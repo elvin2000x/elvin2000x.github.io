@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Artificial Advantage — Elvin Peters</title>
+  <meta name="description" content="The practical framework for directing AI the way top professionals actually do. By Elvin Peters — former Google, goeasy. Available now." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #080808;
+      --dark: #111111;
+      --card: #181818;
+      --border: #2a2a2a;
+      --accent: #c8f000;
+      --accent-dim: #a8cc00;
+      --white: #f5f5f0;
+      --muted: #888880;
+      --text: #d8d8d0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .nav-cta {
+      background: var(--accent);
+      color: var(--black);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 4px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 24px 72px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 2px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(38px, 5vw, 60px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .hero-vol {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-sub strong { color: var(--white); font-weight: 500; }
+
+    /* Buy buttons */
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--black);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity 0.15s;
+      margin-right: 12px;
+      margin-bottom: 12px;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color 0.15s, color 0.15s;
+      margin-bottom: 12px;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .cta-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .amazon-btn {
+      display: inline-block;
+      margin-top: 16px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 12px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .amazon-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .amz-icon { font-size: 16px; vertical-align: middle; margin-right: 6px; }
+
+    /* Book cover mockup */
+    .book-wrap {
+      display: flex;
+      justify-content: center;
+    }
+    .book-cover {
+      width: 280px;
+      aspect-ratio: 6/9;
+      background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+      border: 1px solid #333;
+      border-radius: 4px;
+      box-shadow: -8px 12px 40px rgba(0,0,0,0.7), 4px 0 0 0 #222, 8px 4px 20px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .book-cover::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--accent);
+    }
+    .book-cover-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .book-cover-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .book-cover-sub {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .book-cover-line {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin: 0 auto 24px;
+    }
+    .book-cover-desc {
+      font-size: 9px;
+      color: #666;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .book-cover-author {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .book-price-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: var(--black);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+
+    /* ── SOCIAL PROOF BAR ── */
+    .proof-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--dark);
+      padding: 20px 24px;
+    }
+    .proof-bar-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .proof-item { text-align: center; }
+    .proof-num {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .proof-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .proof-divider {
+      width: 1px;
+      height: 36px;
+      background: var(--border);
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 80px 24px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-body {
+      font-size: 17px;
+      color: var(--text);
+      max-width: 640px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    /* ── STORY SECTION ── */
+    .story-block {
+      max-width: 680px;
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--text);
+    }
+    .story-block p { margin-bottom: 20px; }
+    .story-block p:last-child { margin-bottom: 0; }
+    .story-block strong { color: var(--white); font-weight: 500; }
+
+    /* ── WHO IT'S FOR ── */
+    .for-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .for-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .for-card-icon { font-size: 24px; margin-bottom: 12px; }
+    .for-card h3 { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .for-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── WHAT YOU'LL GET ── */
+    .learn-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .learn-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .learn-check { color: var(--accent); font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .learn-text { font-size: 15px; color: var(--text); line-height: 1.5; }
+    .learn-text strong { color: var(--white); font-weight: 600; display: block; margin-bottom: 4px; }
+
+    /* ── APPENDICES ── */
+    .appendix-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .appendix-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px 20px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .appendix-item span {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .testimonial-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .testimonial-stars { color: var(--accent); font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; }
+    .testimonial-quote {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .testimonial-author { font-size: 13px; color: var(--muted); }
+    .testimonial-author strong { color: var(--text); font-style: normal; }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 2px; }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      background: var(--card);
+      border: none;
+      padding: 20px 24px;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--white);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s;
+    }
+    .faq-q:hover { background: #1f1f1f; }
+    .faq-q .faq-icon { color: var(--accent); font-size: 20px; flex-shrink: 0; margin-left: 16px; transition: transform 0.2s; }
+    .faq-a {
+      display: none;
+      background: var(--dark);
+      padding: 0 24px 20px;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* ── AUTHOR ── */
+    .author-section { background: var(--dark); }
+    .author-inner {
+      max-width: 820px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    .author-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+    .author-name { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .author-title { font-size: 13px; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 16px; }
+    .author-bio { font-size: 16px; color: var(--text); line-height: 1.7; }
+
+    /* ── GUARANTEE ── */
+    .guarantee-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 28px 32px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .guarantee-box h3 { font-size: 18px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+    .guarantee-box p { font-size: 15px; color: var(--text); line-height: 1.7; }
+
+    /* ── BOTTOM CTA ── */
+    .bottom-cta {
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding: 80px 24px;
+      background: var(--black);
+    }
+    .bottom-cta h2 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .bottom-cta p {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .bottom-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; gap: 48px; }
+      .book-wrap { order: -1; }
+      .book-cover { width: 220px; }
+      .learn-list { grid-template-columns: 1fr; }
+      .author-inner { grid-template-columns: 1fr; }
+      .proof-divider { display: none; }
+      .btn-primary, .btn-secondary { display: block; text-align: center; margin-right: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">The Artificial Advantage</span>
+  <a href="https://goodadagency.gumroad.com/l/pvofzn" class="nav-cta" target="_blank" rel="noopener">Get the Book — $37</a>
+</nav>
+
+<!-- HERO -->
+<section style="background: var(--black);">
+  <div class="hero">
+    <div class="hero-copy">
+      <div class="hero-badge">Now Available · 2026</div>
+      <h1>The Artificial<br/>Advantage</h1>
+      <div class="hero-vol">Volume 1 of the AI Fluency Series · By Elvin Peters</div>
+      <p class="hero-sub">
+        Most people using AI are only touching the floor. They ask a question, get a generic answer, and rewrite it themselves. The problem isn't the tool. <strong>It's that no one ever taught them how to direct it.</strong>
+      </p>
+
+      <div style="margin-bottom: 8px;">
+        <a href="https://goodadagency.gumroad.com/l/pvofzn" class="btn-primary" target="_blank" rel="noopener">Get the Book — $37 →</a>
+        <a href="https://goodadagency.gumroad.com/l/REPLACE_FREE_CHAPTER" class="btn-secondary" target="_blank" rel="noopener">Read Chapter 1 Free</a>
+      </div>
+      <p class="cta-note">PDF · Instant delivery · 14-day money-back guarantee</p>
+
+      <a href="https://www.amazon.com/dp/REPLACE_WITH_ASIN" class="amazon-btn" target="_blank" rel="noopener" style="margin-top: 20px;">
+        <span class="amz-icon">📦</span> Also available in print on Amazon
+      </a>
+    </div>
+
+    <div class="book-wrap">
+      <div class="book-cover">
+        <div class="book-cover-label">AI Fluency Series</div>
+        <div class="book-cover-title">The Artificial<br/>Advantage</div>
+        <div class="book-cover-sub">Volume 1</div>
+        <div class="book-cover-line"></div>
+        <div class="book-cover-desc">The Practical Framework<br/>for Directing AI at the<br/>Professional Level</div>
+        <div class="book-cover-author">Elvin Peters</div>
+        <div class="book-price-badge">$37</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-bar-inner">
+    <div class="proof-item">
+      <div class="proof-num">150</div>
+      <div class="proof-label">Pages</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <div class="proof-num">3</div>
+      <div class="proof-label">Core Frameworks</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <div class="proof-num">9</div>
+      <div class="proof-label">Appendices</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <div class="proof-num">0</div>
+      <div class="proof-label">Tech Background Required</div>
+    </div>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Why This Book Exists</div>
+    <h2 class="section-title">The gap isn't intelligence.<br/>It's accumulated literacy.</h2>
+    <div class="story-block">
+      <p>I spent years in Google's advertising division watching some of the most capable professionals I've ever worked with use AI every single day — and consistently extract a fraction of what it could deliver.</p>
+      <p>Not because they weren't smart. Not because the tools weren't powerful. Because <strong>effective AI direction is a skill, and skills require a framework.</strong> No one had given them one.</p>
+      <p>I watched two professionals with identical access to identical tools get completely different results from the same prompt. One spent 20 minutes rewriting a generic draft. The other had a near-final email in under two minutes. Same tool. Same task. Different outcomes. The only difference was AI literacy.</p>
+      <p>After Google, I led digital marketing at goeasy — one of Canada's largest fintechs — running Google, Meta, and Quora campaigns at scale. The same pattern showed up everywhere. The professionals who got exceptional results weren't more technical. They were more deliberate.</p>
+      <p>I wrote <em>The Artificial Advantage</em> because I couldn't find the book I wished I'd had.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="section" style="background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label">Who This Is For</div>
+    <h2 class="section-title">Written for professionals,<br/>not programmers</h2>
+    <p class="section-body">If you've been watching AI from the sidelines — or using it inconsistently, without a system — this book closes that gap. No code. No jargon.</p>
+
+    <div class="for-grid">
+      <div class="for-card">
+        <div class="for-card-icon">💼</div>
+        <h3>Skeptical Professionals</h3>
+        <p>You've tried AI, found it underwhelming, and suspect the problem might be the approach — not the tool. You're right.</p>
+      </div>
+      <div class="for-card">
+        <div class="for-card-icon">🔄</div>
+        <h3>Inconsistent Users</h3>
+        <p>You use AI occasionally but without a system. Results vary. You're not sure why it works sometimes and not others.</p>
+      </div>
+      <div class="for-card">
+        <div class="for-card-icon">📈</div>
+        <h3>Career-Focused Operators</h3>
+        <p>You know AI matters for your career and haven't yet found the version that delivers on its promise. This is it.</p>
+      </div>
+      <div class="for-card">
+        <div class="for-card-icon">🏢</div>
+        <h3>Managers &amp; Leaders</h3>
+        <p>You want to integrate AI into how your team works — and need a framework you can actually teach, not just use yourself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU'LL GET -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Inside the Book</div>
+    <h2 class="section-title">A framework, not a feature list</h2>
+    <p class="section-body">Three parts. Fifteen chapters. The specific skills that separate the 10% who extract real AI value from everyone else.</p>
+
+    <div class="learn-list">
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <div class="learn-text">
+          <strong>The CLEAR System</strong>
+          A five-part prompting framework that gets consistently better results across every professional task.
+        </div>
+      </div>
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <div class="learn-text">
+          <strong>The Three P's &amp; RTC Method</strong>
+          Two complementary frameworks for structuring requests the way AI actually processes them.
+        </div>
+      </div>
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <div class="learn-text">
+          <strong>Constraint Architecture</strong>
+          The invisible skill that separates capable users from exceptional ones — most professionals never learn this.
+        </div>
+      </div>
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <div class="learn-text">
+          <strong>Meta-Prompting</strong>
+          How to use AI to improve your own prompts — the recursive skill that compounds your results over time.
+        </div>
+      </div>
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <div class="learn-text">
+          <strong>Template Thinking</strong>
+          Build reusable structures that turn your best AI outputs into repeatable systems, not one-off wins.
+        </div>
+      </div>
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <div class="learn-text">
+          <strong>A 3-Month Practice Plan</strong>
+          A structured progression built into the book — not vague advice, but a week-by-week path to fluency.
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px;">
+      <div class="section-label">9 Appendices Included</div>
+      <div class="appendix-list">
+        <div class="appendix-item"><span>Appendix A</span>25-Prompt Professional Prompt Library</div>
+        <div class="appendix-item"><span>Appendix B</span>Quick Reference Card — all frameworks on one page</div>
+        <div class="appendix-item"><span>Appendix C</span>Director's Diagnostic — fix broken outputs fast</div>
+        <div class="appendix-item"><span>Appendix D</span>Role Library — 25 pre-built professional personas</div>
+        <div class="appendix-item"><span>Appendix E</span>Transformation Gallery — 12 before/after examples</div>
+        <div class="appendix-item"><span>Appendix F–I</span>Iteration patterns, tool comparison, practice exercises, glossary</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" style="background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label">Reader Feedback</div>
+    <h2 class="section-title">What readers say</h2>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"The frameworks made everything click. I'd been using AI for months and felt like I was guessing every time. The Three P's alone changed my output quality in the first week."</p>
+        <div class="testimonial-author"><strong>Reader</strong> · Marketing Professional</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"I've read three AI books and this is the first one that actually changed how I work, not just how I think about AI."</p>
+        <div class="testimonial-author"><strong>Reader</strong> · Senior Manager</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Read it in two sittings. The appendices alone are worth the price — I use the Director's Diagnostic constantly."</p>
+        <div class="testimonial-author"><strong>Reader</strong> · Business Owner</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHOR -->
+<section class="section author-section">
+  <div class="section-inner">
+    <div class="section-label">About the Author</div>
+    <div class="author-inner">
+      <div class="author-avatar">EP</div>
+      <div>
+        <div class="author-name">Elvin Peters</div>
+        <div class="author-title">Author · Marketing Strategist · Former Google · ex-goeasy</div>
+        <p class="author-bio">
+          Elvin Peters spent years in Google's advertising division before leading digital marketing at goeasy, one of Canada's largest fintechs, where he ran AI-integrated campaigns across Google, Meta, and Quora at scale. He's been testing and directing AI tools since ChatGPT launched in 2022.
+          <br/><br/>
+          He wrote <em>The Artificial Advantage</em> because he watched too many capable professionals consistently underuse tools that could have transformed how they worked — not because the tools weren't powerful, but because nobody had given them a framework for directing them.
+          <br/><br/>
+          <em>The Artificial Advantage</em> is Volume 1 of the AI Fluency Series. Volume 2, <em>The Systematic Advantage</em>, is in progress.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label">Common Questions</div>
+    <h2 class="section-title" style="margin-bottom: 36px;">Frequently asked</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need any technical background?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">None. The book was written for professionals with zero technical training. If you can use email and Google, you have all the background this book requires.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is this about ChatGPT specifically?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">No. The frameworks work with any major AI tool — Claude, ChatGPT, Gemini, Copilot. The directing skill transfers across all of them. The landscape of tools changes fast. The skill doesn't.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is this a PDF or a physical book?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">This listing is for the digital edition (PDF), which you receive immediately after purchase. A print edition is available on Amazon.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if I'm already using AI regularly?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">If you're using it without a framework — or getting inconsistent results — Volume 1 replaces scattered instinct with something systematic. If you already have a solid, deliberate practice, Volume 2 is where you'll want to start.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What's the refund policy?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">If you don't find value in the frameworks within 14 days, email for a full refund. No questions asked.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<section class="section" style="background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 48px 24px;">
+  <div class="guarantee-box">
+    <h3>14-Day Money-Back Guarantee</h3>
+    <p>If you work through the frameworks and don't find real value within 14 days, email for a full refund. No questions, no hoops. The professional using AI without this foundation will spend the next year guessing. The one who builds it now compounds from day one.</p>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<div class="bottom-cta">
+  <h2>The window where AI literacy<br/>is a differentiator is still open.</h2>
+  <p>It won't be for long. The professionals building this foundation now are the ones who compound from here.</p>
+  <a href="https://goodadagency.gumroad.com/l/pvofzn" class="btn-primary" target="_blank" rel="noopener" style="font-size: 18px; padding: 18px 40px;">Get The Artificial Advantage — $37 →</a>
+  <br/>
+  <a href="https://goodadagency.gumroad.com/l/REPLACE_FREE_CHAPTER" class="btn-secondary" target="_blank" rel="noopener" style="margin-top: 4px;">Read the First Chapter Free</a>
+  <p class="bottom-note">PDF · Instant delivery · 14-day guarantee · Also available in print on Amazon</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Elvin Peters &nbsp;·&nbsp; <a href="mailto:elvin.m.peters@gmail.com">Contact</a> &nbsp;·&nbsp; <a href="https://goodadagency.gumroad.com/l/pvofzn" target="_blank">Buy the Book</a></p>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+</body>
+</html>
