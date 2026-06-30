@@ -290,6 +290,20 @@
     .bs-copy p { font-size: 17px; color: #3a4a5e; line-height: 1.65; margin-bottom: 18px; }
     .bs-free { display: inline-block; background: #eaf6ef; color: #1e7a4d; font-weight: 700; font-size: 15px; padding: 9px 16px; border-radius: 8px; }
     .bs-cta { text-align: center; margin-top: 34px; }
+    /* ── 10-guide bonus library ── */
+    .va-library { padding: 72px 24px; background: var(--black); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .va-inner { max-width: 1000px; margin: 0 auto; }
+    .va-head { text-align: center; margin-bottom: 36px; }
+    .va-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .va-card { text-align: center; }
+    .va-card img { width: 100%; border-radius: 6px; border: 1px solid var(--border); box-shadow: 0 8px 20px rgba(0,0,0,0.5); display: block; margin-bottom: 10px; }
+    .va-card .t { font-size: 12px; font-weight: 600; color: var(--white); line-height: 1.3; margin-bottom: 3px; min-height: 31px; }
+    .va-card .v { font-size: 11px; color: var(--muted); }
+    .va-card .v s { color: var(--muted); }
+    .va-card .v b { color: var(--accent); }
+    .va-total { text-align: center; margin-top: 30px; font-size: 16px; color: var(--text); }
+    .va-total b { color: var(--accent); }
+    @media (max-width: 768px) { .va-grid { grid-template-columns: repeat(2, 1fr); } }
     /* ── (old) BONUS SPOTLIGHT grid ── */
     .bonus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .bonus-card {
@@ -708,7 +722,8 @@
         <div class="stack-row bonus"><div class="item"><span class="tag">Included</span><strong>7-Day AI Workbook</strong> · guided daily practice</div><div class="val">$29</div></div>
         <div class="stack-row bonus"><div class="item"><span class="tag">Included</span><strong>50 Best AI Prompts</strong> · copy-paste pack</div><div class="val">$50</div></div>
         <div class="stack-row bonus"><div class="item"><span class="tag">Included</span><strong>12 Professional Role Packs</strong> · Marketing, Sales, Finance, HR &amp; more</div><div class="val">$59</div></div>
-        <div class="stack-total"><div class="label">Total value</div><div class="strike">$310</div></div>
+        <div class="stack-row bonus"><div class="item"><span class="tag">Included</span><strong>The Complete 10-Guide AI Bonus Library</strong> · 10 field guides beyond the book</div><div class="val">$236</div></div>
+        <div class="stack-total"><div class="label">Total value</div><div class="strike">$546</div></div>
         <div class="stack-price">
           <div class="today">Your price today</div>
           <div class="big">$37</div>
@@ -778,6 +793,31 @@
     <div class="bs-cta">
       <a class="btn-primary buy" href="#">Get the System + all 3 bonuses for $37 →</a>
     </div>
+  </div>
+</section>
+
+<!-- ───────────── 8b. 10-GUIDE BONUS LIBRARY ───────────── -->
+<section class="va-library">
+  <div class="va-inner">
+    <div class="va-head">
+      <div class="section-label" style="text-align:center;">Included free with the System</div>
+      <h2 class="section-title" style="text-align:center;">Plus the complete 10-guide AI bonus library</h2>
+      <p class="section-body center">Ten focused field guides that go beyond the book: the practitioner knowledge most professionals never find. No fluff, no filler, each one usable today.</p>
+    </div>
+    <div class="va-grid">
+      <div class="va-card"><img src="img/va/01-anthropic-decoded.png" alt="Decoded" loading="lazy"><div class="t">Decoded: 8 Pro Techniques</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/02-context-playbook.png" alt="Feed It Your World" loading="lazy"><div class="t">Feed It Your World</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/03-anti-hallucination.png" alt="Tell Me the Truth" loading="lazy"><div class="t">Tell Me the Truth</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/04-build-ai-assistant.png" alt="Your Own AI Assistant" loading="lazy"><div class="t">Your Own AI Assistant</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/05-automation-starter.png" alt="Set It and Forget It" loading="lazy"><div class="t">Set It and Forget It</div><div class="v"><s>$27</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/06-slides-docs-images.png" alt="Make It Look Good" loading="lazy"><div class="t">Make It Look Good</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/07-meeting-email-machine.png" alt="Inbox Zero, Meetings Handled" loading="lazy"><div class="t">Inbox Zero, Meetings Handled</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/08-what-not-to-put.png" alt="What Not to Type" loading="lazy"><div class="t">What Not to Type</div><div class="v"><s>$27</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/09-cost-roi.png" alt="Is It Worth It?" loading="lazy"><div class="t">Is It Worth It?</div><div class="v"><s>$19</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/10-operating-system.png" alt="Stay Ahead" loading="lazy"><div class="t">Stay Ahead</div><div class="v"><s>$19</s> <b>Free</b></div></div>
+    </div>
+    <div class="va-total">Library value <s style="color:var(--muted)">$236</s> &middot; <b>yours free with the $37 System</b></div>
+    <div class="cta-band" style="margin-top:30px;"><a class="btn-primary buy" href="#">Get the System + all 10 guides for $37 →</a></div>
   </div>
 </section>
 
@@ -913,7 +953,7 @@
   <div class="exitpop-card">
     <button class="exitpop-x" aria-label="Close" onclick="closeExit()">×</button>
     <h2>Wait — before you grab it on Amazon…</h2>
-    <p>Get <b>The Artificial Advantage</b> on <b>this page</b> and you also get <span class="gold">$310 in bonuses, free</span>: the 7-Day Workbook, the 50-prompt pack, and all 12 Role Packs. On Amazon, you just get the book.</p>
+    <p>Get <b>The Artificial Advantage</b> on <b>this page</b> and you also get <span class="gold">$546 in bonuses, free</span>: the 7-Day Workbook, the 50-prompt pack, and all 12 Role Packs. On Amazon, you just get the book.</p>
     <div class="exitpop-covers">
       <img src="img/cover_workbook.png" alt="7-Day AI Workbook" />
       <img class="lead" src="cover.png" alt="The Artificial Advantage" />
