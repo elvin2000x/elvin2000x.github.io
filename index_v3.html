@@ -272,7 +272,25 @@
     .stack-price .big { font-family: 'EB Garamond', serif; font-size: 56px; font-weight: 600; color: var(--white); line-height: 1; }
     .stack-price .sub { font-size: 13px; color: var(--muted); margin-top: 10px; }
 
-    /* ── BONUS SPOTLIGHT ── */
+    /* ── BONUS SPOTLIGHT (Brunson-style, light) ── */
+    .bonus-spotlight { background: #f4f6fa; color: #1a2433; padding: 72px 24px; }
+    .bs-inner { max-width: 760px; margin: 0 auto; }
+    .bs-head { text-align: center; margin-bottom: 44px; }
+    .bs-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #b8860b; margin-bottom: 12px; }
+    .bs-head h2 { font-family: 'EB Garamond', serif; font-size: clamp(28px, 4.2vw, 40px); font-weight: 600; color: #0a1828; margin-bottom: 12px; line-height: 1.15; }
+    .bs-head p { font-size: 18px; color: #4a5a6e; }
+    .bs-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; margin-bottom: 22px; box-shadow: 0 10px 30px rgba(13,30,55,0.06); }
+    .bs-band { background: #0a1828; color: #fff; font-weight: 700; font-size: 16px; padding: 13px 22px; text-align: center; }
+    .bs-band b { color: #d9b65a; }
+    .bs-body { padding: 30px 28px 32px; text-align: center; }
+    .bs-img { max-width: 330px; width: 100%; margin: 0 auto 22px; display: block; }
+    .bs-copy { max-width: 560px; margin: 0 auto; }
+    .bs-copy h3 { font-family: 'EB Garamond', serif; font-size: 24px; font-weight: 600; color: #0a1828; line-height: 1.25; margin-bottom: 10px; }
+    .bs-value { font-size: 19px; font-weight: 800; color: #c0392b; margin-bottom: 14px; }
+    .bs-copy p { font-size: 17px; color: #3a4a5e; line-height: 1.65; margin-bottom: 18px; }
+    .bs-free { display: inline-block; background: #eaf6ef; color: #1e7a4d; font-weight: 700; font-size: 15px; padding: 9px 16px; border-radius: 8px; }
+    .bs-cta { text-align: center; margin-top: 34px; }
+    /* ── (old) BONUS SPOTLIGHT grid ── */
     .bonus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .bonus-card {
       position: relative; background: var(--card); border: 1px solid var(--border);
@@ -709,30 +727,56 @@
   </div>
 </section>
 
-<!-- ───────────── 8. BONUS SPOTLIGHT ───────────── -->
-<section class="section" style="background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-  <div class="section-inner">
-    <div class="section-label">Included Free</div>
-    <h2 class="section-title">Two bonuses that turn<br/>reading into doing</h2>
-    <p class="section-body">The book gives you the system. These make it muscle memory by the end of the week.</p>
-    <div class="bonus-grid">
-      <div class="bonus-card">
-        <div class="bonus-ribbon">Free</div>
-        <div class="bonus-kicker">Bonus 1</div>
-        <h3>The 7-Day AI Workbook</h3>
-        <p>Seven short daily exercises that turn the frameworks into a habit. By Friday you will have rebuilt your three most common work tasks around AI, with prompts you keep using.</p>
-        <div class="bonus-val"><s>$29</s> <strong>Included free</strong></div>
-      </div>
-      <div class="bonus-card">
-        <div class="bonus-ribbon">Free</div>
-        <div class="bonus-kicker">Bonus 2</div>
-        <h3>50 Best AI Prompts</h3>
-        <p>A copy-paste pack of the highest-leverage professional prompts, pre-loaded with the book's structure. Open it, swap in your details, send. Instant wins from day one.</p>
-        <div class="bonus-val"><s>$19</s> <strong>Included free</strong></div>
+<!-- ───────────── 8. BONUS SPOTLIGHT (Brunson-style, light) ───────────── -->
+<section class="bonus-spotlight">
+  <div class="bs-inner">
+    <div class="bs-head">
+      <div class="bs-eyebrow">Order today and you also get</div>
+      <h2>3 free bonuses that make sure you actually use it</h2>
+      <p>The book hands you the system. These make it stick this week, for your exact job.</p>
+    </div>
+
+    <div class="bs-item">
+      <div class="bs-band"><b>BONUS #1</b> · The 7-Day AI Workbook</div>
+      <div class="bs-body">
+        <img class="bs-img" src="img/mockup_workbook.png" alt="The 7-Day AI Workbook" loading="lazy" />
+        <div class="bs-copy">
+          <h3>"Stop wondering where to start. Have it working by Friday."</h3>
+          <div class="bs-value">Total value: $29</div>
+          <p>Most people read a book like this and never apply it. This is the fix: seven short daily exercises that rebuild your three most common work tasks around AI. By the end of the week it's a habit, not a someday.</p>
+          <div class="bs-free">✓ Yours FREE when you get the System today</div>
+        </div>
       </div>
     </div>
-    <div class="cta-band" style="margin-top: 36px;">
-      <a href="https://goodadagency.gumroad.com/l/pvofzn" class="btn-primary buy" target="_blank" rel="noopener">Add it to my library — $37 →</a>
+
+    <div class="bs-item">
+      <div class="bs-band"><b>BONUS #2</b> · 50 Best AI Prompts</div>
+      <div class="bs-body">
+        <img class="bs-img" src="img/mockup_prompts.png" alt="50 Best AI Prompts" loading="lazy" />
+        <div class="bs-copy">
+          <h3>"Never stare at a blank prompt box again."</h3>
+          <div class="bs-value">Total value: $50</div>
+          <p>The hardest part is knowing what to type. This is a copy-paste pack of the highest-leverage professional prompts, already built on the book's structure. Open one, swap in your details, send. Wins from day one.</p>
+          <div class="bs-free">✓ Yours FREE when you get the System today</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bs-item">
+      <div class="bs-band"><b>BONUS #3</b> · 12 Professional Role Packs</div>
+      <div class="bs-body">
+        <img class="bs-img" src="img/mockup_roles.png" alt="12 AI Role Packs" loading="lazy" />
+        <div class="bs-copy">
+          <h3>"Get AI that actually understands your job."</h3>
+          <div class="bs-value">Total value: $59</div>
+          <p>Generic AI advice doesn't fit your actual role. These are done-for-you playbooks for Marketing, Sales, Finance, HR and more, so whatever you do, you start with an expert head start instead of a blank page.</p>
+          <div class="bs-free">✓ Yours FREE when you get the System today</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bs-cta">
+      <a class="btn-primary buy" href="#">Get the System + all 3 bonuses for $37 →</a>
     </div>
   </div>
 </section>
