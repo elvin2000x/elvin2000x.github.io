@@ -312,6 +312,25 @@
     .cred-strip .head { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 26px; }
     .cred-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .cred-grid img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); display: block; }
+    /* exit-intent popup */
+    .exitpop { position: fixed; inset: 0; z-index: 9999; background: rgba(4,9,16,0.82); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .exitpop.hidden { display: none; }
+    .exitpop-card { position: relative; background: linear-gradient(170deg, #0f2035 0%, #0a1828 100%); border: 1px solid var(--border); border-radius: 16px; max-width: 600px; width: 100%; padding: 40px 34px 32px; text-align: center; box-shadow: 0 30px 90px rgba(0,0,0,0.6); animation: pop .25s ease; }
+    @keyframes pop { from { transform: scale(0.94); opacity: 0; } to { transform: none; opacity: 1; } }
+    .exitpop-x { position: absolute; top: 12px; right: 16px; background: none; border: none; color: var(--muted); font-size: 26px; cursor: pointer; line-height: 1; }
+    .exitpop-x:hover { color: var(--white); }
+    .exitpop h2 { font-family: 'EB Garamond', serif; font-size: clamp(24px, 4vw, 32px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 14px; }
+    .exitpop p { font-size: 16px; color: var(--text); line-height: 1.6; margin-bottom: 22px; }
+    .exitpop p .gold { color: var(--accent); font-weight: 700; }
+    .exitpop p b { color: var(--white); }
+    .exitpop-covers { display: flex; align-items: flex-end; justify-content: center; gap: 8px; margin-bottom: 24px; }
+    .exitpop-covers img { height: 96px; border-radius: 4px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+    .exitpop-covers img.lead { height: 124px; }
+    .exitpop-btns { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .exitpop-yes { background: #2f9e6b; color: #fff; font-weight: 700; font-size: 17px; padding: 16px; border-radius: 8px; text-decoration: none; box-shadow: 0 6px 20px rgba(47,158,107,0.3); }
+    .exitpop-yes:hover { filter: brightness(1.05); }
+    .exitpop-no { background: transparent; color: var(--muted); font-size: 13px; padding: 10px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border); }
+    .exitpop-no:hover { color: var(--text); border-color: #b85c5c; }
     /* visual "what's included" bonus cards */
     .includes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 30px; }
     .inc-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 16px; text-align: center; position: relative; }
@@ -638,21 +657,21 @@
       </div>
       <div class="inc-card">
         <span class="ribbon">BONUS</span>
-        <div class="inc-thumb"><img src="workbook_cover.png" alt="7-Day AI Workbook" /></div>
+        <div class="inc-thumb"><img src="img/cover_workbook.png" alt="7-Day AI Workbook" /></div>
         <h4>7-Day AI Workbook</h4>
         <p>Make it muscle memory in a week. By Friday, your three biggest work tasks run on AI.</p>
         <div class="inc-meta"><span class="v">$29</span><span class="ck">✓ Included</span></div>
       </div>
       <div class="inc-card">
         <span class="ribbon">BONUS</span>
-        <div class="inc-thumb"><div class="inc-doc"><span class="ico">⌘</span><span class="lbl">50 Best<br/>AI Prompts</span></div></div>
+        <div class="inc-thumb"><img src="img/cover_prompts.png" alt="50 Best AI Prompts" /></div>
         <h4>50 Best AI Prompts</h4>
         <p>Plug-and-play prompts for real work. Open one, swap in your details, send. Wins from day one.</p>
         <div class="inc-meta"><span class="v">$50</span><span class="ck">✓ Included</span></div>
       </div>
       <div class="inc-card">
         <span class="ribbon">BONUS</span>
-        <div class="inc-thumb"><div class="inc-doc"><span class="ico">📁</span><span class="lbl">12 Role<br/>Packs</span></div></div>
+        <div class="inc-thumb"><img src="img/cover_roles.png" alt="12 AI Role Packs" /></div>
         <h4>12 Professional Role Packs</h4>
         <p>Done-for-you AI playbooks by job: Marketing, Sales, Finance, HR and more. Hit the ground running.</p>
         <div class="inc-meta"><span class="v">$59</span><span class="ck">✓ Included</span></div>
@@ -844,6 +863,42 @@
 <footer>
   <p>© 2026 Elvin M. Peters &nbsp;·&nbsp; <a href="mailto:elvin@epeters.ca">elvin@epeters.ca</a> &nbsp;·&nbsp; <a href="https://goodadagency.gumroad.com/l/pvofzn" class="buy" target="_blank">Buy the Book</a></p>
 </footer>
+
+<!-- ───────────── EXIT-INTENT POPUP (owned vs Amazon) ───────────── -->
+<div id="exitpop" class="exitpop hidden" role="dialog" aria-modal="true">
+  <div class="exitpop-card">
+    <button class="exitpop-x" aria-label="Close" onclick="closeExit()">×</button>
+    <h2>Wait — before you grab it on Amazon…</h2>
+    <p>Get <b>The Artificial Advantage</b> on <b>this page</b> and you also get <span class="gold">$310 in bonuses, free</span>: the 7-Day Workbook, the 50-prompt pack, and all 12 Role Packs. On Amazon, you just get the book.</p>
+    <div class="exitpop-covers">
+      <img src="img/cover_workbook.png" alt="7-Day AI Workbook" />
+      <img class="lead" src="cover.png" alt="The Artificial Advantage" />
+      <img src="img/cover_prompts.png" alt="50 Best AI Prompts" />
+      <img src="img/cover_roles.png" alt="12 AI Role Packs" />
+    </div>
+    <div class="exitpop-btns">
+      <a class="exitpop-yes buy" href="#">Yes — send me the System + all the bonuses ($37) →</a>
+      <a class="exitpop-no" href="https://amzn.to/4gCyVkm" target="_blank" rel="noopener" onclick="closeExit()">No thanks, just the book on Amazon (no bonuses)</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var pop = document.getElementById('exitpop');
+  function show() {
+    if (!pop || sessionStorage.getItem('exit_shown')) return;
+    sessionStorage.setItem('exit_shown', '1');
+    pop.classList.remove('hidden');
+    try { gtag('event', 'exit_popup_shown'); } catch (e) {}
+  }
+  window.closeExit = function () { if (pop) pop.classList.add('hidden'); };
+  document.addEventListener('mouseout', function (e) {
+    if (e.clientY <= 0 && !e.relatedTarget) show();   // cursor left the top of the viewport
+  });
+  if (pop) pop.addEventListener('click', function (e) { if (e.target === pop) closeExit(); });
+})();
+</script>
 
 <script>
   /* ── FAQ accordion ── */
