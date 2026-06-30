@@ -307,6 +307,11 @@
     .free-band a { color: var(--accent); text-decoration: none; font-weight: 600; border-bottom: 1px solid rgba(201,162,80,0.4); }
     .free-band a:hover { border-color: var(--accent); }
     .free-band .sep { color: var(--border); }
+    /* credibility scene strip */
+    .cred-strip { padding: 52px 24px; background: var(--dark); border-bottom: 1px solid var(--border); }
+    .cred-strip .head { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 26px; }
+    .cred-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .cred-grid img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); display: block; }
     /* visual "what's included" bonus cards */
     .includes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 30px; }
     .inc-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 16px; text-align: center; position: relative; }
@@ -406,6 +411,7 @@
       .book-img { width: 240px; }
       .learn-list, .compare-grid, .bonus-grid { grid-template-columns: 1fr; }
       .includes { grid-template-columns: 1fr 1fr; }
+      .cred-grid { grid-template-columns: 1fr 1fr; }
       .free-band .sep { display: none; }
       .author-inner { grid-template-columns: 1fr; }
       .guarantee-box { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 18px; }
@@ -438,7 +444,7 @@
       <div class="hero-seal"><span class="star">★★★★★</span> <b>Also on Amazon</b> · by Elvin M. Peters, ex-Google &amp; ex-goeasy</div>
     </div>
     <div class="book-wrap">
-      <img src="book3d.png" alt="The Artificial Advantage by Elvin M. Peters" class="book-img" style="box-shadow:none;border-radius:0;width:360px;" />
+      <img src="img/hero.png" alt="The Artificial Advantage by Elvin M. Peters" class="book-img" style="box-shadow:none;border-radius:0;width:380px;" />
     </div>
   </div>
 </section>
@@ -467,6 +473,17 @@
     <span><a href="/quiz/">Take the 60-second AI Style quiz →</a></span>
   </div>
 </div>
+
+<!-- ───────────── CREDIBILITY SCENE STRIP ───────────── -->
+<section class="cred-strip">
+  <div class="head">The framework professionals are taking to work</div>
+  <div class="cred-grid">
+    <img src="img/stage_screen.png" alt="The Artificial Advantage on a keynote stage" loading="lazy" />
+    <img src="img/bookstore_display.png" alt="The Artificial Advantage on a bookstore bestseller shelf" loading="lazy" />
+    <img src="img/executive_desk.png" alt="The Artificial Advantage on an executive desk" loading="lazy" />
+    <img src="img/podcast_set.png" alt="The Artificial Advantage in a podcast studio" loading="lazy" />
+  </div>
+</section>
 
 <!-- ───────────── 3. PROBLEM / AGITATION ───────────── -->
 <section class="section">
