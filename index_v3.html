@@ -273,13 +273,14 @@
     .stack-price .sub { font-size: 13px; color: var(--muted); margin-top: 10px; }
 
     /* ── BONUS SPOTLIGHT (Brunson-style, light) ── */
-    .bonus-spotlight { background: #f4f6fa; color: #1a2433; padding: 72px 24px; }
+    /* dark section, white product cards (cohesive with V3's dark theme) */
+    .bonus-spotlight { background: var(--dark); color: var(--text); padding: 72px 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .bs-inner { max-width: 760px; margin: 0 auto; }
     .bs-head { text-align: center; margin-bottom: 44px; }
-    .bs-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #b8860b; margin-bottom: 12px; }
-    .bs-head h2 { font-family: 'EB Garamond', serif; font-size: clamp(28px, 4.2vw, 40px); font-weight: 600; color: #0a1828; margin-bottom: 12px; line-height: 1.15; }
-    .bs-head p { font-size: 18px; color: #4a5a6e; }
-    .bs-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; margin-bottom: 22px; box-shadow: 0 10px 30px rgba(13,30,55,0.06); }
+    .bs-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .bs-head h2 { font-family: 'EB Garamond', serif; font-size: clamp(28px, 4.2vw, 40px); font-weight: 600; color: var(--white); margin-bottom: 12px; line-height: 1.15; }
+    .bs-head p { font-size: 18px; color: var(--muted); }
+    .bs-item { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 22px; box-shadow: 0 18px 44px rgba(0,0,0,0.45); }
     .bs-band { background: #0a1828; color: #fff; font-weight: 700; font-size: 16px; padding: 13px 22px; text-align: center; }
     .bs-band b { color: #d9b65a; }
     .bs-body { padding: 30px 28px 32px; text-align: center; }
