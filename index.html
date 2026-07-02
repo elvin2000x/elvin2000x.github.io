@@ -27,6 +27,15 @@
   src="https://www.facebook.com/tr?id=1699232654449762&ev=PageView&noscript=1"
   /></noscript>
   <!-- End Meta Pixel Code -->
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('D93C3IRC77U4775FLNR0');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Artificial Advantage — Elvin M. Peters</title>
   <meta name="description" content="The framework for professionals who tried AI and weren't impressed. Learn to direct AI the way the top 10% actually do. By Elvin M. Peters, ex-Google, ex-goeasy." />
@@ -816,6 +825,7 @@
     function track() {
       try { gtag('event', 'gumroad_click', { event_category: 'conversion', event_label: location.search || 'direct' }); } catch (e) {}
       try { fbq('track', 'InitiateCheckout', { content_name: 'The Artificial Advantage', value: 37.00, currency: 'USD' }); } catch (e) {}
+      try { ttq.track('InitiateCheckout', { content_name: 'The Artificial Advantage', value: 37.00, currency: 'USD' }); } catch (e) {}
     }
     document.querySelectorAll('a.buy').forEach(function (a) { a.addEventListener('click', track); });
   })();
