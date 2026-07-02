@@ -49,16 +49,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:   #060f1a;
-      --dark:    #0a1828;
-      --card:    #0f2035;
-      --border:  #1a3248;
-      --accent:  #c9a250;
-      --accent2: #4fb3f0;
-      --white:   #f0f5fa;
-      --muted:   #6a8faa;
-      --text:    #b8d0e4;
-      --red:     #e05555;
+      /* LIGHT variant (V4): navy + gold on white. Vars keep their semantic
+         roles so most of the page flips: --black = page bg, --white = heading ink. */
+      --black:   #ffffff;
+      --dark:    #f1f4f9;
+      --card:    #ffffff;
+      --border:  #e3e8ef;
+      --accent:  #b88a2e;
+      --accent2: #2f74b5;
+      --white:   #0a1828;
+      --muted:   #6a7a8e;
+      --text:    #3c4a5c;
+      --red:     #cf4444;
     }
 
     html { scroll-behavior: smooth; }
@@ -74,7 +76,7 @@
     /* ── NAV ── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(6,15,26,0.94);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
@@ -83,7 +85,7 @@
     }
     .nav-logo { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
     .nav-cta {
-      background: var(--accent); color: var(--black);
+      background: var(--accent); color: #0a1828;
       font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 4px;
       text-decoration: none; letter-spacing: 0.02em; transition: opacity 0.15s;
     }
@@ -122,7 +124,7 @@
     }
 
     .btn-primary {
-      display: inline-block; background: var(--accent); color: var(--black);
+      display: inline-block; background: var(--accent); color: #0a1828;
       font-size: 16px; font-weight: 700; padding: 16px 32px; border-radius: 6px;
       text-decoration: none; letter-spacing: 0.02em; transition: opacity 0.15s, transform 0.15s;
       margin-right: 12px; margin-bottom: 12px;
@@ -208,7 +210,7 @@
     .compare-card.good .compare-label { color: var(--accent); }
     .compare-prompt {
       font-family: 'EB Garamond', serif; font-size: 15px; font-style: italic;
-      color: var(--text); background: rgba(0,0,0,0.3); border-radius: 4px;
+      color: var(--text); background: rgba(10,24,40,0.05); border-radius: 4px;
       padding: 12px 16px; margin-bottom: 12px; line-height: 1.6;
       border-left: 2px solid var(--border);
     }
@@ -262,7 +264,7 @@
     .stack-row.bonus { background: rgba(201,162,80,0.06); }
     .stack-row.bonus .tag {
       display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--black); background: var(--accent);
+      text-transform: uppercase; color: #0a1828; background: var(--accent);
       padding: 2px 7px; border-radius: 3px; margin-right: 8px; vertical-align: middle;
     }
     .stack-total {
@@ -274,14 +276,46 @@
     .stack-total .strike { color: var(--muted); text-decoration: line-through; font-size: 18px; }
     .stack-price {
       text-align: center; padding: 28px 24px;
-      background: linear-gradient(160deg, #0f2035 0%, #0a1828 100%);
+      background: linear-gradient(160deg, #f3f6fb 0%, #e9eef6 100%);
       border-top: 1px solid var(--border);
     }
     .stack-price .today { font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
     .stack-price .big { font-family: 'EB Garamond', serif; font-size: 56px; font-weight: 600; color: var(--white); line-height: 1; }
     .stack-price .sub { font-size: 13px; color: var(--muted); margin-top: 10px; }
 
-    /* ── BONUS SPOTLIGHT ── */
+    /* ── BONUS SPOTLIGHT (Brunson-style, light) ── */
+    .bonus-spotlight { background: #f4f6fa; color: #1a2433; padding: 72px 24px; }
+    .bs-inner { max-width: 760px; margin: 0 auto; }
+    .bs-head { text-align: center; margin-bottom: 44px; }
+    .bs-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #b8860b; margin-bottom: 12px; }
+    .bs-head h2 { font-family: 'EB Garamond', serif; font-size: clamp(28px, 4.2vw, 40px); font-weight: 600; color: #0a1828; margin-bottom: 12px; line-height: 1.15; }
+    .bs-head p { font-size: 18px; color: #4a5a6e; }
+    .bs-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; margin-bottom: 22px; box-shadow: 0 10px 30px rgba(13,30,55,0.06); }
+    .bs-band { background: #0a1828; color: #fff; font-weight: 700; font-size: 16px; padding: 13px 22px; text-align: center; }
+    .bs-band b { color: #d9b65a; }
+    .bs-body { padding: 30px 28px 32px; text-align: center; }
+    .bs-img { max-width: 330px; width: 100%; margin: 0 auto 22px; display: block; }
+    .bs-copy { max-width: 560px; margin: 0 auto; }
+    .bs-copy h3 { font-family: 'EB Garamond', serif; font-size: 24px; font-weight: 600; color: #0a1828; line-height: 1.25; margin-bottom: 10px; }
+    .bs-value { font-size: 19px; font-weight: 800; color: #c0392b; margin-bottom: 14px; }
+    .bs-copy p { font-size: 17px; color: #3a4a5e; line-height: 1.65; margin-bottom: 18px; }
+    .bs-free { display: inline-block; background: #eaf6ef; color: #1e7a4d; font-weight: 700; font-size: 15px; padding: 9px 16px; border-radius: 8px; }
+    .bs-cta { text-align: center; margin-top: 34px; }
+    /* ── 10-guide bonus library ── */
+    .va-library { padding: 72px 24px; background: var(--black); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .va-inner { max-width: 1000px; margin: 0 auto; }
+    .va-head { text-align: center; margin-bottom: 36px; }
+    .va-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .va-card { text-align: center; }
+    .va-card img { width: 100%; border-radius: 6px; border: 1px solid var(--border); box-shadow: 0 8px 20px rgba(0,0,0,0.5); display: block; margin-bottom: 10px; }
+    .va-card .t { font-size: 12px; font-weight: 600; color: var(--white); line-height: 1.3; margin-bottom: 3px; min-height: 31px; }
+    .va-card .v { font-size: 11px; color: var(--muted); }
+    .va-card .v s { color: var(--muted); }
+    .va-card .v b { color: var(--accent); }
+    .va-total { text-align: center; margin-top: 30px; font-size: 16px; color: var(--text); }
+    .va-total b { color: var(--accent); }
+    @media (max-width: 768px) { .va-grid { grid-template-columns: repeat(2, 1fr); } }
+    /* ── (old) BONUS SPOTLIGHT grid ── */
     .bonus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .bonus-card {
       position: relative; background: var(--card); border: 1px solid var(--border);
@@ -289,7 +323,7 @@
     }
     .bonus-ribbon {
       position: absolute; top: 14px; right: -34px; transform: rotate(45deg);
-      background: var(--accent); color: var(--black);
+      background: var(--accent); color: #0a1828;
       font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
       padding: 4px 40px; text-transform: uppercase;
     }
@@ -303,6 +337,57 @@
     /* ── CTA BAND ── */
     .cta-band { text-align: center; padding: 8px 24px 0; }
     .cta-band .btn-primary { font-size: 17px; padding: 17px 38px; margin: 0; }
+    .trust-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 16px; font-size: 12px; color: var(--muted); }
+    .trust-secure { letter-spacing: 0.01em; }
+    .pay { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; color: var(--text); background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 3px 7px; }
+    .hero-seal { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; font-size: 12px; color: var(--muted); }
+    .hero-seal b { color: var(--text); font-weight: 600; }
+    .hero-seal .star { color: var(--accent); letter-spacing: 1px; }
+    /* free ways to start band */
+    .free-band { background: var(--dark); border-bottom: 1px solid var(--border); padding: 16px 24px; }
+    .free-band .inner { max-width: 820px; margin: 0 auto; display: flex; gap: 8px 22px; align-items: center; justify-content: center; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+    .free-band b { color: var(--text); font-weight: 600; }
+    .free-band a { color: var(--accent); text-decoration: none; font-weight: 600; border-bottom: 1px solid rgba(201,162,80,0.4); }
+    .free-band a:hover { border-color: var(--accent); }
+    .free-band .sep { color: var(--border); }
+    /* credibility scene strip */
+    .cred-strip { padding: 52px 24px; background: var(--dark); border-bottom: 1px solid var(--border); }
+    .cred-strip .head { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 26px; }
+    .cred-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .cred-grid img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); display: block; }
+    /* exit-intent popup */
+    .exitpop { position: fixed; inset: 0; z-index: 9999; background: rgba(4,9,16,0.82); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .exitpop.hidden { display: none; }
+    .exitpop-card { position: relative; background: #ffffff; border: 1px solid var(--border); border-radius: 16px; max-width: 600px; width: 100%; padding: 40px 34px 32px; text-align: center; box-shadow: 0 30px 90px rgba(0,0,0,0.6); animation: pop .25s ease; }
+    @keyframes pop { from { transform: scale(0.94); opacity: 0; } to { transform: none; opacity: 1; } }
+    .exitpop-x { position: absolute; top: 12px; right: 16px; background: none; border: none; color: var(--muted); font-size: 26px; cursor: pointer; line-height: 1; }
+    .exitpop-x:hover { color: var(--white); }
+    .exitpop h2 { font-family: 'EB Garamond', serif; font-size: clamp(24px, 4vw, 32px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 14px; }
+    .exitpop p { font-size: 16px; color: var(--text); line-height: 1.6; margin-bottom: 22px; }
+    .exitpop p .gold { color: var(--accent); font-weight: 700; }
+    .exitpop p b { color: var(--white); }
+    .exitpop-covers { display: flex; align-items: flex-end; justify-content: center; gap: 8px; margin-bottom: 24px; }
+    .exitpop-covers img { height: 96px; border-radius: 4px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
+    .exitpop-covers img.lead { height: 124px; }
+    .exitpop-btns { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .exitpop-yes { background: #2f9e6b; color: #fff; font-weight: 700; font-size: 17px; padding: 16px; border-radius: 8px; text-decoration: none; box-shadow: 0 6px 20px rgba(47,158,107,0.3); }
+    .exitpop-yes:hover { filter: brightness(1.05); }
+    .exitpop-no { background: transparent; color: var(--muted); font-size: 13px; padding: 10px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border); }
+    .exitpop-no:hover { color: var(--text); border-color: #b85c5c; }
+    /* visual "what's included" bonus cards */
+    .includes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 30px; }
+    .inc-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 16px; text-align: center; position: relative; }
+    .inc-card .ribbon { position: absolute; top: 12px; right: 12px; font-size: 9px; font-weight: 800; letter-spacing: 0.06em; color: #0a1828; background: var(--accent); padding: 2px 7px; border-radius: 99px; }
+    .inc-thumb { height: 130px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .inc-thumb img { max-height: 130px; max-width: 100%; border-radius: 4px; box-shadow: 0 10px 24px rgba(0,0,0,0.55); }
+    .inc-doc { width: 92px; height: 118px; border-radius: 6px; background: linear-gradient(150deg, #142c47, #0c1c30); border: 1px solid var(--border); box-shadow: 0 10px 24px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; padding: 12px; }
+    .inc-doc .ico { font-size: 26px; }
+    .inc-doc .lbl { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); line-height: 1.3; }
+    .inc-card h4 { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .inc-card p { font-size: 12px; color: var(--muted); line-height: 1.45; margin-bottom: 10px; min-height: 34px; }
+    .inc-meta { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; }
+    .inc-meta .v { color: var(--muted); text-decoration: line-through; }
+    .inc-meta .ck { color: var(--accent); font-weight: 700; }
 
     /* ── TESTIMONIALS ── */
     .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
@@ -387,6 +472,9 @@
       .book-wrap { order: -1; }
       .book-img { width: 240px; }
       .learn-list, .compare-grid, .bonus-grid { grid-template-columns: 1fr; }
+      .includes { grid-template-columns: 1fr 1fr; }
+      .cred-grid { grid-template-columns: 1fr 1fr; }
+      .free-band .sep { display: none; }
       .author-inner { grid-template-columns: 1fr; }
       .guarantee-box { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 18px; }
       .proof-divider { display: none; }
@@ -403,7 +491,7 @@
 </nav>
 
 <!-- ───────────── 1. HERO (dynamic headline) ───────────── -->
-<section style="background: linear-gradient(160deg, #060f1a 0%, #0a1e35 100%);">
+<section style="background: linear-gradient(170deg, #ffffff 0%, #eaf1fb 100%);">
   <div class="hero">
     <div class="hero-copy">
       <div class="hero-badge">Now Available · Vol 1 of the AI Fluency Series</div>
@@ -414,10 +502,11 @@
         <a href="https://goodadagency.gumroad.com/l/pvofzn" class="btn-primary buy" target="_blank" rel="noopener">Get the Book — $37 →</a>
         <a href="#newsletter" class="btn-secondary">Read Chapter 1 Free</a>
       </div>
-      <p class="cta-note">PDF · Instant delivery · 14-day money-back guarantee · Also on Amazon</p>
+      <p class="cta-note">Instant delivery · 14-day money-back guarantee</p>
+      <div class="hero-seal"><span class="star">★★★★★</span> <b>Also on Amazon</b> · by Elvin M. Peters, ex-Google &amp; ex-goeasy</div>
     </div>
     <div class="book-wrap">
-      <img src="cover.png" alt="The Artificial Advantage by Elvin M. Peters" class="book-img" />
+      <img src="img/hero.png" alt="The Artificial Advantage by Elvin M. Peters" class="book-img" style="box-shadow:none;border-radius:0;width:380px;" />
     </div>
   </div>
 </section>
@@ -436,6 +525,27 @@
     <div class="proof-authority">By <strong>Elvin M. Peters</strong><br/>ex-Google · ex-goeasy</div>
   </div>
 </div>
+
+<!-- ───────────── FREE WAYS TO START (surfaced high) ───────────── -->
+<div class="free-band">
+  <div class="inner">
+    <b>Want to try before you buy?</b>
+    <span><a href="#newsletter">Read Chapter 1 free →</a></span>
+    <span class="sep">·</span>
+    <span><a href="/quiz/">Take the 60-second AI Style quiz →</a></span>
+  </div>
+</div>
+
+<!-- ───────────── CREDIBILITY SCENE STRIP ───────────── -->
+<section class="cred-strip">
+  <div class="head">The framework professionals are taking to work</div>
+  <div class="cred-grid">
+    <img src="img/stage_screen.png" alt="The Artificial Advantage on a keynote stage" loading="lazy" />
+    <img src="img/bookstore_display.png" alt="The Artificial Advantage on a bookstore bestseller shelf" loading="lazy" />
+    <img src="img/executive_desk.png" alt="The Artificial Advantage on an executive desk" loading="lazy" />
+    <img src="img/podcast_set.png" alt="The Artificial Advantage in a podcast studio" loading="lazy" />
+  </div>
+</section>
 
 <!-- ───────────── 3. PROBLEM / AGITATION ───────────── -->
 <section class="section">
@@ -576,60 +686,149 @@
 <!-- ───────────── 7. THE OFFER + VALUE STACK ───────────── -->
 <section class="section">
   <div class="section-inner">
-    <div class="section-label">The Offer</div>
-    <h2 class="section-title" style="text-align: center;">Here's everything you get today</h2>
-    <p class="section-body center">A complete system, plus two standalone bonuses that make the frameworks stick. Priced separately, it adds up. You won't pay anywhere near it.</p>
+    <div class="section-label">The Complete System</div>
+    <h2 class="section-title" style="text-align: center;">The Artificial Advantage System</h2>
+    <p class="section-body center">Not just the book. The complete kit to actually put AI to work the same day you buy. On Amazon you get the book; here you get the whole system, delivered instantly.</p>
+
+    <div class="includes">
+      <div class="inc-card">
+        <span class="ribbon">CORE</span>
+        <div class="inc-thumb"><img src="cover.png" alt="The Artificial Advantage book" /></div>
+        <h4>The Artificial Advantage</h4>
+        <p>Direct AI like the top 10%. Turn vague requests into precise, professional output, every single time.</p>
+        <div class="inc-meta"><span class="v">$49</span><span class="ck">✓ Included</span></div>
+      </div>
+      <div class="inc-card">
+        <span class="ribbon">BONUS</span>
+        <div class="inc-thumb"><img src="img/cover_workbook.png" alt="7-Day AI Workbook" /></div>
+        <h4>7-Day AI Workbook</h4>
+        <p>Make it muscle memory in a week. By Friday, your three biggest work tasks run on AI.</p>
+        <div class="inc-meta"><span class="v">$29</span><span class="ck">✓ Included</span></div>
+      </div>
+      <div class="inc-card">
+        <span class="ribbon">BONUS</span>
+        <div class="inc-thumb"><img src="img/cover_prompts.png" alt="50 Best AI Prompts" /></div>
+        <h4>50 Best AI Prompts</h4>
+        <p>Plug-and-play prompts for real work. Open one, swap in your details, send. Wins from day one.</p>
+        <div class="inc-meta"><span class="v">$50</span><span class="ck">✓ Included</span></div>
+      </div>
+      <div class="inc-card">
+        <span class="ribbon">BONUS</span>
+        <div class="inc-thumb"><img src="img/cover_roles.png" alt="12 AI Role Packs" /></div>
+        <h4>12 Professional Role Packs</h4>
+        <p>Done-for-you AI playbooks by job: Marketing, Sales, Finance, HR and more. Hit the ground running.</p>
+        <div class="inc-meta"><span class="v">$59</span><span class="ck">✓ Included</span></div>
+      </div>
+    </div>
+
     <div class="stack-wrap">
       <div class="stack">
         <div class="stack-row"><div class="item"><strong>The Artificial Advantage</strong> · 150-page framework, 3 parts</div><div class="val">$49</div></div>
-        <div class="stack-row"><div class="item">Appendix A — 25-Prompt Professional Library</div><div class="val">$29</div></div>
+        <div class="stack-row"><div class="item">Appendix A — 25-Prompt Professional Library</div><div class="val">$25</div></div>
         <div class="stack-row"><div class="item">Appendix B — Quick-Reference Framework Card</div><div class="val">$15</div></div>
         <div class="stack-row"><div class="item">Appendix C — Director's Diagnostic</div><div class="val">$19</div></div>
-        <div class="stack-row"><div class="item">Appendix D — 25 Pre-Built Professional Roles</div><div class="val">$19</div></div>
+        <div class="stack-row"><div class="item">Appendix D — 25 Pre-Built Professional Roles</div><div class="val">$25</div></div>
         <div class="stack-row"><div class="item">Appendix E — Transformation Gallery (12 before/afters)</div><div class="val">$15</div></div>
         <div class="stack-row"><div class="item">Appendices F–I — iteration, tools, exercises, glossary</div><div class="val">$24</div></div>
-        <div class="stack-row bonus"><div class="item"><span class="tag">Bonus</span><strong>7-Day AI Workbook</strong> · guided daily practice</div><div class="val">$29</div></div>
-        <div class="stack-row bonus"><div class="item"><span class="tag">Bonus</span><strong>50 Best AI Prompts</strong> · copy-paste pack</div><div class="val">$19</div></div>
-        <div class="stack-total"><div class="label">Total value</div><div class="strike">$237</div></div>
+        <div class="stack-row bonus"><div class="item"><span class="tag">Included</span><strong>7-Day AI Workbook</strong> · guided daily practice</div><div class="val">$29</div></div>
+        <div class="stack-row bonus"><div class="item"><span class="tag">Included</span><strong>50 Best AI Prompts</strong> · copy-paste pack</div><div class="val">$50</div></div>
+        <div class="stack-row bonus"><div class="item"><span class="tag">Included</span><strong>12 Professional Role Packs</strong> · Marketing, Sales, Finance, HR &amp; more</div><div class="val">$59</div></div>
+        <div class="stack-row bonus"><div class="item"><span class="tag">Included</span><strong>The Complete 10-Guide AI Bonus Library</strong> · 10 field guides beyond the book</div><div class="val">$236</div></div>
+        <div class="stack-total"><div class="label">Total value</div><div class="strike">$546</div></div>
         <div class="stack-price">
           <div class="today">Your price today</div>
           <div class="big">$37</div>
-          <div class="sub">PDF · instant delivery · also in print on Amazon</div>
+          <div class="sub">Instant download · the book alone is $9.99 on Amazon</div>
         </div>
       </div>
       <div class="cta-band" style="margin-top: 28px;">
-        <a href="https://goodadagency.gumroad.com/l/pvofzn" class="btn-primary buy" target="_blank" rel="noopener">Get It All — $37 →</a>
-        <p class="cta-note">Instant download · 14-day keep-everything guarantee</p>
+        <a href="#" class="btn-primary buy">Get the Full System — $37 →</a>
+        <div class="trust-row">
+          <span class="trust-secure">🔒 Secure checkout</span>
+          <span class="pay">VISA</span><span class="pay">MC</span><span class="pay">AMEX</span><span class="pay"> Pay</span>
+          <span class="trust-secure">Instant download · 14-day guarantee</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ───────────── 8. BONUS SPOTLIGHT ───────────── -->
-<section class="section" style="background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-  <div class="section-inner">
-    <div class="section-label">Included Free</div>
-    <h2 class="section-title">Two bonuses that turn<br/>reading into doing</h2>
-    <p class="section-body">The book gives you the system. These make it muscle memory by the end of the week.</p>
-    <div class="bonus-grid">
-      <div class="bonus-card">
-        <div class="bonus-ribbon">Free</div>
-        <div class="bonus-kicker">Bonus 1</div>
-        <h3>The 7-Day AI Workbook</h3>
-        <p>Seven short daily exercises that turn the frameworks into a habit. By Friday you will have rebuilt your three most common work tasks around AI, with prompts you keep using.</p>
-        <div class="bonus-val"><s>$29</s> <strong>Included free</strong></div>
-      </div>
-      <div class="bonus-card">
-        <div class="bonus-ribbon">Free</div>
-        <div class="bonus-kicker">Bonus 2</div>
-        <h3>50 Best AI Prompts</h3>
-        <p>A copy-paste pack of the highest-leverage professional prompts, pre-loaded with the book's structure. Open it, swap in your details, send. Instant wins from day one.</p>
-        <div class="bonus-val"><s>$19</s> <strong>Included free</strong></div>
+<!-- ───────────── 8. BONUS SPOTLIGHT (Brunson-style, light) ───────────── -->
+<section class="bonus-spotlight">
+  <div class="bs-inner">
+    <div class="bs-head">
+      <div class="bs-eyebrow">Order today and you also get</div>
+      <h2>3 free bonuses that make sure you actually use it</h2>
+      <p>The book hands you the system. These make it stick this week, for your exact job.</p>
+    </div>
+
+    <div class="bs-item">
+      <div class="bs-band"><b>BONUS #1</b> · The 7-Day AI Workbook</div>
+      <div class="bs-body">
+        <img class="bs-img" src="img/mockup_workbook.png" alt="The 7-Day AI Workbook" loading="lazy" />
+        <div class="bs-copy">
+          <h3>"Stop wondering where to start. Have it working by Friday."</h3>
+          <div class="bs-value">Total value: $29</div>
+          <p>Most people read a book like this and never apply it. This is the fix: seven short daily exercises that rebuild your three most common work tasks around AI. By the end of the week it's a habit, not a someday.</p>
+          <div class="bs-free">✓ Yours FREE when you get the System today</div>
+        </div>
       </div>
     </div>
-    <div class="cta-band" style="margin-top: 36px;">
-      <a href="https://goodadagency.gumroad.com/l/pvofzn" class="btn-primary buy" target="_blank" rel="noopener">Add it to my library — $37 →</a>
+
+    <div class="bs-item">
+      <div class="bs-band"><b>BONUS #2</b> · 50 Best AI Prompts</div>
+      <div class="bs-body">
+        <img class="bs-img" src="img/mockup_prompts.png" alt="50 Best AI Prompts" loading="lazy" />
+        <div class="bs-copy">
+          <h3>"Never stare at a blank prompt box again."</h3>
+          <div class="bs-value">Total value: $50</div>
+          <p>The hardest part is knowing what to type. This is a copy-paste pack of the highest-leverage professional prompts, already built on the book's structure. Open one, swap in your details, send. Wins from day one.</p>
+          <div class="bs-free">✓ Yours FREE when you get the System today</div>
+        </div>
+      </div>
     </div>
+
+    <div class="bs-item">
+      <div class="bs-band"><b>BONUS #3</b> · 12 Professional Role Packs</div>
+      <div class="bs-body">
+        <img class="bs-img" src="img/mockup_roles.png" alt="12 AI Role Packs" loading="lazy" />
+        <div class="bs-copy">
+          <h3>"Get AI that actually understands your job."</h3>
+          <div class="bs-value">Total value: $59</div>
+          <p>Generic AI advice doesn't fit your actual role. These are done-for-you playbooks for Marketing, Sales, Finance, HR and more, so whatever you do, you start with an expert head start instead of a blank page.</p>
+          <div class="bs-free">✓ Yours FREE when you get the System today</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bs-cta">
+      <a class="btn-primary buy" href="#">Get the System + all 3 bonuses for $37 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── 8b. 10-GUIDE BONUS LIBRARY ───────────── -->
+<section class="va-library">
+  <div class="va-inner">
+    <div class="va-head">
+      <div class="section-label" style="text-align:center;">Included free with the System</div>
+      <h2 class="section-title" style="text-align:center;">Plus the complete 10-guide AI bonus library</h2>
+      <p class="section-body center">Ten focused field guides that go beyond the book: the practitioner knowledge most professionals never find. No fluff, no filler, each one usable today.</p>
+    </div>
+    <div class="va-grid">
+      <div class="va-card"><img src="img/va/01-anthropic-decoded.png" alt="Decoded" loading="lazy"><div class="t">Decoded: 8 Pro Techniques</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/02-context-playbook.png" alt="Feed It Your World" loading="lazy"><div class="t">Feed It Your World</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/03-anti-hallucination.png" alt="Tell Me the Truth" loading="lazy"><div class="t">Tell Me the Truth</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/04-build-ai-assistant.png" alt="Your Own AI Assistant" loading="lazy"><div class="t">Your Own AI Assistant</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/05-automation-starter.png" alt="Set It and Forget It" loading="lazy"><div class="t">Set It and Forget It</div><div class="v"><s>$27</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/06-slides-docs-images.png" alt="Make It Look Good" loading="lazy"><div class="t">Make It Look Good</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/07-meeting-email-machine.png" alt="Inbox Zero, Meetings Handled" loading="lazy"><div class="t">Inbox Zero, Meetings Handled</div><div class="v"><s>$24</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/08-what-not-to-put.png" alt="What Not to Type" loading="lazy"><div class="t">What Not to Type</div><div class="v"><s>$27</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/09-cost-roi.png" alt="Is It Worth It?" loading="lazy"><div class="t">Is It Worth It?</div><div class="v"><s>$19</s> <b>Free</b></div></div>
+      <div class="va-card"><img src="img/va/10-operating-system.png" alt="Stay Ahead" loading="lazy"><div class="t">Stay Ahead</div><div class="v"><s>$19</s> <b>Free</b></div></div>
+    </div>
+    <div class="va-total">Library value <s style="color:var(--muted)">$236</s> &middot; <b>yours free with the $37 System</b></div>
+    <div class="cta-band" style="margin-top:30px;"><a class="btn-primary buy" href="#">Get the System + all 10 guides for $37 →</a></div>
   </div>
 </section>
 
@@ -744,10 +943,10 @@
 </section>
 
 <!-- ───────────── 15. NEWSLETTER (free front-end) ───────────── -->
-<section id="newsletter" class="section" style="background: #070e1a; border-top: 1px solid var(--border); padding: 60px 24px; text-align: center;">
+<section id="newsletter" class="section" style="background: var(--dark); border-top: 1px solid var(--border); padding: 60px 24px; text-align: center;">
   <div style="max-width: 520px; margin: 0 auto;">
     <p style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">Not ready to buy? Start free</p>
-    <h2 style="font-size: 26px; font-weight: 800; color: #f0f5fa; margin-bottom: 12px; letter-spacing: -0.5px;">Read Chapter 1 free</h2>
+    <h2 style="font-size: 26px; font-weight: 800; color: var(--white); margin-bottom: 12px; letter-spacing: -0.5px;">Read Chapter 1 free</h2>
     <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;">Drop your email and get the first chapter, plus one short email a week with real AI workflows tested in real businesses. No theory, no hype.</p>
     <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="d4799f36-e61d-43a8-88cf-fbcb0b24fd5b"></script>
     <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
@@ -759,6 +958,42 @@
 <footer>
   <p>© 2026 Elvin M. Peters &nbsp;·&nbsp; <a href="mailto:elvin@epeters.ca">elvin@epeters.ca</a> &nbsp;·&nbsp; <a href="https://goodadagency.gumroad.com/l/pvofzn" class="buy" target="_blank">Buy the Book</a></p>
 </footer>
+
+<!-- ───────────── EXIT-INTENT POPUP (owned vs Amazon) ───────────── -->
+<div id="exitpop" class="exitpop hidden" role="dialog" aria-modal="true">
+  <div class="exitpop-card">
+    <button class="exitpop-x" aria-label="Close" onclick="closeExit()">×</button>
+    <h2>Wait — before you grab it on Amazon…</h2>
+    <p>Get <b>The Artificial Advantage</b> on <b>this page</b> and you also get <span class="gold">$546 in bonuses, free</span>: the 7-Day Workbook, the 50-prompt pack, and all 12 Role Packs. On Amazon, you just get the book.</p>
+    <div class="exitpop-covers">
+      <img src="img/cover_workbook.png" alt="7-Day AI Workbook" />
+      <img class="lead" src="cover.png" alt="The Artificial Advantage" />
+      <img src="img/cover_prompts.png" alt="50 Best AI Prompts" />
+      <img src="img/cover_roles.png" alt="12 AI Role Packs" />
+    </div>
+    <div class="exitpop-btns">
+      <a class="exitpop-yes buy" href="#">Yes — send me the System + all the bonuses ($37) →</a>
+      <a class="exitpop-no" href="https://amzn.to/4gCyVkm" target="_blank" rel="noopener" onclick="closeExit()">No thanks, just the book on Amazon (no bonuses)</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var pop = document.getElementById('exitpop');
+  function show() {
+    if (!pop || sessionStorage.getItem('exit_shown')) return;
+    sessionStorage.setItem('exit_shown', '1');
+    pop.classList.remove('hidden');
+    try { gtag('event', 'exit_popup_shown'); } catch (e) {}
+  }
+  window.closeExit = function () { if (pop) pop.classList.add('hidden'); };
+  document.addEventListener('mouseout', function (e) {
+    if (e.clientY <= 0 && !e.relatedTarget) show();   // cursor left the top of the viewport
+  });
+  if (pop) pop.addEventListener('click', function (e) { if (e.target === pop) closeExit(); });
+})();
+</script>
 
 <script>
   /* ── FAQ accordion ── */
@@ -820,14 +1055,25 @@
     } catch (e) { /* fail silent -> DEFAULT already in HTML */ }
   })();
 
-  /* ── Conversion tracking: fire GA4 + Meta on every buy-link click ── */
+  /* ── Owned checkout + conversion tracking ──
+     ONE place controls where every "buy" button goes. When the Stripe
+     checkout is live, set CHECKOUT_URL to the Stripe Checkout / Payment
+     Link (or the VPS /api/checkout endpoint) and every button updates.
+     TEMP: points at the current Gumroad link so the page is never dead
+     until Stripe is wired. V3 is NOT promoted to live until then. */
+  var CHECKOUT_URL = "https://buy.stripe.com/14AeVd5wPd49fnE1c49IQ00"; // Stripe Payment Link (owned checkout, live)
   (function () {
     function track() {
-      try { gtag('event', 'gumroad_click', { event_category: 'conversion', event_label: location.search || 'direct' }); } catch (e) {}
-      try { fbq('track', 'InitiateCheckout', { content_name: 'The Artificial Advantage', value: 37.00, currency: 'USD' }); } catch (e) {}
-      try { ttq.track('InitiateCheckout', { content_name: 'The Artificial Advantage', value: 37.00, currency: 'USD' }); } catch (e) {}
+      try { gtag('event', 'begin_checkout', { event_category: 'conversion', event_label: location.search || 'direct', value: 37.00, currency: 'USD' }); } catch (e) {}
+      try { fbq('track', 'InitiateCheckout', { content_name: 'The Artificial Advantage System', value: 37.00, currency: 'USD' }); } catch (e) {}
+      try { ttq.track('InitiateCheckout', { content_name: 'The Artificial Advantage System', value: 37.00, currency: 'USD' }); } catch (e) {}
     }
-    document.querySelectorAll('a.buy').forEach(function (a) { a.addEventListener('click', track); });
+    document.querySelectorAll('a.buy').forEach(function (a) {
+      a.setAttribute('href', CHECKOUT_URL);
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener');
+      a.addEventListener('click', track);
+    });
   })();
 </script>
 </body>
