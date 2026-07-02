@@ -1061,7 +1061,7 @@
      Link (or the VPS /api/checkout endpoint) and every button updates.
      TEMP: points at the current Gumroad link so the page is never dead
      until Stripe is wired. V3 is NOT promoted to live until then. */
-  var CHECKOUT_URL = "https://goodadagency.gumroad.com/l/pvofzn"; // TODO: swap to Stripe checkout
+  var CHECKOUT_URL = "https://buy.stripe.com/14AeVd5wPd49fnE1c49IQ00"; // Stripe Payment Link (owned checkout, live)
   (function () {
     function track() {
       try { gtag('event', 'begin_checkout', { event_category: 'conversion', event_label: location.search || 'direct', value: 37.00, currency: 'USD' }); } catch (e) {}
