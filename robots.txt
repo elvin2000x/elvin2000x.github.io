@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /thank-you/
+Disallow: /dl/
+
+Sitemap: https://elvinpeters.com/sitemap.xml
