@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elvin Peters — apps, games &amp; things I didn't need to build</title>
-<meta name="description" content="A one-person workshop in Toronto. Self-hosted apps, a shelf of original browser games, and whatever else sounded fun — built solo, zero dependencies. Ex-Google, ex-fintech. Wrote a book.">
+<title>Elvin Peters · apps, games &amp; things I didn't need to build</title>
+<meta name="description" content="A one-person workshop in Toronto. Self-hosted apps, a shelf of original browser games, and essays on building solo with AI. Ex-Google, ex-fintech. Wrote a book.">
 <link rel="canonical" href="https://elvinpeters.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Elvin Peters — apps, games &amp; things I didn't need to build">
-<meta property="og:description" content="A one-person workshop: self-hosted apps, original browser games, and a book — all built solo with zero dependencies.">
+<meta property="og:title" content="Elvin Peters · apps, games &amp; things I didn't need to build">
+<meta property="og:description" content="A one-person workshop: self-hosted apps, original browser games, essays on building solo with AI, and a book.">
 <meta property="og:url" content="https://elvinpeters.com/">
-<meta property="og:image" content="https://elvinpeters.com/og.png">
+<meta property="og:image" content="https://elvinpeters.com/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@elvin_peters">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 19V5h9M5 12h7' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='18' cy='17' r='2.4' fill='%23c9a250'/%3E%3C/svg%3E">
@@ -97,13 +97,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .nav .container{display:flex;align-items:center;gap:20px;height:64px}
 .brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px;letter-spacing:.02em}
 .brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel);box-shadow:var(--shadow)}
-.nav .links{margin-left:auto;display:flex;gap:26px;align-items:center}
+.nav .links{margin-left:auto;display:flex;gap:24px;align-items:center}
 .nav .links a{font-size:14px;color:var(--ink-2)}
 .nav .links a:hover{color:var(--ink)}
 .nav .links a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:8px 15px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;gap:5px}
 .nav .links a.cta:hover{background:var(--gold);color:var(--bg-2)}
 .themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:34px;height:34px;border-radius:9px;cursor:pointer}
-@media(max-width:720px){.nav .links a:not(.cta){display:none}}
+@media(max-width:760px){.nav .links a:not(.cta){display:none}}
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line-soft)}
 #constellation{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
 .hero .container{position:relative;z-index:2;padding:96px 24px 82px}
@@ -126,13 +126,14 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
 .card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,border-color .25s;display:flex;flex-direction:column}
 .card:hover{transform:translateY(-6px);box-shadow:var(--card-lift);border-color:color-mix(in srgb,var(--gold) 55%,var(--line))}
-.card .thumb{aspect-ratio:16/10;position:relative;border-bottom:1px solid var(--line-soft)}
+.card .thumb{aspect-ratio:16/10;position:relative;border-bottom:1px solid var(--line-soft);background-size:cover;background-position:center}
 .card .thumb svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .card .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
 .card .kicker{display:flex;align-items:center;gap:10px}
 .card .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .card .pill{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:999px;color:#2f9c6f;background:color-mix(in srgb,#2f9c6f 14%,transparent);border:1px solid color-mix(in srgb,#2f9c6f 40%,transparent)}
 .card .pill.play{color:var(--cyan);background:color-mix(in srgb,var(--cyan) 12%,transparent);border-color:color-mix(in srgb,var(--cyan) 38%,transparent)}
+.card .pill.read{color:var(--gold-2);background:color-mix(in srgb,var(--gold) 13%,transparent);border-color:color-mix(in srgb,var(--gold) 40%,transparent)}
 .card h3{font-size:1.34rem;letter-spacing:-.01em}
 .card .desc{color:var(--ink-2);font-size:14px;line-height:1.5}
 .card .go{margin-top:auto;font-size:13px;font-weight:600;color:var(--gold-2);display:inline-flex;align-items:center;gap:7px}
@@ -144,18 +145,25 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .stat .n em{color:var(--gold-2);font-style:normal}
 .stat .l{font-size:13px;color:var(--muted);margin-top:2px}
 @media(max-width:680px){.stats .container{grid-template-columns:1fr 1fr;gap:26px 18px}}
-.about{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:start}
-.about p{font-size:16.5px;color:var(--ink-2);line-height:1.7}
-.about p .lead{color:var(--ink);font-family:var(--serif);font-size:1.4rem;line-height:1.4;display:block;margin-bottom:16px}
-.about .side{border-left:1px solid var(--line);padding-left:28px}
-.about .side .row{padding:12px 0;border-bottom:1px solid var(--line-soft);display:flex;justify-content:space-between;gap:14px;font-size:14px}
-.about .side .row span:first-child{color:var(--muted)}
-.about .side .row span:last-child{color:var(--ink);font-weight:600;text-align:right}
-@media(max-width:760px){.about{grid-template-columns:1fr;gap:30px}.about .side{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:8px}}
-.contact{text-align:center;padding:88px 24px}
-.contact h2{font-size:clamp(2rem,4.6vw,3.2rem);letter-spacing:-.015em}
-.contact p{color:var(--ink-2);max-width:44ch;margin:16px auto 0}
-.contact .actions{display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+.about{display:grid;grid-template-columns:0.82fr 1fr;gap:44px;align-items:center}
+.aboutimg{width:100%;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);aspect-ratio:1;object-fit:cover;display:block}
+.about .lead{color:var(--ink);font-family:var(--serif);font-size:1.4rem;line-height:1.4;display:block;margin-bottom:16px}
+.about p{font-size:16.5px;color:var(--ink-2);line-height:1.7;margin:0}
+.factgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px 22px;margin-top:24px}
+.factgrid .row{padding:10px 0;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;gap:12px;font-size:13.5px}
+.factgrid .row span:first-child{color:var(--muted)}
+.factgrid .row span:last-child{color:var(--ink);font-weight:600;text-align:right}
+@media(max-width:760px){.about{grid-template-columns:1fr;gap:26px}.factgrid{grid-template-columns:1fr}}
+.connect{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:38px}
+.connect h2{font-size:clamp(1.8rem,3.6vw,2.5rem);letter-spacing:-.01em;margin:10px 0 0}
+.connect p{color:var(--ink-2);margin:12px 0 20px;font-size:15.5px;max-width:40ch}
+.nlwrap{min-height:44px}
+.clinks{display:flex;flex-direction:column;gap:12px}
+.clink{display:flex;align-items:center;gap:13px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg-2);font-weight:600;font-size:14.5px;transition:border-color .15s,transform .15s}
+.clink:hover{border-color:var(--gold);transform:translateX(3px)}
+.clink .ic{width:22px;height:22px;flex:none;color:var(--gold-2)}
+.clink small{display:block;color:var(--muted);font-weight:400;font-size:12px;margin-top:1px}
+@media(max-width:760px){.connect{grid-template-columns:1fr;padding:26px;gap:26px}}
 footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px}
 footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
 footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
@@ -172,8 +180,8 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
     <div class="links">
       <a href="#apps">Apps</a>
       <a href="#games">Games</a>
+      <a href="/writing/">Writing</a>
       <a href="#about">About</a>
-      <a href="#contact">Say hi</a>
       <button class="themebtn" id="themeBtn" aria-label="Toggle light or dark theme">◑</button>
       <a class="cta" href="/book.html">Read the book <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
@@ -184,7 +192,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
     <div class="container">
       <span class="eyebrow">Builder · Toronto · Nights &amp; weekends</span>
       <h1>I make apps, games,<br>&amp; things I <span class="amp">didn't need<br>to build.</span></h1>
-      <p class="lede">A one-person workshop. Self-hosted tools, a shelf of original browser games, and whatever else sounded fun that week — no team, no dependencies, no reason other than I wanted to see if I could.</p>
+      <p class="lede">A one-person workshop. Self-hosted tools, a shelf of original browser games, and whatever else sounded fun that week. No team, no dependencies, no reason other than I wanted to see if I could.</p>
       <div class="actions">
         <a class="btn primary" href="#games">Play something <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></a>
         <a class="btn ghost" href="#apps">Poke at the apps</a>
@@ -201,7 +209,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   <section class="section" id="apps"><div class="container">
     <div class="section-head">
       <div><span class="eyebrow">Apps &amp; tools</span><h2>Little machines I built for myself.</h2></div>
-      <p>Things I wanted to exist, so I made them — each self-hosted and running on one server I manage by hand.</p>
+      <p>Things I wanted to exist, so I made them. Each one self-hosted and running on a single server I manage by hand.</p>
     </div>
     <div class="grid" id="appGrid"></div>
   </div></section>
@@ -209,9 +217,33 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   <section class="section" id="games" style="padding-top:8px"><div class="container">
     <div class="section-head">
       <div><span class="eyebrow">The arcade</span><h2>Games I built for the fun of it.</h2></div>
-      <p>Thirteen originals — strategy on a spinning globe, tower defense, survivors, a monster-taming RPG. Every one a single zero-dependency file of vanilla JavaScript and canvas.</p>
+      <p>Thirteen originals: strategy on a spinning globe, tower defense, survivors, a monster-taming RPG. Every one a single zero-dependency file of vanilla JavaScript and canvas.</p>
     </div>
     <div class="grid" id="gameGrid"></div>
+  </div></section>
+
+  <section class="section" id="writing" style="padding-top:8px"><div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Writing</span><h2>Notes from a workshop of one.</h2></div>
+      <p>How I actually build: the harness around the AI, the zero-dependency habit, and the tools that let one person ship like a team. <a href="/writing/" style="color:var(--gold-2);font-weight:600">All essays →</a></p>
+    </div>
+    <div class="grid" id="writeGrid">
+      <a class="card" href="/writing/the-harness/">
+        <div class="thumb" style="background-image:url(/img/blog-claude.jpg)"></div>
+        <div class="body"><div class="kicker"><span class="tag">Essay</span><span class="pill read">6 min</span></div>
+        <h3>The Harness Beats the Prompt</h3><p class="desc">You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship.</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>
+      <a class="card" href="/writing/zero-dependencies/">
+        <div class="thumb" style="background-image:url(/img/blog-zerodep.jpg)"></div>
+        <div class="body"><div class="kicker"><span class="tag">Essay</span><span class="pill read">6 min</span></div>
+        <h3>Zero dependencies on purpose</h3><p class="desc">Why almost everything I ship is one self-contained file, and the sentence I write at build time that keeps that from turning into a mistake.</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>
+      <a class="card" href="/writing/thirteen-games-solo/">
+        <div class="thumb" style="background-image:url(/img/blog-games.jpg)"></div>
+        <div class="body"><div class="kicker"><span class="tag">Essay</span><span class="pill read">6 min</span></div>
+        <h3>Shipping Thirteen Games Solo</h3><p class="desc">Shipping a lot alone is a tooling problem, and the tool that matters most is the one that checks your work while you sleep.</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>
+    </div>
   </div></section>
 
   <section class="stats"><div class="container">
@@ -223,36 +255,53 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
 
   <section class="section" id="about"><div class="container">
     <div class="about">
+      <img class="aboutimg" src="/img/workspace.jpg" alt="A late-night studio with monitors showing code and a wireframe globe" loading="lazy">
       <div>
         <span class="eyebrow">About</span>
-        <p style="margin-top:18px">
-          <span class="lead">I spent years inside the machines — Ads at Google, then engineering in fintech. These days I build for myself.</span>
-          I make the apps I wished existed and the games I wanted to play, and every so often something that only makes sense to me. I write the code, draw the art, and run the servers — solo, with AI as a genuine co-worker rather than a party trick. I also wrote a book about doing exactly that. Everything on this page came out of one head and one keyboard, mostly on nights and weekends.
+        <p style="margin-top:16px">
+          <span class="lead">I spent years inside the machines. Ads at Google, then engineering in fintech. These days I build for myself.</span>
+          I make the apps I wished existed and the games I wanted to play, and every so often something that only makes sense to me. I write the code, draw the art, and run the servers, solo, with AI as a genuine co-worker rather than a party trick. I also wrote a book about doing exactly that. Everything on this page came out of one head and one keyboard, mostly on nights and weekends.
         </p>
-      </div>
-      <div class="side">
-        <div class="row"><span>Based in</span><span>Toronto, Canada</span></div>
-        <div class="row"><span>Past life</span><span>Google · fintech</span></div>
-        <div class="row"><span>Makes</span><span>Apps · Games · Toys</span></div>
-        <div class="row"><span>Rule</span><span>Zero dependencies</span></div>
-        <div class="row"><span>Team size</span><span>One (+ the AI)</span></div>
+        <div class="factgrid">
+          <div class="row"><span>Based in</span><span>Toronto, Canada</span></div>
+          <div class="row"><span>Past life</span><span>Google · fintech</span></div>
+          <div class="row"><span>Makes</span><span>Apps · Games · Toys</span></div>
+          <div class="row"><span>Rule</span><span>Zero dependencies</span></div>
+          <div class="row"><span>Team size</span><span>One, plus the AI</span></div>
+          <div class="row"><span>Writes at</span><span><a href="/writing/" style="color:var(--gold-2)">/writing</a></span></div>
+        </div>
       </div>
     </div>
   </div></section>
 
-  <section class="contact" id="contact"><div class="container">
-    <span class="eyebrow">Say hi</span>
-    <h2>Want to see how something was built?</h2>
-    <p>I like talking shop. Email's the fastest way to reach me.</p>
-    <div class="actions">
-      <a class="btn primary" href="mailto:elvin.m.peters@gmail.com">elvin.m.peters@gmail.com</a>
-      <a class="btn ghost" href="https://twitter.com/elvin_peters">@elvin_peters</a>
+  <section class="section" id="connect"><div class="container">
+    <div class="connect">
+      <div>
+        <span class="eyebrow">Stay in touch</span>
+        <h2>Get the next essay.</h2>
+        <p>I write about building software and games solo with AI. Occasional, practical, no spam.</p>
+        <div class="nlwrap"><script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="d4799f36-e61d-43a8-88cf-fbcb0b24fd5b"></script></div>
+      </div>
+      <div class="clinks">
+        <a class="clink" href="https://twitter.com/elvin_peters" target="_blank" rel="noopener">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3l7 8.5L4.3 21H7l5-6 5 6h3l-7.4-9L20.7 3H18l-4.6 5.4L9 3z"/></svg>
+          <span>@elvin_peters<small>Daily notes on X</small></span>
+        </a>
+        <a class="clink" href="https://ca.linkedin.com/in/elvin-peters-7697b4355" target="_blank" rel="noopener">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.75 2.5 4.75 5.9V21h-4v-5.2c0-1.24-.02-2.85-1.74-2.85s-2 1.36-2 2.76V21H9z"/></svg>
+          <span>LinkedIn<small>Elvin Peters</small></span>
+        </a>
+        <a class="clink" href="mailto:elvin@elvinpeters.com">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <span>elvin@elvinpeters.com<small>The fastest way to reach me</small></span>
+        </a>
+      </div>
     </div>
   </div></section>
 
   <footer><div class="container">
-    <span>© 2026 Elvin Peters — built &amp; hosted by hand.</span>
-    <span><a href="/book.html">The book</a> · Toronto → everywhere</span>
+    <span>© 2026 Elvin Peters. Built and hosted by hand.</span>
+    <span><a href="/writing/">Writing</a> · <a href="/book.html">The book</a> · Toronto</span>
   </div></footer>
 
 <script>
@@ -284,27 +333,27 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   var PLAY='https://play.elvinpeters.com/';
   var APPS=[
    {t:"QR Studio",cat:"Owned tool",pill:"Live",href:"https://qr.elvinpeters.com",th:qrThumb,
-    d:"A self-hosted QR generator with dynamic short links and scan analytics. Branded codes whose destination you can change after they're printed."},
+    d:"A self-hosted QR generator with dynamic short links and scan analytics. Branded codes whose destination you can change after they are printed."},
    {t:"Empire Studio",cat:"Platform",pill:"Built",href:"#",th:studioThumb,
-    d:"My own website + funnel builder — a 20-block page engine, funnels, and lead capture, running on my own box instead of a $99/mo SaaS."},
+    d:"My own website and funnel builder: a 20-block page engine, funnels, and lead capture, running on my own box instead of a $99/mo SaaS."},
    {t:"Chronicle",cat:"App",pill:"Built",href:"#",th:chronicleThumb,
-    d:'An accountability app that makes you "prove it" — photo-verified streaks instead of a journal you lie to. Browser extension + desktop.'}
+    d:'An accountability app that makes you "prove it," with photo-verified streaks instead of a journal you lie to. Browser extension and desktop.'}
   ];
   var GAMES=[
    {t:"Globe Strategy",cat:"Dominion · Outbreak · Hegemon",pill:"Play",href:PLAY+"dominion/",th:globeThumb,
-    d:"Three grand-strategy games that play out on a real, rotating 3D globe rendered in plain canvas — empire-building, pandemic response, and world domination."},
+    d:"Three grand-strategy games that play out on a real, rotating 3D globe rendered in plain canvas: empire-building, pandemic response, and world domination."},
    {t:"Prism Arcade",cat:"Tower defense ×3",pill:"Play",href:PLAY+"prism-defense/",th:prismThumb,
-    d:"A geometric universe of defense games — evolving-tower TD, a last-tower survivor, and a castle siege. Neon prisms, endless modes, one art style."},
+    d:"A geometric universe of defense games: evolving-tower TD, a last-tower survivor, and a castle siege. Neon prisms, endless modes, one art style."},
    {t:"Forest Defense",cat:"Maze TD",pill:"Play",href:PLAY+"forest-defense/",th:mazeThumb,
-    d:"Retro maze tower defense — grow living tree-walls to route the swarm, 21 maps and 7 bosses, with a talking acorn named Oakley for a guide."},
+    d:"Retro maze tower defense. Grow living tree-walls to route the swarm across 21 maps and 7 bosses, with a talking acorn named Oakley for a guide."},
    {t:"Pixel Tamer",cat:"Monster RPG",pill:"Play",href:PLAY+"pixel-tamer/",th:tamerThumb,
-    d:"An old-school monster-taming RPG — explore, catch, and battle your way to the Champion. Made mostly because I wanted the dialogue to be funny."},
+    d:"An old-school monster-taming RPG. Explore, catch, and battle your way to the Champion. Made mostly because I wanted the dialogue to be funny."},
    {t:"Ballista Knight",cat:"360° shooter",pill:"Play",href:PLAY+"ballista-knight/",th:shooterThumb,
-    d:"A retro twin-stick-style shooter — hold to fire, knock the Gloom back from all sides, and let auto-cast spells do the flashy work. Sibling: Ink &amp; Bolt."},
+    d:"A retro twin-stick-style shooter. Hold to fire, knock the Gloom back from all sides, and let auto-cast spells do the flashy work. Sibling: Ink &amp; Bolt."},
    {t:"Legion TD",cat:"Lane defense",pill:"Play",href:PLAY+"legion-td/",th:laneThumb,
-    d:"Single-player lane defense — build the wall, farm the eco, send mercs at the bot. The bot even sim-tests its own holds before it commits."},
+    d:"Single-player lane defense. Build the wall, farm the eco, and send mercs at the bot. The bot even sim-tests its own holds before it commits."},
    {t:"Siege &amp; Space Siege",cat:"4X conquest",pill:"Play",href:PLAY+"space-siege/",th:conquestThumb,
-    d:"Turn-based conquest — one across a Risk-style map of Europe, one across 36 star systems and 7 empires. Build, blockade, and take the map."}
+    d:"Turn-based conquest. One across a Risk-style map of Europe, one across 36 star systems and 7 empires. Build, blockade, and take the map."}
   ];
   function card(p){var a=document.createElement('a');a.className='card';a.href=p.href;
     if(p.href.indexOf('http')===0){a.target='_blank';a.rel='noopener';}
