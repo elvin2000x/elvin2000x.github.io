@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CLZ7N26J1Q');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Share Your Thoughts · The Artificial Advantage</title>
+  <meta name="description" content="You read The Artificial Advantage. Tell Elvin what you really think. Two minutes, honest feedback, direct to the author." />
+  <meta name="robots" content="noindex" />
+  <meta property="og:title" content="What did you think of The Artificial Advantage?" />
+  <meta property="og:description" content="Share your honest review and thoughts on Book 1 directly with the author. Takes two minutes." />
+  <meta property="og:image" content="https://elvinpeters.com/cover.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:#060f1a; --dark:#0a1828; --card:#0f2035; --border:#1a3248;
+      --accent:#c9a250; --accent2:#4fb3f0; --white:#f0f5fa; --muted:#6a8faa; --text:#b8d0e4;
+    }
+    body {
+      background: radial-gradient(140% 100% at 50% 0%, #0a1e35 0%, #060f1a 60%);
+      min-height: 100vh; color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .wrap { width: 100%; max-width: 860px; padding: 24px; margin: 0 auto; }
+
+    .topbar { display:flex; align-items:center; justify-content:space-between; padding: 8px 4px 0; margin-bottom: 28px; }
+    .brand { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .brand a { color: var(--accent); text-decoration: none; }
+    .topbar .skip { font-size: 12px; color: var(--muted); text-decoration: none; }
+    .topbar .skip:hover { color: var(--accent); }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 40px 36px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .hero { display: flex; gap: 36px; align-items: center; margin-bottom: 36px; }
+    .hero .cover-wrap { flex-shrink: 0; }
+    .hero img.cover {
+      width: 190px; height: auto; display: block; border-radius: 6px;
+      box-shadow: 0 14px 44px rgba(0,0,0,0.55), 0 0 0 1px rgba(79,179,240,0.15);
+      transform: rotate(-2deg);
+    }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    h1 { font-family: 'EB Garamond', Georgia, serif; font-weight: 600; color: var(--white); line-height: 1.12; letter-spacing: -0.01em; font-size: clamp(30px, 5.5vw, 44px); margin-bottom: 14px; }
+    .hero p { font-size: 17px; color: var(--text); }
+    .hero p b { color: var(--white); font-weight: 600; }
+
+    label { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--white); margin-bottom: 8px; }
+    label .opt-tag { color: var(--muted); font-weight: 400; }
+    .field { margin-bottom: 22px; }
+    input[type=text], input[type=email], textarea {
+      width: 100%; background: var(--dark); border: 1px solid var(--border); border-radius: 10px;
+      padding: 15px 16px; font-size: 16px; color: var(--white); font-family: 'Inter', sans-serif;
+      transition: border-color 0.15s;
+    }
+    input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+    textarea { min-height: 150px; resize: vertical; line-height: 1.6; }
+    ::placeholder { color: var(--muted); opacity: 0.8; }
+
+    .stars { display: flex; gap: 6px; margin-bottom: 4px; }
+    .star {
+      background: none; border: none; cursor: pointer; padding: 4px;
+      font-size: 38px; line-height: 1; color: var(--border);
+      transition: color 0.12s, transform 0.12s; font-family: inherit;
+    }
+    .star:hover { transform: scale(1.12); }
+    .star.lit { color: var(--accent); text-shadow: 0 0 18px rgba(201,162,80,0.45); }
+    .rating-hint { font-size: 13px; color: var(--muted); min-height: 20px; margin-bottom: 6px; }
+
+    .quote-row { display: flex; align-items: flex-start; gap: 12px; background: var(--dark); border: 1px solid var(--border); border-radius: 10px; padding: 16px; cursor: pointer; }
+    .quote-row input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+    .quote-row span { font-size: 14px; color: var(--text); }
+
+    .btn {
+      display: inline-block; background: var(--accent); color: var(--black);
+      font-size: 16px; font-weight: 700; padding: 17px 32px; border-radius: 8px;
+      text-decoration: none; border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em; transition: opacity 0.15s, transform 0.12s;
+      box-shadow: 0 6px 24px rgba(201,162,80,0.22); width: 100%;
+    }
+    .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); box-shadow: none; width: auto; padding: 13px 24px; font-size: 14px; }
+
+    .form-error { color: #e58989; font-size: 14px; margin-top: 14px; display: none; }
+
+    .success { text-align: center; display: none; padding: 20px 0; }
+    .success .big { font-size: 52px; margin-bottom: 14px; }
+    .success h2 { font-family: 'EB Garamond', Georgia, serif; font-weight: 600; color: var(--white); font-size: 32px; margin-bottom: 12px; }
+    .success p { max-width: 460px; margin: 0 auto 22px; }
+
+    footer { padding: 28px 0 40px; font-size: 12px; color: var(--muted); text-align: center; }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 640px) {
+      .card { padding: 30px 22px; }
+      .hero { flex-direction: column; text-align: center; gap: 24px; }
+      .hero img.cover { width: 150px; margin: 0 auto; }
+      .stars { justify-content: center; }
+      .rating-hint { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand"><a href="https://elvinpeters.com/">Elvin Peters</a></div>
+      <a class="skip" href="https://elvinpeters.com/">elvinpeters.com</a>
+    </div>
+
+    <div class="card">
+      <!-- FORM VIEW -->
+      <div id="formView">
+        <div class="hero">
+          <div class="cover-wrap">
+            <img class="cover" src="/cover.png" alt="The Artificial Advantage book cover" width="190" height="304" />
+          </div>
+          <div>
+            <div class="eyebrow">Reader Feedback · Book 1</div>
+            <h1>Tell me what you really think</h1>
+            <p>You read <b>The Artificial Advantage</b>. Your honest take shapes Volume 2 and it genuinely means a lot to me. Two minutes, tops.</p>
+          </div>
+        </div>
+
+        <form id="fbForm" novalidate>
+          <div class="field">
+            <label>How would you rate it?</label>
+            <div class="stars" id="stars" role="radiogroup" aria-label="Star rating out of 5">
+              <button type="button" class="star" data-v="1" aria-label="1 star">★</button>
+              <button type="button" class="star" data-v="2" aria-label="2 stars">★</button>
+              <button type="button" class="star" data-v="3" aria-label="3 stars">★</button>
+              <button type="button" class="star" data-v="4" aria-label="4 stars">★</button>
+              <button type="button" class="star" data-v="5" aria-label="5 stars">★</button>
+            </div>
+            <div class="rating-hint" id="ratingHint">Tap a star</div>
+          </div>
+
+          <div class="field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" autocomplete="name" placeholder="First name is perfect" />
+          </div>
+
+          <div class="field">
+            <label for="email">Email <span class="opt-tag">(optional, if you'd like a reply)</span></label>
+            <input type="email" id="email" autocomplete="email" placeholder="you@example.com" />
+          </div>
+
+          <div class="field">
+            <label for="thoughts">Your thoughts</label>
+            <textarea id="thoughts" placeholder="What landed for you? What fell flat? Favourite chapter, biggest takeaway, anything you'd change for Volume 2..."></textarea>
+          </div>
+
+          <div class="field">
+            <label class="quote-row" for="quoteOk">
+              <input type="checkbox" id="quoteOk" />
+              <span><b style="color:var(--white)">You can quote me.</b> I'm happy for Elvin to share my words as a reader testimonial (first name only is fine).</span>
+            </label>
+          </div>
+
+          <button class="btn" type="submit" id="sendBtn">Send my feedback</button>
+          <div class="form-error" id="formError"></div>
+        </form>
+      </div>
+
+      <!-- SUCCESS VIEW -->
+      <div class="success" id="successView">
+        <div class="big">🙏</div>
+        <h2>Got it. Thank you!</h2>
+        <p>Your feedback just landed in my inbox and I read every single one. If you enjoyed the book, a quick Amazon review helps more than you know.</p>
+        <a class="btn ghost" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Leave an Amazon review</a>
+      </div>
+    </div>
+
+    <footer>
+      The Artificial Advantage · <a href="https://elvinpeters.com/">elvinpeters.com</a>
+    </footer>
+  </div>
+
+  <script>
+    var LEAD_API = "https://ultimateaidirectory.com/api/lead"; // owned lead DB (HTTPS, CORS-enabled)
+    var rating = 0;
+    var hints = ["Tap a star", "Ouch. Tell me why below.", "Rough. I want the details.", "Fair. What would make it better?", "Solid! What worked?", "Amazing! What hit hardest?"];
+
+    var stars = document.querySelectorAll("#stars .star");
+    function paint(n){
+      stars.forEach(function(s){
+        s.classList.toggle("lit", parseInt(s.dataset.v, 10) <= n);
+      });
+    }
+    stars.forEach(function(s){
+      s.addEventListener("mouseenter", function(){ paint(parseInt(s.dataset.v, 10)); });
+      s.addEventListener("mouseleave", function(){ paint(rating); });
+      s.addEventListener("click", function(){
+        rating = parseInt(s.dataset.v, 10);
+        paint(rating);
+        document.getElementById("ratingHint").textContent = hints[rating];
+      });
+    });
+
+    document.getElementById("fbForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      var err = document.getElementById("formError");
+      err.style.display = "none";
+
+      var name = document.getElementById("name").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var thoughts = document.getElementById("thoughts").value.trim();
+      var quoteOk = document.getElementById("quoteOk").checked;
+
+      if (!rating) { err.textContent = "Pick a star rating first (be honest)."; err.style.display = "block"; return; }
+      if (!name) { err.textContent = "Add your name so I know who to thank."; err.style.display = "block"; return; }
+      if (!thoughts) { err.textContent = "The whole point is your thoughts. Even one sentence helps."; err.style.display = "block"; return; }
+
+      var btn = document.getElementById("sendBtn");
+      btn.disabled = true;
+      btn.textContent = "Sending...";
+
+      var payload = {
+        name: name,
+        email: email,
+        message: "[BOOK 1 FEEDBACK · " + rating + "/5 stars · quote " + (quoteOk ? "OK" : "NO") + "] " + thoughts,
+        source: "book1-feedback"
+      };
+
+      fetch(LEAD_API, {
+        method: "POST", mode: "cors", keepalive: true,
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(payload).toString()
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.success) {
+          try { gtag('event', 'book1_feedback_submit', { rating: rating }); } catch(_e){}
+          document.getElementById("formView").style.display = "none";
+          document.getElementById("successView").style.display = "block";
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else { throw new Error("server rejected"); }
+      })
+      .catch(function(){
+        btn.disabled = false;
+        btn.textContent = "Send my feedback";
+        err.innerHTML = "Hmm, that didn't go through. Try again in a minute, or email me directly at <a href='mailto:elvin@elvinpeters.com' style='color:var(--accent)'>elvin@elvinpeters.com</a>.";
+        err.style.display = "block";
+      });
+    });
+  </script>
+</body>
+</html>
