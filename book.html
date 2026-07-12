@@ -946,10 +946,29 @@
 <section id="newsletter" class="section" style="background: var(--dark); border-top: 1px solid var(--border); padding: 60px 24px; text-align: center;">
   <div style="max-width: 520px; margin: 0 auto;">
     <p style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px;">Not ready to buy? Start free</p>
-    <h2 style="font-size: 26px; font-weight: 800; color: var(--white); margin-bottom: 12px; letter-spacing: -0.5px;">Read Chapter 1 free</h2>
-    <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;">Drop your email and get the first chapter, plus one short email a week with real AI workflows tested in real businesses. No theory, no hype.</p>
-    <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="d4799f36-e61d-43a8-88cf-fbcb0b24fd5b"></script>
-    <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+    <h2 style="font-size: 26px; font-weight: 800; color: var(--white); margin-bottom: 12px; letter-spacing: -0.5px;">Get the 50 Best AI Prompts free</h2>
+    <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;">Drop your email and get the exact prompt pack from the book, plus one short email a week with real AI workflows tested in real businesses. No theory, no hype.</p>
+    <form id="nlform" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+      <input id="nlemail" type="email" required placeholder="you@work.com" style="flex:1;min-width:220px;max-width:300px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--white);font-size:15px">
+      <button type="submit" style="padding:13px 22px;border-radius:10px;border:0;background:var(--accent);color:#0b1220;font-weight:700;cursor:pointer;font-size:15px">Send me the prompts</button>
+    </form>
+    <p id="nlmsg" style="display:none;font-size:14px;margin-top:12px;color:#7fd18c"></p>
+    <script>
+    document.getElementById('nlform').addEventListener('submit', function(e){
+      e.preventDefault();
+      var f = this, m = document.getElementById('nlmsg');
+      fetch('https://ultimateaidirectory.com/api/lead', {method:'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({email: document.getElementById('nlemail').value.trim(),
+          source: 'newsletter-booksite', website: f.website.value})})
+        .then(function(r){ return r.json(); }).then(function(r){
+          m.style.display = 'block';
+          if (r.success) { f.style.display = 'none'; m.textContent = 'Done. The 50 Best AI Prompts are on their way to your inbox.'; }
+          else { m.style.color = '#ff8f8f'; m.textContent = r.error || 'Something went wrong. Try again.'; }
+        }).catch(function(){ m.style.display = 'block'; m.style.color = '#ff8f8f'; m.textContent = 'Network hiccup. Try again.'; });
+    });
+    </script>
     <p style="font-size: 12px; color: #3a5168; margin-top: 14px;">Free. Unsubscribe any time.</p>
     <p style="font-size: 13px; color: var(--muted); margin-top: 22px;">Not sure it's for you? <a href="/quiz/" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(201,162,80,0.4);">Take the 60-second AI Style quiz →</a></p>
   </div>

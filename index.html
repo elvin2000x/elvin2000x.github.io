@@ -407,8 +407,30 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
       <div>
         <span class="eyebrow">Stay in touch</span>
         <h2>Get the next essay.</h2>
-        <p>Practical notes on putting AI to work in a real business. Occasional, useful, no spam.</p>
-        <div class="nlwrap"><script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="d4799f36-e61d-43a8-88cf-fbcb0b24fd5b"></script></div>
+        <p>Practical notes on putting AI to work in a real business. Join free and I'll send you the 50 Best AI Prompts today, then one useful letter at a time. No spam.</p>
+        <div class="nlwrap">
+          <form id="nlform" style="display:flex;gap:10px;flex-wrap:wrap;max-width:480px">
+            <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+            <input id="nlemail" type="email" required placeholder="you@work.com" style="flex:1;min-width:220px;padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:15px">
+            <button type="submit" style="padding:13px 22px;border-radius:10px;border:0;background:#c9a250;color:#0b1220;font-weight:700;cursor:pointer;font-size:15px">Get the prompts</button>
+          </form>
+          <p id="nlmsg" style="display:none;font-size:14px;margin-top:10px;color:#7fd18c"></p>
+          <script>
+          document.getElementById('nlform').addEventListener('submit', function(e){
+            e.preventDefault();
+            var f = this, m = document.getElementById('nlmsg');
+            fetch('https://ultimateaidirectory.com/api/lead', {method:'POST',
+              headers: {'Content-Type':'application/json'},
+              body: JSON.stringify({email: document.getElementById('nlemail').value.trim(),
+                source: 'newsletter-homepage', website: f.website.value})})
+              .then(function(r){ return r.json(); }).then(function(r){
+                m.style.display = 'block';
+                if (r.success) { f.style.display = 'none'; m.textContent = 'Done. The 50 Best AI Prompts are on their way to your inbox.'; }
+                else { m.style.color = '#ff8f8f'; m.textContent = r.error || 'Something went wrong. Try again.'; }
+              }).catch(function(){ m.style.display = 'block'; m.style.color = '#ff8f8f'; m.textContent = 'Network hiccup. Try again.'; });
+          });
+          </script>
+        </div>
       </div>
       <div class="clinks">
         <a class="clink" href="https://meet.elvinpeters.com">
