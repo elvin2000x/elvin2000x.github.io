@@ -177,8 +177,11 @@
 
 <script>
 /* =========================================================================
-   QUIZ FUNNEL — config-driven. To build a NEW quiz: edit the QUIZ object
-   below (questions + archetypes). The engine underneath needs no changes.
+   QUIZ FUNNEL — config-driven.
+   Content now lives in https://ultimateaidirectory.com/quiz-config.json
+   (edit it in Empire Studio → /studio/quiz). The inline QUIZ object below
+   is the OFFLINE FALLBACK only — if the remote fetch fails, the quiz still
+   runs from this copy. Keep it valid.
    ========================================================================= */
 var QUIZ = {
   bookUrl: "https://goodadagency.gumroad.com/l/pvofzn",
@@ -306,7 +309,7 @@ var QUIZ = {
 };
 
 /* ===================== ENGINE (no edits needed) ===================== */
-(function () {
+function startQuizEngine() {
   var stageEl = document.getElementById("stage");
   var barEl = document.getElementById("bar");
   var answers = [];      // index -> {optIndex, text}
@@ -464,6 +467,28 @@ var QUIZ = {
 
   // boot
   showIntro();
+}
+
+/* ===================== BOOT: remote config with inline fallback ============
+   Tries the published config first so quiz content can be edited without a
+   site deploy. Any failure (offline, CORS, bad JSON, slow network) falls
+   back to the inline QUIZ object above. The quiz can never be blocked. */
+(function () {
+  var CONFIG_URL = "https://ultimateaidirectory.com/quiz-config.json";
+  var started = false;
+  function start(){ if (!started) { started = true; startQuizEngine(); } }
+  var timer = setTimeout(start, 2500); // never hold the page hostage
+  try {
+    fetch(CONFIG_URL, { mode: "cors", cache: "no-cache" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (cfg) {
+        if (!started && cfg && cfg.intro && cfg.questions && cfg.questions.length && cfg.archetypes) {
+          QUIZ = cfg;
+        }
+        clearTimeout(timer); start();
+      })
+      .catch(function () { clearTimeout(timer); start(); });
+  } catch (e) { clearTimeout(timer); start(); }
 })();
 </script>
 </body>
