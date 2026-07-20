@@ -948,7 +948,7 @@
           source: 'newsletter-booksite', website: f.website.value})})
         .then(function(r){ return r.json(); }).then(function(r){
           m.style.display = 'block';
-          if (r.success) { f.style.display = 'none'; m.textContent = 'Done. The prompts, cheat sheets, and first chapter are on their way to your inbox.'; if (window.fbq) fbq('track','Lead',{content_name:'booksite-freekit'}); if (window.ttq) ttq.track('SubmitForm',{description:'booksite-freekit'}); }
+          if (r.success) { f.style.display = 'none'; m.innerHTML = 'You\'re in. <a href="/dl/50-Best-AI-Prompts.pdf" download style="color:var(--accent);font-weight:700;border-bottom:1px solid rgba(184,138,46,0.5)">Download your 50 prompts now &rarr;</a><br>I\'ll follow up by email with the cheat sheets and the first chapter.'; if (window.fbq) fbq('track','Lead',{content_name:'booksite-freekit'}); if (window.ttq) ttq.track('SubmitForm',{description:'booksite-freekit'}); }
           else { m.style.color = '#ff8f8f'; m.textContent = r.error || 'Something went wrong. Try again.'; }
         }).catch(function(){ m.style.display = 'block'; m.style.color = '#ff8f8f'; m.textContent = 'Network hiccup. Try again.'; });
     });
