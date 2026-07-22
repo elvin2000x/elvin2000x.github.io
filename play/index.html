@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Play — Elvin Peters</title>
+<meta name="description" content="Free browser games and decision-makers. Play classics with friends in a shared lobby, or settle something with a coin, dice or straws. No apps, no sign-up.">
+<link rel="stylesheet" href="_kit/play-kit.css">
+<style>
+  body{ display:block; }
+  .wrap{ max-width:920px; margin:0 auto; padding:var(--pk-pad); }
+  .top{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 0 6px; }
+  .top a.back{ color:var(--pk-ink-soft); text-decoration:none; font-size:var(--pk-fs-sm); font-weight:600; }
+  .top a.back:hover{ color:var(--pk-ink); }
+  .hero{ text-align:center; padding:26px 0 8px; }
+  .hero h1{ font-family:var(--pk-font-display); font-size:clamp(2.2rem,6vw,3.4rem); line-height:1.05;
+    letter-spacing:-.02em; margin-bottom:10px; }
+  .hero p{ color:var(--pk-ink-soft); max-width:56ch; margin:0 auto; font-size:var(--pk-fs-lg); }
+  .cta{ display:flex; justify-content:center; margin:22px 0 6px; }
+  .cta a{ text-decoration:none; }
+  .lobby-card{ display:block; text-decoration:none; color:inherit; margin:22px 0 8px;
+    background:linear-gradient(135deg, var(--pk-accent-soft), var(--pk-surface));
+    border:1.5px solid var(--pk-accent); border-radius:var(--pk-radius-lg);
+    padding:22px; box-shadow:var(--pk-shadow-2); transition:transform var(--pk-t-quick) var(--pk-ease-spring), box-shadow var(--pk-t-quick); }
+  .lobby-card:hover{ transform:translateY(-2px); box-shadow:var(--pk-shadow-3); }
+  .lobby-card h2{ font-family:var(--pk-font-display); font-size:1.5rem; margin-bottom:6px; }
+  .lobby-card p{ color:var(--pk-ink-soft); margin:0; }
+  .lobby-card .go{ display:inline-block; margin-top:12px; font-weight:700; color:var(--pk-accent-press); }
+  h3.sec{ font-family:var(--pk-font-display); font-size:1.25rem; margin:30px 0 4px; }
+  h3.sec + p{ color:var(--pk-ink-faint); font-size:var(--pk-fs-sm); margin-bottom:14px; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+  .card{ display:block; text-decoration:none; color:inherit; background:var(--pk-surface);
+    border:1px solid var(--pk-line); border-radius:var(--pk-radius); padding:15px;
+    box-shadow:var(--pk-shadow-1); transition:transform var(--pk-t-quick) var(--pk-ease-spring), box-shadow var(--pk-t-quick), border-color var(--pk-t-quick); }
+  .card:hover{ transform:translateY(-3px); box-shadow:var(--pk-shadow-2); border-color:var(--pk-accent); }
+  .card .n{ font-weight:700; display:block; margin-bottom:3px; }
+  .card .b{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); }
+  .card .tag{ display:inline-block; margin-top:8px; font-size:var(--pk-fs-xs); font-weight:700;
+    color:var(--pk-accent-press); background:var(--pk-accent-soft); border-radius:999px; padding:2px 8px; }
+  footer{ text-align:center; color:var(--pk-ink-faint); font-size:var(--pk-fs-sm); padding:34px 0 24px; }
+  footer a{ color:var(--pk-ink-soft); }
+  @media (prefers-reduced-motion: reduce){ .card:hover,.lobby-card:hover{ transform:none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="/">← elvinpeters.com</a>
+    <span class="pk-subtle">free · no sign-up</span>
+  </div>
+
+  <div class="hero">
+    <h1>Play</h1>
+    <p>Classic games you can play with friends in a shared lobby, plus a few things for settling an argument. Everything runs in the browser. Nothing to install.</p>
+  </div>
+
+  <a class="lobby-card" href="lobby/">
+    <h2>🎲 Play with friends</h2>
+    <p>Open the lobby, send your friends the link, and you all land in the same room. Pick a game, sit down at a table, play. Chat while you wait.</p>
+    <span class="go">Open the lobby →</span>
+  </a>
+
+  <h3 class="sec">Games</h3>
+  <p>Two to six players. Play online with friends, pass one device around, or take on the computer.</p>
+  <div class="grid">
+    <a class="card" href="dominoes/"><span class="n">Dominoes</span><span class="b">Draw or Block, 2–4 players</span><span class="tag">multiplayer</span></a>
+    <a class="card" href="checkers/"><span class="n">Checkers</span><span class="b">English draughts. Forced captures, kings</span><span class="tag">multiplayer</span></a>
+    <a class="card" href="fourfall/"><span class="n">Fourfall</span><span class="b">Get four in a row before they do</span><span class="tag">multiplayer</span></a>
+    <a class="card" href="gridfleet/"><span class="n">Gridfleet</span><span class="b">Hide your fleet, hunt theirs</span><span class="tag">multiplayer</span></a>
+    <a class="card" href="boxcatch/"><span class="n">Boxcatch</span><span class="b">Draw lines, claim the boxes</span><span class="tag">multiplayer</span></a>
+    <a class="card" href="fivestar/"><span class="n">FiveStar</span><span class="b">Roll five dice, fill the scorecard</span><span class="tag">multiplayer</span></a>
+    <a class="card" href="liars-cup/"><span class="n">Liar's Cup</span><span class="b">Bluff about dice nobody else can see</span><span class="tag">multiplayer</span></a>
+  </div>
+
+  <h3 class="sec">Quick decisions</h3>
+  <p>For when someone has to take the bins out.</p>
+  <div class="grid">
+    <a class="card" href="coin-flip/"><span class="n">Coin Flip</span><span class="b">Heads or tails, provably fair</span></a>
+    <a class="card" href="dice-roller/"><span class="n">Dice Roller</span><span class="b">Any dice you like — 2d6, d20, the lot</span></a>
+    <a class="card" href="draw-straws/"><span class="n">Draw Straws</span><span class="b">Short straw loses. Or pick a name</span></a>
+    <a class="card" href="fortune-teller/"><span class="n">Fortune Teller</span><span class="b">The paper one. Write your own fortunes</span></a>
+    <a class="card" href="movie-picker/"><span class="n">Movie Picker</span><span class="b">Ends the "what should we watch" loop</span></a>
+    <a class="card" href="baby-names/"><span class="n">Baby Names</span><span class="b">By culture, meaning and origin</span></a>
+    <a class="card" href="office-reset/"><span class="n">Office Reset</span><span class="b">Five minutes of desk stretches</span></a>
+  </div>
+
+  <footer>
+    Built by <a href="/">Elvin Peters</a>. No accounts, no tracking of your games, nothing to download.<br>
+    Multiplayer runs on my own server — <a href="https://play.elvinpeters.com/lobby/">play.elvinpeters.com</a>.
+  </footer>
+</div>
+</body>
+</html>
