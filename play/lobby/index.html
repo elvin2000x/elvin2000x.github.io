@@ -36,6 +36,22 @@
   .picker .b{ color:var(--pk-ink-soft); font-size:var(--pk-fs-xs); }
   .toys{ display:flex; gap:8px; flex-wrap:wrap; }
   .toys a{ text-decoration:none; }
+  /* warm depth so the shell isn't a flat void */
+  body{ background:
+      radial-gradient(900px 520px at 50% -10%, color-mix(in srgb, var(--pk-accent) 15%, transparent), transparent 70%),
+      var(--pk-bg); background-attachment:fixed; }
+  /* name gate */
+  .gate{ width:100%; max-width:440px; margin:auto; text-align:center;
+    background:var(--pk-surface); border:1px solid var(--pk-line); border-radius:var(--pk-radius-lg);
+    padding:34px 28px; box-shadow:var(--pk-shadow-3); }
+  .gate .mark{ width:74px; height:74px; margin:0 auto 16px; border-radius:20px; display:grid; place-items:center;
+    color:var(--pk-accent); background:color-mix(in srgb, var(--pk-accent) 20%, var(--pk-surface-sunk));
+    border:1px solid color-mix(in srgb, var(--pk-accent) 45%, transparent); }
+  .gate .mark svg{ width:42px; height:42px; }
+  .gate h2{ font-family:var(--pk-font-display); font-size:1.7rem; letter-spacing:-.01em; margin-bottom:6px; }
+  .gate .sub{ color:var(--pk-ink-soft); font-size:var(--pk-fs-sm); margin-bottom:20px; }
+  .gate .pk-input{ width:100%; text-align:center; font-size:1.1rem; font-weight:600; }
+  .gate .hint{ color:var(--pk-ink-faint); font-size:var(--pk-fs-xs); margin-top:16px; line-height:1.6; }
 </style>
 </head>
 <body>
@@ -81,11 +97,16 @@ if (!HEADLESS) (function(){
   /* ---------- name gate ---------- */
   function askName(){
     stage.innerHTML =
-      '<div class="lb" style="max-width:420px;margin:auto;text-align:center">'+
-      '<h2 style="font-family:var(--pk-font-display);font-size:1.6rem">Who are you?</h2>'+
-      '<p class="pk-subtle">Your friends will see this name in the lobby.</p>'+
-      '<input class="pk-input" id="nm" maxlength="24" placeholder="Your name" style="text-align:center;font-size:1.1rem">'+
-      '<div class="pk-row"></div></div>';
+      '<div class="gate">'+
+        '<div class="mark"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" '+
+          'stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="15" r="6"/><circle cx="33" cy="18" r="5"/>'+
+          '<path d="M6 39c0-6.1 4.9-11 11-11s11 4.9 11 11"/><path d="M28 33c1.2-3.4 4.4-5.6 8-5.6 4.4 0 8 3.6 8 8"/></svg></div>'+
+        '<h2>Join the lobby</h2>'+
+        '<p class="sub">Pick a name your friends will recognise.</p>'+
+        '<input class="pk-input" id="nm" maxlength="24" placeholder="Your name" autocomplete="nickname">'+
+        '<div class="pk-row" style="margin-top:16px"></div>'+
+        '<p class="hint">Next: share the lobby link, open a table,<br>and everyone sits down to play.</p>'+
+      '</div>';
     var inp = stage.querySelector("#nm"); inp.value = myName || "";
     var go = function(){ var v=(inp.value||"").trim(); if(!v){ inp.focus(); return; }
       myName=v; PK.store.set("play.name", v); start(); };
