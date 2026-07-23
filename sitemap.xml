@@ -42,4 +42,10 @@
   <url><loc>https://elvinpeters.com/apps/calculators/ad-spend-roi/</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://elvinpeters.com/apps/calculators/freelance-rate/</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://elvinpeters.com/apps/calculators/percentage-calculator/</loc><lastmod>2026-07-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url>
+    <loc>https://elvinpeters.com/press/</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
