@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Artificial Advantage System — put AI to work this week</title>
+<meta name="description" content="The plug-and-play system for professionals: 50 proven prompts, 12 role playbooks, and a 7-day plan to run your real work through AI. By Elvin M. Peters." />
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
+<!-- Meta Pixel -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#ffffff;--soft:#f4f1ea;--card:#ffffff;--border:#e4ddce;--navy:#0a1828;--ink:#12202f;--text:#3c4a5c;--muted:#6a7a8e;--gold:#b88a2e;--gold2:#c9a250;--green:#2f8a5b;--red:#cf4444}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px}
+  h1,h2,h3{color:var(--ink);font-family:'EB Garamond',Georgia,serif;line-height:1.15}
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+  .nav-cta{background:var(--gold2);color:#0a1828;font-size:13px;font-weight:700;padding:9px 18px;border-radius:5px;text-decoration:none}
+  /* buttons */
+  .btn{display:inline-block;background:var(--gold2);color:#0a1828;font-size:17px;font-weight:700;padding:17px 34px;border-radius:8px;text-decoration:none;box-shadow:0 8px 26px rgba(201,162,80,.28);transition:transform .12s,opacity .12s;border:none;cursor:pointer}
+  .btn:hover{transform:translateY(-1px);opacity:.94}
+  .btn.big{font-size:19px;padding:20px 44px}
+  .cta-sub{font-size:13px;color:var(--muted);margin-top:10px}
+  /* hero */
+  .hero{background:linear-gradient(170deg,#ffffff 0%,#eef2f7 100%);border-bottom:1px solid var(--border)}
+  .hero .wrap{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:center;padding:64px 22px}
+  .badge{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:5px 12px;border-radius:3px;margin-bottom:20px}
+  .hero h1{font-size:clamp(34px,4.6vw,52px);font-weight:600;margin-bottom:18px}
+  .hero h1 span{color:var(--gold)}
+  .hero p.lead{font-size:19px;color:var(--text);margin-bottom:26px;max-width:520px}
+  .hero p.lead b{color:var(--ink);font-weight:600}
+  .stars{color:var(--gold2);letter-spacing:2px}
+  .hero-seal{font-size:13px;color:var(--muted);margin-top:16px}
+  .hero-img{position:relative;display:flex;justify-content:center}
+  .hero-img img{width:100%;max-width:360px;border-radius:8px;box-shadow:0 24px 50px rgba(10,24,40,.22)}
+  /* sections */
+  section{padding:66px 0}
+  .soft{background:var(--soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .label{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+  .h2{font-size:clamp(26px,3.4vw,38px);font-weight:600;margin-bottom:16px}
+  .body{font-size:17px;color:var(--text);max-width:660px;margin-bottom:8px}
+  .body p{margin-bottom:16px}
+  .body strong{color:var(--ink);font-weight:600}
+  /* before/after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+  .ba-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px}
+  .ba-card.bad{border-top:3px solid var(--red)}
+  .ba-card.good{border-top:3px solid var(--gold2)}
+  .ba-tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+  .ba-card.bad .ba-tag{color:var(--red)}.ba-card.good .ba-tag{color:var(--gold)}
+  .ba-prompt{font-family:'EB Garamond',serif;font-style:italic;font-size:15px;background:rgba(10,24,40,.04);border-left:2px solid var(--border);border-radius:4px;padding:12px 14px;margin-bottom:12px;color:var(--text)}
+  .ba-res{font-size:14px;color:var(--muted)}
+  /* inside cards */
+  .inside{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+  .in-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;text-align:center}
+  .in-card img{height:150px;width:auto;border-radius:5px;box-shadow:0 12px 26px rgba(10,24,40,.16);margin-bottom:16px}
+  .in-card h3{font-size:20px;margin-bottom:8px}
+  .in-card p{font-size:14px;color:var(--muted);line-height:1.55}
+  /* value stack */
+  .stack{max-width:600px;margin:28px auto 0;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .srow{display:flex;justify-content:space-between;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);font-size:15px}
+  .srow .v{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .srow strong{color:var(--ink);font-weight:600}
+  .stotal{display:flex;justify-content:space-between;padding:16px 22px;background:var(--soft);font-size:14px}
+  .stotal .lab{text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--muted);font-size:12px}
+  .stotal .strike{text-decoration:line-through;color:var(--muted);font-size:18px}
+  .price{text-align:center;padding:30px 22px;background:linear-gradient(160deg,#f5f8fc,#e9eef6)}
+  .price .today{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--gold);font-weight:700;margin-bottom:4px}
+  .price .big{font-family:'EB Garamond',serif;font-size:60px;font-weight:600;color:var(--ink);line-height:1}
+  .price .note{font-size:13px;color:var(--muted);margin-top:8px}
+  /* bump */
+  .bump{max-width:600px;margin:18px auto 0;background:#fffdf6;border:2px dashed var(--gold2);border-radius:12px;padding:20px 22px;display:flex;gap:14px;align-items:flex-start}
+  .bump .box{font-size:22px;color:var(--gold);margin-top:2px}
+  .bump h4{font-size:16px;color:var(--ink);margin-bottom:4px;font-family:'Inter';font-weight:700}
+  .bump p{font-size:14px;color:var(--text)}
+  .bump .add{font-weight:700;color:var(--gold)}
+  /* trust row */
+  .trust{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;font-size:12px;color:var(--muted);align-items:center}
+  .pay{font-size:10px;font-weight:700;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:4px;padding:3px 7px}
+  /* segments */
+  .segs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+  .seg{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px}
+  .seg h4{font-size:15px;color:var(--ink);margin-bottom:6px;font-family:'Inter';font-weight:700}
+  .seg p{font-size:14px;color:var(--muted)}
+  /* testimonials */
+  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  .tcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px}
+  .tq{font-family:'EB Garamond',serif;font-style:italic;font-size:16px;color:var(--ink);line-height:1.55;margin:10px 0 14px}
+  .ta{font-size:13px;color:var(--muted)}
+  /* guarantee */
+  .guar{max-width:660px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:32px;display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center}
+  .seal{width:88px;height:88px;border-radius:50%;border:2px solid var(--gold2);color:var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'EB Garamond',serif;line-height:1;flex-shrink:0}
+  .seal .n{font-size:30px;font-weight:600}.seal .u{font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-top:4px;font-family:'Inter'}
+  .guar h3{font-size:20px;margin-bottom:8px}.guar p{font-size:15px}
+  /* faq */
+  .faq{max-width:680px;margin:26px auto 0;display:flex;flex-direction:column;gap:10px}
+  .fitem{border:1px solid var(--border);border-radius:8px;padding:18px 20px;background:var(--card)}
+  .fitem h4{font-size:16px;color:var(--ink);font-family:'Inter';font-weight:600;margin-bottom:6px}
+  .fitem p{font-size:14px;color:var(--text)}
+  /* final */
+  .final{text-align:center}
+  .final .h2{margin-bottom:14px}
+  footer{border-top:1px solid var(--border);padding:26px;text-align:center;font-size:13px;color:var(--muted)}
+  footer a{color:var(--muted);text-decoration:none}
+  @media(max-width:820px){
+    .hero .wrap{grid-template-columns:1fr;gap:34px}.hero-img{order:-1}
+    .ba,.inside,.segs,.tgrid{grid-template-columns:1fr}
+    .guar{grid-template-columns:1fr;text-align:center;justify-items:center}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap"><span class="logo">The Artificial Advantage System</span><a href="#order" class="nav-cta">Get it — $37</a></div></nav>
+
+<!-- HERO -->
+<header class="hero"><div class="wrap">
+  <div>
+    <span class="badge">For professionals who tried AI and weren't impressed</span>
+    <h1>Put AI to work on your real job, <span>by the end of the week.</span></h1>
+    <p class="lead">Not another course to sit through. A <b>ready-to-run system</b>: fifty proven prompts, twelve role playbooks, and a seven-day plan that turns AI into the fastest worker on your team.</p>
+    <a href="#order" class="btn big buy">Get the System — $37 →</a>
+    <p class="cta-sub">Instant access · 14-day money-back guarantee</p>
+    <p class="hero-seal"><span class="stars">★★★★★</span> &nbsp;Built by Elvin M. Peters · ex-Google Ads, ex-goeasy fintech</p>
+  </div>
+  <div class="hero-img"><img src="../img/mockup_prompts.png" alt="The Artificial Advantage System" /></div>
+</div></header>
+
+<!-- PROBLEM -->
+<section><div class="wrap">
+  <div class="label">Why AI keeps disappointing you</div>
+  <h2 class="h2">You don't need more tools. You need a way to use the one you have.</h2>
+  <div class="body">
+    <p>You opened ChatGPT, typed a question, and got something generic and slightly wrong. You fixed it yourself and quietly decided the hype was oversold.</p>
+    <p>The problem was never the tool. <strong>The people getting remarkable results are typing into the same box you are.</strong> They just learned to direct it instead of asking it. This system is that skill, already built into prompts and playbooks you run on your actual work.</p>
+  </div>
+  <div class="ba">
+    <div class="ba-card bad">
+      <div class="ba-tag">What most people type</div>
+      <div class="ba-prompt">"Write an email to a client about the project delay."</div>
+      <div class="ba-res">Generic apology, wrong tone, no specifics. You rewrite the whole thing.</div>
+    </div>
+    <div class="ba-card good">
+      <div class="ba-tag">A System prompt, filled in</div>
+      <div class="ba-prompt">"You're my communications advisor. Draft a delay email to a long-standing client. Own the miss, give the new date, protect the relationship. Under 150 words, warm, no corporate filler."</div>
+      <div class="ba-res">A draft you can actually send, in one pass.</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- WHAT'S INSIDE -->
+<section class="soft"><div class="wrap">
+  <div class="label">What you get</div>
+  <h2 class="h2">Three tools that do the work for you</h2>
+  <p class="body">Everything is plug-and-play. Open it, drop in your details, send. You get wins the first day, not after a month of study.</p>
+  <div class="inside">
+    <div class="in-card">
+      <img src="../img/cover_prompts.png" alt="50 Best AI Prompts" />
+      <h3>50 Best AI Prompts</h3>
+      <p>The highest-leverage professional prompts, already built on the directing method. Email, reports, planning, research. Never stare at a blank box again.</p>
+    </div>
+    <div class="in-card">
+      <img src="../img/cover_roles.png" alt="12 Professional Role Packs" />
+      <h3>12 Role Playbooks</h3>
+      <p>Done-for-you AI setups by job: Marketing, Sales, Finance, HR and more. Paste the playbook, and AI works like it actually understands your role.</p>
+    </div>
+    <div class="in-card">
+      <img src="../img/cover_workbook.png" alt="7-Day AI Workbook" />
+      <h3>The 7-Day Plan</h3>
+      <p>Seven short daily exercises that rebuild your three most common work tasks around AI. By Friday it is a habit, not a someday.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- OFFER / VALUE STACK -->
+<section id="order"><div class="wrap">
+  <div class="label" style="text-align:center">The complete system</div>
+  <h2 class="h2" style="text-align:center">Everything you need to run your work through AI</h2>
+  <div class="stack">
+    <div class="srow"><div><strong>50 Best AI Prompts</strong> · copy-paste professional pack</div><div class="v">$50</div></div>
+    <div class="srow"><div><strong>12 Professional Role Playbooks</strong> · by job function</div><div class="v">$59</div></div>
+    <div class="srow"><div><strong>The 7-Day AI Plan</strong> · guided daily practice</div><div class="v">$29</div></div>
+    <div class="srow"><div><strong>The Director's Quick-Reference Card</strong> · frameworks on one page</div><div class="v">$15</div></div>
+    <div class="stotal"><div class="lab">Total value</div><div class="strike">$153</div></div>
+    <div class="price">
+      <div class="today">Today</div>
+      <div class="big">$37</div>
+      <div class="note">One payment · instant access · yours to keep</div>
+    </div>
+  </div>
+
+  <!-- ORDER BUMP PREVIEW -->
+  <div class="bump">
+    <div class="box">☐</div>
+    <div>
+      <h4>Add the Prompt Vault + 10-Guide Library <span class="add">— just $27 more</span></h4>
+      <p>150 more role-specific prompts and the complete 10-guide AI field library, so you are never missing the exact prompt for the job in front of you. You'll see this as a one-click add at checkout.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:26px">
+    <a href="#" class="btn big buy" id="mainBuy">Get the System — $37 →</a>
+    <div class="trust">
+      <span>🔒 Secure checkout</span><span class="pay">VISA</span><span class="pay">MC</span><span class="pay">AMEX</span>
+      <span>Instant access · 14-day guarantee</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- WHO IT'S FOR -->
+<section class="soft"><div class="wrap">
+  <div class="label">Is this you</div>
+  <h2 class="h2">Built for the professional, not the programmer</h2>
+  <div class="segs">
+    <div class="seg"><h4>The skeptic</h4><p>You tried AI, weren't impressed, and suspect the approach is the problem. It is, and that is good news.</p></div>
+    <div class="seg"><h4>The mandated</h4><p>Your company went AI-first with zero training. This is the training, in plain English, on your real tasks.</p></div>
+    <div class="seg"><h4>The time-poor</h4><p>You don't have a weekend for a course. You have twenty minutes tonight. Open one prompt and use it tomorrow.</p></div>
+  </div>
+</div></section>
+
+<!-- SOCIAL PROOF -->
+<section><div class="wrap">
+  <div class="label" style="text-align:center">What early users say</div>
+  <h2 class="h2" style="text-align:center">The difference shows up in the first week</h2>
+  <div class="tgrid">
+    <div class="tcard"><span class="stars">★★★★★</span><p class="tq">"I'd been guessing at prompts for months. The role playbook for my job changed my output quality in a week."</p><p class="ta">Marketing professional</p></div>
+    <div class="tcard"><span class="stars">★★★★★</span><p class="tq">"The 7-day plan is the part that made it stick. By Friday my reporting was running on AI."</p><p class="ta">Operations manager</p></div>
+    <div class="tcard"><span class="stars">★★★★★</span><p class="tq">"Worth it for the email prompts alone. I stopped rewriting everything the AI gave me."</p><p class="ta">Finance lead</p></div>
+  </div>
+</div></section>
+
+<!-- GUARANTEE -->
+<section class="soft"><div class="wrap">
+  <div class="guar">
+    <div class="seal"><div class="n">14</div><div class="u">Day</div></div>
+    <div>
+      <h3>Use it for two weeks. If it doesn't change how you work, get every dollar back.</h3>
+      <p>Run the prompts on your real tasks. If the system doesn't earn its place in your week, email us within 14 days for a full refund and keep everything. The risk is ours.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section><div class="wrap">
+  <div class="label" style="text-align:center">Questions</div>
+  <h2 class="h2" style="text-align:center">Before you decide</h2>
+  <div class="faq">
+    <div class="fitem"><h4>Do I need to be technical?</h4><p>No. If you can send an email, you can use every part of this. Zero code, zero jargon.</p></div>
+    <div class="fitem"><h4>Which AI tool does it work with?</h4><p>All of them. ChatGPT, Claude, Gemini, Copilot. The prompts and playbooks work anywhere, including the models that come next.</p></div>
+    <div class="fitem"><h4>Is this the book?</h4><p>No. This is the practical toolkit. The book, <em>The Artificial Advantage</em>, is on Amazon if you want the full framework behind it. This is the part you run on your work today.</p></div>
+    <div class="fitem"><h4>How do I get it?</h4><p>Instant access after checkout. Everything is delivered digitally, yours to keep forever.</p></div>
+  </div>
+</div></section>
+
+<!-- FINAL CTA -->
+<section class="soft final"><div class="wrap">
+  <h2 class="h2">The window where AI skill is a differentiator is still open.</h2>
+  <p class="body" style="margin:0 auto 26px">Two professionals start today with the same tools. In six months, one is the person everyone asks how they move so fast. The difference is a system. Here is yours.</p>
+  <a href="#" class="btn big buy">Get the System — $37 →</a>
+  <p class="cta-sub">Instant access · 14-day money-back guarantee · yours to keep</p>
+</div></section>
+
+<footer>© 2026 Elvin M. Peters · PLT Publishing · <a href="https://elvinpeters.com">elvinpeters.com</a> · <a href="mailto:elvin@epeters.ca">contact</a></footer>
+
+<script>
+/* ── Checkout wiring ──────────────────────────────────────────────
+   v1: point CHECKOUT_URL at a NEW, de-booked Stripe Payment Link /
+   Checkout Session for the $37 System (NO ebook in fulfillment) with
+   the $27 bump as an optional item.
+   v2: replace with the VPS /api/system-checkout endpoint that saves the
+   card and offers one-click $97 / $197 upsells on the thank-you page.
+   Leave as "#" until the de-booked Stripe product exists. */
+var CHECKOUT_URL = "#"; // TODO: paste de-booked Stripe link
+document.querySelectorAll('a.buy').forEach(function(a){
+  if(CHECKOUT_URL!=="#"){a.setAttribute('href',CHECKOUT_URL);a.setAttribute('target','_blank');a.setAttribute('rel','noopener');}
+  a.addEventListener('click',function(){
+    try{gtag('event','begin_checkout',{value:37,currency:'USD'});}catch(e){}
+    try{fbq('track','InitiateCheckout',{content_name:'The Artificial Advantage System',value:37,currency:'USD'});}catch(e){}
+  });
+});
+</script>
+</body>
+</html>
