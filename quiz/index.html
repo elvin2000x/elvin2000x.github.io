@@ -9,7 +9,12 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-CLZ7N26J1Q');
+    gtag('config', 'AW-637214471');   /* Google Ads: remarketing + conversions */
   </script>
+  <!-- X (Twitter) pixel base code -->
+  <script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+  },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+  a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -317,6 +322,10 @@ function startQuizEngine() {
   var N = QUIZ.questions.length;
   var lead = { email:"", name:"" };
 
+  // Ad conversion ids for THIS funnel (quiz lead). X is armed; the Google Ads
+  // "Quiz Lead" conversion goes here as "AW-637214471/<label>" once created.
+  var ADS_QUIZ = { x: "tw-re26u-re279", g: "" };
+
   function setBar(p){ barEl.style.width = p + "%"; }
   function track(name, params){ try{ gtag('event', name, params||{}); }catch(e){} }
 
@@ -434,6 +443,9 @@ function startQuizEngine() {
         body: body
       }).catch(function(){});
     } catch(e){}
+    // Ad conversions: quiz lead captured. Fire-and-forget, never blocks the funnel.
+    try{ if(typeof twq==='function') twq('event', ADS_QUIZ.x, {}); }catch(e){}
+    try{ if(ADS_QUIZ.g && typeof gtag==='function') gtag('event','conversion',{send_to:ADS_QUIZ.g}); }catch(e){}
   }
 
   function showResult(){
