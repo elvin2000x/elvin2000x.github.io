@@ -29,9 +29,9 @@ LEAD_API = "https://ultimateaidirectory.com/api/lead"
 # ── tracking (gated: empty = installed but nothing fires) ─────────────────────
 GA4 = "G-CLZ7N26J1Q"
 GADS_ID = "AW-637214471"
-GADS_MAGNET = ""              # Google "Lead Magnet Opt-in" send_to: AW-637214471/<label>
+GADS_MAGNET = "AW-637214471/bylsCMuW0NUcEIe-7K8C"   # Google "Lead Magnet Opt-in"
 X_PIXEL = "re26u"
-X_MAGNET = ""                 # X "Lead Magnet Opt-in" event id: tw-re26u-XXXXX
+X_MAGNET = ""                 # X "Lead Magnet Opt-in" event id: tw-re26u-XXXXX (pending)
 
 
 def esc(s):
@@ -159,7 +159,10 @@ def page(m):
     }}catch(e){{}}
     return base;
   }}
-  function convert(){{
+  function convert(email){{
+    // Enhanced conversions: hand Google the email (it hashes client-side) so it
+    // can match conversions cookies would lose. Set before firing the event.
+    try{{if(email&&typeof gtag==='function')gtag('set','user_data',{{email:email}});}}catch(e){{}}
     try{{if(XEVT&&typeof twq==='function')twq('event',XEVT,{{}});}}catch(e){{}}
     try{{if(GADS&&typeof gtag==='function')gtag('event','conversion',{{'send_to':GADS}});}}catch(e){{}}
   }}
@@ -176,8 +179,8 @@ def page(m):
     btn.disabled=true;btn.textContent='Sending...';
     var body=new URLSearchParams({{name:name||'Magnet lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:''}}).toString();
     fetch("{lead_api}",{{method:'POST',mode:'cors',keepalive:true,headers:{{'Content-Type':'application/x-www-form-urlencoded'}},body:body}})
-      .then(function(){{convert();reveal(name);}})
-      .catch(function(){{convert();reveal(name);}});  // always deliver the guide
+      .then(function(){{convert(email);reveal(name);}})
+      .catch(function(){{convert(email);reveal(name);}});  // always deliver the guide
   }});
 }})();
 </script>
