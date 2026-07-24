@@ -1,0 +1,109 @@
+{
+  "_note": "Lead-magnet registry. Each entry generates an opt-in page at /free/<slug>/ that captures an email to the owned lead DB, fires the Lead Magnet conversion (Google + X), then delivers the PDF from /dl/. Edit here, run build_magnets.py, deploy. 'file' is the existing PDF in site/dl/.",
+  "magnets": [
+    {
+      "slug": "decoded",
+      "title": "Decoded: 8 Pro AI Techniques",
+      "tagline": "The prompt techniques the pros use, pulled from the actual developer docs and written in plain English.",
+      "hook": "You have the basics down. This is the layer above them.",
+      "file": "Decoded-8-Pro-AI-Techniques.pdf",
+      "bullets": ["System prompts, structure and role-setting that quietly double your output quality", "Examples, prefilling and extended thinking, explained without the jargon", "The 8 techniques that separate people who get great results from people who get average ones"]
+    },
+    {
+      "slug": "context-playbook",
+      "title": "Feed It Your World: The Context Playbook",
+      "tagline": "Stop starting from scratch. Learn to give AI your own documents, data and files the right way.",
+      "hook": "The number one thing beginners miss: AI is only as good as what you feed it.",
+      "file": "Feed-It-Your-World-Context-Playbook.pdf",
+      "bullets": ["How to load your own docs, data and long files so the AI actually uses them", "NotebookLM, Projects and smart pasting, step by step", "The simple 'RAG-lite' method that makes AI answer as if it knows your business"]
+    },
+    {
+      "slug": "anti-hallucination",
+      "title": "Tell Me the Truth: The Anti-Hallucination Field Guide",
+      "tagline": "Make AI stop making things up, and learn exactly when not to trust it.",
+      "hook": "If you have ever caught AI confidently inventing an answer, this is for you.",
+      "file": "Tell-Me-The-Truth-Anti-Hallucination.pdf",
+      "bullets": ["Verification workflows that force AI to show its work", "The situations where AI lies most, so you know when to double-check", "Citation-forcing prompts that keep answers grounded in real sources"]
+    },
+    {
+      "slug": "ai-assistant",
+      "title": "Build Your Own AI Assistant (No Code)",
+      "tagline": "A reusable assistant that already knows your job, so you never retype your context again.",
+      "hook": "Set it up once. Use it every day.",
+      "file": "Your-Own-AI-Assistant-No-Code.pdf",
+      "bullets": ["Build a Custom GPT, Claude Project or Gemini Gem for your exact role", "No code, no setup fee, done in an afternoon", "The context and instructions to bake in so it works the first time"]
+    },
+    {
+      "slug": "automation-kit",
+      "title": "The AI Automation Starter Kit",
+      "tagline": "Seven no-code automations that quietly do your daily busywork for you.",
+      "hook": "Stop doing the same task every morning.",
+      "file": "AI-Automation-Starter-Kit.pdf",
+      "bullets": ["Inbox triage, meeting notes and report drafts, handled automatically", "AI plus Zapier or Make, with no coding", "Copy-paste recipes you can switch on today"]
+    },
+    {
+      "slug": "slides-docs-images",
+      "title": "AI for Slides, Docs and Images",
+      "tagline": "Generate decks, documents and visuals with AI, even if you are not a designer.",
+      "hook": "The stuff that used to take you all afternoon, in minutes.",
+      "file": "AI-Slides-Docs-Images.pdf",
+      "bullets": ["Turn a rough outline into a finished deck", "The exact image workflow that produces clean, on-brand visuals", "Documents and one-pagers that look like a designer made them"]
+    },
+    {
+      "slug": "email-meetings",
+      "title": "The Meeting and Email Machine",
+      "tagline": "Done-for-you AI workflows for the email and meetings that eat your whole day.",
+      "hook": "Get your mornings back.",
+      "file": "AI-Email-Meeting-Machine.pdf",
+      "bullets": ["Draft, triage and reply to email in a fraction of the time", "Meeting prep, live notes and follow-ups, automated", "The prompts and setup to run it all hands-off"]
+    },
+    {
+      "slug": "ai-security",
+      "title": "What Not to Put Into AI",
+      "tagline": "The security and privacy guide that keeps you and your company out of trouble.",
+      "hook": "Before you paste that into ChatGPT, read this.",
+      "file": "What-Not-To-Type-AI-Security.pdf",
+      "bullets": ["What is safe to share and what will get you in trouble", "How data leakage actually happens, and how to avoid it", "A simple checklist for safe, policy-friendly AI use at work"]
+    },
+    {
+      "slug": "cost-roi",
+      "title": "The AI Cost and ROI Playbook",
+      "tagline": "Stop guessing which AI subscriptions are worth it. Measure it.",
+      "hook": "Are you paying for the right tools, or just paying?",
+      "file": "AI-Cost-And-ROI-Playbook.pdf",
+      "bullets": ["Which subscriptions actually earn their keep, and which to cancel", "A simple way to measure the ROI of any AI tool", "How to stop the quiet monthly bleed of unused seats"]
+    },
+    {
+      "slug": "ai-operating-system",
+      "title": "Your 30-Minutes-a-Week AI Operating System",
+      "tagline": "A simple weekly routine to keep improving and never fall behind as AI changes.",
+      "hook": "It moves fast. Here is how to stay ahead without living online.",
+      "file": "Stay-Ahead-AI-Operating-System.pdf",
+      "bullets": ["A 30-minute weekly routine that compounds your skills", "Curated, trustworthy sources so you skip the hype", "How to keep your workflows current as the models change"]
+    },
+    {
+      "slug": "50-prompts",
+      "title": "50 of the Best AI Prompts",
+      "tagline": "Fifty ready-to-use prompts for real work, so you always know what to type.",
+      "hook": "Copy, paste, done.",
+      "file": "50-Best-AI-Prompts.pdf",
+      "bullets": ["Prompts for writing, planning, analysis and everyday tasks", "Written to get strong results the first time", "Organized so you can find the right one in seconds"]
+    },
+    {
+      "slug": "prompt-cheatsheet",
+      "title": "The AI Prompt Framework Cheatsheet",
+      "tagline": "One page that turns mediocre prompts into consistently great ones.",
+      "hook": "The difference between a bad answer and a brilliant one is usually the prompt.",
+      "file": "AI-Prompt-Framework-Cheatsheet.pdf",
+      "bullets": ["The simple framework behind every great prompt", "A one-page reference you will actually keep open", "The five ingredients most people leave out"]
+    },
+    {
+      "slug": "free-chapter",
+      "title": "The Artificial Advantage: Free Chapter",
+      "tagline": "Read a full chapter of the book that teaches non-technical professionals to master AI.",
+      "hook": "Try it before you buy it.",
+      "file": "The-Artificial-Advantage-Chapter-8.pdf",
+      "bullets": ["A complete chapter, not a teaser", "See the plain-English, no-jargon approach for yourself", "The exact method for directing AI like a pro"]
+    }
+  ]
+}
