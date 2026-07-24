@@ -157,10 +157,11 @@ border-radius:16px;padding:32px 28px;text-align:center;max-width:640px;margin:34
   var LEAD_API = "https://ultimateaidirectory.com/api/lead";
 
   // Ad conversion ids for the VAULT lead. Meta fires fbq('Lead') below with no id
-  // needed. Create a dedicated Google Ads "Vault Lead" conversion and an X "Lead"
-  // event, then paste them here. Both dormant until then.
-  var GADS = "";   // PENDING id  -> "AW-637214471/<vault-lead-label>"
-  var XEVT = "";   // PENDING id  -> X "Lead" event id for the vault
+  // needed. Reuses the existing "Lead Magnet Opt-in" Google conversion (the source
+  // field tags this as vault:starter-vault so it stays distinguishable). X magnet
+  // event id is not created yet, so X stays dormant until Elvin sends it.
+  var GADS = "AW-637214471/bylsCMuW0NUcEIe-7K8C";   // shared "Lead Magnet Opt-in" conversion
+  var XEVT = "";   // PENDING id  -> X "Lead Magnet Opt-in" event id (not created yet)
 
   /* ---- The library delivered on opt-in (reuses the existing /dl/ PDFs) ---- */
   var VAULT = [

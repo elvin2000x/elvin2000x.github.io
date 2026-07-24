@@ -332,7 +332,7 @@ function startQuizEngine() {
   // Ad conversion ids for THIS quiz (lead capture). Create a Google Ads
   // "Submit lead form" conversion and an X "Lead" event for the AI Risk quiz,
   // then paste them here. Both dormant until then.
-  var ADS = { x: "", g: "" }; // PENDING id  (x = X "Lead" event id, g = "AW-637214471/<label>")
+  var ADS = { x: "tw-re26u-re279", g: "AW-637214471/AKwFCNHut9UcEIe-7K8C" }; // shared "Quiz Lead" conversion; the source field segments which quiz produced the lead
 
   function setBar(p){ barEl.style.width = p + "%"; }
   function track(name, params){ try{ gtag('event', name, params||{}); }catch(e){} }
@@ -454,8 +454,8 @@ function startQuizEngine() {
       }).catch(function(){});
     } catch(e){}
     // Ad conversions: quiz lead captured. Fire-and-forget, never blocks the funnel.
-    try{ if(ADS.x && typeof twq==='function') twq('event', ADS.x, {}); }catch(e){}      // PENDING id
-    try{ if(ADS.g && typeof gtag==='function') gtag('event','conversion',{send_to:ADS.g}); }catch(e){}  // PENDING id
+    try{ if(ADS.x && typeof twq==='function') twq('event', ADS.x, {}); }catch(e){}      // fires shared Quiz Lead conversion
+    try{ if(ADS.g && typeof gtag==='function') gtag('event','conversion',{send_to:ADS.g}); }catch(e){}  // fires shared Quiz Lead conversion
   }
 
   function showResult(){
