@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Ultimate Free AI Resource Vault — 480+ Free Tools, Assets & Libraries | Elvin Peters</title>
+<meta name="description" content="480+ hand-picked free tools, assets and libraries for anyone building with AI — vectors, icons, animations, fonts, stock media, courses, GitHub repos, Python & JS libraries, AI models, prompt libraries and more. One spreadsheet. Free.">
+<link rel="canonical" href="https://elvinpeters.com/free/ai-toolkit/">
+<meta property="og:title" content="The Ultimate Free AI Resource Vault — 480+ Free Tools & Assets">
+<meta property="og:description" content="One spreadsheet. 480+ free resources for building with AI. Grab it free.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://elvinpeters.com/free/ai-toolkit/">
+<!-- GA4 + Google Ads -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');gtag('config','AW-637214471');</script>
+<!-- X pixel -->
+<script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
+<style>
+:root{--navy:#0a0f1e;--navy2:#111a30;--card:#141d33;--gold:#d3b463;--gold2:#e7cd86;
+--ink:#eef2fa;--muted:#9aa7c2;--line:rgba(255,255,255,.09);--ok:#4ad0a0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+background:var(--navy);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;
+background-image:radial-gradient(900px 500px at 80% -10%,rgba(211,180,99,.10),transparent 60%),
+radial-gradient(700px 500px at 0% 0%,rgba(60,90,160,.10),transparent 55%);background-attachment:fixed}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.top{padding:24px 0;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;letter-spacing:.02em;color:var(--ink);font-size:17px;text-decoration:none}
+.brand b{color:var(--gold)}
+.topcta{font-size:13.5px;color:var(--muted);text-decoration:none;border:1px solid var(--line);padding:8px 15px;border-radius:999px}
+.topcta:hover{border-color:rgba(211,180,99,.5);color:var(--ink)}
+/* hero */
+.grid{display:grid;grid-template-columns:1.12fr .88fr;gap:46px;align-items:start;padding:22px 0 30px}
+.eyebrow{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+color:var(--gold);background:rgba(211,180,99,.10);border:1px solid rgba(211,180,99,.25);padding:7px 14px;border-radius:999px;margin-bottom:22px}
+h1{font-size:clamp(32px,4.7vw,52px);line-height:1.05;letter-spacing:-.02em}
+h1 span{color:var(--gold2)}
+.hook{font-size:16px;color:var(--gold2);font-style:italic;margin:16px 0 6px}
+.tagline{font-size:clamp(16px,2vw,19px);color:var(--muted);margin:14px 0 24px;max-width:54ch}
+ul.hl{list-style:none;margin:6px 0 0}
+ul.hl li{position:relative;padding:9px 0 9px 32px;font-size:16px;color:var(--ink)}
+ul.hl li::before{content:"";position:absolute;left:2px;top:15px;width:14px;height:14px;border-radius:50%;
+background:radial-gradient(circle at 50% 40%,var(--gold2),var(--gold));box-shadow:0 0 0 4px rgba(211,180,99,.12)}
+.trust{margin-top:22px;font-size:13.5px;color:#67748f}
+/* opt-in card */
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;
+box-shadow:0 40px 90px -50px #000;position:sticky;top:18px}
+.card h2{font-size:22px;margin-bottom:6px}.card .sub{color:var(--muted);font-size:14.5px;margin-bottom:20px}
+.field{margin-bottom:12px}
+.field input{width:100%;font-family:inherit;font-size:16px;padding:14px 15px;border:1px solid var(--line);
+border-radius:11px;background:#0c1426;color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--gold)}
+.field input::placeholder{color:#67748f}
+.btn{width:100%;font-family:inherit;font-size:16.5px;font-weight:800;padding:15px;border:none;border-radius:11px;cursor:pointer;
+background:linear-gradient(180deg,var(--gold2),var(--gold));color:#20180a;transition:transform .12s,filter .12s;text-decoration:none;display:block;text-align:center}
+.btn:hover{filter:brightness(1.05);transform:translateY(-1px)}.btn[disabled]{opacity:.6;cursor:not-allowed}
+.fine{font-size:12.5px;color:#67748f;text-align:center;margin-top:13px}
+.msg{font-size:14px;margin-top:12px;padding:11px 13px;border-radius:10px;display:none}
+.msg.err{display:block;background:rgba(255,110,90,.12);border:1px solid rgba(255,110,90,.35);color:#ffb3a1}
+.done{display:none;text-align:center}.done.on{display:block}
+.done .tick{width:60px;height:60px;border-radius:50%;background:rgba(74,208,160,.14);border:1px solid rgba(74,208,160,.4);
+display:grid;place-items:center;font-size:28px;color:var(--ok);margin:0 auto 16px}
+.done h2{font-size:22px;margin-bottom:8px}.done p{color:var(--muted);font-size:15px;margin-bottom:8px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.miniprev{margin-top:20px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0c1426}
+.miniprev .bar{display:flex;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line);background:#0e1730}
+.miniprev .bar i{width:10px;height:10px;border-radius:50%;background:#33405e;display:inline-block}
+.miniprev table{width:100%;border-collapse:collapse;font-size:11.5px}
+.miniprev th{background:#1f3864;color:#fff;text-align:left;padding:7px 10px;font-weight:700}
+.miniprev td{padding:6px 10px;color:var(--muted);border-top:1px solid rgba(255,255,255,.05)}
+.miniprev tr:nth-child(even) td{background:rgba(234,240,249,.03)}
+.miniprev a.link{color:#7ea8ff}
+/* stat bar */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:12px 0 8px}
+.stat{background:var(--navy2);border:1px solid var(--line);border-radius:14px;padding:20px 16px;text-align:center}
+.stat b{display:block;font-size:30px;color:var(--gold2);letter-spacing:-.02em}
+.stat span{font-size:13px;color:var(--muted)}
+/* sections */
+.section{padding:56px 0 10px}
+.section h2.head{font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;text-align:center}
+.section p.lede{text-align:center;color:var(--muted);max-width:60ch;margin:14px auto 8px;font-size:16.5px}
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;padding:30px 0 0}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;transition:transform .15s,border-color .15s}
+.cat:hover{transform:translateY(-3px);border-color:rgba(211,180,99,.45)}
+.cat .ico{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;margin-bottom:12px;
+background:rgba(211,180,99,.10);border:1px solid rgba(211,180,99,.22);color:var(--gold2)}
+.cat .ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.cat h3{font-size:15.5px;margin-bottom:3px}
+.cat .cnt{font-size:12.5px;color:var(--gold);font-weight:700}
+.cat p{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5}
+/* value props */
+.vals{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:30px 0 0}
+.val{background:var(--navy2);border:1px solid var(--line);border-radius:16px;padding:26px}
+.val .vico{font-size:26px;margin-bottom:10px}
+.val h3{font-size:18px;margin-bottom:8px}.val p{color:var(--muted);font-size:14.5px}
+/* big preview */
+.preview{margin:34px auto 0;max-width:960px;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+box-shadow:0 50px 110px -50px #000;background:#0c1426}
+.preview .pbar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#0e1730;border-bottom:1px solid var(--line)}
+.preview .pbar i{width:11px;height:11px;border-radius:50%;background:#33405e}
+.preview .pbar .fn{margin-left:10px;font-size:12.5px;color:var(--muted)}
+.preview img{width:100%;display:block}
+.preview table{width:100%;border-collapse:collapse;font-size:13px}
+.preview th{background:#1f3864;color:#fff;text-align:left;padding:11px 14px;font-weight:700;white-space:nowrap}
+.preview td{padding:10px 14px;color:var(--ink);border-top:1px solid rgba(255,255,255,.06);vertical-align:top}
+.preview td.u{color:#7ea8ff}
+.preview td.m{color:var(--muted)}
+.preview tr:nth-child(even) td{background:rgba(234,240,249,.035)}
+.tabsrow{display:flex;gap:6px;flex-wrap:wrap;padding:12px 16px;background:#0e1730;border-top:1px solid var(--line)}
+.tabsrow span{font-size:11.5px;color:var(--muted);background:#152142;border:1px solid var(--line);padding:4px 9px;border-radius:7px}
+.tabsrow span.act{background:var(--gold);color:#20180a;font-weight:700;border-color:var(--gold)}
+/* final cta */
+.finalcta{margin:60px 0 20px;background:linear-gradient(180deg,var(--navy2),#0c1428);
+border:1px solid var(--line);border-radius:20px;padding:48px 30px;text-align:center}
+.finalcta h2{font-size:clamp(24px,3vw,32px);letter-spacing:-.02em}
+.finalcta p{color:var(--muted);max-width:52ch;margin:14px auto 24px;font-size:16px}
+.ctaform{display:flex;gap:10px;max-width:480px;margin:0 auto;flex-wrap:wrap}
+.ctaform input{flex:1;min-width:220px;font-family:inherit;font-size:16px;padding:14px 15px;border:1px solid var(--line);
+border-radius:11px;background:#0c1426;color:var(--ink)}
+.ctaform input:focus{outline:none;border-color:var(--gold)}
+.ctaform .btn{width:auto;flex:0 0 auto;padding:15px 26px}
+.foot{border-top:1px solid var(--line);padding:26px 0;color:#67748f;font-size:13px;text-align:center;margin-top:30px}
+.foot a{color:var(--muted);text-decoration:none}
+@media(max-width:860px){.grid{grid-template-columns:1fr;gap:28px;padding-bottom:20px}.card{position:static}
+.stats{grid-template-columns:repeat(2,1fr)}.vals{grid-template-columns:1fr}
+.preview{overflow-x:auto}.preview table{min-width:640px}}
+</style></head><body>
+<div class="wrap">
+<div class="top">
+  <a class="brand" href="/">ELVIN <b>PETERS</b></a>
+  <a class="topcta" href="#get">Get the vault &rarr;</a>
+</div>
+
+<!-- HERO -->
+<div class="grid">
+<div class="copy">
+<span class="eyebrow">Free &middot; 480+ resources</span>
+<h1>The Ultimate <span>Free AI</span> Resource Vault</h1>
+<div class="hook">Every asset, tool and library, in one place.</div>
+<p class="tagline">480+ hand-picked free tools, assets and libraries for anyone building with AI &mdash; so you stop hunting across a hundred tabs and just grab what you need.</p>
+<ul class="hl">
+<li>Free vectors, icons, animations, fonts, stock photos &amp; video</li>
+<li>The top GitHub repos, Python &amp; JavaScript libraries, AI models</li>
+<li>83 GenAI tools, 28 prompt libraries, free courses &amp; APIs</li>
+<li>Every link vetted, licensed and labeled &mdash; commercial-safe flagged</li>
+</ul>
+<div class="trust">One organized spreadsheet &middot; 21 categories &middot; No cost, no catch</div>
+</div>
+
+<!-- OPT-IN -->
+<div class="card" id="get">
+<div class="form-in">
+<h2>Get the vault free</h2>
+<div class="sub">Enter your email and I&rsquo;ll send you the download link. No spam, unsubscribe anytime.</div>
+<form id="f" novalidate>
+<div class="field"><input id="name" type="text" placeholder="First name (optional)" maxlength="80" autocomplete="given-name"></div>
+<div class="field"><input id="email" type="email" placeholder="Your best email" maxlength="120" required autocomplete="email"></div>
+<div class="hp" aria-hidden="true"><input type="text" id="website" tabindex="-1" autocomplete="off"></div>
+<button class="btn" type="submit" id="btn">Send me the vault</button>
+<div class="msg" id="msg"></div>
+<div class="fine">I&rsquo;ll email your download link. Unsubscribe anytime.</div>
+</form>
+<div class="miniprev" aria-hidden="true">
+<div class="bar"><i></i><i></i><i></i></div>
+<table><tr><th>Resource</th><th>Category</th></tr>
+<tr><td class="link">unDraw</td><td>Illustrations</td></tr>
+<tr><td class="link">Lottie</td><td>Animations</td></tr>
+<tr><td class="link">HuggingFace</td><td>AI Models</td></tr>
+<tr><td class="link">freeCodeCamp</td><td>Courses</td></tr>
+</table>
+</div>
+</div>
+<div class="done" id="done">
+<div class="tick">&#10003;</div>
+<h2>You&rsquo;re in</h2>
+<p>Thanks<span id="dn"></span>. Your download link is on its way to your inbox right now.</p>
+<p class="fine">Don&rsquo;t see it in a couple of minutes? Check your spam or promotions tab.</p>
+</div>
+</div>
+</div>
+
+<!-- STAT BAR -->
+<div class="stats">
+<div class="stat"><b>480+</b><span>Free resources</span></div>
+<div class="stat"><b>21</b><span>Categories</span></div>
+<div class="stat"><b>100%</b><span>Free to use</span></div>
+<div class="stat"><b>$0</b><span>Forever</span></div>
+</div>
+
+<!-- WHAT'S INSIDE -->
+<div class="section">
+<h2 class="head">What&rsquo;s inside the vault</h2>
+<p class="lede">21 organized categories. Every entry has a live link, a plain-English description, and its license so you know what&rsquo;s safe for client work.</p>
+<div class="cats" id="cats"></div>
+</div>
+
+<!-- BIG PREVIEW -->
+<div class="section">
+<h2 class="head">A peek inside</h2>
+<p class="lede">Clean, sortable, and ready to drop into your own workflow or AI directory.</p>
+<div class="preview">
+<div class="pbar"><i></i><i></i><i></i><span class="fn">AI-Asset-Resource-Database.xlsx &mdash; START HERE</span></div>
+<img src="preview-index.png" alt="The vault index: 21 categories and 480 free resources, each linked" loading="lazy">
+</div>
+<div class="preview" style="margin-top:22px">
+<div class="pbar"><i></i><i></i><i></i><span class="fn">AI-Asset-Resource-Database.xlsx &mdash; GenAI Apps &amp; Tools</span></div>
+<img src="preview-tools.png" alt="Sample rows from the GenAI Apps and Tools tab, each with a live link, license and what it is best for" loading="lazy">
+</div>
+<div class="tabsrow" style="max-width:960px;margin:16px auto 0;border:0;background:none;justify-content:center">
+<span class="act">GenAI Apps &amp; Tools</span><span>Vectors</span><span>Icons</span><span>Animations</span><span>Stock Photos</span><span>Fonts</span><span>Audio</span><span>UI Kits</span><span>3D Assets</span><span>Courses</span><span>Python</span><span>Prompt Libraries</span><span>+10 more</span>
+</div>
+</div>
+
+<!-- VALUE PROPS -->
+<div class="section">
+<h2 class="head">Why it&rsquo;s worth grabbing</h2>
+<div class="vals">
+<div class="val"><div class="vico">&#9889;</div><h3>Stop the tab-hunt</h3><p>The exact resource you need is one search away instead of buried in a bookmark graveyard. Everything in a single file.</p></div>
+<div class="val"><div class="vico">&#9989;</div><h3>License-safe</h3><p>Every entry is labeled by license and cost. CC0, MIT and Apache are flagged, so you never ship a client project on the wrong asset.</p></div>
+<div class="val"><div class="vico">&#129513;</div><h3>Built for AI work</h3><p>Curated for people actually building with AI &mdash; models, GenAI tools, prompt libraries and dev libraries alongside the design assets.</p></div>
+</div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="finalcta">
+<h2>Get the whole vault, free</h2>
+<p>480+ resources, 21 categories, one spreadsheet. Enter your email and I&rsquo;ll send you the link.</p>
+<form id="f2" class="ctaform" novalidate>
+<input id="email2" type="email" placeholder="Your best email" maxlength="120" required autocomplete="email">
+<div class="hp" aria-hidden="true"><input type="text" id="website2" tabindex="-1" autocomplete="off"></div>
+<button class="btn" type="submit" id="btn2">Send it to me</button>
+</form>
+<div class="msg" id="msg2" style="max-width:480px;margin-left:auto;margin-right:auto"></div>
+<div class="fine" id="fine2">Free forever. Unsubscribe anytime.</div>
+</div>
+
+<div class="foot"><a href="/free/">See all free guides</a> &nbsp;&middot;&nbsp; <a href="/">elvinpeters.com</a> &nbsp;&middot;&nbsp; <a href="/privacy.html">Privacy</a></div>
+</div>
+
+<script>
+(function(){
+  var SLUG="ai-toolkit", TITLE="The Ultimate Free AI Resource Vault";
+  var GADS="AW-637214471/bylsCMuW0NUcEIe-7K8C", XEVT="";
+
+  // ---- category tiles (name, count, one-line, icon) ----
+  var I={
+    vec:'<path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/>',
+    icons:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>',
+    anim:'<circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4V8z"/>',
+    photo:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/>',
+    video:'<rect x="2" y="5" width="14" height="14" rx="2"/><path d="M22 8l-6 4 6 4V8z"/>',
+    font:'<path d="M4 20l6-16 6 16"/><path d="M7 13h6"/><path d="M17 20h4"/>',
+    audio:'<path d="M9 18V6l10-2v12"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/>',
+    ui:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>',
+    mock:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>',
+    cube:'<path d="M21 16V8l-9-5-9 5v8l9 5 9-5z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/>',
+    color:'<path d="M12 3a9 9 0 100 18h1.5a2 2 0 001.8-2.9c-.3-.6-.3-1.4 0-2 .4-.7 1.1-1.1 1.9-1.1H19a3 3 0 003-3 8 8 0 00-8-8z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/>',
+    cap:'<path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 3 6 3s6-2 6-3v-5"/>',
+    star:'<path d="M12 2l3 6.9 7.5.6-5.7 4.9 1.8 7.3L12 17.8 5.4 21.7l1.8-7.3L1.5 9.5 9 8.9 12 2z"/>',
+    git:'<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="8" r="3"/><path d="M18 11v1a4 4 0 01-4 4H6M6 9v6"/>',
+    py:'<polyline points="8 6 3 12 8 18"/><polyline points="16 6 21 12 16 18"/><line x1="13" y1="4" x2="11" y2="20"/>',
+    js:'<path d="M8 6l-4 6 4 6M16 6l4 6-4 6"/>',
+    cpu:'<rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/><rect x="10" y="10" width="4" height="4"/>',
+    gen:'<path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15l-1.9-4.1L5.5 9l4.6-1.4L12 3z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8.8-2z"/>',
+    prompt:'<path d="M21 15a2 2 0 01-2 2H8l-5 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/><path d="M8 9h8M8 13h5"/>',
+    api:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>',
+    tool:'<path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.6 2.6-2.4-.6-.6-2.4 2.6-2.6z"/>'
+  };
+  var CATS=[
+    ["Vectors & Illustrations",20,"unDraw, Storyset, Humaaans",I.vec],
+    ["Icons",22,"Lucide, Font Awesome, Tabler",I.icons],
+    ["Animations & Lottie",18,"LottieFiles, GSAP, Rive",I.anim],
+    ["Stock Photos",18,"Unsplash, Pexels, Pixabay",I.photo],
+    ["Stock Video & Motion",10,"Coverr, Mixkit, Pexels",I.video],
+    ["Fonts & Typography",15,"Google Fonts, Fontshare",I.font],
+    ["Audio, Music & SFX",14,"Freesound, Pixabay, Uppbeat",I.audio],
+    ["UI Kits & Design Systems",22,"Tailwind, shadcn/ui, MUI",I.ui],
+    ["Mockups & Templates",15,"HTML5 UP, Shots, Smartmockups",I.mock],
+    ["3D Assets",14,"Blender, Poly Haven, Kenney",I.cube],
+    ["Color & Design Tools",18,"Coolors, Figma, Penpot",I.color],
+    ["Coding Courses & Learning",24,"freeCodeCamp, CS50, Odin",I.cap],
+    ["Awesome Lists (GitHub)",23,"The best curated lists to mine",I.star],
+    ["Top GitHub Repos",20,"Most-starred, most-talked-about",I.git],
+    ["Python Libraries",30,"NumPy, pandas, FastAPI",I.py],
+    ["JS & Web Libraries",25,"React, Three.js, D3",I.js],
+    ["AI Models & Datasets",19,"HuggingFace, Ollama, Kaggle",I.cpu],
+    ["GenAI Apps & Tools",83,"Chat, image, video, voice, code",I.gen],
+    ["Prompt Libraries",28,"Anthropic, Learn Prompting",I.prompt],
+    ["Free APIs & Data",18,"public-apis, NASA, OpenWeather",I.api],
+    ["Dev Tools & Utilities",24,"VS Code, Supabase, CyberChef",I.tool]
+  ];
+  var host=document.getElementById('cats');
+  CATS.forEach(function(c){
+    var d=document.createElement('div');d.className='cat';
+    d.innerHTML='<div class="ico"><svg viewBox="0 0 24 24">'+c[3]+'</svg></div>'+
+      '<h3>'+c[0]+'</h3><div class="cnt">'+c[1]+' resources</div><p>'+c[2]+'</p>';
+    host.appendChild(d);
+  });
+
+  // ---- lead capture (owned lead DB -> Resend delivery email) ----
+  function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+  function source(){
+    var base='magnet:'+SLUG;
+    try{var p=new URLSearchParams(location.search),b=[];
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=p.get(k);if(v)b.push(k.replace('utm_','')+'='+v);});
+      var g=p.get('gclid');if(g)b.push('gclid='+g);var tw=p.get('twclid');if(tw)b.push('twclid='+tw);
+      if(b.length)base=(base+' | '+b.join('&')).slice(0,290);
+    }catch(e){}
+    return base;
+  }
+  function convert(email){
+    try{if(email&&typeof gtag==='function')gtag('set','user_data',{email:email});}catch(e){}
+    try{if(XEVT&&typeof twq==='function')twq('event',XEVT,{});}catch(e){}
+    try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','generate_lead',{'value':1,'currency':'USD','items':[{'item_name':TITLE}]});}catch(e){}
+  }
+  function send(email,name){
+    var body=new URLSearchParams({name:name||'Vault lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:''}).toString();
+    return fetch("https://ultimateaidirectory.com/api/lead",{method:'POST',mode:'cors',keepalive:true,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body});
+  }
+  function revealMain(name){
+    document.getElementById('dn').textContent=name?(' '+name):'';
+    document.querySelector('#get .form-in').style.display='none';
+    document.getElementById('done').classList.add('on');
+  }
+  // hero form
+  var f=document.getElementById('f'),msg=document.getElementById('msg'),btn=document.getElementById('btn');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();msg.className='msg';msg.textContent='';
+    if(val('website')){revealMain('');return;}
+    var email=val('email'),name=val('name');
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg.className='msg err';msg.textContent='Please enter a valid email.';return;}
+    btn.disabled=true;btn.textContent='Sending...';
+    send(email,name).then(function(){convert(email);revealMain(name);}).catch(function(){convert(email);revealMain(name);});
+  });
+  // final-cta form
+  var f2=document.getElementById('f2'),msg2=document.getElementById('msg2'),btn2=document.getElementById('btn2'),fine2=document.getElementById('fine2');
+  f2.addEventListener('submit',function(e){
+    e.preventDefault();msg2.className='msg';msg2.textContent='';
+    if(val('website2')){return;}
+    var email=val('email2');
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){msg2.className='msg err';msg2.textContent='Please enter a valid email.';return;}
+    btn2.disabled=true;btn2.textContent='Sending...';
+    send(email,'').then(done).catch(done);
+    function done(){convert(email);f2.style.display='none';fine2.textContent='';
+      msg2.className='msg';msg2.style.display='block';msg2.style.background='rgba(74,208,160,.12)';
+      msg2.style.border='1px solid rgba(74,208,160,.4)';msg2.style.color='#9ff0d0';
+      msg2.textContent='Done — your download link is on its way to your inbox.';}
+  });
+})();
+</script>
+</body></html>
