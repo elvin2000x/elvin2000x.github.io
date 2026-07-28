@@ -23,6 +23,7 @@
     <div class="booktitle">The Artificial Advantage</div>
     <div class="navgroup"><h4>Start here</h4>
       <a class="navlink active" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="prompt-builder.html"><span class="dot"></span>Prompt Builder</a>
       <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
     </div>
     <div class="navgroup"><h4>Appendices</h4>
@@ -39,7 +40,7 @@
       <div class="crumb"><a href="index.html">The Artificial Advantage</a> &nbsp;/&nbsp; The Artificial Advantage · Resources</div>
       <h1>Book Resources</h1>
       <div class="updated from"><span class="b"></span>From <em>The Artificial Advantage</em></div>
-      <p class="lead">Everything from <em>The Artificial Advantage</em> that is better on a screen than on a page: the code, the prompts, and the reference tables, in copy-and-adapt form and kept current as the tools change.</p><div class="hubgrid"><a class="hubcard" href="quick-reference-card.html"><h3>Quick Reference Card</h3><p>The operator&#x27;s one-pager: the loop, the tiers, the safety and cost rules at a glance.</p><span class="go">Open →</span></a><a class="hubcard" href="prompt-library.html"><h3>The Professional Prompt Library</h3><p>Reusable system-prompt and agent-instruction templates.</p><span class="go">Open →</span></a><a class="hubcard" href="role-library.html"><h3>The Role Library</h3><p>Ready-to-paste role setups that get you expert-level output on demand.</p><span class="go">Open →</span></a><a class="hubcard" href="framework-reference.html"><h3>Framework Reference</h3><p>The frameworks and models from the book in one reference.</p><span class="go">Open →</span></a><a class="hubcard" href="diagnostic.html"><h3>The Director&#x27;s Diagnostic</h3><p>When a prompt is not working: match the symptom, find the cause, copy the fix.</p><span class="go">Open →</span></a><a class="hubcard" href="tools-reference.html"><h3>AI Tools Reference</h3><p>The AI tools landscape at a glance, sorted by the job you need done.</p><span class="go">Open →</span></a><a class="hubcard" href="glossary.html"><h3>Glossary</h3><p>Every term the book uses, in plain language.</p><span class="go">Open →</span></a></div>
+      <p class="lead">Everything from <em>The Artificial Advantage</em> that is better on a screen than on a page: the code, the prompts, and the reference tables, in copy-and-adapt form and kept current as the tools change.</p><div class="hubgrid"><a class="hubcard" href="prompt-builder.html"><h3>Prompt Builder</h3><p>Fill in Role, Task, and Constraint. Watch your prompt assemble itself, copy-ready.</p><span class="go">Open →</span></a><a class="hubcard" href="quick-reference-card.html"><h3>Quick Reference Card</h3><p>The operator&#x27;s one-pager: the loop, the tiers, the safety and cost rules at a glance.</p><span class="go">Open →</span></a><a class="hubcard" href="prompt-library.html"><h3>The Professional Prompt Library</h3><p>Reusable system-prompt and agent-instruction templates.</p><span class="go">Open →</span></a><a class="hubcard" href="role-library.html"><h3>The Role Library</h3><p>Ready-to-paste role setups that get you expert-level output on demand.</p><span class="go">Open →</span></a><a class="hubcard" href="framework-reference.html"><h3>Framework Reference</h3><p>The frameworks and models from the book in one reference.</p><span class="go">Open →</span></a><a class="hubcard" href="diagnostic.html"><h3>The Director&#x27;s Diagnostic</h3><p>When a prompt is not working: match the symptom, find the cause, copy the fix.</p><span class="go">Open →</span></a><a class="hubcard" href="tools-reference.html"><h3>AI Tools Reference</h3><p>The AI tools landscape at a glance, sorted by the job you need done.</p><span class="go">Open →</span></a><a class="hubcard" href="glossary.html"><h3>Glossary</h3><p>Every term the book uses, in plain language.</p><span class="go">Open →</span></a></div>
       <div class="optin">
         <h3>Want the whole library, kept current?</h3>
         <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
@@ -79,7 +80,7 @@ function optin(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),
   fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({email:(i.value||'').trim(),source:'book-library'})})
    .then(function(r){return r.json();}).then(function(r){
-     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You're in. I'll be in touch when it counts.</p>';}
+     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You are in. I will be in touch when it counts.</p>';}
      else{b.textContent=r.error||'Try again';}})
    .catch(function(){b.textContent='Network hiccup — try again';});
   return false;}

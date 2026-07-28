@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prompt Builder · The Artificial Advantage · Elvin M. Peters</title>
+<meta name="description" content="Prompt Builder — companion resource for The Artificial Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Artificial Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 1</div>
+    <div class="booktitle">The Artificial Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink active" href="prompt-builder.html"><span class="dot"></span>Prompt Builder</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>The Professional Prompt Library</a>
+      <a class="navlink" href="role-library.html"><span class="dot"></span>The Role Library</a>
+      <a class="navlink" href="framework-reference.html"><span class="dot"></span>Framework Reference</a>
+      <a class="navlink" href="diagnostic.html"><span class="dot"></span>The Director&#x27;s Diagnostic</a>
+      <a class="navlink" href="tools-reference.html"><span class="dot"></span>AI Tools Reference</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Artificial Advantage</a> &nbsp;/&nbsp; Prompt Builder</div>
+      <h1>The Prompt Builder</h1>
+      <div class="updated from"><span class="b"></span>From <em>The Artificial Advantage</em></div>
+      <p class="lead">The whole method on one screen. Fill in the parts and your prompt assembles itself in the book’s <strong>Role, Task, Constraint</strong> structure, copy-ready. Your work saves in this browser as you type. Nothing you enter is sent anywhere.</p><div class="pbpresets"><span>Start from an example:</span><button type="button" onclick="pbPreset('email')">Executive email</button><button type="button" onclick="pbPreset('brief')">Stakeholder brief</button><button type="button" onclick="pbPreset('plan')">30-day plan</button></div><div class="pbgrid"><div class="pbform"><div class="pbfield"><label for="pb-role">Role</label><span class="pbhint">Who should the AI be? Give it a professional identity and a point of view.</span><textarea id="pb-role" rows="2" placeholder="a senior communications advisor with ten years in B2B SaaS"></textarea></div><div class="pbfield"><label for="pb-task">Task</label><span class="pbhint">What exactly do you need? One deliverable per prompt.</span><textarea id="pb-task" rows="3" placeholder="write a 30-day onboarding checklist for a new remote employee in a client-facing role"></textarea></div><div class="pbfield"><label for="pb-constraint">Constraints</label><span class="pbhint">The rules the output must follow: length, format, tone, and what to avoid.</span><textarea id="pb-constraint" rows="3" placeholder="each item under 15 words, numbered list, plain language, no corporate jargon"></textarea></div><div class="pbfield"><label for="pb-context">Context<span class="pbopt">optional</span></label><span class="pbhint">Anything the AI cannot infer: the audience, the background, the situation.</span><textarea id="pb-context" rows="2" placeholder="the audience is board members unfamiliar with day-to-day operations"></textarea></div></div><div class="pbpreview"><div class="pbbar"><span class="pblab">Your prompt</span><span class="pbbtns"><button class="pbbtn" id="pb-copy" onclick="pbCopy()">Copy</button><button class="pbbtn ghost" onclick="pbDownload()">Download .txt</button></span></div><div class="pbout empty" id="pb-out">Fill in the fields and your prompt appears here, copy-ready.</div><p class="pbtip">Role opens the prompt, Task says exactly what you need, and Constraints close it. That order is the whole trick.</p></div></div>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Artificial Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]');
+  b.textContent='Sending…';
+  fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:(i.value||'').trim(),source:'book-library'})})
+   .then(function(r){return r.json();}).then(function(r){
+     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You are in. I will be in touch when it counts.</p>';}
+     else{b.textContent=r.error||'Try again';}})
+   .catch(function(){b.textContent='Network hiccup — try again';});
+  return false;}
+
+var PB_PRESETS={
+ email:{role:"a senior communications advisor",
+   task:"write a brief status email to the executive team summarizing [project]: what shipped this week, what is next, and one risk that needs their attention",
+   constraint:"confident and direct, under 200 words, prose not bullet points",
+   context:""},
+ brief:{role:"a senior analyst preparing a briefing document",
+   task:"write a one-page briefing on [the issue or decision]",
+   constraint:"problem statement in 2 sentences, current status in 3 to 4, at most three options, one recommended next step; plain language, no jargon",
+   context:"the audience is board members unfamiliar with day-to-day operations"},
+ plan:{role:"a senior HR manager with remote-team experience",
+   task:"write a 30-day onboarding checklist for a new remote employee in a client-facing role",
+   constraint:"each item under 15 words, numbered list, plain language, no corporate jargon",
+   context:""}
+};
+function pbVal(k){var el=document.getElementById('pb-'+k);return el?el.value.trim():'';}
+function pbCap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
+function pbStrip(s){return s.replace(/\s*\.\s*$/,'');}
+function pbAssemble(){
+  var role=pbVal('role'),ctx=pbVal('context'),task=pbVal('task'),con=pbVal('constraint');
+  var parts=[];
+  if(role) parts.push("Act as "+pbStrip(role)+".");
+  if(ctx)  parts.push(pbCap(pbStrip(ctx))+".");
+  if(task) parts.push(pbCap(pbStrip(task))+".");
+  if(con)  parts.push(pbCap(pbStrip(con))+".");
+  var out=document.getElementById('pb-out');
+  if(parts.length){out.textContent=parts.join(" ");out.classList.remove('empty');}
+  else{out.textContent="Fill in the fields and your prompt appears here, copy-ready.";out.classList.add('empty');}
+  try{localStorage.setItem('pb:'+location.pathname,JSON.stringify({role:role,context:ctx,task:task,constraint:con}));}catch(e){}
+}
+function pbRestore(){
+  var raw;try{raw=localStorage.getItem('pb:'+location.pathname);}catch(e){}
+  if(raw){try{var d=JSON.parse(raw);['role','context','task','constraint'].forEach(function(k){var el=document.getElementById('pb-'+k);if(el&&d[k])el.value=d[k];});}catch(e){}}
+  pbAssemble();
+}
+function pbPreset(name){
+  var p=PB_PRESETS[name];if(!p)return;
+  ['role','context','task','constraint'].forEach(function(k){var el=document.getElementById('pb-'+k);if(el)el.value=p[k]||'';});
+  pbAssemble();
+}
+function pbCopy(){
+  var t=document.getElementById('pb-out');if(t.classList.contains('empty'))return;
+  navigator.clipboard.writeText(t.textContent).then(function(){
+    var b=document.getElementById('pb-copy');var o=b.textContent;b.textContent='Copied \u2713';b.classList.add('done');
+    setTimeout(function(){b.textContent=o;b.classList.remove('done');},1600);
+  });
+}
+function pbDownload(){
+  var t=document.getElementById('pb-out');if(t.classList.contains('empty'))return;
+  var blob=new Blob([t.textContent+"\n"],{type:'text/plain'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='my-prompt.txt';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(a.href);
+}
+document.addEventListener('DOMContentLoaded',function(){
+  pbRestore();
+  document.addEventListener('input',function(e){if(e.target.id&&e.target.id.indexOf('pb-')===0)pbAssemble();});
+});
+
+</script>
+</body>
+</html>
