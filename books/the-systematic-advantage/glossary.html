@@ -37,7 +37,10 @@
       <div class="crumb"><a href="index.html">The Systematic Advantage</a> &nbsp;/&nbsp; Glossary</div>
       <h1>Glossary</h1>
       <div class="updated from"><span class="b"></span>From <em>The Systematic Advantage</em></div>
-      <p>The working vocabulary of <em>The Systematic Advantage</em>. Terms carried over from Volume 1 are marked <em>(Vol 1)</em>. Where a term has a home chapter, it is noted so you can go deeper.</p>
+      <blockquote>
+<p><strong>Also online, free.</strong> This appendix is on the web in copy-and-paste form, kept current, at elvinpeters.com/books/the-systematic-advantage/glossary.</p>
+</blockquote>
+<p>The working vocabulary of <em>The Systematic Advantage</em>. Terms carried over from Volume 1 are marked <em>(Vol 1)</em>. Where a term has a home chapter, it is noted so you can go deeper.</p>
 <hr/>
 <p><strong>Accountability Map</strong> <em>(Ch 14)</em>: A one-page written standard, one line per high-stakes output category, stating what you verify before that kind of output ships. It holds under deadline pressure and under negotiation because it was decided in advance.</p>
 <p><strong>Agentic workspace</strong> <em>(Ch 9)</em>: An AI that can act rather than only answer: it opens and edits files, runs steps, produces working artifacts, and shows its work. The product-agnostic name for the category.</p>
@@ -126,7 +129,15 @@ function copyCode(btn){
   });
 }
 function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
-function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+function optin(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]');
+  b.textContent='Sending…';
+  fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:(i.value||'').trim(),source:'book-library'})})
+   .then(function(r){return r.json();}).then(function(r){
+     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You're in. I'll be in touch when it counts.</p>';}
+     else{b.textContent=r.error||'Try again';}})
+   .catch(function(){b.textContent='Network hiccup — try again';});
+  return false;}
 
 </script>
 </body>

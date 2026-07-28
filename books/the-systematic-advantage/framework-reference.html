@@ -37,7 +37,10 @@
       <div class="crumb"><a href="index.html">The Systematic Advantage</a> &nbsp;/&nbsp; Framework Reference</div>
       <h1>Framework Reference</h1>
       <div class="updated from"><span class="b"></span>From <em>The Systematic Advantage</em></div>
-      <p>Every framework in the book on one page each, grouped by the stage of CRAFT it serves. Use this as the lookup you return to after the first read: what a framework is, what it is made of, and when to run it. The chapter that builds it is noted for when you want the full treatment.</p>
+      <blockquote>
+<p><strong>Also online, free.</strong> This appendix is on the web in copy-and-paste form, kept current, at elvinpeters.com/books/the-systematic-advantage/framework-reference.</p>
+</blockquote>
+<p>Every framework in the book on one page each, grouped by the stage of CRAFT it serves. Use this as the lookup you return to after the first read: what a framework is, what it is made of, and when to run it. The chapter that builds it is noted for when you want the full treatment.</p>
 <hr/>
 <h2 class="rc">The spine: CRAFT</h2>
 <p>Volume 2's operating cycle, and the successor to Volume 1's CLEAR. Where CLEAR taught you to direct a single session well, CRAFT builds the system in which good sessions happen reliably.</p>
@@ -157,7 +160,15 @@ function copyCode(btn){
   });
 }
 function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
-function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+function optin(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]');
+  b.textContent='Sending…';
+  fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:(i.value||'').trim(),source:'book-library'})})
+   .then(function(r){return r.json();}).then(function(r){
+     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You're in. I'll be in touch when it counts.</p>';}
+     else{b.textContent=r.error||'Try again';}})
+   .catch(function(){b.textContent='Network hiccup — try again';});
+  return false;}
 
 </script>
 </body>

@@ -213,7 +213,15 @@ function copyCode(btn){
   });
 }
 function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
-function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+function optin(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]');
+  b.textContent='Sending…';
+  fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:(i.value||'').trim(),source:'book-library'})})
+   .then(function(r){return r.json();}).then(function(r){
+     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You're in. I'll be in touch when it counts.</p>';}
+     else{b.textContent=r.error||'Try again';}})
+   .catch(function(){b.textContent='Network hiccup — try again';});
+  return false;}
 
 </script>
 </body>

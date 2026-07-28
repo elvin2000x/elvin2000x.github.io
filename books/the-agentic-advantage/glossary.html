@@ -47,7 +47,10 @@
       <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Glossary</div>
       <h1>Glossary</h1>
       <div class="updated from"><span class="b"></span>From <em>The Agentic Advantage</em></div>
-      <p>The agentic world moved fast enough to grow its own vocabulary. These are the terms this book leans on, in plain language, so you can read any chapter without keeping a browser tab open. Where a term carries a precise technical meaning and a looser everyday one, I have given you the version an operator actually needs.</p>
+      <blockquote>
+<p><strong>Also online, free.</strong> This appendix is on the web in copy-and-paste form, kept current, at elvinpeters.com/books/the-agentic-advantage/glossary.</p>
+</blockquote>
+<p>The agentic world moved fast enough to grow its own vocabulary. These are the terms this book leans on, in plain language, so you can read any chapter without keeping a browser tab open. Where a term carries a precise technical meaning and a looser everyday one, I have given you the version an operator actually needs.</p>
 <p><strong>Agent.</strong> An AI system that pursues a goal by choosing its own next action, calling tools, observing the results, and repeating until the goal is met. The step up from a chatbot that only answers.</p>
 <p><strong>Batch API.</strong> An asynchronous mode that runs non-urgent jobs at roughly half the standard rate, in exchange for results within hours instead of seconds.</p>
 <p><strong>Cascade routing.</strong> Sending a request to a cheap model first and escalating to a stronger one only when the cheap answer is not good enough.</p>
@@ -110,7 +113,15 @@ function copyCode(btn){
   });
 }
 function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
-function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+function optin(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]');
+  b.textContent='Sending…';
+  fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:(i.value||'').trim(),source:'book-library'})})
+   .then(function(r){return r.json();}).then(function(r){
+     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You're in. I'll be in touch when it counts.</p>';}
+     else{b.textContent=r.error||'Try again';}})
+   .catch(function(){b.textContent='Network hiccup — try again';});
+  return false;}
 
 </script>
 </body>
