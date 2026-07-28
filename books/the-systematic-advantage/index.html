@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Systematic Advantage · Resources · The Systematic Advantage · Elvin M. Peters</title>
+<meta name="description" content="The Systematic Advantage · Resources — companion resource for The Systematic Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Systematic Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 2</div>
+    <div class="booktitle">The Systematic Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink active" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>Prompt Library</a>
+      <a class="navlink" href="framework-reference.html"><span class="dot"></span>Framework Reference</a>
+      <a class="navlink" href="worksheets.html"><span class="dot"></span>Worksheets</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Systematic Advantage</a> &nbsp;/&nbsp; The Systematic Advantage · Resources</div>
+      <h1>Book Resources</h1>
+      <div class="updated from"><span class="b"></span>From <em>The Systematic Advantage</em></div>
+      <p class="lead">Everything from <em>The Systematic Advantage</em> that is better on a screen than on a page: the code, the prompts, and the reference tables, in copy-and-adapt form and kept current as the tools change.</p><div class="hubgrid"><a class="hubcard" href="quick-reference-card.html"><h3>Quick Reference Card</h3><p>The operator&#x27;s one-pager: the loop, the tiers, the safety and cost rules at a glance.</p><span class="go">Open →</span></a><a class="hubcard" href="prompt-library.html"><h3>Prompt Library</h3><p>Reusable system-prompt and agent-instruction templates.</p><span class="go">Open →</span></a><a class="hubcard" href="framework-reference.html"><h3>Framework Reference</h3><p>The frameworks and models from the book in one reference.</p><span class="go">Open →</span></a><a class="hubcard" href="worksheets.html"><h3>Worksheets</h3><p>Fill them in on screen, then download a clean PDF.</p><span class="go">Open →</span></a><a class="hubcard" href="glossary.html"><h3>Glossary</h3><p>Every term the book uses, in plain language.</p><span class="go">Open →</span></a></div>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Systematic Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Memory Architecture · The Agentic Advantage · Elvin M. Peters</title>
+<meta name="description" content="Memory Architecture — companion resource for The Agentic Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Agentic Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 3</div>
+    <div class="booktitle">The Agentic Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="recipes.html"><span class="dot"></span>Agent Recipes &amp; Blueprints</a>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>Prompt Library</a>
+      <a class="navlink" href="stack.html"><span class="dot"></span>The 2026 Operator Stack</a>
+      <a class="navlink" href="mcp.html"><span class="dot"></span>MCP Servers &amp; Integrations</a>
+      <a class="navlink" href="api-reference.html"><span class="dot"></span>API &amp; Tooling Quick Reference</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+    <div class="navgroup"><h4>Chapter code</h4>
+      <a class="navlink" href="chapter-4.html"><span class="dot"></span>Ch 4 · Trigger-Action-Memory</a>
+      <a class="navlink active" href="chapter-6.html"><span class="dot"></span>Ch 6 · Memory Architecture</a>
+      <a class="navlink" href="chapter-8.html"><span class="dot"></span>Ch 8 · The Monitoring Layer</a>
+      <a class="navlink" href="chapter-9.html"><span class="dot"></span>Ch 9 · Claude Code</a>
+      <a class="navlink" href="chapter-11.html"><span class="dot"></span>Ch 11 · The Tech Stack</a>
+      <a class="navlink" href="chapter-12.html"><span class="dot"></span>Ch 12 · Security &amp; Cost</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Memory Architecture</div>
+      <h1>Memory Architecture</h1>
+      <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
+      <p class="lead">Every code block from <em>Ch 6 · Memory Architecture</em>, in one place you can copy from. Model IDs and prices are current as of writing; live values are on the Stack page.</p><h2 class="rc"><span class="tag">SNIPPET 1</span>Here is the state file for my always-on scraper, the agent that has continuously accumulated 5,400+ local business leads:</h2>
+<div class="code"><div class="bar"><span class="lang">json</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>{
+  &quot;version&quot;: &quot;1.2&quot;,
+  &quot;current_niche&quot;: &quot;plumbers&quot;,
+  &quot;current_city&quot;: &quot;Mississauga&quot;,
+  &quot;cities_completed&quot;: [&quot;Toronto&quot;, &quot;Ottawa&quot;, &quot;Hamilton&quot;, &quot;Brampton&quot;],
+  &quot;niches_completed&quot;: [&quot;electricians&quot;, &quot;HVAC&quot;, &quot;roofers&quot;],
+  &quot;last_run&quot;: &quot;2026-05-31T06:42:11Z&quot;,
+  &quot;total_leads&quot;: 5423,
+  &quot;run_count&quot;: 847
+}</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 2</span>The pattern, in code:</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import json
+from pathlib import Path
+
+STATE_FILE = Path(&quot;state.json&quot;)
+
+def load_state():
+    if STATE_FILE.exists():
+        return json.loads(STATE_FILE.read_text())
+    return {&quot;version&quot;: &quot;1.0&quot;, &quot;cities_completed&quot;: [], &quot;total_leads&quot;: 0}
+
+def save_state(state: dict):
+    STATE_FILE.write_text(json.dumps(state, indent=2))
+
+# At the top of every agent run:
+state = load_state()
+
+# ... do work, update state ...
+state[&quot;total_leads&quot;] += new_leads_found
+state[&quot;last_run&quot;] = datetime.utcnow().isoformat() + &quot;Z&quot;
+
+# At the bottom of every agent run:
+save_state(state)</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 3</span>The Telegram bot uses a different form of external file memory: conversation logs. Every message exchange gets appended to a daily Markdown </h2>
+<div class="code"><div class="bar"><span class="lang">code</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>### 07:43 AM
+**Elvin:** what&#x27;s the status on the book?
+**Claude:** Vol 1 is live on KDP and Gumroad at $37...
+
+### 07:51 AM
+**Elvin:** what about the scraper, any issues?
+**Claude:** Last run was 6:42 AM, found 14 new leads in Mississauga...</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 4</span>The right starting point is Chroma. It is free, runs locally as a Python library, requires no server, and integrates directly with the Anthr</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import chromadb
+from anthropic import Anthropic
+
+client = Anthropic()
+chroma = chromadb.Client()
+collection = chroma.get_or_create_collection(&quot;engagement_notes&quot;)
+
+def search_memory(query: str, n_results: int = 5) -&gt; str:
+    results = collection.query(query_texts=[query], n_results=n_results)
+    return &quot;\n\n&quot;.join(results[&quot;documents&quot;][0])
+
+# Before the agent call:
+relevant_context = search_memory(&quot;manufacturing company cost reduction&quot;)
+
+response = client.messages.create(
+    model=&quot;claude-sonnet-4-5&quot;,
+    max_tokens=2048,
+    system=f&quot;You are a research assistant. Relevant context:\n{relevant_context}&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_query}]
+)</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 5</span>Here is the pattern, 15 lines that are the foundation of every context-aware agent in the stack:</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>from pathlib import Path
+from anthropic import Anthropic
+
+client = Anthropic()
+
+def build_system_prompt() -&gt; str:
+    session_status = Path(
+        r&quot;C:\Users\elvin\Documents\Brain\SESSION_STATUS.md&quot;
+    ).read_text(encoding=&quot;utf-8&quot;)
+    
+    base_prompt = &quot;&quot;&quot;You are Claude, Elvin&#x27;s AI collaborator.
+You run as part of an autonomous agent ecosystem.
+Answer directly. No filler. Use specific numbers.&quot;&quot;&quot;
+    
+    return f&quot;{base_prompt}\n\n## Current Project Status\n{session_status}&quot;
+
+def ask(user_message: str) -&gt; str:
+    response = client.messages.create(
+        model=&quot;claude-sonnet-4-5&quot;,
+        max_tokens=2048,
+        system=build_system_prompt(),
+        messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_message}]
+    )
+    return response.content[0].text
+
+print(ask(&quot;what&#x27;s the status on the book?&quot;))</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 6</span>The injection pattern composes. You can inject multiple files:</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>def build_agent_context(agent_name: str) -&gt; str:
+    brain = Path(r&quot;C:\Users\elvin\Documents\Brain&quot;)
+    
+    session_status = (brain / &quot;SESSION_STATUS.md&quot;).read_text()
+    
+    state_file = Path(f&quot;agents/{agent_name}/state.json&quot;)
+    current_state = state_file.read_text() if state_file.exists() else &quot;{}&quot;
+    
+    return f&quot;&quot;&quot;## Session Status
+{session_status}
+
+## Agent Current State
+{current_state}&quot;&quot;&quot;</code></pre></div>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Agentic Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+
+</script>
+</body>
+</html>

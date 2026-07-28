@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The 2026 Operator Stack · The Agentic Advantage · Elvin M. Peters</title>
+<meta name="description" content="The 2026 Operator Stack — companion resource for The Agentic Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Agentic Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 3</div>
+    <div class="booktitle">The Agentic Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="recipes.html"><span class="dot"></span>Agent Recipes &amp; Blueprints</a>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>Prompt Library</a>
+      <a class="navlink active" href="stack.html"><span class="dot"></span>The 2026 Operator Stack</a>
+      <a class="navlink" href="mcp.html"><span class="dot"></span>MCP Servers &amp; Integrations</a>
+      <a class="navlink" href="api-reference.html"><span class="dot"></span>API &amp; Tooling Quick Reference</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+    <div class="navgroup"><h4>Chapter code</h4>
+      <a class="navlink" href="chapter-4.html"><span class="dot"></span>Ch 4 · Trigger-Action-Memory</a>
+      <a class="navlink" href="chapter-6.html"><span class="dot"></span>Ch 6 · Memory Architecture</a>
+      <a class="navlink" href="chapter-8.html"><span class="dot"></span>Ch 8 · The Monitoring Layer</a>
+      <a class="navlink" href="chapter-9.html"><span class="dot"></span>Ch 9 · Claude Code</a>
+      <a class="navlink" href="chapter-11.html"><span class="dot"></span>Ch 11 · The Tech Stack</a>
+      <a class="navlink" href="chapter-12.html"><span class="dot"></span>Ch 12 · Security &amp; Cost</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; The 2026 Operator Stack</div>
+      <h1>The 2026 Operator Stack</h1>
+      <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
+      <p>I built this appendix to hold everything with a short shelf life so the chapters could stay evergreen. Prices and product names in this field move every few months, so treat every figure here as a dated snapshot from the time of writing rather than a current quote, and verify the live numbers before you commit real budget (the companion Toolkit is the version I keep current). What actually lasts is not the price or even the product name. What lasts is the <em>category</em> each tool fills, because those categories are the true shape of an operator's stack. Read the tables for the shape first, and the specific names second.</p>
+<blockquote>
+<p><strong>Verify before you commit budget.</strong> Everything below was checked in mid-2026. Vendors reprice, get acquired, and rename tiers constantly, so confirm the current figure on the provider's own pricing page before you spend.</p>
+</blockquote>
+<p>The organizing principle behind the whole stack is simple: buy the model, rent the infrastructure, own the orchestration.</p>
+<h2 class="rc">Model APIs &amp; SDKs (the model layer)</h2>
+<p>This is the engine. The SDK choice usually follows the model choice, and all three major SDKs speak MCP, so your tools stay portable across them. Model prices are quoted per one million tokens (input / output) and are the fastest-moving figures in this entire appendix.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Rough cost (at time of writing)</th>
+<th>When to reach for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anthropic API + Claude Agent SDK</td>
+<td>Model API + agent harness</td>
+<td>Mid-tier ~$2–3 in / $10–15 out; light tier ~$1/$5; heavy tier ~$5/$25. Prompt caching cuts input ~90%, Batch API ~50%</td>
+<td>Default for agentic, coding, and tool-use work; the fastest path from a chat call to an autonomous loop</td>
+</tr>
+<tr>
+<td>OpenAI Agents SDK + Responses API</td>
+<td>Model API + managed tools</td>
+<td>Flagship ~$5/$30; mid ~$2.50/$15; nano ~$0.20/$1.25; web-search tool billed separately</td>
+<td>You already live in the OpenAI ecosystem or want managed built-in tools (web search, file search, code interpreter)</td>
+</tr>
+<tr>
+<td>Google ADK + Gemini</td>
+<td>Code-first agent framework + model</td>
+<td>ADK is free and open source; pay Gemini token rates plus platform compute; new-customer credit available</td>
+<td>You are on Google Cloud, need enterprise governance, or want a model-agnostic code-first framework</td>
+</tr>
+</tbody>
+</table></div>
+<p>Note on model references throughout the book: I talk in tiers (light, mid, flagship) rather than pinning exact version ids, because the ids turn over faster than anything else here. When this table says "mid-tier," map it to whatever the current mid-tier model is at the time you read it.</p>
+<h2 class="rc">Agentic coding tools (where most operators start)</h2>
+<p>This is Level 1 for almost everyone. These are the tools you drive to write the code that becomes your agents. Subscription tools bundle a token allowance; bring-your-own-key tools charge only for the tokens you burn.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Rough cost (at time of writing)</th>
+<th>When to reach for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude Code</td>
+<td>Terminal-first agentic coder</td>
+<td>Subscription tiers ~$20–200/mo, or API pay-per-token</td>
+<td>You want the strongest agentic-coding loop and a path to building your own agents on the same SDK</td>
+</tr>
+<tr>
+<td>Cursor</td>
+<td>AI-native IDE (VS Code fork)</td>
+<td>Free tier; paid from ~$20/mo up to power tiers ~$200</td>
+<td>You want an IDE-centric experience with best-in-class autocomplete</td>
+</tr>
+<tr>
+<td>Windsurf</td>
+<td>AI IDE with agent</td>
+<td>Free; paid ~$20–200/mo on a quota model</td>
+<td>You prefer this agent UX; read the quota model rather than the headline price</td>
+</tr>
+<tr>
+<td>Cline</td>
+<td>Open-source VS Code autonomous agent</td>
+<td>Tool is free; you pay tokens only (~$5–200+/mo by usage)</td>
+<td>You want transparency and direct control over model spend inside VS Code</td>
+</tr>
+<tr>
+<td>Aider</td>
+<td>Open-source terminal pair-programmer</td>
+<td>Tool is free; tokens only</td>
+<td>You live in the terminal and want git-native, scriptable edits</td>
+</tr>
+<tr>
+<td>GitHub Copilot (agent mode)</td>
+<td>Autonomous multi-file agent + inline completion</td>
+<td>Paid from ~$10/mo, higher tiers usage-metered</td>
+<td>You are deep in GitHub and VS Code and want agent mode alongside inline completion</td>
+</tr>
+<tr>
+<td>Devin</td>
+<td>Async cloud "AI software engineer"</td>
+<td>From ~$20/mo</td>
+<td>You want a fire-and-forget cloud engineer for parallelizable, well-scoped tickets</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="rc">Orchestration frameworks (when one model call is not enough)</h2>
+<p>Reach for these only when the model SDK's own built-in loop and subagents genuinely cannot hold the task. A framework is a cost to carry rather than a milestone to reach.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Rough cost (at time of writing)</th>
+<th>When to reach for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LangGraph</td>
+<td>Graph-based stateful orchestration</td>
+<td>Library free and open source; hosted platform ~$39/user/mo plus per-run metering</td>
+<td>You need durable, inspectable, cyclic workflows with fine-grained control and checkpoints</td>
+</tr>
+<tr>
+<td>CrewAI</td>
+<td>Role-based multi-agent "crews"</td>
+<td>Library free and open source; enterprise is contact-sales</td>
+<td>You want a fast, high-level abstraction for role-playing agent teams</td>
+</tr>
+<tr>
+<td>AutoGen / AG2</td>
+<td>Conversational multi-agent</td>
+<td>Free and open source</td>
+<td>You want conversational multi-agent patterns or async, event-driven orchestration</td>
+</tr>
+<tr>
+<td>LlamaIndex</td>
+<td>Data framework expanded to agents</td>
+<td>Library free and open source; hosted cloud is usage-based</td>
+<td>Your agent is retrieval-heavy and data connectors are the hard part</td>
+</tr>
+<tr>
+<td>OpenAI Agents SDK</td>
+<td>Explicit handoffs and routing</td>
+<td>Free SDK; you pay model tokens</td>
+<td>You want routing and triage handoff apps living in the OpenAI ecosystem</td>
+</tr>
+<tr>
+<td>Claude Agent SDK</td>
+<td>Orchestrator plus isolated subagents</td>
+<td>Free SDK; you pay model tokens</td>
+<td>You want the battle-tested Claude Code loop embedded in your own product or pipeline</td>
+</tr>
+<tr>
+<td>Google ADK 2.0</td>
+<td>Graph-first workflow engine</td>
+<td>Free and open source; pay platform compute</td>
+<td>You want enterprise, deterministic multi-agent flows with first-class human-in-the-loop</td>
+</tr>
+</tbody>
+</table></div>
+<p>Rule of thumb: if the model SDK's built-in loop and subagents handle the job, add nothing. Add LangGraph for explicit state machines, CrewAI for role teams, and LlamaIndex when retrieval is the center of gravity.</p>
+<h2 class="rc">No/low-code automation (fastest ROI for a solo operator)</h2>
+<p>Not everything needs to be code. For connecting apps and running visual flows, these earn their keep quickly. Watch the billing model closely, because it is where the real cost hides.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Rough cost (at time of writing)</th>
+<th>When to reach for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Make.com</td>
+<td>Visual scenario builder</td>
+<td>From ~$10/mo, priced per operation</td>
+<td>You want multi-step visual flows on a budget with strong operations-per-dollar</td>
+</tr>
+<tr>
+<td>n8n</td>
+<td>Source-available workflow automation</td>
+<td>Self-host is free (server cost only); cloud from ~$20/mo</td>
+<td>You want to own it, run unlimited executions, or embed custom code nodes</td>
+</tr>
+<tr>
+<td>Zapier</td>
+<td>Widest app catalog, per-task billing</td>
+<td>Free tier; paid from ~$20/mo, professional tiers ~$130+/mo</td>
+<td>Breadth of integrations matters more to you than per-task cost</td>
+</tr>
+<tr>
+<td>Lindy</td>
+<td>AI-agent builder</td>
+<td>From ~$50/mo</td>
+<td>You want a persistent AI assistant instead of a static node graph</td>
+</tr>
+<tr>
+<td>Gumloop</td>
+<td>No-code visual AI pipeline builder</td>
+<td>Free credits; paid from ~$37/mo</td>
+<td>You run repeatable AI-heavy pipelines like scraping, enrichment, or content</td>
+</tr>
+<tr>
+<td>Relay.app</td>
+<td>Human-in-the-loop automation</td>
+<td>From ~$38/mo</td>
+<td>You want approvals and collaboration baked into automations</td>
+</tr>
+</tbody>
+</table></div>
+<p>The billing model is the trap here. Zapier bills <strong>per task</strong>, meaning each individual action counts. n8n bills <strong>per execution</strong>, so a whole ten-step workflow counts as one. For a ten-step flow at ten thousand runs a month, self-hosted n8n can cut eighty to ninety percent off the Zapier bill. When a workflow needs real logic, secrets management, or git history, graduate it off the visual tool and onto code on a VPS.</p>
+<h2 class="rc">Vector &amp; memory DBs (giving agents recall)</h2>
+<p>A vector store is usually the read path for memory rather than the memory itself. Start on the cheapest option that fits your scale and only move up when ops or volume force it. Costs below are indicative at roughly ten million vectors.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Rough cost (at time of writing)</th>
+<th>When to reach for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pgvector</td>
+<td>Postgres extension</td>
+<td>Free (the Postgres you already run)</td>
+<td>You already run Postgres and want vectors, SQL, and transactions in one store; the default choice for most apps</td>
+</tr>
+<tr>
+<td>Chroma</td>
+<td>Embedded / local OSS</td>
+<td>Free local; managed cloud tier</td>
+<td>Prototyping, local-first dev, and learning RAG with zero config</td>
+</tr>
+<tr>
+<td>Qdrant</td>
+<td>OSS + managed</td>
+<td>Free tier; ~$30–65/mo cloud, no per-query fee</td>
+<td>Cost-sensitive production at scale with rich filtered search; best price-performance</td>
+</tr>
+<tr>
+<td>Pinecone</td>
+<td>Managed serverless</td>
+<td>~$70/mo at scale, consumption-based</td>
+<td>You want zero ops and cheap idle; watch query metering under heavy load</td>
+</tr>
+<tr>
+<td>Weaviate</td>
+<td>OSS + managed</td>
+<td>Entry ~$25/mo; ~$135/mo at scale, less with quantization</td>
+<td>You need built-in hybrid search and modules and will tune quantization</td>
+</tr>
+<tr>
+<td>Milvus</td>
+<td>OSS + managed</td>
+<td>Self-host or managed</td>
+<td>Billion-scale, GPU-accelerated, heavy workloads</td>
+</tr>
+<tr>
+<td>mem0</td>
+<td>Managed memory layer (not a DB)</td>
+<td>Free hobby tier; paid ~$19–249/mo</td>
+<td>You want persistent cross-session memory bolted onto an existing stack in a day</td>
+</tr>
+<tr>
+<td>Letta / Zep / LangMem</td>
+<td>Agent memory runtime/layer (not a DB)</td>
+<td>OSS plus hosted tiers</td>
+<td>You want the memory <em>logic</em> (tiering, self-editing, temporal graph) on top of a store rather than a raw index</td>
+</tr>
+</tbody>
+</table></div>
+<p>Default path: start on pgvector or Chroma, and move to Qdrant or Pinecone only when scale or operational load actually demands it. Remember that mem0, Letta, Zep, and LangMem provide the memory logic that sits on top of a database rather than being databases themselves.</p>
+<h2 class="rc">Observability (you cannot debug what you cannot trace)</h2>
+<p>Add this the moment an agent runs unattended. Agent failures live in multi-step causal chains, so you need full-session trace capture rather than per-call logging.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Rough cost (at time of writing)</th>
+<th>When to reach for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Langfuse</td>
+<td>OSS tracing + evals</td>
+<td>Free self-host with no usage limits; paid cloud from ~$29/mo</td>
+<td>You want open-source flexibility, self-hosting, and the lowest entry cost; the default starting point</td>
+</tr>
+<tr>
+<td>Arize Phoenix</td>
+<td>OTel-native tracing + eval library</td>
+<td>Fully open source, no cost; paid managed tier available</td>
+<td>You want OpenTelemetry-standard traces plus a strong open-source eval library</td>
+</tr>
+<tr>
+<td>LangSmith</td>
+<td>Tracing + eval, tight with LangChain</td>
+<td>Free dev tier; paid ~$39/seat/mo plus trace metering</td>
+<td>You are already on the LangChain or LangGraph stack</td>
+</tr>
+<tr>
+<td>Braintrust</td>
+<td>Eval-first observability</td>
+<td>Generous free tier; paid ~$249/mo</td>
+<td>Evaluation-driven development is core to how you ship</td>
+</tr>
+<tr>
+<td>OpenTelemetry GenAI</td>
+<td>Vendor-neutral tracing standard</td>
+<td>Open standard, backend-agnostic</td>
+<td>You want multi-framework, future-proof instrumentation and to point any backend at the same data</td>
+</tr>
+</tbody>
+</table></div>
+<p>Start with Langfuse (free and self-hostable) unless you are already on LangChain, in which case LangSmith is frictionless, or you are eval-obsessed, in which case Braintrust fits.</p>
+<h2 class="rc">Hosting &amp; always-on (where the agent actually lives)</h2>
+<p>An agent that only runs when you are watching is a demo. To make it a worker it has to live somewhere always-on. For a solo operator, a cheap VPS plus the operating system's own scheduler covers the overwhelming majority of always-on needs.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Rough cost (at time of writing)</th>
+<th>When to reach for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hetzner Cloud</td>
+<td>Budget VPS</td>
+<td>Small box ~$9–10/mo with generous traffic</td>
+<td>Always-on agents and schedulers on a budget; best price-to-performance</td>
+</tr>
+<tr>
+<td>DigitalOcean</td>
+<td>VPS plus managed services</td>
+<td>Basic droplet from ~$24/mo</td>
+<td>You want managed database and platform services around the box, US-centric</td>
+</tr>
+<tr>
+<td>Serverless (Lambda / Cloud Run / Workers)</td>
+<td>Pay-per-invocation compute</td>
+<td>Usage-based with free tiers</td>
+<td>Bursty, event-driven agents you do not want to keep running</td>
+</tr>
+<tr>
+<td>cron / Task Scheduler</td>
+<td>Built-in OS scheduler</td>
+<td>Free</td>
+<td>Simple "run this every N minutes" on a box you already own</td>
+</tr>
+<tr>
+<td>Temporal</td>
+<td>Durable execution engine</td>
+<td>Self-host free; cloud from ~$100/mo</td>
+<td>Long-running, mission-critical workflows that must never lose state</td>
+</tr>
+<tr>
+<td>Inngest</td>
+<td>Durable functions / step orchestration</td>
+<td>Free tier; paid from ~$75/mo</td>
+<td>Event-driven durable workflows without running Temporal yourself</td>
+</tr>
+</tbody>
+</table></div>
+<p>For a solo operator, a small VPS plus cron or systemd covers roughly ninety percent of "always-on agent" needs for around ten dollars a month.</p>
+<h2 class="rc">Search &amp; scrape APIs (the agent's eyes on the web)</h2>
+<p>An agent that cannot see the live web is limited to what it already knows. These are the tools that give it current sight.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Category</th>
+<th>Rough cost (at time of writing)</th>
+<th>When to reach for it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Brave Search API</td>
+<td>Independent web index</td>
+<td>Free tier; paid from ~$5/mo</td>
+<td>You want cheap, independent, privacy-first web results</td>
+</tr>
+<tr>
+<td>Tavily</td>
+<td>Search purpose-built for agents</td>
+<td>~$0.008/query, free tier</td>
+<td>You want a drop-in agent search with filtering and extraction</td>
+</tr>
+<tr>
+<td>Exa</td>
+<td>Neural / semantic search</td>
+<td>From ~$0.001/result</td>
+<td>You want meaning-based discovery rather than keyword results</td>
+</tr>
+<tr>
+<td>Firecrawl</td>
+<td>Scrape and crawl to clean markdown</td>
+<td>~$99/mo at scale</td>
+<td>You are turning arbitrary sites into agent-ready markdown at volume</td>
+</tr>
+<tr>
+<td>SerpAPI</td>
+<td>Faithful Google SERP scraping</td>
+<td>~$50 per 5,000 queries</td>
+<td>You specifically need real Google SERP structure and fidelity</td>
+</tr>
+</tbody>
+</table></div>
+<p>Default path: Tavily or Brave for agent search, Firecrawl for clean full-page extraction, Exa for semantic recall, and SerpAPI only when you genuinely need real Google SERP fidelity.</p>
+<h2 class="rc">The Level 1 → 2 → 3 adoption ladder</h2>
+<p>The stack is a ladder you climb only as scale forces you up a rung, rather than a shopping list you buy all at once. Most operators stop climbing far earlier than they expect, and that is the correct outcome. Consider Dmitri, a fictional solo operator, as the reference climber.</p>
+<p><strong>Level 1: prompt and glue (Week 1, roughly $20–40/mo).</strong> One agentic-coding subscription plus a no-code automation tool for connecting apps. No hosting, no vector DB, no framework. Memory is files on disk, and observability is reading the terminal. Dmitri can automate real, revenue-touching work at this level, and most operators never need to leave it. Climb only when per-task automation costs start to bite, or when a workflow needs logic the no-code tool cannot express.</p>
+<p><strong>Level 2: own the loop (Month 1–2, roughly $30–80/mo).</strong> Dmitri moves the logic into code against a model API and agent SDK, and puts it on a cheap VPS run by cron or systemd. He adds pgvector or Chroma for memory and self-hosted Langfuse (free) for tracing, and self-hosts n8n if he still wants visual flows. Now he owns his automations, versions them in git, and pays only for tokens plus a cheap box. This is the sweet spot for a technical solo builder, and many stay here permanently.</p>
+<p><strong>Level 3: durable and multi-agent (only when justified, hundreds per month).</strong> Dmitri adds an orchestration framework (LangGraph for stateful control, CrewAI for role teams) only when a single loop genuinely cannot hold the complexity. He adds durable execution (Inngest, then Temporal) when losing mid-run state becomes expensive, and adds a managed memory layer, a managed vector DB at scale, and paid observability and evals once he is shipping to other people. He resists this level until a concrete pain, whether lost state, unmanageable branching, or multi-tenant scale, forces the move. Complexity is a cost to be justified rather than a milestone to be celebrated.</p>
+<p>The through-line for all three rungs: add the next tool only when the pain of not having it is already real. The category tells you what slot a tool fills. Your own bottleneck tells you whether you need to fill it yet.</p>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Agentic Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+
+</script>
+</body>
+</html>

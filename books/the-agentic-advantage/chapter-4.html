@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trigger-Action-Memory · The Agentic Advantage · Elvin M. Peters</title>
+<meta name="description" content="Trigger-Action-Memory — companion resource for The Agentic Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Agentic Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 3</div>
+    <div class="booktitle">The Agentic Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="recipes.html"><span class="dot"></span>Agent Recipes &amp; Blueprints</a>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>Prompt Library</a>
+      <a class="navlink" href="stack.html"><span class="dot"></span>The 2026 Operator Stack</a>
+      <a class="navlink" href="mcp.html"><span class="dot"></span>MCP Servers &amp; Integrations</a>
+      <a class="navlink" href="api-reference.html"><span class="dot"></span>API &amp; Tooling Quick Reference</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+    <div class="navgroup"><h4>Chapter code</h4>
+      <a class="navlink active" href="chapter-4.html"><span class="dot"></span>Ch 4 · Trigger-Action-Memory</a>
+      <a class="navlink" href="chapter-6.html"><span class="dot"></span>Ch 6 · Memory Architecture</a>
+      <a class="navlink" href="chapter-8.html"><span class="dot"></span>Ch 8 · The Monitoring Layer</a>
+      <a class="navlink" href="chapter-9.html"><span class="dot"></span>Ch 9 · Claude Code</a>
+      <a class="navlink" href="chapter-11.html"><span class="dot"></span>Ch 11 · The Tech Stack</a>
+      <a class="navlink" href="chapter-12.html"><span class="dot"></span>Ch 12 · Security &amp; Cost</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Trigger-Action-Memory</div>
+      <h1>Trigger-Action-Memory</h1>
+      <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
+      <p class="lead">Every code block from <em>Ch 4 · Trigger-Action-Memory</em>, in one place you can copy from. Model IDs and prices are current as of writing; live values are on the Stack page.</p><h2 class="rc"><span class="tag">SNIPPET 1</span>Windows Task Scheduler fires every 10 minutes. The task runs:</h2>
+<div class="code"><div class="bar"><span class="lang">code</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>python C:\Users\elvin\coding\outreach_engine\always_on_scraper.py --once</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 2</span>state.json: the scraper&#x27;s position tracker:</h2>
+<div class="code"><div class="bar"><span class="lang">json</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>{
+  &quot;current_niche_index&quot;: 14,
+  &quot;current_city_index&quot;: 7,
+  &quot;niches&quot;: [&quot;hvac&quot;, &quot;plumbing&quot;, &quot;roofing&quot;, &quot;landscaping&quot;, ...],
+  &quot;cities&quot;: [&quot;Toronto&quot;, &quot;Mississauga&quot;, &quot;Brampton&quot;, &quot;Hamilton&quot;, ...],
+  &quot;last_run&quot;: &quot;2026-05-30T14:20:00&quot;,
+  &quot;total_runs&quot;: 847,
+  &quot;leads_found_today&quot;: 23
+}</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 3</span>Create briefing_config.json in your project folder:</h2>
+<div class="code"><div class="bar"><span class="lang">json</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>{
+  &quot;domain&quot;: &quot;B2B SaaS sales automation&quot;,
+  &quot;topics&quot;: [
+    &quot;AI sales tools&quot;,
+    &quot;outbound email deliverability&quot;,
+    &quot;LinkedIn automation trends&quot;,
+    &quot;CRM integrations&quot;
+  ],
+  &quot;output_folder&quot;: &quot;C:/Users/yourname/Documents/Brain/briefings/&quot;,
+  &quot;telegram_token&quot;: &quot;YOUR_BOT_TOKEN&quot;,
+  &quot;telegram_chat_id&quot;: &quot;YOUR_CHAT_ID&quot;
+}</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 4</span>The Agent</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import anthropic
+import json
+import os
+from datetime import datetime
+
+def run_briefing():
+    with open(&quot;briefing_config.json&quot;) as f:
+        config = json.load(f)
+
+    client = anthropic.Anthropic()
+
+    topics_str = &quot;, &quot;.join(config[&quot;topics&quot;])
+    query = f&quot;Latest news and developments in {config[&#x27;domain&#x27;]}: {topics_str}. Focus on the last 24 hours.&quot;
+
+    response = client.messages.create(
+        model=&quot;claude-opus-4-5&quot;,
+        max_tokens=1024,
+        tools=[{
+            &quot;type&quot;: &quot;web_search_20250305&quot;,
+            &quot;name&quot;: &quot;web_search&quot;,
+            &quot;max_uses&quot;: 3
+        }],
+        messages=[{
+            &quot;role&quot;: &quot;user&quot;,
+            &quot;content&quot;: f&quot;&quot;&quot;Search for recent developments in this domain and produce a morning briefing.
+
+Domain: {config[&#x27;domain&#x27;]}
+Topics to cover: {topics_str}
+
+Return EXACTLY 5 bullet points. Each bullet: one sentence, specific and actionable.
+Format: • [Topic]: [Finding]. Source: [publication name].
+No intro, no conclusion, no filler. Just the 5 bullets.&quot;&quot;&quot;
+        }]
+    )
+
+    briefing_text = &quot;&quot;
+    for block in response.content:
+        if hasattr(block, &quot;text&quot;):
+            briefing_text = block.text
+            break
+
+    today = datetime.now().strftime(&quot;%Y-%m-%d&quot;)
+    filename = f&quot;{config[&#x27;output_folder&#x27;]}briefing_{today}.md&quot;
+    os.makedirs(config[&quot;output_folder&quot;], exist_ok=True)
+
+    with open(filename, &quot;w&quot;) as f:
+        f.write(f&quot;# Morning Briefing: {today}\n\n&quot;)
+        f.write(briefing_text)
+        f.write(f&quot;\n\n---\nGenerated: {datetime.now().strftime(&#x27;%H:%M&#x27;)}\n&quot;)
+
+    print(f&quot;Briefing written to {filename}&quot;)
+
+    log_run(today, len(briefing_text), response.usage.input_tokens + response.usage.output_tokens)
+
+def log_run(date, chars, tokens):
+    log_entry = {
+        &quot;date&quot;: date,
+        &quot;timestamp&quot;: datetime.now().isoformat(),
+        &quot;output_chars&quot;: chars,
+        &quot;tokens_used&quot;: tokens,
+        &quot;status&quot;: &quot;success&quot;
+    }
+    log_file = &quot;briefing_log.json&quot;
+    log = []
+    if os.path.exists(log_file):
+        with open(log_file) as f:
+            log = json.load(f)
+    log.append(log_entry)
+    with open(log_file, &quot;w&quot;) as f:
+        json.dump(log, f, indent=2)
+
+if __name__ == &quot;__main__&quot;:
+    run_briefing()</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 5</span>On Linux/Mac (cron):</h2>
+<div class="code"><div class="bar"><span class="lang">code</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>0 7 * * * cd /path/to/project &amp;&amp; python briefing_agent.py &gt;&gt; briefing_cron.log 2&gt;&amp;1</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 6</span>The fix is the atomic write pattern:</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import tempfile
+import os
+
+def save_state(state: dict, state_file: str):
+    dir_name = os.path.dirname(state_file)
+    with tempfile.NamedTemporaryFile(
+        mode=&#x27;w&#x27;,
+        dir=dir_name,
+        delete=False,
+        suffix=&#x27;.tmp&#x27;
+    ) as tmp:
+        json.dump(state, tmp, indent=2)
+        tmp_path = tmp.name
+    os.replace(tmp_path, state_file)</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 7</span>The fix is structural: make reading memory the first thing the agent does, before any API calls, before any work. Not in the middle of the f</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>def run_agent():
+    state = load_state()          # First
+    context = build_context(state)  # Second
+    results = do_work(context)    # Third
+    new_state = update_state(state, results)  # Fourth
+    save_state(new_state)         # Fifth (atomic)
+    log_run(results)              # Sixth</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 8</span>A good failure mode is: log the error with full context, send an alert to Telegram or email, and exit cleanly. Not crash with a Python trace</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>try:
+    run_briefing()
+except Exception as e:
+    error_msg = f&quot;Briefing agent failed: {str(e)}&quot;
+    log_run_failure(error_msg)
+    send_telegram_alert(error_msg)  # so you find out immediately
+    raise  # re-raise so the scheduler records a failure status</code></pre></div>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Agentic Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+
+</script>
+</body>
+</html>

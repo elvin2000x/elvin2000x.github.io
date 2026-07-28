@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Glossary · The Agentic Advantage · Elvin M. Peters</title>
+<meta name="description" content="Glossary — companion resource for The Agentic Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Agentic Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 3</div>
+    <div class="booktitle">The Agentic Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="recipes.html"><span class="dot"></span>Agent Recipes &amp; Blueprints</a>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>Prompt Library</a>
+      <a class="navlink" href="stack.html"><span class="dot"></span>The 2026 Operator Stack</a>
+      <a class="navlink" href="mcp.html"><span class="dot"></span>MCP Servers &amp; Integrations</a>
+      <a class="navlink" href="api-reference.html"><span class="dot"></span>API &amp; Tooling Quick Reference</a>
+      <a class="navlink active" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+    <div class="navgroup"><h4>Chapter code</h4>
+      <a class="navlink" href="chapter-4.html"><span class="dot"></span>Ch 4 · Trigger-Action-Memory</a>
+      <a class="navlink" href="chapter-6.html"><span class="dot"></span>Ch 6 · Memory Architecture</a>
+      <a class="navlink" href="chapter-8.html"><span class="dot"></span>Ch 8 · The Monitoring Layer</a>
+      <a class="navlink" href="chapter-9.html"><span class="dot"></span>Ch 9 · Claude Code</a>
+      <a class="navlink" href="chapter-11.html"><span class="dot"></span>Ch 11 · The Tech Stack</a>
+      <a class="navlink" href="chapter-12.html"><span class="dot"></span>Ch 12 · Security &amp; Cost</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Glossary</div>
+      <h1>Glossary</h1>
+      <div class="updated from"><span class="b"></span>From <em>The Agentic Advantage</em></div>
+      <p>The agentic world moved fast enough to grow its own vocabulary. These are the terms this book leans on, in plain language, so you can read any chapter without keeping a browser tab open. Where a term carries a precise technical meaning and a looser everyday one, I have given you the version an operator actually needs.</p>
+<p><strong>Agent.</strong> An AI system that pursues a goal by choosing its own next action, calling tools, observing the results, and repeating until the goal is met. The step up from a chatbot that only answers.</p>
+<p><strong>Batch API.</strong> An asynchronous mode that runs non-urgent jobs at roughly half the standard rate, in exchange for results within hours instead of seconds.</p>
+<p><strong>Cascade routing.</strong> Sending a request to a cheap model first and escalating to a stronger one only when the cheap answer is not good enough.</p>
+<p><strong>CLAUDE.md.</strong> A project file Claude Code reads at the start of every session, holding standing context: who you are, how you work, and the conventions of your operation.</p>
+<p><strong>Compaction.</strong> Summarizing older conversation history so a long-running agent stays inside its context window without losing the thread.</p>
+<p><strong>Context engineering.</strong> The discipline of deciding what goes into the model's context window on each call, and in what order, so it has what it needs and nothing that distracts it.</p>
+<p><strong>Context window.</strong> The amount of text a model can consider at once, measured in tokens. Everything the model knows in the moment lives here.</p>
+<p><strong>Effort.</strong> A dial on some models that trades thinking depth and token spend against speed.</p>
+<p><strong>Embedding.</strong> A numeric representation of text that lets a system find passages by meaning rather than by exact words.</p>
+<p><strong>Eval / golden set.</strong> A small, versioned set of test cases with known-good answers, run on every change to catch regressions before they reach production.</p>
+<p><strong>Fan-out / fan-in.</strong> Splitting a job across several agents that run in parallel (fan-out), then combining their results into one (fan-in).</p>
+<p><strong>Guardrail.</strong> A rule that keeps an agent inside safe bounds. The reliable ones live in code as well as in the prompt.</p>
+<p><strong>Hook.</strong> A script Claude Code runs automatically at a defined moment, for example before a tool call, to log, notify, or block.</p>
+<p><strong>Human-in-the-loop.</strong> A checkpoint where the agent pauses for a person to approve an action before it happens, placed before anything hard to undo.</p>
+<p><strong>Idempotency.</strong> Designing an action so that running it twice has the same effect as running it once, which makes a retry safe.</p>
+<p><strong>MCP (Model Context Protocol).</strong> An open standard for pre-built tool servers an agent can connect to, covering common platforms without custom code.</p>
+<p><strong>Model tiers.</strong> The family of models offered at different capability and cost points: lightweight and fast (Claude Haiku), balanced (Claude Sonnet), and frontier (Claude Opus).</p>
+<p><strong>Observability / tracing.</strong> The ability to see, after the fact, exactly what an agent did on a run: every tool call, its input, its output, and its cost.</p>
+<p><strong>Orchestration.</strong> Coordinating several agents or steps so they hand work off to each other cleanly.</p>
+<p><strong>Prompt caching.</strong> Reusing the model's processing of a stable prefix across calls to cut cost and latency, for as long as that prefix does not change.</p>
+<p><strong>Prompt injection.</strong> An attack where instructions hidden inside content the agent reads, such as a web page or an email, try to hijack its behavior.</p>
+<p><strong>RAG (retrieval-augmented generation).</strong> Fetching relevant documents and adding them to the prompt so the model answers from real sources rather than from memory.</p>
+<p><strong>ReAct loop.</strong> The core agent cycle: reason, act by calling a tool, observe the result, and repeat.</p>
+<p><strong>Re-ranking.</strong> A second pass that reorders retrieved passages by true relevance, since a similarity search on its own returns plausible-but-wrong hits.</p>
+<p><strong>Router.</strong> A lightweight model whose only job is to read a request and decide which agent or tier should handle it. The router decides; it does not do the work.</p>
+<p><strong>Slash command.</strong> A reusable prompt packaged behind a short command in Claude Code.</p>
+<p><strong>Subagent.</strong> An agent spawned by another agent to handle one piece of the work on its own.</p>
+<p><strong>System prompt.</strong> The standing instructions that define an agent's role, constraints, and output format, re-read on every call.</p>
+<p><strong>Token.</strong> The unit models read and bill in, roughly three-quarters of a word.</p>
+<p><strong>Tool / tool use.</strong> A function you expose to the model. The model decides when to call it and with what arguments, and your code runs it.</p>
+<p><strong>tool_choice.</strong> The setting that controls whether the model may use a tool (auto), must use some tool (any), must use one specific tool, or may not use tools at all (none).</p>
+<p><strong>Trigger-Action-Memory loop.</strong> The operator's shape for an agent: something triggers it, it acts through tools, and it writes what it learned to memory for the next run.</p>
+<p><strong>Vector database.</strong> A store for embeddings that answers the question "what is most similar to this" over a large body of text.</p>
+<p><strong>VPS (virtual private server).</strong> A small rented cloud computer that runs your agents around the clock, independent of your own machine.</p>
+<p><strong>Webhook.</strong> An inbound call from an external service that wakes an agent when an event happens, rather than making the agent poll for it.</p>
+<hr/>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Agentic Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+
+</script>
+</body>
+</html>

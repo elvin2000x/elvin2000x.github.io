@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Security &amp; Cost · The Agentic Advantage · Elvin M. Peters</title>
+<meta name="description" content="Security &amp; Cost — companion resource for The Agentic Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Agentic Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 3</div>
+    <div class="booktitle">The Agentic Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="recipes.html"><span class="dot"></span>Agent Recipes &amp; Blueprints</a>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>Prompt Library</a>
+      <a class="navlink" href="stack.html"><span class="dot"></span>The 2026 Operator Stack</a>
+      <a class="navlink" href="mcp.html"><span class="dot"></span>MCP Servers &amp; Integrations</a>
+      <a class="navlink" href="api-reference.html"><span class="dot"></span>API &amp; Tooling Quick Reference</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+    <div class="navgroup"><h4>Chapter code</h4>
+      <a class="navlink" href="chapter-4.html"><span class="dot"></span>Ch 4 · Trigger-Action-Memory</a>
+      <a class="navlink" href="chapter-6.html"><span class="dot"></span>Ch 6 · Memory Architecture</a>
+      <a class="navlink" href="chapter-8.html"><span class="dot"></span>Ch 8 · The Monitoring Layer</a>
+      <a class="navlink" href="chapter-9.html"><span class="dot"></span>Ch 9 · Claude Code</a>
+      <a class="navlink" href="chapter-11.html"><span class="dot"></span>Ch 11 · The Tech Stack</a>
+      <a class="navlink active" href="chapter-12.html"><span class="dot"></span>Ch 12 · Security &amp; Cost</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Security &amp; Cost</div>
+      <h1>Security &amp; Cost</h1>
+      <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
+      <p class="lead">Every code block from <em>Ch 12 · Security &amp; Cost</em>, in one place you can copy from. Model IDs and prices are current as of writing; live values are on the Stack page.</p><h2 class="rc"><span class="tag">SNIPPET 1</span>API keys belong in environment variables or .env files. A .env file sits in the project root, loads at runtime, and never touches version co</h2>
+<div class="code"><div class="bar"><span class="lang">bash</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code># .gitignore: add this the moment you create a .env
+.env
+*.env
+.env.*
+social_platforms.env
+credentials/
+secrets/</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 2</span>Structure your secrets with intention. Don&#x27;t put everything in one .env file. Separate them by domain:</h2>
+<div class="code"><div class="bar"><span class="lang">code</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>social_platforms.env     # Twitter, LinkedIn, Telegram tokens
+ai_services.env          # Anthropic, OpenAI API keys
+infrastructure.env       # cloud provider, VPS credentials, cloud APIs
+crm.env                  # Lead database, email service keys</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 3</span>A well-scoped agent running in your ecosystem:</h2>
+<div class="code"><div class="bar"><span class="lang">code</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>scraper_agent:
+  reads from:   web (via search tool)
+  writes to:    crm.json, scraper_state.json
+  env vars:     crm.env only
+  cannot:       send email, post to social, access SSH
+
+twitter_poster:
+  reads from:   twitter_queue.json
+  writes to:    twitter_queue.json (marking posts as sent)
+  env vars:     social_platforms.env only
+  cannot:       read CRM, call Anthropic API directly, access email</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 4</span>Environment variables: When you launch an agent subprocess, pass only the env vars it needs:</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import subprocess
+import os
+
+scraper_env = {
+    &#x27;CRM_DB_PATH&#x27;: os.environ[&#x27;CRM_DB_PATH&#x27;],
+    &#x27;SEARCH_API_KEY&#x27;: os.environ[&#x27;SEARCH_API_KEY&#x27;],
+    &#x27;PATH&#x27;: os.environ[&#x27;PATH&#x27;]
+}
+
+subprocess.run([&#x27;python&#x27;, &#x27;agents/scraper.py&#x27;], env=scraper_env)</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 5</span>The agent prepares the action, generates a preview, and sends it to your Telegram bot with two inline keyboard buttons: ✅ Approve and ❌ Reje</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>def request_approval(action_type: str, preview: str, action_id: str) -&gt; None:
+    &quot;&quot;&quot;Send approval request to Telegram with inline keyboard.&quot;&quot;&quot;
+    keyboard = {
+        &quot;inline_keyboard&quot;: [[
+            {&quot;text&quot;: &quot;✅ Approve&quot;, &quot;callback_data&quot;: f&quot;approve_{action_id}&quot;},
+            {&quot;text&quot;: &quot;❌ Reject&quot;, &quot;callback_data&quot;: f&quot;reject_{action_id}&quot;}
+        ]]
+    }
+    
+    message = f&quot;*Approval Required*\n\n*Type:* {action_type}\n\n*Preview:*\n{preview}&quot;
+    
+    send_telegram_message(message, reply_markup=keyboard)
+    
+    # Store pending action in state file
+    pending = load_json(&#x27;pending_approvals.json&#x27;)
+    pending[action_id] = {
+        &#x27;type&#x27;: action_type,
+        &#x27;preview&#x27;: preview,
+        &#x27;requested_at&#x27;: datetime.now().isoformat(),
+        &#x27;status&#x27;: &#x27;pending&#x27;
+    }
+    save_json(&#x27;pending_approvals.json&#x27;, pending)</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 6</span>Implementation is a small code change to how you construct your system prompt:</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+def run_agent_with_cache(system_context: str, user_message: str) -&gt; str:
+    &quot;&quot;&quot;Run agent with prompt caching on static system context.&quot;&quot;&quot;
+    
+    response = client.messages.create(
+        model=&quot;claude-haiku-3-5&quot;,
+        max_tokens=1024,
+        system=[
+            {
+                &quot;type&quot;: &quot;text&quot;,
+                &quot;text&quot;: system_context,
+                &quot;cache_control&quot;: {&quot;type&quot;: &quot;ephemeral&quot;}  # Cache this block
+            }
+        ],
+        messages=[
+            {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_message}
+        ]
+    )
+    
+    return response.content[0].text</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 7</span>Prevention is structural. Every agent loop gets a hard maximum iteration count. Every agent run gets a timeout. Every agent that calls the A</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import time
+
+def run_agent_loop(agent_func, max_iterations: int = 100, timeout_seconds: int = 300):
+    &quot;&quot;&quot;Agent loop wrapper with hard limits.&quot;&quot;&quot;
+    
+    start_time = time.time()
+    iterations = 0
+    
+    while True:
+        # Hard iteration cap
+        if iterations &gt;= max_iterations:
+            send_alert(f&quot;Agent hit max iterations ({max_iterations}). Halting.&quot;)
+            break
+            
+        # Hard timeout
+        if time.time() - start_time &gt; timeout_seconds:
+            send_alert(f&quot;Agent exceeded timeout ({timeout_seconds}s). Halting.&quot;)
+            break
+        
+        result = agent_func()
+        iterations += 1
+        
+        if result.get(&#x27;done&#x27;):
+            break
+    
+    return iterations</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 8</span>Structure validation: For agents that produce structured output (JSON, CSV, formatted reports), add a validation step:</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import json
+
+def validate_agent_output(output: str, required_fields: list) -&gt; bool:
+    &quot;&quot;&quot;Validate agent output has expected structure.&quot;&quot;&quot;
+    try:
+        data = json.loads(output)
+        
+        for field in required_fields:
+            if field not in data:
+                send_alert(f&quot;Agent output missing required field: {field}&quot;)
+                return False
+                
+        return True
+        
+    except json.JSONDecodeError:
+        send_alert(&quot;Agent output failed JSON parsing; possible format drift&quot;)
+        return False</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 9</span>The most important fix is atomic writes. Never write directly to the target file:</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import json
+import os
+import tempfile
+
+def save_json_atomic(filepath: str, data: dict) -&gt; None:
+    &quot;&quot;&quot;Write JSON atomically: either the full write succeeds or nothing changes.&quot;&quot;&quot;
+    
+    dir_path = os.path.dirname(filepath)
+    
+    # Write to temp file in same directory (same filesystem)
+    with tempfile.NamedTemporaryFile(
+        mode=&#x27;w&#x27;,
+        dir=dir_path,
+        suffix=&#x27;.tmp&#x27;,
+        delete=False
+    ) as tmp_file:
+        json.dump(data, tmp_file, indent=2)
+        tmp_path = tmp_file.name
+    
+    # Atomic rename: on same filesystem, this is guaranteed atomic
+    os.replace(tmp_path, filepath)</code></pre></div>
+<h2 class="rc"><span class="tag">SNIPPET 10</span>For shared files with concurrent access, add a file lock:</h2>
+<div class="code"><div class="bar"><span class="lang">python</span><button class="copy" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy</button></div><pre><code>import fcntl  # Unix/Linux; on Windows use msvcrt.locking or a lock file pattern
+
+def write_with_lock(filepath: str, data: dict) -&gt; None:
+    &quot;&quot;&quot;Write JSON with file lock to prevent race conditions.&quot;&quot;&quot;
+    lock_path = filepath + &#x27;.lock&#x27;
+    
+    with open(lock_path, &#x27;w&#x27;) as lock_file:
+        fcntl.flock(lock_file, fcntl.LOCK_EX)
+        try:
+            save_json_atomic(filepath, data)
+        finally:
+            fcntl.flock(lock_file, fcntl.LOCK_UN)</code></pre></div>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Agentic Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();e.target.querySelector('button').textContent='Thanks — check your inbox';return false;}
+
+</script>
+</body>
+</html>
