@@ -40,53 +40,41 @@
       <h1>Quick Reference Card</h1>
       <div class="updated from"><span class="b"></span>From <em>The Artificial Advantage</em></div>
       <p>Use this as a one-page cheat sheet until the core frameworks become automatic. Each section maps to a chapter in the book.</p>
-<h2 class="rc"><strong>The Three P's: Your Prompt Foundation</strong></h2>
-<p>Persona — Describe who the AI is working as and who it's working for. Assign a role, give context about you, and clarify the audience. The more specific, the more tailored the output.</p>
-<p>Parameters — Define the shape of the response. Specify format (email, bullet list, table, paragraph), length (word count or paragraph count), tone (professional, conversational, warm), and any hard constraints (no jargon, under 200 words, avoid X).</p>
-<p>Polish — Treat the first output as a starting point. Iterate with specific follow-up prompts: shorter, different tone, reframed for a different audience, more persuasive. The real value lives in the back-and-forth.</p>
-<h2 class="rc"><strong>The RTC Framework</strong></h2>
-<p><em>Same structure as the Three P's, named precisely: Persona → Role, Parameters → Constraint, Polish stays the iteration step. RTC is the version to use on real work.</em></p>
-<p>Role — Who should the AI act as? Give it an identity and relevant expertise. Example: "Act as a senior HR manager with experience in remote team onboarding."</p>
-<p>Task — What specifically do you need? One deliverable per message. Example: "Write a 30-day onboarding checklist for a new remote employee starting in a client-facing role."</p>
-<p>Constraint — What guardrails apply? Include length, tone, audience, format, and any content limits. Example: "Keep each item under 15 words. Use plain language. Avoid corporate jargon. Format as a numbered list."</p>
+<h2 class="rc">The RTC Framework</h2>
+<p>Role: Who should the AI act as? Give it an identity and relevant expertise. Example: "Act as a senior HR manager with experience in remote team onboarding."</p>
+<p>Task: What specifically do you need? One deliverable per message. Example: "Write a 30-day onboarding checklist for a new remote employee starting in a client-facing role."</p>
+<p>Constraint: What guardrails apply? Include length, tone, audience, format, and any content limits. Example: "Keep each item under 15 words. Use plain language. Avoid corporate jargon. Format as a numbered list."</p>
 <p>Full example: "Act as a senior HR manager with remote team experience [Role]. Write a 30-day onboarding checklist for a new remote employee in a client-facing role [Task]. Each item under 15 words, plain language, numbered list, no corporate jargon [Constraint]."</p>
-<h2 class="rc"><strong>Model Selection at a Glance</strong></h2>
+<h2 class="rc">Model Selection at a Glance</h2>
 <p>Default or fast model: Use for daily drafts, emails, summaries, brainstorming, explanations, and research synthesis. Start here always. This handles the vast majority of professional work.</p>
 <p>Reasoning model: Use for complex logic, multi-step planning, code debugging, financial or legal analysis, and tasks where the intermediate reasoning steps matter as much as the final answer. Worth the extra wait only when accuracy is critical.</p>
-<p>Creative prompting: Add phrases like "give me the unexpected version," "what would a contrarian say," or "make the last three ideas genuinely strange" to any prompt. No model switch required.</p>
+<p>Creative prompting: Add phrases like "give me the unexpected version," "what would a contrarian say," or "make the last three ideas strange" to any prompt. No model switch required.</p>
 <p>Search-enabled mode: Use for current events, statistics from the past year, recent developments, or any fact that could have changed since the model's training cutoff. Verify that search is active before relying on time-sensitive information.</p>
-<h2 class="rc"><strong>Chain-of-Thought Activation Phrases</strong></h2>
+<h2 class="rc">Chain-of-Thought Activation Phrases</h2>
 <p>Add any of these to any prompt to activate more deliberate, transparent reasoning from a fast model without switching to a slower reasoning model:</p>
-<p>"Think step by step" — "Show your reasoning before giving your answer" — "List your assumptions first" — "Walk me through how you arrived at this"</p>
+<p>"Think step by step," "Show your reasoning before giving your answer," "List your assumptions first," "Walk me through how you arrived at this."</p>
 <p>These phrases trigger Chain-of-Thought prompting: the model works through the problem methodically before responding, revealing its reasoning process and improving accuracy on complex tasks.</p>
-<h2 class="rc"><strong>The Three-Question Verification Filter</strong></h2>
-<p>Before using any AI output, ask three questions:</p>
-<ol>
-<li>
-<p>Is this a factual claim? Specific dates, statistics, citations, quotes, or named sources. Verify when it matters. A single independent source is enough. The presence of a citation format does not guarantee the source exists.</p>
-</li>
-<li>
-<p>Is this subjective or opinion-based? Recommendations, creative suggestions, stylistic choices. Use your judgment. Treat as a starting point, not a final answer.</p>
-</li>
-<li>
-<p>Is this creative generation? Draft emails, outlines, plans, stories, code. Judge by usefulness and fit. The question isn't whether it's accurate but whether it serves your purpose.</p>
-</li>
-</ol>
-<p>Match verification effort to stakes: 30 seconds for low-stakes tasks, 2-3 minutes targeted checking for medium stakes, expert consultation for legal, medical, or financial decisions.</p>
-<h2 class="rc"><strong>The Iteration Vocabulary</strong></h2>
+<h2 class="rc">The Two-Step Verification Method</h2>
+<p>Step one, sort the claim. Before verifying anything, decide which of three kinds of output you're looking at:</p>
+<p>Factual claim: specific dates, statistics, citations, quotes, or named sources. Verify when it matters; a single independent source is enough, and a citation format is no guarantee the source exists.</p>
+<p>Judgment or opinion: recommendations, creative suggestions, stylistic choices. Use your own judgment and treat it as a starting point.</p>
+<p>Creative generation: draft emails, outlines, plans, stories, code. Judge by usefulness and fit, and give code and schedules a functional check even when they need no fact-check.</p>
+<p>Step two, match effort to stakes: 30 seconds for low-stakes tasks, 2 to 3 minutes of targeted checking for medium stakes, expert consultation for legal, medical, or financial decisions.</p>
+<p>(The three questions in step one are the sorting; the two steps are sort, then check.)</p>
+<h2 class="rc">The Iteration Vocabulary</h2>
 <p>Replace vague feedback with precise direction. Vague feedback produces vague improvements.</p>
-<p>Instead of "make it better" — say "cut this to under 150 words while keeping the three main points"</p>
-<p>Instead of "fix the tone" — say "rewrite this in a warm, conversational tone, the way you'd explain it to a trusted colleague"</p>
-<p>Instead of "I don't like it" — say "the structure is correct but the opening paragraph is too formal — rewrite the first two sentences"</p>
-<p>Instead of "be more creative" — say "give me five alternative versions and make the last two genuinely unexpected"</p>
-<p>Instead of "start over" — say "the argument in paragraph two is strong, keep it. Rebuild the rest around that point."</p>
-<h2 class="rc"><strong>The CLEAR System at a Glance</strong></h2>
+<p>Instead of "make it better", say "cut this to under 150 words while keeping the three main points"</p>
+<p>Instead of "fix the tone", say "rewrite this in a warm, conversational tone, the way you'd explain it to a trusted colleague"</p>
+<p>Instead of "I don't like it," say "the structure is correct but the opening paragraph is too formal. Rewrite the first two sentences."</p>
+<p>Instead of "be more creative", say "give me five alternative versions and make the last two unexpected"</p>
+<p>Instead of "start over", say "the argument in paragraph two is strong, keep it. Rebuild the rest around that point."</p>
+<h2 class="rc">The CLEAR System at a Glance</h2>
 <p>Use CLEAR as your orientation whenever you feel stuck or want to identify the next skill worth developing. Each letter maps to a set of chapters and frameworks already covered in this book.</p>
-<p>C — Choose Your Tools (Part 2). Build your personal AI toolkit. Match the model and tool to the task, not the other way around. Use the Vibe Test to find your platform, the Model Selection guide to choose between fast and reasoning models, and specialty tools for anything beyond text.</p>
-<p>L — Lead with Clear Direction (The Three Fundamental Rules). Apply the RTC Framework (Role, Task, Constraint) to every prompt. Clear inputs produce clear outputs. Vague prompts produce vague results, and no amount of iteration fully compensates for a poorly constructed starting point.</p>
-<p>E — Evolve Your Outputs (Iteration Patterns and The Invisible Skills). Iterate precisely, not repeatedly. Use the Iteration Vocabulary to diagnose and fix specific problems rather than restarting from scratch. Apply Constraint Architecture and Meta-Prompting to raise your ceiling.</p>
-<p>A — Audit for Accuracy (Trust, but Verify). Apply the Three-Question Verification Filter before using any AI output that carries professional risk. Match your verification effort to the stakes involved.</p>
-<p>R — Repeat to Build a Practice. Build a prompt library and workflow templates. Consistency converts skill into infrastructure. The three-month plan in Building Your AI Practice shows you how to keep developing after the book ends.</p>
+<p>C: Choose Your Tools (Part 2). Build your personal AI toolkit. Match the model and tool to the task rather than the other way around. Use the Vibe Test to find your platform, the Model Selection guide to choose between fast and reasoning models, and specialty tools for anything beyond text.</p>
+<p>L: Lead with Clear Direction (The Three Fundamental Rules). Apply the RTC Framework (Role, Task, Constraint) to every prompt. Clear inputs produce clear outputs. Vague prompts produce vague results, and no amount of iteration fully compensates for a poorly constructed starting point.</p>
+<p>E: Evolve Your Outputs (Iteration Patterns and The Invisible Skills). Iterate precisely rather than repeatedly. Use the Iteration Vocabulary to diagnose and fix specific problems rather than restarting from scratch. Apply Constraint Architecture and Meta-Prompting to raise your ceiling.</p>
+<p>A: Audit for Accuracy (Trust, but Verify). Apply the two-step verification method before using any AI output that carries professional risk. Match your verification effort to the stakes involved.</p>
+<p>R: Repeat to Build a Practice. Build a prompt library and workflow templates. Consistency converts skill into infrastructure. The three-month plan in Building Your AI Practice shows you how to keep developing after the book ends.</p>
 <p>Director's Mindset (The Mental Shift That Makes AI Work). AI is your crew. You set the vision, direct the output, and take responsibility for the result. This never changes, regardless of which stage of CLEAR you're in.</p>
       <div class="optin">
         <h3>Want the whole library, kept current?</h3>
