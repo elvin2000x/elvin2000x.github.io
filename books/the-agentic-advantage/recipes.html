@@ -47,9 +47,9 @@
       <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Agent Recipes &amp; Blueprints</div>
       <h1>Agent Recipes &amp; Blueprints</h1>
       <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
-      <blockquote>
+      <div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p><strong>Also online, free.</strong> This appendix is on the web in copy-and-paste form, kept current, at elvinpeters.com/books/the-agentic-advantage/recipes.</p>
-</blockquote>
+</blockquote></div>
 <p>This is the workshop drawer the chapters keep pointing back to. I put the lift-and-adapt code here so the running text stays about ideas while the copyable parts live in one place you can flip to. First you get the twelve build specs, each compressed to a stack, a shape, numbered steps, and the one mistake that bites everyone. Then you get the three core tool-use patterns every agent in this book is built on top of.</p>
 <p>A note on the datable detail. Model tiers, endpoint names, and rough prices are current as of writing, so I frame any figure as approximate. For live numbers, check the companion Toolkit, which is where I keep the version that gets updated.</p>
 <hr/>
@@ -481,9 +481,9 @@
 5. Render into the ESP template; save as draft for human review.
 6. On approval, send.</p>
 <p><strong>Gotcha:</strong> Score relevance against a written audience definition rather than "interestingness." Without an explicit ICP in the prompt, the model reliably drifts toward generically viral items your specific readers don't care about.</p>
-<blockquote>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p>Tool and API details above reflect widely documented interfaces at the time of writing (Anthropic Messages API, Brave Search API, Firecrawl <code class="inl">/scrape</code>, Gmail API, X API v2, Telegram Bot API, Voyage and Cohere rerank). Verify exact endpoint paths and rate limits against current provider docs before you build, and check the companion Toolkit for the maintained versions.</p>
-</blockquote>
+</blockquote></div>
 <hr/>
 <h2 class="rc">Core code patterns</h2>
 <p>Every blueprint above stands on three tool-use patterns. Get these right once and the rest is wiring. The examples use the Anthropic Messages API. OpenAI (<code class="inl">tools</code>/<code class="inl">tool_calls</code>), Google Gemini (<code class="inl">functionDeclarations</code>), and Bedrock or Vertex mirror the same loop with renamed fields.</p>
@@ -604,6 +604,14 @@ function copyCode(btn){
   navigator.clipboard.writeText(code).then(function(){
     var o=btn.innerHTML; btn.classList.add('done');
     btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
     setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
   });
 }

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Glossary · The Artificial Advantage · Elvin M. Peters</title>
+<meta name="description" content="Glossary — companion resource for The Artificial Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Artificial Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 1</div>
+    <div class="booktitle">The Artificial Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>The Professional Prompt Library</a>
+      <a class="navlink" href="role-library.html"><span class="dot"></span>The Role Library</a>
+      <a class="navlink" href="framework-reference.html"><span class="dot"></span>Framework Reference</a>
+      <a class="navlink" href="diagnostic.html"><span class="dot"></span>The Director&#x27;s Diagnostic</a>
+      <a class="navlink" href="tools-reference.html"><span class="dot"></span>AI Tools Reference</a>
+      <a class="navlink active" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Artificial Advantage</a> &nbsp;/&nbsp; Glossary</div>
+      <h1>Glossary</h1>
+      <div class="updated from"><span class="b"></span>From <em>The Artificial Advantage</em></div>
+      <p>Use this when a term from the book stops you. Every definition is written for the professional using AI, not the engineer building it.</p>
+<p>These are the terms you'll encounter most often when working with AI tools. Definitions here are practical rather than technical, focused on what each concept means for the professional using AI, not the engineer building it.</p>
+<p>AI (Artificial Intelligence): A broad term for computer systems that perform tasks typically associated with human intelligence, including understanding language, recognizing patterns, generating text, and making decisions. In this book, AI refers specifically to large language models accessed through chat interfaces.</p>
+<p>API (Application Programming Interface): A connection that allows software tools to communicate with each other. When AI is described as having an API, it means developers can integrate it into their own applications. For most professionals, this is background context and not something you need to use directly.</p>
+<p>Chain-of-Thought Prompting: A technique that instructs AI to show its reasoning step by step before delivering an answer. Activated by phrases like 'think step by step' or 'show your reasoning.' Produces more deliberate, transparent outputs for complex tasks.</p>
+<p>Context Window: The total amount of text an AI model can process at once, including both your input and its response. Think of it as the model's active workspace for a single session. Larger context windows allow you to share longer documents or have extended conversations before the model loses track of earlier content.</p>
+<p>Director's Mindset: The governing philosophy of this book: AI is your crew. You set the vision, direct the output, and take responsibility for the result. Effective AI use requires judgment, clarity, and accountability. The tool provides none of these.</p>
+<p>Fine-tuning: The process of training an existing AI model on a specific dataset to improve its performance on a particular task or domain. A fine-tuned model on legal contracts, for example, will perform differently on legal tasks than the base model. Relevant when evaluating specialist tools.</p>
+<p>Foundation Model: A large AI model trained on broad, general data that can be adapted for many tasks. ChatGPT, Claude, and Gemini are all built on foundation models. Specialist tools are often built on top of these same foundations.</p>
+<p>Hallucination: When an AI generates information that is factually incorrect but presented with the same confident tone as accurate content. Hallucinations are a structural feature of how language models work, not a bug to be fixed. They are most common with specific facts, dates, citations, and named sources.</p>
+<p>Iteration: The process of refining AI output through follow-up prompts rather than trying to write a perfect first prompt. The standard workflow: generate, diagnose, improve. Strong iteration is targeted and specific, identifying exactly what needs to change rather than asking AI to 'make it better.'</p>
+<p>Large Language Model (LLM): The type of AI that powers chat tools like ChatGPT, Claude, and Gemini. Trained on massive amounts of text, LLMs generate responses by predicting likely sequences of words given your input. They don't retrieve facts from a database. They generate text based on statistical patterns.</p>
+<p>Meta-Prompting: Using AI to help you clarify or improve your own prompt before executing the actual task. Example: 'Before you draft this proposal, ask me the five questions that would help you do it better.' Useful when you're not sure what context the model needs.</p>
+<p>Model: The specific version of an AI system you're using. Within a single platform like ChatGPT, there are multiple models: ChatGPT's default model (fast), o3 (reasoning), and others. Each has different speed, capability, and cost trade-offs. Choosing the right model for the task is part of the C stage of CLEAR.</p>
+<p>Multimodal AI: An AI system that can process and generate multiple types of content, including text, images, audio, and video, rather than text alone. Most leading chat AIs are now multimodal to some degree.</p>
+<p>Neural Network: The computational architecture underlying most modern AI. Loosely inspired by the structure of the human brain, neural networks learn patterns from training data rather than following explicit rules. You don't need to understand how they work to use AI effectively.</p>
+<p>Persona: The role or identity you assign to AI in your prompt. Part of the Three P's framework and the RTC Framework's Role component. Example: 'Act as a senior HR manager with remote team experience.' A clear persona gives the model a perspective to work from.</p>
+<p>Prompt: The instruction or input you provide to an AI tool. The quality of your prompt directly determines the quality of the output. Prompt engineering is the practice of crafting inputs that consistently produce useful results.</p>
+<p>RAG (Retrieval-Augmented Generation): A technique that gives AI access to a specific external knowledge base, such as company documents, a database, or a website, before generating a response. RAG-powered tools can answer questions about content the base model was never trained on. Relevant when evaluating enterprise AI tools.</p>
+<p>Reasoning Model: A type of AI model that takes more time to work through complex problems step by step before responding. Slower than standard models but produces better results on tasks requiring multi-step logic, analysis, or planning. Examples: OpenAI o3, Claude's extended thinking mode. Part of the C stage tool selection decision.</p>
+<p>RTC Framework: Role, Task, Constraint — the three-part prompt structure introduced in The Three Fundamental Rules for Beginners. Role: who the AI should act as. Task: what specifically it needs to produce. Constraint: the guardrails (tone, length, audience, format). The foundation of the L stage of CLEAR.</p>
+<p>System Prompt: A set of instructions given to an AI before the user conversation begins. System prompts define the model's persona, constraints, and behaviour for a session. Used by developers building AI-powered tools. In standard chat interfaces, you don't see the system prompt, but one is often present.</p>
+<p>Temperature: A setting that controls how predictable or varied an AI's outputs are. Low temperature produces more consistent, conservative responses. High temperature produces more varied and sometimes more creative responses. Not directly adjustable in most consumer chat tools, but understanding it helps explain why the same prompt can produce different results across sessions.</p>
+<p>Three P's: Persona, Parameters, Polish — the prompt framework introduced in The Mental Shift That Makes AI Work. Persona: who the AI is working as and for. Parameters: the shape of the response (format, length, tone). Polish: the planned follow-up iteration. The entry point to the L stage of CLEAR.</p>
+<p>Token: The unit AI models use to process text. Roughly equivalent to three-quarters of a word in English. Models have token limits for both input and output. In practice, this means very long documents may need to be split, and very long conversations may cause earlier context to fade.</p>
+<p>Training Data: The text, code, and other content an AI model learned from. The model's knowledge, style, and biases all reflect what was in its training data. Most foundation models have a training cutoff date, which means they don't know about recent events without web search access.</p>
+<p>Vibe Test: An informal evaluation method for choosing an AI platform: try the same real task on two or three tools and notice which output feels closest to what you'd produce yourself. Introduced in The Race You're Joining as a practical alternative to reading comparison articles.</p>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Artificial Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]');
+  b.textContent='Sending…';
+  fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:(i.value||'').trim(),source:'book-library'})})
+   .then(function(r){return r.json();}).then(function(r){
+     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You're in. I'll be in touch when it counts.</p>';}
+     else{b.textContent=r.error||'Try again';}})
+   .catch(function(){b.textContent='Network hiccup — try again';});
+  return false;}
+
+</script>
+</body>
+</html>

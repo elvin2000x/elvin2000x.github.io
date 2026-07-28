@@ -47,9 +47,9 @@
       <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Glossary</div>
       <h1>Glossary</h1>
       <div class="updated from"><span class="b"></span>From <em>The Agentic Advantage</em></div>
-      <blockquote>
+      <div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p><strong>Also online, free.</strong> This appendix is on the web in copy-and-paste form, kept current, at elvinpeters.com/books/the-agentic-advantage/glossary.</p>
-</blockquote>
+</blockquote></div>
 <p>The agentic world moved fast enough to grow its own vocabulary. These are the terms this book leans on, in plain language, so you can read any chapter without keeping a browser tab open. Where a term carries a precise technical meaning and a looser everyday one, I have given you the version an operator actually needs.</p>
 <p><strong>Agent.</strong> An AI system that pursues a goal by choosing its own next action, calling tools, observing the results, and repeating until the goal is met. The step up from a chatbot that only answers.</p>
 <p><strong>Batch API.</strong> An asynchronous mode that runs non-urgent jobs at roughly half the standard rate, in exchange for results within hours instead of seconds.</p>
@@ -109,6 +109,14 @@ function copyCode(btn){
   navigator.clipboard.writeText(code).then(function(){
     var o=btn.innerHTML; btn.classList.add('done');
     btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
     setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
   });
 }

@@ -47,9 +47,9 @@
       <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; MCP Servers &amp; Integrations</div>
       <h1>MCP Servers &amp; Integrations</h1>
       <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
-      <blockquote>
+      <div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p><strong>Also online, free.</strong> This appendix is on the web in copy-and-paste form, kept current, at elvinpeters.com/books/the-agentic-advantage/mcp.</p>
-</blockquote>
+</blockquote></div>
 <p>When I need an agent to work inside a platform that someone else already maintains, I reach for the Model Context Protocol before I write a single line of custom tool code. MCP is an open standard that lets any compatible agent host plug into a pre-built "server" for a service such as GitHub, Slack, or a database, so the agent inherits a whole set of ready-made tools without me building or maintaining the integration myself. A large share of everyday operator needs, reading and writing files, pulling issues, posting messages, querying records, is already covered by a published server. This appendix is a working reference for the servers worth knowing, how to wire one in, and the security posture you need before you trust one.</p>
 <h2 class="rc">What MCP Gives You</h2>
 <p>Before MCP, every agent framework invented its own way of describing tools, so connecting a model to a data source was a custom job each time. MCP standardizes that connection the way USB-C standardized a charging port. A tool provider writes one server, and any MCP-compatible client can consume it. At the time of writing, the compatible clients include Claude Desktop, Claude Code, Cursor, Windsurf, VS Code, and the agent SDKs from the other major model providers, which is why a server you adopt is portable across hosts instead of locked to one.</p>
@@ -247,6 +247,14 @@ function copyCode(btn){
   navigator.clipboard.writeText(code).then(function(){
     var o=btn.innerHTML; btn.classList.add('done');
     btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
     setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
   });
 }

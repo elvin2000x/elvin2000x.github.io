@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Framework Reference · The Artificial Advantage · Elvin M. Peters</title>
+<meta name="description" content="Framework Reference — companion resource for The Artificial Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Artificial Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 1</div>
+    <div class="booktitle">The Artificial Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>The Professional Prompt Library</a>
+      <a class="navlink" href="role-library.html"><span class="dot"></span>The Role Library</a>
+      <a class="navlink active" href="framework-reference.html"><span class="dot"></span>Framework Reference</a>
+      <a class="navlink" href="diagnostic.html"><span class="dot"></span>The Director&#x27;s Diagnostic</a>
+      <a class="navlink" href="tools-reference.html"><span class="dot"></span>AI Tools Reference</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Artificial Advantage</a> &nbsp;/&nbsp; Framework Reference</div>
+      <h1>Framework Reference</h1>
+      <div class="updated from"><span class="b"></span>From <em>The Artificial Advantage</em></div>
+      <p><em>All the frameworks, vocabularies, and decision tools from the book, collected in one place. Use this as your go-to reference until each framework becomes instinctive. The companion XLSX includes these frameworks in table format for quick scanning and printing.</em></p>
+<p><em>A current version of this resource is available at the book's companion site.</em></p>
+<h3 class="rc3"><strong>D.1 The CLEAR System</strong></h3>
+<p>CLEAR is the organizing framework for everything in this book. Each letter names a stage of professional AI fluency. Use it to orient yourself when you feel stuck and to identify which skill to develop next.</p>
+<p><strong>C — Choose Your Tools (Part 2)</strong>
+Build your personal AI toolkit. Match the model and tool to the task. Use the Vibe Test to select your starting platform, the Model Types guide to choose between fast and reasoning models, and specialist tools for anything beyond text.
+Primary decision: Which tool fits this task?</p>
+<p><strong>L — Lead with Clear Direction (The Three Fundamental Rules)</strong>
+Apply the RTC Framework to every prompt. Clear inputs produce clear outputs. No amount of iteration fully compensates for a vague starting point.
+Primary decision: Have I given the model a Role, a Task, and a Constraint?</p>
+<p><strong>E — Evolve Your Outputs (Iteration Patterns and The Invisible Skills)</strong>
+Iterate precisely, not repeatedly. Use the Iteration Vocabulary to diagnose specific problems. Apply Constraint Architecture and Meta-Prompting to raise your ceiling beyond what standard prompting reaches.
+Primary decision: What specifically is wrong, and what instruction would fix it?</p>
+<p><strong>A — Audit for Accuracy (Trust, but Verify)</strong>
+Apply the Three-Question Verification Filter before using any AI output that carries professional risk. Match your verification effort to the stakes involved.
+Primary decision: Is this a factual claim, a subjective judgment, or creative generation?</p>
+<p><strong>R — Repeat to Build a Practice (Building Your AI Practice)</strong>
+Build a prompt library and workflow templates. Consistency converts skill into infrastructure. The three-month plan shows you how to keep developing after the book ends.
+Primary decision: Is this prompt worth saving for the next time this task appears?</p>
+<p><strong>The Director's Mindset (The Mental Shift That Makes AI Work)</strong>
+AI is your crew. You set the vision, direct the output, and take responsibility for the result. This never changes, regardless of which stage of CLEAR you're in.</p>
+<h3 class="rc3"><strong>D.2 The Three P's: Your Prompt Foundation</strong></h3>
+<p>Use the Three P's to build every prompt before you apply the full RTC Framework. They give you a reliable starting structure for any task.</p>
+<p><strong>Persona</strong> — Describe who the AI is working as and who it's working for.
+Assign a role, give context about you, and clarify the audience. The more specific the persona, the more tailored the output.
+Example: "You're a senior marketing strategist writing for a B2B SaaS company whose audience is VP-level buyers."</p>
+<p><strong>Parameters</strong> — Define the shape of the response.
+Specify format (email, bullet list, table, paragraph), length (word count or paragraph count), tone (professional, conversational, warm), and any hard constraints (no jargon, under 200 words, avoid X).
+Example: "Write a 150-word email. Professional tone. No jargon. End with a single clear call to action."</p>
+<p><strong>Polish</strong> — Treat the first output as a starting point.
+Iterate with specific follow-up prompts: shorter, different tone, reframed for a different audience, more persuasive. The real value lives in the back-and-forth.
+Example follow-ups: "Make the opening stronger." | "Cut by half." | "Reframe for a skeptical audience."</p>
+<h3 class="rc3"><strong>D.3 The RTC Framework</strong></h3>
+<p>RTC is the structured prompt framework for professional-grade outputs. Apply it to every substantive task.</p>
+<p><strong>Role</strong> — Who should the AI act as?
+Give it an identity and relevant expertise. Be specific about domain, experience level, and perspective.
+Example: "Act as a senior HR manager with ten years of experience in remote team onboarding."</p>
+<p><strong>Task</strong> — What specifically do you need?
+One deliverable per message. The more precisely you define the output, the better the result.
+Example: "Write a 30-day onboarding checklist for a new remote employee starting in a client-facing role."</p>
+<p><strong>Constraint</strong> — What guardrails apply?
+Include length, tone, audience, format, and any content limits. Constraints are not limitations — they are the instructions that make the output usable.
+Example: "Keep each item under 15 words. Use plain language. Avoid corporate jargon. Format as a numbered list."</p>
+<p><strong>Full RTC Example:</strong>
+"Act as a senior HR manager with remote team experience [Role]. Write a 30-day onboarding checklist for a new remote employee in a client-facing role [Task]. Each item under 15 words, plain language, numbered list, no corporate jargon [Constraint]."</p>
+<p><strong>Common RTC Mistakes:</strong>
+Vague Role: "Act as an expert" — Expert in what? For whom? For what purpose?
+Missing Task scope: "Write something about onboarding" — What format? What length? What audience?
+No Constraints: Outputs without constraints tend to be generic. Constraints force specificity.</p>
+<h3 class="rc3"><strong>D.4 The Iteration Vocabulary</strong></h3>
+<p>Replace vague feedback with precise direction. Vague feedback produces vague improvements. These substitutions apply to any AI interaction.</p>
+<p>Instead of "make it better" → "Cut this to under 150 words while keeping the three main points."
+Instead of "fix the tone" → "Rewrite this in a warm, conversational tone — the way you'd explain it to a trusted colleague."
+Instead of "I don't like it" → "The structure is correct but the opening paragraph is too formal. Rewrite the first two sentences."
+Instead of "be more creative" → "Give me five alternative versions. Make the last two genuinely unexpected."
+Instead of "start over" → "The argument in paragraph two is strong — keep it. Rebuild the rest around that point."
+Instead of "make it shorter" → "Cut to 100 words. Prioritize the most actionable insight. Remove all setup."
+Instead of "add more detail" → "Expand the second point with one concrete example from a professional context."
+Instead of "this is wrong" → "This claim [quote the specific phrase] needs a source. Either add a citation or reframe it as a recommendation."</p>
+<p><strong>Constraint Architecture (The Invisible Skills)</strong>
+Layer constraints to force precision on recurring tasks.
+Format constraint: "Always respond in bullet points, maximum five bullets."
+Audience constraint: "Write as if the reader has no technical background."
+Scope constraint: "Address only the question asked. Do not add context I didn't request."
+Tone constraint: "Match the tone of the text I'm about to paste."</p>
+<h3 class="rc3"><strong>D.5 The Three-Question Verification Filter</strong></h3>
+<p>Before using any AI output professionally, run it through these three questions. Match your verification effort to the stakes.</p>
+<p><strong>Question 1: Is this a factual claim?</strong>
+Specific dates, statistics, citations, quotes, named sources, research findings.
+Action: Verify when it matters. A single independent source is sufficient. The presence of a citation format does not guarantee the source exists. AI can and does hallucinate plausible-sounding references.</p>
+<p><strong>Question 2: Is this subjective or opinion-based?</strong>
+Recommendations, creative suggestions, stylistic choices, interpretations.
+Action: Use your judgment. Treat as a starting point. You are the expert on your situation — the AI is not.</p>
+<p><strong>Question 3: Is this creative generation?</strong>
+Draft emails, outlines, plans, stories, code, frameworks.
+Action: Judge by usefulness and fit. The question isn't whether it's accurate — it's whether it serves your purpose.</p>
+<p><strong>Verification effort by stakes:</strong>
+Low stakes (internal notes, personal use): 30 seconds — gut check for obvious errors.
+Medium stakes (client-facing, published content): 2–3 minutes targeted fact-checking on specific claims.
+High stakes (legal, medical, financial, public record): Expert consultation. AI output is input, not conclusion.</p>
+<p><strong>Hallucination warning signs:</strong>
+Specific statistics with no source — Very specific dates on obscure events — Named quotes from living people — Academic citations that sound plausible — Legal precedents or case names.</p>
+<h3 class="rc3"><strong>D.6 The 30-Day AI Practice Plan</strong></h3>
+<p><strong>Days 1–7: Foundation</strong>
+Pick one tool. Run one real task per day. Focus on prompts with clear Role, Task, Constraint. Accept imperfect outputs. The goal is repetition, not perfection.</p>
+<p><strong>Days 8–14: Iteration</strong>
+Start saving prompts that worked. Practice the Iteration Vocabulary — replace vague feedback with specific direction. Run each task through at least two exchanges before accepting the output.</p>
+<p><strong>Days 15–21: Specialization</strong>
+Identify your three highest-frequency AI tasks. Build a reusable prompt template for each. Test one specialist tool if a creative or technical need has appeared.</p>
+<p><strong>Days 22–30: Infrastructure</strong>
+Build your prompt library. Establish one weekly AI practice session (the Friday Hour). Identify one workflow that AI can now reliably handle. Run the Audit habit — verify before submitting anything that carries professional stakes.</p>
+<p><strong>After 30 days:</strong> Your AI fluency is no longer beginner level. You have a prompt library, a practice habit, and a workflow that compounds. The skill gap between you and professionals who haven't started is now measurable — and growing in your favour.</p>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Artificial Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]');
+  b.textContent='Sending…';
+  fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:(i.value||'').trim(),source:'book-library'})})
+   .then(function(r){return r.json();}).then(function(r){
+     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You're in. I'll be in touch when it counts.</p>';}
+     else{b.textContent=r.error||'Try again';}})
+   .catch(function(){b.textContent='Network hiccup — try again';});
+  return false;}
+
+</script>
+</body>
+</html>

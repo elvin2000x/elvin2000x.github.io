@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Director&#x27;s Diagnostic · The Artificial Advantage · Elvin M. Peters</title>
+<meta name="description" content="The Director&#x27;s Diagnostic — companion resource for The Artificial Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/resources.css" />
+</head>
+<body>
+<div class="topbar">
+  <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
+  <div class="bookname">The Artificial Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <a class="allbooks" href="/books/">← All my books</a>
+</div>
+<div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="kicker">AI Fluency · Volume 1</div>
+    <div class="booktitle">The Artificial Advantage</div>
+    <div class="navgroup"><h4>Start here</h4>
+      <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
+      <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
+    </div>
+    <div class="navgroup"><h4>Appendices</h4>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>The Professional Prompt Library</a>
+      <a class="navlink" href="role-library.html"><span class="dot"></span>The Role Library</a>
+      <a class="navlink" href="framework-reference.html"><span class="dot"></span>Framework Reference</a>
+      <a class="navlink active" href="diagnostic.html"><span class="dot"></span>The Director&#x27;s Diagnostic</a>
+      <a class="navlink" href="tools-reference.html"><span class="dot"></span>AI Tools Reference</a>
+      <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="wrap">
+      <div class="crumb"><a href="index.html">The Artificial Advantage</a> &nbsp;/&nbsp; The Director&#x27;s Diagnostic</div>
+      <h1>The Director&#x27;s Diagnostic</h1>
+      <div class="updated from"><span class="b"></span>From <em>The Artificial Advantage</em></div>
+      <p>Use this when a prompt isn't working and you can't identify why. Find the symptom that matches what you're seeing and follow it to the cause.</p>
+<p>When AI output isn't working, the instinct is to try again with a slightly different prompt. That rarely helps. The output failing is a symptom. The cause is almost always in the prompt structure.</p>
+<p>This diagnostic maps ten common failure types to their most likely cause and provides a corrective prompt pattern. Use it when you're getting output that's technically responsive but not useful.</p>
+<h3 class="rc3"><strong>G.1 Output Is Too Generic</strong></h3>
+<p><strong>Symptom:</strong> The AI produced something that could apply to any professional in any industry. It hits the obvious beats. It sounds correct but tells you nothing you didn't already know.</p>
+<p><strong>Diagnosis:</strong> The prompt lacked specificity about audience, context, or constraints. The model defaulted to the most statistically common version of what you asked for — which is also the least distinctive.</p>
+<p><strong>Fix:</strong> Add three pieces of specificity: who the output is for (role, not "professionals"), what context it will be used in (not just "a meeting" but "a 30-minute meeting with a CFO skeptical of the proposal"), and what it should not include ("avoid recommendations — this is the diagnosis step only"). Specificity forces the model off the generic track.</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>The previous output was too general. Rewrite it specifically for [describe exact audience] in [describe exact context]. The output should not include [most generic element from the response]. Make it specific enough that someone in a different industry would recognize it wasn't written for them.</p>
+</blockquote></div>
+<h3 class="rc3"><strong>G.2 Output Is Too Long</strong></h3>
+<p><strong>Symptom:</strong> The model produced a comprehensive, well-structured response that covers everything — and you have to read 800 words to extract the 80 words you actually needed.</p>
+<p><strong>Diagnosis:</strong> No length constraint was provided. The model optimizes for completeness by default.</p>
+<p><strong>Fix:</strong> Add a hard word count and specify what to prioritize if cuts are needed. "Under 150 words, prioritize the most actionable insight" is more useful than "make it shorter."</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>The previous response was too long. Rewrite it in under [X] words. Keep only [specify what matters — e.g., "the three findings that require action"]. Cut all context, setup, and explanation that the reader can infer from the situation.</p>
+</blockquote></div>
+<h3 class="rc3"><strong>G.3 AI Went Off-Topic</strong></h3>
+<p><strong>Symptom:</strong> You asked for one thing and the model gave you something adjacent. You asked for a diagnostic and got recommendations. You asked for a summary and got an analysis. You asked for a draft and got an outline.</p>
+<p><strong>Diagnosis:</strong> The Task in your prompt was ambiguous or the model inferred a more elaborate version of what you asked for.</p>
+<p><strong>Fix:</strong> Add a scope constraint that names explicitly what the output should not include. "Do not include recommendations — this is the diagnosis step" is a constraint. "Focus only on the findings, not the implications" is a constraint.</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>The previous response went beyond what I asked for. I only need [specific deliverable]. Do not include [what the model added that you didn't want]. Redo the task with only what I specified.</p>
+</blockquote></div>
+<h3 class="rc3"><strong>G.4 Output Contains Hallucinated Facts</strong></h3>
+<p><strong>Symptom:</strong> The model stated something specific — a statistic, a citation, a named source, a date — that you cannot verify or that you know to be wrong.</p>
+<p><strong>Diagnosis:</strong> The model completed a statistical pattern into a specific claim. This is how hallucination works — the model doesn't know the difference between what it knows and what it's extrapolating.</p>
+<p><strong>Fix:</strong> Add two instructions to the prompt: (1) "Do not include statistics or citations unless I provide them," and (2) "If you're drawing on something you're uncertain about, say so." These don't eliminate hallucination, but they reduce the model's incentive to fill gaps with fabricated specifics.</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>Remove any specific statistics, dates, or citations from the previous response that were not in my original message. If a claim requires a source to be credible, reframe it as a recommendation or observation rather than a fact. Flag any remaining claim that I should verify independently.</p>
+</blockquote></div>
+<h3 class="rc3"><strong>G.5 Wrong Tone</strong></h3>
+<p><strong>Symptom:</strong> The content is technically correct but the register is off — too formal for a casual update, too casual for an executive briefing, too enthusiastic for a skeptical audience, too hedged for a decisive context.</p>
+<p><strong>Diagnosis:</strong> Tone wasn't specified, and the model defaulted to the most common register for that content type.</p>
+<p><strong>Fix:</strong> Name the specific tonal quality you want and provide a contrast: "Direct, not blunt." "Warm, not effusive." "Confident, not arrogant." One-word tone descriptors ("professional," "friendly") are not enough — the model needs the tension between two qualities to calibrate.</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>The tone of the previous response was [describe the problem — e.g., "too formal," "too apologetic," "too enthusiastic"]. Rewrite it with a tone that is [primary quality] but not [the quality to avoid]. If you're uncertain, err toward [which side of the spectrum].</p>
+</blockquote></div>
+<h3 class="rc3"><strong>G.6 Missed the Point Entirely</strong></h3>
+<p><strong>Symptom:</strong> The output is coherent, well-written, and completely misses what you were trying to accomplish. You asked for something and got something that addresses the literal words of your request but not the underlying need.</p>
+<p><strong>Diagnosis:</strong> The Task was stated at the surface level without the purpose behind it. The model answered the question you asked, not the question you needed answered.</p>
+<p><strong>Fix:</strong> Add a sentence explaining why you need this output and what decision or action it will inform. "I need this to convince a skeptical CFO to approve budget" changes the output more than any structural instruction.</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>The previous response addressed my question but missed what I actually need. The purpose of this output is [describe the real goal]. Rewrite it with that purpose in mind — the reader should be able to [describe what they should be able to do after reading it].</p>
+</blockquote></div>
+<h3 class="rc3"><strong>G.7 Too Many Options, No Clear Direction</strong></h3>
+<p><strong>Symptom:</strong> You asked for help making a decision and received a balanced list of pros and cons. Everything sounds reasonable. Nothing tells you what to do.</p>
+<p><strong>Diagnosis:</strong> The model is trained to present balanced perspectives, not to make recommendations. Without explicit permission to conclude, it defaults to neutrality.</p>
+<p><strong>Fix:</strong> Add an explicit instruction to take a position: "Recommend one option and defend it. Acknowledge the trade-offs but don't equivocate." If you want balance, ask for the analysis step separately from the recommendation step.</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>The previous response presented both sides but didn't help me decide. Based on the criteria I gave you — [restate the key criteria] — recommend one option. Explain the reasoning in two to three sentences. Note the one trade-off I'm accepting with that recommendation.</p>
+</blockquote></div>
+<h3 class="rc3"><strong>G.8 Output Reads as AI-Written</strong></h3>
+<p><strong>Symptom:</strong> The output is technically fine but sounds like no human ever wrote it. The sentences are complete. The structure is logical. It sounds hollow.</p>
+<p><strong>Diagnosis:</strong> The model defaulted to its most probable phrasing — which is also the most frequently trained-on phrasing. Common patterns: opening with a transition phrase, using symmetrical sentence structures, excessive use of "It's important to note," "It's worth mentioning," or similar hedges.</p>
+<p><strong>Fix:</strong> Add a specificity constraint and a prohibition. "Write in [name of specific voice] register" helps. "Avoid starting any sentence with 'It's'" breaks a common AI habit. Providing a sample of the voice you want to match gives the model something to pattern-match against.</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>The previous response sounds AI-generated. Rewrite it in a more natural, direct voice. Avoid [list specific phrases or structures that feel hollow — e.g., "It's important to," "In conclusion," symmetrical sentence openers]. If it helps, imagine the reader can tell the difference between a human and an AI draft and will reject the latter.</p>
+</blockquote></div>
+<h3 class="rc3"><strong>G.9 Keeps Making the Same Mistake</strong></h3>
+<p><strong>Symptom:</strong> You've corrected the model twice for the same issue — it keeps reverting to the problem you already flagged.</p>
+<p><strong>Diagnosis:</strong> Each correction is treated as an in-context instruction, but it competes with the original prompt. The model is pattern-matching against the full conversation, not just your most recent message.</p>
+<p><strong>Fix:</strong> Restate the constraint you're enforcing at the top of your next message, not just at the end. Lead with: "Before you do anything else, remember: [the rule you keep correcting]." If the issue persists, start a new session with the corrected constraint built into the original prompt.</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>Before you respond: [state the rule clearly — e.g., "Do not use bullet points," "Do not include statistics," "Keep the response under 200 words"]. That constraint applies to everything that follows. Now, [restate the task].</p>
+</blockquote></div>
+<h3 class="rc3"><strong>G.10 Output Is Technically Correct but Useless</strong></h3>
+<p><strong>Symptom:</strong> The model did exactly what you asked. The output is accurate and complete. You can't use any of it.</p>
+<p><strong>Diagnosis:</strong> The Task was specified without connecting it to the context in which the output would be used. The model produced a correct answer to a question that wasn't the right question.</p>
+<p><strong>Fix:</strong> This is the hardest failure type to fix because it requires stepping back from the prompt to ask: what do I actually need and why? The fix is usually to add the context the model didn't have: who will read this, what decision they need to make, and what would make this output genuinely useful to them.</p>
+<p><strong>Corrective prompt pattern:</strong></p>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
+<p>The previous response was technically correct but not useful for my purpose. Here's the actual context: [describe who will use this, what decision or action it should enable, and what "useful" looks like in this situation]. Redo the output with that context in mind.</p>
+</blockquote></div>
+      <div class="optin">
+        <h3>Want the whole library, kept current?</h3>
+        <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
+        <form onsubmit="return optin(event)">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" required />
+          <button type="submit">Send me the library</button>
+        </form>
+      </div>
+      <footer class="pfoot">
+        <a href="index.html">All The Artificial Advantage resources</a> &nbsp;·&nbsp;
+        <a href="/books/">Other books</a> &nbsp;·&nbsp;
+        <a href="/">elvinpeters.com</a>
+      </footer>
+    </div>
+  </main>
+</div>
+<script>
+function copyCode(btn){
+  var code = btn.closest('.code').querySelector('pre code, pre').innerText;
+  navigator.clipboard.writeText(code).then(function(){
+    var o=btn.innerHTML; btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function toggleNav(){document.getElementById('side').classList.toggle('open');document.getElementById('mobar').classList.toggle('open');}
+function optin(e){e.preventDefault();var f=e.target,b=f.querySelector('button'),i=f.querySelector('input[type=email]');
+  b.textContent='Sending…';
+  fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({email:(i.value||'').trim(),source:'book-library'})})
+   .then(function(r){return r.json();}).then(function(r){
+     if(r.success){f.innerHTML='<p style="margin:0;font-weight:600;color:var(--gold-ink)">You're in. I'll be in touch when it counts.</p>';}
+     else{b.textContent=r.error||'Try again';}})
+   .catch(function(){b.textContent='Network hiccup — try again';});
+  return false;}
+
+</script>
+</body>
+</html>

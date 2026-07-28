@@ -47,9 +47,9 @@
       <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; API &amp; Tooling Quick Reference</div>
       <h1>API &amp; Tooling Quick Reference</h1>
       <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
-      <blockquote>
+      <div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p><strong>Also online, free.</strong> This appendix is on the web in copy-and-paste form, kept current, at elvinpeters.com/books/the-agentic-advantage/api-reference.</p>
-</blockquote>
+</blockquote></div>
 <p>I built this appendix as a lookup card rather than a chapter. When you are mid-build and you just need the shape of a <code class="inl">tool_choice</code> mode, the break-even math on prompt caching, or the one control that actually stops a given attack, flip here and scan. Every figure marked "at the time of writing" moves, so treat the numbers as shape rather than gospel; the live values sit in the companion Toolkit.</p>
 <hr/>
 <h2 class="rc">1. Tool Use: the Messages API loop</h2>
@@ -467,6 +467,14 @@ function copyCode(btn){
   navigator.clipboard.writeText(code).then(function(){
     var o=btn.innerHTML; btn.classList.add('done');
     btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
     setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
   });
 }

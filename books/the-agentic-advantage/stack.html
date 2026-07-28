@@ -47,13 +47,13 @@
       <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; The 2026 Operator Stack</div>
       <h1>The 2026 Operator Stack</h1>
       <div class="updated"><span class="g"></span>Kept current · updated July 2026</div>
-      <blockquote>
+      <div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p><strong>Also online, free.</strong> This stack is on the web and kept current as tools and prices change, at elvinpeters.com/books/the-agentic-advantage/stack.</p>
-</blockquote>
+</blockquote></div>
 <p>I built this appendix to hold everything with a short shelf life so the chapters could stay evergreen. Prices and product names in this field move every few months, so treat every figure here as a dated snapshot from the time of writing rather than a current quote, and verify the live numbers before you commit real budget (the companion Toolkit is the version I keep current). What actually lasts is not the price or even the product name. What lasts is the <em>category</em> each tool fills, because those categories are the true shape of an operator's stack. Read the tables for the shape first, and the specific names second.</p>
-<blockquote>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p><strong>Verify before you commit budget.</strong> Everything below was checked in mid-2026. Vendors reprice, get acquired, and rename tiers constantly, so confirm the current figure on the provider's own pricing page before you spend.</p>
-</blockquote>
+</blockquote></div>
 <p>The organizing principle behind the whole stack is simple: buy the model, rent the infrastructure, own the orchestration.</p>
 <h2 class="rc">Model APIs &amp; SDKs (the model layer)</h2>
 <p>This is the engine. The SDK choice usually follows the model choice, and all three major SDKs speak MCP, so your tools stay portable across them. Model prices are quoted per one million tokens (input / output) and are the fastest-moving figures in this entire appendix.</p>
@@ -484,6 +484,14 @@ function copyCode(btn){
   navigator.clipboard.writeText(code).then(function(){
     var o=btn.innerHTML; btn.classList.add('done');
     btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
     setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
   });
 }

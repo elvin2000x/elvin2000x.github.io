@@ -47,9 +47,9 @@
       <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Quick Reference Card</div>
       <h1>Quick Reference Card</h1>
       <div class="updated from"><span class="b"></span>From <em>The Agentic Advantage</em></div>
-      <blockquote>
+      <div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p><strong>Also online, free.</strong> This card is on the web, kept current, at elvinpeters.com/books/the-agentic-advantage/quick-reference-card.</p>
-</blockquote>
+</blockquote></div>
 <p>One page to pin above the desk. Everything else in this book is the explanation behind these lines.</p>
 <p><strong>The loop.</strong> Trigger → act through a tool → observe the result → repeat → write what you learned to memory. Every agent is a variation on this.</p>
 <p><strong>The five tool categories.</strong> Information (learn), action (change things), execution (run things), memory (persist), orchestration (coordinate). Build at least one of each.</p>
@@ -82,6 +82,14 @@ function copyCode(btn){
   navigator.clipboard.writeText(code).then(function(){
     var o=btn.innerHTML; btn.classList.add('done');
     btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
     setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
   });
 }

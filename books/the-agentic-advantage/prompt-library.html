@@ -47,9 +47,9 @@
       <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Prompt Library</div>
       <h1>Prompt Library</h1>
       <div class="updated from"><span class="b"></span>From <em>The Agentic Advantage</em></div>
-      <blockquote>
+      <div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p><strong>Also online, free.</strong> This appendix is on the web in copy-and-paste form, kept current, at elvinpeters.com/books/the-agentic-advantage/prompt-library.</p>
-</blockquote>
+</blockquote></div>
 <p>These are the templates I reach for first when I stand up a new agent. Think of them as starting points you adapt to your own domain, rather than finished prompts you paste and forget. Every good agent I have shipped rests on the same reusable spine, and the blocks below are that spine written out in full. Copy them, swap in your identity and tools, and delete the annotation comments once the shape is yours.</p>
 <p>A word on how to read this appendix. The prose around each template explains what the section does and why it earns its place. The template blocks themselves are meant to be lifted whole, so I have kept them in code blocks with the XML tags and structure intact. Adapt the wording, keep the boundaries.</p>
 <hr/>
@@ -114,9 +114,9 @@ read_skill tool when eligibility is non-obvious. Do not guess policy.
 <p><strong><code class="inl">&lt;escalation&gt;</code> — when to stop and hand off.</strong> Spell out the trigger conditions and the shape of a clean handoff. An agent that knows exactly when to quit is safer than one told only what to do.</p>
 <p><strong><code class="inl">&lt;references&gt;</code> — the skills pointer.</strong> Rather than front-loading every procedure into the always-on prefix, point to named skill files the agent loads on demand. This keeps the base prompt lean. The rule for a procedure lives in exactly one place, so the pointer references the skill instead of restating it.</p>
 <p><strong>The single-breakpoint caching note.</strong> Everything above is run-invariant, which is the whole point. Because agents re-send an identical large prefix on every step, you mark the last stable block of that prefix with one <code class="inl">cache_control</code> breakpoint and let the discount ride. Cache prefixes build in strict order (tools, then system, then messages), so put everything invariant first and set the breakpoint at the end of it. The customer's actual request arrives in the first user turn, outside the cached prefix, so the hash matches on every step. The load-bearing constraints here are stated in the prompt and also enforced in code: <code class="inl">issue_refund</code> rejects amounts over $500 and a human-approval gate backs the escalation path. The prompt makes the model want to comply; the external check makes non-compliance impossible.</p>
-<blockquote>
+<div class="pcard"><button aria-label="Copy" class="pcopy" onclick="copyProse(this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="13" rx="2" width="13" x="9" y="9"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span>Copy</span></button><blockquote>
 <p>One breakpoint, placed at the end of the invariant prefix, is the default that pays for itself. Do not put <code class="inl">cache_control</code> on anything that changes per request (a timestamp, a per-task ID), because the prefix hash will never match and you will pay the write premium for zero reads. Verify the current minimum cacheable size and syntax against the platform docs at the time you build, since short prefixes silently fail to cache.</p>
-</blockquote>
+</blockquote></div>
 <hr/>
 <h2 class="rc">D.2 The multi-agent orchestrator template</h2>
 <p>When a job is too large for one agent, the pattern is a coordinator that fans work out to N writers and fans the results back in. The failure modes are predictable: writers drift from a shared voice, they lack the context to do their slice well, or the assembled whole reads like it was written by a committee. The template answers all three with a style-guide holder, a per-agent context contract, and a fan-in consistency check.</p>
@@ -274,6 +274,14 @@ function copyCode(btn){
   navigator.clipboard.writeText(code).then(function(){
     var o=btn.innerHTML; btn.classList.add('done');
     btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Copied';
+    setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
+  });
+}
+function copyProse(btn){
+  var q=btn.closest('.pcard').querySelector('blockquote');
+  navigator.clipboard.writeText(q.innerText.trim()).then(function(){
+    btn.classList.add('done');var o=btn.innerHTML;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span>Copied</span>';
     setTimeout(function(){btn.classList.remove('done');btn.innerHTML=o;},1600);
   });
 }
