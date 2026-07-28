@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Prompt Builder · The Artificial Advantage · Elvin M. Peters</title>
-<meta name="description" content="Prompt Builder — companion resource for The Artificial Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
+<title>Agent Prompt Builder · The Agentic Advantage · Elvin M. Peters</title>
+<meta name="description" content="Agent Prompt Builder — companion resource for The Agentic Advantage, part of the AI Fluency series by Elvin M. Peters. Copy-and-adapt code, prompts and reference, kept current." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
@@ -13,34 +13,42 @@
 <body>
 <div class="topbar">
   <a class="brand" href="/"><b>Elvin</b> M. Peters</a>
-  <div class="bookname">The Artificial Advantage &nbsp;·&nbsp; Companion Resources</div>
+  <div class="bookname">The Agentic Advantage &nbsp;·&nbsp; Companion Resources</div>
   <a class="allbooks" href="/books/">← All my books</a>
 </div>
 <div class="mobar" id="mobar" onclick="toggleNav()"><span>Resources for this book</span><span class="chev">▾</span></div>
 <div class="shell">
   <aside class="side" id="side">
-    <div class="kicker">AI Fluency · Volume 1</div>
-    <div class="booktitle">The Artificial Advantage</div>
+    <div class="kicker">AI Fluency · Volume 3</div>
+    <div class="booktitle">The Agentic Advantage</div>
     <div class="navgroup"><h4>Start here</h4>
       <a class="navlink" href="index.html"><span class="dot"></span>Resource home</a>
-      <a class="navlink active" href="prompt-builder.html"><span class="dot"></span>Prompt Builder</a>
+      <a class="navlink active" href="agent-builder.html"><span class="dot"></span>Agent Prompt Builder</a>
       <a class="navlink" href="quick-reference-card.html"><span class="dot"></span>Quick Reference Card</a>
     </div>
     <div class="navgroup"><h4>Appendices</h4>
-      <a class="navlink" href="prompt-library.html"><span class="dot"></span>The Professional Prompt Library</a>
-      <a class="navlink" href="role-library.html"><span class="dot"></span>The Role Library</a>
-      <a class="navlink" href="framework-reference.html"><span class="dot"></span>Framework Reference</a>
-      <a class="navlink" href="diagnostic.html"><span class="dot"></span>The Director&#x27;s Diagnostic</a>
-      <a class="navlink" href="tools-reference.html"><span class="dot"></span>AI Tools Reference</a>
+      <a class="navlink" href="recipes.html"><span class="dot"></span>Agent Recipes &amp; Blueprints</a>
+      <a class="navlink" href="prompt-library.html"><span class="dot"></span>Prompt Library</a>
+      <a class="navlink" href="stack.html"><span class="dot"></span>The 2026 Operator Stack</a>
+      <a class="navlink" href="mcp.html"><span class="dot"></span>MCP Servers &amp; Integrations</a>
+      <a class="navlink" href="api-reference.html"><span class="dot"></span>API &amp; Tooling Quick Reference</a>
       <a class="navlink" href="glossary.html"><span class="dot"></span>Glossary</a>
+    </div>
+    <div class="navgroup"><h4>Chapter code</h4>
+      <a class="navlink" href="chapter-4.html"><span class="dot"></span>Ch 4 · Trigger-Action-Memory</a>
+      <a class="navlink" href="chapter-6.html"><span class="dot"></span>Ch 6 · Memory Architecture</a>
+      <a class="navlink" href="chapter-8.html"><span class="dot"></span>Ch 8 · The Monitoring Layer</a>
+      <a class="navlink" href="chapter-9.html"><span class="dot"></span>Ch 9 · Claude Code</a>
+      <a class="navlink" href="chapter-11.html"><span class="dot"></span>Ch 11 · The Tech Stack</a>
+      <a class="navlink" href="chapter-12.html"><span class="dot"></span>Ch 12 · Security &amp; Cost</a>
     </div>
   </aside>
   <main class="main">
     <div class="wrap">
-      <div class="crumb"><a href="index.html">The Artificial Advantage</a> &nbsp;/&nbsp; Prompt Builder</div>
-      <h1>Prompt Builder</h1>
-      <div class="updated from"><span class="b"></span>From <em>The Artificial Advantage</em></div>
-      <script>window.PB_CONFIG={"mode": "rtc", "empty": "Fill in the fields and your prompt appears here, copy-ready.", "dl": "my-prompt.txt", "fields": [{"key": "role", "out": "Role"}, {"key": "task", "out": "Task"}, {"key": "constraint", "out": "Constraints"}, {"key": "context", "out": "Context"}], "presets": {"email": {"role": "a senior communications advisor", "task": "write a brief status email to the executive team summarizing [project]: what shipped this week, what is next, and one risk that needs their attention", "constraint": "confident and direct, under 200 words, prose not bullet points", "context": ""}, "brief": {"role": "a senior analyst preparing a briefing document", "task": "write a one-page briefing on [the issue or decision]", "constraint": "problem statement in 2 sentences, current status in 3 to 4, at most three options, one recommended next step; plain language, no jargon", "context": "the audience is board members unfamiliar with day-to-day operations"}, "plan": {"role": "a senior HR manager with remote-team experience", "task": "write a 30-day onboarding checklist for a new remote employee in a client-facing role", "constraint": "each item under 15 words, numbered list, plain language, no corporate jargon", "context": ""}}};</script><p class="lead">The whole method on one screen. Fill in the parts and your prompt assembles itself in the book’s <strong>Role, Task, Constraint</strong> structure, copy-ready. Your work saves in this browser as you type. Nothing you enter is sent anywhere.</p><div class="pbpresets"><span>Start from an example:</span><button type="button" onclick="pbPreset('email')">Executive email</button><button type="button" onclick="pbPreset('brief')">Stakeholder brief</button><button type="button" onclick="pbPreset('plan')">30-day plan</button></div><div class="pbgrid"><div class="pbform"><div class="pbfield"><label for="pb-role">Role</label><span class="pbhint">Who should the AI be? Give it a professional identity and a point of view.</span><textarea id="pb-role" rows="2" placeholder="a senior communications advisor with ten years in B2B SaaS"></textarea></div><div class="pbfield"><label for="pb-task">Task</label><span class="pbhint">What exactly do you need? One deliverable per prompt.</span><textarea id="pb-task" rows="3" placeholder="write a 30-day onboarding checklist for a new remote employee in a client-facing role"></textarea></div><div class="pbfield"><label for="pb-constraint">Constraints</label><span class="pbhint">The rules the output must follow: length, format, tone, and what to avoid.</span><textarea id="pb-constraint" rows="3" placeholder="each item under 15 words, numbered list, plain language, no corporate jargon"></textarea></div><div class="pbfield"><label for="pb-context">Context<span class="pbopt">optional</span></label><span class="pbhint">Anything the AI cannot infer: the audience, the background, the situation.</span><textarea id="pb-context" rows="2" placeholder="the audience is board members unfamiliar with day-to-day operations"></textarea></div></div><div class="pbpreview"><div class="pbbar"><span class="pblab">Your prompt</span><span class="pbbtns"><button class="pbbtn" id="pb-copy" onclick="pbCopy()">Copy</button><button class="pbbtn ghost" onclick="pbDownload()">Download .txt</button></span></div><div class="pbout empty" id="pb-out">Fill in the fields and your prompt appears here, copy-ready.</div><p class="pbtip">Role opens the prompt, Task says exactly what you need, and Constraints close it. That order is the whole trick.</p></div></div>
+      <div class="crumb"><a href="index.html">The Agentic Advantage</a> &nbsp;/&nbsp; Agent Prompt Builder</div>
+      <h1>Agent Prompt Builder</h1>
+      <div class="updated from"><span class="b"></span>From <em>The Agentic Advantage</em></div>
+      <script>window.PB_CONFIG={"mode": "agent", "empty": "Fill in the fields and your agent's system prompt assembles here.", "dl": "agent-system-prompt.txt", "fields": [{"key": "role", "out": "Role"}, {"key": "task", "out": "Task"}, {"key": "tools", "out": "Tools"}, {"key": "memory", "out": "Memory"}, {"key": "constraint", "out": "Constraints"}], "presets": {"scraper": {"role": "an always-on lead-research agent for a B2B sales team", "task": "each morning, find 20 net-new companies matching our ICP and draft a one-line opener for each", "tools": "web search, a company-enrichment API, append-only access to leads.json", "memory": "leads.json keyed by normalized domain to skip duplicates; a last_query cursor to page deeper each run", "constraint": "max 50 enrichment calls per run; never email anyone; stop and flag if the API errors twice"}, "researcher": {"role": "a research agent that turns a topic into a sourced brief", "task": "given a topic, gather the key facts and the three best sources, then draft an outline a writer can run with", "tools": "web search and read access to our past-articles folder", "memory": "a topics_done.json so it does not repeat covered angles", "constraint": "cite every claim with a link; flag anything you cannot verify; never invent a statistic"}, "triage": {"role": "an assistant that triages a shared support inbox", "task": "read each new message, tag it by urgency and topic, and draft a suggested reply for a human to approve", "tools": "read access to the inbox and to our help-doc library", "memory": "a decisions log so recurring questions get consistent answers", "constraint": "never send a reply itself; escalate anything about billing or legal; keep drafts under 150 words"}}};</script><p class="lead">Turn the book’s agent anatomy into a starting system prompt. Fill in the parts and it assembles a spec you can drop into your agent, copy-ready. It saves in your browser as you type.</p><div class="pbpresets"><span>Start from an example:</span><button type="button" onclick="pbPreset('scraper')">Lead scraper</button><button type="button" onclick="pbPreset('researcher')">Content researcher</button><button type="button" onclick="pbPreset('triage')">Inbox triage</button></div><div class="pbgrid"><div class="pbform"><div class="pbfield"><label for="pb-role">Role</label><span class="pbhint">The agent&#x27;s identity and standing purpose.</span><textarea id="pb-role" rows="2" placeholder="an always-on lead-research agent for a B2B sales team"></textarea></div><div class="pbfield"><label for="pb-task">Task / Trigger</label><span class="pbhint">What fires it, and what it does on each run.</span><textarea id="pb-task" rows="3" placeholder="every morning, find 20 companies matching our ICP and draft a one-line opener for each"></textarea></div><div class="pbfield"><label for="pb-tools">Tools available</label><span class="pbhint">What it is allowed to call: search, scrapers, APIs, files.</span><textarea id="pb-tools" rows="2" placeholder="web search, a company-enrichment API, and append-only access to leads.json"></textarea></div><div class="pbfield"><label for="pb-memory">Memory</label><span class="pbhint">What it remembers between runs, and where it lives.</span><textarea id="pb-memory" rows="2" placeholder="leads.json keyed by domain so it never re-adds a company; a last_run cursor"></textarea></div><div class="pbfield"><label for="pb-constraint">Constraints</label><span class="pbhint">Guardrails: rate limits, cost caps, and what it must never do.</span><textarea id="pb-constraint" rows="3" placeholder="max 50 enrichment calls per run; never contact anyone directly; stop and flag if the API errors twice"></textarea></div></div><div class="pbpreview"><div class="pbbar"><span class="pblab">Your system prompt</span><span class="pbbtns"><button class="pbbtn" id="pb-copy" onclick="pbCopy()">Copy</button><button class="pbbtn ghost" onclick="pbDownload()">Download .txt</button></span></div><div class="pbout empty" id="pb-out">Fill in the fields and your agent&#x27;s system prompt assembles here.</div><p class="pbtip">An agent is a Role plus a trigger, the Tools it can call, the Memory it carries between runs, and the Constraints that keep it safe. Name all five.</p></div></div>
       <div class="optin">
         <h3>Want the whole library, kept current?</h3>
         <p>Every recipe, prompt, and worksheet across the series, plus a note whenever a model or price changes. No spam, unsubscribe anytime.</p>
@@ -50,7 +58,7 @@
         </form>
       </div>
       <footer class="pfoot">
-        <a href="index.html">All The Artificial Advantage resources</a> &nbsp;·&nbsp;
+        <a href="index.html">All The Agentic Advantage resources</a> &nbsp;·&nbsp;
         <a href="/books/">Other books</a> &nbsp;·&nbsp;
         <a href="/">elvinpeters.com</a>
       </footer>
