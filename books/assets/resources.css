@@ -113,14 +113,61 @@ td code{font-family:var(--mono);font-size:.85em}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
+/* ---- worksheets (fill-in + clean PDF) ---- */
+.wstoolbar{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin:16px 0 26px;padding:12px 15px;background:var(--panel);border:1px solid var(--border);border-radius:12px;position:sticky;top:56px;z-index:20}
+.wsdl{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#1a1204;border:none;border-radius:9px;padding:10px 18px;font-weight:700;font-size:14px;cursor:pointer;font-family:var(--sans)}
+.wsdl svg{width:16px;height:16px}
+.wsdl:hover{filter:brightness(1.06)}
+.wsclr{background:none;border:1px solid var(--border);color:var(--muted);border-radius:9px;padding:9px 14px;font-size:13.5px;cursor:pointer;font-family:var(--sans)}
+.wsclr:hover{color:var(--heading);border-color:var(--muted)}
+.wssaved{font-size:12.5px;color:var(--gold-ink);font-weight:600;margin-left:auto;min-height:1em}
+.ws{margin:0 0 16px;padding:22px 26px;background:var(--panel);border:1px solid var(--border);border-radius:14px;break-inside:avoid}
+.wshead{display:flex;align-items:flex-start;gap:14px;margin:0 0 6px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.wsnum{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--gold);font-family:var(--serif);font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.wsh.rc{margin:3px 0 0!important;padding:0!important;border:none!important}
+.wschap{display:inline-block;margin-left:11px;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--gold-ink);vertical-align:middle;background:var(--panel-2);border:1px solid var(--gold-line);border-radius:20px;padding:2px 10px;white-space:nowrap}
+.wrow{margin:13px 0;font-size:15px;line-height:1.85;color:var(--text)}
+.wrow strong{color:var(--heading)}
+.fin{font-family:var(--sans);font-size:14.5px;color:var(--heading);background:transparent;border:none;border-bottom:1.5px solid var(--gold-line);padding:2px 5px;margin:0 2px;max-width:100%}
+.fin::placeholder{color:var(--muted)}
+.fin:focus{outline:none;border-bottom-color:var(--gold);background:var(--panel-2)}
+.fin-cell{width:100%!important;border-bottom:1px dashed var(--border);text-align:inherit;margin:0}
+.wcirc{display:flex;flex-wrap:wrap;align-items:center;gap:9px}
+.wlab{font-size:15px;color:var(--text)}.wlab em{font-style:normal;color:var(--muted);font-size:13px;margin-left:2px}
+.chips{display:inline-flex;flex-wrap:wrap;gap:7px}
+.chip{font-family:var(--sans);font-size:13px;color:var(--text);background:var(--ground);border:1px solid var(--border);border-radius:20px;padding:5px 13px;cursor:pointer;transition:.12s}
+.chip:hover{border-color:var(--gold)}
+.chip.on{background:var(--gold);border-color:var(--gold);color:#1a1204;font-weight:600}
+.wchk{display:flex;gap:11px;align-items:flex-start;margin:9px 0;padding:11px 14px;background:var(--ground);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:14.5px;line-height:1.6;color:var(--text)}
+.wchk:hover{border-color:var(--gold-line)}
+.wchk input{margin-top:2px;width:17px;height:17px;accent-color:var(--gold);flex:none;cursor:pointer}
+.wchk strong{color:var(--heading)}
+.wstable{font-size:13.5px}
+.wstable th{background:var(--panel-2);text-align:left;vertical-align:bottom}
+.wstable td{vertical-align:middle}
+.wc{font-family:var(--mono);font-size:12.5px;background:var(--panel-2);border:1px solid var(--border);border-radius:5px;padding:1px 6px;color:var(--heading)}
+
 /* ---- print (clean PDF for worksheets) ---- */
 @media print{
-  .topbar,.mobar,.side,.optin,.pfoot,.copy,.crumb,.allbooks{display:none!important}
+  .topbar,.mobar,.side,.optin,.pfoot,.copy,.crumb,.allbooks,.wstoolbar,.updated,.no-print{display:none!important}
   .shell{display:block;max-width:100%} .main{padding:0} .wrap{max-width:100%}
-  body{background:#fff;color:#111}
-  h1,.wrap h2.rc,.wrap h3.rc3{color:#0a1828}
-  .updated{border-color:#ccc}
-  input,textarea{border:1px solid #999!important;background:#fff!important;color:#111!important}
+  body{background:#fff;color:#111;font-size:11.5pt}
+  h1{font-size:22pt;color:#0a1828;margin-bottom:14px}
+  .lead{font-size:10.5pt;color:#444}
+  .wrap h2.rc,.wrap h3.rc3,.wrow strong,.wchk strong,.wsh.rc,.wstable th{color:#0a1828}
+  /* worksheets: flat, ink-on-paper, one per page-break group */
+  .ws{background:#fff!important;border:none!important;border-top:1.5pt solid #0a1828;border-radius:0;padding:14px 0 10px;margin:0 0 8px;break-inside:avoid;page-break-inside:avoid}
+  .wshead{border-bottom:1px solid #bbb}
+  .wsnum{background:#0a1828!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wschap{background:none!important;border-color:#999!important;color:#555!important}
+  .fin{border-bottom:1px solid #333!important;background:#fff!important;color:#111!important;min-width:60px}
+  .fin-cell{border-bottom:none!important}
+  .wchk{background:#fff!important;border:none!important;padding:4px 0}
+  .wchk input{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .chip{background:#fff!important;color:#111!important;border:1px solid #999!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .chip.on{background:#0a1828!important;color:#fff!important;border-color:#0a1828!important}
+  .wc{background:#f0f0f0!important;border-color:#ccc!important;color:#111!important}
+  .wstable th{background:#f0f0f0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .code{border-color:#ccc} .code pre{color:#111}
   @page{margin:16mm}
 }
