@@ -57,10 +57,10 @@
           '<span>Elvin M. Peters</span>' +
         '</a>' +
         '<nav class="links">' +
-          '<a href="/apps/">Apps</a>' +
+          '<a href="/projects/">Projects</a>' +
           extra +
-          '<a href="https://play.elvinpeters.com/">Play</a>' +
           '<a href="https://elvinpeters.com/services/">Services</a>' +
+          '<a href="https://elvinpeters.com/contact/">Contact</a>' +
           '<button class="themebtn" data-theme-toggle type="button"></button>' +
           '<a class="cta" href="https://meet.elvinpeters.com">Book a call</a>' +
         '</nav>' +
@@ -73,7 +73,7 @@
       '<div class="container">' +
         'Built and hosted by <a href="https://elvinpeters.com/" style="color:var(--gold-2)">Elvin M. Peters</a>' +
         ' — Toronto. Free to use, nothing tracked beyond page views, no sign-up. ' +
-        '<a href="/apps/">All apps</a> · <a href="https://elvinpeters.com/services/">Work with me</a>' +
+        '<a href="/projects/">All projects</a> · <a href="https://elvinpeters.com/services/">Work with me</a>' +
       '</div>';
   }
 
