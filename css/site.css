@@ -1,0 +1,245 @@
+/* ===================================================================
+   site.css — the design system for elvinpeters.com.
+   Three layers:
+     L1 STRUCTURE — type scale, space, radius, measure. Context-free.
+     L2 PALETTES  — raw hex. THE ONLY PLACE A HEX LITERAL MAY LIVE.
+     L3 ROLES     — 15 color names, reassigned per context.
+   Contexts: site-light (default) · site-dark (OS or pinned) ·
+   book-light ([data-theme="book"], never flips).
+   Rules of the house: gold is a FILL, --accent-ink is the only gold
+   text; every button is a pill; breakpoints are 640 and 920 only
+   (deliberate exceptions carry a bp-exempt comment).
+   =================================================================== */
+
+:root{
+  /* ---------- L1: TYPE — 5 fixed + 4 fluid steps. 12px floor. ---------- */
+  --fs-label: 12px;
+  --fs-sm: 14px;
+  --fs-body: 16px;
+  --fs-lead: 18px;
+  --fs-lead-lg: 22px;
+  --fs-h3: clamp(20px, 2.2vw, 24px);
+  --fs-h2: clamp(28px, 3.4vw, 40px);
+  --fs-h1: clamp(34px, 4.6vw, 52px);
+  --fs-display: clamp(40px, 5.6vw, 64px);
+
+  --lh-tight: 1.12;
+  --lh-snug: 1.2;
+  --lh-body: 1.6;
+  --lh-prose: 1.75;
+  --track-label: .14em;
+
+  /* ---------- L1: SPACE — 4px base ---------- */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px;
+  --sp-6:24px; --sp-7:32px; --sp-8:40px; --sp-9:56px; --sp-10:72px;
+  --sp-section: clamp(56px, 7vw, 88px);
+  --sp-section-tight: clamp(32px, 4vw, 48px);
+
+  /* ---------- L1: RADIUS ---------- */
+  --r-pill: 999px;   /* every button, chip, pill */
+  --r-sm: 10px;      /* inputs, thumbnails, sigil */
+  --r-card: 16px;    /* cards, panels */
+  --r-lg: 20px;      /* full-width bands */
+
+  /* ---------- L1: MEASURE / CHROME / MOTION ---------- */
+  --w-wide: 1080px;
+  --w-text: 720px;
+  --measure: 62ch;
+  --measure-tight: 46ch;
+  --nav-h: 64px;
+  --tap: 44px;
+  --scroll-offset: calc(var(--nav-h) + 12px);
+  --fast: .18s;
+  --slow: .35s;
+  --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* ---------- L2: PALETTES ---------- */
+  /* site light */
+  --l-bg:#e6ebf1;      --l-bg2:#dde4ec;
+  --l-panel:#ffffff;   --l-panel2:#f3f6fa;
+  --l-line:#c3cedd;    --l-linesoft:#d3dce8;  --l-linestrong:#7d8da3;
+  --l-ink:#0e1a2b;     --l-ink2:#3d4d63;      --l-muted:#4f6076;
+  --l-accent:#9c761f;  --l-accenthi:#b3892f;  --l-accentink:#7a5a12; --l-accenton:#1b1304;
+  --l-info:#1c6ea8;    --l-ok:#1e7a4d;        --l-warn:#a33a3a;
+
+  /* site dark */
+  --d-bg:#0a1524;      --d-bg2:#060d18;
+  --d-panel:#1b2c45;   --d-panel2:#131f33;
+  --d-line:#2b405c;    --d-linesoft:#223351;  --d-linestrong:#64809f;
+  --d-ink:#e9eff7;     --d-ink2:#b7c6d9;      --d-muted:#8ba2bd;
+  --d-accent:#c9a250;  --d-accenthi:#e0bd6b;  --d-accentink:#e0bd6b; --d-accenton:#0b1220;
+  --d-info:#4fb3f0;    --d-ok:#5fd39b;        --d-warn:#ff8f8f;
+
+  /* book, fixed light */
+  --b-bg:#ffffff;      --b-bg2:#eef2f8;
+  --b-panel:#ffffff;   --b-panel2:#f5f8fc;
+  --b-line:#d6dfea;    --b-linesoft:#e6ecf4;  --b-linestrong:#7d8da3;
+  --b-ink:#0a1828;     --b-ink2:#3c4a5c;      --b-muted:#5c6b7f;
+  --b-accent:#9c761f;  --b-accenthi:#b3892f;  --b-accentink:#7a5a12; --b-accenton:#1b1304;
+  --b-info:#1f6096;    --b-ok:#1e7a4d;        --b-warn:#a33a3a;
+
+  /* ---------- L3: ROLES — default = site light ---------- */
+  --bg:var(--l-bg);              --bg-2:var(--l-bg2);
+  --panel:var(--l-panel);        --panel-2:var(--l-panel2);
+  --line:var(--l-line);          --line-soft:var(--l-linesoft);
+  --line-strong:var(--l-linestrong);
+  --ink:var(--l-ink);            --ink-2:var(--l-ink2);   --muted:var(--l-muted);
+  --accent:var(--l-accent);      --accent-hi:var(--l-accenthi);
+  --accent-ink:var(--l-accentink); --accent-on:var(--l-accenton);
+  --info:var(--l-info);          --ok:var(--l-ok);        --warn:var(--l-warn);
+  --glow: rgba(156,118,31,.14);
+  --shadow: 0 18px 40px -24px rgba(14,26,43,.45);
+  --card-lift: 0 26px 50px -28px rgba(14,26,43,.55);
+  /* legacy aliases consumed by pre-system page CSS; retire as pages migrate */
+  --gold:var(--accent); --gold-2:var(--accent-hi); --cyan:var(--info);
+}
+
+/* ---------- L3: site dark via OS, unless a theme is pinned ---------- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]){
+    --bg:var(--d-bg); --bg-2:var(--d-bg2);
+    --panel:var(--d-panel); --panel-2:var(--d-panel2);
+    --line:var(--d-line); --line-soft:var(--d-linesoft); --line-strong:var(--d-linestrong);
+    --ink:var(--d-ink); --ink-2:var(--d-ink2); --muted:var(--d-muted);
+    --accent:var(--d-accent); --accent-hi:var(--d-accenthi);
+    --accent-ink:var(--d-accentink); --accent-on:var(--d-accenton);
+    --info:var(--d-info); --ok:var(--d-ok); --warn:var(--d-warn);
+    --glow: rgba(201,162,80,.16);
+    --shadow: 0 24px 50px -28px rgba(0,0,0,.7);
+    --card-lift: 0 34px 60px -30px rgba(0,0,0,.8);
+  }
+}
+
+/* ---------- L3: site dark, pinned by the toggle ---------- */
+:root[data-theme="dark"]{
+  --bg:var(--d-bg); --bg-2:var(--d-bg2);
+  --panel:var(--d-panel); --panel-2:var(--d-panel2);
+  --line:var(--d-line); --line-soft:var(--d-linesoft); --line-strong:var(--d-linestrong);
+  --ink:var(--d-ink); --ink-2:var(--d-ink2); --muted:var(--d-muted);
+  --accent:var(--d-accent); --accent-hi:var(--d-accenthi);
+  --accent-ink:var(--d-accentink); --accent-on:var(--d-accenton);
+  --info:var(--d-info); --ok:var(--d-ok); --warn:var(--d-warn);
+  --glow: rgba(201,162,80,.16);
+  --shadow: 0 24px 50px -28px rgba(0,0,0,.7);
+  --card-lift: 0 34px 60px -30px rgba(0,0,0,.8);
+}
+
+/* ---------- L3: site light, pinned (explicit so the toggle beats the OS query) ---------- */
+:root[data-theme="light"]{
+  --bg:var(--l-bg); --bg-2:var(--l-bg2);
+  --panel:var(--l-panel); --panel-2:var(--l-panel2);
+  --line:var(--l-line); --line-soft:var(--l-linesoft); --line-strong:var(--l-linestrong);
+  --ink:var(--l-ink); --ink-2:var(--l-ink2); --muted:var(--l-muted);
+  --accent:var(--l-accent); --accent-hi:var(--l-accenthi);
+  --accent-ink:var(--l-accentink); --accent-on:var(--l-accenton);
+  --info:var(--l-info); --ok:var(--l-ok); --warn:var(--l-warn);
+  --glow: rgba(156,118,31,.14);
+  --shadow: 0 18px 40px -24px rgba(14,26,43,.45);
+  --card-lift: 0 26px 50px -28px rgba(14,26,43,.55);
+}
+
+/* ---------- L3: BOOK — fixed light, never flips, no toggle rendered ---------- */
+:root[data-theme="book"]{
+  color-scheme: light;
+  --bg:var(--b-bg); --bg-2:var(--b-bg2);
+  --panel:var(--b-panel); --panel-2:var(--b-panel2);
+  --line:var(--b-line); --line-soft:var(--b-linesoft); --line-strong:var(--b-linestrong);
+  --ink:var(--b-ink); --ink-2:var(--b-ink2); --muted:var(--b-muted);
+  --accent:var(--b-accent); --accent-hi:var(--b-accenthi);
+  --accent-ink:var(--b-accentink); --accent-on:var(--b-accenton);
+  --info:var(--b-info); --ok:var(--b-ok); --warn:var(--b-warn);
+  --glow: rgba(156,118,31,.10);
+  --shadow: 0 14px 34px -22px rgba(10,24,40,.38);
+  --card-lift: 0 22px 44px -26px rgba(10,24,40,.45);
+}
+
+/* ===================================================================
+   PRIMITIVES — new class names; pages adopt them wave by wave.
+   =================================================================== */
+
+html{ -webkit-text-size-adjust:100% }
+
+h1,h2,h3,h4{ font-family:var(--serif); font-weight:400; margin:0; text-wrap:balance }
+h1{ font-size:var(--fs-h1); line-height:var(--lh-tight); letter-spacing:-.015em }
+h2{ font-size:var(--fs-h2); line-height:var(--lh-tight); letter-spacing:-.01em }
+h3{ font-size:var(--fs-h3); line-height:var(--lh-snug) }
+
+[id]{ scroll-margin-top: var(--scroll-offset) }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:var(--tap); padding:0 22px; border-radius:var(--r-pill);
+  font:600 var(--fs-body)/1 var(--sans);
+  border:1px solid transparent; cursor:pointer; white-space:nowrap;
+  color:var(--ink); text-decoration:none;
+}
+.btn--lg{ min-height:56px; padding:0 30px; font-size:var(--fs-lead) }
+.btn--primary{ background:linear-gradient(135deg,var(--accent),var(--accent-hi)); color:var(--accent-on); box-shadow:var(--shadow) }
+.btn--primary:hover{ filter:brightness(1.06) }
+.btn--ghost{ border-color:var(--line-strong); color:var(--ink) }
+.btn--ghost:hover{ border-color:var(--accent) }
+
+.label{
+  font-size:var(--fs-label); font-weight:700; letter-spacing:var(--track-label);
+  text-transform:uppercase; color:var(--accent-ink);
+}
+
+.field{
+  width:100%; min-height:var(--tap); padding:12px 14px; border-radius:var(--r-sm);
+  border:1px solid var(--line-strong); background:var(--panel); color:var(--ink);
+  font-family:var(--sans); font-size:var(--fs-body);
+}
+.field::placeholder{ color:var(--muted) }
+.field:focus{ outline:2px solid var(--accent-hi); outline-offset:1px; border-color:var(--accent) }
+
+.section{ padding:var(--sp-section) 0 }
+.section--cont{ padding-top:var(--sp-section-tight) }
+
+:focus-visible{ outline:2px solid var(--accent-hi); outline-offset:3px; border-radius:4px }
+
+/* ===================================================================
+   NAV CHROME — mobile menu (site.js drives state).
+   ≤920px: page-local link-hiding rules are superseded here; the burger
+   appears and every destination stays reachable.
+   =================================================================== */
+
+.navburger{
+  display:none; align-items:center; justify-content:center;
+  width:var(--tap); height:var(--tap); margin-left:auto;
+  background:none; border:1px solid var(--line); border-radius:var(--r-sm);
+  color:var(--ink); cursor:pointer; font-size:18px; line-height:1;
+}
+.navburger[aria-expanded="true"]{ border-color:var(--accent); color:var(--accent-ink) }
+
+.navdrawer{
+  display:none; position:fixed; top:var(--nav-h); left:0; right:0; z-index:60;
+  background:var(--panel); border-bottom:1px solid var(--line);
+  box-shadow:var(--card-lift); padding:var(--sp-4) var(--sp-6) var(--sp-6);
+  max-height:calc(100vh - var(--nav-h)); overflow:auto;
+}
+.navdrawer.open{ display:block }
+.navdrawer a{
+  display:flex; align-items:center; min-height:var(--tap);
+  padding:0 var(--sp-2); font-size:var(--fs-lead); color:var(--ink);
+  border-bottom:1px solid var(--line-soft); text-decoration:none;
+}
+.navdrawer a:last-child{ border-bottom:none }
+.navdrawer a.cta{
+  justify-content:center; margin:0 0 var(--sp-3); border:1px solid var(--accent);
+  border-radius:var(--r-pill); color:var(--accent-ink); font-weight:600;
+  border-bottom:1px solid var(--accent);
+}
+.navoverlay{
+  display:none; position:fixed; inset:var(--nav-h) 0 0 0; z-index:50;
+  background:rgba(4,10,20,.45);
+}
+.navoverlay.open{ display:block }
+
+@media(max-width:920px){
+  .navburger{ display:inline-flex }
+  .nav .links a:not(.cta), .nav .lk a:not(.cta){ display:none }
+}
+@media(max-width:640px){
+  .nav .links a.cta, .nav .lk a.cta{ display:none } /* CTA moves into the drawer */
+}
