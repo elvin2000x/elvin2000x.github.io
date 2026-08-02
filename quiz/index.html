@@ -173,7 +173,7 @@
   <div class="wrap">
     <div class="topbar">
       <span class="brand"><a href="https://elvinpeters.com">The Artificial Advantage</a></span>
-      <a class="skip" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" id="skipLink">Skip to the book →</a>
+      <a class="skip" href="/book.html" id="skipLink">Skip to the book →</a>
     </div>
     <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
     <div id="stage"></div>
@@ -189,7 +189,7 @@
    runs from this copy. Keep it valid.
    ========================================================================= */
 var QUIZ = {
-  bookUrl: "https://www.amazon.com/dp/B0H4X2S2JD",
+  bookUrl: "https://elvinpeters.com/system/",
   salesUrl: "https://elvinpeters.com/",
   leadApi: "https://ultimateaidirectory.com/api/lead", // owned lead DB (HTTPS, CORS-enabled)
 
@@ -387,7 +387,7 @@ function startQuizEngine() {
     render(
       '<div class="card gate">' +
         '<div class="eyebrow">Almost there</div>' +
-        '<h1 style="font-size:30px;margin-bottom:10px;">Where should we send your result?</h1>' +
+        '<h1 style="font-size:30px;margin-bottom:10px;">One step before your result</h1>' +
         '<p style="color:var(--muted);margin-bottom:22px;">Your personalized AI toolkit and result, plus one short email a week with AI workflows that actually work. No spam, unsubscribe any time.</p>' +
         '<div class="err" id="gateErr">Please enter a valid email.</div>' +
         '<label for="qname">First name (optional)</label>' +
@@ -395,7 +395,7 @@ function startQuizEngine() {
         '<label for="qemail">Email</label>' +
         '<input id="qemail" type="email" autocomplete="email" placeholder="you@work.com" />' +
         '<button class="btn full" id="seeBtn">Show me my AI style →</button>' +
-        '<div class="fineprint">We only use this to send your result and the newsletter.</div>' +
+        '<div class="fineprint">Instant result on this page. We also send the free starter kit by email.</div>' +
         '<div class="nav-row"><button class="back" id="backBtn2">← Back</button><span></span></div>' +
       '</div>'
     );
@@ -468,7 +468,7 @@ function startQuizEngine() {
         '<div class="book-cta">' +
           '<div class="why">'+A.angle+'</div>' +
           '<a class="btn" href="'+QUIZ.bookUrl+'" target="_blank" rel="noopener" id="bookBtn">Get The Artificial Advantage — $37 →</a>' +
-          '<div class="price">PDF · instant delivery · 14-day money-back guarantee · also on Amazon</div>' +
+          '<div class="price">Ebook + complete kit · instant download · 14-day money-back guarantee</div>' +
         '</div>' +
         '<div class="share"><a href="'+QUIZ.salesUrl+'" target="_blank" rel="noopener">Read more about the book →</a></div>' +
       '</div>'
