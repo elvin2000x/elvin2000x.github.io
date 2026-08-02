@@ -42,7 +42,7 @@
 {
   "@context":"https://schema.org",
   "@graph":[
-    {"@type":"Person","@id":"https://elvinpeters.com/#elvin","name":"Elvin M. Peters","jobTitle":"AI Consultant","url":"https://elvinpeters.com/","alumniOf":["Google","goeasy"],"knowsAbout":["AI enablement","AI direction","Google Ads","paid media","AI training"],"sameAs":["https://www.linkedin.com/in/elvinmpeters","https://twitter.com/elvin_peters"]},
+    {"@type":"Person","@id":"https://elvinpeters.com/#elvin","name":"Elvin M. Peters","jobTitle":"AI Consultant","url":"https://elvinpeters.com/","knowsAbout":["AI enablement","AI direction","Google Ads","paid media","AI training"],"sameAs":["https://www.linkedin.com/in/elvinmpeters","https://twitter.com/elvin_peters"]},
     {"@type":"WebSite","@id":"https://elvinpeters.com/#website","url":"https://elvinpeters.com/","name":"Elvin M. Peters","publisher":{"@id":"https://elvinpeters.com/#elvin"}},
     {"@type":"ProfessionalService","name":"Elvin Peters, AI Consulting and Google Ads","provider":{"@id":"https://elvinpeters.com/#elvin"},"areaServed":["Toronto","Canada","Remote"],"serviceType":"AI consulting, coaching, and Google Ads management","url":"https://elvinpeters.com/services/"},
     {"@type":"Book","name":"The Artificial Advantage","author":{"@id":"https://elvinpeters.com/#elvin"},"isbn":"9798254324782","url":"https://elvinpeters.com/book.html"}
@@ -125,7 +125,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .heroviz::before{content:"";position:absolute;width:min(430px,100%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle, var(--glow), transparent 64%);filter:blur(4px)}
 .heroviz .bookwrap{position:relative;transform:rotate(4.5deg);transition:transform .4s cubic-bezier(.2,.8,.3,1)}
 .heroviz:hover .bookwrap{transform:rotate(2deg) translateY(-5px)}
-.heroviz img.bcover{width:min(268px,58vw);display:block;border-radius:10px;border:1px solid color-mix(in srgb,var(--gold) 36%,var(--line));box-shadow:0 44px 74px -32px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05)}
+.heroviz img.bcover{width:min(268px,58vw);height:auto;display:block;border-radius:10px;border:1px solid color-mix(in srgb,var(--gold) 36%,var(--line));box-shadow:0 44px 74px -32px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05)}
 .vchip{position:absolute;display:inline-flex;align-items:center;gap:9px;background:color-mix(in srgb, var(--panel) 90%, transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:13px;font-weight:600;color:var(--ink);box-shadow:var(--shadow);white-space:nowrap}
 .vchip.vc1{top:5%;right:-3%;color:var(--gold-2);border-color:color-mix(in srgb,var(--gold) 46%,var(--line))}
 .vchip.vc2{bottom:6%;left:-5%}
@@ -169,7 +169,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .credbar .sep{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.6}
 @media(max-width:680px){.credbar .sep{display:none}.credbar .container{gap:6px 0;flex-direction:column}}
 .feature{display:grid;grid-template-columns:0.72fr 1fr;gap:44px;align-items:center;background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:38px}
-.feature img{width:100%;max-width:280px;border-radius:10px;box-shadow:var(--card-lift);display:block;margin:0 auto;justify-self:center}
+.feature img{width:100%;max-width:280px;height:auto;border-radius:10px;box-shadow:var(--card-lift);display:block;margin:0 auto;justify-self:center}
 .feature h2{font-size:clamp(1.9rem,3.6vw,2.6rem);letter-spacing:-.01em;margin:8px 0 0}
 .feature .tag2{font-family:var(--serif);font-style:italic;font-size:1.35rem;color:var(--gold-2);margin:10px 0 0}
 .feature p{color:var(--ink-2);font-size:16px;line-height:1.65;margin:16px 0 0;max-width:48ch}
@@ -255,8 +255,8 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
           <a class="btn ghost" href="/book.html">Get the book</a>
         </div>
         <div class="cred">
-          <span><b>Ex-Google</b> Ads</span><span class="dot"></span>
-          <span><b>Multimillion-$</b> campaigns at goeasy</span><span class="dot"></span>
+          <span><b>Big-tech</b> ads training</span><span class="dot"></span>
+          <span><b>Multimillion-$</b> budgets managed</span><span class="dot"></span>
           <span><b>Author</b>, The Artificial Advantage</span>
         </div>
       </div>
@@ -264,7 +264,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <div class="bookwrap">
           <img class="bcover" src="/img/cover-hero.webp" alt="The Artificial Advantage, the book by Elvin M. Peters" width="600" height="960">
           <span class="vchip vc1">★ Live on Amazon</span>
-          <span class="vchip vc2"><img src="/img/headshot.jpg" alt="">Elvin M. Peters · Ex-Google Ads</span>
+          <span class="vchip vc2"><img src="/img/headshot.jpg" alt="">Elvin M. Peters · Ads &amp; AI operator</span>
         </div>
       </div>
     </div>
@@ -272,7 +272,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
 
   <div class="credbar"><div class="container">
     <span>Paid media at scale inside <b>Google Ads</b></span><span class="sep"></span>
-    <span>Ran multimillion-dollar campaigns at <b>goeasy</b></span><span class="sep"></span>
+    <span>Multimillion-dollar campaigns for a <b>leading Canadian fintech</b></span><span class="sep"></span>
     <span>Author of <b>The Artificial Advantage</b></span><span class="sep"></span>
     <span>Builds and self-hosts AI systems <b>solo</b></span>
   </div></div>
@@ -281,7 +281,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   <section class="section" id="services"><div class="container">
     <div class="section-head">
       <div><span class="eyebrow">Work with me</span><h2>AI and Google Ads, run by one operator.</h2></div>
-      <p>I spent years running paid media at Google and marketing at goeasy, then taught myself to build with AI. Now you get both: the strategy and the person who actually builds it. <a href="/services/" style="color:var(--gold-2);font-weight:600">Full services and pricing →</a></p>
+      <p>I spent a decade running paid media inside big tech and Canadian fintech, then taught myself to build with AI. Now you get both: the strategy and the person who actually builds it. <a href="/services/" style="color:var(--gold-2);font-weight:600">Full services and pricing →</a></p>
     </div>
 
     <div class="bucket-label">Put AI to work</div>
@@ -311,13 +311,13 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
       <div class="svc">
         <h3>Google Ads Audit</h3>
         <span class="who">For businesses already spending</span>
-        <p>A former Google Ads insider tears down your account and hands you a prioritized plan of exactly what to fix. From $499.</p>
+        <p>A specialist with three years inside Google Ads tears down your account and hands you a prioritized plan of exactly what to fix. From $499.</p>
         <div class="row"><a href="/google-ads-audit/">View the audit →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
       </div>
       <div class="svc">
         <h3>Google Ads Management</h3>
         <span class="who">For businesses ready to grow</span>
-        <p>Done for you paid search run by someone who managed real budgets inside Google, so every dollar stays accountable.</p>
+        <p>Done for you paid search run by someone who managed seven-figure budgets at platform scale, so every dollar stays accountable.</p>
         <div class="row"><a href="/google-ads/">View management →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
       </div>
     </div>
@@ -349,8 +349,8 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
     </div>
     <div class="receipts">
       <div class="rcol">
-        <div class="item"><h4>Paid media at Google scale</h4><p>Years running Google Ads where a wasted dollar gets noticed. That discipline is what I bring to your campaigns.</p></div>
-        <div class="item"><h4>A marketer who learned to build</h4><p>I ran paid campaigns at Google and goeasy across Google, Meta, and Quora, then taught myself to build with AI. You get someone who understands the business and can actually ship the tool, not just advise on it.</p></div>
+        <div class="item"><h4>Seven-figure paid media</h4><p>Years running Google Ads where a wasted dollar gets noticed. That discipline is what I bring to your campaigns.</p></div>
+        <div class="item"><h4>A marketer who learned to build</h4><p>I ran paid campaigns across Google, Meta, and Quora for big-tech and fintech brands, then taught myself to build with AI. You get someone who understands the business and can actually ship the tool, not just advise on it.</p></div>
         <div class="item"><h4>A published book on this exact topic</h4><p>The Artificial Advantage is my method in print, live on Amazon. The frameworks I teach are the ones I use.</p></div>
         <div class="item"><h4>I build and self-host it all</h4><p>This site, my scheduler, my CRM, a shelf of apps and games, run on my own server by hand. When I say I can install AI that ships, the proof is everywhere you look here.</p></div>
       </div>
