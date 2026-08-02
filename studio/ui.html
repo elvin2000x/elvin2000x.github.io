@@ -1,0 +1,167 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Site Studio · elvinpeters.com</title>
+<style>
+:root{--bg:#0a1524;--panel:#1b2c45;--panel2:#131f33;--line:#2b405c;--ink:#e9eff7;--ink2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold2:#e0bd6b;--ok:#5fd39b;--warn:#ff8f8f}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 Inter,-apple-system,'Segoe UI',Roboto,sans-serif;padding-bottom:88px}
+header{position:sticky;top:0;z-index:10;background:var(--panel2);border-bottom:1px solid var(--line);padding:14px 18px;display:flex;align-items:center;gap:12px}
+header b{font-family:Georgia,serif;font-weight:600;font-size:18px}
+header .crumb{color:var(--muted);font-size:14px}
+main{max-width:680px;margin:0 auto;padding:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.card h3{font-size:17px;margin-bottom:4px}
+.card .help{color:var(--muted);font-size:14px}
+.card.section{cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:64px}
+.card.section:active{border-color:var(--gold)}
+.arw{color:var(--gold2);font-size:20px}
+label{display:block;font-size:13px;font-weight:600;color:var(--ink2);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.06em}
+input[type=text],textarea{width:100%;min-height:44px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font:16px/1.4 inherit}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--gold);border-color:var(--gold)}
+.item{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:var(--panel2)}
+.item .rowbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 15px inherit;cursor:pointer}
+button.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b1220;border:none}
+button.small{min-height:36px;padding:0 12px;font-size:13px}
+button:disabled{opacity:.45}
+.bar{position:fixed;bottom:0;left:0;right:0;background:var(--panel2);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center;z-index:20}
+.bar button{flex:1;max-width:200px}
+.msg{font-size:14px;margin-top:10px;color:var(--muted);white-space:pre-wrap}
+.msg.ok{color:var(--ok)}.msg.err{color:var(--warn)}
+.pub{background:#0b1220;border:1px solid var(--line);border-radius:10px;padding:12px;font:13px/1.6 ui-monospace,Consolas,monospace;white-space:pre-wrap;margin-top:10px;max-height:280px;overflow:auto}
+iframe{width:100%;height:70vh;border:1px solid var(--line);border-radius:12px;background:#fff}
+.pv-controls{display:flex;gap:8px;margin:10px 0}
+.pv-controls button[aria-pressed=true]{border-color:var(--gold);color:var(--gold2)}
+.hist .row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.hist .row small{color:var(--muted);display:block}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:6px}
+.dot.warn{background:var(--warn)}
+a{color:var(--gold2)}
+.iframe-wrap{max-width:390px;margin:0 auto;transition:max-width .2s}
+.iframe-wrap.wide{max-width:100%}
+</style>
+<header><b>Site Studio</b> <span class="crumb" id="crumb">loading…</span>
+  <span style="margin-left:auto;font-size:13px" id="repo"></span></header>
+<main id="main"></main>
+<div class="bar" id="bar" hidden>
+  <button id="saveBtn">Save</button>
+  <button id="prevBtn">Preview</button>
+  <button class="primary" id="pubBtn">Publish</button>
+</div>
+<script>
+'use strict';
+const $ = s => document.querySelector(s);
+let STATE = null, CUR = null, DATA = null, DIRTY = false;
+
+const get = (o, p) => p.split('.').reduce((a, k) => a && a[k], o);
+const set = (o, p, v) => { const ks = p.split('.'); let t = o; for (const k of ks.slice(0, -1)) t = t[k] = t[k] || {}; t[ks.at(-1)] = v; };
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function boot() {
+  STATE = await (await fetch('/api/state')).json();
+  $('#repo').textContent = STATE.repo.branch ? STATE.repo.branch + (STATE.repo.dirty.length ? ' · unsaved publish pending' : '') : '';
+  home();
+}
+function home() {
+  CUR = null; DATA = null; $('#bar').hidden = true; $('#crumb').textContent = 'what do you want to edit?';
+  const m = $('#main'); m.innerHTML = '';
+  for (const s of STATE.sections) {
+    const c = document.createElement('div');
+    c.className = 'card section';
+    c.innerHTML = `<div><h3>${esc(s.title)}</h3><div class="help">${esc(s.help || '')}</div></div><span class="arw">→</span>`;
+    c.onclick = () => open(s);
+    m.appendChild(c);
+  }
+  const h = document.createElement('div');
+  h.className = 'card hist';
+  h.innerHTML = '<h3>Recent publishes</h3>' + (STATE.repo.publishes || []).map(pb =>
+    `<div class="row"><div>${esc(pb.msg)}<small>${esc(pb.date)} · ${esc(pb.sha)}</small></div>
+     <button class="small" onclick="revert('${esc(pb.sha)}')">Undo</button></div>`).join('');
+  m.appendChild(h);
+}
+async function open(s) {
+  CUR = s; DATA = await (await fetch('/api/content/' + s.name)).json(); DIRTY = false;
+  $('#bar').hidden = false; $('#crumb').textContent = s.title;
+  render();
+}
+function field(f, keyPrefix) {
+  const key = (keyPrefix || '') + f.key;
+  const val = get(DATA, key) ?? '';
+  const id = 'f_' + key.replace(/[^a-z0-9]/gi, '_');
+  if (f.type === 'textarea')
+    return `<label for="${id}">${esc(f.label)}</label><textarea id="${id}" data-key="${esc(key)}" maxlength="${f.maxlen || 1000}">${esc(val)}</textarea>`;
+  return `<label for="${id}">${esc(f.label)}</label><input type="text" id="${id}" data-key="${esc(key)}" value="${esc(val)}" maxlength="${f.maxlen || 300}">`;
+}
+function render() {
+  const m = $('#main'); let html = '<div class="card"><button class="small" onclick="home()">← All sections</button>';
+  for (const f of CUR.fields) {
+    if (f.type === 'list') {
+      const arr = get(DATA, f.key) || [];
+      html += `<label>${esc(f.label)}</label>`;
+      arr.forEach((item, i) => {
+        html += `<div class="item">`;
+        for (const sub of f.item_fields)
+          html += field({ ...sub, key: f.key + '.' + i + '.' + sub.key, label: sub.label }, '');
+        html += `<div class="rowbtns">
+          <button class="small" onclick="move('${f.key}',${i},-1)">↑</button>
+          <button class="small" onclick="move('${f.key}',${i},1)">↓</button>
+          <button class="small" onclick="del('${f.key}',${i})">Remove</button></div></div>`;
+      });
+      html += `<button class="small" onclick="add('${f.key}')">+ Add</button>`;
+    } else html += field(f);
+  }
+  html += '<div class="msg" id="msg"></div><div id="pv"></div></div>';
+  m.innerHTML = html;
+  m.querySelectorAll('input,textarea').forEach(el =>
+    el.addEventListener('input', () => { set(DATA, el.dataset.key, el.value); DIRTY = true; }));
+}
+function move(key, i, d) { const a = get(DATA, key); const j = i + d; if (j < 0 || j >= a.length) return; [a[i], a[j]] = [a[j], a[i]]; DIRTY = true; render(); }
+function del(key, i) { get(DATA, key).splice(i, 1); DIRTY = true; render(); }
+function add(key) { const f = CUR.fields.find(x => x.key === key); const blank = {}; f.item_fields.forEach(s => blank[s.key] = ''); get(DATA, key).push(blank); DIRTY = true; render(); }
+
+async function save(silent) {
+  const r = await fetch('/api/content/' + CUR.name, { method: 'PUT', body: JSON.stringify(DATA) });
+  const j = await r.json();
+  if (!silent) msg(j.saved ? 'Saved. Preview it, then Publish to go live.' : (j.error || 'save failed'), j.saved);
+  DIRTY = !j.saved;
+  return j.saved;
+}
+async function preview() {
+  if (DIRTY) await save(true);
+  msg('Building preview…', true);
+  const r = await (await fetch('/api/preview', { method: 'POST' })).json();
+  if (!r.id) return msg(r.detail || r.error || 'preview failed', false);
+  const page = (CUR.preview || '/').replace(/^\//, '');
+  $('#pv').innerHTML = `<div class="pv-controls">
+      <button class="small" aria-pressed="true" onclick="pw(this,false)">Phone</button>
+      <button class="small" aria-pressed="false" onclick="pw(this,true)">Desktop</button></div>
+    <div class="iframe-wrap" id="ifw"><iframe src="/preview/${r.id}/${page}"></iframe></div>`;
+  msg('Preview below is byte-for-byte what will ship.', true);
+}
+function pw(btn, wide) { $('#ifw').classList.toggle('wide', wide); document.querySelectorAll('.pv-controls button').forEach(b => b.setAttribute('aria-pressed', b === btn)); }
+async function publish() {
+  if (DIRTY) await save(true);
+  if (!confirm('Publish to the live site?')) return;
+  $('#pubBtn').disabled = true;
+  const out = document.createElement('div'); out.className = 'pub'; ($('#pv') || $('#msg')).after(out);
+  const r = await fetch('/api/publish', { method: 'POST' });
+  const reader = r.body.getReader(); const dec = new TextDecoder();
+  while (true) { const { done, value } = await reader.read(); if (done) break; out.textContent += dec.decode(value); out.scrollTop = out.scrollHeight; }
+  $('#pubBtn').disabled = false;
+  STATE = await (await fetch('/api/state')).json();
+}
+async function revert(sha) {
+  if (!confirm('Undo this publish? A reversing commit goes live in ~60s.')) return;
+  const r = await (await fetch('/api/revert', { method: 'POST', body: JSON.stringify({ sha }) })).json();
+  alert(r.reverted ? 'Undone and pushed. Live in about a minute.' : (r.error || 'failed'));
+  boot();
+}
+function msg(t, ok) { const el = $('#msg'); if (el) { el.textContent = t; el.className = 'msg ' + (ok ? 'ok' : 'err'); } }
+$('#saveBtn').onclick = () => save(false);
+$('#prevBtn').onclick = preview;
+$('#pubBtn').onclick = publish;
+window.addEventListener('beforeunload', e => { if (DIRTY) e.preventDefault(); });
+boot();
+</script>
