@@ -39,7 +39,7 @@
   .stars{color:var(--gold2);letter-spacing:2px}
   .hero-seal{font-size:13px;color:var(--muted);margin-top:16px}
   .hero-img{position:relative;display:flex;justify-content:center}
-  .hero-img img{width:100%;max-width:360px;border-radius:8px;box-shadow:0 24px 50px rgba(10,24,40,.22)}
+  .hero-img img{width:100%;max-width:290px;height:auto;border-radius:8px;box-shadow:0 24px 50px rgba(10,24,40,.22)}
   /* sections */
   section{padding:66px 0}
   .soft{background:var(--soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -68,6 +68,11 @@
   .srow{display:flex;justify-content:space-between;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);font-size:15px}
   .srow .v{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
   .srow strong{color:var(--ink);font-weight:600}
+  .lib{max-width:660px;margin:26px auto 0;display:grid;gap:10px}
+  .lib-row{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px}
+  .lib-row img{width:44px;height:auto;border-radius:4px;box-shadow:0 6px 14px rgba(10,24,40,.18);flex:none}
+  .lib-row b{display:block;color:var(--ink);font-size:15px}
+  .lib-row span{font-size:13px;color:var(--muted);line-height:1.45}
   .stotal{display:flex;justify-content:space-between;padding:16px 22px;background:var(--soft);font-size:14px}
   .stotal .lab{text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--muted);font-size:12px}
   .stotal .strike{text-decoration:line-through;color:var(--muted);font-size:18px}
@@ -130,7 +135,7 @@
     <p class="cta-sub">Instant access · 14-day money-back guarantee</p>
     <p class="hero-seal"><span class="stars">★★★★★</span> &nbsp;“Must-read if you’re looking to enhance your output.” · verified Amazon review of the book</p>
   </div>
-  <div class="hero-img"><img src="../img/mockup_prompts.png" alt="The Artificial Advantage System" /></div>
+  <div class="hero-img"><img src="/img/cover-hero.webp" alt="The Artificial Advantage, the book at the center of the System" width="600" height="960" /></div>
 </div></header>
 
 <!-- PROBLEM -->
@@ -162,38 +167,68 @@
   <p class="body">Everything is plug-and-play. Open it, drop in your details, send. You get wins the first day, not after a month of study.</p>
   <div class="inside">
     <div class="in-card">
-      <img src="../img/cover_prompts.png" alt="50 Best AI Prompts" />
+      <img src="/img/cover-hero.webp" alt="The Artificial Advantage ebook" width="600" height="960" />
+      <h3>The Full Book</h3>
+      <p>The Artificial Advantage, complete with all nine appendices. The method everything else here is built on: direct AI, stop prompting at it.</p>
+    </div>
+    <div class="in-card">
+      <img src="../img/cover_workbook.png" alt="7-Day AI Workbook" loading="lazy" width="800" height="1280" />
+      <h3>The 7-Day Plan</h3>
+      <p>Seven short daily exercises that rebuild your three most common work tasks around AI. By Friday it is a habit, not a someday.</p>
+    </div>
+    <div class="in-card">
+      <img src="../img/cover_prompts.png" alt="50 Best AI Prompts" loading="lazy" width="800" height="1280" />
       <h3>50 Best AI Prompts</h3>
       <p>The highest-leverage professional prompts, already built on the directing method. Email, reports, planning, research. Never stare at a blank box again.</p>
     </div>
     <div class="in-card">
-      <img src="../img/cover_roles.png" alt="12 Professional Role Packs" />
+      <img src="../img/cover_roles.png" alt="12 Professional Role Packs" loading="lazy" width="800" height="1280" />
       <h3>12 Role Playbooks</h3>
       <p>Done-for-you AI setups by job: Marketing, Sales, Finance, HR and more. Paste the playbook, and AI works like it actually understands your role.</p>
     </div>
     <div class="in-card">
-      <img src="../img/cover_workbook.png" alt="7-Day AI Workbook" />
-      <h3>The 7-Day Plan</h3>
-      <p>Seven short daily exercises that rebuild your three most common work tasks around AI. By Friday it is a habit, not a someday.</p>
+      <img src="../img/va/01-anthropic-decoded.png" alt="The 10-guide field library" loading="lazy" width="794" height="1123" />
+      <h3>The 10-Guide Library</h3>
+      <p>Ten focused field guides for what comes after the book. Every single one is listed below, so there is no mystery about what you get.</p>
     </div>
   </div>
 </div></section>
 
 <!-- OFFER / VALUE STACK -->
+
+<!-- THE LIBRARY, SPELLED OUT (credibility: every item named, no mystery value) -->
+<section class="soft"><div class="wrap">
+  <div class="label" style="text-align:center">No mystery box</div>
+  <h2 class="h2" style="text-align:center">The 10-guide field library, spelled out</h2>
+  <p class="body" style="margin:0 auto 8px;text-align:center">These answer the questions the book raises next. Here is every one, so you know exactly what you are getting.</p>
+  <div class="lib">
+    <div class="lib-row"><img src="../img/va/01-anthropic-decoded.png" alt="" loading="lazy" width="794" height="1123"><div><b>Decoded: 8 Pro AI Techniques</b><span>The prompt techniques the pros use, pulled from the actual developer docs and written in plain English.</span></div></div>
+    <div class="lib-row"><img src="../img/va/02-context-playbook.png" alt="" loading="lazy" width="794" height="1123"><div><b>Feed It Your World: The Context Playbook</b><span>Stop starting from scratch. Learn to give AI your own documents, data and files the right way.</span></div></div>
+    <div class="lib-row"><img src="../img/va/03-anti-hallucination.png" alt="" loading="lazy" width="794" height="1123"><div><b>Tell Me the Truth: The Anti-Hallucination Field Guide</b><span>Make AI stop making things up, and learn exactly when not to trust it.</span></div></div>
+    <div class="lib-row"><img src="../img/va/04-build-ai-assistant.png" alt="" loading="lazy" width="794" height="1123"><div><b>Build Your Own AI Assistant (No Code)</b><span>A reusable assistant that already knows your job, so you never retype your context again.</span></div></div>
+    <div class="lib-row"><img src="../img/va/05-automation-starter.png" alt="" loading="lazy" width="794" height="1123"><div><b>The AI Automation Starter Kit</b><span>Seven no-code automations that quietly do your daily busywork for you.</span></div></div>
+    <div class="lib-row"><img src="../img/va/06-slides-docs-images.png" alt="" loading="lazy" width="794" height="1123"><div><b>AI for Slides, Docs and Images</b><span>Generate decks, documents and visuals with AI, even if you are not a designer.</span></div></div>
+    <div class="lib-row"><img src="../img/va/07-meeting-email-machine.png" alt="" loading="lazy" width="794" height="1123"><div><b>The Meeting and Email Machine</b><span>Done-for-you AI workflows for the email and meetings that eat your whole day.</span></div></div>
+    <div class="lib-row"><img src="../img/va/08-what-not-to-put.png" alt="" loading="lazy" width="794" height="1123"><div><b>What Not to Put Into AI</b><span>The security and privacy guide that keeps you and your company out of trouble.</span></div></div>
+    <div class="lib-row"><img src="../img/va/09-cost-roi.png" alt="" loading="lazy" width="794" height="1123"><div><b>The AI Cost and ROI Playbook</b><span>Stop guessing which AI subscriptions are worth it. Measure it.</span></div></div>
+    <div class="lib-row"><img src="../img/va/10-operating-system.png" alt="" loading="lazy" width="794" height="1123"><div><b>Your 30-Minutes-a-Week AI Operating System</b><span>A simple weekly routine to keep improving and never fall behind as AI changes.</span></div></div>
+  </div>
+</div></section>
+
 <section id="order"><div class="wrap">
   <div class="label" style="text-align:center">The complete system</div>
   <h2 class="h2" style="text-align:center">Everything you need to run your work through AI</h2>
   <div class="stack">
-    <div class="srow"><div><strong>The Artificial Advantage (full ebook)</strong> · all 9 appendices included</div><div class="v">Included</div></div>
-    <div class="srow"><div><strong>50 Best AI Prompts</strong> · copy-paste professional pack</div><div class="v">$50</div></div>
-    <div class="srow"><div><strong>12 Professional Role Playbooks</strong> · by job function</div><div class="v">$59</div></div>
-    <div class="srow"><div><strong>The 7-Day AI Plan</strong> · guided daily practice</div><div class="v">$29</div></div>
-    <div class="srow"><div><strong>The Complete 10-Guide AI Library</strong> · the field guides beyond the book</div><div class="v">$236</div></div>
-    <div class="stotal"><div class="lab">Total value</div><div class="strike">$374</div></div>
+    <div class="srow"><div><strong>The Artificial Advantage</strong> · the complete ebook</div><div class="v">book + 9 appendices</div></div>
+    <div class="srow"><div><strong>The 7-Day AI Plan</strong> · guided daily practice</div><div class="v">7 days</div></div>
+    <div class="srow"><div><strong>50 Best AI Prompts</strong> · copy-paste professional pack</div><div class="v">50 prompts</div></div>
+    <div class="srow"><div><strong>12 Professional Role Playbooks</strong> · by job function</div><div class="v">12 playbooks</div></div>
+    <div class="srow"><div><strong>The 10-Guide Field Library</strong> · every guide listed above</div><div class="v">10 guides</div></div>
+    <div class="stotal"><div class="lab">For scale</div><div style="font-size:14px;color:var(--text)">One coaching session with me is <a href="/services/" style="color:var(--gold);font-weight:700">$300</a>. This is the self-serve version.</div></div>
     <div class="price">
-      <div class="today">Today</div>
+      <div class="today">The complete System</div>
       <div class="big">$37</div>
-      <div class="note">One payment · instant access · yours to keep</div>
+      <div class="note">One payment · instant download · yours to keep · 14-day money-back guarantee</div>
     </div>
   </div>
 
