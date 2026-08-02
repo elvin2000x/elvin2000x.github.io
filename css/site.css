@@ -236,10 +236,12 @@ h3{ font-size:var(--fs-h3); line-height:var(--lh-snug) }
 }
 .navoverlay.open{ display:block }
 
+html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 @media(max-width:920px){
   .navburger{ display:inline-flex }
-  .nav .links a:not(.cta), .nav .lk a:not(.cta){ display:none }
+  html .nav .links a:not(.cta), html .nav .lk a:not(.cta){ display:none }
 }
 @media(max-width:640px){
-  .nav .links a.cta, .nav .lk a.cta{ display:none } /* CTA moves into the drawer */
+  /* CTA moves into the drawer; html prefix outranks page-local display rules */
+  html .nav .links a.cta, html .nav .lk a.cta{ display:none }
 }
