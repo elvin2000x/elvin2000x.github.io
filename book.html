@@ -66,7 +66,6 @@
       --red:     var(--warn);
     }
 
-    html { scroll-behavior: smooth; }
     body {
       background: var(--black);
       color: var(--text);
@@ -366,7 +365,7 @@
     .exitpop-covers img { height: 96px; border-radius: 4px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
     .exitpop-covers img.lead { height: 124px; }
     .exitpop-btns { display: grid; grid-template-columns: 1fr; gap: 10px; }
-    .exitpop-yes { background: #2f9e6b; color: #fff; font-weight: 700; font-size: 17px; padding: 16px; border-radius: 8px; text-decoration: none; box-shadow: 0 6px 20px rgba(47,158,107,0.3); }
+    .exitpop-yes { background: linear-gradient(135deg, var(--accent), var(--accent-hi)); color: var(--accent-on); font-weight: 700; font-size: 17px; padding: 16px; border-radius: var(--r-pill); text-decoration: none; box-shadow: 0 6px 20px rgba(156,118,31,0.3); }
     .exitpop-yes:hover { filter: brightness(1.05); }
     .exitpop-no { background: transparent; color: var(--muted); font-size: 13px; padding: 10px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border); }
     .exitpop-no:hover { color: var(--text); border-color: #b85c5c; }
@@ -669,6 +668,42 @@
   </div>
 </section>
 
+<!-- ───────────── 15. NEWSLETTER (free front-end) ───────────── -->
+<section id="newsletter" class="section" style="background: var(--dark); border-top: 1px solid var(--border); padding: 60px 24px; text-align: center;">
+  <div style="max-width: 520px; margin: 0 auto;">
+    <p style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color:var(--accent-ink); margin-bottom: 12px;">Not ready to buy? Try it first</p>
+    <h2 style="font-size: var(--fs-h3); color: var(--white); margin-bottom: 12px;">Take a piece of the book for free</h2>
+    <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;">Drop your email and I'll send you the full companion toolkit free: the 7-Day Workbook, the 50 best prompts, the 12 Role Packs, the 10-guide library, and the first chapter to test the approach before you spend a cent. After that, a short note from me most weeks when I find an AI workflow actually worth stealing. I write them myself. No team, no filler.</p>
+    <form id="nlform" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+      <input id="nlemail" type="email" required placeholder="you@work.com" style="flex:1;min-width:220px;max-width:300px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--white);font-size:15px">
+      <button type="submit" style="padding:13px 22px;border-radius:10px;border:0;background:var(--accent);color:#0b1220;font-weight:700;cursor:pointer;font-size:15px">Send it over</button>
+    </form>
+    <p id="nlmsg" style="display:none;font-size:14px;margin-top:12px;color:#7fd18c"></p>
+    <script>
+    document.getElementById('nlform').addEventListener('submit', function(e){
+      e.preventDefault();
+      var f = this, m = document.getElementById('nlmsg');
+      fetch('https://ultimateaidirectory.com/api/lead', {method:'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({email: document.getElementById('nlemail').value.trim(),
+          source: 'newsletter-booksite', website: f.website.value})})
+        .then(function(r){ return r.json(); }).then(function(r){
+          m.style.display = 'block';
+          if (r.success) { f.style.display = 'none'; m.innerHTML = 'You\'re in. <a href="/dl/50-Best-AI-Prompts.pdf" download style="color:var(--accent-ink);font-weight:700;border-bottom:1px solid rgba(184,138,46,0.5)">Download your 50 prompts now &rarr;</a><br>I\'ll follow up by email with the cheat sheets and the first chapter.'; if (window.fbq) fbq('track','Lead',{content_name:'booksite-freekit'}); if (window.ttq) ttq.track('SubmitForm',{description:'booksite-freekit'}); }
+          else { m.style.color = '#ff8f8f'; m.textContent = r.error || 'Something went wrong. Try again.'; }
+        }).catch(function(){ m.style.display = 'block'; m.style.color = '#ff8f8f'; m.textContent = 'Network hiccup. Try again.'; });
+    });
+    </script>
+    <p style="font-size: 12px; color: #3a5168; margin-top: 14px;">Free. Unsubscribe any time.</p>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 22px;">Not sure it's for you? <a href="/quiz/" style="color:var(--accent-ink); text-decoration: none; border-bottom: 1px solid rgba(201,162,80,0.4);">Take the 60-second AI Style quiz →</a></p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Elvin M. Peters &nbsp;·&nbsp; <a href="mailto:elvin@elvinpeters.com">elvin@elvinpeters.com</a> &nbsp;·&nbsp; <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="buy" target="_blank">Buy the Book</a></p>
+</footer>
+
 <!-- ───────────── 7. THE OFFER + VALUE STACK ───────────── -->
 <section class="section">
   <div class="section-inner">
@@ -795,11 +830,11 @@
 
 <!-- ───────────── 13. URGENCY + FINAL CTA + TWO-PATHS ───────────── -->
 <div class="bottom-cta">
-  <h2>The window where AI literacy<br/>is a differentiator is still open.</h2>
+  <h2>The window where AI literacy is a differentiator is still open.</h2>
   <div class="two-paths">
     Two professionals start today with the same tools. In six months one is the person everyone asks how they move so fast. The other is still rewriting AI's first draft. <strong>The only difference is whether you learned to direct it.</strong>
   </div>
-  <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-primary buy" target="_blank" rel="noopener" style="font-size: 18px; padding: 18px 40px;">Get The Artificial Advantage on Amazon →</a><br/>
+  <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-primary buy" target="_blank" rel="noopener">Get The Artificial Advantage on Amazon →</a><br/>
   <a href="#newsletter" class="btn-secondary" style="margin-top: 4px;">Read the First Chapter Free</a>
   <p class="bottom-note">On Amazon · Kindle, paperback &amp; hardcover · free companion toolkit with your email</p>
 </div>
@@ -807,54 +842,18 @@
 <!-- ───────────── 14. P.S. SKIMMER RECAP ───────────── -->
 <section class="section" style="padding: 56px 24px;">
   <div class="ps-block">
-    <strong>P.S.</strong> <em>The Artificial Advantage</em> is the framework for professionals who tried AI and weren't impressed. Get it on Amazon in Kindle, paperback or hardcover, then join the email list for the free companion toolkit: the 7-Day Workbook, the 50-prompt pack, and the 12 Role Packs. If you've ever closed an AI tab thinking "this is overhyped," this is the book that changes that.
+    <strong>P.S.</strong> <em>The Artificial Advantage</em> is the framework for professionals who tried AI and weren't impressed. Get it on Amazon in Kindle, paperback or hardcover, then join the email list for the free companion toolkit: the 7-Day Workbook, the 50-prompt pack, the 12 Role Packs, the 10-guide library, and the first chapter. If you've ever closed an AI tab thinking "this is overhyped," this is the book that changes that.
     <br/>
     <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="ps-cta buy" target="_blank" rel="noopener">Get it on Amazon →</a>
   </div>
 </section>
-
-<!-- ───────────── 15. NEWSLETTER (free front-end) ───────────── -->
-<section id="newsletter" class="section" style="background: var(--dark); border-top: 1px solid var(--border); padding: 60px 24px; text-align: center;">
-  <div style="max-width: 520px; margin: 0 auto;">
-    <p style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color:var(--accent-ink); margin-bottom: 12px;">Not ready to buy? Try it first</p>
-    <h2 style="font-size: var(--fs-h3); color: var(--white); margin-bottom: 12px;">Take a piece of the book for free</h2>
-    <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;">Drop your email and I'll send you enough to test the approach before you spend a cent: the 50 best prompts, the framework cheat sheets, and the first chapter. After that, a short note from me most weeks when I find an AI workflow actually worth stealing. I write them myself. No team, no filler.</p>
-    <form id="nlform" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
-      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
-      <input id="nlemail" type="email" required placeholder="you@work.com" style="flex:1;min-width:220px;max-width:300px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:var(--white);font-size:15px">
-      <button type="submit" style="padding:13px 22px;border-radius:10px;border:0;background:var(--accent);color:#0b1220;font-weight:700;cursor:pointer;font-size:15px">Send it over</button>
-    </form>
-    <p id="nlmsg" style="display:none;font-size:14px;margin-top:12px;color:#7fd18c"></p>
-    <script>
-    document.getElementById('nlform').addEventListener('submit', function(e){
-      e.preventDefault();
-      var f = this, m = document.getElementById('nlmsg');
-      fetch('https://ultimateaidirectory.com/api/lead', {method:'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({email: document.getElementById('nlemail').value.trim(),
-          source: 'newsletter-booksite', website: f.website.value})})
-        .then(function(r){ return r.json(); }).then(function(r){
-          m.style.display = 'block';
-          if (r.success) { f.style.display = 'none'; m.innerHTML = 'You\'re in. <a href="/dl/50-Best-AI-Prompts.pdf" download style="color:var(--accent-ink);font-weight:700;border-bottom:1px solid rgba(184,138,46,0.5)">Download your 50 prompts now &rarr;</a><br>I\'ll follow up by email with the cheat sheets and the first chapter.'; if (window.fbq) fbq('track','Lead',{content_name:'booksite-freekit'}); if (window.ttq) ttq.track('SubmitForm',{description:'booksite-freekit'}); }
-          else { m.style.color = '#ff8f8f'; m.textContent = r.error || 'Something went wrong. Try again.'; }
-        }).catch(function(){ m.style.display = 'block'; m.style.color = '#ff8f8f'; m.textContent = 'Network hiccup. Try again.'; });
-    });
-    </script>
-    <p style="font-size: 12px; color: #3a5168; margin-top: 14px;">Free. Unsubscribe any time.</p>
-    <p style="font-size: 13px; color: var(--muted); margin-top: 22px;">Not sure it's for you? <a href="/quiz/" style="color:var(--accent-ink); text-decoration: none; border-bottom: 1px solid rgba(201,162,80,0.4);">Take the 60-second AI Style quiz →</a></p>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 Elvin M. Peters &nbsp;·&nbsp; <a href="mailto:elvin@elvinpeters.com">elvin@elvinpeters.com</a> &nbsp;·&nbsp; <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="buy" target="_blank">Buy the Book</a></p>
-</footer>
 
 <!-- ───────────── EXIT-INTENT POPUP (owned vs Amazon) ───────────── -->
 <div id="exitpop" class="exitpop hidden" role="dialog" aria-modal="true">
   <div class="exitpop-card">
     <button class="exitpop-x" aria-label="Close" onclick="closeExit()">×</button>
     <h2>Wait, grab the free toolkit first</h2>
-    <p>Before you go, join the email list and get <span class="gold">the companion toolkit free</span>: the 7-Day Workbook, the 50-prompt pack, and all 12 Role Packs. They make the book stick in your first week.</p>
+    <p>Before you go, join the email list and get <span class="gold">the companion toolkit free</span>: the 7-Day Workbook, the 50-prompt pack, the 12 Role Packs, the 10-guide library, and the first chapter. They make the book stick in your first week.</p>
     <div class="exitpop-covers">
       <img src="img/cover_workbook.png" alt="7-Day AI Workbook" />
       <img class="lead" src="cover.png" alt="The Artificial Advantage" />
@@ -863,7 +862,7 @@
     </div>
     <div class="exitpop-btns">
       <a class="exitpop-yes" href="#newsletter" onclick="closeExit()">Yes, send me the free toolkit →</a>
-      <a class="exitpop-no" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" onclick="closeExit()">No thanks, take me to the book on Amazon</a>
+      <a class="exitpop-no" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" onclick="closeExit()">Just take me to Amazon</a>
     </div>
   </div>
 </div>
