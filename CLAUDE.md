@@ -6,7 +6,7 @@ This repo IS the live site. Pushing to master deploys via GitHub Pages in ~60s. 
 1. `git pull --rebase` before starting work.
 2. Content and chrome flow through `node build.js` — never hand-edit generated files (currently: `writing/**` pages and `writing/_homepage_cards.html`; the list grows as the CMS lands).
 3. Before ANY push: `node build.js && node verify.js` — **the gate must print GREEN.** A FAIL means do not push; fix the cause, never the check.
-4. Prefer PR flow for anything visual or multi-file: branch → push → `gh pr create`. Elvin merges; merging deploys.
+4. Prefer PR flow for anything visual or multi-file: branch → push → `gh pr create`. **Merging is delegated to Claude** (Elvin, 2026-08-04: "less clicks for me") under two conditions: the verify gate is GREEN, and any content-judgment change (copy claims, offer structure, proof elements, pricing) had screenshots shown in chat first. Elvin can revert any merge with one click on the PR page.
 
 ## Design system (canonical doc: DESIGN-SYSTEM.md — read it before styling anything)
 - Tokens live in `css/site.css`; hex literals live there and nowhere else. Pages may add page-specific styles but NEVER redefine chrome, buttons, type scale, or breakpoints.
