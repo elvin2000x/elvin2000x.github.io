@@ -52,19 +52,19 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance;
 .nav .cta{border:1px solid var(--gold);color:var(--gold-2);padding:8px 15px;border-radius:999px;font-weight:600}
 .nav .cta:hover{background:var(--gold);color:var(--bg-2)}
 .themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:15px}
-@media(max-width:760px){.nav .links a:not(.cta){display:none}}
+@media(max-width:920px){.nav .links a:not(.cta){display:none}}
 /* hero */
 .hero{padding:56px 0 34px}
 .hero .grid{display:grid;grid-template-columns:230px 1fr;gap:40px;align-items:center}
-@media(max-width:720px){.hero .grid{grid-template-columns:1fr;text-align:center;gap:26px}}
+@media(max-width:640px){.hero .grid{grid-template-columns:1fr;text-align:center;gap:26px}}
 .hero img.cover{width:100%;max-width:230px;border-radius:10px;box-shadow:var(--shadow);margin:0 auto;display:block}
 .hero h1{font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.05;margin:8px 0 6px}
 .hero .sub{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--ink-2);margin-bottom:6px}
 .hero .series{color:var(--muted);font-size:14px;margin-bottom:18px}
 .tagline{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--gold-2);font-size:1.35rem;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);padding:12px 0;margin:6px 0 20px;display:inline-block}
 .btns{display:flex;gap:12px;flex-wrap:wrap}
-@media(max-width:720px){.btns{justify-content:center}}
-.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:12px 22px;border-radius:999px;font-weight:600;font-size:14.5px;transition:.15s;box-shadow:var(--shadow)}
+@media(max-width:640px){.btns{justify-content:center}}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:12px 22px;border-radius:999px;font-weight:600;font-size:14px;transition:.15s;box-shadow:var(--shadow)}
 .btn:hover{border-color:var(--gold);color:var(--gold-2);transform:translateY(-2px)}
 .btn.primary{background:var(--gold);border-color:var(--gold);color:#0a1524}
 .btn.primary:hover{background:var(--gold-2);color:#0a1524}
@@ -77,10 +77,10 @@ section{padding:34px 0}
 .bigidea{font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--ink);max-width:26ch}
 /* key messages */
 .msgs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:680px){.msgs{grid-template-columns:1fr}}
+@media(max-width:640px){.msgs{grid-template-columns:1fr}}
 .msg{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow)}
 .msg b{display:block;font-size:16px;color:var(--ink);margin-bottom:5px}
-.msg span{color:var(--ink-2);font-size:14.5px}
+.msg span{color:var(--ink-2);font-size:14px}
 /* author */
 .author{display:grid;grid-template-columns:1fr;gap:8px}
 .author .lbl{font-weight:700;color:var(--ink)}
@@ -112,7 +112,7 @@ ul.q li::before{content:"";position:absolute;left:6px;top:10px;width:7px;height:
 .contact{background:var(--panel);border:1px solid color-mix(in srgb,var(--gold) 40%,var(--line));border-radius:14px;padding:26px 28px;box-shadow:var(--shadow)}
 .contact .rows{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:14px}
 .contact .rows div{font-size:15px}
-.contact .rows .lbl{color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.08em}
+.contact .rows .lbl{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
 .contact a{color:var(--cyan);font-weight:600}
 .foot{border-top:1px solid var(--line-soft);margin-top:40px;padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
 </style>
@@ -135,7 +135,7 @@ ul.q li::before{content:"";position:absolute;left:6px;top:10px;width:7px;height:
 </div></nav>
 
 <header class="hero"><div class="container"><div class="grid">
-  <img class="cover" src="/cover.png" alt="The Artificial Advantage book cover">
+  <img class="cover" src="/cover.png" width="1600" height="2560" alt="The Artificial Advantage book cover">
   <div>
     <p class="eyebrow">Press &amp; media kit</p>
     <h1>The Artificial Advantage</h1>
@@ -227,11 +227,11 @@ ul.q li::before{content:"";position:absolute;left:6px;top:10px;width:7px;height:
   <section id="assets">
     <div class="sechead"><p class="eyebrow">Downloads</p><h2>Cover, photos &amp; the full kit</h2></div>
     <div class="assets">
-      <div class="asset"><div class="thumb"><img src="/cover.png" alt="Cover"></div><div class="b"><b>Book cover</b><small>PNG · high-res</small></div><a class="dl" href="/press/assets/The-Artificial-Advantage-cover.png" download>Download</a></div>
-      <div class="asset"><div class="thumb"><img src="/press/assets/desk_corner.jpg" alt="Desk"></div><div class="b"><b>Desk shot</b><small>JPG</small></div><a class="dl" href="/press/assets/desk_corner.jpg" download>Download</a></div>
-      <div class="asset"><div class="thumb"><img src="/press/assets/bookshelf.jpg" alt="Bookshelf"></div><div class="b"><b>Bookshelf</b><small>JPG</small></div><a class="dl" href="/press/assets/bookshelf.jpg" download>Download</a></div>
-      <div class="asset"><div class="thumb"><img src="/press/assets/conference_hold.jpg" alt="Conference"></div><div class="b"><b>Conference</b><small>JPG</small></div><a class="dl" href="/press/assets/conference_hold.jpg" download>Download</a></div>
-      <div class="asset"><div class="thumb"><img src="/press/assets/bookstore_display.jpg" alt="Bookstore"></div><div class="b"><b>Bookstore</b><small>JPG</small></div><a class="dl" href="/press/assets/bookstore_display.jpg" download>Download</a></div>
+      <div class="asset"><div class="thumb"><img src="/cover.png" alt="Cover" width="1600" height="2560"></div><div class="b"><b>Book cover</b><small>PNG · high-res</small></div><a class="dl" href="/press/assets/The-Artificial-Advantage-cover.png" download>Download</a></div>
+      <div class="asset"><div class="thumb"><img src="/press/assets/desk_corner.jpg" width="800" height="1280" loading="lazy" alt="Desk"></div><div class="b"><b>Desk shot</b><small>JPG</small></div><a class="dl" href="/press/assets/desk_corner.jpg" download>Download</a></div>
+      <div class="asset"><div class="thumb"><img src="/press/assets/bookshelf.jpg" width="800" height="1280" loading="lazy" alt="Bookshelf"></div><div class="b"><b>Bookshelf</b><small>JPG</small></div><a class="dl" href="/press/assets/bookshelf.jpg" download>Download</a></div>
+      <div class="asset"><div class="thumb"><img src="/press/assets/conference_hold.jpg" width="800" height="1280" loading="lazy" alt="Conference"></div><div class="b"><b>Conference</b><small>JPG</small></div><a class="dl" href="/press/assets/conference_hold.jpg" download>Download</a></div>
+      <div class="asset"><div class="thumb"><img src="/press/assets/bookstore_display.jpg" width="800" height="1280" loading="lazy" alt="Bookstore"></div><div class="b"><b>Bookstore</b><small>JPG</small></div><a class="dl" href="/press/assets/bookstore_display.jpg" download>Download</a></div>
       <div class="asset"><div class="thumb doc">↓</div><div class="b"><b>Full media kit</b><small>PDF · 4 pages</small></div><a class="dl" href="/press/assets/The-Artificial-Advantage-Media-Kit.pdf" download>Download PDF</a></div>
       <div class="asset"><div class="thumb doc">W</div><div class="b"><b>Media kit (editable)</b><small>Word .docx</small></div><a class="dl" href="/press/assets/The-Artificial-Advantage-Media-Kit.docx" download>Download DOCX</a></div>
     </div>

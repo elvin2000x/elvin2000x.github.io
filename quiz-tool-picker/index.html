@@ -64,7 +64,7 @@
       -webkit-font-smoothing: antialiased;
       display: flex; flex-direction: column; align-items: center;
     }
-    .wrap { width: 100%; max-width: 680px; padding: 24px; margin: 0 auto; }
+    .wrap { width: 100%; max-width: 640px; padding: 24px; margin: 0 auto; }
     .topbar { display:flex; align-items:center; justify-content:space-between; padding: 8px 4px 0; margin-bottom: 28px; }
     .brand { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
     .brand a { color: var(--accent); text-decoration: none; }
@@ -77,8 +77,8 @@
       border-radius: 14px; padding: 36px 32px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     }
-    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-    h1 { font-family: 'EB Garamond', Georgia, serif; font-weight: 600; color: var(--white); line-height: 1.12; letter-spacing: -0.01em; }
+    .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    h1, h2.as-h1 { font-family: 'EB Garamond', Georgia, serif; font-weight: 600; color: var(--white); line-height: 1.12; letter-spacing: -0.01em; }
     .intro h1 { font-size: clamp(32px, 6vw, 48px); margin-bottom: 18px; }
     .intro p { font-size: 18px; color: var(--text); margin-bottom: 14px; }
     .intro .meta { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
@@ -123,10 +123,10 @@
     .gate .fineprint { font-size: 12px; color: var(--muted); margin-top: 14px; text-align: center; }
     .gate .err { color: #e07a7a; font-size: 13px; margin-bottom: 12px; display: none; }
     .result .type-eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-    .result h1 { font-size: clamp(30px, 6vw, 46px); margin-bottom: 8px; }
+    .result h1, .result h2.as-h1 { font-size: clamp(30px, 6vw, 46px); margin-bottom: 8px; }
     .result .tagline { font-size: 18px; color: var(--text); margin-bottom: 24px; font-style: italic; font-family: 'EB Garamond', serif; }
     .primary { background: linear-gradient(160deg, rgba(79,179,240,0.12), rgba(201,162,80,0.06)); border:1px solid var(--accent2); border-radius:12px; padding:22px 22px; margin-bottom:24px; }
-    .primary .plabel { font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent2); margin-bottom:8px; }
+    .primary .plabel { font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent2); margin-bottom:8px; }
     .primary .pname { font-family:'EB Garamond',serif; font-size:28px; color:var(--white); font-weight:600; margin-bottom:8px; }
     .primary .pwhy { font-size:15px; color:var(--text); line-height:1.7; }
     .block { margin-bottom: 26px; }
@@ -140,7 +140,7 @@
     .magnet:hover { border-color: var(--accent); background:#11263f; }
     .magnet .mn { font-weight:600; color: var(--white); font-size:15px; }
     .magnet .md { font-size:13px; color: var(--muted); margin-top:3px; }
-    .magnet .mg { font-size:11px; color: var(--accent); letter-spacing:0.1em; text-transform:uppercase; font-weight:700; }
+    .magnet .mg { font-size:12px; color: var(--accent); letter-spacing:0.1em; text-transform:uppercase; font-weight:700; }
     .book-cta { background: linear-gradient(160deg, #112a47 0%, #0a1828 100%); border:1px solid var(--border); border-radius: 12px; padding: 28px 26px; text-align: center; margin-top: 8px; }
     .book-cta .why { font-size: 16px; color: var(--text); line-height: 1.7; margin-bottom: 20px; }
     .book-cta .why b { color: var(--white); }
@@ -154,7 +154,7 @@
     footer { font-size: 12px; color: var(--muted); text-align: center; padding: 30px 24px 40px; }
     footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--accent); }
-    @media (max-width: 560px) { .card { padding: 28px 22px; } }
+    @media (max-width: 640px) { .card { padding: 28px 22px; } }
   </style>
 </head>
 <body>
@@ -402,7 +402,7 @@ function startQuizEngine() {
     render(
       '<div class="card gate">' +
         '<div class="eyebrow">Almost there</div>' +
-        '<h1 style="font-size:30px;margin-bottom:10px;">Where should we send your recommendation?</h1>' +
+        '<h2 class="as-h1" style="font-size:30px;margin-bottom:10px;">One step before your recommendation</h2>' +
         '<p style="color:var(--muted);margin-bottom:22px;">Your recommended stack and the reasoning, plus one short email a week on getting more out of these tools. No spam, unsubscribe any time.</p>' +
         '<div class="err" id="gateErr">Please enter a valid email.</div>' +
         '<label for="qname">First name (optional)</label>' +
@@ -482,7 +482,7 @@ function startQuizEngine() {
     render(
       '<div class="card result">' +
         '<div class="type-eyebrow">Your recommended AI tool</div>' +
-        '<h1>Start with '+S.lead+'</h1>' +
+        '<h2 class="as-h1">Start with '+S.lead+'</h2>' +
         '<div class="tagline">'+S.tagline+'</div>' +
         '<div class="primary"><div class="plabel">Why this fits you</div><div class="pname">'+S.name+'</div><div class="pwhy">'+S.leadWhy+'</div></div>' +
         '<div class="block"><h3>Your honest stack</h3><div class="tools">'+stack+'</div></div>' +
