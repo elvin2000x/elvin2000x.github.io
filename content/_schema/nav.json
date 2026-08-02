@@ -1,0 +1,37 @@
+{
+  "title": "Menu & buttons",
+  "file": "nav.json",
+  "preview": "/",
+  "help": "The site menu. Order here is the order on the page.",
+  "fields": [
+    {
+      "key": "links",
+      "type": "list",
+      "label": "Menu links",
+      "item_fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Label",
+          "maxlen": 20
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "key": "cta.label",
+      "type": "text",
+      "label": "Gold button text",
+      "maxlen": 24
+    },
+    {
+      "key": "cta.href",
+      "type": "text",
+      "label": "Gold button link"
+    }
+  ]
+}
