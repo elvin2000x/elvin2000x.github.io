@@ -57,9 +57,12 @@
           '<span>Elvin M. Peters</span>' +
         '</a>' +
         '<nav class="links">' +
+          '<a href="https://elvinpeters.com/services/">Services</a>' +
+          '<a href="https://elvinpeters.com/book.html">The Book</a>' +
           '<a href="/projects/">Projects</a>' +
           extra +
-          '<a href="https://elvinpeters.com/services/">Services</a>' +
+          '<a href="https://elvinpeters.com/writing/">Blog</a>' +
+          '<a href="https://elvinpeters.com/#about">About</a>' +
           '<a href="https://elvinpeters.com/contact/">Contact</a>' +
           '<button class="themebtn" data-theme-toggle type="button"></button>' +
           '<a class="cta" href="https://meet.elvinpeters.com">Book a call</a>' +
