@@ -35,7 +35,7 @@ article{max-width:720px;margin:0 auto;padding:44px 24px 40px}
 .arthead .cover{width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:26px}
 article h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3rem);line-height:1.08;letter-spacing:-.015em;margin:14px 0 0;text-wrap:balance}
 .dek{font-size:1.2rem;color:var(--ink-2);margin:16px 0 0;font-family:var(--serif);font-style:italic}
-.byline{display:flex;gap:14px;align-items:center;margin:22px 0 0;padding-bottom:26px;border-bottom:1px solid var(--line-soft);font-size:13.5px;color:var(--muted)}
+.byline{display:flex;gap:14px;align-items:center;margin:22px 0 0;padding-bottom:26px;border-bottom:1px solid var(--line-soft);font-size:14px;color:var(--muted)}
 .byline b{color:var(--ink-2);font-weight:600}
 .body{font-size:17.5px;color:var(--ink)}
 .body h2{font-family:var(--serif);font-weight:600;font-size:1.6rem;letter-spacing:-.01em;margin:38px 0 12px;line-height:1.2}
@@ -48,7 +48,7 @@ article h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3
 .endcta .card{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:16px;padding:28px;text-align:center}
 .endcta h3{font-family:var(--serif);font-weight:400;font-size:1.6rem;margin:0}
 .endcta p{color:var(--ink-2);margin:10px 0 18px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:14.5px;border:1px solid transparent;cursor:pointer;font-family:var(--sans)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:14px;border:1px solid transparent;cursor:pointer;font-family:var(--sans)}
 .btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304}
 .btn.ghost{border-color:var(--line);color:var(--ink)}
 .backlink{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:14px;margin-bottom:8px}
@@ -71,7 +71,7 @@ const THEME = `<script>(function(){var r=document.documentElement;document.addEv
 const NLCSS = `
 .nlrow{display:flex;gap:10px;max-width:440px;margin:18px auto 0;flex-wrap:wrap;justify-content:center}
 .nlrow input{flex:1;min-width:210px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:16px;font-family:var(--sans)}
-.nlmsg{font-size:13.5px;color:var(--muted);margin:10px 0 0;min-height:18px}
+.nlmsg{font-size:14px;color:var(--muted);margin:10px 0 0;min-height:18px}
 .ctarow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 `;
 
@@ -123,7 +123,7 @@ for(const e of essays){
 const list = head('Blog','Posts on building software, games, and a company of one with AI as a co-worker.','/img/og.jpg','https://elvinpeters.com/writing/') + NAV +
   `<article style="max-width:820px"><span class="eyebrow">Blog</span><h1 style="margin-bottom:6px">Notes from a workshop of one.</h1><p class="dek" style="margin-bottom:30px">How I actually build: the harness around the AI, the zero-dependency habit, the tools that let one person ship like a team.</p>`+
   essays.map(e=>`<a href="/writing/${e.slug}/" style="display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line-soft);align-items:center">`+
-    `<img src="/img/${e.image}" alt="" style="width:150px;aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--line)">`+
+    `<img src="/img/${e.image}" alt="" width="150" height="94" loading="lazy" style="aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--line)">`+
     `<span><span class="eyebrow">Post &middot; ${e.readmins||8} min</span><h2 style="font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:6px 0 4px">${esc(e.title)}</h2><span style="color:var(--ink-2);font-size:14px">${esc(e.dek)}</span></span></a>`).join('')+
   `</article>`+FOOT+THEME+`</body></html>`;
 fs.writeFileSync(path.join(OUT,'writing','index.html'), list);

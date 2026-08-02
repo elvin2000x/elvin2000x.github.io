@@ -53,47 +53,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+<script src="/js/site.js"></script>
 <style>
-:root{
-  --bg:#e9edf2; --bg-2:#e2e7ee; --panel:#f6f8fb; --panel-2:#eef2f7;
-  --line:#cdd6e2; --line-soft:#dbe2ec;
-  --ink:#0e1a2b; --ink-2:#3d4d63; --muted:#6a7c93;
-  --gold:#9c761f; --gold-2:#b3892f; --cyan:#1c6ea8;
-  --glow: rgba(156,118,31,.14);
-  --shadow: 0 18px 40px -24px rgba(14,26,43,.45);
-  --card-lift: 0 26px 50px -28px rgba(14,26,43,.55);
-  --serif:'EB Garamond',Georgia,'Times New Roman',serif;
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#0a1524; --bg-2:#060d18; --panel:#101d30; --panel-2:#0c1626;
-    --line:#213249; --line-soft:#1a2942;
-    --ink:#e9eff7; --ink-2:#b7c6d9; --muted:#7f96b1;
-    --gold:#c9a250; --gold-2:#e0bd6b; --cyan:#4fb3f0;
-    --glow: rgba(201,162,80,.16);
-    --shadow: 0 24px 50px -28px rgba(0,0,0,.7);
-    --card-lift: 0 34px 60px -30px rgba(0,0,0,.8);
-  }
-}
-:root[data-theme="light"]{
-  --bg:#e9edf2; --bg-2:#e2e7ee; --panel:#f6f8fb; --panel-2:#eef2f7;
-  --line:#cdd6e2; --line-soft:#dbe2ec;
-  --ink:#0e1a2b; --ink-2:#3d4d63; --muted:#6a7c93;
-  --gold:#9c761f; --gold-2:#b3892f; --cyan:#1c6ea8;
-  --glow: rgba(156,118,31,.14);
-  --shadow: 0 18px 40px -24px rgba(14,26,43,.45);
-  --card-lift: 0 26px 50px -28px rgba(14,26,43,.55);
-}
-:root[data-theme="dark"]{
-  --bg:#0a1524; --bg-2:#060d18; --panel:#101d30; --panel-2:#0c1626;
-  --line:#213249; --line-soft:#1a2942;
-  --ink:#e9eff7; --ink-2:#b7c6d9; --muted:#7f96b1;
-  --gold:#c9a250; --gold-2:#e0bd6b; --cyan:#4fb3f0;
-  --glow: rgba(201,162,80,.16);
-  --shadow: 0 24px 50px -28px rgba(0,0,0,.7);
-  --card-lift: 0 34px 60px -30px rgba(0,0,0,.8);
-}
+/* Tokens and theme contexts come from /css/site.css. */
 *{box-sizing:border-box}
 html,body{margin:0}
 body{
@@ -104,14 +67,14 @@ body{
 }
 .container{max-width:1120px;margin:0 auto;padding:0 24px}
 a{color:inherit;text-decoration:none}
-.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+.eyebrow{font-size:var(--fs-label);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
 h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb, var(--bg) 78%, transparent);border-bottom:1px solid var(--line-soft)}
 .nav .container{display:flex;align-items:center;gap:20px;height:64px}
-.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px;letter-spacing:.02em}
+.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:var(--fs-lead);letter-spacing:.02em}
 .brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel);box-shadow:var(--shadow)}
 .nav .links{margin-left:auto;display:flex;gap:24px;align-items:center}
-.nav .links a{font-size:14px;color:var(--ink-2)}
+.nav .links a{font-size:var(--fs-sm);color:var(--ink-2)}
 .nav .links a:hover{color:var(--ink)}
 .nav .links a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:8px 15px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;gap:5px}
 .nav .links a.cta:hover{background:var(--gold);color:var(--bg-2)}
@@ -121,104 +84,96 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(760px 460px at 10% 118%, color-mix(in srgb, var(--cyan) 8%, transparent), transparent 62%);pointer-events:none}
 #constellation{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
 .hero .container{position:relative;z-index:2;padding:84px 24px 72px;display:grid;grid-template-columns:1.06fr .72fr;gap:44px;align-items:center}
-.heroviz{position:relative;display:grid;place-items:center;min-height:420px}
+.heroviz{position:relative;display:grid;place-items:center;gap:16px;min-height:420px;align-content:center}
 .heroviz::before{content:"";position:absolute;width:min(430px,100%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle, var(--glow), transparent 64%);filter:blur(4px)}
-.heroviz .bookwrap{position:relative;transform:rotate(4.5deg);transition:transform .4s cubic-bezier(.2,.8,.3,1)}
-.heroviz:hover .bookwrap{transform:rotate(2deg) translateY(-5px)}
-.heroviz img.bcover{width:min(268px,58vw);height:auto;display:block;border-radius:10px;border:1px solid color-mix(in srgb,var(--gold) 36%,var(--line));box-shadow:0 44px 74px -32px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05)}
-.vchip{position:absolute;display:inline-flex;align-items:center;gap:9px;background:color-mix(in srgb, var(--panel) 90%, transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;padding:9px 15px;font-size:13px;font-weight:600;color:var(--ink);box-shadow:var(--shadow);white-space:nowrap}
-.vchip.vc1{top:5%;right:-3%;color:var(--gold-2);border-color:color-mix(in srgb,var(--gold) 46%,var(--line))}
-.vchip.vc2{bottom:6%;left:-5%}
-.vchip img{width:26px;height:26px;border-radius:50%;object-fit:cover;border:1px solid var(--gold)}
-@media(max-width:920px){.hero .container{grid-template-columns:1fr;gap:10px;padding:72px 24px 60px}.heroviz{display:none}}
-.hero h1{font-size:clamp(2.5rem,6vw,4.6rem);line-height:1.04;letter-spacing:-.015em;margin:18px 0 0}
+.heroviz .bookwrap{position:relative;transform:perspective(1400px) rotateY(-9deg) rotateX(1.5deg) rotate(1deg);transition:transform var(--slow) cubic-bezier(.2,.8,.3,1)}
+.heroviz:hover .bookwrap{transform:perspective(1400px) rotateY(-13deg) rotateX(1.5deg) rotate(1deg) translateY(-4px)}
+@media (prefers-reduced-motion: reduce){.heroviz .bookwrap,.heroviz:hover .bookwrap{transform:none}}
+.heroviz img.bcover{width:min(268px,58vw);height:auto;display:block;border-radius:10px;border:1px solid color-mix(in srgb,var(--gold) 36%,var(--line));box-shadow:-18px 40px 70px -30px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05)}
+.vchip{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;background:var(--bg-2);border:1px solid color-mix(in srgb,var(--accent) 46%,var(--line));border-radius:var(--r-pill);padding:10px 18px;font-size:var(--fs-label);font-weight:700;letter-spacing:.06em;color:var(--accent-ink);box-shadow:var(--shadow);white-space:nowrap;text-decoration:none}
+.vchip:hover{border-color:var(--accent)}
+@media(max-width:920px){.hero .container{grid-template-columns:1fr;gap:10px;padding:64px 24px 56px}.heroviz{min-height:0;margin-top:12px}.heroviz img.bcover{width:min(170px,38vw)}.heroviz::before{width:min(240px,70%)}}
+.hero h1{font-size:var(--fs-display);line-height:1.04;letter-spacing:-.015em;margin:18px 0 0}
 .hero h1 .amp{color:var(--gold-2);font-style:italic}
-.hero .lede{font-size:clamp(1.05rem,1.8vw,1.28rem);color:var(--ink-2);max-width:52ch;margin:22px 0 0;line-height:1.55}
+.hero .lede{font-size:var(--fs-lead-lg);color:var(--ink-2);max-width:52ch;margin:22px 0 0;line-height:1.55}
 .hero .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
-.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:var(--sans)}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:var(--fs-body);border:1px solid transparent;cursor:pointer;font-family:var(--sans)}
 .btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304;box-shadow:var(--shadow)}
 .btn.primary:hover{filter:brightness(1.05)}
 .btn.ghost{border-color:var(--line);color:var(--ink)}
 .btn.ghost:hover{border-color:var(--gold)}
-.hero .cred{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:40px;font-size:13.5px;color:var(--muted);align-items:center}
-.hero .cred b{color:var(--ink-2);font-weight:600}
-.hero .cred .dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.7}
-.section{padding:70px 0}
+/* hero cred strip removed (W2): the credbar below is the single proof strip */
+.section{padding:var(--sp-section) 0}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:30px}
-.section-head h2{font-size:clamp(1.7rem,3.4vw,2.35rem);letter-spacing:-.01em}
-.section-head p{margin:8px 0 0;color:var(--muted);max-width:48ch;font-size:15px}
+@media(max-width:920px){.section-head{display:block}.section-head p{margin:14px 0 0;max-width:none}}
+.section-head h2{font-size:var(--fs-h2);letter-spacing:-.01em}
+.section-head p{margin:8px 0 0;color:var(--muted);max-width:48ch;font-size:var(--fs-body)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
 .card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,border-color .25s;display:flex;flex-direction:column}
 .card:hover{transform:translateY(-6px);box-shadow:var(--card-lift);border-color:color-mix(in srgb,var(--gold) 55%,var(--line))}
 .card .thumb{aspect-ratio:16/10;position:relative;border-bottom:1px solid var(--line-soft);background-size:cover;background-position:center}
 .card .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
 .card .kicker{display:flex;align-items:center;gap:10px}
-.card .tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.card .pill{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:999px;color:#2f9c6f;background:color-mix(in srgb,#2f9c6f 14%,transparent);border:1px solid color-mix(in srgb,#2f9c6f 40%,transparent)}
+.card .tag{font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.card .pill{margin-left:auto;font-size:var(--fs-label);font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:999px;color:#2f9c6f;background:color-mix(in srgb,#2f9c6f 14%,transparent);border:1px solid color-mix(in srgb,#2f9c6f 40%,transparent)}
 .card .pill.play{color:var(--cyan);background:color-mix(in srgb,var(--cyan) 12%,transparent);border-color:color-mix(in srgb,var(--cyan) 38%,transparent)}
 .card .pill.read{color:var(--gold-2);background:color-mix(in srgb,var(--gold) 13%,transparent);border-color:color-mix(in srgb,var(--gold) 40%,transparent)}
-.card h3{font-size:1.3rem;letter-spacing:-.01em}
-.card .desc{color:var(--ink-2);font-size:14px;line-height:1.5}
-.card .go{margin-top:auto;font-size:13px;font-weight:600;color:var(--gold-2);display:inline-flex;align-items:center;gap:7px}
+.card h3{font-size:var(--fs-h3);letter-spacing:-.01em}
+.card .desc{color:var(--ink-2);font-size:var(--fs-sm);line-height:1.5}
+.card .go{margin-top:auto;font-size:var(--fs-sm);font-weight:600;color:var(--gold-2);display:inline-flex;align-items:center;gap:7px}
 .card:hover .go .arw{transform:translateX(4px)}.card .go .arw{transition:transform .2s}
 
 /* --- professional additions --- */
 .credbar{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--panel-2)}
-.credbar .container{display:flex;flex-wrap:wrap;gap:10px 26px;padding:18px 24px;font-size:13.5px;color:var(--ink-2);align-items:center;justify-content:center;text-align:center}
+.credbar .container{display:flex;flex-wrap:wrap;gap:10px 26px;padding:18px 24px;font-size:var(--fs-sm);color:var(--ink-2);align-items:center;justify-content:center;text-align:center}
 .credbar b{color:var(--ink);font-weight:600}
 .credbar .sep{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.6}
-@media(max-width:680px){.credbar .sep{display:none}.credbar .container{gap:6px 0;flex-direction:column}}
-.feature{display:grid;grid-template-columns:0.72fr 1fr;gap:44px;align-items:center;background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:38px}
-.feature img{width:100%;max-width:280px;height:auto;border-radius:10px;box-shadow:var(--card-lift);display:block;margin:0 auto;justify-self:center}
-.feature h2{font-size:clamp(1.9rem,3.6vw,2.6rem);letter-spacing:-.01em;margin:8px 0 0}
-.feature .tag2{font-family:var(--serif);font-style:italic;font-size:1.35rem;color:var(--gold-2);margin:10px 0 0}
-.feature p{color:var(--ink-2);font-size:16px;line-height:1.65;margin:16px 0 0;max-width:48ch}
+.credbar .container span+span::before{content:"·";margin-right:26px;color:var(--gold);opacity:.65}
+@media(max-width:640px){.credbar .container{gap:6px 0;flex-direction:column}.credbar .container span+span::before{content:none}}
+.feature{display:grid;grid-template-columns:300px 1fr;gap:var(--sp-9);align-items:center;background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:38px}
+.feature img{width:100%;max-width:300px;height:auto;border-radius:10px;box-shadow:var(--card-lift);display:block;margin:0}
+.feature h2{font-size:var(--fs-h2);letter-spacing:-.01em;margin:8px 0 0}
+.feature .tag2{font-family:var(--serif);font-style:italic;font-size:var(--fs-h3);color:var(--gold-2);margin:10px 0 0}
+.feature p{color:var(--ink-2);font-size:var(--fs-body);line-height:1.65;margin:16px 0 0;max-width:48ch}
 .feature .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
-.feature .onamz{font-size:13px;color:var(--muted)}
-@media(max-width:760px){.feature{grid-template-columns:1fr;padding:26px;gap:24px}.feature img{max-width:200px}}
-.bucket-label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin:34px 0 14px}
+.feature .onamz{font-size:var(--fs-sm);color:var(--muted)}
+@media(max-width:640px){.feature{grid-template-columns:1fr;padding:26px;gap:24px}.feature img{max-width:200px;margin:0 auto}}
+.bucket-label{font-size:var(--fs-sm);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin:34px 0 14px}
 .bucket-label:first-of-type{margin-top:0}
-.svcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-@media(max-width:720px){.svcgrid{grid-template-columns:1fr}}
+.svcgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media(max-width:920px){.svcgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.svcgrid{grid-template-columns:1fr}}
 .svc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 24px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px;transition:transform .2s,border-color .2s}
 .svc:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--gold) 50%,var(--line))}
-.svc h3{font-size:1.32rem}
-.svc .who{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.svc p{color:var(--ink-2);font-size:14.5px;line-height:1.55;margin:0;flex:1}
+.svc h3{font-size:var(--fs-h3)}
+.svc .who{font-size:var(--fs-label);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.svc p{color:var(--ink-2);font-size:var(--fs-body);line-height:1.55;margin:0;flex:1}
 .svc .row{display:flex;gap:16px;align-items:center;margin-top:6px}
-.svc .row a{font-size:13.5px;font-weight:600;color:var(--gold-2)}
+.svc .row a{font-size:var(--fs-sm);font-weight:600;color:var(--gold-2)}
 .svc .row a.detail{color:var(--muted);font-weight:500}
-.receipts{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-@media(max-width:760px){.receipts{grid-template-columns:1fr}}
-.rcol .item{padding:16px 0;border-top:1px solid var(--line-soft)}
-.rcol .item:first-child{border-top:0}
-.rcol .item h4{margin:0 0 4px;font-family:var(--sans);font-size:15px;font-weight:700;color:var(--ink)}
-.rcol .item p{margin:0;color:var(--ink-2);font-size:14px}
-.quote{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:20px 22px}
-.quote p{margin:0 0 10px;font-family:var(--serif);font-size:1.15rem;line-height:1.5;color:var(--ink)}
-.quote .by{font-size:13px;color:var(--muted)}
-.ctaband{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--panel)),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:44px;text-align:center}
-.ctaband h2{font-size:clamp(1.8rem,3.6vw,2.5rem)}
-.ctaband p{color:var(--ink-2);margin:12px auto 24px;max-width:44ch;font-size:16px}
+.ctaband{background:var(--panel);background:linear-gradient(135deg,color-mix(in oklab,var(--gold) 18%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line));box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 12%,transparent),var(--card-lift);border-radius:var(--r-lg);padding:44px;text-align:center}
+@media(max-width:640px){.ctaband{padding:28px 20px}}
+.ctaband h2{font-size:var(--fs-h2)}
+.ctaband p{color:var(--ink-2);margin:12px auto 24px;max-width:44ch;font-size:var(--fs-body)}
 .apps-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;color:var(--ink-2);transition:border-color .15s,transform .15s}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:9px 16px;font-size:var(--fs-sm);font-weight:600;color:var(--ink-2);transition:border-color .15s,transform .15s}
 .chip:hover{border-color:var(--gold);transform:translateY(-2px)}
-.chip .lv{font-size:10px;font-weight:700;color:#2f9c6f}
+.chip .lv{font-size:var(--fs-label);font-weight:700;color:#2f9c6f}
 .about{display:grid;grid-template-columns:0.82fr 1fr;gap:44px;align-items:center}
 .aboutimg{width:100%;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);aspect-ratio:1;object-fit:cover;display:block}
-.about .lead{color:var(--ink);font-family:var(--serif);font-size:1.4rem;line-height:1.4;display:block;margin-bottom:16px}
-.about p{font-size:16.5px;color:var(--ink-2);line-height:1.7;margin:0}
+.about .lead{color:var(--ink);font-family:var(--serif);font-size:var(--fs-h3);line-height:1.4;display:block;margin-bottom:16px}
+.about p{font-size:var(--fs-lead);color:var(--ink-2);line-height:1.7;margin:0}
 @media(max-width:760px){.about{grid-template-columns:1fr;gap:26px}}
 .connect{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:38px}
-.connect h2{font-size:clamp(1.7rem,3.4vw,2.3rem);letter-spacing:-.01em;margin:10px 0 0}
-.connect p{color:var(--ink-2);margin:12px 0 20px;font-size:15.5px;max-width:40ch}
+.connect h2{font-size:var(--fs-h2);letter-spacing:-.01em;margin:10px 0 0}
+.connect p{color:var(--ink-2);margin:12px 0 20px;font-size:var(--fs-body);max-width:40ch}
 .clinks{display:flex;flex-direction:column;gap:12px}
-.clink{display:flex;align-items:center;gap:13px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg-2);font-weight:600;font-size:14.5px;transition:border-color .15s,transform .15s}
+.clink{display:flex;align-items:center;gap:13px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);font-weight:600;font-size:var(--fs-body);transition:border-color .15s,transform .15s}
 .clink:hover{border-color:var(--gold);transform:translateX(3px)}
 .clink .ic{width:22px;height:22px;flex:none;color:var(--gold-2)}
-.clink small{display:block;color:var(--muted);font-weight:400;font-size:12px;margin-top:1px}
+.clink small{display:block;color:var(--muted);font-weight:400;font-size:var(--fs-label);margin-top:1px}
 @media(max-width:760px){.connect{grid-template-columns:1fr;padding:26px;gap:26px}}
-footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px}
+footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:var(--fs-sm)}
 footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
 footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
@@ -238,7 +193,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
       <a href="/writing/">Blog</a>
       <a href="#about">About</a>
       <a href="/contact/">Contact</a>
-      <button class="themebtn" id="themeBtn" aria-label="Toggle light or dark theme">◑</button>
+      <button class="themebtn" id="themeBtn" data-theme-toggle aria-label="Toggle light or dark theme">◑</button>
       <a class="cta" href="https://meet.elvinpeters.com">Book a call <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div></nav>
@@ -254,26 +209,20 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
           <a class="btn primary" href="https://meet.elvinpeters.com">Book a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           <a class="btn ghost" href="/book.html">Get the book</a>
         </div>
-        <div class="cred">
-          <span><b>Big-tech</b> ads training</span><span class="dot"></span>
-          <span><b>Multimillion-$</b> budgets managed</span><span class="dot"></span>
-          <span><b>Author</b>, The Artificial Advantage</span>
-        </div>
       </div>
       <div class="heroviz">
         <div class="bookwrap">
           <img class="bcover" src="/img/cover-hero.webp" alt="The Artificial Advantage, the book by Elvin M. Peters" width="600" height="960">
-          <span class="vchip vc1">★ Live on Amazon</span>
-          <span class="vchip vc2"><img src="/img/headshot.jpg" alt="">Elvin M. Peters · Ads &amp; AI operator</span>
         </div>
+        <a class="vchip vc1" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">★ Live on Amazon</a>
       </div>
     </div>
   </header>
 
   <div class="credbar"><div class="container">
-    <span>Paid media at scale inside <b>Google Ads</b></span><span class="sep"></span>
-    <span>Multimillion-dollar campaigns for a <b>leading Canadian fintech</b></span><span class="sep"></span>
-    <span>Author of <b>The Artificial Advantage</b></span><span class="sep"></span>
+    <span>Paid media at scale inside <b>Google Ads</b></span>
+    <span>Multimillion-dollar campaigns for a <b>leading Canadian fintech</b></span>
+    <span>Author of <b>The Artificial Advantage</b></span>
     <span>Builds and self-hosts AI systems <b>solo</b></span>
   </div></div>
 
@@ -281,7 +230,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   <section class="section" id="services"><div class="container">
     <div class="section-head">
       <div><span class="eyebrow">Work with me</span><h2>AI and Google Ads, run by one operator.</h2></div>
-      <p>I spent a decade running paid media inside big tech and Canadian fintech, then taught myself to build with AI. Now you get both: the strategy and the person who actually builds it. <a href="/services/" style="color:var(--gold-2);font-weight:600">Full services and pricing →</a></p>
+      <p>Five fixed-scope ways to work together: coaching, done-for-you builds, team training, and paid search. One person handles strategy and the build, accountable end to end. <a href="/services/" style="color:var(--gold-2);font-weight:600">Full services and pricing →</a></p>
     </div>
 
     <div class="bucket-label">Put AI to work</div>
@@ -290,19 +239,19 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <h3>AI Coaching</h3>
         <span class="who">For founders &amp; professionals</span>
         <p>One on one working sessions that get you directing AI with real confidence, with a system you keep using after we finish.</p>
-        <div class="row"><a href="/ai-coaching/">View coaching →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <div class="row"><a href="/ai-coaching/">View coaching →</a></div>
       </div>
       <div class="svc">
         <h3>AI Workflow Build</h3>
         <span class="who">Done for you</span>
         <p>Pick one repetitive task and I build the AI workflow that runs it, then hand it over documented so your team owns it.</p>
-        <div class="row"><a href="/ai-workflow-build/">View builds →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <div class="row"><a href="/ai-workflow-build/">View builds →</a></div>
       </div>
       <div class="svc">
         <h3>Team AI Workshop</h3>
         <span class="who">For teams</span>
         <p>A live two hour session that gets your whole team working from one reliable, shared way of using AI.</p>
-        <div class="row"><a href="/team-ai-workshop/">View workshop →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <div class="row"><a href="/team-ai-workshop/">View workshop →</a></div>
       </div>
     </div>
 
@@ -312,19 +261,19 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <h3>Google Ads Audit</h3>
         <span class="who">For businesses already spending</span>
         <p>A specialist with three years inside Google Ads tears down your account and hands you a prioritized plan of exactly what to fix. From $499.</p>
-        <div class="row"><a href="/google-ads-audit/">View the audit →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <div class="row"><a href="/google-ads-audit/">View the audit →</a></div>
       </div>
       <div class="svc">
         <h3>Google Ads Management</h3>
         <span class="who">For businesses ready to grow</span>
-        <p>Done for you paid search run by someone who managed seven-figure budgets at platform scale, so every dollar stays accountable.</p>
-        <div class="row"><a href="/google-ads/">View management →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <p>Done for you paid search run by someone who has managed serious budgets, so every dollar stays accountable.</p>
+        <div class="row"><a href="/google-ads/">View management →</a></div>
       </div>
     </div>
   </div></section>
 
   <!-- THE BOOK: authority anchor -->
-  <section class="section" id="book" style="padding-top:8px"><div class="container">
+  <section class="section section--cont" id="book"><div class="container">
     <div class="feature">
       <img src="/img/cover-hero.webp" alt="The Artificial Advantage by Elvin M. Peters, book cover" loading="lazy" width="600" height="960">
       <div>
@@ -341,34 +290,18 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   </div></section>
 
   <!-- WHY ME: proof + method -->
-  <section class="section" id="about" style="padding-top:8px"><div class="container">
-    <img src="/img/headshot.jpg" alt="Elvin M. Peters, Toronto AI consultant" style="width:118px;height:118px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);box-shadow:var(--shadow);display:block;margin:0 auto 22px">
+  <section class="section section--cont" id="about"><div class="container">
+    <img src="/img/headshot.jpg" alt="Elvin M. Peters, Toronto AI consultant" width="118" height="118" loading="lazy" style="border-radius:50%;object-fit:cover;border:2px solid var(--gold);box-shadow:var(--shadow);display:block;margin:0 auto 22px">
     <div class="section-head">
-      <div><span class="eyebrow">Why me</span><h2>The receipts behind the advice.</h2></div>
-      <p>Most people talk about AI. I build and ship real systems with it, and this whole site is the proof.</p>
+      <div><span class="eyebrow">Why me</span><h2>A marketer who learned to build.</h2></div>
     </div>
-    <div class="receipts">
-      <div class="rcol">
-        <div class="item"><h4>Seven-figure paid media</h4><p>Years running Google Ads where a wasted dollar gets noticed. That discipline is what I bring to your campaigns.</p></div>
-        <div class="item"><h4>A marketer who learned to build</h4><p>I ran paid campaigns across Google, Meta, and Quora for big-tech and fintech brands, then taught myself to build with AI. You get someone who understands the business and can actually ship the tool, not just advise on it.</p></div>
-        <div class="item"><h4>A published book on this exact topic</h4><p>The Artificial Advantage is my method in print, live on Amazon. The frameworks I teach are the ones I use.</p></div>
-        <div class="item"><h4>I build and self-host it all</h4><p>This site, my scheduler, my CRM, a shelf of apps and games, run on my own server by hand. When I say I can install AI that ships, the proof is everywhere you look here.</p></div>
-      </div>
-      <div class="rcol">
-        <div class="quote">
-          <p>The scheduler behind the booking button, the CRM under it, the email engine that delivers my newsletter, and this site itself are all software I built and run on my own server. The stack you are looking at is the case study.</p>
-          <span class="by">— My own systems, in production</span>
-        </div>
-        <div class="quote" style="margin-top:16px">
-          <p>The public work runs the same way: an AI directory where every link is re-verified by script before deploy, and twenty-five browser games shipped solo. When I build for your business, it ships with the same discipline.</p>
-          <span class="by">— The proof is one click away: <a href="/projects/" style="color:var(--gold-2)">see the projects</a></span>
-        </div>
-      </div>
+    <div style="max-width:70ch">
+      <p style="font-size:var(--fs-lead);color:var(--ink-2);line-height:1.7;margin:0">I spent a decade in paid media, running campaigns across Google, Meta, and Quora where a wasted dollar gets noticed. Then I taught myself to build with AI, wrote the method down, and started shipping software instead of slide decks. So you get one person who understands the business case, builds the actual tool, and stays accountable for both. Everything I recommend to a client runs in production somewhere on this site first. <a href="/projects/" style="color:var(--gold-2);font-weight:600">See it all live →</a></p>
     </div>
   </div></section>
 
   <!-- Closing CTA (end of the professional 75%) -->
-  <section class="section" style="padding-top:8px"><div class="container">
+  <section class="section section--cont"><div class="container">
     <div class="ctaband">
       <h2>Ready to put AI to work?</h2>
       <p>Book a 20 minute call. We will find the fastest place AI pays off in your business, and I will tell you straight whether I can help.</p>
@@ -380,12 +313,13 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
 
   <section class="section" id="projects"><div class="container">
     <div class="about">
-      <img class="aboutimg" src="/img/workspace.jpg" alt="A late-night studio with monitors showing code and a wireframe globe" loading="lazy">
+      <img class="aboutimg" src="/img/workspace.jpg" alt="A late-night studio with monitors showing code and a wireframe globe" loading="lazy" width="800" height="800">
       <div>
         <span class="eyebrow">Projects</span>
+        <h2 style="margin-top:10px">Live systems, one click away.</h2>
         <p style="margin-top:16px">
           <span class="lead">I ship production software solo, every day, with AI as a genuine co-worker.</span>
-          Everything I claim on this page has a running receipt: a continuously verified AI directory, eleven Canadian financial calculators, twenty-five original browser games, a QR studio with scan tracking, and the scheduler, CRM, and email engine this business runs on. All designed, built, and hosted by me. It is the same way I work for clients.
+          Everything I claim on this page has a running receipt: a continuously verified AI directory, eleven Canadian financial calculators, thirteen original browser games, a QR studio with scan tracking, and the scheduler, CRM, and email engine this business runs on. All designed, built, and hosted by me. It is the same way I work for clients.
         </p>
         <div class="apps-row">
           <a class="chip" href="/projects/">Browse all the projects <span class="lv">LIVE</span></a>
@@ -397,7 +331,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
     </div>
   </div></section>
 
-  <section class="section" id="writing" style="padding-top:8px"><div class="container">
+  <section class="section section--cont" id="writing"><div class="container">
     <div class="section-head">
       <div><span class="eyebrow">Blog</span><h2>Notes on making AI actually work.</h2></div>
       <p>How I build: the harness around the AI, the reliability discipline, and the tools that let one person ship like a team. <a href="/writing/" style="color:var(--gold-2);font-weight:600">All posts →</a></p>
@@ -421,7 +355,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
     </div>
   </div></section>
 
-  <section class="section" id="connect" style="padding-top:8px"><div class="container">
+  <section class="section section--cont" id="connect"><div class="container">
     <div class="connect">
       <div>
         <span class="eyebrow">Stay in touch</span>
@@ -430,10 +364,10 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <div class="nlwrap">
           <form id="nlform" style="display:flex;gap:10px;flex-wrap:wrap;max-width:480px">
             <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
-            <input id="nlemail" type="email" required placeholder="you@work.com" style="flex:1;min-width:220px;padding:13px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:15px">
-            <button type="submit" style="padding:13px 22px;border-radius:10px;border:0;background:#c9a250;color:#0b1220;font-weight:700;cursor:pointer;font-size:15px">Get the prompts</button>
+            <input id="nlemail" type="email" required placeholder="you@work.com" class="field" style="flex:1;min-width:220px">
+            <button type="submit" class="btn primary">Get the prompts</button>
           </form>
-          <p id="nlmsg" style="display:none;font-size:14px;margin-top:10px;color:#7fd18c"></p>
+          <p id="nlmsg" style="display:none;font-size:var(--fs-sm);margin-top:10px;color:var(--ok)"></p>
           <script>
           document.getElementById('nlform').addEventListener('submit', function(e){
             e.preventDefault();
@@ -474,11 +408,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   </div></footer>
 
 <script>
-(function(){
-  var btn=document.getElementById('themeBtn'), root=document.documentElement;
-  function cur(){return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
-  btn.addEventListener('click',function(){root.setAttribute('data-theme', cur()==='dark'?'light':'dark');});
-})();
+/* Theme toggling + persistence handled by /js/site.js via [data-theme-toggle]. */
 (function(){
   var cv=document.getElementById('constellation');
   if(cv && !matchMedia('(prefers-reduced-motion: reduce)').matches){
