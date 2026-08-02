@@ -1,0 +1,54 @@
+{
+  "title": "Homepage hero",
+  "file": "home.json",
+  "preview": "/",
+  "help": "The first screen of the homepage.",
+  "fields": [
+    {
+      "key": "hero.eyebrow",
+      "type": "text",
+      "label": "Small line above the headline",
+      "maxlen": 80
+    },
+    {
+      "key": "hero.headline_1",
+      "type": "text",
+      "label": "Headline line 1",
+      "maxlen": 40
+    },
+    {
+      "key": "hero.headline_2",
+      "type": "text",
+      "label": "Headline line 2 (gold italic)",
+      "maxlen": 40
+    },
+    {
+      "key": "hero.lede",
+      "type": "textarea",
+      "label": "Paragraph under the headline",
+      "maxlen": 400
+    },
+    {
+      "key": "hero.cta_primary.label",
+      "type": "text",
+      "label": "Primary button text",
+      "maxlen": 24
+    },
+    {
+      "key": "hero.cta_primary.href",
+      "type": "text",
+      "label": "Primary button link"
+    },
+    {
+      "key": "hero.cta_secondary.label",
+      "type": "text",
+      "label": "Secondary button text",
+      "maxlen": 24
+    },
+    {
+      "key": "hero.cta_secondary.href",
+      "type": "text",
+      "label": "Secondary button link"
+    }
+  ]
+}

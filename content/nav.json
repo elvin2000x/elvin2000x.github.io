@@ -1,0 +1,56 @@
+{
+  "_comment": "The single copy of the site menu. Edited by Site Studio or by hand; node build.js renders it into every page that carries the ep:nav region.",
+  "brand": "Elvin Peters",
+  "links": [
+    {
+      "label": "Services",
+      "href": "/services/"
+    },
+    {
+      "label": "The Book",
+      "href": "/book.html"
+    },
+    {
+      "label": "Projects",
+      "href": "/projects/"
+    },
+    {
+      "label": "Blog",
+      "href": "/writing/"
+    },
+    {
+      "label": "About",
+      "href": "/#about"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
+  ],
+  "cta": {
+    "label": "Book a call",
+    "href": "https://meet.elvinpeters.com"
+  },
+  "pages": {
+    "index.html": {
+      "brandHref": "#top",
+      "aboutHref": "#about",
+      "themebtn": true,
+      "ctaArrow": true,
+      "brandStyle": "multiline",
+      "indent": 2
+    },
+    "book.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "active": "/book.html",
+      "cta": {
+        "label": "Get the System",
+        "href": "/system/"
+      },
+      "brandStyle": "inline",
+      "indent": 0
+    }
+  }
+}
