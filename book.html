@@ -258,6 +258,14 @@
     .stack-row .item { line-height: 1.4; min-width: 0; }
     .stack-row .item strong { color: var(--white); font-weight: 600; }
     .stack-row .val { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .review-card { background: var(--panel-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--r-card); padding: 28px 32px; }
+    .review-head { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .review-stars { color: var(--accent); font-size: var(--fs-lead); letter-spacing: 2px; }
+    .review-badge { font-size: var(--fs-label); font-weight: 700; color: var(--ok); text-transform: uppercase; letter-spacing: .08em; }
+    .review-title { font-size: var(--fs-h3); margin: 10px 0 12px; font-weight: 600; color: var(--ink); }
+    .review-card p { font-size: var(--fs-body); color: var(--ink-2); line-height: 1.7; margin: 0 0 12px; }
+    .review-meta { font-size: var(--fs-sm); color: var(--muted); margin-top: 6px; }
+    .review-meta a { color: var(--accent-ink); font-weight: 600; }
     .va-strip { display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; margin-top:22px; }
     .va-strip img { width:56px; height:auto; border-radius:4px; box-shadow:0 6px 16px rgba(10,24,40,.25); border:1px solid var(--line); }
     .va-strip span { font-size:var(--fs-sm); color:var(--muted); }
@@ -673,7 +681,7 @@
   <div style="max-width: 520px; margin: 0 auto;">
     <p style="font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color:var(--accent-ink); margin-bottom: 12px;">Not ready to buy? Try it first</p>
     <h2 style="font-size: var(--fs-h3); color: var(--white); margin-bottom: 12px;">Take a piece of the book for free</h2>
-    <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;">Drop your email and I'll send you the full companion toolkit free: the 7-Day Workbook, the 50 best prompts, the 12 Role Packs, the 10-guide library, and the first chapter to test the approach before you spend a cent. After that, a short note from me most weeks when I find an AI workflow actually worth stealing. I write them myself. No team, no filler.</p>
+    <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;">Drop your email and I'll send you the starter kit free: the 50 best prompts, the framework cheat sheets, and the first chapter. Enough to test the approach before you spend a cent. After that, a short note from me most weeks when I find an AI workflow actually worth stealing. I write them myself. No team, no filler.</p>
     <form id="nlform" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
       <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
       <input id="nlemail" type="email" required placeholder="you@work.com" style="flex:1;min-width:220px;max-width:300px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:var(--panel);color:var(--ink);font-size:16px">
@@ -709,7 +717,7 @@
   <div class="section-inner">
     <div class="section-label">The Complete System</div>
     <h2 class="section-title" style="text-align: center;">The book, plus a free toolkit to make it stick</h2>
-    <p class="section-body center">Get <strong>The Artificial Advantage</strong> on Amazon in Kindle, paperback or hardcover. Then join the email list and these companion tools are yours free: the 7-Day Workbook, the 50-prompt pack, the 12 Professional Role Packs, the 10-guide library, and the first chapter. Most people read a book like this and never apply it. The toolkit is the fix.</p>
+    <p class="section-body center">Get <strong>The Artificial Advantage</strong> on Amazon in Kindle, paperback or hardcover. Every copy includes the appendices plus a QR code to the companion resource library on this site. Start free with your email and get the starter kit: the 50 best prompts, the framework cheat sheets, and the first chapter. Want the whole thing installed? The complete System adds the 7-Day Workbook, the 12 Role Packs, and the 10-guide library. Most people read a book like this and never apply it. The kit is the fix.</p>
 
     <div class="includes">
       <div class="inc-card">
@@ -720,40 +728,40 @@
         <div class="inc-meta"><span class="ck">On Amazon</span></div>
       </div>
       <div class="inc-card">
-        <span class="ribbon">FREE</span>
+        <span class="ribbon">SYSTEM</span>
         <div class="inc-thumb"><img src="img/cover_workbook.png" alt="7-Day AI Workbook" loading="lazy" width="800" height="1280" /></div>
         <h4>7-Day AI Workbook</h4>
         <p>Make it muscle memory in a week. By Friday, your three biggest work tasks run on AI.</p>
-        <div class="inc-meta"><span class="v">$29</span><span class="ck">✓ Included</span></div>
+        <div class="inc-meta"><span class="v">$29</span><span class="ck">In the System</span></div>
       </div>
       <div class="inc-card">
-        <span class="ribbon">BONUS</span>
+        <span class="ribbon">FREE</span>
         <div class="inc-thumb"><img src="img/cover_prompts.png" alt="50 Best AI Prompts" loading="lazy" width="800" height="1280" /></div>
         <h4>50 Best AI Prompts</h4>
         <p>Plug-and-play prompts for real work. Open one, swap in your details, send. Wins from day one.</p>
-        <div class="inc-meta"><span class="v">$50</span><span class="ck">✓ Included</span></div>
+        <div class="inc-meta"><span class="v">$50</span><span class="ck">Free with your email</span></div>
       </div>
       <div class="inc-card">
-        <span class="ribbon">BONUS</span>
+        <span class="ribbon">SYSTEM</span>
         <div class="inc-thumb"><img src="img/cover_roles.png" alt="12 AI Role Packs" loading="lazy" width="800" height="1280" /></div>
         <h4>12 Professional Role Packs</h4>
         <p>Done-for-you AI playbooks by job: Marketing, Sales, Finance, HR and more. Hit the ground running.</p>
-        <div class="inc-meta"><span class="v">$59</span><span class="ck">✓ Included</span></div>
+        <div class="inc-meta"><span class="v">$59</span><span class="ck">In the System</span></div>
       </div>
     </div>
 
     <div class="stack-wrap">
       <div class="stack">
         <div class="stack-row"><div class="item"><strong>The Artificial Advantage</strong> · the full book + all 9 appendices</div><div class="val">On Amazon</div></div>
-        <div class="stack-row bonus"><div class="item"><span class="tag">Free</span><strong>7-Day AI Workbook</strong> · guided daily practice</div><div class="val">$29</div></div>
+        <div class="stack-row bonus"><div class="item"><span class="tag">System</span><strong>7-Day AI Workbook</strong> · guided daily practice</div><div class="val">$29</div></div>
         <div class="stack-row bonus"><div class="item"><span class="tag">Free</span><strong>50 Best AI Prompts</strong> · copy-paste pack</div><div class="val">$50</div></div>
-        <div class="stack-row bonus"><div class="item"><span class="tag">Free</span><strong>12 Professional Role Packs</strong> · Marketing, Sales, Finance, HR &amp; more</div><div class="val">$59</div></div>
-        <div class="stack-row bonus"><div class="item"><span class="tag">Free</span><strong>The Complete 10-Guide AI Bonus Library</strong></div><div class="val">$236</div></div>
-        <div class="stack-total"><div class="label">Free companion toolkit</div><b style="font-variant-numeric:tabular-nums;color:var(--ink)">$374 value</b></div>
+        <div class="stack-row bonus"><div class="item"><span class="tag">System</span><strong>12 Professional Role Packs</strong> · Marketing, Sales, Finance, HR &amp; more</div><div class="val">$59</div></div>
+        <div class="stack-row bonus"><div class="item"><span class="tag">System</span><strong>The Complete 10-Guide AI Bonus Library</strong></div><div class="val">$236</div></div>
+        <div class="stack-total"><div class="label">The complete kit</div><b style="font-variant-numeric:tabular-nums;color:var(--ink)">$374 value</b></div>
         <div class="stack-price">
           <div class="today">The Artificial Advantage</div>
           <div class="big">On Amazon</div>
-          <div class="sub">Kindle · Paperback · Hardcover — the free companion toolkit comes with your email</div>
+          <div class="sub">Kindle · Paperback · Hardcover — start free with your email, or get the complete System with everything above</div>
         </div>
       </div>
       <div class="va-strip">
@@ -766,11 +774,25 @@
       </div>
       <div class="cta-band" style="margin-top: 28px;">
         <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-primary buy" target="_blank" rel="noopener">Get the Book on Amazon →</a>
-        <a href="#newsletter" class="btn-secondary">Send me the free toolkit →</a>
+        <a href="#newsletter" class="btn-secondary">Start free with your email →</a>
         <div class="trust-row">
-          <span class="trust-secure">Sold and shipped by Amazon · returns follow Amazon's standard policy · toolkit free with your email</span>
+          <span class="trust-secure">Sold and shipped by Amazon · returns follow Amazon's standard policy · <a href="/system/" style="color:var(--accent-ink);font-weight:600">or get the complete System on this site →</a></span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── 9. READER PROOF (real, attributed) ───────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">From the first Amazon review</div>
+    <div class="review-card">
+      <div class="review-head"><span class="review-stars" aria-label="Rated 5 out of 5 stars">★★★★★</span><span class="review-badge">Verified Purchase · Amazon.ca</span></div>
+      <h3 class="review-title">“Must-read if you’re looking to enhance your output.”</h3>
+      <p>“What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you’re looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.”</p>
+      <p>“Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I’ll be recommending this to all of my coworkers who have been struggling with AI and prompting.”</p>
+      <div class="review-meta">Paperback · Reviewed in Canada · July 15, 2026 · <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Read it on Amazon →</a></div>
     </div>
   </div>
 </section>
@@ -842,7 +864,7 @@
 <!-- ───────────── 14. P.S. SKIMMER RECAP ───────────── -->
 <section class="section" style="padding: 56px 24px;">
   <div class="ps-block">
-    <strong>P.S.</strong> <em>The Artificial Advantage</em> is the framework for professionals who tried AI and weren't impressed. Get it on Amazon in Kindle, paperback or hardcover, then join the email list for the free companion toolkit: the 7-Day Workbook, the 50-prompt pack, the 12 Role Packs, the 10-guide library, and the first chapter. If you've ever closed an AI tab thinking "this is overhyped," this is the book that changes that.
+    <strong>P.S.</strong> <em>The Artificial Advantage</em> is the framework for professionals who tried AI and weren't impressed. Get it on Amazon in Kindle, paperback or hardcover, then start free with your email (the 50 best prompts, cheat sheets, and the first chapter), or get the complete System for the full kit. If you've ever closed an AI tab thinking "this is overhyped," this is the book that changes that.
     <br/>
     <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="ps-cta buy" target="_blank" rel="noopener">Get it on Amazon →</a>
   </div>
@@ -853,12 +875,10 @@
   <div class="exitpop-card">
     <button class="exitpop-x" aria-label="Close" onclick="closeExit()">×</button>
     <h2>Wait, grab the free toolkit first</h2>
-    <p>Before you go, join the email list and get <span class="gold">the companion toolkit free</span>: the 7-Day Workbook, the 50-prompt pack, the 12 Role Packs, the 10-guide library, and the first chapter. They make the book stick in your first week.</p>
+    <p>Before you go, join the email list and get <span class="gold">the starter kit free</span>: the 50 best prompts, the framework cheat sheets, and the first chapter. Enough to test the method this week.</p>
     <div class="exitpop-covers">
-      <img src="img/cover_workbook.png" alt="7-Day AI Workbook" loading="lazy" width="800" height="1280" />
       <img class="lead" src="/img/cover-hero.webp" alt="The Artificial Advantage" loading="lazy" width="600" height="960" />
       <img src="img/cover_prompts.png" alt="50 Best AI Prompts" loading="lazy" width="800" height="1280" />
-      <img src="img/cover_roles.png" alt="12 AI Role Packs" loading="lazy" width="800" height="1280" />
     </div>
     <div class="exitpop-btns">
       <a class="exitpop-yes" href="#newsletter" onclick="closeExit()">Yes, send me the free toolkit →</a>
