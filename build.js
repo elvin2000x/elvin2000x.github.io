@@ -239,3 +239,41 @@ applyRegions('book.html', {
   'nav': () => renderNav('book.html'),
 });
 console.log('Regions applied: index.html (nav, hero-text, home-services), book.html (nav)');
+
+
+
+/* ------------------------------------------------------------------ */
+/* sitemap.xml - generated from the page walk so it can never go stale.
+   No lastmod on purpose: builds must be byte-idempotent. */
+const SM_EXCLUDE = ['titles', 'books', 'play', 'book1-feedback', 'oto', 'dl', 'studio', 'toolkit', 'thank-you'];
+const SM_SKIP_FILES = ['apps/index.html', 'writing/_homepage_cards.html'];
+function smWalk(dir, rel, out) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.name.startsWith('.') || e.name === 'node_modules') continue;
+    const r = rel ? rel + '/' + e.name : e.name;
+    if (SM_EXCLUDE.includes(r) || SM_SKIP_FILES.includes(r)) continue;
+    if (!rel && /^index_v[0-9]\.html$/.test(e.name)) continue;
+    if (e.isDirectory()) smWalk(path.join(dir, e.name), r, out);
+    else if (e.name === 'index.html' || (!rel && e.name.endsWith('.html'))) out.push(r);
+  }
+  return out;
+}
+function smUrl(rel) {
+  if (rel === 'index.html') return '/';
+  if (rel.endsWith('/index.html')) return '/' + rel.slice(0, -10);
+  return '/' + rel;
+}
+function smPriority(u) {
+  if (u === '/') return '1.0';
+  if (u === '/system/' || u === '/book.html' || u === '/services/') return '0.9';
+  if (u === '/projects/' || u === '/writing/') return '0.8';
+  if (u.startsWith('/free/') || u.startsWith('/apps/calculators/') || u.startsWith('/quiz')) return '0.7';
+  return '0.6';
+}
+const smPages = smWalk(DIR, '', []).map(smUrl).sort();
+const smXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+  smPages.map(u => '  <url><loc>https://elvinpeters.com' + u + '</loc><priority>' + smPriority(u) + '</priority></url>').join('\n') +
+  '\n</urlset>\n';
+fs.writeFileSync(path.join(OUT, 'sitemap.xml'), smXml);
+console.log('Sitemap: ' + smPages.length + ' URLs');

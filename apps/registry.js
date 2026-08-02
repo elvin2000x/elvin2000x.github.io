@@ -12,12 +12,13 @@
    ========================================================================== */
 
 window.APPS_REGISTRY = {
-  updated: '2026-07-22',
+  updated: '2026-08-04',
 
   categories: [
     { id: 'tools',     label: 'Tools',     blurb: 'Free, no sign-up, works on a phone. Open one and use it.' },
     { id: 'games',     label: 'Games',     blurb: 'Browser games written from scratch — no engine, no framework, no download.' },
     { id: 'platforms', label: 'Platforms', blurb: 'The bigger builds: software other businesses run on.' },
+    { id: 'products', label: 'Products', blurb: 'The book and the systems built around it.' },
     { id: 'sites',     label: 'Sites & directories', blurb: 'Content properties built to be found in search.' }
   ],
 
@@ -69,7 +70,7 @@ window.APPS_REGISTRY = {
       slug: 'arcade', name: 'The Arcade', cat: 'games', status: 'live', featured: true,
       href: 'https://play.elvinpeters.com/',
       blurb: 'Thirteen browser games, all written from scratch. Seven of them are real-time multiplayer over a WebSocket server I run — share one lobby link and your friends are at the table.',
-      stat: '25+ games',
+      stat: '13 games',
       tags: ['Multiplayer', 'No download', 'Zero dependencies']
     },
     {
@@ -128,6 +129,28 @@ window.APPS_REGISTRY = {
       blurb: 'A two-sided marketplace connecting athletes with coaches, complete with its own admin CMS for managing listings.',
       stat: 'Two-sided marketplace',
       tags: ['Marketplace', 'Custom CMS']
+    },
+
+    /* ---------------- products ---------------- */
+    {
+      slug: 'artificial-advantage', name: 'The Artificial Advantage (book)', cat: 'products', status: 'live', featured: true,
+      href: '/book.html',
+      blurb: 'The book: a framework for non-technical professionals to get real work out of AI. Kindle, paperback and hardcover on Amazon; every physical copy links to the companion resource library on this site.',
+      stat: 'Vol 1, AI Fluency series',
+      tags: ['Amazon', 'Companion library']
+    },
+    {
+      slug: 'aa-system', name: 'The Artificial Advantage System', cat: 'products', status: 'live', featured: true,
+      href: '/system/',
+      blurb: 'The self-serve product: the full ebook plus the complete working kit (workbook, role packs, prompt pack, 10-guide library), delivered instantly by email with a 14-day guarantee.',
+      stat: 'Ebook + complete kit',
+      tags: ['Stripe checkout', 'Instant delivery']
+    },
+    {
+      slug: 'site-studio', name: 'Site Studio', cat: 'platforms', status: 'private',
+      blurb: 'The CMS behind this site: a phone-first admin app that edits content as JSON, previews with the real build engine, runs the polish gate, and publishes straight to production through git.',
+      stat: 'Zero dependencies',
+      tags: ['Self-hosted', 'Git-native', 'Build gate']
     },
 
     /* ---------------- sites ---------------- */
