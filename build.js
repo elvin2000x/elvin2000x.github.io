@@ -37,7 +37,7 @@ article h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3
 .dek{font-size:1.2rem;color:var(--ink-2);margin:16px 0 0;font-family:var(--serif);font-style:italic}
 .byline{display:flex;gap:14px;align-items:center;margin:22px 0 0;padding-bottom:26px;border-bottom:1px solid var(--line-soft);font-size:14px;color:var(--muted)}
 .byline b{color:var(--ink-2);font-weight:600}
-.body{font-size:17.5px;color:var(--ink)}
+.body{font-size:18px;color:var(--ink)}
 .body h2{font-family:var(--serif);font-weight:600;font-size:1.6rem;letter-spacing:-.01em;margin:38px 0 12px;line-height:1.2}
 .body p{margin:0 0 20px}
 .body ul{margin:0 0 20px;padding-left:22px}.body li{margin:0 0 8px}
@@ -56,7 +56,7 @@ footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted
 footer .in{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer a:hover{color:var(--gold-2)}
 :focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
-@media(max-width:520px){.nav .lk a:not(.cta){display:none}}
+@media(max-width:640px){.nav .lk a:not(.cta){display:none}}
 `;
 
 const NAV = `<nav class="nav"><div class="in">
@@ -106,7 +106,7 @@ for(const e of essays){
   const page = head(e.title, e.dek, img, canon) + NAV +
     `<article><div class="arthead">`+
       `<a class="backlink" href="/writing/">&larr; Blog</a>`+
-      `<img class="cover" src="${img}" alt="" loading="eager">`+
+      `<img class="cover" src="${img}" alt="" width="1024" height="640" loading="eager">`+
       `<span class="eyebrow">Blog</span>`+
       `<h1>${esc(e.title)}</h1>`+
       `<p class="dek">${esc(e.dek)}</p>`+
