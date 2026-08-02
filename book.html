@@ -343,7 +343,6 @@
     .pay { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; color: var(--text); background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 3px 7px; }
     .hero-seal { display: inline-flex; align-items: center; gap: 7px; margin-top: 18px; font-size: 12px; color: var(--muted); }
     .hero-seal b { color: var(--text); font-weight: 600; }
-    .hero-seal .star { color:var(--accent-ink); letter-spacing: 1px; }
     /* free ways to start band */
     .free-band { background: var(--dark); border-bottom: 1px solid var(--border); padding: 16px 24px; }
     .free-band .inner { max-width: var(--w-wide); margin: 0 auto; display: flex; gap: 8px 22px; align-items: center; justify-content: center; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
@@ -352,10 +351,6 @@
     .free-band a:hover { border-color:var(--accent-ink); }
     .free-band .sep { color: var(--border); }
     /* credibility scene strip */
-    .cred-strip { padding: 52px 24px; background: var(--dark); border-bottom: 1px solid var(--border); }
-    .cred-strip .head { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 26px; }
-    .cred-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .cred-grid img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); display: block; }
     /* exit-intent popup */
     .exitpop { position: fixed; inset: 0; z-index: 9999; background: rgba(4,9,16,0.82); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; }
     .exitpop.hidden { display: none; }
@@ -391,12 +386,6 @@
     .inc-meta .ck { color:var(--accent-ink); font-weight: 700; }
 
     /* ── TESTIMONIALS ── */
-    .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-    .testimonial-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
-    .testimonial-stars { color:var(--accent-ink); font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; }
-    .testimonial-quote { font-family: 'EB Garamond', Georgia, serif; font-size: 17px; font-style: italic; color: var(--white); line-height: 1.6; margin-bottom: 16px; }
-    .testimonial-author { font-size: 13px; color: var(--muted); }
-    .testimonial-author strong { color: var(--text); }
 
     /* ── FAQ ── */
     .faq-list { display: flex; flex-direction: column; gap: 2px; }
@@ -451,11 +440,9 @@
     }
     .bottom-cta .two-paths strong { color: var(--white); }
     .bottom-cta h2 { font-family: var(--serif); font-size: clamp(30px, 4vw, 48px); font-weight: 600; color: var(--white); margin-bottom: 16px; line-height: var(--lh-tight); }
-    .bottom-quote {
       max-width: 560px; margin: 0 auto 36px; font-family: 'EB Garamond', serif;
       font-style: italic; font-size: 18px; color: var(--white); line-height: 1.6;
     }
-    .bottom-quote .who { display: block; font-family: 'Inter', sans-serif; font-style: normal; font-size: 13px; color: var(--muted); margin-top: 10px; }
     .bottom-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
 
     /* ── P.S. ── */
@@ -476,7 +463,6 @@
       .book-img { width: 200px; }
       .learn-list, .compare-grid, .bonus-grid { grid-template-columns: 1fr; }
       .includes { grid-template-columns: 1fr 1fr; }
-      .cred-grid { grid-template-columns: 1fr 1fr; }
       .free-band .sep { display: none; }
       .author-inner { grid-template-columns: 1fr; }
       .guarantee-box { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 18px; }
@@ -514,7 +500,7 @@
         <a href="#newsletter" class="btn-secondary">Read Chapter 1 Free</a>
       </div>
       <p class="cta-note">On Amazon in Kindle, paperback &amp; hardcover</p>
-      <div class="hero-seal"><span class="star">★★★★★</span> <b>Also on Amazon</b> · by Elvin M. Peters, a decade in performance marketing</div>
+      <div class="hero-seal"><b>Also on Amazon</b> · by Elvin M. Peters, a decade in performance marketing</div>
     </div>
     <div class="book-wrap">
       <img src="cover.png" alt="The Artificial Advantage by Elvin M. Peters" class="book-img" width="1600" height="2560" />
@@ -546,17 +532,6 @@
     <span><a href="/quiz/">Take the 60-second AI Style quiz →</a></span>
   </div>
 </div>
-
-<!-- ───────────── CREDIBILITY SCENE STRIP ───────────── -->
-<section class="cred-strip">
-  <div class="head">The framework professionals are taking to work</div>
-  <div class="cred-grid">
-    <img src="img/stage_screen.png" alt="The Artificial Advantage on a keynote stage" loading="lazy" />
-    <img src="img/bookstore_display.png" alt="The Artificial Advantage on a bookstore bestseller shelf" loading="lazy" />
-    <img src="img/executive_desk.png" alt="The Artificial Advantage on an executive desk" loading="lazy" />
-    <img src="img/podcast_set.png" alt="The Artificial Advantage in a podcast studio" loading="lazy" />
-  </div>
-</section>
 
 <!-- ───────────── 3. PROBLEM / AGITATION ───────────── -->
 <section class="section">
@@ -765,31 +740,6 @@
   </div>
 </section>
 
-<!-- ───────────── 9. SOCIAL PROOF ───────────── -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-label">Reader Feedback</div>
-    <h2 class="section-title">What early readers say</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote">"The frameworks made everything click. I'd been using AI for months and felt like I was guessing every time. The Role-Task-Constraint brief alone changed my output quality in the first week."</p>
-        <div class="testimonial-author"><strong>Reader</strong> · Marketing Professional</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote">"I've read three AI books and this is the first one that actually changed how I work, not just how I think about AI."</p>
-        <div class="testimonial-author"><strong>Reader</strong> · Senior Manager</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-quote">"Read it in two sittings. The appendices alone are worth the price. I use the Director's Diagnostic constantly."</p>
-        <div class="testimonial-author"><strong>Reader</strong> · Business Owner</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ───────────── 10. AUTHOR ───────────── -->
 <section class="section author-section">
   <div class="section-inner">
@@ -845,7 +795,6 @@
 
 <!-- ───────────── 13. URGENCY + FINAL CTA + TWO-PATHS ───────────── -->
 <div class="bottom-cta">
-  <p class="bottom-quote">"I'd been using AI for months and felt like I was guessing every time. This was the first thing that gave it structure."<span class="who">Early reader · Marketing Professional</span></p>
   <h2>The window where AI literacy<br/>is a differentiator is still open.</h2>
   <div class="two-paths">
     Two professionals start today with the same tools. In six months one is the person everyone asks how they move so fast. The other is still rewriting AI's first draft. <strong>The only difference is whether you learned to direct it.</strong>
