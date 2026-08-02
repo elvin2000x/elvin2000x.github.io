@@ -1,0 +1,22 @@
+{
+  "title": "Site basics",
+  "file": "site.json",
+  "preview": "/",
+  "fields": [
+    {
+      "key": "email",
+      "type": "text",
+      "label": "Contact email"
+    },
+    {
+      "key": "meet_url",
+      "type": "text",
+      "label": "Booking link"
+    },
+    {
+      "key": "amazon_url",
+      "type": "text",
+      "label": "Amazon book link"
+    }
+  ]
+}

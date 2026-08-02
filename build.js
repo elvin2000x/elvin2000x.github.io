@@ -139,3 +139,103 @@ const frag = cards.map(c=>
 fs.writeFileSync(path.join(OUT,'writing','_homepage_cards.html'), frag);
 
 console.log('Built', essays.length, 'essays -> writing/<slug>/ + writing/ index', OUT !== DIR ? `(out: ${OUT})` : '');
+
+
+/* ==========================================================================
+   REGION ENGINE (CMS layer) — content/*.json renders into marked regions:
+   <!-- ep:name --> ... <!-- /ep:name -->
+   Pages without markers are never touched. Unknown or unbalanced markers are
+   hard errors. In --out mode, region-applied copies are written to OUT and
+   the repo files stay untouched (Site Studio preview uses this).
+   ========================================================================== */
+const NAVC = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'nav.json'), 'utf8'));
+const HOME = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'home.json'), 'utf8'));
+const SVCS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'services.json'), 'utf8'));
+
+const NAV_SVG_SIG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19V5h9M5 12h7" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="17" r="2.4" fill="var(--gold)"/></svg>`;
+const NAV_SVG_ARROW = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const HERO_SVG_ARROW = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+function renderNav(pageKey) {
+  const pg = (NAVC.pages || {})[pageKey] || {};
+  const ind = ' '.repeat(pg.indent || 0);
+  const cta = pg.cta || NAVC.cta;
+  const links = NAVC.links.map(l => {
+    let href = l.href;
+    if (href === '/#about' && pg.aboutHref) href = pg.aboutHref;
+    const active = pg.active && l.href === pg.active ? ' class="active"' : '';
+    return `${ind}    <a href="${href}"${active}>${esc(l.label)}</a>`;
+  });
+  const brand = pg.brandStyle === 'multiline'
+    ? `${ind}  <a class="brandmark" href="${pg.brandHref || '/'}">\n${ind}    <span class="sig">${NAV_SVG_SIG}</span>\n${ind}    ${esc(NAVC.brand).replace(' ', '&nbsp;')}\n${ind}  </a>`
+    : `${ind}  <a class="brandmark" href="${pg.brandHref || '/'}"><span class="sig">${NAV_SVG_SIG}</span>${esc(NAVC.brand).replace(' ', '&nbsp;')}</a>`;
+  const tail = [];
+  if (pg.themebtn) tail.push(`${ind}    <button class="themebtn" id="themeBtn" data-theme-toggle aria-label="Toggle light or dark theme">\u25d1</button>`);
+  tail.push(`${ind}    <a class="cta" href="${cta.href}">${esc(cta.label)}${pg.ctaArrow ? ' ' + NAV_SVG_ARROW : ''}</a>`);
+  return [`${ind}<nav class="nav"><div class="container">`, brand,
+          `${ind}  <div class="links">`, ...links, ...tail,
+          `${ind}  </div>`, `${ind}</div></nav>`].join('\n');
+}
+
+function renderHeroText() {
+  const h = HOME.hero;
+  return [
+    `      <div class="herotext">`,
+    `        <span class="eyebrow">${esc(h.eyebrow)}</span>`,
+    `        <h1>${esc(h.headline_1)}<br><span class="amp">${esc(h.headline_2)}</span></h1>`,
+    `        <p class="lede">${esc(h.lede)}</p>`,
+    `        <div class="actions">`,
+    `          <a class="btn primary" href="${h.cta_primary.href}">${esc(h.cta_primary.label)} ${HERO_SVG_ARROW}</a>`,
+    `          <a class="btn ghost" href="${h.cta_secondary.href}">${esc(h.cta_secondary.label)}</a>`,
+    `        </div>`,
+    `      </div>`].join('\n');
+}
+
+function renderHomeServices() {
+  const out = [];
+  for (const b of SVCS.buckets) {
+    out.push(`    <div class="bucket-label">${esc(b.label)}</div>`);
+    out.push(`    <div class="svcgrid">`);
+    for (const c of SVCS.cards.filter(x => x.bucket === b.id)) {
+      out.push(`      <div class="svc">`);
+      out.push(`        <h3>${esc(c.title)}</h3>`);
+      out.push(`        <span class="who">${esc(c.who)}</span>`);
+      out.push(`        <p>${esc(c.home_blurb)}</p>`);
+      out.push(`        <div class="row"><a href="${c.href}">${esc(c.link_label)}</a></div>`);
+      out.push(`      </div>`);
+    }
+    out.push(`    </div>`);
+    out.push(``);
+  }
+  out.pop(); // no trailing blank line after the last grid
+  return out.join('\n');
+}
+
+function applyRegions(pagePath, regions) {
+  const src = path.join(DIR, pagePath);
+  let html = fs.readFileSync(src, 'utf8');
+  for (const [name, render] of Object.entries(regions)) {
+    const open = new RegExp('([ \t]*)<!-- ep:' + name + ' -->\r?\n');
+    const close = new RegExp('[ \t]*<!-- /ep:' + name + ' -->');
+    const mOpen = html.match(open);
+    const mClose = html.match(close);
+    if (!mOpen || !mClose) throw new Error(pagePath + ': region ep:' + name + ' markers missing/unbalanced');
+    const start = mOpen.index + mOpen[0].length;
+    const end = html.search(close);
+    if (end < start) throw new Error(pagePath + ': region ep:' + name + ' inverted');
+    html = html.slice(0, start) + render() + '\n' + html.slice(end);
+  }
+  const dest = path.join(OUT, pagePath);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.writeFileSync(dest, html);
+}
+
+applyRegions('index.html', {
+  'nav': () => renderNav('index.html'),
+  'hero-text': renderHeroText,
+  'home-services': renderHomeServices,
+});
+applyRegions('book.html', {
+  'nav': () => renderNav('book.html'),
+});
+console.log('Regions applied: index.html (nav, hero-text, home-services), book.html (nav)');
