@@ -1,0 +1,17 @@
+{
+  "_comment": "Homepage hero copy. The visual shell (cover, chips, constellation) stays in index.html; this file owns the words.",
+  "hero": {
+    "eyebrow": "AI Consultant · Coaching · Google Ads · Toronto and Remote",
+    "headline_1": "You tried AI.",
+    "headline_2": "You weren't impressed.",
+    "lede": "You do not need another AI demo. You need AI doing real work: hours saved, ad spend that pays for itself, and follow-up that runs while you sleep. I find where AI actually moves the needle in your business, build it, and train your team to run it. One operator, accountable end to end.",
+    "cta_primary": {
+      "label": "Book a call",
+      "href": "https://meet.elvinpeters.com"
+    },
+    "cta_secondary": {
+      "label": "Get the book",
+      "href": "/book.html"
+    }
+  }
+}

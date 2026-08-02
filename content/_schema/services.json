@@ -1,0 +1,44 @@
+{
+  "title": "Service cards (homepage)",
+  "file": "services.json",
+  "preview": "/",
+  "help": "The five offer cards. Blurbs shown on the homepage grid.",
+  "fields": [
+    {
+      "key": "cards",
+      "type": "list",
+      "label": "Cards",
+      "item_fields": [
+        {
+          "key": "title",
+          "type": "text",
+          "label": "Title",
+          "maxlen": 40
+        },
+        {
+          "key": "who",
+          "type": "text",
+          "label": "Who it's for",
+          "maxlen": 50
+        },
+        {
+          "key": "home_blurb",
+          "type": "textarea",
+          "label": "Blurb",
+          "maxlen": 220
+        },
+        {
+          "key": "link_label",
+          "type": "text",
+          "label": "Link text",
+          "maxlen": 30
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
+}
