@@ -801,7 +801,7 @@
       cat: 'Business & Marketing',
       featured: true,
       blurb: 'The four numbers that decide whether a campaign is a business or a hobby: CAC, ROAS, payback, and the CPA you can actually afford.',
-      seoDesc: 'Calculate return on ad spend, cost per acquisition, customer lifetime value, and the break-even CPA for any paid campaign. Built by a former Google Ads specialist.',
+      seoDesc: 'Calculate return on ad spend, cost per acquisition, customer lifetime value, and the break-even CPA for any paid campaign. Built by a veteran Google Ads specialist.',
       inputs: [
         { id: 'spend', label: 'Monthly ad spend', type: 'money', def: 6000, min: 0, step: 250 },
         { id: 'cpc', label: 'Average cost per click', type: 'money', def: 2.40, min: .01, step: .05 },

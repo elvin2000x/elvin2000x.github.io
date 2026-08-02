@@ -1,7 +1,10 @@
-// Generates blog article pages + a blog index from essays.json, and prints the
-// homepage "Writing" cards fragment. Run: node build_blog.js
+// build.js — the site's one build engine. Rung 1 scope: essays (folds the old
+// build_blog.js in, with the corrected site nav). Run: node build.js
+// Preview mode: node build.js --out <dir>  (writes generated files there instead)
 const fs = require('fs'), path = require('path');
 const DIR = __dirname;
+const outArg = process.argv.indexOf('--out');
+const OUT = outArg > -1 ? path.resolve(process.argv[outArg + 1]) : DIR;
 const essays = JSON.parse(fs.readFileSync(path.join(DIR, 'essays.json'), 'utf8'));
 
 const GA = `
@@ -58,12 +61,19 @@ footer a:hover{color:var(--gold-2)}
 
 const NAV = `<nav class="nav"><div class="in">
   <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19V5h9M5 12h7" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="17" r="2.4" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
-  <div class="lk"><a href="/#apps">Apps</a><a href="/#games">Games</a><a href="/writing/">Writing</a><a class="cta" href="/book.html">Read the book</a></div>
+  <div class="lk"><a href="/services/">Services</a><a href="/projects/">Projects</a><a href="/contact/">Contact</a><a class="cta" href="/book.html">Read the book</a></div>
 </div></nav>`;
 
-const FOOT = `<footer><div class="in"><span>&copy; 2026 Elvin Peters. Built and hosted by hand.</span><span><a href="/writing/">Writing</a> &middot; <a href="/book.html">The book</a> &middot; Toronto</span></div></footer>`;
+const FOOT = `<footer><div class="in"><span>&copy; 2026 Elvin Peters. Built and hosted by hand.</span><span><a href="/writing/">Blog</a> &middot; <a href="/book.html">The book</a> &middot; Toronto</span></div></footer>`;
 
 const THEME = `<script>(function(){var r=document.documentElement;document.addEventListener('click',function(e){if(e.target.closest('#tg')){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.setAttribute('data-theme',d==='dark'?'light':'dark')}})})();</script>`;
+
+const NLCSS = `
+.nlrow{display:flex;gap:10px;max-width:440px;margin:18px auto 0;flex-wrap:wrap;justify-content:center}
+.nlrow input{flex:1;min-width:210px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:16px;font-family:var(--sans)}
+.nlmsg{font-size:13.5px;color:var(--muted);margin:10px 0 0;min-height:18px}
+.ctarow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+`;
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function head(title, desc, ogimg, canon){
@@ -74,49 +84,58 @@ function head(title, desc, ogimg, canon){
 <meta property="og:type" content="article"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="https://elvinpeters.com${ogimg}"><meta property="og:url" content="${canon}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@elvin_peters">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 19V5h9M5 12h7' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='18' cy='17' r='2.4' fill='%23c9a250'/%3E%3C/svg%3E">
-${GA}${FONTS}<style>${CSS}</style></head><body>`;
+${GA}${FONTS}<style>${CSS}${NLCSS}</style></head><body>`;
 }
 
-const BEEHIIV = `<script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="d4799f36-e61d-43a8-88cf-fbcb0b24fd5b"></script>`;
+// End-of-post CTA: book first, services second, owned newsletter capture third.
+// Posts to the owned lead API (same pattern + bot-wall as the homepage form).
+const ENDCTA = `<section class="endcta"><div class="card">
+<h3>Liked this? The book goes deeper.</h3>
+<p>The Artificial Advantage: the frameworks behind everything here, written for professionals, not programmers.</p>
+<div class="ctarow"><a class="btn primary" href="/book.html">Read The Artificial Advantage</a><a class="btn ghost" href="/services/">Work with me</a></div>
+<form id="nlform" class="nlrow" novalidate><input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true"><input id="nlemail" type="email" name="email" required placeholder="you@work.com" aria-label="Email address"><button class="btn ghost" type="submit">Get new posts</button></form>
+<p class="nlmsg" id="nlmsg"></p>
+<script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail').value.trim();if(!em){m.textContent='Enter your email first.';return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'newsletter-blog',website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
+</div></section>`;
 
-fs.mkdirSync(path.join(DIR,'writing'), {recursive:true});
+fs.mkdirSync(path.join(OUT,'writing'), {recursive:true});
 const cards = [];
 for(const e of essays){
   const canon = `https://elvinpeters.com/writing/${e.slug}/`;
   const img = `/img/${e.image}`;
   const page = head(e.title, e.dek, img, canon) + NAV +
     `<article><div class="arthead">`+
-      `<a class="backlink" href="/writing/">&larr; Writing</a>`+
+      `<a class="backlink" href="/writing/">&larr; Blog</a>`+
       `<img class="cover" src="${img}" alt="" loading="eager">`+
-      `<span class="eyebrow">Essay</span>`+
+      `<span class="eyebrow">Blog</span>`+
       `<h1>${esc(e.title)}</h1>`+
       `<p class="dek">${esc(e.dek)}</p>`+
       `<div class="byline"><b>Elvin Peters</b> <span>${e.readmins||8} min read</span> <button id="tg" style="margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);width:30px;height:30px;border-radius:8px;cursor:pointer">&#9681;</button></div>`+
     `</div><div class="body">${e.html}</div></article>`+
-    `<section class="endcta"><div class="card"><h3>I write about building things solo with AI.</h3><p>Occasional, practical, no spam. Get the next one.</p>${BEEHIIV}<div style="margin-top:16px"><a class="btn ghost" href="https://twitter.com/elvin_peters">Follow on X</a></div></div></section>`+
+    ENDCTA +
     FOOT + THEME + `</body></html>`;
-  fs.mkdirSync(path.join(DIR,'writing',e.slug), {recursive:true});
-  fs.writeFileSync(path.join(DIR,'writing',e.slug,'index.html'), page);
-  cards.push({slug:e.slug,title:e.title,dek:e.dek,image:e.image,readmins:e.readmins||8});
+  fs.mkdirSync(path.join(OUT,'writing',e.slug), {recursive:true});
+  fs.writeFileSync(path.join(OUT,'writing',e.slug,'index.html'), page);
+  cards.push({slug:e.slug,title:e.short_title||e.title,dek:e.short_dek||e.dek,image:e.image,readmins:e.readmins||8});
 }
 
 // writing index page
-const list = head('Writing','Essays on building software, games, and a company of one with AI as a co-worker.','/img/og.jpg','https://elvinpeters.com/writing/') + NAV +
-  `<article style="max-width:820px"><span class="eyebrow">Writing</span><h1 style="margin-bottom:6px">Notes from a workshop of one.</h1><p class="dek" style="margin-bottom:30px">How I actually build: the harness around the AI, the zero-dependency habit, the tools that let one person ship like a team.</p>`+
-  cards.map(c=>`<a href="/writing/${c.slug}/" style="display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line-soft);align-items:center">`+
-    `<img src="/img/${c.image}" alt="" style="width:150px;aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--line)">`+
-    `<span><span class="eyebrow">Essay &middot; ${c.readmins} min</span><h2 style="font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:6px 0 4px">${esc(c.title)}</h2><span style="color:var(--ink-2);font-size:14px">${esc(c.dek)}</span></span></a>`).join('')+
+const list = head('Blog','Posts on building software, games, and a company of one with AI as a co-worker.','/img/og.jpg','https://elvinpeters.com/writing/') + NAV +
+  `<article style="max-width:820px"><span class="eyebrow">Blog</span><h1 style="margin-bottom:6px">Notes from a workshop of one.</h1><p class="dek" style="margin-bottom:30px">How I actually build: the harness around the AI, the zero-dependency habit, the tools that let one person ship like a team.</p>`+
+  essays.map(e=>`<a href="/writing/${e.slug}/" style="display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line-soft);align-items:center">`+
+    `<img src="/img/${e.image}" alt="" style="width:150px;aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--line)">`+
+    `<span><span class="eyebrow">Post &middot; ${e.readmins||8} min</span><h2 style="font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:6px 0 4px">${esc(e.title)}</h2><span style="color:var(--ink-2);font-size:14px">${esc(e.dek)}</span></span></a>`).join('')+
   `</article>`+FOOT+THEME+`</body></html>`;
-fs.writeFileSync(path.join(DIR,'writing','index.html'), list);
+fs.writeFileSync(path.join(OUT,'writing','index.html'), list);
 
-// homepage "Writing" section cards fragment (for manual injection into index.html)
+// homepage "Writing" section cards fragment — matches the homepage card markup
+// exactly (short display fields when present), ready to become an ep: region.
 const frag = cards.map(c=>
-`  <a class="card" href="/writing/${c.slug}/">
-    <div class="thumb" style="background-image:url(/img/${c.image});background-size:cover;background-position:center"></div>
-    <div class="body"><div class="kicker"><span class="tag">Essay</span><span class="pill read">${c.readmins} min</span></div>
-    <h3>${esc(c.title)}</h3><p class="desc">${esc(c.dek)}</p><span class="go">Read <span class="arw">&rarr;</span></span></div>
-  </a>`).join('\n');
-fs.writeFileSync(path.join(DIR,'writing','_homepage_cards.html'), frag);
+`      <a class="card" href="/writing/${c.slug}/">
+        <div class="thumb" style="background-image:url(/img/${c.image})"></div>
+        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">${c.readmins} min</span></div>
+        <h3>${esc(c.title)}</h3><p class="desc">${esc(c.dek)}</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>`).join('\n');
+fs.writeFileSync(path.join(OUT,'writing','_homepage_cards.html'), frag);
 
-console.log('Built', essays.length, 'essays -> /writing/<slug>/ + /writing/ index');
-console.log('Homepage cards fragment -> writing/_homepage_cards.html');
+console.log('Built', essays.length, 'essays -> writing/<slug>/ + writing/ index', OUT !== DIR ? `(out: ${OUT})` : '');
