@@ -135,12 +135,18 @@
   /* ---------------- boot ---------------- */
 
   function boot() {
+    // On apps-kit pages the kit owns theme toggling; double-binding would
+    // flip twice per tap. site.js only contributes the mobile drawer there.
+    var kitOwnsTheme = !!window.AppsKit;
     buildMenu();
-    document.addEventListener('click', function (e) {
-      var b = e.target.closest && e.target.closest('[data-theme-toggle]');
-      if (b) toggleTheme();
-    });
-    paintToggles();
+    if (!document.querySelector('.navburger')) setTimeout(buildMenu, 120); // kit injects its nav late
+    if (!kitOwnsTheme) {
+      document.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('[data-theme-toggle]');
+        if (b) toggleTheme();
+      });
+      paintToggles();
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
