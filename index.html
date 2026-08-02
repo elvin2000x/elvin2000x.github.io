@@ -151,15 +151,6 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .svc .row{display:flex;gap:16px;align-items:center;margin-top:6px}
 .svc .row a{font-size:var(--fs-sm);font-weight:600;color:var(--gold-2)}
 .svc .row a.detail{color:var(--muted);font-weight:500}
-.receipts{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-@media(max-width:760px){.receipts{grid-template-columns:1fr}}
-.rcol .item{padding:16px 0;border-top:1px solid var(--line-soft)}
-.rcol .item:first-child{border-top:0}
-.rcol .item h4{margin:0 0 4px;font-family:var(--sans);font-size:var(--fs-body);font-weight:700;color:var(--ink)}
-.rcol .item p{margin:0;color:var(--ink-2);font-size:var(--fs-sm)}
-.quote{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:20px 22px}
-.quote p{margin:0 0 10px;font-family:var(--serif);font-size:var(--fs-lead);line-height:1.5;color:var(--ink)}
-.quote .by{font-size:var(--fs-sm);color:var(--muted)}
 .ctaband{background:var(--panel);background:linear-gradient(135deg,color-mix(in oklab,var(--gold) 18%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line));box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 12%,transparent),var(--card-lift);border-radius:var(--r-lg);padding:44px;text-align:center}
 @media(max-width:640px){.ctaband{padding:28px 20px}}
 .ctaband h2{font-size:var(--fs-h2)}
@@ -239,7 +230,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   <section class="section" id="services"><div class="container">
     <div class="section-head">
       <div><span class="eyebrow">Work with me</span><h2>AI and Google Ads, run by one operator.</h2></div>
-      <p>I spent a decade running paid media inside big tech and Canadian fintech, then taught myself to build with AI. Now you get both: the strategy and the person who actually builds it. <a href="/services/" style="color:var(--gold-2);font-weight:600">Full services and pricing →</a></p>
+      <p>Five fixed-scope ways to work together: coaching, done-for-you builds, team training, and paid search. One person handles strategy and the build, accountable end to end. <a href="/services/" style="color:var(--gold-2);font-weight:600">Full services and pricing →</a></p>
     </div>
 
     <div class="bucket-label">Put AI to work</div>
@@ -248,19 +239,19 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <h3>AI Coaching</h3>
         <span class="who">For founders &amp; professionals</span>
         <p>One on one working sessions that get you directing AI with real confidence, with a system you keep using after we finish.</p>
-        <div class="row"><a href="/ai-coaching/">View coaching →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <div class="row"><a href="/ai-coaching/">View coaching →</a></div>
       </div>
       <div class="svc">
         <h3>AI Workflow Build</h3>
         <span class="who">Done for you</span>
         <p>Pick one repetitive task and I build the AI workflow that runs it, then hand it over documented so your team owns it.</p>
-        <div class="row"><a href="/ai-workflow-build/">View builds →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <div class="row"><a href="/ai-workflow-build/">View builds →</a></div>
       </div>
       <div class="svc">
         <h3>Team AI Workshop</h3>
         <span class="who">For teams</span>
         <p>A live two hour session that gets your whole team working from one reliable, shared way of using AI.</p>
-        <div class="row"><a href="/team-ai-workshop/">View workshop →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <div class="row"><a href="/team-ai-workshop/">View workshop →</a></div>
       </div>
     </div>
 
@@ -270,13 +261,13 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <h3>Google Ads Audit</h3>
         <span class="who">For businesses already spending</span>
         <p>A specialist with three years inside Google Ads tears down your account and hands you a prioritized plan of exactly what to fix. From $499.</p>
-        <div class="row"><a href="/google-ads-audit/">View the audit →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <div class="row"><a href="/google-ads-audit/">View the audit →</a></div>
       </div>
       <div class="svc">
         <h3>Google Ads Management</h3>
         <span class="who">For businesses ready to grow</span>
-        <p>Done for you paid search run by someone who managed seven-figure budgets at platform scale, so every dollar stays accountable.</p>
-        <div class="row"><a href="/google-ads/">View management →</a><a class="detail" href="https://meet.elvinpeters.com">Book a call</a></div>
+        <p>Done for you paid search run by someone who has managed serious budgets, so every dollar stays accountable.</p>
+        <div class="row"><a href="/google-ads/">View management →</a></div>
       </div>
     </div>
   </div></section>
@@ -302,26 +293,10 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   <section class="section section--cont" id="about"><div class="container">
     <img src="/img/headshot.jpg" alt="Elvin M. Peters, Toronto AI consultant" style="width:118px;height:118px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);box-shadow:var(--shadow);display:block;margin:0 auto 22px">
     <div class="section-head">
-      <div><span class="eyebrow">Why me</span><h2>The receipts behind the advice.</h2></div>
-      <p>Most people talk about AI. I build and ship real systems with it, and this whole site is the proof.</p>
+      <div><span class="eyebrow">Why me</span><h2>A marketer who learned to build.</h2></div>
     </div>
-    <div class="receipts">
-      <div class="rcol">
-        <div class="item"><h4>Seven-figure paid media</h4><p>Years running Google Ads where a wasted dollar gets noticed. That discipline is what I bring to your campaigns.</p></div>
-        <div class="item"><h4>A marketer who learned to build</h4><p>I ran paid campaigns across Google, Meta, and Quora for big-tech and fintech brands, then taught myself to build with AI. You get someone who understands the business and can actually ship the tool, not just advise on it.</p></div>
-        <div class="item"><h4>A published book on this exact topic</h4><p>The Artificial Advantage is my method in print, live on Amazon. The frameworks I teach are the ones I use.</p></div>
-        <div class="item"><h4>I build and self-host it all</h4><p>This site, my scheduler, my CRM, a shelf of apps and games, run on my own server by hand. When I say I can install AI that ships, the proof is everywhere you look here.</p></div>
-      </div>
-      <div class="rcol">
-        <div class="quote">
-          <p>The scheduler behind the booking button, the CRM under it, the email engine that delivers my newsletter, and this site itself are all software I built and run on my own server. The stack you are looking at is the case study.</p>
-          <span class="by">— My own systems, in production</span>
-        </div>
-        <div class="quote" style="margin-top:16px">
-          <p>The public work runs the same way: an AI directory where every link is re-verified by script before deploy, and twenty-five browser games shipped solo. When I build for your business, it ships with the same discipline.</p>
-          <span class="by">— The proof is one click away: <a href="/projects/" style="color:var(--gold-2)">see the projects</a></span>
-        </div>
-      </div>
+    <div style="max-width:70ch">
+      <p style="font-size:var(--fs-lead);color:var(--ink-2);line-height:1.7;margin:0">I spent a decade in paid media, running campaigns across Google, Meta, and Quora where a wasted dollar gets noticed. Then I taught myself to build with AI, wrote the method down, and started shipping software instead of slide decks. So you get one person who understands the business case, builds the actual tool, and stays accountable for both. Everything I recommend to a client runs in production somewhere on this site first. <a href="/projects/" style="color:var(--gold-2);font-weight:600">See it all live →</a></p>
     </div>
   </div></section>
 
@@ -344,7 +319,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <h2 style="margin-top:10px">Live systems, one click away.</h2>
         <p style="margin-top:16px">
           <span class="lead">I ship production software solo, every day, with AI as a genuine co-worker.</span>
-          Everything I claim on this page has a running receipt: a continuously verified AI directory, eleven Canadian financial calculators, twenty-five original browser games, a QR studio with scan tracking, and the scheduler, CRM, and email engine this business runs on. All designed, built, and hosted by me. It is the same way I work for clients.
+          Everything I claim on this page has a running receipt: a continuously verified AI directory, eleven Canadian financial calculators, thirteen original browser games, a QR studio with scan tracking, and the scheduler, CRM, and email engine this business runs on. All designed, built, and hosted by me. It is the same way I work for clients.
         </p>
         <div class="apps-row">
           <a class="chip" href="/projects/">Browse all the projects <span class="lv">LIVE</span></a>
