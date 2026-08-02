@@ -1,0 +1,11 @@
+{
+  "_comment": "Global facts. Consumed by future footer/connect regions and the Studio dashboard.",
+  "email": "elvin@elvinpeters.com",
+  "meet_url": "https://meet.elvinpeters.com",
+  "amazon_url": "https://www.amazon.com/dp/B0H4X2S2JD",
+  "system_url": "/system/",
+  "socials": {
+    "x": "https://twitter.com/elvin_peters",
+    "linkedin": "https://www.linkedin.com/in/elvinmpeters"
+  }
+}
