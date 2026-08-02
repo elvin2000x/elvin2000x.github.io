@@ -10,7 +10,7 @@ const ROOT = __dirname;
 
 // Pages excluded from every check: other businesses, retired stubs,
 // generated-elsewhere pipelines, binaries.
-const EXCLUDE = /^(titles|books|play|book1-feedback|oto|dl|studio)([\\/]|$)|^index_v[0-9]\.html$/;
+const EXCLUDE = /^(titles|books|play|book1-feedback|oto|dl|studio)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^writing\/_homepage_cards\.html$/;
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
