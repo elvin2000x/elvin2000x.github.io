@@ -31,7 +31,7 @@ article h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3
 .dek{font-size:1.2rem;color:var(--ink-2);margin:16px 0 0;font-family:var(--serif);font-style:italic}
 .byline{display:flex;gap:14px;align-items:center;margin:22px 0 0;padding-bottom:26px;border-bottom:1px solid var(--line-soft);font-size:14px;color:var(--muted)}
 .byline b{color:var(--ink-2);font-weight:600}
-.body{font-size:17.5px;color:var(--ink)}
+.body{font-size:18px;color:var(--ink)}
 .body h2{font-family:var(--serif);font-weight:600;font-size:1.6rem;letter-spacing:-.01em;margin:38px 0 12px;line-height:1.2}
 .body p{margin:0 0 20px}
 .body ul{margin:0 0 20px;padding-left:22px}.body li{margin:0 0 8px}
@@ -50,7 +50,7 @@ footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted
 footer .in{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer a:hover{color:var(--gold-2)}
 :focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
-@media(max-width:520px){.nav .lk a:not(.cta){display:none}}
+@media(max-width:640px){.nav .lk a:not(.cta){display:none}}
 
 .nlrow{display:flex;gap:10px;max-width:440px;margin:18px auto 0;flex-wrap:wrap;justify-content:center}
 .nlrow input{flex:1;min-width:210px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:16px;font-family:var(--sans)}
@@ -59,7 +59,7 @@ footer a:hover{color:var(--gold-2)}
 </style></head><body><nav class="nav"><div class="in">
   <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19V5h9M5 12h7" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="17" r="2.4" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
   <div class="lk"><a href="/services/">Services</a><a href="/projects/">Projects</a><a href="/contact/">Contact</a><a class="cta" href="/book.html">Read the book</a></div>
-</div></nav><article><div class="arthead"><a class="backlink" href="/writing/">&larr; Blog</a><img class="cover" src="/img/blog-claude.jpg" alt="" loading="eager"><span class="eyebrow">Blog</span><h1>The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker</h1><p class="dek">You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship.</p><div class="byline"><b>Elvin Peters</b> <span>6 min read</span> <button id="tg" style="margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);width:30px;height:30px;border-radius:8px;cursor:pointer">&#9681;</button></div></div><div class="body"><p>Most people treat an AI model like a vending machine. Prompt in, answer out, assume the answer is right because it reads like it's right. Then one day it hands back a confident wrong number, they act on it, and they write the whole thing off as a toy. I get the reaction. I think the diagnosis is backwards.</p>
+</div></nav><article><div class="arthead"><a class="backlink" href="/writing/">&larr; Blog</a><img class="cover" src="/img/blog-claude.jpg" alt="" width="1024" height="640" loading="eager"><span class="eyebrow">Blog</span><h1>The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker</h1><p class="dek">You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship.</p><div class="byline"><b>Elvin Peters</b> <span>6 min read</span> <button id="tg" style="margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);width:30px;height:30px;border-radius:8px;cursor:pointer">&#9681;</button></div></div><div class="body"><p>Most people treat an AI model like a vending machine. Prompt in, answer out, assume the answer is right because it reads like it's right. Then one day it hands back a confident wrong number, they act on it, and they write the whole thing off as a toy. I get the reaction. I think the diagnosis is backwards.</p>
 
 <p>The model is fallible. You can't prompt that away, and it isn't a reason to walk. A good human teammate is fallible too. What makes one reliable isn't a clean record, it's that they work inside a system that catches mistakes before those mistakes cost anything: code review, a staging environment, a checklist for the step everyone forgets. You don't repair an unreliable worker by trusting them harder. You build the checks around them.</p>
 
