@@ -5,17 +5,15 @@ This repo IS the live site. Pushing to master deploys via GitHub Pages in ~60s. 
 ## Build workflow (always)
 1. `git pull --rebase` before starting work.
 2. Content and chrome flow through `node build.js` — never hand-edit generated files (currently: `writing/**` pages and `writing/_homepage_cards.html`; the list grows as the CMS lands).
-3. Before ANY push: `node build.js && node verify.js` (verify.js arrives with the design-pass PR; until then run the build twice — the second run must produce zero diff).
+3. Before ANY push: `node build.js && node verify.js` — **the gate must print GREEN.** A FAIL means do not push; fix the cause, never the check.
 4. Prefer PR flow for anything visual or multi-file: branch → push → `gh pr create`. Elvin merges; merging deploys.
 
-## Design system (supersedes the old per-page-CSS habit — decided 2026-08-02)
-- Shared chrome and design tokens live in `css/site.css` + partials (landing with the design-pass PR). Pages may add page-specific styles but NEVER redefine chrome, buttons, type scale, or breakpoints.
-- One button language: the gold pill (`border-radius:999px`). No new rectangle-button variants.
-- Breakpoints: 640 and 920 only, unless a component genuinely needs its own.
-- Forms: inputs ≥16px font (iOS zoom), tap targets ≥44px.
-- Images: always `width`+`height` attributes; `loading="lazy"` below the fold; webp preferred; no inline `width:` styles; nothing over ~200KB eager.
-- Type floors: no font-size below 11px anywhere.
-- book.html is DELIBERATELY light/white (sales page); it shares nav/button/type/footer DNA via alias tokens. Do not dark-theme it.
+## Design system (canonical doc: DESIGN-SYSTEM.md — read it before styling anything)
+- Tokens live in `css/site.css`; hex literals live there and nowhere else. Pages may add page-specific styles but NEVER redefine chrome, buttons, type scale, or breakpoints.
+- One button language: the gold pill. Breakpoints 640/920 only (`/* bp-exempt: reason */` for deliberate exceptions).
+- Forms ≥16px, tap targets ≥44px, images always dimensioned + lazy below the fold, no inline `width:` on any `<img>`.
+- Type floor: **12px** (raised from 11 during the design pass; verify.js enforces it).
+- book.html is DELIBERATELY light/white via `data-theme="book"`; it never theme-flips. Do not dark-theme it.
 
 ## Content rules
 - Voice: follow `Brain/VOICE-RULES.md` for anything reader-facing (no em-dashes, no "not just X, it's Y", no AI-tell vocab).
