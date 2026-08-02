@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects | Elvin M. Peters</title>
-<meta name="description" content="A working portfolio: free calculators, 25+ browser games with real-time multiplayer, a continuously verified AI directory, a white-label lead funnel platform, and a self-hosted site builder. Everything here is live and you can open it.">
+<meta name="description" content="A working portfolio: free calculators, 13 original browser games with real-time multiplayer, a continuously verified AI directory, a white-label lead funnel platform, and a self-hosted site builder. Everything here is live and you can open it.">
 <link rel="canonical" href="https://elvinpeters.com/projects/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Projects | Elvin M. Peters">
-<meta property="og:description" content="Free calculators, 25+ browser games with real-time multiplayer, a verified AI directory, and self-hosted platforms. All live, all clickable.">
+<meta property="og:description" content="Free calculators, 13 original browser games with real-time multiplayer, a verified AI directory, and self-hosted platforms. All live, all clickable.">
 <meta property="og:url" content="https://elvinpeters.com/projects/">
 <meta property="og:image" content="https://elvinpeters.com/cover.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -85,7 +85,7 @@
     <p class="lede">Not screenshots and not case studies. Every link below is a running application — click one and use it. Most of them are free, none of them ask you to sign up, and all of them run on infrastructure I own. This page is the proof behind everything I claim about shipping with AI.</p>
     <div class="strip">
       <div><b id="n-apps">—</b><span>live builds</span></div>
-      <div><b>25+</b><span>browser games</span></div>
+      <div><b>13</b><span>browser games</span></div>
       <div><b>11</b><span>free calculators</span></div>
       <div><b>0</b><span>frameworks used</span></div>
     </div>
@@ -112,11 +112,11 @@
 <script>
 (function () {
   'use strict';
-  var R = window.APPS_REGISTRY;
+  var R = JSON.parse(JSON.stringify(window.APPS_REGISTRY).replace(/\\\/\\*AID:[a-z_]*\\\*\\\//g, '').replace(/\\\/\\*\\\/AID\\\*\\\//g, ''));
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) {
     return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); };
 
-  document.getElementById('n-apps').textContent = R.apps.length;
+  document.getElementById('n-apps').textContent = R.apps.filter(function (a) { return a.status === 'live'; }).length;
 
   var active = 'all';
   var filters = document.getElementById('filters');

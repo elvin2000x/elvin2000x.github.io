@@ -19,6 +19,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://elvinpeters.com/system/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://elvinpeters.com/quiz/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
