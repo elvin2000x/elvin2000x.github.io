@@ -64,6 +64,7 @@
       <h1>Welcome to the System.</h1>
       <p>Your complete kit is ready: the full book, the 7-Day Workbook, the 50-prompt pack, and all 12 role packs.</p>
       <a id="dl" class="btn" href="mailto:elvin@elvinpeters.com?subject=System%20download%20link">Download your System →</a>
+      <a id="dlm" class="btn" href="#" hidden style="margin-top:10px">Download the Operator's Manual →</a>
       <p class="muted">Your receipt is on its way to <b id="email">your email</b>. This download link works for 24 hours; the files are yours to keep, so save them somewhere safe.</p>
       <div class="next">
         <h3>Start here</h3>
@@ -80,7 +81,7 @@
       <h1>You're all set.</h1>
       <p>If you just completed your purchase, your receipt is on its way to your inbox and your download is ready.</p>
       <button class="btn" type="button" onclick="location.reload()">Retry loading my download →</button>
-      <p class="muted">Still not showing? Email <a href="mailto:elvin@elvinpeters.com" style="color:var(--accent)">elvin@elvinpeters.com</a> with your receipt and I'll send the files directly, fast.</p>
+      <p class="muted">Still not showing? Email me and your order reference goes in automatically: <a id="helpmail" href="mailto:elvin@elvinpeters.com?subject=System%20download%20help" style="color:var(--accent)">elvin@elvinpeters.com</a>. I will send the files directly, fast.</p>
     </div>
 
     <div class="foot">© 2026 Elvin M. Peters · <a href="https://elvinpeters.com/">elvinpeters.com</a></div>
@@ -114,6 +115,10 @@
       .then(function(d){
         if (d.paid && d.download_url) {
           document.getElementById("dl").setAttribute("href", API_BASE + d.download_url);
+          if (d.manual_url) { var m = document.getElementById("dlm"); m.setAttribute("href", API_BASE + d.manual_url); m.hidden = false; }
+          var ns = document.getElementById("nextstep"); if (ns) ns.hidden = false;
+          var hm = document.getElementById("helpmail");
+          if (hm && sid) hm.setAttribute("href", "mailto:elvin@elvinpeters.com?subject=" + encodeURIComponent("System download help - " + sid) + "&body=" + encodeURIComponent("Order reference: " + sid));
           if (d.email) document.getElementById("email").textContent = d.email;
           show("success");
         } else { show("fallback"); }

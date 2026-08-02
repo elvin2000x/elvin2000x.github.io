@@ -68,7 +68,7 @@ window.APPS_REGISTRY = {
     {
       slug: 'arcade', name: 'The Arcade', cat: 'games', status: 'live', featured: true,
       href: 'https://play.elvinpeters.com/',
-      blurb: 'Twenty-five browser games, all written from scratch. Seven of them are real-time multiplayer over a WebSocket server I run — share one lobby link and your friends are at the table.',
+      blurb: 'Thirteen browser games, all written from scratch. Seven of them are real-time multiplayer over a WebSocket server I run — share one lobby link and your friends are at the table.',
       stat: '25+ games',
       tags: ['Multiplayer', 'No download', 'Zero dependencies']
     },
