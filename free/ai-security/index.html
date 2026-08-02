@@ -7,6 +7,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');gtag('config','AW-637214471');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
 <!-- X pixel -->
 <script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
 },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
@@ -79,7 +80,7 @@ transition:transform .15s,border-color .15s}
 <form id="f" novalidate>
 <div class="field"><input id="name" type="text" placeholder="First name (optional)" maxlength="80" autocomplete="given-name"></div>
 <div class="field"><input id="email" type="email" placeholder="Your best email" maxlength="120" required autocomplete="email"></div>
-<div class="hp" aria-hidden="true"><input type="text" id="website" tabindex="-1" autocomplete="off"></div>
+<div class="hp" aria-hidden="true"><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
 <button class="btn" type="submit" id="btn">Send me the guide</button>
 <div class="msg" id="msg"></div>
 <div class="fine">Instant access. We will also email you a copy.</div>
@@ -129,7 +130,7 @@ transition:transform .15s,border-color .15s}
     var email=val('email'),name=val('name');
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){return fail('Please enter a valid email.');}
     btn.disabled=true;btn.textContent='Sending...';
-    var body=new URLSearchParams({name:name||'Magnet lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:''}).toString();
+    var body=new URLSearchParams({name:name||'Magnet lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:val('website')}).toString();
     fetch("https://ultimateaidirectory.com/api/lead",{method:'POST',mode:'cors',keepalive:true,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
       .then(function(){convert(email);reveal(name);})
       .catch(function(){convert(email);reveal(name);});  // always deliver the guide
