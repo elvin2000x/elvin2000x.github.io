@@ -236,6 +236,7 @@ function applyRegions(pagePath, regions) {
    byte-identical until someone actually edits the JSON (or Site Studio does). */
 const SYS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'system.json'), 'utf8'));
 const CLA = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'claude.json'), 'utf8'));
+const CMA = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'content-machine.json'), 'utf8'));
 
 function renderSysHero() {
   const h = SYS.hero;
@@ -274,6 +275,18 @@ function renderClPrice() {
   const x = CLA.price;
   return `  <div class="big">${x.amount}</div>\n  <div class="sub">${x.sub}</div>`;
 }
+function renderCmHero() {
+  const h = CMA.hero;
+  return [
+    `    <span class="label">${h.label}</span>`,
+    `    <h1>${h.headline}</h1>`,
+    `    <p class="dek">${h.dek}</p>`,
+  ].join('\n');
+}
+function renderCmPrice() {
+  const x = CMA.price;
+  return `  <div class="big">${x.amount}</div>\n  <div class="sub">${x.sub}</div>`;
+}
 
 applyRegions('system/index.html', {
   'sys-hero': renderSysHero,
@@ -285,7 +298,11 @@ applyRegions('claude/index.html', {
   'cl-hero': renderClHero,
   'cl-price': renderClPrice,
 });
-console.log('Regions applied: system/index.html (hero, price, guarantee, faq), claude/index.html (hero, price)');
+applyRegions('content-machine/index.html', {
+  'cm-hero': renderCmHero,
+  'cm-price': renderCmPrice,
+});
+console.log('Regions applied: system/index.html (hero, price, guarantee, faq), claude/index.html (hero, price), content-machine/index.html (hero, price)');
 
 applyRegions('index.html', {
   'nav': () => renderNav('index.html'),

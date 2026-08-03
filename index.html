@@ -183,6 +183,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .rung--cover{flex-direction:row;gap:20px;align-items:flex-start}
 .rung--cover img{width:92px;height:auto;border-radius:6px;flex:none;box-shadow:0 16px 34px -18px rgba(0,0,0,.6)} /* bp-exempt: fixed cover thumb */
 .rung--cover > div{display:flex;flex-direction:column;flex:1}
+/* Two paid covers sit side by side; the free rung takes the full width beneath
+   them rather than leaving an orphan half-row. */
+.rung--wide{grid-column:1/-1}
 @media(max-width:760px){.ladder{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:var(--fs-sm)}
 footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
@@ -202,6 +205,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
       <a href="/services/">Services</a>
       <a href="/book.html">The Book</a>
       <a href="/claude/">Claude Guide</a>
+      <a href="/content-machine/">Content Machine</a>
       <a href="/projects/">Projects</a>
       <a href="/writing/">Blog</a>
       <a href="#about">About</a>
@@ -315,7 +319,16 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
           <span class="rgo">See the manual &rarr;</span>
         </div>
       </a>
-      <a class="rung" href="/free/">
+      <a class="rung rung--cover" href="/content-machine/">
+        <img src="/img/magnets/content-machine.webp" alt="The Content Machine" width="440" height="629" loading="lazy">
+        <div>
+          <span class="rl">Publish more, without the slop</span>
+          <b>The Content Machine</b>
+          <span class="rd">Five components and nine steps for producing real volume with AI. Built from 293,571 words that cost $32.67, and the audit of how much of it was worth keeping. $47.</span>
+          <span class="rgo">See the guide &rarr;</span>
+        </div>
+      </a>
+      <a class="rung rung--wide" href="/free/">
         <span class="rl">Start free</span>
         <b>Fourteen free guides</b>
         <span class="rd">Ten field guides, the 50-prompt pack, a full chapter of the book, and a 480-resource vault. One email, yours to keep.</span>

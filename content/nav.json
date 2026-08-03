@@ -15,6 +15,10 @@
       "href": "/claude/"
     },
     {
+      "label": "Content Machine",
+      "href": "/content-machine/"
+    },
+    {
       "label": "Projects",
       "href": "/projects/"
     },
