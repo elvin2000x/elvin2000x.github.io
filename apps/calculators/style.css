@@ -42,7 +42,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .field-debts .debt-head{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
 .field-debts .debt-row{margin-bottom:6px}
 .field-debts .debt-row input{padding:8px 9px;font-size:13.5px}
-.field-debts .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:19px;line-height:1;padding:0}
+.field-debts .del{background:none;border:none;color:var(--muted);cursor:pointer;font-size:19px;line-height:1;padding:0;min-width:44px;min-height:44px}
 .field-debts .del:hover{color:var(--bad)}
 .field-debts .addrow{margin-top:10px;padding:7px 14px;font-size:13px}
 @media(max-width:520px){.field-debts .debt-head{display:none}
@@ -94,7 +94,7 @@ input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-
 .tip span{display:flex;align-items:center;gap:6px;color:var(--ink-2)}
 .tip i{width:9px;height:9px;border-radius:3px;display:inline-block}
 .tip em{font-style:normal;font-weight:600;color:var(--ink);margin-left:auto;padding-left:14px;font-variant-numeric:tabular-nums}
-.tablebtn{background:none;border:none;color:var(--muted);font-size:12.5px;cursor:pointer;padding:8px 0 2px;text-decoration:underline}
+.tablebtn{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;padding:12px 0;min-height:44px;text-decoration:underline}
 .tablebtn:hover{color:var(--gold-2)}
 .charttable{max-height:320px;overflow:auto}
 
