@@ -1,12 +1,12 @@
 {
-  "_comment": "The $47 Claude Operator's Manual page. Rendered by build.js. Edit here or in Site Studio.",
+  "_comment": "The $67 Claude Operator's Manual page. Rendered by build.js. Edit here or in Site Studio.",
   "hero": {
     "label": "The Claude Operator's Manual",
     "headline": "Most people use Claude like a search box. This is the manual for the other way.",
     "dek": "Two hundred and seventeen pages on running Claude as a working operator: projects that remember your context, skills you build once, connectors into the tools you already use, the API when the chat window is not enough, and Claude Code for the work that touches real files."
   },
   "price": {
-    "amount": "$47",
+    "amount": "$67",
     "sub": "USD · instant PDF · 217 pages · yours to keep · 14-day money-back guarantee"
   }
 }
