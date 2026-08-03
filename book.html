@@ -376,7 +376,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .exitpop.hidden { display: none; }
     .exitpop-card { position: relative; background: var(--panel); border: 1px solid var(--border); border-radius: 16px; max-width: 600px; width: 100%; padding: 40px 34px 32px; text-align: center; box-shadow: 0 30px 90px rgba(0,0,0,0.6); animation: pop .25s ease; }
     @keyframes pop { from { transform: scale(0.94); opacity: 0; } to { transform: none; opacity: 1; } }
-    .exitpop-x { position: absolute; top: 12px; right: 16px; background: none; border: none; color: var(--muted); font-size: 26px; cursor: pointer; line-height: 1; }
+    .exitpop-x { position: absolute; top: 6px; right: 8px; width: 44px; height: 44px; background: none; border: none; color: var(--muted); font-size: 26px; cursor: pointer; line-height: 1; }
     .exitpop-x:hover { color: var(--white); }
     .exitpop h2 { font-family: 'EB Garamond', serif; font-size: clamp(24px, 4vw, 32px); font-weight: 600; color: var(--white); line-height: 1.15; margin-bottom: 14px; }
     .exitpop p { font-size: 16px; color: var(--text); line-height: 1.6; margin-bottom: 22px; }
@@ -580,18 +580,54 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <p>The whole book rests on one idea: <strong>stop asking AI, start directing it.</strong> Here is what that looks like with the same task and two different people:</p>
     </div>
 
-    <div class="compare-grid">
-      <div class="compare-card bad">
-        <div class="compare-label">Without a framework</div>
-        <div class="compare-prompt">"Write me an email to a client about a project delay."</div>
-        <div class="compare-result"><strong>Result: 20 minutes</strong>Generic output. Wrong tone. They rewrote the whole thing.</div>
+      <div class="ba-set">
+        <div class="ba-item ba-item--before">
+          <div class="ba-label">Without a framework</div>
+          <div class="ba-prompt">&ldquo;Write me an email to a client about a project delay.&rdquo;</div>
+          <div class="ba-out"><b>20 minutes</b>Generic output, wrong tone. They rewrote the whole thing.</div>
+        </div>
+        <div class="ba-item ba-item--after">
+          <div class="ba-label">With direction</div>
+          <div class="ba-prompt">&ldquo;Client delay email. Two weeks late. Client values transparency. Tone: collaborative, not apologetic. Under 150 words. New date: March 15.&rdquo;</div>
+          <div class="ba-out"><b>2 minutes</b>Right voice, right tone, right length. One minute of polish. Sent.</div>
+        </div>
       </div>
-      <div class="compare-card good">
-        <div class="compare-label">With direction (Role · Task · Constraint)</div>
-        <div class="compare-prompt">"Client delay email. Two weeks late. Client: Sarah Chen, values transparency. Tone: collaborative, not apologetic. Under 150 words. New date: March 15."</div>
-        <div class="compare-result"><strong>Result: 2 minutes</strong>Right voice, right tone, right length. One minute of polish. Sent.</div>
+      <div class="ba-set">
+        <div class="ba-item ba-item--before">
+          <div class="ba-label">Without a framework</div>
+          <div class="ba-prompt">&ldquo;Summarize these meeting notes.&rdquo;</div>
+          <div class="ba-out"><b>A shorter pile of notes</b>No decisions, no owners, nothing anyone can act on.</div>
+        </div>
+        <div class="ba-item ba-item--after">
+          <div class="ba-label">With direction</div>
+          <div class="ba-prompt">&ldquo;From these notes: decisions made, action items with owner and date, open questions. Three lists, nothing else.&rdquo;</div>
+          <div class="ba-out"><b>A follow-up, sent same day</b>The meeting actually produces something.</div>
+        </div>
       </div>
-    </div>
+      <div class="ba-set">
+        <div class="ba-item ba-item--before">
+          <div class="ba-label">Without a framework</div>
+          <div class="ba-prompt">&ldquo;What does this data tell me?&rdquo;</div>
+          <div class="ba-out"><b>Your own columns, read back</b>A description where you needed a decision.</div>
+        </div>
+        <div class="ba-item ba-item--after">
+          <div class="ba-label">With direction</div>
+          <div class="ba-prompt">&ldquo;Act as an analyst briefing a skeptical CFO. Name the three changes that matter, why each happened, and what the numbers cannot explain.&rdquo;</div>
+          <div class="ba-out"><b>A briefing you can defend</b>Findings, causes, and the honest gaps.</div>
+        </div>
+      </div>
+      <div class="ba-set">
+        <div class="ba-item ba-item--before">
+          <div class="ba-label">Without a framework</div>
+          <div class="ba-prompt">&ldquo;Write a job description for a marketing manager.&rdquo;</div>
+          <div class="ba-out"><b>A posting like every other posting</b>Buzzwords, nothing specific, no reason to apply.</div>
+        </div>
+        <div class="ba-item ba-item--after">
+          <div class="ba-label">With direction</div>
+          <div class="ba-prompt">&ldquo;Job posting, marketing manager, 12-person B2B firm. Lead with the problems this person owns in month one. Plain language, under 400 words.&rdquo;</div>
+          <div class="ba-out"><b>A posting people answer</b>Specific, honest about the work.</div>
+        </div>
+      </div>
 
     <div class="story-block" style="margin-top: 24px;">
       <p>Same tool. Same task. Same professional context. The only difference was AI literacy.</p>
@@ -705,7 +741,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 </section>
 
 <footer>
-  <p>© 2026 Elvin M. Peters &nbsp;·&nbsp; <a href="mailto:elvin@elvinpeters.com">elvin@elvinpeters.com</a> &nbsp;·&nbsp; <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="buy" target="_blank">Buy the Book</a></p>
+  <p>© 2026 Elvin M. Peters &nbsp;·&nbsp; <a href="mailto:elvin@elvinpeters.com">elvin@elvinpeters.com</a> &nbsp;·&nbsp; <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="buy" target="_blank">Buy the Book</a> &nbsp;·&nbsp; <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="/tos.html">Terms</a></p>
 </footer>
 
 <!-- ───────────── 7. THE OFFER + VALUE STACK ───────────── -->
@@ -889,10 +925,30 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   function show() {
     if (!pop || sessionStorage.getItem('exit_shown')) return;
     sessionStorage.setItem('exit_shown', '1');
+    lastFocus = document.activeElement;
     pop.classList.remove('hidden');
+    var x = pop.querySelector('.exitpop-x'); if (x) x.focus();
     try { gtag('event', 'exit_popup_shown'); } catch (e) {}
   }
-  window.closeExit = function () { if (pop) pop.classList.add('hidden'); };
+  var lastFocus = null;
+  window.closeExit = function () {
+    if (!pop) return;
+    pop.classList.add('hidden');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  };
+  document.addEventListener('keydown', function (e) {
+    if (!pop || pop.classList.contains('hidden')) return;
+    if (e.key === 'Escape') { closeExit(); return; }
+    if (e.key === 'Tab') {
+      // Trap focus inside the dialog: aria-modal hides the page from AT, so the
+      // keyboard must not wander behind the overlay.
+      var f = pop.querySelectorAll('button, a[href], input');
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
   document.addEventListener('mouseout', function (e) {
     if (e.clientY <= 0 && !e.relatedTarget) show();   // cursor left the top of the viewport
   });
