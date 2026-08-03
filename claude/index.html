@@ -81,7 +81,7 @@ h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:v
       <span>217 pages</span><span>19 chapters</span><span>7 appendices</span><span>&ldquo;You can now&rdquo; checklist per chapter</span>
     </div>
     <div class="buyrow">
-      <a class="btn btn--primary btn--lg buy" href="https://buy.stripe.com/6oU8wP8J16FLcbs9IA9IQ01">Get the manual: $47 USD &rarr;</a>
+      <a class="btn btn--primary btn--lg buy" href="https://buy.stripe.com/9B600j7EX8NT7VcbQI9IQ03">Get the manual: $67 USD &rarr;</a>
       <a class="btn btn--ghost" href="#inside">See what is inside</a>
     </div>
     <p class="price-note">Instant PDF download · yours to keep · 14-day money-back guarantee</p>
@@ -173,10 +173,10 @@ h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:v
 <div class="buyband">
   <span class="label">The manual</span>
   <!-- ep:cl-price -->
-  <div class="big">$47</div>
+  <div class="big">$67</div>
   <div class="sub">USD · instant PDF · 217 pages · yours to keep · 14-day money-back guarantee</div>
   <!-- /ep:cl-price -->
-  <p style="margin-top:20px"><a class="btn btn--primary btn--lg buy" href="https://buy.stripe.com/6oU8wP8J16FLcbs9IA9IQ01">Get the manual &rarr;</a></p>
+  <p style="margin-top:20px"><a class="btn btn--primary btn--lg buy" href="https://buy.stripe.com/9B600j7EX8NT7VcbQI9IQ03">Get the manual &rarr;</a></p>
   <p class="sub">Buying <a href="/system/" style="color:var(--accent-ink);font-weight:600">The Artificial Advantage System</a>? You can add this manual at checkout for $27 instead.</p>
 </div>
 
@@ -197,7 +197,7 @@ h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:v
 (function(){
   // Attribution into Stripe, same pattern as /system/, so a purchase is
   // traceable to its campaign without depending on pixels.
-  var URL_BASE = "https://buy.stripe.com/6oU8wP8J16FLcbs9IA9IQ01";
+  var URL_BASE = "https://buy.stripe.com/9B600j7EX8NT7VcbQI9IQ03";
   var ref = '';
   try {
     var q = new URLSearchParams(location.search), parts = [];
@@ -210,8 +210,8 @@ h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:v
   document.querySelectorAll('a.buy').forEach(function(a){
     a.setAttribute('href', url); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener');
     a.addEventListener('click', function(){
-      try{gtag('event','begin_checkout',{value:47,currency:'USD',items:[{item_name:"Claude Operator's Manual"}]});}catch(e){}
-      try{fbq('track','InitiateCheckout',{content_name:"The Claude Operator's Manual",value:47,currency:'USD'});}catch(e){}
+      try{gtag('event','begin_checkout',{value:67,currency:'USD',items:[{item_name:"Claude Operator's Manual"}]});}catch(e){}
+      try{fbq('track','InitiateCheckout',{content_name:"The Claude Operator's Manual",value:67,currency:'USD'});}catch(e){}
     });
   });
 })();
