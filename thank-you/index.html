@@ -72,7 +72,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <p id="s-sub">Your complete kit is ready: the full book, the 7-Day Workbook, the 50-prompt pack, and all 12 role packs.</p>
       <a id="dl" class="btn" href="mailto:elvin@elvinpeters.com?subject=Download%20link">Download your System →</a>
       <a id="dlm" class="btn" hidden style="margin-top:10px">Download the Operator's Manual →</a>
-      <p class="muted">Your receipt is on its way to <b id="email">your email</b>. This download link works for 24 hours; the files are yours to keep, so save them somewhere safe.</p>
+      <p class="muted" id="s-receipt">Your receipt is on its way to <b id="email">your email</b>. This download link works for 24 hours; the files are yours to keep, so save them somewhere safe.</p>
       <div class="next">
         <h3>Start here</h3>
         <ol id="s-steps">
@@ -145,6 +145,24 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
                 "Build all five components before you generate anything.",
                 "Do the first ten pieces, and reject one on purpose."],
         extra: 'Running Claude for the writing? <a href="/claude/" style="color:var(--accent)">The Claude Operator\'s Manual &rarr;</a>'
+      },
+      "The AI Workspace Setup, Personal Operator": {
+        head: "Your setup is confirmed.",
+        sub: "There is nothing to download, because this is work I do with you. I will email you within one business day to book the discovery call.",
+        steps: ["I email you within one business day to book the call.",
+                "Sixty minutes on your real work, recorded with your permission.",
+                "I build, and you get one progress note midway.",
+                "Handover: the workspace, the written manual, the walkthrough recording."],
+        extra: 'Nothing to prepare. If you want a head start, jot down the three jobs you repeat most in a week &mdash; that is the first thing I will ask.'
+      },
+      "The AI Workspace Setup, Business Operator": {
+        head: "Your setup is confirmed.",
+        sub: "There is nothing to download, because this is work I do with you. I will email you within one business day to book the discovery call with your team.",
+        steps: ["I email you within one business day to book the call.",
+                "Discovery with up to three people, recorded with your permission.",
+                "I build, and you get one progress note midway.",
+                "Handover and a recorded 45-minute team session."],
+        extra: 'Nothing to prepare. Worth thinking about who from your team should be on the discovery call.'
       }
     };
     function applyCopy(title) {
@@ -154,17 +172,29 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       if (!c) return;
       document.getElementById('s-head').textContent = c.head;
       document.getElementById('s-sub').textContent = c.sub;
-      document.getElementById('dl').textContent = c.btn;
       document.getElementById('s-steps').innerHTML = c.steps.map(function(s){ return '<li>' + s + '</li>'; }).join('');
       document.getElementById('s-extra').innerHTML = c.extra;
+      // A service has no file, so there is no download button to relabel and
+      // no receipt line promising a link that will never arrive.
+      if (c.btn) {
+        document.getElementById('dl').textContent = c.btn;
+      } else {
+        document.getElementById('dl').hidden = true;
+        document.getElementById('s-receipt').innerHTML =
+          'Your receipt is on its way to <b id="email">your email</b>, along with what happens next.';
+        var h = document.querySelector('.next h3');
+        if (h) h.textContent = 'What happens next';
+      }
     }
     fetch(API_BASE + "/api/order?session_id=" + encodeURIComponent(sid))
       .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
       .then(function(d){
-        if (d.paid && d.download_url) {
+        // A service is paid with nothing to download, so success cannot depend
+        // on a download_url or a setup buyer lands on the "retry" state.
+        if (d.paid && (d.download_url || d.kind === 'service')) {
           applyCopy(d.product);   // must run before firePurchase: it sets PRODUCT_NAME
           firePurchase(typeof d.amount === 'number' && d.amount > 0 ? d.amount : 37.00);
-          document.getElementById("dl").setAttribute("href", API_BASE + d.download_url);
+          if (d.download_url) document.getElementById("dl").setAttribute("href", API_BASE + d.download_url);
           if (d.manual_url) { var m = document.getElementById("dlm"); m.setAttribute("href", API_BASE + d.manual_url); m.hidden = false; }
           var ns = document.getElementById("nextstep"); if (ns) ns.hidden = false;
           var hm = document.getElementById("helpmail");
