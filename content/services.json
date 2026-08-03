@@ -12,6 +12,15 @@
   ],
   "cards": [
     {
+      "id": "setup",
+      "bucket": "put-ai-to-work",
+      "title": "The AI Workspace Setup",
+      "href": "/setup/",
+      "who": "Done for you · five a month",
+      "home_blurb": "Your AI set up on your real business, then handed over with a written manual and a recorded walkthrough so your team runs it without me. From $497.",
+      "link_label": "View the setup →"
+    },
+    {
       "id": "coaching",
       "bucket": "put-ai-to-work",
       "title": "AI Coaching",
