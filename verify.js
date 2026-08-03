@@ -64,6 +64,23 @@ for (const rel of PAGES) {
     else if (size % 1 !== 0) report(rel, 'fractional font-size ' + size + 'px');
   }
 
+  // CSS-BALANCE: one missing brace silently kills every rule after it. This
+  // shipped live on /system/ (2026-08-04): a dropped } swallowed the price
+  // block, the guarantee and the trust row, and no other check could see it
+  // because the HTML was perfectly valid.
+  for (const m of html.matchAll(/<style>([\s\S]*?)<\/style>/g)) {
+    const css = m[1].replace(/\/\*[\s\S]*?\*\//g, '');   // comments first
+    let depth = 0;
+    for (const ch of css) {
+      if (ch === '{') depth++;
+      else if (ch === '}') depth--;
+      if (depth < 0) break;
+    }
+    if (depth !== 0)
+      fail(rel, 'unbalanced braces in a <style> block (' +
+        (depth > 0 ? depth + ' rule(s) never closed; everything after is dropped' : 'extra closing brace') + ')');
+  }
+
   // IMG-INLINE-W: the stretched-cover bug class. Zero tolerance.
   if (/<img[^>]*style="[^"]*width\s*:\s*\d+px/.test(html))
     fail(rel, 'inline pixel width on an <img> (the sideways-book bug class)');
