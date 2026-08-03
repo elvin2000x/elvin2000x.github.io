@@ -35,7 +35,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{--bg:#ffffff;--soft:#f4f1ea;--card:#ffffff;--border:#e4ddce;--navy:#0a1828;--ink:#12202f;--text:#3c4a5c;--muted:#5c6b7f;--gold:#b88a2e;--gold2:#c9a250;--green:#2f8a5b;--red:#cf4444}
+  :root{--bg:#ffffff;--soft:#f4f1ea;--card:#ffffff;--border:#e4ddce;--navy:#0a1828;--ink:#12202f;--text:#3c4a5c;--muted:#5c6b7f;--gold:#b88a2e;--gold2:#c9a250;--green:#1e7a4d;--red:#cf4444}
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
   .wrap{max-width:960px;margin:0 auto;padding:0 22px}
@@ -79,10 +79,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   .ba-item{display:grid;grid-template-rows:auto auto auto;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
   @supports (grid-template-rows: subgrid){.ba-item{grid-row:span 3;grid-template-rows:subgrid}}
   .ba-item--before{border-top:3px solid var(--red)}
-  .ba-item--after{border-top:3px solid var(--gold2)}
+  .ba-item--after{border-top:3px solid var(--green)}
   .ba-label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:20px 22px 12px}
   .ba-item--before .ba-label{color:var(--red)}
-  .ba-item--after .ba-label{color:var(--gold)}
+  .ba-item--after .ba-label{color:var(--green)}
   .ba-prompt{font-family:'EB Garamond',serif;font-style:italic;font-size:15px;line-height:1.55;background:var(--soft);border-left:2px solid var(--border);border-radius:6px;margin:0 22px;padding:14px 16px;color:var(--text)}
   .ba-out{padding:16px 22px 20px;font-size:14px;color:var(--muted)}
   .ba-out b{display:block;color:var(--ink);font-weight:600;margin-bottom:3px}
