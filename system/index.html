@@ -108,11 +108,24 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   .stack .sx p{margin:0 0 10px}
   .stack .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
   .stack .chips span{font-size:12px;border:1px solid var(--border);border-radius:999px;padding:4px 11px;color:var(--muted)}
-  .lib{max-width:660px;margin:26px auto 0;display:grid;gap:10px}
-  .lib-row{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px}
-  .lib-row img{width:44px;height:auto;border-radius:4px;box-shadow:0 6px 14px rgba(10,24,40,.18);flex:none}
+  .lib{max-width:720px;margin:26px auto 0;display:grid;gap:10px}
+  .lib-row{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .lib-row summary{display:flex;gap:16px;align-items:center;padding:14px 18px;cursor:pointer;list-style:none}
+  .lib-row summary::-webkit-details-marker{display:none}
+  .lib-row summary:hover{background:rgba(184,138,46,.05)}
+  .lib-row img{width:72px;height:auto;border-radius:5px;box-shadow:0 8px 18px rgba(10,24,40,.22);flex:none}
+  .lib-row .t{flex:1;min-width:0}
   .lib-row b{display:block;color:var(--ink);font-size:15px}
   .lib-row span{font-size:13px;color:var(--muted);line-height:1.45}
+  .lib-row .more{font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap}
+  .lib-row .more::after{content:" +"}
+  .lib-row[open] .more::after{content:" \2212"}
+  .lib-row .lx{padding:2px 18px 18px 106px;font-size:14px;color:var(--text);line-height:1.6}
+  .lib-row .lx em{color:var(--muted);font-style:italic;display:block;margin-bottom:8px}
+  .lib-row .lx ul{list-style:none;margin:0;padding:0}
+  .lib-row .lx li{position:relative;padding:4px 0 4px 16px}
+  .lib-row .lx li::before{content:"";position:absolute;left:2px;top:13px;width:5px;height:5px;border-radius:50%;background:var(--gold2)}
+  @media(max-width:640px){.lib-row .lx{padding-left:18px}.lib-row img{width:56px}}
   .stotal{display:flex;justify-content:space-between;padding:16px 22px;background:var(--soft);font-size:14px}
   .stotal .lab{text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--muted);font-size:12px}
   .stotal .strike{text-decoration:line-through;color:var(--muted);font-size:18px}
@@ -267,18 +280,18 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <section class="soft"><div class="wrap">
   <div class="label" style="text-align:center">No mystery box</div>
   <h2 class="h2" style="text-align:center">The 10-guide field library, spelled out</h2>
-  <p class="body" style="margin:0 auto 8px;text-align:center">These answer the questions the book raises next. Here is every one, so you know exactly what you are getting.</p>
+  <p class="body" style="margin:0 auto 8px;text-align:center">These answer the questions the book raises next. Open any one to see what is inside it.</p>
   <div class="lib">
-    <div class="lib-row"><img src="/img/lib/01-anthropic-decoded.webp" alt="" loading="lazy" width="132" height="187"><div><b>Decoded: 8 Pro AI Techniques</b><span>The prompt techniques the pros use, pulled from the actual developer docs and written in plain English.</span></div></div>
-    <div class="lib-row"><img src="/img/lib/02-context-playbook.webp" alt="" loading="lazy" width="132" height="187"><div><b>Feed It Your World: The Context Playbook</b><span>Stop starting from scratch. Learn to give AI your own documents, data and files the right way.</span></div></div>
-    <div class="lib-row"><img src="/img/lib/03-anti-hallucination.webp" alt="" loading="lazy" width="132" height="187"><div><b>Tell Me the Truth: The Anti-Hallucination Field Guide</b><span>Make AI stop making things up, and learn exactly when not to trust it.</span></div></div>
-    <div class="lib-row"><img src="/img/lib/04-build-ai-assistant.webp" alt="" loading="lazy" width="132" height="187"><div><b>Build Your Own AI Assistant (No Code)</b><span>A reusable assistant that already knows your job, so you never retype your context again.</span></div></div>
-    <div class="lib-row"><img src="/img/lib/05-automation-starter.webp" alt="" loading="lazy" width="132" height="187"><div><b>The AI Automation Starter Kit</b><span>Seven no-code automations that quietly do your daily busywork for you.</span></div></div>
-    <div class="lib-row"><img src="/img/lib/06-slides-docs-images.webp" alt="" loading="lazy" width="132" height="187"><div><b>AI for Slides, Docs and Images</b><span>Generate decks, documents and visuals with AI, even if you are not a designer.</span></div></div>
-    <div class="lib-row"><img src="/img/lib/07-meeting-email-machine.webp" alt="" loading="lazy" width="132" height="187"><div><b>The Meeting and Email Machine</b><span>Done-for-you AI workflows for the email and meetings that eat your whole day.</span></div></div>
-    <div class="lib-row"><img src="/img/lib/08-what-not-to-put.webp" alt="" loading="lazy" width="132" height="187"><div><b>What Not to Put Into AI</b><span>The security and privacy guide that keeps you and your company out of trouble.</span></div></div>
-    <div class="lib-row"><img src="/img/lib/09-cost-roi.webp" alt="" loading="lazy" width="132" height="187"><div><b>The AI Cost and ROI Playbook</b><span>Stop guessing which AI subscriptions are worth it. Measure it.</span></div></div>
-    <div class="lib-row"><img src="/img/lib/10-operating-system.webp" alt="" loading="lazy" width="132" height="187"><div><b>Your 30-Minutes-a-Week AI Operating System</b><span>A simple weekly routine to keep improving and never fall behind as AI changes.</span></div></div>
+    <details class="lib-row"><summary><img src="/img/lib/01-anthropic-decoded.webp" alt="Decoded: 8 Pro AI Techniques cover" loading="lazy" width="132" height="187"><span class="t"><b>Decoded: 8 Pro AI Techniques</b><span>The prompt techniques the pros use, pulled from the actual developer docs and written in plain English.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>You have the basics down. This is the layer above them.</em><ul><li>System prompts, structure and role-setting that quietly double your output quality</li><li>Examples, prefilling and extended thinking, explained without the jargon</li><li>The 8 techniques that separate people who get great results from people who get average ones</li></ul></div></details>
+    <details class="lib-row"><summary><img src="/img/lib/02-context-playbook.webp" alt="Feed It Your World: The Context Playbook cover" loading="lazy" width="132" height="187"><span class="t"><b>Feed It Your World: The Context Playbook</b><span>Stop starting from scratch. Learn to give AI your own documents, data and files the right way.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>The number one thing beginners miss: AI is only as good as what you feed it.</em><ul><li>How to load your own docs, data and long files so the AI actually uses them</li><li>NotebookLM, Projects and smart pasting, step by step</li><li>The simple &#x27;RAG-lite&#x27; method that makes AI answer as if it knows your business</li></ul></div></details>
+    <details class="lib-row"><summary><img src="/img/lib/03-anti-hallucination.webp" alt="Tell Me the Truth: The Anti-Hallucination Field Guide cover" loading="lazy" width="132" height="187"><span class="t"><b>Tell Me the Truth: The Anti-Hallucination Field Guide</b><span>Make AI stop making things up, and learn exactly when not to trust it.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>If you have ever caught AI confidently inventing an answer, this is for you.</em><ul><li>Verification workflows that force AI to show its work</li><li>The situations where AI lies most, so you know when to double-check</li><li>Citation-forcing prompts that keep answers grounded in real sources</li></ul></div></details>
+    <details class="lib-row"><summary><img src="/img/lib/04-build-ai-assistant.webp" alt="Build Your Own AI Assistant (No Code) cover" loading="lazy" width="132" height="187"><span class="t"><b>Build Your Own AI Assistant (No Code)</b><span>A reusable assistant that already knows your job, so you never retype your context again.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>Set it up once. Use it every day.</em><ul><li>Build a Custom GPT, Claude Project or Gemini Gem for your exact role</li><li>No code, no setup fee, done in an afternoon</li><li>The context and instructions to bake in so it works the first time</li></ul></div></details>
+    <details class="lib-row"><summary><img src="/img/lib/05-automation-starter.webp" alt="The AI Automation Starter Kit cover" loading="lazy" width="132" height="187"><span class="t"><b>The AI Automation Starter Kit</b><span>Seven no-code automations that quietly do your daily busywork for you.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>Stop doing the same task every morning.</em><ul><li>Inbox triage, meeting notes and report drafts, handled automatically</li><li>AI plus Zapier or Make, with no coding</li><li>Copy-paste recipes you can switch on today</li></ul></div></details>
+    <details class="lib-row"><summary><img src="/img/lib/06-slides-docs-images.webp" alt="AI for Slides, Docs and Images cover" loading="lazy" width="132" height="187"><span class="t"><b>AI for Slides, Docs and Images</b><span>Generate decks, documents and visuals with AI, even if you are not a designer.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>The stuff that used to take you all afternoon, in minutes.</em><ul><li>Turn a rough outline into a finished deck</li><li>The exact image workflow that produces clean, on-brand visuals</li><li>Documents and one-pagers that look like a designer made them</li></ul></div></details>
+    <details class="lib-row"><summary><img src="/img/lib/07-meeting-email-machine.webp" alt="The Meeting and Email Machine cover" loading="lazy" width="132" height="187"><span class="t"><b>The Meeting and Email Machine</b><span>Done-for-you AI workflows for the email and meetings that eat your whole day.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>Get your mornings back.</em><ul><li>Draft, triage and reply to email in a fraction of the time</li><li>Meeting prep, live notes and follow-ups, automated</li><li>The prompts and setup to run it all hands-off</li></ul></div></details>
+    <details class="lib-row"><summary><img src="/img/lib/08-what-not-to-put.webp" alt="What Not to Put Into AI cover" loading="lazy" width="132" height="187"><span class="t"><b>What Not to Put Into AI</b><span>The security and privacy guide that keeps you and your company out of trouble.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>Before you paste that into ChatGPT, read this.</em><ul><li>What is safe to share and what will get you in trouble</li><li>How data leakage actually happens, and how to avoid it</li><li>A simple checklist for safe, policy-friendly AI use at work</li></ul></div></details>
+    <details class="lib-row"><summary><img src="/img/lib/09-cost-roi.webp" alt="The AI Cost and ROI Playbook cover" loading="lazy" width="132" height="187"><span class="t"><b>The AI Cost and ROI Playbook</b><span>Stop guessing which AI subscriptions are worth it. Measure it.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>Are you paying for the right tools, or just paying?</em><ul><li>Which subscriptions actually earn their keep, and which to cancel</li><li>A simple way to measure the ROI of any AI tool</li><li>How to stop the quiet monthly bleed of unused seats</li></ul></div></details>
+    <details class="lib-row"><summary><img src="/img/lib/10-operating-system.webp" alt="Your 30-Minutes-a-Week AI Operating System cover" loading="lazy" width="132" height="187"><span class="t"><b>Your 30-Minutes-a-Week AI Operating System</b><span>A simple weekly routine to keep improving and never fall behind as AI changes.</span></span><span class="more">What is inside</span></summary><div class="lx"><em>It moves fast. Here is how to stay ahead without living online.</em><ul><li>A 30-minute weekly routine that compounds your skills</li><li>Curated, trustworthy sources so you skip the hype</li><li>How to keep your workflows current as the models change</li></ul></div></details>
   </div>
 </div></section>
 
@@ -382,7 +395,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
    deliberately dropped). Physical formats stay on Amazon.
    v2 later: VPS /api/system-checkout endpoint w/ saved card +
    one-click upsells on the thank-you page. */
-document.querySelectorAll('.stack details').forEach(function(d){
+document.querySelectorAll('.stack details, details.lib-row').forEach(function(d){
   d.addEventListener('toggle', function(){
     if (d.open) { try { gtag('event','stack_expand',{event_label:d.querySelector('strong').textContent}); } catch(e){} }
   });
