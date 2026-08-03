@@ -230,6 +230,62 @@ function applyRegions(pagePath, regions) {
   fs.writeFileSync(dest, html);
 }
 
+/* ---- money pages: /system/ and /claude/ ------------------------------
+   These render the exact markup that used to be hand-written, so the page is
+   byte-identical until someone actually edits the JSON (or Site Studio does). */
+const SYS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'system.json'), 'utf8'));
+const CLA = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'claude.json'), 'utf8'));
+
+function renderSysHero() {
+  const h = SYS.hero;
+  return [
+    `    <span class="badge">${h.badge}</span>`,
+    `    <h1>${h.headline_1} <span>${h.headline_2}</span></h1>`,
+    `    <p class="lead">${h.lede}</p>`,
+    `    <a href="#order" class="btn big buy">${h.cta_label}</a>`,
+    `    <p class="cta-sub">${h.cta_sub}</p>`,
+  ].join('\n');
+}
+function renderSysPrice() {
+  const x = SYS.price;
+  return [
+    `      <div class="today">${x.label}</div>`,
+    `      <div class="big">${x.amount}</div>`,
+    `      <div class="note">${x.note}</div>`,
+  ].join('\n');
+}
+function renderSysGuarantee() {
+  const g = SYS.guarantee;
+  return `      <h3>${g.heading}</h3>\n      <p>${g.body}</p>`;
+}
+function renderSysFaq() {
+  return SYS.faq.map(f => `    <div class="fitem"><h4>${f.q}</h4><p>${f.a}</p></div>`).join('\n');
+}
+function renderClHero() {
+  const h = CLA.hero;
+  return [
+    `    <span class="label">${h.label}</span>`,
+    `    <h1>${h.headline}</h1>`,
+    `    <p class="dek">${h.dek}</p>`,
+  ].join('\n');
+}
+function renderClPrice() {
+  const x = CLA.price;
+  return `  <div class="big">${x.amount}</div>\n  <div class="sub">${x.sub}</div>`;
+}
+
+applyRegions('system/index.html', {
+  'sys-hero': renderSysHero,
+  'sys-price': renderSysPrice,
+  'sys-guarantee': renderSysGuarantee,
+  'sys-faq': renderSysFaq,
+});
+applyRegions('claude/index.html', {
+  'cl-hero': renderClHero,
+  'cl-price': renderClPrice,
+});
+console.log('Regions applied: system/index.html (hero, price, guarantee, faq), claude/index.html (hero, price)');
+
 applyRegions('index.html', {
   'nav': () => renderNav('index.html'),
   'hero-text': renderHeroText,
