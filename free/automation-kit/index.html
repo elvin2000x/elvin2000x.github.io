@@ -87,6 +87,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
 <h2>It is yours</h2>
 <p>Thanks<span id="dn"></span>. Your guide is ready, and a copy is on its way to your inbox.</p>
 <a class="btn btn--primary btn--full" id="dl" href="/dl/AI-Automation-Starter-Kit.pdf" target="_blank" rel="noopener">Download the PDF</a>
+<p style="font-size:var(--fs-sm);color:var(--muted);margin-top:18px;border-top:1px solid var(--line-soft);padding-top:16px">That is one guide of the ten in the complete System, which also has the full ebook, the workbook, and 12 role packs. <a href="/system/" style="color:var(--accent-ink);font-weight:700">Get the System: $37 &rarr;</a></p>
 </div>
 </div>
 </div>
@@ -114,6 +115,8 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
     try{if(email&&typeof gtag==='function')gtag('set','user_data',{email:email});}catch(e){}
     try{if(XEVT&&typeof twq==='function')twq('event',XEVT,{});}catch(e){}
     try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
+    try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG});}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG});}catch(e){}
   }
   function reveal(name){
     document.getElementById('dn').textContent=name?(' '+name):'';
