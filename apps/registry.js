@@ -15,11 +15,11 @@ window.APPS_REGISTRY = {
   updated: '2026-08-04',
 
   categories: [
+    { id: 'products',  label: 'Products',  blurb: 'The book and the systems built around it.' },
     { id: 'tools',     label: 'Tools',     blurb: 'Free, no sign-up, works on a phone. Open one and use it.' },
-    { id: 'games',     label: 'Games',     blurb: 'Browser games written from scratch — no engine, no framework, no download.' },
     { id: 'platforms', label: 'Platforms', blurb: 'The bigger builds: software other businesses run on.' },
-    { id: 'products', label: 'Products', blurb: 'The book and the systems built around it.' },
-    { id: 'sites',     label: 'Sites & directories', blurb: 'Content properties built to be found in search.' }
+    { id: 'sites',     label: 'Sites & directories', blurb: 'Content properties built to be found in search.' },
+    { id: 'games',     label: 'Games',     blurb: 'Range: browser games written from scratch. No engine, no framework, no download.' }
   ],
 
   apps: [
