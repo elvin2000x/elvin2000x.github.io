@@ -6,8 +6,8 @@
 
 /* ---------- two-column layout ---------- */
 .calc-layout{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:26px;align-items:start}
-@media(max-width:900px){.calc-layout{grid-template-columns:1fr}}
-.calc-panel{padding:24px;position:sticky;top:84px}
+@media(max-width:900px){.calc-layout{grid-template-columns:minmax(0,1fr)}}
+.calc-panel{padding:24px;position:sticky;top:84px;min-width:0}
 @media(max-width:900px){.calc-panel{position:static}}
 
 /* ---------- form ---------- */
@@ -15,7 +15,7 @@
 .calc-form .field:last-of-type{margin-bottom:22px}
 .hint{font-size:12.5px;color:var(--muted);margin:6px 0 0;line-height:1.45}
 .inputwrap{position:relative;display:flex;align-items:center}
-.inputwrap input{width:100%}
+.inputwrap input{width:100%;min-width:0}
 .inputwrap.has-prefix input{padding-left:30px}
 .inputwrap.has-suffix input{padding-right:56px}
 .affix{position:absolute;color:var(--muted);font-size:14px;pointer-events:none}
