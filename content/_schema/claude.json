@@ -1,5 +1,5 @@
 {
-  "title": "The $47 Claude Manual page",
+  "title": "The $67 Claude Manual page",
   "file": "claude.json",
   "preview": "/claude/",
   "help": "Headline and price for the Claude Operator's Manual page.",
@@ -25,7 +25,7 @@
     {
       "key": "price.amount",
       "type": "text",
-      "label": "Price (e.g. $47)",
+      "label": "Price (e.g. $67)",
       "maxlen": 12
     },
     {
