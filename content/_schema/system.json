@@ -1,0 +1,93 @@
+{
+  "title": "The $37 System page",
+  "file": "system.json",
+  "preview": "/system/",
+  "help": "The money page. Headline, price, guarantee and FAQ. Changes go live when you publish.",
+  "fields": [
+    {
+      "key": "hero.badge",
+      "type": "text",
+      "label": "Badge above the headline",
+      "maxlen": 80
+    },
+    {
+      "key": "hero.headline_1",
+      "type": "text",
+      "label": "Headline, first part",
+      "maxlen": 70
+    },
+    {
+      "key": "hero.headline_2",
+      "type": "text",
+      "label": "Headline, gold part",
+      "maxlen": 50
+    },
+    {
+      "key": "hero.lede",
+      "type": "textarea",
+      "label": "Paragraph under the headline (HTML allowed)",
+      "maxlen": 500
+    },
+    {
+      "key": "hero.cta_label",
+      "type": "text",
+      "label": "Buy button text",
+      "maxlen": 40
+    },
+    {
+      "key": "hero.cta_sub",
+      "type": "text",
+      "label": "Small line under the button",
+      "maxlen": 90
+    },
+    {
+      "key": "price.label",
+      "type": "text",
+      "label": "Price block label",
+      "maxlen": 40
+    },
+    {
+      "key": "price.amount",
+      "type": "text",
+      "label": "Price (e.g. $37)",
+      "maxlen": 12
+    },
+    {
+      "key": "price.note",
+      "type": "textarea",
+      "label": "Price fine print",
+      "maxlen": 160
+    },
+    {
+      "key": "guarantee.heading",
+      "type": "text",
+      "label": "Guarantee heading",
+      "maxlen": 120
+    },
+    {
+      "key": "guarantee.body",
+      "type": "textarea",
+      "label": "Guarantee paragraph",
+      "maxlen": 400
+    },
+    {
+      "key": "faq",
+      "type": "list",
+      "label": "FAQ",
+      "item": [
+        {
+          "key": "q",
+          "type": "text",
+          "label": "Question",
+          "maxlen": 120
+        },
+        {
+          "key": "a",
+          "type": "textarea",
+          "label": "Answer",
+          "maxlen": 600
+        }
+      ]
+    }
+  ]
+}

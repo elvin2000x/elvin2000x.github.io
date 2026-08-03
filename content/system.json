@@ -1,0 +1,38 @@
+{
+  "_comment": "The $37 System sales page. Rendered into system/index.html by build.js. Edit here or in Site Studio, never in the HTML.",
+  "hero": {
+    "badge": "For professionals who tried AI and weren't impressed",
+    "headline_1": "Put AI to work on your real job,",
+    "headline_2": "by the end of the week.",
+    "lede": "Not another course to sit through. A <b>ready-to-run system</b>: the complete ebook, fifty proven prompts, twelve role playbooks, the 10-guide AI library, and a seven-day plan that turns AI into the fastest worker on your team.",
+    "cta_label": "Get the System — $37 →",
+    "cta_sub": "Instant access · 14-day money-back guarantee"
+  },
+  "price": {
+    "label": "The complete System",
+    "amount": "$37",
+    "note": "One payment in USD · instant download · yours to keep · 14-day money-back guarantee"
+  },
+  "guarantee": {
+    "heading": "14 days. If it did not change how you work, email me and I refund it.",
+    "body": "Run the prompts on your real tasks for two weeks. If the System does not earn its place in your week, one email gets you a full refund, and you keep everything you downloaded."
+  },
+  "faq": [
+    {
+      "q": "Do I need to be technical?",
+      "a": "No. If you can send an email, you can use every part of this. Zero code, zero jargon."
+    },
+    {
+      "q": "Which AI tool does it work with?",
+      "a": "All of them. ChatGPT, Claude, Gemini, Copilot. The prompts and playbooks work anywhere, including the models that come next."
+    },
+    {
+      "q": "Is this the book?",
+      "a": "Yes, and more. The complete ebook is inside, along with the whole working kit. Prefer paper? The paperback and hardcover live on Amazon, and my honest advice is to get both: run the System from your screen, keep a paper copy so it sticks."
+    },
+    {
+      "q": "How do I get it?",
+      "a": "Instant access after checkout. Everything is delivered digitally, yours to keep forever."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "The $47 Claude Manual page",
+  "file": "claude.json",
+  "preview": "/claude/",
+  "help": "Headline and price for the Claude Operator's Manual page.",
+  "fields": [
+    {
+      "key": "hero.label",
+      "type": "text",
+      "label": "Small label above the headline",
+      "maxlen": 60
+    },
+    {
+      "key": "hero.headline",
+      "type": "textarea",
+      "label": "Headline",
+      "maxlen": 140
+    },
+    {
+      "key": "hero.dek",
+      "type": "textarea",
+      "label": "Paragraph under the headline",
+      "maxlen": 500
+    },
+    {
+      "key": "price.amount",
+      "type": "text",
+      "label": "Price (e.g. $47)",
+      "maxlen": 12
+    },
+    {
+      "key": "price.sub",
+      "type": "textarea",
+      "label": "Price fine print",
+      "maxlen": 160
+    }
+  ]
+}
