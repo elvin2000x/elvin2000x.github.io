@@ -21,15 +21,11 @@
     {
       "label": "About",
       "href": "/#about"
-    },
-    {
-      "label": "Contact",
-      "href": "/contact/"
     }
   ],
   "cta": {
-    "label": "Book a call",
-    "href": "https://meet.elvinpeters.com"
+    "label": "Contact",
+    "href": "/contact/"
   },
   "pages": {
     "index.html": {
