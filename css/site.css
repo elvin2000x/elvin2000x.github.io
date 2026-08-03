@@ -245,3 +245,53 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
   /* CTA moves into the drawer; html prefix outranks page-local display rules */
   html .nav .links a.cta, html .nav .lk a.cta{ display:none }
 }
+
+
+/* ---------- BEFORE / AFTER ("the gap") ----------------------------------
+   One component for every page that shows the same task done two ways.
+   Rows (label / prompt / outcome) are locked across columns with subgrid so
+   the two cards always line up no matter how the copy wraps. Without subgrid
+   support the cards still stack cleanly, just self-sized. */
+.ba-set{
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-4);
+  grid-template-rows:auto auto auto; margin:var(--sp-7) 0;
+}
+.ba-item{
+  display:grid; grid-template-rows:auto auto auto;
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:var(--r-card); overflow:hidden;
+}
+@supports (grid-template-rows: subgrid){
+  .ba-item{ grid-row:span 3; grid-template-rows:subgrid }
+}
+.ba-item > *{ padding-left:var(--sp-6); padding-right:var(--sp-6) }
+.ba-item--before{ border-top:3px solid var(--warn) }
+.ba-item--after{ border-top:3px solid var(--accent) }
+
+.ba-label{
+  font-size:var(--fs-label); font-weight:700; letter-spacing:var(--track-label);
+  text-transform:uppercase; padding-top:var(--sp-5); padding-bottom:var(--sp-3);
+  display:flex; align-items:flex-start; gap:8px;
+}
+.ba-item--before .ba-label{ color:var(--warn) }
+.ba-item--after .ba-label{ color:var(--accent-ink) }
+
+.ba-prompt{
+  font-family:var(--serif); font-style:italic; font-size:var(--fs-body);
+  line-height:1.55; color:var(--ink-2);
+  background:var(--panel-2); border-left:2px solid var(--line);
+  border-radius:var(--r-sm); margin:0 var(--sp-6);
+  padding:var(--sp-4) var(--sp-4);
+}
+.ba-item > .ba-prompt{ padding-left:var(--sp-4); padding-right:var(--sp-4) }
+
+.ba-out{ padding-top:var(--sp-4); padding-bottom:var(--sp-5); font-size:var(--fs-sm); color:var(--muted) }
+.ba-out b{ display:block; color:var(--ink); font-weight:600; margin-bottom:3px }
+
+.ba-note{ text-align:center; font-size:var(--fs-sm); color:var(--muted); margin-top:calc(-1 * var(--sp-4)) }
+
+@media(max-width:640px){
+  .ba-set{ grid-template-columns:1fr }
+  .ba-item{ grid-row:auto }
+  @supports (grid-template-rows: subgrid){ .ba-item{ grid-template-rows:auto auto auto } }
+}
