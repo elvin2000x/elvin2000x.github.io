@@ -29,7 +29,8 @@ a{color:inherit;text-decoration:none}
 .brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel)}
 .nav .lk{margin-left:auto;display:flex;gap:24px;align-items:center}
 .nav .lk a{font-size:14px;color:var(--ink-2)}.nav .lk a:hover{color:var(--ink)}
-.nav .lk a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:8px 15px;border-radius:999px;font-weight:600}
+.themebtn{width:44px;height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line);border-radius:10px;color:var(--ink-2);cursor:pointer;font-size:15px;line-height:1}
+.nav .lk a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:11px 16px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;min-height:44px}
 .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
 article{max-width:720px;margin:0 auto;padding:44px 24px 40px}
 .arthead .cover{width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:26px}
@@ -50,7 +51,7 @@ article h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3
 .endcta p{color:var(--ink-2);margin:10px 0 18px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:14px;border:1px solid transparent;cursor:pointer;font-family:var(--sans)}
 .btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304}
-.btn.ghost{border-color:var(--line);color:var(--ink)}
+.btn.ghost{border-color:var(--line);color:var(--ink);min-height:44px}
 .backlink{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:14px;margin-bottom:8px}
 footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px;margin-top:56px}
 footer .in{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -110,7 +111,7 @@ for(const e of essays){
       `<span class="eyebrow">Blog</span>`+
       `<h1>${esc(e.title)}</h1>`+
       `<p class="dek">${esc(e.dek)}</p>`+
-      `<div class="byline"><b>Elvin Peters</b> <span>${e.readmins||8} min read</span> <button id="tg" style="margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);width:30px;height:30px;border-radius:8px;cursor:pointer">&#9681;</button></div>`+
+      `<div class="byline"><b>Elvin Peters</b> <span>${e.readmins||8} min read</span> <button id="tg" class="themebtn" aria-label="Toggle light or dark theme" style="margin-left:auto">&#9681;</button></div>`+
     `</div><div class="body">${e.html}</div></article>`+
     ENDCTA +
     FOOT + THEME + `</body></html>`;

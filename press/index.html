@@ -51,7 +51,20 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance;
 .nav .links a:hover{color:var(--ink)}
 .nav .cta{border:1px solid var(--gold);color:var(--gold-2);padding:8px 15px;border-radius:999px;font-weight:600}
 .nav .cta:hover{background:var(--gold);color:var(--bg-2)}
-.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:15px}
+.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:44px;height:44px;border-radius:10px;cursor:pointer;font-size:15px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+/* site.js injects a burger + drawer here; this page loads no shared stylesheet,
+   so without these the mobile menu rendered as bare links at the page foot. */
+.navburger{display:none;align-items:center;justify-content:center;width:44px;height:44px;margin-left:auto;background:none;border:1px solid var(--line);border-radius:10px;color:var(--ink);cursor:pointer;font-size:18px;line-height:1;padding:0}
+.navburger[aria-expanded="true"]{border-color:var(--gold);color:var(--gold-2)}
+.navdrawer{display:none;position:fixed;top:64px;left:0;right:0;z-index:60;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow);padding:16px 22px 24px;max-height:calc(100vh - 64px);overflow:auto}
+.navdrawer.open{display:block}
+.navdrawer a{display:flex;align-items:center;min-height:44px;padding:0 8px;font-size:18px;color:var(--ink);border-bottom:1px solid var(--line-soft);text-decoration:none}
+.navdrawer a:last-child{border-bottom:none}
+.navdrawer a.cta{justify-content:center;margin:0 0 12px;border:1px solid var(--gold);border-radius:999px;color:var(--gold-2);font-weight:600}
+.navoverlay{display:none;position:fixed;inset:64px 0 0 0;z-index:50;background:rgba(4,10,20,.45)}
+.navoverlay.open{display:block}
+@media(max-width:920px){.navburger{display:inline-flex}}
+@media(max-width:640px){.nav .links a.cta,.nav .lk a.cta{display:none}}
 @media(max-width:920px){.nav .links a:not(.cta){display:none}}
 /* hero */
 .hero{padding:56px 0 34px}
