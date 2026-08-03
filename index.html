@@ -180,6 +180,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .rung b{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);color:var(--ink);line-height:1.25;margin-bottom:8px}
 .rung .rd{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.6;flex:1}
 .rung .rgo{font-size:var(--fs-sm);font-weight:600;color:var(--gold-2);margin-top:14px}
+.rung--cover{flex-direction:row;gap:20px;align-items:flex-start}
+.rung--cover img{width:92px;height:auto;border-radius:6px;flex:none;box-shadow:0 16px 34px -18px rgba(0,0,0,.6)} /* bp-exempt: fixed cover thumb */
+.rung--cover > div{display:flex;flex-direction:column;flex:1}
 @media(max-width:760px){.ladder{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:var(--fs-sm)}
 footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
@@ -303,11 +306,14 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
     </div>
 
     <div class="ladder">
-      <a class="rung" href="/claude/">
-        <span class="rl">Go deeper</span>
-        <b>The Claude Operator's Manual</b>
-        <span class="rd">217 pages on running Claude as an operator: projects, skills, connectors, the API, Claude Code. $47.</span>
-        <span class="rgo">See the manual &rarr;</span>
+      <a class="rung rung--cover" href="/claude/">
+        <img src="/img/magnets/claude-manual.webp" alt="The Claude Operator's Manual" width="440" height="629" loading="lazy">
+        <div>
+          <span class="rl">Go deeper</span>
+          <b>The Claude Operator's Manual</b>
+          <span class="rd">217 pages on running Claude as an operator: projects, skills, connectors, the API, Claude Code. $47.</span>
+          <span class="rgo">See the manual &rarr;</span>
+        </div>
       </a>
       <a class="rung" href="/free/">
         <span class="rl">Start free</span>
