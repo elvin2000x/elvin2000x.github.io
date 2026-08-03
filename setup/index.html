@@ -87,6 +87,12 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;text-wrap:balance}
 .checklist li.plus::before{content:'+';color:var(--accent-ink)}
 .turn{margin-top:22px;padding-top:16px;border-top:1px solid var(--line-soft);font-size:var(--fs-sm);color:var(--ink-2)}
 .turn b{color:var(--ink)}
+/* Applying stays the front door. The pay link is the quiet second path for
+   somebody who has already had the call and just wants to book it. */
+.tieract{margin-top:20px;display:grid;gap:12px;justify-items:start}
+.tieract .btn{width:100%;justify-content:center}
+.paylink{font-size:var(--fs-sm);color:var(--muted);text-decoration:underline;text-underline-offset:3px;min-height:var(--tap);display:inline-flex;align-items:center}
+.paylink:hover{color:var(--accent-ink)}
 /* founding banner */
 .founding{background:var(--panel-2);border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));border-radius:var(--r-lg);padding:26px 28px;margin-top:var(--sp-7);display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
 .founding .fnum{font-family:var(--serif);font-size:52px;line-height:1;color:var(--accent-ink)}
@@ -187,6 +193,10 @@ footer a{color:var(--ink-2)}footer a:hover{color:var(--accent-ink)}
           <li>Fourteen days of email follow-up for the questions that surface once you start using it.</li>
         </ul>
         <p class="turn"><b>Turnaround:</b> 5 business days from the discovery call.</p>
+        <div class="tieract">
+          <a class="btn btn--primary" href="#apply">Apply for this tier &rarr;</a>
+          <a class="paylink" href="https://buy.stripe.com/fZueVd8J17JP4J03kc9IQ04" data-pay="setup-personal">Already spoken to me? Pay $298 and book it &rarr;</a>
+        </div>
       </div>
 
       <div class="tier tier--feat">
@@ -203,6 +213,10 @@ footer a{color:var(--ink-2)}footer a:hover{color:var(--accent-ink)}
           <li class="plus">A 45-minute team handover session, recorded, so the next hire can watch it too.</li>
         </ul>
         <p class="turn"><b>Turnaround:</b> 10 business days.</p>
+        <div class="tieract">
+          <a class="btn btn--primary" href="#apply">Apply for this tier &rarr;</a>
+          <a class="paylink" href="https://buy.stripe.com/eVq00j7EX0hnb7odYQ9IQ06" data-pay="setup-business">Already spoken to me? Pay $898 and book it &rarr;</a>
+        </div>
       </div>
     </div>
 
@@ -341,6 +355,28 @@ footer a{color:var(--ink-2)}footer a:hover{color:var(--accent-ink)}
   </div></footer>
 
 <script>
+(function(){
+  // Attribution into Stripe, same pattern as the product pages, so a booking is
+  // traceable to its campaign without depending on pixels.
+  var ref = '';
+  try {
+    var q = new URLSearchParams(location.search), parts = [];
+    ['utm_campaign','utm_source','gclid','fbclid','twclid'].forEach(function(k){
+      var v = q.get(k); if (v) parts.push(k.replace('utm_','') + '-' + v);
+    });
+    ref = parts.join('_').replace(/[^A-Za-z0-9_-]/g,'').slice(0,190);
+  } catch(e) {}
+  var VALUES = {'setup-personal': 298, 'setup-business': 898};
+  document.querySelectorAll('a.paylink').forEach(function(a){
+    if (ref) a.setAttribute('href', a.getAttribute('href') + '?client_reference_id=' + ref);
+    a.setAttribute('target','_blank'); a.setAttribute('rel','noopener');
+    a.addEventListener('click', function(){
+      var key = a.getAttribute('data-pay'), v = VALUES[key] || 0;
+      try{gtag('event','begin_checkout',{value:v,currency:'USD',items:[{item_name:key}]});}catch(e){}
+      try{fbq('track','InitiateCheckout',{content_name:key,value:v,currency:'USD'});}catch(e){}
+    });
+  });
+})();
 (function(){
   var f = document.getElementById('sform');
   var out = document.getElementById('smsgout');
