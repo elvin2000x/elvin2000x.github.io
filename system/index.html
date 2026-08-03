@@ -81,6 +81,18 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   .srow{display:flex;justify-content:space-between;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);font-size:15px}
   .srow .v{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
   .srow strong{color:var(--ink);font-weight:600}
+  .stack details{border-bottom:1px solid var(--border)}
+  .stack details:last-of-type{border-bottom:1px solid var(--border)}
+  .stack summary{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:15px 22px;font-size:15px;cursor:pointer;list-style:none}
+  .stack summary::-webkit-details-marker{display:none}
+  .stack summary:hover{background:rgba(201,162,80,0.05)}
+  .stack summary .v{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .stack summary .v::after{content:" +";color:var(--gold);font-weight:700}
+  .stack details[open] summary .v::after{content:" \2212"}
+  .stack .sx{padding:2px 22px 18px;font-size:14px;color:var(--text);line-height:1.65}
+  .stack .sx p{margin:0 0 10px}
+  .stack .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .stack .chips span{font-size:12px;border:1px solid var(--border);border-radius:999px;padding:4px 11px;color:var(--muted)}
   .lib{max-width:660px;margin:26px auto 0;display:grid;gap:10px}
   .lib-row{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px}
   .lib-row img{width:44px;height:auto;border-radius:4px;box-shadow:0 6px 14px rgba(10,24,40,.18);flex:none}
@@ -185,17 +197,17 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <p>The Artificial Advantage, complete with all nine appendices. The method everything else here is built on: direct AI, stop prompting at it.</p>
     </div>
     <div class="in-card">
-      <img src="../img/cover_workbook.png" alt="7-Day AI Workbook" loading="lazy" width="800" height="1280" />
+      <img src="/img/magnets/workbook.webp" alt="7-Day AI Workbook" loading="lazy" width="440" height="704" />
       <h3>The 7-Day Plan</h3>
       <p>Seven short daily exercises that rebuild your three most common work tasks around AI. By Friday it is a habit, not a someday.</p>
     </div>
     <div class="in-card">
-      <img src="../img/cover_prompts.png" alt="50 Best AI Prompts" loading="lazy" width="800" height="1280" />
+      <img src="/img/magnets/50-prompts.webp" alt="50 Best AI Prompts" loading="lazy" width="440" height="704" />
       <h3>50 Best AI Prompts</h3>
       <p>The highest-leverage professional prompts, already built on the directing method. Email, reports, planning, research. Never stare at a blank box again.</p>
     </div>
     <div class="in-card">
-      <img src="../img/cover_roles.png" alt="12 Professional Role Packs" loading="lazy" width="800" height="1280" />
+      <img src="/img/magnets/roles.webp" alt="12 Professional Role Packs" loading="lazy" width="440" height="704" />
       <h3>12 Role Playbooks</h3>
       <p>Done-for-you AI setups by job: Marketing, Sales, Finance, HR and more. Paste the playbook, and AI works like it actually understands your role.</p>
     </div>
@@ -232,11 +244,16 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="label" style="text-align:center">The complete system</div>
   <h2 class="h2" style="text-align:center">Everything you need to run your work through AI</h2>
   <div class="stack">
-    <div class="srow"><div><strong>The Artificial Advantage</strong> · the complete ebook</div><div class="v">book + 9 appendices</div></div>
-    <div class="srow"><div><strong>The 7-Day AI Plan</strong> · guided daily practice</div><div class="v">7 days</div></div>
-    <div class="srow"><div><strong>50 Best AI Prompts</strong> · copy-paste professional pack</div><div class="v">50 prompts</div></div>
-    <div class="srow"><div><strong>12 Professional Role Playbooks</strong> · by job function</div><div class="v">12 playbooks</div></div>
-    <div class="srow"><div><strong>The 10-Guide Field Library</strong> · every guide listed above. Honest note: these ten are also free on this site one at a time. They are bundled here so everything lives in one download.</div><div class="v">10 guides</div></div>
+    <details><summary><div><strong>The Artificial Advantage</strong> · the complete ebook</div><div class="v">15 chapters</div></summary>
+      <div class="sx"><p>The method everything else is built on: stop asking AI, start directing it, the way you would brief a sharp new hire. Fifteen chapters take you from skeptic to operator, and nine appendices hold the reference material, including a 25-prompt library and 25 pre-built professional personas.</p><div class="chips"><span>Choose Your Tool</span><span>Direct Your Tool</span><span>The Three Fundamental Rules</span><span>Iteration Patterns</span><span>Trust, but Verify</span><span>The Long Game</span></div></div></details>
+    <details><summary><div><strong>The 7-Day AI Workbook</strong> · turns reading into habit</div><div class="v">7 days</div></summary>
+      <div class="sx"><p>Reading does not change how you work; a week of guided reps does. One short exercise a day, each with a concept and a fill-in prompt template. By Friday you have rebuilt your three most common work tasks around AI.</p><div class="chips"><span>Day 1 · Map your workflow</span><span>Day 2 · Master the prompt</span><span>Day 3 · Email at speed</span><span>Day 4 · Research & analysis</span><span>Day 5 · Meeting intelligence</span><span>Day 6 · Content & reporting</span><span>Day 7 · Your personal AI system</span></div></div></details>
+    <details><summary><div><strong>50 Best AI Prompts</strong> · the cure for the blank box</div><div class="v">50 prompts</div></summary>
+      <div class="sx"><p>Fifty proven prompts you copy, paste, and swap your details into. Ten sections of five, one for each part of your work week, so the right prompt is always thirty seconds away.</p><div class="chips"><span>Writing & Communication</span><span>Marketing & Growth</span><span>Sales & Persuasion</span><span>Data & Analysis</span><span>Strategy & Decision-Making</span><span>Productivity & Planning</span><span>HR & People</span><span>Finance & Operations</span><span>Learning & Research</span><span>Content Creation</span></div></div></details>
+    <details><summary><div><strong>12 Role Playbooks</strong> · AI that knows your actual job</div><div class="v">12 roles</div></summary>
+      <div class="sx"><p>Generic prompts do not know your job; these do. Each playbook covers one role's recurring deliverables, pre-written. The Marketing pack alone ships campaign briefs, competitive analysis, quarterly plans, ad copy variations, metrics interpretation and more, plus a four-week adoption plan. Pick your role, or hand the others to your team.</p><div class="chips"><span>Marketing Manager</span><span>Sales Manager</span><span>Executive Assistant</span><span>Content Creator</span><span>Data Analyst</span><span>Finance Manager</span><span>HR Manager</span><span>Operations Manager</span><span>Product Manager</span><span>Project Manager</span><span>Customer Service Manager</span><span>Legal & Compliance Manager</span></div></div></details>
+    <details><summary><div><strong>The 10-Guide Field Library</strong> · the questions the book raises next</div><div class="v">10 guides</div></summary>
+      <div class="sx"><p>Every guide is named in the section above, so there is no mystery about what you get. Honest note: all ten are also free on this site one at a time. They are bundled here so everything lives in one download, next to the prompts and playbooks they support.</p></div></details>
     <div class="stotal"><div class="lab">For scale</div><div style="font-size:14px;color:var(--text)">One coaching session with me is <a href="/services/" style="color:var(--gold);font-weight:700">$300</a>. This is the self-serve version.</div></div>
     <div class="price">
       <div class="today">The complete System</div>
@@ -323,6 +340,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
    deliberately dropped). Physical formats stay on Amazon.
    v2 later: VPS /api/system-checkout endpoint w/ saved card +
    one-click upsells on the thank-you page. */
+document.querySelectorAll('.stack details').forEach(function(d){
+  d.addEventListener('toggle', function(){
+    if (d.open) { try { gtag('event','stack_expand',{event_label:d.querySelector('strong').textContent}); } catch(e){} }
+  });
+});
 var CHECKOUT_URL = "https://buy.stripe.com/14AeVd5wPd49fnE1c49IQ00";
 // Carry campaign attribution into Stripe so every purchase row is traceable
 // without relying on pixels. client_reference_id: alphanum/dash/underscore only.
@@ -350,6 +372,7 @@ var CHECKOUT_URL = "https://buy.stripe.com/14AeVd5wPd49fnE1c49IQ00";
 <div id="exitpop" class="exitpop hidden" role="dialog" aria-modal="true">
   <div class="exitpop-card">
     <button class="exitpop-x" aria-label="Close" onclick="closeExit()">&times;</button>
+    <div class="exitpop-covers"><img src="/img/cover-hero.webp" alt="The Artificial Advantage" width="600" height="960" loading="lazy"><img src="/img/magnets/50-prompts.webp" alt="50 Best AI Prompts" width="440" height="704" loading="lazy"></div>
     <h2 style="margin-bottom:10px">Not ready for $37? Take the starter kit free.</h2>
     <p style="color:var(--muted);margin-bottom:18px">The 50 best prompts, the framework cheat sheets, and the first chapter of the book. Enough to test the method this week, on the house.</p>
     <form id="exitform" novalidate style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
@@ -365,6 +388,8 @@ var CHECKOUT_URL = "https://buy.stripe.com/14AeVd5wPd49fnE1c49IQ00";
 .exitpop.hidden{display:none}
 .exitpop-card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:540px;width:100%;padding:38px 32px 30px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,0.6)}
 .exitpop-x{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1}
+.exitpop-covers{display:flex;justify-content:center;gap:14px;margin-bottom:16px}
+.exitpop-covers img{width:86px;height:auto;border-radius:6px;box-shadow:0 12px 28px rgba(0,0,0,0.45)} /* bp-exempt: fixed thumb */
 </style>
 <script>
 (function(){

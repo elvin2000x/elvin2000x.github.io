@@ -262,6 +262,15 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .stack-row .item { line-height: 1.4; min-width: 0; }
     .stack-row .item strong { color: var(--white); font-weight: 600; }
     .stack-row .val { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    details.stack-row { padding: 0; display: block; }
+    details.stack-row summary { display: flex; justify-content: space-between; gap: 16px; padding: 14px 22px; cursor: pointer; list-style: none; align-items: baseline; }
+    details.stack-row summary::-webkit-details-marker { display: none; }
+    details.stack-row summary:hover { background: rgba(201,162,80,0.05); }
+    details.stack-row .val::after { content: " +"; color: var(--accent); font-weight: 700; }
+    details.stack-row[open] .val::after { content: " \2212"; }
+    details.stack-row .sx { padding: 0 22px 16px; font-size: 14px; color: var(--muted); line-height: 1.6; }
+    details.stack-row .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    details.stack-row .chips span { font-size: 12px; border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; color: var(--muted); }
     .review-card { background: var(--panel-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--r-card); padding: 28px 32px; }
     .review-head { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
     .review-stars { color: var(--accent); font-size: var(--fs-lead); letter-spacing: 2px; }
@@ -274,7 +283,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .va-strip img { width:56px; height:auto; border-radius:4px; box-shadow:0 6px 16px rgba(10,24,40,.25); border:1px solid var(--line); }
     .va-strip span { font-size:var(--fs-sm); color:var(--muted); }
     .stack-row.bonus { background: rgba(201,162,80,0.06); }
-    .stack-row.bonus .tag {
+    .stack-row .tag, .stack-row.bonus .tag {
       display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--accent-on); background: var(--accent);
       padding: 2px 7px; border-radius: 3px; margin-right: 8px; vertical-align: middle;
@@ -739,11 +748,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
     <div class="stack-wrap">
       <div class="stack">
-        <div class="stack-row"><div class="item"><span class="tag">System</span><strong>The Artificial Advantage (ebook)</strong> · the full book + all 9 appendices</div><div class="val">Included</div></div>
-        <div class="stack-row bonus"><div class="item"><span class="tag">System</span><strong>7-Day AI Workbook</strong> · guided daily practice</div><div class="val">7 days</div></div>
-        <div class="stack-row bonus"><div class="item"><span class="tag">Free</span><strong>50 Best AI Prompts</strong> · copy-paste pack</div><div class="val">50 prompts</div></div>
-        <div class="stack-row bonus"><div class="item"><span class="tag">System</span><strong>12 Professional Role Packs</strong> · Marketing, Sales, Finance, HR &amp; more</div><div class="val">12 playbooks</div></div>
-        <div class="stack-row bonus"><div class="item"><span class="tag">System</span><strong>The Complete 10-Guide AI Bonus Library</strong> · also free on this site one at a time; bundled so it all lives in one download</div><div class="val">10 guides</div></div>
+        <details class="stack-row"><summary><div class="item"><span class="tag">System</span><strong>The Artificial Advantage (ebook)</strong> · the full book + all 9 appendices</div><div class="val">Included</div></summary><div class="sx"><p>The complete ebook: fifteen chapters on directing AI instead of asking it, plus nine appendices of reference material including the 25-prompt library and 25 pre-built personas.</p><div class="chips"><span>Choose Your Tool</span><span>Direct Your Tool</span><span>Trust, but Verify</span></div></div></details>
+        <details class="stack-row bonus"><summary><div class="item"><span class="tag">System</span><strong>7-Day AI Workbook</strong> · guided daily practice</div><div class="val">7 days</div></summary><div class="sx"><p>One short exercise a day with a fill-in prompt template. By Friday your three most common work tasks run through AI.</p><div class="chips"><span>Day 1 · Map your workflow</span><span>Day 2 · Master the prompt</span><span>Day 3 · Email at speed</span><span>Day 4 · Research & analysis</span><span>Day 5 · Meeting intelligence</span><span>Day 6 · Content & reporting</span><span>Day 7 · Your personal AI system</span></div></div></details>
+        <details class="stack-row bonus"><summary><div class="item"><span class="tag">Free</span><strong>50 Best AI Prompts</strong> · copy-paste pack</div><div class="val">50 prompts</div></summary><div class="sx"><p>Fifty proven prompts in ten sections, one for each part of your work week. Copy, paste, swap in your details, send.</p></div></details>
+        <details class="stack-row bonus"><summary><div class="item"><span class="tag">System</span><strong>12 Professional Role Packs</strong> · Marketing, Sales, Finance, HR &amp; more</div><div class="val">12 playbooks</div></summary><div class="sx"><p>Each playbook covers one role's recurring deliverables, pre-written: briefs, analyses, reports, plans, plus a four-week adoption plan. Pick your role, or hand the rest to your team.</p><div class="chips"><span>Marketing Manager</span><span>Sales Manager</span><span>Executive Assistant</span><span>Content Creator</span><span>Data Analyst</span><span>Finance Manager</span><span>HR Manager</span><span>Operations Manager</span><span>Product Manager</span><span>Project Manager</span><span>Customer Service Manager</span><span>Legal & Compliance Manager</span></div></div></details>
+        <details class="stack-row bonus"><summary><div class="item"><span class="tag">System</span><strong>The Complete 10-Guide AI Bonus Library</strong> · also free on this site one at a time; bundled so it all lives in one download</div><div class="val">10 guides</div></summary><div class="sx"><p>Ten focused field guides answering the questions the book raises next. All ten are also free on this site one at a time; they are bundled so everything lives in one download.</p></div></details>
         <div class="stack-total"><div class="label">For scale</div><b style="color:var(--ink);font-weight:600">One coaching session with me is $300. This is the self-serve version.</b></div>
         <div class="stack-price">
           <div class="today">The complete System</div>
