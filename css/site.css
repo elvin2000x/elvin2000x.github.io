@@ -266,7 +266,7 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 }
 .ba-item > *{ padding-left:var(--sp-6); padding-right:var(--sp-6) }
 .ba-item--before{ border-top:3px solid var(--warn) }
-.ba-item--after{ border-top:3px solid var(--accent) }
+.ba-item--after{ border-top:3px solid var(--ok) }
 
 .ba-label{
   font-size:var(--fs-label); font-weight:700; letter-spacing:var(--track-label);
@@ -274,7 +274,7 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
   display:flex; align-items:flex-start; gap:8px;
 }
 .ba-item--before .ba-label{ color:var(--warn) }
-.ba-item--after .ba-label{ color:var(--accent-ink) }
+.ba-item--after .ba-label{ color:var(--ok) }
 
 .ba-prompt{
   font-family:var(--serif); font-style:italic; font-size:var(--fs-body);
