@@ -53,6 +53,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .foot{margin-top:22px;font-size:12px;color:var(--muted);}
     .foot a{color:var(--muted);}
     .hidden{display:none;}
+    /* .btn sets display:inline-block, which outranks the UA rule for [hidden],
+       so the bump-only manual button was showing on every order. */
+    [hidden]{display:none!important;}
   </style>
 </head>
 <body>
@@ -65,20 +68,20 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <div id="success" class="hidden">
       <div class="check">✓</div>
       <div class="eyebrow">Payment confirmed</div>
-      <h1>Welcome to the System.</h1>
-      <p>Your complete kit is ready: the full book, the 7-Day Workbook, the 50-prompt pack, and all 12 role packs.</p>
-      <a id="dl" class="btn" href="mailto:elvin@elvinpeters.com?subject=System%20download%20link">Download your System →</a>
+      <h1 id="s-head">Welcome to the System.</h1>
+      <p id="s-sub">Your complete kit is ready: the full book, the 7-Day Workbook, the 50-prompt pack, and all 12 role packs.</p>
+      <a id="dl" class="btn" href="mailto:elvin@elvinpeters.com?subject=Download%20link">Download your System →</a>
       <a id="dlm" class="btn" hidden style="margin-top:10px">Download the Operator's Manual →</a>
       <p class="muted">Your receipt is on its way to <b id="email">your email</b>. This download link works for 24 hours; the files are yours to keep, so save them somewhere safe.</p>
       <div class="next">
         <h3>Start here</h3>
-        <ol>
+        <ol id="s-steps">
           <li>Open <b>START HERE.txt</b>, then read the book first.</li>
           <li>Run the <b>7-Day Workbook</b> alongside Week 1.</li>
           <li>Keep the <b>50 Prompts</b> and your <b>Role Pack</b> open while you work.</li>
         </ol>
       </div>
-      <p class="muted" style="margin-top:18px">Want it on paper too? The paperback and hardcover include all nine appendices plus a QR code to the companion library. <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent)">Get the physical copy on Amazon &rarr;</a></p>
+      <p class="muted" id="s-extra" style="margin-top:18px">Want it on paper too? The paperback and hardcover include all nine appendices plus a QR code to the companion library. <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent)">Get the physical copy on Amazon &rarr;</a></p>
     </div>
 
     <div id="fallback" class="hidden">
@@ -117,13 +120,49 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       } catch(e){}
       try { gtag('event','purchase',{transaction_id:sid,value:amount,currency:'USD'}); } catch(e){}
       try { if (AW_PURCHASE_LABEL) gtag('event','conversion',{send_to:AW_PURCHASE_LABEL,value:amount,currency:'USD',transaction_id:sid}); } catch(e){}
-      try { fbq('track','Purchase',{value:amount,currency:'USD',content_name:'The Artificial Advantage System'},{eventID:sid}); } catch(e){}
-      try { ttq.track('CompletePayment',{content_name:'The Artificial Advantage System',value:amount,currency:'USD'},{event_id:sid}); } catch(e){}
+      try { fbq('track','Purchase',{value:amount,currency:'USD',content_name:PRODUCT_NAME},{eventID:sid}); } catch(e){}
+      try { ttq.track('CompletePayment',{content_name:PRODUCT_NAME,value:amount,currency:'USD'},{event_id:sid}); } catch(e){}
+    }
+    // This page serves three products. Without this, a manual or guide buyer was
+    // told "Welcome to the System" and sent looking for a START HERE.txt that is
+    // not in their download. Keyed on the product title /api/order returns.
+    var PRODUCT_NAME = 'The Artificial Advantage System';
+    var COPY = {
+      "The Claude Operator's Manual": {
+        head: "Your manual is ready.",
+        sub: "All 217 pages of The Claude Operator's Manual: the hands-on setup, projects and skills, connectors, the API, and Claude Code.",
+        btn: "Download the manual →",
+        steps: ["Read <b>Before You Begin</b>, then Part I end to end.",
+                "Set up one Project on real work before touching the API chapters.",
+                "Use the chapter checklists as you go. They are the whole point."],
+        extra: 'Want the method underneath the tool? <a href="/book.html" style="color:var(--accent)">The Artificial Advantage &rarr;</a>'
+      },
+      "The Content Machine": {
+        head: "Your copy is ready.",
+        sub: "The Content Machine: the briefing, the five components, the nine steps, and the reference cards you keep open while you work.",
+        btn: "Download the guide →",
+        steps: ["Read the briefing first. It is short, and it is why the rest is built this way.",
+                "Build all five components before you generate anything.",
+                "Do the first ten pieces, and reject one on purpose."],
+        extra: 'Running Claude for the writing? <a href="/claude/" style="color:var(--accent)">The Claude Operator\'s Manual &rarr;</a>'
+      }
+    };
+    function applyCopy(title) {
+      if (!title) return;
+      PRODUCT_NAME = title;
+      var c = COPY[title];
+      if (!c) return;
+      document.getElementById('s-head').textContent = c.head;
+      document.getElementById('s-sub').textContent = c.sub;
+      document.getElementById('dl').textContent = c.btn;
+      document.getElementById('s-steps').innerHTML = c.steps.map(function(s){ return '<li>' + s + '</li>'; }).join('');
+      document.getElementById('s-extra').innerHTML = c.extra;
     }
     fetch(API_BASE + "/api/order?session_id=" + encodeURIComponent(sid))
       .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
       .then(function(d){
         if (d.paid && d.download_url) {
+          applyCopy(d.product);   // must run before firePurchase: it sets PRODUCT_NAME
           firePurchase(typeof d.amount === 'number' && d.amount > 0 ? d.amount : 37.00);
           document.getElementById("dl").setAttribute("href", API_BASE + d.download_url);
           if (d.manual_url) { var m = document.getElementById("dlm"); m.setAttribute("href", API_BASE + d.manual_url); m.hidden = false; }

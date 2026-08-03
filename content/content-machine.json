@@ -1,0 +1,12 @@
+{
+  "_comment": "The $47 Content Machine page. Rendered by build.js. Edit here or in Site Studio.",
+  "hero": {
+    "label": "The Content Machine",
+    "headline": "I generated 200 pieces before I noticed every single one was the same piece.",
+    "dek": "A step-by-step system for producing real volume with AI without producing garbage. Five components you build in an afternoon, nine steps you run every week, and the audit that shows you exactly what happens when you skip them."
+  },
+  "price": {
+    "amount": "$47",
+    "sub": "USD · instant PDF · yours to keep · 14-day money-back guarantee"
+  }
+}
