@@ -90,7 +90,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <p class="muted">While you wait, <a href="/free/free-chapter/" style="color:var(--accent)">read the free chapter</a>.</p>
     </div>
 
-    <div class="foot">© 2026 Elvin M. Peters · <a href="https://elvinpeters.com/">elvinpeters.com</a></div>
+    <div class="foot">© 2026 Elvin M. Peters · <a href="https://elvinpeters.com/">elvinpeters.com</a> · <a href="/privacy.html">Privacy</a> · <a href="/tos.html">Terms</a></div>
   </div>
 
 <script>
@@ -134,7 +134,12 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           show("success");
         } else { show("fallback"); }
       })
-      .catch(function(){ firePurchase(37.00); show("fallback"); });
+      .catch(function(){
+        // Do NOT fire a purchase we could not verify: an ad blocker or offline
+        // moment would mint phantom conversions and poison optimization.
+        try { gtag('event','purchase_unverified',{transaction_id:sid}); } catch(e){}
+        show("fallback");
+      });
   })();
 </script>
 </body>
