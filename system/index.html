@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="book">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +12,8 @@
 <meta property="og:url" content="https://elvinpeters.com/system/">
 <meta property="og:image" content="https://elvinpeters.com/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/css/site.css">
+<script src="/js/site.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- GA4 -->
@@ -35,7 +37,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{--bg:#ffffff;--soft:#f4f1ea;--card:#ffffff;--border:#e4ddce;--navy:#0a1828;--ink:#12202f;--text:#3c4a5c;--muted:#5c6b7f;--gold:#b88a2e;--gold2:#c9a250;--green:#1e7a4d;--red:#cf4444}
+  /* Token bridge: this page keeps its own short names, but every value now
+     comes from the design system (book context, so it never theme-flips).
+     No hex literals live here any more — see DESIGN-SYSTEM.md. */
+  :root{
+    --soft:var(--bg-2); --card:var(--panel); --border:var(--line);
+    --text:var(--ink-2); --gold:var(--accent-ink); --gold2:var(--accent);
+    --green:var(--ok); --red:var(--warn);
+  }
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
   .wrap{max-width:960px;margin:0 auto;padding:0 22px}
