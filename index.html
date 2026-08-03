@@ -384,9 +384,9 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
                 source: 'newsletter-homepage', website: f.website.value})})
               .then(function(r){ return r.json(); }).then(function(r){
                 m.style.display = 'block';
-                if (r.success) { f.style.display = 'none'; m.textContent = 'Done. The 50 Best AI Prompts are on their way to your inbox.'; }
-                else { m.style.color = '#ff8f8f'; m.textContent = r.error || 'Something went wrong. Try again.'; }
-              }).catch(function(){ m.style.display = 'block'; m.style.color = '#ff8f8f'; m.textContent = 'Network hiccup. Try again.'; });
+                if (r.success) { f.style.display = 'none'; m.textContent = 'Done. The starter kit is on its way to your inbox.'; try{fbq('track','Lead',{content_name:'newsletter-homepage'});}catch(e){} try{gtag('event','generate_lead',{event_label:'newsletter-homepage'});}catch(e){} }
+                else { m.style.color = 'var(--warn)'; m.textContent = r.error || 'Something went wrong. Try again.'; }
+              }).catch(function(){ m.style.display = 'block'; m.style.color = 'var(--warn)'; m.textContent = 'Network hiccup. Try again.'; });
           });
           </script>
         </div>

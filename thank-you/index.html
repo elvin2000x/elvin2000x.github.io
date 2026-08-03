@@ -13,6 +13,10 @@
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
   fbq('init','1699232654449762'); fbq('track','PageView');
   </script>
+<!-- X pixel -->
+<script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
   <!-- TikTok Pixel Code Start -->
   <script>
   !function (w, d, t) {
@@ -74,6 +78,7 @@
           <li>Keep the <b>50 Prompts</b> and your <b>Role Pack</b> open while you work.</li>
         </ol>
       </div>
+      <p class="muted" style="margin-top:18px">Want it on paper too? The paperback and hardcover include all nine appendices plus a QR code to the companion library. <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent)">Get the physical copy on Amazon &rarr;</a></p>
     </div>
 
     <div id="fallback" class="hidden">
@@ -82,6 +87,7 @@
       <p>If you just completed your purchase, your receipt is on its way to your inbox and your download is ready.</p>
       <button class="btn" type="button" onclick="location.reload()">Retry loading my download →</button>
       <p class="muted">Still not showing? Email me and your order reference goes in automatically: <a id="helpmail" href="mailto:elvin@elvinpeters.com?subject=System%20download%20help" style="color:var(--accent)">elvin@elvinpeters.com</a>. I will send the files directly, fast.</p>
+      <p class="muted">While you wait, <a href="/free/free-chapter/" style="color:var(--accent)">read the free chapter</a>.</p>
     </div>
 
     <div class="foot">© 2026 Elvin M. Peters · <a href="https://elvinpeters.com/">elvinpeters.com</a></div>
@@ -97,23 +103,28 @@
     function show(id){ ["loading","success","fallback"].forEach(function(x){ document.getElementById(x).classList.toggle("hidden", x!==id); }); }
     var sid = new URLSearchParams(location.search).get("session_id");
     if (!sid) { show("fallback"); return; }
-    // Fire purchase events ONCE per order. This page is now linked from the buyer
-    // email for re-downloads, so without this guard every revisit would re-count a
-    // sale and poison ad optimisation. eventID/event_id let the pixels dedupe
-    // against any server-side copy.
-    try {
-      var pkey = "aa_purchased_" + sid;
-      if (!localStorage.getItem(pkey)) {
-        try { gtag('event','purchase',{transaction_id:sid,value:37.00,currency:'USD'}); } catch(e){}
-        try { fbq('track','Purchase',{value:37.00,currency:'USD',content_name:'The Artificial Advantage System'},{eventID:sid}); } catch(e){}
-        try { ttq.track('CompletePayment',{content_name:'The Artificial Advantage System',value:37.00,currency:'USD'},{event_id:sid}); } catch(e){}
-        localStorage.setItem(pkey,'1');
-      }
-    } catch(e){}
+    // Fire purchase events ONCE per order, with the REAL total. This page is
+    // linked from the buyer email for re-downloads, so without the guard every
+    // revisit would re-count a sale. We wait for /api/order so the $27 bump is
+    // included in the value; if the lookup fails we fall back to the $37 base
+    // rather than lose the conversion. eventID/event_id let pixels dedupe.
+    var AW_PURCHASE_LABEL = ""; // set to "AW-637214471/<label>" once the Purchase conversion action exists in Google Ads
+    function firePurchase(amount) {
+      try {
+        var pkey = "aa_purchased_" + sid;
+        if (localStorage.getItem(pkey)) return;
+        localStorage.setItem(pkey, '1');
+      } catch(e){}
+      try { gtag('event','purchase',{transaction_id:sid,value:amount,currency:'USD'}); } catch(e){}
+      try { if (AW_PURCHASE_LABEL) gtag('event','conversion',{send_to:AW_PURCHASE_LABEL,value:amount,currency:'USD',transaction_id:sid}); } catch(e){}
+      try { fbq('track','Purchase',{value:amount,currency:'USD',content_name:'The Artificial Advantage System'},{eventID:sid}); } catch(e){}
+      try { ttq.track('CompletePayment',{content_name:'The Artificial Advantage System',value:amount,currency:'USD'},{event_id:sid}); } catch(e){}
+    }
     fetch(API_BASE + "/api/order?session_id=" + encodeURIComponent(sid))
       .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
       .then(function(d){
         if (d.paid && d.download_url) {
+          firePurchase(typeof d.amount === 'number' && d.amount > 0 ? d.amount : 37.00);
           document.getElementById("dl").setAttribute("href", API_BASE + d.download_url);
           if (d.manual_url) { var m = document.getElementById("dlm"); m.setAttribute("href", API_BASE + d.manual_url); m.hidden = false; }
           var ns = document.getElementById("nextstep"); if (ns) ns.hidden = false;
@@ -123,7 +134,7 @@
           show("success");
         } else { show("fallback"); }
       })
-      .catch(function(){ show("fallback"); });
+      .catch(function(){ firePurchase(37.00); show("fallback"); });
   })();
 </script>
 </body>
