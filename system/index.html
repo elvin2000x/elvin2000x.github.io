@@ -55,7 +55,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   .logo{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
   .nav-cta{background:var(--gold2);color:#0a1828;font-size:13px;font-weight:700;padding:9px 18px;border-radius:5px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
   /* buttons */
-  .btn{display:inline-block;background:var(--gold2);color:#0a1828;font-size:17px;font-weight:700;padding:17px 34px;border-radius:8px;text-decoration:none;box-shadow:0 8px 26px rgba(201,162,80,.28);transition:transform .12s,opacity .12s;border:none;cursor:pointer}
+  .btn{display:inline-block;background:var(--accent-hi);color:var(--accent-on);font-size:17px;font-weight:700;padding:17px 34px;border-radius:8px;text-decoration:none;box-shadow:0 8px 26px rgba(10,24,40,.20);transition:transform .12s,opacity .12s;border:none;cursor:pointer}
   .btn:hover{transform:translateY(-1px);opacity:.94}
   .btn.big{font-size:19px;padding:20px 44px}
   .cta-sub{font-size:13px;color:var(--muted);margin-top:10px}
@@ -96,6 +96,18 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   .ba-out{padding:16px 22px 20px;font-size:14px;color:var(--muted)}
   .ba-out b{display:block;color:var(--ink);font-weight:600;margin-bottom:3px}
   .ba-note{text-align:center;font-size:14px;color:var(--muted);margin-top:-8px}
+  /* look inside: real pages from the real files */
+  .peek{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+  .peek figure{margin:0}
+  .peek img{width:100%;height:auto;border:1px solid var(--border);border-radius:10px;box-shadow:0 18px 40px -24px rgba(10,24,40,.45);display:block;background:var(--card)}
+  .peek figcaption{font-size:13px;color:var(--muted);line-height:1.5;margin-top:10px}
+  .peek figcaption b{color:var(--ink);display:block;font-weight:600;margin-bottom:2px}
+  .sample{max-width:660px;margin:34px auto 0;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .sample .sh{background:var(--soft);border-bottom:1px solid var(--border);padding:12px 20px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .sample .sb{padding:20px 22px}
+  .sample .nm{font-family:'EB Garamond',serif;font-size:20px;color:var(--ink);margin-bottom:10px}
+  .sample pre{margin:0;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;line-height:1.65;color:var(--text);background:var(--soft);border-left:3px solid var(--gold2);border-radius:6px;padding:16px 18px}
+  .sample .bf{font-size:13px;color:var(--muted);margin-top:12px}
   .in-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;text-align:center}
   .in-card img{height:150px;width:auto;border-radius:5px;box-shadow:0 12px 26px rgba(10,24,40,.16);margin-bottom:16px}
   .in-card h3{font-size:20px;margin-bottom:8px}
@@ -134,7 +146,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   .lib-row .lx ul{list-style:none;margin:0;padding:0}
   .lib-row .lx li{position:relative;padding:4px 0 4px 16px}
   .lib-row .lx li::before{content:"";position:absolute;left:2px;top:13px;width:5px;height:5px;border-radius:50%;background:var(--gold2)}
-  @media(max-width:640px){.lib-row .lx{padding-left:18px}.lib-row img{width:56px}}
+  @media(max-width:640px){.lib-row .lx{padding-left:18px}.lib-row img{width:56px}
+  @media(max-width:640px){.peek{grid-template-columns:1fr}}
   .stotal{display:flex;justify-content:space-between;padding:16px 22px;background:var(--soft);font-size:14px}
   .stotal .lab{text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--muted);font-size:12px}
   .stotal .strike{text-decoration:line-through;color:var(--muted);font-size:18px}
@@ -179,6 +192,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   @media(max-width:920px){
     .hero .wrap{grid-template-columns:1fr;gap:34px}.hero-img{order:-1}
     .ba-set,.inside,.segs,.tgrid{grid-template-columns:1fr}
+    .peek{grid-template-columns:repeat(2,1fr)}
     .ba-item{grid-row:auto}
     @supports (grid-template-rows: subgrid){.ba-item{grid-template-rows:auto auto auto}}
     .guar{grid-template-columns:1fr;text-align:center;justify-items:center}
@@ -279,6 +293,53 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <img src="/img/lib/01-anthropic-decoded.webp" alt="The 10-guide field library" loading="lazy" width="132" height="187" />
       <h3>The 10-Guide Library</h3>
       <p>Ten focused field guides for what comes after the book. Every single one is listed below, so there is no mystery about what you get.</p>
+    </div>
+  </div>
+</div></section>
+
+
+<!-- LOOK INSIDE: real pages, not descriptions -->
+<section class="soft"><div class="wrap">
+  <div class="label" style="text-align:center">Look inside</div>
+  <h2 class="h2" style="text-align:center">Real pages from the real files</h2>
+  <p class="body" style="margin:0 auto;text-align:center">Not mockups. These are pages out of the PDFs you get, exactly as they arrive.</p>
+  <div class="peek">
+    <figure>
+      <img src="/img/inside/workbook-day2.webp" alt="Day 2 of the 7-Day AI Workbook" width="720" height="932" loading="lazy">
+      <figcaption><b>Workbook, Day 2</b>Every day has a concept, a fill-in prompt template, and an exercise you finish in minutes.</figcaption>
+    </figure>
+    <figure>
+      <img src="/img/inside/rolepack-marketing.webp" alt="Inside the Marketing role pack" width="720" height="932" loading="lazy">
+      <figcaption><b>Role pack, Marketing</b>Ad copy, subject lines, landing pages, metrics interpretation. Written out, ready to paste.</figcaption>
+    </figure>
+    <figure>
+      <img src="/img/inside/rolepack-plan.webp" alt="The four-week adoption plan in every role pack" width="720" height="932" loading="lazy">
+      <figcaption><b>The four-week plan</b>Every role pack ends with week-by-week adoption, so it does not stay a document.</figcaption>
+    </figure>
+    <figure>
+      <img src="/img/inside/prompts-section1.webp" alt="Section one of the 50-prompt pack" width="720" height="932" loading="lazy">
+      <figcaption><b>Prompt pack, section 1 of 10</b>Each prompt names what it is for and when to reach for it.</figcaption>
+    </figure>
+    <figure>
+      <img src="/img/inside/workbook-day5.webp" alt="Day 5 of the workbook, meeting intelligence" width="720" height="932" loading="lazy">
+      <figcaption><b>Workbook, Day 5</b>Meeting intelligence: prepare, participate, follow up, with the templates filled in for you.</figcaption>
+    </figure>
+    <figure>
+      <img src="/img/inside/book-ch8.webp" alt="Chapter 8 of The Artificial Advantage" width="720" height="932" loading="lazy">
+      <figcaption><b>The book, Chapter 8</b>Direct Your Tool. The chapter the whole method rests on, and the one you can read free.</figcaption>
+    </figure>
+  </div>
+
+  <div class="sample">
+    <div class="sh">One of the fifty, in full</div>
+    <div class="sb">
+      <div class="nm">Prompt #01 &middot; The Inbox Killer</div>
+      <pre>You are a professional business writer. Here is an email I received:
+[PASTE EMAIL]. Write a concise, professional reply that: (1)
+acknowledges their main point, (2) answers their question directly,
+(3) provides a clear next step. Keep it under 100 words. Tone: warm
+but efficient.</pre>
+      <p class="bf"><b>Best for:</b> clearing 20+ emails in 30 minutes. Forty-nine more like it, sorted by the kind of work you are doing.</p>
     </div>
   </div>
 </div></section>
