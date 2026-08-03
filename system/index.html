@@ -10,6 +10,19 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
 <!-- Meta Pixel -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
+<!-- X pixel -->
+<script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
+<!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('D93C3IRC77U4775FLNR0');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -288,7 +301,7 @@
   <div class="faq">
     <div class="fitem"><h4>Do I need to be technical?</h4><p>No. If you can send an email, you can use every part of this. Zero code, zero jargon.</p></div>
     <div class="fitem"><h4>Which AI tool does it work with?</h4><p>All of them. ChatGPT, Claude, Gemini, Copilot. The prompts and playbooks work anywhere, including the models that come next.</p></div>
-    <div class="fitem"><h4>Is this the book?</h4><p>No. This is the practical toolkit. The book, <em>The Artificial Advantage</em>, is on Amazon if you want the full framework behind it. This is the part you run on your work today.</p></div>
+    <div class="fitem"><h4>Is this the book?</h4><p>Yes, and more. The complete ebook is inside, along with the whole working kit. Prefer paper? The paperback and hardcover live on Amazon, and my honest advice is to get both: run the System from your screen, keep a paper copy so it sticks.</p></div>
     <div class="fitem"><h4>How do I get it?</h4><p>Instant access after checkout. Everything is delivered digitally, yours to keep forever.</p></div>
   </div>
 </div></section>
@@ -311,13 +324,78 @@
    v2 later: VPS /api/system-checkout endpoint w/ saved card +
    one-click upsells on the thank-you page. */
 var CHECKOUT_URL = "https://buy.stripe.com/14AeVd5wPd49fnE1c49IQ00";
-document.querySelectorAll('a.buy').forEach(function(a){
-  if(CHECKOUT_URL!=="#"){a.setAttribute('href',CHECKOUT_URL);a.setAttribute('target','_blank');a.setAttribute('rel','noopener');}
-  a.addEventListener('click',function(){
-    try{gtag('event','begin_checkout',{value:37,currency:'USD'});}catch(e){}
-    try{fbq('track','InitiateCheckout',{content_name:'The Artificial Advantage System',value:37,currency:'USD'});}catch(e){}
+// Carry campaign attribution into Stripe so every purchase row is traceable
+// without relying on pixels. client_reference_id: alphanum/dash/underscore only.
+(function(){
+  var ref = '';
+  try {
+    var q = new URLSearchParams(location.search), parts = [];
+    ['utm_campaign','utm_source','gclid','fbclid','twclid'].forEach(function(k){
+      var v = q.get(k); if (v) parts.push(k.replace('utm_','') + '-' + v);
+    });
+    ref = parts.join('_').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 190);
+  } catch(e) {}
+  var url = ref ? CHECKOUT_URL + '?client_reference_id=' + ref : CHECKOUT_URL;
+  document.querySelectorAll('a.buy').forEach(function(a){
+    a.setAttribute('href', url); a.setAttribute('target','_blank'); a.setAttribute('rel','noopener');
+    a.addEventListener('click', function(){
+      try{gtag('event','begin_checkout',{value:37,currency:'USD'});}catch(e){}
+      try{fbq('track','InitiateCheckout',{content_name:'The Artificial Advantage System',value:37,currency:'USD'});}catch(e){}
+      try{ttq.track('InitiateCheckout',{content_name:'The Artificial Advantage System',value:37,currency:'USD'});}catch(e){}
+    });
   });
-});
+})();
+</script>
+
+<div id="exitpop" class="exitpop hidden" role="dialog" aria-modal="true">
+  <div class="exitpop-card">
+    <button class="exitpop-x" aria-label="Close" onclick="closeExit()">&times;</button>
+    <h2 style="margin-bottom:10px">Not ready for $37? Take the starter kit free.</h2>
+    <p style="color:var(--muted);margin-bottom:18px">The 50 best prompts, the framework cheat sheets, and the first chapter of the book. Enough to test the method this week, on the house.</p>
+    <form id="exitform" novalidate style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+      <input id="exitemail" type="email" required placeholder="you@work.com" style="flex:1;min-width:220px;font-size:16px;padding:13px 15px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:var(--text)">
+      <button type="submit" class="btn" style="font-size:16px">Send me the kit</button>
+    </form>
+    <p id="exitmsg" style="display:none;font-size:14px;margin-top:12px"></p>
+  </div>
+</div>
+<style>
+.exitpop{position:fixed;inset:0;z-index:9999;background:rgba(4,9,16,0.82);display:flex;align-items:center;justify-content:center;padding:20px}
+.exitpop.hidden{display:none}
+.exitpop-card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:540px;width:100%;padding:38px 32px 30px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,0.6)}
+.exitpop-x{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1}
+</style>
+<script>
+(function(){
+  var pop = document.getElementById('exitpop');
+  function show(){
+    if (!pop || sessionStorage.getItem('exit_shown')) return;
+    sessionStorage.setItem('exit_shown','1');
+    pop.classList.remove('hidden');
+    try{gtag('event','exit_popup_shown');}catch(e){}
+  }
+  window.closeExit = function(){ if(pop) pop.classList.add('hidden'); };
+  document.addEventListener('mouseout', function(e){
+    if (!e.relatedTarget && e.clientY <= 0) show();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeExit(); });
+  document.getElementById('exitform').addEventListener('submit', function(e){
+    e.preventDefault();
+    var f=this, m=document.getElementById('exitmsg');
+    fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:document.getElementById('exitemail').value.trim(),
+        source:'system-exit', website:f.website.value})})
+      .then(function(r){return r.json();}).then(function(r){
+        m.style.display='block';
+        if(r.success){ f.style.display='none'; m.style.color='var(--gold)'; m.textContent='Done. The starter kit is on its way to your inbox.';
+          try{fbq('track','Lead',{content_name:'system-exit'});}catch(e){}
+          try{gtag('event','generate_lead',{event_label:'system-exit'});}catch(e){}
+        } else { m.style.color='var(--muted)'; m.textContent=r.error||'Something went wrong. Try again.'; }
+      }).catch(function(){ m.style.display='block'; m.style.color='var(--muted)'; m.textContent='Network hiccup. Try again.'; });
+  });
+})();
 </script>
 </body>
 </html>
