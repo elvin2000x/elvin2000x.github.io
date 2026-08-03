@@ -173,6 +173,14 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .clink .ic{width:22px;height:22px;flex:none;color:var(--gold-2)}
 .clink small{display:block;color:var(--muted);font-weight:400;font-size:var(--fs-label);margin-top:1px}
 @media(max-width:920px){.connect{grid-template-columns:1fr;padding:26px;gap:26px}}
+.ladder{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+.rung{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;text-decoration:none;transition:border-color .15s,transform .15s}
+.rung:hover{border-color:var(--gold);transform:translateY(-3px)}
+.rung .rl{font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);margin-bottom:8px}
+.rung b{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);color:var(--ink);line-height:1.25;margin-bottom:8px}
+.rung .rd{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.6;flex:1}
+.rung .rgo{font-size:var(--fs-sm);font-weight:600;color:var(--gold-2);margin-top:14px}
+@media(max-width:760px){.ladder{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:var(--fs-sm)}
 footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
 footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
@@ -190,6 +198,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
     <div class="links">
       <a href="/services/">Services</a>
       <a href="/book.html">The Book</a>
+      <a href="/claude/">Claude Guide</a>
       <a href="/projects/">Projects</a>
       <a href="/writing/">Blog</a>
       <a href="#about">About</a>
@@ -291,6 +300,21 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
           <span class="onamz">Available on Amazon</span>
         </div>
       </div>
+    </div>
+
+    <div class="ladder">
+      <a class="rung" href="/claude/">
+        <span class="rl">Go deeper</span>
+        <b>The Claude Operator's Manual</b>
+        <span class="rd">217 pages on running Claude as an operator: projects, skills, connectors, the API, Claude Code. $47.</span>
+        <span class="rgo">See the manual &rarr;</span>
+      </a>
+      <a class="rung" href="/free/">
+        <span class="rl">Start free</span>
+        <b>Fourteen free guides</b>
+        <span class="rd">Ten field guides, the 50-prompt pack, a full chapter of the book, and a 480-resource vault. One email, yours to keep.</span>
+        <span class="rgo">Browse the free library &rarr;</span>
+      </a>
     </div>
   </div></section>
 

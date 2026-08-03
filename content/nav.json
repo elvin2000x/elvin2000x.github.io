@@ -11,6 +11,10 @@
       "href": "/book.html"
     },
     {
+      "label": "Claude Guide",
+      "href": "/claude/"
+    },
+    {
       "label": "Projects",
       "href": "/projects/"
     },
