@@ -161,7 +161,7 @@ for (const key of ['index.html', 'book.html', 'services/index.html', 'contact/in
 
 // Optional visual layer (never a dependency; skips cleanly).
 if (process.argv.includes('--visual')) {
-  try { require('playwright'); console.log('visual layer: playwright found, not yet implemented in node — use the python harness'); }
+  try { require('playwright'); console.log('visual layer: run  python verify_visual.py  (rendered aspect/overflow/JS-error checks)'); }
   catch (e) { console.log('visual layer skipped (playwright for node not installed)'); }
 }
 
