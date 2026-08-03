@@ -140,6 +140,13 @@ window.APPS_REGISTRY = {
       tags: ['Amazon', 'Companion library']
     },
     {
+      slug: 'claude-manual', name: "The Claude Operator's Manual", cat: 'products', status: 'live',
+      href: '/claude/',
+      blurb: "A 217-page field manual for running Claude as a daily operator: projects, skills, connectors, the API, and Claude Code. Written from using it every working day to ship real software.",
+      stat: '217 pages',
+      tags: ['Stripe checkout', 'Instant delivery']
+    },
+    {
       slug: 'aa-system', name: 'The Artificial Advantage System', cat: 'products', status: 'live', featured: true,
       href: '/system/',
       blurb: 'The self-serve product: the full ebook plus the complete working kit (workbook, role packs, prompt pack, 10-guide library), delivered instantly by email with a 14-day guarantee.',
