@@ -1,0 +1,72 @@
+/* ===========================================================================
+   MOBILE NAV DRAWER — standalone
+   ---------------------------------------------------------------------------
+   The drawer component on its own, for the hand-written pages that predate the
+   design system and carry their own tokens and type scale.
+
+   Those pages hide every nav link below 920px and have no burger, so on a phone
+   they are dead ends: no menu, no way out but the back button. js/site.js can
+   build the drawer for them, but it needs this styling or the drawer renders as
+   a stack of unstyled links at the foot of the page.
+
+   Linking the full css/site.css instead was tried and rejected: it carries a
+   type scale that resizes every unscoped h2 and h3, which shifted the length of
+   all nine pages. This file adds the component and touches nothing else.
+
+   Every custom property has a literal fallback, so it works whether the page
+   defines design-system tokens (--accent, --tap) or the legacy set (--gold),
+   or neither. Kept in sync by hand with the same rules in css/site.css.
+   =========================================================================== */
+
+.navburger{
+  display:none; align-items:center; justify-content:center;
+  width:var(--tap, 44px); height:var(--tap, 44px); margin-left:auto;
+  background:none; border:1px solid var(--line, #cdd6e2);
+  border-radius:var(--r-sm, 9px);
+  color:var(--ink, #0e1a2b); cursor:pointer; font-size:18px; line-height:1;
+}
+.navburger[aria-expanded="true"]{
+  border-color:var(--accent, var(--gold, #9c761f));
+  color:var(--accent-ink, var(--gold-2, #b3892f));
+}
+
+.navdrawer{
+  display:none; position:fixed; top:var(--nav-h, 64px); left:0; right:0; z-index:60;
+  background:var(--panel, #f6f8fb);
+  border-bottom:1px solid var(--line, #cdd6e2);
+  box-shadow:var(--card-lift, var(--shadow, 0 26px 50px -28px rgba(14,26,43,.55)));
+  padding:12px 22px 22px;
+  max-height:calc(100vh - var(--nav-h, 64px)); overflow:auto;
+}
+.navdrawer.open{ display:block }
+.navdrawer a{
+  display:flex; align-items:center; min-height:var(--tap, 44px);
+  padding:0 6px; font-size:var(--fs-lead, 17px);
+  color:var(--ink, #0e1a2b);
+  border-bottom:1px solid var(--line-soft, #dbe2ec); text-decoration:none;
+}
+.navdrawer a:last-child{ border-bottom:none }
+.navdrawer a.cta{
+  justify-content:center; margin:0 0 10px;
+  border:1px solid var(--accent, var(--gold, #9c761f));
+  border-radius:var(--r-pill, 999px);
+  color:var(--accent-ink, var(--gold-2, #b3892f)); font-weight:600;
+  border-bottom:1px solid var(--accent, var(--gold, #9c761f));
+}
+
+.navoverlay{
+  display:none; position:fixed; inset:var(--nav-h, 64px) 0 0 0; z-index:50;
+  background:rgba(4,10,20,.45);
+}
+.navoverlay.open{ display:block }
+
+html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
+@media(max-width:920px){
+  .navburger{ display:inline-flex }
+  html .nav .links a:not(.cta), html .nav .lk a:not(.cta){ display:none }
+}
+@media(max-width:640px){
+  /* The CTA moves into the drawer too. The html prefix outranks page-local
+     display rules without needing !important. */
+  html .nav .links a.cta, html .nav .lk a.cta{ display:none }
+}
