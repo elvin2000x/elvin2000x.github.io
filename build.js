@@ -16,9 +16,9 @@ const FONTS = `<link rel="preconnect" href="https://fonts.googleapis.com"><link 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">`;
 
 const CSS = `
-:root{--bg:#e9edf2;--bg-2:#e2e7ee;--panel:#f6f8fb;--panel-2:#eef2f7;--line:#cdd6e2;--line-soft:#dbe2ec;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#6a7c93;--gold:#9c761f;--gold-2:#b3892f;--cyan:#1c6ea8;--glow:rgba(156,118,31,.14);--shadow:0 18px 40px -24px rgba(14,26,43,.45);--serif:'EB Garamond',Georgia,'Times New Roman',serif;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
+:root{--bg:#e9edf2;--bg-2:#e2e7ee;--panel:#f6f8fb;--panel-2:#eef2f7;--line:#cdd6e2;--line-soft:#dbe2ec;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#6a7c93;--gold:#9c761f;--gold-2:#7a5a12;--cyan:#1c6ea8;--glow:rgba(156,118,31,.14);--shadow:0 18px 40px -24px rgba(14,26,43,.45);--serif:'EB Garamond',Georgia,'Times New Roman',serif;--sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
 @media(prefers-color-scheme:dark){:root{--bg:#0a1524;--bg-2:#060d18;--panel:#101d30;--panel-2:#0c1626;--line:#213249;--line-soft:#1a2942;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#7f96b1;--gold:#c9a250;--gold-2:#e0bd6b;--cyan:#4fb3f0;--glow:rgba(201,162,80,.16);--shadow:0 24px 50px -28px rgba(0,0,0,.7)}}
-:root[data-theme="light"]{--bg:#e9edf2;--bg-2:#e2e7ee;--panel:#f6f8fb;--panel-2:#eef2f7;--line:#cdd6e2;--line-soft:#dbe2ec;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#6a7c93;--gold:#9c761f;--gold-2:#b3892f;--cyan:#1c6ea8;--shadow:0 18px 40px -24px rgba(14,26,43,.45)}
+:root[data-theme="light"]{--bg:#e9edf2;--bg-2:#e2e7ee;--panel:#f6f8fb;--panel-2:#eef2f7;--line:#cdd6e2;--line-soft:#dbe2ec;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#6a7c93;--gold:#9c761f;--gold-2:#7a5a12;--cyan:#1c6ea8;--shadow:0 18px 40px -24px rgba(14,26,43,.45)}
 :root[data-theme="dark"]{--bg:#0a1524;--bg-2:#060d18;--panel:#101d30;--panel-2:#0c1626;--line:#213249;--line-soft:#1a2942;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#7f96b1;--gold:#c9a250;--gold-2:#e0bd6b;--cyan:#4fb3f0;--shadow:0 24px 50px -28px rgba(0,0,0,.7)}
 *{box-sizing:border-box}html,body{margin:0}
 body{background:linear-gradient(180deg,var(--bg),var(--bg-2));color:var(--ink);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased}
@@ -61,7 +61,7 @@ footer a:hover{color:var(--gold-2)}
 `;
 
 const NAV = `<nav class="nav"><div class="in">
-  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19V5h9M5 12h7" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="17" r="2.4" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
+  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
   <div class="lk"><a href="/services/">Services</a><a href="/projects/">Projects</a><a href="/contact/">Contact</a><a class="cta" href="/book.html">Read the book</a></div>
 </div></nav>`;
 
@@ -84,7 +84,7 @@ function head(title, desc, ogimg, canon){
 <link rel="canonical" href="${canon}">
 <meta property="og:type" content="article"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="https://elvinpeters.com${ogimg}"><meta property="og:url" content="${canon}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@elvin_peters">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 19V5h9M5 12h7' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='18' cy='17' r='2.4' fill='%23c9a250'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5v14M6 5h9M6 12h7M6 19h9' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='19.5' cy='18.6' r='1.9' fill='%23c9a250'/%3E%3C/svg%3E">
 ${GA}${FONTS}<style>${CSS}${NLCSS}</style></head><body>`;
 }
 
@@ -153,7 +153,7 @@ const NAVC = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'nav.json'), '
 const HOME = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'home.json'), 'utf8'));
 const SVCS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'services.json'), 'utf8'));
 
-const NAV_SVG_SIG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19V5h9M5 12h7" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="17" r="2.4" fill="var(--gold)"/></svg>`;
+const NAV_SVG_SIG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>`;
 const NAV_SVG_ARROW = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const HERO_SVG_ARROW = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
@@ -261,7 +261,10 @@ function renderSysGuarantee() {
   return `      <h3>${g.heading}</h3>\n      <p>${g.body}</p>`;
 }
 function renderSysFaq() {
-  return SYS.faq.map(f => `    <div class="fitem"><h4>${f.q}</h4><p>${f.a}</p></div>`).join('\n');
+  // Canonical .faq accordion, same as every other page on the site. This used
+  // to emit static .fitem divs that could not be opened, which is the
+  // inconsistency Elvin spotted between /book.html and /system/.
+  return SYS.faq.map(f => `    <details><summary>${f.q}</summary><p>${f.a}</p></details>`).join('\n');
 }
 function renderClHero() {
   const h = CLA.hero;
@@ -366,6 +369,157 @@ function renderRcGap() {
   const g = RCP.gap;
   return `    <div class="gap">\n      <h3>${g.headline}</h3>\n      <p>${g.body}</p>\n    </div>`;
 }
+
+/* ---- book.html reusable blocks ---------------------------------------
+   The reader review and the author bio were hand-written HTML, which is why
+   neither could be edited anywhere. They are content, so they live in
+   content/book.json and Site Studio can reach them from the phone. */
+const BK = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'book.json'), 'utf8'));
+
+function renderBkReview() {
+  const r = BK.review;
+  return [
+    `    <div class="section-label">${r.label}</div>`,
+    '    <div class="review-card">',
+    '      <div class="review-head"><span class="review-stars" aria-label="Rated 5 out of 5 stars">★★★★★</span>' +
+      `<span class="review-badge">${r.badge}</span></div>`,
+    `      <h3 class="review-title">&ldquo;${r.headline}&rdquo;</h3>`,
+    ...r.paragraphs.map(p => `      <p>${p}</p>`),
+    `      <div class="review-meta">${r.meta} &middot; ` +
+      `<a href="${r.link_url}" target="_blank" rel="noopener">${r.link_label}</a></div>`,
+    '    </div>',
+  ].join('\n');
+}
+
+function renderBkAuthor() {
+  const a = BK.author;
+  return [
+    `    <div class="section-label">${a.label}</div>`,
+    '    <div class="author-inner">',
+    `      <div class="author-avatar"><img src="${a.photo}" alt="${a.name}" width="400" height="400" loading="lazy" onerror="this.parentElement.textContent='EP'" /></div>`,
+    '      <div>',
+    `        <div class="author-name">${a.name}</div>`,
+    `        <div class="author-title">${a.title}</div>`,
+    `        <p class="author-bio">${a.paragraphs.join('<br/><br/>')}</p>`,
+    '      </div>',
+    '    </div>',
+  ].join('\n');
+}
+
+/* Copy for the opt-in on each money page. The offer has to match the page:
+   somebody reading the Content Machine page has already met the volume problem
+   and is not looking for a starter kit for the book. Every source tag is unique
+   so the lead DB shows which page and which position actually converts. */
+const OPTINS = {
+  'system': {
+    eyebrow: 'Free starter kit',
+    headline: 'Try the method before you spend anything',
+    body: 'The prompts for the jobs that keep sliding to tomorrow, the cheat sheets for briefing a model properly, and the first chapter of the book. It lands in about a minute and it is yours either way.',
+    button: 'Send me the kit',
+    note: 'One email, four files. Unsubscribe in one click, and it never removes your access to anything.',
+    success: 'Done. Check your inbox in about a minute, and look in promotions if it is not there.',
+  },
+  'claude': {
+    eyebrow: 'Free sample',
+    headline: 'Read a chapter before you buy the manual',
+    body: 'I will send you the chapter on giving Claude a job description, which is the one that changes how people work within a day. Plus the briefing cheat sheet from the appendix.',
+    button: 'Send me the chapter',
+    note: 'One email, two files. Unsubscribe in one click.',
+    success: 'On its way. Check your inbox in about a minute, and look in promotions if it is not there.',
+  },
+  'content-machine': {
+    eyebrow: 'Free, and the honest part',
+    headline: 'The failure record, before you buy anything',
+    body: 'The audit of my first 200 pieces: every title that started with "The", the character name that turned up in 21 of 75 stories, and the tweets that averaged zero. It is the part of the guide nobody else publishes.',
+    button: 'Send me the audit',
+    note: 'One email, one PDF. Unsubscribe in one click.',
+    success: 'Sent. Check your inbox in about a minute, and look in promotions if it is not there.',
+  },
+};
+
+/* One opt-in block, rendered wherever it is needed. Each instance carries its
+   own source tag so the lead DB shows which position actually converts. */
+function renderOptin(slot, page) {
+  const o = page ? { ...BK.optin, ...OPTINS[page] } : BK.optin;
+  const tag = page ? `${page}-optin-${slot}` : `book-optin-${slot}`;
+  const id = 'oi-' + (page ? page + '-' : '') + slot;
+  return [
+    '  <div class="optin">',
+    `    <span class="oi-eyebrow">${o.eyebrow}</span>`,
+    `    <h2>${o.headline}</h2>`,
+    `    <p>${o.body}</p>`,
+    `    <form class="oi-form" data-source="${tag}" novalidate>`,
+    '      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">',
+    `      <label class="visually-hidden" for="${id}">Your email</label>`,
+    `      <input id="${id}" type="email" required autocomplete="email" placeholder="${o.placeholder}">`,
+    `      <button type="submit">${o.button}</button>`,
+    '    </form>',
+    `    <p class="oi-note">${o.note}</p>`,
+    `    <p class="oi-msg" data-success="${o.success}"></p>`,
+    '  </div>',
+  ].join('\n');
+}
+
+applyRegions('book.html', {
+  'bk-review': renderBkReview,
+  'bk-author': renderBkAuthor,
+  'bk-optin-top': () => renderOptin('top'),
+  'bk-optin-bottom': () => renderOptin('bottom'),
+});
+console.log('Regions applied: book.html (review, author, optin x2)');
+
+/* The three money pages get the same component with page-matched copy. Until
+   now /system/ had only a desktop exit-intent popup (mouseout never fires on
+   touch, so the $37 page had zero mobile capture), and /claude/ and
+   /content-machine/ had no capture at all. */
+applyRegions('system/index.html', { 'sys-optin': () => renderOptin('end', 'system') });
+applyRegions('claude/index.html', { 'cl-optin': () => renderOptin('end', 'claude') });
+applyRegions('content-machine/index.html', { 'cm-optin': () => renderOptin('end', 'content-machine') });
+console.log('Regions applied: money-page opt-ins (system, claude, content-machine)');
+
+/* One honest Amazon-vs-System table, rendered on both pages from this source.
+   The rows Amazon wins outright (paper, formats, reviews) are what make it
+   read as information instead of a funnel; the System wins speed, the kit
+   and the guarantee. Nothing on the book page explained the difference
+   between the two ways to buy, which was Elvin's original complaint. */
+const COMPARE_ROWS = [
+  ['What you get',
+   '<span class="win">Paperback, hardcover or Kindle</span> of the book itself',
+   'The ebook <span class="win">plus the whole working kit</span>: 7-day workbook, the prompts, 12 role packs, the 10-guide library'],
+  ['In your hands',
+   'Kindle instantly; <span class="no">paper in a few days</span>',
+   '<span class="win">Instant download</span>, on any device, no app'],
+  ['A copy on your shelf',
+   '<span class="win">Yes, and it is the better way to read cover to cover</span>',
+   '<span class="no">No paper copy</span>'],
+  ['Guarantee',
+   '<span class="no">Amazon’s return policy</span>',
+   '<span class="win">14 days, money back, keep the files</span>'],
+  ['Your purchase helps the book',
+   '<span class="win">Yes: every Amazon copy and review moves it up the rankings</span>',
+   'It supports me directly'],
+  ['Price',
+   'The list price of the format you pick',
+   '$37 for the ebook and everything above'],
+];
+
+function renderCompare() {
+  const rows = COMPARE_ROWS.map(([label, az, sys]) =>
+    `      <tr><td>${label}</td><td>${az}</td><td>${sys}</td></tr>`).join('\n');
+  return [
+    '  <div class="compare"><table>',
+    '    <thead><tr><th scope="col"></th><th scope="col">The book on Amazon</th><th scope="col">The System, here</th></tr></thead>',
+    '    <tbody>',
+    rows,
+    '    </tbody>',
+    '  </table></div>',
+    '  <p class="compare-note">My honest advice is both: paper for reading, the System for doing. Start with either.</p>',
+  ].join('\n');
+}
+
+applyRegions('book.html', { 'bk-compare': renderCompare });
+applyRegions('system/index.html', { 'sys-compare': renderCompare });
+console.log('Regions applied: Amazon-vs-System comparison (book.html, system)');
 
 applyRegions('receipts/index.html', {
   'rc-intro': renderRcIntro,

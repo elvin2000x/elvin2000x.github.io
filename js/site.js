@@ -154,3 +154,53 @@
 
   window.SiteChrome = { toggleTheme: toggleTheme, currentTheme: currentTheme };
 })();
+
+/* ---------------------------------------------------------------------------
+   Inline email capture. One handler for every .oi-form on any page.
+   Lived inline in book.html, which is why the three money pages had no working
+   capture: /system/ had only an exit-intent popup bound to mouseout with
+   clientY <= 0 (an event that never fires on a touchscreen), and /claude/ and
+   /content-machine/ had nothing at all. Each form carries its own data-source
+   so the lead DB shows which page and which position converts.
+   --------------------------------------------------------------------------- */
+(function () {
+  function wire(f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var box = f.closest('.optin');
+      var input = f.querySelector('input[type=email]');
+      var msg = box && box.querySelector('.oi-msg');
+      var note = box && box.querySelector('.oi-note');
+      var btn = f.querySelector('button');
+      var email = input ? input.value.trim() : '';
+      if (!email || !msg) return;
+      btn.disabled = true;
+      function failWith(text) {
+        btn.disabled = false;
+        msg.style.color = 'var(--warn)';
+        msg.textContent = text;
+        msg.style.display = 'block';
+      }
+      fetch('https://ultimateaidirectory.com/api/lead', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          source: f.dataset.source,
+          website: f.website ? f.website.value : ''
+        })
+      }).then(function (r) { return r.json(); }).then(function (r) {
+        if (!r.success) return failWith(r.error || 'Something went wrong. Try again in a moment.');
+        f.style.display = 'none';
+        if (note) note.style.display = 'none';
+        msg.style.color = '';
+        msg.textContent = msg.dataset.success;
+        msg.style.display = 'block';
+        try { fbq('track', 'Lead', { content_name: f.dataset.source }); } catch (e) {}
+        try { gtag('event', 'generate_lead', { method: f.dataset.source }); } catch (e) {}
+      }).catch(function () { failWith('Network hiccup. Try again.'); });
+    });
+  }
+  function bootOptins() { document.querySelectorAll('.oi-form').forEach(wire); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootOptins);
+  else bootOptins();
+})();
