@@ -100,8 +100,18 @@
   --glow: rgba(156,118,31,.14);
   --shadow: 0 18px 40px -24px rgba(14,26,43,.45);
   --card-lift: 0 26px 50px -28px rgba(14,26,43,.55);
-  /* legacy aliases consumed by pre-system page CSS; retire as pages migrate */
-  --gold:var(--accent); --gold-2:var(--accent-hi); --cyan:var(--info);
+  /* legacy aliases consumed by pre-system page CSS; retire as pages migrate.
+     Every name a legacy page still references has to resolve to something. An
+     unmapped one is not a fallback, it is a dead declaration the browser drops:
+     book.html asked for --gold2 and --green and silently lost its opt-in accent
+     bar, its email focus ring, its success colour and a path-card highlight. */
+  /* --gold-2 is read as a TEXT colour on ~100 declarations across the site, so
+     it points at --accent-ink, the only gold that passes contrast on a light
+     background (5.31:1 vs 2.68:1). In dark both resolve to #e0bd6b, so this
+     changes nothing there. Use --accent-hi directly for a gold FILL. */
+  --gold:var(--accent); --gold-2:var(--accent-ink); --cyan:var(--info);
+  --gold2:var(--accent);   /* fill and border gold, not the text gold */
+  --green:var(--ok);
 }
 
 /* ---------- L3: site dark via OS, unless a theme is pinned ---------- */
