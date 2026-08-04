@@ -100,8 +100,18 @@
   --glow: rgba(156,118,31,.14);
   --shadow: 0 18px 40px -24px rgba(14,26,43,.45);
   --card-lift: 0 26px 50px -28px rgba(14,26,43,.55);
-  /* legacy aliases consumed by pre-system page CSS; retire as pages migrate */
-  --gold:var(--accent); --gold-2:var(--accent-hi); --cyan:var(--info);
+  /* legacy aliases consumed by pre-system page CSS; retire as pages migrate.
+     Every name a legacy page still references has to resolve to something. An
+     unmapped one is not a fallback, it is a dead declaration the browser drops:
+     book.html asked for --gold2 and --green and silently lost its opt-in accent
+     bar, its email focus ring, its success colour and a path-card highlight. */
+  /* --gold-2 is read as a TEXT colour on ~100 declarations across the site, so
+     it points at --accent-ink, the only gold that passes contrast on a light
+     background (5.31:1 vs 2.68:1). In dark both resolve to #e0bd6b, so this
+     changes nothing there. Use --accent-hi directly for a gold FILL. */
+  --gold:var(--accent); --gold-2:var(--accent-ink); --cyan:var(--info);
+  --gold2:var(--accent);   /* fill and border gold, not the text gold */
+  --green:var(--ok);
 }
 
 /* ---------- L3: site dark via OS, unless a theme is pinned ---------- */
@@ -362,4 +372,100 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
   .fig-nums{ grid-template-columns:1fr; gap:var(--sp-6) }
   .fig-units{ grid-template-columns:repeat(auto-fill,minmax(11px,1fr)); gap:3px }
   .fig-units--dots{ grid-template-columns:repeat(auto-fill,minmax(14px,1fr)); gap:6px }
+}
+
+
+/* ---------- FAQ ---------------------------------------------------------
+   One accordion for the whole site. It was built three different ways: most
+   pages used <details>, /system/ used static divs that could not be opened,
+   and /claude/ had no FAQ at all despite being the most expensive product.
+   Elvin found it: "on the book page the FAQs are expandable but on system
+   they are static."
+   Native <details> so it works with no JS, is keyboard accessible, and is
+   findable by in-page search when open. */
+.faq{ max-width:var(--w-text); margin:var(--sp-7) auto 0 }
+.faq details{ border-bottom:1px solid var(--line-soft) }
+.faq details:first-child{ border-top:1px solid var(--line-soft) }
+.faq summary{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--sp-5);
+  cursor:pointer; list-style:none; min-height:var(--tap);
+  padding:var(--sp-5) 0; font-weight:600; font-size:var(--fs-body); color:var(--ink);
+}
+.faq summary::-webkit-details-marker{ display:none }
+.faq summary::after{
+  content:"+"; color:var(--accent-ink); font-weight:700;
+  font-size:var(--fs-lead); line-height:1; flex:none;
+}
+.faq details[open] summary::after{ content:"\2212" }
+.faq summary:hover{ color:var(--accent-ink) }
+.faq details > p{
+  margin:0 0 var(--sp-5); padding-right:var(--sp-8);
+  font-size:var(--fs-sm); color:var(--ink-2); line-height:var(--lh-prose); max-width:none;
+}
+
+/* ---------- INLINE EMAIL CAPTURE ----------------------------------------
+   One opt-in for every page that has something to offer. It lived inline in
+   book.html, which is why /system/ (the $37 page) had nothing but a desktop
+   exit-intent popup bound to mouseout + clientY<=0, an event that does not
+   exist on a phone, and why /claude/ and /content-machine/ had no email
+   capture at all. Promoted here so all four money pages share it.
+   Every instance posts to the owned endpoint with its own source tag and a
+   honeypot named `website`; the handler lives in js/site.js.               */
+.optin{
+  background:var(--panel); border:1px solid var(--line);
+  border-top:3px solid var(--accent);
+  border-radius:var(--r-card); padding:var(--sp-7) var(--sp-7);
+  max-width:var(--w-text); margin:0 auto;
+}
+.optin .oi-eyebrow{
+  font-size:var(--fs-label); font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent-ink);
+}
+.optin h2{ font-size:var(--fs-h3); font-weight:600; margin:var(--sp-3) 0 var(--sp-3) }
+.optin > p{ font-size:var(--fs-sm); color:var(--ink-2); margin:0 0 var(--sp-6); line-height:var(--lh-prose) }
+.optin form{ display:flex; gap:var(--sp-3); flex-wrap:wrap }
+.optin input[type=email]{
+  flex:1; min-width:220px; padding:14px 16px; border-radius:var(--r-sm);
+  border:1px solid var(--line); background:var(--bg); color:var(--ink);
+  font-size:16px;               /* below 16 and iOS zooms the page on focus */
+  font-family:inherit; min-height:44px;
+}
+.optin input[type=email]:focus{ outline:2px solid var(--accent); outline-offset:1px; border-color:transparent }
+.optin button{
+  padding:14px 26px; border-radius:var(--r-pill); border:0;
+  background:var(--accent); color:var(--accent-on);
+  font-weight:700; font-size:16px; cursor:pointer; min-height:44px; font-family:inherit;
+}
+.optin button:hover{ filter:brightness(1.06) }
+.optin button[disabled]{ opacity:.6; cursor:default }
+.optin .oi-note{ font-size:var(--fs-label); color:var(--muted); margin:var(--sp-3) 0 0 }
+.optin .oi-msg{ display:none; font-size:var(--fs-sm); margin:var(--sp-3) 0 0; color:var(--ok); font-weight:600 }
+.optinband{ padding:var(--sp-9) 24px }
+/* Screen-reader-only. The opt-in's email label uses it; without this rule the
+   words "Your email" render as stray visible text above the field. */
+.visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap }
+
+/* ---------- COMPARISON TABLE (Amazon vs the System) ----------------------
+   One honest table, rendered on book.html and /system/ from the same source
+   in build.js. Each column wins rows outright: Amazon owns paper, formats
+   and reviews; the System owns speed, the kit and the guarantee. The rows
+   Amazon wins are what make the table read as information, not as a funnel. */
+.compare{ max-width:var(--w-text); margin:var(--sp-7) auto 0; border:1px solid var(--line);
+  border-radius:var(--r-card); overflow:hidden; background:var(--panel) }
+.compare table{ width:100%; border-collapse:collapse; font-size:var(--fs-sm) }
+.compare th{ text-align:left; padding:14px 18px; font-size:var(--fs-label);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  border-bottom:2px solid var(--line); background:var(--panel-2) }
+.compare th:first-child{ width:34% }
+.compare td{ padding:13px 18px; border-bottom:1px solid var(--line-soft);
+  color:var(--ink-2); vertical-align:top; line-height:1.5 }
+.compare tr:last-child td{ border-bottom:0 }
+.compare td:first-child{ font-weight:600; color:var(--ink) }
+.compare .win{ color:var(--ink); font-weight:600 }
+.compare .win::before{ content:"✓ "; color:var(--ok); font-weight:800 }
+.compare .no{ color:var(--muted) }
+.compare-note{ max-width:var(--w-text); margin:var(--sp-3) auto 0;
+  font-size:var(--fs-label); color:var(--muted); text-align:center }
+@media(max-width:640px){
+  .compare th,.compare td{ padding:11px 12px }
 }
