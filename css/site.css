@@ -304,3 +304,62 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
   .ba-item{ grid-row:auto }
   @supports (grid-template-rows: subgrid){ .ba-item{ grid-template-rows:auto auto auto } }
 }
+
+
+/* ---------- DATA FIGURE -----------------------------------------------
+   Built in HTML, never as a raster. A 2400px PNG scaled into a 375px
+   viewport renders its own headline at about 6px, which is under the type
+   floor and invisible to verify.js because the text is baked into the
+   image. In markup it stays legible, follows the theme, and puts the
+   numbers where they can be read and indexed.
+   One series in --accent against a recessive neutral, always directly
+   labelled, always with the source printed. */
+.fig{ margin:var(--sp-10) 0; max-width:var(--w-wide) }
+.fig .fig-kicker{
+  display:block; font:700 var(--fs-label)/1 var(--sans);
+  letter-spacing:var(--track-label); text-transform:uppercase; color:var(--accent-ink);
+}
+.fig h3{ font-size:var(--fs-h2); line-height:var(--lh-tight); margin:var(--sp-4) 0; max-width:20ch }
+.fig .fig-dek{ font-size:var(--fs-body); color:var(--ink-2); max-width:var(--measure-tight); margin:0 }
+.fig .fig-plot{ margin:var(--sp-8) 0 var(--sp-7) }
+.fig .fig-src{
+  font-size:var(--fs-label); color:var(--muted);
+  border-top:1px solid var(--line-soft); padding-top:var(--sp-4); margin:0;
+}
+
+/* the number row */
+.fig-nums{ display:grid; grid-template-columns:repeat(3,auto); gap:0 clamp(32px,6vw,80px); justify-content:start }
+.fig-nums b{
+  display:block; font-family:var(--serif); font-weight:400;
+  font-size:var(--fs-num); line-height:1; color:var(--accent-ink);
+}
+.fig-nums span{ display:block; font-size:var(--fs-sm); color:var(--ink-2); margin-top:var(--sp-3); max-width:20ch }
+
+/* unit charts: one mark per real thing counted */
+.fig-units{ display:grid; grid-template-columns:repeat(auto-fill,minmax(14px,1fr)); gap:4px }
+.fig-units i{ aspect-ratio:1; background:var(--accent); border-radius:3px; display:block }
+.fig-units--dots{ grid-template-columns:repeat(auto-fill,minmax(18px,1fr)); gap:8px }
+.fig-units--dots i{ border-radius:50% }
+.fig-units i[data-off]{ background:var(--line-strong) }
+.fig-legend{ display:flex; flex-wrap:wrap; gap:var(--sp-3) var(--sp-6); font-size:var(--fs-sm); color:var(--ink-2); margin-top:var(--sp-5) }
+.fig-legend span{ display:flex; align-items:center; gap:var(--sp-2) }
+.fig-legend em{ width:12px; height:12px; border-radius:50%; background:var(--accent); font-style:normal }
+.fig-legend em[data-off]{ background:var(--line-strong) }
+
+/* the flat line */
+.fig-reach{ position:relative; height:clamp(140px,20vh,220px); border-bottom:2px solid var(--accent) }
+.fig-reach .peak{ position:absolute; right:22%; bottom:38%; width:10px; height:10px; border-radius:50%; background:var(--accent) }
+.fig-reach .peak-label{ position:absolute; right:20%; bottom:calc(38% + 20px); font-size:var(--fs-sm); color:var(--ink-2); white-space:nowrap }
+.fig-reach .axis{ position:absolute; left:0; right:0; bottom:-26px; display:flex; justify-content:space-between; font-size:var(--fs-label); color:var(--muted) }
+.fig-baseline{ font:600 var(--fs-sm)/1 var(--sans); color:var(--ink); margin:0 0 var(--sp-3) }
+
+/* two figures side by side where they answer the same question */
+.fig-pair{ display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-9) }
+.fig-pair .fig{ margin:0 }
+
+@media(max-width:920px){ .fig-pair{ grid-template-columns:1fr; gap:var(--sp-9) } }
+@media(max-width:640px){
+  .fig-nums{ grid-template-columns:1fr; gap:var(--sp-6) }
+  .fig-units{ grid-template-columns:repeat(auto-fill,minmax(11px,1fr)); gap:3px }
+  .fig-units--dots{ grid-template-columns:repeat(auto-fill,minmax(14px,1fr)); gap:6px }
+}
