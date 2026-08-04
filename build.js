@@ -61,7 +61,7 @@ footer a:hover{color:var(--gold-2)}
 `;
 
 const NAV = `<nav class="nav"><div class="in">
-  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19V5h9M5 12h7" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="17" r="2.4" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
+  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
   <div class="lk"><a href="/services/">Services</a><a href="/projects/">Projects</a><a href="/contact/">Contact</a><a class="cta" href="/book.html">Read the book</a></div>
 </div></nav>`;
 
@@ -84,7 +84,7 @@ function head(title, desc, ogimg, canon){
 <link rel="canonical" href="${canon}">
 <meta property="og:type" content="article"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="https://elvinpeters.com${ogimg}"><meta property="og:url" content="${canon}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@elvin_peters">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 19V5h9M5 12h7' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='18' cy='17' r='2.4' fill='%23c9a250'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5v14M6 5h9M6 12h7M6 19h9' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='19.5' cy='18.6' r='1.9' fill='%23c9a250'/%3E%3C/svg%3E">
 ${GA}${FONTS}<style>${CSS}${NLCSS}</style></head><body>`;
 }
 
@@ -153,7 +153,7 @@ const NAVC = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'nav.json'), '
 const HOME = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'home.json'), 'utf8'));
 const SVCS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'services.json'), 'utf8'));
 
-const NAV_SVG_SIG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19V5h9M5 12h7" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="17" r="2.4" fill="var(--gold)"/></svg>`;
+const NAV_SVG_SIG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>`;
 const NAV_SVG_ARROW = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const HERO_SVG_ARROW = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
@@ -366,6 +366,48 @@ function renderRcGap() {
   const g = RCP.gap;
   return `    <div class="gap">\n      <h3>${g.headline}</h3>\n      <p>${g.body}</p>\n    </div>`;
 }
+
+/* ---- book.html reusable blocks ---------------------------------------
+   The reader review and the author bio were hand-written HTML, which is why
+   neither could be edited anywhere. They are content, so they live in
+   content/book.json and Site Studio can reach them from the phone. */
+const BK = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'book.json'), 'utf8'));
+
+function renderBkReview() {
+  const r = BK.review;
+  return [
+    `    <div class="section-label">${r.label}</div>`,
+    '    <div class="review-card">',
+    '      <div class="review-head"><span class="review-stars" aria-label="Rated 5 out of 5 stars">★★★★★</span>' +
+      `<span class="review-badge">${r.badge}</span></div>`,
+    `      <h3 class="review-title">&ldquo;${r.headline}&rdquo;</h3>`,
+    ...r.paragraphs.map(p => `      <p>${p}</p>`),
+    `      <div class="review-meta">${r.meta} &middot; ` +
+      `<a href="${r.link_url}" target="_blank" rel="noopener">${r.link_label}</a></div>`,
+    '    </div>',
+  ].join('\n');
+}
+
+function renderBkAuthor() {
+  const a = BK.author;
+  return [
+    `    <div class="section-label">${a.label}</div>`,
+    '    <div class="author-inner">',
+    `      <div class="author-avatar"><img src="${a.photo}" alt="${a.name}" width="400" height="400" loading="lazy" onerror="this.parentElement.textContent='EP'" /></div>`,
+    '      <div>',
+    `        <div class="author-name">${a.name}</div>`,
+    `        <div class="author-title">${a.title}</div>`,
+    `        <p class="author-bio">${a.paragraphs.join('<br/><br/>')}</p>`,
+    '      </div>',
+    '    </div>',
+  ].join('\n');
+}
+
+applyRegions('book.html', {
+  'bk-review': renderBkReview,
+  'bk-author': renderBkAuthor,
+});
+console.log('Regions applied: book.html (review, author)');
 
 applyRegions('receipts/index.html', {
   'rc-intro': renderRcIntro,

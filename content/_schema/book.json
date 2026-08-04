@@ -1,0 +1,68 @@
+{
+  "title": "The book page: review + author",
+  "file": "book.json",
+  "preview": "/book.html",
+  "help": "The reader review and the author bio on book.html. Both are reusable blocks: change the words here and the page rebuilds. Paragraphs are one per line.",
+  "fields": [
+    {
+      "key": "review.label",
+      "type": "text",
+      "label": "Small label above the review",
+      "maxlen": 80
+    },
+    {
+      "key": "review.badge",
+      "type": "text",
+      "label": "Badge beside the stars",
+      "maxlen": 60
+    },
+    {
+      "key": "review.headline",
+      "type": "textarea",
+      "label": "The review's headline (quote marks are added for you)",
+      "maxlen": 160
+    },
+    {
+      "key": "review.paragraphs",
+      "type": "list",
+      "label": "Review paragraphs, one per line",
+      "maxlen": 900
+    },
+    {
+      "key": "review.meta",
+      "type": "text",
+      "label": "Format, country and date",
+      "maxlen": 120
+    },
+    {
+      "key": "review.link_label",
+      "type": "text",
+      "label": "Link text",
+      "maxlen": 60
+    },
+    {
+      "key": "author.label",
+      "type": "text",
+      "label": "Small label above the bio",
+      "maxlen": 60
+    },
+    {
+      "key": "author.name",
+      "type": "text",
+      "label": "Name",
+      "maxlen": 80
+    },
+    {
+      "key": "author.title",
+      "type": "text",
+      "label": "One-line credentials",
+      "maxlen": 140
+    },
+    {
+      "key": "author.paragraphs",
+      "type": "list",
+      "label": "Bio paragraphs, one per line",
+      "maxlen": 900
+    }
+  ]
+}

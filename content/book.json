@@ -1,0 +1,26 @@
+{
+  "_comment": "Reusable blocks on book.html: the reader review and the author bio. Rendered by build.js into the ep:bk-review and ep:bk-author regions. Edit here or in Site Studio. Paragraphs are arrays, so adding one is adding a line.",
+  "review": {
+    "label": "The first review the book got, unedited",
+    "badge": "Verified Purchase · Amazon.ca",
+    "headline": "Must-read if you’re looking to enhance your output.",
+    "paragraphs": [
+      "“What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you’re looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.",
+      "Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I’ll be recommending this to all of my coworkers who have been struggling with AI and prompting.”"
+    ],
+    "meta": "Paperback · Reviewed in Canada · July 15, 2026",
+    "link_url": "https://www.amazon.com/dp/B0H4X2S2JD",
+    "link_label": "Read it on Amazon →"
+  },
+  "author": {
+    "label": "About the Author",
+    "name": "Elvin M. Peters",
+    "title": "Author · Marketing Strategist · A decade in performance marketing",
+    "photo": "/img/headshot.jpg",
+    "paragraphs": [
+      "I spent three years inside Google Ads, watching brilliant people get mediocre results from AI, and I figured out exactly why. After that I led digital marketing at one of Canada's largest fintechs, running AI-integrated campaigns across Google, Meta, and Quora at scale. I have been testing and directing AI tools since ChatGPT launched in 2022.",
+      "I wrote <em>The Artificial Advantage</em> because I watched too many capable professionals underuse tools that could have transformed how they worked. Not because the tools weren't powerful, but because nobody gave them a framework for directing them.",
+      "<em>The Artificial Advantage</em> is Volume 1 of the AI Fluency Series. Volume 2, <em>The Systematic Advantage</em>, is in progress."
+    ]
+  }
+}

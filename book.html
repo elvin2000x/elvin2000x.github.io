@@ -149,7 +149,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .cta-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
 
     /* ── COVER IMAGE ── */
-    .book-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
+    .book-wrap { display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
     
     .book-img {
       width: min(320px, 72vw); height: auto; position: relative; z-index: 1;
@@ -492,11 +492,26 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       .btn-primary, .btn-secondary { display: flex; margin: 6px 0; }
       .stack-price .big { font-size: 46px; }
     }
-  /* Amazon's official badge in place of the words "on Amazon". This page is
-     deliberately light, so it takes the dark-text version. */
-  .azbadge{display:inline-block;line-height:0;margin-top:16px}
-  .azbadge img{width:168px;height:auto;display:block}
+  /* Amazon's official badge. Their guidelines prefer the stacked tag over the
+     horizontal one and set a floor of 125px wide at 1x, so it ships at 150 and
+     is served from a 500px asset. No box, no outline, no recolour, and the
+     clear space is the width of the tag's own "o" on each side. */
+  .azbadge{display:block;line-height:0;margin:22px auto 0;width:fit-content;padding:0 14px}
+  .azbadge img{width:150px;height:auto;display:block}
   .azbadge:hover{opacity:.85}
+  /* the two purchase paths */
+  .pathband{padding:0 0 var(--sp-9)}
+  .paths{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:0;max-width:860px}
+  .path{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;display:flex;flex-direction:column}
+  .path--own{border-color:var(--gold2);box-shadow:0 0 0 1px var(--gold2) inset}
+  .path-num{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .path h2{font-size:1.35rem;font-weight:600;margin:8px 0 10px}
+  .path > p{font-size:15px;color:var(--text);margin:0 0 18px;flex:1}
+  .path .btn-primary{width:100%;text-align:center;white-space:nowrap}
+  .path-note{font-size:13px;color:var(--muted);margin:12px 0 0}
+  .hero-free{margin:22px 0 0;font-size:15px}
+  .hero-free a{color:var(--gold);font-weight:600;border-bottom:1px solid rgba(184,138,46,.4)}
+  @media(max-width:760px){.paths{grid-template-columns:1fr}}
   /* The extra before/after examples, folded away so the section is one idea
      rather than four (Justine, 2026-08-04). */
   .ba-more{margin-top:14px}
@@ -515,7 +530,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
 <!-- ep:nav -->
 <nav class="nav"><div class="container">
-  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 19V5h9M5 12h7" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="18" cy="17" r="2.4" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
+  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
   <div class="links">
     <a href="/services/">Services</a>
     <a href="/book.html" class="active">The Book</a>
@@ -533,25 +548,40 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <section style="background: linear-gradient(170deg, var(--panel) 0%, var(--bg-2) 100%);">
   <div class="hero">
     <div class="hero-copy">
-      <div class="hero-badge">Now Available · Vol 1 of the AI Fluency Series</div>
       <h1 id="hl">You tried AI.<br/><span>You weren't impressed.</span></h1>
-      <p class="hero-sub" id="sub">The problem was never the tool. No one taught you how to direct it. This is the framework that does, written for professionals and not programmers.</p>
-      <p class="hero-hook" id="hook">The people getting astonishing results are typing into the same box you are. They are just directing it. That is a learnable skill, and it has almost nothing to do with being technical.</p>
-      <div>
-        <a href="/system/" class="btn-primary">Get the System: ebook + full kit →</a>
-        <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-secondary" target="_blank" rel="noopener">Buy the paperback or hardcover</a>
-        <div class="cta-note"><a href="#newsletter" style="color:var(--accent-ink);font-weight:600">Or read the first chapter free →</a></div>
-      </div>
-      <a class="azbadge" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy The Artificial Advantage on Amazon">
-        <img src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
-      </a>
-      <div class="hero-seal"><b>Ebook + kit on this site</b> · paperback &amp; hardcover on Amazon · by Elvin M. Peters</div>
+      <p class="hero-sub" id="sub">The people getting astonishing results are typing into the same box you are. They are just directing it, and that is a learnable skill with almost nothing to do with being technical. This is the book that teaches it, written for professionals and not programmers.</p>
+
     </div>
     <div class="book-wrap">
       <img src="/img/cover-hero.webp" alt="The Artificial Advantage by Elvin M. Peters" class="book-img" width="600" height="960" />
+      <a class="azbadge" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy The Artificial Advantage on Amazon">
+        <img src="/img/amazon/available-at-amazon-stacked-light.png" alt="Available at Amazon" width="500" height="241" loading="lazy">
+      </a>
     </div>
   </div>
 </section>
+
+<!-- The two ways to buy, given a full-width band of their own. Squeezed into
+     the hero column they were two narrow boxes with wrapping buttons. -->
+<section class="pathband"><div class="section-inner">
+      <div class="paths">
+        <div class="path">
+          <span class="path-num">Read it</span>
+          <h2>On Amazon</h2>
+          <p>Kindle, paperback or hardcover. Every print copy includes the nine appendices and a QR code to the companion library on this site.</p>
+          <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-primary" target="_blank" rel="noopener">Buy on Amazon</a>
+          <p class="path-note">If it helps you, an honest review is the single most useful thing you can send back.</p>
+        </div>
+        <div class="path path--own">
+          <span class="path-num">Run it</span>
+          <h2>The System, direct from me</h2>
+          <p>The same complete book, plus the working kit you cannot get on Amazon: the 7-day workbook, fifty prompts for the jobs that eat your week, twelve role playbooks and the ten-guide library.</p>
+          <a href="/system/" class="btn-primary">Get the System, $37</a>
+          <p class="path-note">Instant download, 14-day money-back guarantee, no account to create.</p>
+        </div>
+      </div>
+      <p class="hero-free"><a href="#newsletter">Not ready for either? Read the first chapter free &rarr;</a></p>
+</div></section>
 
 <!-- ───────────── 2. PROOF BAR ───────────── -->
 <div class="proof-bar">
@@ -846,20 +876,23 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <!-- ───────────── 9. READER PROOF (real, attributed) ───────────── -->
 <section class="section">
   <div class="section-inner">
+    <!-- ep:bk-review -->
     <div class="section-label">The first review the book got, unedited</div>
     <div class="review-card">
       <div class="review-head"><span class="review-stars" aria-label="Rated 5 out of 5 stars">★★★★★</span><span class="review-badge">Verified Purchase · Amazon.ca</span></div>
-      <h3 class="review-title">“Must-read if you’re looking to enhance your output.”</h3>
-      <p>“What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you’re looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.”</p>
-      <p>“Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I’ll be recommending this to all of my coworkers who have been struggling with AI and prompting.”</p>
-      <div class="review-meta">Paperback · Reviewed in Canada · July 15, 2026 · <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Read it on Amazon →</a></div>
+      <h3 class="review-title">&ldquo;Must-read if you’re looking to enhance your output.&rdquo;</h3>
+      <p>“What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you’re looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.</p>
+      <p>Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I’ll be recommending this to all of my coworkers who have been struggling with AI and prompting.”</p>
+      <div class="review-meta">Paperback · Reviewed in Canada · July 15, 2026 &middot; <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Read it on Amazon →</a></div>
     </div>
+    <!-- /ep:bk-review -->
   </div>
 </section>
 
 <!-- ───────────── 10. AUTHOR ───────────── -->
 <section class="section author-section">
   <div class="section-inner">
+    <!-- ep:bk-author -->
     <div class="section-label">About the Author</div>
     <div class="author-inner">
       <div class="author-avatar"><img src="/img/headshot.jpg" alt="Elvin M. Peters" width="400" height="400" loading="lazy" onerror="this.parentElement.textContent='EP'" /></div>
@@ -869,13 +902,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         <p class="author-bio">I spent three years inside Google Ads, watching brilliant people get mediocre results from AI, and I figured out exactly why. After that I led digital marketing at one of Canada's largest fintechs, running AI-integrated campaigns across Google, Meta, and Quora at scale. I have been testing and directing AI tools since ChatGPT launched in 2022.<br/><br/>I wrote <em>The Artificial Advantage</em> because I watched too many capable professionals underuse tools that could have transformed how they worked. Not because the tools weren't powerful, but because nobody gave them a framework for directing them.<br/><br/><em>The Artificial Advantage</em> is Volume 1 of the AI Fluency Series. Volume 2, <em>The Systematic Advantage</em>, is in progress.</p>
       </div>
     </div>
+    <!-- /ep:bk-author -->
   </div>
 </section>
 
 <!-- ───────────── 12. FAQ ───────────── -->
 <section class="section">
   <div class="section-inner">
-    <div class="section-label">Common Questions</div>
     <h2 class="section-title" style="margin-bottom: 36px;">Frequently Asked Questions</h2>
     <div class="faq-list">
       <div class="faq-item">
