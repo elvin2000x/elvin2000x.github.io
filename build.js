@@ -261,7 +261,10 @@ function renderSysGuarantee() {
   return `      <h3>${g.heading}</h3>\n      <p>${g.body}</p>`;
 }
 function renderSysFaq() {
-  return SYS.faq.map(f => `    <div class="fitem"><h4>${f.q}</h4><p>${f.a}</p></div>`).join('\n');
+  // Canonical .faq accordion, same as every other page on the site. This used
+  // to emit static .fitem divs that could not be opened, which is the
+  // inconsistency Elvin spotted between /book.html and /system/.
+  return SYS.faq.map(f => `    <details><summary>${f.q}</summary><p>${f.a}</p></details>`).join('\n');
 }
 function renderClHero() {
   const h = CLA.hero;

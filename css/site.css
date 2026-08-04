@@ -363,3 +363,32 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
   .fig-units{ grid-template-columns:repeat(auto-fill,minmax(11px,1fr)); gap:3px }
   .fig-units--dots{ grid-template-columns:repeat(auto-fill,minmax(14px,1fr)); gap:6px }
 }
+
+
+/* ---------- FAQ ---------------------------------------------------------
+   One accordion for the whole site. It was built three different ways: most
+   pages used <details>, /system/ used static divs that could not be opened,
+   and /claude/ had no FAQ at all despite being the most expensive product.
+   Elvin found it: "on the book page the FAQs are expandable but on system
+   they are static."
+   Native <details> so it works with no JS, is keyboard accessible, and is
+   findable by in-page search when open. */
+.faq{ max-width:var(--w-text); margin:var(--sp-7) auto 0 }
+.faq details{ border-bottom:1px solid var(--line-soft) }
+.faq details:first-child{ border-top:1px solid var(--line-soft) }
+.faq summary{
+  display:flex; align-items:center; justify-content:space-between; gap:var(--sp-5);
+  cursor:pointer; list-style:none; min-height:var(--tap);
+  padding:var(--sp-5) 0; font-weight:600; font-size:var(--fs-body); color:var(--ink);
+}
+.faq summary::-webkit-details-marker{ display:none }
+.faq summary::after{
+  content:"+"; color:var(--accent-ink); font-weight:700;
+  font-size:var(--fs-lead); line-height:1; flex:none;
+}
+.faq details[open] summary::after{ content:"\2212" }
+.faq summary:hover{ color:var(--accent-ink) }
+.faq details > p{
+  margin:0 0 var(--sp-5); padding-right:var(--sp-8);
+  font-size:var(--fs-sm); color:var(--ink-2); line-height:var(--lh-prose); max-width:none;
+}
