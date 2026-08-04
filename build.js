@@ -406,17 +406,49 @@ function renderBkAuthor() {
   ].join('\n');
 }
 
+/* Copy for the opt-in on each money page. The offer has to match the page:
+   somebody reading the Content Machine page has already met the volume problem
+   and is not looking for a starter kit for the book. Every source tag is unique
+   so the lead DB shows which page and which position actually converts. */
+const OPTINS = {
+  'system': {
+    eyebrow: 'Free starter kit',
+    headline: 'Try the method before you spend anything',
+    body: 'The prompts for the jobs that keep sliding to tomorrow, the cheat sheets for briefing a model properly, and the first chapter of the book. It lands in about a minute and it is yours either way.',
+    button: 'Send me the kit',
+    note: 'One email, four files. Unsubscribe in one click, and it never removes your access to anything.',
+    success: 'Done. Check your inbox in about a minute, and look in promotions if it is not there.',
+  },
+  'claude': {
+    eyebrow: 'Free sample',
+    headline: 'Read a chapter before you buy the manual',
+    body: 'I will send you the chapter on giving Claude a job description, which is the one that changes how people work within a day. Plus the briefing cheat sheet from the appendix.',
+    button: 'Send me the chapter',
+    note: 'One email, two files. Unsubscribe in one click.',
+    success: 'On its way. Check your inbox in about a minute, and look in promotions if it is not there.',
+  },
+  'content-machine': {
+    eyebrow: 'Free, and the honest part',
+    headline: 'The failure record, before you buy anything',
+    body: 'The audit of my first 200 pieces: every title that started with "The", the character name that turned up in 21 of 75 stories, and the tweets that averaged zero. It is the part of the guide nobody else publishes.',
+    button: 'Send me the audit',
+    note: 'One email, one PDF. Unsubscribe in one click.',
+    success: 'Sent. Check your inbox in about a minute, and look in promotions if it is not there.',
+  },
+};
+
 /* One opt-in block, rendered wherever it is needed. Each instance carries its
    own source tag so the lead DB shows which position actually converts. */
-function renderOptin(slot) {
-  const o = BK.optin;
-  const id = 'oi-' + slot;
+function renderOptin(slot, page) {
+  const o = page ? { ...BK.optin, ...OPTINS[page] } : BK.optin;
+  const tag = page ? `${page}-optin-${slot}` : `book-optin-${slot}`;
+  const id = 'oi-' + (page ? page + '-' : '') + slot;
   return [
     '  <div class="optin">',
     `    <span class="oi-eyebrow">${o.eyebrow}</span>`,
     `    <h2>${o.headline}</h2>`,
     `    <p>${o.body}</p>`,
-    `    <form class="oi-form" data-source="book-optin-${slot}" novalidate>`,
+    `    <form class="oi-form" data-source="${tag}" novalidate>`,
     '      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">',
     `      <label class="visually-hidden" for="${id}">Your email</label>`,
     `      <input id="${id}" type="email" required autocomplete="email" placeholder="${o.placeholder}">`,
@@ -435,6 +467,15 @@ applyRegions('book.html', {
   'bk-optin-bottom': () => renderOptin('bottom'),
 });
 console.log('Regions applied: book.html (review, author, optin x2)');
+
+/* The three money pages get the same component with page-matched copy. Until
+   now /system/ had only a desktop exit-intent popup (mouseout never fires on
+   touch, so the $37 page had zero mobile capture), and /claude/ and
+   /content-machine/ had no capture at all. */
+applyRegions('system/index.html', { 'sys-optin': () => renderOptin('end', 'system') });
+applyRegions('claude/index.html', { 'cl-optin': () => renderOptin('end', 'claude') });
+applyRegions('content-machine/index.html', { 'cm-optin': () => renderOptin('end', 'content-machine') });
+console.log('Regions applied: money-page opt-ins (system, claude, content-machine)');
 
 applyRegions('receipts/index.html', {
   'rc-intro': renderRcIntro,

@@ -168,6 +168,63 @@ for (const rel of PAGES) {
   }
 })();
 
+// DEAD CUSTOM PROPERTIES.
+// A var() naming a property nothing defines is not a graceful fallback, it is a
+// declaration the browser throws away. Nothing rendered an error, nothing turned
+// red, and the gate stayed green while book.html quietly lost its opt-in accent
+// bar, its email focus ring, its success colour and a path-card highlight
+// (--gold2, --green), and while a new component asked for --r instead of
+// --r-card. This is the check that would have caught all of it.
+(() => {
+  const defsIn = (t) => {
+    const s = new Set();
+    // a definition is `--name:` NOT preceded by `var(`
+    for (const m of t.matchAll(/(--[A-Za-z0-9_-]+)\s*:/g)) {
+      if (!/var\(\s*$/.test(t.slice(Math.max(0, m.index - 5), m.index))) s.add(m[1]);
+    }
+    return s;
+  };
+  const cssCache = new Map();
+  const cssDefs = (abs) => {
+    if (!cssCache.has(abs)) {
+      cssCache.set(abs, fs.existsSync(abs) ? defsIn(fs.readFileSync(abs, 'utf8')) : new Set());
+    }
+    return cssCache.get(abs);
+  };
+
+  const cssPath = path.join(ROOT, 'css', 'site.css');
+  const siteCss = fs.existsSync(cssPath) ? fs.readFileSync(cssPath, 'utf8') : '';
+  const siteDefs = defsIn(siteCss);
+
+  // site.css must not reference a token it never defines, either.
+  for (const m of siteCss.matchAll(/var\(\s*(--[A-Za-z0-9_-]+)\s*(?:,([^)]*))?\)/g)) {
+    if (!siteDefs.has(m[1]) && m[2] === undefined)
+      fail('css/site.css', 'undefined custom property ' + m[1] + ' (no fallback)');
+  }
+
+  for (const rel of PAGES) {
+    const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    // A page can only rely on tokens from the stylesheets it actually loads.
+    // /projects/ is on apps-kit.css, not site.css, so resolve every local link
+    // rather than assuming the design system is present.
+    const known = new Set(defsIn(html));
+    for (const m of html.matchAll(/<link[^>]+href=["']([^"']+\.css)["']/g)) {
+      const href = m[1];
+      if (/^https?:|^\/\//.test(href)) continue;             // remote sheet, not ours
+      const abs = href.startsWith('/')
+        ? path.join(ROOT, href.slice(1))
+        : path.join(ROOT, path.dirname(rel), href);
+      for (const d of cssDefs(abs)) known.add(d);
+    }
+    const dead = new Set();
+    for (const m of html.matchAll(/var\(\s*(--[A-Za-z0-9_-]+)\s*(?:,([^)]*))?\)/g)) {
+      // a var() with a fallback still renders something, so it is not a defect
+      if (m[2] === undefined && !known.has(m[1])) dead.add(m[1]);
+    }
+    for (const d of dead) fail(rel, 'undefined custom property ' + d + ' (declaration is dropped)');
+  }
+})();
+
 // KEY PAGES exist and are non-trivial.
 for (const key of ['index.html', 'book.html', 'services/index.html', 'contact/index.html',
   'links/index.html', 'projects/index.html', 'system/index.html', 'writing/index.html']) {

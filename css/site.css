@@ -402,3 +402,45 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
   margin:0 0 var(--sp-5); padding-right:var(--sp-8);
   font-size:var(--fs-sm); color:var(--ink-2); line-height:var(--lh-prose); max-width:none;
 }
+
+/* ---------- INLINE EMAIL CAPTURE ----------------------------------------
+   One opt-in for every page that has something to offer. It lived inline in
+   book.html, which is why /system/ (the $37 page) had nothing but a desktop
+   exit-intent popup bound to mouseout + clientY<=0, an event that does not
+   exist on a phone, and why /claude/ and /content-machine/ had no email
+   capture at all. Promoted here so all four money pages share it.
+   Every instance posts to the owned endpoint with its own source tag and a
+   honeypot named `website`; the handler lives in js/site.js.               */
+.optin{
+  background:var(--panel); border:1px solid var(--line);
+  border-top:3px solid var(--accent);
+  border-radius:var(--r-card); padding:var(--sp-7) var(--sp-7);
+  max-width:var(--w-text); margin:0 auto;
+}
+.optin .oi-eyebrow{
+  font-size:var(--fs-label); font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent-ink);
+}
+.optin h2{ font-size:var(--fs-h3); font-weight:600; margin:var(--sp-3) 0 var(--sp-3) }
+.optin > p{ font-size:var(--fs-sm); color:var(--ink-2); margin:0 0 var(--sp-6); line-height:var(--lh-prose) }
+.optin form{ display:flex; gap:var(--sp-3); flex-wrap:wrap }
+.optin input[type=email]{
+  flex:1; min-width:220px; padding:14px 16px; border-radius:var(--r-sm);
+  border:1px solid var(--line); background:var(--bg); color:var(--ink);
+  font-size:16px;               /* below 16 and iOS zooms the page on focus */
+  font-family:inherit; min-height:44px;
+}
+.optin input[type=email]:focus{ outline:2px solid var(--accent); outline-offset:1px; border-color:transparent }
+.optin button{
+  padding:14px 26px; border-radius:var(--r-pill); border:0;
+  background:var(--accent); color:var(--accent-on);
+  font-weight:700; font-size:16px; cursor:pointer; min-height:44px; font-family:inherit;
+}
+.optin button:hover{ filter:brightness(1.06) }
+.optin button[disabled]{ opacity:.6; cursor:default }
+.optin .oi-note{ font-size:var(--fs-label); color:var(--muted); margin:var(--sp-3) 0 0 }
+.optin .oi-msg{ display:none; font-size:var(--fs-sm); margin:var(--sp-3) 0 0; color:var(--ok); font-weight:600 }
+.optinband{ padding:var(--sp-9) 24px }
+/* Screen-reader-only. The opt-in's email label uses it; without this rule the
+   words "Your email" render as stray visible text above the field. */
+.visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap }

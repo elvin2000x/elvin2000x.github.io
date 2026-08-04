@@ -2,6 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    /* FIRST, before any pixel loads. The Stripe session id in the URL is a
+       bearer credential: /api/order answers to it forever with the buyer's
+       order and a fresh download link. GA4, Meta, TikTok and X all record the
+       full page URL, which was handing that credential to four ad networks on
+       every sale. Capture it, then strip it from the address bar so what the
+       pixels see is a clean /thank-you/. */
+    window.__sid = new URLSearchParams(location.search).get("session_id") || "";
+    try {
+      if (window.__sid) sessionStorage.setItem("ep_sid", window.__sid);
+      else window.__sid = sessionStorage.getItem("ep_sid") || "";
+    } catch (e) {}
+    if (location.search.indexOf("session_id") !== -1 && history.replaceState) {
+      history.replaceState(null, "", location.pathname);
+    }
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -104,7 +120,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
   (function () {
     function show(id){ ["loading","success","fallback"].forEach(function(x){ document.getElementById(x).classList.toggle("hidden", x!==id); }); }
-    var sid = new URLSearchParams(location.search).get("session_id");
+    // The head script captured this and stripped it from the URL before any
+    // pixel loaded; location.search is deliberately empty by the time we run.
+    var sid = window.__sid || "";
     if (!sid) { show("fallback"); return; }
     // Fire purchase events ONCE per order, with the REAL total. This page is
     // linked from the buyer email for re-downloads, so without the guard every
