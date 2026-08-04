@@ -298,9 +298,35 @@ applyRegions('claude/index.html', {
   'cl-hero': renderClHero,
   'cl-price': renderClPrice,
 });
+/* The unit charts are one mark per real thing counted, emitted here rather than
+   hand-written so the marks can never drift from the audit they describe. The
+   numbers are the verified ones: 200 of 200 titles, and 21 of 75 stories.
+   Sourced to Brain/deliverables/VERIFIED-NUMBERS.md. */
+const FIG_TITLES_TOTAL = 200;   // pieces audited
+const FIG_STORIES_TOTAL = 75;   // short stories
+const FIG_STORIES_HIT = 21;     // protagonist named Marina
+
+function renderFigTitles() {
+  return '<i></i>'.repeat(FIG_TITLES_TOTAL);
+}
+function renderFigMarina() {
+  // Spread the hits through the set rather than clustering them at the front,
+  // because a solid block reads as two groups instead of one distribution.
+  const every = FIG_STORIES_TOTAL / FIG_STORIES_HIT;
+  let hits = 0, out = '';
+  for (let i = 0; i < FIG_STORIES_TOTAL; i++) {
+    const on = hits < FIG_STORIES_HIT && Math.floor(i / every) === hits;
+    if (on) hits++;
+    out += on ? '<i></i>' : '<i data-off></i>';
+  }
+  return out;
+}
+
 applyRegions('content-machine/index.html', {
   'cm-hero': renderCmHero,
   'cm-price': renderCmPrice,
+  'fig-titles': renderFigTitles,
+  'fig-marina': renderFigMarina,
 });
 console.log('Regions applied: system/index.html (hero, price, guarantee, faq), claude/index.html (hero, price), content-machine/index.html (hero, price)');
 
