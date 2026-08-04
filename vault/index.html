@@ -30,6 +30,9 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1699232654449762&ev=PageView&noscript=1"/></noscript>
 <style>
+/* Deliberate styling island: the vault magnet page has its own always-dark
+   palette (bespoke navy + brighter gold), like links/ and book.html. It is
+   NOT a drifted copy of the system palette; do not migrate it to site.css. */
 :root{--navy:#0a0f1e;--navy2:#111a30;--card:#141d33;--gold:#d3b463;--gold2:#e7cd86;
 --ink:#eef2fa;--muted:#9aa7c2;--line:rgba(255,255,255,.09);--ok:#4ad0a0}
 *{margin:0;padding:0;box-sizing:border-box}
