@@ -20,22 +20,11 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
+<link rel="stylesheet" href="/css/site.css">
 <style>
-:root{
-  --bg:#e6ebf1; --bg-2:#dde4ec; --panel:#ffffff; --panel-2:#f3f6fa;
-  --line:#c3cedd; --line-soft:#d3dce8;
-  --ink:#0e1a2b; --ink-2:#3d4d63; --muted:#4f6076;
-  --gold:#9c761f; --gold-2:#7a5a12; --cyan:#1c6ea8;
-  --shadow:0 18px 40px -24px rgba(14,26,43,.45);
-  --serif:'EB Garamond',Georgia,serif; --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-}
-@media (prefers-color-scheme:dark){:root{
-  --bg:#0a1524; --bg-2:#060d18; --panel:#1b2c45; --panel-2:#131f33;
-  --line:#2b405c; --line-soft:#223351; --ink:#e9eff7; --ink-2:#b7c6d9; --muted:#8ba2bd;
-  --gold:#c9a250; --gold-2:#e0bd6b; --cyan:#4fb3f0; --shadow:0 24px 50px -28px rgba(0,0,0,.7);
-}}
-:root[data-theme="light"]{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--cyan:#1c6ea8;--shadow:0 18px 40px -24px rgba(14,26,43,.45)}
-:root[data-theme="dark"]{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--cyan:#4fb3f0;--shadow:0 24px 50px -28px rgba(0,0,0,.7)}
+/* On the design system: tokens come from css/site.css L2/L3. This page
+   used to carry a hand-copied palette here, which drifted (it rendered
+   the retired navy for weeks). Component styles below stay page-local. */
 *{box-sizing:border-box} html,body{margin:0}
 body{background:radial-gradient(1100px 520px at 82% -8%,color-mix(in srgb,var(--gold) 14%,transparent),transparent 60%),linear-gradient(180deg,var(--bg),var(--bg-2));color:var(--ink);font-family:var(--sans);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
