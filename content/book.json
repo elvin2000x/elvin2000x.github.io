@@ -22,5 +22,15 @@
       "I wrote <em>The Artificial Advantage</em> because I watched too many capable professionals underuse tools that could have transformed how they worked. Not because the tools weren't powerful, but because nobody gave them a framework for directing them.",
       "<em>The Artificial Advantage</em> is Volume 1 of the AI Fluency Series. Volume 2, <em>The Systematic Advantage</em>, is in progress."
     ]
+  },
+  "optin": {
+    "_comment": "The inline email capture. Rendered twice on book.html, near the top and at the foot, from this one block.",
+    "eyebrow": "Free starter kit",
+    "headline": "Try the method before you spend anything",
+    "body": "Fifty prompts for the jobs that actually eat your week, the cheat sheets for briefing a model properly, and the first chapter of the book. It lands in your inbox in about a minute and it is yours to keep either way.",
+    "placeholder": "you@work.com",
+    "button": "Send me the kit",
+    "note": "One email, four files. Unsubscribe in one click, and it never removes your access to anything.",
+    "success": "Done. Check your inbox in about a minute, and look in promotions if it is not there."
   }
 }

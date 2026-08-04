@@ -63,6 +63,36 @@
       "type": "list",
       "label": "Bio paragraphs, one per line",
       "maxlen": 900
+    },
+    {
+      "key": "optin.eyebrow",
+      "type": "text",
+      "label": "Opt-in: small label",
+      "maxlen": 60
+    },
+    {
+      "key": "optin.headline",
+      "type": "text",
+      "label": "Opt-in: headline",
+      "maxlen": 120
+    },
+    {
+      "key": "optin.body",
+      "type": "textarea",
+      "label": "Opt-in: what they get",
+      "maxlen": 400
+    },
+    {
+      "key": "optin.button",
+      "type": "text",
+      "label": "Opt-in: button text",
+      "maxlen": 40
+    },
+    {
+      "key": "optin.note",
+      "type": "text",
+      "label": "Opt-in: fine print",
+      "maxlen": 160
     }
   ]
 }
