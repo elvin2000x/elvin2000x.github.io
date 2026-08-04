@@ -403,11 +403,35 @@ function renderBkAuthor() {
   ].join('\n');
 }
 
+/* One opt-in block, rendered wherever it is needed. Each instance carries its
+   own source tag so the lead DB shows which position actually converts. */
+function renderOptin(slot) {
+  const o = BK.optin;
+  const id = 'oi-' + slot;
+  return [
+    '  <div class="optin">',
+    `    <span class="oi-eyebrow">${o.eyebrow}</span>`,
+    `    <h2>${o.headline}</h2>`,
+    `    <p>${o.body}</p>`,
+    `    <form class="oi-form" data-source="book-optin-${slot}" novalidate>`,
+    '      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">',
+    `      <label class="visually-hidden" for="${id}">Your email</label>`,
+    `      <input id="${id}" type="email" required autocomplete="email" placeholder="${o.placeholder}">`,
+    `      <button type="submit">${o.button}</button>`,
+    '    </form>',
+    `    <p class="oi-note">${o.note}</p>`,
+    `    <p class="oi-msg" data-success="${o.success}"></p>`,
+    '  </div>',
+  ].join('\n');
+}
+
 applyRegions('book.html', {
   'bk-review': renderBkReview,
   'bk-author': renderBkAuthor,
+  'bk-optin-top': () => renderOptin('top'),
+  'bk-optin-bottom': () => renderOptin('bottom'),
 });
-console.log('Regions applied: book.html (review, author)');
+console.log('Regions applied: book.html (review, author, optin x2)');
 
 applyRegions('receipts/index.html', {
   'rc-intro': renderRcIntro,

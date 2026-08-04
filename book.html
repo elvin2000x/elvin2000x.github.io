@@ -492,6 +492,26 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       .btn-primary, .btn-secondary { display: flex; margin: 6px 0; }
       .stack-price .big { font-size: 46px; }
     }
+  /* Reusable inline email capture. Rendered from content/book.json at the top
+     and the foot of the page, because asking someone to click through to a
+     different section to hand over an email is a hoop, and the old closing band
+     did exactly that. */
+  .optin{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--gold2);
+    border-radius:16px;padding:34px 32px;max-width:720px;margin:0 auto}
+  .optin .oi-eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .optin h2{font-size:1.6rem;font-weight:600;margin:10px 0 10px}
+  .optin > p{font-size:15px;color:var(--text);margin:0 0 22px;line-height:1.65}
+  .optin form{display:flex;gap:10px;flex-wrap:wrap}
+  .optin input[type=email]{flex:1;min-width:220px;padding:14px 16px;border-radius:10px;
+    border:1px solid var(--border);background:var(--bg);color:var(--ink);font-size:16px;font-family:inherit}
+  .optin input[type=email]:focus{outline:2px solid var(--gold2);outline-offset:1px;border-color:transparent}
+  .optin button{padding:14px 26px;border-radius:10px;border:0;background:var(--accent-hi);
+    color:var(--accent-on);font-weight:700;font-size:16px;cursor:pointer;min-height:44px;font-family:inherit}
+  .optin button:hover{filter:brightness(1.05)}
+  .optin .oi-note{font-size:13px;color:var(--muted);margin:14px 0 0}
+  .optin .oi-msg{display:none;font-size:15px;margin:14px 0 0;color:var(--green);font-weight:600}
+  .optinband{padding:var(--sp-9) 24px}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   /* Amazon's official badge. Their guidelines prefer the stacked tag over the
      horizontal one and set a floor of 125px wide at 1x, so it ships at 150 and
      is served from a 500px asset. No box, no outline, no recolour, and the
@@ -582,6 +602,24 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       </div>
       <p class="hero-free"><a href="#newsletter">Not ready for either? Read the first chapter free &rarr;</a></p>
 </div></section>
+
+<section class="optinband">
+  <!-- ep:bk-optin-top -->
+  <div class="optin">
+    <span class="oi-eyebrow">Free starter kit</span>
+    <h2>Try the method before you spend anything</h2>
+    <p>Fifty prompts for the jobs that actually eat your week, the cheat sheets for briefing a model properly, and the first chapter of the book. It lands in your inbox in about a minute and it is yours to keep either way.</p>
+    <form class="oi-form" data-source="book-optin-top" novalidate>
+      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+      <label class="visually-hidden" for="oi-top">Your email</label>
+      <input id="oi-top" type="email" required autocomplete="email" placeholder="you@work.com">
+      <button type="submit">Send me the kit</button>
+    </form>
+    <p class="oi-note">One email, four files. Unsubscribe in one click, and it never removes your access to anything.</p>
+    <p class="oi-msg" data-success="Done. Check your inbox in about a minute, and look in promotions if it is not there."></p>
+  </div>
+  <!-- /ep:bk-optin-top -->
+</section>
 
 <!-- ───────────── 2. PROOF BAR ───────────── -->
 <div class="proof-bar">
@@ -945,14 +983,30 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
 <!-- ───────────── 13. URGENCY + FINAL CTA + TWO-PATHS ───────────── -->
 <div class="bottom-cta">
-  <h2>The window where AI literacy is a differentiator is still open.</h2>
+  <h2>Two ways in, and one of them is free.</h2>
   <div class="two-paths">
-    Two professionals start today with the same tools. In six months one is the person everyone asks how they move so fast. The other is still rewriting AI's first draft. <strong>The only difference is whether you learned to direct it.</strong>
+    Buy the book on <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600">Amazon</a>, or get the System here and have the whole working kit with it. If you are not ready for either, take the free kit below and decide afterwards.
   </div>
-  <a href="/system/" class="btn-primary">Get the System: ebook + full kit →</a><br/>
-  <a href="#newsletter" class="btn-secondary" style="margin-top: 4px;">Read the First Chapter Free</a>
-  <p class="bottom-note">Ebook + kit on this site · paperback &amp; hardcover on <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent-ink)">Amazon</a> · starter kit free with your email</p>
+  <a href="/system/" class="btn-primary">Get the System, $37</a>
 </div>
+
+<section class="optinband">
+  <!-- ep:bk-optin-bottom -->
+  <div class="optin">
+    <span class="oi-eyebrow">Free starter kit</span>
+    <h2>Try the method before you spend anything</h2>
+    <p>Fifty prompts for the jobs that actually eat your week, the cheat sheets for briefing a model properly, and the first chapter of the book. It lands in your inbox in about a minute and it is yours to keep either way.</p>
+    <form class="oi-form" data-source="book-optin-bottom" novalidate>
+      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+      <label class="visually-hidden" for="oi-bottom">Your email</label>
+      <input id="oi-bottom" type="email" required autocomplete="email" placeholder="you@work.com">
+      <button type="submit">Send me the kit</button>
+    </form>
+    <p class="oi-note">One email, four files. Unsubscribe in one click, and it never removes your access to anything.</p>
+    <p class="oi-msg" data-success="Done. Check your inbox in about a minute, and look in promotions if it is not there."></p>
+  </div>
+  <!-- /ep:bk-optin-bottom -->
+</section>
 
 <!-- ───────────── 14. P.S. SKIMMER RECAP ───────────── -->
 <section class="section" style="padding: 56px 24px;">
@@ -1088,6 +1142,47 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       });
     });
   })();
+</script>
+
+<script>
+/* Every .oi-form on the page, handled once. Each carries its own source tag so
+   the lead DB shows which position actually converts. Same owned endpoint and
+   honeypot as every other capture on the site. */
+(function(){
+  document.querySelectorAll('.oi-form').forEach(function(f){
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var box = f.closest('.optin');
+      var email = f.querySelector('input[type=email]').value.trim();
+      var msg = box.querySelector('.oi-msg');
+      var btn = f.querySelector('button');
+      if (!email) return;
+      btn.disabled = true; btn.style.opacity = '.7';
+      fetch('https://ultimateaidirectory.com/api/lead', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ email: email, source: f.dataset.source, website: f.website.value })
+      }).then(function(r){ return r.json(); }).then(function(r){
+        if (r.success) {
+          f.style.display = 'none';
+          box.querySelector('.oi-note').style.display = 'none';
+          msg.textContent = msg.dataset.success; msg.style.display = 'block';
+          try{ fbq('track','Lead',{content_name:f.dataset.source}); }catch(e){}
+          try{ gtag('event','generate_lead',{method:f.dataset.source}); }catch(e){}
+        } else {
+          btn.disabled = false; btn.style.opacity = '1';
+          msg.style.color = 'var(--red)';
+          msg.textContent = r.error || 'Something went wrong. Try again in a moment.';
+          msg.style.display = 'block';
+        }
+      }).catch(function(){
+        btn.disabled = false; btn.style.opacity = '1';
+        msg.style.color = 'var(--red)';
+        msg.textContent = 'Network hiccup. Try again.';
+        msg.style.display = 'block';
+      });
+    });
+  });
+})();
 </script>
 </body>
 </html>
