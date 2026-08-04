@@ -492,6 +492,23 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       .btn-primary, .btn-secondary { display: flex; margin: 6px 0; }
       .stack-price .big { font-size: 46px; }
     }
+  /* Amazon's official badge in place of the words "on Amazon". This page is
+     deliberately light, so it takes the dark-text version. */
+  .azbadge{display:inline-block;line-height:0;margin-top:16px}
+  .azbadge img{width:168px;height:auto;display:block}
+  .azbadge:hover{opacity:.85}
+  /* The extra before/after examples, folded away so the section is one idea
+     rather than four (Justine, 2026-08-04). */
+  .ba-more{margin-top:14px}
+  .ba-more summary{display:flex;align-items:center;gap:12px;flex-wrap:wrap;cursor:pointer;list-style:none;
+    min-height:var(--tap);padding:12px 18px;border:1px solid var(--line);border-radius:var(--r-pill);
+    background:var(--panel);color:var(--ink);font-weight:600;font-size:var(--fs-sm);width:fit-content}
+  .ba-more summary::-webkit-details-marker{display:none}
+  .ba-more summary::after{content:"+";color:var(--accent-ink);font-weight:700;font-size:var(--fs-body)}
+  .ba-more[open] summary::after{content:"\2212"}
+  .ba-more summary:hover{border-color:var(--accent)}
+  .ba-more .bam-hint{color:var(--muted);font-weight:400}
+  .ba-more .ba-set{margin-top:16px}
   </style>
 </head>
 <body>
@@ -522,10 +539,12 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <p class="hero-hook" id="hook">The people getting astonishing results are typing into the same box you are. They are just directing it. That is a learnable skill, and it has almost nothing to do with being technical.</p>
       <div>
         <a href="/system/" class="btn-primary">Get the System: ebook + full kit →</a>
-        <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-secondary" target="_blank" rel="noopener">Paperback &amp; hardcover on Amazon</a>
+        <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-secondary" target="_blank" rel="noopener">Buy the paperback or hardcover</a>
         <div class="cta-note"><a href="#newsletter" style="color:var(--accent-ink);font-weight:600">Or read the first chapter free →</a></div>
       </div>
-      <p class="cta-note">On Amazon in Kindle, paperback &amp; hardcover</p>
+      <a class="azbadge" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy The Artificial Advantage on Amazon">
+        <img src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
+      </a>
       <div class="hero-seal"><b>Ebook + kit on this site</b> · paperback &amp; hardcover on Amazon · by Elvin M. Peters</div>
     </div>
     <div class="book-wrap">
@@ -595,6 +614,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           <div class="ba-out"><b>2 minutes</b>Right voice, right tone, right length. One minute of polish. Sent.</div>
         </div>
       </div>
+      <!-- Four of these back to back was a wall (Justine, 2026-08-04). One
+           carries the idea; the other three are there for anyone who wants
+           more, one click away. -->
+      <details class="ba-more">
+        <summary><span>Three more, same idea</span><span class="bam-hint">meeting notes, data, hiring</span></summary>
       <div class="ba-set">
         <div class="ba-item ba-item--before">
           <div class="ba-label">Without a framework</div>
@@ -631,6 +655,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           <div class="ba-out"><b>A posting people answer</b>Specific, honest about the work.</div>
         </div>
       </div>
+      </details>
 
     <div class="story-block" style="margin-top: 24px;">
       <p>Same tool. Same task. Same professional context. The only difference was AI literacy.</p>
@@ -716,7 +741,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div style="max-width: 640px; margin: 0 auto;">
     <p style="font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color:var(--accent-ink); margin-bottom: 12px;">Not ready to buy? Try it first</p>
     <h2 style="font-size: var(--fs-h3); color: var(--white); margin-bottom: 12px;">Take a piece of the book for free</h2>
-    <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;">Drop your email and I'll send you the starter kit free: the 50 best prompts, the framework cheat sheets, and the first chapter. Enough to test the approach before you spend a cent. After that, a short note from me most weeks when I find an AI workflow actually worth stealing. I write them myself. No team, no filler.</p>
+    <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;">Drop your email and I'll send you the starter kit free: fifty prompts for the jobs that eat your week, the cheat sheets for briefing a model properly, and the first chapter. Enough to test the approach before you spend a cent. After that, a short note from me most weeks when I find an AI workflow actually worth stealing. I write them myself. No team, no filler.</p>
     <form id="nlform" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
       <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
       <input id="nlemail" type="email" required placeholder="you@work.com" style="flex:1;min-width:220px;max-width:300px;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:var(--panel);color:var(--ink);font-size:16px">
@@ -733,7 +758,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           source: 'newsletter-booksite', website: f.website.value})})
         .then(function(r){ return r.json(); }).then(function(r){
           m.style.display = 'block';
-          if (r.success) { f.style.display = 'none'; m.innerHTML = 'You\'re in. <a href="/dl/50-Best-AI-Prompts.pdf" download style="color:var(--accent-ink);font-weight:700;border-bottom:1px solid rgba(184,138,46,0.5)">Download your 50 prompts now &rarr;</a><br>I\'ll follow up by email with the cheat sheets and the first chapter.'; if (window.fbq) fbq('track','Lead',{content_name:'booksite-freekit'}); if (window.ttq) ttq.track('SubmitForm',{description:'booksite-freekit'}); }
+          if (r.success) { f.style.display = 'none'; m.innerHTML = 'You\'re in. <a href="/dl/50-Best-AI-Prompts.pdf" download style="color:var(--accent-ink);font-weight:700;border-bottom:1px solid rgba(184,138,46,0.5)">Download the prompt pack now &rarr;</a><br>I\'ll follow up by email with the cheat sheets and the first chapter.'; if (window.fbq) fbq('track','Lead',{content_name:'booksite-freekit'}); if (window.ttq) ttq.track('SubmitForm',{description:'booksite-freekit'}); }
           else { m.style.color = 'var(--warn)'; m.textContent = r.error || 'Something went wrong. Try again.'; }
         }).catch(function(){ m.style.display = 'block'; m.style.color = 'var(--warn)'; m.textContent = 'Network hiccup. Try again.'; });
     });
@@ -752,7 +777,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="section-inner">
     <div class="section-label">The Complete System</div>
     <h2 class="section-title" style="text-align: center;">The book, plus a free toolkit to make it stick</h2>
-    <p class="section-body center">The complete System gets you the full ebook and the entire kit below, delivered instantly by email. Prefer reading on paper? The paperback and hardcover live on Amazon, and every copy includes the appendices plus a QR code to the companion resource library on this site. My honest recommendation: get both. Run the System from your screen, and keep a paper copy so the ideas stick. Not ready for either? Start free with your email and get the starter kit: the 50 best prompts, the framework cheat sheets, and the first chapter.</p>
+    <p class="section-body center">The complete System gets you the full ebook and the entire kit below, delivered instantly by email. Prefer reading on paper? You can buy the paperback and hardcover on Amazon, and every copy includes the appendices plus a QR code to the companion resource library on this site. My honest recommendation: get both. Run the System from your screen, and keep a paper copy so the ideas stick. Not ready for either? Start free with your email and get the starter kit: fifty prompts for the jobs that eat your week, the cheat sheets for briefing a model properly, and the first chapter.</p>
 
     <div class="includes">
       <div class="inc-card">
@@ -899,7 +924,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <!-- ───────────── 14. P.S. SKIMMER RECAP ───────────── -->
 <section class="section" style="padding: 56px 24px;">
   <div class="ps-block">
-    <strong>P.S.</strong> <em>The Artificial Advantage</em> is the framework for professionals who tried AI and weren't impressed. Get the complete System here for the ebook and the full kit, or the paperback on Amazon. My advice: both, paper for reading, the System for doing. Not ready? Start free with your email (the 50 best prompts, cheat sheets, and the first chapter). If you've ever closed an AI tab thinking "this is overhyped," this is the book that changes that.
+    <strong>P.S.</strong> <em>The Artificial Advantage</em> is the framework for professionals who tried AI and weren't impressed. Get the complete System here for the ebook and the full kit, or the paperback on Amazon. My advice: both, paper for reading, the System for doing. Not ready? Start free with your email (fifty prompts for the jobs that eat your week, the briefing cheat sheets, and the first chapter). If you've ever closed an AI tab thinking "this is overhyped," this is the book that changes that.
     <br/>
     <a href="/system/" class="ps-cta">Get the System →</a> &nbsp;·&nbsp; <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="ps-cta buy" target="_blank" rel="noopener">Paperback on Amazon →</a>
   </div>
@@ -910,7 +935,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="exitpop-card">
     <button class="exitpop-x" aria-label="Close" onclick="closeExit()">×</button>
     <h2>Wait, grab the free toolkit first</h2>
-    <p>Before you go, join the email list and get <span class="gold">the starter kit free</span>: the 50 best prompts, the framework cheat sheets, and the first chapter. Enough to test the method this week.</p>
+    <p>Before you go, join the email list and get <span class="gold">the starter kit free</span>: fifty prompts for the jobs that eat your week, the cheat sheets for briefing a model properly, and the first chapter. Enough to test the method this week.</p>
     <div class="exitpop-covers">
       <img class="lead" src="/img/cover-hero.webp" alt="The Artificial Advantage" loading="lazy" width="600" height="960" />
       <img src="/img/magnets/50-prompts.webp" alt="50 Best AI Prompts" loading="lazy" width="440" height="704" />
