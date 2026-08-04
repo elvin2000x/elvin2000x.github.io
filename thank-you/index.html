@@ -24,6 +24,9 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-CLZ7N26J1Q');
+    /* Without this config the page carries no Google Ads tag at all, so even a
+       filled-in purchase label would have had nothing to report through. */
+    gtag('config', 'AW-637214471');
   </script>
   <script>
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -125,6 +128,16 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     // The head script captured this and stripped it from the URL before any
     // pixel loaded; location.search is deliberately empty by the time we run.
     var sid = window.__sid || "";
+    // Wire the order reference into the help mailto BEFORE any branching. The
+    // fallback copy promises "your order reference goes in automatically", but
+    // this used to run only in the success branch, so the one state where the
+    // buyer actually needs help never kept the promise.
+    if (sid) {
+      var hm0 = document.getElementById("helpmail");
+      if (hm0) hm0.setAttribute("href",
+        "mailto:elvin@elvinpeters.com?subject=" + encodeURIComponent("System download help - " + sid) +
+        "&body=" + encodeURIComponent("Order reference: " + sid));
+    }
     if (!sid) { show("fallback"); return; }
     // Fire purchase events ONCE per order, with the REAL total. This page is
     // linked from the buyer email for re-downloads, so without the guard every

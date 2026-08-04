@@ -73,7 +73,7 @@
     .topbar { display:flex; align-items:center; justify-content:space-between; padding: 8px 4px 0; margin-bottom: 28px; }
     .brand { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
     .brand a { color: var(--accent); text-decoration: none; }
-    .topbar .skip { font-size: 12px; color: var(--muted); text-decoration: none; }
+    .topbar .skip { font-size: 12px; color: var(--muted); text-decoration: none; padding: 12px 0 12px 14px; }
     .topbar .skip:hover { color: var(--accent); }
 
     /* progress */
@@ -125,7 +125,7 @@
     .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
 
     .nav-row { display: flex; align-items: center; justify-content: space-between; margin-top: 26px; }
-    .back { background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; font-family: 'Inter', sans-serif; padding: 8px; }
+    .back { background: none; border: none; color: var(--muted); font-size: 14px; cursor: pointer; font-family: 'Inter', sans-serif; padding: 8px; ;min-height:44px;display:inline-flex;align-items:center}
     .back:hover { color: var(--accent); }
     .back:disabled { opacity: 0; pointer-events: none; }
 
@@ -233,7 +233,7 @@ var QUIZ = {
       opts: [
         { t: "The output is generic and soulless", w:{skeptic:3}, f:1 },
         { t: "Results are inconsistent, hit or miss", w:{dabbler:3}, f:1 },
-        { t: "I know it can do more, I just can't unlock it", w:{operator:3}, f:2 },
+        { t: "I know it can do more, I just can't get it out", w:{operator:3}, f:2 },
         { t: "None really, I just want more leverage", w:{builder:3}, f:3 }
       ]
     },
@@ -270,13 +270,13 @@ var QUIZ = {
     skeptic: {
       name: "The Skeptic",
       tagline: "You tried AI, weren't impressed, and quietly suspect the hype is overblown.",
-      summary: "Here's the thing almost nobody told you: the people getting astonishing results are typing into the same box you are. They are not smarter or more technical. They learned to direct the tool instead of just asking it. That is a learnable skill, and it is the entire gap between your results and theirs.",
+      summary: "Almost nobody told you this: the people getting astonishing results are typing into the same box you are. They are not smarter or more technical. They learned to direct the tool instead of just asking it. That is a learnable skill, and it is the entire gap between your results and theirs.",
       tools: [
         { n:"Claude", d:"The most natural for thoughtful, professional writing. Start here to feel the difference." },
         { n:"ChatGPT", d:"The all-rounder. Great once you learn to give it real direction." },
         { n:"Perplexity", d:"Answers with sources. Rebuilds trust when you've been burned by made-up facts." }
       ],
-      angle: "You're exactly who this book was written for. <b>The Artificial Advantage</b> opens with the skeptic's problem and hands you the directing framework that turns generic output into work that actually impresses. If it doesn't change your results in 14 days, you get every cent back."
+      angle: "You're exactly who this was written for. <b>The Artificial Advantage System</b> opens with the skeptic's problem and hands you the directing framework that turns generic output into work that impresses. Buy the System here and if it doesn't change your results in 14 days, you get every cent back."
     },
     dabbler: {
       name: "The Dabbler",
@@ -284,22 +284,22 @@ var QUIZ = {
       summary: "You're getting flashes of value with no system underneath, so every session starts from scratch and the quality swings wildly. The fix isn't more tools or more practice. It's a repeatable structure for how you ask, so good results stop being luck and start being the default.",
       tools: [
         { n:"ChatGPT", d:"Your daily driver. Save your best prompts so wins repeat." },
-        { n:"Claude", d:"Reach for it on longer writing and nuanced tasks." },
+        { n:"Claude", d:"Reach for it on longer writing and judgment-heavy tasks." },
         { n:"NotebookLM", d:"Turn your own docs into a source you can question. Kills the inconsistency." }
       ],
-      angle: "<b>The Artificial Advantage</b> replaces scattered instinct with a system. The CLEAR framework and the prompt library mean you stop guessing and start getting the same high quality every time. That alone is worth far more than $37."
+      angle: "<b>The Artificial Advantage System</b> replaces scattered instinct with a system: the full book, the CLEAR framework and the prompt library, so you stop guessing and start getting the same high quality every time. That alone is worth far more than $37."
     },
     operator: {
       name: "The Operator",
       tagline: "You use AI regularly and get real value, but you know you're leaving leverage on the table.",
-      summary: "You're past the basics and into the frustrating middle: AI clearly can do more, you just can't consistently unlock it. The next level isn't harder prompts. It's constraint architecture and meta-prompting, the skills that separate good output from exceptional, and that make your results compound week over week.",
+      summary: "You're past the basics and into the frustrating middle: AI clearly can do more, you just can't get it out consistently. The next level isn't harder prompts. It's constraint architecture and meta-prompting, the skills that separate good output from exceptional, and that make your results compound week over week.",
       tools: [
         { n:"Claude", d:"Best-in-class for high-stakes writing and reasoning." },
         { n:"ChatGPT", d:"Pair it with custom instructions to match your standard automatically." },
         { n:"Perplexity", d:"For fast, cited research that feeds your real work." },
         { n:"Gemini", d:"Strong when your workflow lives in Google Workspace." }
       ],
-      angle: "You don't need convincing that AI works. You need the advanced layer. <b>The Artificial Advantage</b> teaches constraint architecture, meta-prompting and template thinking, the exact skills that take you from good to the person everyone asks how you move so fast."
+      angle: "You don't need convincing that AI works. You need the advanced layer. <b>The Artificial Advantage System</b> teaches constraint architecture, meta-prompting and template thinking, the exact skills that take you from good to the person everyone asks how you move so fast."
     },
     builder: {
       name: "The Power User",
@@ -311,7 +311,7 @@ var QUIZ = {
         { n:"NotebookLM", d:"Turn your knowledge base into an on-demand expert." },
         { n:"Gemini", d:"Workspace-native automation across docs, sheets and mail." }
       ],
-      angle: "You're past the basics, so the value here is the framework you can teach. <b>The Artificial Advantage</b> gives you one system simple enough to hand to a whole team, plus the template thinking that turns your best results into repeatable ones. It's the language to scale what you already do well."
+      angle: "You're past the basics, so the value here is the framework you can teach. <b>The Artificial Advantage System</b> gives you one framework simple enough to hand to a whole team, plus the template thinking that turns your best results into repeatable ones. It's the language to scale what you already do well."
     }
   }
 };
