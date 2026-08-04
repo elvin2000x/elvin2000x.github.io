@@ -121,7 +121,7 @@ border-radius:16px;padding:32px 28px;text-align:center;max-width:640px;margin:34
 <form id="f" novalidate>
 <div class="field"><input id="name" type="text" placeholder="First name (optional)" maxlength="80" autocomplete="given-name"></div>
 <div class="field"><input id="email" type="email" placeholder="Your best email" maxlength="120" required autocomplete="email"></div>
-<div class="hp" aria-hidden="true"><input type="text" id="website" tabindex="-1" autocomplete="off"></div>
+<div class="hp" aria-hidden="true"><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
 <button class="btn" type="submit" id="btn">Send me the vault</button>
 <div class="msg" id="msg"></div>
 <div class="fine">Instant access to all thirteen guides. We will also email you the link.</div>
@@ -230,7 +230,7 @@ border-radius:16px;padding:32px 28px;text-align:center;max-width:640px;margin:34
     var email=val('email'),name=val('name');
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){return fail('Please enter a valid email.');}
     btn.disabled=true;btn.textContent='Unlocking...';
-    var body=new URLSearchParams({name:name||'Vault lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:''}).toString();
+    var body=new URLSearchParams({name:name||'Vault lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:(document.getElementById('website')||{value:''}).value||''}).toString();
     fetch(LEAD_API,{method:'POST',mode:'cors',keepalive:true,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
       .then(function(){convert(email);reveal(name);})
       .catch(function(){convert(email);reveal(name);});  // always deliver the vault

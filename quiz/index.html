@@ -394,7 +394,7 @@ function startQuizEngine() {
         '<label for="qname">First name (optional)</label>' +
         '<input id="qname" type="text" autocomplete="given-name" placeholder="Alex" />' +
         '<label for="qemail">Email</label>' +
-        '<input id="qemail" type="email" autocomplete="email" placeholder="you@work.com" />' +
+        '<input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" /><input id="qemail" type="email" autocomplete="email" placeholder="you@work.com" />' +
         '<button class="btn full" id="seeBtn">Show me my AI style →</button>' +
         '<div class="fineprint">Instant result on this page. We also send the free starter kit by email.</div>' +
         '<div class="nav-row"><button class="back" id="backBtn2">← Back</button><span></span></div>' +
@@ -433,7 +433,8 @@ function startQuizEngine() {
       name: lead.name || "Quiz lead",
       email: lead.email,
       message: "[AI STYLE: "+QUIZ.archetypes[res.key].name+" · fluency "+res.score+"/100]  "+summary,
-      source: "ai-style-quiz" + (location.search || "")
+      source: "ai-style-quiz" + (location.search || ""),
+      website: (document.querySelector('input[name=website]')||{value:''}).value || ''
     };
     // Fire-and-forget. Funnel never blocks on this.
     try {
