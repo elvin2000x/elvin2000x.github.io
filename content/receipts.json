@@ -1,0 +1,60 @@
+{
+  "_comment": "The receipts ledger. Every row must trace to Brain/deliverables/VERIFIED-NUMBERS.md. If a number is not in that file it does not go here. Add a row per system built; the page renders itself from this. Editable in Site Studio.",
+  "intro": {
+    "label": "Receipts",
+    "headline": "One review, no case studies, and the most checkable numbers in this category.",
+    "body": "I have one Amazon review and no client case studies. Rather than write vague quotes to fill the gap, here is what I can actually prove: what each system cost to build and run, logged per call at the time of the call, and what it produced. Including the parts that did not work, which is the half nobody publishes."
+  },
+  "spend": [
+    {
+      "figure": "$32.67",
+      "what": "293,571 words across 210 pieces, in twenty-five days",
+      "detail": "Eleven cents per thousand words. Essays, short stories and columns, drafted, voice-scrubbed and machine-rated before a human ever saw them.",
+      "source": "per-run generation ledger, cost and word fields summed over the runs array"
+    },
+    {
+      "figure": "$0.32",
+      "what": "446 short posts generated",
+      "detail": "0.073 cents each. Written per call at call time with real token counts, which makes it a receipt file rather than an estimate.",
+      "source": "per-call token log, 823 calls between 2026-05-28 and 2026-07-09"
+    },
+    {
+      "figure": "$0.00",
+      "what": "7,729 business listings across 15 live directories",
+      "detail": "445 scraper runs and 13.79 hours of compute. 35,564 raw records collected, 15,295 passed the quality bar. No language model anywhere in that pipeline, which is why it cost nothing.",
+      "source": "the 15 listings files, the scraper logs, and 102 run summaries"
+    },
+    {
+      "figure": "$0.00",
+      "what": "3,384 static SEO pages built and published",
+      "detail": "Plain string interpolation, no API library anywhere in it. The honest caveat, printed here because it belongs next to the number: 600 of those pages come from 20 unique bodies. Real surface area, not 600 distinct pieces of writing.",
+      "source": "the two page-generation engines and their output directories"
+    }
+  ],
+  "failures": [
+    {
+      "count": "100%",
+      "what": "Of the first 200 pieces, every title began with the word “The”.",
+      "detail": "Not sampled. Counted. Read one at a time they were fine, which is exactly why I did not notice for a month."
+    },
+    {
+      "count": "21 of 75",
+      "what": "One character name, across the short-story set.",
+      "detail": "Asked for a name with no further instruction, the model returned something plausible, and plausible has a shape. A death appeared in 69% of those stories, a mother in 75%, grief in 52%."
+    },
+    {
+      "count": "0.0",
+      "what": "Median engagement across 113 published posts.",
+      "detail": "The best single post got two interactions. By then the writing had genuinely improved, which is the uncomfortable part: quality was never the bottleneck, distribution was."
+    },
+    {
+      "count": "~50%",
+      "what": "Of AI-generated ad images shipped with garbled text.",
+      "detail": "Measured on my own output. It is why the current pipeline renders text in CSS and screenshots it instead of asking a model to draw letters."
+    }
+  ],
+  "gap": {
+    "headline": "What I do not have",
+    "body": "No client testimonials. No case studies. No revenue screenshots. The AI Workspace Setup launched this month and the first three clients are discounted specifically to buy those, with permission agreed before the work starts rather than asked for afterwards. When they exist they will appear on this page with the before, the after, and the counted result. Until then this is what I have, and everything on the projects page is clickable."
+  }
+}
