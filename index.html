@@ -137,6 +137,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .feature p{color:var(--ink-2);font-size:var(--fs-body);line-height:1.65;margin:16px 0 0;max-width:48ch}
 .feature .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
 .feature .onamz{font-size:var(--fs-sm);color:var(--muted)}
+/* Amazon's official badge, used in place of the words "on Amazon". The kit ships
+   a reversed (white) version for dark backgrounds; usage rules are in
+   img/amazon/Available-at-Amazon-Guidelines.pdf. */
+.azbadge{display:inline-block;line-height:0}
+.azbadge img{width:168px;height:auto;display:block}
+.azbadge:hover{opacity:.85}
+.heroviz .azbadge{position:relative;z-index:2}
 @media(max-width:640px){.feature{grid-template-columns:1fr;padding:26px;gap:24px}.feature img{max-width:200px;margin:0 auto}}
 .bucket-label{font-size:var(--fs-sm);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin:34px 0 14px}
 .bucket-label:first-of-type{margin-top:0}
@@ -225,7 +232,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <p class="lede">You do not need another AI demo. You need AI doing real work: hours saved, ad spend that pays for itself, and follow-up that runs while you sleep. I find where AI actually moves the needle in your business, build it, and train your team to run it. One operator, accountable end to end.</p>
         <div class="actions">
           <a class="btn primary" href="https://meet.elvinpeters.com">Book a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a class="btn ghost" href="/book.html">Get the book</a>
+          <a class="btn ghost" href="https://www.amazon.com/dp/B0H4X2S2JD">Buy the book</a>
         </div>
       </div>
       <!-- /ep:hero-text -->
@@ -233,7 +240,9 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <div class="bookwrap">
           <img class="bcover" src="/img/cover-hero.webp" alt="The Artificial Advantage, the book by Elvin M. Peters" width="600" height="960">
         </div>
-        <a class="vchip vc1" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">★ Live on Amazon</a>
+        <a class="azbadge" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy The Artificial Advantage on Amazon">
+          <img src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
+        </a>
       </div>
     </div>
   </header>
@@ -307,11 +316,14 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <span class="eyebrow">The book</span>
         <h2>The Artificial Advantage</h2>
         <p class="tag2">Stop prompting. Start directing.</p>
-        <p>The practical playbook for professionals who want AI to do real work. The same methods I install for clients, written down. Live on Amazon in Kindle, paperback, and hardcover.</p>
+        <p>The practical playbook for professionals who want AI to do real work: how to brief a model the way you would brief a sharp new hire, so you stop getting generic answers and start getting work you can actually use. The same methods I install for clients, written down. Kindle, paperback and hardcover.</p>
         <div class="actions">
-          <a class="btn primary" href="/book.html">Get the book</a>
-          <span class="onamz">Available on Amazon</span>
+          <a class="btn primary" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy it now on Amazon</a>
+          <a class="azbadge" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy The Artificial Advantage on Amazon">
+            <img src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
+          </a>
         </div>
+        <p class="onamz" style="margin-top:14px">Want the ebook plus the whole working kit instead? <a href="/system/" style="color:var(--gold-2);font-weight:600">The Artificial Advantage System &rarr;</a></p>
       </div>
     </div>
 
@@ -337,7 +349,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
       <a class="rung rung--wide" href="/free/">
         <span class="rl">Start free</span>
         <b>Fourteen free guides</b>
-        <span class="rd">Ten field guides, the 50-prompt pack, a full chapter of the book, and a 480-resource vault. One email, yours to keep.</span>
+        <span class="rd">Fifty prompts for the jobs that eat your week, ten field guides on the things people get wrong with AI, a full chapter of the book, and a 480-resource vault. One email, yours to keep.</span>
         <span class="rgo">Browse the free library &rarr;</span>
       </a>
     </div>
@@ -345,7 +357,9 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
 
   <!-- WHY ME: proof + method -->
   <section class="section section--cont" id="about"><div class="container">
-    <img src="/img/headshot.jpg" alt="Elvin M. Peters, Toronto AI consultant" width="118" height="118" loading="lazy" style="border-radius:50%;object-fit:cover;border:2px solid var(--gold);box-shadow:var(--shadow);display:block;margin:0 auto 22px">
+    <!-- Left-aligned with the copy beneath it. Centring the portrait over a
+         left-aligned heading read as a mistake (Justine, 2026-08-04). -->
+    <img src="/img/headshot.jpg" alt="Elvin M. Peters, Toronto AI consultant" width="118" height="118" loading="lazy" style="border-radius:50%;object-fit:cover;border:2px solid var(--gold);box-shadow:var(--shadow);display:block;margin:0 0 22px">
     <div class="section-head">
       <div><span class="eyebrow">Why me</span><h2>A marketer who learned to build.</h2></div>
     </div>
@@ -412,9 +426,9 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   <section class="section section--cont" id="connect"><div class="container">
     <div class="connect">
       <div>
-        <span class="eyebrow">Stay in touch</span>
-        <h2>Get the next essay.</h2>
-        <p>Practical notes on putting AI to work in a real business. Join free and I'll send you the starter kit today: the 50 best prompts, the framework cheat sheets, and the first chapter. Then one useful letter at a time. No spam.</p>
+        <span class="eyebrow">Free starter kit</span>
+        <h2>Get the kit that fixes generic AI answers.</h2>
+        <p>Fifty prompts written for the jobs that actually eat your week: the client email you keep rewriting, the report nobody reads, the meeting notes, the proposal, the awkward follow-up. Plus the one-page cheat sheets for briefing a model properly, and the first chapter of the book. Free, yours to keep, and it lands in your inbox within a minute.</p>
         <div class="nlwrap">
           <form id="nlform" style="display:flex;gap:10px;flex-wrap:wrap;max-width:480px">
             <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
@@ -472,14 +486,24 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
     function acc(){return getComputedStyle(document.documentElement).getPropertyValue('--gold').trim()||'#c9a250';}
     function ln(){return getComputedStyle(document.documentElement).getPropertyValue('--line').trim()||'#213249';}
     function fit(){var r=cv.getBoundingClientRect();W=cv.width=r.width*DPR;H=cv.height=r.height*DPR;}
-    function seed(){pts=[];var n=Math.max(24,Math.min(52,Math.round((W*H)/(48000*DPR))));for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.16*DPR,vy:(Math.random()-.5)*.16*DPR});}
+    // Seven of the points are stars: gold, larger, and slowly twinkling. The rest
+    // stay as faint network nodes. Seven is deliberate (Justine, 2026-08-04) — the
+    // old every-seventh-point rule left only three or four readable on the navy.
+    var STARS=7;
+    function seed(){pts=[];var n=Math.max(24,Math.min(52,Math.round((W*H)/(48000*DPR))));for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.16*DPR,vy:(Math.random()-.5)*.16*DPR,star:i<STARS,ph:Math.random()*6.28});}
     fit();seed();addEventListener('resize',function(){fit();seed();});
     function draw(){ctx.clearRect(0,0,W,H);var L=ln(),A=acc();
       for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
         for(var j=i+1;j<pts.length;j++){var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.hypot(dx,dy);
           if(d<118*DPR){ctx.globalAlpha=(1-d/(118*DPR))*0.5;ctx.strokeStyle=L;ctx.lineWidth=DPR;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}}
       ctx.globalAlpha=1;
-      for(var k=0;k<pts.length;k++){ctx.fillStyle=k%7===0?A:L;ctx.globalAlpha=k%7===0?0.9:0.55;ctx.beginPath();ctx.arc(pts[k].x,pts[k].y,k%7===0?2.2*DPR:1.5*DPR,0,7);ctx.fill();}
+      var t=Date.now()/1000;
+      for(var k=0;k<pts.length;k++){var s=pts[k].star;
+        if(s){var tw=0.78+0.22*Math.sin(t*0.9+pts[k].ph);   // slow twinkle, never fully dim
+          ctx.fillStyle=A;ctx.globalAlpha=tw;ctx.shadowColor=A;ctx.shadowBlur=9*DPR;
+          ctx.beginPath();ctx.arc(pts[k].x,pts[k].y,3.1*DPR,0,7);ctx.fill();ctx.shadowBlur=0;}
+        else{ctx.fillStyle=L;ctx.globalAlpha=0.55;
+          ctx.beginPath();ctx.arc(pts[k].x,pts[k].y,1.5*DPR,0,7);ctx.fill();}}
       ctx.globalAlpha=1;requestAnimationFrame(draw);}
     draw();
   }
