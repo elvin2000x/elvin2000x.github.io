@@ -12,22 +12,31 @@
    =================================================================== */
 
 :root{
-  /* ---------- L1: TYPE — 5 fixed + 4 fluid steps. 12px floor. ---------- */
-  --fs-label: 12px;
+  /* ---------- L1: TYPE — 3 fixed + 6 fluid steps. 12px floor. ----------
+     The leads were fixed, which is what broke the phone: at 375px the homepage
+     ran headline 34 / lede 22 / body 16, three sizes inside one octave, so
+     nothing shouted and nothing whispered and a 53-word lede pushed the buttons
+     off screen. Both leads are fluid now and the top of the range is wider, so
+     the ratio holds at 2.1x on a phone and 2.8x on a desktop. */
+  --fs-label: 12px;                        /* FLOOR — verify.js enforces this */
   --fs-sm: 14px;
   --fs-body: 16px;
-  --fs-lead: 18px;
-  --fs-lead-lg: 22px;
-  --fs-h3: clamp(20px, 2.2vw, 24px);
-  --fs-h2: clamp(28px, 3.4vw, 40px);
-  --fs-h1: clamp(34px, 4.6vw, 52px);
-  --fs-display: clamp(40px, 5.6vw, 64px);
+  --fs-lead: clamp(17px, 1.25vw, 19px);
+  --fs-lead-lg: clamp(18px, 1.9vw, 24px);
+  --fs-h3: clamp(19px, 1.9vw, 23px);
+  --fs-h2: clamp(30px, 4.2vw, 48px);
+  --fs-h1: clamp(38px, 6.0vw, 68px);
+  --fs-display: clamp(44px, 8.2vw, 84px);
+  /* One size for every big number on the site: prices, counters, figures.
+     They were 30, 44, 52, 56 and 3.1rem in five different page style blocks. */
+  --fs-num: clamp(40px, 6vw, 76px);
 
-  --lh-tight: 1.12;
+  --lh-tight: 1.06;                        /* 68px needs tighter than 1.12 */
   --lh-snug: 1.2;
   --lh-body: 1.6;
   --lh-prose: 1.75;
-  --track-label: .14em;
+  --track-label: .16em;
+  --track-display: -.022em;
 
   /* ---------- L1: SPACE — 4px base ---------- */
   --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px;
