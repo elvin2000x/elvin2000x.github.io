@@ -9,6 +9,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-CLZ7N26J1Q');
+    gtag('config', 'AW-637214471');
   </script>
   <!-- Meta Pixel Code -->
   <script>
@@ -470,11 +471,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     /* ── P.S. ── */
     .ps-block { max-width: var(--w-text); margin: 0 auto; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 28px 32px; font-size: 16px; line-height: 1.8; color: var(--text); }
     .ps-block strong { color: var(--white); }
-    .ps-block .ps-cta { display: inline-block; margin-top: 16px; color:var(--accent-ink); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--accent); }
+    .ps-block .ps-cta { display: inline-block; margin-top: 16px; padding: 12px 6px; color:var(--accent-ink); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--accent); }
 
     /* ── FOOTER ── */
     footer { border-top: 1px solid var(--border); padding: 24px; text-align: center; font-size: 13px; color: var(--muted); }
-    footer a { color: var(--muted); text-decoration: none; }
+    footer a { color: var(--muted); text-decoration: none; padding: 12px 4px; margin: -12px -4px; }
     footer a:hover { color:var(--accent-ink); }
 
     /* ── RESPONSIVE ── */
@@ -570,7 +571,17 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <div class="hero-copy">
       <h1 id="hl">You tried AI.<br/><span>You weren't impressed.</span></h1>
       <p class="hero-sub" id="sub">The people getting astonishing results are typing into the same box you are. They are just directing it, and that is a learnable skill with almost nothing to do with being technical. This is the book that teaches it, written for professionals and not programmers.</p>
-
+      <!-- #hook is the third line of every ?aud= / ?v= ad segment. The DTR
+           script has been writing to it since the ad build; the element was
+           lost in a hero rework, so paid visitors landed on partial matches. -->
+      <p class="hero-sub" id="hook" style="font-weight:600;color:var(--ink)"></p>
+      <!-- The hero sat with ZERO calls to action: the only clickable in screen
+           one was the Amazon badge, on the page whose job is the $37 sale. -->
+      <div class="cta-band" style="margin-top:22px">
+        <a href="/system/" class="btn-primary">Get the System: ebook + full kit →</a>
+        <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-secondary" target="_blank" rel="noopener">Buy the paperback or hardcover</a>
+      </div>
+      <p class="hero-free" style="margin-top:14px"><a href="#newsletter">Or read the first chapter free →</a></p>
     </div>
     <div class="book-wrap">
       <img src="/img/cover-hero.webp" alt="The Artificial Advantage by Elvin M. Peters" class="book-img" width="600" height="960" />
@@ -611,7 +622,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <tr><td>A copy on your shelf</td><td><span class="win">Yes, and it is the better way to read cover to cover</span></td><td><span class="no">No paper copy</span></td></tr>
       <tr><td>Guarantee</td><td><span class="no">Amazon’s return policy</span></td><td><span class="win">14 days, money back, keep the files</span></td></tr>
       <tr><td>Your purchase helps the book</td><td><span class="win">Yes: every Amazon copy and review moves it up the rankings</span></td><td>It supports me directly</td></tr>
-      <tr><td>Price</td><td>The list price of the format you pick</td><td>$37 for the ebook and everything above</td></tr>
+      <tr><td>Price</td><td>$9.99 Kindle · $24.99 paperback</td><td>$37 for the ebook and everything above</td></tr>
     </tbody>
   </table></div>
   <p class="compare-note">My honest advice is both: paper for reading, the System for doing. Start with either.</p>
@@ -625,7 +636,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <span class="oi-eyebrow">Free starter kit</span>
     <h2>Try the method before you spend anything</h2>
     <p>Fifty prompts for the jobs that actually eat your week, the cheat sheets for briefing a model properly, and the first chapter of the book. It lands in your inbox in about a minute and it is yours to keep either way.</p>
-    <form class="oi-form" data-source="book-optin-top" novalidate>
+    <form class="oi-form" data-source="book-optin-top" data-magnet="/dl/50-Best-AI-Prompts.pdf" data-magnet-label="Download the prompt pack now →" novalidate>
       <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
       <label class="visually-hidden" for="oi-top">Your email</label>
       <input id="oi-top" type="email" required autocomplete="email" placeholder="you@work.com">
@@ -913,10 +924,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         <span>+ 5 more · the 10-guide library rides along free</span>
       </div>
       <div class="cta-band" style="margin-top: 28px;">
-        <a href="/system/" class="btn-primary">Get the System — $37 →</a>
+        <a href="/system/" class="btn-primary">Get the System, $37 →</a>
         <a href="#newsletter" class="btn-secondary">Start free with your email →</a>
         <div class="trust-row">
-          <span class="trust-secure">Instant delivery by email · 14-day money-back guarantee · paperback &amp; hardcover on <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600">Amazon →</a></span>
+          <span class="trust-secure">Instant delivery by email · 14-day money-back guarantee</span><br>
+          <span class="trust-secure">Prefer paper? The paperback and hardcover live on <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600">Amazon →</a> (Amazon’s own return policy applies there)</span>
         </div>
       </div>
     </div>
@@ -1008,7 +1020,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <span class="oi-eyebrow">Free starter kit</span>
     <h2>Try the method before you spend anything</h2>
     <p>Fifty prompts for the jobs that actually eat your week, the cheat sheets for briefing a model properly, and the first chapter of the book. It lands in your inbox in about a minute and it is yours to keep either way.</p>
-    <form class="oi-form" data-source="book-optin-bottom" novalidate>
+    <form class="oi-form" data-source="book-optin-bottom" data-magnet="/dl/50-Best-AI-Prompts.pdf" data-magnet-label="Download the prompt pack now →" novalidate>
       <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
       <label class="visually-hidden" for="oi-bottom">Your email</label>
       <input id="oi-bottom" type="email" required autocomplete="email" placeholder="you@work.com">
@@ -1048,7 +1060,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     </div>
     <div class="exitpop-btns">
       <a class="exitpop-yes" href="#newsletter" onclick="closeExit()">Yes, send me the free toolkit →</a>
-      <a class="exitpop-no" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" onclick="closeExit()">Just take me to Amazon</a>
+      <a class="exitpop-no" href="#newsletter" onclick="closeExit()">No thanks, just the free chapter</a>
     </div>
   </div>
 </div>

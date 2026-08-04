@@ -49,12 +49,13 @@ article h1{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3
 .endcta .card{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:16px;padding:28px;text-align:center}
 .endcta h3{font-family:var(--serif);font-weight:400;font-size:1.6rem;margin:0}
 .endcta p{color:var(--ink-2);margin:10px 0 18px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:14px;border:1px solid transparent;cursor:pointer;font-family:var(--sans)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:14px;border:1px solid transparent;cursor:pointer;font-family:var(--sans);background:transparent}
 .btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304}
 .btn.ghost{border-color:var(--line);color:var(--ink);min-height:44px}
 .backlink{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-size:14px;margin-bottom:8px}
 footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px;margin-top:56px}
 footer .in{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{padding:10px 4px;margin:-10px -4px}
 footer a:hover{color:var(--gold-2)}
 :focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
 @media(max-width:640px){.nav .lk a:not(.cta){display:none}}
@@ -412,6 +413,8 @@ function renderBkAuthor() {
    so the lead DB shows which page and which position actually converts. */
 const OPTINS = {
   'system': {
+    magnet: '/dl/50-Best-AI-Prompts.pdf',
+    magnet_label: 'Download the prompt pack now →',
     eyebrow: 'Free starter kit',
     headline: 'Try the method before you spend anything',
     body: 'The prompts for the jobs that keep sliding to tomorrow, the cheat sheets for briefing a model properly, and the first chapter of the book. It lands in about a minute and it is yours either way.',
@@ -428,10 +431,12 @@ const OPTINS = {
     success: 'On its way. Check your inbox in about a minute, and look in promotions if it is not there.',
   },
   'content-machine': {
-    eyebrow: 'Free, and the honest part',
-    headline: 'The failure record, before you buy anything',
-    body: 'The audit of my first 200 pieces: every title that started with "The", the character name that turned up in 21 of 75 stories, and the tweets that averaged zero. It is the part of the guide nobody else publishes.',
-    button: 'Send me the audit',
+    magnet: '/dl/The-Content-Machine-Quality-Gate.pdf',
+    magnet_label: 'Download the gate now →',
+    eyebrow: 'Free, from inside the guide',
+    headline: 'The quality gate, before you buy anything',
+    body: 'The banned-phrase list I run every piece against, and the scoring rubric a draft has to clear before I ever see it. One printable page from inside the guide. Run it against anything you wrote this week.',
+    button: 'Send me the gate',
     note: 'One email, one PDF. Unsubscribe in one click.',
     success: 'Sent. Check your inbox in about a minute, and look in promotions if it is not there.',
   },
@@ -440,7 +445,8 @@ const OPTINS = {
 /* One opt-in block, rendered wherever it is needed. Each instance carries its
    own source tag so the lead DB shows which position actually converts. */
 function renderOptin(slot, page) {
-  const o = page ? { ...BK.optin, ...OPTINS[page] } : BK.optin;
+  const o = page ? { ...BK.optin, ...OPTINS[page] }
+                 : { ...BK.optin, magnet: '/dl/50-Best-AI-Prompts.pdf', magnet_label: 'Download the prompt pack now →' };
   const tag = page ? `${page}-optin-${slot}` : `book-optin-${slot}`;
   const id = 'oi-' + (page ? page + '-' : '') + slot;
   return [
@@ -448,7 +454,7 @@ function renderOptin(slot, page) {
     `    <span class="oi-eyebrow">${o.eyebrow}</span>`,
     `    <h2>${o.headline}</h2>`,
     `    <p>${o.body}</p>`,
-    `    <form class="oi-form" data-source="${tag}" novalidate>`,
+    `    <form class="oi-form" data-source="${tag}"${o.magnet ? ` data-magnet="${o.magnet}" data-magnet-label="${o.magnet_label}"` : ''} novalidate>`,
     '      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">',
     `      <label class="visually-hidden" for="${id}">Your email</label>`,
     `      <input id="${id}" type="email" required autocomplete="email" placeholder="${o.placeholder}">`,
@@ -499,7 +505,7 @@ const COMPARE_ROWS = [
    '<span class="win">Yes: every Amazon copy and review moves it up the rankings</span>',
    'It supports me directly'],
   ['Price',
-   'The list price of the format you pick',
+   '$9.99 Kindle · $24.99 paperback',
    '$37 for the ebook and everything above'],
 ];
 
