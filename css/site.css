@@ -425,7 +425,7 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 .optin > p{ font-size:var(--fs-sm); color:var(--ink-2); margin:0 0 var(--sp-6); line-height:var(--lh-prose) }
 .optin form{ display:flex; gap:var(--sp-3); flex-wrap:wrap }
 .optin input[type=email]{
-  flex:1; min-width:220px; padding:14px 16px; border-radius:var(--r-sm);
+  flex:1; min-width:min(220px, 100%); padding:14px 16px; border-radius:var(--r-sm);
   border:1px solid var(--line); background:var(--bg); color:var(--ink);
   font-size:16px;               /* below 16 and iOS zooms the page on focus */
   font-family:inherit; min-height:44px;

@@ -194,6 +194,20 @@
         if (note) note.style.display = 'none';
         msg.style.color = '';
         msg.textContent = msg.dataset.success;
+        /* Same email, better moment: when the form names its asset, hand the
+           file over right now instead of only saying "check your inbox". The
+           book page's newsletter form already worked this way; the shared
+           component did not, so the better experience was the unstandardised
+           one. */
+        if (f.dataset.magnet) {
+          msg.textContent = msg.textContent + ' ';
+          var dl = document.createElement('a');
+          dl.href = f.dataset.magnet;
+          dl.setAttribute('download', '');
+          dl.textContent = f.dataset.magnetLabel || 'Download it now →';
+          dl.style.cssText = 'color:var(--accent-ink);font-weight:700;border-bottom:1px solid var(--accent)';
+          msg.appendChild(dl);
+        }
         msg.style.display = 'block';
         try { fbq('track', 'Lead', { content_name: f.dataset.source }); } catch (e) {}
         try { gtag('event', 'generate_lead', { method: f.dataset.source }); } catch (e) {}
