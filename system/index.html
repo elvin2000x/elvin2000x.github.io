@@ -50,8 +50,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   .wrap{max-width:960px;margin:0 auto;padding:0 22px}
   h1,h2,h3{color:var(--ink);font-family:'EB Garamond',Georgia,serif;line-height:1.15}
   /* nav */
-  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between}
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);height:58px;display:flex;align-items:center;justify-content:center}
+  /* width:100% matters: as a flex item of <nav> the wrap shrink-wraps to its
+     content, which left space-between nothing to distribute — the page title
+     sat pressed against the buy button. */
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%}
   .logo{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
   .nav-cta{background:var(--gold2);color:#0a1828;font-size:13px;font-weight:700;padding:9px 18px;border-radius:5px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
   /* buttons */
@@ -533,6 +536,27 @@ but efficient.</pre>
   <a href="#order" class="btn big buy">Get the System, $37 →</a>
   <p class="cta-sub">Instant access · 14-day money-back guarantee · yours to keep</p>
 </div></section>
+
+<!-- Not everyone buys on the first visit. Before this, the only capture on the
+     page was an exit-intent popup bound to mouseout, which never fires on a
+     phone, so mobile readers who were not ready simply left. -->
+<section class="soft optinband">
+  <!-- ep:sys-optin -->
+  <div class="optin">
+    <span class="oi-eyebrow">Free starter kit</span>
+    <h2>Try the method before you spend anything</h2>
+    <p>The prompts for the jobs that keep sliding to tomorrow, the cheat sheets for briefing a model properly, and the first chapter of the book. It lands in about a minute and it is yours either way.</p>
+    <form class="oi-form" data-source="system-optin-end" novalidate>
+      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+      <label class="visually-hidden" for="oi-system-end">Your email</label>
+      <input id="oi-system-end" type="email" required autocomplete="email" placeholder="you@work.com">
+      <button type="submit">Send me the kit</button>
+    </form>
+    <p class="oi-note">One email, four files. Unsubscribe in one click, and it never removes your access to anything.</p>
+    <p class="oi-msg" data-success="Done. Check your inbox in about a minute, and look in promotions if it is not there."></p>
+  </div>
+  <!-- /ep:sys-optin -->
+</section>
 
 <footer>© 2026 Elvin M. Peters · PLT Publishing (my imprint) · <a href="https://elvinpeters.com">elvinpeters.com</a> · <a href="mailto:elvin@elvinpeters.com">contact</a> · <a href="/privacy.html">Privacy</a> · <a href="/tos.html">Terms</a></footer>
 

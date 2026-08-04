@@ -1147,45 +1147,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   })();
 </script>
 
-<script>
-/* Every .oi-form on the page, handled once. Each carries its own source tag so
-   the lead DB shows which position actually converts. Same owned endpoint and
-   honeypot as every other capture on the site. */
-(function(){
-  document.querySelectorAll('.oi-form').forEach(function(f){
-    f.addEventListener('submit', function(e){
-      e.preventDefault();
-      var box = f.closest('.optin');
-      var email = f.querySelector('input[type=email]').value.trim();
-      var msg = box.querySelector('.oi-msg');
-      var btn = f.querySelector('button');
-      if (!email) return;
-      btn.disabled = true; btn.style.opacity = '.7';
-      fetch('https://ultimateaidirectory.com/api/lead', {
-        method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({ email: email, source: f.dataset.source, website: f.website.value })
-      }).then(function(r){ return r.json(); }).then(function(r){
-        if (r.success) {
-          f.style.display = 'none';
-          box.querySelector('.oi-note').style.display = 'none';
-          msg.textContent = msg.dataset.success; msg.style.display = 'block';
-          try{ fbq('track','Lead',{content_name:f.dataset.source}); }catch(e){}
-          try{ gtag('event','generate_lead',{method:f.dataset.source}); }catch(e){}
-        } else {
-          btn.disabled = false; btn.style.opacity = '1';
-          msg.style.color = 'var(--red)';
-          msg.textContent = r.error || 'Something went wrong. Try again in a moment.';
-          msg.style.display = 'block';
-        }
-      }).catch(function(){
-        btn.disabled = false; btn.style.opacity = '1';
-        msg.style.color = 'var(--red)';
-        msg.textContent = 'Network hiccup. Try again.';
-        msg.style.display = 'block';
-      });
-    });
-  });
-})();
-</script>
+<!-- The .oi-form handler now lives in js/site.js, so every page that has an
+     opt-in gets the same one. It used to be inline here, which is exactly why
+     the three money pages had no working capture. -->
 </body>
 </html>
