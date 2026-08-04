@@ -225,6 +225,46 @@ for (const rel of PAGES) {
   }
 })();
 
+// GOLD AS TEXT.
+// --accent-hi is a fill (2.68:1 on the light background). The only legal gold
+// for text is --accent-ink. Six pages failed WCAG this way in the level 5
+// diagnostic; this stops the seventh.
+for (const rel of PAGES) {
+  const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  if (/color:\s*var\(--accent-hi\)/.test(html))
+    fail(rel, 'gold fill used as a text colour (use --accent-ink; --accent-hi is 2.68:1)');
+}
+
+// LEAD CAPTURE CONTRACT.
+// Every owned email form carries the honeypot and its own source tag, and no
+// tag is reused: the lead DB's per-position conversion data is only real if
+// each form reports as itself.
+(() => {
+  const seen = new Map(); // source tag -> first file
+  for (const rel of PAGES) {
+    const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    if (!html.includes('/api/lead')) continue;
+    if (!/name=["']website["']/.test(html))
+      fail(rel, 'posts to /api/lead without the honeypot field (name="website")');
+    const tags = [
+      ...[...html.matchAll(/data-source=["']([^"']+)["']/g)].map(m => m[1]),
+      // the closing quote must end the value ("," or "}"): a literal followed
+      // by "+" is a computed prefix, not a complete tag
+      ...[...html.matchAll(/source:\s*['"]([^'"]+)['"]\s*[,}\)]/g)].map(m => m[1]),
+    ].filter(t => !t.includes('${') && !t.includes("' +"));
+    // A source computed at runtime (the magnet pages build theirs from the
+    // page title + UTM params) satisfies the contract without a literal.
+    const computed = /source:\s*(source\(|[A-Za-z_$][\w$]*\s*\+|['"][^'"]*['"]\s*\+)/.test(html);
+    if (!tags.length && !computed)
+      fail(rel, 'posts to /api/lead with no source tag');
+    for (const t of new Set(tags)) {
+      if (seen.has(t) && seen.get(t) !== rel)
+        fail(rel, `lead source tag "${t}" is already used by ${seen.get(t)}`);
+      if (!seen.has(t)) seen.set(t, rel);
+    }
+  }
+})();
+
 // KEY PAGES exist and are non-trivial.
 for (const key of ['index.html', 'book.html', 'services/index.html', 'contact/index.html',
   'links/index.html', 'projects/index.html', 'system/index.html', 'writing/index.html']) {

@@ -5,9 +5,9 @@
    ========================================================================== */
 
 :root{
-  --bg:#0a1524; --bg-2:#060d18; --panel:#101d30; --panel-2:#0c1626;
-  --line:#213249; --line-soft:#1a2942;
-  --ink:#e9eff7; --ink-2:#b7c6d9; --muted:#7f96b1;
+  --bg:#0a1524; --bg-2:#060d18; --panel:#1b2c45; --panel-2:#131f33;
+  --line:#2b405c; --line-soft:#223351;
+  --ink:#e9eff7; --ink-2:#b7c6d9; --muted:#8ba2bd;
   --gold:#c9a250; --gold-2:#e0bd6b; --cyan:#4fb3f0;
   --good:#4ec98a; --warn:#e2a33d; --bad:#e3706b;
   --glow: rgba(201,162,80,.16);
@@ -20,9 +20,9 @@
 }
 @media (prefers-color-scheme: light){
   :root{
-    --bg:#e9edf2; --bg-2:#e2e7ee; --panel:#f6f8fb; --panel-2:#eef2f7;
-    --line:#cdd6e2; --line-soft:#dbe2ec;
-    --ink:#0e1a2b; --ink-2:#3d4d63; --muted:#6a7c93;
+    --bg:#e6ebf1; --bg-2:#dde4ec; --panel:#ffffff; --panel-2:#f3f6fa;
+    --line:#c3cedd; --line-soft:#d3dce8;
+    --ink:#0e1a2b; --ink-2:#3d4d63; --muted:#4f6076;
     --gold:#9c761f; --gold-2:#7a5a12; --cyan:#1c6ea8;
     --good:#1d8c5b; --warn:#a2701a; --bad:#b8433d;
     --glow: rgba(156,118,31,.14);
@@ -31,9 +31,9 @@
   }
 }
 :root[data-theme="light"]{
-  --bg:#e9edf2; --bg-2:#e2e7ee; --panel:#f6f8fb; --panel-2:#eef2f7;
-  --line:#cdd6e2; --line-soft:#dbe2ec;
-  --ink:#0e1a2b; --ink-2:#3d4d63; --muted:#6a7c93;
+  --bg:#e6ebf1; --bg-2:#dde4ec; --panel:#ffffff; --panel-2:#f3f6fa;
+  --line:#c3cedd; --line-soft:#d3dce8;
+  --ink:#0e1a2b; --ink-2:#3d4d63; --muted:#4f6076;
   --gold:#9c761f; --gold-2:#7a5a12; --cyan:#1c6ea8;
   --good:#1d8c5b; --warn:#a2701a; --bad:#b8433d;
   --glow: rgba(156,118,31,.14);
@@ -41,9 +41,9 @@
   --lift: 0 26px 50px -28px rgba(14,26,43,.55);
 }
 :root[data-theme="dark"]{
-  --bg:#0a1524; --bg-2:#060d18; --panel:#101d30; --panel-2:#0c1626;
-  --line:#213249; --line-soft:#1a2942;
-  --ink:#e9eff7; --ink-2:#b7c6d9; --muted:#7f96b1;
+  --bg:#0a1524; --bg-2:#060d18; --panel:#1b2c45; --panel-2:#131f33;
+  --line:#2b405c; --line-soft:#223351;
+  --ink:#e9eff7; --ink-2:#b7c6d9; --muted:#8ba2bd;
   --gold:#c9a250; --gold-2:#e0bd6b; --cyan:#4fb3f0;
   --good:#4ec98a; --warn:#e2a33d; --bad:#e3706b;
   --glow: rgba(201,162,80,.16);
