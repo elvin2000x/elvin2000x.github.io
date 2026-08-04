@@ -50,22 +50,27 @@ h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:v
 .part ul{list-style:none;margin:12px 0 0;padding:0}
 .part li{font-size:var(--fs-sm);padding:5px 0 5px 18px;position:relative;color:var(--ink-2)}
 .part li::before{content:"";position:absolute;left:2px;top:13px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-.who{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:var(--sp-6)}
-.who div{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:22px}
-.who h3{margin-bottom:8px}
-.who p{font-size:var(--fs-sm);color:var(--muted)}
-.who .yes{border-top:3px solid var(--ok)}
-.who .no{border-top:3px solid var(--warn)}
+/* Three personas as vertical cards. The old two-column "yes / probably not"
+   split spent half the section talking people out of buying (Justine, 2026-08-04). */
+.personas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:var(--sp-6)}
+.persona{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:var(--r-card);padding:26px 24px}
+.persona .pnum{display:block;font-family:var(--serif);font-size:var(--fs-h2);line-height:1;color:var(--accent-ink);margin-bottom:12px}
+.persona h3{margin-bottom:10px}
+.persona p{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.6}
 .buyband{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--sp-8) var(--sp-6);text-align:center;margin:var(--sp-9) 0}
 .buyband .big{font-family:var(--serif);font-size:56px;line-height:1;margin:10px 0}
 .buyband .sub{font-size:var(--fs-sm);color:var(--muted);margin-top:10px}
+/* The price band was a wall of centred text. The cover gives it something to look at. */
+.buyband--cover{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;text-align:left}
+.buyband--cover > img{width:200px;height:auto;border-radius:var(--r-sm);border:1px solid color-mix(in srgb,var(--accent) 30%,var(--line));box-shadow:0 28px 60px -28px rgba(0,0,0,.6)}
+.buyband--cover .big{margin:8px 0}
 .crossell{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:24px;margin-top:var(--sp-7);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
 .crossell img{width:88px;height:auto;border-radius:6px} /* bp-exempt: fixed thumb */
 .crossell p{font-size:var(--fs-sm);color:var(--muted);margin:6px 0 12px}
 .cfoot{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:var(--fs-sm);text-align:center}
 .cfoot a{color:var(--muted);text-decoration:none}
 .cfoot a:hover{color:var(--accent-ink)}
-@media(max-width:920px){.parts{grid-template-columns:1fr}.chero{grid-template-columns:1fr;gap:32px;padding-bottom:var(--sp-8)}.who{grid-template-columns:1fr}.crossell{grid-template-columns:1fr;text-align:center}.crossell img{margin:0 auto}}
+@media(max-width:920px){.parts{grid-template-columns:1fr}.chero{grid-template-columns:1fr;gap:32px;padding-bottom:var(--sp-8)}.personas{grid-template-columns:1fr}.buyband--cover{grid-template-columns:1fr;text-align:center}.buyband--cover img{margin:0 auto 20px}.crossell{grid-template-columns:1fr;text-align:center}.crossell img{margin:0 auto}}
 </style></head><body>
 <div class="cwrap">
 <div class="ctop"><a class="brand" href="/">Elvin <b>Peters</b></a><button class="themebtn" type="button" data-theme-toggle aria-label="Switch theme">☾</button></div>
@@ -74,8 +79,8 @@ h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:v
   <div>
     <!-- ep:cl-hero -->
     <span class="label">The Claude Operator's Manual</span>
-    <h1>Most people use Claude like a search box. This is the manual for the other way.</h1>
-    <p class="dek">Two hundred and seventeen pages on running Claude as a working operator: projects that remember your context, skills you build once, connectors into the tools you already use, the API when the chat window is not enough, and Claude Code for the work that touches real files.</p>
+    <h1>Stop re-explaining your job to Claude every single morning.</h1>
+    <p class="dek">Set Claude up once so it already knows your business, your clients and the way you write, then build the jobs you repeat into something you run in a click. This is the setup written down, step by step, by someone who does it every working day.</p>
     <!-- /ep:cl-hero -->
     <div class="facts">
       <span>217 pages</span><span>19 chapters</span><span>7 appendices</span><span>&ldquo;You can now&rdquo; checklist per chapter</span>
@@ -109,8 +114,8 @@ h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:v
 </section>
 
 <section class="sec" id="inside">
-  <h2>What is inside</h2>
-  <p class="lead">Four parts, nineteen chapters, and seven reference appendices. Every chapter ends with a &ldquo;you can now&rdquo; checklist, so you know whether it worked before you move on.</p>
+  <h2>What you will be able to do</h2>
+  <p class="lead">Four parts, each one ending with a thing you can do that you could not do before. Every chapter closes with a checklist so you know it worked before you move on.</p>
   <div class="parts">
     <div class="part">
       <span class="label">Part I</span>
@@ -157,27 +162,38 @@ h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:v
 </section>
 
 <section class="sec">
-  <h2>Who this is for</h2>
-  <div class="who">
-    <div class="yes">
-      <h3>Yes, if</h3>
-      <p>You already use Claude and suspect you are scratching the surface. You want projects, skills and connectors set up properly once. You are willing to read something longer than a thread.</p>
+  <h2>Written for three people in particular</h2>
+  <p class="lead">If you recognise yourself here, the manual will pay for itself in the first week you apply it.</p>
+  <div class="personas">
+    <div class="persona">
+      <span class="pnum">01</span>
+      <h3>The consultant who repeats themselves</h3>
+      <p>You explain the same client context at the start of every session, and you rewrite the same kind of deliverable every week. You finish the manual with a project that already holds the context and a skill that produces the deliverable in your format.</p>
     </div>
-    <div class="no">
-      <h3>Probably not, if</h3>
-      <p>You have never opened Claude. Start with <a href="/book.html" style="color:var(--accent-ink);font-weight:600">The Artificial Advantage</a> instead: it teaches directing AI in general, and it costs less.</p>
+    <div class="persona">
+      <span class="pnum">02</span>
+      <h3>The operator whose tools do not talk</h3>
+      <p>Your real work lives in email, a CRM, a drive and three spreadsheets, and none of it is where you are typing. You finish with connectors in place, so Claude answers from your actual data instead of guessing.</p>
+    </div>
+    <div class="persona">
+      <span class="pnum">03</span>
+      <h3>The builder who outgrew the chat box</h3>
+      <p>You are shipping real work and hitting the ceiling of copy and paste. You finish knowing the API, Claude Code, hooks, subagents and MCP well enough to put Claude on files, repositories and jobs that run without you watching.</p>
     </div>
   </div>
 </section>
 
-<div class="buyband">
+<div class="buyband buyband--cover">
+  <img src="/img/magnets/claude-manual.webp" alt="The Claude Operator's Manual" width="440" height="629" loading="lazy">
+  <div>
   <span class="label">The manual</span>
   <!-- ep:cl-price -->
   <div class="big">$67</div>
-  <div class="sub">USD · instant PDF · 217 pages · yours to keep · 14-day money-back guarantee</div>
+  <div class="sub">USD · instant PDF · yours to keep · 14-day money-back guarantee</div>
   <!-- /ep:cl-price -->
   <p style="margin-top:20px"><a class="btn btn--primary btn--lg buy" href="https://buy.stripe.com/9B600j7EX8NT7VcbQI9IQ03">Get the manual &rarr;</a></p>
   <p class="sub">Buying <a href="/system/" style="color:var(--accent-ink);font-weight:600">The Artificial Advantage System</a>? You can add this manual at checkout for $27 instead.</p>
+  </div>
 </div>
 
 <div class="crossell">
