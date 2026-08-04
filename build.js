@@ -477,6 +477,50 @@ applyRegions('claude/index.html', { 'cl-optin': () => renderOptin('end', 'claude
 applyRegions('content-machine/index.html', { 'cm-optin': () => renderOptin('end', 'content-machine') });
 console.log('Regions applied: money-page opt-ins (system, claude, content-machine)');
 
+/* One honest Amazon-vs-System table, rendered on both pages from this source.
+   The rows Amazon wins outright (paper, formats, reviews) are what make it
+   read as information instead of a funnel; the System wins speed, the kit
+   and the guarantee. Nothing on the book page explained the difference
+   between the two ways to buy, which was Elvin's original complaint. */
+const COMPARE_ROWS = [
+  ['What you get',
+   '<span class="win">Paperback, hardcover or Kindle</span> of the book itself',
+   'The ebook <span class="win">plus the whole working kit</span>: 7-day workbook, the prompts, 12 role packs, the 10-guide library'],
+  ['In your hands',
+   'Kindle instantly; <span class="no">paper in a few days</span>',
+   '<span class="win">Instant download</span>, on any device, no app'],
+  ['A copy on your shelf',
+   '<span class="win">Yes, and it is the better way to read cover to cover</span>',
+   '<span class="no">No paper copy</span>'],
+  ['Guarantee',
+   '<span class="no">Amazon’s return policy</span>',
+   '<span class="win">14 days, money back, keep the files</span>'],
+  ['Your purchase helps the book',
+   '<span class="win">Yes: every Amazon copy and review moves it up the rankings</span>',
+   'It supports me directly'],
+  ['Price',
+   'The list price of the format you pick',
+   '$37 for the ebook and everything above'],
+];
+
+function renderCompare() {
+  const rows = COMPARE_ROWS.map(([label, az, sys]) =>
+    `      <tr><td>${label}</td><td>${az}</td><td>${sys}</td></tr>`).join('\n');
+  return [
+    '  <div class="compare"><table>',
+    '    <thead><tr><th scope="col"></th><th scope="col">The book on Amazon</th><th scope="col">The System, here</th></tr></thead>',
+    '    <tbody>',
+    rows,
+    '    </tbody>',
+    '  </table></div>',
+    '  <p class="compare-note">My honest advice is both: paper for reading, the System for doing. Start with either.</p>',
+  ].join('\n');
+}
+
+applyRegions('book.html', { 'bk-compare': renderCompare });
+applyRegions('system/index.html', { 'sys-compare': renderCompare });
+console.log('Regions applied: Amazon-vs-System comparison (book.html, system)');
+
 applyRegions('receipts/index.html', {
   'rc-intro': renderRcIntro,
   'rc-spend': renderRcSpend,

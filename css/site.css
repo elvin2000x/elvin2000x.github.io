@@ -444,3 +444,28 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 /* Screen-reader-only. The opt-in's email label uses it; without this rule the
    words "Your email" render as stray visible text above the field. */
 .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap }
+
+/* ---------- COMPARISON TABLE (Amazon vs the System) ----------------------
+   One honest table, rendered on book.html and /system/ from the same source
+   in build.js. Each column wins rows outright: Amazon owns paper, formats
+   and reviews; the System owns speed, the kit and the guarantee. The rows
+   Amazon wins are what make the table read as information, not as a funnel. */
+.compare{ max-width:var(--w-text); margin:var(--sp-7) auto 0; border:1px solid var(--line);
+  border-radius:var(--r-card); overflow:hidden; background:var(--panel) }
+.compare table{ width:100%; border-collapse:collapse; font-size:var(--fs-sm) }
+.compare th{ text-align:left; padding:14px 18px; font-size:var(--fs-label);
+  letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  border-bottom:2px solid var(--line); background:var(--panel-2) }
+.compare th:first-child{ width:34% }
+.compare td{ padding:13px 18px; border-bottom:1px solid var(--line-soft);
+  color:var(--ink-2); vertical-align:top; line-height:1.5 }
+.compare tr:last-child td{ border-bottom:0 }
+.compare td:first-child{ font-weight:600; color:var(--ink) }
+.compare .win{ color:var(--ink); font-weight:600 }
+.compare .win::before{ content:"✓ "; color:var(--ok); font-weight:800 }
+.compare .no{ color:var(--muted) }
+.compare-note{ max-width:var(--w-text); margin:var(--sp-3) auto 0;
+  font-size:var(--fs-label); color:var(--muted); text-align:center }
+@media(max-width:640px){
+  .compare th,.compare td{ padding:11px 12px }
+}
