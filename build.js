@@ -423,6 +423,8 @@ const OPTINS = {
     success: 'Done. Check your inbox in about a minute, and look in promotions if it is not there.',
   },
   'claude': {
+    magnet: '/dl/Claude-Manual-Talking-to-Claude-Well.pdf',
+    magnet_label: 'Download the chapter now →',
     eyebrow: 'Free sample',
     headline: 'Read a chapter before you buy the manual',
     body: 'I will send you the chapter on giving Claude a job description, which is the one that changes how people work within a day. Plus the briefing cheat sheet from the appendix.',
