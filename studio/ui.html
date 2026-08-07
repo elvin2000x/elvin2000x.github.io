@@ -41,6 +41,20 @@ iframe{width:100%;height:70vh;border:1px solid var(--line);border-radius:12px;ba
 a{color:var(--gold2)}
 .iframe-wrap{max-width:390px;margin:0 auto;transition:max-width .2s}
 .iframe-wrap.wide{max-width:100%}
+details.item>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:600}
+details.item>summary::-webkit-details-marker{display:none}
+details.item>summary::before{content:'\25b8';color:var(--gold2);transition:transform .15s}
+details.item[open]>summary::before{transform:rotate(90deg)}
+.badge{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.badge.draft{border-color:var(--gold);color:var(--gold2)}
+.badge.live{border-color:var(--ok);color:var(--ok)}
+.chk{display:flex;align-items:center;gap:10px;margin:14px 0 6px}
+.chk input{width:22px;height:22px;accent-color:var(--gold)}
+.chk label{margin:0;text-transform:none;letter-spacing:0;font-size:15px;color:var(--ink)}
+select{width:100%;min-height:44px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font:16px/1.4 inherit}
+textarea.md{min-height:340px;font:14px/1.6 ui-monospace,Consolas,monospace}
+.cheat{background:#0b1220;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:8px;font:12px/1.7 ui-monospace,Consolas,monospace;color:var(--ink2)}
+.cheat b{color:var(--gold2)}
 </style>
 <header><b>Site Studio</b> <span class="crumb" id="crumb">loading…</span>
   <span style="margin-left:auto;font-size:13px" id="repo"></span></header>
@@ -53,7 +67,7 @@ a{color:var(--gold2)}
 <script>
 'use strict';
 const $ = s => document.querySelector(s);
-let STATE = null, CUR = null, DATA = null, DIRTY = false;
+let STATE = null, CUR = null, DATA = null, DIRTY = false, OPEN_ITEM = 0;
 
 const get = (o, p) => p.split('.').reduce((a, k) => a && a[k], o);
 const set = (o, p, v) => { const ks = p.split('.'); let t = o; for (const k of ks.slice(0, -1)) t = t[k] = t[k] || {}; t[ks.at(-1)] = v; };
@@ -86,14 +100,35 @@ async function open(s) {
   $('#bar').hidden = false; $('#crumb').textContent = s.title;
   render();
 }
+const CHEAT = `<div class="cheat"><b>## Heading</b> and <b>### Sub-heading</b>
+<b>**bold**</b>  <b>*italic*</b>  <b>\`code\`</b>  <b>[text](/link)</b>
+<b>- item</b> bullets, <b>1. item</b> numbers
+<b>&gt; a quoted line</b> becomes a pull quote
+<b>&gt; [!note]</b> blue callout   <b>&gt; [!warn]</b> amber callout
+<b>&gt; [!series]</b> series banner  <b>&gt; [!foot]</b> method footer
+<b>\`\`\`</b> code   <b>\`\`\`prompt</b> prompt block   <b>\`\`\`tree</b> file tree
+<b>| a | b |</b> then <b>|---|---:|</b> for a table (---: right-aligns)</div>`;
+
 function field(f, keyPrefix) {
   const key = (keyPrefix || '') + f.key;
   const val = get(DATA, key) ?? '';
   const id = 'f_' + key.replace(/[^a-z0-9]/gi, '_');
+  const lab = `<label for="${id}">${esc(f.label)}</label>`;
+  if (f.type === 'bool')
+    return `<div class="chk"><input type="checkbox" id="${id}" data-key="${esc(key)}" data-bool="1"${val ? " checked" : ""}><label for="${id}">${esc(f.label)}</label></div>`;
+  if (f.type === 'select')
+    return lab + `<select id="${id}" data-key="${esc(key)}">` +
+      (f.options || []).map(o => `<option value="${esc(o.value)}"${o.value === val ? " selected" : ""}>${esc(o.label)}</option>`).join('') + '</select>';
+  if (f.type === 'markdown')
+    return lab + `<textarea class="md" id="${id}" data-key="${esc(key)}" maxlength="${f.maxlen || 120000}">${esc(val)}</textarea>` + CHEAT;
+  if (f.type === 'slug')
+    return lab + `<input type="text" id="${id}" data-key="${esc(key)}" data-slug="${esc(f.from || "")}" value="${esc(val)}" maxlength="${f.maxlen || 60}" placeholder="filled in from the title">`;
   if (f.type === 'textarea')
-    return `<label for="${id}">${esc(f.label)}</label><textarea id="${id}" data-key="${esc(key)}" maxlength="${f.maxlen || 1000}">${esc(val)}</textarea>`;
-  return `<label for="${id}">${esc(f.label)}</label><input type="text" id="${id}" data-key="${esc(key)}" value="${esc(val)}" maxlength="${f.maxlen || 300}">`;
+    return lab + `<textarea id="${id}" data-key="${esc(key)}" maxlength="${f.maxlen || 1000}">${esc(val)}</textarea>`;
+  return lab + `<input type="text" id="${id}" data-key="${esc(key)}" value="${esc(val)}" maxlength="${f.maxlen || 300}">`;
 }
+const slugify = t => String(t).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-+|-+$/g, '').slice(0, 60);
 function render() {
   const m = $('#main'); let html = '<div class="card"><button class="small" onclick="home()">← All sections</button>';
   for (const f of CUR.fields) {
@@ -101,25 +136,64 @@ function render() {
       const arr = get(DATA, f.key) || [];
       html += `<label>${esc(f.label)}</label>`;
       arr.forEach((item, i) => {
-        html += `<div class="item">`;
+        const hasTitle = !!f.item_title;
+        const name = hasTitle ? (item[f.item_title] || '(untitled)') : ('Item ' + (i + 1));
+        const badge = ('draft' in item)
+          ? `<span class="badge ${item.draft ? "draft" : "live"}">${item.draft ? "Draft" : "Live"}</span>` : '';
+        const openAttr = (hasTitle && i !== OPEN_ITEM) ? '' : ' open';
+        html += hasTitle
+          ? `<details class="item"${openAttr}><summary>${esc(name)} ${badge}</summary>`
+          : `<div class="item">`;
         for (const sub of f.item_fields)
           html += field({ ...sub, key: f.key + '.' + i + '.' + sub.key, label: sub.label }, '');
         html += `<div class="rowbtns">
-          <button class="small" onclick="move('${f.key}',${i},-1)">↑</button>
-          <button class="small" onclick="move('${f.key}',${i},1)">↓</button>
-          <button class="small" onclick="del('${f.key}',${i})">Remove</button></div></div>`;
+          <button class="small" onclick="move('${f.key}',${i},-1)">&uarr;</button>
+          <button class="small" onclick="move('${f.key}',${i},1)">&darr;</button>` +
+          (CUR.item_preview ? `<button class="small" onclick="previewItem(${i})">Preview this</button>` : '') +
+          `<button class="small" onclick="del('${f.key}',${i})">Remove</button></div>`;
+        html += hasTitle ? `</details>` : `</div>`;
       });
-      html += `<button class="small" onclick="add('${f.key}')">+ Add</button>`;
+      html += `<button class="small" onclick="add('${f.key}')">+ ${esc(CUR.new_label || "Add")}</button>`;
     } else html += field(f);
   }
   html += '<div class="msg" id="msg"></div><div id="pv"></div></div>';
   m.innerHTML = html;
-  m.querySelectorAll('input,textarea').forEach(el =>
-    el.addEventListener('input', () => { set(DATA, el.dataset.key, el.value); DIRTY = true; }));
+  m.querySelectorAll('input,textarea,select').forEach(el => {
+    const ev = (el.dataset.bool || el.tagName === 'SELECT') ? 'change' : 'input';
+    el.addEventListener(ev, () => {
+      set(DATA, el.dataset.key, el.dataset.bool ? el.checked : el.value);
+      DIRTY = true;
+      if (el.dataset.bool) render();                    // the badge follows the tick
+      // The slug is suggested from its source field until it is typed by hand.
+      const base = el.dataset.key.replace(/\.[^.]+$/, '');
+      const sl = m.querySelector('[data-key="' + base + '.slug"]');
+      if (sl && !sl.dataset.touched && el.dataset.key === base + '.' + sl.dataset.slug) {
+        sl.value = slugify(el.value); set(DATA, sl.dataset.key, sl.value);
+      }
+    });
+  });
+  m.querySelectorAll('[data-slug]').forEach(el => {
+    if (el.value) el.dataset.touched = '1';
+    el.addEventListener('input', () => {
+      el.dataset.touched = '1';
+      el.value = slugify(el.value); set(DATA, el.dataset.key, el.value);
+    });
+  });
 }
-function move(key, i, d) { const a = get(DATA, key); const j = i + d; if (j < 0 || j >= a.length) return; [a[i], a[j]] = [a[j], a[i]]; DIRTY = true; render(); }
+function move(key, i, d) { const a = get(DATA, key); const j = i + d; if (j < 0 || j >= a.length) return; [a[i], a[j]] = [a[j], a[i]]; OPEN_ITEM = j; DIRTY = true; render(); }
 function del(key, i) { get(DATA, key).splice(i, 1); DIRTY = true; render(); }
-function add(key) { const f = CUR.fields.find(x => x.key === key); const blank = {}; f.item_fields.forEach(s => blank[s.key] = ''); get(DATA, key).push(blank); DIRTY = true; render(); }
+function add(key) {
+  const f = CUR.fields.find(x => x.key === key);
+  const blank = {};
+  f.item_fields.forEach(s => blank[s.key] = s.type === 'bool' ? false : '');
+  Object.assign(blank, f.item_defaults || {});      // schema-supplied sensible start
+  const arr = get(DATA, key);
+  if (f.item_title) arr.unshift(blank); else arr.push(blank);
+  OPEN_ITEM = f.item_title ? 0 : arr.length - 1;
+  DIRTY = true; render();
+  const first = document.querySelector('.item input[type=text],.item textarea');
+  if (first) first.focus();
+}
 
 async function save(silent) {
   const r = await fetch('/api/content/' + CUR.name, { method: 'PUT', body: JSON.stringify(DATA) });
@@ -139,6 +213,23 @@ async function preview() {
       <button class="small" aria-pressed="false" onclick="pw(this,true)">Desktop</button></div>
     <div class="iframe-wrap" id="ifw"><iframe src="/preview/${r.id}/${page}"></iframe></div>`;
   msg('Preview below is byte-for-byte what will ship.', true);
+}
+async function previewItem(i) {
+  const list = CUR.fields.find(f => f.type === 'list');
+  const item = get(DATA, list.key)[i];
+  OPEN_ITEM = i;
+  if (DIRTY) await save(true);
+  msg('Building preview\u2026', true);
+  const r = await (await fetch('/api/preview', { method: 'POST' })).json();
+  if (!r.id) return msg(r.detail || r.error || 'preview failed', false);
+  const page = CUR.item_preview.replace(/\{(\w+)\}/g, (_, k) => item[k] || '').replace(/^\//, '');
+  $('#pv').innerHTML = `<div class="pv-controls">
+      <button class="small" aria-pressed="true" onclick="pw(this,false)">Phone</button>
+      <button class="small" aria-pressed="false" onclick="pw(this,true)">Desktop</button></div>
+    <div class="iframe-wrap" id="ifw"><iframe src="/preview/${r.id}/${page}"></iframe></div>`;
+  msg(item.draft ? 'Draft preview. This is the real built page. It stays off the site until you untick Draft.'
+                 : 'Preview below is byte-for-byte what will ship.', true);
+  $('#pv').scrollIntoView({ behavior: 'smooth' });
 }
 function pw(btn, wide) { $('#ifw').classList.toggle('wide', wide); document.querySelectorAll('.pv-controls button').forEach(b => b.setAttribute('aria-pressed', b === btn)); }
 async function publish() {
