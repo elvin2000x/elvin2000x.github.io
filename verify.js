@@ -152,7 +152,9 @@ for (const rel of PAGES) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ep-verify-'));
   try {
     execFileSync(process.execPath, [path.join(ROOT, 'build.js'), '--out', tmp], { stdio: 'pipe' });
-    const gen = ['writing/index.html', 'writing/token-efficiency/index.html', 'writing/the-harness/index.html',
+    const gen = ['writing/index.html', 'writing/token-efficiency/index.html',
+      'writing/assembly-line/index.html', 'writing/studio-session/index.html',
+      'writing/the-harness/index.html',
       'writing/zero-dependencies/index.html', 'writing/thirteen-games-solo/index.html',
       'writing/_homepage_cards.html'];
     for (const g of gen) {
