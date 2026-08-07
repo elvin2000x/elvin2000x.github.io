@@ -10,7 +10,7 @@ const ROOT = __dirname;
 
 // Pages excluded from every check: other businesses, retired stubs,
 // generated-elsewhere pipelines, binaries.
-const EXCLUDE = /^(titles|books|play|book1-feedback|oto|dl|studio)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$/;
+const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$/;
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
@@ -152,7 +152,7 @@ for (const rel of PAGES) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ep-verify-'));
   try {
     execFileSync(process.execPath, [path.join(ROOT, 'build.js'), '--out', tmp], { stdio: 'pipe' });
-    const gen = ['writing/index.html', 'writing/the-harness/index.html',
+    const gen = ['writing/index.html', 'writing/token-efficiency/index.html', 'writing/the-harness/index.html',
       'writing/zero-dependencies/index.html', 'writing/thirteen-games-solo/index.html',
       'writing/_homepage_cards.html'];
     for (const g of gen) {
