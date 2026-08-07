@@ -5,7 +5,16 @@ const fs = require('fs'), path = require('path');
 const DIR = __dirname;
 const outArg = process.argv.indexOf('--out');
 const OUT = outArg > -1 ? path.resolve(process.argv[outArg + 1]) : DIR;
-const essays = JSON.parse(fs.readFileSync(path.join(DIR, 'essays.json'), 'utf8'));
+const { mdToHtml } = require('./md.js');
+// Essays live in content/ with the rest of the CMS data so Site Studio can edit
+// them. Accepts a bare array too, which is what the file looked like before the move.
+const essaysRaw = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'essays.json'), 'utf8'));
+const allEssays = Array.isArray(essaysRaw) ? essaysRaw : essaysRaw.posts;
+// Drafts are built in preview only. A real build never writes them, never lists
+// them, and never puts them in the sitemap, so an unfinished post cannot ship.
+const isPreview = OUT !== DIR;
+const essays = allEssays.filter(e => !e.draft || isPreview);
+const published = allEssays.filter(e => !e.draft);
 
 const GA = `
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
@@ -112,7 +121,10 @@ for(const e of essays){
   const canon = `https://elvinpeters.com/writing/${e.slug}/`;
   const img = `/img/${e.image}`;
   const og = e.og ? `/img/${e.og}` : img;
-  const body = e.file ? fs.readFileSync(path.join(DIR, e.file), 'utf8') : e.html;
+  // Body source: a scoped HTML file, Markdown written in Site Studio, or raw HTML.
+  const body = e.file ? fs.readFileSync(path.join(DIR, e.file), 'utf8')
+             : e.body_format === 'markdown' ? mdToHtml(e.body)
+             : e.html;
   const accent = e.accent || 'amber';
   let page;
   if(e.custom){
@@ -141,13 +153,13 @@ for(const e of essays){
              .replace('</head>', POSTCSS + '</head>');
   fs.mkdirSync(path.join(OUT,'writing',e.slug), {recursive:true});
   fs.writeFileSync(path.join(OUT,'writing',e.slug,'index.html'), page);
-  cards.push({slug:e.slug,title:e.short_title||e.title,dek:e.short_dek||e.dek,image:e.image,readmins:e.readmins||8});
+  if(!e.draft) cards.push({slug:e.slug,title:e.short_title||e.title,dek:e.short_dek||e.dek,image:e.image,readmins:e.readmins||8});
 }
 
 // writing index page
 const list = head('Blog','Posts on building software, games, and a company of one with AI as a co-worker.','/img/og.jpg','https://elvinpeters.com/writing/') + NAV +
   `<article style="max-width:820px"><span class="eyebrow">Blog</span><h1 style="margin-bottom:6px">Notes from a workshop of one.</h1><p class="dek" style="margin-bottom:30px">How I actually build: the harness around the AI, the zero-dependency habit, the tools that let one person ship like a team.</p>`+
-  essays.map(e=>`<a href="/writing/${e.slug}/" style="display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line-soft);align-items:center">`+
+  published.map(e=>`<a href="/writing/${e.slug}/" style="display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line-soft);align-items:center">`+
     `<img src="/img/${e.image}" alt="" width="150" height="94" loading="lazy" style="aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--line)">`+
     `<span><span class="eyebrow">Post${e.date?' &middot; '+e.date:''} &middot; ${e.readmins||8} min</span><h2 style="font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:6px 0 4px">${esc(e.title)}</h2><span style="color:var(--ink-2);font-size:14px">${esc(e.dek)}</span></span></a>`).join('')+
   `</article>`+FOOT+THEME+`</body></html>`;
@@ -163,7 +175,10 @@ const frag = cards.map(c=>
       </a>`).join('\n');
 fs.writeFileSync(path.join(OUT,'writing','_homepage_cards.html'), frag);
 
-console.log('Built', essays.length, 'essays -> writing/<slug>/ + writing/ index', OUT !== DIR ? `(out: ${OUT})` : '');
+const drafts = allEssays.length - published.length;
+console.log('Built', essays.length, 'essays -> writing/<slug>/ + writing/ index',
+  drafts ? `(${drafts} draft${drafts>1?'s':''} ` + (isPreview ? 'shown in preview only)' : 'withheld)') : '',
+  OUT !== DIR ? `(out: ${OUT})` : '');
 
 
 /* ==========================================================================

@@ -86,7 +86,7 @@ const server = http.createServer((req, res) => {
       if (!allowed(name)) return json(res, 404, { error: 'unknown section' });
       if (req.method === 'GET') return serveFile(res, contentPath(name));
       if (req.method === 'PUT') {
-        return readBody(req, 256 * 1024, body => {
+        return readBody(req, 4 * 1024 * 1024, body => {   // long Markdown posts
           let data;
           try { data = JSON.parse(body); } catch (e) { return json(res, 400, { error: 'not valid JSON: ' + e.message }); }
           fs.writeFileSync(contentPath(name), JSON.stringify(data, null, 2) + '\n');
@@ -165,6 +165,16 @@ const server = http.createServer((req, res) => {
           json(res, 500, { error: 'revert failed: ' + String(e.message).slice(0, 300) });
         }
       });
+    }
+
+    // Static assets for the preview iframe. A built page links absolute paths
+    // (/css/post.css, /js/site.js, /img/...), which are not under /preview/<id>/,
+    // so without this the preview renders unstyled. Assets only, by extension, and
+    // never source or content directories.
+    if (req.method === 'GET' && /\.(css|js|svg|png|jpg|jpeg|webp|ico|woff2|xml|txt|pdf)$/i.test(p)
+        && !/^\/(studio|content|essays)\//i.test(p)) {
+      const asset = safeJoin(ROOT, p);
+      if (asset && fs.existsSync(asset)) return serveFile(res, asset);
     }
 
     res.writeHead(404); res.end('not found');
