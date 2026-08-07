@@ -1,8 +1,8 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker · Elvin Peters</title>
 <meta name="description" content="You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship.">
 <link rel="canonical" href="https://elvinpeters.com/writing/the-harness/">
-<meta property="og:type" content="article"><meta property="og:title" content="The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker"><meta property="og:description" content="You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship."><meta property="og:image" content="https://elvinpeters.com/img/blog-claude.jpg"><meta property="og:url" content="https://elvinpeters.com/writing/the-harness/">
+<meta property="og:type" content="article"><meta property="og:title" content="The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker"><meta property="og:description" content="You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship."><meta property="og:image" content="https://elvinpeters.com/img/og.jpg"><meta property="og:url" content="https://elvinpeters.com/writing/the-harness/">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@elvin_peters">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5v14M6 5h9M6 12h7M6 19h9' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='19.5' cy='18.6' r='1.9' fill='%23c9a250'/%3E%3C/svg%3E">
 
@@ -58,15 +58,10 @@ footer a:hover{color:var(--gold-2)}
 .nlrow input{flex:1;min-width:210px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:16px;font-family:var(--sans)}
 .nlmsg{font-size:14px;color:var(--muted);margin:10px 0 0;min-height:18px}
 .ctarow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-</style><style>/* dark restyle prototype — palette only */
-:root,:root[data-theme="light"],:root[data-theme="dark"]{
---bg:#15171A;--bg-2:#101214;--panel:#1D2025;--panel-2:#17191D;--line:#2A2D31;--line-soft:#26292D;
---ink:#EAEBE6;--ink-2:#C6CBD2;--muted:#A3AAB4;--gold:#EFA43A;--gold-2:#F0B45C;--cyan:#6FA3D8;
---glow:rgba(239,164,58,.14);--shadow:0 24px 50px -28px rgba(0,0,0,.7)}
-</style></head><body><nav class="nav"><div class="in">
+</style><link rel="stylesheet" href="/css/post.css"></head><body><nav class="nav"><div class="in">
   <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
   <div class="lk"><a href="/services/">Services</a><a href="/projects/">Projects</a><a href="/contact/">Contact</a><a class="cta" href="/book.html">Read the book</a></div>
-</div></nav><article><div class="arthead"><a class="backlink" href="/writing/">&larr; Blog</a><img class="cover" src="/img/blog-claude.jpg" alt="" width="1024" height="640" loading="eager"><span class="eyebrow">Blog</span><h1>The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker</h1><p class="dek">You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship.</p><div class="byline"><b>Elvin Peters</b> <span>6 min read</span> <button id="tg" class="themebtn" aria-label="Toggle light or dark theme" style="margin-left:auto">&#9681;</button></div></div><div class="body"><p>Most people treat an AI model like a vending machine. Prompt in, answer out, assume the answer is right because it reads like it's right. Then one day it hands back a confident wrong number, they act on it, and they write the whole thing off as a toy. I get the reaction. I think the diagnosis is backwards.</p>
+</div></nav><div class="trp accent-good"><div class="wrap"><div class="col"><a class="trp-back" href="/writing/">&larr; Blog</a></div><header class="col" style="padding-top:26px"><div class="eyebrow">Playbook · Reliability</div><h1>The Harness Beats the Prompt: How I Get Claude to Build Like a Reliable Co-Worker</h1><p class="dek">You don't fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship.</p><div class="byline">Elvin Peters &middot; 6 min read</div></header><div class="col"><p>Most people treat an AI model like a vending machine. Prompt in, answer out, assume the answer is right because it reads like it's right. Then one day it hands back a confident wrong number, they act on it, and they write the whole thing off as a toy. I get the reaction. I think the diagnosis is backwards.</p>
 
 <p>The model is fallible. You can't prompt that away, and it isn't a reason to walk. A good human teammate is fallible too. What makes one reliable isn't a clean record, it's that they work inside a system that catches mistakes before those mistakes cost anything: code review, a staging environment, a checklist for the step everyone forgets. You don't repair an unreliable worker by trusting them harder. You build the checks around them.</p>
 
@@ -116,7 +111,7 @@ footer a:hover{color:var(--gold-2)}
 
 <p>People keep asking me for the magic prompt. There isn't one, and if there were, it would still be one confident wrong answer away from letting you down. The leverage was never in the prompt. It's in everything wrapped around the prompt: the rules that name the failure modes, the scripts that catch them with an exit code, the hooks that fire whether or not the model remembers, and the one clean source for every fact.</p>
 
-<p>Build that, and the model stops being a clever thing you have to babysit. It becomes what a good co-worker already is. Fallible, checked, and reliable anyway.</p></div></article><section class="endcta"><div class="card">
+<p>Build that, and the model stops being a clever thing you have to babysit. It becomes what a good co-worker already is. Fallible, checked, and reliable anyway.</p></div></div></div><section class="endcta"><div class="card">
 <h3>Liked this? The book goes deeper.</h3>
 <p>The Artificial Advantage: the frameworks behind everything here, written for professionals, not programmers.</p>
 <div class="ctarow"><a class="btn primary" href="/book.html">Read The Artificial Advantage</a><a class="btn ghost" href="/services/">Work with me</a></div>

@@ -152,11 +152,9 @@ for (const rel of PAGES) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ep-verify-'));
   try {
     execFileSync(process.execPath, [path.join(ROOT, 'build.js'), '--out', tmp], { stdio: 'pipe' });
-    const gen = ['writing/index.html', 'writing/token-efficiency/index.html',
-      'writing/assembly-line/index.html', 'writing/studio-session/index.html',
-      'writing/the-harness/index.html',
-      'writing/zero-dependencies/index.html', 'writing/thirteen-games-solo/index.html',
-      'writing/_homepage_cards.html'];
+    const gen = ['writing/index.html', 'writing/_homepage_cards.html'].concat(
+      ['token-efficiency','assembly-line','studio-session','the-harness',
+       'zero-dependencies','thirteen-games-solo'].map(s => 'writing/' + s + '/index.html'));
     for (const g of gen) {
       const a = path.join(ROOT, g), b = path.join(tmp, g);
       if (!fs.existsSync(a) || !fs.existsSync(b)) { warn(g, 'missing from build comparison'); continue; }
