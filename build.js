@@ -100,12 +100,30 @@ const ENDCTA = `<section class="endcta"><div class="card">
 <script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail').value.trim();if(!em){m.textContent='Enter your email first.';return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'newsletter-blog-'+location.pathname.split('/').filter(Boolean).pop(),website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
 </div></section>`;
 
+// Dark-restyle PROTOTYPE (palette only: background/ink/link). Applied per-essay
+// via "darkProto": true in essays.json. Pending Elvin's sign-off before any
+// site-wide sweep.
+const DARKPROTO = `<style>/* dark restyle prototype — palette only */
+:root,:root[data-theme="light"],:root[data-theme="dark"]{
+--bg:#15171A;--bg-2:#101214;--panel:#1D2025;--panel-2:#17191D;--line:#2A2D31;--line-soft:#26292D;
+--ink:#EAEBE6;--ink-2:#C6CBD2;--muted:#A3AAB4;--gold:#EFA43A;--gold-2:#F0B45C;--cyan:#6FA3D8;
+--glow:rgba(239,164,58,.14);--shadow:0 24px 50px -28px rgba(0,0,0,.7)}
+</style>`;
+
 fs.mkdirSync(path.join(OUT,'writing'), {recursive:true});
 const cards = [];
 for(const e of essays){
   const canon = `https://elvinpeters.com/writing/${e.slug}/`;
   const img = `/img/${e.image}`;
-  const page = head(e.title, e.dek, img, canon) + NAV +
+  const og = e.og ? `/img/${e.og}` : img;
+  const body = e.file ? fs.readFileSync(path.join(DIR, e.file), 'utf8') : e.html;
+  let page;
+  if(e.custom){
+    // Custom-bodied post: the body file brings its own (scoped) styles, markup
+    // and scripts; build.js still supplies head, nav, CTA, footer, analytics.
+    page = head(e.title, e.dek, og, canon) + NAV + body + ENDCTA + FOOT + THEME + `</body></html>`;
+  } else {
+    page = head(e.title, e.dek, og, canon) + NAV +
     `<article><div class="arthead">`+
       `<a class="backlink" href="/writing/">&larr; Blog</a>`+
       `<img class="cover" src="${img}" alt="" width="1024" height="640" loading="eager">`+
@@ -113,9 +131,12 @@ for(const e of essays){
       `<h1>${esc(e.title)}</h1>`+
       `<p class="dek">${esc(e.dek)}</p>`+
       `<div class="byline"><b>Elvin Peters</b> <span>${e.readmins||8} min read</span> <button id="tg" class="themebtn" aria-label="Toggle light or dark theme" style="margin-left:auto">&#9681;</button></div>`+
-    `</div><div class="body">${e.html}</div></article>`+
+    `</div><div class="body">${body}</div></article>`+
     ENDCTA +
     FOOT + THEME + `</body></html>`;
+  }
+  if(e.dark) page = page.replace('<html lang="en">', '<html lang="en" data-theme="dark">');
+  if(e.darkProto) page = page.replace('</head>', DARKPROTO + '</head>');
   fs.mkdirSync(path.join(OUT,'writing',e.slug), {recursive:true});
   fs.writeFileSync(path.join(OUT,'writing',e.slug,'index.html'), page);
   cards.push({slug:e.slug,title:e.short_title||e.title,dek:e.short_dek||e.dek,image:e.image,readmins:e.readmins||8});
@@ -126,7 +147,7 @@ const list = head('Blog','Posts on building software, games, and a company of on
   `<article style="max-width:820px"><span class="eyebrow">Blog</span><h1 style="margin-bottom:6px">Notes from a workshop of one.</h1><p class="dek" style="margin-bottom:30px">How I actually build: the harness around the AI, the zero-dependency habit, the tools that let one person ship like a team.</p>`+
   essays.map(e=>`<a href="/writing/${e.slug}/" style="display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line-soft);align-items:center">`+
     `<img src="/img/${e.image}" alt="" width="150" height="94" loading="lazy" style="aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--line)">`+
-    `<span><span class="eyebrow">Post &middot; ${e.readmins||8} min</span><h2 style="font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:6px 0 4px">${esc(e.title)}</h2><span style="color:var(--ink-2);font-size:14px">${esc(e.dek)}</span></span></a>`).join('')+
+    `<span><span class="eyebrow">Post${e.date?' &middot; '+e.date:''} &middot; ${e.readmins||8} min</span><h2 style="font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:6px 0 4px">${esc(e.title)}</h2><span style="color:var(--ink-2);font-size:14px">${esc(e.dek)}</span></span></a>`).join('')+
   `</article>`+FOOT+THEME+`</body></html>`;
 fs.writeFileSync(path.join(OUT,'writing','index.html'), list);
 
