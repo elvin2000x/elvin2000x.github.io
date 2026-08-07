@@ -54,6 +54,8 @@
   <url><loc>https://elvinpeters.com/updates/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/vault/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/writing/</loc><priority>0.8</priority></url>
+  <url><loc>https://elvinpeters.com/writing/assembly-line/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/writing/studio-session/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/writing/the-harness/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/writing/thirteen-games-solo/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/writing/token-efficiency/</loc><priority>0.6</priority></url>
