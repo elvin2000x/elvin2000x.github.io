@@ -100,15 +100,11 @@ const ENDCTA = `<section class="endcta"><div class="card">
 <script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail').value.trim();if(!em){m.textContent='Enter your email first.';return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'newsletter-blog-'+location.pathname.split('/').filter(Boolean).pop(),website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
 </div></section>`;
 
-// Dark-restyle PROTOTYPE (palette only: background/ink/link). Applied per-essay
-// via "darkProto": true in essays.json. Pending Elvin's sign-off before any
-// site-wide sweep.
-const DARKPROTO = `<style>/* dark restyle prototype — palette only */
-:root,:root[data-theme="light"],:root[data-theme="dark"]{
---bg:#15171A;--bg-2:#101214;--panel:#1D2025;--panel-2:#17191D;--line:#2A2D31;--line-soft:#26292D;
---ink:#EAEBE6;--ink-2:#C6CBD2;--muted:#A3AAB4;--gold:#EFA43A;--gold-2:#F0B45C;--cyan:#6FA3D8;
---glow:rgba(239,164,58,.14);--shadow:0 24px 50px -28px rgba(0,0,0,.7)}
-</style>`;
+// The blog post design system. Spec: BLOG-DESIGN-SYSTEM.md (canonical 2026-08-07).
+// Shell, type, neutrals and the shared module library live in css/post.css and are
+// scoped under .trp; each post file carries only its own modules. Every post ships
+// fixed dark and opens on type, never a hero photograph.
+const POSTCSS = `<link rel="stylesheet" href="/css/post.css">`;
 
 fs.mkdirSync(path.join(OUT,'writing'), {recursive:true});
 const cards = [];
@@ -117,26 +113,32 @@ for(const e of essays){
   const img = `/img/${e.image}`;
   const og = e.og ? `/img/${e.og}` : img;
   const body = e.file ? fs.readFileSync(path.join(DIR, e.file), 'utf8') : e.html;
+  const accent = e.accent || 'amber';
   let page;
   if(e.custom){
-    // Custom-bodied post: the body file brings its own (scoped) styles, markup
-    // and scripts; build.js still supplies head, nav, CTA, footer, analytics.
+    // Custom-bodied post: the body file brings its own post-specific styles,
+    // markup and scripts. build.js supplies head, nav, CTA, footer, analytics.
     page = head(e.title, e.dek, og, canon) + NAV + body + ENDCTA + FOOT + THEME + `</body></html>`;
   } else {
+    // Standard post: the design system's shell and header pattern wrapped around
+    // the essay's own HTML. Content is never rewritten here, only skinned.
     page = head(e.title, e.dek, og, canon) + NAV +
-    `<article><div class="arthead">`+
-      `<a class="backlink" href="/writing/">&larr; Blog</a>`+
-      `<img class="cover" src="${img}" alt="" width="1024" height="640" loading="eager">`+
-      `<span class="eyebrow">Blog</span>`+
-      `<h1>${esc(e.title)}</h1>`+
-      `<p class="dek">${esc(e.dek)}</p>`+
-      `<div class="byline"><b>Elvin Peters</b> <span>${e.readmins||8} min read</span> <button id="tg" class="themebtn" aria-label="Toggle light or dark theme" style="margin-left:auto">&#9681;</button></div>`+
-    `</div><div class="body">${body}</div></article>`+
+    `<div class="trp accent-${accent}"><div class="wrap">`+
+      `<div class="col"><a class="trp-back" href="/writing/">&larr; Blog</a></div>`+
+      `<header class="col" style="padding-top:26px">`+
+        `<div class="eyebrow">${esc(e.kicker||'Playbook')}</div>`+
+        `<h1>${esc(e.title)}</h1>`+
+        `<p class="dek">${esc(e.dek)}</p>`+
+        `<div class="byline">Elvin Peters${e.date?' &middot; '+esc(e.date):''} &middot; ${e.readmins||8} min read</div>`+
+      `</header>`+
+      `<div class="col">${body}</div>`+
+    `</div></div>`+
     ENDCTA +
     FOOT + THEME + `</body></html>`;
   }
-  if(e.dark) page = page.replace('<html lang="en">', '<html lang="en" data-theme="dark">');
-  if(e.darkProto) page = page.replace('</head>', DARKPROTO + '</head>');
+  // Every post ships fixed dark, and loads the shared post stylesheet.
+  page = page.replace('<html lang="en">', '<html lang="en" data-theme="dark">')
+             .replace('</head>', POSTCSS + '</head>');
   fs.mkdirSync(path.join(OUT,'writing',e.slug), {recursive:true});
   fs.writeFileSync(path.join(OUT,'writing',e.slug,'index.html'), page);
   cards.push({slug:e.slug,title:e.short_title||e.title,dek:e.short_dek||e.dek,image:e.image,readmins:e.readmins||8});
