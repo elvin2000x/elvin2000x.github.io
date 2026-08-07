@@ -1,0 +1,91 @@
+{
+  "title": "Blog posts",
+  "file": "essays.json",
+  "preview": "/writing/",
+  "help": "Write, draft and publish posts. New posts are written in Markdown and pick up the blog design system automatically.",
+  "item_preview": "/writing/{slug}/",
+  "new_label": "New post",
+  "fields": [
+    {
+      "key": "posts",
+      "type": "list",
+      "label": "Posts (top of the list is newest on /writing/)",
+      "item_title": "title",
+      "item_defaults": {
+        "body_format": "markdown",
+        "accent": "amber",
+        "draft": true,
+        "readmins": 6,
+        "image": "blog-tokens.svg",
+        "og": "og.jpg",
+        "kicker": "Playbook"
+      },
+      "item_fields": [
+        {
+          "key": "draft",
+          "type": "bool",
+          "label": "Draft (hidden from the site until unticked)"
+        },
+        {
+          "key": "title",
+          "type": "text",
+          "label": "Title",
+          "maxlen": 90
+        },
+        {
+          "key": "slug",
+          "type": "slug",
+          "from": "title",
+          "label": "Web address (elvinpeters.com/writing/…)",
+          "maxlen": 60
+        },
+        {
+          "key": "kicker",
+          "type": "text",
+          "label": "Eyebrow (small label above the title)",
+          "maxlen": 40
+        },
+        {
+          "key": "dek",
+          "type": "textarea",
+          "label": "Dek (italic line under the title; also the search description)",
+          "maxlen": 200
+        },
+        {
+          "key": "short_dek",
+          "type": "textarea",
+          "label": "Teaser (the card on the blog index and homepage)",
+          "maxlen": 200
+        },
+        {
+          "key": "date",
+          "type": "text",
+          "label": "Date shown on the card, e.g. Aug 7, 2026",
+          "maxlen": 20
+        },
+        {
+          "key": "readmins",
+          "type": "text",
+          "label": "Read time in minutes",
+          "maxlen": 3
+        },
+        {
+          "key": "accent",
+          "type": "select",
+          "label": "Accent colour",
+          "options": [
+            { "value": "amber", "label": "Amber (findings, analysis)" },
+            { "value": "good", "label": "Green (playbooks, how-to)" },
+            { "value": "blue", "label": "Blue (reference, explainer)" }
+          ]
+        },
+        {
+          "key": "body",
+          "type": "markdown",
+          "label": "Body (Markdown)",
+          "maxlen": 120000
+        }
+      ]
+    }
+  ]
+}

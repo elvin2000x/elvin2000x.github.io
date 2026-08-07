@@ -265,6 +265,40 @@ for (const rel of PAGES) {
   }
 })();
 
+// VOICE GATE: no em-dashes or en-dashes in blog content, ever.
+// This is a hard house rule (DESIGN-SYSTEM section 7 / VOICE-RULES.md) and it was
+// being checked by hand, which is exactly the kind of check that eventually slips.
+// Covers every authored surface: the essay records, the scoped body files, and the
+// built pages. Entities like &ndash; are fine; this only catches literal characters.
+(() => {
+  const DASH = /[–—]/;
+  const where = (t) => {
+    const i = t.search(DASH);
+    return JSON.stringify(t.slice(Math.max(0, i - 40), i + 40));
+  };
+  const raw = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'essays.json'), 'utf8'));
+  const posts = Array.isArray(raw) ? raw : raw.posts;
+  for (const e of posts) {
+    for (const k of ['title', 'short_title', 'dek', 'short_dek', 'kicker', 'body', 'html']) {
+      const v = e[k];
+      if (typeof v === 'string' && DASH.test(v))
+        fail('content/essays.json', `post "${e.slug}" field ${k} has an em-dash or en-dash: ${where(v)}`);
+    }
+    if (e.file) {
+      const abs = path.join(ROOT, e.file);
+      if (fs.existsSync(abs)) {
+        const t = fs.readFileSync(abs, 'utf8');
+        if (DASH.test(t)) fail(e.file, `em-dash or en-dash in post body: ${where(t)}`);
+      }
+    }
+  }
+  for (const rel of PAGES) {
+    if (!rel.startsWith('writing/')) continue;
+    const t = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    if (DASH.test(t)) fail(rel, `em-dash or en-dash on a built blog page: ${where(t)}`);
+  }
+})();
+
 // KEY PAGES exist and are non-trivial.
 for (const key of ['index.html', 'book.html', 'services/index.html', 'contact/index.html',
   'links/index.html', 'projects/index.html', 'system/index.html', 'writing/index.html']) {
