@@ -65,7 +65,7 @@
           '<a href="https://elvinpeters.com/#about">About</a>' +
           '<a href="https://elvinpeters.com/contact/">Contact</a>' +
           '<button class="themebtn" data-theme-toggle type="button"></button>' +
-          '<a class="cta" href="https://meet.elvinpeters.com">Book a call</a>' +
+          '<a class="cta" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy the Book</a>' +
         '</nav>' +
       '</div>';
   }

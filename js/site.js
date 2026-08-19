@@ -89,6 +89,9 @@
       c.href = el.getAttribute('href');
       c.textContent = el.textContent.replace(/\s+/g, ' ').trim();
       if (el.className.indexOf('cta') > -1) c.className = 'cta';
+      // Services dropdown children are plain anchors inside .links, so the
+      // drawer picks them up for free. Tag them so they read as nested.
+      if (el.className.indexOf('navdd-i') > -1) c.className = 'sub';
       if (el.getAttribute('target')) c.setAttribute('target', el.getAttribute('target'));
       if (el.getAttribute('rel')) c.setAttribute('rel', el.getAttribute('rel'));
       return c;

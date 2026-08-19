@@ -196,6 +196,40 @@ const NAV_SVG_SIG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"
 const NAV_SVG_ARROW = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const HERO_SVG_ARROW = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
+// The Services menu is generated from content/services.json, the same file the
+// homepage cards render from, so the menu and the cards can no longer drift.
+// Adding a service to that file puts it in both places with no further edits.
+// The trigger is a real link to /services/, so the menu degrades to a plain
+// link with no JS and stays usable on touch, where hover does not exist.
+function renderNavDropdown(href, label, ind) {
+  const out = [];
+  out.push(`${ind}    <div class="navdd">`);
+  out.push(`${ind}      <a class="navdd-t" href="${href}">${esc(label)}<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>`);
+  out.push(`${ind}      <div class="navdd-p">`);
+  for (const b of SVCS.buckets) {
+    const cards = SVCS.cards.filter(x => x.bucket === b.id);
+    if (!cards.length) continue;
+    out.push(`${ind}        <div class="navdd-g">`);
+    out.push(`${ind}          <span class="navdd-l">${esc(b.label)}</span>`);
+    for (const c of cards) out.push(`${ind}          <a class="navdd-i" href="${c.href}">${esc(c.title)}</a>`);
+    out.push(`${ind}        </div>`);
+  }
+  out.push(`${ind}      </div>`);
+  out.push(`${ind}    </div>`);
+  return out.join('\n');
+}
+
+// Nav items flagged "ext" in content/nav.json leave the site (the AI directory,
+// the Amazon listing). They open in a new tab; rel="noopener" keeps the
+// destination from reaching back through window.opener.
+const EXT = l => (l && l.ext ? ' target="_blank" rel="noopener"' : '');
+
+// A CTA carrying "contact" opens the contact modal with its subject prefilled,
+// instead of sending the visitor to a scheduler.
+const CONTACT = l => (l && l.contact
+  ? ` data-contact="${esc(l.contact)}" data-contact-source="${esc(l.source || 'home')}"`
+  : '');
+
 function renderNav(pageKey) {
   const pg = (NAVC.pages || {})[pageKey] || {};
   const ind = ' '.repeat(pg.indent || 0);
@@ -204,14 +238,15 @@ function renderNav(pageKey) {
     let href = l.href;
     if (href === '/#about' && pg.aboutHref) href = pg.aboutHref;
     const active = pg.active && l.href === pg.active ? ' class="active"' : '';
-    return `${ind}    <a href="${href}"${active}>${esc(l.label)}</a>`;
+    if (l.dropdown === 'services') return renderNavDropdown(href, l.label, ind);
+    return `${ind}    <a href="${href}"${active}${EXT(l)}>${esc(l.label)}</a>`;
   });
   const brand = pg.brandStyle === 'multiline'
     ? `${ind}  <a class="brandmark" href="${pg.brandHref || '/'}">\n${ind}    <span class="sig">${NAV_SVG_SIG}</span>\n${ind}    ${esc(NAVC.brand).replace(' ', '&nbsp;')}\n${ind}  </a>`
     : `${ind}  <a class="brandmark" href="${pg.brandHref || '/'}"><span class="sig">${NAV_SVG_SIG}</span>${esc(NAVC.brand).replace(' ', '&nbsp;')}</a>`;
   const tail = [];
   if (pg.themebtn) tail.push(`${ind}    <button class="themebtn" id="themeBtn" data-theme-toggle aria-label="Toggle light or dark theme">\u25d1</button>`);
-  tail.push(`${ind}    <a class="cta" href="${cta.href}">${esc(cta.label)}${pg.ctaArrow ? ' ' + NAV_SVG_ARROW : ''}</a>`);
+  tail.push(`${ind}    <a class="cta" href="${cta.href}"${EXT(cta)}>${esc(cta.label)}${pg.ctaArrow || cta.ext ? ' ' + NAV_SVG_ARROW : ''}</a>`);
   return [`${ind}<nav class="nav"><div class="container">`, brand,
           `${ind}  <div class="links">`, ...links, ...tail,
           `${ind}  </div>`, `${ind}</div></nav>`].join('\n');
@@ -225,8 +260,8 @@ function renderHeroText() {
     `        <h1>${esc(h.headline_1)}<br><span class="amp">${esc(h.headline_2)}</span></h1>`,
     `        <p class="lede">${esc(h.lede)}</p>`,
     `        <div class="actions">`,
-    `          <a class="btn primary" href="${h.cta_primary.href}">${esc(h.cta_primary.label)} ${HERO_SVG_ARROW}</a>`,
-    `          <a class="btn ghost" href="${h.cta_secondary.href}">${esc(h.cta_secondary.label)}</a>`,
+    `          <a class="btn primary" href="${h.cta_primary.href}"${EXT(h.cta_primary)}${CONTACT(h.cta_primary)}>${esc(h.cta_primary.label)} ${HERO_SVG_ARROW}</a>`,
+    `          <a class="btn ghost" href="${h.cta_secondary.href}"${EXT(h.cta_secondary)}${CONTACT(h.cta_secondary)}>${esc(h.cta_secondary.label)}</a>`,
     `        </div>`,
     `      </div>`].join('\n');
 }
@@ -342,11 +377,11 @@ applyRegions('claude/index.html', {
 });
 /* The unit charts are one mark per real thing counted, emitted here rather than
    hand-written so the marks can never drift from the audit they describe. The
-   numbers are the verified ones: 200 of 200 titles, and 21 of 75 stories.
+   numbers are the verified ones: 200 of 200 titles, and 22 of 78 stories.
    Sourced to Brain/deliverables/VERIFIED-NUMBERS.md. */
 const FIG_TITLES_TOTAL = 200;   // pieces audited
-const FIG_STORIES_TOTAL = 75;   // short stories
-const FIG_STORIES_HIT = 21;     // protagonist named Marina
+const FIG_STORIES_TOTAL = 78;   // short stories
+const FIG_STORIES_HIT = 22;     // protagonist named Marina
 
 function renderFigTitles() {
   return '<i></i>'.repeat(FIG_TITLES_TOTAL);
@@ -580,11 +615,15 @@ applyRegions('index.html', {
   'nav': () => renderNav('index.html'),
   'hero-text': renderHeroText,
   'home-services': renderHomeServices,
+  // The homepage blog cards are the same fragment written to
+  // writing/_homepage_cards.html. Injecting it here means the homepage can no
+  // longer drift from the post registry, which it had (8 min vs 7 min).
+  'writing': () => frag,
 });
 applyRegions('book.html', {
   'nav': () => renderNav('book.html'),
 });
-console.log('Regions applied: index.html (nav, hero-text, home-services), book.html (nav)');
+console.log('Regions applied: index.html (nav, hero-text, home-services, writing), book.html (nav)');
 
 
 

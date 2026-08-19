@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elvin M. Peters | AI Consultant &amp; Google Ads Expert, Toronto + Remote</title>
-<meta name="description" content="Toronto AI consultant and author of The Artificial Advantage. I help teams install AI that ships, run better Google Ads, and train staff to use AI well. Book a call.">
+<meta name="description" content="Toronto AI consultant and author of The Artificial Advantage. I help teams install AI that ships, run better Google Ads, and train staff to use AI well. Get in touch.">
 <link rel="canonical" href="https://elvinpeters.com/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Elvin M. Peters | AI Consultant &amp; Google Ads Expert">
@@ -191,6 +191,20 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
 .rung b{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);color:var(--ink);line-height:1.25;margin-bottom:8px}
 .rung .rd{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.6;flex:1}
 .rung .rgo{font-size:var(--fs-sm);font-weight:600;color:var(--gold-2);margin-top:14px}
+/* THE SERIES. Three covers side by side is the cheapest signal that this is a
+   body of work rather than one book. Books two and three are unpublished, so
+   their cards carry a status label and no buy link. */
+.series{margin-top:56px;padding-top:40px;border-top:1px solid var(--line)}
+.series h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);color:var(--ink);line-height:1.3;margin:10px 0 0;max-width:34ch}
+.serieslist{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+.sbook{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.sbook img{width:100%;height:auto;border-radius:6px;box-shadow:0 18px 38px -20px rgba(0,0,0,.65);margin-bottom:16px}
+.sbook .sb-n{font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);margin-bottom:6px}
+.sbook b{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);color:var(--ink);line-height:1.25;margin-bottom:8px}
+.sbook .sb-d{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.6;flex:1}
+.sbook .sb-go{font-size:var(--fs-sm);font-weight:600;color:var(--gold-2);margin-top:14px;text-decoration:none}
+.sbook .sb-soon{font-size:var(--fs-sm);font-weight:600;color:var(--ink-2);margin-top:14px}
+@media (max-width:920px){.serieslist{grid-template-columns:1fr;gap:16px}}
 .rung--cover{flex-direction:row;gap:20px;align-items:flex-start}
 .rung--cover img{width:92px;height:auto;border-radius:6px;flex:none;box-shadow:0 16px 34px -18px rgba(0,0,0,.6)} /* bp-exempt: fixed cover thumb */
 .rung--cover > div{display:flex;flex-direction:column;flex:1}
@@ -204,6 +218,8 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 :focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
 </style>
+  <link rel="stylesheet" href="/css/contact-modal.css">
+  <script src="/js/contact-modal.js" defer></script>
 </head>
 <body>
   <!-- ep:nav -->
@@ -213,15 +229,34 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
       Elvin&nbsp;Peters
     </a>
     <div class="links">
-      <a href="/services/">Services</a>
-      <a href="/book.html">The Book</a>
-      <a href="/claude/">Claude Guide</a>
-      <a href="/content-machine/">Content Machine</a>
-      <a href="/projects/">Projects</a>
+      <div class="navdd">
+        <a class="navdd-t" href="/services/">Services<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="navdd-p">
+          <div class="navdd-g">
+            <span class="navdd-l">Put AI to work</span>
+            <a class="navdd-i" href="/setup/">The AI Workspace Setup</a>
+            <a class="navdd-i" href="/ai-coaching/">AI Coaching</a>
+            <a class="navdd-i" href="/ai-workflow-build/">AI Workflow Build</a>
+          </div>
+          <div class="navdd-g">
+            <span class="navdd-l">In-Person</span>
+            <a class="navdd-i" href="/contact/">Events</a>
+            <a class="navdd-i" href="/team-ai-workshop/">Workshops</a>
+          </div>
+          <div class="navdd-g">
+            <span class="navdd-l">Consulting</span>
+            <a class="navdd-i" href="/google-ads-audit/">Google Ads Audit</a>
+            <a class="navdd-i" href="/google-ads/">Google Ads Management</a>
+          </div>
+        </div>
+      </div>
+      <a href="/free/">Guides</a>
       <a href="/writing/">Blog</a>
-      <a href="#about">About</a>
+      <a href="/receipts/">Receipts</a>
+      <a href="https://ultimateaidirectory.com" target="_blank" rel="noopener">AI Tools Directory</a>
+      <a href="/contact/">Contact</a>
       <button class="themebtn" id="themeBtn" data-theme-toggle aria-label="Toggle light or dark theme">◑</button>
-      <a class="cta" href="/contact/">Contact <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="cta" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy the Book <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div></nav>
   <!-- /ep:nav -->
@@ -235,8 +270,8 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <h1>You tried AI.<br><span class="amp">You weren't impressed.</span></h1>
         <p class="lede">You do not need another AI demo. You need AI doing real work: hours saved, ad spend that pays for itself, and follow-up that runs while you sleep. I find where AI actually moves the needle in your business, build it, and train your team to run it. One operator, accountable end to end.</p>
         <div class="actions">
-          <a class="btn primary" href="https://meet.elvinpeters.com">Book a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a class="btn ghost" href="https://www.amazon.com/dp/B0H4X2S2JD">Buy the book</a>
+          <a class="btn primary" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy the Book <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn ghost" href="/contact/" data-contact="Working together on " data-contact-source="home-hero">Get in touch</a>
         </div>
       </div>
       <!-- /ep:hero-text -->
@@ -252,8 +287,8 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   </header>
 
   <div class="credbar"><div class="container">
-    <span>Three years inside <b>Google Ads</b>, on <b>$60M+</b> in annual ad investment</span>
-    <span><b>$1M+ a month</b> in paid media at a leading Canadian fintech</span>
+    <span><b>$50M+</b> in profitable ad spend, then advising inside <b>Google</b></span>
+    <span><b>$1.5M a month</b> in paid media at a large publicly traded Canadian lender</span>
     <span>Author of <b>The Artificial Advantage</b></span>
     <span>Builds and self-hosts AI systems <b>solo</b></span>
   </div></div>
@@ -286,20 +321,30 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <p>Pick one repetitive task and I build the AI workflow that runs it, then hand it over documented so your team owns it.</p>
         <div class="row"><a href="/ai-workflow-build/">View builds →</a></div>
       </div>
+    </div>
+
+    <div class="bucket-label">In-Person</div>
+    <div class="svcgrid">
       <div class="svc">
-        <h3>Team AI Workshop</h3>
+        <h3>Events</h3>
+        <span class="who">For conferences, townhalls and company events</span>
+        <p>A talk built for your audience, whether that is a conference stage, a townhall or a company offsite, that sends people back to their desks able to use AI on real work.</p>
+        <div class="row"><a href="/contact/">View events →</a></div>
+      </div>
+      <div class="svc">
+        <h3>Workshops</h3>
         <span class="who">For teams</span>
         <p>A live two hour session that gets your whole team working from one reliable, shared way of using AI.</p>
-        <div class="row"><a href="/team-ai-workshop/">View workshop →</a></div>
+        <div class="row"><a href="/team-ai-workshop/">View workshops →</a></div>
       </div>
     </div>
 
-    <div class="bucket-label">Bring in customers</div>
+    <div class="bucket-label">Consulting</div>
     <div class="svcgrid">
       <div class="svc">
         <h3>Google Ads Audit</h3>
         <span class="who">For businesses already spending</span>
-        <p>A specialist with three years inside Google Ads tears down your account and hands you a prioritized plan of exactly what to fix. From $499.</p>
+        <p>A specialist who ran $1.5M a month in paid search tears down your account and hands you a prioritized plan of exactly what to fix. From $499.</p>
         <div class="row"><a href="/google-ads-audit/">View the audit →</a></div>
       </div>
       <div class="svc">
@@ -328,6 +373,38 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
           </a>
         </div>
         <p class="onamz" style="margin-top:14px">Want the ebook plus the whole working kit instead? <a href="/system/" style="color:var(--gold-2);font-weight:600">The Artificial Advantage System &rarr;</a></p>
+      </div>
+    </div>
+
+    <div class="series">
+      <span class="eyebrow">The AI Fluency Series</span>
+      <h3>Three books, one arc: direct the model, build the systems, then run the agents.</h3>
+      <div class="serieslist">
+
+        <div class="sbook">
+          <img src="/img/cover-hero.webp" alt="The Artificial Advantage, book one of the AI Fluency Series" width="600" height="960" loading="lazy">
+          <span class="sb-n">Book One &middot; Available now</span>
+          <b>The Artificial Advantage</b>
+          <span class="sb-d">Brief a model the way you would brief a sharp new hire, so the output is work you can actually use.</span>
+          <a class="sb-go" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy on Amazon &rarr;</a>
+        </div>
+
+        <div class="sbook">
+          <img src="/img/cover-book2.webp" alt="The Systematic Advantage, book two of the AI Fluency Series" width="600" height="960" loading="lazy">
+          <span class="sb-n">Book Two &middot; In progress</span>
+          <b>The Systematic Advantage</b>
+          <span class="sb-d">Turn one good result into a repeatable system, so the skill compounds instead of resetting every time.</span>
+          <span class="sb-soon">Not yet published</span>
+        </div>
+
+        <div class="sbook">
+          <img src="/img/cover-book3.webp" alt="The Agentic Advantage, book three of the AI Fluency Series" width="600" height="960" loading="lazy">
+          <span class="sb-n">Book Three &middot; Planned</span>
+          <b>The Agentic Advantage</b>
+          <span class="sb-d">Hand the repeatable work to agents that run without you, and keep the judgment that stays yours.</span>
+          <span class="sb-soon">Not yet published</span>
+        </div>
+
       </div>
     </div>
 
@@ -376,8 +453,8 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
   <section class="section section--cont"><div class="container">
     <div class="ctaband">
       <h2>Ready to put AI to work?</h2>
-      <p>Book a 20 minute call. We will find the fastest place AI pays off in your business, and I will tell you straight whether I can help.</p>
-      <a class="btn primary" href="https://meet.elvinpeters.com">Book a call <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <p>Tell me where you are stuck. We will find the fastest place AI pays off in your business, and I will tell you straight whether I can help.</p>
+      <a class="btn primary" href="/contact/" data-contact="Working together on " data-contact-source="home">Get in touch <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div></section>
 
@@ -409,9 +486,10 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
       <p>How I build: the harness around the AI, the reliability discipline, and the tools that let one person ship like a team. <a href="/writing/" style="color:var(--gold-2);font-weight:600">All posts →</a></p>
     </div>
     <div class="grid">
+      <!-- ep:writing -->
       <a class="card" href="/writing/token-efficiency/">
         <div class="thumb" style="background-image:url(/img/blog-tokens.svg)"></div>
-        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">7 min</span></div>
+        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">8 min</span></div>
         <h3>The Rent You Pay Every Turn</h3><p class="desc">I audited 3 months and 16 billion tokens of my own AI sessions. The bill was not where I thought.</p><span class="go">Read <span class="arw">→</span></span></div>
       </a>
       <a class="card" href="/writing/assembly-line/">
@@ -439,6 +517,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">6 min</span></div>
         <h3>Shipping Thirteen Games Solo</h3><p class="desc">Shipping a lot alone is a tooling problem, and the tool that matters most is the one that checks your work while you sleep.</p><span class="go">Read <span class="arw">→</span></span></div>
       </a>
+      <!-- /ep:writing -->
     </div>
   </div></section>
 
@@ -473,10 +552,7 @@ footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
         </div>
       </div>
       <div class="clinks">
-        <a class="clink" href="https://meet.elvinpeters.com">
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>
-          <span>Book a call<small>The fastest way to work together</small></span>
-        </a>
+        <a class="clink" href="/contact/" data-contact="Working together on " data-contact-source="home">Get in touch <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></a>
         <a class="clink" href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">
           <svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.75 2.5 4.75 5.9V21h-4v-5.2c0-1.24-.02-2.85-1.74-2.85s-2 1.36-2 2.76V21H9z"/></svg>
           <span>LinkedIn<small>linkedin.com/in/elvinmpeters</small></span>

@@ -152,9 +152,13 @@ for (const rel of PAGES) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ep-verify-'));
   try {
     execFileSync(process.execPath, [path.join(ROOT, 'build.js'), '--out', tmp], { stdio: 'pipe' });
-    const gen = ['writing/index.html', 'writing/_homepage_cards.html'].concat(
-      ['token-efficiency','assembly-line','studio-session','the-harness',
-       'zero-dependencies','thirteen-games-solo'].map(s => 'writing/' + s + '/index.html'));
+    // Slugs come from the registry, not a hardcoded list, so a new post is
+    // covered by this check automatically instead of slipping through on a WARN.
+    // Drafts are excluded because a real build never writes them.
+    const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'essays.json'), 'utf8'));
+    const slugs = (Array.isArray(reg) ? reg : reg.posts).filter(e => !e.draft).map(e => e.slug);
+    const gen = ['index.html', 'writing/index.html', 'writing/_homepage_cards.html'].concat(
+      slugs.map(s => 'writing/' + s + '/index.html'));
     for (const g of gen) {
       const a = path.join(ROOT, g), b = path.join(tmp, g);
       if (!fs.existsSync(a) || !fs.existsSync(b)) { warn(g, 'missing from build comparison'); continue; }
