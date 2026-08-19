@@ -6,8 +6,12 @@
       "label": "Put AI to work"
     },
     {
-      "id": "bring-in-customers",
-      "label": "Bring in customers"
+      "id": "in-person",
+      "label": "In-Person"
+    },
+    {
+      "id": "consulting",
+      "label": "Consulting"
     }
   ],
   "cards": [
@@ -39,26 +43,35 @@
       "link_label": "View builds →"
     },
     {
+      "id": "events",
+      "bucket": "in-person",
+      "title": "Events",
+      "href": "/contact/",
+      "who": "For conferences, townhalls and company events",
+      "home_blurb": "A talk built for your audience, whether that is a conference stage, a townhall or a company offsite, that sends people back to their desks able to use AI on real work.",
+      "link_label": "View events →"
+    },
+    {
       "id": "workshop",
-      "bucket": "put-ai-to-work",
-      "title": "Team AI Workshop",
+      "bucket": "in-person",
+      "title": "Workshops",
       "href": "/team-ai-workshop/",
       "who": "For teams",
       "home_blurb": "A live two hour session that gets your whole team working from one reliable, shared way of using AI.",
-      "link_label": "View workshop →"
+      "link_label": "View workshops →"
     },
     {
       "id": "ads-audit",
-      "bucket": "bring-in-customers",
+      "bucket": "consulting",
       "title": "Google Ads Audit",
       "href": "/google-ads-audit/",
       "who": "For businesses already spending",
-      "home_blurb": "A specialist with three years inside Google Ads tears down your account and hands you a prioritized plan of exactly what to fix. From $499.",
+      "home_blurb": "A specialist who ran $1.5M a month in paid search tears down your account and hands you a prioritized plan of exactly what to fix. From $499.",
       "link_label": "View the audit →"
     },
     {
       "id": "ads-mgmt",
-      "bucket": "bring-in-customers",
+      "bucket": "consulting",
       "title": "Google Ads Management",
       "href": "/google-ads/",
       "who": "For businesses ready to grow",

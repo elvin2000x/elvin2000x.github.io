@@ -4,36 +4,35 @@
   "links": [
     {
       "label": "Services",
-      "href": "/services/"
+      "href": "/services/",
+      "dropdown": "services"
     },
     {
-      "label": "The Book",
-      "href": "/book.html"
-    },
-    {
-      "label": "Claude Guide",
-      "href": "/claude/"
-    },
-    {
-      "label": "Content Machine",
-      "href": "/content-machine/"
-    },
-    {
-      "label": "Projects",
-      "href": "/projects/"
+      "label": "Guides",
+      "href": "/free/"
     },
     {
       "label": "Blog",
       "href": "/writing/"
     },
     {
-      "label": "About",
-      "href": "/#about"
+      "label": "Receipts",
+      "href": "/receipts/"
+    },
+    {
+      "label": "AI Tools Directory",
+      "href": "https://ultimateaidirectory.com",
+      "ext": true
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
     }
   ],
   "cta": {
-    "label": "Contact",
-    "href": "/contact/"
+    "label": "Buy the Book",
+    "href": "https://www.amazon.com/dp/B0H4X2S2JD",
+    "ext": true
   },
   "pages": {
     "index.html": {
