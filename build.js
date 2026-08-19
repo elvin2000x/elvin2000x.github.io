@@ -630,7 +630,7 @@ console.log('Regions applied: index.html (nav, hero-text, home-services, writing
 /* ------------------------------------------------------------------ */
 /* sitemap.xml - generated from the page walk so it can never go stale.
    No lastmod on purpose: builds must be byte-idempotent. */
-const SM_EXCLUDE = ['titles', 'books', 'play', 'book1-feedback', 'oto', 'dl', 'studio', 'toolkit', 'thank-you', 'services/events' /* draft, pricing unapproved - unpark when it ships */];
+const SM_EXCLUDE = ['titles', 'books', 'play', 'book1-feedback', 'oto', 'dl', 'studio', 'toolkit', 'thank-you'];
 const SM_SKIP_FILES = ['apps/index.html', 'writing/_homepage_cards.html'];
 function smWalk(dir, rel, out) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {

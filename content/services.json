@@ -46,7 +46,7 @@
       "id": "events",
       "bucket": "in-person",
       "title": "Events",
-      "href": "/contact/",
+      "href": "/services/events/",
       "who": "For conferences, townhalls and company events",
       "home_blurb": "A talk built for your audience, whether that is a conference stage, a townhall or a company offsite, that sends people back to their desks able to use AI on real work.",
       "link_label": "View events →"
