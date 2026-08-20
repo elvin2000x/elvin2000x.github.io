@@ -87,7 +87,7 @@
     function cloneLink(el) {
       var c = document.createElement('a');
       c.href = el.getAttribute('href');
-      c.textContent = el.textContent.replace(/\s+/g, ' ').trim();
+      c.textContent = (el.getAttribute('data-nav-label') || el.textContent).replace(/\s+/g, ' ').trim();
       if (el.className.indexOf('cta') > -1) c.className = 'cta';
       // Services dropdown children are plain anchors inside .links, so the
       // drawer picks them up for free. Tag them so they read as nested.

@@ -522,3 +522,13 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 .navdrawer a.sub{padding-left:24px;color:var(--ink-2,#5b6779);font-size:var(--fs-sm,15px)}
 @media(max-width:920px){ html .nav .links .navdd{display:none} }
 
+
+/* Products dropdown: card-style rows, one gold buy action on top. Rendered by
+   build.js from content/products.json; .navdd-s subtitles hide in the drawer. */
+.nav .links .navdd-cards{min-width:288px}
+.nav .links .navdd-cards a.navdd-i{flex-direction:column;align-items:flex-start;justify-content:center;min-height:0;padding:9px 12px;white-space:normal;line-height:1.35;font-weight:600}
+.navdd-s{display:block;font-size:12px;font-weight:400;color:var(--muted,#7e8aa0);margin-top:1px}
+.nav .links a.navdd-buy{background:linear-gradient(135deg,var(--gold,#c9a250),var(--gold-2,#b3892f));color:var(--accent-on,#141414);border-radius:10px;margin:2px 4px 6px}
+.nav .links a.navdd-buy .navdd-s{color:var(--accent-on,#141414);opacity:.75}
+.nav .links a.navdd-buy:hover,.nav .links a.navdd-buy:focus-visible{background:linear-gradient(135deg,var(--gold,#c9a250),var(--gold-2,#b3892f));color:var(--accent-on,#141414);filter:brightness(1.06)}
+.navdrawer .navdd-s{display:none}
