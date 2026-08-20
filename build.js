@@ -256,6 +256,19 @@ const CONTACT = l => (l && l.contact
   ? ` data-contact="${esc(l.contact)}" data-contact-source="${esc(l.source || 'home')}"`
   : '');
 
+function renderNavItemsDropdown(href, label, items, ind) {
+  const out = [];
+  out.push(ind + '    <div class="navdd">');
+  out.push(ind + '      <a class="navdd-t" href="' + href + '">' + esc(label) + '<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>');
+  out.push(ind + '      <div class="navdd-p">');
+  out.push(ind + '        <div class="navdd-g">');
+  for (const it of items) out.push(ind + '          <a class="navdd-i" href="' + it.href + '"' + EXT(it) + '>' + esc(it.label) + '</a>');
+  out.push(ind + '        </div>');
+  out.push(ind + '      </div>');
+  out.push(ind + '    </div>');
+  return out.join('\n');
+}
+
 function renderNav(pageKey) {
   const pg = (NAVC.pages || {})[pageKey] || {};
   const ind = ' '.repeat(pg.indent || 0);
@@ -266,6 +279,7 @@ function renderNav(pageKey) {
     const active = pg.active && l.href === pg.active ? ' class="active"' : '';
     if (l.dropdown === 'services') return renderNavDropdown(href, l.label, ind);
     if (l.dropdown === 'products') return renderNavProductsDropdown(href, l.label, ind);
+    if (l.items) return renderNavItemsDropdown(href, l.label, l.items, ind);
     return `${ind}    <a href="${href}"${active}${EXT(l)}>${esc(l.label)}</a>`;
   });
   const brand = pg.brandStyle === 'multiline'

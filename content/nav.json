@@ -18,7 +18,13 @@
     },
     {
       "label": "Blog",
-      "href": "/writing/"
+      "href": "/writing/",
+      "items": [
+        {
+          "label": "Projects",
+          "href": "/projects/"
+        }
+      ]
     },
     {
       "label": "Receipts",
