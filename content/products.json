@@ -1,8 +1,18 @@
 {
   "_comment": "The single copy of the Products menu. node build.js renders it into the Products nav dropdown on every page carrying the ep:nav region. The /products/ and /series/ pages present the same items in full; keep all three in agreement when editing.",
   "buckets": [
-    { "id": "series", "label": "The AI Fluency Series" },
-    { "id": "tools", "label": "Tools and Apps" }
+    {
+      "id": "series",
+      "label": "The AI Fluency Series"
+    },
+    {
+      "id": "guides",
+      "label": "Guides and Systems"
+    },
+    {
+      "id": "tools",
+      "label": "Tools and Apps"
+    }
   ],
   "items": [
     {
@@ -24,6 +34,24 @@
       "title": "The series",
       "sub": "Books Two and Three, on the way",
       "href": "/series/"
+    },
+    {
+      "bucket": "guides",
+      "title": "The System",
+      "sub": "The complete method, $37",
+      "href": "/system/"
+    },
+    {
+      "bucket": "guides",
+      "title": "The Claude Operator's Manual",
+      "sub": "Claude, set up for your job, $67",
+      "href": "/claude/"
+    },
+    {
+      "bucket": "guides",
+      "title": "The Content Machine",
+      "sub": "AI volume worth publishing, $47",
+      "href": "/content-machine/"
     },
     {
       "bucket": "tools",
