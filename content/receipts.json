@@ -1,7 +1,7 @@
 {
   "_comment": "The receipts ledger. Every row must trace to Brain/deliverables/VERIFIED-NUMBERS.md. If a number is not in that file it does not go here. Add a row per system built; the page renders itself from this. Editable in Site Studio.",
   "intro": {
-    "label": "Receipts",
+    "label": "Proof",
     "headline": "One review, no case studies, and the most checkable numbers in this category.",
     "body": "I have one Amazon review and no client case studies. Rather than write vague quotes to fill the gap, here is what I can actually prove: what each system cost to build and run, logged per call at the time of the call, and what it produced. Including the parts that did not work, which is the half nobody publishes."
   },
