@@ -68,6 +68,90 @@
       },
       "brandStyle": "inline",
       "indent": 0
+    },
+    "ai-coaching/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "ai-workflow-build/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "contact/index.html": {
+      "brandHref": "/",
+      "themebtn": true,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "google-ads-audit/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "google-ads/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "press/index.html": {
+      "brandHref": "/",
+      "themebtn": true,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 0
+    },
+    "receipts/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "services/events/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "services/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "setup/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "team-ai-workshop/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "updates/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
     }
   }
 }

@@ -650,9 +650,11 @@ applyRegions('index.html', {
 applyRegions('book.html', {
   'nav': () => renderNav('book.html'),
 });
-applyRegions('series/index.html', { 'nav': () => renderNav('series/index.html') });
-applyRegions('products/index.html', { 'nav': () => renderNav('products/index.html') });
-console.log('Regions applied: index.html (nav, hero-text, home-services, writing), book.html (nav), series/index.html (nav), products/index.html (nav)');
+// Every other page in nav.json gets its nav from the same renderer, so the menu
+// cannot drift between pages. index/book are applied above with their other regions.
+const navOnly = Object.keys(NAVC.pages).filter(p => p !== 'index.html' && p !== 'book.html');
+for (const pk of navOnly) applyRegions(pk, { 'nav': () => renderNav(pk) });
+console.log('Regions applied: index.html (nav, hero-text, home-services, writing), book.html (nav), nav on: ' + navOnly.join(', '));
 
 
 
