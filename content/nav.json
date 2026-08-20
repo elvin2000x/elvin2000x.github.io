@@ -8,6 +8,11 @@
       "dropdown": "services"
     },
     {
+      "label": "Products",
+      "href": "/products/",
+      "dropdown": "products"
+    },
+    {
       "label": "Guides",
       "href": "/free/"
     },
@@ -18,11 +23,6 @@
     {
       "label": "Receipts",
       "href": "/receipts/"
-    },
-    {
-      "label": "AI Tools Directory",
-      "href": "https://ultimateaidirectory.com",
-      "ext": true
     },
     {
       "label": "Contact",
@@ -41,6 +41,20 @@
       "themebtn": true,
       "ctaArrow": true,
       "brandStyle": "multiline",
+      "indent": 2
+    },
+    "series/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "products/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
       "indent": 2
     },
     "book.html": {

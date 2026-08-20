@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI Fluency Series | Elvin Peters</title>
+<meta name="description" content="Three books, one arc: direct the model, build the systems, then run the agents. Book One, The Artificial Advantage, is on Amazon now. Books Two and Three are on the way.">
+<link rel="canonical" href="https://elvinpeters.com/series/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The AI Fluency Series | Elvin Peters">
+<meta property="og:description" content="Direct the model, build the systems, then run the agents. Book One is out now; Books Two and Three are on the way.">
+<meta property="og:url" content="https://elvinpeters.com/series/">
+<meta property="og:image" content="https://elvinpeters.com/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5v14M6 5h9M6 12h7M6 19h9' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='19.5' cy='18.6' r='1.9' fill='%23c9a250'/%3E%3C/svg%3E">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+<style>
+.spage{max-width:1000px;margin:0 auto;padding:0 24px}
+.shero{padding:64px 0 44px;border-bottom:1px solid var(--line-soft)}
+.shero .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+.shero h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,5vw,3.2rem);letter-spacing:-.015em;margin:12px 0 0;text-wrap:balance}
+.shero .sub{color:var(--ink-2);font-size:1.14rem;max-width:62ch;margin:18px 0 0}
+.vol{display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:start;padding:46px 0;border-bottom:1px solid var(--line-soft)}
+.vol img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.vol .vn{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-2);font-weight:700}
+.vol h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.01em;margin:8px 0 0}
+.vol .vsub{color:var(--muted);font-size:14px;margin:6px 0 0;font-style:italic}
+.vol p{color:var(--ink-2);font-size:1.05rem;max-width:60ch;margin:14px 0 0}
+.vol .vact{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:var(--sans);min-height:44px;text-decoration:none;color:inherit}
+.btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:var(--accent-on);box-shadow:var(--shadow)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.ghost{border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--gold)}
+.vchip{display:inline-flex;align-items:center;padding:9px 16px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.04em}
+.notify{margin:52px 0 64px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:38px;box-shadow:var(--shadow)}
+.notify h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);margin:0}
+.notify p{color:var(--ink-2);margin:12px 0 0;max-width:58ch}
+.notify form{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.notify input[type=email]{flex:1;min-width:220px;max-width:320px;padding:13px 16px;border-radius:10px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);font-size:16px}
+.notify .fine{font-size:12px;color:var(--muted);margin-top:12px}
+@media(max-width:640px){.vol{grid-template-columns:1fr}.vol img{max-width:220px}}
+footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px}
+footer .fin{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:var(--ink-2);text-decoration:none}footer a:hover{color:var(--gold-2)}
+body{background:radial-gradient(1100px 520px at 82% -8%,var(--glow),transparent 60%),linear-gradient(180deg,var(--bg),var(--bg-2));color:var(--ink);font-family:var(--sans);line-height:1.6;margin:0;-webkit-font-smoothing:antialiased;min-height:100vh}
+:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
+</style>
+<script src="/js/site.js"></script>
+</head>
+<body>
+  <!-- ep:nav -->
+  <nav class="nav"><div class="container">
+    <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
+    <div class="links">
+      <div class="navdd">
+        <a class="navdd-t" href="/services/">Services<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="navdd-p">
+          <div class="navdd-g">
+            <span class="navdd-l">Put AI to work</span>
+            <a class="navdd-i" href="/setup/">The AI Workspace Setup</a>
+            <a class="navdd-i" href="/ai-coaching/">AI Coaching</a>
+            <a class="navdd-i" href="/ai-workflow-build/">AI Workflow Build</a>
+          </div>
+          <div class="navdd-g">
+            <span class="navdd-l">In-Person</span>
+            <a class="navdd-i" href="/services/events/">Events</a>
+            <a class="navdd-i" href="/team-ai-workshop/">Workshops</a>
+          </div>
+          <div class="navdd-g">
+            <span class="navdd-l">Consulting</span>
+            <a class="navdd-i" href="/google-ads-audit/">Google Ads Audit</a>
+            <a class="navdd-i" href="/google-ads/">Google Ads Management</a>
+          </div>
+        </div>
+      </div>
+      <div class="navdd">
+        <a class="navdd-t" href="/products/">Products<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="navdd-p navdd-cards">
+          <div class="navdd-g">
+            <span class="navdd-l">The AI Fluency Series</span>
+            <a class="navdd-i navdd-buy" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" data-nav-label="Buy on Amazon">Buy on Amazon<span class="navdd-s">Book One, available now</span></a>
+            <a class="navdd-i" href="/book.html" data-nav-label="Learn more">Learn more<span class="navdd-s">The Artificial Advantage</span></a>
+            <a class="navdd-i" href="/series/" data-nav-label="The series">The series<span class="navdd-s">Books Two and Three, on the way</span></a>
+          </div>
+          <div class="navdd-g">
+            <span class="navdd-l">Tools and Apps</span>
+            <a class="navdd-i" href="https://ultimateaidirectory.com" target="_blank" rel="noopener" data-nav-label="AI Tools Directory">AI Tools Directory<span class="navdd-s">Find the right AI tool</span></a>
+            <a class="navdd-i" href="/apps/" data-nav-label="Apps and Calculators">Apps and Calculators<span class="navdd-s">Free tools, built and hosted here</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="/free/">Guides</a>
+      <a href="/writing/">Blog</a>
+      <a href="/receipts/">Receipts</a>
+      <a href="/contact/">Contact</a>
+      <a class="cta" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy the Book <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div></nav>
+  <!-- /ep:nav -->
+
+  <main class="spage">
+
+  <header class="shero">
+    <span class="eyebrow">The AI Fluency Series</span>
+    <h1>Three books, one arc.</h1>
+    <p class="sub">Direct the model, build the systems, then run the agents. Each book takes the skill from the one before it and compounds it. Book One is on Amazon now, and the next two are being written in the open, tested against the same live systems this whole site runs on.</p>
+  </header>
+
+  <section class="vol">
+    <img src="/img/cover-hero.webp" alt="The Artificial Advantage book cover" width="600" height="960" loading="lazy">
+    <div>
+      <span class="vn">Book One &middot; Available now</span>
+      <h2>The Artificial Advantage</h2>
+      <p class="vsub">Stop prompting. Start directing.</p>
+      <p>Brief a model the way you would brief a sharp new hire, so the output is work you can actually use. The book teaches the directing method from the ground up, on real tasks, and is published on Amazon in Kindle, paperback and hardcover.</p>
+      <div class="vact">
+        <a class="btn primary" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy on Amazon</a>
+        <a class="btn ghost" href="/book.html">Learn more</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="vol">
+    <img src="/img/cover-book2.webp" alt="The Systematic Advantage book cover" width="600" height="906" loading="lazy">
+    <div>
+      <span class="vn">Book Two &middot; In progress</span>
+      <h2>The Systematic Advantage</h2>
+      <p class="vsub">Designing efficient and scalable structures.</p>
+      <p>Turn one good result into a repeatable system, so the skill compounds instead of resetting every time. Book Two takes the directing habit from Book One and turns it into workflows, standards and structures a whole team can run.</p>
+      <div class="vact">
+        <span class="vchip">Being written now</span>
+        <a class="btn ghost" href="#notify">Get notified</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="vol" style="border-bottom:none">
+    <img src="/img/cover-book3.webp" alt="The Agentic Advantage book cover" width="600" height="906" loading="lazy">
+    <div>
+      <span class="vn">Book Three &middot; Planned</span>
+      <h2>The Agentic Advantage</h2>
+      <p class="vsub">Revolutionizing efficiency with AI agents.</p>
+      <p>Hand the repeatable work to agents that run without you, and keep the judgment that stays yours. Book Three covers the shift from using AI to directing fleets of it, drawn from the agent systems running behind this site every day.</p>
+      <div class="vact">
+        <span class="vchip">Planned</span>
+        <a class="btn ghost" href="#notify">Get notified</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="notify" id="notify">
+    <h2>Know the day Book Two ships.</h2>
+    <p>One email when the next book is out, plus the occasional field note from the systems the books are written from. No sequence, no drip, nothing daily.</p>
+    <form id="snform">
+      <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+      <input id="snemail" type="email" required placeholder="you@work.com" aria-label="Email address">
+      <button type="submit" class="btn primary">Notify me</button>
+    </form>
+    <p id="snmsg" style="display:none;font-size:14px;margin-top:12px"></p>
+    <p class="fine">Free. Unsubscribe any time.</p>
+    <script>
+    document.getElementById('snform').addEventListener('submit', function(e){
+      e.preventDefault();
+      var f = this, m = document.getElementById('snmsg');
+      fetch('https://ultimateaidirectory.com/api/lead', {method:'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({email: document.getElementById('snemail').value.trim(),
+          source: 'series-notify', website: f.website.value})})
+        .then(function(r){ return r.json(); }).then(function(r){
+          m.style.display = 'block';
+          if (r.success) { f.style.display = 'none'; m.style.color = 'var(--gold-2)'; m.textContent = 'You are on the list. When Book Two ships, you hear about it the same day.'; if (window.fbq) fbq('track','Lead',{content_name:'series-notify'}); }
+          else { m.style.color = 'var(--warn, #c0392b)'; m.textContent = r.error || 'Something went wrong. Try again.'; }
+        }).catch(function(){ m.style.display = 'block'; m.style.color = 'var(--warn, #c0392b)'; m.textContent = 'Network hiccup. Try again.'; });
+    });
+    </script>
+  </section>
+
+  </main>
+
+  <footer><div class="fin">
+    <span>&copy; 2026 Elvin M. Peters. Toronto and remote.</span>
+    <span><a href="/">Home</a> &middot; <a href="/products/">Products</a> &middot; <a href="/book.html">The Book</a> &middot; <a href="/receipts/">Receipts</a> &middot; <a href="/contact/">Contact</a></span>
+  </div></footer>
+</body>
+</html>

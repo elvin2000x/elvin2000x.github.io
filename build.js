@@ -191,6 +191,7 @@ console.log('Built', essays.length, 'essays -> writing/<slug>/ + writing/ index'
 const NAVC = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'nav.json'), 'utf8'));
 const HOME = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'home.json'), 'utf8'));
 const SVCS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'services.json'), 'utf8'));
+const PRODS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'products.json'), 'utf8'));
 
 const NAV_SVG_SIG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>`;
 const NAV_SVG_ARROW = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -219,6 +220,31 @@ function renderNavDropdown(href, label, ind) {
   return out.join('\n');
 }
 
+// The Products menu renders from content/products.json as two-line card rows
+// so the highest-value action (Buy on Amazon) reads as a button, not a link.
+// data-nav-label gives the mobile drawer a clean single-line label to clone.
+function renderNavProductsDropdown(href, label, ind) {
+  const out = [];
+  out.push(`${ind}    <div class="navdd">`);
+  out.push(`${ind}      <a class="navdd-t" href="${href}">${esc(label)}<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>`);
+  out.push(`${ind}      <div class="navdd-p navdd-cards">`);
+  for (const b of PRODS.buckets) {
+    const items = PRODS.items.filter(x => x.bucket === b.id);
+    if (!items.length) continue;
+    out.push(`${ind}        <div class="navdd-g">`);
+    out.push(`${ind}          <span class="navdd-l">${esc(b.label)}</span>`);
+    for (const it of items) {
+      const cls = it.buy ? 'navdd-i navdd-buy' : 'navdd-i';
+      const extra = it.ext ? ' target="_blank" rel="noopener"' : '';
+      out.push(`${ind}          <a class="${cls}" href="${it.href}"${extra} data-nav-label="${esc(it.title)}">${esc(it.title)}<span class="navdd-s">${esc(it.sub)}</span></a>`);
+    }
+    out.push(`${ind}        </div>`);
+  }
+  out.push(`${ind}      </div>`);
+  out.push(`${ind}    </div>`);
+  return out.join('\n');
+}
+
 // Nav items flagged "ext" in content/nav.json leave the site (the AI directory,
 // the Amazon listing). They open in a new tab; rel="noopener" keeps the
 // destination from reaching back through window.opener.
@@ -239,6 +265,7 @@ function renderNav(pageKey) {
     if (href === '/#about' && pg.aboutHref) href = pg.aboutHref;
     const active = pg.active && l.href === pg.active ? ' class="active"' : '';
     if (l.dropdown === 'services') return renderNavDropdown(href, l.label, ind);
+    if (l.dropdown === 'products') return renderNavProductsDropdown(href, l.label, ind);
     return `${ind}    <a href="${href}"${active}${EXT(l)}>${esc(l.label)}</a>`;
   });
   const brand = pg.brandStyle === 'multiline'
@@ -623,7 +650,9 @@ applyRegions('index.html', {
 applyRegions('book.html', {
   'nav': () => renderNav('book.html'),
 });
-console.log('Regions applied: index.html (nav, hero-text, home-services, writing), book.html (nav)');
+applyRegions('series/index.html', { 'nav': () => renderNav('series/index.html') });
+applyRegions('products/index.html', { 'nav': () => renderNav('products/index.html') });
+console.log('Regions applied: index.html (nav, hero-text, home-services, writing), book.html (nav), series/index.html (nav), products/index.html (nav)');
 
 
 
