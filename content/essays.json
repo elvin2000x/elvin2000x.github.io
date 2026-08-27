@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "slug": "same-song-four-bills",
+      "title": "Same Song, Four Different Bills",
+      "short_title": "Same Song, Four Bills",
+      "dek": "Four Claude runs, one songwriting task, and the biggest gap in the whole benchmark came from a single model measured against itself twice. What a model-efficiency test looks like before it can name a winner.",
+      "short_dek": "Four Claude runs, one songwriting task, and the biggest gap came from a single model measured against itself twice.",
+      "readmins": 6,
+      "date": "Aug 27, 2026",
+      "image": "blog-song-bench.svg",
+      "og": "og.jpg",
+      "custom": true,
+      "file": "essays/same-song-four-bills.html",
+      "accent": "amber",
+      "body_format": "custom",
+      "draft": false
+    },
+    {
       "slug": "automation-is-easy",
       "title": "I Built 258 Landing Pages by Hand",
       "short_title": "258 Pages by Hand",
