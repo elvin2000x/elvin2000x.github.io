@@ -287,7 +287,7 @@ footer a:hover{color:var(--ink)}
 (function(){
   var btn=document.getElementById('themeBtn'), root=document.documentElement;
   function cur(){return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}
-  btn.addEventListener('click',function(){root.setAttribute('data-theme', cur()==='dark'?'light':'dark');});
+  if(btn) btn.addEventListener('click',function(){root.setAttribute('data-theme', cur()==='dark'?'light':'dark');});
 })();
 (function(){
   function wire(formId, emailId, msgId){
