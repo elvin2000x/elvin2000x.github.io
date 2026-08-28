@@ -124,8 +124,8 @@
     "fr": {
       "copyright": "© 2026 Elvin M. Peters. Toronto et à distance.",
       "links": [
-        { "label": "Accueil", "href": "/fr/" },
-        { "label": "Services", "href": "/fr/services/" },
+        { "label": "Accueil", "href": "/" },
+        { "label": "Services", "href": "/services/" },
         { "label": "Le livre", "href": "/book.html" },
         { "label": "Courriel", "href": "mailto:elvin@elvinpeters.com" }
       ]

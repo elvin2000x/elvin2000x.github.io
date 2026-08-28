@@ -886,7 +886,10 @@ function renderSections(secs, lang) {
       const o = s.offer;
       parts.push('    <div class="offercard" style="margin-top:26px">');
       parts.push(`      <div class="oname">${esc(o.name)}</div>`);
-      parts.push(`      <div class="price">${esc(o.price)} <small>${esc(o.priceUnit)}</small></div>`);
+      // Not every offer has a unit: the AIO build is a flat one-time price,
+      // so an unguarded <small> would print the word "undefined" next to it.
+      parts.push(`      <div class="price">${esc(o.price)}` +
+        (o.priceUnit ? ` <small>${esc(o.priceUnit)}</small>` : '') + `</div>`);
       if (o.scarcity) parts.push(`      <p class="scarce">${esc(o.scarcity)}</p>`);
       if (o.pnote) parts.push(`      <div class="pnote">${esc(o.pnote)}</div>`);
       parts.push('      <ul class="checklist">');
@@ -929,8 +932,24 @@ function renderOfferPage(page, lang) {
         provider: { '@type': 'Person', name: 'Elvin M. Peters', jobTitle: 'AI Consultant' },
         areaServed: page.schemaService.areaServed, url: selfUrl,
         inLanguage: L.hreflang,
-        offers: [{ '@type': 'Offer', price: page.schemaService.price,
-          priceCurrency: page.schemaService.priceCurrency, url: selfUrl }] },
+        /* The hand-authored pages carried a named Offer with a
+           UnitPriceSpecification, which says "1500 per MONTH" rather than the
+           bare "1500" a plain Offer implies. Dropping it on migration would
+           have quietly downgraded the markup on the pages of a consultant who
+           sells schema work. offerName and unitText are optional: a one-time
+           price like the AIO build has no unit, so it emits a plain Offer. */
+        offers: [Object.assign(
+          { '@type': 'Offer' },
+          page.schemaService.offerName ? { name: c.schemaOfferName || page.schemaService.offerName } : {},
+          { price: page.schemaService.price,
+            priceCurrency: page.schemaService.priceCurrency,
+            url: selfUrl },
+          page.schemaService.unitText ? { priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: page.schemaService.price,
+            priceCurrency: page.schemaService.priceCurrency,
+            unitText: page.schemaService.unitText } } : {}
+        )] },
       { '@type': 'FAQPage', inLanguage: L.hreflang, mainEntity: faqPlain }
     ]
   };
@@ -1008,13 +1027,13 @@ ${renderForm(c.form, lang, slug)}
       <h2>${esc(c.cta.h2)}</h2>
       <p>${esc(c.cta.p)}</p>
       ${renderBtn(c.cta.btn, 'primary', lang)}
-      ${c.cta.after ? `<p style="margin:18px 0 0;font-size:14px">${c.cta.after}</p>` : ''}
+      ${c.cta.after ? `<p style="margin:18px 0 0;font-size:14px"><a href="${loc(c.cta.after.href, lang)}" style="color:var(--gold-2)">${esc(c.cta.after.label)} &rarr;</a></p>` : ''}
     </div>
   </div></section>
 </main>
 <footer><div class="container">
   <span>${esc(I18N.footer[lang].copyright)}</span>
-  <span>${I18N.footer[lang].links.map(l => `<a href="${l.href}">${esc(l.label)}</a>`).join(' &middot; ')}</span>
+  <span>${I18N.footer[lang].links.map(l => `<a href="${loc(l.href, lang)}">${esc(l.label)}</a>`).join(' &middot; ')}</span>
 </div></footer>
 </body>
 </html>
@@ -1032,6 +1051,27 @@ for (const page of PAGES) {
   }
 }
 console.log('Bilingual pages: ' + genPaths.length + ' (' + genPaths.join(', ') + ')');
+
+/* Every /fr/ href on a generated page must resolve to a file that exists.
+   loc() only adds the prefix where a twin is present, so the only way to get
+   a broken one is a hardcoded /fr/... in a data file -- which is exactly the
+   bug this caught: the French footer pointed at /fr/ and /fr/services/, and
+   the French google-ads page at /fr/contact/, none of which had been built.
+   Nothing visible fails when this happens; the link just 404s for the one
+   audience the page was translated for. So it stops the build instead. */
+const frBroken = [];
+for (const rel of genPaths) {
+  const html = fs.readFileSync(path.join(OUT, rel), 'utf8');
+  for (const m of html.matchAll(/href="(\/fr\/[^"#?]*)/g)) {
+    const target = m[1].endsWith('/') ? m[1].slice(1) + 'index.html' : m[1].slice(1);
+    if (!fs.existsSync(path.join(OUT, target))) frBroken.push(rel + ' -> ' + m[1]);
+  }
+}
+if (frBroken.length) {
+  throw new Error('French links point at pages that do not exist:\n  ' +
+    [...new Set(frBroken)].join('\n  ') +
+    '\nStore the English path in the data file and let loc() add /fr where a twin exists.');
+}
 
 
 /* ------------------------------------------------------------------ */
