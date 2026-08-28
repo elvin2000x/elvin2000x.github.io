@@ -1064,8 +1064,10 @@ function smPriority(u) {
 }
 /* hreflang annotations for the bilingual pairs. Every page already carries
    page-level <link rel="alternate"> tags; this is the second place Google
-   reads the same declaration, and the one Search Console's international
-   reporting is built on. Both sides of a pair must list the complete set
+   reads the same declaration. Search Console's International Targeting report
+   was retired in 2022, so nothing here surfaces in a GSC report -- validate
+   with URL Inspection or an external hreflang checker. The annotations still
+   feed Google's actual pairing. Both sides of a pair must list the complete set
    INCLUDING THEMSELVES, or Google discards the entire cluster and the pages
    compete with each other instead of pairing. x-default points at English:
    it is the fallback for every language we do not publish, not a third page. */
