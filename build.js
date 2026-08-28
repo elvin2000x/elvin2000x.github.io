@@ -447,44 +447,6 @@ applyRegions('content-machine/index.html', {
   'fig-marina': renderFigMarina,
 });
 
-/* ---- /receipts/ -------------------------------------------------------
-   The ledger renders itself from content/receipts.json so adding a row is a
-   data edit, not a markup edit. That matters because the value of this page
-   compounds with the date range: every system built adds a line, and a
-   competitor starting today has nothing to put in one. */
-const RCP = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'receipts.json'), 'utf8'));
-
-function renderRcIntro() {
-  const i = RCP.intro;
-  return [
-    `    <span class="label">${i.label}</span>`,
-    `    <h1>${i.headline}</h1>`,
-    `    <p class="sub">${i.body}</p>`,
-  ].join('\n');
-}
-function renderRcSpend() {
-  return '    <ul class="ledger">\n' + RCP.spend.map(r => [
-    '      <li>',
-    `        <span class="amt">${r.figure}</span>`,
-    `        <div><b>${r.what}</b><p>${r.detail}</p>`,
-    `          <span class="src">Source: ${r.source}</span></div>`,
-    '      </li>',
-  ].join('\n')).join('\n') + '\n    </ul>';
-}
-function renderRcFails() {
-  return '    <ul class="fails">\n' + RCP.failures.map(f => [
-    '      <li>',
-    `        <span class="cnt">${f.count}</span>`,
-    `        <b>${f.what}</b>`,
-    `        <p>${f.detail}</p>`,
-    '      </li>',
-  ].join('\n')).join('\n') + '\n    </ul>';
-}
-function renderRcGap() {
-  const g = RCP.gap;
-  return `    <div class="gap">\n      <h3>${g.headline}</h3>\n      <p>${g.body}</p>\n    </div>`;
-}
-
 /* ---- book.html reusable blocks ---------------------------------------
    The reader review and the author bio were hand-written HTML, which is why
    neither could be edited anywhere. They are content, so they live in
@@ -643,13 +605,6 @@ applyRegions('book.html', { 'bk-compare': renderCompare });
 applyRegions('system/index.html', { 'sys-compare': renderCompare });
 console.log('Regions applied: Amazon-vs-System comparison (book.html, system)');
 
-applyRegions('receipts/index.html', {
-  'rc-intro': renderRcIntro,
-  'rc-spend': renderRcSpend,
-  'rc-fails': renderRcFails,
-  'rc-gap': renderRcGap,
-});
-console.log('Regions applied: receipts/index.html (intro, spend, fails, gap)');
 console.log('Regions applied: system/index.html (hero, price, guarantee, faq), claude/index.html (hero, price), content-machine/index.html (hero, price)');
 
 applyRegions('index.html', {

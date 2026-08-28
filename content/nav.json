@@ -337,13 +337,6 @@
    "brandStyle": "inline",
    "indent": 0
   },
-  "receipts/index.html": {
-   "brandHref": "/",
-   "themebtn": false,
-   "ctaArrow": false,
-   "brandStyle": "inline",
-   "indent": 2
-  },
   "services/events/index.html": {
    "brandHref": "/",
    "themebtn": false,
