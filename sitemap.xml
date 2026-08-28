@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://elvinpeters.com/</loc><priority>1.0</priority></url>
   <url><loc>https://elvinpeters.com/ai-coaching/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/ai-workflow-build/</loc><priority>0.6</priority></url>
@@ -32,7 +32,11 @@
   <url><loc>https://elvinpeters.com/consulting/winnipeg/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/contact/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/content-machine/</loc><priority>0.6</priority></url>
-  <url><loc>https://elvinpeters.com/fr/google-ads/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/fr/google-ads/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/google-ads/"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/google-ads/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/google-ads/"/>
+  </url>
   <url><loc>https://elvinpeters.com/free/</loc><priority>0.7</priority></url>
   <url><loc>https://elvinpeters.com/free/50-prompts/</loc><priority>0.7</priority></url>
   <url><loc>https://elvinpeters.com/free/ai-assistant/</loc><priority>0.7</priority></url>
@@ -49,7 +53,11 @@
   <url><loc>https://elvinpeters.com/free/prompt-cheatsheet/</loc><priority>0.7</priority></url>
   <url><loc>https://elvinpeters.com/free/slides-docs-images/</loc><priority>0.7</priority></url>
   <url><loc>https://elvinpeters.com/google-ads-audit/</loc><priority>0.6</priority></url>
-  <url><loc>https://elvinpeters.com/google-ads/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/google-ads/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/google-ads/"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/google-ads/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/google-ads/"/>
+  </url>
   <url><loc>https://elvinpeters.com/links/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/press/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/privacy.html</loc><priority>0.6</priority></url>

@@ -1062,10 +1062,27 @@ function smPriority(u) {
   if (u.startsWith('/free/') || u.startsWith('/apps/calculators/') || u.startsWith('/quiz')) return '0.7';
   return '0.6';
 }
+/* hreflang annotations for the bilingual pairs. Every page already carries
+   page-level <link rel="alternate"> tags; this is the second place Google
+   reads the same declaration, and the one Search Console's international
+   reporting is built on. Both sides of a pair must list the complete set
+   INCLUDING THEMSELVES, or Google discards the entire cluster and the pages
+   compete with each other instead of pairing. x-default points at English:
+   it is the fallback for every language we do not publish, not a third page. */
+function smAlternates(u) {
+  const en = u.startsWith('/fr/') ? u.slice(3) : u;
+  if (!FR_TWINS.has(en)) return '';
+  return [['en-CA', en], ['fr-CA', '/fr' + en], ['x-default', en]]
+    .map(([hl, href]) =>
+      '\n    <xhtml:link rel="alternate" hreflang="' + hl + '" href="' + ORIGIN + href + '"/>')
+    .join('') + '\n  ';
+}
 const smPages = smWalk(DIR, '', []).map(smUrl).sort();
 const smXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  smPages.map(u => '  <url><loc>https://elvinpeters.com' + u + '</loc><priority>' + smPriority(u) + '</priority></url>').join('\n') +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' +
+  ' xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
+  smPages.map(u => '  <url><loc>' + ORIGIN + u + '</loc><priority>' + smPriority(u) + '</priority>' +
+    smAlternates(u) + '</url>').join('\n') +
   '\n</urlset>\n';
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), smXml);
 console.log('Sitemap: ' + smPages.length + ' URLs');
