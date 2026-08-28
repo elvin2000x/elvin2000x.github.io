@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elvin M. Peters | AI Consultant &amp; Google Ads Expert, Toronto + Remote</title>
+<meta name="description" content="Toronto AI consultant and author of The Artificial Advantage. I help teams install AI that ships, run better Google Ads, and train staff to use AI well. Get in touch.">
+<link rel="canonical" href="https://elvinpeters.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Elvin M. Peters | AI Consultant &amp; Google Ads Expert">
+<meta property="og:description" content="I help teams and founders turn AI into an operating advantage: systems that ship, campaigns that convert, and people who know how to use the tools.">
+<meta property="og:url" content="https://elvinpeters.com/">
+<meta property="og:image" content="https://elvinpeters.com/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@elvin_peters">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5v14M6 5h9M6 12h7M6 19h9' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='19.5' cy='18.6' r='1.9' fill='%23c9a250'/%3E%3C/svg%3E">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CLZ7N26J1Q');
+    gtag('config', 'AW-637214471');
+</script>
+<!-- Meta Pixel -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1699232654449762');
+  fbq('track', 'PageView');
+</script>
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Person","@id":"https://elvinpeters.com/#elvin","name":"Elvin M. Peters","jobTitle":"AI Consultant","url":"https://elvinpeters.com/","knowsAbout":["AI enablement","AI direction","Google Ads","paid media","AI training"],"sameAs":["https://www.linkedin.com/in/elvinmpeters","https://twitter.com/elvin_peters"]},
+    {"@type":"WebSite","@id":"https://elvinpeters.com/#website","url":"https://elvinpeters.com/","name":"Elvin M. Peters","publisher":{"@id":"https://elvinpeters.com/#elvin"}},
+    {"@type":"ProfessionalService","name":"Elvin Peters, AI Consulting and Google Ads","provider":{"@id":"https://elvinpeters.com/#elvin"},"areaServed":["Toronto","Canada","Remote"],"serviceType":"AI consulting, coaching, and Google Ads management","url":"https://elvinpeters.com/services/"},
+    {"@type":"Book","name":"The Artificial Advantage","author":{"@id":"https://elvinpeters.com/#elvin"},"isbn":"9798254324782","url":"https://elvinpeters.com/book.html"}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+<script src="/js/site.js"></script>
+<style>
+/* Tokens and theme contexts come from /css/site.css. */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(1100px 520px at 82% -8%, var(--glow), transparent 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; line-height:1.6; min-height:100vh;
+}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+.eyebrow{font-size:var(--fs-label);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+h1,h2,h3{font-family:var(--serif);font-weight:400;text-wrap:balance;margin:0}
+.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb, var(--bg) 78%, transparent);border-bottom:1px solid var(--line-soft)}
+.nav .container{display:flex;align-items:center;gap:20px;height:64px}
+.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:var(--fs-lead);letter-spacing:.02em}
+.brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel);box-shadow:var(--shadow)}
+.nav .links{margin-left:auto;display:flex;gap:24px;align-items:center}
+.nav .links a{font-size:var(--fs-sm);color:var(--ink-2)}
+.nav .links a:hover{color:var(--ink)}
+.nav .links a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:11px 16px;border-radius:999px;font-weight:600;display:inline-flex;align-items:center;gap:5px}
+.nav .links a.cta:hover{background:var(--gold);color:var(--bg-2)}
+.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:44px;height:44px;border-radius:9px;cursor:pointer}
+@media(max-width:920px){.nav .links a:not(.cta){display:none}}
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line-soft)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(760px 460px at 10% 118%, color-mix(in srgb, var(--cyan) 8%, transparent), transparent 62%);pointer-events:none}
+#constellation{position:absolute;inset:0;width:100%;height:100%;opacity:.7}
+.hero .container{position:relative;z-index:2;padding:84px 24px 72px;display:grid;grid-template-columns:1.06fr .72fr;gap:44px;align-items:center}
+.heroviz{position:relative;display:grid;place-items:center;gap:16px;min-height:420px;align-content:center}
+.heroviz::before{content:"";position:absolute;width:min(430px,100%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle, var(--glow), transparent 64%);filter:blur(4px)}
+/* The cover faces the reader square on. It was rotated on three axes, which
+   skewed the title and read as a mockup rather than as the actual book. A
+   flat cover with a soft drop shadow is what a bookstore listing looks like. */
+.heroviz .bookwrap{position:relative;transition:transform var(--slow) cubic-bezier(.2,.8,.3,1)}
+.heroviz:hover .bookwrap{transform:translateY(-5px)}
+@media (prefers-reduced-motion: reduce){.heroviz:hover .bookwrap{transform:none}}
+.heroviz img.bcover{width:min(300px,62vw);height:auto;display:block;border-radius:6px;box-shadow:0 30px 60px -22px rgba(10,21,36,.42),0 6px 16px -8px rgba(10,21,36,.28)}
+.vchip{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;background:var(--bg-2);border:1px solid color-mix(in srgb,var(--accent) 46%,var(--line));border-radius:var(--r-pill);padding:10px 18px;font-size:var(--fs-label);font-weight:700;letter-spacing:.06em;color:var(--accent-ink);box-shadow:var(--shadow);white-space:nowrap;text-decoration:none}
+.vchip:hover{border-color:var(--accent)}
+@media(max-width:920px){.hero .container{grid-template-columns:1fr;gap:10px;padding:64px 24px 56px}.heroviz{min-height:0;margin-top:12px}.heroviz img.bcover{width:min(170px,38vw)}.heroviz::before{width:min(240px,70%)}}
+.hero h1{font-size:var(--fs-display);line-height:1.04;letter-spacing:-.015em;margin:18px 0 0}
+.hero h1 .amp{color:var(--gold-2);font-style:italic}
+.hero .lede{font-size:var(--fs-lead-lg);color:var(--ink-2);max-width:52ch;margin:22px 0 0;line-height:1.55}
+.hero .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:var(--fs-body);border:1px solid transparent;cursor:pointer;font-family:var(--sans)}
+.btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304;box-shadow:var(--shadow)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.ghost{border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--gold)}
+/* hero cred strip removed (W2): the credbar below is the single proof strip */
+.section{padding:var(--sp-section) 0}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:30px}
+@media(max-width:920px){.section-head{display:block}.section-head p{margin:14px 0 0;max-width:none}}
+.section-head h2{font-size:var(--fs-h2);letter-spacing:-.01em}
+.section-head p{margin:8px 0 0;color:var(--muted);max-width:48ch;font-size:var(--fs-body)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,border-color .25s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-6px);box-shadow:var(--card-lift);border-color:color-mix(in srgb,var(--gold) 55%,var(--line))}
+.card .thumb{aspect-ratio:16/10;position:relative;border-bottom:1px solid var(--line-soft);background-size:cover;background-position:center}
+.card .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card .kicker{display:flex;align-items:center;gap:10px}
+.card .tag{font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.card .pill{margin-left:auto;font-size:var(--fs-label);font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:999px;color:#2f9c6f;background:color-mix(in srgb,#2f9c6f 14%,transparent);border:1px solid color-mix(in srgb,#2f9c6f 40%,transparent)}
+.card .pill.play{color:var(--cyan);background:color-mix(in srgb,var(--cyan) 12%,transparent);border-color:color-mix(in srgb,var(--cyan) 38%,transparent)}
+.card .pill.read{color:var(--gold-2);background:color-mix(in srgb,var(--gold) 13%,transparent);border-color:color-mix(in srgb,var(--gold) 40%,transparent)}
+.card h3{font-size:var(--fs-h3);letter-spacing:-.01em}
+.card .desc{color:var(--ink-2);font-size:var(--fs-sm);line-height:1.5}
+.card .go{margin-top:auto;font-size:var(--fs-sm);font-weight:600;color:var(--gold-2);display:inline-flex;align-items:center;gap:7px}
+.card:hover .go .arw{transform:translateX(4px)}.card .go .arw{transition:transform .2s}
+
+/* --- professional additions --- */
+.credbar{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--panel-2)}
+.credbar .container{display:flex;flex-wrap:wrap;gap:10px 26px;padding:18px 24px;font-size:var(--fs-sm);color:var(--ink-2);align-items:center;justify-content:center;text-align:center}
+.credbar b{color:var(--ink);font-weight:600}
+.credbar .sep{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.6}
+.credbar .container span+span::before{content:"·";margin-right:26px;color:var(--gold);opacity:.65}
+@media(max-width:640px){.credbar .container{gap:6px 0;flex-direction:column}.credbar .container span+span::before{content:none}}
+.feature{display:grid;grid-template-columns:300px 1fr;gap:var(--sp-9);align-items:center;background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:38px}
+.feature img{width:100%;max-width:300px;height:auto;border-radius:10px;box-shadow:var(--card-lift);display:block;margin:0}
+.feature h2{font-size:var(--fs-h2);letter-spacing:-.01em;margin:8px 0 0}
+.feature .tag2{font-family:var(--serif);font-style:italic;font-size:var(--fs-h3);color:var(--gold-2);margin:10px 0 0}
+.feature p{color:var(--ink-2);font-size:var(--fs-body);line-height:1.65;margin:16px 0 0;max-width:48ch}
+.feature .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
+.feature .onamz{font-size:var(--fs-sm);color:var(--muted)}
+/* Amazon's official badge, used in place of the words "on Amazon". The kit ships
+   a reversed (white) version for dark backgrounds; usage rules are in
+   img/amazon/Available-at-Amazon-Guidelines.pdf. */
+.azbadge{display:inline-block;line-height:0;padding:9px 0;display:inline-block}
+.azbadge img{width:168px;height:auto;display:block}
+.azbadge:hover{opacity:.85}
+.heroviz .azbadge{position:relative;z-index:2}
+@media(max-width:640px){.feature{grid-template-columns:1fr;padding:26px;gap:24px}.feature img{max-width:200px;margin:0 auto}}
+.bucket-label{font-size:var(--fs-sm);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin:34px 0 14px}
+.bucket-label:first-of-type{margin-top:0}
+.svcgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media(max-width:920px){.svcgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.svcgrid{grid-template-columns:1fr}}
+.svc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 24px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px;transition:transform .2s,border-color .2s}
+.svc:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--gold) 50%,var(--line))}
+.svc h3{font-size:var(--fs-h3)}
+.svc .who{font-size:var(--fs-label);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.svc p{color:var(--ink-2);font-size:var(--fs-body);line-height:1.55;margin:0;flex:1}
+.svc .row{display:flex;gap:16px;align-items:center;margin-top:6px}
+.svc .row a{font-size:var(--fs-sm);font-weight:600;color:var(--gold-2);padding:11px 0;display:inline-block}
+.svc .row a.detail{color:var(--muted);font-weight:500}
+.ctaband{background:var(--panel);background:linear-gradient(135deg,color-mix(in oklab,var(--gold) 18%,var(--panel)),var(--panel));border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line));box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 12%,transparent),var(--card-lift);border-radius:var(--r-lg);padding:44px;text-align:center}
+@media(max-width:640px){.ctaband{padding:28px 20px}}
+.ctaband h2{font-size:var(--fs-h2)}
+.ctaband p{color:var(--ink-2);margin:12px auto 24px;max-width:44ch;font-size:var(--fs-body)}
+.apps-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:9px 16px;font-size:var(--fs-sm);font-weight:600;color:var(--ink-2);transition:border-color .15s,transform .15s}
+.chip:hover{border-color:var(--gold);transform:translateY(-2px)}
+.chip .lv{font-size:var(--fs-label);font-weight:700;color:#2f9c6f}
+.about{display:grid;grid-template-columns:0.82fr 1fr;gap:44px;align-items:center}
+.aboutimg{width:100%;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow);aspect-ratio:1;object-fit:cover;display:block}
+.about .lead{color:var(--ink);font-family:var(--serif);font-size:var(--fs-h3);line-height:1.4;display:block;margin-bottom:16px}
+.about p{font-size:var(--fs-lead);color:var(--ink-2);line-height:1.7;margin:0}
+@media(max-width:920px){.about{grid-template-columns:1fr;gap:26px}}
+.connect{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:38px}
+.connect h2{font-size:var(--fs-h2);letter-spacing:-.01em;margin:10px 0 0}
+.connect p{color:var(--ink-2);margin:12px 0 20px;font-size:var(--fs-body);max-width:40ch}
+.clinks{display:flex;flex-direction:column;gap:12px}
+.clink{display:flex;align-items:center;gap:13px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);font-weight:600;font-size:var(--fs-body);transition:border-color .15s,transform .15s}
+.clink:hover{border-color:var(--gold);transform:translateX(3px)}
+.clink .ic{width:22px;height:22px;flex:none;color:var(--gold-2)}
+.clink small{display:block;color:var(--muted);font-weight:400;font-size:var(--fs-label);margin-top:1px}
+@media(max-width:920px){.connect{grid-template-columns:1fr;padding:26px;gap:26px}}
+.ladder{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+.rung{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px;text-decoration:none;transition:border-color .15s,transform .15s}
+.rung:hover{border-color:var(--gold);transform:translateY(-3px)}
+.rung .rl{font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);margin-bottom:8px}
+.rung b{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);color:var(--ink);line-height:1.25;margin-bottom:8px}
+.rung .rd{font-size:var(--fs-sm);color:var(--ink-2);line-height:1.6;flex:1}
+.rung .rgo{font-size:var(--fs-sm);font-weight:600;color:var(--gold-2);margin-top:14px}
+.rung--cover{flex-direction:row;gap:20px;align-items:flex-start}
+.rung--cover img{width:92px;height:auto;border-radius:6px;flex:none;box-shadow:0 16px 34px -18px rgba(0,0,0,.6)} /* bp-exempt: fixed cover thumb */
+.rung--cover > div{display:flex;flex-direction:column;flex:1}
+/* Two paid covers sit side by side; the free rung takes the full width beneath
+   them rather than leaving an orphan half-row. */
+.rung--wide{grid-column:1/-1}
+@media(max-width:760px){.ladder{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:var(--fs-sm)}
+footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--ink-2)} footer a:hover{color:var(--gold-2)}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
+</style>
+  <link rel="stylesheet" href="/css/contact-modal.css">
+  <script src="/js/contact-modal.js" defer></script>
+</head>
+<body>
+  <!-- ep:nav -->
+  <nav class="nav"><div class="container">
+    <a class="brandmark" href="#top">
+      <span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>
+      Elvin&nbsp;Peters
+    </a>
+    <div class="links">
+      <div class="navdd">
+        <a class="navdd-t" href="/services/">Services<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="navdd-p">
+          <div class="navdd-g">
+            <span class="navdd-l">Put AI to work</span>
+            <a class="navdd-i" href="/setup/">The AI Workspace Setup</a>
+            <a class="navdd-i" href="/ai-coaching/">AI Coaching</a>
+            <a class="navdd-i" href="/ai-workflow-build/">AI Workflow Build</a>
+          </div>
+          <div class="navdd-g">
+            <span class="navdd-l">In-Person</span>
+            <a class="navdd-i" href="/services/events/">Events</a>
+            <a class="navdd-i" href="/team-ai-workshop/">Workshops</a>
+          </div>
+          <div class="navdd-g">
+            <span class="navdd-l">Consulting</span>
+            <a class="navdd-i" href="/google-ads-audit/">Google Ads Audit</a>
+            <a class="navdd-i" href="/google-ads/">Google Ads Management</a>
+          </div>
+        </div>
+      </div>
+      <a href="/free/">Guides</a>
+      <a href="/writing/">Blog</a>
+      <a href="https://ultimateaidirectory.com" target="_blank" rel="noopener">AI Tools Directory</a>
+      <a href="/contact/">Contact</a>
+      <button class="themebtn" id="themeBtn" data-theme-toggle aria-label="Toggle light or dark theme">◑</button>
+      <a class="cta" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy the Book <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div></nav>
+  <!-- /ep:nav -->
+
+  <header class="hero" id="top">
+    <canvas id="constellation" aria-hidden="true"></canvas>
+    <div class="container">
+      <!-- ep:hero-text -->
+      <div class="herotext">
+        <span class="eyebrow">AI Consultant · Coaching · Google Ads · Toronto and Remote</span>
+        <h1>You tried AI.<br><span class="amp">You weren't impressed.</span></h1>
+        <p class="lede">You do not need another AI demo. You need AI doing real work: hours saved, ad spend that pays for itself, and follow-up that runs while you sleep. I find where AI actually moves the needle in your business, build it, and train your team to run it. One operator, accountable end to end.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy the Book <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="btn ghost" href="/contact/" data-contact="Working together on " data-contact-source="home-hero">Get in touch</a>
+        </div>
+      </div>
+      <!-- /ep:hero-text -->
+      <div class="heroviz">
+        <div class="bookwrap">
+          <img class="bcover" src="/img/cover-hero.webp" alt="The Artificial Advantage, the book by Elvin M. Peters" width="600" height="960">
+        </div>
+        <a class="azbadge" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy The Artificial Advantage on Amazon">
+          <img src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="credbar"><div class="container">
+    <span><b>$50M+</b> in profitable ad spend, then advising inside <b>Google</b></span>
+    <span><b>$1.5M a month</b> in paid media at a large publicly traded Canadian lender</span>
+    <span>Author of <b>The Artificial Advantage</b></span>
+    <span>Builds and self-hosts AI systems <b>solo</b></span>
+  </div></div>
+
+  <!-- SERVICES: the revenue engine, leads the page -->
+  <section class="section" id="services"><div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Work with me</span><h2>AI and Google Ads, run by one operator.</h2></div>
+      <p>Five fixed-scope ways to work together: coaching, done-for-you builds, team training, and paid search. One person handles strategy and the build, accountable end to end. <a href="/services/" style="color:var(--gold-2);font-weight:600">Full services and pricing →</a></p>
+    </div>
+
+    <!-- ep:home-services -->
+    <div class="bucket-label">Put AI to work</div>
+    <div class="svcgrid">
+      <div class="svc">
+        <h3>The AI Workspace Setup</h3>
+        <span class="who">Done for you · five a month</span>
+        <p>Your AI set up on your real business, then handed over with a written manual and a recorded walkthrough so your team runs it without me. From $497.</p>
+        <div class="row"><a href="/setup/">View the setup →</a></div>
+      </div>
+      <div class="svc">
+        <h3>AI Coaching</h3>
+        <span class="who">For founders &amp; professionals</span>
+        <p>One on one working sessions that get you directing AI with real confidence, with a system you keep using after we finish.</p>
+        <div class="row"><a href="/ai-coaching/">View coaching →</a></div>
+      </div>
+      <div class="svc">
+        <h3>AI Workflow Build</h3>
+        <span class="who">Done for you</span>
+        <p>Pick one repetitive task and I build the AI workflow that runs it, then hand it over documented so your team owns it.</p>
+        <div class="row"><a href="/ai-workflow-build/">View builds →</a></div>
+      </div>
+    </div>
+
+    <div class="bucket-label">In-Person</div>
+    <div class="svcgrid">
+      <div class="svc">
+        <h3>Events</h3>
+        <span class="who">For conferences, townhalls and company events</span>
+        <p>A talk built for your audience, whether that is a conference stage, a townhall or a company offsite, that sends people back to their desks able to use AI on real work.</p>
+        <div class="row"><a href="/services/events/">View events →</a></div>
+      </div>
+      <div class="svc">
+        <h3>Workshops</h3>
+        <span class="who">For teams</span>
+        <p>A live two hour session that gets your whole team working from one reliable, shared way of using AI.</p>
+        <div class="row"><a href="/team-ai-workshop/">View workshops →</a></div>
+      </div>
+    </div>
+
+    <div class="bucket-label">Consulting</div>
+    <div class="svcgrid">
+      <div class="svc">
+        <h3>Google Ads Audit</h3>
+        <span class="who">For businesses already spending</span>
+        <p>A specialist who ran $1.5M a month in paid search tears down your account and hands you a prioritized plan of exactly what to fix. From $499.</p>
+        <div class="row"><a href="/google-ads-audit/">View the audit →</a></div>
+      </div>
+      <div class="svc">
+        <h3>Google Ads Management</h3>
+        <span class="who">For businesses ready to grow</span>
+        <p>Done for you paid search run by someone who has managed serious budgets, so every dollar stays accountable.</p>
+        <div class="row"><a href="/google-ads/">View management →</a></div>
+      </div>
+    </div>
+    <!-- /ep:home-services -->
+  </div></section>
+
+  <!-- THE BOOK: authority anchor -->
+  <section class="section section--cont" id="book"><div class="container">
+    <div class="feature">
+      <img src="/img/cover-hero.webp" alt="The Artificial Advantage by Elvin M. Peters, book cover" loading="lazy" width="600" height="960">
+      <div>
+        <span class="eyebrow">The book</span>
+        <h2>The Artificial Advantage</h2>
+        <p class="tag2">Stop prompting. Start directing.</p>
+        <p>The practical playbook for professionals who want AI to do real work: how to brief a model the way you would brief a sharp new hire, so you stop getting generic answers and start getting work you can actually use. The same methods I install for clients, written down. Kindle, paperback and hardcover.</p>
+        <div class="actions">
+          <a class="btn primary" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy it now on Amazon</a>
+          <a class="azbadge" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy The Artificial Advantage on Amazon">
+            <img src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
+          </a>
+        </div>
+        <p class="onamz" style="margin-top:14px">Want the ebook plus the whole working kit instead? <a href="/system/" style="color:var(--gold-2);font-weight:600">The Artificial Advantage System &rarr;</a></p>
+      </div>
+    </div>
+
+    <div class="ladder">
+      <a class="rung rung--cover" href="/claude/">
+        <img src="/img/magnets/claude-manual.webp" alt="The Claude Operator's Manual" width="440" height="629" loading="lazy">
+        <div>
+          <span class="rl">Go deeper</span>
+          <b>The Claude Operator's Manual</b>
+          <span class="rd">217 pages on running Claude as an operator: projects, skills, connectors, the API, Claude Code. $67.</span>
+          <span class="rgo">See the manual &rarr;</span>
+        </div>
+      </a>
+      <a class="rung rung--cover" href="/content-machine/">
+        <img src="/img/magnets/content-machine.webp" alt="The Content Machine" width="440" height="629" loading="lazy">
+        <div>
+          <span class="rl">Publish more, without the slop</span>
+          <b>The Content Machine</b>
+          <span class="rd">Five components and nine steps for producing real volume with AI. Built from 293,571 words that cost $32.67, and the audit of how much of it was worth keeping. $47.</span>
+          <span class="rgo">See the guide &rarr;</span>
+        </div>
+      </a>
+      <a class="rung rung--wide" href="/free/">
+        <span class="rl">Start free</span>
+        <b>Fourteen free guides</b>
+        <span class="rd">Fifty prompts for the jobs that eat your week, ten field guides on the things people get wrong with AI, a full chapter of the book, and a 480-resource vault. One email, yours to keep.</span>
+        <span class="rgo">Browse the free library &rarr;</span>
+      </a>
+    </div>
+  </div></section>
+
+  <!-- WHY ME: proof + method -->
+  <section class="section section--cont" id="about"><div class="container">
+    <!-- Left-aligned with the copy beneath it. Centring the portrait over a
+         left-aligned heading read as a mistake (Justine, 2026-08-04). -->
+    <img src="/img/headshot.jpg" alt="Elvin M. Peters, Toronto AI consultant" width="118" height="118" loading="lazy" style="border-radius:50%;object-fit:cover;border:2px solid var(--gold);box-shadow:var(--shadow);display:block;margin:0 0 22px">
+    <div class="section-head">
+      <div><span class="eyebrow">Why me</span><h2>A marketer who learned to build.</h2></div>
+    </div>
+    <div style="max-width:70ch">
+      <p style="font-size:var(--fs-lead);color:var(--ink-2);line-height:1.7;margin:0">I spent a decade in paid media, running campaigns across Google, Meta, and Quora where a wasted dollar gets noticed. Then I taught myself to build with AI, wrote the method down, and started shipping software instead of slide decks. So you get one person who understands the business case, builds the actual tool, and stays accountable for both. Everything I recommend to a client runs in production somewhere on this site first. I left the corporate track in 2025 to do this full time; the book shipped in 2026, and Book Two is being written in public. <a href="/projects/" style="color:var(--gold-2);font-weight:600">See it all live →</a></p>
+    </div>
+  </div></section>
+
+  <!-- Closing CTA (end of the professional 75%) -->
+  <section class="section section--cont"><div class="container">
+    <div class="ctaband">
+      <h2>Ready to put AI to work?</h2>
+      <p>Tell me where you are stuck. We will find the fastest place AI pays off in your business, and I will tell you straight whether I can help.</p>
+      <a class="btn primary" href="/contact/" data-contact="Working together on " data-contact-source="home">Get in touch <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div></section>
+
+  <!-- ===== ~25% personality tier below ===== -->
+
+  <section class="section" id="projects"><div class="container">
+    <div class="about">
+      <img class="aboutimg" src="/img/workspace.jpg" alt="A late-night studio with monitors showing code and a wireframe globe" loading="lazy" width="800" height="800">
+      <div>
+        <span class="eyebrow">Projects</span>
+        <h2 style="margin-top:10px">Live systems, one click away.</h2>
+        <p style="margin-top:16px">
+          <span class="lead">I ship production software solo, every day, with AI as a genuine co-worker.</span>
+          Everything I claim on this page has a running receipt: a continuously verified AI directory, eleven Canadian financial calculators, thirteen original browser games, a QR studio with scan tracking, and the scheduler, CRM, and email engine this business runs on. All designed, built, and hosted by me. It is the same way I work for clients.
+        </p>
+        <div class="apps-row">
+          <a class="chip" href="/projects/">Browse all the projects <span class="lv">LIVE</span></a>
+          <a class="chip" href="https://play.elvinpeters.com" target="_blank" rel="noopener">The arcade</a>
+          <a class="chip" href="/apps/calculators/">Calculators</a>
+          <a class="chip" href="https://ultimateaidirectory.com" target="_blank" rel="noopener">AI Directory</a>
+        </div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="section section--cont" id="writing"><div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Blog</span><h2>Notes on making AI actually work.</h2></div>
+      <p>How I build: the harness around the AI, the reliability discipline, and the tools that let one person ship like a team. <a href="/writing/" style="color:var(--gold-2);font-weight:600">All posts →</a></p>
+    </div>
+    <div class="grid">
+      <!-- ep:writing -->
+      <a class="card" href="/writing/token-efficiency/">
+        <div class="thumb" style="background-image:url(/img/blog-tokens.svg)"></div>
+        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">8 min</span></div>
+        <h3>The Rent You Pay Every Turn</h3><p class="desc">I audited 3 months and 16 billion tokens of my own AI sessions. The bill was not where I thought.</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>
+      <a class="card" href="/writing/assembly-line/">
+        <div class="thumb" style="background-image:url(/img/blog-assembly.svg)"></div>
+        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">7 min</span></div>
+        <h3>Building the Assembly Line</h3><p class="desc">The default session shape in detail: folder layout, search commands, the prompts I paste, and two hooks that keep me honest.</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>
+      <a class="card" href="/writing/studio-session/">
+        <div class="thumb" style="background-image:url(/img/blog-studio.svg)"></div>
+        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">7 min</span></div>
+        <h3>Running a Studio Session</h3><p class="desc">Sometimes the enormous window is the point. How to spend that deliberately instead of leaking it.</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>
+      <a class="card" href="/writing/the-harness/">
+        <div class="thumb" style="background-image:url(/img/blog-harness.svg)"></div>
+        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">6 min</span></div>
+        <h3>The Harness Beats the Prompt</h3><p class="desc">You do not fix an unreliable AI by trusting it more. You fix it with three scripts that make its failures loud, caught, and impossible to ship.</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>
+      <a class="card" href="/writing/zero-dependencies/">
+        <div class="thumb" style="background-image:url(/img/blog-zerodep.svg)"></div>
+        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">6 min</span></div>
+        <h3>Zero dependencies on purpose</h3><p class="desc">Why almost everything I ship is one self-contained file, and the sentence I write at build time that keeps that from turning into a mistake.</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>
+      <a class="card" href="/writing/thirteen-games-solo/">
+        <div class="thumb" style="background-image:url(/img/blog-games.svg)"></div>
+        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">6 min</span></div>
+        <h3>Shipping Thirteen Games Solo</h3><p class="desc">Shipping a lot alone is a tooling problem, and the tool that matters most is the one that checks your work while you sleep.</p><span class="go">Read <span class="arw">→</span></span></div>
+      </a>
+      <!-- /ep:writing -->
+    </div>
+  </div></section>
+
+  <section class="section section--cont" id="connect"><div class="container">
+    <div class="connect">
+      <div>
+        <span class="eyebrow">Free starter kit</span>
+        <h2>Get the kit that fixes generic AI answers.</h2>
+        <p>Fifty prompts written for the jobs that actually eat your week: the client email you keep rewriting, the report nobody reads, the meeting notes, the proposal, the awkward follow-up. Plus the one-page cheat sheets for briefing a model properly, and the first chapter of the book. Free, yours to keep, and it lands in your inbox within a minute.</p>
+        <div class="nlwrap">
+          <form id="nlform" style="display:flex;gap:10px;flex-wrap:wrap;max-width:480px">
+            <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+            <input id="nlemail" type="email" required placeholder="you@work.com" class="field" style="flex:1;min-width:220px">
+            <button type="submit" class="btn primary">Send me the kit</button>
+          </form>
+          <p id="nlmsg" style="display:none;font-size:var(--fs-sm);margin-top:10px;color:var(--ok)"></p>
+          <script>
+          document.getElementById('nlform').addEventListener('submit', function(e){
+            e.preventDefault();
+            var f = this, m = document.getElementById('nlmsg');
+            fetch('https://ultimateaidirectory.com/api/lead', {method:'POST',
+              headers: {'Content-Type':'application/json'},
+              body: JSON.stringify({email: document.getElementById('nlemail').value.trim(),
+                source: 'newsletter-homepage', website: f.website.value})})
+              .then(function(r){ return r.json(); }).then(function(r){
+                m.style.display = 'block';
+                if (r.success) { f.style.display = 'none'; m.textContent = 'Done. The starter kit is on its way to your inbox.'; try{fbq('track','Lead',{content_name:'newsletter-homepage'});}catch(e){} try{gtag('event','generate_lead',{event_label:'newsletter-homepage'});}catch(e){} }
+                else { m.style.color = 'var(--warn)'; m.textContent = r.error || 'Something went wrong. Try again.'; }
+              }).catch(function(){ m.style.display = 'block'; m.style.color = 'var(--warn)'; m.textContent = 'Network hiccup. Try again.'; });
+          });
+          </script>
+        </div>
+      </div>
+      <div class="clinks">
+        <a class="clink" href="/contact/" data-contact="Working together on " data-contact-source="home">Get in touch <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></a>
+        <a class="clink" href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">
+          <svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.75 2.5 4.75 5.9V21h-4v-5.2c0-1.24-.02-2.85-1.74-2.85s-2 1.36-2 2.76V21H9z"/></svg>
+          <span>LinkedIn<small>linkedin.com/in/elvinmpeters</small></span>
+        </a>
+        <a class="clink" href="/contact/">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <span>Contact me<small>Send a message, I reply personally</small></span>
+        </a>
+      </div>
+    </div>
+  </div></section>
+
+  <footer><div class="container">
+    <span>© 2026 Elvin M. Peters. Built and hosted by hand in Toronto.</span>
+    <span><a href="/services/">Services</a> · <a href="/book.html">The Book</a> · <a href="/projects/">Projects</a> · <a href="/receipts/">Receipts</a> · <a href="/writing/">Blog</a> · <a href="/press/">Press</a> · <a href="/updates/">Newsletter</a> · <a href="/contact/">Contact</a></span>
+  </div>
+      <p style="font-size:var(--fs-sm);margin-top:10px"><a href="/privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="/tos.html">Terms</a></p>
+    </footer>
+
+<script>
+/* Theme toggling + persistence handled by /js/site.js via [data-theme-toggle]. */
+(function(){
+  var cv=document.getElementById('constellation');
+  if(cv && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var ctx=cv.getContext('2d'),W,H,pts,DPR=Math.min(devicePixelRatio||1,2);
+    function acc(){return getComputedStyle(document.documentElement).getPropertyValue('--gold').trim()||'#c9a250';}
+    function ln(){return getComputedStyle(document.documentElement).getPropertyValue('--line').trim()||'#213249';}
+    function fit(){var r=cv.getBoundingClientRect();W=cv.width=r.width*DPR;H=cv.height=r.height*DPR;}
+    // Seven of the points are stars: gold, larger, and slowly twinkling. The rest
+    // stay as faint network nodes. Seven is deliberate (Justine, 2026-08-04) — the
+    // old every-seventh-point rule left only three or four readable on the navy.
+    var STARS=7;
+    function seed(){pts=[];var n=Math.max(24,Math.min(52,Math.round((W*H)/(48000*DPR))));for(var i=0;i<n;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.16*DPR,vy:(Math.random()-.5)*.16*DPR,star:i<STARS,ph:Math.random()*6.28});}
+    fit();seed();addEventListener('resize',function(){fit();seed();});
+    function draw(){ctx.clearRect(0,0,W,H);var L=ln(),A=acc();
+      for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+        for(var j=i+1;j<pts.length;j++){var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.hypot(dx,dy);
+          if(d<118*DPR){ctx.globalAlpha=(1-d/(118*DPR))*0.5;ctx.strokeStyle=L;ctx.lineWidth=DPR;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}}
+      ctx.globalAlpha=1;
+      var t=Date.now()/1000;
+      for(var k=0;k<pts.length;k++){var s=pts[k].star;
+        if(s){var tw=0.78+0.22*Math.sin(t*0.9+pts[k].ph);   // slow twinkle, never fully dim
+          ctx.fillStyle=A;ctx.globalAlpha=tw;ctx.shadowColor=A;ctx.shadowBlur=9*DPR;
+          ctx.beginPath();ctx.arc(pts[k].x,pts[k].y,3.1*DPR,0,7);ctx.fill();ctx.shadowBlur=0;}
+        else{ctx.fillStyle=L;ctx.globalAlpha=0.55;
+          ctx.beginPath();ctx.arc(pts[k].x,pts[k].y,1.5*DPR,0,7);ctx.fill();}}
+      ctx.globalAlpha=1;requestAnimationFrame(draw);}
+    draw();
+  }
+})();
+</script>
+</body>
+</html>

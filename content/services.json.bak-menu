@@ -1,0 +1,82 @@
+{
+  "_comment": "One entry per service. home_blurb renders on the homepage cards; promise/price are for the services page renderer (next slice).",
+  "buckets": [
+    {
+      "id": "put-ai-to-work",
+      "label": "Put AI to work"
+    },
+    {
+      "id": "in-person",
+      "label": "In-Person"
+    },
+    {
+      "id": "bring-in-customers",
+      "label": "Bring in customers"
+    }
+  ],
+  "cards": [
+    {
+      "id": "setup",
+      "bucket": "put-ai-to-work",
+      "title": "The AI Workspace Setup",
+      "href": "/setup/",
+      "who": "Done for you · five a month",
+      "home_blurb": "Your AI set up on your real business, then handed over with a written manual and a recorded walkthrough so your team runs it without me. From $497.",
+      "link_label": "View the setup →"
+    },
+    {
+      "id": "coaching",
+      "bucket": "put-ai-to-work",
+      "title": "AI Coaching",
+      "href": "/ai-coaching/",
+      "who": "For founders & professionals",
+      "home_blurb": "One on one working sessions that get you directing AI with real confidence, with a system you keep using after we finish.",
+      "link_label": "View coaching →"
+    },
+    {
+      "id": "workflow",
+      "bucket": "put-ai-to-work",
+      "title": "AI Workflow Build",
+      "href": "/ai-workflow-build/",
+      "who": "Done for you",
+      "home_blurb": "Pick one repetitive task and I build the AI workflow that runs it, then hand it over documented so your team owns it.",
+      "link_label": "View builds →"
+    },
+    {
+      "id": "events",
+      "bucket": "in-person",
+      "title": "Events",
+      "href": "/services/events/",
+      "who": "For conferences, townhalls and company events",
+      "home_blurb": "A talk built for your audience, whether that is a conference stage, a townhall or a company offsite, that sends people back to their desks able to use AI on real work.",
+      "link_label": "View events →"
+    },
+    {
+      "id": "workshop",
+      "bucket": "in-person",
+      "title": "Workshops",
+      "href": "/team-ai-workshop/",
+      "who": "For teams",
+      "home_blurb": "A live two hour session that gets your whole team working from one reliable, shared way of using AI.",
+      "link_label": "View workshops →"
+    },
+    {
+      "id": "ads-audit",
+      "bucket": "bring-in-customers",
+      "title": "Google Ads Audit",
+      "href": "/google-ads-audit/",
+      "who": "For businesses already spending",
+      "home_blurb": "A specialist who ran $1.5M a month in paid search tears down your account and hands you a prioritized plan of exactly what to fix. From $499.",
+      "link_label": "View the audit →"
+    },
+    {
+      "id": "ads-mgmt",
+      "bucket": "bring-in-customers",
+      "title": "Google Ads Management",
+      "href": "/google-ads/",
+      "who": "For businesses ready to grow",
+      "home_blurb": "Done for you paid search run by someone who has managed serious budgets, so every dollar stays accountable.",
+      "link_label": "View management →"
+    }
+  ]
+}

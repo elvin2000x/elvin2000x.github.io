@@ -1,0 +1,389 @@
+{
+  "_comment": "The /seo/ page in both languages. build.js generates /seo/ and /fr/seo/ from this file -- editing the generated HTML gets overwritten on the next build. FRENCH IS NOT NATIVE-REVIEWED.",
+  "slug": "seo",
+  "template": "offer",
+  "navKey": "seo/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "schemaService": {
+    "serviceType": "Search engine optimization",
+    "areaServed": [
+      "Toronto",
+      "Canada",
+      "Remote"
+    ],
+    "price": "1200",
+    "priceCurrency": "USD",
+    "unitText": "MONTH",
+    "offerName": "Monthly retainer"
+  },
+  "en": {
+    "title": "SEO Consulting Toronto | Elvin Peters",
+    "description": "Done-for-you SEO from a specialist who has driven real search results, not vanity rankings. Month to month, no lock-in, honest reporting. Toronto and remote.",
+    "ogTitle": "SEO Consulting Toronto | Elvin Peters",
+    "ogDescription": "Done-for-you SEO run by someone who has driven real search results. Honest reporting, no long lock-in.",
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services/"
+      },
+      {
+        "label": "SEO Consulting",
+        "href": "/seo/"
+      }
+    ],
+    "eyebrow": "SEO Consulting",
+    "h1": "SEO that gets you found by the customers already searching for you",
+    "sub": "Picture your site showing up when someone searches for exactly what you sell, month after month, without you having to think about it. That is the outcome I build for local and small businesses, run by someone who has driven real search results, not vanity rankings.",
+    "heroBtns": [
+      {
+        "label": "Ask about SEO",
+        "style": "primary",
+        "href": "/contact/",
+        "contact": "SEO consulting for ",
+        "source": "seo"
+      },
+      {
+        "label": "See what is included",
+        "style": "ghost",
+        "href": "#included"
+      }
+    ],
+    "credbar": [
+      "Roughly $100,000 in six months through search at a large Canadian lender",
+      "Advised brands inside Google's Large Customer Sales team",
+      "Author of The Artificial Advantage",
+      "Builds and ranks his own sites with AI in production every day",
+      "Toronto based, works remote"
+    ],
+    "schemaName": "SEO Consulting",
+    "schemaDescription": "Done-for-you SEO by Elvin M. Peters: technical fixes, on-page work, structured data, and content built around real buyer intent.",
+    "sections": [
+      {
+        "n": "01",
+        "h2": "The traffic you actually want",
+        "prose": "The goal is simple and it is worth being clear about. You want your site showing up for the searches your real customers type, a site that search engines can actually read and trust, and a steady climb in traffic that keeps compounding instead of resetting every time an agency changes hands. When the technical foundation is solid and the content is built around real intent, SEO becomes a channel that keeps paying you back long after the work is done. That is the position I get you into and then keep building on every month."
+      },
+      {
+        "n": "02",
+        "cls": "leak",
+        "h2": "Why most small business SEO goes nowhere",
+        "prose": "Most small businesses spend money on SEO for months and never see it move a number that matters. Technical problems sit unfixed because nobody looks past the content calendar. Pages get written for keywords with no real buyer intent behind them. Structured data is missing or wrong, so search engines cannot tell what the page is even about. And the monthly report is full of impressions and rankings that never once get tied back to real traffic or real customers.",
+        "list": [
+          "Technical issues quietly capping how much of the site gets indexed at all",
+          "Content built around keywords nobody with money to spend is searching",
+          "Missing or broken structured data, so search engines misread the page",
+          "Reports built to look busy instead of showing real progress"
+        ]
+      },
+      {
+        "n": "03",
+        "h2": "Done-for-you SEO, run like it is my own site",
+        "prose": "I take the whole thing off your plate and run it with the same care I would give my own site. That starts with a technical audit and fixes so search engines can actually crawl and index your pages properly, then on-page work and structured data so every page is understood correctly. From there it is ongoing content built around the searches your customers actually use, plus honest monthly reporting so you can see the progress in plain language. You keep full ownership of your site and your content the entire time."
+      },
+      {
+        "n": "04",
+        "h2": "Why trust me with your search visibility",
+        "prose": "I ran the search program that helped drive roughly $100,000 in incremental revenue in six months at a large Canadian lender, then advised brands inside Google's Large Customer Sales team on how search actually rewards content and structure. I also build and rank my own sites with AI in production every day, including this one, so the structured data and content practices I use here are the same ones I run on my own business.",
+        "list": [
+          "Roughly $100,000 in six months through search at a large Canadian lender",
+          "Advised brands inside Google's Large Customer Sales team",
+          "Author of The Artificial Advantage on directing AI",
+          "A solo builder who ships and ranks his own sites with AI, every single day"
+        ]
+      },
+      {
+        "n": "05",
+        "h2": "Honest reporting, no vanity metrics",
+        "prose": "You should never have to take my word for how the work is doing. I report on rankings that matter, organic traffic, and where it turns into real inquiries, in language that tells you what changed, what it is doing, and what is next. I will not promise a specific ranking by a specific date, because anyone who does is not being straight with you. You will always know where the work stands, and you can ask me anything about it at any time."
+      },
+      {
+        "n": "06",
+        "id": "included",
+        "h2": "Simple, transparent pricing",
+        "prose": "One flat fee covers the work and the expertise. I take on a limited number of SEO clients at a time so each site gets real attention.",
+        "offer": {
+          "name": "Done-for-You SEO",
+          "price": "$1,200",
+          "priceUnit": "/ month",
+          "pnote": "month to month, no long lock-in",
+          "checklist": [
+            "Full technical SEO audit and fixes: crawlability, site speed, indexing issues",
+            "On-page optimization targeting the searches your customers actually use",
+            "Structured data and schema markup so search engines understand your content correctly",
+            "Ongoing content built around keywords with real buyer intent",
+            "Clear monthly reporting written in plain language, no jargon wall",
+            "You keep full ownership of your site and every piece of content",
+            "Month to month engagement with no long lock-in contract",
+            "Direct access to me, the person actually doing the work"
+          ],
+          "btn": {
+            "label": "Ask about SEO",
+            "href": "/contact/",
+            "contact": "SEO consulting for ",
+            "source": "seo"
+          }
+        }
+      }
+    ],
+    "faqHeading": "Frequently Asked Questions",
+    "faq": [
+      {
+        "open": true,
+        "q": "Who is this for?",
+        "a": "Local and small businesses that want to show up when their customers search, and are tired of vague monthly SEO reports that never tie back to real traffic or revenue. If you want one accountable person doing the work instead of an agency spreading you across a dozen accounts, this is for you."
+      },
+      {
+        "open": false,
+        "q": "What does the $1,200 a month cover?",
+        "a": "It covers the full SEO engagement: a technical audit and fixes, on-page optimization, structured data and schema markup, ongoing content built around the searches your customers actually use, and plain-language monthly reporting. It is the fee for the work and the expertise, and it stays the same whether your site is small or large."
+      },
+      {
+        "open": false,
+        "q": "How fast will I see results?",
+        "a": "I will be straight with you. SEO is not instant, and anyone who promises a specific ranking by a specific date is not being honest with you. Technical fixes and structural cleanup often show measurable improvement within the first couple of months, and the stronger, compounding gains build over time as the site accumulates authority and better content."
+      },
+      {
+        "open": false,
+        "q": "Is there a long contract?",
+        "a": "No. The engagement runs month to month with no long lock-in. I would rather earn your business every month by getting results than trap you in a contract you have outgrown."
+      },
+      {
+        "open": false,
+        "q": "Do I own my website and my content?",
+        "a": "Yes, completely. Everything is built on your own site and in your own accounts. If we ever stop working together, you keep everything and lose nothing."
+      },
+      {
+        "open": false,
+        "q": "What makes you different from other SEO freelancers?",
+        "a": "I ran the search program that helped drive roughly $100,000 in incremental revenue in six months at a large Canadian lender, then advised brands inside Google's Large Customer Sales team. I also build and rank my own sites with AI in production every day, including this one, so the structured data and content practices I use are the ones I run on my own business."
+      },
+      {
+        "open": false,
+        "q": "Can I see client case studies?",
+        "a": "Not yet, and I would rather be straight about that than invent them. This is a productized service and client results will be published as engagements complete. For now the proof is the systems I have built and ranked myself: fifteen directories, my own blog, and a self-hosted platform, all built and optimized with AI in production."
+      },
+      {
+        "open": false,
+        "q": "Do you work with businesses outside Toronto?",
+        "a": "Yes. I am based in Toronto and work remote, so I run SEO for businesses wherever they are in Canada. I also keep <a href=\"/consulting/\" style=\"color:var(--gold-2)\">dedicated pages for a number of Canadian cities</a> if you want details specific to where your business is."
+      }
+    ],
+    "cta": {
+      "h2": "Let us get you found",
+      "p": "If you are ready to stop guessing at SEO and start seeing your site show up for the searches that matter, send me a note. We will look at where your site stands today, where the gaps are, and what real, honestly reported progress could look like. No pressure and no jargon, just a straight conversation about whether this is a fit.",
+      "btn": {
+        "label": "Ask about SEO",
+        "href": "/contact/",
+        "contact": "SEO consulting for ",
+        "source": "seo"
+      },
+      "after": {
+        "href": "/aio-consulting/",
+        "label": "Or see how AIO consulting gets you cited by AI answer engines"
+      }
+    },
+    "schemaOfferName": "Monthly retainer",
+    "form": {
+      "heading": "Tell me where your site stands",
+      "sub": "A few lines is plenty. I read every one of these myself and I will tell you honestly whether this is a fit.",
+      "nameLabel": "Your name",
+      "emailLabel": "Email",
+      "businessLabel": "Business or website",
+      "messageLabel": "What are you trying to fix?",
+      "messagePlaceholder": "My site does not show up for anything, not sure where to start...",
+      "submit": "Send it over",
+      "privacy": "Goes straight to me. No list, no automated sales sequence.",
+      "success": "Got it. I will reply personally, usually within one business day.",
+      "error": "That did not send. Email me directly at elvin@elvinpeters.com and I will pick it up."
+    }
+  },
+  "fr": {
+    "title": "Consultation en référencement naturel Toronto | Elvin Peters",
+    "description": "Référencement naturel clé en main par un spécialiste qui a généré de vrais résultats de recherche, pas des positions de vanité. Au mois, sans engagement, rapports honnêtes. Toronto et à distance.",
+    "ogTitle": "Consultation en référencement naturel Toronto | Elvin Peters",
+    "ogDescription": "Référencement naturel clé en main, mené par quelqu'un qui a généré de vrais résultats de recherche. Rapports honnêtes, sans engagement à long terme.",
+    "breadcrumb": [
+      {
+        "label": "Accueil",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services/"
+      },
+      {
+        "label": "Référencement naturel",
+        "href": "/seo/"
+      }
+    ],
+    "eyebrow": "Référencement naturel",
+    "h1": "Un référencement qui vous fait trouver par les clients qui vous cherchent déjà",
+    "sub": "Imaginez votre site qui apparaît quand quelqu'un cherche exactement ce que vous vendez, mois après mois, sans que vous ayez à y penser. C'est le résultat que je bâtis pour les commerces locaux et les petites entreprises, mené par quelqu'un qui a généré de vrais résultats de recherche, pas des positions de vanité.",
+    "heroBtns": [
+      {
+        "label": "Parlons référencement",
+        "style": "primary",
+        "href": "/contact/",
+        "contact": "Référencement naturel pour ",
+        "source": "seo"
+      },
+      {
+        "label": "Voir ce qui est inclus",
+        "style": "ghost",
+        "href": "#included"
+      }
+    ],
+    "credbar": [
+      "Environ 100 000 $ en six mois grâce à la recherche chez un grand prêteur canadien",
+      "A conseillé des marques au sein de l'équipe Large Customer Sales de Google",
+      "Auteur de The Artificial Advantage",
+      "Bâtit et positionne ses propres sites avec l'IA en production tous les jours",
+      "Basé à Toronto, travaille à distance"
+    ],
+    "schemaName": "Consultation en référencement naturel",
+    "schemaOfferName": "Forfait mensuel",
+    "schemaDescription": "Référencement naturel clé en main par Elvin M. Peters : corrections techniques, optimisation on-page, données structurées et contenu bâti autour d'une réelle intention d'achat.",
+    "sections": [
+      {
+        "n": "01",
+        "h2": "Le trafic que vous voulez vraiment",
+        "prose": "L'objectif est simple et il vaut la peine d'être clair. Vous voulez que votre site apparaisse pour les recherches que vos vrais clients tapent, un site que les moteurs de recherche peuvent réellement lire et à qui ils font confiance, et une progression constante du trafic qui compose au lieu de repartir à zéro chaque fois qu'une agence change de mains. Quand la base technique est solide et que le contenu est bâti autour d'une intention réelle, le référencement devient un canal qui continue de vous rapporter longtemps après la fin des travaux. C'est la position dans laquelle je vous amène, puis que je continue de bâtir chaque mois."
+      },
+      {
+        "n": "02",
+        "cls": "leak",
+        "h2": "Pourquoi le référencement des petites entreprises n'aboutit à rien",
+        "prose": "La plupart des petites entreprises dépensent en référencement pendant des mois sans jamais voir bouger un chiffre qui compte. Les problèmes techniques restent non corrigés parce que personne ne regarde au-delà du calendrier de contenu. Des pages sont écrites pour des mots-clés sans réelle intention d'achat derrière. Les données structurées sont absentes ou erronées, alors les moteurs de recherche n'arrivent pas à saisir de quoi parle la page. Et le rapport mensuel déborde d'impressions et de positions qui ne sont jamais reliées à du vrai trafic ni à de vrais clients.",
+        "list": [
+          "Des problèmes techniques qui plafonnent discrètement la part du site réellement indexée",
+          "Du contenu bâti autour de mots-clés que personne avec un budget ne recherche",
+          "Des données structurées absentes ou brisées, alors les moteurs lisent mal la page",
+          "Des rapports conçus pour paraître occupés plutôt que pour montrer de vrais progrès"
+        ]
+      },
+      {
+        "n": "03",
+        "h2": "Référencement clé en main, mené comme s'il s'agissait de mon propre site",
+        "prose": "Je prends le tout en charge et je le mène avec le même soin que j'accorderais à mon propre site. Ça commence par un audit technique et des corrections pour que les moteurs de recherche puissent réellement explorer et indexer vos pages, puis le travail on-page et les données structurées pour que chaque page soit comprise correctement. Ensuite vient le contenu continu bâti autour des recherches que vos clients utilisent vraiment, plus des rapports mensuels honnêtes pour que vous voyiez les progrès en langage clair. Vous gardez la pleine propriété de votre site et de votre contenu du début à la fin."
+      },
+      {
+        "n": "04",
+        "h2": "Pourquoi me confier votre visibilité dans la recherche",
+        "prose": "J'ai dirigé le programme de recherche qui a contribué à générer environ 100 000 $ de revenus incrémentaux en six mois chez un grand prêteur canadien, puis j'ai conseillé des marques au sein de l'équipe Large Customer Sales de Google sur la façon dont la recherche récompense réellement le contenu et la structure. Je bâtis et positionne aussi mes propres sites avec l'IA en production tous les jours, celui-ci compris, alors les pratiques de données structurées et de contenu que j'utilise ici sont exactement celles que j'applique à ma propre entreprise.",
+        "list": [
+          "Environ 100 000 $ en six mois grâce à la recherche chez un grand prêteur canadien",
+          "A conseillé des marques au sein de l'équipe Large Customer Sales de Google",
+          "Auteur de The Artificial Advantage, sur l'art de diriger l'IA",
+          "Un bâtisseur solo qui livre et positionne ses propres sites avec l'IA, chaque jour"
+        ]
+      },
+      {
+        "n": "05",
+        "h2": "Des rapports honnêtes, aucune métrique de vanité",
+        "prose": "Vous ne devriez jamais avoir à me croire sur parole quant à l'avancement du travail. Je rapporte les positions qui comptent, le trafic organique et l'endroit où il se transforme en vraies demandes, dans un langage qui vous dit ce qui a changé, ce que ça donne et ce qui s'en vient. Je ne promettrai pas une position précise à une date précise, parce que quiconque le fait n'est pas honnête avec vous. Vous saurez toujours où en est le travail, et vous pouvez me poser n'importe quelle question à tout moment."
+      },
+      {
+        "n": "06",
+        "id": "included",
+        "h2": "Une tarification simple et transparente",
+        "prose": "Un tarif fixe couvre le travail et l'expertise. Je prends un nombre limité de clients en référencement à la fois pour que chaque site reçoive une vraie attention.",
+        "offer": {
+          "name": "Référencement naturel clé en main",
+          "price": "1 200 $",
+          "priceUnit": "/ mois",
+          "pnote": "au mois, sans engagement à long terme",
+          "checklist": [
+            "Audit technique complet et corrections : explorabilité, vitesse du site, problèmes d'indexation",
+            "Optimisation on-page ciblant les recherches que vos clients utilisent vraiment",
+            "Données structurées et balisage schema pour que les moteurs comprennent correctement votre contenu",
+            "Contenu continu bâti autour de mots-clés portant une réelle intention d'achat",
+            "Rapports mensuels clairs, en langage simple, sans mur de jargon",
+            "Vous gardez la pleine propriété de votre site et de chaque contenu",
+            "Engagement au mois, sans contrat à long terme",
+            "Accès direct à moi, la personne qui fait réellement le travail"
+          ],
+          "btn": {
+            "label": "Parlons référencement",
+            "href": "/contact/",
+            "contact": "Référencement naturel pour ",
+            "source": "seo"
+          }
+        }
+      }
+    ],
+    "faqHeading": "Foire aux questions",
+    "faq": [
+      {
+        "open": true,
+        "q": "À qui ça s'adresse?",
+        "a": "Aux commerces locaux et aux petites entreprises qui veulent apparaître quand leurs clients cherchent, et qui en ont assez des rapports mensuels vagues qui ne se rattachent jamais à du vrai trafic ni à des revenus. Si vous voulez une seule personne imputable qui fait le travail plutôt qu'une agence qui vous répartit sur une douzaine de comptes, c'est pour vous."
+      },
+      {
+        "open": false,
+        "q": "Que couvrent les 1 200 $ par mois?",
+        "a": "Ça couvre l'engagement complet : un audit technique et les corrections, l'optimisation on-page, les données structurées et le balisage schema, du contenu continu bâti autour des recherches que vos clients utilisent vraiment, et des rapports mensuels en langage clair. C'est le tarif pour le travail et l'expertise, et il reste le même que votre site soit petit ou grand."
+      },
+      {
+        "open": false,
+        "q": "En combien de temps verrai-je des résultats?",
+        "a": "Je vais être franc avec vous. Le référencement n'est pas instantané, et quiconque promet une position précise à une date précise n'est pas honnête avec vous. Les corrections techniques et le nettoyage structurel montrent souvent une amélioration mesurable dès les premiers mois, et les gains plus forts, ceux qui composent, se bâtissent avec le temps à mesure que le site accumule de l'autorité et du meilleur contenu."
+      },
+      {
+        "open": false,
+        "q": "Y a-t-il un contrat à long terme?",
+        "a": "Non. L'engagement se fait au mois, sans blocage à long terme. Je préfère mériter votre confiance chaque mois en livrant des résultats plutôt que de vous coincer dans un contrat que vous avez dépassé."
+      },
+      {
+        "open": false,
+        "q": "Suis-je propriétaire de mon site et de mon contenu?",
+        "a": "Oui, entièrement. Tout est bâti sur votre propre site et dans vos propres comptes. Si nous cessons un jour de travailler ensemble, vous gardez tout et ne perdez rien."
+      },
+      {
+        "open": false,
+        "q": "Qu'est-ce qui vous distingue des autres pigistes en référencement?",
+        "a": "J'ai dirigé le programme de recherche qui a contribué à générer environ 100 000 $ de revenus incrémentaux en six mois chez un grand prêteur canadien, puis j'ai conseillé des marques au sein de l'équipe Large Customer Sales de Google. Je bâtis et positionne aussi mes propres sites avec l'IA en production tous les jours, celui-ci compris, alors les pratiques de données structurées et de contenu que j'utilise sont celles que j'applique à ma propre entreprise."
+      },
+      {
+        "open": false,
+        "q": "Puis-je voir des études de cas clients?",
+        "a": "Pas encore, et je préfère être franc là-dessus plutôt que d'en inventer. C'est un service productisé et les résultats clients seront publiés à mesure que les mandats se terminent. Pour l'instant, la preuve, ce sont les systèmes que j'ai bâtis et positionnés moi-même : quinze répertoires, mon propre blogue et une plateforme auto-hébergée, tous bâtis et optimisés avec l'IA en production."
+      },
+      {
+        "open": false,
+        "q": "Travaillez-vous avec des entreprises à l'extérieur de Toronto?",
+        "a": "Oui. Je suis basé à Toronto et je travaille à distance, alors je gère le référencement pour des entreprises partout au Canada. Je tiens aussi <a href=\"/consulting/\" style=\"color:var(--gold-2)\">des pages dédiées à plusieurs villes canadiennes</a> si vous voulez des détails propres à l'endroit où se trouve votre entreprise."
+      }
+    ],
+    "cta": {
+      "h2": "Faisons en sorte qu'on vous trouve",
+      "p": "Si vous êtes prêt à arrêter de deviner en référencement et à voir votre site apparaître pour les recherches qui comptent, écrivez-moi. Nous regarderons où en est votre site aujourd'hui, où sont les écarts, et à quoi pourraient ressembler de vrais progrès rapportés honnêtement. Sans pression et sans jargon, juste une conversation franche pour voir si ça convient.",
+      "btn": {
+        "label": "Parlons référencement",
+        "href": "/contact/",
+        "contact": "Référencement naturel pour ",
+        "source": "seo"
+      },
+      "after": {
+        "href": "/aio-consulting/",
+        "label": "Ou voyez comment la consultation en visibilité IA vous fait citer par les moteurs de réponse"
+      }
+    },
+    "form": {
+      "heading": "Dites-moi où en est votre site",
+      "sub": "Quelques lignes suffisent. Je lis chacun de ces messages moi-même et je vous dirai honnêtement si c'est un bon match.",
+      "nameLabel": "Votre nom",
+      "emailLabel": "Courriel",
+      "businessLabel": "Entreprise ou site web",
+      "messageLabel": "Qu'essayez-vous de régler?",
+      "messagePlaceholder": "Mon site ne ressort pour rien, je ne sais pas par où commencer...",
+      "submit": "Envoyer",
+      "privacy": "Ça m'arrive directement. Aucune liste, aucune séquence de vente automatisée.",
+      "success": "Bien reçu. Je vous réponds personnellement, habituellement en un jour ouvrable.",
+      "error": "L'envoi n'a pas fonctionné. Écrivez-moi directement à elvin@elvinpeters.com et je vais le récupérer."
+    }
+  }
+}

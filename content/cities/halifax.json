@@ -1,0 +1,119 @@
+{
+  "_comment": "Halifax city page. New page, no /consulting/halifax/ existed before, so nav.json needs a matching entry. The argument is that Halifax is Atlantic Canada's only large metro, which means a Halifax business is usually selling to a region of four provinces rather than to a city, and its competitors are as likely to be in Moncton or St. John's as across the harbour.",
+  "slug": "consulting/halifax",
+  "template": "city",
+  "navKey": "consulting/halifax/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Halifax",
+  "region": "Nova Scotia",
+  "districts": ["downtown Halifax", "the North End", "the South End", "Dartmouth", "Bedford", "Clayton Park", "Spryfield"],
+  "nearby": ["Truro", "New Glasgow", "Bridgewater", "Kentville", "Moncton", "Sydney", "Charlottetown"],
+  "industries": ["ocean industries and defence", "education and research", "health care", "financial services", "tourism and hospitality"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Halifax | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Halifax businesses. Serving downtown Halifax, Dartmouth, Bedford, Clayton Park and across Atlantic Canada.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Halifax",
+    "ogDescription": "Google Ads, SEO and AI visibility for Halifax businesses. One accountable consultant, and targeting built for a regional market.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Nova Scotia", "href": "/consulting/nova-scotia/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. {city} is the only large metro in Atlantic Canada, which means most businesses here are really selling to a region rather than to a city.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} is the regional capital for four provinces. That is the fact that should shape your marketing, because it means the customer base is spread across a large area and low density, and it means your competitors are as likely to be in Moncton or St. John's as across the harbour. Targeting a radius around {city} makes sense for a restaurant and makes almost no sense for a professional services firm, a distributor or anything sold remotely.",
+      "The second thing is that the region punches above its weight in specific sectors. Ocean industries, defence, post-secondary research and health care are concentrated here in a way that creates real B2B and institutional demand, and those buyers do not come through a search ad. They come through being visible and credible while somebody researches, which is SEO and AIO work rather than paid.",
+      "The third is seasonality. Tourism and the student calendar move a lot of local demand, and a business that spreads its budget evenly across the year is underspending in the months that actually pay. That is easy to fix and it is one of the more common things I find in {city} accounts."
+    ],
+    "facts": [
+      { "stat": "465,703", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "#12", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is how far the targeting should reach, and whether your buyer is a household in Dartmouth or an institution that will take nine months to decide.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "Works well in {city} for local urgent services, and can extend across Atlantic Canada for anything you can deliver remotely. Rebuilt account structure, conversion tracking that counts booked work rather than form views, and spend cut off searches that were never going to convert. Least useful when your buyer is an institution with a procurement process.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Strong value in {city} because the competition per search is thinner than in central Canada and the regional catchment is large. Technical fixes first, then pages that answer what buyers across the region search, including separate pages for the markets you genuinely serve.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation in Atlantic Canada. Cheapest of the three, one-time, and nearly nobody in this region has started, which makes it the easiest lead to take right now.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout the municipality, in {districts}. Everything is run remotely over video and email, so which side of the harbour you are on makes no difference to the work or the price.",
+      "nearbyHeading": "And across Atlantic Canada",
+      "nearbyBody": "Most {city} businesses of any size sell beyond the city, and often beyond the province. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. The one hour time difference is worth noting and it has never been a problem.",
+        "open": true
+      },
+      {
+        "q": "Should we advertise across Atlantic Canada or just {city}?",
+        "a": "It depends entirely on what you sell and whether you can deliver it at a distance. A trade or a clinic should stay local. A professional services firm, a distributor, or anything delivered remotely is usually leaving money on the table by stopping at the municipal boundary, because the rest of the region has thin competition and searchers who currently find nobody local.",
+        "open": true
+      },
+      {
+        "q": "Which service should a {city} business start with?",
+        "a": "If you need customers this quarter and you sell to households, Google Ads. If you sell to institutions, government or other businesses, SEO and AIO, because those buyers research long before they contact anybody. Pick one and do it properly."
+      },
+      {
+        "q": "Our business is seasonal. How should we budget?",
+        "a": "Concentrate the ad spend in and just ahead of your season, keep a small presence through the quiet months so you are not restarting from zero, and use the slow period to build the SEO that will be ranking when demand returns. Flat monthly budgets are the most common waste I find in seasonal accounts."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Halifax (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503205" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Tell me how far you can actually serve and I will tell you what I would build first.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

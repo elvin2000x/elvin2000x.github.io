@@ -1,0 +1,121 @@
+{
+  "_comment": "Calgary city page. The argument is the head office concentration and the commodity cycle: Calgary has the highest head office employment relative to its size of any major CMA, and marketing budgets here move with a cycle that has nothing to do with your campaign's performance. Every number in facts traces to an entry in sources.",
+  "slug": "consulting/calgary",
+  "template": "city",
+  "navKey": "consulting/calgary/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Calgary",
+  "region": "Alberta",
+  "districts": ["Downtown Calgary", "the Beltline", "Kensington", "Inglewood", "northeast Calgary", "southeast Calgary", "Bowness", "Mission"],
+  "nearby": ["Airdrie", "Okotoks", "Cochrane", "Chestermere", "Strathmore", "Canmore", "High River"],
+  "industries": ["energy", "professional services", "technology", "transportation and logistics", "construction"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Calgary | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Calgary businesses. Serving Downtown Calgary, the Beltline, Inglewood and out to Airdrie, Okotoks and Cochrane.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Calgary",
+    "ogDescription": "Google Ads, SEO and AI visibility for Calgary businesses. One accountable consultant, and a plan that survives a downturn.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Alberta", "href": "/consulting/alberta/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. {city} runs on a cycle, and a plan that only works at the top of it is not a plan.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} carries 221 corporate head offices employing nearly 30,000 people, which is remarkable for a metro of 1.5 million and it changes who your customer is. A large share of {city} business is B2B, sold into decision makers at head offices on long cycles, with procurement and committees in the way. Nobody signs a six figure contract off a search ad. What search does for you there is make you findable and credible while somebody quietly builds a shortlist, which is SEO and AIO work rather than paid.",
+      "The other half of the city is an ordinary consumer economy of trades, clinics, restaurants and home services, where Google Ads works exactly the way it works anywhere. Those two {city} businesses need almost opposite plans, and the first thing worth establishing is which one you are.",
+      "Then there is the cycle. {city} budgets move with energy prices in a way that has nothing to do with whether your campaigns are working, and the businesses that come through a downturn intact are the ones with a channel that keeps producing when the ad budget gets cut. That is the strongest practical argument for {city} businesses to build SEO alongside ads rather than after them."
+    ],
+    "facts": [
+      { "stat": "1,481,806", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "221", "label": "corporate head offices in {city}, employing 29,824 people (2024)" },
+      { "stat": "#5", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is the mix, and the mix depends almost entirely on whether you sell to head offices or to households.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "Best fit for the consumer side of {city}: trades, clinics, home services, anyone whose customer has a problem they need solved this week. Rebuilt account structure, conversion tracking that counts booked work, and spend cut off searches that were never going to convert. Least useful when your buyer is a procurement committee in a downtown tower.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The channel I would push hardest for a {city} business, for two reasons: your B2B buyers research long before they ever contact you, and rankings keep working when the budget gets cut. Technical fixes first, then the pages that answer what your buyers and their procurement people actually search.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a shortlist. Particularly relevant for {city} B2B, where the research phase is exactly where these tools get used, and new enough that most of your {city} competitors have not started.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout the city, in {districts}. Everything is run remotely over video and email, so where you are in {city} makes no difference to the work or the price.",
+      "nearbyHeading": "And across the {city} region",
+      "nearbyBody": "The commuter towns around {city} are growing faster than the city itself and a lot of your customers live in them. I work with businesses across {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account regardless of city.",
+        "open": true
+      },
+      {
+        "q": "We sell B2B into head offices. Will Google Ads help?",
+        "a": "Some, and less than you would hope. Ads can capture the small number of people actively searching for what you sell, but most of your buying cycle happens before anyone types a commercial keyword. Where search earns its money for a {city} B2B business is credibility during research, which is SEO and AIO work. I would rather tell you that before you fund a campaign than after.",
+        "open": true
+      },
+      {
+        "q": "What happens to our marketing if the economy turns?",
+        "a": "Ads stop producing the day you stop paying, which is exactly when budgets get cut. That is not an argument against ads, it is an argument for having rankings and AI visibility built before you need them. If you can only afford one channel and you are worried about the cycle, I would build the one that keeps working when the spending stops."
+      },
+      {
+        "q": "Which service should a {city} business start with?",
+        "a": "If your customer is a household with an urgent problem, Google Ads. If your customer is a business with a procurement process, SEO first and AIO alongside it. Most people should pick one and do it properly rather than three badly."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Calgary (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503825" },
+      { "label": "Statistics Canada, Annual Head Office Survey, 2024", "href": "https://www.statcan.gc.ca/o1/en/app/8995-annual-head-office-survey-2024" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Tell me who you sell to in {city} and I will tell you which channel I would start with, including when the honest answer is that you do not need to hire anyone yet.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

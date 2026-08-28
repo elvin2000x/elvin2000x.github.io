@@ -1,7 +1,11 @@
+# robots.txt for elvinpeters.com
+# Every Disallow must sit inside its User-agent group. Sitemap is a
+# non-group directive and belongs at the end, after every group is closed.
+
 User-agent: *
 Allow: /
 Disallow: /thank-you/
 Disallow: /dl/
+Disallow: /oto/
 
 Sitemap: https://elvinpeters.com/sitemap.xml
-Disallow: /oto/

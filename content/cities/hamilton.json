@@ -1,0 +1,119 @@
+{
+  "_comment": "Hamilton city page. The argument is the Toronto auction problem: Hamilton sits inside the Greater Toronto and Hamilton Area, so Hamilton businesses routinely end up bidding against Toronto advertisers with Toronto budgets while charging Hamilton prices. Getting the geography and the negative keyword list right is the whole game here.",
+  "slug": "consulting/hamilton",
+  "template": "city",
+  "navKey": "consulting/hamilton/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Hamilton",
+  "region": "Ontario",
+  "districts": ["downtown Hamilton", "Westdale", "Dundas", "Ancaster", "Stoney Creek", "the Hamilton Mountain", "Waterdown", "the North End"],
+  "nearby": ["Burlington", "Oakville", "Grimsby", "Brantford", "Milton", "Caledonia", "Binbrook"],
+  "industries": ["health care and life sciences", "advanced manufacturing", "logistics and distribution", "construction", "education"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Hamilton | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Hamilton businesses. Serving downtown Hamilton, Dundas, Ancaster, Stoney Creek and out to Burlington, Grimsby and Brantford.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Hamilton",
+    "ogDescription": "Google Ads, SEO and AI visibility for Hamilton businesses. One accountable consultant who will keep you out of Toronto's auction.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Ontario", "href": "/consulting/ontario/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. {city} businesses have a specific problem nobody warns them about: you can end up paying Toronto prices for clicks while charging {city} prices for the work.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} sits at the western end of the Greater Toronto and {city} Area, close enough that Toronto advertisers routinely target it and far enough that most of your customers would never drive into Toronto for what you sell. That mismatch is where {city} ad budgets leak. If your targeting is loose, you are bidding in the same auctions as businesses with ten times your budget for clicks that were never going to become customers.",
+      "The fix is unglamorous and it is most of the work: geography tightened to the area you actually serve, a negative keyword list that excludes the Toronto-intent searches, and conversion tracking that counts a booked job rather than a form view so you can see which side of the border is actually paying you. Doing that properly is usually worth more to a {city} business than any increase in budget.",
+      "Underneath that, {city} has a real economy of its own. Health care and life sciences around the hospital network, advanced manufacturing, logistics along the highway corridor and a construction sector working through years of growth. Those are all markets where local search still decides who gets the call, which is why the geography question matters so much."
+    ],
+    "facts": [
+      { "stat": "785,184", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "#9", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the first job in almost every account is drawing the right line around your market, because the default settings will quietly put you in Toronto's auction.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "The first thing I look at in a {city} account is where the money is actually going, because loose targeting sends it to Toronto. Then account structure, a negative keyword list that earns its keep, conversion tracking that counts booked work, and budget concentrated on the searches that come from people who will actually hire you.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Strong value for {city} businesses because local results are decided locally. You are not fighting national brands for a {city} search the way you would for a generic one. Technical fixes first, then the pages that answer what {city} buyers search, including separate pages for the communities you serve.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a local recommendation. These tools lean heavily on clear, well structured local information, and most {city} competitors have not touched it yet.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout the city, in {districts}. Everything is run remotely over video and email, so where you are in {city} makes no difference to the work or the price.",
+      "nearbyHeading": "And across the western GTA and Niagara edge",
+      "nearbyBody": "Most {city} businesses serve well past the city line in both directions. I work with businesses in {nearby} on the same terms, and mapping that service area accurately is usually the single most profitable hour of work in the account."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Should we target Toronto as well?",
+        "a": "Only if you genuinely serve it and can compete on price there. For most {city} businesses the answer is no, and the more useful move is excluding Toronto properly so your budget stops funding clicks from people who will hire somebody closer to home. If you do serve Toronto, it should be its own campaign with its own budget so you can see whether it pays.",
+        "open": true
+      },
+      {
+        "q": "Why are our clicks so expensive?",
+        "a": "Usually because the account is competing in a wider market than the business does. Loose geographic targeting, broad match keywords and a thin negative list all pull you into auctions against advertisers with far bigger budgets. That is fixable and it is normally the first thing I would change."
+      },
+      {
+        "q": "Which service should a {city} business start with?",
+        "a": "If you need work booked this quarter, Google Ads, once the targeting is right. If you can wait, SEO in {city} is winnable because local searches are decided by local competitors. AIO is the cheapest to add and the one your {city} competitors are least likely to have started."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Hamilton (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503537" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, and if your account is quietly funding Toronto clicks I will tell you that too.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

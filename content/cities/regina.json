@@ -1,0 +1,119 @@
+{
+  "_comment": "Regina city page. New page, nav.json needs a matching entry. The argument is that a capital city with a heavy public sector and crown corporation base has unusually long, multi-person buying cycles, which changes both the channel mix and what a fair measurement window looks like. Population and growth are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/regina",
+  "template": "city",
+  "navKey": "consulting/regina/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Regina",
+  "region": "Saskatchewan",
+  "districts": ["downtown Regina", "Harbour Landing", "Cathedral", "Lakeview", "Eastview", "Whitmore Park", "White City", "Emerald Park"],
+  "nearby": ["Moose Jaw", "Weyburn", "Estevan", "Yorkton", "Fort Qu'Appelle", "Indian Head"],
+  "industries": ["public administration", "crown corporations and insurance", "agriculture", "energy", "steel and manufacturing"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Regina, SK | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Regina businesses. Serving downtown Regina, Harbour Landing, Cathedral, White City, Emerald Park and southern Saskatchewan.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Regina, SK",
+    "ogDescription": "Google Ads, SEO and AI visibility for Regina businesses. One accountable consultant, and a plan built for a market where the buyer researches for months.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{region}", "href": "/consulting/saskatchewan/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. {city} is a capital city, and selling into a market built on government, crown corporations and long procurement is a different job from selling to walk-in customers.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} runs on {industries}, and the first three of those buy slowly. A prospect finds you, reads everything you have published, forwards it to two colleagues, and contacts you weeks or months later, often through a form that credits whatever they clicked last. Judge a campaign here on a 30 day window and you will switch off the thing that was actually working.",
+      "That pattern favours being findable and credible over being loud. The businesses that do well in {city} tend to be the ones that have published something worth forwarding: a real explanation of how the work is priced, what the process looks like, and what goes wrong. That is an SEO and content argument more than an advertising one, and it is cheap here because so few competitors are doing it.",
+      "The market is also small enough that reputation travels. {city} is roughly a quarter of a million people and the business community is smaller than that. Advertising that overpromises gets found out fast, and the same word of mouth that punishes it rewards anyone whose website matches what they actually deliver."
+    ],
+    "facts": [
+      { "stat": "249,217", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "5.3%", "label": "growth since 2016, against 3.1% for {region} overall (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is the measurement window, because a market that takes two months to decide cannot be judged on a month of data.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "For {city} that means a longer attribution window before anything gets judged, targeting that covers the southern part of the province rather than the city alone, and spend cut off searches that were never going to convert. Useful here, but rarely the first thing I would fix.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Usually where I would start in {city}. Long buying cycles mean people research before they contact anyone, and thin local competition means the pages that answer those questions can rank quickly. Technical fixes first, then the content your buyers are already looking for.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. That matters more in a slow, research-heavy market, because the research now often starts inside a chatbot. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across Greater {city}",
+      "districtsBody": "I take on clients throughout the region, in {districts}. Everything is run remotely over video and email, so which part of the city you are in makes no difference to the work or the price.",
+      "nearbyHeading": "And across southern {region}",
+      "nearbyBody": "The natural catchment runs well past the city. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Our sales cycle is months long. Can you even measure that?",
+        "a": "Yes, and it is the main thing I would set up first in {city}. That means a longer attribution window, tracking that survives someone leaving and coming back weeks later, and reporting that counts qualified enquiries rather than clicks. Without it you are guessing, and the guess usually punishes the channel that did the early work.",
+        "open": true
+      },
+      {
+        "q": "Should we run ads at all, or just do SEO?",
+        "a": "In {city} I would often start with SEO and add ads once you know which enquiries are worth paying for. That is not a rule, and if you sell something urgent then paid search comes first. I will tell you which on a call rather than selling you both by default."
+      },
+      {
+        "q": "Do you also cover Saskatoon?",
+        "a": "Yes. I work across the province and there is a page for Saskatoon as well as one for Saskatchewan generally. If you sell province-wide, the {region} page is probably the more useful starting point."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Regina (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503705" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether you can actually see the enquiries your marketing is producing.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

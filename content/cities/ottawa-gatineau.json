@@ -1,0 +1,123 @@
+{
+  "_comment": "Ottawa-Gatineau city page. build.js generates /consulting/ottawa-gatineau/ from this file. Slug keeps the existing live URL rather than moving to /ottawa/. This is the one city of the three where the French question is real rather than decorative: the CMA straddles the Ontario/Quebec border, so a business with an establishment on the Gatineau side has obligations under the Charter of the French Language that a Toronto business does not. The FAQ that covers it points at the OQLF and stops short of giving legal advice, deliberately.",
+  "slug": "consulting/ottawa-gatineau",
+  "template": "city",
+  "navKey": "consulting/ottawa-gatineau/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Ottawa",
+  "region": "Ontario and Quebec",
+  "districts": ["Centretown", "Kanata", "Nepean", "Orleans", "Barrhaven", "Stittsville", "the ByWard Market", "Gatineau", "Hull", "Aylmer"],
+  "nearby": ["Gatineau", "Kanata", "Orleans", "Nepean", "Barrhaven", "Rockland", "Carleton Place"],
+  "industries": ["government contracting", "technology and telecom", "professional services", "health care", "tourism and hospitality"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Ottawa | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Ottawa and Gatineau businesses. Serving Centretown, Kanata, Nepean, Orleans, Barrhaven and across the National Capital Region.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Ottawa",
+    "ogDescription": "Google Ads, SEO and AI visibility for Ottawa and Gatineau businesses. One accountable consultant.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Ontario", "href": "/consulting/ontario/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city} and Gatineau",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} and Gatineau businesses, remotely, as one accountable person rather than an account team you never meet. The National Capital Region does not behave like a normal Canadian market, and the plan should reflect that rather than ignore it.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for an {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city} and Gatineau** remotely"
+    ],
+
+    "marketHeading": "What marketing in {city} actually has to account for",
+    "market": [
+      "{city} has an economy most Canadian cities do not: the federal public service is the region's largest employer, with roughly 130,600 federal public servants working in the National Capital Region as of March 2023. If your customers are federal departments, search advertising is close to useless for reaching them, because that money moves through procurement, not through a Google click. What search does buy you there is being credible when a procurement officer, a prime contractor or a hiring panel looks you up, which is an SEO and AIO problem rather than a paid one.",
+      "The other {city} is Kanata North, Canada's largest technology park, with more than 540 companies and roughly 33,000 employees. That is a long-sales-cycle B2B market where nobody signs a six-figure contract off a search ad, but where being absent from the research phase quietly costs you the shortlist. And underneath both sits an ordinary local economy of trades, clinics, restaurants and professional services, where Google Ads works exactly the way it works anywhere.",
+      "So the honest answer for {city} is that the right channel depends on which of those three economies you sell into, more than it depends on your budget. That is the first thing I will ask you, and it changes the recommendation completely."
+    ],
+    "facts": [
+      { "stat": "1,488,307", "label": "people in the {city}-Gatineau census metropolitan area (2021 Census)" },
+      { "stat": "130,611", "label": "federal public servants in the National Capital Region (March 2023)" },
+      { "stat": "540+", "label": "companies in Kanata North, Canada's largest technology park" }
+    ],
+
+    "servicesHeading": "Three ways to grow an {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is which one is worth your money, and that depends almost entirely on whether you sell to government, to Kanata's technology sector, or to the people who live here. Tell me which and I will tell you where I would start.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "Best fit for the local {city} economy: trades, clinics, restaurants, professional services, anyone whose customer types a problem into Google and picks somebody that week. Rebuilt account structure, conversion tracking that counts booked work, and spend cut off the searches that were never going to convert. Least useful if your buyer is a federal department.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The channel that does the most work in {city}, because so much of the buying here starts with research rather than a click. Technical fixes, then the pages that answer what your buyers and their procurement people actually search. Slower than ads, and it keeps paying after you stop.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation or a shortlist. Particularly relevant in a research-heavy market like the National Capital Region, and new enough that most of your {city} competitors have not started.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across the National Capital Region",
+      "districtsBody": "I take on clients throughout the region, in {districts}. Everything is run remotely over video and email, so which side of the river you are on makes no difference to the work or the price.",
+      "nearbyHeading": "And the surrounding markets",
+      "nearbyBody": "The {city} search market does not stop at the city boundary, and neither do your competitors. I work with businesses across {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to pretend there is one. Everything is run remotely over video and email, which is how I run every account regardless of city. If you want someone who will physically come to your office, I am the wrong hire and I will say so on the call.",
+        "open": true
+      },
+      {
+        "q": "We sell to the federal government. Will Google Ads help?",
+        "a": "Usually not directly, and I would rather tell you that before you spend the money. Federal buying goes through procurement, not through search ads. Where search does matter for you is credibility during research: the buyer, the prime contractor or the partner who looks you up should find a site that clearly explains what you do and who you have done it for. That is SEO and AIO work. If you also sell commercially, then ads are worth discussing for that side of the business."
+      },
+      {
+        "q": "Do we need a French version of our website in {city}?",
+        "a": "It depends on which side of the river you operate. A business with an establishment in Quebec, including Gatineau, has obligations under the Charter of the French Language covering commercial publications and websites, and enforcement tightened as of June 2025. An Ontario-side {city} business has no such legal obligation, though this is the most bilingual major market in the country and a French page is often worth building on commercial grounds alone. I am not a lawyer and this is not legal advice: the Office québécois de la langue française publishes the actual requirements, and a Quebec lawyer should confirm what applies to you.",
+        "open": false
+      },
+      {
+        "q": "Which service should an {city} business start with?",
+        "a": "If you sell to consumers or local businesses, Google Ads, because it produces customers in weeks. If you sell to government or into Kanata's technology sector, SEO and AIO, because your buyers research before they ever create an opportunity. Pick one and do it properly rather than three badly."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Ottawa-Gatineau (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503505" },
+      { "label": "CBC News, federal workforce in the Ottawa area continues to grow", "href": "https://www.cbc.ca/news/canada/ottawa/ottawa-gatineau-capital-region-federal-worker-number-1.7074263" },
+      { "label": "Kanata North Business Association, technology hub", "href": "https://www.kanatanorthba.com/technology-hub-emerging-businesses-ottawa-kanata-north/" },
+      { "label": "Office quebecois de la langue francaise, requirements for businesses", "href": "https://www.oqlf.gouv.qc.ca/" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Tell me who you sell to in the National Capital Region and I will tell you which channel I would start with, including when the honest answer is that you do not need me yet.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for an {city} business", "source": "city-{city}" }
+    }
+  }
+}

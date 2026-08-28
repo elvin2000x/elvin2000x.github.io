@@ -1,0 +1,119 @@
+{
+  "_comment": "Saskatoon city page. New page, nav.json needs a matching entry. The argument is that a lot of Saskatoon businesses sell to a customer base far larger than Saskatoon (agtech, mining supply, professional services serving the whole province) and are targeting a radius around the city instead. Population and growth rate are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/saskatoon",
+  "template": "city",
+  "navKey": "consulting/saskatoon/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Saskatoon",
+  "region": "Saskatchewan",
+  "districts": ["downtown Saskatoon", "Riversdale", "Nutana", "Sutherland", "Stonebridge", "Willowgrove", "Martensville", "Warman"],
+  "nearby": ["Prince Albert", "North Battleford", "Humboldt", "Rosetown", "Yorkton", "Melfort"],
+  "industries": ["agriculture and agtech", "mining and potash", "health care", "education and research", "construction"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Saskatoon, SK | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Saskatoon businesses. Serving downtown Saskatoon, Stonebridge, Sutherland, Martensville, Warman and northern Saskatchewan.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Saskatoon, SK",
+    "ogDescription": "Google Ads, SEO and AI visibility for Saskatoon businesses. One accountable consultant, and a plan built for a market that sells well past the city limits.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{region}", "href": "/consulting/saskatchewan/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. {city} grew faster than the province and faster than the country between the last two censuses, and most local marketing has not caught up to that.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "The single most common mistake I see in {city} accounts is a targeting radius drawn around the city. A large share of {city} businesses do not sell to {city}. They sell to farms, mines, processors and contractors spread across the whole province and often well beyond it, and a 50 kilometre radius quietly cuts off most of the people who were going to buy. Fixing the geography is usually a bigger win here than fixing the ads.",
+      "Competition for search is genuinely thin. In {industries}, the number of {city} companies running a serious SEO or content programme is small enough that a business willing to publish real answers to real customer questions can take the top of the results in months rather than years. That is not true in Toronto or Vancouver and it will not stay true here forever.",
+      "The other thing worth knowing is that {city} buying cycles in the sectors that matter are long and involve several people. Someone researches for weeks, sends a link to a colleague, and a purchase order shows up two months later. Any measurement setup that only credits the last click will make your best channel look like your worst one."
+    ],
+    "facts": [
+      { "stat": "317,480", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "7.6%", "label": "growth since 2016, against 3.1% for {region} and 5.2% nationally (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is how wide the targeting has to be and how patient the measurement has to be.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "For {city} that starts with the map. Targeting rebuilt around the customers you actually serve rather than a circle around the office, then account structure, then cutting spend on searches that were never going to convert. In a market this size the waste is usually geographic before it is anything else.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The strongest of the three in {city}, because the competition is thin and the buying cycle is long enough that people genuinely research before they contact anyone. Technical fixes first, then the pages that answer what your customers are actually typing.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a supplier or a firm. Cheapest of the three, one-time, and I have yet to find a {city} competitor who has started.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across Greater {city}",
+      "districtsBody": "I take on clients throughout the region, in {districts}. Everything is run remotely over video and email, so which part of the city you are in makes no difference to the work or the price.",
+      "nearbyHeading": "And across northern {region}",
+      "nearbyBody": "Plenty of {city} businesses serve the north, and plenty of northern businesses are better served from {city} than from anywhere else. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "We sell across the province, not just in {city}. Does a {city} page even apply?",
+        "a": "It applies, and that gap is most of the value. Businesses in {industries} routinely sell province-wide while their advertising is targeted at the city they happen to sit in. The first thing I would look at is whether your targeting matches your actual service area, because that mismatch costs more than anything else on the account.",
+        "open": true
+      },
+      {
+        "q": "Is there enough search volume here to bother?",
+        "a": "For most {city} businesses, yes, but the honest answer is that it depends on what you sell and I would rather look than guess. On a call I will tell you if I think the volume is too thin to justify paid search. In smaller markets the answer is sometimes that SEO and AIO are worth doing and Google Ads is not, and that is a fine outcome."
+      },
+      {
+        "q": "How long before we see anything?",
+        "a": "Google Ads can shift within weeks because you are buying attention directly. SEO is a few months before it compounds, which is genuinely fine here because your competitors are not moving fast either. AIO is a one-time piece of work and shows up as soon as the models re-crawl."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Saskatoon (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503725" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether your targeting matches the customers you actually serve.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

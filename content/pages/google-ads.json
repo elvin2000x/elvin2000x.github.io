@@ -1,0 +1,377 @@
+{
+  "_comment": "Content model for /google-ads/ and /fr/google-ads/. Rendered by build.js (renderOfferPage). Editing the HTML directly gets overwritten on the next build; edit this file instead. French is Quebec register and is NOT yet native-reviewed.",
+  "slug": "google-ads",
+  "template": "offer",
+  "navKey": "google-ads/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "schemaService": {
+    "serviceType": "Google Ads management",
+    "areaServed": [
+      "Toronto",
+      "Canada",
+      "Remote"
+    ],
+    "price": "1500",
+    "priceCurrency": "USD",
+    "unitText": "MONTH",
+    "offerName": "Monthly management"
+  },
+  "en": {
+    "title": "Google Ads Management Toronto | Elvin Peters",
+    "description": "Done-for-you Google Ads management from a specialist who ran $1.5M a month in paid search. Profitable campaigns, less wasted spend, honest tracking. Toronto and remote.",
+    "ogTitle": "Google Ads Management Toronto | Elvin Peters",
+    "ogDescription": "Google Ads run by someone who ran $1.5M a month in paid search. Profitable campaigns, honest reporting, no long lock-in.",
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services/"
+      },
+      {
+        "label": "Google Ads Management"
+      }
+    ],
+    "eyebrow": "Google Ads Management",
+    "h1": "Google Ads that bring in profitable customers, month after month",
+    "sub": "Picture opening your account and seeing budget flow only to the searches that turn into real customers, with tracking that shows you exactly what every dollar earned back. That is the outcome I build for local and small businesses, run by someone who ran $1.5M a month in paid search.",
+    "heroBtns": [
+      {
+        "label": "Ask about management",
+        "style": "primary",
+        "href": "/contact/",
+        "contact": "Google Ads management for ",
+        "source": "google-ads"
+      },
+      {
+        "label": "See what is included",
+        "style": "ghost",
+        "href": "#included"
+      }
+    ],
+    "credbar": [
+      "$50M+ in profitable ad spend",
+      "$1.5M a month in paid media at a large publicly traded Canadian lender",
+      "Author of The Artificial Advantage",
+      "Builds with AI in production every day",
+      "Toronto based, works remote"
+    ],
+    "schemaDescription": "Done-for-you Google Ads management by Elvin M. Peters, who ran $1.5M a month in paid search, then advised brands inside Google.",
+    "schemaName": "Google Ads Management",
+    "sections": [
+      {
+        "n": "01",
+        "h2": "The account you actually want to run",
+        "prose": "The goal is simple and it is worth being clear about. You want more of the right customers finding you the moment they search, a cost per lead that keeps dropping as the account gets smarter, and a clear picture of what your spend returns. When the campaigns are built and managed well, Google Ads becomes a steady source of demand that funds your growth and that competitors have a hard time copying. That is the position I get you into and then defend every month."
+      },
+      {
+        "n": "02",
+        "cls": "leak",
+        "h2": "Why most ad budgets quietly leak",
+        "prose": "Most small businesses lose money on Google Ads for a few boring reasons. Broad keywords pull in searches that will never buy. Conversion tracking is often set up wrong or not at all, so nobody really knows what works. And the agency running the account treats it like one of a hundred logins, checking in once a month and sending a report full of vanity metrics. The spend keeps going out and the answers never get clearer.",
+        "list": [
+          "Budget bleeding into searches that never convert",
+          "Tracking that hides what each dollar actually earns",
+          "Reports built to look busy instead of showing profit",
+          "An account nobody is watching closely between invoices"
+        ]
+      },
+      {
+        "n": "03",
+        "h2": "Done-for-you management, run like it is my own money",
+        "prose": "I take the whole thing off your plate and run the account with the same care I would give my own spend. That means building or rebuilding the campaigns to cut waste from day one, then managing keywords, bids, and budget every week toward the searches that turn into customers. You get honest conversion tracking wired in properly, plain-language reporting you can actually read, and a search presence that gets stronger the longer we run it. You keep full ownership of the ad account and fund the ad spend directly, so your history and your money always stay yours."
+      },
+      {
+        "n": "04",
+        "h2": "Why trust me with your ad budget",
+        "prose": "I spent three years running $1.5M a month in paid search myself, then advised brands inside Google. I know how the auction actually rewards accounts, where budgets quietly leak, and which levers move your cost per result. I also ran multimillion-dollar campaigns for a large publicly traded Canadian lender, so I understand what it takes to turn traffic into real revenue. Most freelancers only ever learned the platform from the outside, while I learned how it works from the inside.",
+        "list": [
+          "$50M+ in profitable ad spend, then advising inside Google",
+          "Roughly $100,000 in six months through search at a large Canadian lender",
+          "Author of The Artificial Advantage on directing AI",
+          "A solo builder who works with these tools in production every single day"
+        ]
+      },
+      {
+        "n": "05",
+        "h2": "Tracking you can see and reporting you can read",
+        "prose": "You should never have to take my word for how the campaigns are doing. I set up conversion tracking so leads, calls, and sales are measured accurately, and I report in language that tells you what happened, what it cost, and what I am doing next. You will always know where your budget went and what it brought in, and you can ask me anything about the account at any time."
+      },
+      {
+        "n": "06",
+        "id": "included",
+        "h2": "Simple, transparent pricing",
+        "prose": "One flat management fee covers the work and the expertise. You fund your own ad spend directly, so your money and your account history always belong to you.",
+        "offer": {
+          "name": "Done-for-You Google Ads Management",
+          "price": "$1,500",
+          "priceUnit": "/ month",
+          "scarcity": "I run five accounts, maximum. When they are full, they are full.",
+          "pnote": "management fee, you fund ad spend separately",
+          "checklist": [
+            "Full campaign build or rebuild, structured to cut wasted spend from the start",
+            "Weekly keyword, bid, and budget management focused on profitable searches",
+            "Negative keyword and wasted-spend cleanup so your budget stops leaking",
+            "Accurate conversion tracking so you can see what every dollar returns",
+            "Ad copy and landing page recommendations that lift your results",
+            "Clear monthly reporting written in plain language, no jargon wall",
+            "You keep full ownership of the ad account and all of its history",
+            "Month to month engagement with no long lock-in contract",
+            "Direct access to me, the person actually running your account"
+          ],
+          "btn": {
+            "label": "Ask about management",
+            "href": "/contact/",
+            "contact": "Google Ads management for ",
+            "source": "google-ads"
+          }
+        }
+      }
+    ],
+    "faqHeading": "Frequently Asked Questions",
+    "faq": [
+      {
+        "open": true,
+        "q": "Who is this for?",
+        "a": "Local and small businesses that are already spending on Google Ads, or about to start, and are tired of wasted budget and agencies that do not seem to care. If you want an account run by one accountable person who treats your spend like it is his own, this is for you."
+      },
+      {
+        "q": "What does the $1,500 a month cover?",
+        "a": "It covers the full management of your account. That includes building or rebuilding the campaigns, weekly optimization of keywords, bids, and budget, proper conversion tracking, and plain-language reporting. It is the fee for the work and the expertise, and it stays the same whether your ad budget is small or large."
+      },
+      {
+        "q": "Is my ad spend included in that price?",
+        "a": "No, and that is by design. You fund your own ad spend directly through your account, separate from the $1,500 management fee. That keeps everything transparent, and it means your money and your account history always belong to you."
+      },
+      {
+        "q": "Do I own my Google Ads account?",
+        "a": "Yes, completely. The account stays in your name with all of its data and history. If we ever stop working together, you keep everything and lose nothing."
+      },
+      {
+        "q": "Is there a long contract?",
+        "a": "No. The engagement runs month to month with no long lock-in. I would rather earn your business every month by getting results than trap you in a contract you have outgrown."
+      },
+      {
+        "q": "What makes you different from other Google Ads freelancers?",
+        "a": "I spent three years running $1.5M a month in paid search myself, then advised brands inside Google's Large Customer Sales team, so I understand the platform at a level most freelancers never reach. I also ran multimillion-dollar campaigns for a large publicly traded Canadian lender."
+      },
+      {
+        "q": "What results can I expect, and how soon?",
+        "a": "I will be straight with you. I do not promise a specific revenue number, because honest results depend on your margins, your market, and your budget. Early cleanups of wasted spend often show up within the first few weeks, and the stronger gains come as the account gathers data and the campaigns are refined month over month. What I commit to is building the account properly, cutting the waste, tracking honestly, and pushing your cost per result down over time."
+      },
+      {
+        "q": "Do you work with businesses outside Toronto?",
+        "a": "Yes. I am based in Toronto and work remote, so I manage accounts for businesses wherever they are. The work happens inside your account and over calls and email, so location is never a barrier. I also keep <a href=\"/consulting/\" style=\"color:var(--gold-2)\">dedicated pages for a number of Canadian cities</a> if you want details specific to where your business is."
+      }
+    ],
+    "cta": {
+      "h2": "Let us get your budget working",
+      "p": "If you are ready to stop watching spend disappear and start seeing Google Ads bring in customers you can count, send me a note. We will look at where your account stands today, where the waste is, and what a well-run account could return for your business. No pressure and no jargon, just a straight conversation about whether this is a fit.",
+      "btn": {
+        "label": "Ask about management",
+        "href": "/contact/",
+        "contact": "Google Ads management for ",
+        "source": "google-ads"
+      },
+      "after": {
+        "href": "/ai-coaching/",
+        "label": "Or explore 1:1 AI coaching"
+      }
+    },
+    "form": {
+      "heading": "Tell me where your account stands",
+      "sub": "A few lines is plenty. I read every one of these myself and I will tell you honestly whether this is a fit.",
+      "nameLabel": "Your name",
+      "emailLabel": "Email",
+      "businessLabel": "Business or website",
+      "messageLabel": "What are you trying to fix?",
+      "messagePlaceholder": "Currently spending about $X a month, not sure what it is bringing back...",
+      "submit": "Send it over",
+      "privacy": "Goes straight to me. No list, no automated sales sequence.",
+      "success": "Got it. I will reply personally, usually within one business day.",
+      "error": "That did not send. Email me directly at elvin@elvinpeters.com and I will pick it up."
+    },
+    "schemaOfferName": "Monthly management"
+  },
+  "fr": {
+    "title": "Gestion Google Ads Toronto | Elvin Peters",
+    "description": "Gestion Google Ads clé en main par un spécialiste qui a piloté 1,5 M$ par mois en recherche payante. Campagnes rentables, moins de gaspillage, suivi honnête. Toronto et à distance.",
+    "ogTitle": "Gestion Google Ads Toronto | Elvin Peters",
+    "ogDescription": "Des campagnes Google Ads gérées par quelqu'un qui a piloté 1,5 M$ par mois en recherche payante. Campagnes rentables, rapports honnêtes, aucun contrat à long terme.",
+    "breadcrumb": [
+      {
+        "label": "Accueil",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services/"
+      },
+      {
+        "label": "Gestion Google Ads"
+      }
+    ],
+    "eyebrow": "Gestion Google Ads",
+    "h1": "Des campagnes Google Ads qui amènent des clients rentables, mois après mois",
+    "sub": "Imaginez ouvrir votre compte et voir votre budget aller uniquement vers les recherches qui deviennent de vrais clients, avec un suivi qui vous montre exactement ce que chaque dollar a rapporté. C'est le résultat que je bâtis pour les commerces locaux et les petites entreprises, géré par quelqu'un qui a piloté 1,5 M$ par mois en recherche payante.",
+    "heroBtns": [
+      {
+        "label": "Parlons de la gestion",
+        "style": "primary",
+        "href": "/contact/",
+        "contact": "Gestion Google Ads pour ",
+        "source": "google-ads-fr"
+      },
+      {
+        "label": "Voir ce qui est inclus",
+        "style": "ghost",
+        "href": "#included"
+      }
+    ],
+    "credbar": [
+      "Plus de 50 M$ en investissement publicitaire rentable",
+      "1,5 M$ par mois en média payant chez un grand prêteur canadien coté en bourse",
+      "Auteur de The Artificial Advantage",
+      "Bâtit avec l'IA en production tous les jours",
+      "Basé à Toronto, travaille à distance"
+    ],
+    "schemaDescription": "Gestion Google Ads clé en main par Elvin M. Peters, qui a piloté 1,5 M$ par mois en recherche payante, puis conseillé des marques à l'interne chez Google.",
+    "schemaName": "Gestion Google Ads",
+    "sections": [
+      {
+        "n": "01",
+        "h2": "Le compte que vous voulez vraiment avoir",
+        "prose": "L'objectif est simple et il vaut la peine d'être dit clairement. Vous voulez que plus de bons clients vous trouvent au moment exact où ils cherchent, un coût par client potentiel qui continue de baisser à mesure que le compte s'affine, et un portrait clair de ce que vos dépenses rapportent. Quand les campagnes sont bien bâties et bien gérées, Google Ads devient une source constante de demande qui finance votre croissance et que vos concurrents ont du mal à copier. C'est la position dans laquelle je vous amène, puis que je défends chaque mois."
+      },
+      {
+        "n": "02",
+        "cls": "leak",
+        "h2": "Pourquoi la plupart des budgets publicitaires fuient en silence",
+        "prose": "La plupart des petites entreprises perdent de l'argent sur Google Ads pour quelques raisons bien ordinaires. Les mots-clés trop larges attirent des recherches qui n'achèteront jamais. Le suivi des conversions est souvent mal configuré ou carrément absent, alors personne ne sait vraiment ce qui fonctionne. Et l'agence qui gère le compte le traite comme un identifiant parmi cent, y jette un coup d'œil une fois par mois et envoie un rapport rempli de mesures de vanité. L'argent continue de sortir et les réponses ne deviennent jamais plus claires.",
+        "list": [
+          "Du budget qui se vide dans des recherches qui ne convertissent jamais",
+          "Un suivi qui cache ce que chaque dollar rapporte réellement",
+          "Des rapports conçus pour avoir l'air occupé au lieu de montrer le profit",
+          "Un compte que personne ne surveille de près entre les factures"
+        ]
+      },
+      {
+        "n": "03",
+        "h2": "Gestion clé en main, menée comme si c'était mon propre argent",
+        "prose": "Je prends le tout en charge et je gère le compte avec le même soin que je donnerais à mes propres dépenses. Ça veut dire bâtir ou rebâtir les campagnes pour couper le gaspillage dès le premier jour, puis gérer les mots-clés, les enchères et le budget chaque semaine vers les recherches qui deviennent des clients. Vous obtenez un suivi des conversions branché correctement, des rapports en langage clair que vous pouvez vraiment lire, et une présence en recherche qui se renforce plus longtemps on la fait tourner. Vous gardez la pleine propriété du compte publicitaire et vous financez les dépenses directement, alors votre historique et votre argent restent toujours les vôtres."
+      },
+      {
+        "n": "04",
+        "h2": "Pourquoi me confier votre budget publicitaire",
+        "prose": "J'ai passé trois ans à piloter moi-même 1,5 M$ par mois en recherche payante, puis j'ai conseillé des marques à l'interne chez Google. Je sais comment l'enchère récompense réellement les comptes, où les budgets fuient en silence, et quels leviers font bouger votre coût par résultat. J'ai aussi mené des campagnes de plusieurs millions de dollars pour un grand prêteur canadien coté en bourse, alors je comprends ce que ça prend pour transformer du trafic en revenus réels. La plupart des pigistes n'ont appris la plateforme que de l'extérieur, tandis que je l'ai apprise de l'intérieur.",
+        "list": [
+          "Plus de 50 M$ en investissement publicitaire rentable, puis conseiller à l'interne chez Google",
+          "Environ 100 000 $ en six mois par la recherche chez un grand prêteur canadien",
+          "Auteur de The Artificial Advantage, sur l'art de diriger l'IA",
+          "Un bâtisseur solo qui travaille avec ces outils en production chaque jour"
+        ]
+      },
+      {
+        "n": "05",
+        "h2": "Un suivi que vous voyez et des rapports que vous pouvez lire",
+        "prose": "Vous ne devriez jamais avoir à me croire sur parole quant à la performance des campagnes. Je configure le suivi des conversions pour que les clients potentiels, les appels et les ventes soient mesurés correctement, et je vous fais rapport dans un langage qui vous dit ce qui s'est passé, ce que ça a coûté, et ce que je fais ensuite. Vous saurez toujours où votre budget est allé et ce qu'il a rapporté, et vous pouvez me poser n'importe quelle question sur le compte à n'importe quel moment."
+      },
+      {
+        "n": "06",
+        "id": "included",
+        "h2": "Une tarification simple et transparente",
+        "prose": "Un seul frais de gestion fixe couvre le travail et l'expertise. Vous financez vos propres dépenses publicitaires directement, alors votre argent et l'historique de votre compte vous appartiennent toujours.",
+        "offer": {
+          "name": "Gestion Google Ads clé en main",
+          "price": "1 500 $",
+          "priceUnit": "/ mois",
+          "scarcity": "Je gère cinq comptes, maximum. Quand ils sont pleins, ils sont pleins.",
+          "pnote": "frais de gestion, vous financez les dépenses publicitaires séparément",
+          "checklist": [
+            "Construction ou reconstruction complète des campagnes, structurée pour couper le gaspillage dès le départ",
+            "Gestion hebdomadaire des mots-clés, des enchères et du budget, axée sur les recherches rentables",
+            "Nettoyage des mots-clés négatifs et des dépenses perdues pour que votre budget arrête de fuir",
+            "Suivi des conversions exact pour que vous voyiez ce que chaque dollar rapporte",
+            "Recommandations de textes publicitaires et de pages de destination qui améliorent vos résultats",
+            "Rapports mensuels clairs, écrits en langage simple, sans mur de jargon",
+            "Vous gardez la pleine propriété du compte publicitaire et de tout son historique",
+            "Engagement de mois en mois, sans contrat à long terme",
+            "Accès direct à moi, la personne qui gère réellement votre compte"
+          ],
+          "btn": {
+            "label": "Parlons de la gestion",
+            "href": "/contact/",
+            "contact": "Gestion Google Ads pour ",
+            "source": "google-ads-fr"
+          }
+        }
+      }
+    ],
+    "faqHeading": "Foire aux questions",
+    "faq": [
+      {
+        "open": true,
+        "q": "À qui ça s'adresse?",
+        "a": "Aux commerces locaux et aux petites entreprises qui dépensent déjà sur Google Ads, ou qui sont sur le point de commencer, et qui en ont assez du budget gaspillé et des agences qui ne semblent pas s'en soucier. Si vous voulez un compte géré par une seule personne responsable, qui traite vos dépenses comme les siennes, c'est pour vous."
+      },
+      {
+        "q": "Qu'est-ce que les 1 500 $ par mois couvrent?",
+        "a": "Ça couvre la gestion complète de votre compte. Ça comprend la construction ou la reconstruction des campagnes, l'optimisation hebdomadaire des mots-clés, des enchères et du budget, un suivi des conversions bien configuré, et des rapports en langage clair. C'est le tarif pour le travail et l'expertise, et il reste le même que votre budget publicitaire soit petit ou grand."
+      },
+      {
+        "q": "Mes dépenses publicitaires sont-elles incluses dans ce prix?",
+        "a": "Non, et c'est voulu. Vous financez vos propres dépenses publicitaires directement par votre compte, séparément des frais de gestion de 1 500 $. Ça garde tout transparent, et ça veut dire que votre argent et l'historique de votre compte vous appartiennent toujours."
+      },
+      {
+        "q": "Est-ce que je reste propriétaire de mon compte Google Ads?",
+        "a": "Oui, entièrement. Le compte reste à votre nom avec toutes ses données et tout son historique. Si on arrête un jour de travailler ensemble, vous gardez tout et vous ne perdez rien."
+      },
+      {
+        "q": "Y a-t-il un contrat à long terme?",
+        "a": "Non. L'engagement se fait de mois en mois, sans aucune période obligatoire. Je préfère mériter votre confiance chaque mois par des résultats plutôt que de vous enfermer dans un contrat que vous avez dépassé."
+      },
+      {
+        "q": "Qu'est-ce qui vous distingue des autres pigistes Google Ads?",
+        "a": "J'ai passé trois ans à piloter moi-même 1,5 M$ par mois en recherche payante, puis j'ai conseillé des marques au sein de l'équipe Large Customer Sales de Google, alors je comprends la plateforme à un niveau que la plupart des pigistes n'atteignent jamais. J'ai aussi mené des campagnes de plusieurs millions de dollars pour un grand prêteur canadien coté en bourse."
+      },
+      {
+        "q": "Quels résultats puis-je attendre, et en combien de temps?",
+        "a": "Je vais être franc avec vous. Je ne promets pas un chiffre de revenus précis, parce que des résultats honnêtes dépendent de vos marges, de votre marché et de votre budget. Les premiers nettoyages de dépenses gaspillées se voient souvent dans les premières semaines, et les gains plus solides arrivent à mesure que le compte accumule des données et que les campagnes s'affinent mois après mois. Ce à quoi je m'engage, c'est bâtir le compte correctement, couper le gaspillage, mesurer honnêtement, et faire baisser votre coût par résultat avec le temps."
+      },
+      {
+        "q": "Travaillez-vous avec des entreprises à l'extérieur de Toronto?",
+        "a": "Oui. Je suis basé à Toronto et je travaille à distance, alors je gère des comptes pour des entreprises où qu'elles soient. Le travail se fait dans votre compte, par appels et par courriel, alors l'emplacement n'est jamais un obstacle. Je tiens aussi <a href=\"/consulting/\" style=\"color:var(--gold-2)\">des pages dédiées à plusieurs villes canadiennes</a> si vous voulez des détails propres à l'endroit où se trouve votre entreprise."
+      }
+    ],
+    "cta": {
+      "h2": "Mettons votre budget au travail",
+      "p": "Si vous êtes prêt à arrêter de regarder vos dépenses disparaître et à voir Google Ads amener des clients que vous pouvez compter, écrivez-moi. On regardera où en est votre compte aujourd'hui, où se trouve le gaspillage, et ce qu'un compte bien géré pourrait rapporter à votre entreprise. Sans pression et sans jargon, juste une conversation franche pour savoir si c'est un bon match.",
+      "btn": {
+        "label": "Parlons de la gestion",
+        "href": "/contact/",
+        "contact": "Gestion Google Ads pour ",
+        "source": "google-ads-fr"
+      },
+      "after": {
+        "href": "/ai-coaching/",
+        "label": "Ou découvrez l'accompagnement IA individuel"
+      }
+    },
+    "form": {
+      "heading": "Dites-moi où en est votre compte",
+      "sub": "Quelques lignes suffisent. Je lis chacun de ces messages moi-même et je vous dirai honnêtement si c'est un bon match.",
+      "nameLabel": "Votre nom",
+      "emailLabel": "Courriel",
+      "businessLabel": "Entreprise ou site web",
+      "messageLabel": "Qu'essayez-vous de régler?",
+      "messagePlaceholder": "Je dépense environ X $ par mois, je ne sais pas trop ce que ça rapporte...",
+      "submit": "Envoyer",
+      "privacy": "Ça m'arrive directement. Aucune liste, aucune séquence de vente automatisée.",
+      "success": "Bien reçu. Je vous réponds personnellement, habituellement en un jour ouvrable.",
+      "error": "L'envoi n'a pas fonctionné. Écrivez-moi directement à elvin@elvinpeters.com et je vais le récupérer."
+    },
+    "schemaOfferName": "Gestion mensuelle"
+  }
+}
