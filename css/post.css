@@ -95,5 +95,11 @@ body{background:#15171A;}
 
 /* Wide content scrolls inside its own container; the page never scrolls sideways. */
 .trp .scroll-x{overflow-x:auto;}
+/* A table with enough columns forces a min-content width past a phone viewport,
+   and width:100% cannot shrink below it. Let the table scroll itself rather than
+   the page. Mobile only: the desktop full-width table is unchanged. */
+@media (max-width:640px){
+  .trp table{display:block;width:max-content;max-width:100%;overflow-x:auto;}
+}
 
 @media (prefers-reduced-motion: reduce){.trp *{transition:none!important;animation:none!important;}}
