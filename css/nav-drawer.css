@@ -64,6 +64,10 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 @media(max-width:920px){
   .navburger{ display:inline-flex }
   html .nav .links a:not(.cta), html .nav .lk a:not(.cta){ display:none }
+  /* The language toggle stays in the header at every width. It is a top-level
+     affordance, not a menu item: a bilingual site whose mobile visitors cannot
+     switch language is broken. Small enough to sit beside the burger. */
+  html .nav .links a.langtog, html .nav .lk a.langtog{ display:inline-flex }
 }
 @media(max-width:640px){
   /* The CTA moves into the drawer too. The html prefix outranks page-local

@@ -666,10 +666,372 @@ applyRegions('book.html', {
 });
 // Every other page in nav.json gets its nav from the same renderer, so the menu
 // cannot drift between pages. index/book are applied above with their other regions.
-const navOnly = Object.keys(NAVC.pages).filter(p => p !== 'index.html' && p !== 'book.html');
+// Pages owned by the bilingual engine render their own nav (it carries the
+// language toggle), so applyRegions must not re-inject a toggle-less one.
+const GEN_NAV_KEYS = new Set(
+  (fs.existsSync(path.join(DIR, 'content', 'pages'))
+    ? fs.readdirSync(path.join(DIR, 'content', 'pages')).filter(f => f.endsWith('.json'))
+    : []
+  ).map(f => JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'pages', f), 'utf8')).navKey)
+);
+const navOnly = Object.keys(NAVC.pages)
+  .filter(p => p !== 'index.html' && p !== 'book.html' && !GEN_NAV_KEYS.has(p));
 for (const pk of navOnly) applyRegions(pk, { 'nav': () => renderNav(pk) });
 console.log('Regions applied: index.html (nav, hero-text, home-services, writing), book.html (nav), nav on: ' + navOnly.join(', '));
 
+
+/* ==================================================================== */
+/* BILINGUAL PAGE ENGINE                                                */
+/*                                                                      */
+/* Commercial pages are generated from content/pages/<slug>.json into    */
+/* BOTH languages: /<slug>/ (en) and /fr/<slug>/ (fr). The two are real  */
+/* URLs with reciprocal hreflang and self-referencing canonicals. The    */
+/* header toggle is a plain link between them, never a JS text swap, so  */
+/* both versions are independently indexable and readable by AI crawlers */
+/* that do not execute JavaScript.                                      */
+/*                                                                      */
+/* Editing a generated index.html by hand gets overwritten. Edit the     */
+/* JSON. French copy is Quebec register and is NOT yet native-reviewed.  */
+/* ==================================================================== */
+
+const I18N = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'i18n.json'), 'utf8'));
+const PAGES_DIR = path.join(DIR, 'content', 'pages');
+const PAGE_FILES = fs.existsSync(PAGES_DIR)
+  ? fs.readdirSync(PAGES_DIR).filter(f => f.endsWith('.json')).sort()
+  : [];
+const PAGES = PAGE_FILES.map(f => JSON.parse(fs.readFileSync(path.join(PAGES_DIR, f), 'utf8')));
+const LANGS = ['en', 'fr'];
+const ORIGIN = 'https://elvinpeters.com';
+
+// Which paths actually exist in French. A link to a page with no French twin
+// keeps pointing at the English URL, which is honest and avoids 404s.
+const FR_TWINS = new Set(PAGES.map(p => '/' + p.slug + '/'));
+
+function stripTags(s) { return String(s).replace(/<[^>]*>/g, ''); }
+function attr(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;'); }
+
+// Prefix internal links with /fr when a French twin exists for that path.
+function loc(href, lang) {
+  if (lang === 'en' || !href) return href;
+  if (/^(https?:|mailto:|tel:|#)/.test(href)) return href;
+  if (href.startsWith('/fr/')) return href;
+  return FR_TWINS.has(href) ? '/fr' + href : href;
+}
+
+function tnav(label, lang) {
+  const table = I18N.nav[lang] || {};
+  return table[label] || label;
+}
+
+/* The language toggle. A real anchor to the equivalent page in the other
+   language, so it deep-links instead of dumping people on the homepage. */
+function renderLangToggle(slug, lang, ind) {
+  const other = lang === 'en' ? 'fr' : 'en';
+  const o = I18N.locales[other];
+  const href = other === 'fr' ? '/fr/' + slug + '/' : '/' + slug + '/';
+  return `${ind}    <a class="langtog" href="${href}" hreflang="${o.hreflang}" lang="${o.htmlLang}" aria-label="${attr(o.switchToAria)}" data-lang-switch="${other}">${esc(o.shortLabel)}</a>`;
+}
+
+/* Locale-aware nav. Reuses renderNav's output for English so the generated
+   pages cannot drift from the rest of the site, and translates labels/hrefs
+   for French. */
+function renderNavL(pageKey, lang, slug) {
+  let html = renderNav(pageKey);
+  const ind = ' '.repeat(((NAVC.pages || {})[pageKey] || {}).indent || 0);
+  if (lang === 'fr') {
+    // Translate visible link text and localize internal hrefs.
+    html = html.replace(/href="(\/[^"]*)"/g, (m, h) => `href="${loc(h, 'fr')}"`);
+    html = html.replace(/>([^<>]+)</g, (m, txt) => {
+      const trimmed = txt.trim();
+      if (!trimmed) return m;
+      const key = trimmed.replace(/&nbsp;/g, ' ');
+      const tr = tnav(key, 'fr');
+      // No entry in the table means leave it exactly as it is. Notably the
+      // brandmark, which carries a &nbsp; and must never be rewritten.
+      if (tr === key) return m;
+      return m.replace(trimmed, tr);
+    });
+    html = html.replace(/data-nav-label="([^"]+)"/g, (m, l) => `data-nav-label="${attr(tnav(l, 'fr'))}"`);
+  }
+  const toggle = renderLangToggle(slug, lang, ind);
+  return html.replace(`${ind}  </div>\n${ind}</div></nav>`, `${toggle}\n${ind}  </div>\n${ind}</div></nav>`);
+}
+
+/* Shared CSS for the generated commercial pages. Identical to the hand-authored
+   offer-page CSS, plus:
+   - fluid nav gap and button padding so French (~20% longer than English) does
+     not overflow the header or blow out buttons. Uses clamp() rather than a new
+     breakpoint, so DESIGN-SYSTEM.md's 640/920 rule still holds.
+   - the language toggle and the embedded contact form. */
+const OFFERCSS = `
+:root{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--glow:rgba(156,118,31,.14);--shadow:0 18px 40px -24px rgba(14,26,43,.45);--serif:'EB Garamond',Georgia,serif;--sans:'Inter',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--glow:rgba(201,162,80,.16);--shadow:0 24px 50px -28px rgba(0,0,0,.7);}}
+:root[data-theme="light"]{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;}
+:root[data-theme="dark"]{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;}
+*{box-sizing:border-box}html,body{margin:0}html{scroll-behavior:smooth}
+body{background:radial-gradient(1100px 520px at 82% -8%,var(--glow),transparent 60%),linear-gradient(180deg,var(--bg),var(--bg-2));color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
+.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line-soft)}
+.nav .container{display:flex;align-items:center;gap:clamp(10px,1.6vw,20px);height:64px;max-width:1120px}
+.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px;white-space:nowrap}
+.brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel);box-shadow:var(--shadow);flex:none}
+.nav .links{margin-left:auto;display:flex;gap:clamp(12px,1.7vw,24px);align-items:center}
+.nav .links a{font-size:14px;color:var(--ink-2)}.nav .links a.active{color:var(--ink)}
+.nav .links a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:11px clamp(12px,1.4vw,16px);border-radius:999px;font-weight:600;white-space:nowrap}
+.nav .links a.cta:hover{background:var(--gold);color:var(--bg-2)}
+.langtog{border:1px solid var(--line);color:var(--ink-2);padding:8px 14px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.04em;min-height:44px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.langtog:hover{border-color:var(--gold);color:var(--gold-2)}
+@media(max-width:920px){.nav .links a:not(.cta):not(.langtog){display:none}.nav .links .navdd{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px clamp(16px,2.1vw,22px);border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:var(--sans);min-height:46px;text-align:center}
+.btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304;box-shadow:var(--shadow)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.ghost{border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--gold)}
+.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:14px}
+.breadcrumb a:hover{color:var(--gold-2)}
+.hero{padding:66px 0 40px;border-bottom:1px solid var(--line-soft)}
+.hero h1{font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.015em;margin:12px 0 0}
+.hero .sub{color:var(--ink-2);font-size:1.16rem;max-width:64ch;margin:20px 0 0}
+.hero .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.credbar{border-bottom:1px solid var(--line-soft);background:var(--panel-2)}
+.credbar .container{display:flex;flex-wrap:wrap;gap:8px 22px;padding:16px 24px;font-size:13px;color:var(--ink-2);justify-content:center;text-align:center;max-width:1120px}
+.credbar span{position:relative;padding-left:16px}
+.credbar span::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.section{padding:50px 0;border-top:1px solid var(--line-soft)}
+.section:first-of-type{border-top:none}
+.snum{font-size:12px;letter-spacing:.2em;color:var(--gold-2);font-weight:700}
+.section h2{font-size:clamp(1.5rem,3vw,2.05rem);letter-spacing:-.01em;margin:8px 0 0}
+.prose{color:var(--ink-2);font-size:1.07rem;max-width:64ch;margin:16px 0 0}
+.blist{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:11px;max-width:62ch}
+.blist li{position:relative;padding-left:28px;color:var(--ink-2);font-size:16px}
+.blist li::before{content:'';position:absolute;left:5px;top:10px;width:7px;height:7px;background:var(--gold);border-radius:50%}
+.leak .blist li::before{background:#c0512f}
+.offercard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:var(--shadow)}
+.offercard .oname{font-family:var(--serif);font-size:1.5rem}
+.offercard .price{font-family:var(--serif);font-size:3.1rem;color:var(--ink);line-height:1;margin:10px 0 0}
+.offercard .price small{font-family:var(--sans);font-size:1rem;color:var(--muted);font-weight:500}
+.offercard .pnote{color:var(--muted);font-size:14px;margin:6px 0 0}
+.offercard .scarce{font-size:14px;color:var(--muted);margin:6px 0 0}
+.checklist{list-style:none;padding:0;margin:22px 0 26px;display:grid;gap:12px}
+.checklist li{position:relative;padding-left:30px;color:var(--ink-2);font-size:15px}
+.checklist li::before{content:'✓';position:absolute;left:0;top:-1px;color:var(--gold-2);font-weight:800}
+.faq{max-width:920px;margin:0 auto}
+.faq details{border-top:1px solid var(--line-soft);padding:16px 0}
+.faq summary{font-weight:600;cursor:pointer;font-size:16px;color:var(--ink);list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:'+ ';color:var(--gold-2)}
+.faq details[open] summary::before{content:'– '}
+.faq p{color:var(--ink-2);margin:10px 0 0;font-size:15px}
+.ctaband{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--panel)),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:clamp(28px,4vw,48px);text-align:center}
+.ctaband h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
+.ctaband p{color:var(--ink-2);margin:14px auto 26px;max-width:52ch}
+.epform{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3.4vw,34px);box-shadow:var(--shadow);max-width:640px;margin:26px auto 0}
+.epform h2{font-size:clamp(1.4rem,2.6vw,1.85rem)}
+.epform .fsub{color:var(--ink-2);font-size:15px;margin:10px 0 22px}
+.epform label{display:block;font-size:14px;font-weight:600;color:var(--ink);margin:0 0 6px}
+.epform .field{margin:0 0 16px}
+.epform input,.epform textarea{width:100%;font-family:var(--sans);font-size:16px;color:var(--ink);background:var(--panel-2);border:1px solid var(--line);border-radius:11px;padding:12px 14px;min-height:46px}
+.epform textarea{min-height:120px;resize:vertical}
+.epform input:focus,.epform textarea:focus{outline:2px solid var(--gold-2);outline-offset:1px;border-color:var(--gold)}
+.epform .btn{width:100%}
+.epform .fnote{color:var(--muted);font-size:13px;margin:12px 0 0;text-align:center}
+.epform .fmsg{font-size:14px;margin:14px 0 0;text-align:center;color:var(--gold-2);min-height:20px}
+footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px}
+footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1120px}
+footer a{color:var(--ink-2)}footer a:hover{color:var(--gold-2)}
+:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
+`;
+
+/* The embedded contact form. Posts to the same owned lead API the rest of the
+   site uses, and stamps the language so a French lead is never answered in
+   English. Honeypot field matches the existing bot-wall pattern. */
+function renderForm(f, lang, slug) {
+  if (!f) return '';
+  const id = 'f_' + slug.replace(/[^a-z0-9]/gi, '_');
+  return `  <section class="section" id="contact"><div class="container">
+    <div class="epform">
+      <h2>${esc(f.heading)}</h2>
+      <p class="fsub">${esc(f.sub)}</p>
+      <form id="${id}" novalidate>
+        <input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field"><label for="${id}_n">${esc(f.nameLabel)}</label><input id="${id}_n" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="${id}_e">${esc(f.emailLabel)}</label><input id="${id}_e" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="${id}_b">${esc(f.businessLabel)}</label><input id="${id}_b" name="business" type="text"></div>
+        <div class="field"><label for="${id}_m">${esc(f.messageLabel)}</label><textarea id="${id}_m" name="message" placeholder="${attr(f.messagePlaceholder)}"></textarea></div>
+        <button class="btn primary" type="submit">${esc(f.submit)}</button>
+        <p class="fmsg" id="${id}_msg" role="status" aria-live="polite"></p>
+        <p class="fnote">${esc(f.privacy)}</p>
+      </form>
+    </div>
+  </div></section>
+<script>(function(){var f=document.getElementById(${JSON.stringify(id)}),m=document.getElementById(${JSON.stringify(id + '_msg')});if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var e=f.email.value.trim();if(!e){m.textContent=${JSON.stringify(f.error)};return}m.textContent='...';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e,name:f.name.value,business:f.business.value,message:f.message.value,lang:${JSON.stringify(lang)},source:${JSON.stringify(slug + '-' + lang + '-form')},website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent=${JSON.stringify(f.success)};f.reset()}).catch(function(){m.textContent=${JSON.stringify(f.error)}})})})();</script>`;
+}
+
+function renderSections(secs, lang) {
+  return secs.map(s => {
+    const parts = [];
+    parts.push(`  <section class="section${s.cls ? ' ' + s.cls : ''}"${s.id ? ' id="' + s.id + '"' : ''}><div class="container">`);
+    if (s.n) parts.push(`    <div class="snum">${esc(s.n)}</div>`);
+    parts.push(`    <h2>${esc(s.h2)}</h2>`);
+    if (s.prose) parts.push(`    <p class="prose">${s.prose}</p>`);
+    if (s.list) {
+      parts.push('    <ul class="blist">');
+      for (const li of s.list) parts.push(`      <li>${esc(li)}</li>`);
+      parts.push('    </ul>');
+    }
+    if (s.offer) {
+      const o = s.offer;
+      parts.push('    <div class="offercard" style="margin-top:26px">');
+      parts.push(`      <div class="oname">${esc(o.name)}</div>`);
+      parts.push(`      <div class="price">${esc(o.price)} <small>${esc(o.priceUnit)}</small></div>`);
+      if (o.scarcity) parts.push(`      <p class="scarce">${esc(o.scarcity)}</p>`);
+      if (o.pnote) parts.push(`      <div class="pnote">${esc(o.pnote)}</div>`);
+      parts.push('      <ul class="checklist">');
+      for (const li of o.checklist) parts.push(`        <li>${esc(li)}</li>`);
+      parts.push('      </ul>');
+      parts.push(`      ${renderBtn(o.btn, 'primary', lang)}`);
+      parts.push('    </div>');
+    }
+    parts.push('  </div></section>');
+    return parts.join('\n');
+  }).join('\n\n');
+}
+
+function renderBtn(b, style, lang) {
+  if (!b) return '';
+  const c = b.contact ? ` data-contact="${attr(b.contact)}" data-contact-source="${attr(b.source || '')}"` : '';
+  return `<a class="btn ${b.style || style}" href="${loc(b.href, lang)}"${c}>${esc(b.label)}</a>`;
+}
+
+function renderOfferPage(page, lang) {
+  const c = page[lang];
+  const L = I18N.locales[lang];
+  const slug = page.slug;
+  const enUrl = `${ORIGIN}/${slug}/`;
+  const frUrl = `${ORIGIN}/fr/${slug}/`;
+  const selfUrl = lang === 'fr' ? frUrl : enUrl;
+
+  const faqPlain = c.faq.map(q => ({
+    '@type': 'Question', name: stripTags(q.q),
+    acceptedAnswer: { '@type': 'Answer', text: stripTags(q.a) }
+  }));
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: c.breadcrumb.map((b, i) => ({
+          '@type': 'ListItem', position: i + 1, name: b.label,
+          item: b.href ? ORIGIN + loc(b.href, lang) : selfUrl })) },
+      { '@type': 'Service', name: c.schemaName, serviceType: page.schemaService.serviceType,
+        description: c.schemaDescription,
+        provider: { '@type': 'Person', name: 'Elvin M. Peters', jobTitle: 'AI Consultant' },
+        areaServed: page.schemaService.areaServed, url: selfUrl,
+        inLanguage: L.hreflang,
+        offers: [{ '@type': 'Offer', price: page.schemaService.price,
+          priceCurrency: page.schemaService.priceCurrency, url: selfUrl }] },
+      { '@type': 'FAQPage', inLanguage: L.hreflang, mainEntity: faqPlain }
+    ]
+  };
+
+  const breadcrumbHtml = c.breadcrumb.map(b =>
+    b.href ? `<a href="${loc(b.href, lang)}">${esc(b.label)}</a>` : esc(b.label)).join(' &middot; ');
+
+  return `<!DOCTYPE html>
+<html lang="${L.htmlLang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(c.title)}</title>
+<meta name="description" content="${attr(c.description)}">
+<link rel="canonical" href="${selfUrl}">
+<link rel="alternate" hreflang="en-CA" href="${enUrl}">
+<link rel="alternate" hreflang="fr-CA" href="${frUrl}">
+<link rel="alternate" hreflang="x-default" href="${enUrl}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="${lang === 'fr' ? 'fr_CA' : 'en_CA'}">
+<meta property="og:title" content="${attr(c.ogTitle)}">
+<meta property="og:description" content="${attr(c.ogDescription)}">
+<meta property="og:url" content="${selfUrl}">
+<meta property="og:image" content="${page.ogImage}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
+
+<script type="application/ld+json">
+${JSON.stringify(graph, null, 1)}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>${OFFERCSS}</style>
+<link rel="stylesheet" href="/css/nav-drawer.css">
+<script src="/js/site.js"></script>
+<link rel="stylesheet" href="/css/contact-modal.css">
+<script src="/js/contact-modal.js" defer></script>
+</head>
+<body>
+<!-- ep:nav -->
+${renderNavL(page.navKey, lang, slug)}
+<!-- /ep:nav -->
+<header class="hero"><div class="container">
+  <nav class="breadcrumb">${breadcrumbHtml}</nav>
+  <span class="eyebrow">${esc(c.eyebrow)}</span>
+  <h1>${esc(c.h1)}</h1>
+  <p class="sub">${esc(c.sub)}</p>
+  <div class="btns">
+    ${c.heroBtns.map(b => renderBtn(b, 'primary', lang)).join('\n    ')}
+  </div>
+</div></header>
+<div class="credbar"><div class="container">
+  ${c.credbar.map(s => `<span>${esc(s)}</span>`).join('\n  ')}
+</div></div>
+<main>
+${renderSections(c.sections, lang)}
+
+  <section class="section"><div class="container">
+    <div style="text-align:center;margin-bottom:26px"><h2>${esc(c.faqHeading)}</h2></div>
+    <div class="faq">
+${c.faq.map(q => `      <details${q.open ? ' open' : ''}><summary>${esc(q.q)}</summary><p>${q.a}</p></details>`).join('\n')}
+    </div>
+  </div></section>
+
+${renderForm(c.form, lang, slug)}
+
+  <section class="section"><div class="container">
+    <div class="ctaband">
+      <h2>${esc(c.cta.h2)}</h2>
+      <p>${esc(c.cta.p)}</p>
+      ${renderBtn(c.cta.btn, 'primary', lang)}
+      ${c.cta.after ? `<p style="margin:18px 0 0;font-size:14px">${c.cta.after}</p>` : ''}
+    </div>
+  </div></section>
+</main>
+<footer><div class="container">
+  <span>${esc(I18N.footer[lang].copyright)}</span>
+  <span>${I18N.footer[lang].links.map(l => `<a href="${l.href}">${esc(l.label)}</a>`).join(' &middot; ')}</span>
+</div></footer>
+</body>
+</html>
+`;
+}
+
+const genPaths = [];
+for (const page of PAGES) {
+  for (const lang of LANGS) {
+    const rel = lang === 'fr' ? path.join('fr', page.slug, 'index.html') : path.join(page.slug, 'index.html');
+    const dest = path.join(OUT, rel);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, renderOfferPage(page, lang));
+    genPaths.push(rel.replace(/\\/g, '/'));
+  }
+}
+console.log('Bilingual pages: ' + genPaths.length + ' (' + genPaths.join(', ') + ')');
 
 
 /* ------------------------------------------------------------------ */
