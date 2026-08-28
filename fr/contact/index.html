@@ -131,6 +131,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
 .ctaband{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--panel)),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:clamp(28px,4vw,48px);text-align:center}
 .ctaband h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
 .ctaband p{color:var(--ink-2);margin:14px auto 26px;max-width:52ch}
+/* nav.json puts the light/dark toggle in the nav on some pages, so the
+   shared CSS has to carry it or those pages render a bare browser button. */
+.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:44px;height:44px;border-radius:9px;cursor:pointer;font-size:16px;line-height:1}
+.themebtn:hover{border-color:var(--gold);color:var(--gold-2)}
 .epform{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3.4vw,34px);box-shadow:var(--shadow);max-width:640px;margin:26px auto 0}
 .epform h2{font-size:clamp(1.4rem,2.6vw,1.85rem)}
 .epform .fsub{color:var(--ink-2);font-size:15px;margin:10px 0 22px}
@@ -163,7 +167,16 @@ footer a{color:var(--ink-2)}footer a:hover{color:var(--gold-2)}
 .formcard{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:var(--shadow)}
 .formcard h2{font-size:1.5rem;margin-bottom:6px}
 .formcard .hint{color:var(--muted);font-size:14px;margin:0 0 22px}
-.formcard .field textarea{min-height:150px}
+/* OFFERCSS scopes every form rule to .epform, so a .formcard has to restate
+   them or the labels sit inline and the inputs render unstyled. */
+.formcard .field{margin:0 0 16px}
+.formcard label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin:0 0 7px}
+.formcard input,.formcard textarea{width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);font-size:16px;font-family:var(--sans);min-height:46px}
+.formcard textarea{min-height:150px;resize:vertical;line-height:1.55}
+.formcard input:focus,.formcard textarea:focus{outline:2px solid var(--gold-2);outline-offset:1px;border-color:transparent}
+.formcard .btn{width:100%;justify-content:center}
+.formcard .fmsg{font-size:14px;margin:14px 0 0;text-align:center;color:var(--gold-2);min-height:20px}
+.formcard .fnote{color:var(--muted);font-size:12px;margin:14px 0 0}
 </style>
 <link rel="stylesheet" href="/css/nav-drawer.css">
 <script src="/js/site.js"></script>
