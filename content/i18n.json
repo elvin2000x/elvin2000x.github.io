@@ -115,19 +115,67 @@
     "en": {
       "copyright": "© 2026 Elvin M. Peters. Toronto and remote.",
       "links": [
-        { "label": "Home", "href": "/" },
-        { "label": "Services", "href": "/services/" },
-        { "label": "The Book", "href": "/book.html" },
-        { "label": "Contact", "href": "mailto:elvin@elvinpeters.com" }
+        {
+          "label": "Home",
+          "href": "/"
+        },
+        {
+          "label": "Services",
+          "href": "/services/"
+        },
+        {
+          "label": "The Book",
+          "href": "/book.html"
+        },
+        {
+          "label": "Projects",
+          "href": "/projects/"
+        },
+        {
+          "label": "Blog",
+          "href": "/writing/"
+        },
+        {
+          "label": "Newsletter",
+          "href": "/updates/"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact/"
+        }
       ]
     },
     "fr": {
       "copyright": "© 2026 Elvin M. Peters. Toronto et à distance.",
       "links": [
-        { "label": "Accueil", "href": "/" },
-        { "label": "Services", "href": "/services/" },
-        { "label": "Le livre", "href": "/book.html" },
-        { "label": "Courriel", "href": "mailto:elvin@elvinpeters.com" }
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Services",
+          "href": "/services/"
+        },
+        {
+          "label": "Le livre",
+          "href": "/book.html"
+        },
+        {
+          "label": "Projets",
+          "href": "/projects/"
+        },
+        {
+          "label": "Blogue",
+          "href": "/writing/"
+        },
+        {
+          "label": "Infolettre",
+          "href": "/updates/"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact/"
+        }
       ]
     }
   },

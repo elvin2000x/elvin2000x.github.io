@@ -909,6 +909,94 @@ function renderBtn(b, style, lang) {
   return `<a class="btn ${b.style || style}" href="${loc(b.href, lang)}"${c}>${esc(b.label)}</a>`;
 }
 
+/* Delta only. The shell already ships OFFERCSS, which carries the nav, buttons,
+   footer, and the .field/.fmsg/.fnote form primitives, so the contact page adds
+   just its two-column layout and the alternatives list. */
+const CONTACTCSS = `
+.wrap{display:grid;grid-template-columns:0.9fr 1.1fr;gap:52px;align-items:start;padding:72px 0 84px}
+@media(max-width:920px){.wrap{grid-template-columns:1fr;gap:36px;padding:52px 0 64px}}
+.intro h1{font-size:clamp(2.3rem,5vw,3.6rem);line-height:1.06;letter-spacing:-.015em;margin:16px 0 0}
+.intro .lede{font-size:16px;color:var(--ink-2);margin:18px 0 0;max-width:46ch;line-height:1.65}
+.alts{display:flex;flex-direction:column;gap:12px;margin-top:30px}
+.alt{display:flex;align-items:center;gap:13px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);font-weight:600;font-size:14px;transition:border-color .15s,transform .15s;box-shadow:var(--shadow)}
+.alt:hover{border-color:var(--gold);transform:translateX(3px)}
+/* Same card, no link. The address used to sit here in a mailto, which handed it
+   to every scraper and defeated the point of having a form (Justine, 2026-08-04). */
+.alt--static{cursor:default}
+.alt--static:hover{border-color:var(--line);transform:none}
+.alt .ic{width:22px;height:22px;flex:none;color:var(--gold-2)}
+.alt small{display:block;color:var(--muted);font-weight:400;font-size:12px;margin-top:1px}
+.formcard{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:var(--shadow)}
+.formcard h2{font-size:1.5rem;margin-bottom:6px}
+.formcard .hint{color:var(--muted);font-size:14px;margin:0 0 22px}
+.formcard .field textarea{min-height:150px}
+`;
+
+const CONTACT_ICONS = {
+  calendar: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>',
+  mail: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+  linkedin: '<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.75 2.5 4.75 5.9V21h-4v-5.2c0-1.24-.02-2.85-1.74-2.85s-2 1.36-2 2.76V21H9z"/></svg>'
+};
+
+/* The page chrome -- head, analytics, nav, footer -- is identical on every
+   generated page regardless of template, so it lives here once. A template's
+   only job is to build its schema graph and the contents of <main>. Keeping the
+   canonical/hreflang/og block in one place matters more than the markup does:
+   those tags are the ones that quietly delete a language from the index when
+   they drift, and they are invisible on the rendered page. */
+function renderShell(o) {
+  const L = I18N.locales[o.lang];
+  return `<!DOCTYPE html>
+<html lang="${L.htmlLang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(o.title)}</title>
+<meta name="description" content="${attr(o.description)}">
+<link rel="canonical" href="${o.selfUrl}">
+<link rel="alternate" hreflang="en-CA" href="${o.enUrl}">
+<link rel="alternate" hreflang="fr-CA" href="${o.frUrl}">
+<link rel="alternate" hreflang="x-default" href="${o.enUrl}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="${o.lang === 'fr' ? 'fr_CA' : 'en_CA'}">
+<meta property="og:title" content="${attr(o.ogTitle)}">
+<meta property="og:description" content="${attr(o.ogDescription)}">
+<meta property="og:url" content="${o.selfUrl}">
+<meta property="og:image" content="${o.ogImage}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
+
+<script type="application/ld+json">
+${JSON.stringify(o.graph, null, 1)}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>${OFFERCSS}${o.css || ''}</style>
+<link rel="stylesheet" href="/css/nav-drawer.css">
+<script src="/js/site.js"></script>
+<link rel="stylesheet" href="/css/contact-modal.css">
+<script src="/js/contact-modal.js" defer></script>
+</head>
+<body>
+<!-- ep:nav -->
+${renderNavL(o.navKey, o.lang, o.slug)}
+<!-- /ep:nav -->
+${o.body}
+<footer><div class="container">
+  <span>${esc(I18N.footer[o.lang].copyright)}</span>
+  <span>${I18N.footer[o.lang].links.map(l => `<a href="${loc(l.href, o.lang)}">${esc(l.label)}</a>`).join(' &middot; ')}</span>
+</div></footer>
+</body>
+</html>
+`;
+}
+
 function renderOfferPage(page, lang) {
   const c = page[lang];
   const L = I18N.locales[lang];
@@ -957,48 +1045,7 @@ function renderOfferPage(page, lang) {
   const breadcrumbHtml = c.breadcrumb.map(b =>
     b.href ? `<a href="${loc(b.href, lang)}">${esc(b.label)}</a>` : esc(b.label)).join(' &middot; ');
 
-  return `<!DOCTYPE html>
-<html lang="${L.htmlLang}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(c.title)}</title>
-<meta name="description" content="${attr(c.description)}">
-<link rel="canonical" href="${selfUrl}">
-<link rel="alternate" hreflang="en-CA" href="${enUrl}">
-<link rel="alternate" hreflang="fr-CA" href="${frUrl}">
-<link rel="alternate" hreflang="x-default" href="${enUrl}">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="${lang === 'fr' ? 'fr_CA' : 'en_CA'}">
-<meta property="og:title" content="${attr(c.ogTitle)}">
-<meta property="og:description" content="${attr(c.ogDescription)}">
-<meta property="og:url" content="${selfUrl}">
-<meta property="og:image" content="${page.ogImage}">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
-<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
-
-<script type="application/ld+json">
-${JSON.stringify(graph, null, 1)}
-</script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>${OFFERCSS}</style>
-<link rel="stylesheet" href="/css/nav-drawer.css">
-<script src="/js/site.js"></script>
-<link rel="stylesheet" href="/css/contact-modal.css">
-<script src="/js/contact-modal.js" defer></script>
-</head>
-<body>
-<!-- ep:nav -->
-${renderNavL(page.navKey, lang, slug)}
-<!-- /ep:nav -->
-<header class="hero"><div class="container">
+  const body = `<header class="hero"><div class="container">
   <nav class="breadcrumb">${breadcrumbHtml}</nav>
   <span class="eyebrow">${esc(c.eyebrow)}</span>
   <h1>${esc(c.h1)}</h1>
@@ -1030,23 +1077,108 @@ ${renderForm(c.form, lang, slug)}
       ${c.cta.after ? `<p style="margin:18px 0 0;font-size:14px"><a href="${loc(c.cta.after.href, lang)}" style="color:var(--gold-2)">${esc(c.cta.after.label)} &rarr;</a></p>` : ''}
     </div>
   </div></section>
-</main>
-<footer><div class="container">
-  <span>${esc(I18N.footer[lang].copyright)}</span>
-  <span>${I18N.footer[lang].links.map(l => `<a href="${loc(l.href, lang)}">${esc(l.label)}</a>`).join(' &middot; ')}</span>
-</div></footer>
-</body>
-</html>
-`;
+</main>`;
+
+  return renderShell({
+    lang, slug, body, graph,
+    navKey: page.navKey, ogImage: page.ogImage,
+    title: c.title, description: c.description,
+    ogTitle: c.ogTitle, ogDescription: c.ogDescription,
+    selfUrl, enUrl, frUrl
+  });
 }
+
+function renderContactPage(page, lang) {
+  const c = page[lang];
+  const L = I18N.locales[lang];
+  const slug = page.slug;
+  const enUrl = `${ORIGIN}/${slug}/`;
+  const frUrl = `${ORIGIN}/fr/${slug}/`;
+  const selfUrl = lang === 'fr' ? frUrl : enUrl;
+  const id = 'cf_' + lang;
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: c.breadcrumb.map((b, i) => ({
+          '@type': 'ListItem', position: i + 1, name: b.label,
+          item: b.href ? ORIGIN + loc(b.href, lang) : selfUrl })) },
+      { '@type': 'ContactPage', name: stripTags(c.h1), url: selfUrl,
+        inLanguage: L.hreflang, description: c.description,
+        about: { '@type': 'Person', name: 'Elvin M. Peters', jobTitle: 'AI Consultant',
+          url: ORIGIN + '/', sameAs: ['https://www.linkedin.com/in/elvinmpeters'] } }
+    ]
+  };
+
+  const alts = c.alts.map(a => {
+    const ic = CONTACT_ICONS[a.icon] || '';
+    const inner = `${ic}<span>${esc(a.label)}<small>${esc(a.sub)}</small></span>`;
+    if (!a.href) return `      <div class="alt alt--static">${inner}</div>`;
+    if (/^https?:/.test(a.href))
+      return `      <a class="alt" href="${a.href}" target="_blank" rel="noopener">${inner}</a>`;
+    const d = a.contact ? ` data-contact="${attr(a.contact)}" data-contact-source="${attr(a.source || '')}"` : '';
+    return `      <a class="alt" href="${loc(a.href, lang)}"${d}>${inner}</a>`;
+  }).join('\n');
+
+  const body = `<main class="container">
+  <div class="wrap">
+    <div class="intro">
+      <span class="eyebrow">${esc(c.eyebrow)}</span>
+      <h1>${esc(c.h1)}</h1>
+      <p class="lede">${esc(c.lede)}</p>
+      <div class="alts">
+${alts}
+      </div>
+    </div>
+
+    <div class="formcard">
+      <h2>${esc(c.form.heading)}</h2>
+      <p class="hint">${esc(c.form.hint)}</p>
+      <form id="${id}" novalidate>
+        <input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field"><label for="${id}_n">${esc(c.form.nameLabel)}</label><input id="${id}_n" name="name" type="text" autocomplete="name" required maxlength="120" placeholder="${attr(c.form.namePlaceholder)}"></div>
+        <div class="field"><label for="${id}_e">${esc(c.form.emailLabel)}</label><input id="${id}_e" name="email" type="email" autocomplete="email" required maxlength="200" placeholder="${attr(c.form.emailPlaceholder)}"></div>
+        <div class="field"><label for="${id}_m">${esc(c.form.messageLabel)}</label><textarea id="${id}_m" name="message" required maxlength="2000" placeholder="${attr(c.form.messagePlaceholder)}"></textarea></div>
+        <button class="btn primary" type="submit">${esc(c.form.submit)}</button>
+        <p class="fmsg" id="${id}_msg" role="status" aria-live="polite"></p>
+        <p class="fnote">${esc(c.form.fine)}</p>
+      </form>
+    </div>
+  </div>
+</main>
+<script>(function(){var f=document.getElementById(${JSON.stringify(id)}),m=document.getElementById(${JSON.stringify(id + '_msg')}),b=f.querySelector('button');
+f.addEventListener('submit',function(ev){ev.preventDefault();
+var n=f.name.value.trim(),e=f.email.value.trim(),g=f.message.value.trim();
+if(!n||!e||!g){m.textContent=${JSON.stringify(c.form.required)};return}
+b.disabled=true;b.style.opacity='.7';m.textContent='...';
+fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,email:e,message:g,lang:${JSON.stringify(lang)},source:${JSON.stringify('contact-' + lang)},website:f.website.value})})
+.then(function(r){return r.json().catch(function(){return{}})}).then(function(r){
+if(r&&r.success===false){b.disabled=false;b.style.opacity='1';m.textContent=${JSON.stringify(c.form.error)};return}
+f.querySelectorAll('.field, button').forEach(function(el){el.style.display='none'});
+m.textContent=${JSON.stringify(c.form.success)};
+if(window.fbq)fbq('track','Contact');if(window.gtag)gtag('event','generate_lead',{method:'contact_form'});
+}).catch(function(){b.disabled=false;b.style.opacity='1';m.textContent=${JSON.stringify(c.form.network)}})})})();</script>`;
+
+  return renderShell({
+    lang, slug, body, graph, css: CONTACTCSS,
+    navKey: page.navKey, ogImage: page.ogImage,
+    title: c.title, description: c.description,
+    ogTitle: c.ogTitle, ogDescription: c.ogDescription,
+    selfUrl, enUrl, frUrl
+  });
+}
+
+const TEMPLATES = { offer: renderOfferPage, contact: renderContactPage };
 
 const genPaths = [];
 for (const page of PAGES) {
+  const render = TEMPLATES[page.template];
+  if (!render) throw new Error(`content/pages/${page.slug}.json asks for template "${page.template}", which does not exist. Known: ${Object.keys(TEMPLATES).join(', ')}`);
   for (const lang of LANGS) {
     const rel = lang === 'fr' ? path.join('fr', page.slug, 'index.html') : path.join(page.slug, 'index.html');
     const dest = path.join(OUT, rel);
     fs.mkdirSync(path.dirname(dest), { recursive: true });
-    fs.writeFileSync(dest, renderOfferPage(page, lang));
+    fs.writeFileSync(dest, render(page, lang));
     genPaths.push(rel.replace(/\\/g, '/'));
   }
 }
