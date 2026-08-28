@@ -1336,7 +1336,10 @@ function cssFor(html) {
   let css = [...html.matchAll(/<style>([\s\S]*?)<\/style>/g)].map(m => m[1]).join('\n');
   for (const s of sheets) {
     if (!cssCache.has(s)) {
-      const f = path.join(OUT, s.replace(/^\//, ''));
+      /* DIR, not OUT: verify.js builds into a throwaway directory that holds
+         only generated pages, so the linked stylesheets live in the source
+         tree either way. */
+      const f = path.join(DIR, s.replace(/^\//, ''));
       cssCache.set(s, fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '');
     }
     css += '\n' + cssCache.get(s);
