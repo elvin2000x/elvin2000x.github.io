@@ -1,0 +1,118 @@
+{
+  "_comment": "Kitchener-Waterloo city page. The argument is buyer sophistication: this is the most technically literate business market in the country outside Toronto, so the pitch that works elsewhere (trust me, it is working) does not survive contact with a Waterloo buyer. Slug keeps the existing /consulting/kitchener-waterloo/ URL even though the CMA is Kitchener-Cambridge-Waterloo.",
+  "slug": "consulting/kitchener-waterloo",
+  "template": "city",
+  "navKey": "consulting/kitchener-waterloo/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Kitchener-Waterloo",
+  "region": "Ontario",
+  "districts": ["downtown Kitchener", "uptown Waterloo", "Cambridge", "the Innovation District", "Elmira", "St. Jacobs", "Baden"],
+  "nearby": ["Guelph", "Stratford", "Woodstock", "Brantford", "Milton", "Fergus", "New Hamburg"],
+  "industries": ["software and technology", "advanced manufacturing", "insurance and financial services", "education", "agriculture and food processing"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Kitchener-Waterloo | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Kitchener, Waterloo and Cambridge businesses. Serving downtown Kitchener, uptown Waterloo, Cambridge and out to Guelph and Stratford.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Kitchener-Waterloo",
+    "ogDescription": "Google Ads, SEO and AI visibility for Waterloo Region businesses. One accountable consultant who will show you the account.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. This region has more people who can read a dashboard properly than anywhere else in the country outside Toronto, and I would rather work with a client like that than one who takes my word for it.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} has an unusual concentration of technical buyers. Between the universities, the software sector and the advanced manufacturing base, a lot of the people you would be pitching here can and will open the account and check what you told them. Marketing that relies on the client not looking closely does not last long in this region, which is one of the reasons I like working here.",
+      "It also changes what the work has to produce. A {city} technology company selling software on a long B2B cycle needs attribution that survives a six month sales process, not a report that credits the last click before a demo request. A local trade or clinic in the same region needs the opposite: fast, simple, cost per booked job. Those are different accounts entirely and the region contains both in unusual proportion.",
+      "The third thing is that {city} behaves as one market and three cities. Kitchener, Waterloo and Cambridge have separate identities and separate search behaviour, and Guelph sits close enough to blur the edge. Targeting the region as a single blob works for some businesses and wastes money for others, and it is worth deciding on purpose rather than by default."
+    ],
+    "facts": [
+      { "stat": "575,847", "label": "people in the Kitchener-Cambridge-Waterloo census metropolitan area (2021 Census)" },
+      { "stat": "#10", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that I expect to be questioned on the numbers, and the account is built so that questioning it is easy.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "For {city} businesses that need pipeline now. Rebuilt account structure, conversion tracking that counts the thing you actually sell rather than a form view, and spend cut off searches that were never going to convert. For B2B here that usually means tracking through to a qualified opportunity rather than stopping at the click, because a lead count tells you almost nothing on a long cycle.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The channel that suits how {city} buyers actually buy, which is by researching thoroughly before they ever talk to you. Technical fixes first, then the pages that answer the specific questions your buyers are asking, which for a technology company is usually comparison and integration content rather than generic service pages.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a shortlist. Your buyers here are early adopters of exactly these tools, which makes this region one of the few places where AIO is already affecting real purchase decisions rather than being a bet on next year.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across Waterloo Region",
+      "districtsBody": "I take on clients throughout the region, in {districts}. Everything is run remotely over video and email, so which of the three cities you are in makes no difference to the work or the price.",
+      "nearbyHeading": "And across southwestern Ontario",
+      "nearbyBody": "The region trades heavily with the corridor around it. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "We sell B2B software on a long cycle. Does Google Ads work for that?",
+        "a": "It can, and only if the measurement is built for it. If the account optimises to form fills you will get form fills and no pipeline. What has to happen is tracking that follows through to qualified opportunities and closed revenue, and enough patience to judge the account on a cycle rather than a month. If your sales cycle is nine months and you want a verdict in six weeks, no channel will give you an honest one.",
+        "open": true
+      },
+      {
+        "q": "Will you show us the account?",
+        "a": "Yes, and I would rather you look. The account lives in your own Google Ads and Analytics properties, you own them, and I will walk you through what is in there whenever you want. If a vendor will not show you the account, that is the answer to a different question."
+      },
+      {
+        "q": "Should we target Kitchener, Waterloo and Cambridge separately?",
+        "a": "It depends on whether your customers behave differently across the three, and often they do. A local service business usually should split them so you can see where the work is coming from. A technology company selling nationally should probably not be targeting the region at all beyond hiring and brand purposes."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Kitchener - Cambridge - Waterloo (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503541" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Bring the account and the numbers if you have them, and I will tell you what I would change first.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

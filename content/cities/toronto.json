@@ -1,0 +1,117 @@
+{
+  "_comment": "Toronto city page. build.js generates /consulting/toronto/ from this file -- editing the generated HTML gets overwritten on the next build. Copy uses {city}, {region}, {districts}, {nearby} and {industries} slots so the city is woven through the page from one source instead of typed twelve times. English only: there is no French twin for this city, so no /fr/ URL, no fr-CA hreflang and no language toggle are emitted. Every number in `facts` must be traceable to an entry in `sources` -- no unsourced statistics on a page whose whole job is local credibility.",
+  "slug": "consulting/toronto",
+  "template": "city",
+  "navKey": "consulting/toronto/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Toronto",
+  "region": "Ontario",
+  "districts": ["Downtown Toronto", "North York", "Scarborough", "Etobicoke", "York", "East York", "the Financial District", "Liberty Village"],
+  "nearby": ["Mississauga", "Brampton", "Markham", "Vaughan", "Richmond Hill", "Oakville", "Pickering"],
+  "industries": ["financial services", "professional services", "technology", "real estate", "health care"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Toronto | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Toronto businesses. Run by one accountable consultant based in Toronto, serving Downtown Toronto, North York, Scarborough, Etobicoke and the wider GTA.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Toronto",
+    "ogDescription": "Google Ads, SEO and AI visibility for Toronto businesses. One accountable consultant, based in Toronto.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I am based in {city} and I run Google Ads, SEO and AIO consulting for {city} businesses that are tired of handing a retainer to an agency and never quite finding out what happened to it. One person does the work. That person is me, and you have my number.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Based in **{city}**"
+    ],
+
+    "marketHeading": "What marketing actually costs a business in {city}",
+    "market": [
+      "{city} is the largest market in the country, and that cuts both ways. There are more customers searching for what you sell here than anywhere else in Canada, and there are also more businesses bidding for those same clicks than anywhere else in Canada. A budget that would dominate a smaller Ontario market buys you a modest share of impressions in {city}, and the difference between a campaign that pays for itself and one that quietly bleeds is usually structural rather than clever.",
+      "The practical consequence for most {city} businesses is that you cannot win by outspending. You win by being more precise: tighter match types, a real negative keyword list, conversion tracking that counts a booked job rather than a form view, and landing pages that answer the specific thing the searcher typed. That is unglamorous work and it is most of the job.",
+      "It is also the market where you are most likely to already have an agency. If yours is doing well by you, keep them. I am useful when you want one accountable person who will show you the account, explain what is in it, and tell you plainly when a channel is not worth the money in {industries} or anywhere else."
+    ],
+    "facts": [
+      { "stat": "6,202,225", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "#1", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is the competition you are buying into and how much precision it takes to make each one pay. If you are not sure which one fits, say so and I will tell you which I would start with, including when the answer is none of them yet.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "For {city} businesses that need the phone to ring this quarter. I rebuild the account structure, fix the conversion tracking so it counts real customers instead of page views, and cut the spend that is going to searches that were never going to buy. In a market this competitive, most of the win is in what I turn off.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "For {city} businesses that want customers arriving without paying per click. Technical fixes first, then the pages that answer what your buyers actually search. Slower than ads and the compounding is the point: {city} rankings you earn keep working after you stop paying.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Your {city} customers increasingly ask ChatGPT, Perplexity and Google's AI Overviews for a recommendation before they ever open a search results page. AIO is the work of being the business those answers name. New enough that most of your {city} competitors have not started.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients right across {city}, in {districts}. The work is done remotely and over video whichever part of the city you are in, though being based here means an in-person coffee is genuinely on the table rather than a line of marketing copy.",
+      "nearbyHeading": "And out into the GTA",
+      "nearbyBody": "Plenty of businesses that describe themselves as {city} businesses are actually headquartered a highway exit away, and they compete in the same auctions and the same search results. I work with them on the same terms: {nearby}."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No, and I would rather say so than imply otherwise. I live and work in {city} but I work from home, so there is no address to visit. I can meet you in person for a coffee anywhere in the city, and the actual work happens remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Which service should a {city} business start with?",
+        "a": "If you need revenue this quarter, Google Ads, because it is the only one that produces customers in weeks rather than months. If you can wait two or three quarters, SEO compounds and eventually costs you nothing per click. AIO is the cheapest of the three and the one your {city} competitors are least likely to have touched. Most people should pick one and do it properly rather than three badly."
+      },
+      {
+        "q": "Is {city} more expensive to advertise in than other Canadian cities?",
+        "a": "Generally yes, because you are bidding against more competitors for the same searches, and in {industries} the competition is heaviest. That does not make it a bad market, it makes precision worth more here than anywhere else. I would rather run a tight $3,000 a month in {city} than a sloppy $10,000."
+      },
+      {
+        "q": "Do you work with businesses outside {city}?",
+        "a": "Yes. I work with clients across Canada and everything is run remotely, so where you are does not change the work or the price. {city} is simply where I happen to live."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus whatever you spend with Google. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract you have to argue your way out of."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Toronto (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503535" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe what you are trying to grow and I will tell you what I would do first, even when what I would do first is not something you need to hire me for.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

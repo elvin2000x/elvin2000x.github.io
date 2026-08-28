@@ -1,0 +1,118 @@
+{
+  "_comment": "Victoria city page. New page, nav.json needs a matching entry. The argument is demographics and geography: the oldest median age of any major CMA in Canada and a customer base on an island, which changes both who converts and how they prefer to get in touch. The claim about age is qualitative on the page rather than a hard statistic, because I did not verify a specific median age figure.",
+  "slug": "consulting/victoria",
+  "template": "city",
+  "navKey": "consulting/victoria/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Victoria",
+  "region": "British Columbia",
+  "districts": ["downtown Victoria", "Oak Bay", "Saanich", "Esquimalt", "Langford", "Colwood", "Sidney", "Fairfield"],
+  "nearby": ["Duncan", "Nanaimo", "Sooke", "Salt Spring Island", "Ladysmith", "Sidney"],
+  "industries": ["public administration", "tourism and hospitality", "health care", "technology", "marine and defence"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Victoria, BC | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Victoria, BC businesses. Serving downtown Victoria, Oak Bay, Saanich, Langford and up-island to Duncan and Nanaimo.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Victoria, BC",
+    "ogDescription": "Google Ads, SEO and AI visibility for Victoria businesses. One accountable consultant, and a plan built for how this market actually buys.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. {city} has an older, steadier customer base than any other major Canadian market, and that changes what a good campaign looks like here.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} BC business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} skews older than any other major Canadian metro, and that has practical consequences most marketing advice ignores. This audience converts by phone far more often than by web form, reads more before deciding, and is less forgiving of a site that is hard to use. A campaign judged purely on form fills will look like it is failing here while the phone rings, which is why call tracking is not optional in a {city} account.",
+      "The economy is anchored by public administration, health care and education, with tourism on top and a small but real technology sector. That gives the city unusually steady local demand and a visitor cycle layered over it, so a lot of {city} businesses are running two demand curves at once and only budgeting for one.",
+      "Then there is the island. Your customers are not going to hop over to the mainland for routine services, which protects local businesses from Vancouver competition in a way that is genuinely valuable. It also means the natural market extends up-island rather than across the strait, and targeting that reflects that will beat targeting drawn as a radius on a map."
+    ],
+    "facts": [
+      { "stat": "397,237", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "#16", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is measurement more than anything else, because a market that prefers to phone you will look terrible in a report that only counts clicks and forms.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "For {city} that starts with call tracking, because a large share of the conversions here happen on the phone and an account that cannot see them will optimise itself in the wrong direction. Then rebuilt account structure, targeting drawn around the island market you actually serve, and spend cut off searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Well suited to {city}, because this is a market that reads before it buys and because the island limits how much outside competition you face for local searches. Technical fixes first, then the pages that answer the questions your customers are actually researching.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation, including the visitors planning a trip here. Cheapest of the three, one-time, and almost no {city} competitors have started.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across Greater {city}",
+      "districtsBody": "I take on clients throughout the region, in {districts}. Everything is run remotely over video and email, so which municipality you are in makes no difference to the work or the price. The three hour time difference is real and I schedule around it.",
+      "nearbyHeading": "And up-island",
+      "nearbyBody": "The natural market runs north rather than across the water. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Most of our customers phone us. Does that break the tracking?",
+        "a": "It breaks the tracking if nobody sets it up, and that is one of the most common problems I find in {city} accounts. Call tracking ties a phone call back to the campaign that produced it, so you can see the whole picture rather than the small part that filled in a form. In this market that single fix often changes which campaigns look profitable.",
+        "open": true
+      },
+      {
+        "q": "Should we target Vancouver as well?",
+        "a": "Only if you sell something people will get on a ferry or a plane for, or something you can deliver remotely. For most {city} businesses the water is a real boundary and the budget is better spent up-island, where the competition is thinner and the customers are genuinely reachable."
+      },
+      {
+        "q": "Does the time difference matter?",
+        "a": "Three hours, and it matters for meetings rather than for the work. I take {city} calls in your morning, which is my early afternoon. If you need someone reachable late in your day on short notice, say so up front and we will agree what that looks like."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Victoria (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503935" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether you can actually see where your customers are coming from.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} BC business", "source": "city-{city}" }
+    }
+  }
+}

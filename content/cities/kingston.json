@@ -1,0 +1,120 @@
+{
+  "_comment": "Kingston city page -- new, there was no /consulting/kingston/ before this. Kingston is the smallest of the three markets by a wide margin and its employment is dominated by institutions rather than companies: the nine largest employers in the city are all public sector. That is the fact the copy is built around, because it changes which channel is worth a small business's money here. Needs a matching key in content/nav.json (consulting/kingston/index.html) or the build will not know how to render its nav.",
+  "slug": "consulting/kingston",
+  "template": "city",
+  "navKey": "consulting/kingston/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Kingston",
+  "region": "Ontario",
+  "districts": ["Downtown Kingston", "the Williamsville corridor", "Kingston West", "Kingston East", "Portsmouth", "Sydenham District", "the Queen's University area"],
+  "nearby": ["Napanee", "Gananoque", "Amherstview", "Brockville", "Belleville", "Prince Edward County"],
+  "industries": ["health care", "education", "public administration", "tourism and hospitality", "advanced manufacturing"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Kingston, Ontario | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Kingston, Ontario businesses. Serving Downtown Kingston, Williamsville, Kingston West and East, and out to Napanee, Gananoque and Belleville.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Kingston, Ontario",
+    "ogDescription": "Google Ads, SEO and AI visibility for Kingston businesses. One accountable consultant, straight answers about a small market.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person. {city} is a small market and I would rather tell you that up front than sell you a budget it cannot absorb.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} is an institutional town before it is a business town. Queen's University, Kingston Health Sciences Centre, CFB {city}, the Limestone District School Board and Correctional Service Canada are among the largest employers in the region, and the eight largest employers in the region are all public sector institutions. The biggest private employer in the city is smaller than the fifth-largest public one. Health care, education and public administration make up a very large share of local jobs.",
+      "For a {city} business, that has one direct consequence: the number of people searching for what you sell, in this city, in a given month, is genuinely small. That is not a reason to skip search marketing. It is a reason to stop taking advice written for Toronto-sized search volume and applying it to a city this size. A campaign here can work extremely well on a budget that would be a rounding error in a bigger market, and it will hit a ceiling far sooner.",
+      "It also means the tourism and student calendars move your demand more than anything you do. A downtown {city} restaurant, a property manager near Queen's and an advanced manufacturer in the west end are three completely different advertising problems that happen to share a postal code, and the plan should be built around which one you are."
+    ],
+    "facts": [
+      { "stat": "172,546", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "Top 8", "label": "largest {city} employers are all public sector institutions" },
+      { "stat": "9,352", "label": "people employed by Queen's University, the region's largest employer" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is how much of each is worth buying, because the available search demand is finite and I would rather you spent less and kept it working than spent more and stopped in three months.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "Works well in {city} for anything with urgency: trades, clinics, legal, storage, anything a student or a homeowner searches and books that week. The honest caveat is that the volume is limited, so the goal is capturing nearly all of a small pool rather than scaling spend. If your budget is under a few hundred dollars a month, say so and I will tell you whether managing it is worth my fee.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Usually the better first dollar in {city}. In a market this size the local results are winnable rather than a bloodbath, and once you rank for what {city} people actually search you stop paying per click entirely. Slower than ads, and in a small market the compounding matters more.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. Cheapest of the three, one-time, and in a market where very few {city} competitors have touched it, the gap is unusually easy to open.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout the city, in {districts}. Everything is run remotely over video and email, so where you are in {city} makes no difference to the work or the price.",
+      "nearbyHeading": "And across eastern Ontario",
+      "nearbyBody": "Search demand in a market this size does not respect the city limits, and neither should your targeting. I work with businesses across {nearby} on the same terms, and for many {city} businesses widening the radius is the single cheapest thing you can do."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. If you want someone who will physically walk into your shop, I am the wrong hire and I will tell you that on the call rather than after you have paid.",
+        "open": true
+      },
+      {
+        "q": "Is {city} big enough for Google Ads to be worth it?",
+        "a": "For some businesses yes, for others honestly no, and it depends on urgency more than size. If your customer has a problem they need solved this week, ads work here on a modest budget. If your service is considered, occasional or sold on reputation, your money goes further in SEO and AIO. I will give you the real answer on the call, and sometimes the real answer is that you should spend nothing with me yet.",
+        "open": true
+      },
+      {
+        "q": "Which service should a {city} business start with?",
+        "a": "In most {city} cases I would start with SEO, because the local results are genuinely winnable at this market size and it stops costing you per click. Ads come first only when you need the phone ringing now. AIO is the cheapest to add and the one your {city} competitors are least likely to have started."
+      },
+      {
+        "q": "Do you work with the university, the hospital or the base?",
+        "a": "Those are procurement-driven buyers and search advertising is not how you reach them. If you sell into {city}'s institutions, what search buys you is credibility during research, which is SEO and AIO work rather than paid. If you also sell commercially, the paid side is worth discussing for that part of the business."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract. In a market the size of {city} those numbers are real money, which is exactly why I would rather talk you out of the wrong one first."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Kingston (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503521" },
+      { "label": "Kingston Economic Development Corporation, major employers", "href": "https://www.investkingston.ca/majoremployers/" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, including when the honest answer for a {city} business your size is that you do not need to hire anyone yet.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

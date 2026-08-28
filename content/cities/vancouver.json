@@ -1,0 +1,120 @@
+{
+  "_comment": "Vancouver city page. The argument here is cost and fragmentation: it is the most expensive metro in the country to operate in, and 'Vancouver' as a targeting radius misses most of the metro's buyers because the population is spread across twenty-odd separate municipalities. Every number in facts traces to an entry in sources.",
+  "slug": "consulting/vancouver",
+  "template": "city",
+  "navKey": "consulting/vancouver/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Vancouver",
+  "region": "British Columbia",
+  "districts": ["Downtown Vancouver", "Yaletown", "Mount Pleasant", "Kitsilano", "East Vancouver", "the West End", "Marpole", "Gastown"],
+  "nearby": ["Burnaby", "Richmond", "Surrey", "Coquitlam", "North Vancouver", "Langley", "Delta"],
+  "industries": ["real estate and construction", "film and television production", "technology", "international trade", "tourism and hospitality"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Vancouver | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Vancouver businesses. Serving Downtown Vancouver, Mount Pleasant, East Vancouver and across Metro Vancouver including Burnaby, Richmond and Surrey.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Vancouver",
+    "ogDescription": "Google Ads, SEO and AI visibility for Vancouver businesses. One accountable consultant, and a plan built for an expensive market.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. {city} is an expensive place to run a business and an expensive place to advertise, and the plan has to earn its keep faster here than almost anywhere else in the country.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} is the third largest market in Canada and one of the most fragmented. The city itself is a fraction of the metro area: most of the people who would describe themselves as {city} customers live in {nearby}, in municipalities with their own downtowns and their own competitors. A campaign targeted at the City of {city} looks tidy on a map and quietly excludes most of the buyers you were trying to reach.",
+      "The second thing that separates {city} is cost. Rent is higher, wages are higher, and the businesses bidding against you are carrying the same overhead, which pushes what they are willing to pay per click. That does not make advertising unaffordable, it makes waste more expensive. Every month a campaign runs on loose match types in this market costs you more than the same mistake would cost in Winnipeg or London.",
+      "The practical consequence is that {city} rewards precision and punishes patience. I would rather set a tight budget with a conversion action that counts booked work, prove the unit economics inside a quarter, and then scale what already pays. That is the opposite of the usual advice to give a campaign six months to find its feet, and in this market the usual advice is expensive."
+    ],
+    "facts": [
+      { "stat": "2,642,825", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "#3", "label": "largest census metropolitan area in Canada (2021 Census)" },
+      { "stat": "288", "label": "corporate head offices in {city}, employing 25,066 people (2024)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the cost of getting it wrong is higher, so I would rather start you on one thing that pays than three that might.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "For {city} businesses that need customers this quarter. The first job is usually geography: targeting that covers the parts of Metro {city} your customers actually come from rather than a radius drawn around a downtown office. Then account structure, conversion tracking that counts booked work rather than form views, and spend cut off searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The channel that does the most for {city} businesses over time, precisely because clicks here are expensive. Technical fixes first, then pages that answer what your buyers search, including separate pages for the municipalities you actually serve. Slower than ads, and in a high cost market the day you stop paying per click matters more.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. Cheapest of the three, one-time, and in a market where a click costs what it costs here, being named in an answer that never generates a click is worth more than it sounds.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout the city, in {districts}. Everything is run remotely over video and email, so where you are makes no difference to the work or the price. The three hour time difference is real and I schedule around it rather than pretending it does not exist.",
+      "nearbyHeading": "And across Metro {city}",
+      "nearbyBody": "Most of the metro population lives outside the City of {city}, and your customers do not care about the municipal boundary. I work with businesses across {nearby} on the same terms, and for a lot of {city} businesses getting this targeting right is the single cheapest improvement available."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. If you want someone who will walk into your showroom, I am the wrong hire and I will tell you that on the call.",
+        "open": true
+      },
+      {
+        "q": "Does the time difference matter?",
+        "a": "Three hours, and it matters for meetings rather than for the work. I take {city} calls in your morning, which is my early afternoon, and the accounts themselves do not care what time zone I am in. If you need someone reachable at 4pm Pacific on short notice, say so up front and we will agree what that looks like.",
+        "open": true
+      },
+      {
+        "q": "Should we target the City of {city} or all of Metro {city}?",
+        "a": "Almost always wider than the city, and the exact answer depends on how far your customers will travel for what you sell. A restaurant is a neighbourhood business. A trade, a clinic or a B2B service usually has customers across {nearby} and is leaving money on the table by targeting the city alone. This is the first thing I look at in a {city} account."
+      },
+      {
+        "q": "Is {city} more expensive to advertise in than the rest of Canada?",
+        "a": "Generally yes, in the sense that your competitors have high fixed costs and bid accordingly, and in {industries} particularly. That is an argument for tighter targeting and better conversion tracking, not an argument against advertising. I would rather run a disciplined $3,000 a month here than a loose $10,000."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Vancouver (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503933" },
+      { "label": "Statistics Canada, Annual Head Office Survey, 2024", "href": "https://www.statcan.gc.ca/o1/en/app/8995-annual-head-office-survey-2024" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, including when the honest answer is that your targeting is the problem and not your budget.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

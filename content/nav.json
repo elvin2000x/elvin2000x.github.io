@@ -1,261 +1,303 @@
 {
-  "_comment": "The single copy of the site menu. Edited by Site Studio or by hand; node build.js renders it into every page that carries the ep:nav region.",
-  "brand": "Elvin Peters",
-  "links": [
-    {
-      "label": "Services",
-      "href": "/services/",
-      "dropdown": "services"
-    },
-    {
-      "label": "Products",
-      "href": "/products/",
-      "dropdown": "products"
-    },
-    {
-      "label": "Free",
-      "href": "/free/"
-    },
-    {
-      "label": "Blog",
-      "href": "/writing/",
-      "items": [
-        {
-          "label": "Projects",
-          "href": "/projects/"
-        }
-      ]
-    },
-    {
-      "label": "Proof",
-      "href": "/receipts/"
-    },
-    {
-      "label": "Contact",
-      "href": "/contact/"
-    }
-  ],
-  "cta": {
-    "label": "Buy the Book",
-    "href": "https://www.amazon.com/dp/B0H4X2S2JD",
-    "ext": true
+ "_comment": "The single copy of the site menu. Edited by Site Studio or by hand; node build.js renders it into every page that carries the ep:nav region.",
+ "brand": "Elvin Peters",
+ "links": [
+  {
+   "label": "Services",
+   "href": "/services/",
+   "dropdown": "services"
   },
-  "pages": {
-    "index.html": {
-      "brandHref": "#top",
-      "aboutHref": "#about",
-      "themebtn": true,
-      "ctaArrow": true,
-      "brandStyle": "multiline",
-      "indent": 2
-    },
-    "series/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "products/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "book.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "active": "/book.html",
-      "cta": {
-        "label": "Get the System",
-        "href": "/system/"
-      },
-      "brandStyle": "inline",
-      "indent": 0
-    },
-    "ai-coaching/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "ai-workflow-build/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "contact/index.html": {
-      "brandHref": "/",
-      "themebtn": true,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "google-ads-audit/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "google-ads/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "seo/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "aio-consulting/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/toronto/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/montreal/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/vancouver/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/calgary/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/edmonton/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/ottawa-gatineau/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/winnipeg/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/quebec-city/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/hamilton/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/kitchener-waterloo/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "consulting/london-ontario/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "press/index.html": {
-      "brandHref": "/",
-      "themebtn": true,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 0
-    },
-    "receipts/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "services/events/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "services/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "setup/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "team-ai-workshop/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
-    },
-    "updates/index.html": {
-      "brandHref": "/",
-      "themebtn": false,
-      "ctaArrow": false,
-      "brandStyle": "inline",
-      "indent": 2
+  {
+   "label": "Products",
+   "href": "/products/",
+   "dropdown": "products"
+  },
+  {
+   "label": "Free",
+   "href": "/free/"
+  },
+  {
+   "label": "Blog",
+   "href": "/writing/",
+   "items": [
+    {
+     "label": "Projects",
+     "href": "/projects/"
     }
+   ]
+  },
+  {
+   "label": "Proof",
+   "href": "/receipts/"
+  },
+  {
+   "label": "Contact",
+   "href": "/contact/"
   }
+ ],
+ "cta": {
+  "label": "Buy the Book",
+  "href": "https://www.amazon.com/dp/B0H4X2S2JD",
+  "ext": true
+ },
+ "pages": {
+  "index.html": {
+   "brandHref": "#top",
+   "aboutHref": "#about",
+   "themebtn": true,
+   "ctaArrow": true,
+   "brandStyle": "multiline",
+   "indent": 2
+  },
+  "series/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "products/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "book.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "active": "/book.html",
+   "cta": {
+    "label": "Get the System",
+    "href": "/system/"
+   },
+   "brandStyle": "inline",
+   "indent": 0
+  },
+  "ai-coaching/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "ai-workflow-build/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "contact/index.html": {
+   "brandHref": "/",
+   "themebtn": true,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "google-ads-audit/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "google-ads/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "seo/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "aio-consulting/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/toronto/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/montreal/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/vancouver/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/calgary/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/edmonton/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/ottawa-gatineau/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/winnipeg/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/quebec-city/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/hamilton/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/kitchener-waterloo/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/london-ontario/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/kingston/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/halifax/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/st-catharines-niagara/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/windsor/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/oshawa/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/victoria/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "press/index.html": {
+   "brandHref": "/",
+   "themebtn": true,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 0
+  },
+  "receipts/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "services/events/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "services/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "setup/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "team-ai-workshop/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "updates/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  }
+ }
 }

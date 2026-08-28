@@ -1,0 +1,118 @@
+{
+  "_comment": "St. Catharines-Niagara city page. New page, nav.json needs a matching entry. The argument is seasonality and visitor demand: Niagara's demand curve is a wave driven by tourism and the border, so the same budget spent in the same way every month is structurally wrong here. The CMA is St. Catharines - Niagara; the page speaks to the whole region rather than to one city.",
+  "slug": "consulting/st-catharines-niagara",
+  "template": "city",
+  "navKey": "consulting/st-catharines-niagara/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Niagara",
+  "region": "Ontario",
+  "districts": ["St. Catharines", "Niagara Falls", "Welland", "Niagara-on-the-Lake", "Thorold", "Port Colborne", "Fort Erie", "Grimsby"],
+  "nearby": ["Hamilton", "Burlington", "Brantford", "Fonthill", "Beamsville", "Dunnville"],
+  "industries": ["tourism and hospitality", "agriculture and wine", "manufacturing", "health care", "cross-border logistics"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in St. Catharines & Niagara | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for St. Catharines, Niagara Falls, Welland and Niagara-on-the-Lake businesses. Built around a seasonal, visitor-driven market.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Niagara",
+    "ogDescription": "Google Ads, SEO and AI visibility for Niagara businesses. One accountable consultant, and a budget built around your season.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "St. Catharines and {city}" }
+    ],
+    "eyebrow": "St. Catharines and {city}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for St. Catharines, {city} Falls and the surrounding region, remotely, as one accountable person rather than an account team you never meet. {city} demand arrives in a wave, and a budget that ignores the wave is money spent in the wrong months.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} region business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} has two customer bases that behave nothing alike. There are the people who live here, who search the way people search anywhere, and there are the millions of visitors who search from somewhere else entirely, days or weeks before they arrive. A campaign built for one is close to useless for the other, and the single most common problem I find in {city} accounts is one set of settings trying to serve both.",
+      "Visitor demand also means your targeting probably should not be where you are. If you sell to tourists, the useful audience is in Toronto, in Buffalo, in the GTA suburbs planning a weekend, not within a ten kilometre radius of your front door. That is an easy setting to get wrong and an expensive one to leave wrong through a whole season.",
+      "Then there is the calendar. {region}'s wine country, the falls, the theatre season and the border traffic put most of the year's demand into a handful of months. Spreading a budget evenly across twelve of them is the most reliable way to underspend in June and overspend in February, and it is the first thing I would restructure."
+    ],
+    "facts": [
+      { "stat": "433,604", "label": "people in the St. Catharines - {city} census metropolitan area (2021 Census)" },
+      { "stat": "#13", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is when the money gets spent and who it gets spent on, because the visitor and the resident are two different customers with two different plans.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "For {city} that means separating the visitor campaigns from the local ones: different geography, different keywords, different budgets and a schedule that loads your season. Rebuilt account structure, conversion tracking that counts bookings rather than page views, and spend cut off the searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The channel that solves the other half of a seasonal business, because the rankings you build in the quiet months are earning through the busy ones. Technical fixes first, then the pages that answer what visitors research before they book and what residents search year round.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when a visitor asks where to eat, stay or go. Trip planning is one of the things people use these tools for most, which makes this region one of the few where AIO is already shaping real bookings.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across the {city} region",
+      "districtsBody": "I take on clients throughout the region, in {districts}. Everything is run remotely over video and email, so which municipality you are in makes no difference to the work or the price.",
+      "nearbyHeading": "And along the corridor",
+      "nearbyBody": "The region trades heavily with the western end of the GTA. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Where should we target if our customers are visitors?",
+        "a": "Where the visitors are before they arrive, which for most {city} businesses means Toronto and the GTA, western New York, and the drive market beyond that. Targeting a radius around your own address is the most common and most expensive mistake in a visitor-driven account, because the people already standing outside your door are not the ones you need to reach.",
+        "open": true
+      },
+      {
+        "q": "Should we advertise in the off season?",
+        "a": "At a much lower level, yes, and mostly to residents rather than visitors. Going completely dark means restarting from zero every spring, and the quiet months are the right time to build the SEO and the AIO presence that will be working when the season arrives."
+      },
+      {
+        "q": "Which service should a {city} business start with?",
+        "a": "If your season is close, Google Ads with the targeting fixed first. If you are in a quiet stretch, that is the best possible time to start SEO because the work needs the runway. AIO is cheap, one time, and unusually relevant for anything a traveller would ask an assistant about."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - St. Catharines - Niagara (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503539" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Tell me who your customers are and when they show up, and I will tell you what I would fix first.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} region business", "source": "city-{city}" }
+    }
+  }
+}
