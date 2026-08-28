@@ -828,6 +828,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
 .ctaband{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--panel)),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:clamp(28px,4vw,48px);text-align:center}
 .ctaband h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
 .ctaband p{color:var(--ink-2);margin:14px auto 26px;max-width:52ch}
+/* nav.json puts the light/dark toggle in the nav on some pages, so the
+   shared CSS has to carry it or those pages render a bare browser button. */
+.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:44px;height:44px;border-radius:9px;cursor:pointer;font-size:16px;line-height:1}
+.themebtn:hover{border-color:var(--gold);color:var(--gold-2)}
 .epform{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3.4vw,34px);box-shadow:var(--shadow);max-width:640px;margin:26px auto 0}
 .epform h2{font-size:clamp(1.4rem,2.6vw,1.85rem)}
 .epform .fsub{color:var(--ink-2);font-size:15px;margin:10px 0 22px}
@@ -929,7 +933,16 @@ const CONTACTCSS = `
 .formcard{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:var(--shadow)}
 .formcard h2{font-size:1.5rem;margin-bottom:6px}
 .formcard .hint{color:var(--muted);font-size:14px;margin:0 0 22px}
-.formcard .field textarea{min-height:150px}
+/* OFFERCSS scopes every form rule to .epform, so a .formcard has to restate
+   them or the labels sit inline and the inputs render unstyled. */
+.formcard .field{margin:0 0 16px}
+.formcard label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin:0 0 7px}
+.formcard input,.formcard textarea{width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);font-size:16px;font-family:var(--sans);min-height:46px}
+.formcard textarea{min-height:150px;resize:vertical;line-height:1.55}
+.formcard input:focus,.formcard textarea:focus{outline:2px solid var(--gold-2);outline-offset:1px;border-color:transparent}
+.formcard .btn{width:100%;justify-content:center}
+.formcard .fmsg{font-size:14px;margin:14px 0 0;text-align:center;color:var(--gold-2);min-height:20px}
+.formcard .fnote{color:var(--muted);font-size:12px;margin:14px 0 0}
 `;
 
 const CONTACT_ICONS = {
@@ -1168,7 +1181,114 @@ if(window.fbq)fbq('track','Contact');if(window.gtag)gtag('event','generate_lead'
   });
 }
 
-const TEMPLATES = { offer: renderOfferPage, contact: renderContactPage };
+/* The services page bolds figures inside otherwise plain sentences. Rather than
+   let raw HTML back into the content files (a hardcoded href in one of those is
+   what broke the French links), the copy carries **bold** and it is escaped
+   first, so a stray < in a price can never become markup. */
+function mdb(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); }
+
+/* Delta only -- the shell already ships the hero, credbar, faq, ctaband and
+   button styles from OFFERCSS. */
+const SERVICESCSS = `
+.btn.sm{padding:10px 18px;font-size:14px;min-height:44px;align-items:center}
+.bucket-label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin:36px 0 16px}
+.bucket-label:first-of-type{margin-top:0}
+.svcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.svc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.svc:hover{border-color:var(--gold)}
+.svc h3{font-size:1.4rem;letter-spacing:-.01em}
+.svc h3 a:hover{color:var(--gold-2)}
+.svc .who{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin:4px 0 12px}
+.svc .promise{font-size:1rem;color:var(--ink-2);margin:0 0 14px;flex:1}
+.svc .price{font-size:14px;color:var(--ink-2);margin:0 0 16px}
+.svc .price b{font-family:var(--serif);font-size:1.25rem;color:var(--ink);font-weight:600}
+.svc .foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-top:1px solid var(--line-soft);padding-top:16px;margin-top:auto}
+`;
+
+function renderServicesPage(page, lang) {
+  const c = page[lang];
+  const L = I18N.locales[lang];
+  const slug = page.slug;
+  const enUrl = `${ORIGIN}/${slug}/`;
+  const frUrl = `${ORIGIN}/fr/${slug}/`;
+  const selfUrl = lang === 'fr' ? frUrl : enUrl;
+  const cards = [].concat(...c.buckets.map(b => b.cards));
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: c.breadcrumb.map((b, i) => ({
+          '@type': 'ListItem', position: i + 1, name: b.label,
+          item: b.href ? ORIGIN + loc(b.href, lang) : selfUrl })) },
+      /* An offer catalogue, not a bare ItemList: these are things you can buy,
+         and each entry points at the page that states its own price. */
+      { '@type': 'ProfessionalService', name: 'Elvin M. Peters', url: ORIGIN + '/',
+        inLanguage: L.hreflang, description: c.description,
+        areaServed: page.areaServed,
+        founder: { '@type': 'Person', name: 'Elvin M. Peters', jobTitle: 'AI Consultant' },
+        hasOfferCatalog: { '@type': 'OfferCatalog', name: stripTags(c.h1),
+          itemListElement: cards.map(s => ({
+            '@type': 'Offer', name: s.title, url: ORIGIN + loc(s.href, lang),
+            itemOffered: { '@type': 'Service', name: s.title,
+              description: stripTags(s.promise) } })) } },
+      { '@type': 'FAQPage', inLanguage: L.hreflang, mainEntity: c.faq.map(q => ({
+          '@type': 'Question', name: stripTags(q.q),
+          acceptedAnswer: { '@type': 'Answer', text: stripTags(q.a) } })) }
+    ]
+  };
+
+  const buckets = c.buckets.map(b => `    <div class="bucket-label">${esc(b.label)}</div>
+    <div class="svcgrid">
+${b.cards.map(s => `      <div class="svc">
+        <h3><a href="${loc(s.href, lang)}">${esc(s.title)}</a></h3>
+        <span class="who">${esc(s.who)}</span>
+        <p class="promise">${esc(s.promise)}</p>
+        <p class="price">${mdb(s.price)}</p>
+        <div class="foot">${s.btns.map(x => renderBtn(x, 'ghost sm', lang)).join('')}</div>
+      </div>`).join('\n')}
+    </div>`).join('\n');
+
+  const body = `<header class="hero"><div class="container">
+  <span class="eyebrow">${esc(c.eyebrow)}</span>
+  <h1>${esc(c.h1)}</h1>
+  <p>${esc(c.sub)}</p>
+  <div class="btns" style="margin-top:26px">${renderBtn(c.heroBtn, 'primary', lang)}</div>
+</div></header>
+<div class="credbar"><div class="container">
+  ${c.credbar.map(s => `<span>${mdb(s)}</span>`).join('')}
+</div></div>
+<main>
+  <section class="section"><div class="container">
+${buckets}
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <div style="text-align:center;margin-bottom:28px"><h2>${esc(c.faqHeading)}</h2></div>
+    <div class="faq">
+${c.faq.map(q => `      <details${q.open ? ' open' : ''}><summary>${esc(q.q)}</summary><p>${esc(q.a)}</p></details>`).join('\n')}
+    </div>
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <div class="ctaband">
+      <h2>${esc(c.cta.h2)}</h2>
+      <p>${esc(c.cta.p)}</p>
+      ${renderBtn(c.cta.btn, 'primary', lang)}
+      ${c.cta.after ? `<p style="margin:18px 0 0;font-size:14px"><a href="${loc(c.cta.after.href, lang)}" style="color:var(--gold-2)">${esc(c.cta.after.label)} &rarr;</a></p>` : ''}
+    </div>
+  </div></section>
+</main>`;
+
+  return renderShell({
+    lang, slug, body, graph, css: SERVICESCSS,
+    navKey: page.navKey, ogImage: page.ogImage,
+    title: c.title, description: c.description,
+    ogTitle: c.ogTitle, ogDescription: c.ogDescription,
+    selfUrl, enUrl, frUrl
+  });
+}
+
+const TEMPLATES = { offer: renderOfferPage, contact: renderContactPage, services: renderServicesPage };
 
 const genPaths = [];
 for (const page of PAGES) {
@@ -1203,6 +1323,39 @@ if (frBroken.length) {
   throw new Error('French links point at pages that do not exist:\n  ' +
     [...new Set(frBroken)].join('\n  ') +
     '\nStore the English path in the data file and let loc() add /fr where a twin exists.');
+}
+
+/* Every class a generated page uses must have a rule behind it somewhere. The
+   form rules in OFFERCSS are scoped to .epform, so the contact template's
+   .formcard shipped with inline labels and unstyled inputs and the build was
+   perfectly happy about it -- nothing 404s, nothing errors, the page is just
+   wrong. Cheap to check, and it only reads the stylesheets the page links. */
+const cssCache = new Map();
+function cssFor(html) {
+  const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map(m => m[1]);
+  let css = [...html.matchAll(/<style>([\s\S]*?)<\/style>/g)].map(m => m[1]).join('\n');
+  for (const s of sheets) {
+    if (!cssCache.has(s)) {
+      const f = path.join(OUT, s.replace(/^\//, ''));
+      cssCache.set(s, fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '');
+    }
+    css += '\n' + cssCache.get(s);
+  }
+  return new Set([...css.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)].map(m => m[1]));
+}
+const unstyled = [];
+for (const rel of genPaths) {
+  const html = fs.readFileSync(path.join(OUT, rel), 'utf8');
+  const styled = cssFor(html);
+  const body = html.slice(html.indexOf('<body>'));
+  for (const m of body.matchAll(/\sclass="([^"]+)"/g))
+    for (const cl of m[1].trim().split(/\s+/))
+      if (!styled.has(cl)) unstyled.push(rel + ' -> .' + cl);
+}
+if (unstyled.length) {
+  throw new Error('Generated pages use classes that no stylesheet defines:\n  ' +
+    [...new Set(unstyled)].join('\n  ') +
+    '\nUsually a template borrowed markup whose CSS is scoped to a different parent.');
 }
 
 

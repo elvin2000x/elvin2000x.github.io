@@ -224,6 +224,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
 .ctaband{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--panel)),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:clamp(28px,4vw,48px);text-align:center}
 .ctaband h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
 .ctaband p{color:var(--ink-2);margin:14px auto 26px;max-width:52ch}
+/* nav.json puts the light/dark toggle in the nav on some pages, so the
+   shared CSS has to carry it or those pages render a bare browser button. */
+.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:44px;height:44px;border-radius:9px;cursor:pointer;font-size:16px;line-height:1}
+.themebtn:hover{border-color:var(--gold);color:var(--gold-2)}
 .epform{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3.4vw,34px);box-shadow:var(--shadow);max-width:640px;margin:26px auto 0}
 .epform h2{font-size:clamp(1.4rem,2.6vw,1.85rem)}
 .epform .fsub{color:var(--ink-2);font-size:15px;margin:10px 0 22px}
