@@ -17,6 +17,7 @@
     "breadcrumb": [
       { "label": "Elvin Peters", "href": "/" },
       { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Ontario", "href": "/consulting/ontario/" },
       { "label": "{city}" }
     ],
     "eyebrow": "{city} and Durham Region",

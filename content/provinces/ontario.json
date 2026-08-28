@@ -1,0 +1,134 @@
+{
+  "_comment": "Ontario province page. Sits above the nine Ontario city pages and links every one of them. The argument that makes this page worth existing rather than duplicating Toronto: Ontario is not one market, it is a dozen auctions with very different economics, and province-wide targeting is the most expensive default setting in the country. Population and growth are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/ontario",
+  "template": "city",
+  "navKey": "consulting/ontario/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Ontario",
+  "region": "Canada",
+  "areaType": "State",
+  "regionType": "Country",
+  "districts": ["the Greater Toronto Area", "the Golden Horseshoe", "the National Capital Region", "Southwestern Ontario", "Eastern Ontario", "Central Ontario", "Northern Ontario"],
+  "nearby": ["Barrie", "Guelph", "Peterborough", "Brantford", "Sarnia", "Sudbury", "Thunder Bay", "North Bay"],
+  "industries": ["financial and professional services", "manufacturing and automotive", "technology", "health care", "agriculture and food processing"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Ontario | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Ontario businesses, agencies and professional firms. Nine Ontario city pages, one accountable consultant, remote across the province.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Ontario",
+    "ogDescription": "Marketing help for Ontario businesses, agency owners and professional firms. Ontario is not one market, and the targeting should not pretend it is.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses across {city}",
+    "sub": "I work with {city} business owners, agency owners and professional firms on Google Ads, SEO and AI visibility, remotely, as one accountable person rather than an account team you never meet. {city} holds more than a third of the country's population and behaves like a dozen separate markets, which is exactly where most provincial budgets leak.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for an {city} business", "source": "province-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing across {city}",
+    "market": [
+      "The most expensive setting in {city} advertising is the province-wide radius. A campaign set to all of {city} pays Toronto prices to reach customers in Sudbury, because the auction is priced by the most competitive part of the geography it covers. If you sell in more than one city here, the accounts almost always need to be split by market before anything else is worth doing.",
+      "The economics genuinely differ between those markets. A professional firm competing in the Greater Toronto Area is bidding against national brands with real budgets. The same firm competing in Kingston or Windsor is bidding against a handful of local competitors. Same service, same ad copy, completely different plan, and copying the Toronto playbook into a smaller {city} market is how good businesses conclude that search does not work for them.",
+      "For agency owners and consultants specifically, there is a second problem. Your customers are not in one place and they are not searching for your city. They are searching for the service, sometimes with a city attached and sometimes not, and often from inside a chatbot now rather than a search box. That mix is different from what a local trades business faces, and it changes which of the three services below is worth your money first."
+    ],
+    "facts": [
+      { "stat": "14,223,942", "label": "people in {city} (2021 Census)" },
+      { "stat": "5.8%", "label": "growth since 2016, above the national rate of 5.2% (2021 Census)" },
+      { "stat": "9", "label": "{city} markets with their own page here, from Toronto to Windsor" }
+    ],
+
+    "servicesHeading": "Three ways to grow an {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes across {city} is how much the geography is costing you and which market you are actually competing in.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that starts by splitting the account by market so the expensive parts of the province stop setting the price for the cheap ones. Then account structure, then cutting spend on searches that were never going to convert. Multi-location {city} businesses usually find most of the waste here.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The better bet outside the Greater Toronto Area, where competition is thinner and a page that genuinely answers the question can rank in months. Inside the GTA it is a longer, more expensive fight and I will say so. Technical fixes first, then the pages your customers are already searching for.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. This is the one where the province's size works for you rather than against you, because almost nobody in any {city} market has started. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "citiesHeading": "{city} cities with their own page",
+      "citiesBody": "Each of these goes into what is actually different about that market, including what it costs to compete there. If you sell in one of them, start there rather than here.",
+      "cities": [
+        { "label": "Toronto", "href": "/consulting/toronto/" },
+        { "label": "Ottawa", "href": "/consulting/ottawa-gatineau/" },
+        { "label": "Hamilton", "href": "/consulting/hamilton/" },
+        { "label": "Kitchener-Waterloo", "href": "/consulting/kitchener-waterloo/" },
+        { "label": "London", "href": "/consulting/london-ontario/" },
+        { "label": "St. Catharines-Niagara", "href": "/consulting/st-catharines-niagara/" },
+        { "label": "Windsor", "href": "/consulting/windsor/" },
+        { "label": "Oshawa and Durham", "href": "/consulting/oshawa/" },
+        { "label": "Kingston", "href": "/consulting/kingston/" }
+      ],
+      "districtsHeading": "Across the province",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price.",
+      "nearbyHeading": "And in the smaller centres",
+      "nearbyBody": "Plenty of good {city} businesses are not in a city with its own page. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "I live in Toronto and work from home, so yes I am in the province, but there is no office and no branch anywhere else in it. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "We sell across {city}. Should we run one campaign or several?",
+        "a": "Almost always several. One province-wide campaign lets the most competitive market in your geography set the price for all of them, which means you overpay in the smaller cities and underspend in the ones that matter. Splitting by market is usually the single biggest improvement available on a multi-city {city} account.",
+        "open": true
+      },
+      {
+        "q": "I run an agency. Do you work with agencies or compete with them?",
+        "a": "Both happen and I am straightforward about which. Some {city} agencies bring me in on Google Ads or AIO work they do not run in-house, white labelled or not depending on what you prefer. Some agency owners hire me for their own marketing. If you are a competitor in the same lane, I will say so rather than take the call under false pretences."
+      },
+      {
+        "q": "Which of the three should an {city} business start with?",
+        "a": "It depends on the market you are in more than the industry you are in. In the Greater Toronto Area, paid search buys you attention while SEO takes a long time and costs real money. Outside it, SEO is usually the better first investment. AIO is worth doing almost everywhere right now because so few competitors have."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract, anywhere in the province."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Ontario", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021A000235" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether your geography is quietly setting your prices.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for an {city} business", "source": "province-{city}" }
+    }
+  }
+}

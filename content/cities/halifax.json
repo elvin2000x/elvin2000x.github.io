@@ -17,6 +17,7 @@
     "breadcrumb": [
       { "label": "Elvin Peters", "href": "/" },
       { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Nova Scotia", "href": "/consulting/nova-scotia/" },
       { "label": "{city}" }
     ],
     "eyebrow": "{city}, {region}",

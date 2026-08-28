@@ -1,0 +1,127 @@
+{
+  "_comment": "British Columbia province page. Sits above Vancouver and Victoria. The distinct argument: geography splits the province into four markets that cannot reach each other, so a province-wide campaign buys Vancouver prices to reach Kelowna customers. Population and growth are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/british-columbia",
+  "template": "city",
+  "navKey": "consulting/british-columbia/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "British Columbia",
+  "region": "Canada",
+  "areaType": "State",
+  "regionType": "Country",
+  "districts": ["the Lower Mainland", "Vancouver Island", "the Okanagan", "the Fraser Valley", "the Kootenays", "northern British Columbia"],
+  "nearby": ["Kelowna", "Kamloops", "Nanaimo", "Prince George", "Vernon", "Cranbrook", "Squamish", "Penticton"],
+  "industries": ["technology", "film and creative", "tourism and hospitality", "construction and real estate", "forestry and resources"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in British Columbia | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for British Columbia businesses, agencies and professional firms. Vancouver and Victoria pages, one accountable consultant, remote across BC.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in British Columbia",
+    "ogDescription": "Marketing for BC business owners, agency owners and professional firms. Four markets separated by mountains and water, priced as if they were one.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses across {city}",
+    "sub": "I work with {city} business owners, agency owners and professional firms on Google Ads, SEO and AI visibility, remotely, as one accountable person rather than an account team you never meet. {city} grew faster than any other province between the last two censuses, and its geography makes provincial campaigns unusually wasteful.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing across {city}",
+    "market": [
+      "Geography does something here it does not do anywhere else in Canada. {districts} are not just different regions, they are separated by mountains and water, and customers in one of them will not travel to a business in another for anything routine. That is unusually good news for local businesses, because it genuinely limits who you compete with. It is unusually bad news for anyone running one campaign across the whole province, because the Lower Mainland sets the price and everyone else pays it.",
+      "The Lower Mainland is also one of the most expensive places in the country to buy attention, and that cost cascades. A business in Kelowna or Kamloops running province-wide targeting is paying Vancouver rates to reach customers who were never going to be reached by a Vancouver-priced click. Splitting the geography is not an optimisation here, it is usually the whole first month of work.",
+      "For agency owners and professional firms, the useful consequence is that the smaller {city} markets are still genuinely winnable on organic search. Very few businesses in the Okanagan, the Kootenays or the north have published anything that seriously answers a customer's question, and the ones that do tend to hold the position for years."
+    ],
+    "facts": [
+      { "stat": "5,000,879", "label": "people in {city} (2021 Census)" },
+      { "stat": "7.6%", "label": "growth since 2016, the fastest of any province and well above the national 5.2% (2021 Census)" },
+      { "stat": "2", "label": "{city} markets with their own page here, Vancouver and Victoria" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the map matters more than almost anything else on the account.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that begins with the geography, because the Lower Mainland should not be setting the price for the Okanagan or the Island. Then account structure, then cutting spend on searches that were never going to convert. On province-wide accounts this is where most of the savings live.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Strongest outside the Lower Mainland, where competition is thin enough that a page which genuinely answers the question can hold the top of the results for years. Inside Vancouver it is a longer and more expensive fight and I will tell you so.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation, including the visitors planning a trip here. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "citiesHeading": "{city} markets with their own page",
+      "citiesBody": "Each of these goes into what is actually different about that market. If you sell mainly in one of them, start there rather than here.",
+      "cities": [
+        { "label": "Vancouver", "href": "/consulting/vancouver/" },
+        { "label": "Victoria", "href": "/consulting/victoria/" }
+      ],
+      "districtsHeading": "Across the province",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price. The three hour time difference is real and I schedule around it.",
+      "nearbyHeading": "And in the interior and the north",
+      "nearbyBody": "Some of the least competitive search markets in the country are in this half of the province. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "We are in the Interior. Are we paying Vancouver prices?",
+        "a": "If your campaign targets the whole province, almost certainly yes. The auction is priced by the most competitive part of the geography it covers, so a Kelowna business advertising province-wide funds Vancouver's competition without reaching Vancouver's customers. Splitting the targeting usually pays for itself in the first month.",
+        "open": true
+      },
+      {
+        "q": "Does the time difference matter?",
+        "a": "Three hours, and it matters for meetings rather than for the work. I take {city} calls in your morning, which is my early afternoon. If you need someone reachable late in your day on short notice, say so up front and we will agree what that looks like."
+      },
+      {
+        "q": "Should a smaller BC business bother with SEO?",
+        "a": "In most of this province, yes, and more than in the big cities. Outside the Lower Mainland the competition for organic search is thin enough that being genuinely useful is often sufficient, which is not something I can say about Toronto or Vancouver."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract, anywhere in the province."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - British Columbia", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021A000259" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether the map is costing you money.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" }
+    }
+  }
+}
