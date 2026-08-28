@@ -110,6 +110,104 @@
       "brandStyle": "inline",
       "indent": 2
     },
+    "seo/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "aio-consulting/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/toronto/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/montreal/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/vancouver/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/calgary/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/edmonton/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/ottawa-gatineau/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/winnipeg/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/quebec-city/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/hamilton/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/kitchener-waterloo/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
+    "consulting/london-ontario/index.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "brandStyle": "inline",
+      "indent": 2
+    },
     "press/index.html": {
       "brandHref": "/",
       "themebtn": true,
