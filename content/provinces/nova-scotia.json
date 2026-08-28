@@ -1,0 +1,125 @@
+{
+  "_comment": "Nova Scotia province page. Sits above Halifax. The distinct argument: Halifax is Atlantic Canada's hub, so a Nova Scotia business is usually selling into four provinces from one place, which makes the marketing question regional rather than provincial. Population and growth are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/nova-scotia",
+  "template": "city",
+  "navKey": "consulting/nova-scotia/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Nova Scotia",
+  "region": "Canada",
+  "areaType": "State",
+  "regionType": "Country",
+  "districts": ["Halifax Regional Municipality", "the South Shore", "the Annapolis Valley", "Cape Breton", "the Northumberland Shore", "the Eastern Shore"],
+  "nearby": ["Sydney", "Truro", "New Glasgow", "Bridgewater", "Yarmouth", "Kentville", "Amherst", "Antigonish"],
+  "industries": ["ocean technology and fisheries", "defence and aerospace", "health care", "education", "tourism and hospitality"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Nova Scotia | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Nova Scotia businesses, agencies and professional firms. One accountable consultant, remote across the province and Atlantic Canada.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Nova Scotia",
+    "ogDescription": "Marketing for Nova Scotia business owners, agency owners and professional firms. Most of you are selling to a region, not a province.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses across {city}",
+    "sub": "I work with {city} business owners, agency owners and professional firms on Google Ads, SEO and AI visibility, remotely, as one accountable person rather than an account team you never meet. {city} businesses tend to serve all of Atlantic Canada, and the marketing usually has not been set up that way.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing across {city}",
+    "market": [
+      "Halifax is the only large metro in Atlantic Canada, and that gives {city} businesses a role their population does not suggest. Specialist firms here routinely serve New Brunswick, Prince Edward Island and Newfoundland because there is nowhere closer to serve them from. If that describes you, then targeting {city} alone is cutting off a large part of your real market, and the fix is a wider geography rather than a bigger budget.",
+      "The province splits into a metro market and a set of much smaller ones. Advertising economics in Halifax look like a mid-sized Canadian city. In Cape Breton, the Valley or the South Shore, volumes are thin enough that paid search sometimes cannot carry a campaign on its own, and being the obvious answer organically matters more than outbidding anyone.",
+      "The core industries here, {industries}, sell on credibility and to buyers who research carefully. That is a poor fit for aggressive advertising and a very good fit for publishing work that demonstrates you know what you are doing. It is also why AI visibility is worth more here than the market size implies, because a chatbot asked for an Atlantic Canadian specialist will name a very short list."
+    ],
+    "facts": [
+      { "stat": "969,383", "label": "people in {city} (2021 Census)" },
+      { "stat": "5.0%", "label": "growth since 2016, close to the national rate of 5.2% (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the right geography is usually the region rather than the province.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that starts with deciding honestly whether you sell provincially or regionally, then targeting to match. Account structure, then cutting spend on searches that were never going to convert. Outside Halifax I will tell you when the volume does not justify the channel.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Usually the better first investment here, because Atlantic buyers research and because ranking for a regional term is realistic in a way that ranking nationally is not. Technical fixes first, then the pages that answer your customers' actual questions.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a specialist in Atlantic Canada. The shortlist is genuinely short in this region, which makes this the best value of the three right now.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "citiesHeading": "{city} markets with their own page",
+      "citiesBody": "Halifax has its own page covering what is specific to that market, including how much of the region it serves.",
+      "cities": [
+        { "label": "Halifax", "href": "/consulting/halifax/" }
+      ],
+      "districtsHeading": "Across the province",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price.",
+      "nearbyHeading": "And in the regional centres",
+      "nearbyBody": "Plenty of good {city} businesses are a long way from the capital. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Should we market to Nova Scotia or to Atlantic Canada?",
+        "a": "Whichever one you actually sell to, and for a lot of specialist firms here the honest answer is the region. If customers in Moncton, Charlottetown or St. John's already buy from you, then provincial targeting is leaving your best prospects out of the campaign for no reason.",
+        "open": true
+      },
+      {
+        "q": "We are outside Halifax. Does any of this work for us?",
+        "a": "SEO and AIO usually do. Paid search sometimes does not, because the search volume in the smaller parts of the province can be too thin to build a campaign on. I will tell you which situation you are in rather than selling you all three."
+      },
+      {
+        "q": "Do you work with agencies here?",
+        "a": "Yes. Some Atlantic agencies bring me in on Google Ads or AIO work they do not run in-house, white labelled or not depending on what you prefer, and some agency owners hire me for their own marketing."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Nova Scotia", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021A000212" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether you are marketing to a province or a region.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" }
+    }
+  }
+}

@@ -17,6 +17,7 @@
     "breadcrumb": [
       { "label": "Elvin Peters", "href": "/" },
       { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Quebec", "href": "/consulting/quebec/" },
       { "label": "{city}" }
     ],
     "eyebrow": "{city}, {region}",
@@ -132,6 +133,7 @@
     "breadcrumb": [
       { "label": "Elvin Peters", "href": "/" },
       { "label": "Consultation", "href": "/consulting/" },
+      { "label": "Québec", "href": "/consulting/quebec/" },
       { "label": "{city}" }
     ],
     "eyebrow": "{city}, {region}",

@@ -671,7 +671,7 @@ applyRegions('book.html', {
 // Both content dirs, or a city page's nav key looks hand-authored to this pass
 // and applyRegions tries to read an HTML file the generator has not written yet.
 const GEN_NAV_KEYS = new Set(
-  ['pages', 'cities'].flatMap(sub => {
+  ['pages', 'cities', 'provinces'].flatMap(sub => {
     const d = path.join(DIR, 'content', sub);
     if (!fs.existsSync(d)) return [];
     return fs.readdirSync(d).filter(f => f.endsWith('.json'))
@@ -705,14 +705,17 @@ const PAGE_FILES = fs.existsSync(PAGES_DIR)
   : [];
 /* City pages live in their own directory. Same page objects, same templates,
    same loop -- the split is only so that fifty of them do not bury the five
-   commercial pages in one folder. */
-const CITIES_DIR = path.join(DIR, 'content', 'cities');
-const CITY_FILES = fs.existsSync(CITIES_DIR)
-  ? fs.readdirSync(CITIES_DIR).filter(f => f.endsWith('.json')).sort()
-  : [];
+   commercial pages in one folder. Provinces get their own directory for the
+   same reason and run through the identical city template; the only thing that
+   makes a province record different is that it says State inside Country
+   instead of City inside AdministrativeArea, and that it links its cities. */
+const GEO_DIRS = ['cities', 'provinces'].map(s => path.join(DIR, 'content', s));
+const GEO_FILES = GEO_DIRS.flatMap(d => fs.existsSync(d)
+  ? fs.readdirSync(d).filter(f => f.endsWith('.json')).sort().map(f => path.join(d, f))
+  : []);
 const PAGES = [
   ...PAGE_FILES.map(f => JSON.parse(fs.readFileSync(path.join(PAGES_DIR, f), 'utf8'))),
-  ...CITY_FILES.map(f => JSON.parse(fs.readFileSync(path.join(CITIES_DIR, f), 'utf8')))
+  ...GEO_FILES.map(f => JSON.parse(fs.readFileSync(f, 'utf8')))
 ];
 const LANGS = ['en', 'fr'];
 const ORIGIN = 'https://elvinpeters.com';
@@ -1351,6 +1354,10 @@ const CITYCSS = `
 .areabox p{font-size:.97rem;color:var(--ink-2);margin:0 0 14px}
 .arealist{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}
 .arealist li{font-size:13px;color:var(--ink-2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.citylinks li{padding:0}
+.citylinks li:hover{border-color:var(--gold)}
+.citylinks a{display:block;padding:6px 14px;color:var(--ink-2)}
+.citylinks a:hover{color:var(--gold-2)}
 .sources{margin-top:34px;font-size:13px;color:var(--muted);line-height:1.7}
 .sources h3{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:700;margin:0 0 8px}
 .sources a{color:var(--gold-2);text-decoration:underline;text-underline-offset:2px}
@@ -1416,14 +1423,17 @@ function renderCityPage(page, lang) {
           item: b.href ? ORIGIN + loc(b.href, lang) : selfUrl })) },
       /* areaServed is the whole point of a city page as far as schema is
          concerned: the City plus the surrounding markets actually covered.
-         Stated once, from the same arrays the visible copy reads. */
+         Stated once, from the same arrays the visible copy reads.
+         The three type fields default to what every city page needs and exist
+         so a province page can say State-inside-Country instead of
+         City-inside-AdministrativeArea. Alberta is not a City. */
       { '@type': 'ProfessionalService', '@id': selfUrl + '#business',
         name: 'Elvin M. Peters', url: selfUrl, inLanguage: L.hreflang,
         description: f(c.description),
         areaServed: [
-          { '@type': 'City', name: page.city, containedInPlace:
-            { '@type': 'AdministrativeArea', name: page.region } },
-          ...(page.nearby || []).map(n => ({ '@type': 'City', name: n }))
+          { '@type': page.areaType || 'City', name: page.city, containedInPlace:
+            { '@type': page.regionType || 'AdministrativeArea', name: page.region } },
+          ...(page.nearby || []).map(n => ({ '@type': page.nearbyType || 'City', name: n }))
         ],
         /* No address and no geo: the practice is remote. Claiming a local
            address here would be the one thing on the page that is a lie. */
@@ -1433,7 +1443,7 @@ function renderCityPage(page, lang) {
             '@type': 'Offer', url: ORIGIN + loc(s.href, lang),
             itemOffered: { '@type': 'Service', name: f(s.title),
               description: stripTags(f(s.body)), areaServed:
-                { '@type': 'City', name: page.city } } })) } },
+                { '@type': page.areaType || 'City', name: page.city } } })) } },
       { '@type': 'FAQPage', inLanguage: L.hreflang, mainEntity: c.faq.map(q => ({
           '@type': 'Question', name: stripTags(f(q.q)),
           acceptedAnswer: { '@type': 'Answer', text: stripTags(f(q.a)) } })) }
@@ -1479,7 +1489,13 @@ ${c.services.map(s => `      <div class="svcbox">
   <section class="section" style="padding-top:0"><div class="container">
     <span class="snum">03</span>
     <h2>${esc(f(c.areaHeading))}</h2>
-    <div class="areabox">
+${c.area.cities ? `    <div class="areabox">
+      <h3>${esc(f(c.area.citiesHeading))}</h3>
+      <p>${esc(f(c.area.citiesBody))}</p>
+      <ul class="arealist citylinks">${c.area.cities.map(x =>
+        `<li><a href="${loc(x.href, lang)}">${esc(f(x.label))}</a></li>`).join('')}</ul>
+    </div>
+` : ''}    <div class="areabox">
       <h3>${esc(f(c.area.districtsHeading))}</h3>
       <p>${esc(f(c.area.districtsBody))}</p>
       <ul class="arealist">${(page.districts || []).map(d => `<li>${esc(d)}</li>`).join('')}</ul>

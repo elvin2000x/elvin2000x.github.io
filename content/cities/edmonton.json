@@ -17,6 +17,7 @@
     "breadcrumb": [
       { "label": "Elvin Peters", "href": "/" },
       { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Alberta", "href": "/consulting/alberta/" },
       { "label": "{city}" }
     ],
     "eyebrow": "{city}, {region}",

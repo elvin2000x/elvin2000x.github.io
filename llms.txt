@@ -47,6 +47,7 @@ French; the French translations are marked below.
 
 - [Consultation en visibilité IA](https://elvinpeters.com/fr/aio-consulting/): French (Canada) version of https://elvinpeters.com/aio-consulting/
 - [Consultant Google Ads, SEO et AIO à Montréal](https://elvinpeters.com/fr/consulting/montreal/): French (Canada) version of https://elvinpeters.com/consulting/montreal/
+- [Consultant Google Ads, SEO et AIO au Québec](https://elvinpeters.com/fr/consulting/quebec/): French (Canada) version of https://elvinpeters.com/consulting/quebec/
 - [Consultant Google Ads, SEO et AIO à Québec](https://elvinpeters.com/fr/consulting/quebec-city/): French (Canada) version of https://elvinpeters.com/consulting/quebec-city/
 - [Contact](https://elvinpeters.com/fr/contact/): French (Canada) version of https://elvinpeters.com/contact/
 - [Gestion Google Ads Toronto](https://elvinpeters.com/fr/google-ads/): French (Canada) version of https://elvinpeters.com/google-ads/

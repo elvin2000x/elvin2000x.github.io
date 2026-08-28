@@ -1,0 +1,120 @@
+{
+  "_comment": "New Brunswick province page. No city page sits under it, which is deliberate: this is the one province with three comparable centres and no dominant metro, so the province genuinely is the unit. Also the only officially bilingual province, which is a real targeting problem rather than a courtesy. The page does not yet exist in French because the French copy would need a native reviewer first, and that is stated on the page rather than hidden. Population and growth are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/new-brunswick",
+  "template": "city",
+  "navKey": "consulting/new-brunswick/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "New Brunswick",
+  "region": "Canada",
+  "areaType": "State",
+  "regionType": "Country",
+  "districts": ["Moncton", "Saint John", "Fredericton", "the Acadian Peninsula", "the Miramichi region", "the upper Saint John River valley"],
+  "nearby": ["Dieppe", "Riverview", "Bathurst", "Edmundston", "Campbellton", "Sackville", "Oromocto"],
+  "industries": ["professional services", "manufacturing and food processing", "energy and refining", "information technology", "forestry"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in New Brunswick | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for New Brunswick businesses, agencies and professional firms. English and French search, one accountable consultant, remote across the province.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in New Brunswick",
+    "ogDescription": "Marketing for New Brunswick business owners, agency owners and professional firms. Three centres, two languages, one province.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses across {city}",
+    "sub": "I work with {city} business owners, agency owners and professional firms on Google Ads, SEO and AI visibility, remotely, as one accountable person rather than an account team you never meet. {city} is the only province in the country with no dominant metro and two official languages, and both of those change how a campaign has to be built.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing across {city}",
+    "market": [
+      "Every other province has a centre of gravity. {city} has three, and Moncton, Saint John and Fredericton are close enough in size that none of them is the obvious answer. That has a practical effect most owners underestimate: a campaign aimed at one of them is aimed at roughly a third of the province, and a campaign aimed at all three is genuinely a provincial campaign rather than a city one with spillover. Deciding which of those you are running is the first real decision here.",
+      "The second is language. {city} is officially bilingual, and in the north and east a large share of your customers search in French. The words they type are not translations of the English ones, so a campaign that was written in English and run through a translator buys phrases nobody uses. If part of your market is francophone, the French keyword research has to be done from scratch rather than converted.",
+      "Beyond that, this is a small and well-connected business community where reputation travels quickly and where competition for search is thin. In {industries}, publishing a genuinely useful explanation of how you work is often enough to take the top of the results, which is not something I can say about a larger province."
+    ],
+    "facts": [
+      { "stat": "775,610", "label": "people in {city} (2021 Census)" },
+      { "stat": "3.8%", "label": "growth since 2016, below the national rate of 5.2% (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that you have to decide which centres and which language you are actually competing in.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that means being deliberate about which of the three centres you are buying, and running French and English as separate work rather than as a translation. Then account structure, then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Usually the better first investment here, because a province-wide organic position is achievable at this size and because {city} buyers research carefully before they call. Technical fixes first, then the pages that answer the real questions.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. In a province this size the named shortlist is very short, which makes this the best value of the three.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across the province",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price. There is no separate page for Moncton, Saint John or Fredericton because none of them is big enough to be a separate market from the others in the way Toronto and Hamilton are.",
+      "nearbyHeading": "And in the surrounding communities",
+      "nearbyBody": "I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Do we need French campaigns?",
+        "a": "If any real share of your customers is francophone, yes, and translating the English ones is not the same thing. French search terms are different words, not converted words, so the research has to be redone. I will be straight about my own limits here: I build the French campaigns, and for customer-facing copy aimed at a francophone audience I have it reviewed by a native speaker before it runs.",
+        "open": true
+      },
+      {
+        "q": "Why is there no page for Moncton or Saint John?",
+        "a": "Because I do not think they are separate search markets in any way that would change my advice, and I would rather say that than publish three near-identical pages to catch three sets of searches. If that changes, or if you tell me otherwise about your own market, I will build them."
+      },
+      {
+        "q": "Is the market too small for this to pay off?",
+        "a": "For paid search it sometimes is, and I will tell you when the volume does not justify the channel. For SEO and AI visibility the small size works in your favour, because a province-wide position is achievable here in a way it never is in Ontario."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - New Brunswick", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021A000213" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with which centres and which language you are actually competing in.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" }
+    }
+  }
+}

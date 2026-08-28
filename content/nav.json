@@ -250,6 +250,90 @@
    "brandStyle": "inline",
    "indent": 2
   },
+  "consulting/saskatoon/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/regina/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/ontario/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/quebec/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/british-columbia/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/alberta/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/manitoba/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/saskatchewan/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/nova-scotia/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/new-brunswick/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/newfoundland-and-labrador/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/prince-edward-island/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
   "press/index.html": {
    "brandHref": "/",
    "themebtn": true,
