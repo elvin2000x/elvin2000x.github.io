@@ -1,0 +1,118 @@
+{
+  "_comment": "Oshawa and Durham Region city page. New page, nav.json needs a matching entry. This is the hardest city page to justify on its own terms because Oshawa shares Toronto's ad auction, so the page says that plainly rather than pretending Durham is an independent market. The argument is that Durham businesses pay Toronto prices for clicks and win on service radius, which makes targeting precision worth more here than anywhere else in the GTA.",
+  "slug": "consulting/oshawa",
+  "template": "city",
+  "navKey": "consulting/oshawa/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Oshawa",
+  "region": "Ontario",
+  "districts": ["downtown Oshawa", "north Oshawa", "Whitby", "Ajax", "Pickering", "Courtice", "Bowmanville"],
+  "nearby": ["Port Perry", "Uxbridge", "Cobourg", "Peterborough", "Markham", "Scarborough", "Newcastle"],
+  "industries": ["automotive and advanced manufacturing", "energy", "health care", "construction and trades", "logistics"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Oshawa & Durham Region | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Oshawa, Whitby, Ajax, Pickering and Durham Region businesses. Targeting built to keep you out of Toronto's auction.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Oshawa",
+    "ogDescription": "Google Ads, SEO and AI visibility for Durham Region businesses. One accountable consultant, and precise targeting where it matters most.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city} and Durham Region",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} and Durham Region businesses, remotely, as one accountable person rather than an account team you never meet. Durham sits inside Toronto's ad auction, and that fact decides more about your results than your budget does.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a Durham Region business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city} and Durham** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "I will be straight about this one: {city} is not an independent search market. Durham Region is the eastern end of the Greater Toronto Area, and when you advertise here you are bidding in auctions shaped by Toronto advertisers with Toronto budgets. That is the defining fact, and any page that told you otherwise would be selling you something.",
+      "What follows from it is genuinely useful. Because the cost per click is set by a market much larger than yours, precision is worth more in Durham than almost anywhere else. Targeting drawn around the communities you actually serve, a negative keyword list that removes downtown Toronto intent, and conversion tracking that counts a booked job are worth more to a {city} business than an increase in spend, because spending more just buys more of the same expensive clicks.",
+      "The upside is that Durham businesses win on radius. A tradesperson in {city} can serve Whitby, Ajax, Pickering, Courtice and Bowmanville without a Toronto commute, and a Toronto competitor bidding on the same keywords usually will not drive out here for the job. Making that service area explicit, in the targeting and on the site, is the most reliable advantage available to a Durham business."
+    ],
+    "facts": [
+      { "stat": "415,311", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "#15", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a Durham Region business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the work is mostly subtraction: cutting the spend that is quietly funding Toronto clicks so the rest of the budget can do its job.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In Durham the first thing I look at is where the money is actually going, because default settings will put you in Toronto's auction. Then account structure, a negative keyword list that earns its keep, conversion tracking that counts booked work, and budget concentrated on the communities you can actually serve profitably.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The better value in Durham for most businesses, because local results are decided by local competitors rather than by whoever has the biggest bid. Technical fixes first, then real pages for the communities you serve, which is what lets a {city} business outrank a Toronto firm for a Whitby or Bowmanville search.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the Durham business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a local recommendation. Cheapest of the three, one-time, and worth more than usual in a market where every paid click is priced by a bigger city.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in Durham I work",
+    "area": {
+      "districtsHeading": "Across Durham Region",
+      "districtsBody": "I take on clients throughout the region, in {districts}. Everything is run remotely over video and email, so which municipality you are in makes no difference to the work or the price.",
+      "nearbyHeading": "And out past the region",
+      "nearbyBody": "Plenty of Durham businesses serve north and east of the region as well as into eastern Toronto. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions Durham businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Should we target Toronto too?",
+        "a": "Only if you will genuinely take the work and can compete on price with firms based there. For most Durham businesses the answer is no, and the more valuable move is excluding Toronto properly so your budget stops paying for clicks from people who will hire somebody closer to them.",
+        "open": true
+      },
+      {
+        "q": "Why are our clicks as expensive as Toronto's?",
+        "a": "Because in most cases they are Toronto's. Loose geographic targeting and broad keywords pull you into the same auctions as advertisers with far larger budgets. That is fixable, it is normally the first thing I change, and it usually does more for the account than any budget increase would."
+      },
+      {
+        "q": "Which service should a Durham business start with?",
+        "a": "SEO more often than not, because local results here are winnable in a way that paid clicks are not cheap. Ads come first when you need work booked immediately and the targeting has been tightened. AIO is cheap, one time, and few competitors have started."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Oshawa (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503532" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in Durham",
+      "p": "Twenty minutes, free, no pitch. Tell me which communities you serve and I will tell you what I would change first, starting with where your budget is actually going.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a Durham Region business", "source": "city-{city}" }
+    }
+  }
+}

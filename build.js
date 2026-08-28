@@ -668,11 +668,15 @@ applyRegions('book.html', {
 // cannot drift between pages. index/book are applied above with their other regions.
 // Pages owned by the bilingual engine render their own nav (it carries the
 // language toggle), so applyRegions must not re-inject a toggle-less one.
+// Both content dirs, or a city page's nav key looks hand-authored to this pass
+// and applyRegions tries to read an HTML file the generator has not written yet.
 const GEN_NAV_KEYS = new Set(
-  (fs.existsSync(path.join(DIR, 'content', 'pages'))
-    ? fs.readdirSync(path.join(DIR, 'content', 'pages')).filter(f => f.endsWith('.json'))
-    : []
-  ).map(f => JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'pages', f), 'utf8')).navKey)
+  ['pages', 'cities'].flatMap(sub => {
+    const d = path.join(DIR, 'content', sub);
+    if (!fs.existsSync(d)) return [];
+    return fs.readdirSync(d).filter(f => f.endsWith('.json'))
+      .map(f => JSON.parse(fs.readFileSync(path.join(d, f), 'utf8')).navKey);
+  })
 );
 const navOnly = Object.keys(NAVC.pages)
   .filter(p => p !== 'index.html' && p !== 'book.html' && !GEN_NAV_KEYS.has(p));
@@ -699,13 +703,30 @@ const PAGES_DIR = path.join(DIR, 'content', 'pages');
 const PAGE_FILES = fs.existsSync(PAGES_DIR)
   ? fs.readdirSync(PAGES_DIR).filter(f => f.endsWith('.json')).sort()
   : [];
-const PAGES = PAGE_FILES.map(f => JSON.parse(fs.readFileSync(path.join(PAGES_DIR, f), 'utf8')));
+/* City pages live in their own directory. Same page objects, same templates,
+   same loop -- the split is only so that fifty of them do not bury the five
+   commercial pages in one folder. */
+const CITIES_DIR = path.join(DIR, 'content', 'cities');
+const CITY_FILES = fs.existsSync(CITIES_DIR)
+  ? fs.readdirSync(CITIES_DIR).filter(f => f.endsWith('.json')).sort()
+  : [];
+const PAGES = [
+  ...PAGE_FILES.map(f => JSON.parse(fs.readFileSync(path.join(PAGES_DIR, f), 'utf8'))),
+  ...CITY_FILES.map(f => JSON.parse(fs.readFileSync(path.join(CITIES_DIR, f), 'utf8')))
+];
 const LANGS = ['en', 'fr'];
 const ORIGIN = 'https://elvinpeters.com';
 
+/* Which pages actually get a French build. A page with no `fr` block is
+   English-only, and everything downstream keys off this one predicate: no
+   /fr/ URL, no fr-CA hreflang, no language toggle. Getting any of those
+   wrong ships a link or an alternate that points at nothing. */
+function hasFr(page) { return !!page.fr; }
+function langsFor(page) { return hasFr(page) ? LANGS : ['en']; }
+
 // Which paths actually exist in French. A link to a page with no French twin
 // keeps pointing at the English URL, which is honest and avoids 404s.
-const FR_TWINS = new Set(PAGES.map(p => '/' + p.slug + '/'));
+const FR_TWINS = new Set(PAGES.filter(hasFr).map(p => '/' + p.slug + '/'));
 
 function stripTags(s) { return String(s).replace(/<[^>]*>/g, ''); }
 function attr(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;'); }
@@ -735,7 +756,7 @@ function renderLangToggle(slug, lang, ind) {
 /* Locale-aware nav. Reuses renderNav's output for English so the generated
    pages cannot drift from the rest of the site, and translates labels/hrefs
    for French. */
-function renderNavL(pageKey, lang, slug) {
+function renderNavL(pageKey, lang, slug, withToggle = true) {
   let html = renderNav(pageKey);
   const ind = ' '.repeat(((NAVC.pages || {})[pageKey] || {}).indent || 0);
   if (lang === 'fr') {
@@ -753,6 +774,9 @@ function renderNavL(pageKey, lang, slug) {
     });
     html = html.replace(/data-nav-label="([^"]+)"/g, (m, l) => `data-nav-label="${attr(tnav(l, 'fr'))}"`);
   }
+  // An English-only page gets no toggle: it would point at a /fr/ URL that was
+  // never built, which is a 404 for the one visitor it was aimed at.
+  if (!withToggle) return html;
   const toggle = renderLangToggle(slug, lang, ind);
   return html.replace(`${ind}  </div>\n${ind}</div></nav>`, `${toggle}\n${ind}  </div>\n${ind}</div></nav>`);
 }
@@ -966,10 +990,12 @@ function renderShell(o) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(o.title)}</title>
 <meta name="description" content="${attr(o.description)}">
-<link rel="canonical" href="${o.selfUrl}">
+<link rel="canonical" href="${o.selfUrl}">${o.hasFr === false ? `
+<link rel="alternate" hreflang="en-CA" href="${o.enUrl}">
+<link rel="alternate" hreflang="x-default" href="${o.enUrl}">` : `
 <link rel="alternate" hreflang="en-CA" href="${o.enUrl}">
 <link rel="alternate" hreflang="fr-CA" href="${o.frUrl}">
-<link rel="alternate" hreflang="x-default" href="${o.enUrl}">
+<link rel="alternate" hreflang="x-default" href="${o.enUrl}">`}
 <meta property="og:type" content="website">
 <meta property="og:locale" content="${o.lang === 'fr' ? 'fr_CA' : 'en_CA'}">
 <meta property="og:title" content="${attr(o.ogTitle)}">
@@ -998,7 +1024,7 @@ ${JSON.stringify(o.graph, null, 1)}
 </head>
 <body>
 <!-- ep:nav -->
-${renderNavL(o.navKey, o.lang, o.slug)}
+${renderNavL(o.navKey, o.lang, o.slug, o.hasFr !== false)}
 <!-- /ep:nav -->
 ${o.body}
 <footer><div class="container">
@@ -1288,13 +1314,221 @@ ${c.faq.map(q => `      <details${q.open ? ' open' : ''}><summary>${esc(q.q)}</s
   });
 }
 
-const TEMPLATES = { offer: renderOfferPage, contact: renderContactPage, services: renderServicesPage };
+/* ==================================================================== */
+/* CITY PAGES                                                           */
+/*                                                                      */
+/* One template, many city slots. The point is not that every page is a */
+/* different essay -- it is that the city is woven through the copy in  */
+/* a dozen places instead of one, and that the slots carry real local   */
+/* data (districts, neighbouring markets, the industries that actually  */
+/* employ people there) rather than the same sentence with a swapped    */
+/* noun. A find-and-replace page is a doorway page; a page that names   */
+/* the reader's neighbourhood and their industry is a local landing     */
+/* page. The structure is identical either way -- the difference is how */
+/* many of the slots are filled with something true about that market.  */
+/*                                                                      */
+/* Adding a city = one JSON file in content/cities/ + one nav.json key. */
+/* ==================================================================== */
+
+const CITYCSS = `
+.lede-city{font-size:1.08rem;color:var(--ink-2);max-width:74ch}
+.lede-city + .lede-city{margin-top:14px}
+.factrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:30px 0 0}
+.fact{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.fact b{display:block;font-family:var(--serif);font-size:1.7rem;color:var(--ink);font-weight:600;line-height:1.15}
+.fact span{display:block;font-size:13px;color:var(--muted);margin-top:6px;line-height:1.45}
+.svcrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;margin-top:26px}
+.svcbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.svcbox:hover{border-color:var(--gold)}
+.svcbox h3{font-size:1.35rem;letter-spacing:-.01em;margin:0 0 10px}
+.svcbox h3 a:hover{color:var(--gold-2)}
+.svcbox p{font-size:.98rem;color:var(--ink-2);margin:0 0 16px;flex:1}
+.svcbox .price{font-size:14px;color:var(--muted);margin:0 0 16px}
+.svcbox .price b{font-family:var(--serif);font-size:1.2rem;color:var(--ink);font-weight:600}
+.svcbox .foot{border-top:1px solid var(--line-soft);padding-top:15px;margin-top:auto}
+.areabox{background:var(--panel-2);border:1px solid var(--line-soft);border-radius:16px;padding:28px 30px;margin-top:26px}
+.areabox h3{font-size:1.2rem;margin:0 0 10px}
+.areabox p{font-size:.97rem;color:var(--ink-2);margin:0 0 14px}
+.arealist{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}
+.arealist li{font-size:13px;color:var(--ink-2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.sources{margin-top:34px;font-size:13px;color:var(--muted);line-height:1.7}
+.sources h3{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:700;margin:0 0 8px}
+.sources a{color:var(--gold-2);text-decoration:underline;text-underline-offset:2px}
+.sources li{margin-bottom:4px}
+.sources ul{margin:0;padding-left:18px}
+`;
+
+/* Fill {city}-style slots from the city record. Content files never repeat the
+   city name by hand -- they write {city} and the template puts it in. That is
+   what makes a 51-city rollout a data change instead of 51 rewrites, and it is
+   why a typo'd city name cannot appear on only one of the twelve mentions. */
+function cityFill(s, page, lang) {
+  const c = page[lang];
+  /* Language block wins over the shared record. Proper nouns like "Kanata" are
+     the same in both languages, but "Downtown Montreal" and "aerospace" are not,
+     so a city with a French twin can override any of these per language and a
+     city without one never has to. */
+  const pick = k => (c && Array.isArray(c[k]) ? c[k] : page[k]);
+  const vals = {
+    city: (c && typeof c.city === 'string') ? c.city : page.city,
+    region: (c && typeof c.region === 'string') ? c.region : page.region,
+    districts: listJoin(pick('districts'), lang),
+    nearby: listJoin(pick('nearby'), lang),
+    industries: listJoin(pick('industries'), lang)
+  };
+  return String(s).replace(/\{(\w+)\}/g, (m, k) => {
+    if (k in vals && vals[k] != null) return vals[k];
+    if (c && k in c && typeof c[k] === 'string') return c[k];
+    throw new Error(`${page.slug}: copy uses {${k}}, which the city record does not define.`);
+  });
+}
+
+function listJoin(arr, lang) {
+  if (!arr || !arr.length) return '';
+  if (arr.length === 1) return arr[0];
+  const and = lang === 'fr' ? 'et' : 'and';
+  return arr.slice(0, -1).join(', ') + ' ' + and + ' ' + arr[arr.length - 1];
+}
+
+function renderCityPage(page, lang) {
+  const c = page[lang];
+  const L = I18N.locales[lang];
+  const slug = page.slug;
+  const enUrl = `${ORIGIN}/${slug}/`;
+  const frUrl = `${ORIGIN}/fr/${slug}/`;
+  const selfUrl = lang === 'fr' ? frUrl : enUrl;
+  const f = s => cityFill(s, page, lang);
+  /* Every string on a button goes through the slot filler, source included.
+     Filling label and contact but not source is how "city-{city}" ended up in
+     the contact form's tracking on the first three city pages. */
+  const fb = b => ({
+    ...b,
+    label: f(b.label),
+    contact: b.contact ? f(b.contact) : undefined,
+    source: b.source ? f(b.source) : undefined
+  });
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: c.breadcrumb.map((b, i) => ({
+          '@type': 'ListItem', position: i + 1, name: f(b.label),
+          item: b.href ? ORIGIN + loc(b.href, lang) : selfUrl })) },
+      /* areaServed is the whole point of a city page as far as schema is
+         concerned: the City plus the surrounding markets actually covered.
+         Stated once, from the same arrays the visible copy reads. */
+      { '@type': 'ProfessionalService', '@id': selfUrl + '#business',
+        name: 'Elvin M. Peters', url: selfUrl, inLanguage: L.hreflang,
+        description: f(c.description),
+        areaServed: [
+          { '@type': 'City', name: page.city, containedInPlace:
+            { '@type': 'AdministrativeArea', name: page.region } },
+          ...(page.nearby || []).map(n => ({ '@type': 'City', name: n }))
+        ],
+        /* No address and no geo: the practice is remote. Claiming a local
+           address here would be the one thing on the page that is a lie. */
+        provider: { '@type': 'Person', name: 'Elvin M. Peters', jobTitle: 'AI Consultant' },
+        hasOfferCatalog: { '@type': 'OfferCatalog', name: f(c.servicesHeading),
+          itemListElement: c.services.map(s => ({
+            '@type': 'Offer', url: ORIGIN + loc(s.href, lang),
+            itemOffered: { '@type': 'Service', name: f(s.title),
+              description: stripTags(f(s.body)), areaServed:
+                { '@type': 'City', name: page.city } } })) } },
+      { '@type': 'FAQPage', inLanguage: L.hreflang, mainEntity: c.faq.map(q => ({
+          '@type': 'Question', name: stripTags(f(q.q)),
+          acceptedAnswer: { '@type': 'Answer', text: stripTags(f(q.a)) } })) }
+    ]
+  };
+
+  const body = `<header class="hero"><div class="container">
+  <nav class="breadcrumb">${c.breadcrumb.map((b, i) =>
+    b.href ? `<a href="${loc(b.href, lang)}">${esc(f(b.label))}</a>` : `<span>${esc(f(b.label))}</span>`
+  ).join(' <i>&rsaquo;</i> ')}</nav>
+  <span class="eyebrow">${esc(f(c.eyebrow))}</span>
+  <h1>${esc(f(c.h1))}</h1>
+  <p class="sub">${esc(f(c.sub))}</p>
+  <div class="btns">${c.heroBtns.map(b => renderBtn(fb(b), 'primary', lang)).join('')}</div>
+</div></header>
+<div class="credbar"><div class="container">
+  ${c.credbar.map(s => `<span>${mdb(f(s))}</span>`).join('')}
+</div></div>
+<main>
+  <section class="section"><div class="container">
+    <span class="snum">01</span>
+    <h2>${esc(f(c.marketHeading))}</h2>
+${c.market.map(p => `    <p class="lede-city">${mdb(f(p))}</p>`).join('\n')}
+    <div class="factrow">
+${c.facts.map(x => `      <div class="fact"><b>${esc(f(x.stat))}</b><span>${esc(f(x.label))}</span></div>`).join('\n')}
+    </div>
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <span class="snum">02</span>
+    <h2>${esc(f(c.servicesHeading))}</h2>
+    <p class="lede-city">${mdb(f(c.servicesIntro))}</p>
+    <div class="svcrow">
+${c.services.map(s => `      <div class="svcbox">
+        <h3><a href="${loc(s.href, lang)}">${esc(f(s.title))}</a></h3>
+        <p>${esc(f(s.body))}</p>
+        <p class="price">${mdb(f(s.price))}</p>
+        <div class="foot">${renderBtn(fb(s.btn), 'ghost', lang)}</div>
+      </div>`).join('\n')}
+    </div>
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <span class="snum">03</span>
+    <h2>${esc(f(c.areaHeading))}</h2>
+    <div class="areabox">
+      <h3>${esc(f(c.area.districtsHeading))}</h3>
+      <p>${esc(f(c.area.districtsBody))}</p>
+      <ul class="arealist">${(page.districts || []).map(d => `<li>${esc(d)}</li>`).join('')}</ul>
+    </div>
+    <div class="areabox">
+      <h3>${esc(f(c.area.nearbyHeading))}</h3>
+      <p>${esc(f(c.area.nearbyBody))}</p>
+      <ul class="arealist">${(page.nearby || []).map(d => `<li>${esc(d)}</li>`).join('')}</ul>
+    </div>
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <div style="text-align:center;margin-bottom:28px"><h2>${esc(f(c.faqHeading))}</h2></div>
+    <div class="faq">
+${c.faq.map(q => `      <details${q.open ? ' open' : ''}><summary>${esc(f(q.q))}</summary><p>${esc(f(q.a))}</p></details>`).join('\n')}
+    </div>
+${c.sources && c.sources.length ? `    <div class="sources">
+      <h3>${esc(f(c.sourcesHeading))}</h3>
+      <ul>
+${c.sources.map(s => `        <li><a href="${s.href}" rel="nofollow noopener" target="_blank">${esc(s.label)}</a></li>`).join('\n')}
+      </ul>
+    </div>` : ''}
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <div class="ctaband">
+      <h2>${esc(f(c.cta.h2))}</h2>
+      <p>${esc(f(c.cta.p))}</p>
+      ${renderBtn(fb(c.cta.btn), 'primary', lang)}
+    </div>
+  </div></section>
+</main>`;
+
+  return renderShell({
+    lang, slug, body, graph, css: CITYCSS, hasFr: hasFr(page),
+    navKey: page.navKey, ogImage: page.ogImage,
+    title: f(c.title), description: f(c.description),
+    ogTitle: f(c.ogTitle), ogDescription: f(c.ogDescription),
+    selfUrl, enUrl, frUrl
+  });
+}
+
+const TEMPLATES = { offer: renderOfferPage, contact: renderContactPage, services: renderServicesPage, city: renderCityPage };
 
 const genPaths = [];
 for (const page of PAGES) {
   const render = TEMPLATES[page.template];
   if (!render) throw new Error(`content/pages/${page.slug}.json asks for template "${page.template}", which does not exist. Known: ${Object.keys(TEMPLATES).join(', ')}`);
-  for (const lang of LANGS) {
+  for (const lang of langsFor(page)) {
     const rel = lang === 'fr' ? path.join('fr', page.slug, 'index.html') : path.join(page.slug, 'index.html');
     const dest = path.join(OUT, rel);
     fs.mkdirSync(path.dirname(dest), { recursive: true });
@@ -1458,7 +1692,7 @@ for (const b of PRODS.buckets) {
       ? '- [' + i.sub + '](' + llmsAbs(i.href) + '): ' + i.title
       : '- [' + i.title + '](' + llmsAbs(i.href) + '): ' + i.sub));
 }
-llmsList('French', PAGES.slice()
+llmsList('French', PAGES.filter(hasFr)
   .sort((a, b) => a.slug.localeCompare(b.slug))
   .map(p => '- [' + p.fr.title.split(' | ')[0] + '](' + ORIGIN + '/fr/' + p.slug + '/): ' +
     'French (Canada) version of ' + ORIGIN + '/' + p.slug + '/'));

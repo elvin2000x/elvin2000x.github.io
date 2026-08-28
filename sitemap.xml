@@ -25,14 +25,28 @@
   <url><loc>https://elvinpeters.com/consulting/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/calgary/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/edmonton/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/consulting/halifax/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/hamilton/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/consulting/kingston/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/kitchener-waterloo/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/london-ontario/</loc><priority>0.6</priority></url>
-  <url><loc>https://elvinpeters.com/consulting/montreal/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/consulting/montreal/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/consulting/montreal/"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/consulting/montreal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/consulting/montreal/"/>
+  </url>
+  <url><loc>https://elvinpeters.com/consulting/oshawa/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/ottawa-gatineau/</loc><priority>0.6</priority></url>
-  <url><loc>https://elvinpeters.com/consulting/quebec-city/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/consulting/quebec-city/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/consulting/quebec-city/"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/consulting/quebec-city/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/consulting/quebec-city/"/>
+  </url>
+  <url><loc>https://elvinpeters.com/consulting/st-catharines-niagara/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/toronto/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/vancouver/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/consulting/victoria/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/consulting/windsor/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/winnipeg/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/contact/</loc><priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/contact/"/>
@@ -44,6 +58,16 @@
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/aio-consulting/"/>
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/aio-consulting/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/aio-consulting/"/>
+  </url>
+  <url><loc>https://elvinpeters.com/fr/consulting/montreal/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/consulting/montreal/"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/consulting/montreal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/consulting/montreal/"/>
+  </url>
+  <url><loc>https://elvinpeters.com/fr/consulting/quebec-city/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/consulting/quebec-city/"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/consulting/quebec-city/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/consulting/quebec-city/"/>
   </url>
   <url><loc>https://elvinpeters.com/fr/contact/</loc><priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/contact/"/>
