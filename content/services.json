@@ -77,6 +77,33 @@
       "who": "For businesses ready to grow",
       "home_blurb": "Done for you paid search run by someone who has managed serious budgets, so every dollar stays accountable.",
       "link_label": "View management →"
+    },
+    {
+      "id": "seo",
+      "bucket": "consulting",
+      "title": "SEO Consulting",
+      "href": "/seo/",
+      "who": "For businesses that want to be found",
+      "home_blurb": "Done for you SEO from someone who has driven real search results, month to month with no lock-in. From $1,200/month.",
+      "link_label": "View SEO →"
+    },
+    {
+      "id": "aio",
+      "bucket": "consulting",
+      "title": "AIO Consulting",
+      "href": "/aio-consulting/",
+      "who": "For businesses that want AI to cite them",
+      "home_blurb": "A done-for-you build that gets ChatGPT, Perplexity and Google AI Overviews citing your business correctly. From $1,800, one time.",
+      "link_label": "View AIO consulting →"
+    },
+    {
+      "id": "consulting-cities",
+      "bucket": "consulting",
+      "title": "Consulting by City",
+      "href": "/consulting/",
+      "who": "Serving businesses across Canada",
+      "home_blurb": "Google Ads, SEO and AIO consulting, remote, with dedicated pages for Toronto, Montreal, Vancouver and eight more Canadian cities.",
+      "link_label": "Find your city →"
     }
   ]
 }
