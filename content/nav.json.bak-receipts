@@ -1,0 +1,55 @@
+{
+  "_comment": "The single copy of the site menu. Edited by Site Studio or by hand; node build.js renders it into every page that carries the ep:nav region.",
+  "brand": "Elvin Peters",
+  "links": [
+    {
+      "label": "Services",
+      "href": "/services/",
+      "dropdown": "services"
+    },
+    {
+      "label": "Guides",
+      "href": "/free/"
+    },
+    {
+      "label": "Blog",
+      "href": "/writing/"
+    },
+    {
+      "label": "AI Tools Directory",
+      "href": "https://ultimateaidirectory.com",
+      "ext": true
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
+  ],
+  "cta": {
+    "label": "Buy the Book",
+    "href": "https://www.amazon.com/dp/B0H4X2S2JD",
+    "ext": true
+  },
+  "pages": {
+    "index.html": {
+      "brandHref": "#top",
+      "aboutHref": "#about",
+      "themebtn": true,
+      "ctaArrow": true,
+      "brandStyle": "multiline",
+      "indent": 2
+    },
+    "book.html": {
+      "brandHref": "/",
+      "themebtn": false,
+      "ctaArrow": false,
+      "active": "/book.html",
+      "cta": {
+        "label": "Get the System",
+        "href": "/system/"
+      },
+      "brandStyle": "inline",
+      "indent": 0
+    }
+  }
+}

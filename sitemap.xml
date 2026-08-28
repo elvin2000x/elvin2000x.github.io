@@ -34,12 +34,21 @@
   <url><loc>https://elvinpeters.com/consulting/toronto/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/vancouver/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/consulting/winnipeg/</loc><priority>0.6</priority></url>
-  <url><loc>https://elvinpeters.com/contact/</loc><priority>0.6</priority></url>
+  <url><loc>https://elvinpeters.com/contact/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/contact/"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/contact/"/>
+  </url>
   <url><loc>https://elvinpeters.com/content-machine/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/fr/aio-consulting/</loc><priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/aio-consulting/"/>
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/aio-consulting/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/aio-consulting/"/>
+  </url>
+  <url><loc>https://elvinpeters.com/fr/contact/</loc><priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/contact/"/>
+    <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/contact/"/>
   </url>
   <url><loc>https://elvinpeters.com/fr/google-ads/</loc><priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/google-ads/"/>
