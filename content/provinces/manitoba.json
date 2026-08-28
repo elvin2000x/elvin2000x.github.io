@@ -1,0 +1,125 @@
+{
+  "_comment": "Manitoba province page. Sits above Winnipeg. The distinct argument: one dominant metro holding most of the province, the most diversified economy in the country, and a real ceiling that means growth has to come from share or from selling outside the province. Population and growth are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/manitoba",
+  "template": "city",
+  "navKey": "consulting/manitoba/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Manitoba",
+  "region": "Canada",
+  "areaType": "State",
+  "regionType": "Country",
+  "districts": ["the Winnipeg Capital Region", "the Eastman region", "the Westman region", "the Interlake", "the Parkland", "northern Manitoba"],
+  "nearby": ["Brandon", "Steinbach", "Portage la Prairie", "Winkler", "Selkirk", "Thompson", "Dauphin"],
+  "industries": ["manufacturing", "agriculture and food processing", "transportation and logistics", "financial services and insurance", "health care"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Manitoba | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Manitoba businesses, agencies and professional firms. One accountable consultant, remote across the province.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Manitoba",
+    "ogDescription": "Marketing for Manitoba business owners, agency owners and professional firms. Cheap to compete in, with a ceiling worth planning around.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses across {city}",
+    "sub": "I work with {city} business owners, agency owners and professional firms on Google Ads, SEO and AI visibility, remotely, as one accountable person rather than an account team you never meet. {city} is one of the least expensive provinces in the country to compete in, and one of the easiest to hit a ceiling in.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing across {city}",
+    "market": [
+      "Most of {city} lives in and around Winnipeg, which makes the province unusually simple to target and unusually easy to exhaust. A budget that would be a rounding error in Toronto can buy a meaningful share of everything available here, which is genuinely good news. It also means that once you have taken the demand that exists, more budget stops producing more customers, and the next dollar is better spent widening what you sell or who you sell it to.",
+      "The economy is the most diversified in the country across {industries}, which is why {city} tends to ride out shocks that flatten single-industry provinces. For marketing that translates into steadier demand and more forgiving forecasting than Alberta or Newfoundland get, so plans here can be built on a year rather than a quarter.",
+      "The competitive picture is thin. In most {city} categories the number of businesses running a serious content or SEO programme is small, and the ones that start now tend to hold what they take. That is the part I would spend on first, because the paid side of this market can be exhausted and the organic side has barely been contested."
+    ],
+    "facts": [
+      { "stat": "1,342,153", "label": "people in {city} (2021 Census)" },
+      { "stat": "5.0%", "label": "growth since 2016, close to the national rate of 5.2% (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the ceiling arrives sooner, so the plan has to say what happens after you hit it.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that means finding the ceiling honestly rather than spending past it. Account structure, targeting that covers the province rather than the city alone, and spend cut off searches that were never going to convert. When the market is saturated I will tell you to stop increasing the budget.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Usually where the better return is here, because the competition is thin and organic share does not have a monthly ceiling the way a paid budget does. Technical fixes first, then the pages that answer what your customers are actually asking.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. Cheapest of the three, one-time, and in a market this size being the named answer is worth disproportionately more.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "citiesHeading": "{city} markets with their own page",
+      "citiesBody": "Winnipeg has its own page covering what is specific to that market. If most of your customers are there, start with it.",
+      "cities": [
+        { "label": "Winnipeg", "href": "/consulting/winnipeg/" }
+      ],
+      "districtsHeading": "Across the province",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price.",
+      "nearbyHeading": "And in the regional centres",
+      "nearbyBody": "A good share of {city} business happens well outside the capital. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Is our market big enough for this to be worth it?",
+        "a": "Usually yes, and the reason is cost rather than size. Competition here is thin enough that a modest budget takes real share, which is not true in a bigger province. What I will not do is tell you to keep raising the budget after the demand has run out, because in {city} that point arrives sooner than owners expect.",
+        "open": true
+      },
+      {
+        "q": "We have hit a ceiling. What now?",
+        "a": "Three options and I would look at them in this order. Sell more to the customers you already have, sell something adjacent to the same market, or start selling outside the province where the demand is not capped. The third is where remote-capable {city} firms tend to find the most room."
+      },
+      {
+        "q": "Should we advertise outside Manitoba?",
+        "a": "If what you sell can be delivered remotely, it is often the best growth available to you and the economics are usually better than they look, because you are competing on expertise rather than on proximity. If you need to be physically present, then no, and I would rather say that than sell you a bigger campaign."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Manitoba", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021A000246" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, including whether you have already taken everything this market has.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" }
+    }
+  }
+}

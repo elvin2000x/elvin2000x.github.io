@@ -1,0 +1,119 @@
+{
+  "_comment": "Edmonton city page. The argument is seasonality and an institutional employment base: government, health care and post-secondary anchor the city, and a large share of the private economy is trades and industrial services whose demand is driven by weather and shutdown schedules rather than by anything a marketer does. No head office figure is published for Edmonton in the 2024 StatCan survey, so this page does not claim one.",
+  "slug": "consulting/edmonton",
+  "template": "city",
+  "navKey": "consulting/edmonton/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Edmonton",
+  "region": "Alberta",
+  "districts": ["Downtown Edmonton", "Old Strathcona", "Whyte Avenue", "west Edmonton", "south Edmonton", "the Ice District", "Mill Woods", "Oliver"],
+  "nearby": ["St. Albert", "Sherwood Park", "Spruce Grove", "Leduc", "Fort Saskatchewan", "Beaumont", "Stony Plain"],
+  "industries": ["public administration", "health care", "construction and trades", "energy services", "transportation and logistics"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Edmonton | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Edmonton businesses. Serving Downtown Edmonton, Old Strathcona, Mill Woods and out to St. Albert, Sherwood Park and Leduc.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Edmonton",
+    "ogDescription": "Google Ads, SEO and AI visibility for Edmonton businesses. One accountable consultant, and a plan built around your season.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Alberta", "href": "/consulting/alberta/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. A lot of {city} demand is seasonal, and a budget spread evenly across twelve months is money handed to your competitors in the three that matter.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for an {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} has a large institutional employment base. Provincial government, health care and post-secondary education anchor the city, which makes local employment steadier than {region}'s reputation suggests and makes the consumer economy more predictable than in a purely resource-driven town. If you sell to households here, that stability is worth something: the demand does not fall off a cliff the way it can elsewhere in the province.",
+      "The private side is heavily weighted toward {industries}. Those businesses have a demand curve that is driven by weather and shutdown schedules rather than by anything a marketer does. Roofing, concrete, landscaping, HVAC and paving in {city} live or die on a short window, and the single most common mistake I see is a budget divided evenly across the year. Spending the same amount in February as in June is not fairness, it is a transfer to whoever bid properly in June.",
+      "The third thing is geography. A meaningful share of the region's population and industrial activity sits outside the city in {nearby}, and the industrial corridor northeast of the city is where a lot of the money is. Targeting the City of {city} alone leaves out customers who consider themselves local."
+    ],
+    "facts": [
+      { "stat": "1,418,118", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "#6", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow an {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is timing more than mix: for a lot of businesses here the question is not how much to spend but when, and getting that wrong wastes more money than any targeting mistake.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "Strong fit for {city} trades and home services, where the customer has an urgent problem and picks somebody that week. The work is account structure, conversion tracking that counts booked jobs rather than form views, and a budget schedule that loads your season instead of spreading flat across a year when half of it produces nothing.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The channel that fixes the other half of the seasonality problem, because rankings you earn in the slow months are working for you when the season arrives. Technical fixes first, then pages that answer what {city} buyers actually search, including the surrounding communities you serve.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. Cheapest of the three, one-time, and very few {city} competitors in {industries} have touched it, so the gap is unusually easy to open right now.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout the city, in {districts}. Everything is run remotely over video and email, so where you are in {city} makes no difference to the work or the price.",
+      "nearbyHeading": "And across the {city} region",
+      "nearbyBody": "A large share of the region lives and works outside the city limits. I work with businesses across {nearby} on the same terms, and for most {city} service businesses widening the targeting to the region is the cheapest improvement on the table."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account regardless of city.",
+        "open": true
+      },
+      {
+        "q": "Our business is seasonal. Should we advertise year round?",
+        "a": "Usually not at the same level, no. For most seasonal {city} businesses I would concentrate the ad budget in and just ahead of the season, keep a small presence through the slow months so you are not restarting from zero, and use the quiet period to build the SEO that will be ranking by the time demand returns. Flat monthly budgets are the most common waste I find in seasonal accounts.",
+        "open": true
+      },
+      {
+        "q": "Which service should an {city} business start with?",
+        "a": "If your season is close and you need the phone ringing, Google Ads. If you are in a slow stretch with a few months before demand picks up, that is the best possible time to start SEO, because the work needs time and you have it. AIO is the cheapest to add and the one your {city} competitors are least likely to have started."
+      },
+      {
+        "q": "Do you work with businesses in Sherwood Park and St. Albert?",
+        "a": "Yes, and with the rest of the region. Everything is remote, so the municipality makes no difference to the work or the price. If anything, businesses in the surrounding communities are often the ones with the most obvious targeting gaps to fix."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Edmonton (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503835" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Tell me what you sell and when your season is, and I will tell you what I would do first and when I would spend the money.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for an {city} business", "source": "city-{city}" }
+    }
+  }
+}

@@ -666,10 +666,950 @@ applyRegions('book.html', {
 });
 // Every other page in nav.json gets its nav from the same renderer, so the menu
 // cannot drift between pages. index/book are applied above with their other regions.
-const navOnly = Object.keys(NAVC.pages).filter(p => p !== 'index.html' && p !== 'book.html');
+// Pages owned by the bilingual engine render their own nav (it carries the
+// language toggle), so applyRegions must not re-inject a toggle-less one.
+// Both content dirs, or a city page's nav key looks hand-authored to this pass
+// and applyRegions tries to read an HTML file the generator has not written yet.
+const GEN_NAV_KEYS = new Set(
+  ['pages', 'cities', 'provinces'].flatMap(sub => {
+    const d = path.join(DIR, 'content', sub);
+    if (!fs.existsSync(d)) return [];
+    return fs.readdirSync(d).filter(f => f.endsWith('.json'))
+      .map(f => JSON.parse(fs.readFileSync(path.join(d, f), 'utf8')).navKey);
+  })
+);
+const navOnly = Object.keys(NAVC.pages)
+  .filter(p => p !== 'index.html' && p !== 'book.html' && !GEN_NAV_KEYS.has(p));
 for (const pk of navOnly) applyRegions(pk, { 'nav': () => renderNav(pk) });
 console.log('Regions applied: index.html (nav, hero-text, home-services, writing), book.html (nav), nav on: ' + navOnly.join(', '));
 
+
+/* ==================================================================== */
+/* BILINGUAL PAGE ENGINE                                                */
+/*                                                                      */
+/* Commercial pages are generated from content/pages/<slug>.json into    */
+/* BOTH languages: /<slug>/ (en) and /fr/<slug>/ (fr). The two are real  */
+/* URLs with reciprocal hreflang and self-referencing canonicals. The    */
+/* header toggle is a plain link between them, never a JS text swap, so  */
+/* both versions are independently indexable and readable by AI crawlers */
+/* that do not execute JavaScript.                                      */
+/*                                                                      */
+/* Editing a generated index.html by hand gets overwritten. Edit the     */
+/* JSON. French copy is Quebec register and is NOT yet native-reviewed.  */
+/* ==================================================================== */
+
+const I18N = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'i18n.json'), 'utf8'));
+const PAGES_DIR = path.join(DIR, 'content', 'pages');
+const PAGE_FILES = fs.existsSync(PAGES_DIR)
+  ? fs.readdirSync(PAGES_DIR).filter(f => f.endsWith('.json')).sort()
+  : [];
+/* City pages live in their own directory. Same page objects, same templates,
+   same loop -- the split is only so that fifty of them do not bury the five
+   commercial pages in one folder. Provinces get their own directory for the
+   same reason and run through the identical city template; the only thing that
+   makes a province record different is that it says State inside Country
+   instead of City inside AdministrativeArea, and that it links its cities. */
+const GEO_DIRS = ['cities', 'provinces'].map(s => path.join(DIR, 'content', s));
+const GEO_FILES = GEO_DIRS.flatMap(d => fs.existsSync(d)
+  ? fs.readdirSync(d).filter(f => f.endsWith('.json')).sort().map(f => path.join(d, f))
+  : []);
+const PAGES = [
+  ...PAGE_FILES.map(f => JSON.parse(fs.readFileSync(path.join(PAGES_DIR, f), 'utf8'))),
+  ...GEO_FILES.map(f => JSON.parse(fs.readFileSync(f, 'utf8')))
+];
+const LANGS = ['en', 'fr'];
+const ORIGIN = 'https://elvinpeters.com';
+
+/* Which pages actually get a French build. A page with no `fr` block is
+   English-only, and everything downstream keys off this one predicate: no
+   /fr/ URL, no fr-CA hreflang, no language toggle. Getting any of those
+   wrong ships a link or an alternate that points at nothing. */
+function hasFr(page) { return !!page.fr; }
+function langsFor(page) { return hasFr(page) ? LANGS : ['en']; }
+
+// Which paths actually exist in French. A link to a page with no French twin
+// keeps pointing at the English URL, which is honest and avoids 404s.
+const FR_TWINS = new Set(PAGES.filter(hasFr).map(p => '/' + p.slug + '/'));
+
+function stripTags(s) { return String(s).replace(/<[^>]*>/g, ''); }
+function attr(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;'); }
+
+// Prefix internal links with /fr when a French twin exists for that path.
+function loc(href, lang) {
+  if (lang === 'en' || !href) return href;
+  if (/^(https?:|mailto:|tel:|#)/.test(href)) return href;
+  if (href.startsWith('/fr/')) return href;
+  return FR_TWINS.has(href) ? '/fr' + href : href;
+}
+
+function tnav(label, lang) {
+  const table = I18N.nav[lang] || {};
+  return table[label] || label;
+}
+
+/* The language toggle. A real anchor to the equivalent page in the other
+   language, so it deep-links instead of dumping people on the homepage. */
+function renderLangToggle(slug, lang, ind) {
+  const other = lang === 'en' ? 'fr' : 'en';
+  const o = I18N.locales[other];
+  const href = other === 'fr' ? '/fr/' + slug + '/' : '/' + slug + '/';
+  return `${ind}    <a class="langtog" href="${href}" hreflang="${o.hreflang}" lang="${o.htmlLang}" aria-label="${attr(o.switchToAria)}" data-lang-switch="${other}">${esc(o.shortLabel)}</a>`;
+}
+
+/* Locale-aware nav. Reuses renderNav's output for English so the generated
+   pages cannot drift from the rest of the site, and translates labels/hrefs
+   for French. */
+function renderNavL(pageKey, lang, slug, withToggle = true) {
+  let html = renderNav(pageKey);
+  const ind = ' '.repeat(((NAVC.pages || {})[pageKey] || {}).indent || 0);
+  if (lang === 'fr') {
+    // Translate visible link text and localize internal hrefs.
+    html = html.replace(/href="(\/[^"]*)"/g, (m, h) => `href="${loc(h, 'fr')}"`);
+    html = html.replace(/>([^<>]+)</g, (m, txt) => {
+      const trimmed = txt.trim();
+      if (!trimmed) return m;
+      const key = trimmed.replace(/&nbsp;/g, ' ');
+      const tr = tnav(key, 'fr');
+      // No entry in the table means leave it exactly as it is. Notably the
+      // brandmark, which carries a &nbsp; and must never be rewritten.
+      if (tr === key) return m;
+      return m.replace(trimmed, tr);
+    });
+    html = html.replace(/data-nav-label="([^"]+)"/g, (m, l) => `data-nav-label="${attr(tnav(l, 'fr'))}"`);
+  }
+  // An English-only page gets no toggle: it would point at a /fr/ URL that was
+  // never built, which is a 404 for the one visitor it was aimed at.
+  if (!withToggle) return html;
+  const toggle = renderLangToggle(slug, lang, ind);
+  return html.replace(`${ind}  </div>\n${ind}</div></nav>`, `${toggle}\n${ind}  </div>\n${ind}</div></nav>`);
+}
+
+/* Shared CSS for the generated commercial pages. Identical to the hand-authored
+   offer-page CSS, plus:
+   - fluid nav gap and button padding so French (~20% longer than English) does
+     not overflow the header or blow out buttons. Uses clamp() rather than a new
+     breakpoint, so DESIGN-SYSTEM.md's 640/920 rule still holds.
+   - the language toggle and the embedded contact form. */
+const OFFERCSS = `
+:root{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--glow:rgba(156,118,31,.14);--shadow:0 18px 40px -24px rgba(14,26,43,.45);--serif:'EB Garamond',Georgia,serif;--sans:'Inter',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--glow:rgba(201,162,80,.16);--shadow:0 24px 50px -28px rgba(0,0,0,.7);}}
+:root[data-theme="light"]{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;}
+:root[data-theme="dark"]{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;}
+*{box-sizing:border-box}html,body{margin:0}html{scroll-behavior:smooth}
+body{background:radial-gradient(1100px 520px at 82% -8%,var(--glow),transparent 60%),linear-gradient(180deg,var(--bg),var(--bg-2));color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+.container{max-width:1000px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
+.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line-soft)}
+.nav .container{display:flex;align-items:center;gap:clamp(10px,1.6vw,20px);height:64px;max-width:1120px}
+.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px;white-space:nowrap}
+.brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel);box-shadow:var(--shadow);flex:none}
+.nav .links{margin-left:auto;display:flex;gap:clamp(12px,1.7vw,24px);align-items:center}
+.nav .links a{font-size:14px;color:var(--ink-2)}.nav .links a.active{color:var(--ink)}
+.nav .links a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:11px clamp(12px,1.4vw,16px);border-radius:999px;font-weight:600;white-space:nowrap}
+.nav .links a.cta:hover{background:var(--gold);color:var(--bg-2)}
+.langtog{border:1px solid var(--line);color:var(--ink-2);padding:8px 14px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.04em;min-height:44px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.langtog:hover{border-color:var(--gold);color:var(--gold-2)}
+@media(max-width:920px){.nav .links a:not(.cta):not(.langtog){display:none}.nav .links .navdd{display:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px clamp(16px,2.1vw,22px);border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:var(--sans);min-height:46px;text-align:center}
+.btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304;box-shadow:var(--shadow)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.ghost{border-color:var(--line);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--gold)}
+.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:14px}
+.breadcrumb a:hover{color:var(--gold-2)}
+.hero{padding:66px 0 40px;border-bottom:1px solid var(--line-soft)}
+.hero h1{font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.015em;margin:12px 0 0}
+.hero .sub{color:var(--ink-2);font-size:1.16rem;max-width:64ch;margin:20px 0 0}
+.hero .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.credbar{border-bottom:1px solid var(--line-soft);background:var(--panel-2)}
+.credbar .container{display:flex;flex-wrap:wrap;gap:8px 22px;padding:16px 24px;font-size:13px;color:var(--ink-2);justify-content:center;text-align:center;max-width:1120px}
+.credbar span{position:relative;padding-left:16px}
+.credbar span::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.section{padding:50px 0;border-top:1px solid var(--line-soft)}
+.section:first-of-type{border-top:none}
+.snum{font-size:12px;letter-spacing:.2em;color:var(--gold-2);font-weight:700}
+.section h2{font-size:clamp(1.5rem,3vw,2.05rem);letter-spacing:-.01em;margin:8px 0 0}
+.prose{color:var(--ink-2);font-size:1.07rem;max-width:64ch;margin:16px 0 0}
+.blist{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:11px;max-width:62ch}
+.blist li{position:relative;padding-left:28px;color:var(--ink-2);font-size:16px}
+.blist li::before{content:'';position:absolute;left:5px;top:10px;width:7px;height:7px;background:var(--gold);border-radius:50%}
+.leak .blist li::before{background:#c0512f}
+.offercard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:var(--shadow)}
+.offercard .oname{font-family:var(--serif);font-size:1.5rem}
+.offercard .price{font-family:var(--serif);font-size:3.1rem;color:var(--ink);line-height:1;margin:10px 0 0}
+.offercard .price small{font-family:var(--sans);font-size:1rem;color:var(--muted);font-weight:500}
+.offercard .pnote{color:var(--muted);font-size:14px;margin:6px 0 0}
+.offercard .scarce{font-size:14px;color:var(--muted);margin:6px 0 0}
+.checklist{list-style:none;padding:0;margin:22px 0 26px;display:grid;gap:12px}
+.checklist li{position:relative;padding-left:30px;color:var(--ink-2);font-size:15px}
+.checklist li::before{content:'✓';position:absolute;left:0;top:-1px;color:var(--gold-2);font-weight:800}
+.faq{max-width:920px;margin:0 auto}
+.faq details{border-top:1px solid var(--line-soft);padding:16px 0}
+.faq summary{font-weight:600;cursor:pointer;font-size:16px;color:var(--ink);list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:'+ ';color:var(--gold-2)}
+.faq details[open] summary::before{content:'– '}
+.faq p{color:var(--ink-2);margin:10px 0 0;font-size:15px}
+.ctaband{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--panel)),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:clamp(28px,4vw,48px);text-align:center}
+.ctaband h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
+.ctaband p{color:var(--ink-2);margin:14px auto 26px;max-width:52ch}
+/* nav.json puts the light/dark toggle in the nav on some pages, so the
+   shared CSS has to carry it or those pages render a bare browser button. */
+.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:44px;height:44px;border-radius:9px;cursor:pointer;font-size:16px;line-height:1}
+.themebtn:hover{border-color:var(--gold);color:var(--gold-2)}
+.epform{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3.4vw,34px);box-shadow:var(--shadow);max-width:640px;margin:26px auto 0}
+.epform h2{font-size:clamp(1.4rem,2.6vw,1.85rem)}
+.epform .fsub{color:var(--ink-2);font-size:15px;margin:10px 0 22px}
+.epform label{display:block;font-size:14px;font-weight:600;color:var(--ink);margin:0 0 6px}
+.epform .field{margin:0 0 16px}
+.epform input,.epform textarea{width:100%;font-family:var(--sans);font-size:16px;color:var(--ink);background:var(--panel-2);border:1px solid var(--line);border-radius:11px;padding:12px 14px;min-height:46px}
+.epform textarea{min-height:120px;resize:vertical}
+.epform input:focus,.epform textarea:focus{outline:2px solid var(--gold-2);outline-offset:1px;border-color:var(--gold)}
+.epform .btn{width:100%}
+.epform .fnote{color:var(--muted);font-size:13px;margin:12px 0 0;text-align:center}
+.epform .fmsg{font-size:14px;margin:14px 0 0;text-align:center;color:var(--gold-2);min-height:20px}
+footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px}
+footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1120px}
+footer a{color:var(--ink-2)}footer a:hover{color:var(--gold-2)}
+:focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
+`;
+
+/* The embedded contact form. Posts to the same owned lead API the rest of the
+   site uses, and stamps the language so a French lead is never answered in
+   English. Honeypot field matches the existing bot-wall pattern. */
+function renderForm(f, lang, slug) {
+  if (!f) return '';
+  const id = 'f_' + slug.replace(/[^a-z0-9]/gi, '_');
+  return `  <section class="section" id="contact"><div class="container">
+    <div class="epform">
+      <h2>${esc(f.heading)}</h2>
+      <p class="fsub">${esc(f.sub)}</p>
+      <form id="${id}" novalidate>
+        <input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field"><label for="${id}_n">${esc(f.nameLabel)}</label><input id="${id}_n" name="name" type="text" autocomplete="name" required></div>
+        <div class="field"><label for="${id}_e">${esc(f.emailLabel)}</label><input id="${id}_e" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="${id}_b">${esc(f.businessLabel)}</label><input id="${id}_b" name="business" type="text"></div>
+        <div class="field"><label for="${id}_m">${esc(f.messageLabel)}</label><textarea id="${id}_m" name="message" placeholder="${attr(f.messagePlaceholder)}"></textarea></div>
+        <button class="btn primary" type="submit">${esc(f.submit)}</button>
+        <p class="fmsg" id="${id}_msg" role="status" aria-live="polite"></p>
+        <p class="fnote">${esc(f.privacy)}</p>
+      </form>
+    </div>
+  </div></section>
+<script>(function(){var f=document.getElementById(${JSON.stringify(id)}),m=document.getElementById(${JSON.stringify(id + '_msg')});if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var e=f.email.value.trim();if(!e){m.textContent=${JSON.stringify(f.error)};return}m.textContent='...';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:e,name:f.name.value,business:f.business.value,message:f.message.value,lang:${JSON.stringify(lang)},source:${JSON.stringify(slug + '-' + lang + '-form')},website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent=${JSON.stringify(f.success)};f.reset()}).catch(function(){m.textContent=${JSON.stringify(f.error)}})})})();</script>`;
+}
+
+function renderSections(secs, lang) {
+  return secs.map(s => {
+    const parts = [];
+    parts.push(`  <section class="section${s.cls ? ' ' + s.cls : ''}"${s.id ? ' id="' + s.id + '"' : ''}><div class="container">`);
+    if (s.n) parts.push(`    <div class="snum">${esc(s.n)}</div>`);
+    parts.push(`    <h2>${esc(s.h2)}</h2>`);
+    if (s.prose) parts.push(`    <p class="prose">${s.prose}</p>`);
+    if (s.list) {
+      parts.push('    <ul class="blist">');
+      for (const li of s.list) parts.push(`      <li>${esc(li)}</li>`);
+      parts.push('    </ul>');
+    }
+    if (s.offer) {
+      const o = s.offer;
+      parts.push('    <div class="offercard" style="margin-top:26px">');
+      parts.push(`      <div class="oname">${esc(o.name)}</div>`);
+      // Not every offer has a unit: the AIO build is a flat one-time price,
+      // so an unguarded <small> would print the word "undefined" next to it.
+      parts.push(`      <div class="price">${esc(o.price)}` +
+        (o.priceUnit ? ` <small>${esc(o.priceUnit)}</small>` : '') + `</div>`);
+      if (o.scarcity) parts.push(`      <p class="scarce">${esc(o.scarcity)}</p>`);
+      if (o.pnote) parts.push(`      <div class="pnote">${esc(o.pnote)}</div>`);
+      parts.push('      <ul class="checklist">');
+      for (const li of o.checklist) parts.push(`        <li>${esc(li)}</li>`);
+      parts.push('      </ul>');
+      parts.push(`      ${renderBtn(o.btn, 'primary', lang)}`);
+      parts.push('    </div>');
+    }
+    parts.push('  </div></section>');
+    return parts.join('\n');
+  }).join('\n\n');
+}
+
+function renderBtn(b, style, lang) {
+  if (!b) return '';
+  const c = b.contact ? ` data-contact="${attr(b.contact)}" data-contact-source="${attr(b.source || '')}"` : '';
+  return `<a class="btn ${b.style || style}" href="${loc(b.href, lang)}"${c}>${esc(b.label)}</a>`;
+}
+
+/* Delta only. The shell already ships OFFERCSS, which carries the nav, buttons,
+   footer, and the .field/.fmsg/.fnote form primitives, so the contact page adds
+   just its two-column layout and the alternatives list. */
+const CONTACTCSS = `
+.wrap{display:grid;grid-template-columns:0.9fr 1.1fr;gap:52px;align-items:start;padding:72px 0 84px}
+@media(max-width:920px){.wrap{grid-template-columns:1fr;gap:36px;padding:52px 0 64px}}
+.intro h1{font-size:clamp(2.3rem,5vw,3.6rem);line-height:1.06;letter-spacing:-.015em;margin:16px 0 0}
+.intro .lede{font-size:16px;color:var(--ink-2);margin:18px 0 0;max-width:46ch;line-height:1.65}
+.alts{display:flex;flex-direction:column;gap:12px;margin-top:30px}
+.alt{display:flex;align-items:center;gap:13px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);font-weight:600;font-size:14px;transition:border-color .15s,transform .15s;box-shadow:var(--shadow)}
+.alt:hover{border-color:var(--gold);transform:translateX(3px)}
+/* Same card, no link. The address used to sit here in a mailto, which handed it
+   to every scraper and defeated the point of having a form (Justine, 2026-08-04). */
+.alt--static{cursor:default}
+.alt--static:hover{border-color:var(--line);transform:none}
+.alt .ic{width:22px;height:22px;flex:none;color:var(--gold-2)}
+.alt small{display:block;color:var(--muted);font-weight:400;font-size:12px;margin-top:1px}
+.formcard{background:linear-gradient(160deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:var(--shadow)}
+.formcard h2{font-size:1.5rem;margin-bottom:6px}
+.formcard .hint{color:var(--muted);font-size:14px;margin:0 0 22px}
+/* OFFERCSS scopes every form rule to .epform, so a .formcard has to restate
+   them or the labels sit inline and the inputs render unstyled. */
+.formcard .field{margin:0 0 16px}
+.formcard label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin:0 0 7px}
+.formcard input,.formcard textarea{width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);font-size:16px;font-family:var(--sans);min-height:46px}
+.formcard textarea{min-height:150px;resize:vertical;line-height:1.55}
+.formcard input:focus,.formcard textarea:focus{outline:2px solid var(--gold-2);outline-offset:1px;border-color:transparent}
+.formcard .btn{width:100%;justify-content:center}
+.formcard .fmsg{font-size:14px;margin:14px 0 0;text-align:center;color:var(--gold-2);min-height:20px}
+.formcard .fnote{color:var(--muted);font-size:12px;margin:14px 0 0}
+`;
+
+const CONTACT_ICONS = {
+  calendar: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg>',
+  mail: '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+  linkedin: '<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4 0 4.75 2.5 4.75 5.9V21h-4v-5.2c0-1.24-.02-2.85-1.74-2.85s-2 1.36-2 2.76V21H9z"/></svg>'
+};
+
+/* The page chrome -- head, analytics, nav, footer -- is identical on every
+   generated page regardless of template, so it lives here once. A template's
+   only job is to build its schema graph and the contents of <main>. Keeping the
+   canonical/hreflang/og block in one place matters more than the markup does:
+   those tags are the ones that quietly delete a language from the index when
+   they drift, and they are invisible on the rendered page. */
+function renderShell(o) {
+  const L = I18N.locales[o.lang];
+  return `<!DOCTYPE html>
+<html lang="${L.htmlLang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(o.title)}</title>
+<meta name="description" content="${attr(o.description)}">
+<link rel="canonical" href="${o.selfUrl}">${o.hasFr === false ? `
+<link rel="alternate" hreflang="en-CA" href="${o.enUrl}">
+<link rel="alternate" hreflang="x-default" href="${o.enUrl}">` : `
+<link rel="alternate" hreflang="en-CA" href="${o.enUrl}">
+<link rel="alternate" hreflang="fr-CA" href="${o.frUrl}">
+<link rel="alternate" hreflang="x-default" href="${o.enUrl}">`}
+<meta property="og:type" content="website">
+<meta property="og:locale" content="${o.lang === 'fr' ? 'fr_CA' : 'en_CA'}">
+<meta property="og:title" content="${attr(o.ogTitle)}">
+<meta property="og:description" content="${attr(o.ogDescription)}">
+<meta property="og:url" content="${o.selfUrl}">
+<meta property="og:image" content="${o.ogImage}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');</script>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
+
+<script type="application/ld+json">
+${JSON.stringify(o.graph, null, 1)}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>${OFFERCSS}${o.css || ''}</style>
+<link rel="stylesheet" href="/css/nav-drawer.css">
+<script src="/js/site.js"></script>
+<link rel="stylesheet" href="/css/contact-modal.css">
+<script src="/js/contact-modal.js" defer></script>
+</head>
+<body>
+<!-- ep:nav -->
+${renderNavL(o.navKey, o.lang, o.slug, o.hasFr !== false)}
+<!-- /ep:nav -->
+${o.body}
+<footer><div class="container">
+  <span>${esc(I18N.footer[o.lang].copyright)}</span>
+  <span>${I18N.footer[o.lang].links.map(l => `<a href="${loc(l.href, o.lang)}">${esc(l.label)}</a>`).join(' &middot; ')}</span>
+</div></footer>
+</body>
+</html>
+`;
+}
+
+function renderOfferPage(page, lang) {
+  const c = page[lang];
+  const L = I18N.locales[lang];
+  const slug = page.slug;
+  const enUrl = `${ORIGIN}/${slug}/`;
+  const frUrl = `${ORIGIN}/fr/${slug}/`;
+  const selfUrl = lang === 'fr' ? frUrl : enUrl;
+
+  const faqPlain = c.faq.map(q => ({
+    '@type': 'Question', name: stripTags(q.q),
+    acceptedAnswer: { '@type': 'Answer', text: stripTags(q.a) }
+  }));
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: c.breadcrumb.map((b, i) => ({
+          '@type': 'ListItem', position: i + 1, name: b.label,
+          item: b.href ? ORIGIN + loc(b.href, lang) : selfUrl })) },
+      { '@type': 'Service', name: c.schemaName, serviceType: page.schemaService.serviceType,
+        description: c.schemaDescription,
+        provider: { '@type': 'Person', name: 'Elvin M. Peters', jobTitle: 'AI Consultant' },
+        areaServed: page.schemaService.areaServed, url: selfUrl,
+        inLanguage: L.hreflang,
+        /* The hand-authored pages carried a named Offer with a
+           UnitPriceSpecification, which says "1500 per MONTH" rather than the
+           bare "1500" a plain Offer implies. Dropping it on migration would
+           have quietly downgraded the markup on the pages of a consultant who
+           sells schema work. offerName and unitText are optional: a one-time
+           price like the AIO build has no unit, so it emits a plain Offer. */
+        offers: [Object.assign(
+          { '@type': 'Offer' },
+          page.schemaService.offerName ? { name: c.schemaOfferName || page.schemaService.offerName } : {},
+          { price: page.schemaService.price,
+            priceCurrency: page.schemaService.priceCurrency,
+            url: selfUrl },
+          page.schemaService.unitText ? { priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: page.schemaService.price,
+            priceCurrency: page.schemaService.priceCurrency,
+            unitText: page.schemaService.unitText } } : {}
+        )] },
+      { '@type': 'FAQPage', inLanguage: L.hreflang, mainEntity: faqPlain }
+    ]
+  };
+
+  const breadcrumbHtml = c.breadcrumb.map(b =>
+    b.href ? `<a href="${loc(b.href, lang)}">${esc(b.label)}</a>` : esc(b.label)).join(' &middot; ');
+
+  const body = `<header class="hero"><div class="container">
+  <nav class="breadcrumb">${breadcrumbHtml}</nav>
+  <span class="eyebrow">${esc(c.eyebrow)}</span>
+  <h1>${esc(c.h1)}</h1>
+  <p class="sub">${esc(c.sub)}</p>
+  <div class="btns">
+    ${c.heroBtns.map(b => renderBtn(b, 'primary', lang)).join('\n    ')}
+  </div>
+</div></header>
+<div class="credbar"><div class="container">
+  ${c.credbar.map(s => `<span>${esc(s)}</span>`).join('\n  ')}
+</div></div>
+<main>
+${renderSections(c.sections, lang)}
+
+  <section class="section"><div class="container">
+    <div style="text-align:center;margin-bottom:26px"><h2>${esc(c.faqHeading)}</h2></div>
+    <div class="faq">
+${c.faq.map(q => `      <details${q.open ? ' open' : ''}><summary>${esc(q.q)}</summary><p>${q.a}</p></details>`).join('\n')}
+    </div>
+  </div></section>
+
+${renderForm(c.form, lang, slug)}
+
+  <section class="section"><div class="container">
+    <div class="ctaband">
+      <h2>${esc(c.cta.h2)}</h2>
+      <p>${esc(c.cta.p)}</p>
+      ${renderBtn(c.cta.btn, 'primary', lang)}
+      ${c.cta.after ? `<p style="margin:18px 0 0;font-size:14px"><a href="${loc(c.cta.after.href, lang)}" style="color:var(--gold-2)">${esc(c.cta.after.label)} &rarr;</a></p>` : ''}
+    </div>
+  </div></section>
+</main>`;
+
+  return renderShell({
+    lang, slug, body, graph,
+    navKey: page.navKey, ogImage: page.ogImage,
+    title: c.title, description: c.description,
+    ogTitle: c.ogTitle, ogDescription: c.ogDescription,
+    selfUrl, enUrl, frUrl
+  });
+}
+
+function renderContactPage(page, lang) {
+  const c = page[lang];
+  const L = I18N.locales[lang];
+  const slug = page.slug;
+  const enUrl = `${ORIGIN}/${slug}/`;
+  const frUrl = `${ORIGIN}/fr/${slug}/`;
+  const selfUrl = lang === 'fr' ? frUrl : enUrl;
+  const id = 'cf_' + lang;
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: c.breadcrumb.map((b, i) => ({
+          '@type': 'ListItem', position: i + 1, name: b.label,
+          item: b.href ? ORIGIN + loc(b.href, lang) : selfUrl })) },
+      { '@type': 'ContactPage', name: stripTags(c.h1), url: selfUrl,
+        inLanguage: L.hreflang, description: c.description,
+        about: { '@type': 'Person', name: 'Elvin M. Peters', jobTitle: 'AI Consultant',
+          url: ORIGIN + '/', sameAs: ['https://www.linkedin.com/in/elvinmpeters'] } }
+    ]
+  };
+
+  const alts = c.alts.map(a => {
+    const ic = CONTACT_ICONS[a.icon] || '';
+    const inner = `${ic}<span>${esc(a.label)}<small>${esc(a.sub)}</small></span>`;
+    if (!a.href) return `      <div class="alt alt--static">${inner}</div>`;
+    if (/^https?:/.test(a.href))
+      return `      <a class="alt" href="${a.href}" target="_blank" rel="noopener">${inner}</a>`;
+    const d = a.contact ? ` data-contact="${attr(a.contact)}" data-contact-source="${attr(a.source || '')}"` : '';
+    return `      <a class="alt" href="${loc(a.href, lang)}"${d}>${inner}</a>`;
+  }).join('\n');
+
+  const body = `<main class="container">
+  <div class="wrap">
+    <div class="intro">
+      <span class="eyebrow">${esc(c.eyebrow)}</span>
+      <h1>${esc(c.h1)}</h1>
+      <p class="lede">${esc(c.lede)}</p>
+      <div class="alts">
+${alts}
+      </div>
+    </div>
+
+    <div class="formcard">
+      <h2>${esc(c.form.heading)}</h2>
+      <p class="hint">${esc(c.form.hint)}</p>
+      <form id="${id}" novalidate>
+        <input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field"><label for="${id}_n">${esc(c.form.nameLabel)}</label><input id="${id}_n" name="name" type="text" autocomplete="name" required maxlength="120" placeholder="${attr(c.form.namePlaceholder)}"></div>
+        <div class="field"><label for="${id}_e">${esc(c.form.emailLabel)}</label><input id="${id}_e" name="email" type="email" autocomplete="email" required maxlength="200" placeholder="${attr(c.form.emailPlaceholder)}"></div>
+        <div class="field"><label for="${id}_m">${esc(c.form.messageLabel)}</label><textarea id="${id}_m" name="message" required maxlength="2000" placeholder="${attr(c.form.messagePlaceholder)}"></textarea></div>
+        <button class="btn primary" type="submit">${esc(c.form.submit)}</button>
+        <p class="fmsg" id="${id}_msg" role="status" aria-live="polite"></p>
+        <p class="fnote">${esc(c.form.fine)}</p>
+      </form>
+    </div>
+  </div>
+</main>
+<script>(function(){var f=document.getElementById(${JSON.stringify(id)}),m=document.getElementById(${JSON.stringify(id + '_msg')}),b=f.querySelector('button');
+f.addEventListener('submit',function(ev){ev.preventDefault();
+var n=f.name.value.trim(),e=f.email.value.trim(),g=f.message.value.trim();
+if(!n||!e||!g){m.textContent=${JSON.stringify(c.form.required)};return}
+b.disabled=true;b.style.opacity='.7';m.textContent='...';
+fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,email:e,message:g,lang:${JSON.stringify(lang)},source:${JSON.stringify('contact-' + lang)},website:f.website.value})})
+.then(function(r){return r.json().catch(function(){return{}})}).then(function(r){
+if(r&&r.success===false){b.disabled=false;b.style.opacity='1';m.textContent=${JSON.stringify(c.form.error)};return}
+f.querySelectorAll('.field, button').forEach(function(el){el.style.display='none'});
+m.textContent=${JSON.stringify(c.form.success)};
+if(window.fbq)fbq('track','Contact');if(window.gtag)gtag('event','generate_lead',{method:'contact_form'});
+}).catch(function(){b.disabled=false;b.style.opacity='1';m.textContent=${JSON.stringify(c.form.network)}})})})();</script>`;
+
+  return renderShell({
+    lang, slug, body, graph, css: CONTACTCSS,
+    navKey: page.navKey, ogImage: page.ogImage,
+    title: c.title, description: c.description,
+    ogTitle: c.ogTitle, ogDescription: c.ogDescription,
+    selfUrl, enUrl, frUrl
+  });
+}
+
+/* The services page bolds figures inside otherwise plain sentences. Rather than
+   let raw HTML back into the content files (a hardcoded href in one of those is
+   what broke the French links), the copy carries **bold** and it is escaped
+   first, so a stray < in a price can never become markup. */
+function mdb(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); }
+
+/* Delta only -- the shell already ships the hero, credbar, faq, ctaband and
+   button styles from OFFERCSS. */
+const SERVICESCSS = `
+.btn.sm{padding:10px 18px;font-size:14px;min-height:44px;align-items:center}
+.bucket-label{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin:36px 0 16px}
+.bucket-label:first-of-type{margin-top:0}
+.svcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.svc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.svc:hover{border-color:var(--gold)}
+.svc h3{font-size:1.4rem;letter-spacing:-.01em}
+.svc h3 a:hover{color:var(--gold-2)}
+.svc .who{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-2);font-weight:700;margin:4px 0 12px}
+.svc .promise{font-size:1rem;color:var(--ink-2);margin:0 0 14px;flex:1}
+.svc .price{font-size:14px;color:var(--ink-2);margin:0 0 16px}
+.svc .price b{font-family:var(--serif);font-size:1.25rem;color:var(--ink);font-weight:600}
+.svc .foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-top:1px solid var(--line-soft);padding-top:16px;margin-top:auto}
+`;
+
+function renderServicesPage(page, lang) {
+  const c = page[lang];
+  const L = I18N.locales[lang];
+  const slug = page.slug;
+  const enUrl = `${ORIGIN}/${slug}/`;
+  const frUrl = `${ORIGIN}/fr/${slug}/`;
+  const selfUrl = lang === 'fr' ? frUrl : enUrl;
+  const cards = [].concat(...c.buckets.map(b => b.cards));
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: c.breadcrumb.map((b, i) => ({
+          '@type': 'ListItem', position: i + 1, name: b.label,
+          item: b.href ? ORIGIN + loc(b.href, lang) : selfUrl })) },
+      /* An offer catalogue, not a bare ItemList: these are things you can buy,
+         and each entry points at the page that states its own price. */
+      { '@type': 'ProfessionalService', name: 'Elvin M. Peters', url: ORIGIN + '/',
+        inLanguage: L.hreflang, description: c.description,
+        areaServed: page.areaServed,
+        founder: { '@type': 'Person', name: 'Elvin M. Peters', jobTitle: 'AI Consultant' },
+        hasOfferCatalog: { '@type': 'OfferCatalog', name: stripTags(c.h1),
+          itemListElement: cards.map(s => ({
+            '@type': 'Offer', name: s.title, url: ORIGIN + loc(s.href, lang),
+            itemOffered: { '@type': 'Service', name: s.title,
+              description: stripTags(s.promise) } })) } },
+      { '@type': 'FAQPage', inLanguage: L.hreflang, mainEntity: c.faq.map(q => ({
+          '@type': 'Question', name: stripTags(q.q),
+          acceptedAnswer: { '@type': 'Answer', text: stripTags(q.a) } })) }
+    ]
+  };
+
+  const buckets = c.buckets.map(b => `    <div class="bucket-label">${esc(b.label)}</div>
+    <div class="svcgrid">
+${b.cards.map(s => `      <div class="svc">
+        <h3><a href="${loc(s.href, lang)}">${esc(s.title)}</a></h3>
+        <span class="who">${esc(s.who)}</span>
+        <p class="promise">${esc(s.promise)}</p>
+        <p class="price">${mdb(s.price)}</p>
+        <div class="foot">${s.btns.map(x => renderBtn(x, 'ghost sm', lang)).join('')}</div>
+      </div>`).join('\n')}
+    </div>`).join('\n');
+
+  const body = `<header class="hero"><div class="container">
+  <span class="eyebrow">${esc(c.eyebrow)}</span>
+  <h1>${esc(c.h1)}</h1>
+  <p>${esc(c.sub)}</p>
+  <div class="btns" style="margin-top:26px">${renderBtn(c.heroBtn, 'primary', lang)}</div>
+</div></header>
+<div class="credbar"><div class="container">
+  ${c.credbar.map(s => `<span>${mdb(s)}</span>`).join('')}
+</div></div>
+<main>
+  <section class="section"><div class="container">
+${buckets}
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <div style="text-align:center;margin-bottom:28px"><h2>${esc(c.faqHeading)}</h2></div>
+    <div class="faq">
+${c.faq.map(q => `      <details${q.open ? ' open' : ''}><summary>${esc(q.q)}</summary><p>${esc(q.a)}</p></details>`).join('\n')}
+    </div>
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <div class="ctaband">
+      <h2>${esc(c.cta.h2)}</h2>
+      <p>${esc(c.cta.p)}</p>
+      ${renderBtn(c.cta.btn, 'primary', lang)}
+      ${c.cta.after ? `<p style="margin:18px 0 0;font-size:14px"><a href="${loc(c.cta.after.href, lang)}" style="color:var(--gold-2)">${esc(c.cta.after.label)} &rarr;</a></p>` : ''}
+    </div>
+  </div></section>
+</main>`;
+
+  return renderShell({
+    lang, slug, body, graph, css: SERVICESCSS,
+    navKey: page.navKey, ogImage: page.ogImage,
+    title: c.title, description: c.description,
+    ogTitle: c.ogTitle, ogDescription: c.ogDescription,
+    selfUrl, enUrl, frUrl
+  });
+}
+
+/* ==================================================================== */
+/* CITY PAGES                                                           */
+/*                                                                      */
+/* One template, many city slots. The point is not that every page is a */
+/* different essay -- it is that the city is woven through the copy in  */
+/* a dozen places instead of one, and that the slots carry real local   */
+/* data (districts, neighbouring markets, the industries that actually  */
+/* employ people there) rather than the same sentence with a swapped    */
+/* noun. A find-and-replace page is a doorway page; a page that names   */
+/* the reader's neighbourhood and their industry is a local landing     */
+/* page. The structure is identical either way -- the difference is how */
+/* many of the slots are filled with something true about that market.  */
+/*                                                                      */
+/* Adding a city = one JSON file in content/cities/ + one nav.json key. */
+/* ==================================================================== */
+
+const CITYCSS = `
+.lede-city{font-size:1.08rem;color:var(--ink-2);max-width:74ch}
+.lede-city + .lede-city{margin-top:14px}
+.factrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:30px 0 0}
+.fact{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+.fact b{display:block;font-family:var(--serif);font-size:1.7rem;color:var(--ink);font-weight:600;line-height:1.15}
+.fact span{display:block;font-size:13px;color:var(--muted);margin-top:6px;line-height:1.45}
+.svcrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;margin-top:26px}
+.svcbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.svcbox:hover{border-color:var(--gold)}
+.svcbox h3{font-size:1.35rem;letter-spacing:-.01em;margin:0 0 10px}
+.svcbox h3 a:hover{color:var(--gold-2)}
+.svcbox p{font-size:.98rem;color:var(--ink-2);margin:0 0 16px;flex:1}
+.svcbox .price{font-size:14px;color:var(--muted);margin:0 0 16px}
+.svcbox .price b{font-family:var(--serif);font-size:1.2rem;color:var(--ink);font-weight:600}
+.svcbox .foot{border-top:1px solid var(--line-soft);padding-top:15px;margin-top:auto}
+.areabox{background:var(--panel-2);border:1px solid var(--line-soft);border-radius:16px;padding:28px 30px;margin-top:26px}
+.areabox h3{font-size:1.2rem;margin:0 0 10px}
+.areabox p{font-size:.97rem;color:var(--ink-2);margin:0 0 14px}
+.arealist{display:flex;flex-wrap:wrap;gap:9px;margin:0;padding:0;list-style:none}
+.arealist li{font-size:13px;color:var(--ink-2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.citylinks li{padding:0}
+.citylinks li:hover{border-color:var(--gold)}
+.citylinks a{display:block;padding:6px 14px;color:var(--ink-2)}
+.citylinks a:hover{color:var(--gold-2)}
+.sources{margin-top:34px;font-size:13px;color:var(--muted);line-height:1.7}
+.sources h3{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-family:var(--sans);font-weight:700;margin:0 0 8px}
+.sources a{color:var(--gold-2);text-decoration:underline;text-underline-offset:2px}
+.sources li{margin-bottom:4px}
+.sources ul{margin:0;padding-left:18px}
+`;
+
+/* Fill {city}-style slots from the city record. Content files never repeat the
+   city name by hand -- they write {city} and the template puts it in. That is
+   what makes a 51-city rollout a data change instead of 51 rewrites, and it is
+   why a typo'd city name cannot appear on only one of the twelve mentions. */
+function cityFill(s, page, lang) {
+  const c = page[lang];
+  /* Language block wins over the shared record. Proper nouns like "Kanata" are
+     the same in both languages, but "Downtown Montreal" and "aerospace" are not,
+     so a city with a French twin can override any of these per language and a
+     city without one never has to. */
+  const pick = k => (c && Array.isArray(c[k]) ? c[k] : page[k]);
+  const vals = {
+    city: (c && typeof c.city === 'string') ? c.city : page.city,
+    region: (c && typeof c.region === 'string') ? c.region : page.region,
+    districts: listJoin(pick('districts'), lang),
+    nearby: listJoin(pick('nearby'), lang),
+    industries: listJoin(pick('industries'), lang)
+  };
+  return String(s).replace(/\{(\w+)\}/g, (m, k) => {
+    if (k in vals && vals[k] != null) return vals[k];
+    if (c && k in c && typeof c[k] === 'string') return c[k];
+    throw new Error(`${page.slug}: copy uses {${k}}, which the city record does not define.`);
+  });
+}
+
+function listJoin(arr, lang) {
+  if (!arr || !arr.length) return '';
+  if (arr.length === 1) return arr[0];
+  const and = lang === 'fr' ? 'et' : 'and';
+  return arr.slice(0, -1).join(', ') + ' ' + and + ' ' + arr[arr.length - 1];
+}
+
+function renderCityPage(page, lang) {
+  const c = page[lang];
+  const L = I18N.locales[lang];
+  const slug = page.slug;
+  const enUrl = `${ORIGIN}/${slug}/`;
+  const frUrl = `${ORIGIN}/fr/${slug}/`;
+  const selfUrl = lang === 'fr' ? frUrl : enUrl;
+  const f = s => cityFill(s, page, lang);
+  /* Every string on a button goes through the slot filler, source included.
+     Filling label and contact but not source is how "city-{city}" ended up in
+     the contact form's tracking on the first three city pages. */
+  const fb = b => ({
+    ...b,
+    label: f(b.label),
+    contact: b.contact ? f(b.contact) : undefined,
+    source: b.source ? f(b.source) : undefined
+  });
+
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: c.breadcrumb.map((b, i) => ({
+          '@type': 'ListItem', position: i + 1, name: f(b.label),
+          item: b.href ? ORIGIN + loc(b.href, lang) : selfUrl })) },
+      /* areaServed is the whole point of a city page as far as schema is
+         concerned: the City plus the surrounding markets actually covered.
+         Stated once, from the same arrays the visible copy reads.
+         The three type fields default to what every city page needs and exist
+         so a province page can say State-inside-Country instead of
+         City-inside-AdministrativeArea. Alberta is not a City. */
+      { '@type': 'ProfessionalService', '@id': selfUrl + '#business',
+        name: 'Elvin M. Peters', url: selfUrl, inLanguage: L.hreflang,
+        description: f(c.description),
+        areaServed: [
+          { '@type': page.areaType || 'City', name: page.city, containedInPlace:
+            { '@type': page.regionType || 'AdministrativeArea', name: page.region } },
+          ...(page.nearby || []).map(n => ({ '@type': page.nearbyType || 'City', name: n }))
+        ],
+        /* No address and no geo: the practice is remote. Claiming a local
+           address here would be the one thing on the page that is a lie. */
+        provider: { '@type': 'Person', name: 'Elvin M. Peters', jobTitle: 'AI Consultant' },
+        hasOfferCatalog: { '@type': 'OfferCatalog', name: f(c.servicesHeading),
+          itemListElement: c.services.map(s => ({
+            '@type': 'Offer', url: ORIGIN + loc(s.href, lang),
+            itemOffered: { '@type': 'Service', name: f(s.title),
+              description: stripTags(f(s.body)), areaServed:
+                { '@type': page.areaType || 'City', name: page.city } } })) } },
+      { '@type': 'FAQPage', inLanguage: L.hreflang, mainEntity: c.faq.map(q => ({
+          '@type': 'Question', name: stripTags(f(q.q)),
+          acceptedAnswer: { '@type': 'Answer', text: stripTags(f(q.a)) } })) }
+    ]
+  };
+
+  const body = `<header class="hero"><div class="container">
+  <nav class="breadcrumb">${c.breadcrumb.map((b, i) =>
+    b.href ? `<a href="${loc(b.href, lang)}">${esc(f(b.label))}</a>` : `<span>${esc(f(b.label))}</span>`
+  ).join(' <i>&rsaquo;</i> ')}</nav>
+  <span class="eyebrow">${esc(f(c.eyebrow))}</span>
+  <h1>${esc(f(c.h1))}</h1>
+  <p class="sub">${esc(f(c.sub))}</p>
+  <div class="btns">${c.heroBtns.map(b => renderBtn(fb(b), 'primary', lang)).join('')}</div>
+</div></header>
+<div class="credbar"><div class="container">
+  ${c.credbar.map(s => `<span>${mdb(f(s))}</span>`).join('')}
+</div></div>
+<main>
+  <section class="section"><div class="container">
+    <span class="snum">01</span>
+    <h2>${esc(f(c.marketHeading))}</h2>
+${c.market.map(p => `    <p class="lede-city">${mdb(f(p))}</p>`).join('\n')}
+    <div class="factrow">
+${c.facts.map(x => `      <div class="fact"><b>${esc(f(x.stat))}</b><span>${esc(f(x.label))}</span></div>`).join('\n')}
+    </div>
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <span class="snum">02</span>
+    <h2>${esc(f(c.servicesHeading))}</h2>
+    <p class="lede-city">${mdb(f(c.servicesIntro))}</p>
+    <div class="svcrow">
+${c.services.map(s => `      <div class="svcbox">
+        <h3><a href="${loc(s.href, lang)}">${esc(f(s.title))}</a></h3>
+        <p>${esc(f(s.body))}</p>
+        <p class="price">${mdb(f(s.price))}</p>
+        <div class="foot">${renderBtn(fb(s.btn), 'ghost', lang)}</div>
+      </div>`).join('\n')}
+    </div>
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <span class="snum">03</span>
+    <h2>${esc(f(c.areaHeading))}</h2>
+${c.area.cities ? `    <div class="areabox">
+      <h3>${esc(f(c.area.citiesHeading))}</h3>
+      <p>${esc(f(c.area.citiesBody))}</p>
+      <ul class="arealist citylinks">${c.area.cities.map(x =>
+        `<li><a href="${loc(x.href, lang)}">${esc(f(x.label))}</a></li>`).join('')}</ul>
+    </div>
+` : ''}    <div class="areabox">
+      <h3>${esc(f(c.area.districtsHeading))}</h3>
+      <p>${esc(f(c.area.districtsBody))}</p>
+      <ul class="arealist">${(page.districts || []).map(d => `<li>${esc(d)}</li>`).join('')}</ul>
+    </div>
+    <div class="areabox">
+      <h3>${esc(f(c.area.nearbyHeading))}</h3>
+      <p>${esc(f(c.area.nearbyBody))}</p>
+      <ul class="arealist">${(page.nearby || []).map(d => `<li>${esc(d)}</li>`).join('')}</ul>
+    </div>
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <div style="text-align:center;margin-bottom:28px"><h2>${esc(f(c.faqHeading))}</h2></div>
+    <div class="faq">
+${c.faq.map(q => `      <details${q.open ? ' open' : ''}><summary>${esc(f(q.q))}</summary><p>${esc(f(q.a))}</p></details>`).join('\n')}
+    </div>
+${c.sources && c.sources.length ? `    <div class="sources">
+      <h3>${esc(f(c.sourcesHeading))}</h3>
+      <ul>
+${c.sources.map(s => `        <li><a href="${s.href}" rel="nofollow noopener" target="_blank">${esc(s.label)}</a></li>`).join('\n')}
+      </ul>
+    </div>` : ''}
+  </div></section>
+
+  <section class="section" style="padding-top:0"><div class="container">
+    <div class="ctaband">
+      <h2>${esc(f(c.cta.h2))}</h2>
+      <p>${esc(f(c.cta.p))}</p>
+      ${renderBtn(fb(c.cta.btn), 'primary', lang)}
+    </div>
+  </div></section>
+</main>`;
+
+  return renderShell({
+    lang, slug, body, graph, css: CITYCSS, hasFr: hasFr(page),
+    navKey: page.navKey, ogImage: page.ogImage,
+    title: f(c.title), description: f(c.description),
+    ogTitle: f(c.ogTitle), ogDescription: f(c.ogDescription),
+    selfUrl, enUrl, frUrl
+  });
+}
+
+const TEMPLATES = { offer: renderOfferPage, contact: renderContactPage, services: renderServicesPage, city: renderCityPage };
+
+const genPaths = [];
+for (const page of PAGES) {
+  const render = TEMPLATES[page.template];
+  if (!render) throw new Error(`content/pages/${page.slug}.json asks for template "${page.template}", which does not exist. Known: ${Object.keys(TEMPLATES).join(', ')}`);
+  for (const lang of langsFor(page)) {
+    const rel = lang === 'fr' ? path.join('fr', page.slug, 'index.html') : path.join(page.slug, 'index.html');
+    const dest = path.join(OUT, rel);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, render(page, lang));
+    genPaths.push(rel.replace(/\\/g, '/'));
+  }
+}
+console.log('Bilingual pages: ' + genPaths.length + ' (' + genPaths.join(', ') + ')');
+
+/* Every /fr/ href on a generated page must resolve to a file that exists.
+   loc() only adds the prefix where a twin is present, so the only way to get
+   a broken one is a hardcoded /fr/... in a data file -- which is exactly the
+   bug this caught: the French footer pointed at /fr/ and /fr/services/, and
+   the French google-ads page at /fr/contact/, none of which had been built.
+   Nothing visible fails when this happens; the link just 404s for the one
+   audience the page was translated for. So it stops the build instead. */
+const frBroken = [];
+for (const rel of genPaths) {
+  const html = fs.readFileSync(path.join(OUT, rel), 'utf8');
+  for (const m of html.matchAll(/href="(\/fr\/[^"#?]*)/g)) {
+    const target = m[1].endsWith('/') ? m[1].slice(1) + 'index.html' : m[1].slice(1);
+    if (!fs.existsSync(path.join(OUT, target))) frBroken.push(rel + ' -> ' + m[1]);
+  }
+}
+if (frBroken.length) {
+  throw new Error('French links point at pages that do not exist:\n  ' +
+    [...new Set(frBroken)].join('\n  ') +
+    '\nStore the English path in the data file and let loc() add /fr where a twin exists.');
+}
+
+/* Every class a generated page uses must have a rule behind it somewhere. The
+   form rules in OFFERCSS are scoped to .epform, so the contact template's
+   .formcard shipped with inline labels and unstyled inputs and the build was
+   perfectly happy about it -- nothing 404s, nothing errors, the page is just
+   wrong. Cheap to check, and it only reads the stylesheets the page links. */
+const cssCache = new Map();
+function cssFor(html) {
+  const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map(m => m[1]);
+  let css = [...html.matchAll(/<style>([\s\S]*?)<\/style>/g)].map(m => m[1]).join('\n');
+  for (const s of sheets) {
+    if (!cssCache.has(s)) {
+      /* DIR, not OUT: verify.js builds into a throwaway directory that holds
+         only generated pages, so the linked stylesheets live in the source
+         tree either way. */
+      const f = path.join(DIR, s.replace(/^\//, ''));
+      cssCache.set(s, fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '');
+    }
+    css += '\n' + cssCache.get(s);
+  }
+  return new Set([...css.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)].map(m => m[1]));
+}
+const unstyled = [];
+for (const rel of genPaths) {
+  const html = fs.readFileSync(path.join(OUT, rel), 'utf8');
+  const styled = cssFor(html);
+  const body = html.slice(html.indexOf('<body>'));
+  for (const m of body.matchAll(/\sclass="([^"]+)"/g))
+    for (const cl of m[1].trim().split(/\s+/))
+      if (!styled.has(cl)) unstyled.push(rel + ' -> .' + cl);
+}
+if (unstyled.length) {
+  throw new Error('Generated pages use classes that no stylesheet defines:\n  ' +
+    [...new Set(unstyled)].join('\n  ') +
+    '\nUsually a template borrowed markup whose CSS is scoped to a different parent.');
+}
 
 
 /* ------------------------------------------------------------------ */
@@ -700,10 +1640,93 @@ function smPriority(u) {
   if (u.startsWith('/free/') || u.startsWith('/apps/calculators/') || u.startsWith('/quiz')) return '0.7';
   return '0.6';
 }
+/* hreflang annotations for the bilingual pairs. Every page already carries
+   page-level <link rel="alternate"> tags; this is the second place Google
+   reads the same declaration. Search Console's International Targeting report
+   was retired in 2022, so nothing here surfaces in a GSC report -- validate
+   with URL Inspection or an external hreflang checker. The annotations still
+   feed Google's actual pairing. Both sides of a pair must list the complete set
+   INCLUDING THEMSELVES, or Google discards the entire cluster and the pages
+   compete with each other instead of pairing. x-default points at English:
+   it is the fallback for every language we do not publish, not a third page. */
+function smAlternates(u) {
+  const en = u.startsWith('/fr/') ? u.slice(3) : u;
+  if (!FR_TWINS.has(en)) return '';
+  return [['en-CA', en], ['fr-CA', '/fr' + en], ['x-default', en]]
+    .map(([hl, href]) =>
+      '\n    <xhtml:link rel="alternate" hreflang="' + hl + '" href="' + ORIGIN + href + '"/>')
+    .join('') + '\n  ';
+}
 const smPages = smWalk(DIR, '', []).map(smUrl).sort();
 const smXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
-  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  smPages.map(u => '  <url><loc>https://elvinpeters.com' + u + '</loc><priority>' + smPriority(u) + '</priority></url>').join('\n') +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' +
+  ' xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
+  smPages.map(u => '  <url><loc>' + ORIGIN + u + '</loc><priority>' + smPriority(u) + '</priority>' +
+    smAlternates(u) + '</url>').join('\n') +
   '\n</urlset>\n';
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), smXml);
 console.log('Sitemap: ' + smPages.length + ' URLs');
+
+/* ------------------------------------------------------------------ */
+/* llms.txt - a curated map of the site for language models, per the
+   llmstxt.org proposal.
+
+   Status, honestly: this is a PROPOSED standard, not an adopted one. No
+   major AI company has confirmed it consumes llms.txt, and Google has
+   publicly compared it to the old keywords meta tag. It is here because it
+   costs nothing and the downside is zero, not because it is known to work.
+   What actually governs AI visibility is robots.txt access plus clean,
+   extractable page content -- see robots.txt for the crawler rules.
+
+   Generated from the same JSON the nav reads, so a renamed page or a
+   changed price cannot leave a stale claim in here. Every line traces to
+   copy that already exists on the site: nothing is written fresh for this
+   file, because a claim only an LLM sees is still a claim. */
+const SITE = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'site.json'), 'utf8'));
+const llmsSections = [];
+function llmsList(title, rows) {
+  if (!rows.length) return;
+  llmsSections.push('## ' + title + '\n\n' + rows.join('\n'));
+}
+function llmsAbs(href) {
+  return /^https?:/.test(href) ? href : ORIGIN + href;
+}
+for (const b of SVCS.buckets) {
+  llmsList('Services - ' + b.label, SVCS.cards
+    .filter(c => c.bucket === b.id)
+    .map(c => '- [' + c.title + '](' + llmsAbs(c.href) + '): ' + c.home_blurb));
+}
+/* A few Products entries are menu affordances rather than names -- the nav
+   needs "Learn more", but a model citing this file needs "The Artificial
+   Advantage". Where the title is one of those, the sub is the real name, so
+   they swap. Both strings still ship; only which one is the link text moves. */
+const LLMS_GENERIC = new Set(['Learn more', 'Buy on Amazon', 'The series']);
+for (const b of PRODS.buckets) {
+  llmsList('Products - ' + b.label, PRODS.items
+    .filter(i => i.bucket === b.id)
+    .map(i => LLMS_GENERIC.has(i.title)
+      ? '- [' + i.sub + '](' + llmsAbs(i.href) + '): ' + i.title
+      : '- [' + i.title + '](' + llmsAbs(i.href) + '): ' + i.sub));
+}
+llmsList('French', PAGES.filter(hasFr)
+  .sort((a, b) => a.slug.localeCompare(b.slug))
+  .map(p => '- [' + p.fr.title.split(' | ')[0] + '](' + ORIGIN + '/fr/' + p.slug + '/): ' +
+    'French (Canada) version of ' + ORIGIN + '/' + p.slug + '/'));
+llmsList('Contact', [
+  '- [Contact](' + ORIGIN + '/contact/): send a message or book a call',
+  '- [Book a call](' + SITE.meet_url + '): scheduler',
+  '- Email: ' + SITE.email
+]);
+const llmsTxt =
+  '# Elvin Peters\n\n' +
+  '> Toronto AI consultant and author of The Artificial Advantage. I help teams\n' +
+  '> install AI that ships, run better Google Ads, and train staff to use AI well.\n\n' +
+  'Independent consultant, not an agency: the person who scopes the work is the\n' +
+  'person who does it. Commercial pages are published in English and Canadian\n' +
+  'French; the French translations are marked below.\n\n' +
+  llmsSections.join('\n\n') + '\n\n' +
+  '## Notes\n\n' +
+  '- Full URL list: ' + ORIGIN + '/sitemap.xml\n' +
+  '- Crawler rules: ' + ORIGIN + '/robots.txt\n';
+fs.writeFileSync(path.join(OUT, 'llms.txt'), llmsTxt);
+console.log('llms.txt: ' + llmsSections.length + ' sections');

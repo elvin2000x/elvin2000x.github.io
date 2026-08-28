@@ -1,0 +1,119 @@
+{
+  "_comment": "Windsor city page. New page, nav.json needs a matching entry. The argument is the border: Windsor sits across the river from Detroit, which distorts search results, targeting and even which currency a buyer is thinking in. Automotive manufacturing gives the local economy a supply chain shape that most city pages do not have to account for.",
+  "slug": "consulting/windsor",
+  "template": "city",
+  "navKey": "consulting/windsor/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Windsor",
+  "region": "Ontario",
+  "districts": ["downtown Windsor", "Walkerville", "South Windsor", "Riverside", "Sandwich", "Tecumseh", "LaSalle"],
+  "nearby": ["Leamington", "Amherstburg", "Essex", "Kingsville", "Chatham", "Belle River"],
+  "industries": ["automotive manufacturing", "cross-border logistics", "agriculture and greenhouse produce", "health care", "tourism and gaming"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Windsor, Ontario | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Windsor, Ontario businesses. Serving downtown Windsor, Walkerville, South Windsor, Tecumseh, LaSalle and Essex County.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Windsor",
+    "ogDescription": "Google Ads, SEO and AI visibility for Windsor businesses. One accountable consultant who understands a border market.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Ontario", "href": "/consulting/ontario/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person rather than an account team you never meet. {city} is a border market, and a plan that treats it like any other Ontario city gets the geography wrong from the first day.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} is separated from a metropolitan area of several million people by a river. That shapes everything. Search results here mix Canadian and American businesses, your ads can drift across the border and burn budget on people who will never cross it, and a meaningful share of local buying is influenced by what is available on the other side at what exchange rate. Getting the geographic targeting and the exclusions right is not a refinement in a {city} account, it is the foundation.",
+      "The local economy is built on automotive manufacturing and the supply chain around it, which gives {city} a B2B market with a very specific shape: relatively few buyers, long relationships, and purchasing decisions that do not come from a search ad. If you sell into that chain, what search does for you is make you credible and findable when a buyer or an engineer is scoping suppliers, which is SEO and AIO work rather than paid.",
+      "Alongside that sits an ordinary consumer economy, plus greenhouse agriculture across Essex County that is one of the largest of its kind in North America. Those are three different advertising problems, and the first useful conversation is about which of them you are in."
+    ],
+    "facts": [
+      { "stat": "422,630", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "#14", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the first hour goes into the map rather than the keywords, because a border market punishes default targeting settings harder than anywhere else in Ontario.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "For {city} the first job is stopping the leak across the river, unless you genuinely sell into Michigan, in which case that becomes its own campaign with its own budget so you can see whether it pays. Then account structure, conversion tracking that counts booked work rather than form views, and spend cut off searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Valuable in {city} because local results are contested by local businesses and the competition thins quickly across Essex County. Technical fixes first, then pages that answer what your buyers search, including pages for the surrounding towns you actually serve rather than one page that says {city} and hopes.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation or a supplier shortlist. Cheapest of the three, one-time, and almost no {city} competitors have started.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout the city, in {districts}. Everything is run remotely over video and email, so where you are in {city} makes no difference to the work or the price.",
+      "nearbyHeading": "And across Essex County",
+      "nearbyBody": "A large share of the region's business sits outside the city. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Should we advertise into Michigan?",
+        "a": "Only if you can actually serve customers there and have thought through the currency, the shipping and the border. If you can, it should be a separate campaign in its own right so the numbers stay readable. If you cannot, the more valuable move is excluding it properly, because default targeting will spend your budget there whether you meant it to or not.",
+        "open": true
+      },
+      {
+        "q": "We supply the automotive sector. Will Google Ads help?",
+        "a": "Usually not much directly. Those relationships are long and the buyers are few, so there is very little search volume to capture. Where search earns its keep for a {city} supplier is being findable and credible when an engineer or a purchasing manager is scoping options, which is SEO and AIO work. I would rather tell you that than sell you a campaign that cannot work."
+      },
+      {
+        "q": "Which service should a {city} business start with?",
+        "a": "If you sell to households with urgent needs, Google Ads once the map is right. If you sell into the manufacturing supply chain, SEO and AIO. Pick one and do it properly rather than three badly."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Windsor (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503559" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Tell me who buys from you and on which side of the river, and I will tell you what I would fix first.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

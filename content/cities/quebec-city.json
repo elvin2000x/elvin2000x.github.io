@@ -1,0 +1,237 @@
+{
+  "_comment": "Quebec City page, bilingual. Of every city in this set this is the one where the French version is the primary page and the English one is the translation, not the other way round: the market is overwhelmingly francophone and an English-only site is close to invisible here. Charter of the French Language content points at the OQLF and stops short of legal advice. Slug keeps the existing /consulting/quebec-city/ URL.",
+  "slug": "consulting/quebec-city",
+  "template": "city",
+  "navKey": "consulting/quebec-city/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Quebec City",
+  "region": "Quebec",
+  "districts": ["Old Quebec", "Sainte-Foy", "Limoilou", "Saint-Roch", "Beauport", "Charlesbourg", "Sillery"],
+  "nearby": ["Levis", "L'Ancienne-Lorette", "Saint-Augustin-de-Desmaures", "Stoneham", "Donnacona", "Montmagny"],
+  "industries": ["public administration", "insurance and financial services", "tourism", "health care", "technology"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Quebec City | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Quebec City businesses, working in French. Serving Old Quebec, Sainte-Foy, Limoilou, Saint-Roch, Beauport and Levis.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Quebec City",
+    "ogDescription": "Google Ads, SEO and AI visibility for Quebec City businesses. A French-first plan, run by one accountable consultant.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Quebec", "href": "/consulting/quebec/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} businesses, remotely, as one accountable person. This is a French market, close to entirely, and any plan that treats French as the second version of the English site is going to underperform here.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely, in French"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} is the most linguistically uniform major market in Canada. Your customers search in French, they read in French, and they judge a business by whether its French reads like it was written by somebody who lives here. A translated site does not just rank badly, it signals that you are not really from here, and in a market this tight that costs you more than a ranking would.",
+      "That has a direct consequence for keyword work. The French terms {city} customers use are not the English terms translated, and they are not always the same terms a Montreal customer would use either. Getting that list right is the entire foundation of both the ads and the SEO, and it is the part that gets skipped most often by agencies working out of another province.",
+      "The economy itself is unusually stable. Public administration, insurance and financial services, health care and tourism carry the city, which means less volatility than {region}'s larger market and a buyer who is not in a hurry. Search demand here rewards patience and being genuinely present in French, which is why I would generally point a {city} business at SEO before ads."
+    ],
+    "facts": [
+      { "stat": "839,311", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "#7", "label": "largest census metropolitan area in Canada (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that all of them are built in French first, and that a French keyword list is real research rather than a translation pass.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "Built on French keywords researched for this market rather than translated from an English list. Rebuilt account structure, conversion tracking that counts booked work, and spend cut off searches that were never going to convert. Works well in {city} for anything with urgency, and less well for the long considered purchases that dominate the institutional side of the local economy.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Usually where I would start a {city} business. The local results are winnable, your buyers research before they commit, and a site that reads properly in French is a durable advantage over competitors who translated theirs. Technical fixes first, then the pages that answer what {city} customers actually search.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. These tools answer French questions from French sources, so a site that only exists in English is simply absent from the answers your {city} customers are getting.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout the city, in {districts}. Everything is run remotely over video and email, so where you are makes no difference to the work or the price.",
+      "nearbyHeading": "And across the region",
+      "nearbyBody": "The market extends well past the city, across the river and out along the corridor. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you speak French?",
+        "a": "I work in English. This page and the campaigns I would build for you exist in French, produced with a native francophone reviewer before anything goes live, because I would rather pay for that review than publish French that reads as translated. If you want your weekly calls in French, I am not your best option and I will tell you that on the first call rather than after you have signed.",
+        "open": true
+      },
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email.",
+        "open": true
+      },
+      {
+        "q": "Do we legally need a French website?",
+        "a": "A business with an establishment in Quebec has obligations under the Charter of the French Language covering commercial publications and websites, and enforcement scrutiny tightened as of June 2025. I am not a lawyer and this is not legal advice. The Office quebecois de la langue francaise publishes the actual requirements and a Quebec lawyer should confirm what applies to you. In {city} specifically the commercial argument settles it long before the legal one does.",
+        "open": false
+      },
+      {
+        "q": "Is it worth having an English version at all?",
+        "a": "Only if you sell outside the region or to tourists. For a business whose customers are local, the English version is a nice to have and the French version is the product. I would rather you spent the budget making one language excellent."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Quebec (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503421" },
+      { "label": "Office quebecois de la langue francaise, requirements for businesses", "href": "https://www.oqlf.gouv.qc.ca/" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would build first, including when the honest answer is that you should fix your French pages before spending a dollar on ads.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  },
+
+  "fr": {
+    "city": "Québec",
+    "region": "Québec",
+    "districts": ["le Vieux-Québec", "Sainte-Foy", "Limoilou", "Saint-Roch", "Beauport", "Charlesbourg", "Sillery"],
+    "nearby": ["Lévis", "L'Ancienne-Lorette", "Saint-Augustin-de-Desmaures", "Stoneham", "Donnacona", "Montmagny"],
+    "industries": ["l'administration publique", "l'assurance et les services financiers", "le tourisme", "la santé", "les technologies"],
+
+    "title": "Consultant Google Ads, SEO et AIO à Québec | Elvin Peters",
+    "description": "Gestion Google Ads, consultation SEO et AIO pour les entreprises de Québec, en français. Vieux-Québec, Sainte-Foy, Limoilou, Saint-Roch, Beauport et Lévis.",
+    "ogTitle": "Consultant Google Ads, SEO et AIO à Québec",
+    "ogDescription": "Google Ads, SEO et visibilité dans l'IA pour les entreprises de Québec. Une approche pensée en français.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consultation", "href": "/consulting/" },
+      { "label": "Québec", "href": "/consulting/quebec/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO et visibilité dans l'IA pour les entreprises de {city}",
+    "sub": "J'offre la gestion Google Ads, la consultation SEO et la consultation AIO aux entreprises de {city}, à distance, avec une seule personne responsable de votre compte. C'est un marché francophone à très forte majorité, et tout plan qui traite le français comme la deuxième version du site anglais va sous-performer ici.",
+    "heroBtns": [
+      { "label": "Réservez 20 minutes gratuites", "href": "/contact/", "contact": "Aide en marketing pour une entreprise de {city}", "source": "city-{city}-fr" },
+      { "label": "Voir mes tarifs", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**50 M$+** en investissement publicitaire rentable",
+      "A conseillé des marques au sein de l'équipe **Large Customer Sales de Google**",
+      "Auteur de **The Artificial Advantage**",
+      "Au service de **{city}** à distance, en français"
+    ],
+
+    "marketHeading": "Ce qui distingue réellement le marketing à {city}",
+    "market": [
+      "{city} est le grand marché le plus homogène du pays sur le plan linguistique. Vos clients cherchent en français, lisent en français, et jugent une entreprise à la qualité de son français. Un site traduit ne fait pas que mal se classer, il signale que vous n'êtes pas vraiment d'ici, et dans un marché aussi serré ça coûte plus cher qu'une position perdue.",
+      "Ça se répercute directement sur la recherche de mots-clés. Les termes français employés par les clients de {city} ne sont pas les termes anglais traduits, et ce ne sont pas toujours ceux qu'emploierait un client de Montréal non plus. Bien établir cette liste, c'est la fondation des annonces comme du référencement, et c'est justement la partie que sautent le plus souvent les agences installées ailleurs.",
+      "L'économie locale est particulièrement stable. L'administration publique, l'assurance et les services financiers, la santé et le tourisme portent la ville, ce qui donne moins de volatilité et un acheteur qui n'est pas pressé. La demande de recherche récompense ici la patience et une présence réellement francophone, et c'est pourquoi j'orienterais généralement une entreprise de {city} vers le SEO avant les annonces."
+    ],
+    "facts": [
+      { "stat": "839 311", "label": "personnes dans la région métropolitaine de {city} (Recensement de 2021)" },
+      { "stat": "7e", "label": "région métropolitaine en importance au Canada (Recensement de 2021)" }
+    ],
+
+    "servicesHeading": "Trois façons de faire croître une entreprise de {city}, avec une seule personne responsable",
+    "servicesIntro": "Les mêmes trois services partout où je travaille. Ce qui change à {city}, c'est que tout se construit en français d'abord, et qu'une liste de mots-clés en français est un vrai travail de recherche plutôt qu'une traduction.",
+    "services": [
+      {
+        "title": "Gestion Google Ads",
+        "href": "/google-ads/",
+        "body": "Bâtie sur des mots-clés français recherchés pour ce marché plutôt que traduits d'une liste anglaise. Structure de compte refaite, suivi des conversions qui compte les vrais clients, et dépenses coupées sur les recherches qui n'allaient jamais convertir. Ça fonctionne bien à {city} pour tout ce qui est urgent, et moins bien pour les achats longuement réfléchis qui dominent le côté institutionnel de l'économie locale.",
+        "price": "**1 500 $**/mois + investissement publicitaire",
+        "btn": { "label": "Google Ads à {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "Consultation SEO",
+        "href": "/seo/",
+        "body": "Habituellement mon point de départ pour une entreprise de {city}. Les résultats locaux sont gagnables, vos acheteurs se renseignent avant de s'engager, et un site qui se lit correctement en français est un avantage durable sur les concurrents qui ont traduit le leur. Le technique d'abord, puis les pages qui répondent à ce que les clients de {city} cherchent réellement.",
+        "price": "**1 200 $**/mois",
+        "btn": { "label": "SEO à {city}", "href": "/seo/" }
+      },
+      {
+        "title": "Consultation AIO",
+        "href": "/aio-consulting/",
+        "body": "Devenir l'entreprise de {city} que ChatGPT, Perplexity et les aperçus IA de Google nomment quand quelqu'un demande une recommandation. Ces outils répondent aux questions en français à partir de sources en français: un site qui n'existe qu'en anglais est tout simplement absent des réponses que reçoivent vos clients.",
+        "price": "**1 800 $** une seule fois",
+        "btn": { "label": "Consultation AIO", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Où je travaille à {city}",
+    "area": {
+      "districtsHeading": "Partout à {city}",
+      "districtsBody": "Je prends des clients partout en ville, dans {districts}. Tout se fait à distance par visioconférence et par courriel, donc votre emplacement ne change ni le travail ni le prix.",
+      "nearbyHeading": "Et dans la région",
+      "nearbyBody": "Le marché déborde largement la ville, de l'autre côté du fleuve et le long du corridor. Je travaille avec des entreprises de {nearby} aux mêmes conditions."
+    },
+
+    "faqHeading": "Questions que posent les entreprises de {city}",
+    "faq": [
+      {
+        "q": "Parlez-vous français?",
+        "a": "Je travaille en anglais. Cette page et les campagnes que je bâtirais pour vous existent en français, produites avec une révision par un francophone natif avant toute mise en ligne, parce que je préfère payer cette révision plutôt que de publier du français qui se lit comme une traduction. Si vous voulez vos appels hebdomadaires en français, je ne suis pas votre meilleure option et je vous le dirai au premier appel plutôt qu'après la signature.",
+        "open": true
+      },
+      {
+        "q": "Avez-vous un bureau à {city}?",
+        "a": "Non. Je suis établi à Toronto et je travaille de la maison, donc il n'y a pas de bureau à {city} et je ne vais pas laisser entendre le contraire. Tout se fait à distance par visioconférence et par courriel.",
+        "open": true
+      },
+      {
+        "q": "Avons-nous légalement besoin d'un site en français?",
+        "a": "Une entreprise ayant un établissement au Québec a des obligations en vertu de la Charte de la langue française touchant les publications commerciales et les sites Web, et la surveillance s'est resserrée depuis juin 2025. Je ne suis pas avocat et ceci n'est pas un avis juridique. L'Office québécois de la langue française publie les exigences réelles et un avocat du Québec devrait confirmer ce qui s'applique à vous. À {city}, l'argument commercial tranche la question bien avant l'argument juridique.",
+        "open": false
+      },
+      {
+        "q": "Vaut-il la peine d'avoir une version anglaise?",
+        "a": "Seulement si vous vendez à l'extérieur de la région ou aux touristes. Pour une entreprise dont la clientèle est locale, la version anglaise est un accessoire et la version française est le produit. Je préfère que vous investissiez pour rendre une langue excellente."
+      },
+      {
+        "q": "Combien ça coûte?",
+        "a": "La gestion Google Ads est à 1 500 $ par mois plus votre investissement publicitaire. La consultation SEO est à 1 200 $ par mois. La consultation AIO est à 1 800 $ une seule fois. Aucuns frais d'ouverture et aucun contrat à long terme."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistique Canada, Série « Perspective géographique », Recensement de 2021 - Québec (région métropolitaine de recensement)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=F&topic=1&dguid=2021S0503421" },
+      { "label": "Office québécois de la langue française, obligations des entreprises", "href": "https://www.oqlf.gouv.qc.ca/" }
+    ],
+
+    "cta": {
+      "h2": "Dites-moi où vous bloquez à {city}",
+      "p": "Vingt minutes, gratuites, sans argumentaire de vente. Décrivez-moi l'entreprise et je vous dirai ce que je bâtirais en premier, y compris quand la réponse honnête est de corriger vos pages françaises avant de dépenser un dollar en publicité.",
+      "btn": { "label": "Réservez 20 minutes gratuites", "href": "/contact/", "contact": "Aide en marketing pour une entreprise de {city}", "source": "city-{city}-fr" }
+    }
+  }
+}

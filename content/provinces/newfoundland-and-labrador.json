@@ -1,0 +1,120 @@
+{
+  "_comment": "Newfoundland and Labrador province page. No city page under it. The distinct argument is the uncomfortable one: this is the only province that lost population between the last two censuses, which means growth has to come from taking share rather than from the market expanding. The page says that plainly rather than pretending otherwise. Population and change are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/newfoundland-and-labrador",
+  "template": "city",
+  "navKey": "consulting/newfoundland-and-labrador/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Newfoundland and Labrador",
+  "region": "Canada",
+  "areaType": "State",
+  "regionType": "Country",
+  "districts": ["the St. John's metro area", "the Avalon Peninsula", "central Newfoundland", "western Newfoundland", "Labrador"],
+  "nearby": ["Mount Pearl", "Conception Bay South", "Corner Brook", "Gander", "Grand Falls-Windsor", "Happy Valley-Goose Bay", "Labrador City"],
+  "industries": ["offshore energy", "fisheries and seafood", "mining", "health care", "professional services"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Newfoundland and Labrador | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Newfoundland and Labrador businesses, agencies and professional firms. One accountable consultant, remote across the province.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Newfoundland and Labrador",
+    "ogDescription": "Marketing for Newfoundland and Labrador business owners and professional firms. A market where growth means taking share, and where share is genuinely available.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses across {city}",
+    "sub": "I work with {city} business owners, agency owners and professional firms on Google Ads, SEO and AI visibility, remotely, as one accountable person rather than an account team you never meet. This is the only province in the country that had fewer people at the last census than the one before, and any honest plan here has to start from that.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing across {city}",
+    "market": [
+      "The population fell 1.8% between the last two censuses while the country grew 5.2%. That is not a reason to give up on marketing here, but it is a reason to be honest about the arithmetic: the market is not going to grow into your business, so any growth you get has to come out of a competitor. That changes the goal from capturing demand to taking share, and those need different plans.",
+      "Taking share is unusually realistic here, because the competitive field is the thinnest of any province I work in. In {industries} the number of {city} businesses running a serious content or search programme is small enough to count, and the ones who move first tend to hold the position for years rather than months. Being the obvious answer is cheaper here than almost anywhere else in Canada.",
+      "The geography is real and it shapes the campaign. Most of the population is on the Avalon Peninsula and the rest is spread across enormous distances, so what works in St. John's rarely transfers to Corner Brook or Labrador. If you serve the whole province, the plan has to account for the fact that you are running one campaign across several genuinely disconnected communities."
+    ],
+    "facts": [
+      { "stat": "510,550", "label": "people in {city} (2021 Census)" },
+      { "stat": "-1.8%", "label": "change since 2016, the only province to decline, against 5.2% growth nationally (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is the goal, because in a market this size you are competing for share rather than waiting for growth.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that means being realistic about volume before spending anything, then account structure, targeting that matches the communities you actually serve, and spend cut off searches that were never going to convert. If the volume is not there I will say so instead of running the campaign.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The strongest of the three here, because taking share is exactly what organic search does and because the competition is thinner than in any other province. Technical fixes first, then the pages that answer what your customers are actually asking.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. When a chatbot is asked for a firm in this province it names very few, and being one of them is worth more than the market size suggests.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across the province",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price. The time difference is real and I schedule around it.",
+      "nearbyHeading": "And in the communities beyond the capital",
+      "nearbyBody": "I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "The population is shrinking. Is marketing even worth it?",
+        "a": "It depends what you expect from it. If you are waiting for the market to grow, no. If you want a larger share of what already exists, this is one of the easiest provinces in the country to take it in, because so few of your competitors are seriously trying. I would rather set that expectation than sell you a growth story the census does not support.",
+        "open": true
+      },
+      {
+        "q": "Is there enough search volume for paid ads?",
+        "a": "Sometimes and sometimes not, and it depends entirely on what you sell. I will look and tell you. In several categories here the honest answer is that SEO and AIO are worth doing and Google Ads is not, and that is a perfectly good outcome from a free call."
+      },
+      {
+        "q": "Can you help us sell outside the province?",
+        "a": "Yes, and for anything that can be delivered remotely it is often the better growth story, precisely because the local market is not expanding. That plan competes on expertise rather than proximity, which is a content and AI visibility problem more than an advertising one."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Newfoundland and Labrador", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021A000210" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, including whether the numbers here justify paid advertising at all.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" }
+    }
+  }
+}

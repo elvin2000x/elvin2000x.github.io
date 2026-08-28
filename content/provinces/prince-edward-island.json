@@ -1,0 +1,120 @@
+{
+  "_comment": "Prince Edward Island province page. No city page under it and there should not be one: the whole province is a single market of 154,331 people. This is the page that says outright that paid search is often the wrong tool here, which is also the strongest argument that this set of pages is not a doorway farm. Population and growth are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/prince-edward-island",
+  "template": "city",
+  "navKey": "consulting/prince-edward-island/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Prince Edward Island",
+  "region": "Canada",
+  "areaType": "State",
+  "regionType": "Country",
+  "districts": ["Charlottetown", "Summerside", "Stratford", "Cornwall", "Kings County", "Prince County"],
+  "nearby": ["Montague", "Souris", "Alberton", "Georgetown", "Kensington", "Borden-Carleton"],
+  "industries": ["tourism and hospitality", "agriculture and food processing", "fisheries and aquaculture", "bioscience", "professional services"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Prince Edward Island | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Prince Edward Island businesses and professional firms. One accountable consultant, remote across the province, honest about what the numbers support.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Prince Edward Island",
+    "ogDescription": "Marketing for PEI business owners and professional firms. The fastest-growing province in the country, and small enough that I will tell you when ads are the wrong answer.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses across {city}",
+    "sub": "I work with {city} business owners and professional firms on Google Ads, SEO and AI visibility, remotely, as one accountable person rather than an account team you never meet. {city} grew faster than any other province between the last two censuses, and it is still small enough that the usual marketing advice does not apply cleanly.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing across {city}",
+    "market": [
+      "I will start with the part most consultants skip. {city} has 154,331 people, which for many local services means the monthly search volume is small enough that Google Ads cannot spend a sensible budget without buying searches that were never going to convert. If you sell to Islanders only, there is a real chance that paid search is the wrong tool for you, and I would rather tell you that on a free call than take $1,500 a month to run a campaign against demand that does not exist.",
+      "What does work here is being the obvious answer. In a market this size the shortlist for any service is genuinely short, so ranking well organically or being the business a chatbot names is worth disproportionately more than it would be in a city. Both of those are achievable on {city} budgets in a way that outbidding competitors is not.",
+      "The exception is anything that sells beyond the Island. Tourism reaches the whole country and further, and {industries} include several sectors whose customers are nowhere near here. If that is your business, the market is not 154,331 people and the advice above reverses completely: paid search becomes viable, because you are buying attention where the volume actually is."
+    ],
+    "facts": [
+      { "stat": "154,331", "label": "people in {city} (2021 Census)" },
+      { "stat": "8.0%", "label": "growth since 2016, the fastest of any province, against 5.2% nationally (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. In {city} the first question is which of them your numbers actually support, and the answer is not always all three.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "Worth doing if you sell beyond the Island, or if you are in a category with real local urgency. Not worth doing for many Island-only services, and I will say so before you spend anything. Where it fits: account structure, targeting, and cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Usually the right first investment here. A province-wide organic position is genuinely achievable at this size, and it keeps producing without a monthly media budget behind it. Technical fixes first, then the pages that answer what your customers are actually asking.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "The best value of the three in a market this size. When someone asks ChatGPT, Perplexity or Google's AI Overviews for a business in {city}, it names a handful. Being one of them is a one-time piece of work and it does not care how small the search volume is.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across the province",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where on the Island you are makes no difference to the work or the price. There is no separate page for Charlottetown or Summerside because the whole province is one market and splitting it would be a fiction.",
+      "nearbyHeading": "And in the smaller communities",
+      "nearbyBody": "I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Is our market too small for Google Ads?",
+        "a": "For a lot of Island-only businesses, honestly yes. There is not always enough monthly search volume to justify a management fee on top of the spend, and pretending otherwise would be selling you a service you do not need. If you sell beyond the Island, the answer flips and paid search becomes one of the better options available to you.",
+        "open": true
+      },
+      {
+        "q": "So what should we do instead?",
+        "a": "Usually SEO and AIO. Both are about being the obvious answer rather than about buying attention by the click, and both work better the smaller and more concentrated the market is. In a province of this size, being the named recommendation is worth more than any budget you could reasonably spend on ads."
+      },
+      {
+        "q": "Why is there no page for Charlottetown?",
+        "a": "Because Charlottetown and the rest of the province are not separate search markets in any way that would change my advice. Publishing a page for each town to catch each set of searches is the kind of thing that makes these pages worthless, so I have not done it."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Prince Edward Island", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021A000211" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, including whether the numbers here justify paid advertising at all.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" }
+    }
+  }
+}

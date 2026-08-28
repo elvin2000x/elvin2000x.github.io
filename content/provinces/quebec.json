@@ -1,0 +1,250 @@
+{
+  "_comment": "Quebec province page. Bilingual, matching Montreal and Quebec City. The argument that makes it distinct from either city page: language is the market at the province level, and the Charter of the French language applies to commercial publicity province-wide rather than only in Montreal. Legal framing stays as a pointer to the OQLF and is explicitly not legal advice. French copy still needs a native reviewer before it is load-bearing. Population and growth are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/quebec",
+  "template": "city",
+  "navKey": "consulting/quebec/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Quebec",
+  "region": "Canada",
+  "areaType": "State",
+  "regionType": "Country",
+  "districts": ["Greater Montreal", "the Quebec City region", "the Outaouais", "the Eastern Townships", "Mauricie", "Saguenay-Lac-Saint-Jean", "Bas-Saint-Laurent"],
+  "nearby": ["Sherbrooke", "Trois-Rivieres", "Saguenay", "Drummondville", "Saint-Jean-sur-Richelieu", "Rimouski"],
+  "industries": ["aerospace", "technology and video games", "manufacturing", "professional services", "agri-food"],
+  "fr": {
+    "city": "Québec",
+    "region": "Canada",
+    "districts": ["le Grand Montréal", "la région de Québec", "l'Outaouais", "les Cantons-de-l'Est", "la Mauricie", "le Saguenay-Lac-Saint-Jean", "le Bas-Saint-Laurent"],
+    "nearby": ["Sherbrooke", "Trois-Rivières", "Saguenay", "Drummondville", "Saint-Jean-sur-Richelieu", "Rimouski"],
+    "industries": ["l'aérospatiale", "les technologies et le jeu vidéo", "la fabrication", "les services professionnels", "l'agroalimentaire"],
+
+    "title": "Consultant Google Ads, SEO et AIO au Québec | Elvin Peters",
+    "description": "Gestion Google Ads, SEO et consultation AIO pour les entreprises, agences et cabinets professionnels du Québec. Un seul responsable, à distance, partout dans la province.",
+    "ogTitle": "Consultant Google Ads, SEO et AIO au Québec",
+    "ogDescription": "Marketing pour les entreprises du Québec. Ici, la langue n'est pas un détail de traduction : c'est le marché lui-même.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consultation", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO et visibilité IA pour les entreprises du {city}",
+    "sub": "Je travaille avec des propriétaires d'entreprise, des propriétaires d'agence et des cabinets professionnels du {city} sur Google Ads, le SEO et la visibilité dans les outils d'IA. À distance, une seule personne responsable, pas une équipe que vous ne rencontrez jamais.",
+    "heroBtns": [
+      { "label": "Réservez 20 minutes gratuites", "href": "/contact/", "contact": "Marketing pour une entreprise du {city}", "source": "province-{city}" },
+      { "label": "Voir mes tarifs", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**50 M$+** en investissement publicitaire rentable",
+      "A conseillé des marques au sein de l'équipe **Large Customer Sales de Google**",
+      "Auteur de **The Artificial Advantage**",
+      "Dessert le **{city}** à distance"
+    ],
+
+    "marketHeading": "Ce qui change vraiment quand on fait du marketing au {city}",
+    "market": [
+      "Au {city}, la langue n'est pas une couche de traduction posée sur une campagne anglaise. C'est le marché. Les mots que vos clients tapent en français ne sont presque jamais la traduction directe des mots qu'ils tapent en anglais, et une campagne traduite mot à mot achète des expressions que personne ne cherche. La recherche de mots-clés doit être refaite en français, pas traduite.",
+      "La Charte de la langue française encadre la publicité commerciale partout dans la province, pas seulement à Montréal. Je ne suis pas avocat et rien ici n'est un avis juridique : la référence à consulter est l'Office québécois de la langue française, dont le lien se trouve plus bas. Ce que je peux dire, c'est que je conçois les campagnes en partant du français plutôt qu'en l'ajoutant à la fin.",
+      "Enfin, la province ne se résume pas à Montréal. {districts} sont des marchés distincts, avec des concurrents différents et des coûts très différents. Une campagne réglée sur tout le {city} laisse Montréal fixer le prix pour tout le monde, y compris pour vos clients de Rimouski."
+    ],
+    "facts": [
+      { "stat": "8 501 833", "label": "personnes au {city} (Recensement de 2021)" },
+      { "stat": "4,1 %", "label": "croissance depuis 2016, sous la moyenne nationale de 5,2 % (Recensement de 2021)" },
+      { "stat": "3", "label": "marchés du {city} avec leur propre page ici" }
+    ],
+
+    "servicesHeading": "Trois façons de faire croître une entreprise du {city}",
+    "servicesIntro": "Les mêmes trois services partout où je travaille. Ce qui change au {city}, c'est que tout part du français.",
+    "services": [
+      {
+        "title": "Gestion Google Ads",
+        "href": "/google-ads/",
+        "body": "Au {city}, cela commence par une vraie recherche de mots-clés en français et par la séparation des marchés, pour que Montréal cesse de fixer le prix des régions. Ensuite la structure du compte, puis la coupe des dépenses sur des recherches qui n'allaient jamais convertir.",
+        "price": "**1 500 $**/mois + investissement publicitaire",
+        "btn": { "label": "Google Ads au {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "Consultation SEO",
+        "href": "/seo/",
+        "body": "Souvent le meilleur premier investissement en dehors du Grand Montréal, où la concurrence est plus mince. Corrections techniques d'abord, puis les pages en français qui répondent réellement aux questions de vos clients.",
+        "price": "**1 200 $**/mois",
+        "btn": { "label": "SEO au {city}", "href": "/seo/" }
+      },
+      {
+        "title": "Consultation AIO",
+        "href": "/aio-consulting/",
+        "body": "Être l'entreprise du {city} que ChatGPT, Perplexity et les aperçus IA de Google nomment quand quelqu'un demande une recommandation, en français comme en anglais. Le moins cher des trois, une seule fois.",
+        "price": "**1 800 $** une seule fois",
+        "btn": { "label": "Consultation AIO", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Où je travaille au {city}",
+    "area": {
+      "citiesHeading": "Les marchés du {city} avec leur propre page",
+      "citiesBody": "Chacune de ces pages entre dans le détail de ce marché précis. Si vous vendez dans l'un d'eux, commencez par là plutôt que par cette page.",
+      "cities": [
+        { "label": "Montréal", "href": "/consulting/montreal/" },
+        { "label": "Ville de Québec", "href": "/consulting/quebec-city/" },
+        { "label": "Gatineau et la région d'Ottawa", "href": "/consulting/ottawa-gatineau/" }
+      ],
+      "districtsHeading": "Partout dans la province",
+      "districtsBody": "Je prends des clients dans {districts}. Tout se fait à distance, par visioconférence et par courriel, donc votre région ne change ni le travail ni le prix.",
+      "nearbyHeading": "Et dans les villes régionales",
+      "nearbyBody": "Beaucoup de bonnes entreprises ne sont pas dans une ville qui a sa propre page. Je travaille avec des entreprises de {nearby} aux mêmes conditions."
+    },
+
+    "faqHeading": "Questions que posent les entreprises du {city}",
+    "faq": [
+      {
+        "q": "Avez-vous un bureau au {city}?",
+        "a": "Non. Je suis à Toronto et je travaille de la maison. Il n'y a donc aucun bureau au {city} et je ne vais pas laisser entendre le contraire. Tout se fait à distance, par visioconférence et par courriel.",
+        "open": true
+      },
+      {
+        "q": "Est-ce qu'on peut simplement traduire nos campagnes anglaises?",
+        "a": "C'est ce que font la plupart des entreprises et c'est ce qui coûte le plus cher. Les expressions que vos clients tapent en français ne correspondent pas mot à mot à celles qu'ils tapent en anglais, et une traduction directe achète du volume qui n'existe pas. La recherche se refait en français.",
+        "open": true
+      },
+      {
+        "q": "Et la Charte de la langue française?",
+        "a": "Je ne suis pas avocat et ceci n'est pas un avis juridique. La Charte encadre la publicité commerciale partout dans la province et l'Office québécois de la langue française est la référence à consulter; le lien est plus bas. Concrètement, je conçois à partir du français plutôt que de l'ajouter à la fin."
+      },
+      {
+        "q": "Votre français est-il celui d'ici?",
+        "a": "Je travaille en français et je le dis franchement : pour de la rédaction publicitaire destinée au grand public québécois, je fais réviser par une personne d'ici. Je préfère vous le dire au départ plutôt que de vous livrer un texte qui sonne traduit."
+      },
+      {
+        "q": "Combien ça coûte?",
+        "a": "La gestion Google Ads est à 1 500 $ par mois plus votre investissement publicitaire. La consultation SEO est à 1 200 $ par mois. La consultation AIO est à 1 800 $ une seule fois. Aucuns frais de démarrage et aucun contrat à long terme."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistique Canada, Série « Perspective géographique », Recensement de 2021 - Québec", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=F&topic=1&dguid=2021A000224" },
+      { "label": "Office québécois de la langue française", "href": "https://www.oqlf.gouv.qc.ca/" }
+    ],
+
+    "cta": {
+      "h2": "Dites-moi où ça bloque au {city}",
+      "p": "Vingt minutes, gratuites, sans argumentaire de vente. Décrivez l'entreprise et je vous dirai par quoi je commencerais.",
+      "btn": { "label": "Réservez 20 minutes gratuites", "href": "/contact/", "contact": "Marketing pour une entreprise du {city}", "source": "province-{city}" }
+    }
+  },
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Quebec | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Quebec businesses, agencies and professional firms. French-first campaigns, one accountable consultant, remote across the province.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Quebec",
+    "ogDescription": "Marketing for Quebec businesses. Here language is not a translation layer, it is the market itself.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses across {city}",
+    "sub": "I work with {city} business owners, agency owners and professional firms on Google Ads, SEO and AI visibility, remotely, as one accountable person rather than an account team you never meet. This page exists in French as well, because in this province that is the point rather than a courtesy.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing across {city}",
+    "market": [
+      "In {city}, French is not a translation layer applied to an English campaign. It is the market. The words your customers type in French are almost never the direct translation of the words they type in English, so a translated campaign buys phrases nobody searches for. The keyword research has to be redone in French rather than converted.",
+      "The Charter of the French language governs commercial advertising across the whole province, not only in Montreal. I am not a lawyer and none of this is legal advice; the authority to consult is the Office quebecois de la langue francaise, linked below. What I can tell you is how I work, which is to design in French first rather than bolt it on at the end.",
+      "The province is also not just Montreal. {districts} are separate markets with different competitors and very different costs. A campaign set to all of {city} lets Montreal set the price for everyone in it, including your customers in Rimouski."
+    ],
+    "facts": [
+      { "stat": "8,501,833", "label": "people in {city} (2021 Census)" },
+      { "stat": "4.1%", "label": "growth since 2016, below the national rate of 5.2% (2021 Census)" },
+      { "stat": "3", "label": "{city} markets with their own page here" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that all of them start in French.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that starts with real French keyword research and with splitting the markets, so Montreal stops setting the price for the regions. Then account structure, then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Often the better first investment outside Greater Montreal, where competition is thinner. Technical fixes first, then the French pages that genuinely answer what your customers are asking.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation, in French as well as English. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "citiesHeading": "{city} markets with their own page",
+      "citiesBody": "Each of these goes into what is actually different about that market. If you sell in one of them, start there rather than here.",
+      "cities": [
+        { "label": "Montreal", "href": "/consulting/montreal/" },
+        { "label": "Quebec City", "href": "/consulting/quebec-city/" },
+        { "label": "Gatineau and the Ottawa region", "href": "/consulting/ottawa-gatineau/" }
+      ],
+      "districtsHeading": "Across the province",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price.",
+      "nearbyHeading": "And in the regional cities",
+      "nearbyBody": "Plenty of good businesses are not in a city with its own page. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email.",
+        "open": true
+      },
+      {
+        "q": "Can we just translate our English campaigns?",
+        "a": "That is what most businesses do and it is the most expensive habit in this province. The phrases your customers type in French do not map word for word onto the English ones, so a direct translation buys volume that does not exist. The research gets redone in French.",
+        "open": true
+      },
+      {
+        "q": "What about the Charter of the French language?",
+        "a": "I am not a lawyer and this is not legal advice. The Charter governs commercial advertising across the province and the Office quebecois de la langue francaise is the authority to consult; the link is below. Practically, I design in French first rather than adding it at the end."
+      },
+      {
+        "q": "Is your French good enough for customer-facing copy?",
+        "a": "I work in French and I will be straight with you: for advertising copy aimed at a general Quebec audience I have it reviewed by someone from here. I would rather say that up front than hand you something that reads as translated."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Quebec", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021A000224" },
+      { "label": "Office quebecois de la langue francaise", "href": "https://www.oqlf.gouv.qc.ca/" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" }
+    }
+  }
+}

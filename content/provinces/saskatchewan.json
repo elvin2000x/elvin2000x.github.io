@@ -1,0 +1,127 @@
+{
+  "_comment": "Saskatchewan province page. Sits above Saskatoon and Regina. The distinct argument: this is the one province where province-wide targeting is usually the right default rather than the expensive mistake, because the two cities are close in size and cost and the customer base for the main industries is genuinely provincial. Population and growth are from the StatCan Focus on Geography page cited at the bottom.",
+  "slug": "consulting/saskatchewan",
+  "template": "city",
+  "navKey": "consulting/saskatchewan/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Saskatchewan",
+  "region": "Canada",
+  "areaType": "State",
+  "regionType": "Country",
+  "districts": ["the Saskatoon region", "the Regina region", "southeast Saskatchewan", "the southwest", "the northeast", "northern Saskatchewan"],
+  "nearby": ["Prince Albert", "Moose Jaw", "Swift Current", "Yorkton", "North Battleford", "Estevan", "Weyburn"],
+  "industries": ["agriculture and agtech", "potash and uranium mining", "energy", "manufacturing", "professional services"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Saskatchewan | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Saskatchewan businesses, agencies and professional firms. Saskatoon and Regina pages, one accountable consultant, remote across the province.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Saskatchewan",
+    "ogDescription": "Marketing for Saskatchewan business owners, agency owners and professional firms. The one province where province-wide targeting is usually right.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses across {city}",
+    "sub": "I work with {city} business owners, agency owners and professional firms on Google Ads, SEO and AI visibility, remotely, as one accountable person rather than an account team you never meet. This is the one province where I usually recommend targeting the whole thing, and it is worth understanding why.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing across {city}",
+    "market": [
+      "Almost everywhere else in Canada, province-wide targeting is an expensive default, because one dominant expensive city ends up setting the price for every smaller market in the geography. {city} is the exception. Saskatoon and Regina are close enough in size and cost that neither distorts the other, and in {industries} the customer base genuinely is provincial rather than local. Here, drawing a tight radius around your own city is the more common mistake.",
+      "That customer base also extends past the border more often than owners assume. Agtech, mining supply and specialist professional firms based here routinely sell into Alberta, Manitoba, North Dakota and further, while their advertising is set to a circle around the office. Getting the geography right is usually worth more than getting the ad copy right.",
+      "The province grew 3.1% between the last two censuses, the slowest growth outside Atlantic Canada, and that is worth saying plainly. It means the market is not going to hand you customers through population growth, so gains have to come from taking share. The thin competitive field is what makes that realistic: very few {city} businesses have published anything that seriously competes for a search result."
+    ],
+    "facts": [
+      { "stat": "1,132,505", "label": "people in {city} (2021 Census)" },
+      { "stat": "3.1%", "label": "growth since 2016, against 5.2% nationally (2021 Census)" },
+      { "stat": "2", "label": "{city} cities with their own page here, Saskatoon and Regina" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the map should usually be wider than you have it, not narrower.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that starts with widening the targeting to match who you actually sell to, which for a lot of businesses here means the whole province and sometimes beyond it. Then account structure, then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Usually the strongest of the three here. Long buying cycles mean people research before they contact anyone, and the competition is thin enough that a page which genuinely answers the question can rank in months rather than years.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a supplier or a firm. Cheapest of the three, one-time, and I have yet to find a {city} competitor who has started.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "citiesHeading": "{city} cities with their own page",
+      "citiesBody": "Each of these goes into what is specific to that city. If nearly all your customers are in one of them, start there; if you sell province-wide, this page is the better starting point.",
+      "cities": [
+        { "label": "Saskatoon", "href": "/consulting/saskatoon/" },
+        { "label": "Regina", "href": "/consulting/regina/" }
+      ],
+      "districtsHeading": "Across the province",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price.",
+      "nearbyHeading": "And in the regional centres",
+      "nearbyBody": "A large share of {city} business is done nowhere near either city. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Should we target the whole province or just our city?",
+        "a": "In {city}, usually the whole province, which is the opposite of my advice in Ontario or British Columbia. Saskatoon and Regina are close enough in cost that neither inflates the other, and in most of the industries here the customers are spread across the province rather than concentrated in one city.",
+        "open": true
+      },
+      {
+        "q": "Is there enough search volume to justify paid ads?",
+        "a": "Sometimes not, and I would rather look than guess. In smaller {city} categories the honest answer is that SEO and AIO are worth doing and Google Ads is not, and I will tell you that on the call rather than selling you all three by default."
+      },
+      {
+        "q": "Can you help us sell outside Saskatchewan?",
+        "a": "Yes, and for agtech, mining supply and remote-capable professional firms it is often the biggest growth available. The plan changes, because outside the province you compete on expertise rather than proximity, and that is a content and AI visibility problem more than an advertising one."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Saskatchewan", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021A000247" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether your targeting is narrower than your customer base.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "province-{city}" }
+    }
+  }
+}

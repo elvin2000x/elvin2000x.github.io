@@ -1,0 +1,406 @@
+{
+  "_comment": "The /aio-consulting/ page in both languages. build.js generates /aio-consulting/ and /fr/aio-consulting/ from this file -- editing the generated HTML gets overwritten on the next build. FRENCH IS NOT NATIVE-REVIEWED.",
+  "slug": "aio-consulting",
+  "template": "offer",
+  "navKey": "aio-consulting/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "schemaService": {
+    "serviceType": "AI answer engine optimization",
+    "areaServed": [
+      "Toronto",
+      "Canada",
+      "Remote"
+    ],
+    "price": "1800",
+    "priceCurrency": "USD",
+    "offerName": "Fixed-scope build"
+  },
+  "en": {
+    "title": "AIO Consulting | AI Answer Engine Optimization | Elvin Peters",
+    "description": "A done-for-you build that gets your business cited correctly by ChatGPT, Perplexity, and Google AI Overviews: schema markup, FAQ architecture, and content built for AI extraction. $1,800, one time.",
+    "ogTitle": "AIO Consulting | AI Answer Engine Optimization | Elvin Peters",
+    "ogDescription": "Get your business structured so ChatGPT, Perplexity, and Google AI Overviews cite you correctly. A fixed-scope, done-for-you build.",
+    "breadcrumb": [
+      {
+        "label": "Home",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services/"
+      },
+      {
+        "label": "AIO Consulting",
+        "href": "/aio-consulting/"
+      }
+    ],
+    "eyebrow": "AI Answer Engine Optimization",
+    "h1": "Be the business ChatGPT actually recommends, not the one it never mentions",
+    "sub": "More of your customers are asking ChatGPT, Perplexity, and Google's AI Overviews for a recommendation before they ever type a search query. Most small business sites are invisible to those tools: no structured data, no direct-answer content, nothing built for a machine to read and cite. I fix that in one done-for-you build.",
+    "heroBtns": [
+      {
+        "label": "Book a scoping call",
+        "style": "primary",
+        "href": "/contact/",
+        "contact": "AIO consulting for ",
+        "source": "aio-consulting"
+      },
+      {
+        "label": "See what is included",
+        "style": "ghost",
+        "href": "#included"
+      }
+    ],
+    "credbar": [
+      "Author of The Artificial Advantage",
+      "Advised brands inside Google's Large Customer Sales team",
+      "Builds with AI in production every day",
+      "Every site he runs is built on structured data and schema markup",
+      "Toronto based, works remote"
+    ],
+    "schemaName": "AIO Consulting",
+    "schemaDescription": "A done-for-you, fixed-scope build by Elvin M. Peters that structures a business's site so ChatGPT, Perplexity, Google AI Overviews and other AI answer engines can find, read, and cite it correctly.",
+    "sections": [
+      {
+        "n": "01",
+        "h2": "Imagine being the answer, not a link nobody clicks",
+        "prose": "Right now, when someone asks an AI tool a question your business could answer, there is a good chance you are not part of the answer at all. Not because a competitor is better, but because their site happens to be readable to the machine and yours is not. Imagine that flipped: a customer asks ChatGPT or Perplexity for a recommendation and your business is the one named, because your site was built to be found, understood, and cited correctly. That is the outcome of an AIO build."
+      },
+      {
+        "n": "02",
+        "h2": "One clear build, not a retainer",
+        "prose": "This is a focused, done-for-you build, not an ongoing subscription. We scope it together on a call, then I do the work end to end on your site. The build covers:",
+        "list": [
+          "Schema markup across your key pages, so AI systems and search engines both understand exactly what your business offers",
+          "FAQ architecture written for direct-answer extraction, the format AI tools actually pull from",
+          "Content restructured into clear, citable answers instead of vague marketing copy",
+          "A crawlability review and llms.txt setup so AI bots can actually read your site instead of being blocked out"
+        ]
+      },
+      {
+        "n": "03",
+        "id": "how",
+        "h2": "How the build works",
+        "prose": "The process stays simple and predictable from the first call to the handover.",
+        "list": [
+          "We scope it on a call. I review how AI systems currently see your site and confirm exactly what the build will cover.",
+          "I build it end to end. Schema markup, FAQ architecture, and content restructuring, all done on your live site.",
+          "You get a full handover. Written documentation explaining what changed and why, so nothing stays a black box.",
+          "You own it. The work lives on your own site with no ongoing dependency on me."
+        ]
+      },
+      {
+        "n": "04",
+        "h2": "Built by an operator who ships AI every day",
+        "prose": "I am Elvin Peters, author of The Artificial Advantage, a book on directing AI rather than prompting at it. Before building on my own I spent three years running $1.5M a month in paid search, then advised brands inside Google's Large Customer Sales team. On my own I have shipped fifteen niche directories, thirteen original browser games, my own email engine, and a self-hosted platform, and every one of them runs on the same structured data and schema markup this build applies to your site. This is not theory. It is the exact practice behind every site I operate.",
+        "list": [
+          "A real operator background inside Google, so the recommendations come from how these systems actually work",
+          "A shipping track record across directories, games, a full platform and an email engine, all built on structured data",
+          "Daily hands-on AI work, so you get current practice instead of theory"
+        ]
+      },
+      {
+        "n": "05",
+        "h2": "Who this is for",
+        "prose": "This is built for businesses that want to show up when a customer asks an AI tool for a recommendation instead of typing a search query, and do not have the time or the technical background to structure their own site for it.",
+        "list": [
+          "Your site has real content, but it is written for a person skimming, not a machine extracting",
+          "You want AI systems to cite your business correctly instead of a competitor's",
+          "You want a clean, documented build you own outright, not another ongoing retainer"
+        ]
+      },
+      {
+        "n": "06",
+        "id": "included",
+        "h2": "What it costs",
+        "prose": "A fixed scope for the full build, confirmed with you on the call before any work begins. No open ended retainer.",
+        "offer": {
+          "name": "AIO Consulting Build",
+          "price": "$1,800",
+          "priceUnit": "one time",
+          "pnote": "fixed scope, scoped on a call",
+          "checklist": [
+            "A scoping call auditing how AI systems currently see your site",
+            "Schema markup implementation across your key pages",
+            "FAQ architecture built for direct-answer extraction",
+            "Content restructured into clear, citable, direct-answer format",
+            "Crawlability review and llms.txt setup so AI bots can read your site properly",
+            "Written documentation so your team understands what changed and why",
+            "Full ownership, deployed on your own site with no lock-in"
+          ],
+          "btn": {
+            "label": "Book a scoping call",
+            "href": "/contact/",
+            "contact": "AIO consulting for ",
+            "source": "aio-consulting"
+          }
+        }
+      }
+    ],
+    "faqHeading": "Frequently Asked Questions",
+    "faq": [
+      {
+        "open": true,
+        "q": "What exactly do I get for the price?",
+        "a": "One complete AIO build, scoped on a call, covering schema markup, FAQ architecture built for direct-answer extraction, content restructured so AI systems can lift it cleanly, and a crawlability review with llms.txt setup. It is a fixed scope of $1,800 USD, confirmed with you before any work begins."
+      },
+      {
+        "open": false,
+        "q": "What is AIO, in plain terms?",
+        "a": "AIO, or AI answer engine optimization, is the practice of structuring a site so tools like ChatGPT, Perplexity, and Google AI Overviews can find your content, understand it correctly, and cite your business by name instead of a competitor's. It uses structured data, clear direct-answer content, and crawlable pages, the same techniques search engines already reward."
+      },
+      {
+        "open": false,
+        "q": "How is this different from SEO?",
+        "a": "SEO earns rankings in a search results page. AIO earns a citation inside an AI-generated answer, which increasingly replaces the search results page entirely for a growing share of questions. The two overlap heavily but are not the same job, which is why they are offered as separate builds. Many businesses want both, and <a href=\"/seo/\" style=\"color:var(--gold-2)\">SEO consulting</a> is its own service if that is the fit."
+      },
+      {
+        "open": false,
+        "q": "How long does the build take?",
+        "a": "It depends on the size of the site, which is why we agree the timeline on the call before any work starts. You will know the plan and the handover date up front, so there are no surprises."
+      },
+      {
+        "open": false,
+        "q": "Do I need technical skills to maintain it afterward?",
+        "a": "No. The handover includes plain written documentation so you and your team understand what changed and why, and can maintain it without writing code or calling me back. You own it fully once it is delivered."
+      },
+      {
+        "open": false,
+        "q": "Why is this fixed scope instead of an ongoing retainer?",
+        "a": "One clearly defined deliverable keeps the price predictable and the outcome concrete. You get a finished, working build you own outright, deployed on your own site, with no open ended retainer."
+      },
+      {
+        "open": false,
+        "q": "Can I see client case studies?",
+        "a": "Not yet, and I would rather be straight about that than invent them. This is a productized service and client results will be published as engagements complete. For now the proof is that every site I run myself, including this one, is built on the same structured data and schema markup this build applies to your site."
+      },
+      {
+        "open": false,
+        "q": "Do you work with businesses outside Toronto?",
+        "a": "Yes. I am based in Toronto and work remote, so the build happens on your site wherever your business is in Canada. I also keep <a href=\"/consulting/\" style=\"color:var(--gold-2)\">dedicated pages for a number of Canadian cities</a> if you want details specific to where your business is."
+      }
+    ],
+    "cta": {
+      "h2": "Bring me your site and let us make it citable",
+      "p": "Send me a note about your business and where you want to show up. I will tell you honestly whether an AIO build is the right move before you commit, and if it is a fit I will scope the build and hand you a site AI tools can actually read.",
+      "btn": {
+        "label": "Book your scoping call",
+        "href": "/contact/",
+        "contact": "AIO consulting for ",
+        "source": "aio-consulting"
+      },
+      "after": {
+        "href": "/seo/",
+        "label": "Want search rankings too? See SEO consulting"
+      }
+    },
+    "schemaOfferName": "Fixed-scope build",
+    "form": {
+      "heading": "Tell me where your site stands",
+      "sub": "A few lines is plenty. I read every one of these myself and I will tell you honestly whether this is a fit.",
+      "nameLabel": "Your name",
+      "emailLabel": "Email",
+      "businessLabel": "Business or website",
+      "messageLabel": "Where do you want to be cited?",
+      "messagePlaceholder": "I want ChatGPT to recommend my business when people search my category...",
+      "submit": "Send it over",
+      "privacy": "Goes straight to me. No list, no automated sales sequence.",
+      "success": "Got it. I will reply personally, usually within one business day.",
+      "error": "That did not send. Email me directly at elvin@elvinpeters.com and I will pick it up."
+    }
+  },
+  "fr": {
+    "title": "Consultation en visibilité IA | Optimisation pour moteurs de réponse | Elvin Peters",
+    "description": "Un build clé en main pour que votre entreprise soit citée correctement par ChatGPT, Perplexity et les aperçus IA de Google : balisage schema, architecture FAQ et contenu bâti pour l'extraction par l'IA. 1 800 $, une seule fois.",
+    "ogTitle": "Consultation en visibilité IA | Optimisation pour moteurs de réponse | Elvin Peters",
+    "ogDescription": "Faites structurer votre entreprise pour que ChatGPT, Perplexity et les aperçus IA de Google vous citent correctement. Un build clé en main, à portée fixe.",
+    "breadcrumb": [
+      {
+        "label": "Accueil",
+        "href": "/"
+      },
+      {
+        "label": "Services",
+        "href": "/services/"
+      },
+      {
+        "label": "Consultation en visibilité IA",
+        "href": "/aio-consulting/"
+      }
+    ],
+    "eyebrow": "Optimisation pour moteurs de réponse IA",
+    "h1": "Soyez l'entreprise que ChatGPT recommande vraiment, pas celle qu'il ne nomme jamais",
+    "sub": "De plus en plus de vos clients demandent une recommandation à ChatGPT, à Perplexity ou aux aperçus IA de Google avant même de taper une requête. La plupart des sites de petites entreprises sont invisibles pour ces outils : aucune donnée structurée, aucun contenu en réponse directe, rien qu'une machine puisse lire et citer. Je règle ça en un seul build clé en main.",
+    "heroBtns": [
+      {
+        "label": "Réserver un appel de cadrage",
+        "style": "primary",
+        "href": "/contact/",
+        "contact": "Consultation en visibilité IA pour ",
+        "source": "aio-consulting"
+      },
+      {
+        "label": "Voir ce qui est inclus",
+        "style": "ghost",
+        "href": "#included"
+      }
+    ],
+    "credbar": [
+      "Auteur de The Artificial Advantage",
+      "A conseillé des marques au sein de l'équipe Large Customer Sales de Google",
+      "Bâtit avec l'IA en production tous les jours",
+      "Chacun de ses sites repose sur des données structurées et du balisage schema",
+      "Basé à Toronto, travaille à distance"
+    ],
+    "schemaName": "Consultation en visibilité IA",
+    "schemaOfferName": "Build à portée fixe",
+    "schemaDescription": "Un build clé en main à portée fixe, par Elvin M. Peters, qui structure le site d'une entreprise pour que ChatGPT, Perplexity, les aperçus IA de Google et les autres moteurs de réponse puissent le trouver, le comprendre et le citer correctement.",
+    "sections": [
+      {
+        "n": "01",
+        "h2": "Imaginez être la réponse, pas un lien que personne ne clique",
+        "prose": "En ce moment, quand quelqu'un pose à un outil d'IA une question à laquelle votre entreprise pourrait répondre, il y a de bonnes chances que vous ne fassiez pas partie de la réponse du tout. Non pas parce qu'un concurrent est meilleur, mais parce que son site se trouve à être lisible par la machine et le vôtre ne l'est pas. Imaginez l'inverse : un client demande une recommandation à ChatGPT ou à Perplexity et c'est votre entreprise qui est nommée, parce que votre site a été bâti pour être trouvé, compris et cité correctement. C'est le résultat d'un build de visibilité IA."
+      },
+      {
+        "n": "02",
+        "cls": "leak",
+        "h2": "Un build clair, pas un forfait mensuel",
+        "prose": "C'est un build ciblé et clé en main, pas un abonnement continu. Nous en définissons la portée ensemble lors d'un appel, puis je fais le travail du début à la fin sur votre site. Le build couvre :",
+        "list": [
+          "Le balisage schema sur vos pages clés, pour que les systèmes d'IA et les moteurs de recherche comprennent exactement ce que votre entreprise offre",
+          "Une architecture FAQ écrite pour l'extraction en réponse directe, le format que les outils d'IA reprennent réellement",
+          "Du contenu restructuré en réponses claires et citables plutôt qu'en texte marketing vague",
+          "Une revue d'explorabilité et la mise en place d'un fichier llms.txt pour que les robots d'IA puissent réellement lire votre site au lieu d'en être bloqués"
+        ]
+      },
+      {
+        "n": "03",
+        "h2": "Comment le build se déroule",
+        "prose": "Le processus reste simple et prévisible, du premier appel jusqu'à la remise.",
+        "list": [
+          "Nous en définissons la portée lors d'un appel. J'examine comment les systèmes d'IA voient votre site aujourd'hui et je confirme exactement ce que le build couvrira.",
+          "Je le bâtis du début à la fin. Balisage schema, architecture FAQ et restructuration du contenu, le tout directement sur votre site en ligne.",
+          "Vous recevez une remise complète. Une documentation écrite qui explique ce qui a changé et pourquoi, pour que rien ne reste une boîte noire.",
+          "Vous en êtes propriétaire. Le travail vit sur votre propre site, sans dépendance continue envers moi."
+        ]
+      },
+      {
+        "n": "04",
+        "h2": "Bâti par un opérateur qui livre de l'IA tous les jours",
+        "prose": "Je suis Elvin Peters, auteur de The Artificial Advantage, un livre sur l'art de diriger l'IA plutôt que de lui lancer des prompts. Avant de bâtir à mon compte, j'ai passé trois ans à gérer 1,5 M$ par mois en recherche payante, puis j'ai conseillé des marques au sein de l'équipe Large Customer Sales de Google. À mon compte, j'ai livré quinze répertoires de niche, treize jeux originaux pour navigateur, mon propre moteur de courriel et une plateforme auto-hébergée, et chacun d'eux repose sur les mêmes données structurées et le même balisage schema que ce build applique à votre site. Ce n'est pas de la théorie. C'est exactement la pratique derrière chaque site que j'exploite.",
+        "list": [
+          "Un vrai bagage d'opérateur chez Google, alors les recommandations viennent du fonctionnement réel de ces systèmes",
+          "Un historique de livraison : des répertoires, des jeux, une plateforme complète et un moteur de courriel, tous bâtis sur des données structurées",
+          "Un travail quotidien avec l'IA, alors vous obtenez la pratique actuelle plutôt que de la théorie"
+        ]
+      },
+      {
+        "n": "05",
+        "h2": "À qui ça s'adresse",
+        "prose": "C'est bâti pour les entreprises qui veulent apparaître quand un client demande une recommandation à un outil d'IA au lieu de taper une requête, et qui n'ont ni le temps ni le bagage technique pour structurer leur site elles-mêmes.",
+        "list": [
+          "Votre site a du vrai contenu, mais il est écrit pour une personne qui survole, pas pour une machine qui extrait",
+          "Vous voulez que les systèmes d'IA citent votre entreprise correctement plutôt que celle d'un concurrent",
+          "Vous voulez un build propre et documenté dont vous êtes pleinement propriétaire, pas un autre forfait mensuel"
+        ]
+      },
+      {
+        "n": "06",
+        "id": "included",
+        "h2": "Ce que ça coûte",
+        "prose": "Une portée fixe pour le build complet, confirmée avec vous lors de l'appel avant que le travail commence. Aucun forfait mensuel ouvert.",
+        "offer": {
+          "name": "Build de visibilité IA",
+          "price": "1 800 $",
+          "priceUnit": "une seule fois",
+          "pnote": "portée fixe, définie lors d'un appel",
+          "checklist": [
+            "Un appel de cadrage qui audite comment les systèmes d'IA voient votre site aujourd'hui",
+            "La mise en place du balisage schema sur vos pages clés",
+            "Une architecture FAQ bâtie pour l'extraction en réponse directe",
+            "Du contenu restructuré en format clair, citable et en réponse directe",
+            "Une revue d'explorabilité et la mise en place d'un fichier llms.txt pour que les robots d'IA lisent votre site correctement",
+            "Une documentation écrite pour que votre équipe comprenne ce qui a changé et pourquoi",
+            "La pleine propriété, déployée sur votre propre site, sans engagement"
+          ],
+          "btn": {
+            "label": "Réserver un appel de cadrage",
+            "href": "/contact/",
+            "contact": "Consultation en visibilité IA pour ",
+            "source": "aio-consulting"
+          }
+        }
+      }
+    ],
+    "faqHeading": "Foire aux questions",
+    "faq": [
+      {
+        "open": true,
+        "q": "Qu'est-ce que j'obtiens exactement pour ce prix?",
+        "a": "Un build de visibilité IA complet, dont la portée est définie lors d'un appel, couvrant le balisage schema, une architecture FAQ bâtie pour l'extraction en réponse directe, du contenu restructuré pour que les systèmes d'IA puissent le reprendre proprement, et une revue d'explorabilité avec mise en place d'un fichier llms.txt. C'est une portée fixe de 1 800 $ US, confirmée avec vous avant que le travail commence."
+      },
+      {
+        "open": false,
+        "q": "C'est quoi la visibilité IA, en clair?",
+        "a": "L'optimisation pour moteurs de réponse, c'est la pratique qui consiste à structurer un site pour que des outils comme ChatGPT, Perplexity et les aperçus IA de Google puissent trouver votre contenu, le comprendre correctement et citer votre entreprise par son nom plutôt que celle d'un concurrent. Ça s'appuie sur des données structurées, du contenu clair en réponse directe et des pages explorables, soit les mêmes techniques que les moteurs de recherche récompensent déjà."
+      },
+      {
+        "open": false,
+        "q": "En quoi est-ce différent du référencement naturel?",
+        "a": "Le référencement naturel vous fait gagner des positions dans une page de résultats. La visibilité IA vous fait gagner une citation à l'intérieur d'une réponse générée par l'IA, ce qui remplace de plus en plus la page de résultats pour une part croissante des questions. Les deux se chevauchent beaucoup mais ce n'est pas le même travail, et c'est pourquoi ils sont offerts comme deux mandats distincts. Beaucoup d'entreprises veulent les deux, et <a href=\"/seo/\" style=\"color:var(--gold-2)\">la consultation en référencement naturel</a> est un service à part entière si c'est ce qui convient."
+      },
+      {
+        "open": false,
+        "q": "Combien de temps prend le build?",
+        "a": "Ça dépend de la taille du site, et c'est pour ça que nous convenons de l'échéancier lors de l'appel, avant que le travail commence. Vous connaîtrez le plan et la date de remise dès le départ, alors il n'y a pas de surprises."
+      },
+      {
+        "open": false,
+        "q": "Faut-il des compétences techniques pour l'entretenir ensuite?",
+        "a": "Non. La remise inclut une documentation écrite en langage clair pour que vous et votre équipe compreniez ce qui a changé et pourquoi, et puissiez l'entretenir sans écrire de code ni me rappeler. Vous en êtes pleinement propriétaire une fois livré."
+      },
+      {
+        "open": false,
+        "q": "Pourquoi une portée fixe plutôt qu'un forfait mensuel?",
+        "a": "Un livrable clairement défini garde le prix prévisible et le résultat concret. Vous obtenez un build fini et fonctionnel dont vous êtes pleinement propriétaire, déployé sur votre propre site, sans forfait mensuel ouvert."
+      },
+      {
+        "open": false,
+        "q": "Puis-je voir des études de cas clients?",
+        "a": "Pas encore, et je préfère être franc là-dessus plutôt que d'en inventer. C'est un service productisé et les résultats clients seront publiés à mesure que les mandats se terminent. Pour l'instant, la preuve, c'est que chaque site que j'exploite moi-même, celui-ci compris, repose sur les mêmes données structurées et le même balisage schema que ce build applique à votre site."
+      },
+      {
+        "open": false,
+        "q": "Travaillez-vous avec des entreprises à l'extérieur de Toronto?",
+        "a": "Oui. Je suis basé à Toronto et je travaille à distance, alors le build se fait sur votre site peu importe où se trouve votre entreprise au Canada. Je tiens aussi <a href=\"/consulting/\" style=\"color:var(--gold-2)\">des pages dédiées à plusieurs villes canadiennes</a> si vous voulez des détails propres à l'endroit où se trouve votre entreprise."
+      }
+    ],
+    "cta": {
+      "h2": "Apportez-moi votre site et rendons-le citable",
+      "p": "Écrivez-moi au sujet de votre entreprise et de l'endroit où vous voulez apparaître. Je vous dirai honnêtement si un build de visibilité IA est la bonne décision avant que vous vous engagiez, et si ça convient, je définirai la portée du build et je vous remettrai un site que les outils d'IA peuvent réellement lire.",
+      "btn": {
+        "label": "Réservez votre appel de cadrage",
+        "href": "/contact/",
+        "contact": "Consultation en visibilité IA pour ",
+        "source": "aio-consulting"
+      },
+      "after": {
+        "href": "/seo/",
+        "label": "Vous voulez aussi des positions dans la recherche? Voyez la consultation en référencement naturel"
+      }
+    },
+    "form": {
+      "heading": "Dites-moi où en est votre site",
+      "sub": "Quelques lignes suffisent. Je lis chacun de ces messages moi-même et je vous dirai honnêtement si c'est un bon match.",
+      "nameLabel": "Votre nom",
+      "emailLabel": "Courriel",
+      "businessLabel": "Entreprise ou site web",
+      "messageLabel": "Où voulez-vous être cité?",
+      "messagePlaceholder": "Je veux que ChatGPT recommande mon entreprise quand on cherche dans mon domaine...",
+      "submit": "Envoyer",
+      "privacy": "Ça m'arrive directement. Aucune liste, aucune séquence de vente automatisée.",
+      "success": "Bien reçu. Je vous réponds personnellement, habituellement en un jour ouvrable.",
+      "error": "L'envoi n'a pas fonctionné. Écrivez-moi directement à elvin@elvinpeters.com et je vais le récupérer."
+    }
+  }
+}

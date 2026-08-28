@@ -1,0 +1,196 @@
+{
+  "_comment": "Global UI strings for the bilingual site. English is the source of truth; French is Quebec business register (courriel not email, number format '1 500 $', currency symbol after the number). FRENCH IS NOT YET NATIVE-REVIEWED. Line up a Quebec francophone reviewer before the French pages are load-bearing for a Quebec pitch.",
+  "locales": {
+    "en": {
+      "code": "en",
+      "htmlLang": "en",
+      "hreflang": "en-CA",
+      "urlPrefix": "",
+      "label": "English",
+      "shortLabel": "EN",
+      "_comment": "switchTo/switchToAria describe THIS locale, in this locale's language. The toggle reads them off the locale it links to.",
+      "switchTo": "English",
+      "switchToAria": "View this page in English",
+      "noTwinNote": "This page is available in English only."
+    },
+    "fr": {
+      "code": "fr",
+      "htmlLang": "fr-CA",
+      "hreflang": "fr-CA",
+      "urlPrefix": "/fr",
+      "label": "Français",
+      "shortLabel": "FR",
+      "switchTo": "Français",
+      "switchToAria": "Voir cette page en français",
+      "noTwinNote": "Cette page n'existe qu'en anglais."
+    }
+  },
+  "nav": {
+    "en": {
+      "Services": "Services",
+      "Products": "Products",
+      "Free": "Free",
+      "Blog": "Blog",
+      "Proof": "Proof",
+      "Contact": "Contact",
+      "Projects": "Projects",
+      "Buy the Book": "Buy the Book",
+      "Put AI to work": "Put AI to work",
+      "In-Person": "In-Person",
+      "Consulting": "Consulting",
+      "The AI Workspace Setup": "The AI Workspace Setup",
+      "AI Coaching": "AI Coaching",
+      "AI Workflow Build": "AI Workflow Build",
+      "Events": "Events",
+      "Workshops": "Workshops",
+      "Google Ads Audit": "Google Ads Audit",
+      "Google Ads Management": "Google Ads Management",
+      "SEO Consulting": "SEO Consulting",
+      "AIO Consulting": "AIO Consulting",
+      "Consulting by City": "Consulting by City",
+      "The AI Fluency Series": "The AI Fluency Series",
+      "Buy on Amazon": "Buy on Amazon",
+      "Book One, available now": "Book One, available now",
+      "Learn more": "Learn more",
+      "The Artificial Advantage": "The Artificial Advantage",
+      "The series": "The series",
+      "Books Two and Three, on the way": "Books Two and Three, on the way",
+      "Guides and Systems": "Guides and Systems",
+      "The System": "The System",
+      "The complete method, $37": "The complete method, $37",
+      "The Claude Operator's Manual": "The Claude Operator's Manual",
+      "Claude, set up for your job, $67": "Claude, set up for your job, $67",
+      "The Content Machine": "The Content Machine",
+      "AI volume worth publishing, $47": "AI volume worth publishing, $47",
+      "Tools and Apps": "Tools and Apps",
+      "AI Tools Directory": "AI Tools Directory",
+      "Find the right AI tool": "Find the right AI tool",
+      "Apps and Calculators": "Apps and Calculators",
+      "Free tools, built and hosted here": "Free tools, built and hosted here"
+    },
+    "fr": {
+      "Services": "Services",
+      "Products": "Produits",
+      "Free": "Gratuit",
+      "Blog": "Blogue",
+      "Proof": "Preuves",
+      "Contact": "Contact",
+      "Projects": "Projets",
+      "Buy the Book": "Achetez le livre",
+      "Put AI to work": "Mettre l'IA au travail",
+      "In-Person": "En personne",
+      "Consulting": "Consultation",
+      "The AI Workspace Setup": "Configuration de l'espace de travail IA",
+      "AI Coaching": "Accompagnement IA",
+      "AI Workflow Build": "Construction de flux de travail IA",
+      "Events": "Conférences",
+      "Workshops": "Ateliers",
+      "Google Ads Audit": "Audit Google Ads",
+      "Google Ads Management": "Gestion Google Ads",
+      "SEO Consulting": "Consultation en référencement",
+      "AIO Consulting": "Consultation en visibilité IA",
+      "Consulting by City": "Consultation par ville",
+      "The AI Fluency Series": "La série AI Fluency",
+      "Buy on Amazon": "Acheter sur Amazon",
+      "Book One, available now": "Tome un, disponible maintenant",
+      "Learn more": "En savoir plus",
+      "The Artificial Advantage": "The Artificial Advantage",
+      "The series": "La série",
+      "Books Two and Three, on the way": "Tomes deux et trois, à venir",
+      "Guides and Systems": "Guides et systèmes",
+      "The System": "The System",
+      "The complete method, $37": "La méthode complète, 37 $",
+      "The Claude Operator's Manual": "The Claude Operator's Manual",
+      "Claude, set up for your job, $67": "Claude, configuré pour votre métier, 67 $",
+      "The Content Machine": "The Content Machine",
+      "AI volume worth publishing, $47": "Du volume IA qui mérite d'être publié, 47 $",
+      "Tools and Apps": "Outils et applications",
+      "AI Tools Directory": "Répertoire d'outils IA",
+      "Find the right AI tool": "Trouvez le bon outil d'IA",
+      "Apps and Calculators": "Applications et calculatrices",
+      "Free tools, built and hosted here": "Outils gratuits, bâtis et hébergés ici"
+    }
+  },
+  "footer": {
+    "en": {
+      "copyright": "© 2026 Elvin M. Peters. Toronto and remote.",
+      "links": [
+        {
+          "label": "Home",
+          "href": "/"
+        },
+        {
+          "label": "Services",
+          "href": "/services/"
+        },
+        {
+          "label": "The Book",
+          "href": "/book.html"
+        },
+        {
+          "label": "Projects",
+          "href": "/projects/"
+        },
+        {
+          "label": "Blog",
+          "href": "/writing/"
+        },
+        {
+          "label": "Newsletter",
+          "href": "/updates/"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact/"
+        }
+      ]
+    },
+    "fr": {
+      "copyright": "© 2026 Elvin M. Peters. Toronto et à distance.",
+      "links": [
+        {
+          "label": "Accueil",
+          "href": "/"
+        },
+        {
+          "label": "Services",
+          "href": "/services/"
+        },
+        {
+          "label": "Le livre",
+          "href": "/book.html"
+        },
+        {
+          "label": "Projets",
+          "href": "/projects/"
+        },
+        {
+          "label": "Blogue",
+          "href": "/writing/"
+        },
+        {
+          "label": "Infolettre",
+          "href": "/updates/"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact/"
+        }
+      ]
+    }
+  },
+  "ui": {
+    "en": {
+      "breadcrumbHome": "Home",
+      "breadcrumbServices": "Services",
+      "faqHeading": "Frequently Asked Questions",
+      "unreviewedNotice": ""
+    },
+    "fr": {
+      "breadcrumbHome": "Accueil",
+      "breadcrumbServices": "Services",
+      "faqHeading": "Foire aux questions",
+      "unreviewedNotice": ""
+    }
+  }
+}
