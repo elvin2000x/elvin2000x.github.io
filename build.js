@@ -1088,3 +1088,67 @@ const smXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '\n</urlset>\n';
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), smXml);
 console.log('Sitemap: ' + smPages.length + ' URLs');
+
+/* ------------------------------------------------------------------ */
+/* llms.txt - a curated map of the site for language models, per the
+   llmstxt.org proposal.
+
+   Status, honestly: this is a PROPOSED standard, not an adopted one. No
+   major AI company has confirmed it consumes llms.txt, and Google has
+   publicly compared it to the old keywords meta tag. It is here because it
+   costs nothing and the downside is zero, not because it is known to work.
+   What actually governs AI visibility is robots.txt access plus clean,
+   extractable page content -- see robots.txt for the crawler rules.
+
+   Generated from the same JSON the nav reads, so a renamed page or a
+   changed price cannot leave a stale claim in here. Every line traces to
+   copy that already exists on the site: nothing is written fresh for this
+   file, because a claim only an LLM sees is still a claim. */
+const SITE = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'site.json'), 'utf8'));
+const llmsSections = [];
+function llmsList(title, rows) {
+  if (!rows.length) return;
+  llmsSections.push('## ' + title + '\n\n' + rows.join('\n'));
+}
+function llmsAbs(href) {
+  return /^https?:/.test(href) ? href : ORIGIN + href;
+}
+for (const b of SVCS.buckets) {
+  llmsList('Services - ' + b.label, SVCS.cards
+    .filter(c => c.bucket === b.id)
+    .map(c => '- [' + c.title + '](' + llmsAbs(c.href) + '): ' + c.home_blurb));
+}
+/* A few Products entries are menu affordances rather than names -- the nav
+   needs "Learn more", but a model citing this file needs "The Artificial
+   Advantage". Where the title is one of those, the sub is the real name, so
+   they swap. Both strings still ship; only which one is the link text moves. */
+const LLMS_GENERIC = new Set(['Learn more', 'Buy on Amazon', 'The series']);
+for (const b of PRODS.buckets) {
+  llmsList('Products - ' + b.label, PRODS.items
+    .filter(i => i.bucket === b.id)
+    .map(i => LLMS_GENERIC.has(i.title)
+      ? '- [' + i.sub + '](' + llmsAbs(i.href) + '): ' + i.title
+      : '- [' + i.title + '](' + llmsAbs(i.href) + '): ' + i.sub));
+}
+llmsList('French', PAGES.slice()
+  .sort((a, b) => a.slug.localeCompare(b.slug))
+  .map(p => '- [' + p.fr.title.split(' | ')[0] + '](' + ORIGIN + '/fr/' + p.slug + '/): ' +
+    'French (Canada) version of ' + ORIGIN + '/' + p.slug + '/'));
+llmsList('Contact', [
+  '- [Contact](' + ORIGIN + '/contact/): send a message or book a call',
+  '- [Book a call](' + SITE.meet_url + '): scheduler',
+  '- Email: ' + SITE.email
+]);
+const llmsTxt =
+  '# Elvin Peters\n\n' +
+  '> Toronto AI consultant and author of The Artificial Advantage. I help teams\n' +
+  '> install AI that ships, run better Google Ads, and train staff to use AI well.\n\n' +
+  'Independent consultant, not an agency: the person who scopes the work is the\n' +
+  'person who does it. Commercial pages are published in English and Canadian\n' +
+  'French; the French translations are marked below.\n\n' +
+  llmsSections.join('\n\n') + '\n\n' +
+  '## Notes\n\n' +
+  '- Full URL list: ' + ORIGIN + '/sitemap.xml\n' +
+  '- Crawler rules: ' + ORIGIN + '/robots.txt\n';
+fs.writeFileSync(path.join(OUT, 'llms.txt'), llmsTxt);
+console.log('llms.txt: ' + llmsSections.length + ' sections');

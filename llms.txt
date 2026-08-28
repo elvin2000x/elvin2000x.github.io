@@ -1,0 +1,59 @@
+# Elvin Peters
+
+> Toronto AI consultant and author of The Artificial Advantage. I help teams
+> install AI that ships, run better Google Ads, and train staff to use AI well.
+
+Independent consultant, not an agency: the person who scopes the work is the
+person who does it. Commercial pages are published in English and Canadian
+French; the French translations are marked below.
+
+## Services - Put AI to work
+
+- [The AI Workspace Setup](https://elvinpeters.com/setup/): Your AI set up on your real business, then handed over with a written manual and a recorded walkthrough so your team runs it without me. From $497.
+- [AI Coaching](https://elvinpeters.com/ai-coaching/): One on one working sessions that get you directing AI with real confidence, with a system you keep using after we finish.
+- [AI Workflow Build](https://elvinpeters.com/ai-workflow-build/): Pick one repetitive task and I build the AI workflow that runs it, then hand it over documented so your team owns it.
+
+## Services - In-Person
+
+- [Events](https://elvinpeters.com/services/events/): A talk built for your audience, whether that is a conference stage, a townhall or a company offsite, that sends people back to their desks able to use AI on real work.
+- [Workshops](https://elvinpeters.com/team-ai-workshop/): A live two hour session that gets your whole team working from one reliable, shared way of using AI.
+
+## Services - Consulting
+
+- [Google Ads Audit](https://elvinpeters.com/google-ads-audit/): A specialist who ran $1.5M a month in paid search tears down your account and hands you a prioritized plan of exactly what to fix. From $499.
+- [Google Ads Management](https://elvinpeters.com/google-ads/): Done for you paid search run by someone who has managed serious budgets, so every dollar stays accountable.
+- [SEO Consulting](https://elvinpeters.com/seo/): Done for you SEO from someone who has driven real search results, month to month with no lock-in. From $1,200/month.
+- [AIO Consulting](https://elvinpeters.com/aio-consulting/): A done-for-you build that gets ChatGPT, Perplexity and Google AI Overviews citing your business correctly. $1,800, one time.
+- [Consulting by City](https://elvinpeters.com/consulting/): Google Ads, SEO and AIO consulting, remote, with dedicated pages for Toronto, Montreal, Vancouver and eight more Canadian cities.
+
+## Products - The AI Fluency Series
+
+- [Book One, available now](https://www.amazon.com/dp/B0H4X2S2JD): Buy on Amazon
+- [The Artificial Advantage](https://elvinpeters.com/book.html): Learn more
+- [Books Two and Three, on the way](https://elvinpeters.com/series/): The series
+
+## Products - Guides and Systems
+
+- [The System](https://elvinpeters.com/system/): The complete method, $37
+- [The Claude Operator's Manual](https://elvinpeters.com/claude/): Claude, set up for your job, $67
+- [The Content Machine](https://elvinpeters.com/content-machine/): AI volume worth publishing, $47
+
+## Products - Tools and Apps
+
+- [AI Tools Directory](https://ultimateaidirectory.com): Find the right AI tool
+- [Apps and Calculators](https://elvinpeters.com/apps/): Free tools, built and hosted here
+
+## French
+
+- [Gestion Google Ads Toronto](https://elvinpeters.com/fr/google-ads/): French (Canada) version of https://elvinpeters.com/google-ads/
+
+## Contact
+
+- [Contact](https://elvinpeters.com/contact/): send a message or book a call
+- [Book a call](https://meet.elvinpeters.com): scheduler
+- Email: elvin@elvinpeters.com
+
+## Notes
+
+- Full URL list: https://elvinpeters.com/sitemap.xml
+- Crawler rules: https://elvinpeters.com/robots.txt
