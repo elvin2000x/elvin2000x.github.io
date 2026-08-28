@@ -49,6 +49,7 @@ French; the French translations are marked below.
 - [Contact](https://elvinpeters.com/fr/contact/): French (Canada) version of https://elvinpeters.com/contact/
 - [Gestion Google Ads Toronto](https://elvinpeters.com/fr/google-ads/): French (Canada) version of https://elvinpeters.com/google-ads/
 - [Consultation en référencement naturel Toronto](https://elvinpeters.com/fr/seo/): French (Canada) version of https://elvinpeters.com/seo/
+- [Services en IA, référencement et Google Ads](https://elvinpeters.com/fr/services/): French (Canada) version of https://elvinpeters.com/services/
 
 ## Contact
 

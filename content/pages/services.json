@@ -1,0 +1,330 @@
+{
+  "_comment": "The /services/ page in both languages. build.js generates /services/ and /fr/services/ from this file -- editing the generated HTML gets overwritten on the next build. Prices are restated here on purpose: this is the page a buyer compares on. They must match the individual service pages. FRENCH IS NOT NATIVE-REVIEWED.",
+  "slug": "services",
+  "template": "services",
+  "navKey": "services/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "areaServed": ["Toronto", "Canada", "Remote"],
+  "en": {
+    "title": "AI, SEO & Google Ads Services | Elvin Peters, Toronto",
+    "description": "Ways to work with Elvin Peters: AI coaching, AI workflow builds, team AI workshops, a Google Ads audit, Google Ads management, SEO consulting, and AIO consulting. Toronto and remote.",
+    "ogTitle": "AI, SEO & Google Ads Services | Elvin Peters",
+    "ogDescription": "AI coaching, workflow builds, team workshops, Google Ads (audit + management), SEO and AIO consulting, run by one accountable operator. Toronto and remote.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Services" }
+    ],
+    "eyebrow": "Services · Toronto and Remote",
+    "h1": "Ways to work with me.",
+    "sub": "I help founders and teams put AI to work, and I run the paid search that brings customers in. Strategy from a decade in marketing and three years inside Canadian lending, plus the hands to build it myself. One operator, accountable end to end. Every one below has its own page with the full detail.",
+    "heroBtn": { "href": "/contact/", "label": "Get in touch", "contact": "Working together on ", "source": "services" },
+    "credbar": [
+      "A decade in **marketing**, **$50M+** in profitable ad spend",
+      "**$1.5M a month** in paid media at a large publicly traded Canadian lender",
+      "Author of **The Artificial Advantage**",
+      "Builds and self-hosts AI systems **solo**"
+    ],
+    "buckets": [
+      {
+        "label": "Put AI to work",
+        "cards": [
+          {
+            "href": "/setup/",
+            "title": "The AI Workspace Setup",
+            "who": "Done for you · five a month",
+            "promise": "Your AI set up on your real business, then handed over with a written manual and a recorded walkthrough so your team runs it without me.",
+            "price": "**$497** personal · **$1,497** team · first three clients 40% off",
+            "btns": [
+              { "href": "/setup/", "label": "View details", "style": "primary sm" },
+              { "href": "/setup/#apply", "label": "Apply", "style": "ghost sm" }
+            ]
+          },
+          {
+            "href": "/ai-coaching/",
+            "title": "1:1 AI Coaching",
+            "who": "For founders & professionals",
+            "promise": "Go from dabbling to directing AI with real confidence, with a system you keep using after we finish.",
+            "price": "**$300** per session · 4-pack $1,000",
+            "btns": [
+              { "href": "/ai-coaching/", "label": "View details", "style": "primary sm" },
+              { "href": "/contact/", "label": "Get in touch", "style": "ghost sm", "contact": "Working together on ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/ai-workflow-build/",
+            "title": "AI Workflow Build",
+            "who": "Done for you",
+            "promise": "Pick one repetitive task and I build the AI workflow that runs it, then hand it over documented so your team owns it.",
+            "price": "**From $1,500** · fixed scope per build",
+            "btns": [
+              { "href": "/ai-workflow-build/", "label": "View details", "style": "primary sm" },
+              { "href": "/contact/", "label": "Get in touch", "style": "ghost sm", "contact": "Working together on ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/team-ai-workshop/",
+            "title": "Team AI Workshop",
+            "who": "For teams",
+            "promise": "A live two-hour session that gets your whole team working from one reliable, shared way of using AI.",
+            "price": "**$1,200** · 2-hour live session",
+            "btns": [
+              { "href": "/team-ai-workshop/", "label": "View details", "style": "primary sm" },
+              { "href": "/contact/", "label": "Get in touch", "style": "ghost sm", "contact": "Working together on ", "source": "services" }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Bring in customers",
+        "cards": [
+          {
+            "href": "/google-ads-audit/",
+            "title": "Google Ads Audit",
+            "who": "For businesses already spending",
+            "promise": "A specialist who ran $1.5M a month in paid search tears down your account and hands you a prioritized plan of exactly what to fix.",
+            "price": "**$499** · one-time audit",
+            "btns": [
+              { "href": "/google-ads-audit/", "label": "View details", "style": "primary sm" },
+              { "href": "/contact/", "label": "Get in touch", "style": "ghost sm", "contact": "Working together on ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/google-ads/",
+            "title": "Google Ads Management",
+            "who": "For businesses ready to grow",
+            "promise": "Done-for-you paid search run by someone who has managed serious budgets, so every dollar stays accountable.",
+            "price": "**$1,500/mo** · five accounts max · you fund ad spend",
+            "btns": [
+              { "href": "/google-ads/", "label": "View details", "style": "primary sm" },
+              { "href": "/contact/", "label": "Get in touch", "style": "ghost sm", "contact": "Working together on ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/seo/",
+            "title": "SEO Consulting",
+            "who": "For businesses that want to be found",
+            "promise": "Done-for-you SEO from someone who has driven real search results, month to month with no lock-in.",
+            "price": "**$1,200/mo** · month to month",
+            "btns": [
+              { "href": "/seo/", "label": "View details", "style": "primary sm" },
+              { "href": "/contact/", "label": "Get in touch", "style": "ghost sm", "contact": "Working together on ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/aio-consulting/",
+            "title": "AIO Consulting",
+            "who": "For businesses that want AI to cite them",
+            "promise": "A done-for-you build that gets ChatGPT, Perplexity and Google AI Overviews citing your business correctly.",
+            "price": "**$1,800** · one time, fixed scope",
+            "btns": [
+              { "href": "/aio-consulting/", "label": "View details", "style": "primary sm" },
+              { "href": "/contact/", "label": "Get in touch", "style": "ghost sm", "contact": "Working together on ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/consulting/",
+            "title": "Consulting by City",
+            "who": "Serving businesses across Canada",
+            "promise": "Google Ads, SEO and AIO consulting, remote, with dedicated pages for Toronto, Montreal, Vancouver and eight more Canadian cities.",
+            "price": "**Same pricing** · everywhere in Canada",
+            "btns": [
+              { "href": "/consulting/", "label": "View details", "style": "primary sm" },
+              { "href": "/contact/", "label": "Get in touch", "style": "ghost sm", "contact": "Working together on ", "source": "services" }
+            ]
+          }
+        ]
+      }
+    ],
+    "faqHeading": "Frequently Asked Questions",
+    "faq": [
+      {
+        "open": true,
+        "q": "Do you work remote or only in Toronto?",
+        "a": "Both. I am based in Toronto and work with clients across Canada and remotely worldwide over video."
+      },
+      {
+        "q": "How much does it cost?",
+        "a": "AI coaching is $300 per 90-minute session or $1,000 for four. A one-time Google Ads Audit is $499. Team AI Workshops are $1,200 for a two-hour live session. AI Workflow Builds start at $1,500. Google Ads management is $1,500 per month plus your own ad spend, and I run five accounts at most. SEO Consulting is $1,200 per month, month to month. AIO Consulting is a one-time fixed-scope build at $1,800. Full details are on each service page."
+      },
+      {
+        "q": "How fast can we start?",
+        "a": "Coaching sessions and workshops can usually happen within a week. A Google Ads audit turns around in three to five business days. Workflow builds and ongoing management start with a scoping call, then the build, usually within two weeks."
+      },
+      {
+        "q": "What makes you different from other consultants?",
+        "a": "I build and run production AI systems solo, every day, and I wrote the book on the method. On the ads side, I ran $1.5M a month in paid search for three years, then advised brands inside Google. You get someone who has actually done the work himself."
+      },
+      {
+        "q": "What if I just want to learn, not hire anyone?",
+        "a": "That is exactly what AI Coaching and the Team AI Workshop are for. And the book, The Artificial Advantage, is the low-cost way to start."
+      }
+    ],
+    "cta": {
+      "h2": "Let us find your fastest win.",
+      "p": "Tell me where you are stuck. We will find the highest-value place to start, and I will tell you straight whether I can help.",
+      "btn": { "href": "/contact/", "label": "Get in touch", "contact": "Working together on ", "source": "services" },
+      "after": { "href": "/system/", "label": "Not ready yet? Start with the $37 System: the ebook plus the complete kit" }
+    }
+  },
+  "fr": {
+    "title": "Services en IA, référencement et Google Ads | Elvin Peters, Toronto",
+    "description": "Les façons de travailler avec Elvin Peters : accompagnement en IA, création de flux de travail IA, ateliers en équipe, audit Google Ads, gestion Google Ads, conseil en référencement naturel et conseil en optimisation pour l'IA. Toronto et à distance.",
+    "ogTitle": "Services en IA, référencement et Google Ads | Elvin Peters",
+    "ogDescription": "Accompagnement en IA, flux de travail, ateliers en équipe, Google Ads (audit et gestion), référencement naturel et optimisation pour l'IA, menés par un seul opérateur responsable. Toronto et à distance.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Services" }
+    ],
+    "eyebrow": "Services · Toronto et à distance",
+    "h1": "Les façons de travailler avec moi.",
+    "sub": "J'aide les fondateurs et les équipes à mettre l'IA au travail, et je gère la publicité de recherche qui amène les clients. Une stratégie tirée de dix ans en marketing et de trois ans dans le crédit à la consommation au Canada, avec les mains pour tout construire moi-même. Un seul opérateur, responsable du début à la fin. Chaque service ci-dessous a sa propre page avec tous les détails.",
+    "heroBtn": { "href": "/contact/", "label": "Prenons contact", "contact": "Travailler ensemble sur ", "source": "services" },
+    "credbar": [
+      "Dix ans en **marketing**, plus de **50 M$** en placement publicitaire rentable",
+      "**1,5 M$ par mois** en médias payants chez un grand prêteur canadien coté en bourse",
+      "Auteur de **The Artificial Advantage**",
+      "Conçoit et héberge lui-même des systèmes d'IA, **en solo**"
+    ],
+    "buckets": [
+      {
+        "label": "Mettre l'IA au travail",
+        "cards": [
+          {
+            "href": "/setup/",
+            "title": "L'installation de votre espace de travail IA",
+            "who": "Clés en main · cinq par mois",
+            "promise": "Votre IA installée sur votre véritable entreprise, puis remise avec un manuel écrit et une démonstration enregistrée pour que votre équipe la fasse fonctionner sans moi.",
+            "price": "**497 $** individuel · **1 497 $** équipe · 40 % de rabais pour les trois premiers clients",
+            "btns": [
+              { "href": "/setup/", "label": "Voir les détails", "style": "primary sm" },
+              { "href": "/setup/#apply", "label": "Postuler", "style": "ghost sm" }
+            ]
+          },
+          {
+            "href": "/ai-coaching/",
+            "title": "Accompagnement IA individuel",
+            "who": "Pour fondateurs et professionnels",
+            "promise": "Passez du tâtonnement à la maîtrise de l'IA avec une vraie confiance, et un système que vous continuez d'utiliser après nos séances.",
+            "price": "**300 $** par séance · forfait de 4 : 1 000 $",
+            "btns": [
+              { "href": "/ai-coaching/", "label": "Voir les détails", "style": "primary sm" },
+              { "href": "/contact/", "label": "Prenons contact", "style": "ghost sm", "contact": "Travailler ensemble sur ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/ai-workflow-build/",
+            "title": "Création de flux de travail IA",
+            "who": "Clés en main",
+            "promise": "Choisissez une tâche répétitive et je construis le flux de travail IA qui l'exécute, puis je vous le remets documenté pour que votre équipe en soit propriétaire.",
+            "price": "**À partir de 1 500 $** · portée fixe par projet",
+            "btns": [
+              { "href": "/ai-workflow-build/", "label": "Voir les détails", "style": "primary sm" },
+              { "href": "/contact/", "label": "Prenons contact", "style": "ghost sm", "contact": "Travailler ensemble sur ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/team-ai-workshop/",
+            "title": "Atelier IA en équipe",
+            "who": "Pour les équipes",
+            "promise": "Une séance de deux heures en direct qui amène toute votre équipe à utiliser l'IA d'une seule façon, fiable et partagée.",
+            "price": "**1 200 $** · séance de 2 heures en direct",
+            "btns": [
+              { "href": "/team-ai-workshop/", "label": "Voir les détails", "style": "primary sm" },
+              { "href": "/contact/", "label": "Prenons contact", "style": "ghost sm", "contact": "Travailler ensemble sur ", "source": "services" }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Amener des clients",
+        "cards": [
+          {
+            "href": "/google-ads-audit/",
+            "title": "Audit Google Ads",
+            "who": "Pour les entreprises qui investissent déjà",
+            "promise": "Un spécialiste qui a géré 1,5 M$ par mois en recherche payante démonte votre compte et vous remet un plan priorisé de exactement ce qu'il faut corriger.",
+            "price": "**499 $** · audit unique",
+            "btns": [
+              { "href": "/google-ads-audit/", "label": "Voir les détails", "style": "primary sm" },
+              { "href": "/contact/", "label": "Prenons contact", "style": "ghost sm", "contact": "Travailler ensemble sur ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/google-ads/",
+            "title": "Gestion Google Ads",
+            "who": "Pour les entreprises prêtes à croître",
+            "promise": "Recherche payante clés en main, menée par quelqu'un qui a géré de gros budgets, pour que chaque dollar reste redevable.",
+            "price": "**1 500 $/mois** · cinq comptes au maximum · vous payez le placement publicitaire",
+            "btns": [
+              { "href": "/google-ads/", "label": "Voir les détails", "style": "primary sm" },
+              { "href": "/contact/", "label": "Prenons contact", "style": "ghost sm", "contact": "Travailler ensemble sur ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/seo/",
+            "title": "Conseil en référencement naturel",
+            "who": "Pour les entreprises qui veulent être trouvées",
+            "promise": "Référencement naturel clés en main, par quelqu'un qui a obtenu de vrais résultats en recherche, mois après mois et sans engagement.",
+            "price": "**1 200 $/mois** · sans engagement",
+            "btns": [
+              { "href": "/seo/", "label": "Voir les détails", "style": "primary sm" },
+              { "href": "/contact/", "label": "Prenons contact", "style": "ghost sm", "contact": "Travailler ensemble sur ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/aio-consulting/",
+            "title": "Conseil en optimisation pour l'IA",
+            "who": "Pour les entreprises qui veulent être citées par l'IA",
+            "promise": "Une réalisation clés en main qui amène ChatGPT, Perplexity et les aperçus IA de Google à citer votre entreprise correctement.",
+            "price": "**1 800 $** · une seule fois, portée fixe",
+            "btns": [
+              { "href": "/aio-consulting/", "label": "Voir les détails", "style": "primary sm" },
+              { "href": "/contact/", "label": "Prenons contact", "style": "ghost sm", "contact": "Travailler ensemble sur ", "source": "services" }
+            ]
+          },
+          {
+            "href": "/consulting/",
+            "title": "Conseil par ville",
+            "who": "Au service des entreprises partout au Canada",
+            "promise": "Conseil en Google Ads, en référencement naturel et en optimisation pour l'IA, à distance, avec des pages dédiées pour Toronto, Montréal, Vancouver et huit autres villes canadiennes.",
+            "price": "**Mêmes tarifs** · partout au Canada",
+            "btns": [
+              { "href": "/consulting/", "label": "Voir les détails", "style": "primary sm" },
+              { "href": "/contact/", "label": "Prenons contact", "style": "ghost sm", "contact": "Travailler ensemble sur ", "source": "services" }
+            ]
+          }
+        ]
+      }
+    ],
+    "faqHeading": "Foire aux questions",
+    "faq": [
+      {
+        "open": true,
+        "q": "Travaillez-vous à distance ou seulement à Toronto?",
+        "a": "Les deux. Je suis basé à Toronto et je travaille avec des clients partout au Canada, et à distance dans le monde entier par vidéoconférence."
+      },
+      {
+        "q": "Combien ça coûte?",
+        "a": "L'accompagnement IA est de 300 $ par séance de 90 minutes, ou 1 000 $ pour quatre. Un audit Google Ads unique coûte 499 $. Les ateliers IA en équipe sont à 1 200 $ pour une séance de deux heures en direct. Les créations de flux de travail IA commencent à 1 500 $. La gestion Google Ads est de 1 500 $ par mois, en plus de votre propre placement publicitaire, et je gère cinq comptes au maximum. Le conseil en référencement naturel est de 1 200 $ par mois, sans engagement. Le conseil en optimisation pour l'IA est une réalisation unique à portée fixe de 1 800 $. Tous les détails se trouvent sur la page de chaque service."
+      },
+      {
+        "q": "En combien de temps peut-on commencer?",
+        "a": "Les séances d'accompagnement et les ateliers ont généralement lieu dans la semaine. Un audit Google Ads est livré en trois à cinq jours ouvrables. Les créations de flux de travail et la gestion continue commencent par un appel de cadrage, puis la réalisation, habituellement en deux semaines."
+      },
+      {
+        "q": "Qu'est-ce qui vous distingue des autres consultants?",
+        "a": "Je conçois et j'exploite des systèmes d'IA en production, en solo, tous les jours, et j'ai écrit le livre sur la méthode. Du côté publicitaire, j'ai géré 1,5 M$ par mois en recherche payante pendant trois ans, puis j'ai conseillé des marques chez Google. Vous obtenez quelqu'un qui a réellement fait le travail lui-même."
+      },
+      {
+        "q": "Et si je veux seulement apprendre, sans embaucher personne?",
+        "a": "C'est exactement à ça que servent l'accompagnement IA et l'atelier IA en équipe. Et le livre, The Artificial Advantage, est la façon la moins coûteuse de commencer."
+      }
+    ],
+    "cta": {
+      "h2": "Trouvons votre gain le plus rapide.",
+      "p": "Dites-moi où ça bloque. Nous trouverons l'endroit le plus payant par où commencer, et je vous dirai franchement si je peux aider.",
+      "btn": { "href": "/contact/", "label": "Prenons contact", "contact": "Travailler ensemble sur ", "source": "services" },
+      "after": { "href": "/system/", "label": "Pas encore prêt? Commencez par Le Système à 37 $ : le livre numérique et la trousse complète" }
+    }
+  }
+}
