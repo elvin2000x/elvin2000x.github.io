@@ -74,6 +74,11 @@
 
     "areaHeading": "Where in {city} I work",
     "area": {
+      "citiesHeading": "{city} markets with their own page",
+      "citiesBody": "St. John's has its own page covering what is specific to that market, including why geographic isolation makes local search more reliable there than almost anywhere else in the country.",
+      "cities": [
+        { "label": "St. John's", "href": "/consulting/st-johns/" }
+      ],
       "districtsHeading": "Across the province",
       "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price. The time difference is real and I schedule around it.",
       "nearbyHeading": "And in the communities beyond the capital",

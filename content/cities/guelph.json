@@ -1,0 +1,119 @@
+{
+  "_comment": "Guelph city page. The argument unique to this market: Guelph is permanently absorbed into somebody else's map. It sits inside the triangle of Toronto, Kitchener-Waterloo and Hamilton, so regional campaigns run from all three routinely blanket it, meaning Guelph businesses compete against budgets that never intended to target Guelph at all. The flip side is that this makes Guelph-specific search unusually cheap for the businesses that bother to be specific. Population and growth verified from the StatCan Focus on Geography page cited at the bottom. Needs a matching key in content/nav.json.",
+  "slug": "consulting/guelph",
+  "template": "city",
+  "navKey": "consulting/guelph/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Guelph",
+  "region": "Ontario",
+  "districts": ["Downtown Guelph", "the south end", "the west end", "the Old University area", "Grange Hill East", "Guelph/Eramosa"],
+  "nearby": ["Cambridge", "Kitchener", "Fergus", "Elora", "Rockwood", "Milton", "Acton"],
+  "industries": ["advanced manufacturing", "agri-food and agri-tech", "education and research", "health care", "professional services"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Guelph, Ontario | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Guelph businesses. Serving Downtown Guelph, the south and west ends, the Old University area and Grange Hill East, and out across Wellington County.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Guelph, Ontario",
+    "ogDescription": "Google Ads, SEO and AI visibility for Guelph businesses. Three bigger cities keep advertising over the top of you, and being specific is how you win.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Ontario", "href": "/consulting/ontario/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} business owners, agency owners and professional firms, remotely, as one accountable person rather than an account team you never meet. {city} sits inside three larger markets' targeting at once, and the way out of that is specificity rather than budget.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} is inside the Greater Toronto Area's outer reach, inside the radius most Kitchener-Waterloo businesses draw, and inside what a Hamilton company calls its region. Campaigns from all three wash over this city constantly, run by advertisers who never chose {city} and are not thinking about it. That is genuinely difficult if you try to compete on budget, and it is a gift if you compete on relevance, because a searcher in {city} looking for something local is being shown a lot of results from businesses that are not local at all.",
+      "The practical version of that: generic terms here are contested by people with more money and no interest in the city, while {city}-specific terms are contested by almost nobody. The most profitable move for most businesses here is to be unmistakably, explicitly of {city}, in the ad copy, on the page and in the structured data, rather than to bid harder on a term three larger cities are already fighting over.",
+      "Then there is the part that has nothing to do with the neighbours. The agri-food and agri-tech cluster around the University of Guelph sells nationally and internationally, and for those firms the local map barely matters. {city} grew 9.0% between the last two censuses, well above the national 5.2%, so local demand is genuinely expanding too. Both can be true, and the plan should say which one you are before it says anything else."
+    ],
+    "facts": [
+      { "stat": "165,588", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "9.0%", "label": "growth since 2016, well above the national rate of 5.2% (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that being specific beats being loud, because loud is what the three cities around you are already doing.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that means giving up the generic terms the big regional advertisers are inflating and taking the specific ones they ignore. Fewer clicks, far better ones, at a cost that makes sense for a business this size. Then account structure, then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The strongest of the three here, and for a specific reason: a business actually in {city} can win {city} searches against out-of-town competitors in a way it never could in the paid auction. Local relevance is something Google gives you for free and money cannot buy. Technical fixes first, then the pages your customers are already searching for.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. Assistants do not have a bigger advertiser's budget pressing on them, so they are unusually fair to a genuinely local business that has done the work. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where you are in {city} makes no difference to the work or the price.",
+      "nearbyHeading": "And across Wellington County",
+      "nearbyBody": "The county is thinner ground competitively than the city and worth more than most {city} businesses assume. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. If you want someone who will walk into your shop, I am the wrong hire and I will say so on the call rather than after you have paid.",
+        "open": true
+      },
+      {
+        "q": "We keep getting outbid by companies that are not even in {city}. What do we do?",
+        "a": "Stop fighting them on the terms they care about. A Kitchener or Toronto advertiser blanketing the region is bidding on generic service terms, not on {city}-specific ones, and they are not going to follow you there. Being explicitly local in your copy, your pages and your structured data is both cheaper and more convincing to the person searching.",
+        "open": true
+      },
+      {
+        "q": "Should we advertise in Kitchener-Waterloo too?",
+        "a": "Only if you can serve customers there and have a reason for them to choose you over someone closer. If you do, it should be a separate campaign with its own budget, because merging the two lets the more expensive market set the price for both."
+      },
+      {
+        "q": "We sell nationally in agri-food. Does local search matter to us?",
+        "a": "Not much, and I will not pretend otherwise. Your buyers are looking for a capability, not a neighbour. That makes it a content and AI visibility problem, and the local pieces are worth doing only to the extent that credibility helps."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Guelph (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503550" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with which terms you should stop bidding on.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}
