@@ -74,8 +74,14 @@
 
     "areaHeading": "Where in {city} I work",
     "area": {
+      "citiesHeading": "{city} markets with their own page",
+      "citiesBody": "Moncton and Saint John have their own pages because they are genuinely different problems: one is a bilingual distribution hub, the other an industrial port where some growth is not a marketing question at all. There is no Fredericton page, because on the evidence I have it is not a separate market from the other two rather than a smaller version of them.",
+      "cities": [
+        { "label": "Moncton", "href": "/consulting/moncton/" },
+        { "label": "Saint John", "href": "/consulting/saint-john/" }
+      ],
       "districtsHeading": "Across the province",
-      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price. There is no separate page for Moncton, Saint John or Fredericton because none of them is big enough to be a separate market from the others in the way Toronto and Hamilton are.",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price.",
       "nearbyHeading": "And in the surrounding communities",
       "nearbyBody": "I work with businesses in {nearby} on the same terms."
     },
@@ -93,8 +99,8 @@
         "open": true
       },
       {
-        "q": "Why is there no page for Moncton or Saint John?",
-        "a": "Because I do not think they are separate search markets in any way that would change my advice, and I would rather say that than publish three near-identical pages to catch three sets of searches. If that changes, or if you tell me otherwise about your own market, I will build them."
+        "q": "Do Moncton and Saint John have their own pages?",
+        "a": "They do now, and only because each one turned out to need advice this page cannot give. Moncton is genuinely mixed between English and French, so a single-language campaign there leaves a large part of the market unaddressed. Saint John is an industrial port where a lot of B2B growth runs through procurement rather than search, and the honest answer for those businesses is that advertising is the wrong instrument. There is still no Fredericton page, because I have not found an argument it would carry that these two do not."
       },
       {
         "q": "Is the market too small for this to pay off?",

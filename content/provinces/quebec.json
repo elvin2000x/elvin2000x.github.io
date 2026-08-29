@@ -9,13 +9,13 @@
   "areaType": "State",
   "regionType": "Country",
   "districts": ["Greater Montreal", "the Quebec City region", "the Outaouais", "the Eastern Townships", "Mauricie", "Saguenay-Lac-Saint-Jean", "Bas-Saint-Laurent"],
-  "nearby": ["Sherbrooke", "Trois-Rivieres", "Saguenay", "Drummondville", "Saint-Jean-sur-Richelieu", "Rimouski"],
+  "nearby": ["Trois-Rivieres", "Saguenay", "Drummondville", "Saint-Jean-sur-Richelieu", "Rimouski", "Granby"],
   "industries": ["aerospace", "technology and video games", "manufacturing", "professional services", "agri-food"],
   "fr": {
     "city": "Québec",
     "region": "Canada",
     "districts": ["le Grand Montréal", "la région de Québec", "l'Outaouais", "les Cantons-de-l'Est", "la Mauricie", "le Saguenay-Lac-Saint-Jean", "le Bas-Saint-Laurent"],
-    "nearby": ["Sherbrooke", "Trois-Rivières", "Saguenay", "Drummondville", "Saint-Jean-sur-Richelieu", "Rimouski"],
+    "nearby": ["Trois-Rivières", "Saguenay", "Drummondville", "Saint-Jean-sur-Richelieu", "Rimouski", "Granby"],
     "industries": ["l'aérospatiale", "les technologies et le jeu vidéo", "la fabrication", "les services professionnels", "l'agroalimentaire"],
 
     "title": "Consultant Google Ads, SEO et AIO au Québec | Elvin Peters",
@@ -50,7 +50,7 @@
     "facts": [
       { "stat": "8 501 833", "label": "personnes au {city} (Recensement de 2021)" },
       { "stat": "4,1 %", "label": "croissance depuis 2016, sous la moyenne nationale de 5,2 % (Recensement de 2021)" },
-      { "stat": "3", "label": "marchés du {city} avec leur propre page ici" }
+      { "stat": "4", "label": "marchés du {city} avec leur propre page ici" }
     ],
 
     "servicesHeading": "Trois façons de faire croître une entreprise du {city}",
@@ -86,6 +86,7 @@
       "cities": [
         { "label": "Montréal", "href": "/consulting/montreal/" },
         { "label": "Ville de Québec", "href": "/consulting/quebec-city/" },
+        { "label": "Sherbrooke", "href": "/consulting/sherbrooke/" },
         { "label": "Gatineau et la région d'Ottawa", "href": "/consulting/ottawa-gatineau/" }
       ],
       "districtsHeading": "Partout dans la province",
@@ -165,7 +166,7 @@
     "facts": [
       { "stat": "8,501,833", "label": "people in {city} (2021 Census)" },
       { "stat": "4.1%", "label": "growth since 2016, below the national rate of 5.2% (2021 Census)" },
-      { "stat": "3", "label": "{city} markets with their own page here" }
+      { "stat": "4", "label": "{city} markets with their own page here" }
     ],
 
     "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
@@ -201,6 +202,7 @@
       "cities": [
         { "label": "Montreal", "href": "/consulting/montreal/" },
         { "label": "Quebec City", "href": "/consulting/quebec-city/" },
+        { "label": "Sherbrooke", "href": "/consulting/sherbrooke/" },
         { "label": "Gatineau and the Ottawa region", "href": "/consulting/ottawa-gatineau/" }
       ],
       "districtsHeading": "Across the province",

@@ -260,6 +260,76 @@
    "brandStyle": "inline",
    "indent": 2
   },
+  "consulting/sherbrooke/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/kelowna/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/barrie/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/st-johns/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/abbotsford-mission/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/sudbury/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/guelph/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/moncton/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/brantford/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "consulting/saint-john/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
   "consulting/ontario/index.html": {
    "brandHref": "/",
    "themebtn": false,

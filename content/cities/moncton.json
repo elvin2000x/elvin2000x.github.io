@@ -1,0 +1,119 @@
+{
+  "_comment": "Moncton city page, and the first city page under New Brunswick, which until now had no city beneath it. The argument unique to this market: Greater Moncton is genuinely mixed between English and French rather than majority one or the other, which makes it the one place in New Brunswick where running a single-language campaign demonstrably leaves a large share of the market unaddressed. Second distinct fact: Moncton is the distribution hub for Atlantic Canada, so businesses here usually sell into four provinces. The page states plainly that the French side needs a native reviewer, same position as the New Brunswick province page. Population and growth verified from the StatCan Focus on Geography page cited at the bottom. Needs a matching key in content/nav.json.",
+  "slug": "consulting/moncton",
+  "template": "city",
+  "navKey": "consulting/moncton/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Moncton",
+  "region": "New Brunswick",
+  "districts": ["downtown Moncton", "Dieppe", "Riverview", "the north end", "the Magnetic Hill area", "Salisbury"],
+  "nearby": ["Shediac", "Sackville", "Amherst", "Bouctouche", "Sussex", "Miramichi"],
+  "industries": ["transportation and distribution", "information technology and contact centres", "health care", "retail and hospitality", "professional services"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Moncton, NB | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Greater Moncton businesses. Serving downtown Moncton, Dieppe, Riverview and the north end, and out across southeastern New Brunswick.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Moncton, New Brunswick",
+    "ogDescription": "Google Ads, SEO and AI visibility for Moncton businesses. A genuinely bilingual market and Atlantic Canada's distribution hub.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "New Brunswick", "href": "/consulting/new-brunswick/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for Greater {city} business owners, agency owners and professional firms, remotely, as one accountable person rather than an account team you never meet. This is the one New Brunswick market where advertising in a single language visibly costs you customers.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "Most bilingual marketing advice in Canada is really advice about Montreal, where the answer is to lead in French. Greater {city} is a different situation, because the population here is genuinely mixed rather than tilted decisively one way. An English-only campaign is invisible to a large part of the market, and a French-only one is invisible to another large part. Running both is not a nicety in this city, it is the difference between addressing your market and addressing some of it.",
+      "That has a practical cost most people underestimate. Two languages means two sets of keywords, two sets of ads, two landing pages and two conversations with whoever answers your phone. Half-doing it, which usually means machine-translating the English and hoping, reads badly to francophone customers and tends to convert worse than not bothering. I would rather scope it properly or leave it English-only on purpose than ship something that quietly insults a third of your prospects.",
+      "The second thing about {city} is that it is where Atlantic Canada's freight and distribution converge, and where a lot of national contact-centre and back-office work landed. Businesses here routinely serve New Brunswick, Nova Scotia, Prince Edward Island and beyond from one address. Targeting only {city} is often far too narrow, and the region grew 8.9% between the last two censuses against 5.2% nationally, so the local base is expanding underneath that too."
+    ],
+    "facts": [
+      { "stat": "157,717", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "8.9%", "label": "growth since 2016, well above the national rate of 5.2% (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that every one of them has a language decision inside it before anything else gets decided.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that means separate campaigns per language rather than one campaign with translated ads bolted on, so each has its own budget, its own keywords and its own honest performance data. Then the geography, which for most businesses here is wider than the city. Then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Usually the better first investment here, and the language split matters even more than it does in paid, because a page has to genuinely exist in both languages to rank in both. Technical fixes first, then the pages your customers are already searching for, in whichever language they are searching.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a supplier in {city} or in Atlantic Canada. Assistants answer in the language they are asked in, so the bilingual gap shows up here too, and almost nobody in this market has started. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across Greater {city}",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where you are makes no difference to the work or the price.",
+      "nearbyHeading": "And across southeastern New Brunswick",
+      "nearbyBody": "Plenty of {city} businesses already sell well past the city and often past the province. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. If you want someone who will walk into your shop, I am the wrong hire and I will say so on the call rather than after you have paid.",
+        "open": true
+      },
+      {
+        "q": "Do you work in French?",
+        "a": "I can build and run the French side of a campaign, and I will be straight with you about the limit: I am not a native French speaker, so any French copy I produce should be reviewed by someone who is before it goes live. For a market like {city} I would rather budget for that review than pretend it is unnecessary. If you already have a francophone on staff, that is usually the cheapest and best answer.",
+        "open": true
+      },
+      {
+        "q": "Can we just translate our English ads?",
+        "a": "You can, and it usually underperforms. People do not search for translations of English phrases, they search for how the thing is actually said, and the wording that converts in one language is rarely a direct rendering of the other. Separate keyword research per language is the part that actually pays for itself."
+      },
+      {
+        "q": "Should we target all of Atlantic Canada?",
+        "a": "If you genuinely serve it, yes, and many {city} businesses do because of where the distribution networks run. If you are a local trade or a restaurant, no. The test is simple: can you actually deliver to a customer in Halifax or Charlottetown at a price that works."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract. Running two languages properly takes more work than one, and I will tell you what that means for scope before you commit to anything."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Moncton (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503305" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether you are addressing one language or two.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

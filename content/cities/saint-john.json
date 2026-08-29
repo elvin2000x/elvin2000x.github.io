@@ -1,0 +1,119 @@
+{
+  "_comment": "Saint John city page. The argument unique to this market: the local economy is concentrated in a small number of very large industrial employers, which means B2B growth here is a procurement relationship problem rather than a search volume problem -- and no advertising budget fixes that. This is the page that tells a reader outright not to hire me for ads if their entire plan is winning one contract. The genuine search opportunity is the SMB layer serving the city and the firms supplying those industrials. Population and growth verified from the StatCan Focus on Geography page cited at the bottom. Needs a matching key in content/nav.json.",
+  "slug": "consulting/saint-john",
+  "template": "city",
+  "navKey": "consulting/saint-john/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Saint John",
+  "region": "New Brunswick",
+  "districts": ["uptown Saint John", "the North End", "the West Side", "Millidgeville", "East Saint John", "Rothesay and Quispamsis"],
+  "nearby": ["Rothesay", "Quispamsis", "Hampton", "St. Stephen", "Sussex", "St. Andrews"],
+  "industries": ["energy and refining", "shipbuilding and port logistics", "health care", "information technology", "professional services"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Saint John, NB | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Saint John businesses. Serving uptown, the North End, the West Side, Millidgeville and East Saint John, and out across southern New Brunswick.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Saint John, New Brunswick",
+    "ogDescription": "Google Ads, SEO and AI visibility for Saint John businesses. An industrial city, where some growth problems advertising cannot solve.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "New Brunswick", "href": "/consulting/new-brunswick/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} business owners, agency owners and professional firms, remotely, as one accountable person rather than an account team you never meet. Some growth problems in this city are not marketing problems, and I would rather say so before you spend anything.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} is an industrial port city, and its economy is concentrated in a small number of very large employers in {industries}. If your business grows by winning work from one of them, then your growth depends on procurement processes, relationships and qualification standards, and there is no advertising budget that changes any of that. I would rather tell you on a free call that search is the wrong instrument for your problem than take $1,500 a month to run a campaign at a buyer who will never click an ad.",
+      "What search does buy you, even in that situation, is the check that happens alongside the relationship. Somebody on the other side will look you up. What they find when they do affects whether you get shortlisted, and that is an SEO and AI visibility problem rather than a paid one. It is cheaper than an ad budget and it works on exactly the buyer an ad cannot reach.",
+      "The other half of the city is more conventional and often overlooked. There is a real local market of homeowners, small businesses and professionals in and around {city}, and search works there the way it works anywhere. It is a market growing at 3.5%, slower than the national 5.2%, which means the customers are largely already someone's and growth means taking share rather than catching arrivals."
+    ],
+    "facts": [
+      { "stat": "130,613", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "3.5%", "label": "growth since 2016, below the national rate of 5.2% (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the first honest question is whether your buyer is reachable by search at all.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "Worth it for the local market and for anything with urgency, and usually not worth it if your revenue comes from a handful of industrial contracts. Where it fits: account structure, targeting that matches how far you will actually travel, then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The one that works on both halves of this city. Locally it wins you a market where competition is thin. On the industrial side it is what a procurement team finds when they look you up, which is the part of the sale nobody controls but everybody is judged on.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a supplier in {city} or in your specialty. Increasingly that is where a first shortlist comes from, including inside companies that would never click an ad. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where you are makes no difference to the work or the price.",
+      "nearbyHeading": "And across southern New Brunswick",
+      "nearbyBody": "The Kennebecasis Valley and the towns west along the coast are part of the same working market for most businesses here. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. If you want someone who will walk into your shop, I am the wrong hire and I will say so on the call rather than after you have paid.",
+        "open": true
+      },
+      {
+        "q": "We sell to the refinery and the shipyard. Can you help?",
+        "a": "Not with advertising, and I will not pretend otherwise. Industrial procurement runs on qualification, relationships and tendering, and no campaign gets you into that process. What I can help with is making sure that when someone does look you up during it, you look like a serious operator rather than a company with a neglected website. That is real value, and it is a lot cheaper than an ad budget.",
+        "open": true
+      },
+      {
+        "q": "Is the local market big enough to bother with?",
+        "a": "For most local services, yes. The competition is thin and the cost per click is low, so a modest budget goes further here than it would almost anywhere in Ontario. The ceiling arrives sooner than in a bigger city, and I will tell you when you have reached it rather than pushing for more spend."
+      },
+      {
+        "q": "Should we also target Moncton?",
+        "a": "If you can serve it, it is worth its own campaign rather than an extension of this one, because it is a genuinely different market with a language dimension {city} does not have to the same degree. There is a separate Moncton page that goes into that."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Saint John (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503310" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, including when the honest answer is that search is not your problem.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}
