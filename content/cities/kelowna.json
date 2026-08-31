@@ -1,0 +1,119 @@
+{
+  "_comment": "Kelowna city page. The fact this page is built around: Kelowna grew 14.0% between the 2016 and 2021 censuses, nearly triple the national 5.2% and the fastest growth of any market on this site. That has a direct marketing consequence -- historical account data goes stale faster here than anywhere else, because both the competitive set and the customer base are being replaced while you are still optimising against last year's numbers. Population and growth verified from the StatCan Focus on Geography page cited at the bottom. Needs a matching key in content/nav.json.",
+  "slug": "consulting/kelowna",
+  "template": "city",
+  "navKey": "consulting/kelowna/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Kelowna",
+  "region": "British Columbia",
+  "districts": ["Downtown Kelowna", "Rutland", "Glenmore", "the Mission", "West Kelowna", "Lake Country"],
+  "nearby": ["Vernon", "Penticton", "Peachland", "Summerland", "Salmon Arm", "Osoyoos"],
+  "industries": ["tourism and hospitality", "wine and agriculture", "technology", "construction and real estate", "health care"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Kelowna, BC | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Kelowna businesses. Serving Downtown Kelowna, Rutland, Glenmore, the Mission and West Kelowna, and out through the Okanagan.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Kelowna, British Columbia",
+    "ogDescription": "Google Ads, SEO and AI visibility for Kelowna businesses. The fastest-growing market in the country, which changes how long your data stays true.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "British Columbia", "href": "/consulting/british-columbia/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} business owners, agency owners and professional firms, remotely, as one accountable person rather than an account team you never meet. {city} grew faster than any other market I work in, and that is not a nice statistic here, it is the thing that keeps breaking your account.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} grew 14.0% between the last two censuses, against 5.2% nationally. That is the highest rate of any market on this site, and it has a consequence most consultants never mention: your account's history is a description of a city that no longer exists. The bid strategy trained on last year's conversions, the negative keyword list built two years ago, the assumption about which competitors matter, all of it decays faster in {city} than it would in Winnipeg or Halifax. Accounts here need re-examining on a schedule rather than left alone because they are performing.",
+      "Growth also means the competitive field keeps taking on new entrants who have no local reputation and therefore buy attention instead. If you have been in {city} for fifteen years, you are increasingly bidding against businesses with no word of mouth and a real budget, and your advantage has to be moved somewhere they cannot outspend, which usually means organic and AI visibility rather than the auction.",
+      "Then there is the season. {industries} here run on a summer peak that distorts every month-over-month comparison anyone shows you. A {city} account that looks like it is collapsing in October is often just a business in a city where October is quiet, and judging a channel on a thirty-day window across a seasonal boundary is how good campaigns get switched off for no reason."
+    ],
+    "facts": [
+      { "stat": "222,162", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "14.0%", "label": "growth since 2016, against 5.2% nationally, the fastest market on this site (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that everything needs re-checking more often, because the market underneath the account keeps moving.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that means treating the account as something to revisit rather than something to set. New competitors, new residents who have never heard of you, and a seasonal curve that makes a bad month look like a broken campaign. Account structure first, then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Where your local history actually counts for something. Newcomers to {city} arrive with no idea who anyone is and search for everything, and the business that answers their question is the one they call. This is the part of the plan a well-funded new competitor cannot simply buy their way past.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone new to the Okanagan asks for a recommendation. In a city where a large share of the population arrived recently and has no local network to ask, that recommendation carries unusual weight. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where you are in {city} makes no difference to the work or the price.",
+      "nearbyHeading": "And across the Okanagan",
+      "nearbyBody": "The valley behaves as one market far more than the city boundaries suggest, and plenty of {city} businesses already serve most of it. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. If you want someone who will walk into your shop, I am the wrong hire and I will say so on the call rather than after you have paid.",
+        "open": true
+      },
+      {
+        "q": "Our ads worked last year and stopped. What changed?",
+        "a": "In {city} the most common answer is that the market changed rather than the account. New competitors entered the auction, the customer base partly turned over, and a bid strategy trained on older data kept optimising toward a pattern that had already gone. It is worth checking the seasonal boundary too, because a summer-to-autumn comparison here flatters and then punishes almost every business in town.",
+        "open": true
+      },
+      {
+        "q": "Should we target {city} or the whole Okanagan?",
+        "a": "Depends whether people will drive to you. For most services the valley is one market and restricting to the city limits leaves real customers out. For anything where the customer expects you to come to them, a tight radius is correct and widening it just buys you clicks you cannot serve."
+      },
+      {
+        "q": "How do we compete with a new competitor outspending us?",
+        "a": "Usually not in the auction, because if their whole plan is to buy attention they will pay more per click than the maths justifies and you should let them. The durable answer is to own the organic result and the AI recommendation, both of which reward the years you have been here and cannot be bought in a quarter."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Kelowna (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503915" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether your account is optimised for a version of {city} that has already moved on.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

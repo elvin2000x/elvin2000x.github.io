@@ -1,0 +1,241 @@
+{
+  "_comment": "Sherbrooke city page, bilingual like Montreal and Quebec City. The argument unique to this market: Sherbrooke is the one Quebec city outside Montreal where the language question genuinely has two sides. The Universite de Sherbrooke and Bishop's University sit in the same city, Bishop's teaches in English, and the Eastern Townships have a long-established anglophone community -- so there is a real English-searching minority inside a francophone city, which is not true of Trois-Rivieres or Saguenay. Second distinct fact: two universities means a student population that inflates the census figure relative to the buying market, and demand that moves on the academic calendar. As with every French page on this site, the copy states plainly that the French needs a native reviewer rather than hiding it. Population and growth verified from the StatCan Focus on Geography page cited at the bottom. Needs a matching key in content/nav.json.",
+  "slug": "consulting/sherbrooke",
+  "template": "city",
+  "navKey": "consulting/sherbrooke/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Sherbrooke",
+  "region": "Quebec",
+  "districts": ["downtown Sherbrooke", "Fleurimont", "Jacques-Cartier", "Lennoxville", "Rock Forest", "Brompton"],
+  "nearby": ["Magog", "Granby", "Drummondville", "Coaticook", "Windsor", "Val-des-Sources"],
+  "industries": ["education and research", "health care", "advanced manufacturing", "agri-food", "tourism"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Sherbrooke, Quebec | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Sherbrooke businesses. Serving downtown Sherbrooke, Fleurimont, Jacques-Cartier, Lennoxville and Rock Forest, and out across the Eastern Townships.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Sherbrooke, Quebec",
+    "ogDescription": "Google Ads, SEO and AI visibility for Sherbrooke businesses. The Quebec city where the language question genuinely has two sides.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Quebec", "href": "/consulting/quebec/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} business owners, agency owners and professional firms, remotely, as one accountable person rather than an account team you never meet. This is the Quebec market outside Montreal where advertising in one language actually leaves customers on the table.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} operates in French, and any plan that does not start there is wrong. What makes this city different from Trois-Rivières or Saguenay is that the English side is not negligible either. Bishop's University teaches in English in Lennoxville, the Eastern Townships have a long-established anglophone community, and the Université de Sherbrooke brings in students and researchers from outside the province. For a lot of businesses here the correct answer is a French campaign with a genuine English one beside it, rather than the French-only default that is right almost everywhere else outside Montreal.",
+      "The universities distort the market in a second way that matters more than the language question for some businesses. A significant share of the people counted in {city} are students, which means the census figure overstates the buying market for anything expensive and understates the seasonality of everything else. Demand here moves on the academic calendar, and a business judged on a thirty-day window that crosses September or May is being judged on a change that had nothing to do with its marketing.",
+      "{city} grew 7.2% between the last two censuses against 5.2% nationally, so there is genuine expansion underneath all of that. The competitive field is thin by the standards of Montreal or Quebec City, which makes organic positions and AI recommendations realistically winnable here in a way they are not in the two big Quebec markets."
+    ],
+    "facts": [
+      { "stat": "227,398", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "7.2%", "label": "growth since 2016, above the national rate of 5.2% (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that each of them starts with a language decision and a look at your calendar.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that means French first and properly, with a separate English campaign where your market genuinely has one rather than as an afterthought. Then the schedule, because the academic year moves demand here more than most owners account for. Then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Strong here, because the field is far thinner than in Montreal and a page that genuinely answers the question can rank in months. Ranking in both languages means genuinely publishing in both, not translating one, and I will scope that honestly rather than promising it for free.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. Assistants answer in whichever language they are asked, so the two-language gap shows up here too, and very few businesses in the Townships have started. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where you are in {city} makes no difference to the work or the price.",
+      "nearbyHeading": "And across the Eastern Townships",
+      "nearbyBody": "The Townships behave as one market far more than the municipal boundaries suggest, and plenty of {city} businesses already serve most of it. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account.",
+        "open": true
+      },
+      {
+        "q": "Do you work in French?",
+        "a": "I can build and run the French side of a campaign, and here is the limit stated plainly: I am not a native French speaker, so French copy I write should be reviewed by someone who is before it goes live. In a market that operates in French I would rather budget for that review than pretend it is optional. If you have a francophone on staff, that is usually the best and cheapest answer.",
+        "open": true
+      },
+      {
+        "q": "Should we advertise in English at all?",
+        "a": "In most of Quebec I would say no. In {city} it depends on your customers, and for businesses touching Bishop's, the anglophone Townships community or the research community it is often worth a small separate campaign. The test is whether you can name English-speaking customers you already have, not whether English feels like a bigger market in the abstract."
+      },
+      {
+        "q": "How do the universities affect our numbers?",
+        "a": "They inflate the population figure relative to the people who can actually buy an expensive service, and they put a hard seasonal shape on demand. If your year-over-year looks strange every September and May, that is usually the calendar rather than the campaign, and it is worth checking before anyone changes anything."
+      },
+      {
+        "q": "What about the language requirements for commercial signage and advertising?",
+        "a": "Quebec's language legislation applies to commercial communications and that includes advertising. I am not a lawyer and nothing here is legal advice. The practical position I take is to build French-first as the default and point clients to the Office québécois de la langue française for the actual requirements rather than guessing at them."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract. Running two languages properly takes more work than one, and I will tell you what that means for scope before you commit."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Sherbrooke (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503433" },
+      { "label": "Office québécois de la langue française", "href": "https://www.oqlf.gouv.qc.ca/" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether your market is one language or two.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  },
+  "fr": {
+    "city": "Sherbrooke",
+    "region": "Québec",
+    "districts": ["le centre-ville de Sherbrooke", "Fleurimont", "Jacques-Cartier", "Lennoxville", "Rock Forest", "Brompton"],
+    "nearby": ["Magog", "Granby", "Drummondville", "Coaticook", "Windsor", "Val-des-Sources"],
+    "industries": ["l'enseignement et la recherche", "la santé", "la fabrication de pointe", "l'agroalimentaire", "le tourisme"],
+    "title": "Consultation Google Ads, SEO et AIO à Sherbrooke | Elvin Peters",
+    "description": "Gestion de campagnes Google Ads, référencement et consultation AIO pour les entreprises de Sherbrooke. Le centre-ville, Fleurimont, Jacques-Cartier, Lennoxville et Rock Forest, et partout en Estrie.",
+    "ogTitle": "Consultation Google Ads, SEO et AIO à Sherbrooke",
+    "ogDescription": "Google Ads, référencement et visibilité dans l'IA pour les entreprises de Sherbrooke. La ville québécoise où la question linguistique a vraiment deux côtés.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consultation", "href": "/consulting/" },
+      { "label": "Québec", "href": "/consulting/quebec/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, référencement et visibilité dans l'IA pour les entreprises de {city}",
+    "sub": "J'accompagne les propriétaires d'entreprise, les dirigeants d'agence et les cabinets professionnels de {city} en Google Ads, en référencement et en visibilité dans l'IA, à distance, comme une seule personne responsable plutôt qu'une équipe que vous ne rencontrez jamais. C'est le marché québécois hors Montréal où faire de la publicité dans une seule langue vous coûte réellement des clients.",
+    "heroBtns": [
+      { "label": "Réservez 20 minutes gratuites", "href": "/contact/", "contact": "Aide marketing pour une entreprise de {city}", "source": "city-{city}" },
+      { "label": "Voir mes tarifs", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "Plus de **50 M$** en investissement publicitaire rentable",
+      "A conseillé des marques au sein de l'équipe **Large Customer Sales de Google**",
+      "Auteur de **The Artificial Advantage**",
+      "Au service de **{city}** à distance"
+    ],
+
+    "marketHeading": "Ce qui distingue vraiment le marketing à {city}",
+    "market": [
+      "{city} fonctionne en français, et tout plan qui ne part pas de là est mal conçu. Ce qui distingue cette ville de Trois-Rivières ou de Saguenay, c'est que le côté anglophone n'est pas négligeable non plus. L'Université Bishop's enseigne en anglais à Lennoxville, l'Estrie compte une communauté anglophone établie de longue date, et l'Université de Sherbrooke attire des étudiants et des chercheurs de l'extérieur de la province. Pour bien des entreprises d'ici, la bonne réponse est une campagne française accompagnée d'une véritable campagne anglaise, plutôt que le français seul qui reste la norme partout ailleurs hors Montréal.",
+      "Les universités déforment le marché d'une deuxième façon, qui compte davantage que la langue pour certaines entreprises. Une part importante des personnes recensées à {city} sont des étudiants, ce qui gonfle le chiffre de population par rapport au marché réel pour tout ce qui coûte cher, et accentue la saisonnalité de tout le reste. La demande suit ici le calendrier universitaire, et juger une campagne sur trente jours à cheval sur septembre ou sur mai, c'est juger un changement qui n'a rien à voir avec le marketing.",
+      "{city} a crû de 7,2 % entre les deux derniers recensements, contre 5,2 % à l'échelle du pays. La concurrence y est mince comparée à Montréal ou à Québec, ce qui rend les positions organiques et les recommandations des assistants IA réellement accessibles, ce qui n'est pas le cas dans les deux grands marchés québécois."
+    ],
+    "facts": [
+      { "stat": "227 398", "label": "personnes dans la région métropolitaine de {city} (Recensement de 2021)" },
+      { "stat": "7,2 %", "label": "croissance depuis 2016, contre 5,2 % à l'échelle nationale (Recensement de 2021)" }
+    ],
+
+    "servicesHeading": "Trois façons de faire croître une entreprise de {city}, avec une seule personne responsable",
+    "servicesIntro": "Les mêmes trois services partout où je travaille. Ce qui change à {city}, c'est que chacun commence par une décision linguistique et par un coup d'oeil à votre calendrier.",
+    "services": [
+      {
+        "title": "Gestion de campagnes Google Ads",
+        "href": "/google-ads/",
+        "body": "À {city}, cela veut dire le français d'abord et correctement, avec une campagne anglaise distincte lorsque votre marché en a vraiment une, et non en accessoire. Ensuite le calendrier de diffusion, parce que l'année universitaire déplace la demande ici plus que la plupart des propriétaires ne le prévoient. Ensuite, couper les dépenses sur les recherches qui n'allaient jamais convertir.",
+        "price": "**1 500 $**/mois + investissement publicitaire",
+        "btn": { "label": "Google Ads à {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "Consultation en référencement",
+        "href": "/seo/",
+        "body": "Solide ici, parce que la concurrence est bien plus mince qu'à Montréal et qu'une page qui répond vraiment à la question peut se classer en quelques mois. Se classer dans les deux langues suppose de publier réellement dans les deux, et non d'en traduire une. Je chiffre ce travail honnêtement plutôt que de le promettre gratuitement.",
+        "price": "**1 200 $**/mois",
+        "btn": { "label": "Référencement à {city}", "href": "/seo/" }
+      },
+      {
+        "title": "Consultation AIO",
+        "href": "/aio-consulting/",
+        "body": "Être l'entreprise de {city} que ChatGPT, Perplexity et les aperçus IA de Google nomment quand quelqu'un demande une recommandation. Les assistants répondent dans la langue de la question, alors l'écart entre les deux langues se retrouve ici aussi, et très peu d'entreprises en Estrie s'y sont mises. Le moins cher des trois, une seule fois.",
+        "price": "**1 800 $** une seule fois",
+        "btn": { "label": "Consultation AIO", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Où je travaille à {city}",
+    "area": {
+      "districtsHeading": "Partout à {city}",
+      "districtsBody": "J'accepte des clients dans {districts}. Tout se fait à distance, par visioconférence et par courriel, alors l'endroit où vous êtes à {city} ne change rien au travail ni au prix.",
+      "nearbyHeading": "Et partout en Estrie",
+      "nearbyBody": "L'Estrie se comporte comme un seul marché bien plus que les limites municipales ne le laissent croire, et beaucoup d'entreprises de {city} en desservent déjà la majeure partie. Je travaille avec des entreprises de {nearby} aux mêmes conditions."
+    },
+
+    "faqHeading": "Les questions que posent les entreprises de {city}",
+    "faq": [
+      {
+        "q": "Avez-vous un bureau à {city}?",
+        "a": "Non. Je suis établi à Toronto et je travaille de la maison, alors il n'y a pas de bureau à {city} et je ne vais pas laisser entendre le contraire. Tout se fait à distance, par visioconférence et par courriel, comme pour tous mes comptes.",
+        "open": true
+      },
+      {
+        "q": "Travaillez-vous en français?",
+        "a": "Je peux concevoir et gérer le volet français d'une campagne, et voici la limite dite clairement : je ne suis pas francophone de naissance, alors le texte français que je rédige devrait être révisé par une personne qui l'est avant sa mise en ligne. Dans un marché qui fonctionne en français, je préfère prévoir cette révision au budget plutôt que de faire comme si elle était facultative. Si vous avez une personne francophone dans votre équipe, c'est habituellement la meilleure solution et la moins chère.",
+        "open": true
+      },
+      {
+        "q": "Devrions-nous faire de la publicité en anglais?",
+        "a": "Dans la majeure partie du Québec, je dirais non. À {city}, cela dépend de votre clientèle, et pour les entreprises en lien avec Bishop's, la communauté anglophone de l'Estrie ou le milieu de la recherche, une petite campagne distincte en vaut souvent la peine. Le test est de pouvoir nommer des clients anglophones que vous avez déjà, et non de trouver que l'anglais semble un plus grand marché dans l'abstrait."
+      },
+      {
+        "q": "Quel effet les universités ont-elles sur nos chiffres?",
+        "a": "Elles gonflent le chiffre de population par rapport aux gens qui peuvent réellement acheter un service coûteux, et elles imposent une forte saisonnalité. Si vos comparaisons annuelles paraissent étranges chaque septembre et chaque mai, c'est habituellement le calendrier et non la campagne, et cela vaut la peine de le vérifier avant que quiconque change quoi que ce soit."
+      },
+      {
+        "q": "Et les exigences linguistiques pour l'affichage et la publicité?",
+        "a": "La législation linguistique du Québec s'applique aux communications commerciales, ce qui inclut la publicité. Je ne suis pas avocat et rien ici ne constitue un avis juridique. En pratique, je construis en français d'abord par défaut et je renvoie mes clients à l'Office québécois de la langue française pour les exigences réelles plutôt que de les deviner."
+      },
+      {
+        "q": "Combien cela coûte-t-il?",
+        "a": "La gestion Google Ads est à 1 500 $ par mois, plus votre investissement publicitaire. La consultation en référencement est à 1 200 $ par mois. La consultation AIO est à 1 800 $ une seule fois. Aucuns frais d'installation et aucun contrat à long terme. Gérer deux langues correctement demande plus de travail qu'une seule, et je vous dirai ce que cela implique avant que vous vous engagiez."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistique Canada, Série « Perspective géographique », Recensement de 2021 - Sherbrooke (région métropolitaine de recensement)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=F&topic=1&dguid=2021S0503433" },
+      { "label": "Office québécois de la langue française", "href": "https://www.oqlf.gouv.qc.ca/" }
+    ],
+
+    "cta": {
+      "h2": "Dites-moi où vous bloquez à {city}",
+      "p": "Vingt minutes, gratuites, sans argumentaire de vente. Décrivez l'entreprise et je vous dirai ce que je ferais en premier, à commencer par déterminer si votre marché est dans une langue ou dans deux.",
+      "btn": { "label": "Réservez 20 minutes gratuites", "href": "/contact/", "contact": "Aide marketing pour une entreprise de {city}", "source": "city-{city}" }
+    }
+  }
+}

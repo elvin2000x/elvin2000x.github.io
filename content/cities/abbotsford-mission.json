@@ -1,0 +1,119 @@
+{
+  "_comment": "Abbotsford-Mission city page. The argument specific to this market: it is close enough to Vancouver that any Lower Mainland or Metro Vancouver targeting drags Vancouver's prices onto an Abbotsford budget, but far enough east that Vancouver customers will not drive out here -- so the leak runs one way only. Second distinct fact: this is farmland and border logistics, so an unusual share of local businesses sell B2B nationally rather than to the people who live here. Population and growth verified from the StatCan Focus on Geography page cited at the bottom. Needs a matching key in content/nav.json.",
+  "slug": "consulting/abbotsford-mission",
+  "template": "city",
+  "navKey": "consulting/abbotsford-mission/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Abbotsford",
+  "region": "British Columbia",
+  "districts": ["central Abbotsford", "Clearbrook", "Mission", "Matsqui", "Sumas Prairie", "Aldergrove"],
+  "nearby": ["Chilliwack", "Langley", "Maple Ridge", "Hope", "Agassiz", "Surrey"],
+  "industries": ["agriculture and food processing", "transportation and logistics", "aerospace and manufacturing", "construction", "health care"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Abbotsford, BC | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Abbotsford and Mission businesses. Serving central Abbotsford, Clearbrook, Mission, Matsqui and Sumas Prairie, and out across the Fraser Valley.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Abbotsford, British Columbia",
+    "ogDescription": "Google Ads, SEO and AI visibility for Abbotsford and Fraser Valley businesses. Close enough to Vancouver to pay its prices, far enough that nobody drives out.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "British Columbia", "href": "/consulting/british-columbia/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} and Mission business owners, agency owners and professional firms, remotely, as one accountable person rather than an account team you never meet. The Vancouver problem here runs one way, and most local accounts are paying for it without knowing.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for an {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "Any campaign set to the Lower Mainland or to Metro Vancouver includes Vancouver, and Vancouver prices the auction. Set that targeting from an {city} business and you inherit the cost structure of a market whose customers are never going to drive an hour east to buy from you. The traffic looks fine in the report and the cost per acquisition quietly doubles. Meanwhile the reverse trip does happen, because plenty of Fraser Valley residents will go west, which is why the leak only ever runs in the direction that costs you money.",
+      "The second thing that makes {city} unusual is who the customer is. This is some of the most productive farmland in the country and a major road-freight corridor to the United States border, so a large share of businesses here sell to buyers who are nowhere near the Fraser Valley. If you are in {industries}, your market may be national or cross-border, and a local radius is not a conservative choice, it is the wrong shape entirely.",
+      "Underneath both of those, local demand is real and growing at 8.4%, comfortably above the national rate. There is a genuine {city} and Mission market for anything people buy close to home, and it is far cheaper to win than the equivalent search in Surrey or Vancouver. The plan just has to be explicit about which of the two businesses you are, because the answer changes almost every setting."
+    ],
+    "facts": [
+      { "stat": "195,726", "label": "people in the {city} - Mission census metropolitan area (2021 Census)" },
+      { "stat": "8.4%", "label": "growth since 2016, against 5.2% nationally (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow an {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the first question is always whether your customers live here at all.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} that starts by pulling the targeting off Vancouver so you stop paying its prices for its residents. Then deciding honestly whether your real market is the valley, the province or the freight corridor. Then account structure, then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Good value here, because {city} searches are genuinely winnable while the equivalent Vancouver term is a years-long fight. For businesses selling beyond the valley it is better still, since competing on expertise rather than proximity is a content problem and this is how you solve it.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a supplier in the Fraser Valley, or in your category nationally. Almost nobody here has started. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city} and Mission",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where you are makes no difference to the work or the price.",
+      "nearbyHeading": "And across the Fraser Valley",
+      "nearbyBody": "The valley is closer to one market than the municipal boundaries suggest, and many {city} businesses already serve most of it. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. If you want someone who will walk into your shop, I am the wrong hire and I will say so on the call rather than after you have paid.",
+        "open": true
+      },
+      {
+        "q": "Should we include Vancouver in our targeting?",
+        "a": "Only if Vancouver customers realistically buy from you, and for most {city} businesses they do not. Including the city means paying its auction prices across your whole campaign to reach people who have a dozen closer options. Taking it out is usually the single biggest cost improvement available on a Fraser Valley account.",
+        "open": true
+      },
+      {
+        "q": "Most of our customers are not local. Does local marketing help us?",
+        "a": "Local search will not, and I would rather say that than sell it to you. If you sell into national or cross-border supply chains, what works is being findable and credible on the specifics of what you make or move, which is SEO and AI visibility work aimed at the buyer rather than the neighbourhood."
+      },
+      {
+        "q": "Is {city} cheaper to advertise in than Surrey or Vancouver?",
+        "a": "Generally yes, sometimes substantially, which is exactly why the accidental Vancouver overlap is so costly. I will not put a number on the gap until I have pulled the real figures for your category, because a made-up benchmark is worse than none."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Abbotsford-Mission (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503932" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with whether your campaign is paying Vancouver prices for Fraser Valley customers.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for an {city} business", "source": "city-{city}" }
+    }
+  }
+}

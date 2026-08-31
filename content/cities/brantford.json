@@ -1,0 +1,119 @@
+{
+  "_comment": "Brantford city page. The argument unique to this market: it is the cheapest entry point in the Golden Horseshoe. Brantford sits on the 403 between Hamilton and Kitchener-Waterloo, so a business here can compete for the same regional searches its Hamilton competitors are bidding on at a fraction of the local cost -- a genuine arbitrage that closes as the corridor fills in. Population and growth verified from the StatCan Focus on Geography page cited at the bottom. Needs a matching key in content/nav.json.",
+  "slug": "consulting/brantford",
+  "template": "city",
+  "navKey": "consulting/brantford/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "Brantford",
+  "region": "Ontario",
+  "districts": ["Downtown Brantford", "Echo Place", "West Brant", "Terrace Hill", "Holmedale", "Paris"],
+  "nearby": ["Paris", "Ancaster", "Simcoe", "Woodstock", "Cambridge", "Six Nations of the Grand River", "Hamilton"],
+  "industries": ["advanced manufacturing", "food processing", "transportation and warehousing", "health care", "education"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in Brantford, Ontario | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for Brantford businesses. Serving Downtown Brantford, Echo Place, West Brant, Terrace Hill, Holmedale and Paris, and out across Brant County.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in Brantford, Ontario",
+    "ogDescription": "Google Ads, SEO and AI visibility for Brantford businesses. The cheapest place to compete in the Golden Horseshoe, for now.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Ontario", "href": "/consulting/ontario/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} business owners, agency owners and professional firms, remotely, as one accountable person rather than an account team you never meet. {city} is the cheapest place to compete in the Golden Horseshoe right now, and that advantage has a shelf life.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "{city} sits on the 403 between Hamilton and Kitchener-Waterloo, and the businesses in both of those cities are paying considerably more than you are to reach the same corridor. That is the opportunity here and it is not a small one. A {city} business willing to serve customers along the highway can compete for regional demand at local prices, which is a structural advantage that has nothing to do with how good anyone's ads are.",
+      "It is also temporary. The corridor is filling in, industrial and residential development keeps pushing west from Hamilton, and the gap between what a click costs here and what it costs there narrows every year. The right response is to build the durable assets while the cheap period lasts, because the rankings and the recommendations you establish now keep working after the arbitrage has closed. Spending the advantage on clicks alone means having nothing left when prices converge.",
+      "The local base is real too. {city} grew 7.4% between the last two censuses against 5.2% nationally, and {industries} give it a working economy rather than a commuter one. There is genuine demand here for businesses that serve the city itself, and it is meaningfully cheaper to capture than the same demand thirty minutes east."
+    ],
+    "facts": [
+      { "stat": "144,162", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "7.4%", "label": "growth since 2016, above the national rate of 5.2% (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that you are working against a clock, because the cost advantage you have today is closing.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "In {city} the interesting question is how far along the 403 you can profitably reach, because your cost base lets you go further than a Hamilton competitor can come the other way. Account structure first, then the geography, then cutting spend on searches that were never going to convert.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "The one I would prioritise here, precisely because the paid advantage is temporary and a ranking is not. {city} search competition is thin enough that positions are winnable in months, and once you hold them the corridor's rising ad prices become a competitor's problem rather than yours.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. Essentially nobody in this market has started, which makes the gap unusually cheap to open right now. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across {city}",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where you are in {city} makes no difference to the work or the price.",
+      "nearbyHeading": "And across Brant County and the corridor",
+      "nearbyBody": "This is where the cost advantage actually gets spent, and most {city} accounts stop well short of it. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. If you want someone who will walk into your shop, I am the wrong hire and I will say so on the call rather than after you have paid.",
+        "open": true
+      },
+      {
+        "q": "Can we really compete with Hamilton and Kitchener businesses?",
+        "a": "For corridor demand, often yes, and the reason is cost rather than cleverness. Your click prices are lower than theirs, so the same budget reaches further. What you cannot do is beat them on brand recognition in their own city, so the plan should aim at the space between the two markets rather than at the middle of theirs.",
+        "open": true
+      },
+      {
+        "q": "How long does the cost advantage last?",
+        "a": "I will not put a date on it, because I would be guessing. What I will say is that the gap narrows as the corridor develops, and that the sensible response is to convert cheap clicks into assets you keep. Rankings and AI recommendations built now survive the convergence; a campaign does not."
+      },
+      {
+        "q": "Should we advertise in Hamilton?",
+        "a": "Only as its own campaign with its own budget, never merged into your {city} one. Merging them lets Hamilton prices set the cost for your local traffic, which throws away the exact advantage that makes being in {city} worthwhile."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - Brantford (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503543" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, starting with how far along the corridor your budget can actually reach.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

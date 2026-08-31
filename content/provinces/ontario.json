@@ -9,7 +9,7 @@
   "areaType": "State",
   "regionType": "Country",
   "districts": ["the Greater Toronto Area", "the Golden Horseshoe", "the National Capital Region", "Southwestern Ontario", "Eastern Ontario", "Central Ontario", "Northern Ontario"],
-  "nearby": ["Barrie", "Guelph", "Peterborough", "Brantford", "Sarnia", "Sudbury", "Thunder Bay", "North Bay"],
+  "nearby": ["Peterborough", "Sarnia", "Thunder Bay", "North Bay", "Belleville", "Cornwall", "Timmins", "Owen Sound"],
   "industries": ["financial and professional services", "manufacturing and automotive", "technology", "health care", "agriculture and food processing"],
   "en": {
     "title": "Google Ads, SEO & AIO Consulting in Ontario | Elvin Peters",
@@ -44,7 +44,7 @@
     "facts": [
       { "stat": "14,223,942", "label": "people in {city} (2021 Census)" },
       { "stat": "5.8%", "label": "growth since 2016, above the national rate of 5.2% (2021 Census)" },
-      { "stat": "9", "label": "{city} markets with their own page here, from Toronto to Windsor" }
+      { "stat": "13", "label": "{city} markets with their own page here, from Toronto to Sudbury" }
     ],
 
     "servicesHeading": "Three ways to grow an {city} business, run by one accountable person",
@@ -86,7 +86,11 @@
         { "label": "St. Catharines-Niagara", "href": "/consulting/st-catharines-niagara/" },
         { "label": "Windsor", "href": "/consulting/windsor/" },
         { "label": "Oshawa and Durham", "href": "/consulting/oshawa/" },
-        { "label": "Kingston", "href": "/consulting/kingston/" }
+        { "label": "Barrie", "href": "/consulting/barrie/" },
+        { "label": "Kingston", "href": "/consulting/kingston/" },
+        { "label": "Greater Sudbury", "href": "/consulting/sudbury/" },
+        { "label": "Guelph", "href": "/consulting/guelph/" },
+        { "label": "Brantford", "href": "/consulting/brantford/" }
       ],
       "districtsHeading": "Across the province",
       "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price.",
