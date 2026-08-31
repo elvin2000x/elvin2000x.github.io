@@ -1,0 +1,119 @@
+{
+  "_comment": "St. John's city page, and the first city page under Newfoundland and Labrador, which until now had no city beneath it. The argument unique to this market: geographic isolation is a marketing advantage. There is no larger metro within driving distance, so local demand does not leak to a bigger centre the way it does in Barrie, Abbotsford or Guelph -- which makes local search unusually reliable here. The offsetting fact is 2.0% growth and an economy that moves with the offshore oil cycle. Population and growth verified from the StatCan Focus on Geography page cited at the bottom. Needs a matching key in content/nav.json.",
+  "slug": "consulting/st-johns",
+  "template": "city",
+  "navKey": "consulting/st-johns/index.html",
+  "ogImage": "https://elvinpeters.com/cover.png",
+  "city": "St. John's",
+  "region": "Newfoundland and Labrador",
+  "districts": ["downtown St. John's", "Mount Pearl", "Paradise", "Conception Bay South", "Torbay", "the west end"],
+  "nearby": ["Carbonear", "Bay Roberts", "Placentia", "Clarenville", "Holyrood", "Portugal Cove-St. Philip's"],
+  "industries": ["offshore oil and gas", "ocean technology", "public administration", "health care", "education"],
+  "en": {
+    "title": "Google Ads, SEO & AIO Consulting in St. John's, NL | Elvin Peters",
+    "description": "Google Ads management, SEO and AIO consulting for St. John's businesses. Serving downtown, Mount Pearl, Paradise, Conception Bay South and Torbay, and out across the Avalon.",
+    "ogTitle": "Google Ads, SEO & AIO Consulting in St. John's, Newfoundland",
+    "ogDescription": "Google Ads, SEO and AI visibility for St. John's businesses. The most self-contained market in the country, which makes local search unusually reliable.",
+    "breadcrumb": [
+      { "label": "Elvin Peters", "href": "/" },
+      { "label": "Consulting", "href": "/consulting/" },
+      { "label": "Newfoundland and Labrador", "href": "/consulting/newfoundland-and-labrador/" },
+      { "label": "{city}" }
+    ],
+    "eyebrow": "{city}, {region}",
+    "h1": "Google Ads, SEO and AI visibility for businesses in {city}",
+    "sub": "I run Google Ads, SEO and AIO consulting for {city} business owners, agency owners and professional firms, remotely, as one accountable person rather than an account team you never meet. {city} is the most self-contained market I work in, and that is worth more to your advertising than most people here realise.",
+    "heroBtns": [
+      { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" },
+      { "label": "See what I charge", "href": "/services/", "style": "ghost" }
+    ],
+    "credbar": [
+      "**$50M+** in profitable ad spend",
+      "Advised brands inside **Google's** Large Customer Sales team",
+      "Author of **The Artificial Advantage**",
+      "Serving **{city}** remotely"
+    ],
+
+    "marketHeading": "What is actually different about marketing in {city}",
+    "market": [
+      "Almost every city page on this site has to warn about demand leaking to a bigger metro nearby. Barrie loses its auction to Toronto, Abbotsford to Vancouver, Guelph to three neighbours at once. {city} has no such problem, because there is no larger city within driving distance of it. When somebody here searches for a service, they are going to buy it here. That makes your geographic targeting simple, your conversion data trustworthy, and local search results worth considerably more per position than they are in a corridor market.",
+      "The cost of that isolation is that the market does not grow its way out of anything. {city} grew 2.0% between the last two censuses against 5.2% nationally, so there is no rising tide of new customers arriving to be captured. Growth here means taking share from a competitor who is not going anywhere, and that is a longer, more patient job than winning a race in a boom town.",
+      "The other thing to plan around is the cycle. {industries} anchor this economy, and the offshore in particular moves the whole city at once rather than one sector at a time. A marketing plan built for {city} needs to survive a downturn that arrives for everybody simultaneously, which argues for the parts of the plan you own outright over the parts you rent by the click."
+    ],
+    "facts": [
+      { "stat": "212,579", "label": "people in the {city} census metropolitan area (2021 Census)" },
+      { "stat": "2.0%", "label": "growth since 2016, well below the national rate of 5.2% (2021 Census)" }
+    ],
+
+    "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
+    "servicesIntro": "Same three services everywhere I work. What changes in {city} is that the market is finite and honest about it, so the goal is capturing nearly all of a fixed pool rather than scaling into a growing one.",
+    "services": [
+      {
+        "title": "Google Ads Management",
+        "href": "/google-ads/",
+        "body": "Straightforward here in a way it is not on the mainland, because the geography is unambiguous and the clicks you buy are from people who can actually become customers. Account structure first, then cutting spend on searches that were never going to convert. The ceiling arrives sooner than in a growing market, and I will tell you when you have hit it.",
+        "price": "**$1,500**/month + ad spend",
+        "btn": { "label": "Google Ads in {city}", "href": "/google-ads/" }
+      },
+      {
+        "title": "SEO Consulting",
+        "href": "/seo/",
+        "body": "Worth more in {city} than in most markets its size. A local ranking here is not diluted by a bigger city's results bleeding in, and because the population is stable the position you win keeps paying instead of being re-contested by new entrants every year. Technical fixes first, then the pages your customers are already searching for.",
+        "price": "**$1,200**/month",
+        "btn": { "label": "SEO in {city}", "href": "/seo/" }
+      },
+      {
+        "title": "AIO Consulting",
+        "href": "/aio-consulting/",
+        "body": "Being the {city} business ChatGPT, Perplexity and Google's AI Overviews name when someone asks for a recommendation. The shortlist an assistant gives for a city this size is genuinely short, and I have yet to find a {city} competitor who has started working on it. Cheapest of the three and one-time.",
+        "price": "**$1,800** one-time",
+        "btn": { "label": "AIO consulting", "href": "/aio-consulting/" }
+      }
+    ],
+
+    "areaHeading": "Where in {city} I work",
+    "area": {
+      "districtsHeading": "Across the {city} area",
+      "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where you are makes no difference to the work or the price.",
+      "nearbyHeading": "And across the Avalon and beyond",
+      "nearbyBody": "A lot of {city} businesses serve the whole peninsula and often the whole province, because for many services there is no closer alternative. I work with businesses in {nearby} on the same terms."
+    },
+
+    "faqHeading": "Questions {city} businesses ask",
+    "faq": [
+      {
+        "q": "Do you have an office in {city}?",
+        "a": "No. I am based in Toronto and work from home, so there is no {city} office and I am not going to imply there is. Everything is run remotely over video and email, which is how I run every account. Given the distance, remote was always going to be the honest arrangement here.",
+        "open": true
+      },
+      {
+        "q": "Our market is not growing. Is marketing even worth it?",
+        "a": "Yes, but the goal changes. In a growing market you are trying to catch new arrivals. In {city} you are trying to be the one people choose instead of the competitor they have used for years, which is slower and depends more on being visibly better at answering the question than on outbidding anyone. That favours SEO and AIO over paid, though paid still works for anything urgent.",
+        "open": true
+      },
+      {
+        "q": "Should we target the whole province?",
+        "a": "If you can serve it, often yes, because for many specialist services there is no closer option than {city} and people outside the Avalon are used to buying from here. If you are a local trade or a restaurant, no, and widening the radius just buys clicks from people who cannot reach you."
+      },
+      {
+        "q": "How should we plan around the oil cycle?",
+        "a": "By making sure the plan does not evaporate the moment budgets tighten. Paid search stops the day you stop paying for it. Organic rankings and an established AI recommendation keep working through a quiet stretch, which is exactly when you need them and exactly when you cannot afford to be spending."
+      },
+      {
+        "q": "What does this cost?",
+        "a": "Google Ads management is $1,500 a month plus your ad spend. SEO consulting is $1,200 a month. AIO consulting is $1,800 one time. No setup fees and no long contract."
+      }
+    ],
+
+    "sourcesHeading": "Sources",
+    "sources": [
+      { "label": "Statistics Canada, Focus on Geography Series, 2021 Census - St. John's (census metropolitan area)", "href": "https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?lang=E&topic=1&dguid=2021S0503001" }
+    ],
+
+    "cta": {
+      "h2": "Tell me where you are stuck in {city}",
+      "p": "Twenty minutes, free, no pitch. Describe the business and I will tell you what I would do first, including whether taking share is realistic for you or whether the money is better spent elsewhere.",
+      "btn": { "label": "Book 20 free minutes", "href": "/contact/", "contact": "Marketing help for a {city} business", "source": "city-{city}" }
+    }
+  }
+}

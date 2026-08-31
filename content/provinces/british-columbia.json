@@ -9,7 +9,7 @@
   "areaType": "State",
   "regionType": "Country",
   "districts": ["the Lower Mainland", "Vancouver Island", "the Okanagan", "the Fraser Valley", "the Kootenays", "northern British Columbia"],
-  "nearby": ["Kelowna", "Kamloops", "Nanaimo", "Prince George", "Vernon", "Cranbrook", "Squamish", "Penticton"],
+  "nearby": ["Kamloops", "Nanaimo", "Prince George", "Vernon", "Cranbrook", "Squamish", "Penticton", "Courtenay"],
   "industries": ["technology", "film and creative", "tourism and hospitality", "construction and real estate", "forestry and resources"],
   "en": {
     "title": "Google Ads, SEO & AIO Consulting in British Columbia | Elvin Peters",
@@ -44,7 +44,7 @@
     "facts": [
       { "stat": "5,000,879", "label": "people in {city} (2021 Census)" },
       { "stat": "7.6%", "label": "growth since 2016, the fastest of any province and well above the national 5.2% (2021 Census)" },
-      { "stat": "2", "label": "{city} markets with their own page here, Vancouver and Victoria" }
+      { "stat": "4", "label": "{city} markets with their own page here, from Vancouver to Kelowna" }
     ],
 
     "servicesHeading": "Three ways to grow a {city} business, run by one accountable person",
@@ -79,7 +79,9 @@
       "citiesBody": "Each of these goes into what is actually different about that market. If you sell mainly in one of them, start there rather than here.",
       "cities": [
         { "label": "Vancouver", "href": "/consulting/vancouver/" },
-        { "label": "Victoria", "href": "/consulting/victoria/" }
+        { "label": "Victoria", "href": "/consulting/victoria/" },
+        { "label": "Kelowna", "href": "/consulting/kelowna/" },
+        { "label": "Abbotsford and Mission", "href": "/consulting/abbotsford-mission/" }
       ],
       "districtsHeading": "Across the province",
       "districtsBody": "I take on clients throughout {districts}. Everything is run remotely over video and email, so where in the province you are makes no difference to the work or the price. The three hour time difference is real and I schedule around it.",
