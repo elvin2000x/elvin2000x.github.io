@@ -179,7 +179,8 @@
     if (r.word_count) meta.push(`${r.word_count.toLocaleString()} words`);
     if (r.speaker_count) meta.push(`${r.speaker_count} speaker${r.speaker_count === 1 ? '' : 's'}`);
     if (r.source === 'upload') meta.push('uploaded');
-    return `<a class="row" href="#/rec/${r.id}"><div><div class="title">${esc(r.title || 'Untitled recording')}</div><div class="meta">${meta.map(esc).join('<span>·</span>')}</div></div><div>${statusPill(r)}</div></a>`;
+    const owner = r.owner_name ? `<span class="pill ${r.mine ? 'gold' : 'info'}" title="Recorded by">${esc(r.mine ? 'Me' : r.owner_name)}</span> ` : '';
+    return `<a class="row" href="#/rec/${r.id}"><div><div class="title">${esc(r.title || 'Untitled recording')}</div><div class="meta">${meta.map(esc).join('<span>·</span>')}</div></div><div class="pills">${owner}${statusPill(r)}</div></a>`;
   }
 
   /* ---------------- upload ---------------- */

@@ -23,6 +23,12 @@ window.APPS_REGISTRY = {
   ],
 
   apps: [
+    /* ---------------- platforms ---------------- */
+    {
+      slug: 'record-studio', name: 'Record Studio', cat: 'platforms', status: 'private',
+      href: '/record/',
+      blurb: 'Interview recorder for journalists and researchers. Words appear on screen as they are spoken, the audio is saved to the server every five seconds, and a minute after you stop you get a transcript with speakers named, a summary, pull quotes and Word, text and subtitle exports. Runs on Google’s transcription models behind a login.'
+    },
     /* ---------------- tools ---------------- */
     {
       slug: 'calculators', name: 'Calculator Suite', cat: 'tools', status: 'live', featured: true,
