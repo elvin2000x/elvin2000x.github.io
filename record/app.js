@@ -609,9 +609,9 @@
     const speakers = rec.speakers || {};
     const summary = rec.summary && !rec.summary.error ? rec.summary : null;
     const labels = []; for (const s of final.segments) if (!labels.includes(s.spk)) labels.push(s.spk);
-    const audioUrl = `${API}/recordings/${rec.id}/audio.mp3`;
+    const audioUrl = `${API}/api/recordings/${rec.id}/audio.mp3`;
     const shareUrl = (t) => `${location.origin}${HOME}#/share/${t}`;
-    const exportBtn = (f, label) => `<a class="btn sm" href="${API}/recordings/${rec.id}/export.${f}" download>${label}</a>`;
+    const exportBtn = (f, label) => `<a class="btn sm" href="${API}/api/recordings/${rec.id}/export.${f}" download>${label}</a>`;
 
     mount(shell(`
       ${headHtml(rec, `<span class="pill ok">Ready</span><span class="pill">${labels.length} speaker${labels.length === 1 ? '' : 's'}</span><span class="pill">${(rec.word_count || 0).toLocaleString()} words</span>`)}
@@ -635,7 +635,7 @@
           <div class="card"><h3>Speakers</h3><p class="small muted">Name them once; every export updates.</p>
             <div class="speakers" style="grid-template-columns:1fr">${labels.map((l) => `<label class="speaker ${spkClass(l)}"><span class="swatch"></span><input class="input" data-spk="${l}" value="${esc((speakers[l] && speakers[l].name) || '')}" placeholder="${esc((speakers[l] && speakers[l].guess) ? 'Maybe: ' + speakers[l].guess : 'Speaker ' + l.replace(/\D/g, ''))}" style="min-height:40px"></label>`).join('')}</div>
           </div>
-          <div class="card"><h3>Export</h3><div class="exports">${exportBtn('docx', 'Word')}${exportBtn('txt', 'Text')}${exportBtn('md', 'Markdown')}${exportBtn('srt', 'SRT')}${exportBtn('vtt', 'VTT')}${exportBtn('json', 'JSON')}<a class="btn sm" href="${audioUrl}?download=1" download>MP3 audio</a>${rec.parts ? `<a class="btn sm" href="${API}/recordings/${rec.id}/original" download>Original file</a>` : ''}</div></div>
+          <div class="card"><h3>Export</h3><div class="exports">${exportBtn('docx', 'Word')}${exportBtn('txt', 'Text')}${exportBtn('md', 'Markdown')}${exportBtn('srt', 'SRT')}${exportBtn('vtt', 'VTT')}${exportBtn('json', 'JSON')}<a class="btn sm" href="${audioUrl}?download=1" download>MP3 audio</a>${rec.parts ? `<a class="btn sm" href="${API}/api/recordings/${rec.id}/original" download>Original file</a>` : ''}</div></div>
           <div class="card"><h3>Flagged moments</h3><div class="markers" id="markers">${(data.markers || []).length ? data.markers.map(markerRow).join('') : '<div class="small muted">None flagged during the recording.</div>'}</div></div>
           <div class="card"><h3>Notes</h3><textarea class="input" id="notes" placeholder="Saved automatically.">${esc(rec.notes || '')}</textarea></div>
           <div class="card"><h3>Share</h3><p class="small muted">A read-only link with the audio, summary and transcript. Anyone with the link can open it; turn it off any time.</p>
@@ -713,7 +713,7 @@
       <header class="topbar"><div class="topbar-inner"><span class="brand">${LOGO}<span>Record Studio</span></span><span class="spacer"></span><span class="pill">Shared transcript</span></div></header>
       <main class="main">
         <div class="rec-head"><div><h1>${esc(d.title || 'Untitled recording')}</h1><div class="small muted">${esc(fmtDate(d.started_at))} · ${esc(dur(d.duration_s))}</div></div></div>
-        <div class="player"><audio id="audio" controls preload="metadata" src="${API}/share/${encodeURIComponent(token)}/audio.mp3"></audio></div>
+        <div class="player"><audio id="audio" controls preload="metadata" src="${API}/api/share/${encodeURIComponent(token)}/audio.mp3"></audio></div>
         ${s ? `<div class="card summary"><div class="label">Summary</div><p>${esc(s.summary)}</p>${s.keyPoints && s.keyPoints.length ? `<div class="label">Key points</div><ul>${s.keyPoints.map((k) => `<li>${esc(k)}</li>`).join('')}</ul>` : ''}${s.quotes && s.quotes.length ? `<div class="label">Quotes</div>${s.quotes.map((q) => `<div class="quote" data-t="${parseTime(q.time)}"><div class="q">“${esc(q.quote)}”</div><div class="who">${esc(q.speaker)} · ${esc(q.time)}</div></div>`).join('')}` : ''}</div>` : ''}
         <div class="card" style="margin-top:18px"><h3>Transcript</h3><div class="transcript" id="segments" style="max-height:none">${d.segments.map((seg, i) => segHtml(seg, i, d.speakers)).join('')}</div></div>
       </main>
