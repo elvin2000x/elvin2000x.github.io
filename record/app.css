@@ -202,3 +202,14 @@ table.tbl { width: 100%; border-collapse: collapse; font-size: 15px; }
 .bar { height: 8px; background: var(--rs-bg-2); border-radius: 999px; overflow: hidden; margin-top: 10px; }
 .bar i { display: block; height: 100%; width: 0; background: var(--rs-gold); transition: width .2s; }
 footer.foot { text-align: center; color: var(--rs-muted); font-size: 13px; padding: 30px 0 10px; }
+
+/* ---------- editing ---------- */
+.editable { border: 1px dashed transparent; border-radius: 8px; padding: 4px 8px; margin-left: -8px; margin-right: -8px; transition: border-color .18s, background .18s; }
+.editable:hover { border-color: var(--rs-line-soft); }
+.editable:focus { outline: none; border-color: var(--rs-gold); background: var(--rs-gold-soft); }
+ul.editable { padding-left: 28px; }
+.seg .x[contenteditable] { border: 1px dashed transparent; border-radius: 8px; padding: 2px 6px; margin: -2px -6px; cursor: text; }
+.seg .x[contenteditable]:hover { border-color: var(--rs-line-soft); }
+.seg .x[contenteditable]:focus { outline: none; border-color: var(--rs-gold); background: #fff; }
+.spk-sel { border: 1px solid transparent; background: transparent; font-weight: 600; font-size: 15px; color: inherit; padding: 2px 4px; border-radius: 6px; max-width: 140px; cursor: pointer; }
+.spk-sel:hover, .spk-sel:focus { border-color: var(--rs-line-strong); background: var(--rs-panel); outline: none; }
