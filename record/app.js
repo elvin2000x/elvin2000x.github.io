@@ -619,23 +619,23 @@
       <div class="split" style="grid-template-columns:1fr 380px">
         <div>
           ${summary ? `<div class="card summary">
-            <div class="label">Summary</div>
-            <p>${esc(summary.summary)}</p>
-            ${summary.keyPoints && summary.keyPoints.length ? `<div class="label">Key points</div><ul>${summary.keyPoints.map((k) => `<li>${esc(k)}</li>`).join('')}</ul>` : ''}
+            <div class="rec-head" style="margin-bottom:6px"><div class="label">Summary</div><span class="small muted">Click any text to edit. Saves when you click away.</span></div>
+            <p class="editable" id="sumText" contenteditable="true" spellcheck="true">${esc(summary.summary)}</p>
+            <div class="label">Key points</div><ul class="editable" id="sumPoints" contenteditable="true">${(summary.keyPoints || []).map((k) => `<li>${esc(k)}</li>`).join('') || '<li></li>'}</ul>
             ${summary.quotes && summary.quotes.length ? `<div class="label">Quotes</div>${summary.quotes.map((q) => `<div class="quote" data-t="${parseTime(q.time)}"><div class="q">“${esc(q.quote)}”</div><div class="who">${esc(q.speaker)} · ${esc(q.time)}</div></div>`).join('')}` : ''}
-            ${summary.actionItems && summary.actionItems.length ? `<div class="label">Follow-ups</div><ul>${summary.actionItems.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
+            <div class="label">Follow-ups</div><ul class="editable" id="sumActions" contenteditable="true">${(summary.actionItems || []).map((a) => `<li>${esc(a)}</li>`).join('') || '<li></li>'}</ul>
             ${summary.topics && summary.topics.length ? `<div class="label">Topics</div><div class="chips">${summary.topics.map((t) => `<span class="chip">${esc(t)}</span>`).join('')}</div>` : ''}
           </div>` : (rec.summary && rec.summary.error ? `<div class="notice">Summary unavailable: ${esc(rec.summary.error)}. Use “Process again” to retry.</div>` : '')}
           <div class="card" ${summary ? 'style="margin-top:18px"' : ''}>
-            <div class="rec-head" style="margin-bottom:8px"><h3>Transcript</h3><input class="input" id="find" placeholder="Find in transcript" style="max-width:260px;min-height:40px"></div>
-            <div class="transcript" id="segments" style="max-height:none">${final.segments.map((s, i) => segHtml(s, i, speakers)).join('')}</div>
+            <div class="rec-head" style="margin-bottom:8px"><div><h3>Transcript</h3><span class="small muted">Click a line to fix words; change the speaker from the dropdown. Every export follows your edits.</span></div><input class="input" id="find" placeholder="Find in transcript" style="max-width:260px;min-height:40px"></div>
+            <div class="transcript" id="segments" style="max-height:none">${final.segments.map((s, i) => segHtml(s, i, speakers, labels)).join('')}</div>
           </div>
         </div>
         <div>
           <div class="card"><h3>Speakers</h3><p class="small muted">Name them once; every export updates.</p>
             <div class="speakers" style="grid-template-columns:1fr">${labels.map((l) => `<label class="speaker ${spkClass(l)}"><span class="swatch"></span><input class="input" data-spk="${l}" value="${esc((speakers[l] && speakers[l].name) || '')}" placeholder="${esc((speakers[l] && speakers[l].guess) ? 'Maybe: ' + speakers[l].guess : 'Speaker ' + l.replace(/\D/g, ''))}" style="min-height:40px"></label>`).join('')}</div>
           </div>
-          <div class="card"><h3>Export</h3><div class="exports">${exportBtn('docx', 'Word')}${exportBtn('txt', 'Text')}${exportBtn('md', 'Markdown')}${exportBtn('srt', 'SRT')}${exportBtn('vtt', 'VTT')}${exportBtn('json', 'JSON')}<a class="btn sm" href="${audioUrl}?download=1" download>MP3 audio</a>${rec.parts ? `<a class="btn sm" href="${API}/api/recordings/${rec.id}/original" download>Original file</a>` : ''}</div></div>
+          <div class="card"><h3>Export</h3><div class="exports" id="gdocBox">${rec.google_doc_url ? `<a class="btn sm primary" href="${esc(rec.google_doc_url)}" target="_blank" rel="noopener">Open Google Doc</a><button class="btn sm" id="gdocRedo">Re-create Google Doc</button>` : `<button class="btn sm primary" id="gdocMake">Google Doc (2 tabs)</button>`}</div><div class="exports" style="margin-top:8px">${exportBtn('docx', 'Word')}${exportBtn('txt', 'Text')}${exportBtn('md', 'Markdown')}${exportBtn('srt', 'SRT')}${exportBtn('vtt', 'VTT')}${exportBtn('json', 'JSON')}<a class="btn sm" href="${audioUrl}?download=1" download>MP3 audio</a>${rec.parts ? `<a class="btn sm" href="${API}/api/recordings/${rec.id}/original" download>Original file</a>` : ''}</div></div>
           <div class="card"><h3>Flagged moments</h3><div class="markers" id="markers">${(data.markers || []).length ? data.markers.map(markerRow).join('') : '<div class="small muted">None flagged during the recording.</div>'}</div></div>
           <div class="card"><h3>Notes</h3><textarea class="input" id="notes" placeholder="Saved automatically.">${esc(rec.notes || '')}</textarea></div>
           <div class="card"><h3>Share</h3><p class="small muted">A read-only link with the audio, summary and transcript. Anyone with the link can open it; turn it off any time.</p>
@@ -669,7 +669,7 @@
           try {
             const r = await api(`/api/recordings/${rec.id}`, { method: 'PATCH', body });
             rec.speakers = r.recording.speakers;
-            $$(`.seg[data-spk="${inp.dataset.spk}"] .who .n`).forEach((el) => { el.textContent = spkName(inp.dataset.spk, rec.speakers); });
+            $$(`.spk-sel option[value="${inp.dataset.spk}"]`).forEach((el) => { el.textContent = spkName(inp.dataset.spk, rec.speakers); });
           } catch (e) { toast(e.message); }
         }, 500);
       };
@@ -690,12 +690,55 @@
       if (copy) copy.onclick = async () => { try { await navigator.clipboard.writeText($('#shareLink').value); toast('Link copied'); } catch { $('#shareLink').select(); } };
     };
     wireShare();
+    // ---- editing: summary
+    const saveSummary = async (body) => { try { const r = await api(`/api/recordings/${rec.id}/summary`, { method: 'PATCH', body }); rec.summary = r.recording.summary; toast('Saved'); } catch (e) { toast(e.message); } };
+    const liTexts = (ul) => $$('li', ul).map((li) => li.textContent.trim()).filter(Boolean);
+    const st = $('#sumText'); if (st) st.onblur = () => { const v = st.textContent.trim(); if (v !== (rec.summary.summary || '')) saveSummary({ summary: v }); };
+    const sp = $('#sumPoints'); if (sp) sp.onblur = () => { const v = liTexts(sp); if (JSON.stringify(v) !== JSON.stringify(rec.summary.keyPoints || [])) saveSummary({ keyPoints: v }); };
+    const sa = $('#sumActions'); if (sa) sa.onblur = () => { const v = liTexts(sa); if (JSON.stringify(v) !== JSON.stringify(rec.summary.actionItems || [])) saveSummary({ actionItems: v }); };
+    // ---- editing: transcript lines + speakers
+    const saveSegments = async (edits) => {
+      try { await api(`/api/recordings/${rec.id}/segments`, { method: 'PATCH', body: { edits } }); toast('Saved'); }
+      catch (e) { toast(e.message); }
+    };
+    $('#segments').addEventListener('focusout', (e) => {
+      const x = e.target.closest('.x[contenteditable]'); if (!x) return;
+      const seg = x.closest('.seg'); const i = parseInt(seg.dataset.i, 10);
+      const v = x.textContent.replace(/\s+/g, ' ').trim();
+      if (v && v !== final.segments[i].text) { final.segments[i].text = v; saveSegments([{ i, text: v }]); }
+      else if (!v) x.textContent = final.segments[i].text;
+    });
+    $('#segments').addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.closest('.x[contenteditable]')) { e.preventDefault(); e.target.blur(); } });
+    $('#segments').addEventListener('change', (e) => {
+      const sel = e.target.closest('.spk-sel'); if (!sel) return;
+      const i = parseInt(sel.dataset.i, 10); const seg = sel.closest('.seg');
+      final.segments[i].spk = sel.value; seg.dataset.spk = sel.value;
+      seg.className = `seg ${spkClass(sel.value)}`;
+      saveSegments([{ i, spk: sel.value }]);
+    });
+    // ---- Google Doc
+    const wireGdoc = () => {
+      const mk = $('#gdocMake') || $('#gdocRedo'); if (!mk) return;
+      mk.onclick = async () => {
+        mk.disabled = true; mk.textContent = 'Creating in Google Docs…';
+        try {
+          const r = await api(`/api/recordings/${rec.id}/google-doc`, { method: 'POST', body: {} });
+          rec.google_doc_url = r.url;
+          $('#gdocBox').innerHTML = `<a class="btn sm primary" href="${esc(r.url)}" target="_blank" rel="noopener">Open Google Doc</a><button class="btn sm" id="gdocRedo">Re-create Google Doc</button>`;
+          wireGdoc(); window.open(r.url, '_blank');
+        } catch (e) { toast(e.message, 7000); mk.disabled = false; mk.textContent = rec.google_doc_url ? 'Re-create Google Doc' : 'Google Doc (2 tabs)'; }
+      };
+    };
+    wireGdoc();
     $('#reprocess').onclick = async () => { if (!confirm('Run transcription and summary again? Speaker names are kept.')) return; try { await api(`/api/recordings/${rec.id}/reprocess`, { method: 'POST', body: {} }); render(); } catch (e) { toast(e.message); } };
     $('#del').onclick = () => deleteRec(rec);
   }
 
-  function segHtml(s, i, speakers) {
-    return `<div class="seg ${spkClass(s.spk)}" data-i="${i}" data-spk="${s.spk}"><div class="who"><span class="n">${esc(spkName(s.spk, speakers))}</span><span class="t" data-t="${s.t0}">${clock(s.t0)}</span></div><div class="x">${esc(s.text)}</div></div>`;
+  function segHtml(s, i, speakers, labels) {
+    const who = labels && labels.length
+      ? `<select class="spk-sel n" data-i="${i}" aria-label="Speaker">${labels.map((l) => `<option value="${l}" ${l === s.spk ? 'selected' : ''}>${esc(spkName(l, speakers))}</option>`).join('')}</select>`
+      : `<span class="n">${esc(spkName(s.spk, speakers))}</span>`;
+    return `<div class="seg ${spkClass(s.spk)}" data-i="${i}" data-spk="${s.spk}"><div class="who">${who}<span class="t" data-t="${s.t0}">${clock(s.t0)}</span></div><div class="x" ${labels ? 'contenteditable="true" spellcheck="true"' : ''}>${esc(s.text)}</div></div>`;
   }
   function markerRow(m) {
     return `<div class="marker-row"><span class="t" data-t="${m.t}">${clock(m.t)}</span><input class="input" data-mid="${m.id}" value="${esc(m.text || '')}" placeholder="What happened here?"></div>`;
