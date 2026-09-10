@@ -102,6 +102,8 @@
 
   /* ---------------- dashboard ---------------- */
   async function dashboardView() {
+    const __t = state.renderToken;
+    if (__t !== state.renderToken) return;
     mount(shell(`<div class="empty">Loading…</div>`, 'home'));
     const admin = state.user.role === 'admin';
     let recs = [], stats = null;
@@ -112,6 +114,7 @@
     } catch (e) { toast(e.message); }
 
     const rows = (list) => list.length ? list.map(rowHtml).join('') : `<div class="empty">No recordings yet. Start one above.</div>`;
+    if (__t !== state.renderToken) return;
     mount(shell(`
       <div class="hero"><div><h1>Recordings</h1><p>Hit start, put the phone or laptop on the table, and ask your questions. The words appear as they are spoken; the full transcript, speakers and summary land a minute after you stop.</p></div></div>
       ${!state.gemini ? `<div class="error">Transcription is not configured on the server (no Gemini key). Recording still works, transcripts will not.</div>` : ''}
@@ -388,6 +391,8 @@
 
   /* ---------------- recording view ---------------- */
   async function recordingView(id, params) {
+    const __t = state.renderToken;
+    if (__t !== state.renderToken) return;
     mount(shell(`<div class="empty">Loading…</div>`, 'home'));
     let data;
     try { data = await api(`/api/recordings/${id}`); }
@@ -425,10 +430,12 @@
   }
 
   async function recorderUI(rec, data, autostart, liveElsewhere) {
+    const __t = state.renderToken;
     let utts = [];
     try { utts = (await api(`/api/recordings/${rec.id}/utterances`)).utterances; } catch {}
     const markers = data.markers || [];
     const interrupted = rec.status === 'interrupted' || (rec.status === 'recording' && !rec.live);
+    if (__t !== state.renderToken) return;
     mount(shell(`
       ${headHtml(rec, `<span class="pill" id="pillState">${interrupted ? 'Interrupted' : 'Ready to record'}</span>`)}
       ${liveElsewhere ? `<div class="notice">This recording is live in another tab or device. Starting here will take over the live stream.</div>` : ''}
@@ -559,6 +566,7 @@
   }
 
   async function processingUI(rec, data) {
+    const __t = state.renderToken;
     let utts = [];
     try { utts = (await api(`/api/recordings/${rec.id}/utterances`)).utterances; } catch {}
     const phaseText = (p) => {
@@ -566,6 +574,7 @@
       const m = { processing: 'Building the master audio', transcribing: 'Transcribing with speaker detection', summarizing: 'Writing the summary and pulling quotes', ready: 'Done', failed: 'Failed' };
       return (m[p.phase] || p.phase) + (p.detail ? ` (${p.detail})` : '');
     };
+    if (__t !== state.renderToken) return;
     mount(shell(`
       ${headHtml(rec, `<span class="pill info">Processing</span>`)}
       <div class="progress"><div class="spinner"></div><div><b>Turning the recording into a transcript.</b><div class="small" id="phase">${esc(phaseText(data.phase))}</div><div class="small">About a minute per half hour of audio. You can leave this page; it will be ready when you come back.</div></div></div>
@@ -582,6 +591,8 @@
   }
 
   function failedUI(rec, data) {
+    const __t = state.renderToken;
+    if (__t !== state.renderToken) return;
     mount(shell(`
       ${headHtml(rec, `<span class="pill rec">Failed</span>`)}
       <div class="error"><b>Processing failed.</b> ${esc(rec.error || 'Unknown error')}</div>
@@ -603,6 +614,7 @@
   function spkName(spk, speakers) { const s = speakers && speakers[spk]; if (s && s.name) return s.name; return `Speaker ${String(spk).replace(/\D/g, '')}`; }
 
   async function resultUI(rec, data) {
+    const __t = state.renderToken;
     let final;
     try { final = await api(`/api/recordings/${rec.id}/transcript`); }
     catch (e) { return mount(shell(`<div class="card"><h2>${esc(rec.title)}</h2><div class="error">${esc(e.message)}</div></div>`, 'home')); }
@@ -612,6 +624,8 @@
     const audioUrl = `${API}/api/recordings/${rec.id}/audio.mp3`;
     const shareUrl = (t) => `${location.origin}${HOME}#/share/${t}`;
     const exportBtn = (f, label) => `<a class="btn sm" href="${API}/api/recordings/${rec.id}/export.${f}" download>${label}</a>`;
+
+    if (__t !== state.renderToken) return;
 
     mount(shell(`
       ${headHtml(rec, `<span class="pill ok">Ready</span><span class="pill">${labels.length} speaker${labels.length === 1 ? '' : 's'}</span><span class="pill">${(rec.word_count || 0).toLocaleString()} words</span>`)}
@@ -746,6 +760,7 @@
 
   /* ---------------- share view (public) ---------------- */
   async function shareView(token) {
+    const __t = state.renderToken;
     stopPolling();
     $('#app').innerHTML = `<div class="main"><div class="empty">Loading…</div></div>`;
     let d;
@@ -769,7 +784,9 @@
 
   /* ---------------- settings ---------------- */
   function settingsView() {
+    const __t = state.renderToken;
     const s = state.settings || {};
+    if (__t !== state.renderToken) return;
     mount(shell(`
       <h1>Settings</h1>
       <div class="grid-2" style="margin-top:18px">
@@ -807,11 +824,14 @@
 
   /* ---------------- users (admin) ---------------- */
   async function usersView() {
+    const __t = state.renderToken;
     if (state.user.role !== 'admin') { location.hash = '#/'; return; }
+    if (__t !== state.renderToken) return;
     mount(shell(`<div class="empty">Loading…</div>`, 'users'));
     let users = [];
     try { users = (await api('/api/users')).users; } catch (e) { toast(e.message); }
     const row = (u) => `<tr data-id="${u.id}"><td><b>${esc(u.name || '')}</b><div class="small muted">${esc(u.email)}</div></td><td>${esc(u.role)}</td><td class="small muted">${esc(fmtDate(u.last_login_at)) || 'never'}</td><td>${u.disabled ? '<span class="pill rec">Disabled</span>' : '<span class="pill ok">Active</span>'}</td><td><div class="btn-row"><button class="btn sm" data-act="pw">Reset password</button><button class="btn sm" data-act="toggle">${u.disabled ? 'Enable' : 'Disable'}</button><button class="btn sm danger" data-act="del">Delete</button></div></td></tr>`;
+    if (__t !== state.renderToken) return;
     mount(shell(`
       <h1>Team</h1>
       <div class="card" style="margin-top:18px"><div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Person</th><th>Role</th><th>Last sign-in</th><th>Status</th><th></th></tr></thead><tbody id="rows">${users.map(row).join('')}</tbody></table></div></div>
@@ -851,7 +871,9 @@
   }
 
   /* ---------------- router ---------------- */
+  let renderSeq = 0;
   async function render() {
+    state.renderToken = ++renderSeq;
     const hash = location.hash || '#/';
     const shareMatch = /^#\/share\/([A-Za-z0-9]+)/.exec(hash) || /\/share\/([A-Za-z0-9]+)/.exec(location.pathname);
     if (shareMatch) return shareView(shareMatch[1]);
