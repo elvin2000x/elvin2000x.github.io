@@ -23,14 +23,14 @@
       "dek": "One setting, 29,306 API calls before and after, and a bill that fell by half while the work stayed the same. A case study in why a long chat costs more per message, with the numbers I can stand behind and the parts I can only report as impressions.",
       "short_dek": "One setting, 29,306 API calls before and after, and a bill that fell by half while the work stayed the same.",
       "readmins": 7,
-      "date": "Sep 2, 2026",
+      "date": "Sep 4, 2026",
       "image": "blog-context-cap.svg",
       "og": "og.jpg",
       "custom": true,
       "file": "essays/context-cap.html",
       "accent": "amber",
       "body_format": "custom",
-      "draft": true
+      "draft": false
     },
     {
       "slug": "same-song-four-bills",
