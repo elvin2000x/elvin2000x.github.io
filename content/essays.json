@@ -1,6 +1,22 @@
 {
   "posts": [
     {
+      "slug": "automation-is-easy",
+      "title": "It Took Me Months to Build 258 Pages by Hand. In 2026, AI Did It in Seconds.",
+      "short_title": "258 Pages by Hand",
+      "dek": "The script would have taken an afternoon. Nobody was available to write it. Here is what that taught me about why large companies cannot automate simple things, and what AI actually changed.",
+      "short_dek": "The script would have taken an afternoon. Nobody was available to write it. What that taught me about why big companies cannot automate, and what AI changed.",
+      "readmins": 10,
+      "date": "Sep 16, 2026",
+      "image": "blog-municipalities.svg",
+      "og": "og.jpg",
+      "custom": true,
+      "file": "essays/automation-is-easy.html",
+      "accent": "blue",
+      "body_format": "custom",
+      "draft": false
+    },
+    {
       "slug": "best-deal-washington",
       "title": "The Best Deal Washington Didn't Offer",
       "short_title": "The Best Deal Washington Didn't Offer",
@@ -63,22 +79,6 @@
       "accent": "amber",
       "body_format": "custom",
       "draft": false
-    },
-    {
-      "slug": "automation-is-easy",
-      "title": "I Built 258 Landing Pages by Hand",
-      "short_title": "258 Pages by Hand",
-      "dek": "The script would have taken an afternoon. Nobody was available to write it. Here is what that taught me about why large companies cannot automate simple things, and what AI actually changed.",
-      "short_dek": "The script would have taken an afternoon. Nobody was available to write it. What that taught me about why big companies cannot automate, and what AI changed.",
-      "readmins": 10,
-      "date": "Aug 18, 2026",
-      "image": "blog-municipalities.svg",
-      "og": "og.jpg",
-      "custom": true,
-      "file": "essays/automation-is-easy.html",
-      "accent": "blue",
-      "body_format": "custom",
-      "draft": true
     },
     {
       "slug": "assembly-line",
