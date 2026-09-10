@@ -132,11 +132,30 @@
       '<p><b>Lips:</b> ' + list(m.lip) + '</p><p><b>Blush:</b> ' + list(m.blush) + '</p><p><b>Eyes:</b> ' + list(m.eye) + '</p>' +
       '<p><b>Skip:</b> ' + esc(m.avoid) + '</p>';
     $('token').textContent = p.token;
+    currentToken = p.token;
+    const paid = !!p.paid;
+    $('unlock').classList.toggle('paid', paid);
+    $('unlock-title').textContent = paid ? 'Extension unlocked' : 'Unlock the shopping extension';
+    $('unlock-text').textContent = paid ? 'This key works in the Colour Match extension. Paste it in the popup and open any Sephora, H&M or Zara page.' : 'Your palette above is free. The extension that marks shades on Sephora, H&M and Zara is $19 once, or $4 a month if you would rather try it.';
+    $('unlock-status').textContent = (new URLSearchParams(location.search).get('paid') === '1' && !paid) ? 'Payment received, unlocking now. Reload in a few seconds if this line does not change.' : '';
     const link = location.origin + location.pathname + '?t=' + p.token;
     $('plink').textContent = link; $('plink').href = link;
     $('json').textContent = JSON.stringify(p, null, 2);
     show('result');
   }
+  let currentToken = null;
+  async function buy(plan) {
+    if (!currentToken) return;
+    $('unlock-status').textContent = 'Opening secure checkout';
+    try {
+      const r = await fetch(API + '/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: currentToken, plan: plan }) });
+      const j = await r.json();
+      if (j.ok && j.url) { location.href = j.url; return; }
+      $('unlock-status').textContent = j.already ? 'Already unlocked.' : (j.error || 'Checkout is unavailable right now.');
+    } catch (e) { $('unlock-status').textContent = e.message; }
+  }
+  $('buy-once').addEventListener('click', () => buy('once'));
+  $('buy-monthly').addEventListener('click', () => buy('monthly'));
   $('copy').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText($('token').textContent); $('copy').textContent = 'Copied'; setTimeout(() => ($('copy').textContent = 'Copy'), 1500); } catch (e) { /* select manually */ }
   });

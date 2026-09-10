@@ -87,3 +87,7 @@ h3{font-size:var(--fs-h3);margin:32px 0 12px}
 .privacy{padding:8px 20px 40px;font-size:var(--fs-sm);color:var(--ink-2)}
 .privacy h3{margin-top:0}
 .privacy ul{margin:0;padding-left:20px;display:grid;gap:6px}
+
+.unlock{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.unlock-row{margin-top:8px}
+.unlock.paid .unlock-row{display:none}
