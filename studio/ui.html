@@ -255,15 +255,16 @@ function drawRail(){
   $("#rail").innerHTML = h;
   $("#createbtn").onclick = function(e){ e.stopPropagation(); openCreate(this); };
 }
+function toolUrl(id){ var t = REG.tools.filter(function(x){ return x.id === id; })[0]; return t ? t.u : REG.home; }
 function openCreate(btn){
   var m = $("#createmenu");
   if (!m) { m = document.createElement("div"); m.id = "createmenu"; m.className = "menu"; document.body.appendChild(m); }
   var r = btn.getBoundingClientRect();
   m.style.position = "fixed"; m.style.left = r.left + "px"; m.style.top = (r.bottom + 6) + "px";
   var items = [["Blog post", "Write and preview a post", "web", "#post-new", false],
-    ["Link page", "A new link-in-bio page", "link", REG.home + "#links", true],
-    ["Quiz", "Start from a copy or blank", "quiz", REG.home + "#quizzes", true],
-    ["Landing page", "A one-off campaign page", "layout", REG.home + "#landing", true]];
+    ["Link page", "A new link-in-bio page", "link", toolUrl("links"), true],
+    ["Quiz", "Start from a copy or blank", "quiz", toolUrl("quizzes"), true],
+    ["Landing page", "A one-off campaign page", "layout", toolUrl("landing"), true]];
   m.innerHTML = items.map(function(x){
     return '<button data-go="' + esc(x[3]) + '" data-ext="' + (x[4] ? 1 : "") + '"><span class="ic" style="width:32px;height:32px;border-radius:8px;display:grid;place-items:center">' + icon(x[2]) + '</span><span>' + x[0] + '<small>' + x[1] + '</small></span></button>';
   }).join("");
