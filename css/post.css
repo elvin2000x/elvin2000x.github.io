@@ -103,3 +103,7 @@ body{background:#15171A;}
 }
 
 @media (prefers-reduced-motion: reduce){.trp *{transition:none!important;animation:none!important;}}
+
+/* Images placed from Site Studio (Markdown ![alt](src)). The width and height attributes
+   reserve the space; this rule only lets the image shrink to the column. */
+.trp figure img{display:block;max-width:100%;height:auto;border-radius:6px;border:1px solid var(--grid);}

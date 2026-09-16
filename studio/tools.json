@@ -1,0 +1,501 @@
+{
+ "_comment": "Copied from coding/studio-ui/prototype/index.html (TOOLS + EXTERNAL), the one tools registry in BUILD-BRIEF.md. Hash routes point at the Studio home. When Empire Studio serves /studio/assets/tools.json, replace this copy with it.",
+ "home": "https://studio.elvinpeters.com/studio/",
+ "tools": [
+  {
+   "id": "site",
+   "g": "Build",
+   "n": "Website",
+   "d": "elvinpeters.com pages and blog",
+   "i": "web",
+   "t": "blue",
+   "u": "https://edit.elvinpeters.com/",
+   "rail": 1,
+   "help": "Edits elvinpeters.com itself: the homepage, service pages, menu and blog posts. Publishing rebuilds the site and it is live in about a minute.",
+   "use": "Use it for anything a visitor sees on elvinpeters.com.",
+   "addr": "edit.elvinpeters.com"
+  },
+  {
+   "id": "links",
+   "g": "Build",
+   "n": "Link pages",
+   "d": "Link-in-bio, one per platform",
+   "i": "link",
+   "t": "violet",
+   "u": "https://studio.elvinpeters.com/studio/#links",
+   "rail": 1,
+   "count": 3,
+   "help": "Your link-in-bio pages. One page per platform or campaign, each with its own blocks, click counts and email capture.",
+   "use": "Use it to change what people see after tapping the link in your bio.",
+   "addr": "elvinpeters.com/links/"
+  },
+  {
+   "id": "quizzes",
+   "g": "Build",
+   "n": "Quizzes",
+   "d": "Lead quizzes and their results",
+   "i": "quiz",
+   "t": "amber",
+   "u": "https://studio.elvinpeters.com/studio/#quizzes",
+   "rail": 1,
+   "count": 5,
+   "help": "Build and edit lead quizzes: questions, how answers score, result pages and the email gate. Every quiz feeds Contacts.",
+   "use": "Use it to change a question, add a result or start a new quiz from a copy.",
+   "addr": "elvinpeters.com/quiz/ and 4 more"
+  },
+  {
+   "id": "landing",
+   "g": "Build",
+   "n": "Landing pages",
+   "d": "One-off pages and funnels",
+   "i": "layout",
+   "t": "teal",
+   "u": "https://studio.elvinpeters.com/studio/#landing",
+   "rail": 1,
+   "help": "Standalone landing pages and multi-step funnels that are NOT part of the main website, like a campaign opt-in or a portfolio.",
+   "use": "Use it when a campaign needs its own page. For pages on elvinpeters.com, use Website.",
+   "addr": "studio.elvinpeters.com/s/…"
+  },
+  {
+   "id": "mail",
+   "g": "Grow",
+   "n": "Mail",
+   "d": "Newsletter and sequences",
+   "i": "mail",
+   "t": "red",
+   "u": "https://studio.elvinpeters.com/studio/mail",
+   "rail": 1,
+   "help": "Newsletter broadcasts and the automatic welcome sequences, sent through Resend from your domain.",
+   "use": "Use it to send a newsletter or change a welcome email.",
+   "addr": "studio.elvinpeters.com/studio/mail"
+  },
+  {
+   "id": "contacts",
+   "g": "Grow",
+   "n": "Contacts",
+   "d": "Every lead and customer",
+   "i": "people",
+   "t": "green",
+   "u": "https://studio.elvinpeters.com/studio/crm",
+   "rail": 1,
+   "help": "One list of every lead and customer, from quizzes, link pages, opt-ins, bookings and purchases.",
+   "use": "Use it to look someone up or see where a lead came from.",
+   "addr": "studio.elvinpeters.com/studio/crm"
+  },
+  {
+   "id": "bookings",
+   "g": "Grow",
+   "n": "Bookings",
+   "d": "Your hours and booked calls",
+   "i": "cal",
+   "t": "amber",
+   "u": "https://studio.elvinpeters.com/studio/booking",
+   "rail": 1,
+   "help": "Set the hours people can book you, and see the calls booked at meet.elvinpeters.com.",
+   "use": "Use it before a busy week to block time.",
+   "addr": "studio.elvinpeters.com/studio/booking"
+  },
+  {
+   "id": "convo",
+   "g": "Grow",
+   "n": "Chat funnels",
+   "d": "Convo bots that qualify leads",
+   "i": "chat",
+   "t": "violet",
+   "u": "https://chat.elvinpeters.com/admin",
+   "rail": 1,
+   "help": "Conversational bots that talk to visitors and qualify them. Create a bot, edit its flow, see its leads.",
+   "use": "Use it for a chat-style funnel instead of a form.",
+   "addr": "chat.elvinpeters.com/admin"
+  },
+  {
+   "id": "qr",
+   "g": "Grow",
+   "n": "QR codes",
+   "d": "Re-pointable, with scan counts",
+   "i": "qr",
+   "t": "grey",
+   "u": "https://qr.elvinpeters.com",
+   "rail": 1,
+   "help": "Dynamic QR codes. Change where a printed code goes at any time and see how many times it was scanned.",
+   "use": "Use it for anything printed: cards, flyers, slides.",
+   "addr": "qr.elvinpeters.com"
+  },
+  {
+   "id": "mission",
+   "g": "Run",
+   "n": "Mission Control",
+   "d": "Tasks and priorities",
+   "i": "task",
+   "t": "blue",
+   "u": "https://mission.elvinpeters.com/",
+   "rail": 1,
+   "help": "Your task board. It decides what gets worked on and holds every open card, for you and for Claude.",
+   "use": "Start your day here.",
+   "addr": "mission.elvinpeters.com"
+  },
+  {
+   "id": "ops",
+   "g": "Run",
+   "n": "Ops monitor",
+   "d": "Is everything up",
+   "i": "pulse",
+   "t": "green",
+   "u": "https://hq.elvinpeters.com/world.html",
+   "rail": 1,
+   "help": "Health of every server, site and automation in one view.",
+   "use": "Use it when something looks broken.",
+   "addr": "hq.elvinpeters.com/world.html"
+  },
+  {
+   "id": "social",
+   "g": "On this PC",
+   "n": "Social Suite",
+   "d": "Videos and LinkedIn posts",
+   "i": "video",
+   "t": "red",
+   "u": "http://127.0.0.1:8880/",
+   "pc": 1,
+   "help": "Makes short videos and schedules LinkedIn posts. Runs on your PC only, so it only opens from the PC.",
+   "use": "Use it to make or schedule social content.",
+   "addr": "127.0.0.1:8880"
+  },
+  {
+   "id": "script",
+   "g": "On this PC",
+   "n": "Script Studio",
+   "d": "Video ad scripts",
+   "i": "text",
+   "t": "amber",
+   "u": "http://127.0.0.1:8793/",
+   "pc": 1,
+   "help": "Writes direct-response video ad scripts from a swipe file and tracks which ones you tested.",
+   "use": "Use it before filming an ad.",
+   "addr": "127.0.0.1:8793"
+  },
+  {
+   "id": "adstudio",
+   "g": "On this PC",
+   "n": "Advertising Studio",
+   "d": "Swipe file from ad libraries",
+   "i": "flag",
+   "t": "teal",
+   "u": "http://127.0.0.1:8792/",
+   "pc": 1,
+   "help": "Collects competitors' ads from the public ad libraries into a swipe file and a brief.",
+   "use": "Use it for ad research.",
+   "addr": "127.0.0.1:8792"
+  },
+  {
+   "id": "twitter",
+   "g": "On this PC",
+   "n": "Twitter Studio",
+   "d": "Queue and the bot switch",
+   "i": "share",
+   "t": "blue",
+   "u": "http://127.0.0.1:8788/",
+   "pc": 1,
+   "help": "The X post queue, drafts and the on/off switch for the posting bot.",
+   "use": "Use it to approve or pause posts on X.",
+   "addr": "127.0.0.1:8788"
+  }
+ ],
+ "external_categories": [
+  "Email & domains",
+  "Servers & code",
+  "AI & dev consoles",
+  "Social admin",
+  "Developer portals",
+  "Ads & analytics",
+  "Money & publishing"
+ ],
+ "external": [
+  {
+   "g": "Email & domains",
+   "n": "Gmail",
+   "d": "Personal inbox",
+   "u": "https://mail.google.com",
+   "t": "red"
+  },
+  {
+   "g": "Email & domains",
+   "n": "Business mailbox",
+   "d": "elvin@elvinpeters.com webmail",
+   "u": "https://privateemail.com",
+   "t": "blue"
+  },
+  {
+   "g": "Email & domains",
+   "n": "Resend",
+   "d": "Sending, logs, domains",
+   "u": "https://resend.com/emails",
+   "t": "grey"
+  },
+  {
+   "g": "Email & domains",
+   "n": "Cloudflare",
+   "d": "DNS, email routing for epeters.ca",
+   "u": "https://dash.cloudflare.com",
+   "t": "amber"
+  },
+  {
+   "g": "Email & domains",
+   "n": "Namecheap",
+   "d": "Domains and elvinpeters.com DNS",
+   "u": "https://ap.www.namecheap.com/domains/list/",
+   "t": "red"
+  },
+  {
+   "g": "Servers & code",
+   "n": "Hetzner",
+   "d": "empire-01 server console",
+   "u": "https://console.hetzner.cloud",
+   "t": "red"
+  },
+  {
+   "g": "Servers & code",
+   "n": "GitHub",
+   "d": "Code and the website repo",
+   "u": "https://github.com/elvin2000x",
+   "t": "grey"
+  },
+  {
+   "g": "Servers & code",
+   "n": "Vercel",
+   "d": "Directory site hosting",
+   "u": "https://vercel.com/elvinmpeters-8978s-projects",
+   "t": "grey"
+  },
+  {
+   "g": "Servers & code",
+   "n": "Bitwarden",
+   "d": "Every password lives here",
+   "u": "https://vault.bitwarden.com",
+   "t": "blue"
+  },
+  {
+   "g": "AI & dev consoles",
+   "n": "Claude",
+   "d": "Chat and projects",
+   "u": "https://claude.ai",
+   "t": "amber"
+  },
+  {
+   "g": "AI & dev consoles",
+   "n": "Anthropic Console",
+   "d": "API keys, usage, billing",
+   "u": "https://console.anthropic.com",
+   "t": "amber"
+  },
+  {
+   "g": "AI & dev consoles",
+   "n": "Google AI Studio",
+   "d": "Gemini keys and playground",
+   "u": "https://aistudio.google.com",
+   "t": "blue"
+  },
+  {
+   "g": "AI & dev consoles",
+   "n": "Google Cloud",
+   "d": "Projects, APIs, billing",
+   "u": "https://console.cloud.google.com",
+   "t": "blue"
+  },
+  {
+   "g": "AI & dev consoles",
+   "n": "Groq",
+   "d": "Fast Qwen and Llama keys",
+   "u": "https://console.groq.com",
+   "t": "red"
+  },
+  {
+   "g": "AI & dev consoles",
+   "n": "Suno",
+   "d": "Songs and music",
+   "u": "https://suno.com",
+   "t": "violet"
+  },
+  {
+   "g": "AI & dev consoles",
+   "n": "Gamma",
+   "d": "Decks and docs",
+   "u": "https://gamma.app",
+   "t": "violet"
+  },
+  {
+   "g": "AI & dev consoles",
+   "n": "Canva",
+   "d": "Designs and brand kit",
+   "u": "https://www.canva.com",
+   "t": "teal"
+  },
+  {
+   "g": "Social admin",
+   "n": "LinkedIn",
+   "d": "Your profile",
+   "u": "https://www.linkedin.com/in/elvinmpeters",
+   "t": "blue"
+  },
+  {
+   "g": "Social admin",
+   "n": "X",
+   "d": "@elvin_peters",
+   "u": "https://x.com/elvin_peters",
+   "t": "grey"
+  },
+  {
+   "g": "Social admin",
+   "n": "TikTok Studio",
+   "d": "Posts, comments, analytics",
+   "u": "https://www.tiktok.com/tiktokstudio",
+   "t": "red"
+  },
+  {
+   "g": "Social admin",
+   "n": "YouTube Studio",
+   "d": "Channel and Shorts",
+   "u": "https://studio.youtube.com",
+   "t": "red"
+  },
+  {
+   "g": "Social admin",
+   "n": "Meta Business Suite",
+   "d": "Facebook and Instagram",
+   "u": "https://business.facebook.com",
+   "t": "blue"
+  },
+  {
+   "g": "Developer portals",
+   "n": "LinkedIn Developers",
+   "d": "The Social Suite app",
+   "u": "https://www.linkedin.com/developers/apps",
+   "t": "blue"
+  },
+  {
+   "g": "Developer portals",
+   "n": "X Developer Portal",
+   "d": "API keys and usage",
+   "u": "https://developer.x.com/en/portal/dashboard",
+   "t": "grey"
+  },
+  {
+   "g": "Developer portals",
+   "n": "Meta for Developers",
+   "d": "App, webhooks, review",
+   "u": "https://developers.facebook.com/apps",
+   "t": "blue"
+  },
+  {
+   "g": "Developer portals",
+   "n": "TikTok for Developers",
+   "d": "Apps and API access",
+   "u": "https://developers.tiktok.com/apps",
+   "t": "red"
+  },
+  {
+   "g": "Developer portals",
+   "n": "Telegram BotFather",
+   "d": "Empire Bot settings",
+   "u": "https://t.me/BotFather",
+   "t": "teal"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "Google Ads",
+   "d": "Campaigns",
+   "u": "https://ads.google.com",
+   "t": "green"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "Meta Ads Manager",
+   "d": "Facebook and Instagram ads",
+   "u": "https://adsmanager.facebook.com",
+   "t": "blue"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "LinkedIn Campaign Manager",
+   "d": "LinkedIn ads",
+   "u": "https://www.linkedin.com/campaignmanager",
+   "t": "blue"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "TikTok Ads Manager",
+   "d": "TikTok ads",
+   "u": "https://ads.tiktok.com",
+   "t": "red"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "Amazon Ads",
+   "d": "Book ads",
+   "u": "https://advertising.amazon.com",
+   "t": "amber"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "Google Analytics",
+   "d": "G-CLZ7N26J1Q",
+   "u": "https://analytics.google.com",
+   "t": "amber"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "Search Console",
+   "d": "Search traffic and indexing",
+   "u": "https://search.google.com/search-console",
+   "t": "green"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "Tag Manager",
+   "d": "Tags and pixels",
+   "u": "https://tagmanager.google.com",
+   "t": "blue"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "Meta Ad Library",
+   "d": "Competitors' live ads",
+   "u": "https://www.facebook.com/ads/library",
+   "t": "grey"
+  },
+  {
+   "g": "Ads & analytics",
+   "n": "Google Ads Transparency",
+   "d": "Any advertiser's Google ads",
+   "u": "https://adstransparency.google.com",
+   "t": "grey"
+  },
+  {
+   "g": "Money & publishing",
+   "n": "Stripe",
+   "d": "Payments and payouts",
+   "u": "https://dashboard.stripe.com",
+   "t": "violet"
+  },
+  {
+   "g": "Money & publishing",
+   "n": "Gumroad",
+   "d": "Digital product sales",
+   "u": "https://app.gumroad.com",
+   "t": "red"
+  },
+  {
+   "g": "Money & publishing",
+   "n": "Amazon KDP",
+   "d": "Books, royalties, A+ content",
+   "u": "https://kdp.amazon.com",
+   "t": "amber"
+  },
+  {
+   "g": "Money & publishing",
+   "n": "Whop",
+   "d": "Clip payouts",
+   "u": "https://whop.com/dashboard",
+   "t": "amber"
+  }
+ ]
+}

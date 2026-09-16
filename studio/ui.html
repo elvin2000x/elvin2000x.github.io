@@ -1,258 +1,1211 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Site Studio · elvinpeters.com</title>
-<style>
-:root{--bg:#0a1524;--panel:#1b2c45;--panel2:#131f33;--line:#2b405c;--ink:#e9eff7;--ink2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold2:#e0bd6b;--ok:#5fd39b;--warn:#ff8f8f}
-*{box-sizing:border-box;margin:0}
-body{background:var(--bg);color:var(--ink);font:16px/1.5 Inter,-apple-system,'Segoe UI',Roboto,sans-serif;padding-bottom:88px}
-header{position:sticky;top:0;z-index:10;background:var(--panel2);border-bottom:1px solid var(--line);padding:14px 18px;display:flex;align-items:center;gap:12px}
-header b{font-family:Georgia,serif;font-weight:600;font-size:18px}
-header .crumb{color:var(--muted);font-size:14px}
-main{max-width:680px;margin:0 auto;padding:18px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
-.card h3{font-size:17px;margin-bottom:4px}
-.card .help{color:var(--muted);font-size:14px}
-.card.section{cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:64px}
-.card.section:active{border-color:var(--gold)}
-.arw{color:var(--gold2);font-size:20px}
-label{display:block;font-size:13px;font-weight:600;color:var(--ink2);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.06em}
-input[type=text],textarea{width:100%;min-height:44px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font:16px/1.4 inherit}
-textarea{min-height:96px;resize:vertical}
-input:focus,textarea:focus{outline:2px solid var(--gold);border-color:var(--gold)}
-.item{border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;background:var(--panel2)}
-.item .rowbtns{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
-button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 15px inherit;cursor:pointer}
-button.primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0b1220;border:none}
-button.small{min-height:36px;padding:0 12px;font-size:13px}
-button:disabled{opacity:.45}
-.bar{position:fixed;bottom:0;left:0;right:0;background:var(--panel2);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center;z-index:20}
-.bar button{flex:1;max-width:200px}
-.msg{font-size:14px;margin-top:10px;color:var(--muted);white-space:pre-wrap}
-.msg.ok{color:var(--ok)}.msg.err{color:var(--warn)}
-.pub{background:#0b1220;border:1px solid var(--line);border-radius:10px;padding:12px;font:13px/1.6 ui-monospace,Consolas,monospace;white-space:pre-wrap;margin-top:10px;max-height:280px;overflow:auto}
-iframe{width:100%;height:70vh;border:1px solid var(--line);border-radius:12px;background:#fff}
-.pv-controls{display:flex;gap:8px;margin:10px 0}
-.pv-controls button[aria-pressed=true]{border-color:var(--gold);color:var(--gold2)}
-.hist .row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-.hist .row small{color:var(--muted);display:block}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:6px}
-.dot.warn{background:var(--warn)}
-a{color:var(--gold2)}
-.iframe-wrap{max-width:390px;margin:0 auto;transition:max-width .2s}
-.iframe-wrap.wide{max-width:100%}
-details.item>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:600}
-details.item>summary::-webkit-details-marker{display:none}
-details.item>summary::before{content:'\25b8';color:var(--gold2);transition:transform .15s}
-details.item[open]>summary::before{transform:rotate(90deg)}
-.badge{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
-.badge.draft{border-color:var(--gold);color:var(--gold2)}
-.badge.live{border-color:var(--ok);color:var(--ok)}
-.chk{display:flex;align-items:center;gap:10px;margin:14px 0 6px}
-.chk input{width:22px;height:22px;accent-color:var(--gold)}
-.chk label{margin:0;text-transform:none;letter-spacing:0;font-size:15px;color:var(--ink)}
-select{width:100%;min-height:44px;padding:11px 13px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);font:16px/1.4 inherit}
-textarea.md{min-height:340px;font:14px/1.6 ui-monospace,Consolas,monospace}
-.cheat{background:#0b1220;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:8px;font:12px/1.7 ui-monospace,Consolas,monospace;color:var(--ink2)}
-.cheat b{color:var(--gold2)}
-</style>
-<header><b>Site Studio</b> <span class="crumb" id="crumb">loading…</span>
-  <span style="margin-left:auto;font-size:13px" id="repo"></span></header>
-<main id="main"></main>
-<div class="bar" id="bar" hidden>
-  <button id="saveBtn">Save</button>
-  <button id="prevBtn">Preview</button>
-  <button class="primary" id="pubBtn">Publish</button>
-</div>
+<meta name="robots" content="noindex,nofollow">
+<title>Website · Studio</title>
 <script>
-'use strict';
-const $ = s => document.querySelector(s);
-let STATE = null, CUR = null, DATA = null, DIRTY = false, OPEN_ITEM = 0;
-
-const get = (o, p) => p.split('.').reduce((a, k) => a && a[k], o);
-const set = (o, p, v) => { const ks = p.split('.'); let t = o; for (const k of ks.slice(0, -1)) t = t[k] = t[k] || {}; t[ks.at(-1)] = v; };
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-
-async function boot() {
-  STATE = await (await fetch('/api/state')).json();
-  $('#repo').textContent = STATE.repo.branch ? STATE.repo.branch + (STATE.repo.dirty.length ? ' · unsaved publish pending' : '') : '';
-  home();
-}
-function home() {
-  CUR = null; DATA = null; $('#bar').hidden = true; $('#crumb').textContent = 'what do you want to edit?';
-  const m = $('#main'); m.innerHTML = '';
-  for (const s of STATE.sections) {
-    const c = document.createElement('div');
-    c.className = 'card section';
-    c.innerHTML = `<div><h3>${esc(s.title)}</h3><div class="help">${esc(s.help || '')}</div></div><span class="arw">→</span>`;
-    c.onclick = () => open(s);
-    m.appendChild(c);
-  }
-  const h = document.createElement('div');
-  h.className = 'card hist';
-  h.innerHTML = '<h3>Recent publishes</h3>' + (STATE.repo.publishes || []).map(pb =>
-    `<div class="row"><div>${esc(pb.msg)}<small>${esc(pb.date)} · ${esc(pb.sha)}</small></div>
-     <button class="small" onclick="revert('${esc(pb.sha)}')">Undo</button></div>`).join('');
-  m.appendChild(h);
-}
-async function open(s) {
-  CUR = s; DATA = await (await fetch('/api/content/' + s.name)).json(); DIRTY = false;
-  $('#bar').hidden = false; $('#crumb').textContent = s.title;
-  render();
-}
-const CHEAT = `<div class="cheat"><b>## Heading</b> and <b>### Sub-heading</b>
-<b>**bold**</b>  <b>*italic*</b>  <b>\`code\`</b>  <b>[text](/link)</b>
-<b>- item</b> bullets, <b>1. item</b> numbers
-<b>&gt; a quoted line</b> becomes a pull quote
-<b>&gt; [!note]</b> blue callout   <b>&gt; [!warn]</b> amber callout
-<b>&gt; [!series]</b> series banner  <b>&gt; [!foot]</b> method footer
-<b>\`\`\`</b> code   <b>\`\`\`prompt</b> prompt block   <b>\`\`\`tree</b> file tree
-<b>| a | b |</b> then <b>|---|---:|</b> for a table (---: right-aligns)</div>`;
-
-function field(f, keyPrefix) {
-  const key = (keyPrefix || '') + f.key;
-  const val = get(DATA, key) ?? '';
-  const id = 'f_' + key.replace(/[^a-z0-9]/gi, '_');
-  const lab = `<label for="${id}">${esc(f.label)}</label>`;
-  if (f.type === 'bool')
-    return `<div class="chk"><input type="checkbox" id="${id}" data-key="${esc(key)}" data-bool="1"${val ? " checked" : ""}><label for="${id}">${esc(f.label)}</label></div>`;
-  if (f.type === 'select')
-    return lab + `<select id="${id}" data-key="${esc(key)}">` +
-      (f.options || []).map(o => `<option value="${esc(o.value)}"${o.value === val ? " selected" : ""}>${esc(o.label)}</option>`).join('') + '</select>';
-  if (f.type === 'markdown')
-    return lab + `<textarea class="md" id="${id}" data-key="${esc(key)}" maxlength="${f.maxlen || 120000}">${esc(val)}</textarea>` + CHEAT;
-  if (f.type === 'slug')
-    return lab + `<input type="text" id="${id}" data-key="${esc(key)}" data-slug="${esc(f.from || "")}" value="${esc(val)}" maxlength="${f.maxlen || 60}" placeholder="filled in from the title">`;
-  if (f.type === 'textarea')
-    return lab + `<textarea id="${id}" data-key="${esc(key)}" maxlength="${f.maxlen || 1000}">${esc(val)}</textarea>`;
-  return lab + `<input type="text" id="${id}" data-key="${esc(key)}" value="${esc(val)}" maxlength="${f.maxlen || 300}">`;
-}
-const slugify = t => String(t).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-')
-  .replace(/^-+|-+$/g, '').slice(0, 60);
-function render() {
-  const m = $('#main'); let html = '<div class="card"><button class="small" onclick="home()">← All sections</button>';
-  for (const f of CUR.fields) {
-    if (f.type === 'list') {
-      const arr = get(DATA, f.key) || [];
-      html += `<label>${esc(f.label)}</label>`;
-      arr.forEach((item, i) => {
-        const hasTitle = !!f.item_title;
-        const name = hasTitle ? (item[f.item_title] || '(untitled)') : ('Item ' + (i + 1));
-        const badge = ('draft' in item)
-          ? `<span class="badge ${item.draft ? "draft" : "live"}">${item.draft ? "Draft" : "Live"}</span>` : '';
-        const openAttr = (hasTitle && i !== OPEN_ITEM) ? '' : ' open';
-        html += hasTitle
-          ? `<details class="item"${openAttr}><summary>${esc(name)} ${badge}</summary>`
-          : `<div class="item">`;
-        for (const sub of f.item_fields)
-          html += field({ ...sub, key: f.key + '.' + i + '.' + sub.key, label: sub.label }, '');
-        html += `<div class="rowbtns">
-          <button class="small" onclick="move('${f.key}',${i},-1)">&uarr;</button>
-          <button class="small" onclick="move('${f.key}',${i},1)">&darr;</button>` +
-          (CUR.item_preview ? `<button class="small" onclick="previewItem(${i})">Preview this</button>` : '') +
-          `<button class="small" onclick="del('${f.key}',${i})">Remove</button></div>`;
-        html += hasTitle ? `</details>` : `</div>`;
-      });
-      html += `<button class="small" onclick="add('${f.key}')">+ ${esc(CUR.new_label || "Add")}</button>`;
-    } else html += field(f);
-  }
-  html += '<div class="msg" id="msg"></div><div id="pv"></div></div>';
-  m.innerHTML = html;
-  m.querySelectorAll('input,textarea,select').forEach(el => {
-    const ev = (el.dataset.bool || el.tagName === 'SELECT') ? 'change' : 'input';
-    el.addEventListener(ev, () => {
-      set(DATA, el.dataset.key, el.dataset.bool ? el.checked : el.value);
-      DIRTY = true;
-      if (el.dataset.bool) render();                    // the badge follows the tick
-      // The slug is suggested from its source field until it is typed by hand.
-      const base = el.dataset.key.replace(/\.[^.]+$/, '');
-      const sl = m.querySelector('[data-key="' + base + '.slug"]');
-      if (sl && !sl.dataset.touched && el.dataset.key === base + '.' + sl.dataset.slug) {
-        sl.value = slugify(el.value); set(DATA, sl.dataset.key, sl.value);
-      }
-    });
-  });
-  m.querySelectorAll('[data-slug]').forEach(el => {
-    if (el.value) el.dataset.touched = '1';
-    el.addEventListener('input', () => {
-      el.dataset.touched = '1';
-      el.value = slugify(el.value); set(DATA, el.dataset.key, el.value);
-    });
-  });
-}
-function move(key, i, d) { const a = get(DATA, key); const j = i + d; if (j < 0 || j >= a.length) return; [a[i], a[j]] = [a[j], a[i]]; OPEN_ITEM = j; DIRTY = true; render(); }
-function del(key, i) { get(DATA, key).splice(i, 1); DIRTY = true; render(); }
-function add(key) {
-  const f = CUR.fields.find(x => x.key === key);
-  const blank = {};
-  f.item_fields.forEach(s => blank[s.key] = s.type === 'bool' ? false : '');
-  Object.assign(blank, f.item_defaults || {});      // schema-supplied sensible start
-  const arr = get(DATA, key);
-  if (f.item_title) arr.unshift(blank); else arr.push(blank);
-  OPEN_ITEM = f.item_title ? 0 : arr.length - 1;
-  DIRTY = true; render();
-  const first = document.querySelector('.item input[type=text],.item textarea');
-  if (first) first.focus();
-}
-
-async function save(silent) {
-  const r = await fetch('/api/content/' + CUR.name, { method: 'PUT', body: JSON.stringify(DATA) });
-  const j = await r.json();
-  if (!silent) msg(j.saved ? 'Saved. Preview it, then Publish to go live.' : (j.error || 'save failed'), j.saved);
-  DIRTY = !j.saved;
-  return j.saved;
-}
-async function preview() {
-  if (DIRTY) await save(true);
-  msg('Building preview…', true);
-  const r = await (await fetch('/api/preview', { method: 'POST' })).json();
-  if (!r.id) return msg(r.detail || r.error || 'preview failed', false);
-  const page = (CUR.preview || '/').replace(/^\//, '');
-  $('#pv').innerHTML = `<div class="pv-controls">
-      <button class="small" aria-pressed="true" onclick="pw(this,false)">Phone</button>
-      <button class="small" aria-pressed="false" onclick="pw(this,true)">Desktop</button></div>
-    <div class="iframe-wrap" id="ifw"><iframe src="/preview/${r.id}/${page}"></iframe></div>`;
-  msg('Preview below is byte-for-byte what will ship.', true);
-}
-async function previewItem(i) {
-  const list = CUR.fields.find(f => f.type === 'list');
-  const item = get(DATA, list.key)[i];
-  OPEN_ITEM = i;
-  if (DIRTY) await save(true);
-  msg('Building preview\u2026', true);
-  const r = await (await fetch('/api/preview', { method: 'POST' })).json();
-  if (!r.id) return msg(r.detail || r.error || 'preview failed', false);
-  const page = CUR.item_preview.replace(/\{(\w+)\}/g, (_, k) => item[k] || '').replace(/^\//, '');
-  $('#pv').innerHTML = `<div class="pv-controls">
-      <button class="small" aria-pressed="true" onclick="pw(this,false)">Phone</button>
-      <button class="small" aria-pressed="false" onclick="pw(this,true)">Desktop</button></div>
-    <div class="iframe-wrap" id="ifw"><iframe src="/preview/${r.id}/${page}"></iframe></div>`;
-  msg(item.draft ? 'Draft preview. This is the real built page. It stays off the site until you untick Draft.'
-                 : 'Preview below is byte-for-byte what will ship.', true);
-  $('#pv').scrollIntoView({ behavior: 'smooth' });
-}
-function pw(btn, wide) { $('#ifw').classList.toggle('wide', wide); document.querySelectorAll('.pv-controls button').forEach(b => b.setAttribute('aria-pressed', b === btn)); }
-async function publish() {
-  if (DIRTY) await save(true);
-  if (!confirm('Publish to the live site?')) return;
-  $('#pubBtn').disabled = true;
-  const out = document.createElement('div'); out.className = 'pub'; ($('#pv') || $('#msg')).after(out);
-  const r = await fetch('/api/publish', { method: 'POST' });
-  const reader = r.body.getReader(); const dec = new TextDecoder();
-  while (true) { const { done, value } = await reader.read(); if (done) break; out.textContent += dec.decode(value); out.scrollTop = out.scrollHeight; }
-  $('#pubBtn').disabled = false;
-  STATE = await (await fetch('/api/state')).json();
-}
-async function revert(sha) {
-  if (!confirm('Undo this publish? A reversing commit goes live in ~60s.')) return;
-  const r = await (await fetch('/api/revert', { method: 'POST', body: JSON.stringify({ sha }) })).json();
-  alert(r.reverted ? 'Undone and pushed. Live in about a minute.' : (r.error || 'failed'));
-  boot();
-}
-function msg(t, ok) { const el = $('#msg'); if (el) { el.textContent = t; el.className = 'msg ' + (ok ? 'ok' : 'err'); } }
-$('#saveBtn').onclick = () => save(false);
-$('#prevBtn').onclick = preview;
-$('#pubBtn').onclick = publish;
-window.addEventListener('beforeunload', e => { if (DIRTY) e.preventDefault(); });
-boot();
+(function(){var t="light";try{t=localStorage.getItem("studio-theme")||"light";}catch(e){}
+if(t==="auto")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t);})();
 </script>
+<link rel="stylesheet" href="/studio.css">
+<style>
+/* Site Studio additions. Tokens from studio.css only; no colours of our own. */
+.menubtn{display:grid}
+.rail.open{display:block;position:fixed;top:64px;left:0;bottom:0;z-index:60;background:var(--bg);width:280px;box-shadow:var(--shadow-lg);padding-top:8px}
+@media (min-width:901px){.shell.norail .rail{display:none}.shell.norail .main{margin-left:16px}}
+.banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--primary-soft);color:var(--on-primary-soft);border-radius:12px;padding:10px 14px;margin:0 0 18px}
+.banner.warn{background:var(--red-soft);color:var(--red)}
+.banner.amber{background:var(--amber-soft);color:var(--amber)}
+.banner .sp{flex:1}
+.btn:disabled,.btn[disabled]{opacity:.45;cursor:not-allowed}
+.fmt{font-size:12px;font-weight:600;padding:2px 8px;border-radius:8px;white-space:nowrap}
+.pvframe{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--container);position:relative}
+.pvframe iframe{border:0;display:block;background:transparent;transform-origin:0 0}
+.pvframe.phone{width:390px;max-width:100%;margin:0 auto;border-radius:28px;border:10px solid var(--container-hi)}
+.pvcol{position:sticky;top:76px}
+.pvcol .pvframe{height:calc(100vh - 150px)}
+.writer.noset #setcol{display:none}
+.writer.noset{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.writer.noset.nopreview{grid-template-columns:minmax(0,880px);justify-content:center}
+.tbl td.nowrap{white-space:nowrap}
+.pvnote{font-size:12px;color:var(--muted);margin-top:8px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.writer .toolbar{top:64px}
+.writer #wcol{min-width:0}
+.bodyin{font:15px/1.75 var(--mono)}
+.titlein{resize:none;overflow:hidden;line-height:1.25;display:block}
+.dekin{overflow:hidden;display:block}
+.save.err{color:var(--red)}
+.cover{display:flex;gap:12px;align-items:center}
+.cover img{width:112px;height:70px;object-fit:cover;border-radius:8px;border:1px solid var(--line);background:var(--container)}
+.count{font-size:12px;color:var(--muted);float:right;font-weight:400}
+.count.over{color:var(--red);font-weight:600}
+.lockcard{margin:16px 20px;padding:14px 16px;border-radius:10px;background:var(--container);color:var(--ink2);font-size:13.5px}
+.lockcard b{color:var(--ink)}
+.lockcard .btn{margin-top:10px}
+.modalwrap{position:fixed;inset:0;z-index:75;display:grid;place-items:center;padding:16px}
+.modal{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-lg);width:min(720px,100%);max-height:88vh;display:flex;flex-direction:column}
+.modal.wide{width:min(1280px,100%);height:88vh}
+.modal .mh{display:flex;align-items:center;gap:10px;padding:14px 16px 10px 22px;border-bottom:1px solid var(--line)}
+.modal .mb{padding:16px 22px;overflow:auto;flex:1}
+.modal .mf{display:flex;gap:10px;justify-content:flex-end;padding:12px 22px 16px;border-top:1px solid var(--line);flex-wrap:wrap}
+.log{font:12.5px/1.6 var(--mono);background:var(--container);border-radius:10px;padding:12px 14px;white-space:pre-wrap;max-height:40vh;overflow:auto;margin-top:12px}
+.filelist{list-style:none;margin:8px 0 0;padding:0;font:12.5px var(--mono);color:var(--ink2)}
+.filelist li{padding:3px 0}
+.item{border:1px solid var(--line);border-radius:12px;margin:12px 0 0;background:var(--surface)}
+.item>summary{list-style:none;display:flex;align-items:center;gap:8px;padding:10px 10px 10px 6px;cursor:pointer;font-weight:600}
+.item>summary::-webkit-details-marker{display:none}
+.item .form{padding-top:0}
+.item.over{box-shadow:0 -2px 0 var(--primary)}
+.item.drag{opacity:.4}
+.item .grip{cursor:grab;color:var(--muted);width:24px;display:grid;place-items:center}
+.item .it{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .iconbtn{width:34px;height:34px}
+.chk{display:flex;gap:10px;align-items:center;margin-top:14px}
+.cheat{font-size:13px;line-height:1.9}
+.cheat code{white-space:nowrap}
+.kbd{font:12px var(--font);border:1px solid var(--line-strong);border-radius:6px;padding:0 6px;color:var(--ink2)}
+.pagecards .app{cursor:pointer}
+@media (max-width:1280px){.pvcol{position:static}.pvcol .pvframe{height:70vh}}
+@media (max-width:1280px) and (min-width:901px){.writer.noset:not(.nopreview){grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.writer.noset .pvcol{grid-column:auto;order:0;position:sticky}.writer.noset .pvcol .pvframe{height:calc(100vh - 150px)}}
+@media (max-width:900px){
+  .menubtn{display:grid}
+  .modal.wide{height:92vh}
+  .writer .toolbar{position:static}
+  .titlein{font-size:24px;padding:14px 14px 4px}.dekin{padding:0 14px 10px}.bodyin{padding:10px 14px 30px;min-height:420px}
+  .head .seg{order:5}
+  .writer,.writer.noset,.writer.noset.nopreview{grid-template-columns:minmax(0,1fr)}
+  #toast{left:12px;right:12px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="i-apps" viewBox="0 0 24 24"><g fill="currentColor" stroke="none"><circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></g></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14M12 17.5v.01"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.7-.8 1.7-1.6 0-.5-.2-.8-.4-1.1-.3-.3-.4-.6-.4-1 0-.9.7-1.6 1.6-1.6H16a5 5 0 0 0 5-5c0-4.2-4-7.7-9-7.7z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="14.5" cy="7" r="1.2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-task" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+  <symbol id="i-web" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2 .7 3.5 2.8 3.5 6"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></symbol>
+  <symbol id="i-quiz" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 9a3 3 0 1 1 3.8 2.9c-.5.1-.8.6-.8 1.1v.5M12 17v.01"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v7h-7M17 21v-2"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></symbol>
+  <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
+  <symbol id="i-grip" viewBox="0 0 24 24"><g fill="currentColor" stroke="none"><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="6" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></g></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+  <symbol id="i-open" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M5 6h14M12 6v13M9 19h6"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-desktop" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M7 7h4v4c0 3-1.5 5-4 6M14 7h4v4c0 3-1.5 5-4 6"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></symbol>
+  <symbol id="i-olist" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10M4 5h1.5v3M4 8h3M4 13.5c0-.8.7-1.5 1.5-1.5s1.5.6 1.5 1.3c0 1-3 1.7-3 3.2h3"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 2"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-sidebar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 19l3-1 8-8a6 6 0 0 0 2-6 6 6 0 0 0-6 2l-8 8-1 3zM14 7l3 3M8 13l3 3"/></symbol>
+</svg>
+
+<header class="bar">
+  <button class="iconbtn menubtn" id="menubtn" aria-label="Main menu" aria-expanded="false" aria-controls="rail"><svg class="i"><use href="#i-menu"/></svg></button>
+  <a class="brand" id="brandlink" href="https://studio.elvinpeters.com/studio/"><span class="mark">E</span><span class="word">Studio</span></a>
+  <div class="search" id="searchbox" role="button" tabindex="0" aria-label="Search">
+    <svg class="i"><use href="#i-search"/></svg><span class="ph">Search posts, pages, tools</span><kbd>Ctrl K</kbd>
+  </div>
+  <div class="sp"></div>
+  <button class="iconbtn" id="themebtn" aria-label="Appearance" data-tip="Appearance: Light, Dark or Signature"><svg class="i"><use href="#i-palette"/></svg></button>
+  <button class="iconbtn" id="launchbtn" aria-label="All apps" data-tip="All apps, internal and external"><svg class="i"><use href="#i-apps"/></svg></button>
+  <div class="avatar" title="Elvin Peters">EP</div>
+</header>
+
+<div class="shell" id="shell">
+  <nav class="rail" id="rail" aria-label="Studio"></nav>
+  <main class="main" id="main"><div class="empty">Loading the website…</div></main>
+</div>
+
+<div id="scrim" class="scrim hidden"></div>
+<div id="launcher" class="pop hidden"></div>
+<div id="thememenu" class="pop menu hidden"></div>
+<div id="palette" class="pop hidden" role="dialog" aria-label="Search"><input id="pin" placeholder="Jump to a post, page, tool or action…" autocomplete="off"><div id="pres"></div></div>
+<div id="tip" class="tip hidden" role="tooltip"></div>
+<div id="modal" class="hidden"></div>
+<div id="toast" role="status"><span id="tmsg"></span><button id="tundo">Undo</button></div>
+<input type="file" id="filepick" accept="image/png,image/jpeg,image/webp,image/gif" class="hidden">
+
+<script src="/md.js"></script>
+<script>
+"use strict";
+var $ = function(s, r){ return (r || document).querySelector(s); };
+var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+var esc = function(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
+var icon = function(id, style){ return '<svg class="i"' + (style ? ' style="' + style + '"' : '') + '><use href="#i-' + id + '"/></svg>'; };
+var isExt = function(u){ return u.charAt(0) !== "#"; };
+var tgt = function(u){ return isExt(u) ? ' target="_blank" rel="noopener"' : ""; };
+var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+/* ================= Server ================= */
+function api(method, url, body, headers){
+  var h = Object.assign({"X-Studio": "1"}, headers || {});
+  var opt = {method: method, headers: h};
+  if (body !== undefined) opt.body = (typeof body === "string" || body instanceof Blob) ? body : JSON.stringify(body);
+  return fetch(url, opt).then(function(r){
+    var ct = r.headers.get("content-type") || "";
+    return (ct.indexOf("json") > -1 ? r.json() : r.text()).then(function(data){
+      if (!r.ok) { var err = new Error((data && data.error) || ("HTTP " + r.status)); err.status = r.status; err.data = data; throw err; }
+      return {data: data, etag: (r.headers.get("etag") || "").replace(/"/g, "")};
+    });
+  });
+}
+
+var REG = {tools: [], external: [], home: "https://studio.elvinpeters.com/studio/"};
+var STATE = null, SECTIONS = {}, DOCS = {}, VERS = {}, HISTORY = null;
+var saveTimers = {}, saveBusy = {}, saveAgain = {};
+
+function loadDoc(name){
+  return api("GET", "/api/content/" + name).then(function(r){ DOCS[name] = r.data; VERS[name] = r.etag; return r.data; });
+}
+function refreshState(){
+  return api("GET", "/api/state").then(function(r){
+    STATE = r.data; SECTIONS = {};
+    STATE.sections.forEach(function(s){ SECTIONS[s.name] = s; });
+    return STATE;
+  });
+}
+function posts(){ var d = DOCS.essays; return Array.isArray(d) ? d : d.posts; }
+
+/* Autosave: one PUT per section, debounced, never two at once, stale-safe. */
+function queueSave(name, delay){
+  setSave("saving");
+  clearTimeout(saveTimers[name]);
+  saveTimers[name] = setTimeout(function(){ saveNow(name); }, delay == null ? 700 : delay);
+}
+function saveNow(name){
+  clearTimeout(saveTimers[name]);
+  if (saveBusy[name]) { saveAgain[name] = true; return saveBusy[name]; }
+  var bad = name === "essays" ? validatePosts() : "";
+  if (bad) { setSave("wait", bad); return Promise.resolve(false); }
+  setSave("saving");
+  saveBusy[name] = api("PUT", "/api/content/" + name, DOCS[name], {"If-Match": VERS[name] || ""}).then(function(r){
+    VERS[name] = r.data.version; saveBusy[name] = null;
+    if (saveAgain[name]) { saveAgain[name] = false; return saveNow(name); }
+    setSave("saved"); pendingChanges(true);
+    return true;
+  }).catch(function(e){
+    saveBusy[name] = null;
+    if (e.data && e.data.retry) { setTimeout(function(){ saveNow(name); }, 3000); setSave("wait", "Publishing… will save right after"); return false; }
+    setSave("error", e.message);
+    if (e.status === 409) conflict(e.message);
+    return false;
+  });
+  return saveBusy[name];
+}
+function flushSaves(){
+  return Promise.all(Object.keys(saveTimers).map(function(n){ return saveTimers[n] ? saveNow(n) : true; }).concat(
+    Object.keys(saveBusy).map(function(n){ return saveBusy[n]; }).filter(Boolean)));
+}
+var saveState = "saved";
+function setSave(kind, msg){
+  saveState = kind;
+  var s = $("#savestate"); if (!s) return;
+  s.classList.toggle("err", kind === "error" || kind === "wait");
+  if (kind === "saving") s.textContent = "Saving…";
+  else if (kind === "saved") s.innerHTML = icon("check", "width:16px;height:16px") + "All changes saved";
+  else s.textContent = (kind === "error" ? "Not saved: " : "") + (msg || "");
+}
+function conflict(msg){
+  showModal('<div class="mh"><h2>Someone else changed this</h2></div><div class="mb"><p>' + esc(msg) + '</p><p class="subtle">Reloading brings in the latest copy. Anything you typed in the last few seconds may need to be typed again.</p></div>' +
+    '<div class="mf"><button class="btn" onclick="closeModal()">Keep editing</button><button class="btn filled" onclick="location.reload()">Reload</button></div>');
+}
+window.addEventListener("beforeunload", function(e){ if (saveState === "saving") { e.preventDefault(); e.returnValue = ""; } });
+
+/* ================= Rail, drawer, launcher ================= */
+function drawRail(){
+  var byG = {}, order = [];
+  REG.tools.filter(function(t){ return t.rail; }).forEach(function(t){ if (!byG[t.g]) { byG[t.g] = []; order.push(t.g); } byG[t.g].push(t); });
+  var h = '<button class="create" id="createbtn">' + icon("plus") + 'Create</button><ul class="nav"><li><a href="' + esc(REG.home) + '">' + icon("home") + 'Home</a></li></ul>';
+  order.forEach(function(g){
+    h += '<div class="navhead">' + esc(g) + '</div><ul class="nav">' + byG[g].map(function(t){
+      var self = t.id === "site";
+      return '<li><a href="' + (self ? "#posts" : esc(t.u)) + '"' + (self ? "" : ' rel="noopener"') + ' data-help="' + esc(t.id) + '"' + (self ? ' class="on" aria-current="page"' : '') + '>' + icon(t.i) + esc(t.n) + '</a></li>';
+    }).join("") + '</ul>';
+  });
+  h += '<div class="navhead">Admin</div><ul class="nav"><li><a href="#settings" data-nav="settings">' + icon("gear") + 'Settings</a></li></ul>';
+  $("#rail").innerHTML = h;
+  $("#createbtn").onclick = function(e){ e.stopPropagation(); openCreate(this); };
+}
+function openCreate(btn){
+  var m = $("#createmenu");
+  if (!m) { m = document.createElement("div"); m.id = "createmenu"; m.className = "menu"; document.body.appendChild(m); }
+  var r = btn.getBoundingClientRect();
+  m.style.position = "fixed"; m.style.left = r.left + "px"; m.style.top = (r.bottom + 6) + "px";
+  var items = [["Blog post", "Write and preview a post", "web", "#post-new", false],
+    ["Link page", "A new link-in-bio page", "link", REG.home + "#links", true],
+    ["Quiz", "Start from a copy or blank", "quiz", REG.home + "#quizzes", true],
+    ["Landing page", "A one-off campaign page", "layout", REG.home + "#landing", true]];
+  m.innerHTML = items.map(function(x){
+    return '<button data-go="' + esc(x[3]) + '" data-ext="' + (x[4] ? 1 : "") + '"><span class="ic" style="width:32px;height:32px;border-radius:8px;display:grid;place-items:center">' + icon(x[2]) + '</span><span>' + x[0] + '<small>' + x[1] + '</small></span></button>';
+  }).join("");
+  $$("button", m).forEach(function(b){ b.onclick = function(){ closeDrawer(); if (b.dataset.ext) location.href = b.dataset.go; else location.hash = b.dataset.go; }; });
+  m.classList.remove("hidden");
+  setTimeout(function(){ document.addEventListener("click", function(){ m.classList.add("hidden"); }, {once: true}); });
+}
+function closeDrawer(){ $("#rail").classList.remove("open"); $("#menubtn").setAttribute("aria-expanded", "false"); if ($("#launcher").classList.contains("hidden") && $("#palette").classList.contains("hidden")) $("#scrim").classList.add("hidden"); }
+$("#menubtn").onclick = function(e){
+  e.stopPropagation();
+  if (innerWidth <= 900) {
+    var open = !$("#rail").classList.contains("open");
+    closePops();
+    $("#rail").classList.toggle("open", open); $("#scrim").classList.toggle("hidden", !open);
+    this.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open) { var a = $("#rail a, #rail button"); if (a) a.focus(); }
+  } else {
+    $("#shell").classList.toggle("norail");
+    try { localStorage.setItem("site-studio-norail", $("#shell").classList.contains("norail") ? "1" : ""); } catch (err) {}
+  }
+};
+try { if (localStorage.getItem("site-studio-norail")) $("#shell").classList.add("norail"); } catch (e) {}
+$("#rail").addEventListener("click", function(e){ if (e.target.closest("a")) closeDrawer(); });
+
+function mono(n){ return esc(n.replace(/[^A-Za-z0-9]/g, "").slice(0, 1).toUpperCase()); }
+function drawLauncher(){
+  var groups = {}, order = [];
+  REG.tools.forEach(function(t){ if (!groups[t.g]) { groups[t.g] = []; order.push(t.g); } groups[t.g].push(t); });
+  $("#launcher").innerHTML = order.map(function(g){
+    return '<div class="lhead">' + esc(g) + '</div><div class="lgrid">' + groups[g].map(function(t){
+      var self = t.id === "site";
+      return '<a class="lapp" href="' + (self ? "#posts" : esc(t.u)) + '"' + (self ? "" : ' target="_blank" rel="noopener"') + '><span class="ic t-' + t.t + '">' + icon(t.i) + '</span>' + esc(t.n) + '</a>';
+    }).join("") + '</div>';
+  }).join("") + '<div class="lhead">External</div><div class="lgrid">' + REG.external.slice(0, 9).map(function(t){
+    return '<a class="lapp" href="' + esc(t.u) + '" target="_blank" rel="noopener"><span class="ic t-' + t.t + '">' + mono(t.n) + '</span>' + esc(t.n) + '</a>';
+  }).join("") + '</div><div style="text-align:center;padding:10px 0 2px"><a class="btn sm" href="' + esc(REG.home) + '#external" rel="noopener">All ' + REG.external.length + ' external tools</a></div>';
+}
+function closePops(){ ["#launcher", "#palette", "#thememenu"].forEach(function(s){ $(s).classList.add("hidden"); }); if (!$("#rail").classList.contains("open")) $("#scrim").classList.add("hidden"); hideTip(); }
+$("#launchbtn").onclick = function(e){ e.stopPropagation(); var l = $("#launcher"), open = l.classList.contains("hidden"); closePops(); if (open) { drawLauncher(); l.classList.remove("hidden"); } };
+$("#themebtn").onclick = function(e){ e.stopPropagation(); var m = $("#thememenu"), open = m.classList.contains("hidden"); closePops(); if (open) { drawThemeMenu(); m.classList.remove("hidden"); } };
+document.addEventListener("click", function(e){ if (!e.target.closest("#launcher,#thememenu,#palette")) { $("#launcher").classList.add("hidden"); $("#thememenu").classList.add("hidden"); } });
+$("#scrim").onclick = function(){ closePops(); closeDrawer(); $("#scrim").classList.add("hidden"); };
+
+/* ================= Themes ================= */
+var THEMES = [
+  {k:"light", n:"Light", d:"Clean white. The default.", sw:"background:var(--surface)"},
+  {k:"dark", n:"Dark", d:"Easy on the eyes at night.", sw:"background:var(--ink)"},
+  {k:"signature", n:"Signature", d:"Navy, gold and white text. High contrast.", sw:"background:linear-gradient(135deg,var(--primary-soft) 50%,var(--primary) 50%)"},
+  {k:"auto", n:"Match my device", d:"Light by day, dark when your device is.", sw:"background:linear-gradient(135deg,var(--surface) 50%,var(--ink) 50%)"}
+];
+function curTheme(){ try { return localStorage.getItem("studio-theme") || "light"; } catch (e) { return document.documentElement.getAttribute("data-theme") || "light"; } }
+function setTheme(k){
+  try { localStorage.setItem("studio-theme", k); } catch (e) {}
+  var eff = k === "auto" ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : k;
+  document.documentElement.setAttribute("data-theme", eff);
+  drawThemeMenu(); if (location.hash === "#settings") route();
+}
+function themeOptions(){
+  var cur = curTheme();
+  return THEMES.map(function(t){ return '<button class="' + (t.k === cur ? "on" : "") + '" onclick="setTheme(\'' + t.k + '\')"><span class="swatch" style="' + t.sw + '">' + (t.k === cur ? icon("check", "width:14px;height:14px;color:var(--primary)") : "") + '</span><span>' + t.n + '<small>' + t.d + '</small></span></button>'; }).join("");
+}
+function drawThemeMenu(){ $("#thememenu").innerHTML = '<div class="grouph" style="padding:8px 16px 4px">Appearance</div>' + themeOptions(); }
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function(){ if (curTheme() === "auto") setTheme("auto"); });
+
+/* ================= Help tips, toast, modal ================= */
+var tipTimer;
+function showTip(el){
+  var id = el.dataset.help, t = REG.tools.filter(function(x){ return x.id === id; })[0], tip = $("#tip");
+  if (t) tip.innerHTML = '<b>' + esc(t.n) + '</b>' + esc(t.help) + '<div class="use">' + esc(t.use) + '</div><div class="addr">' + esc(t.addr) + '</div>';
+  else if (el.dataset.tip) tip.textContent = el.dataset.tip;
+  else return;
+  tip.classList.remove("hidden");
+  var r = el.getBoundingClientRect(), w = tip.offsetWidth, hgt = tip.offsetHeight;
+  var inRail = el.closest(".rail") && innerWidth > 900;
+  var left = inRail ? r.right + 8 : Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+  var top = inRail ? r.top - 4 : (r.bottom + hgt + 8 > innerHeight ? r.top - hgt - 8 : r.bottom + 8);
+  tip.style.left = left + "px"; tip.style.top = Math.max(8, top) + "px";
+}
+function hideTip(){ clearTimeout(tipTimer); $("#tip").classList.add("hidden"); }
+document.addEventListener("mouseover", function(e){
+  var el = e.target.closest && e.target.closest("[data-help],[data-tip]");
+  clearTimeout(tipTimer);
+  if (!el) { hideTip(); return; }
+  tipTimer = setTimeout(function(){ showTip(el); }, el.closest(".rail") ? 600 : 250);
+});
+document.addEventListener("click", function(e){
+  var hb = e.target.closest("button[data-help],button[data-tip].help");
+  if (hb) { e.preventDefault(); e.stopPropagation(); showTip(hb); }
+}, true);
+
+var tt, undoFn = null;
+function toast(msg, undo){
+  $("#tmsg").textContent = msg; undoFn = undo || null; $("#tundo").classList.toggle("hidden", !undo);
+  $("#toast").classList.add("show"); clearTimeout(tt); tt = setTimeout(function(){ $("#toast").classList.remove("show"); }, undo ? 7000 : 4000);
+}
+$("#tundo").onclick = function(){ if (undoFn) undoFn(); undoFn = null; $("#toast").classList.remove("show"); };
+
+var modalClose = null;
+function showModal(html, wide, onClose){
+  var m = $("#modal");
+  m.className = "modalwrap"; m.innerHTML = '<div class="modal' + (wide ? " wide" : "") + '" role="dialog" aria-modal="true">' + html + '</div>';
+  $("#scrim").classList.remove("hidden"); modalClose = onClose || null;
+  var f = m.querySelector("input,textarea,button.filled"); if (f) f.focus();
+}
+function closeModal(){
+  var m = $("#modal"); if (m.classList.contains("hidden")) return;
+  m.className = "hidden"; m.innerHTML = ""; $("#scrim").classList.add("hidden");
+  if (modalClose) { var f = modalClose; modalClose = null; f(); }
+}
+$("#modal").addEventListener("click", function(e){ if (e.target.id === "modal") closeModal(); });
+
+/* ================= Router ================= */
+var ROUTE = "";
+function route(){
+  var h = decodeURIComponent((location.hash || "#posts").slice(1));
+  if (h === "site") h = "posts";
+  ROUTE = h; hideTip(); closeModal();
+  var m = $("#main");
+  $$('#rail [data-nav="settings"]').forEach(function(a){ a.classList.toggle("on", h === "settings"); });
+  $$('#rail [data-help="site"]').forEach(function(a){ a.classList.toggle("on", h !== "settings"); });
+  if (h === "settings") { m.innerHTML = viewSettings(); }
+  else if (h === "post-new") { newPost(); return; }
+  else if (h.indexOf("post/") === 0) { openPost(h.slice(5)); }
+  else if (h.indexOf("page/") === 0) { openSection(h.slice(5)); }
+  else { SITETAB = ["posts", "pages", "menu", "history"].indexOf(h) > -1 ? h : "posts"; m.innerHTML = viewSite(); wireSite(); }
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", function(){
+  flushSaves(); unloadWriter(); route();
+});
+
+/* ================= Website ================= */
+var SITETAB = "posts", POSTFILTER = "all";
+function helpBtn(id){ return '<button class="iconbtn" data-help="' + id + '" aria-label="What is this?">' + icon("help", "width:18px;height:18px") + '</button>'; }
+function statusChip(p){ return p.draft ? '<span class="chip draft"><span class="dot"></span>Draft</span>' : '<span class="chip live"><span class="dot"></span>Live</span>'; }
+function formatOf(p){ return p.body_format === "markdown" ? "editor" : (p.file || p.custom) ? "hand" : "html"; }
+function wordsOf(p){
+  var t = p.body_format === "markdown" ? (p.body || "") : p.html ? String(p.html).replace(/<[^>]+>/g, " ") : "";
+  return t ? (t.match(/\S+/g) || []).length : null;
+}
+function changeLabel(f){
+  var m = /^content\/([a-z0-9-]+)\.json$/.exec(f);
+  if (m) return (m[1] === "essays" ? "Blog posts" : m[1] === "nav" ? "Menu" : SECTIONS[m[1]] ? SECTIONS[m[1]].title : m[1]) + ' <span class="subtle">' + esc(f) + '</span>';
+  if (/^img\/uploads\//.test(f)) return 'New image <span class="subtle">' + esc(f.slice(12)) + '</span>';
+  return esc(f);
+}
+function pendingBanner(){
+  if (!STATE) return "";
+  var r = STATE.repo || {}, n = (r.changed || []).length, out = "";
+  if (r.error) out += '<div class="banner warn">' + icon("flag") + '<span>Could not read the site repository: ' + esc(r.error) + '</span></div>';
+  if (r.sync && !r.sync.ok) out += '<div class="banner amber">' + icon("refresh") + '<span>Could not fetch the latest site from GitHub (' + esc(r.sync.msg) + '). Publishing will try again.</span></div>';
+  if (n) out += '<div class="banner" id="pending">' + icon("rocket") + '<span><b>' + n + ' unpublished change' + (n > 1 ? "s" : "") + '.</b> Saved here, not on elvinpeters.com yet.</span><span class="sp"></span>' +
+    '<button class="btn sm" onclick="discardAll()">Discard</button><button class="btn sm filled" onclick="openPublish()">Review and publish</button></div>';
+  return out;
+}
+function pendingChanges(soft){
+  refreshState().then(function(){
+    var el = $("#pendingwrap"); if (el) el.innerHTML = pendingBanner();
+    var pb = $("#pubcount"); if (pb) pb.textContent = (STATE.repo.changed || []).length ? " (" + STATE.repo.changed.length + ")" : "";
+  }).catch(function(){});
+}
+function viewSite(){
+  var tabs = [["posts", "Blog posts"], ["pages", "Pages"], ["menu", "Menu"], ["history", "Publish history"]];
+  var body = "";
+  if (SITETAB === "posts") body = viewPosts();
+  else if (SITETAB === "pages") body = viewPages();
+  else if (SITETAB === "menu") body = '<div id="menued"><div class="empty">Loading the menu…</div></div>';
+  else body = '<div id="histwrap"><div class="empty">Loading publish history…</div></div>';
+  return '<div class="head"><h1>Website</h1>' + helpBtn("site") + '<span class="urlpill" style="padding-right:12px">elvinpeters.com</span><div class="sp"></div>' +
+    '<a class="btn" href="https://elvinpeters.com" target="_blank" rel="noopener">' + icon("open") + 'View site</a>' +
+    '<button class="btn" onclick="openPublish()">' + icon("rocket") + 'Publish<span id="pubcount"></span></button>' +
+    '<a class="btn filled" href="#post-new">' + icon("plus") + 'New post</a></div>' +
+    '<div id="pendingwrap">' + pendingBanner() + '</div>' +
+    '<div class="tabs" role="tablist">' + tabs.map(function(t){ return '<a role="tab" href="#' + t[0] + '" class="' + (t[0] === SITETAB ? "on" : "") + '"' + (t[0] === SITETAB ? ' aria-selected="true"' : '') + '>' + t[1] + '</a>'; }).join("") + '</div>' + body;
+}
+function wireSite(){
+  var pb = $("#pubcount"); if (pb && STATE) pb.textContent = (STATE.repo.changed || []).length ? " (" + STATE.repo.changed.length + ")" : "";
+  if (SITETAB === "menu") drawMenuTab();
+  if (SITETAB === "history") drawHistory();
+}
+function viewPosts(){
+  var list = posts();
+  var shown = list.filter(function(p){ return POSTFILTER === "all" || (POSTFILTER === "draft" ? p.draft : !p.draft); });
+  var fmtLabel = {editor: ['Editor', 't-blue'], html: ['HTML', 't-amber'], hand: ['Hand-coded', 't-grey']};
+  var rows = shown.map(function(p){
+    var f = formatOf(p), w = wordsOf(p), idx = list.indexOf(p);
+    return '<tr class="row" data-slug="' + esc(p.slug) + '"><td><div class="ttl">' + esc(p.title || "Untitled") + '</div><div class="slug">/writing/' + esc(p.slug) + '/</div></td>' +
+      '<td>' + statusChip(p) + '</td><td class="hide-sm"><span class="fmt ' + fmtLabel[f][1] + '">' + fmtLabel[f][0] + '</span></td>' +
+      '<td class="num hide-sm">' + (w == null ? '<span class="subtle">—</span>' : w.toLocaleString()) + '</td><td class="hide-sm subtle nowrap">' + esc(p.date || "") + '</td>' +
+      '<td><div class="rowacts">' +
+        (p.draft ? '' : '<a class="iconbtn" title="Open on the live site" href="https://elvinpeters.com/writing/' + esc(p.slug) + '/" target="_blank" rel="noopener">' + icon("open") + '</a>') +
+        (f === "hand" ? '' : '<button class="iconbtn" title="Duplicate as a draft" data-dup="' + idx + '">' + icon("copy") + '</button>') +
+        '<button class="iconbtn" title="Delete" data-del="' + idx + '">' + icon("trash") + '</button></div></td></tr>';
+  }).join("");
+  var counts = {all: list.length, live: list.filter(function(p){ return !p.draft; }).length, draft: list.filter(function(p){ return p.draft; }).length};
+  return '<div class="filters">' + [["all", "All"], ["live", "Live"], ["draft", "Drafts"]].map(function(x){
+      return '<button class="fchip' + (POSTFILTER === x[0] ? " on" : "") + '" data-filter="' + x[0] + '">' + x[1] + ' ' + counts[x[0]] + '</button>'; }).join("") + '</div>' +
+    (shown.length ? '<table class="tbl"><thead><tr><th>Post</th><th>Status</th><th class="hide-sm">Format</th><th class="num hide-sm">Words</th><th class="hide-sm">Date</th><th></th></tr></thead><tbody>' + rows + '</tbody></table>'
+      : '<div class="empty">' + (POSTFILTER === "draft" ? "No drafts. " : "No posts yet. ") + '<a href="#post-new">Write one</a>.</div>') +
+    '<p class="subtle" style="font-size:13px;margin-top:18px">Top of the list is newest on elvinpeters.com/writing/. <b>Editor</b> posts are written here. <b>HTML</b> posts can be converted into the editor when nothing would change. <b>Hand-coded</b> posts are custom pages: their title, summary, cover and search settings are editable here, their body stays as built.</p>';
+}
+document.addEventListener("click", function(e){
+  var f = e.target.closest("[data-filter]"); if (f) { POSTFILTER = f.dataset.filter; $("#main").innerHTML = viewSite(); wireSite(); return; }
+  var d = e.target.closest("[data-dup]"); if (d) { e.stopPropagation(); dupPost(+d.dataset.dup); return; }
+  var x = e.target.closest("[data-del]"); if (x) { e.stopPropagation(); delPost(+x.dataset.del); return; }
+  if (e.target.closest(".rowacts")) return;
+  var row = e.target.closest("tr.row[data-slug]"); if (row) location.hash = "post/" + row.dataset.slug;
+});
+function uniqueSlug(base){
+  var s = slugify(base) || "untitled", n = 2, taken = {};
+  posts().forEach(function(p){ taken[p.slug] = 1; });
+  if (!taken[s]) return s;
+  while (taken[s + "-" + n]) n++;
+  return s + "-" + n;
+}
+function dupPost(i){
+  var list = posts(), p = JSON.parse(JSON.stringify(list[i]));
+  p.title = (p.title || "Untitled") + " (copy)"; p.slug = uniqueSlug(p.slug + "-copy"); p.draft = true;
+  list.splice(i, 0, p); queueSave("essays", 0);
+  $("#main").innerHTML = viewSite(); wireSite();
+  toast("Duplicated as a draft", function(){ list.splice(list.indexOf(p), 1); queueSave("essays", 0); $("#main").innerHTML = viewSite(); wireSite(); });
+}
+function delPost(i){
+  var list = posts(), p = list[i];
+  list.splice(i, 1); queueSave("essays", 0);
+  $("#main").innerHTML = viewSite(); wireSite();
+  toast((p.draft ? "Draft deleted." : "Post removed. It leaves the site when you publish.") + (p.file ? " Its page file stays in the repo." : ""),
+    function(){ list.splice(i, 0, p); queueSave("essays", 0); $("#main").innerHTML = viewSite(); wireSite(); });
+}
+function discardAll(){
+  var n = (STATE.repo.changed || []).length;
+  showModal('<div class="mh"><h2>Discard unpublished changes?</h2></div><div class="mb"><p>This throws away the ' + n + ' change' + (n > 1 ? "s" : "") + ' saved here since the last publish and puts everything back to what is live. It cannot be undone.</p><ul class="filelist">' +
+    STATE.repo.changed.map(function(f){ return '<li>' + changeLabel(f) + '</li>'; }).join("") + '</ul></div>' +
+    '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="dodiscard">Discard changes</button></div>');
+  $("#dodiscard").onclick = function(){
+    api("POST", "/api/discard").then(function(){
+      closeModal(); return Promise.all([loadDoc("essays"), refreshState()]);
+    }).then(function(){ toast("Changes discarded. Everything matches the live site."); route(); })
+      .catch(function(e){ closeModal(); toast("Could not discard: " + e.message); });
+  };
+}
+
+/* ---- Pages tab ---- */
+var PAGE_ICONS = {home: "home", services: "layout", book: "flag", claude: "text", "content-machine": "video", site: "gear", system: "task"};
+function viewPages(){
+  var names = Object.keys(SECTIONS).filter(function(n){ return n !== "essays" && n !== "nav"; });
+  return '<div class="grid apps pagecards">' + names.map(function(n){
+    var s = SECTIONS[n];
+    return '<a class="card app" href="#page/' + esc(n) + '" style="text-decoration:none"><span class="ic t-blue">' + icon(PAGE_ICONS[n] || "layout") + '</span><span class="tx"><span class="t">' + esc(s.title) + '</span><small>' + esc(s.help || ("Shows on " + (s.preview || "/"))) + '</small></span></a>';
+  }).join("") + '</div><p class="subtle" style="font-size:13px;margin-top:18px">These are the parts of elvinpeters.com that are driven by content files. Everything else on the site is hand-built and changes through code.</p>';
+}
+
+/* ================= Generic section editor (pages + menu) ================= */
+function getPath(o, k){ return k.split(".").reduce(function(a, x){ return a == null ? a : a[x]; }, o); }
+function setPath(o, k, v){ var ks = k.split("."), last = ks.pop(); var t = ks.reduce(function(a, x){ if (a[x] == null) a[x] = /^\d+$/.test(x) ? [] : {}; return a[x]; }, o); t[last] = v; }
+function slugify(t){ return String(t).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60); }
+function fieldHtml(f, key, val){
+  var id = "f_" + key.replace(/[^a-z0-9]/gi, "_"), max = f.maxlen || (f.type === "textarea" ? 1000 : 300);
+  var cnt = f.maxlen ? '<span class="count" data-count="' + id + '">' + String(val || "").length + '/' + f.maxlen + '</span>' : "";
+  if (f.type === "bool") return '<div class="switch"><label class="sx" for="' + id + '">' + esc(f.label) + '</label><input type="checkbox" class="tog" id="' + id + '" data-key="' + esc(key) + '" data-bool="1"' + (val ? " checked" : "") + '></div>';
+  var lab = '<label for="' + id + '">' + esc(f.label) + cnt + '</label>';
+  if (f.type === "select") return '<div class="field">' + lab + '<select id="' + id + '" data-key="' + esc(key) + '">' + (f.options || []).map(function(o){ return '<option value="' + esc(o.value) + '"' + (o.value === val ? " selected" : "") + '>' + esc(o.label) + '</option>'; }).join("") + '</select></div>';
+  if (f.type === "textarea" || f.type === "markdown") return '<div class="field">' + lab + '<textarea id="' + id + '" data-key="' + esc(key) + '" maxlength="' + max + '"' + (f.type === "markdown" ? ' rows="12"' : "") + '>' + esc(val) + '</textarea></div>';
+  return '<div class="field">' + lab + '<input type="text" id="' + id + '" data-key="' + esc(key) + '" value="' + esc(val == null ? "" : val) + '" maxlength="' + max + '"></div>';
+}
+var SEC = null, SECROOT = null, OPENITEM = {};
+function openSection(name){
+  if (!SECTIONS[name] || name === "essays") { location.hash = "#pages"; return; }
+  var s = SECTIONS[name];
+  $("#main").innerHTML = '<div class="head"><a class="iconbtn" href="#pages" title="Back">' + icon("back") + '</a>' +
+    '<div><div class="crumb"><a href="#pages">Website</a><span>›</span><span style="color:var(--ink)">' + esc(s.title) + '</span></div>' +
+    '<span class="urlpill" style="padding-right:12px">elvinpeters.com' + esc(s.preview || "/") + '</span></div>' +
+    '<div class="sp"></div><span class="save" id="savestate">' + icon("check", "width:16px;height:16px") + 'All changes saved</span>' +
+    '<button class="btn filled" onclick="openPublish()">' + icon("rocket") + 'Publish</button></div>' +
+    '<div class="ed" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)"><div class="card"><div class="panel-h"><h2>' + esc(s.title) + '</h2></div><div class="form" id="secform"><div class="empty">Loading…</div></div></div>' +
+    '<div id="secpv"></div></div>';
+  loadDoc(name).then(function(){ SEC = s; SECROOT = $("#secform"); drawSection(); drawRealPreview("#secpv", s.preview || "/", true); })
+    .catch(function(e){ $("#secform").innerHTML = '<div class="empty">Could not load: ' + esc(e.message) + '</div>'; });
+}
+function drawMenuTab(){
+  var s = SECTIONS.nav;
+  if (!s) { $("#menued").innerHTML = '<div class="empty">No menu schema.</div>'; return; }
+  $("#menued").innerHTML = '<div class="ed" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)"><div class="card"><div class="panel-h"><h2>Menu</h2><div class="sp"></div><span class="save" id="savestate">' + icon("check", "width:16px;height:16px") + 'All changes saved</span></div>' +
+    '<div class="form" id="secform"><div class="empty">Loading…</div></div></div><div id="secpv"></div></div>';
+  loadDoc("nav").then(function(){ SEC = s; SECROOT = $("#secform"); drawSection(); drawRealPreview("#secpv", s.preview || "/", true); });
+}
+function drawSection(){
+  var s = SEC, data = DOCS[s.name], h = s.help ? '<p class="subtle" style="margin:6px 0 0">' + esc(s.help) + '</p>' : "";
+  s.fields.forEach(function(f){
+    if (f.type !== "list") { h += fieldHtml(f, f.key, getPath(data, f.key)); return; }
+    var arr = getPath(data, f.key) || [];
+    h += '<div class="field"><label>' + esc(f.label) + '</label><div class="help">Drag to reorder. Order here is the order on the page.</div></div><div data-list="' + esc(f.key) + '">';
+    arr.forEach(function(item, i){
+      var name = (f.item_title && item[f.item_title]) || item.label || item.title || ("Item " + (i + 1));
+      var extra = (item.dropdown || item.items) ? ' <span class="chip draft" title="Its dropdown entries are generated from the site data">has a dropdown</span>' : "";
+      var open = OPENITEM[f.key] === i;
+      h += '<details class="item" draggable="true" data-i="' + i + '"' + (open ? " open" : "") + '><summary><span class="grip">' + icon("grip", "width:16px;height:16px") + '</span><span class="it">' + esc(name) + extra + '</span>' +
+        '<button class="iconbtn" title="Move up" data-mv="-1">' + icon("up", "width:18px;height:18px") + '</button><button class="iconbtn" title="Move down" data-mv="1">' + icon("down", "width:18px;height:18px") + '</button>' +
+        '<button class="iconbtn" title="Duplicate" data-dupi="1">' + icon("copy", "width:18px;height:18px") + '</button><button class="iconbtn" title="Remove" data-rmi="1">' + icon("trash", "width:18px;height:18px") + '</button></summary><div class="form">' +
+        f.item_fields.map(function(sub){ return fieldHtml(sub, f.key + "." + i + "." + sub.key, item[sub.key]); }).join("") + '</div></details>';
+    });
+    h += '</div><button class="btn tonal sm" style="margin-top:12px" data-add="' + esc(f.key) + '">' + icon("plus", "width:16px;height:16px") + (s.new_label || "Add") + '</button>';
+  });
+  SECROOT.innerHTML = h;
+  wireSection();
+}
+function sectionChanged(redraw){
+  queueSave(SEC.name);
+  clearTimeout(sectionChanged.t);
+  sectionChanged.t = setTimeout(function(){ flushSaves().then(function(){ drawRealPreview("#secpv", SEC.preview || "/", true); }); }, 1600);
+  if (redraw) drawSection();
+}
+function wireSection(){
+  var root = SECROOT, data = DOCS[SEC.name];
+  $$("input,textarea,select", root).forEach(function(el){
+    el.addEventListener(el.dataset.bool || el.tagName === "SELECT" ? "change" : "input", function(){
+      setPath(data, el.dataset.key, el.dataset.bool ? el.checked : el.value);
+      var c = root.querySelector('[data-count="' + el.id + '"]'); if (c) { var mx = +el.getAttribute("maxlength"); c.textContent = el.value.length + "/" + mx; }
+      sectionChanged(false);
+    });
+  });
+  $$("[data-list]", root).forEach(function(listEl){
+    var key = listEl.dataset.list, arr = getPath(data, key);
+    $$(".item", listEl).forEach(function(it){
+      var i = +it.dataset.i;
+      it.addEventListener("toggle", function(){ if (it.open) OPENITEM[key] = i; else if (OPENITEM[key] === i) OPENITEM[key] = null; });
+      $$("summary button", it).forEach(function(b){
+        b.onclick = function(e){
+          e.preventDefault(); e.stopPropagation();
+          if (b.dataset.mv) { var j = i + +b.dataset.mv; if (j < 0 || j >= arr.length) return; var t = arr[i]; arr[i] = arr[j]; arr[j] = t; OPENITEM[key] = OPENITEM[key] === i ? j : OPENITEM[key]; sectionChanged(true); }
+          else if (b.dataset.dupi) { arr.splice(i + 1, 0, JSON.parse(JSON.stringify(arr[i]))); OPENITEM[key] = i + 1; sectionChanged(true); toast("Duplicated", function(){ arr.splice(i + 1, 1); sectionChanged(true); }); }
+          else if (b.dataset.rmi) { var gone = arr.splice(i, 1)[0]; OPENITEM[key] = null; sectionChanged(true); toast("Removed", function(){ arr.splice(i, 0, gone); sectionChanged(true); }); }
+        };
+      });
+      it.addEventListener("dragstart", function(e){ if (e.target !== it) return; it.classList.add("drag"); e.dataTransfer.setData("text/plain", key + "|" + i); });
+      it.addEventListener("dragend", function(){ it.classList.remove("drag"); });
+      it.addEventListener("dragover", function(e){ e.preventDefault(); it.classList.add("over"); });
+      it.addEventListener("dragleave", function(){ it.classList.remove("over"); });
+      it.addEventListener("drop", function(e){
+        e.preventDefault(); it.classList.remove("over");
+        var parts = (e.dataTransfer.getData("text/plain") || "").split("|"); if (parts[0] !== key) return;
+        var from = +parts[1]; if (from === i) return;
+        var moved = arr.splice(from, 1)[0]; arr.splice(i, 0, moved); OPENITEM[key] = null; sectionChanged(true);
+      });
+    });
+  });
+  $$("[data-add]", root).forEach(function(b){
+    b.onclick = function(){
+      var f = SEC.fields.filter(function(x){ return x.key === b.dataset.add; })[0], arr = getPath(data, f.key);
+      var blank = {}; f.item_fields.forEach(function(s){ blank[s.key] = s.type === "bool" ? false : ""; });
+      Object.assign(blank, f.item_defaults || {});
+      arr.push(blank); OPENITEM[f.key] = arr.length - 1; sectionChanged(true);
+    };
+  });
+}
+
+/* Real build preview: the exact pages that would ship (analytics removed). */
+var pvDevice = "desktop";
+try { pvDevice = localStorage.getItem("site-studio-device") || "desktop"; } catch (e) {}
+function drawRealPreview(sel, pagePath, auto){
+  var host = $(sel); if (!host) return;
+  if (!host.dataset.wired) {
+    host.dataset.wired = "1";
+    host.innerHTML = '<div class="phone-t">' + icon("eye", "width:18px;height:18px") + 'Preview: the real build<div class="sp"></div>' +
+      '<div class="seg" role="group" aria-label="Device"><button data-dev="desktop" title="Desktop">' + icon("desktop", "width:16px;height:16px") + '</button><button data-dev="phone" title="Phone">' + icon("phone", "width:16px;height:16px") + '</button></div>' +
+      '<button class="iconbtn" title="Rebuild preview" data-rebuild>' + icon("refresh", "width:18px;height:18px") + '</button></div>' +
+      '<div class="pvframe" data-pv style="height:calc(100vh - 170px)"></div><div class="pvnote" data-pvnote>Updates a moment after you stop typing.</div>';
+    $$("[data-dev]", host).forEach(function(b){ b.onclick = function(){ setDevice(b.dataset.dev); drawRealPreview(sel, pagePath, false); }; });
+    $("[data-rebuild]", host).onclick = function(){ flushSaves().then(function(){ drawRealPreview(sel, pagePath, false); }); };
+  }
+  $$("[data-dev]", host).forEach(function(b){ b.classList.toggle("on", b.dataset.dev === pvDevice); });
+  var note = $("[data-pvnote]", host), frameHost = $("[data-pv]", host);
+  note.textContent = "Building the real site…";
+  api("POST", "/api/preview").then(function(r){
+    var url = "/preview/" + r.data.id + "/" + pagePath.replace(/^\//, "");
+    var prevScroll = 0; var old = $("iframe", frameHost);
+    try { prevScroll = old.contentWindow.scrollY; } catch (e) {}
+    frameHost.classList.toggle("phone", pvDevice === "phone");
+    frameHost.innerHTML = '<iframe title="Page preview" src="' + esc(url) + '"></iframe>';
+    var f = $("iframe", frameHost);
+    fitFrame(frameHost, f);
+    f.onload = function(){ try { f.contentWindow.scrollTo(0, prevScroll); } catch (e) {} };
+    note.innerHTML = 'Built just now. <a href="' + esc(url) + '" target="_blank" rel="noopener">Open full size</a>';
+  }).catch(function(e){ note.textContent = "Preview build failed: " + (e.data && e.data.detail || e.message); });
+}
+function setDevice(d){ pvDevice = d; try { localStorage.setItem("site-studio-device", d); } catch (e) {} }
+/* Desktop previews render at 1100px (above the site's 920px breakpoint) and scale down to fit; phone renders at 390px. */
+function fitFrame(host, f){
+  function fit(){
+    var w = host.clientWidth, h = host.clientHeight;
+    if (!w) return;
+    if (pvDevice === "phone") { f.style.width = "100%"; f.style.height = h + "px"; f.style.transform = ""; return; }
+    var vw = Math.max(1100, w), s = w / vw;
+    f.style.width = vw + "px"; f.style.height = (h / s) + "px"; f.style.transform = "scale(" + s + ")";
+  }
+  fit();
+  if (window.ResizeObserver) { if (host._ro) host._ro.disconnect(); host._ro = new ResizeObserver(fit); host._ro.observe(host); }
+}
+
+/* ================= Post writer ================= */
+var POST = null, PV = {shellKey: "", frame: null, pending: false}, pvMode = "split", slugTouched = false, POSTIS_NEW = false, showSettings = innerWidth >= 1700;
+try { var ss = localStorage.getItem("site-studio-settings"); if (ss) showSettings = ss === "1"; } catch (e) {}
+try { pvMode = localStorage.getItem("site-studio-pvmode") || "split"; } catch (e) {}
+function today(){ var d = new Date(); return MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear(); }
+function toISO(s){ var m = /^([A-Z][a-z]{2}) (\d{1,2}), (\d{4})$/.exec(s || ""); if (!m) return ""; var mo = MONTHS.indexOf(m[1]) + 1; return mo ? m[3] + "-" + ("0" + mo).slice(-2) + "-" + ("0" + m[2]).slice(-2) : ""; }
+function fromISO(s){ var p = (s || "").split("-"); return p.length === 3 ? MONTHS[+p[1] - 1] + " " + (+p[2]) + ", " + p[0] : ""; }
+function tagsText(p){ return Array.isArray(p.tags) ? p.tags.join(", ") : (p.tags || ""); }
+
+function newPost(){
+  ensureEssays().then(function(){
+    var defs = (SECTIONS.essays && SECTIONS.essays.fields[0].item_defaults) || {};
+    var p = Object.assign({draft: true, title: "", slug: "", kicker: "Playbook", dek: "", short_dek: "", date: today(), readmins: 1, accent: "amber", image: "blog-tokens.svg", og: "og.jpg", body_format: "markdown", body: ""}, defs, {draft: true, date: today()});
+    POST = p; POSTIS_NEW = true; slugTouched = false;
+    history.replaceState(null, "", "#post-new");
+    drawWriter();
+  });
+}
+function ensureEssays(){ return DOCS.essays ? Promise.resolve() : loadDoc("essays"); }
+function openPost(slug){
+  ensureEssays().then(function(){
+    var p = posts().filter(function(x){ return x.slug === slug; })[0];
+    if (!p) { $("#main").innerHTML = '<div class="empty">No post at /writing/' + esc(slug) + '/. <a href="#posts">Back to posts</a></div>'; return; }
+    POST = p; POSTIS_NEW = false; slugTouched = true;
+    drawWriter();
+  });
+}
+function validatePosts(){
+  var seen = {}, list = posts();
+  for (var i = 0; i < list.length; i++) {
+    var s = list[i].slug || "";
+    if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(s)) return "Needs a web address (type a title first)";
+    if (seen[s]) return "Another post already uses /writing/" + s + "/";
+    seen[s] = 1;
+  }
+  return "";
+}
+function unloadWriter(){ if (PV.ro) PV.ro.disconnect(); PV = {shellKey: "", frame: null, pending: false}; POST = null; }
+
+function drawWriter(){
+  var p = POST, f = formatOf(p), isMd = f === "editor";
+  var url = "elvinpeters.com/writing/" + (p.slug || "…") + "/";
+  var tb = function(label, cmd, title){ return '<button class="iconbtn" data-cmd="' + cmd + '" title="' + title + '" aria-label="' + title + '">' + label + '</button>'; };
+  var tbi = function(ic, cmd, title){ return tb(icon(ic, "width:18px;height:18px"), cmd, title); };
+  var bodyCol;
+  if (isMd) {
+    bodyCol = '<div class="toolbar">' + tb("H2", "h2", "Heading (Ctrl Alt 2)") + tb("H3", "h3", "Sub-heading (Ctrl Alt 3)") + tb("<b>B</b>", "bold", "Bold (Ctrl B)") + tb("<i>I</i>", "italic", "Italic (Ctrl I)") +
+      '<span class="divider"></span>' + tbi("link", "link", "Link (Ctrl K)") + tbi("quote", "quote", "Pull quote (Ctrl Shift .)") + tbi("list", "list", "Bulleted list (Ctrl Shift 8)") + tbi("olist", "olist", "Numbered list (Ctrl Shift 7)") +
+      tbi("note", "note", "Callout box") + tbi("image", "image", "Image: upload and insert") + tb("&lt;/&gt;", "code", "Code (Ctrl E)") + tb("{ }", "prompt", "Prompt block") +
+      '<span class="sp"></span><button class="iconbtn" data-tip="Markdown cheat sheet" aria-label="Formatting help" id="cheatbtn">' + icon("help", "width:18px;height:18px") + '</button></div>';
+  } else bodyCol = "";
+  var lock = "";
+  if (f === "hand") lock = '<div class="lockcard"><b>Hand-coded post.</b> Its body is a custom page (<code>' + esc(p.file || "custom") + '</code>) with its own layout, charts and styles, so it is not edited here. The title, summary, cover, date and search settings on this screen are. The preview shows the real page.</div>';
+  else if (f === "html") lock = '<div class="lockcard" id="convertcard"><b>Written in HTML.</b> Checking whether it can move into the editor without changing a word or a style…</div>';
+
+  $("#main").innerHTML =
+    '<div class="head"><a class="iconbtn" href="#posts" title="Back to posts">' + icon("back") + '</a>' +
+      '<div style="min-width:0"><div class="crumb"><a href="#posts">Website</a><span>›</span><span style="color:var(--ink)">' + (POSTIS_NEW ? "New post" : "Blog post") + '</span></div>' +
+      '<span class="urlpill" id="urlpill">' + esc(url) + '<button class="iconbtn" style="width:28px;height:28px" title="Copy link" id="copyurl">' + icon("copy", "width:16px;height:16px") + '</button></span></div>' +
+      '<div class="sp"></div><span class="save" id="savestate">' + (POSTIS_NEW ? "Starts saving when it has a title" : icon("check", "width:16px;height:16px") + "All changes saved") + '</span>' +
+      '<div class="seg" role="group" aria-label="Layout"><button data-pv="write">Write</button><button data-pv="split">Split</button><button data-pv="preview">Preview</button></div>' +
+      '<div class="seg" role="group" aria-label="Device"><button data-dev="desktop" title="Desktop" aria-label="Desktop preview">' + icon("desktop", "width:16px;height:16px") + '</button><button data-dev="phone" title="Phone" aria-label="Phone preview">' + icon("phone", "width:16px;height:16px") + '</button></div>' +
+      '<button class="iconbtn" id="setbtn" data-tip="Post settings: address, cover, date, search" aria-label="Post settings" aria-pressed="false">' + icon("sidebar") + '</button>' +
+      '<button class="btn" id="exactbtn" title="Build the whole site and show this page exactly as it will ship">' + icon("eye", "width:18px;height:18px") + 'Exact preview</button>' +
+      '<button class="btn filled" id="pubbtn">' + icon("rocket", "width:18px;height:18px") + 'Publish</button></div>' +
+    '<div id="pendingwrap"></div>' +
+    '<div class="writer" id="writer">' +
+      '<div class="card" id="wcol">' + bodyCol +
+        '<textarea class="titlein" id="ptitle" rows="1" placeholder="Title" maxlength="120" aria-label="Title">' + esc(p.title) + '</textarea>' +
+        '<textarea class="dekin" id="pdek" rows="2" maxlength="220" placeholder="One-line summary under the title" aria-label="Summary">' + esc(p.dek) + '</textarea>' + lock +
+        (isMd ? '<textarea class="bodyin" id="pbody" spellcheck="true" placeholder="Start writing. ## makes a heading, **bold**, > quote, - list. Paste or drop an image to upload it." aria-label="Post body">' + esc(p.body) + '</textarea>' : '') +
+        '<div class="counter" id="pcount"></div></div>' +
+      '<div class="pvcol" id="pvcol"><div class="phone-t">' + icon("eye", "width:18px;height:18px") + 'Preview in the site’s design<div class="sp"></div><span class="subtle" style="font-weight:400">' + (isMd ? "Updates as you type" : "The real page body") + '</span></div>' +
+        '<div class="pvframe" id="pvframe"></div><div class="pvnote">Same template the build uses. Scripts and analytics are off in previews. <a href="#" id="exactlink">Exact preview</a> builds the whole site.</div></div>' +
+      '<div class="card" id="setcol"><div class="panel-h"><h2>Post settings</h2></div><div class="form" id="pset"></div></div>' +
+    '</div>';
+  drawSettings();
+  wireWriter();
+  layoutWriter();
+  renderShell(true);
+  updateCounter();
+  if (f === "html") checkConvert();
+  pendingChanges();
+}
+
+function drawSettings(){
+  var p = POST, isMd = formatOf(p) === "editor";
+  var cnt = function(id, v, max){ return '<span class="count' + (String(v || "").length > max ? " over" : "") + '" data-count="' + id + '">' + String(v || "").length + '/' + max + '</span>'; };
+  var h = '<div class="switch" style="border-top:0;margin-top:0"><span class="sx">Draft<small>' + (p.draft ? "Hidden from the site. Publishing keeps it hidden." : "Live on the site after you publish.") + '</small></span><input type="checkbox" class="tog" id="sdraft"' + (p.draft ? " checked" : "") + ' aria-label="Draft"></div>' +
+    '<div class="field"><label for="sslug">Web address</label><input type="text" id="sslug" maxlength="80" value="' + esc(p.slug) + '" placeholder="made from the title"><div class="help" id="slughelp">elvinpeters.com/writing/' + esc(p.slug || "…") + '/' + (!p.draft && !POSTIS_NEW ? '<br><b>Live post:</b> changing this breaks existing links to it.' : '') + '</div></div>' +
+    '<div class="field"><label for="skicker">Eyebrow</label><input type="text" id="skicker" maxlength="40" value="' + esc(p.kicker || "") + '" placeholder="Playbook"><div class="help">Small label above the title.</div></div>' +
+    '<div class="field"><label for="stags">Tags</label><input type="text" id="stags" maxlength="200" value="' + esc(tagsText(p)) + '" placeholder="AI at work, Systems"><div class="help">Comma separated. Added to the page for search and sharing.</div></div>' +
+    '<div class="field"><label>Cover image</label><div class="cover"><img id="coverimg" alt="" src="/img/' + esc(p.image || "og.jpg") + '"><div><button class="btn tonal sm" id="coverbtn">' + icon("image", "width:16px;height:16px") + 'Choose image</button><div class="help" style="margin-top:6px">Blog list, homepage card and share image. Posts open on the title, not a photo.</div></div></div></div>' +
+    '<div class="field"><label for="steaser">Card teaser' + cnt("steaser", p.short_dek, 200) + '</label><textarea id="steaser" maxlength="200" rows="2" placeholder="Blank uses the summary">' + esc(p.short_dek || "") + '</textarea></div>' +
+    '<div class="row2"><div class="field"><label for="sdate">Publish date</label><input type="date" id="sdate" value="' + esc(toISO(p.date)) + '"></div>' +
+    '<div class="field"><label for="saccent">Accent</label><select id="saccent">' + [["amber", "Amber"], ["good", "Green"], ["blue", "Blue"]].map(function(o){ return '<option value="' + o[0] + '"' + ((p.accent || "amber") === o[0] ? " selected" : "") + '>' + o[1] + '</option>'; }).join("") + '</select></div></div>' +
+    '<div class="help">The date shows on the post and the cards. Posts go live when you publish.</div>' +
+    '<div class="field"><label for="sread">Read time (minutes)</label><input type="text" id="sread" inputmode="numeric" maxlength="3" value="' + esc(p.readmins || "") + '"' + (isMd ? ' disabled' : '') + '><div class="help">' + (isMd ? "Counted from the words as you write." : "Set by hand for this post.") + '</div></div>' +
+    '<div class="field"><label for="sseo">Search title' + cnt("sseo", p.seo_title, 60) + '</label><input type="text" id="sseo" maxlength="70" value="' + esc(p.seo_title || "") + '" placeholder="Blank uses the post title"></div>' +
+    '<div class="field"><label for="sseod">Search description' + cnt("sseod", p.seo_description, 160) + '</label><textarea id="sseod" maxlength="170" rows="3" placeholder="Blank uses the summary">' + esc(p.seo_description || "") + '</textarea></div>' +
+    '<div class="field"><label>How it looks on Google</label><div class="serp" id="serp"></div></div>' +
+    '<div style="display:flex;gap:8px;margin-top:22px;border-top:1px solid var(--line);padding-top:16px;flex-wrap:wrap">' +
+      (formatOf(p) !== "hand" ? '<button class="btn text" id="dupbtn">' + icon("copy") + 'Duplicate</button>' : '') + '<div class="sp"></div><button class="btn text danger" id="delbtn">' + icon("trash") + 'Delete</button></div>';
+  $("#pset").innerHTML = h;
+  drawSerp();
+}
+function drawSerp(){
+  var p = POST, t = p.seo_title || p.title || "Untitled", d = p.seo_description || p.dek || "";
+  $("#serp").innerHTML = '<div class="u">elvinpeters.com › writing › ' + esc(p.slug || "…") + '</div><div class="h">' + esc(t.length > 62 ? t.slice(0, 60) + "…" : t) + ' · Elvin Peters</div><div class="d">' + esc(d.length > 160 ? d.slice(0, 157) + "…" : d) + '</div>';
+}
+function wordsNow(){ return formatOf(POST) === "editor" ? ((POST.body || "").match(/\S+/g) || []).length : wordsOf(POST); }
+function updateCounter(){
+  var w = wordsNow(), c = $("#pcount"); if (!c) return;
+  if (formatOf(POST) === "editor") {
+    POST.readmins = Math.max(1, Math.round(w / 230));
+    var r = $("#sread"); if (r) r.value = POST.readmins;
+    c.innerHTML = '<span>' + w.toLocaleString() + ' words</span><span>' + POST.readmins + ' min read</span><span class="hide-sm">Ctrl B bold · Ctrl I italic · Ctrl K link · Ctrl S save</span>';
+  } else c.innerHTML = w == null ? '<span>Hand-coded body</span>' : '<span>' + w.toLocaleString() + ' words</span>';
+}
+function postChanged(opts){
+  opts = opts || {};
+  if (POSTIS_NEW) {
+    if (!POST.slug) { setSave("wait", "Starts saving when it has a title"); return; }
+    posts().unshift(POST); POSTIS_NEW = false;
+  }
+  if (POST.slug && location.hash !== "#post/" + POST.slug) history.replaceState(null, "", "#post/" + POST.slug);
+  queueSave("essays");
+  if (opts.shell) renderShell(false);
+  if (opts.body) renderBody();
+  drawSerp();
+}
+function wireWriter(){
+  var p = POST, isMd = formatOf(p) === "editor";
+  var grow = function(el){ el.style.height = "auto"; el.style.height = el.scrollHeight + "px"; };
+  [$("#ptitle"), $("#pdek")].forEach(function(el){ grow(el); el.addEventListener("input", function(){ grow(el); }); });
+  $("#ptitle").addEventListener("keydown", function(e){ if (e.key === "Enter") { e.preventDefault(); var d = $("#pdek"); d.focus(); } });
+  $("#ptitle").addEventListener("input", function(){
+    p.title = this.value;
+    if (!slugTouched && (POSTIS_NEW || p.draft)) { var s = uniqueSlugFor(this.value); p.slug = s; $("#sslug").value = s; slugHelp(); }
+    postChanged({shell: true});
+  });
+  $("#pdek").addEventListener("input", function(){ p.dek = this.value; postChanged({shell: true}); });
+  if (isMd) {
+    var b = $("#pbody");
+    b.addEventListener("input", function(){ p.body = b.value; updateCounter(); postChanged({body: true}); });
+    b.addEventListener("keydown", bodyKeys);
+    b.addEventListener("paste", function(e){ var fl = e.clipboardData && e.clipboardData.files; if (fl && fl.length && /^image\//.test(fl[0].type)) { e.preventDefault(); uploadImage(fl[0], "inline"); } });
+    b.addEventListener("dragover", function(e){ if (e.dataTransfer && Array.prototype.some.call(e.dataTransfer.items || [], function(i){ return i.kind === "file"; })) e.preventDefault(); });
+    b.addEventListener("drop", function(e){ var fl = e.dataTransfer && e.dataTransfer.files; if (fl && fl.length && /^image\//.test(fl[0].type)) { e.preventDefault(); b.focus(); uploadImage(fl[0], "inline"); } });
+    $$("[data-cmd]").forEach(function(btn){ btn.onclick = function(){ fmt(btn.dataset.cmd); }; });
+    $("#cheatbtn").onclick = function(e){ e.stopPropagation(); cheatSheet(); };
+  }
+  $("#sdraft").onchange = function(){ p.draft = this.checked; drawSettings(); wireSettings(); postChanged({}); };
+  wireSettings();
+  $$("[data-pv]").forEach(function(btn){ btn.onclick = function(){ pvMode = btn.dataset.pv; try { localStorage.setItem("site-studio-pvmode", pvMode); } catch (e) {} layoutWriter(); }; });
+  $$("#main .head [data-dev]").forEach(function(btn){ btn.onclick = function(){ setDevice(btn.dataset.dev); layoutWriter(); }; });
+  $("#pubbtn").onclick = openPublish;
+  $("#setbtn").onclick = function(){ showSettings = !showSettings; try { localStorage.setItem("site-studio-settings", showSettings ? "1" : "0"); } catch (e) {} layoutWriter(); if (showSettings && innerWidth <= 1280) $("#setcol").scrollIntoView({behavior: "smooth"}); };
+  $("#exactbtn").onclick = exactPreview;
+  $("#exactlink").onclick = function(e){ e.preventDefault(); exactPreview(); };
+  $("#copyurl").onclick = function(){ copyText("https://elvinpeters.com/writing/" + p.slug + "/"); };
+}
+function wireSettings(){
+  var p = POST;
+  $("#sdraft").onchange = function(){ p.draft = this.checked; drawSettings(); wireSettings(); postChanged({}); };
+  var bind = function(id, key, opts){
+    var el = $("#" + id);
+    el.addEventListener(el.tagName === "SELECT" || el.type === "date" ? "change" : "input", function(){
+      var v = el.value;
+      if (key === "tags") v = v.split(",").map(function(t){ return t.trim(); }).filter(Boolean);
+      if (key === "date") v = fromISO(v);
+      if (key === "readmins") v = Math.max(1, parseInt(v, 10) || 1);
+      if ((key === "seo_title" || key === "seo_description" || key === "short_dek") && !v) delete p[key]; else p[key] = v;
+      var c = document.querySelector('[data-count="' + id + '"]'); if (c) { var max = {sseo: 60, sseod: 160, steaser: 200}[id]; c.textContent = el.value.length + "/" + max; c.classList.toggle("over", el.value.length > max); }
+      postChanged(opts || {});
+    });
+  };
+  bind("skicker", "kicker", {shell: true}); bind("stags", "tags"); bind("steaser", "short_dek");
+  bind("sdate", "date", {shell: true}); bind("saccent", "accent", {shell: true}); bind("sseo", "seo_title"); bind("sseod", "seo_description");
+  if (formatOf(p) !== "editor") bind("sread", "readmins", {shell: true});
+  var sl = $("#sslug");
+  sl.addEventListener("input", function(){
+    slugTouched = true;
+    var s = slugify(sl.value);
+    if (sl.value !== s && !/-$/.test(sl.value)) sl.value = s;
+    p.slug = s; slugHelp();
+    var urlp = $("#urlpill"); if (urlp) urlp.firstChild.textContent = "elvinpeters.com/writing/" + (s || "…") + "/";
+    postChanged({});
+  });
+  sl.addEventListener("blur", function(){ sl.value = slugify(sl.value); p.slug = sl.value; slugHelp(); postChanged({}); });
+  $("#coverbtn").onclick = function(){ pickFile(function(file){ uploadImage(file, "cover"); }); };
+  var d = $("#dupbtn"); if (d) d.onclick = function(){ flushSaves().then(function(){ var i = posts().indexOf(p); if (i < 0) return; dupPost(i); location.hash = "post/" + posts()[i].slug; }); };
+  $("#delbtn").onclick = function(){
+    var i = posts().indexOf(p);
+    if (i < 0) { location.hash = "#posts"; return; }
+    location.hash = "#posts"; setTimeout(function(){ delPost(i); }, 0);
+  };
+}
+function uniqueSlugFor(title){
+  var s = slugify(title), n = 2, taken = {};
+  posts().forEach(function(x){ if (x !== POST) taken[x.slug] = 1; });
+  if (!s || !taken[s]) return s;
+  while (taken[s + "-" + n]) n++;
+  return s + "-" + n;
+}
+function slugHelp(){
+  var h = $("#slughelp"), dup = posts().some(function(x){ return x !== POST && x.slug === POST.slug; });
+  if (h) h.innerHTML = (dup ? '<b style="color:var(--red)">Another post already uses this address.</b><br>' : '') + 'elvinpeters.com/writing/' + esc(POST.slug || "…") + '/' + (!POST.draft && !POSTIS_NEW ? '<br><b>Live post:</b> changing this breaks existing links to it.' : '');
+  var urlp = $("#urlpill"); if (urlp) urlp.firstChild.textContent = "elvinpeters.com/writing/" + (POST.slug || "…") + "/";
+}
+function layoutWriter(){
+  $$("[data-pv]").forEach(function(x){ x.classList.toggle("on", x.dataset.pv === pvMode); });
+  $$("#main .head [data-dev]").forEach(function(x){ x.classList.toggle("on", x.dataset.dev === pvDevice); });
+  $("#wcol").classList.toggle("hidden", pvMode === "preview");
+  $("#pvcol").classList.toggle("hidden", pvMode === "write");
+  $("#writer").classList.toggle("nopreview", pvMode !== "split");
+  $("#writer").classList.toggle("noset", !showSettings && innerWidth > 900);
+  $("#setbtn").classList.toggle("on", showSettings); $("#setbtn").setAttribute("aria-pressed", showSettings ? "true" : "false");
+  $("#setbtn").style.background = showSettings ? "var(--primary-soft)" : "";
+  var fr = $("#pvframe"); fr.classList.toggle("phone", pvDevice === "phone");
+  if (PV.frame) fitFrame(fr, PV.frame);
+}
+
+/* Live preview: the post page from the build's own template, filled with md.js as you type. */
+function shellKey(){
+  var p = POST, keep = {};
+  ["title", "dek", "kicker", "date", "accent", "readmins", "slug", "image", "og", "body_format", "file", "custom", "seo_title", "seo_description"].forEach(function(k){ keep[k] = p[k]; });
+  if (p.body_format !== "markdown") keep.html = p.html;
+  return JSON.stringify(keep);
+}
+function renderShell(force){
+  var key = shellKey();
+  if (!force && key === PV.shellKey) return;
+  clearTimeout(renderShell.t);
+  renderShell.t = setTimeout(function(){
+    var post = JSON.parse(key); post.slug = post.slug || "untitled";
+    PV.shellKey = key;
+    api("POST", "/api/post-page", post).then(function(r){
+      if (!POST || PV.shellKey !== key) return;
+      var host = $("#pvframe"); if (!host) return;
+      var html = String(r.data).replace("<head>", '<head><base target="_blank">');
+      var old = PV.frame, y = 0;
+      try { y = old ? old.contentWindow.scrollY : 0; } catch (e) {}
+      var f = document.createElement("iframe");
+      f.setAttribute("sandbox", "allow-same-origin allow-popups allow-popups-to-escape-sandbox");
+      f.setAttribute("title", "Post preview");
+      f.srcdoc = html;
+      f.onload = function(){ renderBody(); try { f.contentWindow.scrollTo(0, y); } catch (e) {} };
+      host.innerHTML = ""; host.appendChild(f); PV.frame = f;
+      fitFrame(host, f);
+    }).catch(function(e){ var host = $("#pvframe"); if (host) host.innerHTML = '<div class="empty">Preview unavailable: ' + esc(e.message) + '</div>'; });
+  }, force ? 0 : 250);
+}
+function renderBody(){
+  if (!PV.frame || PV.pending) return;
+  PV.pending = true;
+  requestAnimationFrame(function(){
+    PV.pending = false;
+    try {
+      var doc = PV.frame.contentDocument, el = doc && doc.getElementById("studio-body");
+      if (el) el.innerHTML = window.mdToHtml(POST.body || "");
+    } catch (e) {}
+  });
+}
+
+/* Formatting */
+function fmt(cmd){
+  var b = $("#pbody"); if (!b) return;
+  var s = b.selectionStart, e = b.selectionEnd, v = b.value, sel = v.slice(s, e);
+  var lineStart = v.lastIndexOf("\n", s - 1) + 1;
+  var wrap = function(pre, post, ph){
+    var t = sel || ph;
+    b.setRangeText(pre + t + post, s, e, "end");
+    if (!sel) b.setSelectionRange(s + pre.length, s + pre.length + t.length);
+  };
+  var prefixLines = function(fn){
+    var endLine = v.indexOf("\n", e); if (endLine < 0) endLine = v.length;
+    var block = v.slice(lineStart, endLine), n = 0;
+    var out = block.split("\n").map(function(l){ return fn(l, n++); }).join("\n");
+    b.setRangeText(out, lineStart, endLine, "end");
+  };
+  if (cmd === "bold") wrap("**", "**", "bold text");
+  else if (cmd === "italic") wrap("*", "*", "italic text");
+  else if (cmd === "code") { if (sel.indexOf("\n") > -1) b.setRangeText("\n```\n" + sel + "\n```\n", s, e, "end"); else wrap("`", "`", "code"); }
+  else if (cmd === "prompt") b.setRangeText("\n```prompt\n" + (sel || "Paste the prompt here") + "\n```\n", s, e, "end");
+  else if (cmd === "link") {
+    var href = /^https?:\/\//.test(sel) ? sel : "https://";
+    var text = /^https?:\/\//.test(sel) ? "link text" : (sel || "link text");
+    b.setRangeText("[" + text + "](" + href + ")", s, e, "end");
+    var at = s + text.length + 3; if (href === "https://") b.setSelectionRange(at, at + href.length); else b.setSelectionRange(s + 1, s + 1 + text.length);
+  }
+  else if (cmd === "h2" || cmd === "h3") prefixLines(function(l){ return (cmd === "h2" ? "## " : "### ") + l.replace(/^#{1,6}\s*/, ""); });
+  else if (cmd === "quote") prefixLines(function(l){ return /^> /.test(l) ? l.slice(2) : "> " + l; });
+  else if (cmd === "list") prefixLines(function(l){ return /^[-*] /.test(l) ? l.slice(2) : "- " + l.replace(/^\d+[.)]\s+/, ""); });
+  else if (cmd === "olist") prefixLines(function(l, n){ return /^\d+[.)] /.test(l) ? l.replace(/^\d+[.)]\s+/, "") : (n + 1) + ". " + l.replace(/^[-*]\s+/, ""); });
+  else if (cmd === "note") b.setRangeText((lineStart === s ? "" : "\n\n") + "> [!note]\n> " + (sel || "Something the reader should not miss.") + "\n", s, e, "end");
+  else if (cmd === "image") { pickFile(function(file){ uploadImage(file, "inline"); }); return; }
+  b.focus(); b.dispatchEvent(new Event("input"));
+}
+function bodyKeys(e){
+  var b = e.target;
+  if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey && !e.metaKey && b.selectionStart === b.selectionEnd) {
+    var v = b.value, s = b.selectionStart, ls = v.lastIndexOf("\n", s - 1) + 1, line = v.slice(ls, s);
+    var m = /^(\s*)([-*] |(\d+)([.)]) |> )(.*)$/.exec(line);
+    if (m) {
+      e.preventDefault();
+      if (!m[5].trim()) { b.setRangeText("", ls, s, "end"); }
+      else { var next = m[3] ? (+m[3] + 1) + m[4] + " " : m[2]; b.setRangeText("\n" + m[1] + next, s, s, "end"); }
+      b.dispatchEvent(new Event("input")); return;
+    }
+  }
+  if (!(e.ctrlKey || e.metaKey)) return;
+  var k = e.key.toLowerCase(), map = {b: "bold", i: "italic", k: "link", e: "code"};
+  if (e.altKey && (k === "2" || k === "3")) { e.preventDefault(); fmt("h" + k); return; }
+  if (e.shiftKey && (e.key === "*" || e.code === "Digit8")) { e.preventDefault(); fmt("list"); return; }
+  if (e.shiftKey && (e.key === "&" || e.code === "Digit7")) { e.preventDefault(); fmt("olist"); return; }
+  if (e.shiftKey && (e.key === ">" || e.code === "Period")) { e.preventDefault(); fmt("quote"); return; }
+  if (map[k] && !e.shiftKey && !e.altKey) { e.preventDefault(); e.stopPropagation(); fmt(map[k]); }
+}
+function cheatSheet(){
+  var rows = [["## Heading", "Section heading"], ["### Sub-heading", "Smaller heading"], ["**bold**  *italic*  `code`", "Inline styles"], ["[text](https://…)", "Link"],
+    ["- item   or   1. item", "Lists (Enter continues, Enter twice ends)"], ["> a line", "Pull quote"], ["> [!note]   > [!warn]", "Blue or amber callout box"], ["> [!series]   > [!foot]", "Series banner, method footer"],
+    ["```prompt … ```", "Copy-paste prompt block"], ["```tree … ```", "File tree"], ["| a | b |  then  |---|---:|", "Table (---: right-aligns numbers)"], ["![alt](/img/uploads/… \"caption\")", "Image (use the image button, or paste one)"]];
+  showModal('<div class="mh"><h2>Formatting</h2><div class="sp"></div><button class="iconbtn" onclick="closeModal()" aria-label="Close">×</button></div><div class="mb cheat"><table class="tbl"><tbody>' +
+    rows.map(function(r){ return '<tr><td><code>' + esc(r[0]) + '</code></td><td>' + esc(r[1]) + '</td></tr>'; }).join("") +
+    '</tbody></table><p class="subtle">Shortcuts: <span class="kbd">Ctrl B</span> bold, <span class="kbd">Ctrl I</span> italic, <span class="kbd">Ctrl K</span> link, <span class="kbd">Ctrl E</span> code, <span class="kbd">Ctrl Alt 2</span> heading, <span class="kbd">Ctrl Shift 8</span> list, <span class="kbd">Ctrl S</span> save now.</p></div>');
+}
+
+/* Images */
+function pickFile(cb){
+  var inp = $("#filepick"); inp.value = "";
+  inp.onchange = function(){ if (inp.files && inp.files[0]) cb(inp.files[0]); };
+  inp.click();
+}
+function uploadImage(file, where){
+  if (file.size > 8 * 1024 * 1024) { toast("That image is over 8 MB. Export a smaller JPG or WebP."); return; }
+  var b = $("#pbody"), at = b ? b.selectionStart : 0, marker = "![Uploading " + file.name.replace(/[\[\]()]/g, "") + "…]()";
+  if (where === "inline" && b) { b.setRangeText("\n" + marker + "\n", at, b.selectionEnd, "end"); POST.body = b.value; }
+  toast("Uploading " + file.name + "…");
+  api("POST", "/api/upload?name=" + encodeURIComponent(file.name === "image.png" ? (POST.slug || "image") : file.name), file, {"Content-Type": "application/octet-stream"}).then(function(r){
+    var d = r.data;
+    if (where === "cover") {
+      POST.image = d.image; if (!/\.webp$/.test(d.image)) POST.og = d.image;
+      $("#coverimg").src = d.src;
+      toast("Cover set" + (d.width < 1200 ? ". It is " + d.width + "px wide; 1200px or more looks sharper when shared." : "."));
+      postChanged({shell: true});
+    } else if (b) {
+      var alt = file.name.replace(/\.[a-z0-9]+$/i, "").replace(/[-_]+/g, " ").replace(/[\[\]()]/g, "");
+      var v = b.value.replace(marker, "![" + alt + "](" + d.src + ")");
+      b.value = v; POST.body = v; b.dispatchEvent(new Event("input"));
+      toast("Image added. Edit the words in [brackets] to describe it for screen readers.");
+    }
+    pendingChanges();
+  }).catch(function(e){
+    if (where === "inline" && b) { b.value = b.value.replace("\n" + marker + "\n", ""); POST.body = b.value; b.dispatchEvent(new Event("input")); }
+    toast("Upload failed: " + e.message);
+  });
+}
+function copyText(t){
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function(){ toast("Link copied"); }, function(){ toast(t); });
+}
+
+/* Convert an HTML post into the editor, only when the round trip is identical. */
+function checkConvert(){
+  api("GET", "/api/convert/" + encodeURIComponent(POST.slug)).then(function(r){
+    var c = $("#convertcard"); if (!c) return;
+    if (r.data.ok) c.innerHTML = '<b>Written in HTML.</b> It can move into the editor with nothing changed: a test conversion rendered the same page. After converting you write it here like any other post.<br><button class="btn tonal sm" id="convbtn">Convert to editor</button>';
+    else c.innerHTML = '<b>Written in HTML.</b> ' + esc(r.data.reason) + ' Its settings are editable here and the preview shows the real body.';
+    var btn = $("#convbtn"); if (btn) btn.onclick = convertPost;
+  }).catch(function(){});
+}
+function convertPost(){
+  var slug = POST.slug;
+  flushSaves().then(function(){
+    return api("POST", "/api/convert/" + encodeURIComponent(slug), undefined, {"If-Match": VERS.essays || ""});
+  }).then(function(r){
+    VERS.essays = r.data.version;
+    return loadDoc("essays");
+  }).then(function(){ toast("Converted. The post is now written in the editor."); unloadWriter(); openPost(slug); pendingChanges(); })
+    .catch(function(e){ toast("Not converted: " + e.message); });
+}
+
+/* Exact preview: build the whole site and show this page as it will ship. */
+function exactPreview(){
+  var slug = POST.slug; if (!slug) { toast("Give the post a title first."); return; }
+  showModal('<div class="mh"><h2>Exact preview</h2><span class="subtle" id="exactnote">Building the whole site…</span><div class="sp"></div>' +
+    '<div class="seg" role="group" aria-label="Device"><button data-xdev="desktop" title="Desktop">' + icon("desktop", "width:16px;height:16px") + '</button><button data-xdev="phone" title="Phone">' + icon("phone", "width:16px;height:16px") + '</button></div>' +
+    '<button class="iconbtn" onclick="closeModal()" aria-label="Close">×</button></div><div class="mb" style="padding:12px"><div class="pvframe" id="xframe" style="height:100%"></div></div>', true);
+  var id = null;
+  var draw = function(){
+    $$("[data-xdev]").forEach(function(x){ x.classList.toggle("on", x.dataset.xdev === pvDevice); });
+    if (!id) return;
+    var host = $("#xframe"); if (!host) return;
+    host.classList.toggle("phone", pvDevice === "phone");
+    host.innerHTML = '<iframe title="Exact preview" src="/preview/' + id + '/writing/' + encodeURIComponent(slug) + '/"></iframe>';
+    fitFrame(host, $("iframe", host));
+  };
+  $$("[data-xdev]").forEach(function(x){ x.onclick = function(){ setDevice(x.dataset.xdev); draw(); }; });
+  draw();
+  flushSaves().then(function(){ return api("POST", "/api/preview"); }).then(function(r){
+    id = r.data.id;
+    var n = $("#exactnote"); if (n) n.innerHTML = 'Byte for byte what ships, analytics off.' + (POST.draft ? ' Drafts appear in previews only.' : '') + ' <a target="_blank" rel="noopener" href="/preview/' + id + '/writing/' + encodeURIComponent(slug) + '/">Open in a tab</a>';
+    draw();
+  }).catch(function(e){ var n = $("#exactnote"); if (n) n.textContent = "Build failed: " + (e.data && e.data.detail || e.message); });
+}
+
+/* ================= Publish ================= */
+function openPublish(){
+  flushSaves().then(refreshState).then(function(){
+    var r = STATE.repo || {}, changed = r.changed || [], drafts = DOCS.essays ? posts().filter(function(p){ return p.draft; }).length : 0;
+    var blocked = r.blocked || [];
+    showModal('<div class="mh"><h2>Publish to elvinpeters.com</h2><div class="sp"></div><button class="iconbtn" onclick="closeModal()" aria-label="Close">×</button></div><div class="mb">' +
+      (changed.length ? '<p><b>' + changed.length + ' change' + (changed.length > 1 ? "s" : "") + ' will go live:</b></p><ul class="filelist">' + changed.map(function(f){ return '<li>' + changeLabel(f) + '</li>'; }).join("") + '</ul>'
+        : '<p>Nothing new is waiting. Publishing rebuilds the site anyway, which is harmless.</p>') +
+      (drafts ? '<p class="subtle">' + drafts + ' draft' + (drafts > 1 ? "s stay" : " stays") + ' hidden.</p>' : '') +
+      (blocked.length ? '<div class="banner warn">Publishing is blocked: the server copy has other uncommitted files (' + esc(blocked.slice(0, 3).join(", ")) + ').</div>' : '') +
+      '<div class="field"><label for="pubmsg">What changed? (optional, shows in Publish history)</label><input type="text" id="pubmsg" maxlength="120" placeholder="e.g. New post: The link page that edits itself"></div>' +
+      '<p class="subtle" style="font-size:13px">Steps: get the latest site, build, run the verify gate, save a version, push. If any step fails nothing ships. Live in about a minute.</p>' +
+      '<div class="log hidden" id="publog"></div></div>' +
+      '<div class="mf"><button class="btn" onclick="closeModal()" id="pubcancel">Cancel</button><button class="btn filled" id="pubgo"' + (blocked.length ? " disabled" : "") + '>' + icon("rocket", "width:18px;height:18px") + 'Publish now</button></div>');
+    $("#pubgo").onclick = runPublish;
+  });
+}
+function runPublish(){
+  var go = $("#pubgo"), log = $("#publog"), msg = $("#pubmsg").value;
+  go.disabled = true; go.textContent = "Publishing…"; $("#pubcancel").disabled = true;
+  log.classList.remove("hidden"); log.textContent = "";
+  fetch("/api/publish?msg=" + encodeURIComponent(msg), {method: "POST", headers: {"X-Studio": "1"}}).then(function(r){
+    if (!r.ok || !r.body) return r.text().then(function(t){ throw new Error(t); });
+    var reader = r.body.getReader(), dec = new TextDecoder();
+    var pump = function(){
+      return reader.read().then(function(x){
+        if (x.done) return;
+        log.textContent += dec.decode(x.value, {stream: true}); log.scrollTop = log.scrollHeight;
+        return pump();
+      });
+    };
+    return pump();
+  }).then(function(){
+    var ok = /PUBLISHED|Nothing changed/.test(log.textContent);
+    $("#pubcancel").disabled = false; $("#pubcancel").textContent = "Close";
+    go.innerHTML = ok ? icon("check", "width:18px;height:18px") + "Done" : "Try again";
+    go.disabled = false; go.onclick = ok ? closeModal : runPublish;
+    if (ok) toast(/PUBLISHED/.test(log.textContent) ? "Published. Live in about a minute." : "Everything was already live.");
+    HISTORY = null;
+    return Promise.all([refreshState(), loadDoc("essays")]);
+  }).then(function(){ var w = $("#pendingwrap"); if (w && !POST) w.innerHTML = pendingBanner(); if (SITETAB === "history" && !POST) drawHistory(); })
+    .catch(function(e){ log.textContent += "\n✗ " + e.message; go.disabled = false; go.textContent = "Try again"; go.onclick = runPublish; $("#pubcancel").disabled = false; });
+}
+
+/* ================= Publish history ================= */
+function relTime(iso){
+  var d = new Date(iso), s = (Date.now() - d) / 1000;
+  if (s < 90) return "just now"; if (s < 3600) return Math.round(s / 60) + " min ago"; if (s < 86400) return Math.round(s / 3600) + " h ago";
+  return MONTHS[d.getMonth()] + " " + d.getDate() + ", " + d.getHours() + ":" + ("0" + d.getMinutes()).slice(-2);
+}
+function drawHistory(){
+  var host = $("#histwrap"); if (!host) return;
+  api("GET", "/api/history").then(function(r){
+    HISTORY = r.data.history;
+    if (!HISTORY.length) { host.innerHTML = '<div class="empty">No publishes yet.</div>'; return; }
+    host.innerHTML = '<div class="card"><ul class="attn">' + HISTORY.map(function(h, i){
+      var studio = /^Site Studio: |via Site Studio/.test(h.msg);
+      return '<li><span class="chip ' + (i === 0 ? "live" : "draft") + '"><span class="dot"></span>' + (i === 0 ? "Live now" : "Published") + '</span>' +
+        '<span class="what">' + esc(h.msg) + '<small>' + esc(relTime(h.date)) + ' · ' + esc(studio ? "Site Studio" : h.author) + ' · ' + h.files + ' file' + (h.files === 1 ? "" : "s") + ' · <span style="font-family:var(--mono)">' + esc(h.sha) + '</span></small></span>' +
+        (h.revertable ? '<button class="btn sm" data-revert="' + esc(h.sha) + '">' + icon("history", "width:16px;height:16px") + 'Roll back</button>'
+          : '<button class="btn sm" disabled data-tip="' + esc(h.why) + '" title="' + esc(h.why) + '">' + icon("history", "width:16px;height:16px") + 'Roll back</button>') + '</li>';
+    }).join("") + '</ul></div><p class="subtle" style="font-size:13px;margin-top:14px">Every publish that touched the website’s content. Roll back undoes that one publish with a new version, so nothing is ever lost; later changes stay.</p>';
+    $$("[data-revert]", host).forEach(function(b){ b.onclick = function(){ confirmRevert(b.dataset.revert); }; });
+  }).catch(function(e){ host.innerHTML = '<div class="empty">Could not load history: ' + esc(e.message) + '</div>'; });
+}
+function confirmRevert(sha){
+  var h = (HISTORY || []).filter(function(x){ return x.sha === sha; })[0] || {msg: sha};
+  showModal('<div class="mh"><h2>Roll back this publish?</h2></div><div class="mb"><p><b>' + esc(h.msg) + '</b></p><p>This undoes the changes from that publish, rebuilds, checks and pushes. The site updates in about a minute. You can roll back the roll back later.</p><div class="log hidden" id="revlog"></div></div>' +
+    '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="dorevert">' + icon("history", "width:18px;height:18px") + 'Roll back</button></div>');
+  $("#dorevert").onclick = function(){
+    var b = this; b.disabled = true; b.textContent = "Rolling back…";
+    api("POST", "/api/revert", {sha: sha}).then(function(){
+      closeModal(); toast("Rolled back. Live in about a minute."); HISTORY = null;
+      return Promise.all([refreshState(), loadDoc("essays")]);
+    }).then(function(){ if (SITETAB === "history") { $("#main").innerHTML = viewSite(); wireSite(); } })
+      .catch(function(e){ var l = $("#revlog"); if (l) { l.classList.remove("hidden"); l.textContent = e.message; } b.disabled = false; b.textContent = "Try again"; });
+  };
+}
+
+/* ================= Settings ================= */
+function viewSettings(){
+  return '<div class="head"><h1>Settings</h1></div><div class="card" style="max-width:640px"><div class="panel-h"><h2>Appearance</h2></div><div class="menu" style="position:static;box-shadow:none;border:0">' + themeOptions() + '</div></div>' +
+    '<p class="subtle" style="max-width:640px;font-size:13px;margin-top:14px">The same appearance setting is shared by every Studio tool on this browser. Previews of the website always use the website’s own design.</p>';
+}
+
+/* ================= Ctrl K palette ================= */
+var pIdx = 0, pRes = [];
+function openPalette(){ closePops(); $("#scrim").classList.remove("hidden"); $("#palette").classList.remove("hidden"); var i = $("#pin"); i.value = ""; pIdx = 0; drawPalette(); i.focus(); }
+function paletteItems(){
+  var items = [{n: "Write a blog post", d: "Action", u: "#post-new", i: "plus"}, {n: "Publish the website", d: "Action", run: openPublish, i: "rocket"},
+    {n: "Publish history and roll back", d: "Action", u: "#history", i: "history"}, {n: "Edit the menu", d: "Action", u: "#menu", i: "list"},
+    {n: "Switch to Dark theme", d: "Appearance", run: function(){ setTheme("dark"); }, i: "palette"}, {n: "Switch to Signature theme", d: "Appearance", run: function(){ setTheme("signature"); }, i: "palette"},
+    {n: "Switch to Light theme", d: "Appearance", run: function(){ setTheme("light"); }, i: "palette"}];
+  if (DOCS.essays) posts().forEach(function(p){ items.push({n: p.title || p.slug, d: p.draft ? "Draft post" : "Blog post", u: "#post/" + p.slug, i: "web", x: p.slug}); });
+  Object.keys(SECTIONS).filter(function(n){ return n !== "essays" && n !== "nav"; }).forEach(function(n){ items.push({n: SECTIONS[n].title, d: "Page", u: "#page/" + n, i: "layout"}); });
+  REG.tools.forEach(function(t){ if (t.id !== "site") items.push({n: t.n, d: t.pc ? "Studio tool · PC only" : "Studio tool", u: t.u, i: t.i, x: t.d + " " + t.help}); });
+  REG.external.forEach(function(t){ items.push({n: t.n, d: "External · " + t.g, u: t.u, i: "open", x: t.d}); });
+  return items;
+}
+function drawPalette(){
+  var q = $("#pin").value.toLowerCase().trim(), terms = q.split(/\s+/).filter(Boolean);
+  pRes = paletteItems().filter(function(r){ var hay = (r.n + " " + r.d + " " + (r.x || "")).toLowerCase(); return terms.every(function(w){ return hay.indexOf(w) > -1; }); }).slice(0, q ? 14 : 9);
+  pIdx = Math.min(pIdx, Math.max(pRes.length - 1, 0));
+  $("#pres").innerHTML = (q ? "" : '<div class="pgh">Suggested</div>') + (pRes.length ? pRes.map(function(r, k){
+    return '<a class="pr' + (k === pIdx ? " on" : "") + '" data-k="' + k + '"' + (r.u ? ' href="' + esc(r.u) + '"' + tgt(r.u) : ' href="#" ') + '>' + icon(r.i) + '<span>' + esc(r.n) + '</span><small>' + esc(r.d) + '</small></a>';
+  }).join("") : '<div class="empty">No match. Try a post title, “menu” or “dark”.</div>');
+  $$("#pres a").forEach(function(a){ a.onclick = function(e){ var r = pRes[+a.dataset.k]; if (r.run) { e.preventDefault(); closePops(); r.run(); return; } closePops(); }; });
+}
+$("#pin").addEventListener("input", function(){ pIdx = 0; drawPalette(); });
+$("#pin").addEventListener("keydown", function(e){
+  var n = pRes.length; if (!n) return;
+  if (e.key === "ArrowDown") { pIdx = (pIdx + 1) % n; drawPalette(); e.preventDefault(); }
+  if (e.key === "ArrowUp") { pIdx = (pIdx - 1 + n) % n; drawPalette(); e.preventDefault(); }
+  if (e.key === "Enter") { var a = $$("#pres a")[pIdx]; if (a) a.click(); }
+});
+$("#searchbox").onclick = openPalette;
+$("#searchbox").onkeydown = function(e){ if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPalette(); } };
+document.addEventListener("keydown", function(e){
+  var k = e.key.toLowerCase();
+  if ((e.ctrlKey || e.metaKey) && k === "k" && e.target.id !== "pbody") { e.preventDefault(); openPalette(); }
+  if ((e.ctrlKey || e.metaKey) && k === "s") { e.preventDefault(); flushSaves().then(function(){ if (saveState === "saved") toast("Saved. Publish when you are ready."); }); }
+  if (e.key === "Escape") { if (!$("#modal").classList.contains("hidden")) { var busy = $("#pubgo") && $("#pubgo").textContent === "Publishing…"; if (!busy) closeModal(); } else { closePops(); closeDrawer(); } }
+});
+
+/* ================= Boot ================= */
+Promise.all([
+  fetch("/tools.json").then(function(r){ return r.json(); }).then(function(t){ REG = {tools: t.tools || [], external: t.external || [], home: t.home || REG.home}; }).catch(function(){}),
+  refreshState(),
+  loadDoc("essays")
+]).then(function(){
+  $("#brandlink").href = REG.home;
+  drawRail(); route();
+  setInterval(function(){ if (document.visibilityState === "visible" && !POST) pendingChanges(); }, 60000);
+}).catch(function(e){
+  drawRail();
+  $("#main").innerHTML = '<div class="banner warn">' + icon("flag") + '<span>Site Studio could not load: ' + esc(e.message) + '</span></div>';
+});
+</script>
+</body>
+</html>

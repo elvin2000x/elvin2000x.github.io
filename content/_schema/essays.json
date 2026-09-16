@@ -2,7 +2,7 @@
   "title": "Blog posts",
   "file": "essays.json",
   "preview": "/writing/",
-  "help": "Write, draft and publish posts. New posts are written in Markdown and pick up the blog design system automatically.",
+  "help": "Write, draft and publish posts. New posts are written in Markdown and pick up the blog design system automatically. Hand-coded posts keep their own page; their settings are editable here.",
   "item_preview": "/writing/{slug}/",
   "new_label": "New post",
   "fields": [
@@ -74,10 +74,43 @@
           "type": "select",
           "label": "Accent colour",
           "options": [
-            { "value": "amber", "label": "Amber (findings, analysis)" },
-            { "value": "good", "label": "Green (playbooks, how-to)" },
-            { "value": "blue", "label": "Blue (reference, explainer)" }
+            {
+              "value": "amber",
+              "label": "Amber (findings, analysis)"
+            },
+            {
+              "value": "good",
+              "label": "Green (playbooks, how-to)"
+            },
+            {
+              "value": "blue",
+              "label": "Blue (reference, explainer)"
+            }
           ]
+        },
+        {
+          "key": "tags",
+          "type": "text",
+          "label": "Tags, comma separated (added to the page for search and sharing)",
+          "maxlen": 200
+        },
+        {
+          "key": "image",
+          "type": "text",
+          "label": "Cover image, under /img/ (blog list, homepage card and share image)",
+          "maxlen": 120
+        },
+        {
+          "key": "seo_title",
+          "type": "text",
+          "label": "Search title (blank uses the title)",
+          "maxlen": 70
+        },
+        {
+          "key": "seo_description",
+          "type": "textarea",
+          "label": "Search description (blank uses the dek)",
+          "maxlen": 170
         },
         {
           "key": "body",
