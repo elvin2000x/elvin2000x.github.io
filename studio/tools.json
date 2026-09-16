@@ -1,5 +1,5 @@
 {
- "_comment": "Copied from coding/studio-ui/prototype/index.html (TOOLS + EXTERNAL), the one tools registry in BUILD-BRIEF.md. Hash routes point at the Studio home. When Empire Studio serves /studio/assets/tools.json, replace this copy with it.",
+ "_comment": "Mirrors the live Empire Studio registry (/opt/empire-studio/web/tools.json, card #257) with absolute URLs, since this app runs on edit.elvinpeters.com. Adding a tool: add it there and here.",
  "home": "https://studio.elvinpeters.com/studio/",
  "tools": [
   {
@@ -36,7 +36,7 @@
    "d": "Lead quizzes and their results",
    "i": "quiz",
    "t": "amber",
-   "u": "https://studio.elvinpeters.com/studio/#quizzes",
+   "u": "https://studio.elvinpeters.com/studio/quiz",
    "rail": 1,
    "count": 5,
    "help": "Build and edit lead quizzes: questions, how answers score, result pages and the email gate. Every quiz feeds Contacts.",
