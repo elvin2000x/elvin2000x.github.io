@@ -15,6 +15,9 @@
      > quote             pull quote
      > [!note]           blue callout         > [!warn]   amber callout
      > [!series]         series banner        > [!foot]   method / sources footer
+     ![alt](/img/x.webp "caption")   image on its own line, caption optional.
+                         Site Studio names uploads name-1200x800.webp; those
+                         numbers become the img width and height attributes.
      ---                 horizontal rule is ignored (the design system has no hr)
 
    Inline: **bold**, *italic*, `code`, [text](href).
@@ -72,8 +75,18 @@ function mdToHtml(src) {
       continue;
     }
 
+    // image, alone on its line. Site paths or https only, like links.
+    const im = line.match(/^!\[([^\]]*)\]\(([^)\s"<>]+)(?:\s+"([^"]*)")?\)\s*$/);
+    if (im && /^(https:\/\/|\/)/.test(im[2])) {
+      const dims = im[2].match(/-(\d{2,5})x(\d{2,5})\.[a-z]+$/i);
+      out.push('<figure><img src="' + esc(im[2]) + '" alt="' + esc(im[1]).replace(/"/g, '&quot;') + '"' +
+        (dims ? ' width="' + dims[1] + '" height="' + dims[2] + '"' : '') + ' loading="lazy">' +
+        (im[3] ? '<figcaption>' + inline(im[3]) + '</figcaption>' : '') + '</figure>');
+      i++; continue;
+    }
+
     // headings
-    const h = line.match(/^(#{2,3})\s+(.*)$/);
+    const h =line.match(/^(#{2,3})\s+(.*)$/);
     if (h) { const n = h[1].length; out.push('<h' + n + '>' + inline(h[2].trim()) + '</h' + n + '>'); i++; continue; }
 
     // the design system has no rule element; a lone --- is a nudge, not markup
@@ -135,6 +148,8 @@ function mdToHtml(src) {
     const buf = [];
     while (i < lines.length && lines[i].trim() &&
            !/^(#{2,3}\s|```|>|[-*]\s|\d+[.)]\s|-{3,}\s*$)/.test(lines[i]) &&
+           // an image line ends a paragraph, but a rejected one is still read as text
+           !(buf.length && /^!\[[^\]]*\]\([^)]*\)\s*$/.test(lines[i])) &&
            !(lines[i].trim().startsWith('|') && isTableSep(lines[i + 1] || ''))) buf.push(lines[i++].trim());
     out.push('<p>' + inline(buf.join(' ')) + '</p>');
   }
@@ -170,6 +185,12 @@ if (require.main === module && process.argv.includes('--selftest')) {
     ['| a | b |\n|---|---:|\n| 1 | 2 |',
      '<table><thead><tr><th>a</th><th style="text-align:right">b</th></tr></thead>' +
      '<tbody><tr><td>1</td><td class="n">2</td></tr></tbody></table>'],
+    ['![A chart](/img/uploads/chart-1200x800.webp)',
+     '<figure><img src="/img/uploads/chart-1200x800.webp" alt="A chart" width="1200" height="800" loading="lazy"></figure>'],
+    ['![x](/img/a.png "Fig 1: **cost**")',
+     '<figure><img src="/img/a.png" alt="x" loading="lazy"><figcaption>Fig 1: <b>cost</b></figcaption></figure>'],
+    ['![x](javascript:alert)', '<p>!x</p>'],
+    ['Text\n![a](/img/b-10x20.png)', '<p>Text</p>\n<figure><img src="/img/b-10x20.png" alt="a" width="10" height="20" loading="lazy"></figure>'],
     ['---', ''],
     ['', ''],
   ];

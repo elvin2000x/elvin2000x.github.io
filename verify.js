@@ -38,7 +38,12 @@ for (const rel of PAGES) {
 
   // STALE-TRUTH tripwires (these were real incidents).
   for (const bad of ['elvin2000x.github.io', 'epeters.ca', 'href="/#apps"', 'href="/#games"', 'beehiiv'])
-    if (html.includes(bad)) fail(rel, 'stale-truth tripwire: ' + bad);
+    if (html.includes(bad)) {
+      // epeters.ca the WEBSITE is stale (it 301s to .com). An email address on it is a
+      // deliberate choice: the links page uses elvin@epeters.ca because .com mail bounced.
+      if (bad === 'epeters.ca' && !html.replace(/[\w.+-]+@epeters\.ca/g, '').includes(bad)) continue;
+      fail(rel, 'stale-truth tripwire: ' + bad);
+    }
 
   // SECRET tripwires (public repo).
   for (const re of [/sk-[A-Za-z0-9]{16}/, /ghp_[A-Za-z0-9]/, /github_pat_/, /AKIA[0-9A-Z]{12}/, /BEGIN [A-Z ]*PRIVATE KEY/])
