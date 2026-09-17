@@ -28,7 +28,9 @@ const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': '
 // What an edit in the studio touches, and what the build regenerates from it.
 // Anything else dirty in the clone means someone is working in it by hand, and a
 // publish would sweep their files live.
-const EDITS = /^(content\/|img\/uploads\/)/;
+// essays/ holds the hand-coded post bodies: the studio edits them too, so a failed
+// publish must never reset them as if they were build output.
+const EDITS = /^(content\/|img\/uploads\/|essays\/)/;
 const GENERATED = /(\.html|^sitemap\.xml|^llms\.txt)$/;
 const publishable = f => EDITS.test(f) || GENERATED.test(f);
 
@@ -54,6 +56,10 @@ function allowed(name) {
 }
 function contentPath(name) { return path.join(ROOT, 'content', name + '.json'); }
 function version(buf) { return crypto.createHash('sha1').update(buf).digest('hex').slice(0, 16); }
+function textWords(html) {
+  const t = String(html || '').replace(/<(style|script)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ');
+  return (t.match(/\S+/g) || []).length;
+}
 function fresh(mod) { const p = require.resolve(mod); delete require.cache[p]; return require(p); }
 
 function send(res, code, body, headers) {
@@ -111,6 +117,26 @@ function validate(name, data) {
   return null;
 }
 
+/* ---------- posts ---------- */
+const BODY_FILE = /^essays\/[a-z0-9-]+\.html$/;
+const BIG = { maxBuffer: 32 * 1024 * 1024 };
+function loadPosts() {
+  const data = JSON.parse(fs.readFileSync(contentPath('essays'), 'utf8'));
+  return Array.isArray(data) ? data : data.posts;
+}
+// A hand-coded post's body file, only if that post really points at it.
+function bodyFileOf(slug) {
+  const post = loadPosts().find(x => x.slug === slug);
+  if (!post) return { error: 'no such post', code: 404 };
+  if (!post.file) return { error: 'this post has no body file', code: 404 };
+  if (!BODY_FILE.test(post.file)) return { error: 'bad body file on ' + slug, code: 422 };
+  return { post, file: post.file, abs: path.join(ROOT, post.file) };
+}
+// A file as it was at a commit. Not git(): its trim() would change the bytes.
+function showAt(sha, file) {
+  return execFileSync('git', ['show', sha + ':' + file], { cwd: ROOT, encoding: 'utf8', timeout: 60000, ...BIG });
+}
+
 /* ---------- git sync ---------- */
 // Keep the clone current while nobody has unpublished edits, so the editor never
 // starts from a stale copy of the site.
@@ -160,7 +186,7 @@ function resetBuildOutput() {
 
 /* ---------- history ---------- */
 function history() {
-  const log = git(['log', '-25', '--pretty=%H|%h|%ad|%an|%s', '--date=iso-strict', '--', 'content/']).split('\n').filter(Boolean);
+  const log = git(['log', '-25', '--pretty=%H|%h|%ad|%an|%s', '--date=iso-strict', '--', 'content/', 'essays/']).split('\n').filter(Boolean);
   return log.map(l => {
     const [full, sha, date, author, ...s] = l.split('|');
     const files = git(['show', '--pretty=format:', '--name-only', full]).split('\n').filter(Boolean);
@@ -168,6 +194,41 @@ function history() {
     return { sha, date, author, msg: s.join('|'), files: files.length,
       revertable: offPath.length === 0, why: offPath.length ? 'Also changed code (' + offPath.slice(0, 2).join(', ') + '). Roll this back by hand.' : '' };
   });
+}
+
+// Past versions of one post, newest first. Posts stored in essays.json are read out
+// of that file at each commit; a commit counts when the post differs from the commit
+// before it (older), so every entry is the commit that made that version. Hand-coded
+// posts list the commits of their body file.
+function postHistory(slug) {
+  const post = loadPosts().find(x => x.slug === slug);
+  if (!post) return null;
+  const target = post.file && BODY_FILE.test(post.file) ? post.file : 'content/essays.json';
+  const log = git(['log', '--format=%H|%h|%aI|%s', '-n', '60', '--', target]).split('\n').filter(Boolean)
+    .map(l => { const [full, sha, date, ...m] = l.split('|'); return { full, sha, date, msg: m.join('|') }; });
+  if (target !== 'content/essays.json') {
+    return log.slice(0, 20).map(c => {
+      let words = null;
+      try { words = textWords(showAt(c.full, target)); } catch (e) {}
+      return { sha: c.sha, date: c.date, msg: c.msg, title: post.title || slug, words };
+    });
+  }
+  const snaps = log.map(c => {
+    let obj = null;
+    try {
+      const d = JSON.parse(showAt(c.full, target));
+      obj = (Array.isArray(d) ? d : d.posts || []).find(x => x && x.slug === slug) || null;
+    } catch (e) {}
+    return { c, obj, key: obj ? JSON.stringify(obj) : null };
+  });
+  const out = [];
+  for (let i = 0; i < snaps.length && out.length < 20; i++) {
+    const s = snaps[i], older = snaps[i + 1];
+    if (!s.obj || (older && older.key === s.key)) continue;
+    const words = s.obj.body_format === 'markdown' ? ((s.obj.body || '').match(/\S+/g) || []).length : textWords(s.obj.html);
+    out.push({ sha: s.c.sha, date: s.c.date, msg: s.c.msg, title: s.obj.title || slug, words });
+  }
+  return out;
 }
 
 /* ---------- images ---------- */
@@ -264,13 +325,63 @@ const server = http.createServer((req, res) => {
         const bad = validate('essays', { posts: [{ ...post, slug: post.slug || 'untitled' }] });
         if (bad) return json(res, 422, { error: bad });
         const { essayPage } = fresh(path.join(ROOT, 'essay-page.js'));
+        // body_override: a body typed in the studio that may not be saved yet.
+        const override = typeof post.body_override === 'string' ? post.body_override : null;
+        delete post.body_override;
         let inner;
         if (post.body_format === 'markdown') inner = '<div id="studio-body"></div>';
+        else if (override !== null) inner = override;
         else if (post.file) inner = fs.readFileSync(path.join(ROOT, post.file), 'utf8');
         else inner = String(post.html || '');
         const html = stripTracking(essayPage({ ...post, slug: post.slug || 'untitled' }, inner));
         send(res, 200, html, { 'Content-Type': 'text/html; charset=utf-8' });
       });
+    }
+
+    // A hand-coded post's body file: read it, or save it (stale-safe like content saves).
+    if (p.startsWith('/api/post-body/')) {
+      const slug = decodeURIComponent(p.split('/')[3] || '');
+      const bf = bodyFileOf(slug);
+      if (bf.error) return json(res, bf.code, { error: bf.error });
+      if (req.method === 'GET') {
+        const buf = fs.readFileSync(bf.abs);
+        return json(res, 200, { html: buf.toString('utf8'), version: version(buf) });
+      }
+      if (req.method === 'PUT') {
+        return readBody(req, 2 * 1024 * 1024, body => {
+          if (publishing) return json(res, 409, { error: 'A publish is running. Your change will save when it finishes.', retry: true });
+          const cur = fs.existsSync(bf.abs) ? fs.readFileSync(bf.abs) : Buffer.alloc(0);
+          const want = String(req.headers['if-match'] || '').replace(/"/g, '');
+          if (want !== version(cur))
+            return json(res, 409, { error: 'This post body changed somewhere else (another tab, or the site was updated). Reload to get the latest before saving.' });
+          fs.writeFileSync(bf.abs, body);
+          json(res, 200, { saved: true, version: version(body) });
+        }, () => json(res, 413, { error: 'The page body must be under 2 MB.' }));
+      }
+    }
+
+    if (p.startsWith('/api/post-history/') && req.method === 'GET') {
+      const versions = postHistory(decodeURIComponent(p.split('/')[3] || ''));
+      if (!versions) return json(res, 404, { error: 'no such post' });
+      return json(res, 200, { versions });
+    }
+
+    if (p.startsWith('/api/post-version/') && req.method === 'GET') {
+      const slug = decodeURIComponent(p.split('/')[3] || '');
+      const sha = String(url.searchParams.get('sha') || '');
+      if (!/^[a-f0-9]{7,40}$/.test(sha)) return json(res, 400, { error: 'bad sha' });
+      const post = loadPosts().find(x => x.slug === slug);
+      if (!post) return json(res, 404, { error: 'no such post' });
+      try {
+        if (post.file) {
+          if (!BODY_FILE.test(post.file)) return json(res, 422, { error: 'bad body file on ' + slug });
+          return json(res, 200, { html: showAt(sha, post.file) });
+        }
+        const d = JSON.parse(showAt(sha, 'content/essays.json'));
+        const old = (Array.isArray(d) ? d : d.posts || []).find(x => x && x.slug === slug);
+        if (!old) return json(res, 404, { error: 'This post did not exist in that version.' });
+        return json(res, 200, { post: old });
+      } catch (e) { return json(res, 404, { error: 'That version could not be read.' }); }
     }
 
     if (p.startsWith('/api/convert/')) {
@@ -390,7 +501,7 @@ const server = http.createServer((req, res) => {
     if (p === '/api/discard' && req.method === 'POST') {
       if (publishing) return json(res, 409, { error: 'A publish is running.' });
       try {
-        git(['checkout', '--', 'content/']);
+        git(['checkout', '--', 'content/', 'essays/']);
         git(['clean', '-fdq', '--', 'content/', 'img/uploads/']);
         resetBuildOutput();
         return json(res, 200, { discarded: true });
