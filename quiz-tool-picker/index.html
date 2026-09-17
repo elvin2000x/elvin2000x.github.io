@@ -346,7 +346,8 @@ function startQuizEngine() {
   var ADS = { x: "tw-re26u-re279", g: "AW-637214471/AKwFCNHut9UcEIe-7K8C" }; // shared "Quiz Lead" conversion; the source field segments which quiz produced the lead
 
   function setBar(p){ barEl.style.width = p + "%"; }
-  function track(name, params){ try{ gtag('event', name, params||{}); }catch(e){} }
+  function quizHit(e){ if (e !== "quiz_start" && e !== "quiz_lead" && e !== "quiz_result") return; try{ navigator.sendBeacon("https://studio.elvinpeters.com/s/api/quiz/tool-picker/hit", new Blob([e], {type:"text/plain"})); }catch(x){} } /* QUIZ STUDIO PATCH: start/lead/result counts, no personal data */
+  function track(name, params){ quizHit(name); try{ gtag('event', name, params||{}); }catch(e){} }
   function render(html){ stageEl.innerHTML = html; stageEl.firstElementChild && stageEl.firstElementChild.classList.add('fade'); }
 
   function showIntro(){
@@ -365,6 +366,7 @@ function startQuizEngine() {
   }
 
   function showQuestion(){
+    var L = QUIZ.labels || {};
     var Q = QUIZ.questions[cur];
     setBar(Math.round((cur)/(N+1)*100));
     var picked = answers[cur] ? answers[cur].optIndex : -1;
@@ -380,7 +382,7 @@ function startQuizEngine() {
         '<div class="options">'+opts+'</div>' +
         '<div class="nav-row">' +
           '<button class="back" id="backBtn"'+(cur===0?' disabled':'')+'>← Back</button>' +
-          '<button class="btn" id="nextBtn"'+(picked<0?' disabled':'')+'>'+(cur===N-1?'See my recommendation →':'Next →')+'</button>' +
+          '<button class="btn" id="nextBtn"'+(picked<0?' disabled':'')+'>'+(cur===N-1?(L.last||"See my recommendation →"):'Next →')+'</button>' +
         '</div>' +
       '</div>'
     );
@@ -401,19 +403,20 @@ function startQuizEngine() {
   }
 
   function showGate(){
+    var G = QUIZ.gate || {};
     setBar(Math.round(N/(N+1)*100));
     render(
       '<div class="card gate">' +
-        '<div class="eyebrow">Almost there</div>' +
-        '<h2 class="as-h1" style="font-size:30px;margin-bottom:10px;">One step before your recommendation</h2>' +
-        '<p style="color:var(--muted);margin-bottom:22px;">Your recommended stack and the reasoning, plus one short email a week on getting more out of these tools. No spam, unsubscribe any time.</p>' +
+        '<div class="eyebrow">'+(G.eyebrow||"Almost there")+'</div>' +
+        '<h2 class="as-h1" style="font-size:30px;margin-bottom:10px;">'+(G.title||"One step before your recommendation")+'</h2>' +
+        '<p style="color:var(--muted);margin-bottom:22px;">'+(G.body||"Your recommended stack and the reasoning, plus one short email a week on getting more out of these tools. No spam, unsubscribe any time.")+'</p>' +
         '<div class="err" id="gateErr">Please enter a valid email.</div>' +
         '<label for="qname">First name (optional)</label>' +
         '<input id="qname" type="text" autocomplete="given-name" placeholder="Alex" />' +
         '<label for="qemail">Email</label>' +
         '<input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" /><input id="qemail" type="email" autocomplete="email" placeholder="you@work.com" />' +
-        '<button class="btn full" id="seeBtn">Show me my AI stack →</button>' +
-        '<div class="fineprint">Instant result on this page. We also send the free starter kit by email.</div>' +
+        '<button class="btn full" id="seeBtn">'+(G.button||"Show me my AI stack →")+'</button>' +
+        '<div class="fineprint">'+(G.fineprint||"Instant result on this page. We also send the free starter kit by email.")+'</div>' +
         '<div class="nav-row"><button class="back" id="backBtn2">← Back</button><span></span></div>' +
       '</div>'
     );
@@ -431,13 +434,13 @@ function startQuizEngine() {
   }
 
   function scoreTool(){
-    var sc = { claude:0, chatgpt:0, gemini:0, copilot:0, perplexity:0 };
+    var sc = {}; Object.keys(QUIZ.stacks).forEach(function(k){ sc[k] = 0; });
     answers.forEach(function(a, qi){
       var o = QUIZ.questions[qi].opts[a.optIndex];
       for(var k in o.w){ sc[k] += o.w[k]; }
     });
     // Tie-break order favors the more broadly useful tool when scores are equal.
-    var order = ["chatgpt","claude","perplexity","gemini","copilot"];
+    var order = QUIZ.order || ["chatgpt","claude","perplexity","gemini","copilot"];
     var best = order[0], bestv = -1;
     order.forEach(function(k){ if(sc[k] > bestv){ bestv = sc[k]; best = k; } });
     return { key: best, scores: sc };
@@ -467,6 +470,7 @@ function startQuizEngine() {
   }
 
   function showResult(){
+    var C = QUIZ.cta || {}, L = QUIZ.labels || {};
     setBar(100);
     var res = scoreTool();
     var S = QUIZ.stacks[res.key];
@@ -484,7 +488,7 @@ function startQuizEngine() {
 
     render(
       '<div class="card result">' +
-        '<div class="type-eyebrow">Your recommended AI tool</div>' +
+        '<div class="type-eyebrow">'+(L.eyebrow||"Your recommended AI tool")+'</div>' +
         '<h2 class="as-h1">Start with '+S.lead+'</h2>' +
         '<div class="tagline">'+S.tagline+'</div>' +
         '<div class="primary"><div class="plabel">Why this fits you</div><div class="pname">'+S.name+'</div><div class="pwhy">'+S.leadWhy+'</div></div>' +
@@ -492,10 +496,10 @@ function startQuizEngine() {
         '<div class="block"><h3>Get more out of it, free</h3>'+magnets+'</div>' +
         '<div class="book-cta">' +
           '<div class="why">'+QUIZ.angle+'</div>' +
-          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">Get the System: $37 →</a>' +
-          '<div class="price">Ebook + complete kit · instant download · 14-day money-back guarantee</div>' +
+          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">'+(C.button||"Get the System: $37 →")+'</a>' +
+          '<div class="price">'+(C.price||"Ebook + complete kit · instant download · 14-day money-back guarantee")+'</div>' +
         '</div>' +
-        '<div class="share"><a href="'+QUIZ.salesUrl+'">Read more about the book →</a></div>' +
+        '<div class="share"><a href="'+QUIZ.salesUrl+'">'+(C.more||"Read more about the book →")+'</a></div>' +
       '</div>'
     );
     Array.prototype.forEach.call(document.querySelectorAll(".magnet"), function(a){
@@ -508,7 +512,27 @@ function startQuizEngine() {
   showIntro();
 }
 
-document.addEventListener("DOMContentLoaded", startQuizEngine);
+/* ===================== BOOT: Quiz Studio config with inline fallback (QUIZ STUDIO PATCH) =====
+   Loads the version published in Quiz Studio (studio.elvinpeters.com/studio/quizzes/tool-picker).
+   Any failure (offline, slow, bad JSON) runs the inline QUIZ above. Never blocks the quiz. */
+(function () {
+  var CONFIG_URL = "https://studio.elvinpeters.com/s/quiz/tool-picker/config.json";
+  var started = false;
+  function start(){ if (!started) { started = true; startQuizEngine(); } }
+  function boot(){
+    var timer = setTimeout(start, 2500);
+    try {
+      fetch(CONFIG_URL, { mode: "cors", cache: "no-cache" })
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (cfg) {
+          if (!started && cfg && cfg.intro && cfg.questions && cfg.questions.length && cfg.stacks) { QUIZ = cfg; }
+          clearTimeout(timer); start();
+        })
+        .catch(function () { clearTimeout(timer); start(); });
+    } catch (e) { clearTimeout(timer); start(); }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot); else boot();
+})();
 </script>
 </body>
 </html>
