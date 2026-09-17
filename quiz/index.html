@@ -330,7 +330,8 @@ function startQuizEngine() {
   var ADS_QUIZ = { x: "tw-re26u-re279", g: "AW-637214471/AKwFCNHut9UcEIe-7K8C" };
 
   function setBar(p){ barEl.style.width = p + "%"; }
-  function track(name, params){ try{ gtag('event', name, params||{}); }catch(e){} }
+  function quizHit(e){ if (e !== "quiz_start" && e !== "quiz_lead" && e !== "quiz_result") return; try{ navigator.sendBeacon("https://studio.elvinpeters.com/s/api/quiz/ai-style/hit", new Blob([e], {type:"text/plain"})); }catch(x){} } /* QUIZ STUDIO PATCH: start/lead/result counts, no personal data */
+  function track(name, params){ quizHit(name); try{ gtag('event', name, params||{}); }catch(e){} }
 
   function render(html){ stageEl.innerHTML = html; stageEl.firstElementChild && stageEl.firstElementChild.classList.add('fade'); }
 
@@ -350,6 +351,7 @@ function startQuizEngine() {
   }
 
   function showQuestion(){
+    var L = QUIZ.labels || {};
     var Q = QUIZ.questions[cur];
     setBar(Math.round((cur)/(N+1)*100));
     var picked = answers[cur] ? answers[cur].optIndex : -1;
@@ -365,7 +367,7 @@ function startQuizEngine() {
         '<div class="options">'+opts+'</div>' +
         '<div class="nav-row">' +
           '<button class="back" id="backBtn"'+(cur===0?' disabled':'')+'>← Back</button>' +
-          '<button class="btn" id="nextBtn"'+(picked<0?' disabled':'')+'>'+(cur===N-1?'See my result →':'Next →')+'</button>' +
+          '<button class="btn" id="nextBtn"'+(picked<0?' disabled':'')+'>'+(cur===N-1?(L.last||"See my result →"):'Next →')+'</button>' +
         '</div>' +
       '</div>'
     );
@@ -386,19 +388,20 @@ function startQuizEngine() {
   }
 
   function showGate(){
+    var G = QUIZ.gate || {};
     setBar(Math.round(N/(N+1)*100));
     render(
       '<div class="card gate">' +
-        '<div class="eyebrow">Almost there</div>' +
-        '<h2 class=\"as-h1\" style=\"font-size:30px;margin-bottom:10px;\">One step before your result</h2>' +
-        '<p style="color:var(--muted);margin-bottom:22px;">Your personalized AI toolkit and result, plus one short email a week with AI workflows that actually work. No spam, unsubscribe any time.</p>' +
+        '<div class="eyebrow">'+(G.eyebrow||"Almost there")+'</div>' +
+        '<h2 class=\"as-h1\" style=\"font-size:30px;margin-bottom:10px;\">'+(G.title||"One step before your result")+'</h2>' +
+        '<p style="color:var(--muted);margin-bottom:22px;">'+(G.body||"Your personalized AI toolkit and result, plus one short email a week with AI workflows that actually work. No spam, unsubscribe any time.")+'</p>' +
         '<div class="err" id="gateErr">Please enter a valid email.</div>' +
         '<label for="qname">First name (optional)</label>' +
         '<input id="qname" type="text" autocomplete="given-name" placeholder="Alex" />' +
         '<label for="qemail">Email</label>' +
         '<input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" /><input id="qemail" type="email" autocomplete="email" placeholder="you@work.com" />' +
-        '<button class="btn full" id="seeBtn">Show me my AI style →</button>' +
-        '<div class="fineprint">Instant result on this page. We also send the free starter kit by email.</div>' +
+        '<button class="btn full" id="seeBtn">'+(G.button||"Show me my AI style →")+'</button>' +
+        '<div class="fineprint">'+(G.fineprint||"Instant result on this page. We also send the free starter kit by email.")+'</div>' +
         '<div class="nav-row"><button class="back" id="backBtn2">← Back</button><span></span></div>' +
       '</div>'
     );
@@ -416,7 +419,7 @@ function startQuizEngine() {
   }
 
   function scoreArchetype(){
-    var sc = { skeptic:0, dabbler:0, operator:0, builder:0 };
+    var sc = {}; Object.keys(QUIZ.archetypes).forEach(function(k){ sc[k] = 0; });
     var fluency = 0, maxF = 0;
     answers.forEach(function(a, qi){
       var o = QUIZ.questions[qi].opts[a.optIndex];
@@ -454,6 +457,7 @@ function startQuizEngine() {
   }
 
   function showResult(){
+    var C = QUIZ.cta || {}, L = QUIZ.labels || {};
     setBar(100);
     var res = scoreArchetype();
     var A = QUIZ.archetypes[res.key];
@@ -463,7 +467,7 @@ function startQuizEngine() {
     }).join('');
     render(
       '<div class="card result">' +
-        '<div class="type-eyebrow">Your AI style</div>' +
+        '<div class="type-eyebrow">'+(L.eyebrow||"Your AI style")+'</div>' +
         '<h2 class=\"as-h1\">'+A.name+'</h2>' +
         '<div class="tagline">'+A.tagline+'</div>' +
         '<div class="gauge"><div class="label"><span>Your AI fluency</span><span>'+res.score+'/100</span></div><div class="track"><div class="fill" id="gfill"></div></div></div>' +
@@ -471,10 +475,10 @@ function startQuizEngine() {
         '<div class="block"><h3>Your personalized toolkit</h3><div class="tools">'+tools+'</div></div>' +
         '<div class="book-cta">' +
           '<div class="why">'+A.angle+'</div>' +
-          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">Get the System: $37 →</a>' +
-          '<div class="price">Ebook + complete kit · instant download · 14-day money-back guarantee</div>' +
+          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">'+(C.button||"Get the System: $37 →")+'</a>' +
+          '<div class="price">'+(C.price||"Ebook + complete kit · instant download · 14-day money-back guarantee")+'</div>' +
         '</div>' +
-        '<div class="share"><a href="'+QUIZ.salesUrl+'">Read more about the System →</a></div>' +
+        '<div class="share"><a href="'+QUIZ.salesUrl+'">'+(C.more||"Read more about the System →")+'</a></div>' +
       '</div>'
     );
     setTimeout(function(){ var f=document.getElementById("gfill"); if(f) f.style.width = res.score + "%"; }, 120);
@@ -489,7 +493,8 @@ function startQuizEngine() {
 /* ===================== BOOT: remote config with inline fallback ============
    Tries the published config first so quiz content can be edited without a
    site deploy. Any failure (offline, CORS, bad JSON, slow network) falls
-   back to the inline QUIZ object above. The quiz can never be blocked. */
+   back to the inline QUIZ object above. The quiz can never be blocked.
+   QUIZ STUDIO PATCH: Quiz Studio publishes this file (studio.elvinpeters.com/studio/quizzes/ai-style). */
 (function () {
   var CONFIG_URL = "https://ultimateaidirectory.com/quiz-config.json";
   var started = false;
