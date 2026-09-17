@@ -38,12 +38,7 @@ for (const rel of PAGES) {
 
   // STALE-TRUTH tripwires (these were real incidents).
   for (const bad of ['elvin2000x.github.io', 'epeters.ca', 'href="/#apps"', 'href="/#games"', 'beehiiv'])
-    if (html.includes(bad)) {
-      // epeters.ca the WEBSITE is stale (it 301s to .com). An email address on it is a
-      // deliberate choice: the links page uses elvin@epeters.ca because .com mail bounced.
-      if (bad === 'epeters.ca' && !html.replace(/[\w.+-]+@epeters\.ca/g, '').includes(bad)) continue;
-      fail(rel, 'stale-truth tripwire: ' + bad);
-    }
+    if (html.includes(bad)) fail(rel, 'stale-truth tripwire: ' + bad);
 
   // SECRET tripwires (public repo).
   for (const re of [/sk-[A-Za-z0-9]{16}/, /ghp_[A-Za-z0-9]/, /github_pat_/, /AKIA[0-9A-Z]{12}/, /BEGIN [A-Z ]*PRIVATE KEY/])
@@ -308,9 +303,10 @@ for (const rel of PAGES) {
   }
 })();
 
-// KEY PAGES exist and are non-trivial.
+// KEY PAGES exist and are non-trivial. links/index.html is not here: since #258 it is
+// a small forwarder to links.elvinpeters.com, by design.
 for (const key of ['index.html', 'book.html', 'services/index.html', 'contact/index.html',
-  'links/index.html', 'projects/index.html', 'system/index.html', 'writing/index.html']) {
+  'projects/index.html', 'system/index.html', 'writing/index.html']) {
   try {
     if (fs.statSync(path.join(ROOT, key)).size < 2000) fail(key, 'suspiciously small');
   } catch (e) { fail(key, 'MISSING'); }
