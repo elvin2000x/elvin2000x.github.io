@@ -18,7 +18,7 @@ Now steer it with one follow-up: "Make it warmer and a little less formal." The 
 
 Hi [Name], hope the week's going well. Circling back on the dashboard we talked about. Any time this week for a quick look? Let me know what works. Thanks!
 
-That short session is the Mirror Principle in motion. You gave it context and a constraint, you read the draft, and you redirected. The conversation built on itself.
+That short session is the Mirror Principle in motion. You gave it context and a constraint, you read the draft and checked it added nothing you hadn't told it, and you redirected. The conversation built on itself.
 
 After that first week, one habit carries you further than any checklist. Before you send a prompt, ask whether you've given it a role to play, a task to do, and a constraint to work inside. You won't need all three every time. Checking forces the half-second of thought that separates a usable draft from a generic one, and Chapter 3 turns those three questions into a framework you'll lean on throughout the book.
 
@@ -39,16 +39,16 @@ One caution as you go. The most common beginner error is typing short keyword qu
 ### First week: quick-start
 
 
-Before you think about months, get one week under your belt. Each workday this week, use AI for one real task that needs doing anyway: draft an email, summarize a document, outline a presentation, research a decision. Keep the stakes low enough that a mistake doesn't cost you, yet high enough that the work still matters. At the end of the week, look back at the five sessions and pick the one task you'd do again. Write a full prompt for it (role, task, constraints) and save it. That single saved prompt is your first template, and it's the seed of everything below.
+Before you think about months, get one week under your belt, the same on-ramp Chapter 1 started you on, now with a task every workday. Each workday this week, use AI for one real task that needs doing anyway: draft an email, summarize a document, outline a presentation, research a decision. Keep the stakes low enough that a mistake doesn't cost you, yet high enough that the work still matters. Chapter 2's one privacy rule still holds: nothing goes into a public AI chat that you wouldn't post on a public social media feed. At the end of the week, look back at the five sessions and pick the one task you'd do again. Write a full prompt for it (role, task, constraints) and save it. That single saved prompt is your first template, and it's the seed of everything below.
 
 ### Month 1: make it habitual
 
 
 The first month is about normalizing AI use, so reaching for it becomes automatic, a default move you stop thinking about.
 
-Watch how it went for Marcus. In week one he still paused before each session, half-deciding whether the task "qualified." By week three the pause was gone. He caught himself pasting his scratch notes for the Monday leadership sync into a session on reflex, the way he'd open a spreadsheet, and only noticed afterward that he hadn't debated it. That reflex is the whole goal of month one. His two saved prompts by then, the status update and the sync brief, weren't a library yet. They were proof the habit had taken.
+Watch how it went for Marcus. In week one he still hesitated before each session, half-deciding whether the task "qualified." By week three the hesitation was gone. He caught himself pasting his scratch notes for the Monday leadership sync into a session on reflex, the way he'd open a spreadsheet, and only noticed afterward that he hadn't debated it. That reflex is the whole goal of month one. His two saved prompts by then, the status update and the sync brief, weren't a library yet. They were proof the habit had taken.
 
-Daily practice: keep the quick-start rhythm going. One real work task every day, low-stakes but real. That combination builds confidence without pressure.
+Daily practice: keep the quick-start rhythm going. One real work task every day, low-stakes but real. That combination builds confidence without pressure. Before you send anything, check the single riskiest factual claim in it, the one-claim habit from Chapter 13.
 
 Weekly goal: at the end of each week, find one task you did more than once and build a template for it, a fully engineered prompt, saved and ready for next time.
 
