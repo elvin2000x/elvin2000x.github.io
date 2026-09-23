@@ -18,7 +18,7 @@ Act as a senior communications advisor. Write a brief email from a [role, e.g., 
 Tags: communication, rtc
 
 ```text
-Act as a senior analyst preparing a briefing document. The audience is [describe stakeholders, e.g., board members unfamiliar with operations]. The topic is [describe the issue or decision]. Write a one-page briefing: problem statement (2 sentences), current status (3–4 sentences), options being considered (bullet list, max three), and recommended next step (1–2 sentences). Plain language only, no jargon.
+Act as a senior analyst preparing a briefing document. The audience is [describe stakeholders, e.g., board members unfamiliar with operations]. The topic is [describe the issue or decision]. Write a one-page briefing: problem statement (2 sentences), current status (3 to 4 sentences), options being considered (bullet list, max three), and recommended next step (1 to 2 sentences). Plain language only, no jargon.
 ```
 
 ### Conflict De-escalation Email
@@ -71,7 +71,7 @@ Act as a senior analyst. I'm pasting a summary of [data type, e.g., quarterly sa
 Tags: analysis and research, rtc
 
 ```text
-Act as a strategic advisor. I need to compare [Option A] and [Option B] for [decision context]. Evaluate both options across these dimensions: [list 3–4 dimensions, e.g., cost, time to implement, risk, team impact]. Present as a comparison table followed by a two-sentence summary of where each option wins. Do not recommend one yet. This is the analysis step.
+Act as a strategic advisor. I need to compare [Option A] and [Option B] for [decision context]. Evaluate both options across these dimensions: [list 3 to 4 dimensions, e.g., cost, time to implement, risk, team impact]. Present as a comparison table followed by a two-sentence summary of where each option wins. Do not recommend one yet. This is the analysis step.
 ```
 
 ### Literature / Research Digest
@@ -110,7 +110,7 @@ Act as a professional editor. Rewrite the following passage so the tone matches 
 Tags: writing and editing, rtc
 
 ```text
-Act as a senior analyst. Write an executive summary of the following [document type]. The reader is [describe: role, familiarity with topic, time available, e.g., "a CFO with five minutes"]. Structure: problem or context (1–2 sentences), key findings (3 bullets), and recommended action (1–2 sentences). Under 200 words.
+Act as a senior analyst. Write an executive summary of the following [document type]. The reader is [describe: role, familiarity with topic, time available, e.g., "a CFO with five minutes"]. Structure: problem or context (1 to 2 sentences), key findings (3 bullets), and recommended action (1 to 2 sentences). Under 200 words.
 ```
 
 ### Plain Language Rewrite

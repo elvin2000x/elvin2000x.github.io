@@ -101,9 +101,9 @@ Tone. The output sounds wrong for your audience. The strongest corrections use a
 
 Structure. The organization is wrong, the lead gets buried, or the format doesn't fit. Name the sequence you want: "Reorganize this so the main point comes first, then the supporting detail," or "Break this into three sections with headers: Problem, Solution, Next Step."
 
-Specificity. The output reads like a template anyone could have written. This was Marcus's symptom, and it almost always means you didn't give the model enough to work with. Before asking AI to fix it, audit how much context you actually supplied. A useful follow-up: "How many of the five points I gave you are reflected in this output?" Let the model tell you where it lost your thread.
+Specificity. The output reads like a template anyone could have written. This was Marcus's symptom, and it almost always means you didn't give the model enough to work with. Before asking AI to fix it, audit how much context you actually supplied. A useful follow-up: "Which of the points I gave you are reflected in this output, and which did you drop?" Let the model tell you where it lost your thread.
 
-Accuracy and relevance. The output contains factual errors, invented citations, or content that drifted off-topic. Flag factual errors directly, with the correction and a source. Kill hallucinated citations on sight: "That study doesn't exist. Remove the citation or find a real one." Reanchor topic drift: "This addresses Y, but I asked about Z. Start over on the correct topic." A working method for verifying it yourself: paste the claim or the study title into a search engine, and if you can't find a real source for it in about two minutes, treat it as fabricated and cut it. The model can be confident and wrong in the same breath, so check every fact, statistic, and citation before it leaves your hands.
+Accuracy and relevance. The output contains factual errors, invented citations, or content that drifted off-topic. Flag factual errors directly, with the correction and a source. Kill hallucinated citations on sight: "That study doesn't exist. Remove the citation." Reanchor topic drift: "This addresses Y, but I asked about Z. Start over on the correct topic." A working method for verifying it yourself: paste the claim or the study title into a search engine, and if you can't find a real source for it in about two minutes, treat it as fabricated and cut it. The model can be confident and wrong in the same breath, so check every fact, statistic, and citation before it leaves your hands.
 
 #### Rung Two: Trace It to Role, Task, or Constraint
 
@@ -115,7 +115,7 @@ A Task problem means the model misunderstood what you wanted, or you didn't give
 
 A Constraint problem means the model got the role and task right but executed them wrong on length, tone, format, or audience. These are the easiest to fix. Reinforce the constraint: "Cut this to 200 words."
 
-The symptom list and the cause list line up more cleanly than they first look. Length, Tone, and Structure are usually Constraint problems: the model understood you and shaped the output wrong. Specificity is usually a Task-or-context problem: you didn't hand over enough, which is exactly where Marcus landed. Accuracy is the odd one out: it is a verification problem, so you check it rather than re-prompt it.
+The symptom list and the cause list line up more cleanly than they first look. Length, Tone, and Structure are usually Constraint problems: the model understood you and shaped the output wrong. Tone crosses over to Role when the whole voice is wrong, which is why the strongest tone fixes name a person. Specificity is usually a Task-or-context problem: you didn't hand over enough, which is exactly where Marcus landed. Accuracy is the odd one out: it is a verification problem, so you check it rather than re-prompt it.
 
 This rung is also where you make the call that matters most: iterate or start over. Iteration refines what already exists. It cannot fix a broken premise. So the test is simple: whether the model did the wrong thing well, or the right thing badly. Constraint problems and missing-context problems mean the foundation is sound, so iterate; a precise follow-up will land. A true Task problem, where the model did the wrong thing well because you asked for the wrong thing, means you should start over with a clearer brief. Refining a misframed prompt only produces incrementally better wrong answers.
 
@@ -162,7 +162,7 @@ Draft emails, outlines, plans, stories, code, frameworks.
 
 Low stakes (internal notes, personal use): 30 seconds, gut check for obvious errors.
 
-Medium stakes (client-facing, published content): 2–3 minutes targeted fact-checking on specific claims.
+Medium stakes (client-facing, published content): 2 to 3 minutes targeted fact-checking on specific claims.
 
 High stakes (legal, medical, financial, public record): Expert consultation. AI output is input rather than conclusion.
 

@@ -8,15 +8,15 @@ This is a flexible framework, and it works best when you adapt it to your actual
 
 ### First Week: Quick-Start
 
-Before you think about months, get one week under your belt. Each workday this week, use AI for one real task that needs doing anyway: draft an email, summarize a document, outline a presentation, research a decision. Keep the stakes low enough that a mistake doesn't cost you, yet high enough that the work still matters. At the end of the week, look back at the five sessions and pick the one task you'd do again. Write a full prompt for it (role, task, constraints) and save it. That single saved prompt is your first template, and it's the seed of everything below.
+Before you think about months, get one week under your belt, the same on-ramp Chapter 1 started you on, now with a task every workday. Each workday this week, use AI for one real task that needs doing anyway: draft an email, summarize a document, outline a presentation, research a decision. Keep the stakes low enough that a mistake doesn't cost you, yet high enough that the work still matters. Chapter 2's one privacy rule still holds: nothing goes into a public AI chat that you wouldn't post on a public social media feed. At the end of the week, look back at the five sessions and pick the one task you'd do again. Write a full prompt for it (role, task, constraints) and save it. That single saved prompt is your first template, and it's the seed of everything below.
 
 ### Month 1: Make It Habitual
 
 The first month is about normalizing AI use, so reaching for it becomes automatic, a default move you stop thinking about.
 
-Watch how it went for Marcus. In week one he still paused before each session, half-deciding whether the task "qualified." By week three the pause was gone. He caught himself pasting his scratch notes for the Monday leadership sync into a session on reflex, the way he'd open a spreadsheet, and only noticed afterward that he hadn't debated it. That reflex is the whole goal of month one. His two saved prompts by then, the status update and the sync brief, weren't a library yet. They were proof the habit had taken.
+Watch how it went for Marcus. In week one he still hesitated before each session, half-deciding whether the task "qualified." By week three the hesitation was gone. He caught himself pasting his scratch notes for the Monday leadership sync into a session on reflex, the way he'd open a spreadsheet, and only noticed afterward that he hadn't debated it. That reflex is the whole goal of month one. His two saved prompts by then, the status update and the sync brief, weren't a library yet. They were proof the habit had taken.
 
-Daily practice: keep the quick-start rhythm going. One real work task every day, low-stakes but real. That combination builds confidence without pressure.
+Daily practice: keep the quick-start rhythm going. One real work task every day, low-stakes but real. That combination builds confidence without pressure. Before you send anything, check the single riskiest factual claim in it, the one-claim habit from Chapter 13.
 
 Weekly goal: at the end of each week, find one task you did more than once and build a template for it, a fully engineered prompt, saved and ready for next time.
 
@@ -42,7 +42,7 @@ What success looks like: you can say why a good output was good. When you can na
 
 ### Month 3: Make It Systematic
 
-The third month is about building infrastructure that lasts, and the core of it is organizing the library you've been accumulating.
+The third month is about building infrastructure that lasts, and the core of it is organizing the library you've been accumulating. It also closes the ninety days you gave your tool in Chapter 7, so at the end of the month decide whether it stays, or whether a real task now calls for a second one.
 
 For Marcus, month three is when the library stopped being his. He sorted his prompts by task type, emails, summaries, launch briefs, and walked one teammate through his best one over a coffee. A week later she asked for two more. Then someone she'd shown them asked. The template that once saved Marcus an afternoon on a hard stakeholder email started saving his whole team the same afternoon. The shared library his colleagues now open every week traces back to a single prompt he saved in week one.
 
@@ -62,7 +62,7 @@ By persona helps if you lean on the same roles repeatedly: a folder for "the edi
 
 By project or client keeps everything for one engagement in one place.
 
-Pick one angle and start. A library you'll maintain beats a perfect taxonomy you abandon, so keep it simple and accessible: one cloud document or notes page, clear headings, the changeable parts in brackets. Here's what a single entry looks like, filed under "Research":
+Pick one angle and start. A library you'll maintain beats a perfect taxonomy you abandon, so keep it simple and accessible: your My Prompts doc from Chapter 12, with clear headings and the changeable parts in brackets. Here's what a single entry looks like, filed under "Research":
 
 Research / Decision Brief
 
@@ -74,7 +74,7 @@ Teach one person. Walk a colleague through your best template and explain why it
 
 What success looks like: picture an ordinary Tuesday at week twelve. A request lands that would once have eaten your afternoon. You open your library, pull the template that fits, drop in the specifics, and send a strong draft for review twenty minutes later. The tool has become infrastructure, and your advantage grows with every proven template you add. The deeper change is harder to see on a calendar. Three months of naming what you need before you ask for it builds a habit of thought that outlasts any single task. That's the part you keep.
 
-A note on where this goes next. Organizing a library by hand is the foundation, and it's also the doorway to something larger: getting AI to remember your context and run as a system around your work. Later volumes in this series go deeper into working with memory and building those systems. For now, a simple, well-kept library is the thing everything else stands on.
+A note on where this goes next. Organizing a library by hand is the foundation, and it's also the doorway to something larger: getting AI to remember your context and run as a system around your work. Later volumes in this series go deeper into working with memory and building those systems. For now, a simple, well-kept library is the thing everything else stands on, and the session summary from Chapter 11 carries your context between conversations by hand.
 
 ## Month-end check-ins
 
