@@ -6,6 +6,8 @@ Welcome. The book teaches you to direct AI. This kit is the working half: the pa
 
 ## What is in here
 
+Every file comes as a Word document you can edit and print, and as plain text you can paste anywhere.
+
 1. **The Exercises, editable.** Every exercise from the book, in order, with space to record what happened. *(Chapters 2 to 13)*
 2. **The 30-Day Practice Plan.** Your first month, from the first real task to a daily habit, with a checklist. *(Chapters 1 and 14)*
 3. **The 3-Month AI Practice Plan.** The full plan from Chapter 14, with a check-in at the end of each month. *(Chapter 14)*

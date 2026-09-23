@@ -8,37 +8,37 @@ The whole system on a few printable pages: CLEAR, RTC, the Diagnostic Ladder and
 
 CLEAR is the organizing framework for everything in this book. Each letter names a stage of professional AI fluency. Use it to orient yourself when you feel stuck and to identify which skill to develop next.
 
-C: Choose Your Tools (Part 2)
+**C: Choose Your Tools (Part 2)**
 
 Build your personal AI toolkit. Match the model and tool to the task. Use the Vibe Test to select your starting platform, the Model Types guide to choose between fast and reasoning models, and specialist tools for anything beyond text.
 
-Primary decision: Which tool fits this task?
+**Primary decision:** Which tool fits this task?
 
-L: Lead with Clear Direction (The Three Fundamental Rules)
+**L: Lead with Clear Direction (The Three Fundamental Rules)**
 
 Apply the RTC Framework to every prompt. Clear inputs produce clear outputs. No amount of iteration fully compensates for a vague starting point.
 
-Primary decision: Have I given the model a Role, a Task, and a Constraint?
+**Primary decision:** Have I given the model a Role, a Task, and a Constraint?
 
-E: Evolve Your Outputs (Iteration Patterns and The Invisible Skills)
+**E: Evolve Your Outputs (Iteration Patterns and The Invisible Skills)**
 
 Iterate precisely instead of repeatedly. Use the Iteration Vocabulary to diagnose specific problems. Apply Constraint Architecture and Meta-Prompting to raise your ceiling beyond what standard prompting reaches.
 
-Primary decision: What specifically is wrong, and what instruction would fix it?
+**Primary decision:** What specifically is wrong, and what instruction would fix it?
 
-A: Audit for Accuracy (Trust, but Verify)
+**A: Audit for Accuracy (Trust, but Verify)**
 
 Apply the two-step verification method before using any AI output that carries professional risk. Match your verification effort to the stakes involved.
 
-Primary decision: Is this a factual claim, a subjective judgment, or creative generation?
+**Primary decision:** Is this a factual claim, a subjective judgment, or creative generation?
 
-R: Repeat to Build a Practice (Building Your AI Practice)
+**R: Repeat to Build a Practice (Building Your AI Practice)**
 
 Build a prompt library and workflow templates. Consistency converts skill into infrastructure. The three-month plan shows you how to keep developing after the book ends.
 
-Primary decision: Is this prompt worth saving for the next time this task appears?
+**Primary decision:** Is this prompt worth saving for the next time this task appears?
 
-The Director's Mindset (The Mental Shift That Makes AI Work)
+**The Director's Mindset (The Mental Shift That Makes AI Work)**
 
 AI is your crew. You set the vision, direct the output, and take responsibility for the result. This never changes, regardless of which stage of CLEAR you're in.
 
@@ -47,29 +47,29 @@ AI is your crew. You set the vision, direct the output, and take responsibility 
 
 RTC is the structured prompt framework for professional-grade outputs. Apply it to every substantive task.
 
-Role: Who should the AI act as?
+**Role: Who should the AI act as?**
 
 Give it an identity and relevant expertise. Be specific about domain, experience level, and perspective.
 
-Example: "Act as a senior HR manager with ten years of experience in remote team onboarding."
+**Example:** "Act as a senior HR manager with ten years of experience in remote team onboarding."
 
-Task: What specifically do you need?
+**Task: What specifically do you need?**
 
 One deliverable per message. The more precisely you define the output, the better the result.
 
-Example: "Write a 30-day onboarding checklist for a new remote employee starting in a client-facing role."
+**Example:** "Write a 30-day onboarding checklist for a new remote employee starting in a client-facing role."
 
-Constraint: What guardrails apply?
+**Constraint: What guardrails apply?**
 
 Include length, tone, audience, format, and any content limits. Constraints are the instructions that make the output usable; they focus the model instead of limiting it.
 
-Example: "Keep each item under 15 words. Use plain language. Avoid corporate jargon. Format as a numbered list."
+**Example:** "Keep each item under 15 words. Use plain language. Avoid corporate jargon. Format as a numbered list."
 
-Full RTC Example:
+**Full RTC Example:**
 
 "Act as a senior HR manager with remote team experience [Role]. Write a 30-day onboarding checklist for a new remote employee in a client-facing role [Task]. Each item under 15 words, plain language, numbered list, no corporate jargon [Constraint]."
 
-Common RTC Mistakes:
+**Common RTC Mistakes:**
 
 Vague Role: "Act as an expert." Expert in what? For whom? For what purpose?
 
@@ -140,25 +140,25 @@ That's the ladder. Symptom, cause, correction: the same three rungs Marcus climb
 
 Before using any AI output professionally, sort the claim with these three questions. That's step one. Step two is matching your verification effort to the stakes.
 
-Question 1: Is this a factual claim?
+**Question 1: Is this a factual claim?**
 
 Specific dates, statistics, citations, quotes, named sources, research findings.
 
-Action: Verify when it matters. A single independent source is sufficient. The presence of a citation format does not guarantee the source exists. AI can and does hallucinate plausible-sounding references.
+**Action:** Verify when it matters. A single independent source is sufficient. The presence of a citation format does not guarantee the source exists. AI can and does hallucinate plausible-sounding references.
 
-Question 2: Is this subjective or opinion-based?
+**Question 2: Is this subjective or opinion-based?**
 
 Recommendations, creative suggestions, stylistic choices, interpretations.
 
-Action: Use your judgment. Treat as a starting point. You are the expert on your situation. The AI is not.
+**Action:** Use your judgment. Treat as a starting point. You are the expert on your situation. The AI is not.
 
-Question 3: Is this creative generation?
+**Question 3: Is this creative generation?**
 
 Draft emails, outlines, plans, stories, code, frameworks.
 
-Action: Judge by usefulness and fit. What matters is whether it serves your purpose, more than whether it's accurate.
+**Action:** Judge by usefulness and fit. What matters is whether it serves your purpose, more than whether it's accurate.
 
-Verification effort by stakes:
+**Verification effort by stakes:**
 
 Low stakes (internal notes, personal use): 30 seconds, gut check for obvious errors.
 
@@ -166,6 +166,6 @@ Medium stakes (client-facing, published content): 2–3 minutes targeted fact-ch
 
 High stakes (legal, medical, financial, public record): Expert consultation. AI output is input rather than conclusion.
 
-Hallucination warning signs:
+**Hallucination warning signs:**
 
 Specific statistics with no source, Very specific dates on obscure events, Named quotes from living people, Academic citations that sound plausible, Legal precedents or case names.
