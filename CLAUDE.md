@@ -27,3 +27,4 @@ This repo IS the live site. Pushing to master deploys via GitHub Pages in ~60s. 
 - The Book 2 and Book 3 Companion Libraries (`/books/the-systematic-advantage/`, `/books/the-agentic-advantage/`) are private until each book ships (Elvin, 2026-09-24). Their source lives outside this public repo in `coding\site-unpublished\`, with restore steps. Never restore or relink them without his go.
 - `/play/**` game internals, `index_v1-4.html` (retired stubs), `book1-feedback/`, `oto/`, `dl/` binaries.
 - Blog URLs stay under `/writing/` (label is "Blog"; URL churn = SEO churn).
+- Every blog post follows `Brain/04 Marketing and PR/reference/BLOG-STANDARD.md` (structure, format, design, voice, claims, pre-publish checklist; since 2026-09-24).
