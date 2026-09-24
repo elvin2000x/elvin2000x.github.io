@@ -1479,6 +1479,8 @@ function smAlternates(u) {
       '\n    <xhtml:link rel="alternate" hreflang="' + hl + '" href="' + ORIGIN + href + '"/>')
     .join('') + '\n  ';
 }
+// Reader-only pages stay out of the sitemap: the Book 2 Toolkit page is for readers of an unpublished book (2026-09-24).
+SM_EXCLUDE.push('tsa-toolkit');
 const smPages = smWalk(DIR, '', []).map(smUrl).sort();
 const smXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' +
