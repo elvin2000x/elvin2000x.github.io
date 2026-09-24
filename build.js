@@ -282,12 +282,7 @@ function renderCmPrice() {
   return `  <div class="big">${x.amount}</div>\n  <div class="sub">${x.sub}</div>`;
 }
 
-applyRegions('system/index.html', {
-  'sys-hero': renderSysHero,
-  'sys-price': renderSysPrice,
-  'sys-guarantee': renderSysGuarantee,
-  'sys-faq': renderSysFaq,
-});
+// /system/ retired 2026-09-23: the page is a redirect stub to /book.html now.
 applyRegions('claude/index.html', {
   'cl-hero': renderClHero,
   'cl-price': renderClPrice,
@@ -432,10 +427,9 @@ console.log('Regions applied: book.html (review, author, optin x2)');
    now /system/ had only a desktop exit-intent popup (mouseout never fires on
    touch, so the $37 page had zero mobile capture), and /claude/ and
    /content-machine/ had no capture at all. */
-applyRegions('system/index.html', { 'sys-optin': () => renderOptin('end', 'system') });
 applyRegions('claude/index.html', { 'cl-optin': () => renderOptin('end', 'claude') });
 applyRegions('content-machine/index.html', { 'cm-optin': () => renderOptin('end', 'content-machine') });
-console.log('Regions applied: money-page opt-ins (system, claude, content-machine)');
+console.log('Regions applied: money-page opt-ins (claude, content-machine)');
 
 /* One honest Amazon-vs-System table, rendered on both pages from this source.
    The rows Amazon wins outright (paper, formats, reviews) are what make it
@@ -477,11 +471,8 @@ function renderCompare() {
   ].join('\n');
 }
 
-applyRegions('book.html', { 'bk-compare': renderCompare });
-applyRegions('system/index.html', { 'sys-compare': renderCompare });
-console.log('Regions applied: Amazon-vs-System comparison (book.html, system)');
 
-console.log('Regions applied: system/index.html (hero, price, guarantee, faq), claude/index.html (hero, price), content-machine/index.html (hero, price)');
+console.log('Regions applied: claude/index.html (hero, price), content-machine/index.html (hero, price)');
 
 applyRegions('index.html', {
   'nav': () => renderNav('index.html'),
@@ -1447,7 +1438,7 @@ if (unstyled.length) {
 /* sitemap.xml - generated from the page walk so it can never go stale.
    No lastmod on purpose: builds must be byte-idempotent. */
 const SM_EXCLUDE = ['titles', 'books', 'play', 'book1-feedback', 'oto', 'dl', 'studio', 'toolkit', 'thank-you', 'record'];
-const SM_SKIP_FILES = ['apps/index.html', 'writing/_homepage_cards.html'];
+const SM_SKIP_FILES = ['apps/index.html', 'writing/_homepage_cards.html', 'system/index.html'];
 function smWalk(dir, rel, out) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (e.name.startsWith('.') || e.name === 'node_modules') continue;
@@ -1466,7 +1457,7 @@ function smUrl(rel) {
 }
 function smPriority(u) {
   if (u === '/') return '1.0';
-  if (u === '/system/' || u === '/book.html' || u === '/services/') return '0.9';
+  if (u === '/book.html' || u === '/services/') return '0.9';
   if (u === '/projects/' || u === '/writing/') return '0.8';
   if (u.startsWith('/free/') || u.startsWith('/apps/calculators/') || u.startsWith('/quiz')) return '0.7';
   return '0.6';

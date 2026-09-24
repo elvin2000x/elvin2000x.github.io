@@ -64,10 +64,6 @@
    "themebtn": false,
    "ctaArrow": false,
    "active": "/book.html",
-   "cta": {
-    "label": "Get the System",
-    "href": "/system/"
-   },
    "brandStyle": "inline",
    "indent": 0
   },

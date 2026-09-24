@@ -10,7 +10,7 @@ const ROOT = __dirname;
 
 // Pages excluded from every check: other businesses, retired stubs,
 // generated-elsewhere pipelines, binaries.
-const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$/;
+const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^system\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$/;
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
@@ -306,7 +306,7 @@ for (const rel of PAGES) {
 // KEY PAGES exist and are non-trivial. links/index.html is not here: since #258 it is
 // a small forwarder to links.elvinpeters.com, by design.
 for (const key of ['index.html', 'book.html', 'services/index.html', 'contact/index.html',
-  'projects/index.html', 'system/index.html', 'writing/index.html']) {
+  'projects/index.html', 'writing/index.html']) {
   try {
     if (fs.statSync(path.join(ROOT, key)).size < 2000) fail(key, 'suspiciously small');
   } catch (e) { fail(key, 'MISSING'); }
