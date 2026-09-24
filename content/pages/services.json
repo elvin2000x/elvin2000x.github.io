@@ -162,8 +162,7 @@
     "cta": {
       "h2": "Let us find your fastest win.",
       "p": "Tell me where you are stuck. We will find the highest-value place to start, and I will tell you straight whether I can help.",
-      "btn": { "href": "/contact/", "label": "Get in touch", "contact": "Working together on ", "source": "services" },
-      "after": { "href": "/system/", "label": "Not ready yet? Start with the $37 System: the ebook plus the complete kit" }
+      "btn": { "href": "/contact/", "label": "Get in touch", "contact": "Working together on ", "source": "services" }
     }
   },
   "fr": {
@@ -323,8 +322,7 @@
     "cta": {
       "h2": "Trouvons votre gain le plus rapide.",
       "p": "Dites-moi où ça bloque. Nous trouverons l'endroit le plus payant par où commencer, et je vous dirai franchement si je peux aider.",
-      "btn": { "href": "/contact/", "label": "Prenons contact", "contact": "Travailler ensemble sur ", "source": "services" },
-      "after": { "href": "/system/", "label": "Pas encore prêt? Commencez par Le Système à 37 $ : le livre numérique et la trousse complète" }
+      "btn": { "href": "/contact/", "label": "Prenons contact", "contact": "Travailler ensemble sur ", "source": "services" }
     }
   }
 }

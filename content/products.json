@@ -37,12 +37,6 @@
     },
     {
       "bucket": "guides",
-      "title": "The System",
-      "sub": "The complete method, $37",
-      "href": "/system/"
-    },
-    {
-      "bucket": "guides",
       "title": "The Claude Operator's Manual",
       "sub": "Claude, set up for your job, $67",
       "href": "/claude/"

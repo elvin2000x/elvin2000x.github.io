@@ -34,7 +34,6 @@ French; the French translations are marked below.
 
 ## Products - Guides and Systems
 
-- [The System](https://elvinpeters.com/system/): The complete method, $37
 - [The Claude Operator's Manual](https://elvinpeters.com/claude/): Claude, set up for your job, $67
 - [The Content Machine](https://elvinpeters.com/content-machine/): AI volume worth publishing, $47
 

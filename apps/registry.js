@@ -153,13 +153,6 @@ window.APPS_REGISTRY = {
       tags: ['Stripe checkout', 'Instant delivery']
     },
     {
-      slug: 'aa-system', name: 'The Artificial Advantage System', cat: 'products', status: 'live', featured: true,
-      href: '/system/',
-      blurb: 'The self-serve product: the full ebook plus the complete working kit (workbook, role packs, prompt pack, 10-guide library), delivered instantly by email with a 14-day guarantee.',
-      stat: 'Ebook + complete kit',
-      tags: ['Stripe checkout', 'Instant delivery']
-    },
-    {
       slug: 'site-studio', name: 'Site Studio', cat: 'platforms', status: 'private',
       blurb: 'The CMS behind this site: a phone-first admin app that edits content as JSON, previews with the real build engine, runs the polish gate, and publishes straight to production through git.',
       stat: 'Zero dependencies',
