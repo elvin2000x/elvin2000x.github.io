@@ -328,7 +328,7 @@ var QUIZ = {
     { n:"50 Prompts That Actually Work", d:"Copy-paste prompts that get more out of whichever tool you land on.", url:"https://elvinpeters.com/free/50-prompts/" }
   ],
 
-  angle: "Picking the tool is the easy part. Getting great work out of it is the skill, and it's the same skill across every tool above. <b>The Artificial Advantage</b> is the plain-English playbook for exactly that: how to direct any of these tools so the output stops being generic and starts being genuinely good. If it doesn't change your results in 14 days, you get every cent back."
+  angle: "Picking the tool is the easy part. Getting great work out of it is the skill, and it's the same skill across every tool above. <b>The Artificial Advantage</b> is the plain-English playbook for exactly that: how to direct any of these tools so the output stops being generic and starts being genuinely good."
 };
 
 /* ===================== ENGINE ===================== */
@@ -496,8 +496,8 @@ function startQuizEngine() {
         '<div class="block"><h3>Get more out of it, free</h3>'+magnets+'</div>' +
         '<div class="book-cta">' +
           '<div class="why">'+QUIZ.angle+'</div>' +
-          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">'+(C.button||"Get the System: $37 →")+'</a>' +
-          '<div class="price">'+(C.price||"Ebook + complete kit · instant download · 14-day money-back guarantee")+'</div>' +
+          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">'+(C.button||"See the book →")+'</a>' +
+          (C.price ? '<div class="price">'+C.price+'</div>' : '') +
         '</div>' +
         '<div class="share"><a href="'+QUIZ.salesUrl+'">'+(C.more||"Read more about the book →")+'</a></div>' +
       '</div>'
@@ -506,7 +506,7 @@ function startQuizEngine() {
       a.onclick = function(){ track('magnet_click', {event_label:a.getAttribute('data-mn')}); };
     });
     var bb = document.getElementById("bookBtn");
-    if(bb) bb.onclick = function(){ track('system_click', {event_label:'quiz_result'}); try{ fbq('track','InitiateCheckout',{content_name:'The Artificial Advantage',value:37.00,currency:'USD'});}catch(e){} };
+    if(bb) bb.onclick = function(){ track('system_click', {event_label:'quiz_result'}); };
   }
 
   showIntro();

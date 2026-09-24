@@ -320,7 +320,7 @@ var QUIZ = {
     { n:"The Anti-Hallucination Field Guide", d:"Make AI stop making things up, and know exactly when not to trust it.", url:"https://elvinpeters.com/free/anti-hallucination/" }
   ],
 
-  angle: "Every fix above comes from one place: knowing how these tools actually handle your words. <b>The Artificial Advantage</b> is the plain-English playbook for using AI at full speed without the exposure, from what never belongs in a prompt to how to get answers you can trust. If it doesn't change how safely you work in 14 days, you get every cent back."
+  angle: "Every fix above comes from one place: knowing how these tools actually handle your words. <b>The Artificial Advantage</b> is the plain-English playbook for using AI at full speed without the exposure, from what never belongs in a prompt to how to get answers you can trust."
 };
 
 /* ===================== ENGINE ===================== */
@@ -497,8 +497,8 @@ function startQuizEngine() {
         '<div class="block"><h3>Close the gaps free</h3>'+magnets+'</div>' +
         '<div class="book-cta">' +
           '<div class="why">'+QUIZ.angle+'</div>' +
-          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">'+(C.button||"Get the System: $37 →")+'</a>' +
-          '<div class="price">'+(C.price||"Ebook + complete kit · instant download · 14-day money-back guarantee")+'</div>' +
+          '<a class="btn" href="'+QUIZ.bookUrl+'" id="bookBtn">'+(C.button||"See the book →")+'</a>' +
+          (C.price ? '<div class="price">'+C.price+'</div>' : '') +
         '</div>' +
         '<div class="share"><a href="'+QUIZ.salesUrl+'">'+(C.more||"Read more about the book →")+'</a></div>' +
       '</div>'
@@ -508,7 +508,7 @@ function startQuizEngine() {
       a.onclick = function(){ track('magnet_click', {event_label:a.getAttribute('data-mn')}); };
     });
     var bb = document.getElementById("bookBtn");
-    if(bb) bb.onclick = function(){ track('system_click', {event_label:'quiz_result'}); try{ fbq('track','InitiateCheckout',{content_name:'The Artificial Advantage',value:37.00,currency:'USD'});}catch(e){} };
+    if(bb) bb.onclick = function(){ track('system_click', {event_label:'quiz_result'}); };
   }
 
   showIntro();
