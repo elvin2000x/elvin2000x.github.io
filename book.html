@@ -1181,8 +1181,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     } catch (e) { /* fail silent -> DEFAULT already in HTML */ }
   })();
 
-  /* Amazon outbound clicks are NOT checkout events. The $37 System checks
-     out on /system/; these links go to the paperback/hardcover listing.
+  /* Amazon outbound clicks are NOT checkout events. These links go to the
+     paperback/hardcover listing.
      Firing InitiateCheckout here poisoned the ad-platform optimization
      signal with buyers who never reach /thank-you/. */
   (function () {
