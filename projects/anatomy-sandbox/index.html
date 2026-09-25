@@ -157,6 +157,13 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 .ex-steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
 .ex-steps li::marker { color: var(--muted); font-family: var(--font-data); font-size: 12px; }
 .ex-note { margin: 0; font-size: 12px; color: var(--muted); }
+.card-ex { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.card-ex h4 { margin: 6px 0 2px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.card-ex h4:first-child { margin-top: 0; }
+.card-ex ul { list-style: none; margin: 0 -8px; padding: 0; }
+.card-ex .ex-item { padding: 5px 8px; }
+.card-ex .links { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; }
+.ex-glink { border: 0; background: none; padding: 0; font: inherit; color: var(--accent); text-decoration: underline dotted; text-underline-offset: 3px; }
 #exRep[aria-pressed="true"], #exOnly[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
 .dock { position: fixed; z-index: 4; left: 50%; transform: translateX(-50%); bottom: calc(14px + var(--bottom)); max-width: calc(100% - 32px); box-sizing: border-box; display: flex; align-items: center; gap: 6px; padding: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); overflow-x: auto; }
@@ -311,6 +318,7 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
   <p class="eyebrow" id="cardEyebrow"></p>
   <h3 class="name" id="cardName"></h3>
   <div class="chips" id="cardChips"></div>
+  <div class="card-ex" id="cardEx" hidden></div>
   <div class="desc" id="cardDesc"></div>
   <div class="actions">
     <button id="actFocus" title="Focus (F)">Focus</button>
@@ -1147,6 +1155,7 @@ function renderCard() {
   if (p.g && p.g !== p.n && !/^\d+:/.test(p.g)) add(p.g, true);
   add(`Moves with: ${rig.segments[segOfPart(p)].label.toLowerCase()}`, true);
   if (p.heat) { const s = document.createElement('span'); s.className = 'chip plain data'; s.id = 'strainChip'; chips.append(s); updateCardStrain(); }
+  renderCardExercises(p);
   const desc = $('#cardDesc');
   desc.innerHTML = '<p class="none">Loading description…</p>';
   const want = p;
@@ -1791,7 +1800,7 @@ async function openExercise(e, opts = {}) {
   $('#exName').textContent = e.name;
   const chips = [cap(exData.level[e.level]), cap(exData.cat[e.cat]), exData.equip[e.equip] ? cap(exData.equip[e.equip]) : '', cap(e.mech), cap(e.force)].filter(Boolean);
   $('#exChips').innerHTML = chips.map((c, i) => `<span class="chip${i ? ' plain' : ''}">${esc(c)}</span>`).join('');
-  const row = (i, label, groups) => groups.length ? `<div class="row"><span class="sw" style="background:${EX_HEX[i]}"></span><span class="k">${label}</span><span>${esc(groups.map(exGroupLabel).join(', '))}</span></div>` : '';
+  const row = (i, label, groups) => groups.length ? `<div class="row"><span class="sw" style="background:${EX_HEX[i]}"></span><span class="k">${label}</span><span>${groups.map((g) => `<button class="ex-glink" data-g="${g}" title="More ${esc(exData.groups[g])} exercises">${esc(exGroupLabel(g))}</button>`).join(', ')}</span></div>` : '';
   $('#exMuscles').innerHTML = row(2, 'Main', e.prim) + row(1, 'Also', e.sec);
   $('#exSteps').innerHTML = e.steps.map((s) => `<li>${esc(s)}</li>`).join('');
   $('#exRep').hidden = !e.rep;
@@ -1916,6 +1925,43 @@ $('#exBack').addEventListener('click', backToList);
 $('#exClear').addEventListener('click', clearExercise);
 $('#exFocus').addEventListener('click', () => exCurrent && focusExercise(exCurrent));
 $('#exRep').addEventListener('click', playExerciseRep);
+// ---------- cross-links: a muscle's card lists exercises that train it; an exercise's muscle groups open their list ----------
+const byEase = (a, b) => a.level - b.level;  // beginner first; the list is A to Z already and the sort is stable
+function renderCardExercises(p) {
+  const box = $('#cardEx');
+  box.hidden = true; box.innerHTML = '';
+  if (p.l !== 'muscles' || PASSIVE_M.has(p.m)) return;
+  loadExercises().then((d) => {
+    if (!d || selected !== p) return;
+    const groups = d.groups.map((_, i) => i).filter((i) => EX_GROUP[d.groups[i]].test(p.n));
+    if (!groups.length) return;
+    const main = exAll.filter((e) => e.prim.some((g) => groups.includes(g)));
+    const isStretch = (e) => d.cat[e.cat] === 'stretching';
+    const item = (e) => `<li><button class="ex-item" data-id="${esc(e.id)}"><span class="r-name">${esc(e.name)}${e.rep ? '<span class="r-rep">▶ rep</span>' : ''}</span>`
+      + `<span class="r-meta">${esc([cap(d.level[e.level]), cap(d.equip[e.equip] || '')].filter(Boolean).join(' · '))}</span></button></li>`;
+    const list = (title, xs) => xs.length ? `<h4>${title}</h4><ul>${xs.map(item).join('')}</ul>` : '';
+    box.innerHTML = list('Exercises that train it', main.filter((e) => !isStretch(e)).sort(byEase).slice(0, 4))
+      + list('Stretches', main.filter(isStretch).sort(byEase).slice(0, 3))
+      + `<div class="links">${groups.map((g) => `<button class="ex-glink" data-g="${g}">All ${exAll.filter((e) => e.prim.includes(g)).length} ${esc(d.groups[g])} exercises</button>`).join('')}</div>`;
+    box.hidden = false;
+  });
+}
+function showGroup(g) {  // the library, filtered to one muscle group
+  $('#exQ').value = ''; ['#exEquip', '#exLevel', '#exCat'].forEach((s) => { $(s).value = ''; });
+  $('#exMuscle').value = String(g);
+  if (isNarrow()) { select(null); openPanel(true); }
+  setPanelTab('ex');
+  $('#exDetail').hidden = true; $('#exBrowse').hidden = false;
+  runExSearch(); $('#panel').scrollTop = 0;
+}
+$('#cardEx').addEventListener('click', (ev) => {
+  const g = ev.target.closest('.ex-glink'); if (g) { showGroup(Number(g.dataset.g)); return; }
+  const b = ev.target.closest('.ex-item'); if (!b) return;
+  if (isNarrow()) openPanel(true);
+  setPanelTab('ex');
+  openExercise(exAll.find((e) => e.id === b.dataset.id));
+});
+$('#exMuscles').addEventListener('click', (ev) => { const g = ev.target.closest('.ex-glink'); if (g) showGroup(Number(g.dataset.g)); });
 $('#exOnly').addEventListener('click', () => { setExOnly(!exOnly); if (state.colorMode !== 'exercise') setColorMode('exercise'); });
 
 // ---------- input on the stage ----------
