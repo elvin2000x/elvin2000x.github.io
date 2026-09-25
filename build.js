@@ -1481,6 +1481,8 @@ function smAlternates(u) {
 }
 // Reader-only pages stay out of the sitemap: the Book 2 Toolkit page is for readers of an unpublished book (2026-09-24).
 SM_EXCLUDE.push('tsa-toolkit');
+// The Anatomy Sandbox is shared by link (noindex), so it stays out of the sitemap too (2026-09-25).
+SM_SKIP_FILES.push('projects/anatomy-sandbox/index.html');
 const smPages = smWalk(DIR, '', []).map(smUrl).sort();
 const smXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' +
