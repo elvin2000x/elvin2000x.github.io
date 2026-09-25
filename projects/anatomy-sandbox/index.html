@@ -1926,7 +1926,17 @@ $('#exClear').addEventListener('click', clearExercise);
 $('#exFocus').addEventListener('click', () => exCurrent && focusExercise(exCurrent));
 $('#exRep').addEventListener('click', playExerciseRep);
 // ---------- cross-links: a muscle's card lists exercises that train it; an exercise's muscle groups open their list ----------
-const byEase = (a, b) => a.level - b.level;  // beginner first; the list is A to Z already and the sort is stable
+// card picks rank physio staples first: a playable rep, a "... Stretch" name, home kit (body, band, dumbbell),
+// only this muscle's groups as main, then beginner first; ties stay A to Z (stable sort). The library list keeps its own order.
+const EX_HOME_KIT = new Set(['body only', 'bands', 'dumbbell']), EX_CARD_SKIP = new Set(['plyometrics', 'strongman']);
+function byStaple(d, groups) {
+  const key = (e) => [e.rep ? 0 : 1, /stretch/i.test(e.name) ? 0 : 1, EX_HOME_KIT.has(d.equip[e.equip]) ? 0 : 1,
+    e.prim.every((g) => groups.includes(g)) ? 0 : 1, e.level];
+  return (a, b) => {
+    const x = key(a), y = key(b), i = x.findIndex((v, j) => v !== y[j]);
+    return i < 0 ? 0 : x[i] - y[i];
+  };
+}
 function renderCardExercises(p) {
   const box = $('#cardEx');
   box.hidden = true; box.innerHTML = '';
@@ -1940,8 +1950,9 @@ function renderCardExercises(p) {
     const item = (e) => `<li><button class="ex-item" data-id="${esc(e.id)}"><span class="r-name">${esc(e.name)}${e.rep ? '<span class="r-rep">▶ rep</span>' : ''}</span>`
       + `<span class="r-meta">${esc([cap(d.level[e.level]), cap(d.equip[e.equip] || '')].filter(Boolean).join(' · '))}</span></button></li>`;
     const list = (title, xs) => xs.length ? `<h4>${title}</h4><ul>${xs.map(item).join('')}</ul>` : '';
-    box.innerHTML = list('Exercises that train it', main.filter((e) => !isStretch(e)).sort(byEase).slice(0, 4))
-      + list('Stretches', main.filter(isStretch).sort(byEase).slice(0, 3))
+    const rank = byStaple(d, groups);
+    box.innerHTML = list('Exercises that train it', main.filter((e) => !isStretch(e) && !EX_CARD_SKIP.has(d.cat[e.cat])).sort(rank).slice(0, 4))
+      + list('Stretches', main.filter(isStretch).sort(rank).slice(0, 3))
       + `<div class="links">${groups.map((g) => `<button class="ex-glink" data-g="${g}">All ${exAll.filter((e) => e.prim.includes(g)).length} ${esc(d.groups[g])} exercises</button>`).join('')}</div>`;
     box.hidden = false;
   });
