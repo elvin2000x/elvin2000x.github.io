@@ -99,7 +99,8 @@ button { cursor: pointer; }
 .toggle:checked::after { transform: translateX(12px); }
 input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 .panel .seg { display: flex; }
-.panel .seg button { flex: 1; padding: 6px 4px; font-size: 12px; }
+.panel .seg button { flex: 1; padding: 6px 4px; font-size: 12px; white-space: nowrap; }
+#colorMode:has(#color-exercise:not([hidden])) button { padding: 6px 0; }  /* four fit on one line */
 .legend { display: flex; flex-direction: column; gap: 6px; font-size: 12px; }
 .legend .row { display: grid; grid-template-columns: 12px 1fr auto; gap: 8px; align-items: center; }
 .legend .row .sw { width: 12px; height: 12px; border-radius: 3px; }
@@ -133,6 +134,30 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 .checks { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; }
 .checks label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
 .checks input { accent-color: var(--accent); }
+
+.tab-body { display: flex; flex-direction: column; gap: 18px; }
+.field, .ex-filters select { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--raised); color: var(--ink); }
+.ex-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.ex-filters select { padding: 6px 2px 6px 6px; min-width: 0; }
+.ex-filters select.on { border-color: var(--accent); background: var(--accent-soft); }
+.ex-count { margin: 0; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; }
+.ex-count button { border: 0; background: none; padding: 0; color: var(--accent); font: inherit; }
+.ex-list { list-style: none; margin: 0 -4px; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+.ex-item { display: block; width: 100%; text-align: left; border: 0; background: transparent; padding: 7px 8px; border-radius: 8px; }
+.ex-item:hover, .ex-item[aria-current="true"] { background: var(--accent-soft); }
+.ex-item .r-name { display: block; font-weight: 500; }
+.ex-item .r-meta { display: block; font-size: 12px; color: var(--muted); }
+.ex-item .r-rep { font-size: 11px; color: var(--accent); font-weight: 600; margin-left: 4px; }
+.link-btn { align-self: flex-start; border: 0; background: none; padding: 0; color: var(--accent); font-size: 13px; font-weight: 500; }
+.ex-name { margin: 0; font-family: var(--font-name); font-style: italic; font-weight: 600; font-size: 23px; line-height: 1.15; text-wrap: balance; }
+.ex-muscles { display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.ex-muscles .row { display: grid; grid-template-columns: 12px auto 1fr; gap: 8px; align-items: baseline; }
+.ex-muscles .sw { width: 12px; height: 12px; border-radius: 3px; align-self: center; }
+.ex-muscles .k { color: var(--muted); font-size: 12px; }
+.ex-steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.ex-steps li::marker { color: var(--muted); font-family: var(--font-data); font-size: 12px; }
+.ex-note { margin: 0; font-size: 12px; color: var(--muted); }
+#exRep[aria-pressed="true"], #exOnly[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 
 .dock { position: fixed; z-index: 4; left: 50%; transform: translateX(-50%); bottom: calc(14px + var(--bottom)); max-width: calc(100% - 32px); box-sizing: border-box; display: flex; align-items: center; gap: 6px; padding: 6px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); overflow-x: auto; }
 .dock-group { display: flex; align-items: center; gap: 6px; }
@@ -170,7 +195,8 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 @media (max-width: 760px) {
   .topbar { flex-wrap: wrap; gap: 8px; }
   .brand-name { font-size: 18px; }
-  .search { order: 3; flex: 1 1 180px; width: auto; margin-left: 0; }
+  .search { order: 3; flex: 1 1 120px; width: auto; margin-left: 0; }
+  #exToggle { order: 4; }
   .only-narrow { display: inline-block; order: 4; }
   .panel { top: auto; left: 16px; right: 16px; bottom: calc(76px + var(--bottom)); width: auto; max-height: 55%; transform: translateY(calc(100% + 120px)); transition: transform 0.2s; }
   .panel.open { transform: none; }
@@ -201,10 +227,44 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
     <input id="q" type="search" placeholder="Find a muscle, bone or nerve…" autocomplete="off" spellcheck="false" aria-label="Search structures" aria-controls="results" aria-expanded="false">
     <ul id="results" class="results" role="listbox" hidden></ul>
   </div>
+  <button id="exToggle" class="icon-btn" aria-pressed="false" aria-controls="panel" title="Exercise library (E)">Exercises</button>
   <button id="panelToggle" class="icon-btn only-narrow" aria-expanded="false" aria-controls="panel">Layers</button>
 </header>
 
-<aside id="panel" class="panel" aria-label="Body systems and display">
+<aside id="panel" class="panel" aria-label="Body systems, display and exercises">
+  <div class="seg" role="tablist" aria-label="Panel">
+    <button role="tab" id="tab-body" data-tab="body" aria-selected="true" aria-controls="bodyTab">Body</button>
+    <button role="tab" id="tab-ex" data-tab="ex" aria-selected="false" aria-controls="exTab">Exercises</button>
+  </div>
+  <div id="exTab" class="tab-body" role="tabpanel" aria-labelledby="tab-ex" hidden>
+    <section id="exBrowse">
+      <input id="exQ" class="field" type="search" placeholder="Search exercises…" autocomplete="off" spellcheck="false" aria-label="Search exercises" aria-controls="exList">
+      <div class="ex-filters">
+        <select id="exMuscle" aria-label="Main muscle"><option value="">Muscle</option></select>
+        <select id="exEquip" aria-label="Equipment"><option value="">Equipment</option></select>
+        <select id="exLevel" aria-label="Level"><option value="">Level</option></select>
+        <select id="exCat" aria-label="Type"><option value="">Type</option></select>
+      </div>
+      <p class="ex-count data" aria-live="polite"><span id="exCount">Loading the library…</span><button id="exReset" hidden>Reset</button></p>
+      <ul id="exList" class="ex-list" aria-label="Exercises"></ul>
+      <button id="exMore" class="chip-btn" hidden>Show more</button>
+    </section>
+    <section id="exDetail" hidden>
+      <button id="exBack" class="link-btn">← All exercises</button>
+      <h3 class="ex-name" id="exName"></h3>
+      <div class="chips" id="exChips"></div>
+      <div class="ex-muscles" id="exMuscles"></div>
+      <div class="actions">
+        <button id="exRep" aria-pressed="false" hidden>Play rep</button>
+        <button id="exFocus">Focus muscles</button>
+        <button id="exOnly" aria-pressed="false" title="Hide every other muscle, so deep main muscles show">Main only</button>
+        <button id="exClear" class="close">Clear</button>
+      </div>
+      <p class="ex-note" id="exRepNote" hidden></p>
+      <ol class="ex-steps desc" id="exSteps"></ol>
+    </section>
+  </div>
+  <div id="bodyTab" class="tab-body" role="tabpanel" aria-labelledby="tab-body">
   <section>
     <h2>Body systems</h2>
     <ul id="layerList" class="layers"></ul>
@@ -220,6 +280,7 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
       <button id="color-natural" data-color="natural" aria-pressed="true">Natural</button>
       <button id="color-action" data-color="action" aria-pressed="false">By action</button>
       <button id="color-heat" data-color="heat" aria-pressed="false">Stretch</button>
+      <button id="color-exercise" data-color="exercise" aria-pressed="false" hidden>Exercise</button>
     </div>
     <div id="legend" class="legend"></div>
   </section>
@@ -236,10 +297,12 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
       <button id="cutFlip" class="chip-btn">Flip</button>
     </div>
   </section>
+  </div>
   <p class="credits">
     Anatomy: <a href="https://github.com/Z-Anatomy/Models-of-human-anatomy" target="_blank" rel="noopener">Z-Anatomy</a> (CC BY-SA 4.0), built on
     <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noopener">BodyParts3D</a> © The Database Center for Life Science (CC BY-SA 2.1 JP).
     Descriptions: Z-Anatomy, from Wikipedia (CC BY-SA). The meshes here are simplified and rigged from those sources and shared under CC BY-SA 4.0.
+    Exercises: <a href="https://github.com/yuhonas/free-exercise-db" target="_blank" rel="noopener">free-exercise-db</a> (Unlicense, public domain); its muscle groups are mapped onto the atlas here.
     Movement uses a simplified 19-joint rig; stretch colours are estimates.
   </p>
 </aside>
@@ -639,6 +702,10 @@ function actionColor(p) {
   return hexRGB(i == null ? '#9aa7a4' : ACTION[i][1]);
 }
 const HEAT_NEUTRAL = hexRGB('#b7a29c'), HEAT_NONE = hexRGB('#cdc3bf');
+// Exercise colours: the rest of the muscles, secondary (soft), primary (strong)
+const EX_HEX = ['#cdc3bf', '#eda56a', '#d63a26'], EX_RGB = EX_HEX.map(hexRGB);
+const exRole = new Map();  // muscle part -> 1 secondary, 2 primary, for the exercise on show
+let exOnly = false;
 function heatColor(strain) {
   const t = clamp(strain / 0.16, -1, 1);
   const to = hexRGB(cssVar(t < 0 ? '--shorter' : '--longer'));
@@ -724,8 +791,10 @@ function writePart(p) {
   let rgb;
   if (state.colorMode === 'action') rgb = actionColor(p);
   else if (state.colorMode === 'heat' && p.l === 'muscles') rgb = p.heat ? heatColor(p.strain || 0) : HEAT_NONE;
+  else if (state.colorMode === 'exercise' && p.l === 'muscles') rgb = EX_RGB[exRole.get(p) || 0];
   else rgb = naturalColor(p);
-  const off = L.hidden.has(p.index) || !!(p.cp && layerByKey[p.cp]?.visible);  // a copy hides while its home layer shows
+  const off = L.hidden.has(p.index) || !!(p.cp && layerByKey[p.cp]?.visible)  // a copy hides while its home layer shows
+    || (exOnly && state.colorMode === 'exercise' && p.l === 'muscles' && exRole.get(p) !== 2);  // "Main only": peel the rest away
   d[o] = rgb[0]; d[o + 1] = rgb[1]; d[o + 2] = rgb[2]; d[o + 3] = off ? 0 : 255;
 }
 function recolorLayer(L) { for (const p of L.parts) writePart(p); L.tex.needsUpdate = true; }
@@ -946,6 +1015,10 @@ function renderLegend() {
     for (const p of layerByKey.muscles.parts) { const i = actionOf.get(p.m); counts.set(i ?? 11, (counts.get(i ?? 11) || 0) + 1); }
     el.innerHTML = ACTION.map(([label, color], i) => counts.get(i) ? `<div class="row"><span class="sw" style="background:${color}"></span><span>${label}</span><span class="n data">${counts.get(i)}</span></div>` : '').join('')
       + '<p>Muscles grouped by their main action in the Z-Anatomy atlas. Pick an exercise, then look at which groups sit on the working side of the joint.</p>';
+  } else if (state.colorMode === 'exercise' && exCurrent) {
+    const row = (i, label, groups) => groups.length ? `<div class="row"><span class="sw" style="background:${EX_HEX[i]}"></span><span>${label}: ${groups.map(exGroupLabel).join(', ')}</span><span></span></div>` : '';
+    el.innerHTML = row(2, 'Main', exCurrent.prim) + row(1, 'Also', exCurrent.sec)
+      + `<p>${esc(exCurrent.name)}. Muscle groups from free-exercise-db, mapped onto the atlas. They show what the exercise trains, not how hard each muscle works.</p>`;
   } else if (state.colorMode === 'heat') {
     el.innerHTML = `<div class="ramp" aria-hidden="true"></div><div class="ramp-labels"><span>Shorter</span><span>As standing</span><span>Longer</span></div>
 <p>Each muscle's length compared with standing, measured along the joints it crosses. Pose or walk to see it change. This shows stretch, not effort: a muscle can work hard while it lengthens, like your thighs when you lower into a squat.</p>`;
@@ -960,6 +1033,7 @@ function renderLegend() {
   }
 }
 function setColorMode(m) {
+  if (m === 'exercise' && !exCurrent) m = 'natural';
   state.colorMode = m;
   $$('#colorMode button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.color === m)));
   if (m === 'heat') { poseDirty = true; if (state.mode === 'explore') toast('Switch to Pose or Walk to see muscles stretch and shorten.'); }
@@ -1238,7 +1312,7 @@ function repStart() {
   return m ? m.base : 'stand';
 }
 function toggleRep(on = !rep) {
-  if (!on) { rep = null; $('#rep').setAttribute('aria-pressed', 'false'); $('#rep').textContent = 'Play rep'; return; }
+  if (!on) { rep = null; $('#rep').setAttribute('aria-pressed', 'false'); $('#rep').textContent = 'Play rep'; syncExRep(); return; }
   const a = quatsOf(repStart());
   const now = bones.map((b) => b.quaternion.clone());
   const b = !poseEdited && REPS[lastPreset] ? quatsOf(REPS[lastPreset][1]) : now;
@@ -1274,8 +1348,9 @@ function toggleRep(on = !rep) {
     pins: pinned.map((end, j) => flat(end)
       ? { end, pa: kept.pins[j], pb: kept.pins[j], qa: kept.rots[j], qb: kept.rots[j] }
       : { end, pa: ea.pins[j], pb: eb.pins[j], qa: ea.rots[j], qb: eb.rots[j] }) };
-  if (state.colorMode !== 'heat') setColorMode('heat');
+  if (state.colorMode !== 'heat' && state.colorMode !== 'exercise') setColorMode('heat');  // an exercise keeps its muscles lit
   $('#rep').setAttribute('aria-pressed', 'true'); $('#rep').textContent = 'Stop rep';
+  syncExRep();
 }
 function stepRep(dt) {
   const { down, hold, up, rest } = REP_T;
@@ -1621,6 +1696,228 @@ $('#q').addEventListener('keydown', (e) => {
   else if (e.key === 'Escape') { e.target.value = ''; runSearch(''); e.target.blur(); }
 });
 
+// ---------- exercises: free-exercise-db (Unlicense), its 17 muscle groups mapped onto the atlas ----------
+// data/exercises.bin comes from tools/build_exercises.py (gzip JSON, loaded when the Exercises tab first opens)
+const EX_GROUP = {
+  neck: /^(sternocleidomastoid|splenius (capitis|colli)|scalenus|semispinalis colli|levator scapulae)/i,
+  traps: /trapezius muscle$/i,
+  shoulders: /deltoid muscle$|^(supraspinatus|infraspinatus|teres minor)/i,
+  chest: /pectoralis/i,
+  biceps: /biceps brachii|^brachialis/i,
+  triceps: /triceps brachii|^anconeus/i,
+  forearms: /brachioradialis|(flexor|extensor) carpi|palmaris longus|flexor digitorum (superficialis|profundus)|^extensor digitorum$|extensor digiti minimi$|pronator|^supinator|flexor pollicis longus|extensor pollicis|abductor pollicis longus|extensor indicis/i,
+  lats: /^(latissimus dorsi|teres major)/i,
+  // the atlas swaps the trapezius labels: its "Ascending part" runs to the head and neck (the upper fibres), its
+  // "Descending part" is the lower triangle, so the mid and lower traps of a row are "Transverse" + "Descending" here
+  'middle back': /^(rhomboid|transverse part of trapezius|descending part of trapezius)/i,
+  'lower back': /^(iliocostalis (lumborum|thoracis)|longissimus thoracis|multifidus (lumborum|thoracis)|spinalis thoracis|quadratus lumborum)/i,
+  abdominals: /^(rectus abdominis|external abdominal oblique|internal abdominal oblique|transversus abdominis|pyramidalis)/i,
+  glutes: /^gluteus (maximus|medius)/i,
+  abductors: /^(gluteus (medius|minimus)|tensor fasciae latae)/i,
+  adductors: /^(adductor (longus|brevis|magnus)|gracilis|pectineus)/i,
+  quadriceps: /^(rectus femoris|vastus (lateralis|medialis|intermedius))/i,
+  hamstrings: /biceps femoris|^semi(tendinosus|membranosus)/i,
+  calves: /gastrocnemius|^(soleus|plantaris)/i,
+};
+const EX_ALIAS = { quadriceps: 'quads legs', hamstrings: 'hams legs', glutes: 'butt', abdominals: 'abs core six pack', chest: 'pecs',
+  shoulders: 'delts', triceps: 'tris arms', biceps: 'bis arms', forearms: 'grip', calves: 'calf', 'lower back': 'erectors spinal',
+  'middle back': 'rhomboids upper back', lats: 'back', abductors: 'outer thigh', adductors: 'inner thigh groin' };
+const EX_DEEP = new Set(['lower back']);  // main groups that sit under other muscles: "Main only" starts on
+const EX_BACK = new Set(['traps', 'triceps', 'lats', 'middle back', 'lower back', 'glutes', 'hamstrings', 'calves']);  // seen best from behind
+const EX_REP_NAME = { squat: 'squat', deadlift: 'deadlift', lunge: 'split squat', pushup: 'push-up', tpose: 'lateral raise' };
+const EX_PAGE = 60;
+let exData = null, exPromise = null, exAll = [], exShown = [], exLimit = EX_PAGE, exCurrent = null, exGroupParts = null, exColorBefore = 'natural';
+function esc(s) { return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+function exGroupLabel(g) { return cap(exData.groups[g]); }
+function loadExercises() {
+  if (!exPromise) exPromise = fetchJSON('data/exercises.bin').then((d) => {
+    exData = d;
+    const G = d.groups;
+    // "pull-up", "pull up" and "pullup" all find Pull-Up: names are indexed with hyphens as spaces and run together
+    const loose = (s) => { s = s.toLowerCase(); return `${s.replace(/-/g, ' ')} ${s.replace(/-/g, '')}`; };
+    exAll = d.x.map(([id, name, prim, sec, equip, level, cat, force, mech, repKey, steps]) => ({
+      id, name, prim, sec, equip, level, cat, force, mech, rep: repKey, steps, lname: loose(name),
+      groupText: prim.map((g) => `${G[g]} ${EX_ALIAS[G[g]] || ''}`).join(' ').toLowerCase(),
+      text: `${loose(name)} ${[...prim, ...sec].map((g) => `${G[g]} ${EX_ALIAS[G[g]] || ''}`).join(' ')} ${d.equip[equip] || ''} ${d.cat[cat]} ${d.level[level]} ${mech} ${force}`.toLowerCase(),
+    }));
+    // filter labels stay short: the selects are 16px (smaller makes iPhones zoom in) in a two-column grid
+    const SHORT = { 'olympic weightlifting': 'olympic lifts', 'e-z curl bar': 'EZ bar', 'medicine ball': 'med ball', 'exercise ball': 'swiss ball' };
+    const opts = (sel, list) => $(sel).insertAdjacentHTML('beforeend', list.map((t, i) => `<option value="${i}">${esc(cap(SHORT[t] || t))}</option>`).join(''));
+    opts('#exMuscle', G); opts('#exEquip', d.equip); opts('#exLevel', d.level); opts('#exCat', d.cat);
+    $('#exQ').placeholder = `Search ${exAll.length} exercises…`;
+    runExSearch();
+    return d;
+  }).catch((err) => { console.error(err); exPromise = null; $('#exCount').textContent = 'The exercise library did not load. Open the tab again to retry.'; return null; });
+  return exPromise;
+}
+function exGroups() {  // atlas muscles per group, both sides (built on first use; parts.json already lists every part)
+  if (exGroupParts) return exGroupParts;
+  const muscles = layerByKey.muscles.parts.filter((p) => !PASSIVE_M.has(p.m));
+  exGroupParts = exData.groups.map((g) => muscles.filter((p) => EX_GROUP[g].test(p.n)));
+  return exGroupParts;
+}
+function runExSearch(keepLimit = false) {
+  if (!exData) return;
+  const words = $('#exQ').value.toLowerCase().split(/[\s-]+/).filter(Boolean);
+  const f = ['#exMuscle', '#exEquip', '#exLevel', '#exCat'].map((s) => { const v = $(s).value; $(s).classList.toggle('on', v !== ''); return v === '' ? null : Number(v); });
+  const [fm, fe, fl, fc] = f;
+  const q = words.join(' ');
+  exShown = exAll.filter((e) => (fm == null || e.prim.includes(fm)) && (fe == null || e.equip === fe) && (fl == null || e.level === fl) && (fc == null || e.cat === fc)
+    && words.every((w) => e.text.includes(w)));
+  if (words.length) {  // name hits first, then exercises that train the muscle you typed, then the rest
+    const rank = (e) => (e.lname.startsWith(q) ? 0 : words.every((w) => e.lname.includes(w)) ? 1 : words.every((w) => e.groupText.includes(w) || e.lname.includes(w)) ? 2 : 3);
+    exShown = exShown.map((e) => [rank(e), e]).sort((a, b) => a[0] - b[0]).map(([, e]) => e);  // stable: stays A to Z inside a rank
+  }
+  if (!keepLimit) exLimit = EX_PAGE;
+  const filtered = words.length || f.some((v) => v != null);
+  $('#exCount').textContent = `${exShown.length.toLocaleString()} of ${exAll.length.toLocaleString()} exercises`;
+  $('#exReset').hidden = !filtered;
+  const ul = $('#exList');
+  ul.innerHTML = exShown.length ? '' : '<li class="ex-note">No exercise matches. Try one word, like "curl", or clear a filter.</li>';
+  for (const e of exShown.slice(0, exLimit)) {
+    const li = document.createElement('li');
+    li.innerHTML = `<button class="ex-item" data-id="${esc(e.id)}"${exCurrent === e ? ' aria-current="true"' : ''}><span class="r-name">${esc(e.name)}${e.rep ? '<span class="r-rep">▶ rep</span>' : ''}</span>`
+      + `<span class="r-meta">${esc([e.prim.map(exGroupLabel).join(', '), cap(exData.equip[e.equip] || ''), cap(exData.level[e.level])].filter(Boolean).join(' · '))}</span></button>`;
+    ul.append(li);
+  }
+  $('#exMore').hidden = exShown.length <= exLimit;
+  $('#exMore').textContent = `Show more (${(exShown.length - exLimit).toLocaleString()} left)`;
+}
+async function openExercise(e, opts = {}) {
+  if (!e) return;
+  exCurrent = e;
+  $('#exBrowse').hidden = true; $('#exDetail').hidden = false;
+  $('#exName').textContent = e.name;
+  const chips = [cap(exData.level[e.level]), cap(exData.cat[e.cat]), exData.equip[e.equip] ? cap(exData.equip[e.equip]) : '', cap(e.mech), cap(e.force)].filter(Boolean);
+  $('#exChips').innerHTML = chips.map((c, i) => `<span class="chip${i ? ' plain' : ''}">${esc(c)}</span>`).join('');
+  const row = (i, label, groups) => groups.length ? `<div class="row"><span class="sw" style="background:${EX_HEX[i]}"></span><span class="k">${label}</span><span>${esc(groups.map(exGroupLabel).join(', '))}</span></div>` : '';
+  $('#exMuscles').innerHTML = row(2, 'Main', e.prim) + row(1, 'Also', e.sec);
+  $('#exSteps').innerHTML = e.steps.map((s) => `<li>${esc(s)}</li>`).join('');
+  $('#exRep').hidden = !e.rep;
+  $('#exRepNote').hidden = !e.rep;
+  if (e.rep) $('#exRepNote').textContent = `The rep plays the sandbox's own ${EX_REP_NAME[e.rep]}, so the equipment and stance of this variation are not shown.`;
+  syncExRep();
+  $('#panel').scrollTop = 0;
+  // light the muscles: primary strong, secondary soft
+  const G = exGroups();
+  exRole.clear();
+  for (const g of e.sec) for (const p of G[g]) exRole.set(p, 1);
+  for (const g of e.prim) for (const p of G[g]) exRole.set(p, 2);
+  if (state.colorMode !== 'exercise') exColorBefore = state.colorMode;
+  setExOnly(e.prim.some((g) => EX_DEEP.has(exData.groups[g])), false);  // deep main muscles would hide under the rest
+  $('#color-exercise').hidden = false;
+  select(null);
+  setColorMode('exercise');
+  setHash(`ex=${e.id}`);
+  const L = layerByKey.muscles;
+  if (!L.visible) await setLayerVisible(L, true);
+  if (exCurrent === e && opts.fly !== false) focusExercise(e);
+}
+function focusExercise(e) {
+  const parts = e.prim.flatMap((g) => exGroups()[g]).filter((p) => p.center);
+  if (!parts.length) return;
+  updateSkinMatrices();
+  const box = new THREE.Box3(), c = new THREE.Vector3();
+  for (const p of parts) {
+    c.copy(p.center).applyMatrix4(skinM[segOfPart(p)]);
+    box.expandByPoint(c.clone().addScalar(p.radius * 0.35)).expandByPoint(c.clone().addScalar(-p.radius * 0.35));
+  }
+  const target = box.getCenter(new THREE.Vector3());
+  const back = e.prim.filter((g) => EX_BACK.has(exData.groups[g])).length * 2 > e.prim.length;
+  const { fwd } = bodyFrame();
+  const dir = fwd.clone().multiplyScalar(back ? -1 : 1); dir.y = 0.22; dir.normalize();
+  const size = box.getSize(new THREE.Vector3());
+  let dist = clamp(Math.max(size.x, size.y, size.z) * 2.4 + 0.5, 1.1, 3.4);
+  if (camera.aspect < 0.8) dist *= 1.35;  // portrait phone
+  const drawer = isNarrow() && $('#panel').classList.contains('open');
+  if (drawer) dist = Math.min(dist * 1.5, 5.5);  // only the band between the header and the drawer is free
+  const perPx = (2 * dist * Math.tan((camera.fov * DEG) / 2)) / Math.max(1, canvas.clientHeight);  // metres per screen pixel at the target
+  if (isNarrow()) {
+    if (drawer) {  // centre the muscles in the free band between the header and the drawer
+      const P = $('#panel');  // where the drawer rests, not where its slide-in transition is right now
+      const top = $('.topbar').getBoundingClientRect().bottom, bottom = innerHeight - parseFloat(getComputedStyle(P).bottom) - P.offsetHeight;
+      target.y -= (canvas.clientHeight / 2 - (top + bottom) / 2) * perPx;
+    }
+  }
+  else {  // the panel covers the left of the stage: centre the muscles in the space right of it
+    const right = new THREE.Vector3().crossVectors(dir, new THREE.Vector3(0, 1, 0)).normalize().negate();
+    target.addScaledVector(right, -(($('#panel').offsetWidth + 16) / 2) * perPx);
+  }
+  flyTo(target, target.clone().addScaledVector(dir, dist));
+}
+function setExOnly(on, repaint = true) {
+  exOnly = on;
+  $('#exOnly').setAttribute('aria-pressed', String(on));
+  if (repaint && layerByKey.muscles.loaded) { recolorLayer(layerByKey.muscles); requestRender(); }
+}
+function clearExercise() {
+  if (!exCurrent) return;
+  exCurrent = null; exRole.clear(); setExOnly(false, false);
+  if (rep) toggleRep(false);
+  $('#color-exercise').hidden = true;
+  $('#exDetail').hidden = true; $('#exBrowse').hidden = false;
+  setColorMode(exColorBefore === 'exercise' ? 'natural' : exColorBefore);
+  setHash('');
+  runExSearch(true);
+}
+function backToList() {
+  $('#exDetail').hidden = true; $('#exBrowse').hidden = false;
+  runExSearch(true);
+  $(`.ex-item[data-id="${CSS.escape(exCurrent?.id || '')}"]`)?.scrollIntoView({ block: 'nearest' });
+}
+function syncExRep() {
+  const b = $('#exRep');
+  const on = !!(rep && exCurrent?.rep && lastPreset === exCurrent.rep);
+  b.setAttribute('aria-pressed', String(on)); b.textContent = on ? 'Stop rep' : 'Play rep';
+}
+function playExerciseRep() {
+  const e = exCurrent;
+  if (!e?.rep) return;
+  if (rep && lastPreset === e.rep) { toggleRep(false); return; }
+  if (state.mode !== 'pose') setMode('pose');
+  setPose(e.rep);
+  toggleRep(true);
+  if (rep) toast('The rep keeps the exercise colours. Body tab › Colour › Stretch shows muscles lengthen and shorten.', 4200);
+}
+function setHash(h) { try { history.replaceState(null, '', h ? `#${h}` : location.pathname + location.search); } catch { /* sandboxed frame */ } }
+function setPanelTab(t) {
+  $$('#panel [role="tab"]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === t)));
+  $('#bodyTab').hidden = t !== 'body'; $('#exTab').hidden = t !== 'ex';
+  $('#exToggle').setAttribute('aria-pressed', String(t === 'ex'));
+  if (t === 'ex') loadExercises();
+}
+function openPanel(open) { $('#panel').classList.toggle('open', open); $('#panelToggle').setAttribute('aria-expanded', String(open)); }
+$$('#panel [role="tab"]').forEach((b) => b.addEventListener('click', () => setPanelTab(b.dataset.tab)));
+$('#exToggle').addEventListener('click', () => {
+  const onEx = !$('#exTab').hidden;
+  if (isNarrow()) { const open = $('#panel').classList.contains('open'); if (open && onEx) { openPanel(false); return; } openPanel(true); setPanelTab('ex'); }
+  else setPanelTab(onEx ? 'body' : 'ex');
+  if (!$('#exTab').hidden && !exCurrent && finePointer) setTimeout(() => $('#exQ').focus(), 0);
+});
+$('#exQ').addEventListener('input', () => runExSearch());
+$('#exQ').addEventListener('keydown', (ev) => {
+  if (ev.key === 'Enter') { ev.preventDefault(); openExercise(exShown[0]); }
+  else if (ev.key === 'ArrowDown') { ev.preventDefault(); $('.ex-item')?.focus(); }
+  else if (ev.key === 'Escape') { ev.target.value = ''; runExSearch(); }
+});
+['#exMuscle', '#exEquip', '#exLevel', '#exCat'].forEach((s) => $(s).addEventListener('change', () => runExSearch()));
+$('#exReset').addEventListener('click', () => { $('#exQ').value = ''; ['#exMuscle', '#exEquip', '#exLevel', '#exCat'].forEach((s) => { $(s).value = ''; }); runExSearch(); });
+$('#exList').addEventListener('click', (ev) => { const b = ev.target.closest('.ex-item'); if (b) openExercise(exAll.find((e) => e.id === b.dataset.id)); });
+$('#exList').addEventListener('keydown', (ev) => {  // arrow keys walk the list
+  if (ev.key !== 'ArrowDown' && ev.key !== 'ArrowUp') return;
+  const items = $$('.ex-item'), i = items.indexOf(document.activeElement);
+  if (i < 0) return;
+  ev.preventDefault();
+  if (ev.key === 'ArrowUp' && i === 0) $('#exQ').focus(); else items[clamp(i + (ev.key === 'ArrowDown' ? 1 : -1), 0, items.length - 1)].focus();
+});
+$('#exMore').addEventListener('click', () => { exLimit += EX_PAGE; runExSearch(true); });
+$('#exBack').addEventListener('click', backToList);
+$('#exClear').addEventListener('click', clearExercise);
+$('#exFocus').addEventListener('click', () => exCurrent && focusExercise(exCurrent));
+$('#exRep').addEventListener('click', playExerciseRep);
+$('#exOnly').addEventListener('click', () => { setExOnly(!exOnly); if (state.colorMode !== 'exercise') setColorMode('exercise'); });
+
 // ---------- input on the stage ----------
 let down = null, lastHover = 0;
 canvas.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY, t: performance.now(), gizmo: !!tc.object && tc.axis !== null }; });
@@ -1664,6 +1961,7 @@ addEventListener('keydown', (e) => {
   else if (k === 'i' && selected) isolatePart(selected);
   else if (k === 'f' && selected) focusPart(selected);
   else if (k === 'x') toggleXray();
+  else if (k === 'e') $('#exToggle').click();
   else if (k === 'p' && state.mode === 'pose') toggleRep();
   else if (k === '1') setMode('explore');
   else if (k === '2') setMode('pose');
@@ -1705,7 +2003,10 @@ $('#xray').addEventListener('click', toggleXray);
 $('#speed').addEventListener('input', (e) => { gait.speed = Number(e.target.value); });
 $('#wander').addEventListener('click', () => { gait.wander = !gait.wander; $('#wander').setAttribute('aria-pressed', String(gait.wander)); if (!gait.wander) gait.target = null; });
 $('#stopWalk').addEventListener('click', stopWalking);
-$('#panelToggle').addEventListener('click', () => { const open = !$('#panel').classList.contains('open'); $('#panel').classList.toggle('open', open); $('#panelToggle').setAttribute('aria-expanded', String(open)); });
+$('#panelToggle').addEventListener('click', () => {
+  const open = !$('#panel').classList.contains('open') || !$('#exTab').hidden;  // from the exercises, Layers flips to the body tab
+  openPanel(open); if (open) setPanelTab('body');
+});
 
 // ---------- compass: which way the body faces from where you stand (radiology letters) ----------
 function updateCompass() {
@@ -1821,14 +2122,31 @@ async function boot() {
   solveGround(false);
   setAnchorHere();
   const start = layerByKey.muscles.parts.find((p) => p.n === 'Rectus femoris muscle' && p.s === 'r');
-  if (start && !isNarrow()) select(start);  // on a phone the card would cover the legs; the whole body is the better first look
+  const linked = decodeURIComponent(location.hash.match(/^#ex=([^&]+)/)?.[1] || '');  // #ex=<id> opens that exercise
+  if (start && !isNarrow() && !linked) select(start);  // on a phone the card would cover the legs; the whole body is the better first look
   if (camera.aspect < 0.8) camera.position.sub(controls.target).multiplyScalar(1.25).add(controls.target);
   $('#loader').hidden = true;
   requestRender();
+  if (linked) {
+    if (isNarrow()) openPanel(true);
+    setPanelTab('ex');
+    const d = await loadExercises();
+    const e = d && exAll.find((x) => x.id === linked);
+    if (e) openExercise(e); else setHash('');
+  }
 }
 // console handle for poking at the sandbox: anatomySandbox.strain('Soleus muscle', 'r')
 window.anatomySandbox = {
-  state, setMode, setPose, setColorMode, flyTo, viewPreset, toggleRep,
+  state, setMode, setPose, setColorMode, flyTo, viewPreset, toggleRep, setPanelTab,
+  async exercise(q) {  // anatomySandbox.exercise('Barbell_Squat') or a name; returns what it lit up
+    await loadExercises();
+    const e = exAll.find((x) => x.id === q || x.lname === String(q).toLowerCase()) || exAll.find((x) => x.lname.includes(String(q).toLowerCase()));
+    if (!e) return null;
+    setPanelTab('ex'); await openExercise(e);
+    const names = (gs) => gs.map((g) => `${exData.groups[g]}: ${exGroups()[g].length}`);
+    return { id: e.id, name: e.name, rep: e.rep, primary: names(e.prim), secondary: names(e.sec) };
+  },
+  exGroups: () => exData && Object.fromEntries(exData.groups.map((g, i) => [g, [...new Set(exGroups()[i].map((p) => p.n))]])),
   get rep() { return rep; }, get bones() { return bones; }, get character() { return character; }, camera, controls, gait,
   step(seconds = 1) { for (let t = 0; t < seconds; t += 1 / 60) update(1 / 60); needsRender = true; draw(); },
   strain(name, side = 'r') {
