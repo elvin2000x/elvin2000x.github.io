@@ -983,7 +983,7 @@ async function setLayerVisible(L, on) {
   for (const M of LAYERS) if (M.loaded && M.parts.some((p) => p.cp === L.key)) recolorLayer(M);  // copies step aside
   if (!on && selected && selected.layer === L) select(null);
   renderLayerList(); renderLegend(); requestRender();
-  store.set('layers', LAYERS.filter((l) => l.visible).map((l) => l.key));
+  store.set('layers2', LAYERS.filter((l) => l.visible).map((l) => l.key));
 }
 
 // ---------- UI: layers + legend ----------
@@ -2166,8 +2166,8 @@ async function boot() {
   };
   await Promise.all(first.map((L) => loadLayer(L, (n) => { got[L.key] = n; report(); })));
   $('#loadText').textContent = 'Building the body…';
-  const saved = store.get('layers', null);
-  const keep = Array.isArray(saved) && saved.length ? saved : first.map((L) => L.key);
+  const saved = store.get('layers2', null);  // key renamed when the default became skeleton only, so older saves don't override it
+  const keep = Array.isArray(saved) && saved.length ? saved : ['bones'];  // first look is the skeleton; muscles still load for picks and reps
   for (const L of first) { L.want = L.visible = L.mesh.visible = keep.includes(L.key); }
   for (const k of keep) if (layerByKey[k] && !layerByKey[k].visible) setLayerVisible(layerByKey[k], true);
   renderLayerList();
@@ -2180,7 +2180,7 @@ async function boot() {
   setAnchorHere();
   const start = layerByKey.muscles.parts.find((p) => p.n === 'Rectus femoris muscle' && p.s === 'r');
   const linked = decodeURIComponent(location.hash.match(/^#ex=([^&]+)/)?.[1] || '');  // #ex=<id> opens that exercise
-  if (start && !isNarrow() && !linked) select(start);  // on a phone the card would cover the legs; the whole body is the better first look
+  if (start && layerByKey.muscles.visible && !isNarrow() && !linked) select(start);  // on a phone the card would cover the legs; the whole body is the better first look
   if (camera.aspect < 0.8) camera.position.sub(controls.target).multiplyScalar(1.25).add(controls.target);
   $('#loader').hidden = true;
   requestRender();
