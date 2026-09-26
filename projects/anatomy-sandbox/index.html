@@ -316,7 +316,7 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
     <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noopener">BodyParts3D</a> © The Database Center for Life Science (CC BY-SA 2.1 JP).
     Descriptions: Z-Anatomy, from Wikipedia (CC BY-SA). The meshes here are simplified and rigged from those sources and shared under CC BY-SA 4.0.
     Female organs: <a href="https://humanatlas.io/3d-reference-library" target="_blank" rel="noopener">HRA 3D Reference Object Library</a> (NIH HuBMAP; Kristen Browne, Heidi Schlehlein; CC BY 4.0), from the Visible Human Female, simplified and fitted onto this pelvis here; the breasts are a sculpted model.
-    In Female mode only the organs change: the muscles, skeleton, nerves, most vessels and the skin still come from the male donor.
+    In Female mode the organs change and the skin and fat are reshaped: wider hips, a narrower waist, breasts and a closed urogenital surface. That shape is an estimate made here, not a scan. The vulva is not modelled yet. The muscles, skeleton, nerves and most vessels still come from the male donor.
     Exercises: <a href="https://github.com/yuhonas/free-exercise-db" target="_blank" rel="noopener">free-exercise-db</a> (Unlicense, public domain); its muscle groups are mapped onto the atlas here.
     Movement uses a simplified 19-joint rig; stretch colours are estimates.
   </p>
@@ -630,13 +630,14 @@ const state = { mode: 'explore', colorMode: 'natural', cut: 'off', cutPos: 0.5, 
 // Outside-in list order, and the see-through membranes: opacity to start with, rim (edges glint, faces stay clear), draw order
 const LAYER_ORDER = ['skin', 'fat', 'fascia', 'muscles', 'bones', 'joints', 'attachments', 'vessels', 'nerves', 'organs', 'lymph'];
 const MEMBRANE = { skin: { opacity: 0.6, rim: 0.5, order: 3 }, fat: { opacity: 0.5, rim: 0.45, order: 2 }, fascia: { opacity: 0.5, rim: 0.8, order: 1 } };
-const FAT_U = { value: 0 };  // metres of fat added on the belly; every other region gets its share
+const FAT_U = { value: 0 };  // metres of fat added on the belly (hips in Female mode); every other region gets its share
+const FEM_U = { value: 0 };  // 0 = male skin shape and fat pattern, 1 = female; eased by setSex
 // Eye colours, shared by the skin's copies and the nervous system's own eyes. The cornea is drawn solid, so it takes
 // a dark iris tone instead of looking like a cataract.
 const EYE = { Sclera: '#f1ede4', Iris: '#6a4b33', Retina: '#140d0b', Cornea: '#3a2a20', 'Anterior chamber of eyeball': '#3a2a20' };
 const LAYER_NOTES = {  // shown when the atlas has no description of its own
-  fat: 'Subcutaneous fat (the hypodermis) sits between the skin and the fascia over the muscles. The atlas has no fat, so this layer is drawn from the skin surface, 3 mm under it. The Body fat slider adds thickness in the usual adult male pattern: belly and flanks first, then hips and thighs, chest and back, and arms, with very little on the hands, feet and face.',
-  skin: 'The skin is built from the atlas\'s map of body regions, the surface anatomists use to say where things are. It starts half see-through so you can look at what sits under it. Slide its opacity up for a solid body, or down to look deeper.',
+  fat: 'Subcutaneous fat (the hypodermis) sits between the skin and the fascia over the muscles. The atlas has no fat, so this layer is drawn from the skin surface, 3 mm under it. The Body fat slider adds thickness in the usual adult male pattern: belly and flanks first, then hips and thighs, chest and back, and arms, with very little on the hands, feet and face. In Female mode it follows the usual adult female pattern instead: hips, buttocks and thighs first, then breasts and the lower belly. Both patterns are estimates.',
+  skin: 'The skin is built from the atlas\'s map of body regions, the surface anatomists use to say where things are. It starts half see-through so you can look at what sits under it. Slide its opacity up for a solid body, or down to look deeper. The atlas skin is male. In Female mode it is reshaped by an estimate made here (wider hips, narrower waist and shoulders, breasts sized to hold the atlas breast model), not by a scan.',
 };
 let LAYERS = [], layerByKey = {}, partById = new Map(), rig = null, segIndex = {};
 let bones = [], skeleton = null, skinM = [];
@@ -735,14 +736,14 @@ function makeLayerMaterial(L) {
   const m = new THREE.MeshStandardMaterial({ roughness: L.key === 'bones' ? 0.64 : L.key === 'fascia' ? 0.3 : 0.52, metalness: 0, side: THREE.DoubleSide });
   if (L.key === 'attachments') { m.polygonOffset = true; m.polygonOffsetFactor = -2; m.polygonOffsetUnits = -2; }
   L.uniforms.uRim = { value: MEMBRANE[L.key]?.rim ?? 0 };
-  if (L.fatData) Object.assign(L.uniforms, { uFat: FAT_U, uFatInset: { value: L.key === 'fat' ? -0.003 : 0 } });  // fat sits 3 mm under the skin
+  if (L.fatData) Object.assign(L.uniforms, { uFat: FAT_U, uFem: FEM_U, uFatInset: { value: L.key === 'fat' ? -0.003 : 0 } });  // fat sits 3 mm under the skin
   m.onBeforeCompile = (sh) => {
     Object.assign(sh.uniforms, L.uniforms);
     if (L.fatData) sh.vertexShader = sh.vertexShader
       .replace('#include <common>', `#include <common>
-attribute vec3 fatDir; attribute float fatW; uniform float uFat; uniform float uFatInset;`)
+${FAT_GLSL_PARS}`)
       .replace('#include <begin_vertex>', `#include <begin_vertex>
-transformed += fatDir * (uFat * fatW + uFatInset);`);
+${FAT_GLSL}`);
     sh.vertexShader = sh.vertexShader
       .replace('#include <common>', `#include <common>
 attribute float partIndex;
@@ -765,24 +766,28 @@ if (uRim > 0.0) diffuseColor.a *= mix(1.0, mix(0.22, 1.0, pow(1.0 - abs(dot(norm
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
 totalEmissiveRadiance += uAccent * 0.3 * vHi;`);
   };
-  m.customProgramCacheKey = () => (L.fatData ? 'anatomy-part-fat' : 'anatomy-part');
+  m.customProgramCacheKey = () => (L.fatData ? 'anatomy-part-fat-fem' : 'anatomy-part');
   return m;
 }
+// Skin and fat, in rest space before skinning so the male weights still pose them: the female shape comes in with uFem
+// (offsets in 0.1 mm), then the fat moves out along its direction by the male or female share, blended the same way.
+const FAT_GLSL_PARS = 'attribute vec3 fatDir; attribute float fatW; attribute vec3 femOff; attribute float femW; uniform float uFat; uniform float uFem; uniform float uFatInset;';
+const FAT_GLSL = 'transformed += uFem * femOff * 0.0001 + fatDir * (uFat * mix(fatW, femW, uFem) + uFatInset);';
 function makePickMaterial(L) {
   const fat = !!L.fatData;
   return new THREE.ShaderMaterial({
-    uniforms: { uPartTex: L.uniforms.uPartTex, uPartTexW: L.uniforms.uPartTexW, uLayer: { value: L.index }, ...(fat ? { uFat: FAT_U, uFatInset: L.uniforms.uFatInset } : {}) },
+    uniforms: { uPartTex: L.uniforms.uPartTex, uPartTexW: L.uniforms.uPartTexW, uLayer: { value: L.index }, ...(fat ? { uFat: FAT_U, uFem: FEM_U, uFatInset: L.uniforms.uFatInset } : {}) },
     vertexShader: `#include <common>
 #include <skinning_pars_vertex>
 #include <clipping_planes_pars_vertex>
 attribute float partIndex;
 uniform sampler2D uPartTex; uniform float uPartTexW;
-${fat ? 'attribute vec3 fatDir; attribute float fatW; uniform float uFat; uniform float uFatInset;' : ''}
+${fat ? FAT_GLSL_PARS : ''}
 varying float vPart;
 void main() {
   #include <skinbase_vertex>
   #include <begin_vertex>
-  ${fat ? 'transformed += fatDir * (uFat * fatW + uFatInset);' : ''}
+  ${fat ? FAT_GLSL : ''}
   #include <skinning_vertex>
   #include <project_vertex>
   #include <clipping_planes_vertex>
@@ -923,10 +928,12 @@ async function loadLayer(L, onProgress) {
     const prog = { model: 0, skin: 0 };
     const report = () => onProgress && onProgress(prog.model + prog.skin);
     const fatUrl = rig.fat?.files?.[L.key];  // skin and fat: which way each vertex moves with body fat, and how far
-    const [mbuf, sbuf, fbuf] = await Promise.all([
+    const femUrl = fatUrl && rig.fat?.fem?.[L.key];  // the female skin shape and fat pattern for the same vertices
+    const [mbuf, sbuf, fbuf, mmbuf] = await Promise.all([
       fetchBytes(L.file, (n) => { prog.model = n; report(); }),
       skinUrl ? fetchBytes(skinUrl, (n) => { prog.skin = n; report(); }) : Promise.resolve(null),
       fatUrl ? fetchBytes(fatUrl) : Promise.resolve(null),
+      femUrl ? fetchBytes(femUrl) : Promise.resolve(null),
     ]);
     const d = decodeLayer(mbuf);
     let si, sw;
@@ -953,6 +960,12 @@ async function loadLayer(L, onProgress) {
       if (fbuf[0] !== 0x4d || fbuf[3] !== 0x31 || n !== d.V) throw new Error('Fat data and skin model are out of step.');
       g.setAttribute('fatDir', new THREE.BufferAttribute(new Int8Array(fbuf.buffer, fbuf.byteOffset + 8, n * 3), 3, true));
       g.setAttribute('fatW', new THREE.BufferAttribute(new Uint8Array(fbuf.buffer, fbuf.byteOffset + 8 + n * 3, n), 1, true));
+      // "MVM1" | uint32 count | int16 xyz female offset (0.1 mm) | uint8 female share of the fat thickness
+      const mn = mmbuf ? new DataView(mmbuf.buffer, mmbuf.byteOffset + 4, 4).getUint32(0, true) : -1;
+      if (mmbuf && (mmbuf[0] !== 0x4d || mmbuf[3] !== 0x31 || mn !== d.V)) throw new Error('Female shape and skin model are out of step.');
+      const off = mmbuf ? new Int16Array(mmbuf.buffer.slice(mmbuf.byteOffset + 8, mmbuf.byteOffset + 8 + n * 6)) : new Int16Array(n * 3);
+      g.setAttribute('femOff', new THREE.BufferAttribute(off, 3, false));
+      g.setAttribute('femW', mmbuf ? new THREE.BufferAttribute(new Uint8Array(mmbuf.buffer, mmbuf.byteOffset + 8 + n * 6, n), 1, true) : g.getAttribute('fatW'));
       L.fatData = true;
     }
     L.material = makeLayerMaterial(L);
@@ -1614,7 +1627,8 @@ function setMode(m) {
 // ---------- male / female ----------
 // One shared body: the switch swaps only the parts that differ (sx 'm' or 'f' in parts.json). It never turns a layer
 // on, so a visitor on the skeleton stays on the skeleton.
-const SEX_SUB = { m: 'Z-Anatomy male · 1.71 m · 19 joints', f: 'Female organs on the male atlas · 19 joints' };
+const SEX_SUB = { m: 'Z-Anatomy male · 1.71 m · 19 joints', f: 'Female organs, estimated female skin · 19 joints' };
+let femTarget = 0;  // FEM_U eases toward this, so the skin reshapes instead of jumping
 function setSex(sx, opts = {}) {
   sx = sx === 'f' ? 'f' : 'm';
   const changed = state.sex !== sx;
@@ -1622,13 +1636,16 @@ function setSex(sx, opts = {}) {
   $$('.sexes button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.sex === sx)));
   $('#brandSub').textContent = SEX_SUB[sx];
   store.set('sex', sx);
+  femTarget = sx === 'f' ? 1 : 0;
+  if (opts.quiet) FEM_U.value = femTarget;
+  applyFat();
   if (!changed) return;
   if (selected?.sx && selected.sx !== sx) select(null);
   for (const L of LAYERS) if (L.loaded) recolorLayer(L);
   setHash(exHash);
   if ($('#results') && !$('#results').hidden) runSearch($('#q').value);
   requestRender();
-  if (!opts.quiet) toast(sx === 'f' ? 'Female organs from the NIH Human Reference Atlas. Muscles, bones and skin are still male.' : 'Male organs.');
+  if (!opts.quiet) toast(sx === 'f' ? 'Female organs from the NIH Human Reference Atlas; skin and fat reshaped by estimate. Muscles and bones are still male.' : 'Male organs and skin.');
 }
 $$('.sexes button').forEach((b) => b.addEventListener('click', () => setSex(b.dataset.sex)));
 
@@ -2087,7 +2104,7 @@ $('#showAll').addEventListener('click', showAll);
 function applyFat() {
   const cm = state.fat * (rig?.fat?.maxCm || 4);
   FAT_U.value = cm / 100;
-  $('#fatVal').textContent = cm < 0.05 ? 'as scanned' : `+${cm.toFixed(1)} cm belly`;
+  $('#fatVal').textContent = cm < 0.05 ? (state.sex === 'f' ? 'estimated' : 'as scanned') : `+${cm.toFixed(1)} cm ${state.sex === 'f' ? 'hips' : 'belly'}`;
   requestRender();
 }
 function updateFatRow() { $('#fatRow').hidden = !(rig?.fat && (layerByKey.skin?.want || layerByKey.fat?.want)); }
@@ -2142,6 +2159,10 @@ function update(dt) {
     controls.target.lerpVectors(camTween.t0, camTween.t1, k);
     camera.position.lerpVectors(camTween.p0, camTween.p1, k);
     if (k >= 1) camTween = null;
+    needsRender = true;
+  }
+  if (FEM_U.value !== femTarget) {
+    FEM_U.value = femTarget > FEM_U.value ? Math.min(femTarget, FEM_U.value + dt / 0.6) : Math.max(femTarget, FEM_U.value - dt / 0.6);
     needsRender = true;
   }
   if (state.mode === 'walk') { walkStep(dt); followCamera(dt); }
