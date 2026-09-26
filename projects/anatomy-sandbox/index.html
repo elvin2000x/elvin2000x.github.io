@@ -202,6 +202,8 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 @media (max-width: 760px) {
   .topbar { flex-wrap: wrap; gap: 8px; }
   .brand-name { font-size: 18px; }
+  .sexes button { font-size: 0; padding: 6px 10px; }
+  .sexes button::after { content: attr(data-short); font-size: 13px; }
   .search { order: 3; flex: 1 1 120px; width: auto; margin-left: 0; }
   #exToggle { order: 4; }
   .only-narrow { display: inline-block; order: 4; }
@@ -223,7 +225,11 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 <header class="topbar">
   <div class="brand">
     <span class="brand-name">Anatomy Sandbox</span>
-    <span class="brand-sub">Z-Anatomy male · 1.71 m · 19 joints</span>
+    <span class="brand-sub" id="brandSub">Z-Anatomy male · 1.71 m · 19 joints</span>
+  </div>
+  <div class="seg sexes" role="group" aria-label="Body">
+    <button id="sex-m" data-sex="m" data-short="M" aria-pressed="true" aria-label="Male">Male</button>
+    <button id="sex-f" data-sex="f" data-short="F" aria-pressed="false" aria-label="Female">Female</button>
   </div>
   <div class="seg modes" role="tablist" aria-label="Mode">
     <button role="tab" id="mode-explore" data-mode="explore" aria-selected="true">Explore</button>
@@ -309,6 +315,8 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
     Anatomy: <a href="https://github.com/Z-Anatomy/Models-of-human-anatomy" target="_blank" rel="noopener">Z-Anatomy</a> (CC BY-SA 4.0), built on
     <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html" target="_blank" rel="noopener">BodyParts3D</a> © The Database Center for Life Science (CC BY-SA 2.1 JP).
     Descriptions: Z-Anatomy, from Wikipedia (CC BY-SA). The meshes here are simplified and rigged from those sources and shared under CC BY-SA 4.0.
+    Female organs: <a href="https://humanatlas.io/3d-reference-library" target="_blank" rel="noopener">HRA 3D Reference Object Library</a> (NIH HuBMAP; Kristen Browne, Heidi Schlehlein; CC BY 4.0), from the Visible Human Female, simplified and fitted onto this pelvis here; the breasts are a sculpted model.
+    In Female mode only the organs change: the muscles, skeleton, nerves, most vessels and the skin still come from the male donor.
     Exercises: <a href="https://github.com/yuhonas/free-exercise-db" target="_blank" rel="noopener">free-exercise-db</a> (Unlicense, public domain); its muscle groups are mapped onto the atlas here.
     Movement uses a simplified 19-joint rig; stretch colours are estimates.
   </p>
@@ -618,7 +626,7 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', readTheme)
 new MutationObserver(readTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
 // ---------- app state ----------
-const state = { mode: 'explore', colorMode: 'natural', cut: 'off', cutPos: 0.5, cutFlip: false, xray: false, fat: 0 };
+const state = { mode: 'explore', colorMode: 'natural', cut: 'off', cutPos: 0.5, cutFlip: false, xray: false, fat: 0, sex: 'm' };
 // Outside-in list order, and the see-through membranes: opacity to start with, rim (edges glint, faces stay clear), draw order
 const LAYER_ORDER = ['skin', 'fat', 'fascia', 'muscles', 'bones', 'joints', 'attachments', 'vessels', 'nerves', 'organs', 'lymph'];
 const MEMBRANE = { skin: { opacity: 0.6, rim: 0.5, order: 3 }, fat: { opacity: 0.5, rim: 0.45, order: 2 }, fascia: { opacity: 0.5, rim: 0.8, order: 1 } };
@@ -802,6 +810,7 @@ function writePart(p) {
   else if (state.colorMode === 'exercise' && p.l === 'muscles') rgb = EX_RGB[exRole.get(p) || 0];
   else rgb = naturalColor(p);
   const off = L.hidden.has(p.index) || !!(p.cp && layerByKey[p.cp]?.visible)  // a copy hides while its home layer shows
+    || !!(p.sx && p.sx !== state.sex)  // male-only or female-only part, other body chosen
     || (exOnly && state.colorMode === 'exercise' && p.l === 'muscles' && exRole.get(p) !== 2);  // "Main only": peel the rest away
   d[o] = rgb[0]; d[o + 1] = rgb[1]; d[o + 2] = rgb[2]; d[o + 3] = off ? 0 : 255;
 }
@@ -1602,7 +1611,35 @@ function setMode(m) {
   poseChanged();
 }
 
+// ---------- male / female ----------
+// One shared body: the switch swaps only the parts that differ (sx 'm' or 'f' in parts.json). It never turns a layer
+// on, so a visitor on the skeleton stays on the skeleton.
+const SEX_SUB = { m: 'Z-Anatomy male · 1.71 m · 19 joints', f: 'Female organs on the male atlas · 19 joints' };
+function setSex(sx, opts = {}) {
+  sx = sx === 'f' ? 'f' : 'm';
+  const changed = state.sex !== sx;
+  state.sex = sx;
+  $$('.sexes button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.sex === sx)));
+  $('#brandSub').textContent = SEX_SUB[sx];
+  store.set('sex', sx);
+  if (!changed) return;
+  if (selected?.sx && selected.sx !== sx) select(null);
+  for (const L of LAYERS) if (L.loaded) recolorLayer(L);
+  setHash(exHash);
+  if ($('#results') && !$('#results').hidden) runSearch($('#q').value);
+  requestRender();
+  if (!opts.quiet) toast(sx === 'f' ? 'Female organs from the NIH Human Reference Atlas. Muscles, bones and skin are still male.' : 'Male organs.');
+}
+$$('.sexes button').forEach((b) => b.addEventListener('click', () => setSex(b.dataset.sex)));
+
 // ---------- search ----------
+// Everyday words for the organs, mapped onto the atlas names they mean.
+const ORGAN_SLANG = [
+  ['womb', /uterus/i],
+  ['ovaries', /^ovary$/i],
+  ['fallopian tubes', /uterine tube/i],
+  ['breasts boobs', /breast|mammary|^nipple$|^areola/i],
+];
 // Gym words a lifter types, mapped onto the atlas names they mean.
 const SLANG = [
   ['quads quadriceps', /^(rectus femoris|vastus (lateralis|medialis|intermedius))/i],
@@ -1633,7 +1670,8 @@ function buildSearch() {
   }
   searchIndex = [...groups.values()].map((parts) => {
     const p = parts[0];
-    const slang = p.l === 'muscles' && !PASSIVE_M.has(p.m) ? SLANG.filter(([, rx]) => rx.test(p.n)).map(([w]) => w).join(' ') : '';
+    const slang = p.l === 'muscles' && !PASSIVE_M.has(p.m) ? SLANG.filter(([, rx]) => rx.test(p.n)).map(([w]) => w).join(' ')
+      : p.l === 'organs' ? ORGAN_SLANG.filter(([, rx]) => rx.test(p.n)).map(([w]) => w).join(' ') : '';
     return {
       parts, p, slang, name: p.n.toLowerCase(),
       text: `${p.n} ${parts.map((q) => sideWord(q.s)).join(' ')} ${p.layer.label} ${ROLE[p.m] || ''} ${slang}`.toLowerCase(),
@@ -1650,7 +1688,7 @@ function runSearch(q) {
   const ul = $('#results');
   if (!words.length) { ul.hidden = true; $('#q').setAttribute('aria-expanded', 'false'); return; }
   const terms = words.filter((w) => w !== 'left' && w !== 'right');
-  results = searchIndex.filter((e) => words.every((w) => e.text.includes(w)))
+  results = searchIndex.filter((e) => (!e.p.sx || e.p.sx === state.sex) && words.every((w) => e.text.includes(w)))
     .map((e) => ({ e, r: searchRank(e, terms[0] || words[0]) }))
     .sort((a, b) => a.r[0] - b.r[0] || a.r[1] - b.r[1] || a.r[2] - b.r[2] || a.r[3] - b.r[3] || a.e.name.localeCompare(b.e.name))
     .slice(0, 14).map((x) => x.e);
@@ -1889,7 +1927,12 @@ function playExerciseRep() {
   toggleRep(true);
   if (rep) toast('The rep keeps the exercise colours. Body tab › Colour › Stretch shows muscles lengthen and shorten.', 4200);
 }
-function setHash(h) { try { history.replaceState(null, '', h ? `#${h}` : location.pathname + location.search); } catch { /* sandboxed frame */ } }
+let exHash = '';
+function setHash(h) {  // #ex=<id>, plus &sex=f while the female body is chosen
+  exHash = h || '';
+  const full = [exHash, state.sex === 'f' ? 'sex=f' : ''].filter(Boolean).join('&');
+  try { history.replaceState(null, '', full ? `#${full}` : location.pathname + location.search); } catch { /* sandboxed frame */ }
+}
 function setPanelTab(t) {
   $$('#panel [role="tab"]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === t)));
   $('#bodyTab').hidden = t !== 'body'; $('#exTab').hidden = t !== 'ex';
@@ -2153,6 +2196,8 @@ async function boot() {
   buildSkeleton();
   buildContacts();
   buildSearch();
+  exHash = location.hash.match(/^#(ex=[^&]+)/)?.[1] || '';  // keep an #ex= link while the body is set
+  setSex(location.hash.match(/[#&]sex=([mf])/)?.[1] || store.get('sex', 'm'), { quiet: true });  // before any layer loads, so hidden parts never flash
   loadMyPoses();
   readTheme();
   resize();
