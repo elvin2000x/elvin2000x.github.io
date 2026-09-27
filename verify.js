@@ -8,9 +8,10 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = __dirname;
 
-// Pages excluded from every check: other businesses, retired stubs,
+// Pages excluded from every check: other businesses, retired stubs, parked
+// component fragments (components/: not pages, styled by the page that embeds them),
 // generated-elsewhere pipelines, binaries.
-const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^system\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$/;
+const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio|components)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^system\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$/;
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
@@ -93,7 +94,8 @@ for (const rel of PAGES) {
     idx++;
     const report = TOKENIZED.has(rel) ? fail : warn;
     if (!/width="\d+"/.test(tag) || !/height="\d+"/.test(tag)) report(rel, 'img without width/height: ' + tag.slice(0, 60));
-    if (idx > 2 && !tag.includes('loading=')) report(rel, 'below-fold img not lazy: ' + tag.slice(0, 60));
+    // fetchpriority="high" marks the LCP image: it must never be lazy.
+    if (idx > 2 && !tag.includes('loading=') && !tag.includes('fetchpriority="high"')) report(rel, 'below-fold img not lazy: ' + tag.slice(0, 60));
   }
 
   // DEAD-CTA: href="#" is a broken promise; #anchors must resolve on-page.
@@ -146,6 +148,15 @@ for (const rel of PAGES) {
 })();
 
 // BUILD-IDEMPOTENT: generated pages must match a fresh build.
+// Line endings are normalised: a Windows checkout (autocrlf) is CRLF, a build is LF.
+function eol(s) { return s.replace(/\r\n/g, '\n'); }
+function* builtHtml(dir, rel) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const r = rel ? rel + '/' + e.name : e.name;
+    if (e.isDirectory()) yield* builtHtml(path.join(dir, e.name), r);
+    else if (e.name.endsWith('.html')) yield r;
+  }
+}
 (function () {
   const { execFileSync } = require('child_process');
   const os = require('os');
@@ -162,8 +173,23 @@ for (const rel of PAGES) {
     for (const g of gen) {
       const a = path.join(ROOT, g), b = path.join(tmp, g);
       if (!fs.existsSync(a) || !fs.existsSync(b)) { warn(g, 'missing from build comparison'); continue; }
-      if (fs.readFileSync(a, 'utf8') !== fs.readFileSync(b, 'utf8'))
+      if (eol(fs.readFileSync(a, 'utf8')) !== eol(fs.readFileSync(b, 'utf8')))
         fail(g, 'committed file differs from a fresh build (stale build — run node build.js)');
+    }
+    // REGION-DRIFT: inside every <!-- ep:name --> region build.js fills, the
+    // committed page must hold exactly what the content JSON renders. A hand
+    // edit there is silently lost on the next Studio publish, so it fails here.
+    const REGION = /<!-- ep:([a-z0-9-]+)(?: [^>]*?)? -->\r?\n([\s\S]*?)[ \t]*<!-- \/ep:\1 -->/g;
+    const regions = html => new Map([...eol(html).matchAll(REGION)].map(m => [m[1], m[2]]));
+    for (const rel of builtHtml(tmp, '')) {
+      const a = path.join(ROOT, rel);
+      if (!fs.existsSync(a)) continue;
+      const built = regions(fs.readFileSync(path.join(tmp, rel), 'utf8'));
+      if (!built.size) continue;
+      const committed = regions(fs.readFileSync(a, 'utf8'));
+      for (const [name, body] of built)
+        if (committed.has(name) && committed.get(name) !== body)
+          fail(rel, 'region ep:' + name + ' was edited by hand (differs from content/*.json; edit the JSON or Site Studio, then node build.js)');
     }
   } catch (e) {
     fail('build.js', 'build failed: ' + String(e.message).slice(0, 120));
