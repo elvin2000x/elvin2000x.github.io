@@ -106,6 +106,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .badge-btn img{ width:272px; height:auto; display:block } /* 272px wide = 44px tall tap target */
     .hero-cta{ display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:22px }
     .hero-cta .small{ font-size:15px; color:var(--muted) }
+    .amz-btn{ min-height:var(--tap); display:inline-flex; align-items:center; justify-content:center; padding:0 22px; font-size:17px; font-weight:600 }
+    /* Badge follows the theme: black logo on light, white logo on dark. This page is light only today;
+       the rule is here so the badge stays right if it is reused on a page that has dark mode. */
+    .badge-btn .amz-on-dark{ display:none }
+    [data-theme="dark"] .badge-btn .amz-on-light{ display:none } [data-theme="dark"] .badge-btn .amz-on-dark{ display:block }
+    .badge-btn{ transition:transform .15s } .badge-btn:hover{ transform:translateY(-1px) }
+    .book .formats{ margin:12px 0 }
     @media(min-width:900px){
       .hero{ padding:72px 24px 88px }
       .hero .in--wide{ grid-template-columns:1.25fr .75fr; gap:56px }
@@ -113,6 +120,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       .hero-art .cover{ width:300px }
     }
 
+    /* gimmick: three pains, then the turn */
+    .pains{ list-style:none; margin:8px 0 24px; padding:0; display:grid; gap:10px }
+    .pains li{ display:flex; gap:14px; align-items:center; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:14px 16px; font-size:18px; color:var(--ink) }
+    .pain-ic{ flex:none }
+    .turn{ border-left:4px solid var(--accent); background:var(--bg-2); border-radius:0 var(--r-card) var(--r-card) 0; padding:18px 20px }
+    .turn p{ margin:0 0 8px; font-size:19px }
+    .turn p:last-child{ margin:0 }
+    .turn strong{ font-family:var(--serif); font-size:24px; line-height:1.3; font-weight:600 }
     /* story blocks + one before/after */
     .story p{ font-size:19px; line-height:1.7 }
     .ba-set{ margin:28px 0 }
@@ -226,9 +241,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <p class="hero-sub" id="hook" style="font-weight:600;color:var(--ink)"></p>
       <div class="hero-cta">
         <a class="badge-btn buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon: The Artificial Advantage">
-          <img src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104">
+          <img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
         </a>
         <span class="small">Kindle, paperback and hardcover.</span>
+        <a class="btn btn--primary buy amz-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon">Buy now on Amazon &rarr;</a>
       </div>
     </div>
     <div class="hero-art">
@@ -237,14 +253,20 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   </div>
 </header>
 
-<!-- 4a. From /book.html: The Real Reason It Felt Like A Gimmick -->
-<section class="sec">
-  <div class="in story">
+<!-- 4a. The Real Reason It Felt Like A Gimmick: pains as a list, then one callout (Elvin's review comment, 2026-09-27: less copy, list + visual) -->
+<section class="sec" id="gimmick">
+  <div class="in">
     <span class="eyebrow">The Real Reason It Felt Like A Gimmick</span>
     <h2>You've used AI. So why does it still feel underwhelming?</h2>
-    <p>You typed a question. You got a generic, hedged, vaguely wrong answer. You fixed it yourself and quietly decided the hype was overblown.</p>
-    <p>Here is what nobody told you. <strong>The people getting astonishing results are typing into the same box you are.</strong> They are not smarter and they are not more technical. They learned one thing you were never taught: how to direct the tool instead of just asking it.</p>
-    <p>That single skill is the whole gap. And it is completely learnable.</p>
+    <ul class="pains">
+      <li><svg class="pain-ic" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#f6e4e4"/><path d="M8 8l8 8M16 8l-8 8" stroke="#a33a3a" stroke-width="2.2" stroke-linecap="round"/></svg><span>You asked a question and got a generic answer.</span></li>
+      <li><svg class="pain-ic" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#f6e4e4"/><path d="M8 8l8 8M16 8l-8 8" stroke="#a33a3a" stroke-width="2.2" stroke-linecap="round"/></svg><span>It hedged, padded the reply, or got a fact wrong.</span></li>
+      <li><svg class="pain-ic" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#f6e4e4"/><path d="M8 8l8 8M16 8l-8 8" stroke="#a33a3a" stroke-width="2.2" stroke-linecap="round"/></svg><span>You rewrote it yourself and decided the hype was overblown.</span></li>
+    </ul>
+    <div class="turn">
+      <p><strong>Professionals who get great results type into the same box you do.</strong></p>
+      <p>They learned one skill nobody taught you, which is how to direct the tool. That skill is the whole gap, and you can learn it.</p>
+    </div>
   </div>
 </section>
 
@@ -253,14 +275,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="in story">
     <span class="eyebrow">Why This Book Exists</span>
     <h2>I watched the gap widen every single day inside big tech.</h2>
-    <p>At goeasy I ran an average of $1.2M a month in paid media myself for three years, across two regulated consumer-lending brands. Then Google brought me in to advise the media teams at big advertisers, and the same pattern showed up on both sides of the table. Highly capable professionals were using AI every day and pulling a fraction of what it could deliver. The reason was never intelligence. <strong>Effective AI direction is a skill, and no one had handed them a framework for it.</strong></p>
+    <p>At a large Canadian fintech I ran an average of $1.2M a month in paid media myself for three years, across two regulated consumer-lending brands. Then an adtech giant that is building AI brought me in to advise the media teams at big advertisers, and the same pattern showed up on both sides of the table. Highly capable professionals were using AI every day and pulling a fraction of what it could deliver. The reason was never intelligence. <strong>Effective AI direction is a skill, and no one had handed them a framework for it.</strong></p>
     <p>The whole book rests on one idea: <strong>stop asking AI, start directing it.</strong> Here is what that looks like with the same task and two different people:</p>
 
     <div class="ba-set">
       <div class="ba-item ba-item--before">
         <div class="ba-label">Without a framework</div>
         <div class="ba-prompt">&ldquo;Write me an email to a client about a project delay.&rdquo;</div>
-        <div class="ba-out"><b>20 minutes</b>Generic output, wrong tone. They rewrote the whole thing.</div>
+        <div class="ba-out"><b>10 minutes</b>Generic output, wrong tone. They rewrote the whole thing.</div>
       </div>
       <div class="ba-item ba-item--after">
         <div class="ba-label">With direction</div>
@@ -324,7 +346,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <div class="persona"><h3>The Manager Getting a Team Started</h3><p>Settle on a tool in one afternoon, then build the saved prompts your whole team works from.</p></div>
     </div>
     <a class="badge-btn buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon">
-      <img src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
+      <img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
     </a>
   </div>
 </section>
@@ -338,10 +360,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <h2>The Artificial Advantage</h2>
       <p class="tag2">Stop prompting. Start directing.</p>
       <p>A practical playbook for getting AI to do real work: brief it the way you'd brief a sharp new hire, and get drafts that are ready to use.</p>
-      <p class="formats">Kindle, paperback and hardcover.</p>
       <a class="badge-btn buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon">
-        <img src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
+        <img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
       </a>
+      <p class="formats">Kindle, paperback and hardcover.</p>
+      <a class="btn btn--primary buy amz-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon">Buy now on Amazon &rarr;</a>
     </div>
   </div>
 </section>
@@ -388,7 +411,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <span class="eyebrow">About the Author</span>
       <div class="name">Elvin M. Peters</div>
       <div class="role">Author · Marketing Strategist · A decade in marketing</div>
-      <p>I've spent a decade in marketing, including three years running $40M+ in profitable ad spend for two regulated consumer-lending brands at goeasy. Google then brought me in to advise the media teams at big advertisers, where AI cut my account audits from hours to minutes.</p>
+      <p>I've spent a decade in marketing, including three years running $40M+ in profitable ad spend for two regulated consumer-lending brands at a Canadian fintech. One of the adtech giants building AI then brought me in to advise the media teams at big advertisers, where AI cut my account audits from hours to minutes.</p>
       <p>Today I write and build with AI full-time in Toronto. <em>The Artificial Advantage</em> is Volume 1 of the AI Fluency Series, and Volume 2, <em>The Systematic Advantage</em>, is in progress.</p>
     </div>
   </div>
