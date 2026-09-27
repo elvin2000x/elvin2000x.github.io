@@ -38,12 +38,13 @@
  },
  "pages": {
   "index.html": {
-   "brandHref": "#top",
-   "aboutHref": "#about",
-   "themebtn": true,
-   "ctaArrow": true,
-   "brandStyle": "multiline",
-   "indent": 2
+   "style": "buybar",
+   "links": [
+    { "label": "Free Toolkit", "href": "/free/" },
+    { "label": "Newsletter", "href": "/newsletter/" },
+    { "label": "Contact", "href": "/contact/" }
+   ],
+   "cta": { "label": "Get the book", "href": "https://www.amazon.com/dp/B0H4X2S2JD", "amazon": true, "aria": "Get the book on Amazon" }
   },
   "series/index.html": {
    "brandHref": "/",

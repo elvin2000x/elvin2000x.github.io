@@ -1,0 +1,24 @@
+#!/bin/sh
+# The CLAUDE.md push gate, enforced. Installed by: node scripts/install-hooks.js
+# Runs in whichever worktree is pushing. Blocks the push when the build throws,
+# when the build changes a committed file (the commit is stale), or when
+# verify.js is not GREEN.
+cd "$(git rev-parse --show-toplevel)" || exit 1
+log="$(mktemp)"
+before="$(git diff --name-only)"
+if ! node build.js >"$log" 2>&1; then
+  tail -5 "$log"; rm -f "$log"
+  echo "pre-push: node build.js failed, push blocked."; exit 1
+fi
+after="$(git diff --name-only)"
+if [ "$before" != "$after" ]; then
+  rm -f "$log"
+  echo "pre-push: node build.js changed committed files. Commit them, then push again:"
+  git diff --name-only; exit 1
+fi
+if ! node verify.js >"$log" 2>&1; then
+  sed -n '/^FAIL/,$p' "$log" | head -30; rm -f "$log"
+  echo "pre-push: verify.js is not GREEN, push blocked."; exit 1
+fi
+tail -1 "$log"; rm -f "$log"
+exit 0
