@@ -151,6 +151,7 @@
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/google-ads/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://elvinpeters.com/google-ads/"/>
   </url>
+  <url><loc>https://elvinpeters.com/newsletter/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/press/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/privacy.html</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/products/</loc><priority>0.6</priority></url>
@@ -176,7 +177,6 @@
   <url><loc>https://elvinpeters.com/systematic-advantage.html</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/team-ai-workshop/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/tos.html</loc><priority>0.6</priority></url>
-  <url><loc>https://elvinpeters.com/updates/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/vault/</loc><priority>0.6</priority></url>
   <url><loc>https://elvinpeters.com/writing/</loc><priority>0.8</priority></url>
   <url><loc>https://elvinpeters.com/writing/assembly-line/</loc><priority>0.6</priority></url>
