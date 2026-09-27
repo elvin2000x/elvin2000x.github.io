@@ -1,12 +1,12 @@
 <!DOCTYPE html><html lang="en" data-theme="book"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Free AI Toolkit | Elvin Peters</title>
-<meta name="description" content="Free AI Toolkit: practical guides for getting AI to do real work, starting with the Director's Cheat Sheet from The Artificial Advantage.">
-<link rel="canonical" href="https://elvinpeters.com/free/">
-<meta property="og:title" content="Free AI Toolkit | Elvin Peters">
-<meta property="og:description" content="Practical guides for getting AI to do real work, free to download.">
+<title>The Director's Cheat Sheet (Free) | Elvin Peters</title>
+<meta name="description" content="Free: the CLEAR system from The Artificial Advantage on a few printable pages. Give AI clear direction, fix a weak answer, and check it before you use it.">
+<link rel="canonical" href="https://elvinpeters.com/free/directors-cheat-sheet/">
+<meta property="og:title" content="The Director's Cheat Sheet (Free)">
+<meta property="og:description" content="Free: the CLEAR system from The Artificial Advantage on a few printable pages. Give AI clear direction, fix a weak answer, and check it before you use it.">
 <meta property="og:image" content="https://elvinpeters.com/img/magnets/directors-cheat-sheet.webp">
-<meta property="og:url" content="https://elvinpeters.com/free/">
+<meta property="og:url" content="https://elvinpeters.com/free/directors-cheat-sheet/">
 <!-- GA4 + Google Ads -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
@@ -20,63 +20,62 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/img/magnets/directors-cheat-sheet.webp">
 <link rel="stylesheet" href="/css/site.css">
 <script src="/js/site.js"></script>
 <style>
-/* Free AI Toolkit hub: light only (data-theme="book", Rule 34), phone first, 18px body. Tokens only, no hex. */
+/* starter-slice LP: light only (data-theme="book", Rule 34), phone first, 18px body. Tokens only, no hex. */
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:var(--lh-body);font-size:18px}
 .mwrap{max-width:var(--w-wide);margin:0 auto;padding:0 16px}
 .mtop{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
 .brand{font-family:var(--serif);font-weight:600;font-size:var(--fs-lead);color:var(--ink);text-decoration:none;letter-spacing:.02em;min-height:var(--tap);display:flex;align-items:center}
 .brand b{color:var(--accent-ink);font-weight:600}
-.hub-head{padding:8px 0 18px;max-width:680px}
-.hub-head h1{font-family:var(--serif);font-weight:600;font-size:clamp(36px,6vw,60px);line-height:var(--lh-tight);margin:0 0 8px}
-.hub-head p{color:var(--ink-2);font-size:19px;margin:0}
-.starter{display:grid;grid-template-columns:1fr;gap:18px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:20px;box-shadow:var(--shadow)}
-.starter img{display:block;width:100%;height:auto;border-radius:var(--r-sm)}
-.starter h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.4vw,36px);line-height:var(--lh-snug);margin:6px 0 8px}
-.starter .desc{color:var(--ink-2);margin:0 0 16px}
-.starter label{display:block;font-weight:600;margin-bottom:8px}
+.lp{display:grid;grid-template-columns:1fr;grid-template-areas:"head" "form" "shot" "more";gap:22px;padding:8px 0 48px}
+.head{grid-area:head}.formbox{grid-area:form}.shot{grid-area:shot}.more{grid-area:more}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,58px);line-height:var(--lh-tight);letter-spacing:-.01em;margin:10px 0 12px}
+.sub{font-size:19px;color:var(--ink-2);max-width:var(--measure);margin:0}
+.shot img{display:block;width:100%;height:auto;border-radius:var(--r-card)}
+.mcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:20px;box-shadow:var(--shadow)}
+.mcard label{display:block;font-weight:600;font-size:18px;margin-bottom:8px}
 .fieldrow{margin-bottom:12px}
 .btn--full{width:100%;min-height:52px;font-size:18px}
 .fine{font-size:var(--fs-sm);color:var(--muted);text-align:center;margin-top:10px}
 .msg{font-size:16px;margin-top:12px;padding:11px 13px;border-radius:var(--r-sm);display:none}
 .msg.err{display:block;border:1px solid var(--warn);color:var(--warn)}
-.done{display:none}.done.on{display:block}
-.done h3{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);margin:0 0 8px}
-.done p{color:var(--ink-2);margin:0 0 14px}
+.done{display:none;text-align:center}.done.on{display:block}
+.done .tick{width:56px;height:56px;border-radius:50%;border:1px solid var(--ok);display:grid;place-items:center;font-size:26px;color:var(--ok);margin:0 auto 14px}
+.done h2{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);margin-bottom:8px}
+.done p{color:var(--ink-2);margin-bottom:16px}
+.done .nudge{font-size:16px;color:var(--muted);margin:16px 0 0}
+.done .nudge a{color:var(--accent-ink);font-weight:600}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.more-h{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.4vw,36px);margin:44px 0 14px}
-.cards{display:grid;grid-template-columns:1fr;gap:14px}
-.mag{display:flex;gap:16px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:18px;text-decoration:none;transition:transform var(--fast),border-color var(--fast)}
-.mag>div{display:flex;flex-direction:column;flex:1;align-self:stretch}
-.mag:hover{transform:translateY(-3px);border-color:var(--accent)}
-.mag img{width:72px;height:auto;border-radius:6px;flex:none;box-shadow:0 10px 24px -14px rgba(0,0,0,.4)} /* bp-exempt: radius matches thumbnail scale */
-.mag h3{color:var(--ink);font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:var(--lh-snug);margin:0 0 6px}
-.mag p{color:var(--ink-2);font-size:16px;margin:0;flex:1}
-.mag .go{color:var(--accent-ink);font-weight:700;font-size:16px;margin-top:auto;padding-top:10px;display:inline-block}
-.bought{text-align:center;font-family:var(--serif);font-size:clamp(22px,2.6vw,28px);margin:44px 0 40px}
+.blist{list-style:none;margin:0 0 20px;padding:0}
+.blist li{position:relative;padding:8px 0 8px 28px}
+.blist li::before{content:"";position:absolute;left:2px;top:18px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.byline{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line-soft);padding-top:16px}
+.byline img{width:48px;height:48px;border-radius:50%;object-fit:cover;flex:none}
+.byline span{font-size:16px;color:var(--ink-2)}
+.withbook{margin:18px 0 0;font-size:16px;color:var(--muted)}
+.withbook a{color:var(--accent-ink);font-weight:600}
 .mfoot{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:16px;text-align:center}
 .mfoot a{color:var(--muted);text-decoration:none;display:inline-block;padding:10px 4px}
 .mfoot a:hover{color:var(--accent-ink)}
 @media(min-width:920px){
-  .starter{grid-template-columns:1fr 1fr;gap:40px;padding:32px;align-items:center}
-  .cards{grid-template-columns:repeat(3,1fr)}
+  .lp{grid-template-columns:1.05fr .95fr;grid-template-areas:"head shot" "form shot" "more shot";column-gap:56px;row-gap:22px;padding:28px 0 64px;align-items:start}
+  .shot{position:sticky;top:24px}
+  .formbox{max-width:480px}
 }
 </style></head><body>
 <div class="mwrap">
 <div class="mtop"><a class="brand" href="/">Elvin <b>Peters</b></a></div>
-<main>
-<div class="hub-head">
-<h1>Free AI Toolkit</h1>
-<p>Practical guides for getting AI to do real work, free to download.</p>
+<main class="lp">
+<div class="head">
+<span class="label">Free from The Artificial Advantage</span>
+<h1>Turn generic AI answers into work you can send</h1>
+<p class="sub">The CLEAR system from The Artificial Advantage, on a few printable pages you can keep by your desk.</p>
 </div>
-
-<section class="starter" id="card" aria-labelledby="starter-h">
-<div>
-<span class="label">Start here</span>
-<h2 id="starter-h">The Director's Cheat Sheet</h2>
-<p class="desc">The method from The Artificial Advantage on a few printable pages. It shows you how to give AI clear direction, fix a weak answer, and check what it tells you before you use it.</p>
+<div class="formbox">
+<div class="mcard" id="card">
 <div class="form-in">
 <form id="f" novalidate>
 <label for="email">Your email</label>
@@ -88,46 +87,47 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:v
 </form>
 </div>
 <div class="done" id="done" tabindex="-1">
-<h3>Your cheat sheet is ready</h3>
+<div class="tick" aria-hidden="true">&#10003;</div>
+<h2>Your cheat sheet is ready</h2>
 <p>Download it below. I also sent you a short email: tap confirm and a copy lands in your inbox, so you can find it later.</p>
-<a class="btn btn--primary btn--full" href="/dl/Directors-Cheat-Sheet.pdf" target="_blank" rel="noopener">Download the cheat sheet (PDF)</a>
+<a class="btn btn--primary btn--full" id="dl" href="/dl/Directors-Cheat-Sheet.pdf" target="_blank" rel="noopener">Download the cheat sheet (PDF)</a>
+<p class="nudge">When you want the chapters behind each page, <a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">The Artificial Advantage is on Amazon</a>.</p>
 </div>
 </div>
-<a href="/free/directors-cheat-sheet/"><img src="/img/magnets/directors-cheat-sheet.webp" alt="The Director's Cheat Sheet: the cover and the first page, The CLEAR System" width="1200" height="900" fetchpriority="high"></a>
-</section>
-
-<h2 class="more-h">More free guides</h2>
-<div class="cards">
-<a class="mag" href="/free/free-chapter/"><img src="/img/cover-hero.webp" alt="" width="600" height="960" loading="lazy"><div><h3>The Artificial Advantage: Free Chapter</h3><p>Read a full chapter of the book that teaches non-technical professionals to master AI.</p><span class="go">Get it free &rarr;</span></div></a>
-<a class="mag" href="/free/50-prompts/"><img src="/img/magnets/50-prompts.webp" alt="" width="440" height="704" loading="lazy"><div><h3>50 of the Best AI Prompts</h3><p>Fifty ready-to-use prompts for real work, so you always know what to type.</p><span class="go">Get it free &rarr;</span></div></a>
-<a class="mag" href="/free/anti-hallucination/"><img src="/img/magnets/anti-hallucination.webp" alt="" width="440" height="622" loading="lazy"><div><h3>Tell Me the Truth: The Anti-Hallucination Field Guide</h3><p>Make AI stop making things up, and learn exactly when not to trust it.</p><span class="go">Get it free &rarr;</span></div></a>
 </div>
-
-<p class="bought">Bought the book? Your full Toolkit is inside it.</p>
+<div class="shot"><img src="/img/magnets/directors-cheat-sheet.webp" alt="The Director's Cheat Sheet: the cover and the first page, The CLEAR System" width="1200" height="900" fetchpriority="high"></div>
+<div class="more">
+<ul class="blist"><li>Get a usable first draft by giving every prompt a Role, a Task and a Constraint (the RTC framework).</li><li>Fix a weak answer with one targeted follow-up, using the Diagnostic Ladder.</li><li>Know which AI answers to check before they reach a client, and how much checking the stakes call for (the Two-Step Verification Method).</li></ul>
+<div class="byline"><img src="/img/headshot.jpg" alt="Elvin Peters" width="48" height="48" loading="lazy"><span>From Elvin M. Peters, who wrote <em>The Artificial Advantage</em> after a decade in marketing and $40M+ in profitable ad spend.</span></div>
+<p class="withbook">This sheet is one piece of the book's Toolkit. Readers get the full Toolkit and the Companion Library with <a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">the book</a>.</p>
+</div>
 </main>
-<div class="mfoot"><a href="/">elvinpeters.com</a> &nbsp;&middot;&nbsp; <a href="/privacy.html">Privacy</a></div>
+<div class="mfoot"><a href="/free/">More free guides</a> &nbsp;&middot;&nbsp; <a href="/">elvinpeters.com</a> &nbsp;&middot;&nbsp; <a href="/privacy.html">Privacy</a></div>
 </div>
 <script>
 (function(){
-  // Same magnet as /free/directors-cheat-sheet/, tagged with its own position so the lead DB tells the two forms apart.
-  var SLUG="directors-cheat-sheet", POS="free-hub", TITLE="The Director's Cheat Sheet";
+  var SLUG="directors-cheat-sheet", TITLE="The Director's Cheat Sheet";
+  var ASIN="B0H4X2S2JD", AMAZON="https://www.amazon.com/dp/"+ASIN;
   var GADS="AW-637214471/bylsCMuW0NUcEIe-7K8C";
-  var f=document.getElementById('f'),msg=document.getElementById('msg'),btn=document.getElementById('btn'),BTN=btn.textContent;
+  var f=document.getElementById('f'),msg=document.getElementById('msg'),btn=document.getElementById('btn');
+  Array.prototype.forEach.call(document.querySelectorAll('[data-amazon]'),function(a){a.href=AMAZON;});
   function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
   function fail(t){msg.className='msg err';msg.textContent=t;btn.disabled=false;btn.textContent=BTN;}
+  var BTN=btn.textContent;
   function source(){
-    var base='magnet:'+SLUG,b=['pos='+POS];
-    try{var p=new URLSearchParams(location.search);
+    var base='magnet:'+SLUG;
+    try{var p=new URLSearchParams(location.search),b=[];
       ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=p.get(k);if(v)b.push(k.replace('utm_','')+'='+v);});
-      var g=p.get('gclid');if(g)b.push('gclid='+g);var fc=p.get('fbclid');if(fc)b.push('fbclid='+fc.slice(0,40));
+      var g=p.get('gclid');if(g)b.push('gclid='+g);var fc=p.get('fbclid');if(fc)b.push('fbclid='+fc.slice(0,40));var tw=p.get('twclid');if(tw)b.push('twclid='+tw);
+      if(b.length)base=(base+' | '+b.join('&')).slice(0,290);
     }catch(e){}
-    return (base+' | '+b.join('&')).slice(0,290);
+    return base;
   }
   function convert(email){
     try{if(email&&typeof gtag==='function')gtag('set','user_data',{email:email});}catch(e){}
     try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
     try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG});}catch(e){}
-    try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG+'-'+POS});}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG});}catch(e){}
   }
   function reveal(){
     document.querySelector('#card .form-in').style.display='none';
