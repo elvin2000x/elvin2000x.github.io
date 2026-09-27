@@ -305,7 +305,8 @@ for (const rel of PAGES) {
 
 // KEY PAGES exist and are non-trivial. links/index.html is not here: since #258 it is
 // a small forwarder to links.elvinpeters.com, by design.
-for (const key of ['index.html', 'book.html', 'services/index.html', 'contact/index.html',
+// book.html is not here either: since 2026-09-27 it is a redirect stub to the homepage.
+for (const key of ['index.html', 'services/index.html', 'contact/index.html',
   'projects/index.html', 'writing/index.html']) {
   try {
     if (fs.statSync(path.join(ROOT, key)).size < 2000) fail(key, 'suspiciously small');
