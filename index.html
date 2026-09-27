@@ -64,161 +64,146 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   {"@context":"https://schema.org","@type":"Book","name":"The Artificial Advantage","alternativeHeadline":"Mastering AI in the Modern Workplace","author":{"@type":"Person","name":"Elvin M. Peters","url":"https://elvinpeters.com/","sameAs":["https://www.linkedin.com/in/elvinmpeters"]},"isbn":"9798254324782","bookFormat":["https://schema.org/Paperback","https://schema.org/Hardcover","https://schema.org/EBook"],"image":"https://elvinpeters.com/cover.png","url":"https://elvinpeters.com/","workExample":{"@type":"Book","url":"https://www.amazon.com/dp/B0H4X2S2JD"}}
   </script>
   <style>
-    /* Homepage v2 (plan v2, 2026-09-27). Light only: data-theme="book" never flips (Rule 34).
-       Phone first: one column, 18px body on phones, every section one idea. */
+    /* Homepage v3 (2026-09-27): one argument top to bottom. Light only (Rule 34). Phone first.
+       One heading style (serif, sentence case), one button style, cards only for the demo and the review. */
     :root{ --wrap: 680px; --wide: 1040px; }
     body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:18px; line-height:1.6; }
     @media(min-width:900px){ body{ font-size:17px } }
     a{ color:var(--accent-ink) }
     a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible{ outline:2px solid var(--accent-hi); outline-offset:2px }
     img{ max-width:100%; height:auto }
+    h1, h2, h3{ font-family:var(--serif); font-weight:600; letter-spacing:-.01em; text-wrap:balance; color:var(--ink) }
 
-    /* nav: four items, burger on phones via site.js */
+    /* nav: links go into the burger on phones; the buy button always stays in the bar */
     .nav{ position:sticky; top:0; z-index:40; background:rgba(255,255,255,.96); backdrop-filter:blur(8px); border-bottom:1px solid var(--line-soft) }
-    .nav .container{ max-width:var(--wide); margin:0 auto; padding:0 16px; height:var(--nav-h); display:flex; align-items:center; gap:16px }
-    .brandmark{ display:flex; align-items:center; min-height:var(--tap); gap:8px; font:600 18px/1 var(--serif); color:var(--ink); text-decoration:none; letter-spacing:.01em }
+    .nav .container{ max-width:var(--wide); margin:0 auto; padding:0 16px; height:var(--nav-h); display:flex; align-items:center; gap:12px }
+    .brandmark{ display:flex; align-items:center; min-height:var(--tap); gap:8px; font:600 18px/1 var(--serif); color:var(--ink); text-decoration:none }
     .nav .links{ margin-left:auto; display:flex; align-items:center; gap:4px }
     .nav .links a{ color:var(--ink-2); text-decoration:none; font-size:15px; font-weight:500; padding:10px 12px; border-radius:var(--r-sm) }
     .nav .links a:hover{ color:var(--ink); background:var(--bg-2) }
-    .nav .links a[aria-current="page"]{ color:var(--ink); font-weight:600 }
+    .nav-buy{ min-height:var(--tap); display:inline-flex; align-items:center; padding:0 16px; font-size:15px; font-weight:600; white-space:nowrap }
+    @media(max-width:920px){ .nav-buy{ margin-left:auto } }
 
-    .sec{ padding:56px 16px }
-    @media(min-width:900px){ .sec{ padding:88px 24px } }
+    .sec{ padding:64px 16px }
+    @media(min-width:900px){ .sec{ padding:96px 24px } }
     .sec--tint{ background:var(--bg-2) }
     .in{ max-width:var(--wrap); margin:0 auto }
     .in--wide{ max-width:var(--wide); margin:0 auto }
-    .eyebrow{ display:block; font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:12px }
-    .sec h2{ font-size:clamp(30px,6.4vw,44px); margin-bottom:18px }
+    .eyebrow{ display:block; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:10px }
+    .sec h2{ font-size:clamp(30px,6.4vw,44px); line-height:1.15; margin:0 0 18px }
     .sec p{ margin:0 0 16px; color:var(--ink-2) }
     .sec p strong{ color:var(--ink); font-weight:600 }
-    .center{ text-align:center }
+    .lede{ font-size:20px; line-height:1.55 }
 
-    /* hero */
-    .hero{ background:linear-gradient(170deg,var(--panel) 0%,var(--bg-2) 100%); padding:36px 16px 48px }
-    .hero .in--wide{ display:grid; gap:28px; align-items:center }
-    .hero h1{ font-size:clamp(40px,10vw,68px); margin-bottom:18px }
-    .hero h1 span{ font-style:italic; color:var(--accent-ink) }
-    .hero-sub{ font-size:19px; color:var(--ink-2); margin:0 0 14px; max-width:36em }
-    .hero-sub:empty{ display:none }
-    .hero-art{ display:flex; flex-direction:column; align-items:center; gap:18px; order:-1 }
-    .hero-art .cover{ width:min(62vw,260px); border-radius:4px; box-shadow:0 24px 50px -24px rgba(10,24,40,.55) }
-    .badge-btn{ display:inline-block; line-height:0; border-radius:10px }
-    .badge-btn img{ width:272px; height:auto; display:block } /* 272px wide = 44px tall tap target */
-    .hero-cta{ display:flex; flex-direction:column; align-items:flex-start; gap:12px; margin-top:22px }
-    .hero-cta .small{ font-size:15px; color:var(--muted) }
-    .amz-btn{ min-height:var(--tap); display:inline-flex; align-items:center; justify-content:center; padding:0 22px; font-size:17px; font-weight:600 }
-    /* Badge follows the theme: black logo on light, white logo on dark. This page is light only today;
-       the rule is here so the badge stays right if it is reused on a page that has dark mode. */
+    /* one button style, one secondary link style */
+    .amz-btn{ min-height:52px; display:inline-flex; align-items:center; justify-content:center; padding:0 26px; font-size:18px; font-weight:600 }
+    .buyblock{ display:flex; flex-direction:column; align-items:flex-start; gap:12px }
+    .buyblock--center{ align-items:center; text-align:center }
+    .avail{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-size:15px; color:var(--muted) }
+    .badge-btn{ display:inline-flex; align-items:center; min-height:var(--tap); line-height:0 }
+    .badge-btn img{ width:150px; height:auto; display:block }
     .badge-btn .amz-on-dark{ display:none }
     [data-theme="dark"] .badge-btn .amz-on-light{ display:none } [data-theme="dark"] .badge-btn .amz-on-dark{ display:block }
-    .badge-btn{ transition:transform .15s } .badge-btn:hover{ transform:translateY(-1px) }
-    .book .formats{ margin:12px 0 }
+    .sample{ font-size:16px; font-weight:600; text-decoration:none; min-height:var(--tap); display:inline-flex; align-items:center }
+    .sample:hover{ text-decoration:underline }
+
+    /* hero: words and button first on phones, the book beside them on desktop */
+    .hero{ background:linear-gradient(170deg,var(--panel) 0%,var(--bg-2) 100%); padding:32px 16px 48px }
+    .hero .in--wide{ display:grid; gap:24px; align-items:center }
+    .hero h1{ font-size:clamp(38px,9.6vw,66px); line-height:1.08; margin:0 0 16px }
+    .hero h1 span{ font-style:italic; color:var(--accent-ink) }
+    .hero-sub{ font-size:19px; color:var(--ink-2); margin:0 0 20px; max-width:34em }
+    .hero-sub:empty{ display:none }
+    .trust{ font-size:15px; color:var(--muted); margin:18px 0 0; max-width:34em; padding-top:14px; border-top:1px solid var(--line) }
+    .trust strong{ color:var(--ink-2) }
+    .hero-art{ display:flex; justify-content:center }
+    .hero-art img{ width:min(52vw,220px) }
     @media(min-width:900px){
-      .hero{ padding:72px 24px 88px }
-      .hero .in--wide{ grid-template-columns:1.25fr .75fr; gap:56px }
-      .hero-art{ order:0 }
-      .hero-art .cover{ width:300px }
+      .hero{ padding:64px 24px 80px }
+      .hero .in--wide{ grid-template-columns:1.3fr .7fr; gap:48px }
+      .hero-art img{ width:320px }
     }
 
-    /* gimmick: three pains, then the turn */
-    .pains{ list-style:none; margin:8px 0 24px; padding:0; display:grid; gap:10px }
-    .pains li{ display:flex; gap:14px; align-items:center; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:14px 16px; font-size:18px; color:var(--ink) }
-    .pain-ic{ flex:none }
-    .turn{ border-left:4px solid var(--accent); background:var(--bg-2); border-radius:0 var(--r-card) var(--r-card) 0; padding:18px 20px }
-    .turn p{ margin:0 0 8px; font-size:19px }
-    .turn p:last-child{ margin:0 }
-    .turn strong{ font-family:var(--serif); font-size:24px; line-height:1.3; font-weight:600 }
-    /* story blocks + one before/after */
-    .story p{ font-size:19px; line-height:1.7 }
-    .ba-set{ margin:28px 0 }
-    .ba-more{ margin:0 0 28px }
-    .ba-more > summary{ list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:12px; align-items:center; min-height:var(--tap); padding:12px 16px; border:1px solid var(--line); border-radius:var(--r-card); background:var(--panel); font-weight:600; color:var(--ink) }
-    .ba-more > summary::-webkit-details-marker{ display:none }
-    .ba-more > summary::after{ content:"+"; font-size:22px; color:var(--accent-ink) }
-    .ba-more[open] > summary::after{ content:"–" }
-    .ba-more[open] > summary{ margin-bottom:20px }
+    /* the demo: two chat panels */
+    .demo-pair{ display:grid; gap:14px; margin:8px 0 18px }
+    @media(min-width:760px){ .demo-pair{ grid-template-columns:1fr 1fr } }
+    .chat{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:18px }
+    .chat--after{ border-color:var(--accent); box-shadow:0 12px 30px -22px rgba(10,24,40,.45) }
+    .chat-h{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:12px; font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted) }
+    .chat--after .chat-h span:first-child{ color:var(--accent-ink) }
+    .timer{ font-size:14px; letter-spacing:0; text-transform:none; font-weight:700; padding:4px 10px; border-radius:999px; font-variant-numeric:tabular-nums }
+    .timer--slow{ background:#f6e4e4; color:#8f2f2f }
+    .timer--fast{ background:#e2f1e6; color:#1f6b3a }
+    .bubble{ background:var(--bg-2); border-radius:14px 14px 14px 4px; padding:12px 14px; font-size:16px !important; color:var(--ink) !important; margin:0 0 12px !important }
+    .chat--after .bubble{ background:#fbf5e6 }
+    .chat-out{ font-size:16px !important; margin:0 !important }
+    .res{ display:block; font-family:var(--serif); font-size:17px; color:var(--ink) }
+    .more{ margin:6px 0 24px }
+    .more > summary{ list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:8px; min-height:var(--tap); font-weight:600; color:var(--accent-ink) }
+    .more > summary::-webkit-details-marker{ display:none }
+    .more > summary::after{ content:"+"; font-size:22px }
+    .more[open] > summary::after{ content:"–" }
+    .more[open] > summary{ margin-bottom:14px }
+    .pullline{ font:italic 24px/1.4 var(--serif); color:var(--ink); margin:8px 0 0 }
 
-    /* personas: vertical cards (Justine, Aug) */
-    .personas{ display:grid; gap:14px; margin:8px 0 28px }
-    .persona{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:20px 22px }
-    .persona h3{ font-size:23px; margin-bottom:6px }
-    .persona p{ margin:0; font-size:17px }
+    /* the review: one big quote, two small labelled lines */
+    .quote{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:28px 24px }
+    .stars{ color:var(--accent); letter-spacing:2px; font-size:20px }
+    .vp{ font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ok); margin-left:6px }
+    .quote blockquote{ margin:14px 0 16px; font:500 clamp(24px,5.4vw,32px)/1.3 var(--serif); color:var(--ink) }
+    .quote .meta{ font-size:15px; color:var(--muted); margin:0 }
+    .quote details{ margin-top:10px }
+    .quote summary{ cursor:pointer; min-height:var(--tap); display:inline-flex; align-items:center; font-weight:600; color:var(--accent-ink) }
+    .quote details p{ font-size:17px }
+    .friends{ display:grid; gap:18px; margin-top:28px }
+    @media(min-width:760px){ .friends{ grid-template-columns:1fr 1fr } }
+    .friends figure{ margin:0; padding-left:16px; border-left:3px solid var(--line-strong) }
+    .friends blockquote{ margin:0 0 6px; font:italic 21px/1.4 var(--serif); color:var(--ink) }
+    .friends figcaption{ font-size:14px; color:var(--muted) }
 
-    /* book component */
-    .book{ display:grid; gap:24px; align-items:center }
-    .book img.cover{ width:min(56vw,240px); margin:0 auto; border-radius:4px; box-shadow:0 20px 44px -24px rgba(10,24,40,.55) }
-    .book .tag2{ font:italic 24px/1.3 var(--serif); color:var(--accent-ink); margin:0 0 12px }
-    .book .formats{ font-size:15px; color:var(--muted) }
-    @media(min-width:900px){ .book{ grid-template-columns:auto 1fr; gap:48px } .book img.cover{ width:260px } }
-
-    /* complete system: plain tap-to-open cards */
-    .parts{ display:grid; gap:12px; margin-top:8px }
-    .part{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card) }
-    .part > summary{ list-style:none; cursor:pointer; padding:18px 20px; display:grid; grid-template-columns:1fr auto; gap:4px 12px; align-items:start; min-height:var(--tap) }
+    /* what you'll be able to do: plain rows, no boxes */
+    .parts{ margin:8px 0 28px; border-top:1px solid var(--line) }
+    .part{ border-bottom:1px solid var(--line) }
+    .part > summary{ list-style:none; cursor:pointer; padding:18px 0; display:grid; grid-template-columns:1fr auto; gap:4px 12px; min-height:var(--tap) }
     .part > summary::-webkit-details-marker{ display:none }
-    .part .pn{ font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink) }
-    .part .pt{ grid-column:1; font:600 22px/1.25 var(--serif); color:var(--ink) }
-    .part .po{ grid-column:1; font-size:16px; color:var(--ink-2); line-height:1.5 }
-    .part .pi{ grid-row:1 / span 3; grid-column:2; align-self:center; width:32px; height:32px; border-radius:50%; border:1px solid var(--line-strong); display:grid; place-items:center; color:var(--accent-ink); font-size:20px; line-height:1 }
+    .part .pn{ font-size:13px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-ink) }
+    .part .pt{ grid-column:1; font:600 22px/1.3 var(--serif); color:var(--ink) }
+    .part .pi{ grid-row:1 / span 2; grid-column:2; align-self:center; font-size:24px; color:var(--accent-ink) }
     .part[open] .pi{ transform:rotate(45deg) }
-    .part ul{ margin:0; padding:0 20px 18px 40px; color:var(--ink-2); font-size:16px }
+    .part ul{ margin:0; padding:0 0 18px 20px; color:var(--ink-2); font-size:16px }
     .part li{ margin:6px 0 }
     @media (prefers-reduced-motion:no-preference){ .part .pi{ transition:transform .2s } }
 
-    /* reviews */
-    .rv-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px }
-    .rv-nav{ display:flex; gap:8px; margin-bottom:18px }
-    .rv-btn{ width:var(--tap); height:var(--tap); border-radius:50%; border:1px solid var(--line-strong); background:var(--panel); color:var(--accent-ink); font-size:20px; cursor:pointer }
-    .rv-btn:hover{ border-color:var(--accent) }
-    .rv-track{ display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 2px 12px; margin:0 -2px; scrollbar-width:thin }
-    .rv-track > .review{ flex:0 0 84%; box-sizing:border-box; scroll-snap-align:start; margin:0 }
-    .review--short{ display:flex; flex-direction:column; justify-content:space-between }
-    .review .rq{ font:italic 24px/1.35 var(--serif); color:var(--ink); margin:4px 0 16px }
-    .rv-hint{ font-size:14px; color:var(--muted); margin:6px 0 0 }
-    @media(min-width:900px){ .rv-track > .review{ flex-basis:calc((100% - 28px) / 3) } .rv-hint{ display:none } }
-    @media (prefers-reduced-motion:no-preference){ .rv-track{ scroll-behavior:smooth } }
-    .rating{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:20px; color:var(--ink-2); font-size:16px }
-    .stars{ color:var(--accent); letter-spacing:2px; font-size:20px }
-    .review{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:24px 22px; margin:0 0 14px }
-    .review h3{ font-size:22px; margin:8px 0 12px }
-    .review p{ font-size:17px; margin:0 0 12px }
-    .review .meta{ font-size:14px; color:var(--muted); margin:0 }
-    .review .vp{ font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ok) }
+    /* who it's for: three plain lines */
+    .who{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:22px }
+    .who li{ padding-left:18px; border-left:3px solid var(--accent) }
+    .who b{ display:block; font:600 22px/1.3 var(--serif); color:var(--ink); margin-bottom:4px }
+    .who span{ color:var(--ink-2); font-size:17px }
 
     /* author */
-    .author{ display:grid; gap:20px; align-items:start }
-    .author img{ width:112px; height:112px; border-radius:50%; object-fit:cover; border:2px solid var(--accent) }
-    .author .name{ font:600 26px/1.2 var(--serif); color:var(--ink) }
-    .author .role{ font-size:15px; color:var(--muted); margin:2px 0 14px }
-    @media(min-width:900px){ .author{ grid-template-columns:auto 1fr; gap:32px } .author img{ width:140px; height:140px } }
+    .author{ display:grid; gap:22px; align-items:start }
+    .author img{ width:120px; height:120px; border-radius:50%; object-fit:cover }
+    .author .role{ font-size:15px; color:var(--muted); margin:-10px 0 16px }
+    @media(min-width:900px){ .author{ grid-template-columns:auto 1fr; gap:36px } .author img{ width:160px; height:160px } }
 
-    /* series */
-    .serieslist{ display:grid; gap:16px; margin-top:8px }
-    .sbook{ display:grid; grid-template-columns:88px 1fr; gap:6px 16px; align-items:start; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:16px }
-    .sbook img{ grid-row:1 / span 4; width:88px; border-radius:3px; box-shadow:0 10px 22px -14px rgba(10,24,40,.6) }
-    .sb-n{ font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-ink) }
-    .sbook b{ font:600 20px/1.25 var(--serif); color:var(--ink) }
-    .sb-d{ font-size:15px; color:var(--ink-2); line-height:1.5 }
-    .sb-go{ font-size:15px; font-weight:600; text-decoration:none; min-height:var(--tap); display:inline-flex; align-items:center }
-    .sb-soon{ font-size:14px; color:var(--muted) }
-    @media(min-width:900px){ .serieslist{ grid-template-columns:repeat(3,1fr) } .sbook{ grid-template-columns:1fr } .sbook img{ grid-row:auto; width:140px } }
+    /* FAQ */
+    .faq{ border-top:1px solid var(--line) }
+    .faq details{ border-bottom:1px solid var(--line) }
+    .faq summary{ list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:16px; align-items:center; padding:16px 0; min-height:var(--tap); font-weight:600; font-size:18px; color:var(--ink) }
+    .faq summary::-webkit-details-marker{ display:none }
+    .faq summary::after{ content:"+"; font-size:24px; color:var(--accent-ink); flex:none }
+    .faq details[open] summary::after{ content:"–" }
+    .faq details p{ margin:0 0 18px }
 
-    /* free resources */
-    .freecards{ display:grid; gap:14px; margin-top:8px }
-    .fcard{ display:grid; grid-template-columns:72px 1fr; gap:4px 16px; align-items:start; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:16px; text-decoration:none; color:inherit }
-    .fcard--noimg{ grid-template-columns:1fr }
-    .fcard:hover{ border-color:var(--accent) }
-    .fcard img{ grid-row:1 / span 3; width:72px; height:auto; aspect-ratio:5 / 8; object-fit:contain; object-position:center bottom; border-radius:3px; filter:drop-shadow(0 8px 10px rgba(10,24,40,.22)) }
-    .fcard b{ font:600 20px/1.25 var(--serif); color:var(--ink) }
-    .fcard span{ font-size:15px; color:var(--ink-2); line-height:1.5 }
-    .fcard .go{ font-weight:600; color:var(--accent-ink) }
-    @media(min-width:900px){ .freecards{ grid-template-columns:repeat(3,1fr) } .fcard{ grid-template-columns:1fr } .fcard img{ grid-row:auto; width:110px } }
+    /* close */
+    .close .in--wide{ display:grid; gap:28px; align-items:center }
+    .close img{ width:min(80vw,360px); margin:0 auto; border-radius:var(--r-card); box-shadow:0 24px 50px -30px rgba(10,24,40,.55) }
+    @media(min-width:900px){ .close .in--wide{ grid-template-columns:auto 1fr; gap:56px } .close img{ width:400px } }
 
-    /* newsletter */
+    /* email ask */
     .optin{ margin:0 auto }
     .optin input[type=email]{ font-size:16px }
 
-    /* footer */
     footer.foot{ border-top:1px solid var(--line); padding:32px 16px 40px; font-size:15px; color:var(--muted) }
     footer.foot .in--wide{ display:flex; flex-wrap:wrap; gap:12px 24px; justify-content:space-between }
     footer.foot nav{ display:flex; flex-wrap:wrap; gap:4px 18px }
@@ -228,277 +213,220 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 </head>
 <body>
 
-<!-- ep:nav (homepage v2: the four-item menu, plan v2 section 2) -->
+<!-- ep:nav (homepage v3: three links plus an always-visible buy button) -->
 <nav class="nav" aria-label="Main"><div class="container">
   <a class="brandmark" href="/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>Elvin&nbsp;Peters</a>
   <div class="links">
-    <a href="/" aria-current="page">Home</a>
     <a href="/free/">Free Toolkit</a>
     <a href="/newsletter/">Newsletter</a>
     <a href="/contact/">Contact</a>
   </div>
+  <a class="btn btn--primary nav-buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
 </div></nav>
 <!-- /ep:nav -->
 
 <main>
 
-<!-- 1. HERO, from /book.html (headline, subtext, cover, Amazon badge) -->
+<!-- 1. Hero: the whole pitch in one screen -->
 <header class="hero">
   <div class="in--wide">
     <div>
       <h1 id="hl">You tried AI.<br/><span>You weren't impressed.</span></h1>
-      <p class="hero-sub" id="sub">The people getting astonishing results are typing into the same box you are. They are just directing it, and that is a learnable skill with almost nothing to do with being technical. This is the book that teaches it, written for professionals and not programmers.</p>
-      <!-- #hook: third line of every ?aud= / ?v= ad segment (DTR script below). -->
+      <p class="hero-sub" id="sub">The people getting great results type into the same box you do. They give it a proper brief, and this book shows you how in plain English, one real work task at a time.</p>
+      <!-- #hook: third line of every ?aud= / ?v= ad segment (DTR script below). Empty by default. -->
       <p class="hero-sub" id="hook" style="font-weight:600;color:var(--ink)"></p>
-      <div class="hero-cta">
-        <a class="badge-btn buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon: The Artificial Advantage">
-          <img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
-        </a>
-        <span class="small">Kindle, paperback and hardcover.</span>
-        <a class="btn btn--primary buy amz-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon">Buy now on Amazon &rarr;</a>
+      <div class="buyblock ">
+        <a class="btn btn--primary buy amz-btn " data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book on Amazon &rarr;</a>
+        <div class="avail"><a class="badge-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>Kindle, paperback and hardcover</span></div>
+        <a class="sample" href="/free/free-chapter/">Or read Chapter 8 free first &rarr;</a>
       </div>
+      <p class="trust">By <strong>Elvin M. Peters</strong>, who ran $40M+ in profitable ad spend and then advised the media teams at big advertisers for an adtech giant building AI.</p>
     </div>
     <div class="hero-art">
-      <img class="cover" src="/img/cover-hero.webp" alt="The Artificial Advantage by Elvin M. Peters, book cover" width="600" height="960" fetchpriority="high">
+      <img src="/img/book-3d.webp" alt="The Artificial Advantage by Elvin M. Peters, paperback" width="686" height="1140" fetchpriority="high">
     </div>
   </div>
 </header>
 
-<!-- 4a. The Real Reason It Felt Like A Gimmick: pains as a list, then one callout (Elvin's review comment, 2026-09-27: less copy, list + visual) -->
-<section class="sec" id="gimmick">
+<!-- 2. The demo: proof the skill is real, shown open -->
+<section class="sec" id="demo">
   <div class="in">
-    <span class="eyebrow">The Real Reason It Felt Like A Gimmick</span>
-    <h2>You've used AI. So why does it still feel underwhelming?</h2>
-    <ul class="pains">
-      <li><svg class="pain-ic" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#f6e4e4"/><path d="M8 8l8 8M16 8l-8 8" stroke="#a33a3a" stroke-width="2.2" stroke-linecap="round"/></svg><span>You asked a question and got a generic answer.</span></li>
-      <li><svg class="pain-ic" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#f6e4e4"/><path d="M8 8l8 8M16 8l-8 8" stroke="#a33a3a" stroke-width="2.2" stroke-linecap="round"/></svg><span>It hedged, padded the reply, or got a fact wrong.</span></li>
-      <li><svg class="pain-ic" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#f6e4e4"/><path d="M8 8l8 8M16 8l-8 8" stroke="#a33a3a" stroke-width="2.2" stroke-linecap="round"/></svg><span>You rewrote it yourself and decided the hype was overblown.</span></li>
-    </ul>
-    <div class="turn">
-      <p><strong>Professionals who get great results type into the same box you do.</strong></p>
-      <p>They learned one skill nobody taught you, which is how to direct the tool. That skill is the whole gap, and you can learn it.</p>
-    </div>
-  </div>
-</section>
-
-<!-- 4b. From /book.html: Why This Book Exists (one example open, three behind a tap) -->
-<section class="sec sec--tint" id="mechanism">
-  <div class="in story">
-    <span class="eyebrow">Why This Book Exists</span>
-    <h2>I watched the gap widen every single day inside big tech.</h2>
-    <p>At a large Canadian fintech I ran an average of $1.2M a month in paid media myself for three years, across two regulated consumer-lending brands. Then an adtech giant that is building AI brought me in to advise the media teams at big advertisers, and the same pattern showed up on both sides of the table. Highly capable professionals were using AI every day and pulling a fraction of what it could deliver. The reason was never intelligence. <strong>Effective AI direction is a skill, and no one had handed them a framework for it.</strong></p>
-    <p>The whole book rests on one idea: <strong>stop asking AI, start directing it.</strong> Here is what that looks like with the same task and two different people:</p>
-
-    <div class="ba-set">
-      <div class="ba-item ba-item--before">
-        <div class="ba-label">Without a framework</div>
-        <div class="ba-prompt">&ldquo;Write me an email to a client about a project delay.&rdquo;</div>
-        <div class="ba-out"><b>10 minutes</b>Generic output, wrong tone. They rewrote the whole thing.</div>
-      </div>
-      <div class="ba-item ba-item--after">
-        <div class="ba-label">With direction</div>
-        <div class="ba-prompt">&ldquo;Client delay email. Two weeks late. Client values transparency. Tone: collaborative, not apologetic. Under 150 words. New date: March 15.&rdquo;</div>
-        <div class="ba-out"><b>2 minutes</b>Right voice, right tone, right length. One minute of polish. Sent.</div>
-      </div>
-    </div>
-    <details class="ba-more">
-      <summary><span>Three more, same idea</span></summary>
-      <div class="ba-set">
-        <div class="ba-item ba-item--before">
-          <div class="ba-label">Without a framework</div>
-          <div class="ba-prompt">&ldquo;Summarize these meeting notes.&rdquo;</div>
-          <div class="ba-out"><b>A shorter pile of notes</b>No decisions, no owners, nothing anyone can act on.</div>
+    <span class="eyebrow">See the difference</span>
+    <h2>The same task, two very different results.</h2>
+    <p class="lede">One person asked AI for help. The other gave it a brief, the way you would brief a sharp new hire.</p>
+    <div class="demo-pair">
+        <div class="chat chat--before">
+          <div class="chat-h"><span>Asked</span><span class="timer timer--slow">10 minutes</span></div>
+          <p class="bubble">&ldquo;Write me an email to a client about a project delay.&rdquo;</p>
+          <p class="chat-out">A generic draft in the wrong tone. They rewrote the whole thing.</p>
         </div>
-        <div class="ba-item ba-item--after">
-          <div class="ba-label">With direction</div>
-          <div class="ba-prompt">&ldquo;From these notes: decisions made, action items with owner and date, open questions. Three lists, nothing else.&rdquo;</div>
-          <div class="ba-out"><b>A follow-up, sent same day</b>The meeting actually produces something.</div>
+        <div class="chat chat--after">
+          <div class="chat-h"><span>Directed</span><span class="timer timer--fast">2 minutes</span></div>
+          <p class="bubble">&ldquo;Client delay email. Two weeks late. Client values transparency. Tone: collaborative, not apologetic. Under 150 words. New date: March 15.&rdquo;</p>
+          <p class="chat-out">Right voice and right length. One minute of polish, then sent.</p>
         </div>
       </div>
-      <div class="ba-set">
-        <div class="ba-item ba-item--before">
-          <div class="ba-label">Without a framework</div>
-          <div class="ba-prompt">&ldquo;What does this data tell me?&rdquo;</div>
-          <div class="ba-out"><b>Your own columns, read back</b>A description where you needed a decision.</div>
+    <details class="more">
+      <summary>Three more examples</summary>
+      <div class="demo-pair">
+        <div class="chat chat--before">
+          <div class="chat-h"><span>Asked</span><b class="res">A shorter pile of notes</b></div>
+          <p class="bubble">&ldquo;Summarize these meeting notes.&rdquo;</p>
+          <p class="chat-out">No decisions, no owners, nothing anyone can act on.</p>
         </div>
-        <div class="ba-item ba-item--after">
-          <div class="ba-label">With direction</div>
-          <div class="ba-prompt">&ldquo;Act as an analyst briefing a skeptical CFO. Name the three changes that matter, why each happened, and what the numbers cannot explain.&rdquo;</div>
-          <div class="ba-out"><b>A briefing you can defend</b>Findings, causes, and the honest gaps.</div>
+        <div class="chat chat--after">
+          <div class="chat-h"><span>Directed</span><b class="res">A follow-up, sent the same day</b></div>
+          <p class="bubble">&ldquo;From these notes: decisions made, action items with owner and date, open questions. Three lists, nothing else.&rdquo;</p>
+          <p class="chat-out">The meeting produces something.</p>
         </div>
       </div>
-      <div class="ba-set">
-        <div class="ba-item ba-item--before">
-          <div class="ba-label">Without a framework</div>
-          <div class="ba-prompt">&ldquo;Write a job description for a marketing manager.&rdquo;</div>
-          <div class="ba-out"><b>A posting like every other posting</b>Buzzwords, nothing specific, no reason to apply.</div>
+      <div class="demo-pair">
+        <div class="chat chat--before">
+          <div class="chat-h"><span>Asked</span><b class="res">Your own columns, read back</b></div>
+          <p class="bubble">&ldquo;What does this data tell me?&rdquo;</p>
+          <p class="chat-out">A description where you needed a decision.</p>
         </div>
-        <div class="ba-item ba-item--after">
-          <div class="ba-label">With direction</div>
-          <div class="ba-prompt">&ldquo;Job posting, marketing manager, 12-person B2B firm. Lead with the problems this person owns in month one. Plain language, under 400 words.&rdquo;</div>
-          <div class="ba-out"><b>A posting people answer</b>Specific, honest about the work.</div>
+        <div class="chat chat--after">
+          <div class="chat-h"><span>Directed</span><b class="res">A briefing you can defend</b></div>
+          <p class="bubble">&ldquo;Act as an analyst briefing a skeptical CFO. Name the three changes that matter, why each happened, and what the numbers cannot explain.&rdquo;</p>
+          <p class="chat-out">Findings, causes and the honest gaps.</p>
+        </div>
+      </div>
+      <div class="demo-pair">
+        <div class="chat chat--before">
+          <div class="chat-h"><span>Asked</span><b class="res">A posting like every other posting</b></div>
+          <p class="bubble">&ldquo;Write a job description for a marketing manager.&rdquo;</p>
+          <p class="chat-out">Buzzwords and no reason to apply.</p>
+        </div>
+        <div class="chat chat--after">
+          <div class="chat-h"><span>Directed</span><b class="res">A posting people answer</b></div>
+          <p class="bubble">&ldquo;Job posting, marketing manager, 12-person B2B firm. Lead with the problems this person owns in month one. Plain language, under 400 words.&rdquo;</p>
+          <p class="chat-out">Specific and honest about the work.</p>
         </div>
       </div>
     </details>
-
-    <p>Same tool. Same task. Same professional context. The only difference was AI literacy.</p>
-    <p><strong>The professionals getting exceptional results were not more technical. They were more deliberate.</strong></p>
-    <p>I wrote this book because I could not find the one I wished I had.</p>
+    <p class="pullline">Both people had the same tool. The second one had learned to direct it, and that is the skill this book teaches.</p>
   </div>
 </section>
 
-<!-- 4c. From /book.html: Who This Book Is For, as three vertical persona cards (Justine, Aug) -->
-<section class="sec">
+<!-- 3. Proof: the one Amazon review, large and verbatim; two friends' lines, labelled -->
+<section class="sec sec--tint" id="reviews">
   <div class="in">
-    <h2>Who This Book Is For</h2>
-    <div class="personas">
-      <div class="persona"><h3>The Skeptic Who Tried It Once</h3><p>You tried it, weren't impressed, and suspected the approach was the problem, which is good news, because an approach can be learned.</p></div>
-      <div class="persona"><h3>The Professional Whose Workplace Now Expects AI</h3><p>This book makes you the colleague people quietly ask for help when AI comes up at work.</p></div>
-      <div class="persona"><h3>The Manager Getting a Team Started</h3><p>Settle on a tool in one afternoon, then build the saved prompts your whole team works from.</p></div>
-    </div>
-    <a class="badge-btn buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon">
-      <img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
-    </a>
-  </div>
-</section>
-
-<!-- 4d. The book component -->
-<section class="sec sec--tint" id="book">
-  <div class="in--wide book">
-    <img class="cover" src="/img/cover-hero.webp" alt="The Artificial Advantage by Elvin M. Peters, book cover" loading="lazy" width="600" height="960">
-    <div>
-      <span class="eyebrow">The book</span>
-      <h2>The Artificial Advantage</h2>
-      <p class="tag2">Stop prompting. Start directing.</p>
-      <p>A practical playbook for getting AI to do real work: brief it the way you'd brief a sharp new hire, and get drafts that are ready to use.</p>
-      <a class="badge-btn buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon">
-        <img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="Available at Amazon" width="640" height="104" loading="lazy">
-      </a>
-      <p class="formats">Kindle, paperback and hardcover.</p>
-      <a class="btn btn--primary buy amz-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Buy now on Amazon">Buy now on Amazon &rarr;</a>
+    <span class="eyebrow">Reviews</span>
+    <h2>What readers say</h2>
+    <!-- ep:bk-review (verbatim from Amazon, checked 2026-09-27) -->
+    <figure class="quote">
+      <span class="stars" aria-label="Rated 5 out of 5 stars">★★★★★</span><span class="vp">Verified Purchase</span>
+      <blockquote>&ldquo;I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.&rdquo;</blockquote>
+      <p class="meta">Amazon reviewer 2Buyer · Paperback · Reviewed in Canada on July 15, 2026</p>
+      <details>
+        <summary>Read the full review</summary>
+        <p><strong>&ldquo;Must-read if you're looking to enhance your output.&rdquo;</strong></p>
+        <p>&ldquo;What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.</p>
+        <p>Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.&rdquo;</p>
+        <p><a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">See it on Amazon &rarr;</a></p>
+      </details>
+    </figure>
+    <!-- /ep:bk-review -->
+    <!-- SECOND AMAZON REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).
+         When it appears, add it verbatim as a second .quote and drop one friend line. -->
+    <div class="friends">
+      <figure><blockquote>&ldquo;The beginning also made me tear up.&rdquo;</blockquote><figcaption>Early reader, a friend of the author</figcaption></figure>
+      <figure><blockquote>&ldquo;I didn't realize that my AI skills were bad, then Elvin explained I just sucked at prompting.&rdquo;</blockquote><figcaption>Early reader, a friend of the author</figcaption></figure>
     </div>
   </div>
 </section>
 
-<!-- 5. The Complete System, reworked: one line plus four plain tap-to-open cards -->
-<section class="sec">
+<!-- 4. What you'll be able to do: the four parts as outcomes -->
+<section class="sec" id="inside">
   <div class="in">
-    <span class="eyebrow">The Complete System</span>
-    <h2>The Complete System</h2>
+    <span class="eyebrow">Inside the book</span>
+    <h2>What you'll be able to do</h2>
     <p>Read it in order once, then keep the back of the book open beside your work.</p>
     <div class="parts">
-      <details class="part"><summary><span class="pn">Part 1</span><span class="pt">Building Your Foundation</span><span class="po">You'll know what happens when you type, and you'll hand AI its first proper task this week.</span><span class="pi" aria-hidden="true">+</span></summary><ul><li>Why it felt like a gimmick, and the Mirror Principle (Ch 1)</li><li>The four fears that hold people back, and the way past each (Ch 2)</li><li>The Director's Mindset and the RTC framework: role, task, constraint (Ch 3)</li><li>Your first saved template (Ch 5)</li></ul></details>
-      <details class="part"><summary><span class="pn">Part 2</span><span class="pt">Choose Your Tools</span><span class="po">You'll pick one tool with confidence and know which mode suits each job.</span><span class="pi" aria-hidden="true">+</span></summary><ul><li>Three questions that settle which tool to use (Ch 7)</li><li>Default, reasoning or creative mode, matched to the task (Ch 8, free to read)</li><li>Six hands-on exercises, starting with the email you've been avoiding (Ch 9)</li></ul></details>
-      <details class="part"><summary><span class="pn">Part 3</span><span class="pt">The Core Skills of Conversation</span><span class="po">You'll turn a weak draft into a usable one with a single precise note, and catch an error before anyone else sees it.</span><span class="pi" aria-hidden="true">+</span></summary><ul><li>The Three Fundamental Rules: be specific, ask for one thing, iterate (Ch 10)</li><li>The Diagnostic Ladder for fixing a draft that missed (Ch 11)</li><li>Meta-prompting and template thinking (Ch 12)</li><li>Two-Step Verification and a 3-month practice plan (Ch 13 and Ch 14)</li></ul></details>
-      <details class="part"><summary><span class="pn">The back of the book</span><span class="pt">The Appendices</span><span class="po">When a prompt misfires or a new task lands, the fix or the starting point is already written for you.</span><span class="pi" aria-hidden="true">+</span></summary><ul><li>25 copy-ready prompts and 25 ready-made roles</li><li>12 before-and-after prompt makeovers, each explained</li><li>Ten common failures, each with its corrective prompt</li><li>A quick reference card, a tool comparison and a plain-English glossary</li></ul></details>
+      <details class="part"><summary><span class="pn">Part 1</span><span class="pt">Hand AI its first proper task this week, and know what happens when you type.</span><span class="pi" aria-hidden="true">+</span></summary><ul><li>Why it felt like a gimmick, and the Mirror Principle (Ch 1)</li><li>The four fears that hold people back, and the way past each (Ch 2)</li><li>The Director's Mindset and the RTC framework: role, task, constraint (Ch 3)</li><li>Your first saved template (Ch 5)</li></ul></details>
+      <details class="part"><summary><span class="pn">Part 2</span><span class="pt">Pick one tool with confidence and know which mode suits each job.</span><span class="pi" aria-hidden="true">+</span></summary><ul><li>Three questions that settle which tool to use (Ch 7)</li><li>Default, reasoning or creative mode, matched to the task (Ch 8, free to read)</li><li>Six hands-on exercises, starting with the email you've been avoiding (Ch 9)</li></ul></details>
+      <details class="part"><summary><span class="pn">Part 3</span><span class="pt">Fix a weak draft with one precise note, and catch an error before anyone else sees it.</span><span class="pi" aria-hidden="true">+</span></summary><ul><li>The Three Fundamental Rules: be specific, ask for one thing, iterate (Ch 10)</li><li>The Diagnostic Ladder for fixing a draft that missed (Ch 11)</li><li>Meta-prompting and template thinking (Ch 12)</li><li>Two-Step Verification and a 3-month practice plan (Ch 13 and Ch 14)</li></ul></details>
+      <details class="part"><summary><span class="pn">The appendices</span><span class="pt">Reach for a written fix or a starting point whenever a prompt misfires or a new task lands.</span><span class="pi" aria-hidden="true">+</span></summary><ul><li>25 copy-ready prompts and 25 ready-made roles</li><li>12 before-and-after prompt makeovers, each explained</li><li>Ten common failures, each with its corrective prompt</li><li>A quick reference card, a tool comparison and a plain-English glossary</li></ul></details>
     </div>
-  </div>
-</section>
-
-<!-- 6. Reviews: a swipeable row. The Amazon review is verbatim; friends' quotes are labelled as friends. -->
-<section class="sec sec--tint" id="reviews">
-  <div class="in--wide">
-    <span class="eyebrow">Reviews</span>
-    <div class="rv-head">
-      <h2>What Early Readers Say</h2>
-      <div class="rv-nav">
-        <button type="button" class="rv-btn" data-dir="-1" aria-label="Previous review">&larr;</button>
-        <button type="button" class="rv-btn" data-dir="1" aria-label="Next review">&rarr;</button>
+    <div class="buyblock ">
+        <a class="btn btn--primary buy amz-btn " data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book on Amazon &rarr;</a>
+        <div class="avail"><a class="badge-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>Kindle, paperback and hardcover</span></div>
+        <a class="sample" href="/free/free-chapter/">Or read Chapter 8 free first &rarr;</a>
       </div>
-    </div>
-    <div class="rv-track" id="rv-track" tabindex="0" role="region" aria-label="Reader reviews, scroll sideways for more">
-  <!-- ep:bk-review (verbatim from Amazon, checked 2026-09-27) -->
-    <article class="review">
-      <span class="stars" aria-label="Rated 5 out of 5 stars">★★★★★</span> <span class="vp">Verified Purchase</span>
-      <h3>&ldquo;Must-read if you're looking to enhance your output.&rdquo;</h3>
-      <p>&ldquo;What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.</p>
-      <p>Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.&rdquo;</p>
-      <p class="meta">2Buyer · Paperback · Reviewed in Canada on July 15, 2026 · <a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Read it on Amazon</a></p>
-    </article>
-    <!-- /ep:bk-review -->
-      <article class="review review--short"><p class="rq">&ldquo;The beginning also made me tear up.&rdquo;</p><p class="meta">Early reader · a friend of the author</p></article>
-      <article class="review review--short"><p class="rq">&ldquo;It was cool learning about how AI actually &lsquo;thinks&rsquo;.&rdquo;</p><p class="meta">Early reader · a friend of the author</p></article>
-      <article class="review review--short"><p class="rq">&ldquo;I learned a couple things that I def didn't know.&rdquo;</p><p class="meta">Early reader · a friend of the author</p></article>
-      <article class="review review--short"><p class="rq">&ldquo;I didn't realize that my AI skills were bad, then Elvin explained I just sucked at prompting.&rdquo;</p><p class="meta">Early reader · a friend of the author</p></article>
-    </div>
-    <p class="rv-hint" aria-hidden="true">Swipe for more &rarr;</p>
-    <!-- SECOND AMAZON REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).
-         Paste it into the track, verbatim, the day it appears. -->
   </div>
 </section>
 
-<!-- 7. About the author, from /book.html (facts: 02 Books/reference/elvin-verified-profile.md) -->
+<!-- 5. Who it's for: three plain lines -->
+<section class="sec sec--tint">
+  <div class="in">
+    <h2>Who this book is for</h2>
+    <ul class="who">
+      <li><b>The skeptic who tried it once</b><span>You suspected the approach was the problem, which is good news, because an approach can be learned.</span></li>
+      <li><b>The professional whose workplace now expects AI</b><span>You become the colleague people ask for help when AI comes up at work.</span></li>
+      <li><b>The manager getting a team started</b><span>Settle on a tool in one afternoon, then build the saved prompts your whole team works from.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 6. About the author (facts: 02 Books/reference/elvin-verified-profile.md; employers anonymised at Elvin's request) -->
 <section class="sec" id="about">
   <div class="in author">
     <img src="/img/headshot.jpg" alt="Elvin M. Peters" width="400" height="400" loading="lazy">
     <div>
-      <span class="eyebrow">About the Author</span>
-      <div class="name">Elvin M. Peters</div>
-      <div class="role">Author · Marketing Strategist · A decade in marketing</div>
-      <p>I've spent a decade in marketing, including three years running $40M+ in profitable ad spend for two regulated consumer-lending brands at a Canadian fintech. One of the adtech giants building AI then brought me in to advise the media teams at big advertisers, where AI cut my account audits from hours to minutes.</p>
-      <p>Today I write and build with AI full-time in Toronto. <em>The Artificial Advantage</em> is Volume 1 of the AI Fluency Series, and Volume 2, <em>The Systematic Advantage</em>, is in progress.</p>
+      <span class="eyebrow">About the author</span>
+      <h2>Elvin M. Peters</h2>
+      <p class="role">Author of the AI Fluency Series · Toronto</p>
+      <p>My first lesson in directing machines came at a large Canadian fintech. I ran over $12M a year in paid media there, and I cut the cost per funded loan by more than half by teaching the bidding algorithms what a good customer looked like.</p>
+      <p>Then an adtech giant building AI brought me in to advise the media teams at big advertisers, where AI cut my account audits from hours to minutes. On both sides of the table I met capable people getting a fraction of what AI could give them. I wrote this book for them.</p>
+      <p><em>The Artificial Advantage</em> is book one of the AI Fluency Series. Book two, <em>The Systematic Advantage</em>, is in progress. <a href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">Find me on LinkedIn</a>.</p>
     </div>
   </div>
 </section>
 
-<!-- 8. The AI Fluency Series overview, from the current homepage -->
-<section class="sec sec--tint" id="series">
+<!-- 7. FAQ (adapted from /book.html) -->
+<section class="sec sec--tint" id="faq">
+  <div class="in">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>Do I need a technical background?</summary><p>None. The book is written for professionals with no technical training. If you can write an email, you can use everything in it.</p></details>
+      <details><summary>Which AI tool does it use?</summary><p>It works with ChatGPT, Claude, Gemini and Copilot. Part 2 helps you pick one, and the directing skill carries over to all of them.</p></details>
+      <details><summary>Will it go out of date when the tools change?</summary><p>The book teaches you how to direct AI, and that skill carries over from one model to the next. The product names will keep changing, and your briefs will keep working.</p></details>
+      <details><summary>I already use AI at work. Is it still for me?</summary><p>Yes, if your results are hit and miss. The frameworks turn scattered habits into a method you can repeat, and the appendices give you prompts and fixes to keep beside your work.</p></details>
+      <details><summary>Which format should I get?</summary><p>Kindle, paperback and hardcover are all on Amazon, with Amazon's standard returns. The paperback is handy to keep open beside your desk for the appendices.</p></details>
+      <details><summary>Can I read some of it first?</summary><p>Yes. <a href="/free/free-chapter/">Chapter 8 is free to read</a>, and it shows you which AI mode fits which job.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 8. The close: back to the opening promise, one more clear ask -->
+<section class="sec close" id="book">
   <div class="in--wide">
-    <span class="eyebrow">The AI Fluency Series</span>
-    <h2>Three books, one arc: direct the model, build the systems, then run the agents.</h2>
-    <div class="serieslist">
-      <div class="sbook">
-        <img src="/img/cover-hero.webp" alt="The Artificial Advantage, book one of the AI Fluency Series" width="600" height="960" loading="lazy">
-        <span class="sb-n">Book One · Available now</span>
-        <b>The Artificial Advantage</b>
-        <span class="sb-d">Brief a model the way you would brief a sharp new hire, so the output is work you can actually use.</span>
-        <a class="sb-go buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy now on Amazon &rarr;</a>
-      </div>
-      <div class="sbook">
-        <img src="/img/cover-book2.webp" alt="The Systematic Advantage, book two of the AI Fluency Series" width="600" height="906" loading="lazy">
-        <span class="sb-n">Book Two · In progress</span>
-        <b>The Systematic Advantage</b>
-        <span class="sb-d">Turn one good result into a repeatable system, so the skill compounds instead of resetting every time.</span>
-        <span class="sb-soon">Not yet published</span>
-      </div>
-      <div class="sbook">
-        <img src="/img/cover-book3.webp" alt="The Agentic Advantage, book three of the AI Fluency Series" width="600" height="906" loading="lazy">
-        <span class="sb-n">Book Three · Planned</span>
-        <b>The Agentic Advantage</b>
-        <span class="sb-d">Hand the repeatable work to agents that run without you, and keep the judgment that stays yours.</span>
-        <span class="sb-soon">Not yet published</span>
+    <img src="/img/book-desk.webp" alt="The Artificial Advantage paperback on a desk" width="600" height="600" loading="lazy">
+    <div>
+      <h2>You tried AI once. Give it a proper brief this time.</h2>
+      <p class="lede"><em>The Artificial Advantage</em> shows you how, one real work task at a time.</p>
+      <div class="buyblock ">
+        <a class="btn btn--primary buy amz-btn " data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book on Amazon &rarr;</a>
+        <div class="avail"><a class="badge-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>Kindle, paperback and hardcover</span></div>
+        <a class="sample" href="/free/free-chapter/">Or read Chapter 8 free first &rarr;</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 9. Free resources: three cards, each to its own page -->
-<section class="sec" id="free">
-  <div class="in--wide">
-    <span class="eyebrow">Free</span>
-    <h2>Start Free</h2>
-    <p>Three free guides, each one built to fix a problem you already have.</p>
-    <div class="freecards">
-      <a class="fcard" href="/free/free-chapter/"><img src="/img/cover-hero.webp" alt="" width="600" height="960" loading="lazy"><b>Read Chapter 8 Free: Direct Your Tool</b><span>If AI ever handed you a fifty-page answer when you needed ten slides, this chapter shows you which mode fits which job.</span><span class="go">Read the free chapter &rarr;</span></a>
-      <a class="fcard" href="/free/50-prompts/"><img src="/img/magnets/50-prompts.webp" alt="" width="440" height="704" loading="lazy"><b>50 Prompts for the Jobs That Eat Your Week</b><span>Each prompt is named for the job it does, like The Inbox Killer for the reply you keep putting off, so you fill in the brackets and send.</span><span class="go">Get the 50 prompts &rarr;</span></a>
-      <a class="fcard" href="/free/anti-hallucination/"><img src="/img/magnets/anti-hallucination.webp" alt="" width="440" height="622" loading="lazy"><b>Tell Me the Truth: Stop AI Making Things Up</b><span>If AI has ever given you a confident answer that turned out wrong, this guide shows you when to double-check and the prompts that make it cite sources you can check.</span><span class="go">Get the free guide &rarr;</span></a>
-    </div>
-    <p style="margin-top:20px"><a href="/free/">See the whole free library &rarr;</a></p>
-  </div>
-</section>
-
-<!-- 10. Newsletter signup, one field (lead API via the shared .oi-form handler in /js/site.js) -->
+<!-- 9. One email ask for the not-yet buyers (lead API via the shared .oi-form handler in /js/site.js) -->
 <section class="sec sec--tint" id="newsletter">
   <div class="in">
     <div class="optin">
-      <span class="oi-eyebrow">The newsletter</span>
-      <h2>The Artificial Advantage, Once a Month</h2>
-      <p>The AI news worth knowing, tips you can use that week, my take, and a note from the book. It lands on the first of every month.</p>
-      <form class="oi-form" data-source="newsletter-homepage-v2" novalidate>
+      <span class="oi-eyebrow">Not ready yet?</span>
+      <h2>Get one useful AI email a month</h2>
+      <p>The AI news worth knowing, tips you can use that week, and a note from the book. It lands on the first of every month. The free guides live in the <a href="/free/">Free Toolkit</a>.</p>
+      <form class="oi-form" data-source="newsletter-homepage-v3" novalidate>
         <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
         <label class="visually-hidden" for="nl-email">Your email</label>
         <input id="nl-email" type="email" required autocomplete="email" placeholder="you@work.com">
-        <button type="submit">Get the monthly update</button>
+        <button type="submit">Send me the monthly update</button>
       </form>
       <p class="oi-note">Free. Unsubscribe anytime.</p>
       <p class="oi-msg" data-success="You're in. Look for it on the first of the month, and check your promotions tab if it isn't in your inbox."></p>
@@ -508,7 +436,6 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
 </main>
 
-<!-- 11. Quiet footer -->
 <footer class="foot">
   <div class="in--wide">
     <span>© 2026 Elvin M. Peters</span>
@@ -533,19 +460,6 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       try { gtag('event', 'amazon_outbound', { event_label: a.getAttribute('aria-label') || a.textContent.trim() }); } catch (e) {}
     });
   });
-
-  /* Reviews row: arrow buttons scroll one card at a time (swipe works without them). */
-  (function () {
-    var t = document.getElementById('rv-track');
-    if (!t) return;
-    document.querySelectorAll('.rv-btn').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var card = t.querySelector('.review');
-        var step = card ? card.getBoundingClientRect().width + 14 : t.clientWidth;
-        t.scrollBy({ left: step * Number(b.dataset.dir), behavior: 'smooth' });
-      });
-    });
-  })();
 
   /* Dynamic audience-matched headline (DTR), ported unchanged from /book.html.
      Ad URLs append ?aud=<segment> or ?v=<angle>; no param keeps the HTML default. */
