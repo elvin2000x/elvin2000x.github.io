@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="book">
+<head>
+  <meta charset="UTF-8" />
+  <!-- PREVIEW (2026-09-27): unlisted long-form homepage test build. GA4 only; the ad pixels stay off so testing never trains ad audiences. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CLZ7N26J1Q');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Artificial Advantage by Elvin M. Peters · Learn to direct AI at work</title>
+  <meta name="description" content="For professionals who tried AI and weren't impressed: learn to direct it in plain language, for real work. The Artificial Advantage by Elvin M. Peters." />
+  <link rel="icon" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <meta name="color-scheme" content="light" />
+  <link rel="stylesheet" href="/css/site.css" />
+  <script src="/js/site.js"></script>
+  <style>
+    /* Homepage v3 (2026-09-27): one argument top to bottom. Light only (Rule 34). Phone first.
+       One heading style (serif, sentence case), one button style, cards only for the demo and the review. */
+    :root{ --wrap: 680px; --wide: 1040px; }
+    body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:18px; line-height:1.6; }
+    @media(min-width:900px){ body{ font-size:17px } }
+    a{ color:var(--accent-ink) }
+    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible{ outline:2px solid var(--accent-hi); outline-offset:2px }
+    img{ max-width:100%; height:auto }
+    h1, h2, h3{ font-family:var(--serif); font-weight:600; letter-spacing:-.01em; text-wrap:balance; color:var(--ink) }
+
+    /* nav: links go into the burger on phones; the buy button always stays in the bar */
+    .nav{ position:sticky; top:0; z-index:40; background:rgba(255,255,255,.96); backdrop-filter:blur(8px); border-bottom:1px solid var(--line-soft) }
+    .nav .container{ max-width:var(--wide); margin:0 auto; padding:0 16px; height:var(--nav-h); display:flex; align-items:center; gap:12px }
+    .brandmark{ display:flex; align-items:center; min-height:var(--tap); gap:8px; font:600 18px/1 var(--serif); color:var(--ink); text-decoration:none }
+    .nav .links{ margin-left:auto; display:flex; align-items:center; gap:4px }
+    .nav .links a{ color:var(--ink-2); text-decoration:none; font-size:15px; font-weight:500; padding:10px 12px; border-radius:var(--r-sm) }
+    .nav .links a:hover{ color:var(--ink); background:var(--bg-2) }
+    .nav-buy{ min-height:var(--tap); display:inline-flex; align-items:center; padding:0 16px; font-size:15px; font-weight:600; white-space:nowrap }
+    @media(max-width:920px){ .nav-buy{ margin-left:auto } }
+
+    .sec{ padding:64px 16px }
+    @media(min-width:900px){ .sec{ padding:96px 24px } }
+    .sec--tint{ background:var(--bg-2) }
+    .in{ max-width:var(--wrap); margin:0 auto }
+    .in--wide{ max-width:var(--wide); margin:0 auto }
+    .eyebrow{ display:block; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:10px }
+    .sec h2{ font-size:clamp(30px,6.4vw,44px); line-height:1.15; margin:0 0 18px }
+    .sec p{ margin:0 0 16px; color:var(--ink-2) }
+    .sec p strong{ color:var(--ink); font-weight:600 }
+    .lede{ font-size:20px; line-height:1.55 }
+
+    /* one button style, one secondary link style */
+    .amz-btn{ min-height:52px; display:inline-flex; align-items:center; justify-content:center; padding:0 26px; font-size:18px; font-weight:600 }
+    .buyblock{ display:flex; flex-direction:column; align-items:flex-start; gap:12px }
+    .buyblock--center{ align-items:center; text-align:center }
+    .avail{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-size:15px; color:var(--muted) }
+    .badge-btn{ display:inline-flex; align-items:center; min-height:var(--tap); line-height:0 }
+    .badge-btn img{ width:150px; height:auto; display:block }
+    .badge-btn .amz-on-dark{ display:none }
+    [data-theme="dark"] .badge-btn .amz-on-light{ display:none } [data-theme="dark"] .badge-btn .amz-on-dark{ display:block }
+    .sec p.value{ font:italic 20px/1.45 var(--serif); color:var(--ink); margin:0 0 18px }
+    .sample{ font-size:16px; font-weight:600; text-decoration:none; min-height:var(--tap); display:inline-flex; align-items:center }
+    .sample:hover{ text-decoration:underline }
+
+    /* hero: words and button first on phones, the book beside them on desktop */
+    .hero{ background:linear-gradient(170deg,var(--panel) 0%,var(--bg-2) 100%); padding:32px 16px 48px }
+    .hero .in--wide{ display:grid; gap:24px; align-items:center }
+    .hero h1{ font-size:clamp(38px,9.6vw,66px); line-height:1.08; margin:0 0 16px }
+    .hero h1 span{ font-style:italic; color:var(--accent-ink) }
+    .hero-sub{ font-size:19px; color:var(--ink-2); margin:0 0 20px; max-width:34em }
+    .hero-sub:empty{ display:none }
+    .trust{ font-size:15px; color:var(--muted); margin:18px 0 0; max-width:34em; padding-top:14px; border-top:1px solid var(--line) }
+    .trust strong{ color:var(--ink-2) }
+    .hero-art{ display:flex; justify-content:center }
+    .hero-art img{ width:min(52vw,220px) }
+    @media(min-width:900px){
+      .hero{ padding:64px 24px 80px }
+      .hero .in--wide{ grid-template-columns:1.3fr .7fr; gap:48px }
+      .hero-art img{ width:320px }
+    }
+
+    /* the demo: two chat panels */
+    .demo-pair{ display:grid; gap:14px; margin:8px 0 18px }
+    @media(min-width:760px){ .demo-pair{ grid-template-columns:1fr 1fr } }
+    .chat{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:18px }
+    .chat--after{ border-color:var(--accent); box-shadow:0 12px 30px -22px rgba(10,24,40,.45) }
+    .chat-h{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:12px; font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted) }
+    .chat--after .chat-h span:first-child{ color:var(--accent-ink) }
+    .timer{ font-size:14px; letter-spacing:0; text-transform:none; font-weight:700; padding:4px 10px; border-radius:999px; font-variant-numeric:tabular-nums }
+    .timer--slow{ background:#f6e4e4; color:#8f2f2f }
+    .timer--fast{ background:#e2f1e6; color:#1f6b3a }
+    .bubble{ background:var(--bg-2); border-radius:14px 14px 14px 4px; padding:12px 14px; font-size:16px !important; color:var(--ink) !important; margin:0 0 12px !important }
+    .chat--after .bubble{ background:#fbf5e6 }
+    .chat-out{ font-size:16px !important; margin:0 !important }
+    .res{ display:block; font-family:var(--serif); font-size:17px; color:var(--ink) }
+    .more{ margin:6px 0 24px }
+    .more > summary{ list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:8px; min-height:var(--tap); font-weight:600; color:var(--accent-ink) }
+    .more > summary::-webkit-details-marker{ display:none }
+    .more > summary::after{ content:"+"; font-size:22px }
+    .more[open] > summary::after{ content:"–" }
+    .more[open] > summary{ margin-bottom:14px }
+    .pullline{ font:italic 24px/1.4 var(--serif); color:var(--ink); margin:8px 0 0 }
+
+    /* the review: one big quote, two small labelled lines */
+    /* review card, same look as /book */
+    .quote{ margin:0; background:var(--panel-2); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:var(--r-card); padding:26px 22px }
+    @media(min-width:760px){ .quote{ padding:28px 32px } }
+    .quote .head{ display:flex; align-items:center; flex-wrap:wrap; gap:6px 12px }
+    .stars{ color:var(--accent); letter-spacing:2px; font-size:20px }
+    .vp{ font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ok) }
+    .quote h3{ margin:12px 0 12px; font:600 clamp(22px,4.6vw,26px)/1.3 var(--serif); color:var(--ink) }
+    .quote p{ font-size:17px; line-height:1.7; color:var(--ink-2); margin:0 0 12px }
+    .quote .meta{ font-size:15px; color:var(--muted); margin:6px 0 0; line-height:1.6 }
+    .quote .meta a{ color:var(--accent-ink); font-weight:600; display:inline-block; padding:10px 0 }
+    .friends{ display:grid; gap:18px; margin-top:28px }
+    @media(min-width:760px){ .friends{ grid-template-columns:1fr 1fr } }
+    .friends figure{ margin:0; padding-left:16px; border-left:3px solid var(--line-strong) }
+    .friends blockquote{ margin:0 0 6px; font:italic 21px/1.4 var(--serif); color:var(--ink) }
+    .friends figcaption{ font-size:14px; color:var(--muted) }
+
+    /* what you'll be able to do: plain rows, no boxes */
+    .parts{ margin:8px 0 28px; border-top:1px solid var(--line) }
+    .part{ border-bottom:1px solid var(--line) }
+    .part > summary{ list-style:none; cursor:pointer; padding:18px 0; display:grid; grid-template-columns:1fr auto; gap:4px 12px; min-height:var(--tap) }
+    .part > summary::-webkit-details-marker{ display:none }
+    .part .pn{ font-size:13px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-ink) }
+    .part .pt{ grid-column:1; font:600 22px/1.3 var(--serif); color:var(--ink) }
+    .part .pi{ grid-row:1 / span 2; grid-column:2; align-self:center; font-size:24px; color:var(--accent-ink) }
+    .part[open] .pi{ transform:rotate(45deg) }
+    .part ul{ margin:0; padding:0 0 18px 20px; color:var(--ink-2); font-size:16px }
+    .part li{ margin:6px 0 }
+    @media (prefers-reduced-motion:no-preference){ .part .pi{ transition:transform .2s } }
+
+    /* who it's for: three plain lines */
+    .who{ list-style:none; margin:8px 0 0; padding:0; display:grid; gap:22px }
+    .who li{ padding-left:18px; border-left:3px solid var(--accent) }
+    .who b{ display:block; font:600 22px/1.3 var(--serif); color:var(--ink); margin-bottom:4px }
+    .who span{ color:var(--ink-2); font-size:17px }
+
+    /* author */
+    .author{ display:grid; gap:22px; align-items:start }
+    .author img{ width:120px; height:120px; border-radius:50%; object-fit:cover }
+    .author .role{ font-size:15px; color:var(--muted); margin:-10px 0 16px }
+    @media(min-width:900px){ .author{ grid-template-columns:auto 1fr; gap:36px } .author img{ width:160px; height:160px } }
+
+    /* FAQ */
+    .faq{ border-top:1px solid var(--line) }
+    .faq details{ border-bottom:1px solid var(--line) }
+    .faq summary{ list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:16px; align-items:center; padding:16px 0; min-height:var(--tap); font-weight:600; font-size:18px; color:var(--ink) }
+    .faq summary::-webkit-details-marker{ display:none }
+    .faq summary::after{ content:"+"; font-size:24px; color:var(--accent-ink); flex:none }
+    .faq details[open] summary::after{ content:"–" }
+    .faq details p{ margin:0 0 18px }
+
+    /* close */
+    .close .in--wide{ display:grid; gap:28px; align-items:center }
+    .close .desk{ width:min(80vw,360px); margin:0 auto; border-radius:var(--r-card); box-shadow:0 24px 50px -30px rgba(10,24,40,.55) }
+    @media(min-width:900px){ .close .in--wide{ grid-template-columns:auto 1fr; gap:56px } .close .desk{ width:400px } }
+    .sec--line{ border-top:1px solid var(--line) }
+
+    /* email ask */
+    .optin{ margin:0 auto }
+    .optin input[type=email]{ font-size:16px }
+
+    footer.foot{ border-top:1px solid var(--line); padding:32px 16px 40px; font-size:15px; color:var(--muted) }
+    footer.foot .in--wide{ display:flex; flex-wrap:wrap; gap:12px 24px; justify-content:space-between }
+    footer.foot nav{ display:flex; flex-wrap:wrap; gap:4px 18px }
+    footer.foot a{ color:var(--ink-2); text-decoration:none; min-height:var(--tap); display:inline-flex; align-items:center }
+    footer.foot a:hover{ color:var(--accent-ink) }
+
+    /* ===== Long-form additions (preview/home-long, 2026-09-27) ===== */
+    .preview-bar{ background:#1d2b3a; color:#fff; font-size:13px; text-align:center; padding:8px 16px }
+    .preview-bar a{ color:#f3d98b }
+
+    /* expandable cards: title + one line visible, specifics on tap */
+    .cards{ display:grid; gap:12px; margin:8px 0 24px }
+    @media(min-width:760px){ .cards--2{ grid-template-columns:1fr 1fr } .cards--3{ grid-template-columns:1fr 1fr 1fr } }
+    .card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); }
+    .sec--tint .card{ background:var(--panel) }
+    .card > summary{ list-style:none; cursor:pointer; padding:18px 18px 16px; display:grid; grid-template-columns:1fr auto; gap:4px 12px; min-height:var(--tap) }
+    .card > summary::-webkit-details-marker{ display:none }
+    .card .ct{ font:600 20px/1.3 var(--serif); color:var(--ink) }
+    .card .cl{ grid-column:1; font-size:16px; color:var(--ink-2); line-height:1.5 }
+    .card .ci{ grid-row:1 / span 2; grid-column:2; align-self:start; font-size:24px; line-height:1; color:var(--accent-ink) }
+    .card[open] .ci{ transform:rotate(45deg) }
+    .card[open]{ border-color:var(--accent) }
+    .card .cx{ padding:0 18px 18px; font-size:16px; color:var(--ink-2) }
+    .card .cx p{ font-size:16px; margin:0 0 10px }
+    .card .cx ul{ margin:0; padding-left:20px } .card .cx li{ margin:5px 0 }
+    .card .tag{ font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-ink) }
+    @media (prefers-reduced-motion:no-preference){ .card .ci{ transition:transform .2s } }
+
+    /* RTC colour-coding in the directed brief */
+    .rtc-r{ background:#e4ecf7; border-radius:4px; padding:0 3px; box-decoration-break:clone }
+    .rtc-t{ background:#fbecc9; border-radius:4px; padding:0 3px; box-decoration-break:clone }
+    .rtc-c{ background:#e2f1e6; border-radius:4px; padding:0 3px; box-decoration-break:clone }
+    .rtc-key{ display:flex; flex-wrap:wrap; gap:8px 14px; font-size:14px; color:var(--muted); margin:0 0 14px }
+    .rtc-key span{ display:inline-flex; align-items:center; gap:6px }
+    .rtc-key i{ width:14px; height:14px; border-radius:3px; display:inline-block }
+
+    /* swipe row on phones, grid on desktop */
+    .swipe{ display:grid; grid-auto-flow:column; grid-auto-columns:88%; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:10px; margin:8px -16px 18px; padding-left:16px; padding-right:16px; scrollbar-width:thin }
+    .swipe > *{ scroll-snap-align:start }
+    @media(min-width:760px){ .swipe{ grid-auto-flow:row; grid-template-columns:1fr 1fr; overflow:visible; margin:8px 0 18px; padding:0 } }
+    .swipe-hint{ font-size:14px; color:var(--muted); margin:-6px 0 18px }
+    @media(min-width:760px){ .swipe-hint{ display:none } }
+    .demo-case{ display:grid; gap:10px }
+
+    /* banner line */
+    .banner{ margin:28px 0 0; padding:22px; border-radius:var(--r-card); background:var(--ink); color:#fff; font:italic 22px/1.4 var(--serif) }
+    .banner strong{ color:#f3d98b; font-weight:600 }
+
+    /* symptom list */
+    .ticks{ list-style:none; padding:0; margin:8px 0 0; display:grid; gap:10px }
+    .ticks li{ padding:14px 16px 14px 44px; position:relative; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-sm); color:var(--ink-2); font-size:17px }
+    .ticks li::before{ content:"✓"; position:absolute; left:16px; top:13px; color:var(--accent-ink); font-weight:700 }
+
+    /* brief builder */
+    .builder{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:20px; margin:18px 0 22px }
+    .builder label{ display:block; font-size:14px; font-weight:700; color:var(--ink); margin:12px 0 6px }
+    .builder label i{ font-style:normal; font-weight:500; color:var(--muted) }
+    .builder input{ width:100%; box-sizing:border-box; font:16px/1.4 var(--sans); padding:12px 14px; border:1px solid var(--line-strong); border-radius:var(--r-sm); background:#fff; color:var(--ink); min-height:var(--tap) }
+    .builder .out{ margin:16px 0 0; padding:14px 16px; border-radius:14px 14px 14px 4px; background:#fbf5e6; font-size:16px; color:var(--ink); min-height:3em }
+    .builder .row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:12px }
+    .builder button{ min-height:var(--tap); padding:0 18px; border-radius:var(--r-sm); border:1px solid var(--accent); background:var(--panel); color:var(--accent-ink); font:600 15px var(--sans); cursor:pointer }
+    .builder .note{ font-size:13px; color:var(--muted); margin:10px 0 0 }
+
+    /* chapter map */
+    .chmap{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:6px 0 22px; font-size:13px }
+    .chmap div{ border-top:3px solid var(--accent); background:var(--panel); padding:10px 10px 12px; border-radius:0 0 var(--r-sm) var(--r-sm) }
+    .chmap b{ display:block; font:600 15px/1.25 var(--serif); color:var(--ink); margin-bottom:4px }
+    .chmap span{ color:var(--muted) }
+
+    /* stack (back of the book) */
+    .stack{ display:grid; gap:10px; margin:8px 0 24px; grid-template-columns:1fr 1fr }
+    @media(min-width:760px){ .stack{ grid-template-columns:repeat(4,1fr) } }
+    .stack .card > summary{ grid-template-columns:1fr auto }
+    .stack .num{ font:600 34px/1 var(--serif); color:var(--accent-ink); display:block; margin-bottom:6px }
+
+    /* cast */
+    .cast{ display:grid; gap:14px; margin:8px 0 22px }
+    @media(min-width:900px){ .cast{ grid-template-columns:1fr 1fr 1fr } }
+    .cast .card > summary{ grid-template-columns:auto 1fr auto; align-items:center }
+    .cast .face{ grid-row:1 / span 3; width:84px; height:84px; min-width:84px; max-width:84px; flex-shrink:0; border-radius:50%; object-fit:cover; background:var(--bg-2); display:flex; align-items:center; justify-content:center; font:600 30px var(--serif); color:var(--accent-ink) }
+    .cast .ct, .cast .cl, .cast .tag{ grid-column:2 }
+    .cast .ci{ grid-column:3; grid-row:1 / span 3; align-self:center }
+    .cast-note{ font-size:14px; color:var(--muted); margin:-8px 0 22px }
+    .forlist{ list-style:none; padding:0; margin:0 0 8px; display:grid; gap:8px }
+    .forlist li{ padding-left:28px; position:relative; color:var(--ink-2) }
+    .forlist li::before{ content:"→"; position:absolute; left:0; color:var(--accent-ink); font-weight:700 }
+    .forlist--no li::before{ content:"×"; color:var(--muted) }
+
+    /* timeline */
+    .tl{ list-style:none; margin:8px 0 22px; padding:0; border-left:2px solid var(--line-strong) }
+    .tl > li{ position:relative; padding:0 0 4px 22px }
+    .tl > li::before{ content:""; position:absolute; left:-7px; top:22px; width:12px; height:12px; border-radius:50%; background:var(--accent) }
+    .tl .card{ margin-bottom:10px }
+
+    /* comic strip (two-step verification) */
+    .strip{ display:grid; gap:10px; margin:8px 0 22px }
+    @media(min-width:760px){ .strip{ grid-template-columns:repeat(4,1fr) } }
+    .panel{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:16px }
+    .panel .pnum{ font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-ink) }
+    .panel p{ font-size:16px !important; margin:6px 0 0 !important }
+
+    /* about: proof stack + series strip */
+    .proof{ list-style:none; padding:14px 16px; margin:18px 0; border:1px solid var(--line-strong); border-radius:var(--r-sm); background:var(--panel); display:grid; gap:8px; font-size:16px; color:var(--ink-2) }
+    .proof li{ padding-left:22px; position:relative } .proof li::before{ content:"■"; position:absolute; left:0; top:0; font-size:10px; line-height:2.4; color:var(--accent) }
+    .series{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:16px 0 8px }
+    .series div{ padding:12px 10px; border-radius:var(--r-sm); border:1px solid var(--line); background:var(--panel); font-size:13px; color:var(--muted) }
+    .series b{ display:block; font:600 15px/1.25 var(--serif); color:var(--ink); margin:4px 0 }
+    .series .live{ border-color:var(--accent) }
+
+    /* format chooser */
+    .formats{ display:grid; gap:12px; margin:8px 0 22px }
+    @media(min-width:760px){ .formats{ grid-template-columns:1fr 1fr 1fr } }
+    .fmt{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:18px; display:flex; flex-direction:column; gap:8px }
+    .fmt b{ font:600 21px/1.2 var(--serif); color:var(--ink) }
+    .fmt span{ font-size:16px; color:var(--ink-2); flex:1 }
+    .fmt a{ min-height:var(--tap); display:inline-flex; align-items:center; font-weight:600 }
+    .price-line{ font-size:15px; color:var(--muted); margin:0 0 6px }
+
+    /* close note + P.S. */
+    .note-card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:20px 22px; margin:0 0 20px }
+    .note-card p{ font:italic 19px/1.55 var(--serif) !important; color:var(--ink) !important }
+    .note-card .sig{ font:italic 600 24px var(--serif) !important; margin:6px 0 0 !important }
+    .ps{ font-size:16px; color:var(--ink-2); margin:18px 0 0; padding-top:14px; border-top:1px dashed var(--line-strong) }
+
+    /* sticky buy bar on phones */
+    .sticky-buy{ position:fixed; left:0; right:0; bottom:0; z-index:45; display:flex; align-items:center; gap:12px; justify-content:space-between; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:rgba(255,255,255,.97); border-top:1px solid var(--line); box-shadow:0 -8px 24px -18px rgba(10,24,40,.5); transform:translateY(110%) }
+    .sticky-buy.on{ transform:none }
+    .sticky-buy span{ font-size:14px; color:var(--ink-2); line-height:1.3 }
+    .sticky-buy a{ min-height:var(--tap); display:inline-flex; align-items:center; padding:0 16px; white-space:nowrap; font-weight:600 }
+    @media (prefers-reduced-motion:no-preference){ .sticky-buy{ transition:transform .25s } }
+    @media(min-width:900px){ .sticky-buy{ display:none } }
+    body.has-sticky footer.foot{ padding-bottom:96px }
+    @media(min-width:900px){ body.has-sticky footer.foot{ padding-bottom:40px } }
+
+
+    /* ===== Long-form additions, part 2 ===== */
+    .sec--grey{ background:#eceef1 }
+    .sec--grey .card{ background:var(--panel) }
+    .hero-review{ display:inline-flex; flex-wrap:wrap; align-items:center; gap:4px 8px; margin:0 0 20px; font-size:16px; color:var(--ink); text-decoration:none; min-height:var(--tap) }
+    .hero-review .stars{ font-size:17px }
+    .hero-review small{ font-size:13px; color:var(--muted) }
+    .timing-note{ font-size:12px !important; color:var(--muted) !important; margin:8px 0 0 !important }
+    .more--sm{ margin:0 }
+    .more--sm p{ font-size:15px; margin:0 0 8px }
+    .more--sm p > span:first-child{ font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; margin-right:6px }
+    .reviews-grid{ display:grid; gap:16px }
+    @media(min-width:900px){ .reviews-grid:has(.quote + .quote){ grid-template-columns:1fr 1fr } }
+    .h3{ font-size:24px; margin:28px 0 10px }
+    .card .num{ font:600 34px/1 var(--serif); color:var(--accent-ink); display:block; margin-bottom:6px }
+    .card--row .ct{ font-size:18px }
+
+    /* symptom checklist with real checkboxes */
+    .ticks li{ padding:0 }
+    .ticks li::before{ content:none }
+    .ticks label{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; padding:14px 16px; min-height:var(--tap); cursor:pointer }
+    .ticks input{ width:22px; height:22px; accent-color:var(--accent-ink); flex:none; margin:0 }
+    .ticks .fix{ font-style:normal; font-size:13px; font-weight:700; color:var(--accent-ink); margin-left:auto }
+    .ticks li:has(input:checked){ border-color:var(--accent); background:#fbf5e6 }
+    .tally{ margin:14px 0 0 !important; font-weight:600; color:var(--ink) !important }
+
+    /* brief builder colour hints */
+    .builder .in-r{ border-left:6px solid #9db7dd }
+    .builder .in-t{ border-left:6px solid #e8c877 }
+    .builder .in-c{ border-left:6px solid #9fcfab }
+    .builder button#b-build{ background:var(--accent); border-color:var(--accent); color:#fff }
+
+    /* chapter map as a line with stops */
+    .chmap .stops{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px }
+    .chmap .stops button{ width:44px; height:44px; border-radius:50%; border:1px solid var(--line-strong); background:var(--panel); color:var(--ink); font:600 15px var(--sans); cursor:pointer; padding:0 }
+    .chmap .stops button[aria-pressed="true"]{ background:var(--accent); border-color:var(--accent); color:#fff }
+    @media(max-width:560px){ .chmap{ grid-template-columns:1fr } }
+    .chcap{ margin:-10px 0 20px !important; font-size:16px; min-height:1.6em }
+
+    /* foundation tax curves */
+    .curves{ display:block; width:100%; max-width:420px; height:auto; margin:0 0 20px; color:var(--ink) }
+
+    /* close restatement */
+    .restate{ list-style:none; padding:0; margin:0 0 20px; display:flex; flex-wrap:wrap; gap:8px }
+    .restate li{ font-size:14px; padding:6px 12px; border:1px solid var(--line-strong); border-radius:999px; color:var(--ink-2); background:var(--panel) }
+
+    .oi-eyebrow{ display:block; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:10px }
+    .visually-hidden{ position:absolute !important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap }
+
+  </style>
+</head>
+<body>
+
+<!-- ep:sec:preview-bar -->
+<div class="preview-bar">Preview of the long-form homepage. Not live, not indexed. The live homepage is <a href="/">elvinpeters.com</a>.</div>
+<!-- /ep:sec:preview-bar -->
+
+<!-- ep:sec:nav -->
+<nav class="nav" aria-label="Main"><div class="container">
+  <a class="brandmark" href="/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>Elvin&nbsp;Peters</a>
+  <div class="links">
+    <a href="#mirror">The method</a>
+    <a href="#inside">Inside</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#about">Author</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a class="btn btn--primary nav-buy" id="buy-nav" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
+</div></nav>
+<!-- /ep:sec:nav -->
+
+<main>
+
+<!-- ep:sec:hero -->
+<header class="hero" id="top">
+  <div class="in--wide">
+    <div>
+      <span class="eyebrow">Stop prompting. Start directing.</span>
+      <h1 id="hl">You tried AI.<br/><span>You weren't impressed.</span></h1>
+      <p class="hero-sub" id="sub">The people getting great results type into the same box you do. They give it a proper brief, and this book shows you how in plain English, so you can hand AI its first real task this week.</p>
+      <p class="hero-sub" id="hook" style="font-weight:600;color:var(--ink)"></p>
+      <a class="hero-review" href="#reviews"><span class="stars" aria-label="Rated 5 out of 5 stars">★★★★★</span> &ldquo;Must-read if you're looking to enhance your output.&rdquo; <small>Verified Purchase, Amazon.ca</small></a>
+      <div class="buyblock">
+        <a class="btn btn--primary buy amz-btn" id="buy-hero" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book on Amazon &rarr;</a>
+        <div class="avail"><a class="badge-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>Kindle · Paperback · Hardcover</span></div>
+        <p class="price-line">See the price in your region on Amazon</p>
+        <a class="sample" href="/free/free-chapter/">Read Chapter 8 free: which AI mode fits which job &rarr;</a>
+      </div>
+      <p class="trust">By <strong>Elvin M. Peters</strong>, who ran $40M+ in profitable ad spend and then advised the media teams at big advertisers for an adtech giant building AI.</p>
+    </div>
+    <div class="hero-art">
+      <img src="/img/book-3d.webp" alt="The Artificial Advantage by Elvin M. Peters, paperback" width="686" height="1140" fetchpriority="high">
+    </div>
+  </div>
+</header>
+<!-- /ep:sec:hero -->
+
+<!-- ep:sec:demo -->
+<section class="sec" id="demo">
+  <div class="in">
+    <span class="eyebrow">See the difference</span>
+    <h2>Same tool, same task, and the brief made the difference.</h2>
+    <p class="lede">One person asked AI for help. The other briefed it the way you'd brief a sharp new hire.</p>
+    <p class="rtc-key" aria-hidden="true"><span><i class="rtc-r"></i>Role</span><span><i class="rtc-t"></i>Task</span><span><i class="rtc-c"></i>Constraint</span></p>
+    <div class="swipe">
+      <div class="demo-case">
+        <div class="chat chat--before">
+          <div class="chat-h"><span>Asked</span><span class="timer timer--slow">10 minutes</span></div>
+          <p class="bubble">&ldquo;Write me an email to a client about a project delay.&rdquo;</p>
+          <p class="chat-out">A generic draft in the wrong tone, rewritten from scratch.</p>
+        </div>
+        <div class="chat chat--after">
+          <div class="chat-h"><span>Directed</span><span class="timer timer--fast">2 minutes</span></div>
+          <p class="bubble">&ldquo;<span class="rtc-t">Client delay email. Two weeks late.</span> <span class="rtc-c">Client values transparency. Tone: confident and collaborative. Under 150 words.</span> <span class="rtc-t">New date: March 15.</span>&rdquo;</p>
+          <p class="chat-out">Right voice and right length, one minute of polish, then sent.</p>
+          <p class="timing-note">Example timings</p>
+        </div>
+        <details class="more more--sm"><summary>See the brief's parts</summary>
+          <p><span class="rtc-t">Task</span> Client delay email. Two weeks late. New date: March 15.</p>
+          <p><span class="rtc-c">Constraint</span> Client values transparency. Tone: confident and collaborative. Under 150 words.</p>
+          <p><span class="rtc-r">Role</span> Left light on purpose. The book puts it plainly: &ldquo;A sharp task with a light role almost always beats an elaborate role with a fuzzy task.&rdquo; (Ch 3)</p>
+        </details>
+      </div>
+      <div class="demo-case">
+        <div class="chat chat--before">
+          <div class="chat-h"><span>Asked</span><b class="res">Meeting notes</b></div>
+          <p class="bubble">&ldquo;Summarize these meeting notes.&rdquo;</p>
+          <p class="chat-out">No decisions, no owners, nothing anyone can act on.</p>
+        </div>
+        <div class="chat chat--after">
+          <div class="chat-h"><span>Directed</span><b class="res">A follow-up, sent today</b></div>
+          <p class="bubble">&ldquo;<span class="rtc-t">From these notes: decisions made, action items with owner and date, open questions.</span> <span class="rtc-c">Three lists, nothing else.</span>&rdquo;</p>
+          <p class="chat-out">A follow-up you can send the same day.</p>
+        </div>
+        <details class="more more--sm"><summary>See the brief's parts</summary>
+          <p><span class="rtc-t">Task</span> Decisions made, action items with owner and date, open questions.</p>
+          <p><span class="rtc-c">Constraint</span> Three lists, nothing else.</p>
+          <p><span class="rtc-r">Role</span> None needed. The shape of the output did the work.</p>
+        </details>
+      </div>
+      <div class="demo-case">
+        <div class="chat chat--before">
+          <div class="chat-h"><span>Asked</span><b class="res">Your own data</b></div>
+          <p class="bubble">&ldquo;What does this data tell me?&rdquo;</p>
+          <p class="chat-out">A description where you needed a decision.</p>
+        </div>
+        <div class="chat chat--after">
+          <div class="chat-h"><span>Directed</span><b class="res">A briefing you can defend</b></div>
+          <p class="bubble">&ldquo;<span class="rtc-r">Act as an analyst briefing a skeptical CFO.</span> <span class="rtc-t">Name the three changes that matter, why each happened,</span> <span class="rtc-c">and what the numbers cannot explain.</span>&rdquo;</p>
+          <p class="chat-out">Findings, causes and the honest gaps.</p>
+        </div>
+        <details class="more more--sm"><summary>See the brief's parts</summary>
+          <p><span class="rtc-r">Role</span> An analyst briefing a skeptical CFO.</p>
+          <p><span class="rtc-t">Task</span> Name the three changes that matter and why each happened.</p>
+          <p><span class="rtc-c">Constraint</span> Say what the numbers cannot explain.</p>
+        </details>
+      </div>
+      <div class="demo-case">
+        <div class="chat chat--before">
+          <div class="chat-h"><span>Asked</span><b class="res">A job posting</b></div>
+          <p class="bubble">&ldquo;Write a job description for a marketing manager.&rdquo;</p>
+          <p class="chat-out">Buzzwords and no reason to apply.</p>
+        </div>
+        <div class="chat chat--after">
+          <div class="chat-h"><span>Directed</span><b class="res">A posting people answer</b></div>
+          <p class="bubble">&ldquo;<span class="rtc-t">Job posting, marketing manager, 12-person B2B firm.</span> <span class="rtc-c">Lead with the problems this person owns in month one. Plain language, under 400 words.</span>&rdquo;</p>
+          <p class="chat-out">Specific and honest about the work.</p>
+        </div>
+        <details class="more more--sm"><summary>See the brief's parts</summary>
+          <p><span class="rtc-t">Task</span> Job posting, marketing manager, 12-person B2B firm.</p>
+          <p><span class="rtc-c">Constraint</span> Lead with the problems this person owns in month one, plain language, under 400 words.</p>
+        </details>
+      </div>
+    </div>
+    <p class="swipe-hint">Swipe for three more examples &rarr;</p>
+    <p class="pullline">Both people had the same tool. The second one had learned to direct it, and that is the skill this book teaches.</p>
+    <div class="buyblock" style="margin-top:22px">
+      <a class="btn btn--primary buy amz-btn" id="buy-demo" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Learn to brief like that: get the book on Amazon">Learn to brief like that &rarr;</a>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:demo -->
+
+<!-- ep:sec:familiar -->
+<section class="sec sec--tint" id="familiar">
+  <div class="in">
+    <h2>Sound familiar? Every one of these has a fix.</h2>
+    <p>Tick the ones that have happened to you.</p>
+    <ul class="ticks" id="ticks">
+      <li><label><input type="checkbox"> I asked for an email and rewrote the whole thing. <em class="fix">Fix in Ch 3</em></label></li>
+      <li><label><input type="checkbox"> I got a summary with no decisions in it. <em class="fix">Fix in Ch 10</em></label></li>
+      <li><label><input type="checkbox"> It gave me a list I could have found on any blog. <em class="fix">Fix in Ch 11</em></label></li>
+      <li><label><input type="checkbox"> I asked a follow-up and the draft got worse. <em class="fix">Fix in Ch 11</em></label></li>
+      <li><label><input type="checkbox"> I tried two tools and couldn't tell which was better. <em class="fix">Fix in Ch 7</em></label></li>
+      <li><label><input type="checkbox"> The answer sounded sure of itself and was wrong. <em class="fix">Fix in Ch 13</em></label></li>
+    </ul>
+    <p class="tally" id="tally" aria-live="polite">None so far. The book will turn what already works into a method you can repeat.</p>
+    <p class="banner">You already know how to brief a sharp new hire. <strong>Directing AI uses the same skill.</strong></p>
+  </div>
+</section>
+<!-- /ep:sec:familiar -->
+
+<!-- ep:sec:beliefs -->
+<section class="sec" id="beliefs">
+  <div class="in">
+    <h2>Three reasons people wait, and what the book says to each.</h2>
+    <div class="cards">
+      <details class="card"><summary><span class="ct">&ldquo;AI is overhyped.&rdquo;</span><span class="cl">The Mirror Principle: AI reflects the quality of your direction (Ch 1).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>The model has no goals of its own, so it mirrors back what you bring. The book's image is a lamp against a beam: a vague prompt lights the whole room, and a precise one narrows the beam onto the thing you need. A flat answer usually tells you the brief was thin, and a brief can be fixed.</p></div></details>
+      <details class="card"><summary><span class="ct">&ldquo;I'm not technical.&rdquo;</span><span class="cl">The skill is direction, and you already use it at work (Ch 3).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>The Director's Mindset puts you in the chair with AI as the crew. You supply the judgment, the direction and the check, which is what you already do when you hand work to a colleague.</p><p>Priya, a consultant in the book (a character, a composite), practised for two weeks in January and had twelve templates by March, and &ldquo;no technical training went into any of it.&rdquo;</p></div></details>
+      <details class="card"><summary><span class="ct">&ldquo;The tools change too fast.&rdquo;</span><span class="cl">A good brief carries over from one model to the next (Ch 6).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>ChatGPT, Claude and Gemini share the same engine underneath, and each one mirrors the quality of what you type. In the book's words, &ldquo;The skill you're building here transfers to every tool, because the underlying engine is the same one.&rdquo; Product names will keep changing, and your briefs keep working.</p></div></details>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:beliefs -->
+
+<!-- ep:sec:mirror -->
+<section class="sec sec--tint" id="mirror">
+  <div class="in">
+    <span class="eyebrow">The method</span>
+    <h2>AI mirrors the brief you give it. Build one now.</h2>
+    <p>This is the three-part brief from Chapter 3. Fill it in for a task on your desk this week.</p>
+    <p class="pullline" style="margin:0 0 6px">&ldquo;A vague prompt covers ground the way a lamp covers a room. A precise one narrows the beam to a point.&rdquo;</p>
+    <p class="price-line">Adapted from Chapter 1</p>
+    <form class="builder" id="builder" onsubmit="return false" autocomplete="off">
+      <p class="note" style="margin:0">Three boxes, one brief. Nothing you type leaves this page.</p>
+      <label for="b-role" class="lab-r">Role <i>· Who should AI be for this?</i></label>
+      <input id="b-role" class="in-r" placeholder="a chief of staff who writes for busy executives">
+      <label for="b-task">Task <i>· What do you need done?</i></label>
+      <input id="b-task" class="in-t" placeholder="turn my notes below into a weekly update for my director">
+      <label for="b-con">Constraint <i>· What are the limits?</i></label>
+      <input id="b-con" class="in-c" placeholder="lead with the one decision I need, three bullets at most, under 120 words">
+      <div class="row"><button type="button" id="b-build">Build my brief</button><button type="button" id="b-copy">Copy brief</button></div>
+      <p class="note" style="margin-top:14px;font-weight:700;color:var(--ink)">Your brief</p>
+      <p class="out" id="b-out" aria-live="polite" style="color:var(--muted)">Act as a chief of staff who writes for busy executives. Turn my notes below into a weekly update for my director. Lead with the one decision I need, three bullets at most, under 120 words.</p>
+      <p class="note" id="b-msg" aria-live="polite"></p>
+    </form>
+    <p>That's one framework. Chapter 3 teaches the rest of the brief, and Chapter 11 shows you how to fix the draft when it misses.</p>
+    <div class="buyblock">
+      <a class="btn btn--primary buy amz-btn" id="buy-mech" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the full method: the book on Amazon">Get the full method &rarr;</a>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:mirror -->
+
+<!-- ep:sec:reviews -->
+<section class="sec" id="reviews">
+  <div class="in">
+    <span class="eyebrow">The first review the book got, unedited</span>
+    <h2>What the first readers said</h2>
+    <div class="reviews-grid">
+    <!-- ep:bk-review (verbatim from Amazon, checked 2026-09-27) -->
+    <figure class="quote">
+      <div class="head"><span class="stars" aria-label="Rated 5 out of 5 stars">★★★★★</span><span class="vp">Verified Purchase · Amazon.ca</span></div>
+      <h3>&ldquo;Must-read if you're looking to enhance your output.&rdquo;</h3>
+      <p>&ldquo;What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.</p>
+      <p>Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.&rdquo;</p>
+      <p class="meta">Amazon reviewer 2Buyer · Paperback · Reviewed in Canada · July 15, 2026 &middot; <a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Read it on Amazon &rarr;</a></p>
+    </figure>
+    <!-- /ep:bk-review -->
+    <!-- SECOND AMAZON REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).
+         When it appears, add it verbatim as a second .quote inside .reviews-grid (the grid holds one to six). -->
+    </div>
+    <div class="friends">
+      <figure><blockquote>&ldquo;The beginning also made me tear up.&rdquo;</blockquote><figcaption>Early reader, a friend of the author</figcaption></figure>
+      <figure><blockquote>&ldquo;I didn't realize that my AI skills were bad, then Elvin explained I just sucked at prompting.&rdquo;</blockquote><figcaption>Early reader, a friend of the author</figcaption></figure>
+    </div>
+    <p style="margin-top:22px"><a class="sample" href="/contact/">Read the book? Tell me what changed &rarr;</a></p>
+  </div>
+</section>
+<!-- /ep:sec:reviews -->
+
+<!-- ep:sec:inside -->
+<section class="sec sec--tint" id="inside">
+  <div class="in">
+    <span class="eyebrow">Inside the book</span>
+    <h2>Fifteen chapters in three parts, built into one method you can repeat.</h2>
+    <p>Read it in order once, then keep it beside your work.</p>
+    <div class="chmap" id="chmap" aria-label="Chapter map">
+      <div><b>Part 1</b><span class="stops"><button type="button" title="From Gimmick to Daily Assistant">1</button><button type="button" title="Overcoming the Hesitation">2</button><button type="button" title="The Mental Shift That Makes AI Work">3</button><button type="button" title="Setting Realistic Expectations">4</button><button type="button" title="How AI Skills Compound">5</button></span></div>
+      <div><b>Part 2</b><span class="stops"><button type="button" title="The Race You're Joining">6</button><button type="button" title="Choose Your Tool">7</button><button type="button" title="Direct Your Tool (free to read)">8</button><button type="button" title="Your AI Toolkit in Action">9</button></span></div>
+      <div><b>Part 3</b><span class="stops"><button type="button" title="The Three Fundamental Rules for Beginners">10</button><button type="button" title="Iteration Patterns">11</button><button type="button" title="The Invisible Skills">12</button><button type="button" title="Trust, but Verify">13</button><button type="button" title="Building Your AI Practice">14</button><button type="button" title="The Long Game">15</button></span></div>
+    </div>
+    <p class="chcap" id="chcap" aria-live="polite">Tap a stop to see its chapter. The line ends at the back of the book.</p>
+    <div class="cards">
+      <details class="card part-card"><summary><span class="tag">Part 1 · Building Your Foundation</span><span class="ct">Hand AI its first proper task this week, and know what happens when you type.</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><ul>
+          <li>Why the same question gets a generic answer for you and a sharp one for a colleague (Ch 1)</li>
+          <li>The four fears that hold capable people back, and the way past each one (Ch 2)</li>
+          <li>The three-part brief of role, task and constraint (Ch 3)</li>
+          <li>What AI does well, where it slips, and where your judgment stays in charge (Ch 4)</li>
+          <li>Your first saved template, and why each one makes the next task faster (Ch 5)</li>
+        </ul></div></details>
+      <details class="card part-card"><summary><span class="tag">Part 2 · Choose Your Tools</span><span class="ct">Pick one tool with confidence and know which mode suits each job.</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><ul>
+          <li>The three ways AI shows up at work (Ch 6)</li>
+          <li>Three questions that settle which tool to use (Ch 7)</li>
+          <li>Default, reasoning or creative mode, matched to the task (Ch 8, free to read)</li>
+          <li>Six hands-on exercises, starting with the email you've been avoiding (Ch 9)</li>
+        </ul></div></details>
+      <details class="card part-card"><summary><span class="tag">Part 3 · The Core Skills of Conversation</span><span class="ct">Fix a weak draft with one precise note, and catch an error before anyone else sees it.</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><ul>
+          <li>Three fundamental rules: be specific, ask for one thing, iterate (Ch 10)</li>
+          <li>The Diagnostic Ladder: name the symptom, trace the cause, write one corrective prompt (Ch 11)</li>
+          <li>How to get AI to ask you questions before it answers yours (Ch 12)</li>
+          <li>A two-step check for the confident answer that is wrong (Ch 13)</li>
+          <li>A 3-month plan that turns trying AI into a working habit (Ch 14)</li>
+          <li>What eight months of practice looks like, told through Marcus (Ch 15)</li>
+        </ul></div></details>
+    </div>
+    <a class="sample" href="/free/free-chapter/">Read Chapter 8 free: which AI mode fits which job &rarr;</a>
+  </div>
+</section>
+<!-- /ep:sec:inside -->
+
+<!-- ep:sec:stack -->
+<section class="sec" id="stack">
+  <div class="in">
+    <h2>The back of the book stays open beside your keyboard.</h2>
+    <p>Eight appendices and a quick reference card ship inside every copy.</p>
+    <div class="cards cards--2">
+      <details class="card"><summary><span class="ct"><span class="num">25</span>copy-ready prompts</span><span class="cl">For the jobs that fill a working week (Appendix E).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>Organised by task type: communication, analysis and research, writing and editing, planning and strategy, learning and development. Adapt them to your work so you never start from a blank box.</p></div></details>
+      <details class="card"><summary><span class="ct"><span class="num">25</span>ready-made roles</span><span class="cl">A starting persona for eight areas of work (Appendix G).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>Marketing and communications, operations, finance, HR, sales, legal and compliance, research and strategy, and leadership. Paste a role at the top of a prompt and adjust it. A short formula at the end shows you how to build your own.</p></div></details>
+      <details class="card"><summary><span class="ct"><span class="num">12</span>before-and-after makeovers</span><span class="cl">Weak prompts rebuilt, with every change explained (Appendix D).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>They cover real tasks, from a difficult email and a performance review to a client proposal and a research brief. The book calls this the first place to go when a prompt isn't producing what you need.</p></div></details>
+      <details class="card"><summary><span class="ct"><span class="num">10</span>common failures, each with its fix</span><span class="cl">For the output that's wrong when you can't say why (Appendix F).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>Too generic, too long, off-topic, the wrong tone, invented facts and five more. Each one comes with its symptoms, its likely cause and a corrective prompt.</p></div></details>
+      <details class="card"><summary><span class="ct"><span class="num">1</span>quick reference card</span><span class="cl">Every core move on one page.</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>The RTC brief, model selection at a glance, phrases that make AI reason step by step, Two-Step Verification, the iteration vocabulary and CLEAR at a glance.</p></div></details>
+      <details class="card"><summary><span class="ct"><span class="num">4</span>reference appendices</span><span class="cl">Frameworks, tools and plain-English terms (Appendices A, B, C and H).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>A glossary, a tools reference with free tiers, every framework in one place with a 30-day quick-start, and a research-grounded look at AI and the environment.</p></div></details>
+    </div>
+    <div class="buyblock">
+      <a class="btn btn--primary buy amz-btn" id="buy-stack" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Put the back of the book on your desk: get it on Amazon">Put the back of the book on your desk &rarr;</a>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:stack -->
+
+<!-- ep:sec:who -->
+<section class="sec sec--tint" id="who">
+  <div class="in">
+    <h2>Written for professionals who want AI to do real work.</h2>
+    <p>The book follows three characters whose starting points may look like yours.</p>
+    <div class="cast">
+      <details class="card"><summary><span class="face" aria-hidden="true">M</span><span class="tag">A character from the book</span><span class="ct">Maya</span><span class="cl">A high-school English teacher who doubted AI on principle (Ch 2).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>After eleven years in the classroom, she tested AI on her own work first, on a task that reliably took forty minutes. Six months later she still reads every output before it reaches her students. What changed was her question, from whether to use it at all to whether she has checked it.</p></div></details>
+      <details class="card"><summary><span class="face" aria-hidden="true">P</span><span class="tag">A character from the book</span><span class="ct">Priya</span><span class="cl">A consultant with more client work than hours (Ch 5).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>She gave herself two weeks in January to draft every client brief with AI first. By March she had twelve templates. Within a few months those workflows had clawed back close to two days a week, and she put that time into a fourth client account.</p></div></details>
+      <details class="card"><summary><img class="face" src="/img/cast/marcus-painted.webp" alt="" width="400" height="400" loading="lazy"><span class="tag">A character from the book</span><span class="ct">Marcus</span><span class="cl">A launch manager who closed the tab after one bad answer (Ch 3).</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx"><p>His story runs through the whole book. <a href="#marcus">It's told in the next section.</a></p></div></details>
+    </div>
+    <p class="cast-note">Characters from the book. The Preface says they are composites drawn from real patterns. The portraits are illustrations.</p>
+    <h3 class="h3">This book is for you if&hellip;</h3>
+    <div class="cards cards--2">
+      <details class="card card--row"><summary><span class="ct">You've tried AI and shrugged.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Chapter 1 explains why the first try felt like a gimmick, and Chapter 3 gives you the brief that changes the result.</p></div></details>
+      <details class="card card--row"><summary><span class="ct">Your workplace now expects you to use it.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>The Introduction covers why the baseline has shifted, and Part 2 gets you set up with one tool you can trust.</p></div></details>
+      <details class="card card--row"><summary><span class="ct">People at work ask you about it.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Chapter 7's three questions help a team settle on one tool, and the roles in Appendix G give everyone a shared starting point.</p></div></details>
+      <details class="card card--row"><summary><span class="ct">You write, summarise or analyse for a living.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Chapter 9 runs you through six exercises on that kind of work, and Appendix E gives you 25 prompts for it.</p></div></details>
+      <details class="card card--row"><summary><span class="ct">You want a method you can repeat.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>CLEAR ties the book together: choose your tool, lead with clear direction, evolve the output, audit it, and repeat it until it's a practice.</p></div></details>
+      <details class="card card--row"><summary><span class="ct">You want a reference on your desk.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>The appendices and quick reference card are built to stay open while you work.</p></div></details>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:who -->
+
+<!-- ep:sec:marcus -->
+<section class="sec" id="marcus">
+  <div class="in">
+    <span class="eyebrow">Marcus is a character from the book, a composite</span>
+    <h2>Marcus closed the tab for two months. Then he learned to brief it.</h2>
+    <ol class="tl">
+      <li><details class="card"><summary><span class="tag">Ch 3</span><span class="ct">One bad first try</span><span class="cl">He typed a vague question and got a generic list.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Marcus managed product launches at a mid-sized software company. He typed &ldquo;best go-to-market strategy for B2B SaaS&rdquo; and got a list he could have found on any marketing blog. He didn't open the tool again for two months.</p></div></details></li>
+      <li><details class="card"><summary><span class="tag">Ch 3</span><span class="ct">Three minutes of direction</span><span class="cl">A colleague nudged him back, and he tried a proper brief.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>He gave the model his product, his timeline, his team size and the two obstacles his sales team kept hitting. He brought the working first draft to leadership that afternoon.</p></div></details></li>
+      <li><details class="card"><summary><span class="tag">Ch 14</span><span class="ct">A library that grows</span><span class="cl">Six months in, he had fourteen saved templates.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Product launches stopped feeling hard, and his manager started handing him the cross-functional problems that tend to come before a promotion. Each saved template made the next task faster.</p></div></details></li>
+      <li><details class="card"><summary><span class="tag">Ch 15</span><span class="ct">Senior Director</span><span class="cl">Promoted that spring, with a method his team copied.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Within six weeks of his first strategy review, his team had adapted his brief for their own work. More than twenty templates lived in a shared folder by the end of the year, and he never asked anyone to use them.</p></div></details></li>
+    </ol>
+    <div class="buyblock">
+      <a class="btn btn--primary buy amz-btn" id="buy-marcus" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Start where Marcus started: get the book on Amazon">Start where Marcus started &rarr;</a>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:marcus -->
+
+<!-- ep:sec:plan -->
+<section class="sec sec--tint" id="plan">
+  <div class="in">
+    <h2>Your first week, then your first three months.</h2>
+    <p>Chapter 14 turns what you read into a practice plan.</p>
+    <ol class="tl">
+      <li><details class="card"><summary><span class="tag">First week · Quick-start</span><span class="ct">One real task a day, with low stakes.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Each workday, use AI for one task that needs doing anyway: an email, a summary, an outline or some research for a decision. Keep the stakes low enough that a mistake costs nothing. Save the first prompt that works (Ch 5 shows you how).</p></div></details></li>
+      <li><details class="card"><summary><span class="tag">Month 1 · Make it habitual</span><span class="ct">Reaching for AI becomes your default.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Keep one real task a day. At the end of each week, find one task you did more than once and save a template for it. You'll know it's working when you stop asking whether to use AI for something and just use it.</p></div></details></li>
+      <li><details class="card"><summary><span class="tag">Month 2 · Make it strategic</span><span class="ct">You can say why a good output was good.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Sharpen the templates that needed fixing every time. Try ranking the details that matter most and putting them first. On one complex task, ask AI to interview you before it answers.</p></div></details></li>
+      <li><details class="card"><summary><span class="tag">Month 3 · Make it systematic</span><span class="ct">Your prompt library becomes part of how you work.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Organise your library by task, workflow or audience. The book pictures a Tuesday at week twelve where a request that once ate your afternoon becomes a strong draft twenty minutes later.</p></div></details></li>
+    </ol>
+  </div>
+</section>
+<!-- /ep:sec:plan -->
+
+<!-- ep:sec:verify -->
+<section class="sec" id="verify">
+  <div class="in">
+    <h2>AI can sound certain and still be wrong. Two steps catch it.</h2>
+    <p>A story from Chapter 13 about two colleagues and one confident number.</p>
+    <div class="strip">
+      <div class="panel"><span class="pnum">1 · Same prompt</span><p>Diana and James asked AI for a market size for the same client pitch. It came back confident, with a growth rate to the decimal.</p></div>
+      <div class="panel"><span class="pnum">2 · James</span><p>He pasted the number into his slide and moved on. It looked right and read right.</p></div>
+      <div class="panel"><span class="pnum">3 · Diana</span><p>She paused and checked where the figure came from before it went on a slide.</p></div>
+      <div class="panel"><span class="pnum">4 · The meeting</span><p>The client flagged James's number as outdated. He spent fifteen minutes explaining. Diana spent thirty seconds citing her source.</p></div>
+    </div>
+    <p class="cast-note" style="margin:0 0 18px">Diana and James are characters from the book, composites.</p>
+    <div class="cards cards--2">
+      <details class="card"><summary><span class="tag">Step one</span><span class="ct">Sort the claim</span><span class="cl">Is it a fact, a judgment call or a creative draft?</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Facts can be flatly right or wrong, so that's where your checking goes. Judgment calls get your own judgment, and drafts get judged on fit.</p></div></details>
+      <details class="card"><summary><span class="tag">Step two</span><span class="ct">Match effort to stakes</span><span class="cl">A glance for small things, and an expert for big ones.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>A book suggestion gets a quick look. A figure going in front of a client gets a real check. Legal, financial or medical claims go to a professional.</p></div></details>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:verify -->
+
+<!-- ep:sec:tax -->
+<section class="sec sec--tint" id="tax">
+  <div class="in">
+    <h2>Waiting has a cost, and the book calls it the Foundation Tax.</h2>
+    <p class="pullline" style="margin:0 0 18px">&ldquo;The most expensive time to learn something is right after you needed it.&rdquo; <small class="price-line" style="font-style:normal">Chapter 5</small></p>
+    <svg class="curves" viewBox="0 0 320 150" role="img" aria-label="Two curves: starting early climbs gently, starting late climbs steeply after the skill is already expected">
+      <line x1="20" y1="130" x2="310" y2="130" stroke="currentColor" stroke-opacity=".25"/>
+      <line x1="20" y1="10" x2="20" y2="130" stroke="currentColor" stroke-opacity=".25"/>
+      <path d="M20 125 C 90 115, 150 80, 300 40" fill="none" stroke="var(--accent)" stroke-width="3"/>
+      <path d="M150 128 C 200 126, 240 90, 300 18" fill="none" stroke="#8f2f2f" stroke-width="3" stroke-dasharray="6 5"/>
+      <text x="200" y="68" font-size="11" fill="var(--accent-ink)">Start early</text>
+      <text x="236" y="112" font-size="11" fill="#8f2f2f">Start late</text>
+      <text x="24" y="146" font-size="10" fill="currentColor" fill-opacity=".6">Time</text>
+    </svg>
+    <div class="cards cards--2">
+      <details class="card"><summary><span class="ct">What the tax is</span><span class="cl">The extra cost of learning a skill after it's expected (Ch 5).</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>The book defines it as &ldquo;the extra cost, in time, energy, and credibility, that deferred learning charges when the environment already assumes a fluency you haven't built.&rdquo; It builds slowly and then shows up all at once.</p></div></details>
+      <details class="card"><summary><span class="ct">What two early weeks bought</span><span class="cl">Priya's head start came from her calendar (Ch 5, a character from the book).</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>She practised for two weeks in January while the learning curve was forgiving. Within a few months she had close to two days a week back. The book's advice is to start while free tiers and patient teams still make practice cheap.</p></div></details>
+    </div>
+    <p class="banner" style="margin-top:8px">The cheapest place to start is <strong>one brief on one real task this week.</strong></p>
+  </div>
+</section>
+<!-- /ep:sec:tax -->
+
+<!-- ep:sec:about -->
+<section class="sec sec--grey" id="about">
+  <div class="in author">
+    <img src="/img/headshot.jpg" alt="Elvin M. Peters" width="400" height="400" loading="lazy">
+    <div>
+      <span class="eyebrow">About the author</span>
+      <h2>A marketer who spent years directing AI at work.</h2>
+      <p>I spent a decade in marketing, most of it teaching ad algorithms what good results looked like. On both sides of the table I met capable people getting a fraction of what AI could give them, so I wrote this book for them.</p>
+      <div class="cards">
+        <details class="card"><summary><span class="tag">At a large Canadian fintech</span><span class="ct">I ran $40M+ in profitable ad spend over three years.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><ul>
+          <li>Cut the cost per funded loan by more than half by teaching the bidding algorithms what a good customer looked like</li>
+          <li>Ran spend across two regulated brands, where every campaign passed legal review before launch</li>
+          <li>Hand-built 250+ location pages that brought in $74,000 in organic revenue within six months</li>
+        </ul></div></details>
+        <details class="card"><summary><span class="tag">At an adtech giant building AI</span><span class="ct">I advised the media teams at big advertisers.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>AI cut my account audits from hours to minutes. That freed my time for the part that needed a person: shaping the recommendation for each client.</p></div></details>
+        <details class="card"><summary><span class="tag">Today</span><span class="ct">I write and build with AI full-time in Toronto.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>I built this site and its email system by directing AI, along with 20+ working tools in 2026. I taught myself to build this way, and the book teaches the same method from the first brief up.</p></div></details>
+      </div>
+      <div class="series">
+        <div class="live"><span>Book one · Out now</span><b>The Artificial Advantage</b></div>
+        <div><span>Book two · In progress</span><b>The Systematic Advantage</b></div>
+        <div><span>Book three · Planned</span><b>The Agentic Advantage</b></div>
+      </div>
+      <p><a href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">Find me on LinkedIn &rarr;</a></p>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:about -->
+
+<!-- ep:sec:formats -->
+<section class="sec" id="formats">
+  <div class="in">
+    <h2>Pick your format, or read a chapter free first.</h2>
+    <p class="price-line">See the price in your region on Amazon</p>
+    <div class="formats" id="buy-format">
+      <div class="fmt"><b>Kindle</b><span>Start reading tonight.</span><a class="btn btn--primary" id="buy-format-kindle" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get it on Kindle">Get it on Kindle &rarr;</a></div>
+      <div class="fmt"><b>Paperback</b><span>Keep it open beside your keyboard for the appendices.</span><a class="btn btn--primary" id="buy-format-paperback" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the paperback">Get the paperback &rarr;</a></div>
+      <div class="fmt"><b>Hardcover</b><span>The shelf copy, or a gift for the friend who gave up on AI.</span><a class="btn btn--primary" id="buy-format-hardcover" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the hardcover">Get the hardcover &rarr;</a></div>
+    </div>
+    <p>Getting a team started? One copy per person gives everyone the same method and the same starting prompts.</p>
+    <div class="cards cards--2">
+      <details class="card"><summary><span class="ct">Chapter 8 is free on this site</span><span class="cl">Which AI mode fits which job.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Read it tonight with nothing to buy. If the way it's written works for you, the rest of the book reads the same way. <a href="/free/free-chapter/">Read Chapter 8 free &rarr;</a></p></div></details>
+      <details class="card"><summary><span class="ct">Amazon's standard returns</span><span class="cl">The usual Amazon rules cover your order.</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx"><p>Every format is bought on Amazon, so Amazon's standard returns apply.</p></div></details>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:formats -->
+
+<!-- ep:sec:faq -->
+<section class="sec sec--tint" id="faq">
+  <div class="in">
+    <h2>Questions people ask before they buy</h2>
+    <div class="faq">
+      <details><summary>Do I need a technical background?</summary><p>None. The book is written for professionals with no technical training. If you can write an email, you can use everything in it.</p></details>
+      <details><summary>Which AI tool does it use?</summary><p>It works with ChatGPT, Claude, Gemini and Copilot. Part 2 helps you pick one, and the directing skill carries over to all of them.</p></details>
+      <details><summary>Will it go out of date when the tools change?</summary><p>The book teaches you how to direct AI, and that skill carries over from one model to the next. The product names will keep changing, and your briefs will keep working.</p></details>
+      <details><summary>I already use AI at work. Is it still for me?</summary><p>Yes, if your results are hit and miss. The frameworks turn scattered habits into a method you can repeat, and the appendices give you prompts and fixes to keep beside your work.</p></details>
+      <details><summary>What if AI gets something wrong?</summary><p>Chapter 13 gives you a two-step check: sort the claim, then match your checking to the stakes. Appendix F covers invented facts and nine other common failures, each with a corrective prompt.</p></details>
+      <details><summary>I'm a manager. Can my team use it?</summary><p>Yes. Chapter 7 helps a team settle on one tool, and the saved-template habit gives everyone prompts to share. One copy per person keeps the whole team on the same method.</p></details>
+      <details><summary>Can I read some of it first?</summary><p>Yes. <a href="/free/free-chapter/">Chapter 8 is free to read</a>, and it shows you which AI mode fits which job.</p></details>
+    </div>
+    <div class="buyblock" style="margin-top:26px">
+      <a class="btn btn--primary buy amz-btn" id="buy-faq" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get your copy on Amazon">Get your copy on Amazon &rarr;</a>
+      <a class="sample" href="/free/free-chapter/">Read Chapter 8 free: which AI mode fits which job &rarr;</a>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:faq -->
+
+<!-- ep:sec:close -->
+<section class="sec close" id="book">
+  <div class="in--wide">
+    <img class="desk" src="/img/book-desk.webp" alt="The Artificial Advantage paperback on a desk" width="600" height="600" loading="lazy">
+    <div>
+      <h2>You tried AI once. Give it a proper brief this time.</h2>
+      <p class="lede"><em>The Artificial Advantage</em> shows you how, one real work task at a time.</p>
+      <ul class="restate"><li>15 chapters, one method</li><li>8 appendices and a quick reference card</li><li>Kindle, paperback, hardcover</li><li>Chapter 8 free</li></ul>
+      <div class="note-card">
+        <p>I wrote this book for the capable people I kept meeting who were getting a fraction of what AI could give them. If you've been one of them, pick one real task this week and give AI a proper brief. The book will show you the rest.</p>
+        <p class="sig">Elvin</p>
+      </div>
+      <div class="buyblock">
+        <a class="btn btn--primary buy amz-btn" id="buy-close" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get The Artificial Advantage on Amazon">Get The Artificial Advantage &rarr;</a>
+        <p class="price-line">See the price in your region on Amazon</p>
+        <a class="sample" href="/free/free-chapter/">Read Chapter 8 free: which AI mode fits which job &rarr;</a>
+      </div>
+      <p class="ps"><b>P.S.</b> If you skimmed straight here, this is the whole deal. The book teaches you to brief AI the way you'd brief a sharp new hire, and the back of the book gives you prompts, roles and fixes to keep beside your keyboard. The book's Foundation Tax says every month you wait makes the skill cost more to learn, so the cheapest start is Chapter 8, free, tonight.</p>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:close -->
+
+<!-- ep:sec:newsletter -->
+<section class="sec sec--tint" id="newsletter">
+  <div class="in">
+    <div class="optin">
+      <span class="oi-eyebrow">Not ready yet?</span>
+      <h2>Get one useful AI email a month.</h2>
+      <p>The AI news worth knowing, tips you can use that week, and a note from the book. It lands on the first of every month.</p>
+      <form class="oi-form" data-source="newsletter-home-long-preview" novalidate>
+        <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+        <label class="visually-hidden" for="nl-email">Your email</label>
+        <input id="nl-email" type="email" required autocomplete="email" placeholder="you@work.com">
+        <button type="submit">Send me the monthly update</button>
+      </form>
+      <p class="oi-note">Free. Unsubscribe anytime.</p>
+      <p class="oi-msg" data-success="You're in. Look for it on the first of the month, and check your promotions tab if it isn't in your inbox."></p>
+      <p style="margin-top:14px">More free guides live on the <a href="/free/">free guides page</a>.</p>
+    </div>
+  </div>
+</section>
+<!-- /ep:sec:newsletter -->
+
+</main>
+
+<!-- ep:sec:footer -->
+<footer class="foot">
+  <div class="in--wide">
+    <span>© 2026 Elvin M. Peters</span>
+    <nav aria-label="Footer">
+      <a href="/free/">Free guides</a>
+      <a href="/newsletter/">Newsletter</a>
+      <a href="/contact/">Contact</a>
+      <a href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+<!-- /ep:sec:footer -->
+
+<!-- ep:sec:sticky -->
+<div class="sticky-buy" id="sticky" aria-hidden="true"><span><b>The Artificial Advantage</b><br>Kindle · Paperback · Hardcover</span><a class="btn btn--primary" id="buy-sticky" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" tabindex="-1" aria-label="Get it on Amazon">Get it on Amazon</a></div>
+<!-- /ep:sec:sticky -->
+
+<script>
+  /* The Amazon link lives in ONE constant. The 2E upload may change the ASIN
+     (plan v2, section 6): change it here and every buy link on the page follows. */
+  var AMAZON_URL = 'https://www.amazon.com/dp/B0H4X2S2JD';
+  document.querySelectorAll('a[data-amazon]').forEach(function (a) {
+    a.href = AMAZON_URL;
+    a.addEventListener('click', function () {
+      /* Outbound to Amazon is not a checkout event (see /book.html history). */
+      try { gtag('event', 'amazon_outbound', { event_label: a.getAttribute('aria-label') || a.textContent.trim() }); } catch (e) {}
+    });
+  });
+
+  /* Dynamic audience-matched headline (DTR), ported unchanged from /book.html.
+     Ad URLs append ?aud=<segment> or ?v=<angle>; no param keeps the HTML default. */
+  (function () {
+    var AUD = {
+      "skeptic":  { hl: "You tried AI and<br/><span>weren't impressed.</span>",
+                    sub: "The problem wasn't the tool. It was that no one taught you to direct it. Here's the framework that fixes that.",
+                    hook: "The people getting astonishing results are typing into the same box you are. They just learned to direct it." },
+      "jobsec":   { hl: "AI won't take your job.<br/><span>Someone who uses it better will.</span>",
+                    sub: "Become that someone. This is the framework that turns AI from a gimmick into your unfair advantage at work.",
+                    hook: "It has almost nothing to do with being technical. It is a learnable skill, and most professionals never learn it." },
+      "senior":   { hl: "You're not too old for AI.<br/><span>You just need a system.</span>",
+                    sub: "Not a tech degree, a framework. If you can send an email, you can master this in a weekend of reading.",
+                    hook: "Written for professionals with zero technical background. Plain language, real work tasks, start to finish." },
+      "lowtech":  { hl: "If you can send an email,<br/><span>you can master AI.</span>",
+                    sub: "Zero code. Zero jargon. The directing framework that finally makes AI deliver for non-technical professionals.",
+                    hook: "The gap was never about being technical. It was about being taught how to direct the tool." },
+      "student":  { hl: "Graduate already<br/><span>ahead of the room.</span>",
+                    sub: "The AI edge that outranks GPA. Learn to direct AI like the professionals who'll be hiring you.",
+                    hook: "Everyone your age is getting ahead with AI. This is how you get ahead of them." },
+      "manager":  { hl: "Give your team an AI framework<br/><span>you can actually teach.</span>",
+                    sub: "One system for directing AI, simple enough to hand to your whole team. No technical training required.",
+                    hook: "The professionals getting exceptional results are not more technical. They are more deliberate. This is the system." }
+    };
+    var ANG = {
+      "status":   { hl: "Be the one<br/><span>they promote.</span>",
+                    sub: "Make AI look easy while your coworkers fight with it. This is the framework that gets you noticed.",
+                    hook: "Same tools, completely different results. The difference is learning to direct the tool instead of just asking it." },
+      "time":     { hl: "A week's work<br/><span>before lunch.</span>",
+                    sub: "Get your afternoons back. Learn to direct AI so it does the heavy lifting right the first time.",
+                    hook: "Stop rewriting AI's garbage. The framework that gets it right on the first pass, every time." }
+    };
+    try {
+      var p = new URLSearchParams(location.search);
+      var pick = AUD[(p.get("aud") || "").toLowerCase()] || ANG[(p.get("v") || "").toLowerCase()] || null;
+      if (pick) {
+        document.getElementById("hl").innerHTML = pick.hl;
+        document.getElementById("sub").textContent = pick.sub;
+        document.getElementById("hook").textContent = pick.hook;
+      }
+    } catch (e) {}
+  })();
+</script>
+<script>
+  /* Long-form preview extras (2026-09-27). No network calls, no storage. */
+  (function () {
+    function ev(name, p) { try { gtag('event', name, p || {}); } catch (e) {} }
+
+    /* familiar: tick tally */
+    var ticks = document.querySelectorAll('#ticks input'), tally = document.getElementById('tally');
+    function upd() {
+      var n = 0; ticks.forEach(function (t) { if (t.checked) n++; });
+      tally.textContent = n === 0 ? 'None so far. The book will turn what already works into a method you can repeat.'
+        : n + (n === 1 ? ' of these has' : ' of these have') + ' happened to you, and the book has a fix for each one.';
+    }
+    ticks.forEach(function (t) { t.addEventListener('change', upd); });
+
+    /* mirror: brief builder */
+    var r = document.getElementById('b-role'), t = document.getElementById('b-task'), c = document.getElementById('b-con'),
+        out = document.getElementById('b-out'), msg = document.getElementById('b-msg');
+    function trimEnd(s) { return s.trim().replace(/[.\s]+$/, ''); }
+    function cap(s) { s = trimEnd(s); return s ? s.charAt(0).toUpperCase() + s.slice(1) + '.' : ''; }
+    function brief() {
+      var role = trimEnd(r.value) || r.placeholder;
+      return ('Act as ' + role + '. ' + cap(t.value || t.placeholder) + ' ' + cap(c.value || c.placeholder)).trim();
+    }
+    document.getElementById('b-build').addEventListener('click', function () {
+      out.textContent = brief(); out.style.color = 'var(--ink)'; msg.textContent = '';
+      ev('brief_built');
+    });
+    document.getElementById('b-copy').addEventListener('click', function () {
+      var text = brief(); out.textContent = text; out.style.color = 'var(--ink)';
+      function fail() { msg.textContent = 'Select the brief above to copy it.'; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { msg.textContent = 'Copied. Paste it into your AI tool and add your notes.'; ev('brief_copied'); }, fail);
+      } else fail();
+    });
+
+    /* inside: chapter map stops */
+    var capEl = document.getElementById('chcap'), stops = document.querySelectorAll('#chmap button');
+    stops.forEach(function (b) {
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () {
+        stops.forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+        capEl.textContent = 'Chapter ' + b.textContent + ': ' + b.title;
+      });
+    });
+
+    /* parts open by default on desktop */
+    if (window.matchMedia('(min-width:900px)').matches) document.querySelectorAll('.part-card').forEach(function (d) { d.open = true; });
+
+    /* sticky buy bar on phones: shows after the demo, hides at the close */
+    var bar = document.getElementById('sticky'), demo = document.getElementById('demo'), closeSec = document.getElementById('book');
+    if (bar && demo && 'IntersectionObserver' in window) {
+      document.body.classList.add('has-sticky');
+      var past = false, atClose = false, link = bar.querySelector('a');
+      function set() { var on = past && !atClose; bar.classList.toggle('on', on); bar.setAttribute('aria-hidden', on ? 'false' : 'true'); link.tabIndex = on ? 0 : -1; }
+      new IntersectionObserver(function (e) { past = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; set(); }).observe(demo);
+      if (closeSec) new IntersectionObserver(function (e) { atClose = e[0].isIntersecting; set(); }).observe(closeSec);
+    }
+  })();
+</script>
+
+</body>
+</html>
