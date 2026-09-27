@@ -65,13 +65,11 @@ console.log('Built', essays.length, 'essays -> writing/<slug>/ + writing/ index'
    the repo files stay untouched (Site Studio preview uses this).
    ========================================================================== */
 const NAVC = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'nav.json'), 'utf8'));
-const HOME = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'home.json'), 'utf8'));
 const SVCS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'services.json'), 'utf8'));
 const PRODS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'products.json'), 'utf8'));
 
 const NAV_SVG_SIG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>`;
 const NAV_SVG_ARROW = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const HERO_SVG_ARROW = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 // The Services menu is generated from content/services.json, the same file the
 // homepage cards render from, so the menu and the cards can no longer drift.
@@ -126,12 +124,6 @@ function renderNavProductsDropdown(href, label, ind) {
 // destination from reaching back through window.opener.
 const EXT = l => (l && l.ext ? ' target="_blank" rel="noopener"' : '');
 
-// A CTA carrying "contact" opens the contact modal with its subject prefilled,
-// instead of sending the visitor to a scheduler.
-const CONTACT = l => (l && l.contact
-  ? ` data-contact="${esc(l.contact)}" data-contact-source="${esc(l.source || 'home')}"`
-  : '');
-
 function renderNavItemsDropdown(href, label, items, ind) {
   const out = [];
   out.push(ind + '    <div class="navdd">');
@@ -145,8 +137,25 @@ function renderNavItemsDropdown(href, label, items, ind) {
   return out.join('\n');
 }
 
+// Homepage v3: brand, its own short link list, and an always-visible buy button.
+function renderNavBuybar(pg) {
+  const ind = ' '.repeat(pg.indent || 0);
+  const sig = NAV_SVG_SIG.replace('fill="none">', 'fill="none" aria-hidden="true">');
+  const c = pg.cta;
+  return [`${ind}<nav class="nav" aria-label="Main"><div class="container">`,
+    `${ind}  <a class="brandmark" href="${pg.brandHref || '/'}">${sig}${esc(NAVC.brand).replace(' ', '&nbsp;')}</a>`,
+    `${ind}  <div class="links">`,
+    ...pg.links.map(l => `${ind}    <a href="${l.href}"${EXT(l)}>${esc(l.label)}</a>`),
+    `${ind}  </div>`,
+    `${ind}  <a class="btn btn--primary nav-buy"${c.amazon ? ' data-amazon' : ''} href="${c.href}" target="_blank" rel="noopener"` +
+      `${c.aria ? ` aria-label="${attrq(c.aria)}"` : ''}>${esc(c.label)}</a>`,
+    `${ind}</div></nav>`].join('\n');
+}
+const attrq = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+
 function renderNav(pageKey) {
   const pg = (NAVC.pages || {})[pageKey] || {};
+  if (pg.style === 'buybar') return renderNavBuybar(pg);
   const ind = ' '.repeat(pg.indent || 0);
   const cta = pg.cta || NAVC.cta;
   const links = NAVC.links.map(l => {
@@ -169,45 +178,17 @@ function renderNav(pageKey) {
           `${ind}  </div>`, `${ind}</div></nav>`].join('\n');
 }
 
-function renderHeroText() {
-  const h = HOME.hero;
-  return [
-    `      <div class="herotext">`,
-    `        <span class="eyebrow">${esc(h.eyebrow)}</span>`,
-    `        <h1>${esc(h.headline_1)}<br><span class="amp">${esc(h.headline_2)}</span></h1>`,
-    `        <p class="lede">${esc(h.lede)}</p>`,
-    `        <div class="actions">`,
-    `          <a class="btn primary" href="${h.cta_primary.href}"${EXT(h.cta_primary)}${CONTACT(h.cta_primary)}>${esc(h.cta_primary.label)} ${HERO_SVG_ARROW}</a>`,
-    `          <a class="btn ghost" href="${h.cta_secondary.href}"${EXT(h.cta_secondary)}${CONTACT(h.cta_secondary)}>${esc(h.cta_secondary.label)}</a>`,
-    `        </div>`,
-    `      </div>`].join('\n');
-}
-
-function renderHomeServices() {
-  const out = [];
-  for (const b of SVCS.buckets) {
-    out.push(`    <div class="bucket-label">${esc(b.label)}</div>`);
-    out.push(`    <div class="svcgrid">`);
-    for (const c of SVCS.cards.filter(x => x.bucket === b.id)) {
-      out.push(`      <div class="svc">`);
-      out.push(`        <h3>${esc(c.title)}</h3>`);
-      out.push(`        <span class="who">${esc(c.who)}</span>`);
-      out.push(`        <p>${esc(c.home_blurb)}</p>`);
-      out.push(`        <div class="row"><a href="${c.href}">${esc(c.link_label)}</a></div>`);
-      out.push(`      </div>`);
-    }
-    out.push(`    </div>`);
-    out.push(``);
-  }
-  out.pop(); // no trailing blank line after the last grid
-  return out.join('\n');
-}
-
+// Pages already written this run. A page applied twice (book.html, claude/)
+// must build on its first pass: in --out mode (Studio preview) re-reading the
+// committed source dropped every edit from the first pass.
+const REGIONS_DONE = new Set();
 function applyRegions(pagePath, regions) {
-  const src = path.join(DIR, pagePath);
+  const src = path.join(REGIONS_DONE.has(pagePath) ? OUT : DIR, pagePath);
+  REGIONS_DONE.add(pagePath);
   let html = fs.readFileSync(src, 'utf8');
   for (const [name, render] of Object.entries(regions)) {
-    const open = new RegExp('([ \t]*)<!-- ep:' + name + ' -->\r?\n');
+    // A marker may carry a note after the name: <!-- ep:nav (why) -->
+    const open = new RegExp('([ \t]*)<!-- ep:' + name + '(?: [^>]*?)? -->\r?\n');
     const close = new RegExp('[ \t]*<!-- /ep:' + name + ' -->');
     const mOpen = html.match(open);
     const mClose = html.match(close);
@@ -222,41 +203,12 @@ function applyRegions(pagePath, regions) {
   fs.writeFileSync(dest, html);
 }
 
-/* ---- money pages: /system/ and /claude/ ------------------------------
+/* ---- money pages: /claude/ and /content-machine/ ----------------------
    These render the exact markup that used to be hand-written, so the page is
    byte-identical until someone actually edits the JSON (or Site Studio does). */
-const SYS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'system.json'), 'utf8'));
 const CLA = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'claude.json'), 'utf8'));
 const CMA = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'content-machine.json'), 'utf8'));
 
-function renderSysHero() {
-  const h = SYS.hero;
-  return [
-    `    <span class="badge">${h.badge}</span>`,
-    `    <h1>${h.headline_1} <span>${h.headline_2}</span></h1>`,
-    `    <p class="lead">${h.lede}</p>`,
-    `    <a href="#order" class="btn big buy">${h.cta_label}</a>`,
-    `    <p class="cta-sub">${h.cta_sub}</p>`,
-  ].join('\n');
-}
-function renderSysPrice() {
-  const x = SYS.price;
-  return [
-    `      <div class="today">${x.label}</div>`,
-    `      <div class="big">${x.amount}</div>`,
-    `      <div class="note">${x.note}</div>`,
-  ].join('\n');
-}
-function renderSysGuarantee() {
-  const g = SYS.guarantee;
-  return `      <h3>${g.heading}</h3>\n      <p>${g.body}</p>`;
-}
-function renderSysFaq() {
-  // Canonical .faq accordion, same as every other page on the site. This used
-  // to emit static .fitem divs that could not be opened, which is the
-  // inconsistency Elvin spotted between /book.html and /system/.
-  return SYS.faq.map(f => `    <details><summary>${f.q}</summary><p>${f.a}</p></details>`).join('\n');
-}
 function renderClHero() {
   const h = CLA.hero;
   return [
@@ -474,14 +426,11 @@ function renderCompare() {
 
 console.log('Regions applied: claude/index.html (hero, price), content-machine/index.html (hero, price)');
 
+// Homepage v3 is hand-written; its only CMS region is the nav (buy-bar style,
+// own three links, see nav.json pages["index.html"]). Its review block is
+// hand-written too until slice 2 moves the homepage onto the section engine.
 applyRegions('index.html', {
   'nav': () => renderNav('index.html'),
-  'hero-text': renderHeroText,
-  'home-services': renderHomeServices,
-  // The homepage blog cards are the same fragment written to
-  // writing/_homepage_cards.html. Injecting it here means the homepage can no
-  // longer drift from the post registry, which it had (8 min vs 7 min).
-  'writing': () => frag,
 });
 applyRegions('book.html', {
   'nav': () => renderNav('book.html'),
@@ -503,7 +452,7 @@ const GEN_NAV_KEYS = new Set(
 const navOnly = Object.keys(NAVC.pages)
   .filter(p => p !== 'index.html' && p !== 'book.html' && !GEN_NAV_KEYS.has(p));
 for (const pk of navOnly) applyRegions(pk, { 'nav': () => renderNav(pk) });
-console.log('Regions applied: index.html (nav, hero-text, home-services, writing), book.html (nav), nav on: ' + navOnly.join(', '));
+console.log('Regions applied: index.html (nav), book.html (nav), nav on: ' + navOnly.join(', '));
 
 
 /* ==================================================================== */
@@ -1446,7 +1395,11 @@ function smWalk(dir, rel, out) {
     if (SM_EXCLUDE.includes(r) || SM_SKIP_FILES.includes(r)) continue;
     if (!rel && /^index_v[0-9]\.html$/.test(e.name)) continue;
     if (e.isDirectory()) smWalk(path.join(dir, e.name), r, out);
-    else if (e.name === 'index.html' || (!rel && e.name.endsWith('.html'))) out.push(r);
+    else if (e.name === 'index.html' || (!rel && e.name.endsWith('.html'))) {
+      // A noindex page in the sitemap is a Search Console error; skip it by its own meta.
+      if (/<meta name="robots" content="[^"]*noindex/i.test(fs.readFileSync(path.join(dir, e.name), 'utf8'))) continue;
+      out.push(r);
+    }
   }
   return out;
 }
