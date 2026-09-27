@@ -61,15 +61,6 @@
       "link_label": "View workshops →"
     },
     {
-      "id": "ads-audit",
-      "bucket": "consulting",
-      "title": "Google Ads Audit",
-      "href": "/google-ads-audit/",
-      "who": "For businesses already spending",
-      "home_blurb": "A specialist who ran $1.2M a month in paid search tears down your account and hands you a prioritized plan of exactly what to fix. From $499.",
-      "link_label": "View the audit →"
-    },
-    {
       "id": "ads-mgmt",
       "bucket": "consulting",
       "title": "Google Ads Management",

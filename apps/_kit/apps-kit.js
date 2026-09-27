@@ -57,15 +57,15 @@
           '<span>Elvin M. Peters</span>' +
         '</a>' +
         '<nav class="links">' +
-          '<a href="https://elvinpeters.com/services/">Services</a>' +
-          '<a href="https://elvinpeters.com/">The Book</a>' +
-          '<a href="/projects/">Projects</a>' +
-          extra +
-          '<a href="https://elvinpeters.com/writing/">Blog</a>' +
-          '<a href="https://elvinpeters.com/#about">About</a>' +
+          // The site menu (content/nav.json, 2026-09-27). /newsletter/ works today
+          // (it forwards to the homepage signup) and stays right once the page ships.
+          '<a href="https://elvinpeters.com/">Home</a>' +
+          '<a href="https://elvinpeters.com/free/">Free Toolkit</a>' +
+          '<a href="https://elvinpeters.com/newsletter/">Newsletter</a>' +
           '<a href="https://elvinpeters.com/contact/">Contact</a>' +
+          extra +
           '<button class="themebtn" data-theme-toggle type="button"></button>' +
-          '<a class="cta" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Buy the Book</a>' +
+          '<a class="cta" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Get the book</a>' +
         '</nav>' +
       '</div>';
   }
@@ -76,7 +76,9 @@
       '<div class="container">' +
         'Built and hosted by <a href="https://elvinpeters.com/" style="color:var(--gold-2)">Elvin M. Peters</a>' +
         ' — Toronto. Free to use, nothing tracked beyond page views, no sign-up. ' +
-        '<a href="/projects/">All projects</a> · <a href="https://elvinpeters.com/services/">Work with me</a>' +
+        '<a href="https://elvinpeters.com/free/">Free Toolkit</a> · <a href="https://elvinpeters.com/newsletter/">Newsletter</a> · ' +
+        '<a href="https://elvinpeters.com/contact/">Contact</a> · <a href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">LinkedIn</a> · ' +
+        '<a href="https://elvinpeters.com/privacy.html">Privacy</a>' +
       '</div>';
   }
 
