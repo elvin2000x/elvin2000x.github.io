@@ -166,6 +166,17 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     @media (prefers-reduced-motion:no-preference){ .part .pi{ transition:transform .2s } }
 
     /* reviews */
+    .rv-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:12px }
+    .rv-nav{ display:flex; gap:8px; margin-bottom:18px }
+    .rv-btn{ width:var(--tap); height:var(--tap); border-radius:50%; border:1px solid var(--line-strong); background:var(--panel); color:var(--accent-ink); font-size:20px; cursor:pointer }
+    .rv-btn:hover{ border-color:var(--accent) }
+    .rv-track{ display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory; padding:4px 2px 12px; margin:0 -2px; scrollbar-width:thin }
+    .rv-track > .review{ flex:0 0 84%; box-sizing:border-box; scroll-snap-align:start; margin:0 }
+    .review--short{ display:flex; flex-direction:column; justify-content:space-between }
+    .review .rq{ font:italic 24px/1.35 var(--serif); color:var(--ink); margin:4px 0 16px }
+    .rv-hint{ font-size:14px; color:var(--muted); margin:6px 0 0 }
+    @media(min-width:900px){ .rv-track > .review{ flex-basis:calc((100% - 28px) / 3) } .rv-hint{ display:none } }
+    @media (prefers-reduced-motion:no-preference){ .rv-track{ scroll-behavior:smooth } }
     .rating{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:20px; color:var(--ink-2); font-size:16px }
     .stars{ color:var(--accent); letter-spacing:2px; font-size:20px }
     .review{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:24px 22px; margin:0 0 14px }
@@ -384,12 +395,19 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   </div>
 </section>
 
-<!-- 6. Reviews, quoted exactly from Amazon -->
+<!-- 6. Reviews: a swipeable row. The Amazon review is verbatim; friends' quotes are labelled as friends. -->
 <section class="sec sec--tint" id="reviews">
-  <div class="in">
+  <div class="in--wide">
     <span class="eyebrow">Reviews</span>
-    <h2>What Early Readers Say</h2>
-    <!-- ep:bk-review (verbatim from Amazon, checked 2026-09-27) -->
+    <div class="rv-head">
+      <h2>What Early Readers Say</h2>
+      <div class="rv-nav">
+        <button type="button" class="rv-btn" data-dir="-1" aria-label="Previous review">&larr;</button>
+        <button type="button" class="rv-btn" data-dir="1" aria-label="Next review">&rarr;</button>
+      </div>
+    </div>
+    <div class="rv-track" id="rv-track" tabindex="0" role="region" aria-label="Reader reviews, scroll sideways for more">
+  <!-- ep:bk-review (verbatim from Amazon, checked 2026-09-27) -->
     <article class="review">
       <span class="stars" aria-label="Rated 5 out of 5 stars">★★★★★</span> <span class="vp">Verified Purchase</span>
       <h3>&ldquo;Must-read if you're looking to enhance your output.&rdquo;</h3>
@@ -398,8 +416,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <p class="meta">2Buyer · Paperback · Reviewed in Canada on July 15, 2026 · <a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Read it on Amazon</a></p>
     </article>
     <!-- /ep:bk-review -->
-    <!-- SECOND REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).
-         Paste the second one here, verbatim, the day it appears. -->
+      <article class="review review--short"><p class="rq">&ldquo;The beginning also made me tear up.&rdquo;</p><p class="meta">Early reader · a friend of the author</p></article>
+      <article class="review review--short"><p class="rq">&ldquo;It was cool learning about how AI actually &lsquo;thinks&rsquo;.&rdquo;</p><p class="meta">Early reader · a friend of the author</p></article>
+      <article class="review review--short"><p class="rq">&ldquo;I learned a couple things that I def didn't know.&rdquo;</p><p class="meta">Early reader · a friend of the author</p></article>
+      <article class="review review--short"><p class="rq">&ldquo;I didn't realize that my AI skills were bad, then Elvin explained I just sucked at prompting.&rdquo;</p><p class="meta">Early reader · a friend of the author</p></article>
+    </div>
+    <p class="rv-hint" aria-hidden="true">Swipe for more &rarr;</p>
+    <!-- SECOND AMAZON REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).
+         Paste it into the track, verbatim, the day it appears. -->
   </div>
 </section>
 
@@ -509,6 +533,19 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       try { gtag('event', 'amazon_outbound', { event_label: a.getAttribute('aria-label') || a.textContent.trim() }); } catch (e) {}
     });
   });
+
+  /* Reviews row: arrow buttons scroll one card at a time (swipe works without them). */
+  (function () {
+    var t = document.getElementById('rv-track');
+    if (!t) return;
+    document.querySelectorAll('.rv-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var card = t.querySelector('.review');
+        var step = card ? card.getBoundingClientRect().width + 14 : t.clientWidth;
+        t.scrollBy({ left: step * Number(b.dataset.dir), behavior: 'smooth' });
+      });
+    });
+  })();
 
   /* Dynamic audience-matched headline (DTR), ported unchanged from /book.html.
      Ad URLs append ?aud=<segment> or ?v=<angle>; no param keeps the HTML default. */
