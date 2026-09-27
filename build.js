@@ -415,13 +415,8 @@ function renderOptin(slot, page) {
   ].join('\n');
 }
 
-applyRegions('book.html', {
-  'bk-review': renderBkReview,
-  'bk-author': renderBkAuthor,
-  'bk-optin-top': () => renderOptin('top'),
-  'bk-optin-bottom': () => renderOptin('bottom'),
-});
-console.log('Regions applied: book.html (review, author, optin x2)');
+// book.html closed 2026-09-27 (redirect stub to the homepage), so its bk-* regions are no longer applied.
+// The renderers stay for reuse; the last full page is archive/book-2026-09-27.html.
 
 /* The three money pages get the same component with page-matched copy. Until
    now /system/ had only a desktop exit-intent popup (mouseout never fires on
@@ -483,9 +478,7 @@ applyRegions('index.html', {
   // longer drift from the post registry, which it had (8 min vs 7 min).
   'writing': () => frag,
 });
-applyRegions('book.html', {
-  'nav': () => renderNav('book.html'),
-});
+// book.html (nav) no longer applied: the page is a redirect stub since 2026-09-27.
 // Every other page in nav.json gets its nav from the same renderer, so the menu
 // cannot drift between pages. index/book are applied above with their other regions.
 // Pages owned by the bilingual engine render their own nav (it carries the
@@ -1485,7 +1478,7 @@ SM_EXCLUDE.push('tsa-toolkit');
 SM_SKIP_FILES.push('projects/anatomy-sandbox/index.html');
 // Saved components and the archived homepage are unlisted (noindex), kept only for reuse (2026-09-27).
 SM_EXCLUDE.push('components', 'archive');
-// /book.html is unlisted since 2026-09-27: the homepage sells the book; the address stays live for ads, emails and QR codes.
+// /book.html is a redirect stub to the homepage since 2026-09-27; the address stays live for ads, emails and QR codes.
 SM_SKIP_FILES.push('book.html');
 const smPages = smWalk(DIR, '', []).map(smUrl).sort();
 const smXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
