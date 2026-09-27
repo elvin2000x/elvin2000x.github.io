@@ -1,7 +1,7 @@
 {
   "title": "The book page: review + author",
   "file": "book.json",
-  "preview": "/book.html",
+  "preview": "/",
   "help": "The reader review and the author bio on book.html. Both are reusable blocks: change the words here and the page rebuilds. Paragraphs are one per line.",
   "fields": [
     {

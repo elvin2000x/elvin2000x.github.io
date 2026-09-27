@@ -140,7 +140,7 @@ window.APPS_REGISTRY = {
     /* ---------------- products ---------------- */
     {
       slug: 'artificial-advantage', name: 'The Artificial Advantage (book)', cat: 'products', status: 'live', featured: true,
-      href: '/book.html',
+      href: '/',
       blurb: 'The book: a framework for non-technical professionals to get real work out of AI. Kindle, paperback and hardcover on Amazon; every physical copy links to the companion resource library on this site.',
       stat: 'Vol 1, AI Fluency series',
       tags: ['Amazon', 'Companion library']
