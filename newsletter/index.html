@@ -2,14 +2,477 @@
 <html lang="en" data-theme="book">
 <head>
   <meta charset="UTF-8" />
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CLZ7N26J1Q');
+    gtag('config', 'AW-637214471');
+  </script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1699232654449762');
+  fbq('track', 'PageView');
+  </script>
+<!-- X pixel -->
+<script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1699232654449762&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <!-- TikTok Pixel Code Start -->
+  <script>
+  !function (w, d, t) {
+    w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+    ttq.load('D93C3IRC77U4775FLNR0');
+    ttq.page();
+  }(window, document, 'ttq');
+  </script>
+  <!-- TikTok Pixel Code End -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Newsletter · Elvin M. Peters</title>
-  <!-- Stub so the new menu has no dead link. The signup lives on the homepage (#newsletter)
-       until a full /newsletter/ page ships. -->
-  <meta name="robots" content="noindex, follow" />
-  <link rel="canonical" href="https://elvinpeters.com/#newsletter" />
-  <meta http-equiv="refresh" content="0; url=/#newsletter" />
-  <script>location.replace('/#newsletter');</script>
+  <title>Free Monthly AI Newsletter | The Artificial Advantage</title>
+  <meta name="description" content="One useful AI email on the 1st of every month: the AI news worth knowing, with sources, and tips you can use that week. It's free." />
+  <link rel="canonical" href="https://elvinpeters.com/newsletter/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://elvinpeters.com/newsletter/" />
+  <meta property="og:title" content="The Artificial Advantage: a free monthly AI newsletter" />
+  <meta property="og:description" content="One useful AI email on the 1st of every month: the AI news worth knowing, with sources, and tips you can use that week." />
+  <meta property="og:image" content="https://elvinpeters.com/cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:creator" content="@elvin_peters" />
+  <link rel="icon" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <meta name="color-scheme" content="light" />
+  <link rel="preconnect" href="https://api.elvinpeters.com" crossorigin />
+  <link rel="stylesheet" href="/css/site.css" />
+  <script src="/js/site.js"></script>
+  <style>
+    /* /newsletter/ (2026-09-27): sells the monthly letter, shows past issues partly covered.
+       Light only (Rule 34), phone first, same shell and tokens as the homepage v3. */
+    :root{ --wrap: 680px; --wide: 1040px; }
+    body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:18px; line-height:1.6 }
+    @media(min-width:900px){ body{ font-size:17px } }
+    a{ color:var(--accent-ink) }
+    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible{ outline:2px solid var(--accent-hi); outline-offset:2px }
+    img{ max-width:100%; height:auto }
+    h1, h2, h3{ font-family:var(--serif); font-weight:600; letter-spacing:-.01em; text-wrap:balance; color:var(--ink) }
+
+    /* nav: same as the homepage (rendered by build.js from nav.json) */
+    .nav{ position:sticky; top:0; z-index:40; background:rgba(255,255,255,.96); backdrop-filter:blur(8px); border-bottom:1px solid var(--line-soft) }
+    .nav .container{ max-width:var(--wide); margin:0 auto; padding:0 16px; height:var(--nav-h); display:flex; align-items:center; gap:12px }
+    .brandmark{ display:flex; align-items:center; min-height:var(--tap); gap:8px; font:600 18px/1 var(--serif); color:var(--ink); text-decoration:none }
+    .nav .links{ margin-left:auto; display:flex; align-items:center; gap:4px }
+    .nav .links a{ color:var(--ink-2); text-decoration:none; font-size:15px; font-weight:500; padding:10px 12px; border-radius:var(--r-sm) }
+    .nav .links a:hover{ color:var(--ink); background:var(--bg-2) }
+    .nav .links a[aria-current]{ color:var(--ink); background:var(--bg-2) }
+    .nav-buy{ min-height:var(--tap); display:inline-flex; align-items:center; padding:0 16px; font-size:15px; font-weight:600; white-space:nowrap }
+    @media(max-width:920px){ .nav-buy{ margin-left:auto } }
+
+    .sec{ padding:56px 16px }
+    @media(min-width:900px){ .sec{ padding:88px 24px } }
+    .sec--tint{ background:var(--bg-2) }
+    .in{ max-width:var(--wrap); margin:0 auto }
+    .in--wide{ max-width:var(--wide); margin:0 auto }
+    .eyebrow{ display:block; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:10px }
+    .sec h2{ font-size:clamp(30px,6.4vw,42px); line-height:1.15; margin:0 0 14px }
+    .sec p{ margin:0 0 16px; color:var(--ink-2) }
+
+    /* hero: the promise and the one field, above the fold on a phone */
+    .hero{ background:linear-gradient(170deg,var(--panel) 0%,var(--bg-2) 100%); padding:32px 16px 44px }
+    .hero h1{ font-size:clamp(34px,8.6vw,58px); line-height:1.1; margin:0 0 14px }
+    .hero-sub{ font-size:19px; color:var(--ink-2); margin:0 0 22px; max-width:34em }
+    @media(min-width:900px){ .hero{ padding:72px 24px 80px } }
+
+    /* the one signup form (shares the site's .optin look) */
+    .optin{ margin:0; padding:0; background:none; border:0; box-shadow:none; text-align:left }
+    .optin form{ display:flex; gap:10px; flex-wrap:wrap; max-width:540px }
+    .optin input[type=email]{ flex:1 1 220px; font-size:16px; min-height:52px }
+    .optin button{ flex:0 0 auto; min-height:52px; font-size:17px; font-weight:600 }
+    @media(max-width:640px){ .optin button{ flex:1 1 100% } }
+    .optin .oi-note{ font-size:15px }
+    .optin .oi-msg{ font-size:17px; line-height:1.5 }
+    .optin .oi-msg a{ display:inline-flex; align-items:center; min-height:var(--tap) }
+
+    /* what's in every issue: four numbered rows, no boxes */
+    .parts{ list-style:none; margin:10px 0 0; padding:0; display:grid; gap:22px; counter-reset:part }
+    @media(min-width:760px){ .parts{ grid-template-columns:1fr 1fr; gap:28px 36px } }
+    .parts li{ counter-increment:part; padding-left:18px; border-left:3px solid var(--accent) }
+    .parts b{ display:block; font:600 22px/1.3 var(--serif); color:var(--ink); margin-bottom:4px }
+    .parts b::before{ content:counter(part) ". "; color:var(--accent-ink) }
+    .parts span{ color:var(--ink-2); font-size:17px }
+
+    /* past issues */
+    .arch-status{ color:var(--muted) }
+    .issue{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:22px 18px; margin:18px 0 0 }
+    @media(min-width:760px){ .issue{ padding:28px 32px } }
+    .issue-meta{ font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-ink); margin:0 0 6px }
+    .issue-meta time{ color:var(--muted); font-weight:600; letter-spacing:.04em }
+    .issue h3{ font-size:clamp(24px,5.4vw,30px); line-height:1.2; margin:0 0 14px }
+    .issue-body{ font-size:17px; line-height:1.7; color:var(--ink-2); overflow-wrap:anywhere }
+    .issue-body h2, .issue-body h3, .issue-body h4{ font-size:22px; line-height:1.3; margin:26px 0 8px; color:var(--ink) }
+    .issue-body p, .issue-body ul, .issue-body ol, .issue-body blockquote{ margin:0 0 14px }
+    .issue-body img{ border-radius:var(--r-sm) }
+    .issue-body blockquote{ padding-left:14px; border-left:3px solid var(--line-strong) }
+    .issue-body a{ font-weight:600 }
+    .issue-body.is-locked{ position:relative; max-height:22em; overflow:hidden }
+    .issue-body.is-locked::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:9em; background:linear-gradient(to bottom,rgba(255,255,255,0),var(--panel) 85%) }
+    .gate{ text-align:center; padding:6px 0 2px }
+    .gate p{ font:600 20px/1.4 var(--serif); color:var(--ink); margin:0 0 14px }
+    .gate .btn{ min-height:52px; font-size:17px; font-weight:600 }
+    .sec p.issue-book{ margin:18px 0 0; padding:14px 16px; background:var(--panel-2); border-left:3px solid var(--accent); border-radius:var(--r-sm); font-size:16px; color:var(--ink-2) }
+    .issue-book b{ color:var(--ink) }
+    .issue-book a{ font-weight:600; display:inline-flex; align-items:center; min-height:var(--tap) }
+    .issue-more{ margin:8px 0 0; font-size:15px }
+    .issue-more a{ display:inline-flex; align-items:center; min-height:var(--tap) }
+    details.issue > summary{ list-style:none; cursor:pointer; min-height:var(--tap) }
+    details.issue > summary::-webkit-details-marker{ display:none }
+    details.issue > summary h3{ margin:0 }
+    details.issue > summary .open-hint{ display:inline-block; margin-top:8px; font-size:15px; font-weight:600; color:var(--accent-ink) }
+    details.issue[open] > summary .open-hint{ display:none }
+    details.issue[open] > summary{ margin-bottom:14px }
+
+    /* close */
+    .close{ text-align:center }
+    .close .btn{ min-height:52px; padding:0 28px; font-size:18px; font-weight:600 }
+
+    footer.foot{ border-top:1px solid var(--line); padding:32px 16px 40px; font-size:15px; color:var(--muted) }
+    footer.foot .in--wide{ display:flex; flex-wrap:wrap; gap:12px 24px; justify-content:space-between }
+    footer.foot nav{ display:flex; flex-wrap:wrap; gap:4px 18px }
+    footer.foot a{ color:var(--ink-2); text-decoration:none; min-height:var(--tap); display:inline-flex; align-items:center }
+    footer.foot a:hover{ color:var(--accent-ink) }
+    @media (prefers-reduced-motion:no-preference){ html{ scroll-behavior:smooth } }
+  </style>
 </head>
-<body><p><a href="/#newsletter">Go to the newsletter signup</a></p></body>
+<body>
+
+<!-- ep:nav (homepage v3: three links plus an always-visible buy button) -->
+<nav class="nav" aria-label="Main"><div class="container">
+  <a class="brandmark" href="/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>Elvin&nbsp;Peters</a>
+  <div class="links">
+    <a href="/free/">Free Toolkit</a>
+    <a href="/newsletter/">Newsletter</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  <a class="btn btn--primary nav-buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
+</div></nav>
+<!-- /ep:nav -->
+
+<main>
+
+<!-- 1. Hero: what arrives, when, and the one email field -->
+<header class="hero" id="join">
+  <div class="in">
+    <span class="eyebrow">The Artificial Advantage · free monthly newsletter</span>
+    <h1>One useful AI email on the 1st of every month</h1>
+    <p class="hero-sub">The AI news worth knowing, every claim linked to its source, plus tips you can use that same week.</p>
+    <div class="optin">
+      <!-- source: the welcome engine maps the part before " | " ("newsletter") to the newsletter
+           track (double opt-in, then the marketing segment); the label after it is for analytics. -->
+      <form class="nl-form" data-source="newsletter | newsletter-page" novalidate>
+        <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="visually-hidden" for="nl-email">Your email</label>
+        <input id="nl-email" type="email" required autocomplete="email" inputmode="email" placeholder="Your email">
+        <button type="submit" class="btn btn--primary">Send me the next issue</button>
+      </form>
+      <p class="oi-note">Free. You confirm by email first, and you can unsubscribe any time.</p>
+      <p class="oi-msg" role="status" aria-live="polite"
+         data-success-issues="Almost done: check your inbox and tap the confirm link. Every past issue on this page is open for you to read now, and the next one lands on the 1st."
+         data-success-empty="Almost done: check your inbox and tap the confirm link. Issue 1, on AI and back to school, lands on October 1."></p>
+    </div>
+  </div>
+</header>
+
+<!-- 2. What's in every issue: the four fixed sections -->
+<section class="sec" aria-labelledby="parts-h">
+  <div class="in--wide">
+    <h2 id="parts-h">What's in every issue</h2>
+    <ol class="parts">
+      <li><b>AI in the News</b><span>The month's AI news worth knowing, with every claim linked to its source so you can check it yourself.</span></li>
+      <li><b>AI Tips</b><span>Tips you can put to work that same week, picked for the month's theme.</span></li>
+      <li><b>Elvin's take</b><span>What I make of the month's news and what I'd do about it.</span></li>
+      <li><b>From the book</b><span>The same short note at the bottom of every issue, for anyone who wants the full method in <em>The Artificial Advantage</em>.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 3. Past issues, from the web archive feed. Locked: the opening fades out under the gate.
+     After signup (or ?r=1 from a newsletter email) the browser remembers the reader and shows full issues. -->
+<section class="sec sec--tint" id="archive" aria-labelledby="arch-h">
+  <div class="in">
+    <h2 id="arch-h">Past issues</h2>
+    <p id="arch-line">Read the opening of any issue here, and sign up to read the rest on this page.</p>
+    <div id="issues" aria-live="polite">
+      <p class="arch-status" id="arch-status">Loading past issues…</p>
+    </div>
+    <noscript><p>Read every issue on the <a href="https://api.elvinpeters.com/letters/">web archive</a>.</p></noscript>
+  </div>
+</section>
+
+<!-- 4. Closing ask: back up to the one field -->
+<section class="sec close" aria-labelledby="close-h">
+  <div class="in">
+    <h2 id="close-h">Get the next issue on the 1st</h2>
+    <p>If AI has felt like a gimmick so far, give it one email a month and try the tips that week.</p>
+    <a class="btn btn--primary" href="#join" data-join>Send me the next issue</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="in--wide">
+    <span>© 2026 Elvin M. Peters</span>
+    <nav aria-label="Footer">
+      <a href="/free/">Free Toolkit</a>
+      <a href="/newsletter/" aria-current="page">Newsletter</a>
+      <a href="/contact/">Contact</a>
+      <a href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* The archive feed is owned by the newsletter engine (NEWSLETTER MAIN, empire-studio).
+     Shape: [{id, subject, date "YYYY-MM-DD", issue_label, preview, url, body_html}], newest first. */
+  var FEED = 'https://api.elvinpeters.com/letters/feed.json';
+  var LEAD_API = 'https://ultimateaidirectory.com/api/lead';
+  var KEY = 'ep_nl_reader';
+  var memReader = false;           /* works for this visit even when storage is blocked */
+  var issues = [];
+
+  var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  var params;
+  try { params = new URLSearchParams(location.search); } catch (e) { params = null; }
+  if (local && params && params.get('feed')) FEED = params.get('feed');   /* local preview fixture only */
+
+  function isReader() {
+    if (memReader) return true;
+    try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; }
+  }
+  function remember() {
+    memReader = true;
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+  /* Links in the newsletter's own emails can carry ?r=1 so a subscriber on a new device reads in full. */
+  if (params && params.get('r') === '1') remember();
+
+  /* ---- Sanitise the feed's HTML: allowlist tags and attributes (Rule 35) ---- */
+  var KEEP = { P:1, H2:1, H3:1, H4:1, UL:1, OL:1, LI:1, A:1, STRONG:1, EM:1, B:1, I:1, BLOCKQUOTE:1, IMG:1, BR:1, HR:1, FIGURE:1, FIGCAPTION:1, SPAN:1, DIV:1, SECTION:1 };
+  var DROP = { SCRIPT:1, STYLE:1, IFRAME:1, OBJECT:1, EMBED:1, FORM:1, INPUT:1, BUTTON:1, TEMPLATE:1, LINK:1, META:1, SVG:1, MATH:1 };
+  function clean(node) {
+    Array.prototype.slice.call(node.childNodes).forEach(function (c) {
+      if (c.nodeType === 3) return;
+      if (c.nodeType !== 1) { node.removeChild(c); return; }
+      var tag = c.tagName.toUpperCase();
+      if (DROP[tag]) { node.removeChild(c); return; }
+      clean(c);
+      if (!KEEP[tag]) {                /* unknown wrapper: keep its text, drop the tag */
+        while (c.firstChild) node.insertBefore(c.firstChild, c);
+        node.removeChild(c); return;
+      }
+      Array.prototype.slice.call(c.attributes).forEach(function (a) {
+        var n = a.name.toLowerCase(), ok = false;
+        if (tag === 'A' && n === 'href') ok = /^(https?:|mailto:)/i.test(a.value.trim());
+        if (tag === 'IMG' && (n === 'src')) ok = /^https:/i.test(a.value.trim());
+        if (tag === 'IMG' && (n === 'alt' || n === 'width' || n === 'height')) ok = true;
+        if (!ok) c.removeAttribute(a.name);
+      });
+      if (tag === 'A') { c.setAttribute('target', '_blank'); c.setAttribute('rel', 'noopener'); }
+      if (tag === 'IMG') { if (!c.getAttribute('src')) { node.removeChild(c); return; } c.setAttribute('loading', 'lazy'); if (!c.hasAttribute('alt')) c.setAttribute('alt', ''); }
+    });
+    return node;
+  }
+  function parse(html) {
+    var doc = new DOMParser().parseFromString('<div>' + (html || '') + '</div>', 'text/html');
+    return clean(doc.body.firstChild || doc.createElement('div'));
+  }
+  /* The opening: whole blocks in reading order until about 600 characters, never the rest. */
+  var WRAP = { DIV:1, SECTION:1 };
+  function opening(root, limit) {
+    var out = document.createElement('div'), count = 0;
+    (function walk(n) {
+      Array.prototype.slice.call(n.childNodes).forEach(function (c) {
+        if (count >= limit) return;
+        if (c.nodeType === 1 && WRAP[c.tagName.toUpperCase()]) return walk(c);
+        var t = (c.textContent || '').trim();
+        if (!t && !(c.nodeType === 1 && c.tagName === 'IMG')) return;
+        out.appendChild(c.cloneNode(true)); count += t.length;
+      });
+    })(root);
+    return out;
+  }
+
+  function fmtDate(s) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || '');
+    if (!m) return '';
+    var d = new Date(+m[1], +m[2] - 1, +m[3]);
+    try { return d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }); } catch (e) { return s; }
+  }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function head(it, wrap) {
+    var meta = el('p', 'issue-meta');
+    if (it.issue_label) meta.appendChild(document.createTextNode(it.issue_label + ' · '));
+    var t = el('time', '', fmtDate(it.date)); t.setAttribute('datetime', it.date || '');
+    meta.appendChild(t);
+    wrap.appendChild(meta);
+    wrap.appendChild(el('h3', '', it.subject || 'The Artificial Advantage'));
+  }
+
+  function render() {
+    var box = document.getElementById('issues');
+    box.textContent = '';
+    if (!issues.length) {
+      box.appendChild(el('p', 'arch-status', 'Issue 1, on AI and back to school, lands on October 1, so sign up and it comes straight to you.'));
+      document.getElementById('arch-line').hidden = true;
+      return;
+    }
+    document.getElementById('arch-line').hidden = isReader();
+    var reader = isReader();
+    issues.forEach(function (it, i) {
+      var full = parse(it.body_html || (it.preview ? '<p>' + it.preview.replace(/[<>&]/g, '') + '</p>' : ''));
+      var card;
+      if (reader && i > 0) {                       /* older issues fold away for readers */
+        card = el('details', 'issue');
+        var sum = document.createElement('summary');
+        head(it, sum);
+        sum.appendChild(el('span', 'open-hint', 'Read this issue'));
+        card.appendChild(sum);
+      } else {
+        card = el('article', 'issue');
+        head(it, card);
+      }
+      card.id = 'issue-' + String(it.id || i).replace(/[^a-z0-9-]/gi, '');
+      var body = el('div', 'issue-body');
+      if (reader) {
+        body.appendChild(full);
+        card.appendChild(body);
+        /* Section 4, the book footer, is a fixed banner in the email template and not in
+           body_html, so the page renders it here, the same under every issue. */
+        var bk = el('p', 'issue-book');
+        bk.appendChild(el('b', '', 'From the book: '));
+        bk.appendChild(document.createTextNode('The Artificial Advantage teaches you to direct AI in plain language, for real work. '));
+        var ba = el('a', '', 'Get it on Amazon');
+        ba.href = 'https://www.amazon.com/dp/B0H4X2S2JD'; ba.target = '_blank'; ba.rel = 'noopener';
+        ba.setAttribute('data-amazon', ''); ba.setAttribute('aria-label', 'Get the book on Amazon (newsletter archive)');
+        ba.addEventListener('click', function () { try { gtag('event', 'amazon_outbound', { event_label: 'newsletter archive book footer' }); } catch (e) {} });
+        bk.appendChild(ba);
+        card.appendChild(bk);
+        if (/^https:\/\/api\.elvinpeters\.com\//.test(it.url || '')) {
+          var more = el('p', 'issue-more'), a = el('a', '', 'Open this issue on its own page');
+          a.href = it.url; a.target = '_blank'; a.rel = 'noopener';
+          more.appendChild(a); card.appendChild(more);
+        }
+      } else {
+        body.classList.add('is-locked');
+        body.appendChild(opening(full, 600));
+        card.appendChild(body);
+        var gate = el('div', 'gate');
+        gate.appendChild(el('p', '', 'Sign up free to read the full issue and get the next one by email.'));
+        var b = el('a', 'btn btn--primary', 'Read the full issue');
+        b.href = '#join'; b.setAttribute('data-join', '');
+        gate.appendChild(b); card.appendChild(gate);
+      }
+      box.appendChild(card);
+    });
+  }
+
+  function load() {
+    var ctrl = ('AbortController' in window) ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 8000);
+    fetch(FEED, { mode: 'cors', credentials: 'omit', signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { if (!r.ok) throw new Error('feed ' + r.status); return r.json(); })
+      .then(function (d) {
+        var list = Array.isArray(d) ? d : (d && Array.isArray(d.issues) ? d.issues : []);
+        issues = list.filter(function (x) { return x && (x.subject || x.body_html); });
+      })
+      .catch(function () { issues = []; })
+      .then(function () { clearTimeout(timer); render(); });
+  }
+
+  /* ---- The one signup form. Same lead API, source and pixel events as the site's .oi-form,
+     plus: remember the reader and open the archive in place. ---- */
+  var form = document.querySelector('.nl-form');
+  var input = document.getElementById('nl-email');
+  var msg = document.querySelector('.optin .oi-msg');
+  var note = document.querySelector('.optin .oi-note');
+  var btn = form.querySelector('button');
+  function failWith(text) {
+    btn.disabled = false;
+    msg.style.color = 'var(--warn)';
+    msg.textContent = text;
+    msg.style.display = 'block';
+    input.focus();
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = input.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return failWith('Enter a full email address, like you@work.com.');
+    btn.disabled = true;
+    msg.style.display = 'none';
+    fetch(LEAD_API, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, source: form.dataset.source, website: form.website ? form.website.value : '' })
+    }).then(function (r) { return r.json(); }).then(function (r) {
+      if (!r || !r.success) return failWith((r && r.error) || 'Something went wrong. Try again in a moment.');
+      remember();
+      form.style.display = 'none';
+      if (note) note.style.display = 'none';
+      msg.style.color = '';
+      msg.textContent = issues.length ? msg.dataset.successIssues : msg.dataset.successEmpty;
+      if (issues.length) {
+        msg.appendChild(document.createTextNode(' '));
+        var go = el('a', '', 'Read the latest issue');
+        go.href = '#archive';
+        msg.appendChild(go);
+      }
+      msg.style.display = 'block';
+      render();
+      try { fbq('track', 'Lead', { content_name: form.dataset.source }); } catch (e2) {}
+      try { gtag('event', 'generate_lead', { method: form.dataset.source }); } catch (e2) {}
+    }).catch(function () { failWith('Network hiccup. Try again.'); });
+  });
+
+  /* Every "sign up" button on the page jumps to the one field and puts the cursor in it. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('[data-join]');
+    if (!a) return;
+    e.preventDefault();
+    if (form.style.display === 'none') { location.hash = 'archive'; return; }
+    document.getElementById('join').scrollIntoView({ block: 'start' });
+    setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (e3) { input.focus(); } }, 350);
+  });
+
+  /* Outbound to Amazon from the nav button, same event as the homepage. */
+  document.querySelectorAll('a[data-amazon]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      try { gtag('event', 'amazon_outbound', { event_label: a.getAttribute('aria-label') || a.textContent.trim() }); } catch (e) {}
+    });
+  });
+
+  load();
+})();
+</script>
+</body>
 </html>
