@@ -8,7 +8,9 @@
   var root = document.documentElement;
   var KEY = 'ep-theme'; // same key apps/_kit/apps-kit.js already persists
 
-  var isBook = root.getAttribute('data-theme') === 'book';
+  // Sales pages carry data-theme-lock (Rule 34, 2026-09-27): they stay light and a
+  // saved "dark" from another page must not flip them. Same treatment as the book.
+  var isBook = root.getAttribute('data-theme') === 'book' || root.hasAttribute('data-theme-lock');
 
   /* ---------------- theme ---------------- */
 
