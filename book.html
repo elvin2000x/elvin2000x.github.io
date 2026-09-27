@@ -623,12 +623,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
            script has been writing to it since the ad build; the element was
            lost in a hero rework, so paid visitors landed on partial matches. -->
       <p class="hero-sub" id="hook" style="font-weight:600;color:var(--ink)"></p>
-      <!-- The hero sat with ZERO calls to action: the only clickable in screen
-           one was the Amazon badge, on the page whose job is the $37 sale. -->
+      <!-- Amazon-first since 2026-09-27: the $37 System sale is parked (saved in
+           /components/) and the public Toolkit button is gone (Rule 37). No
+           hard-coded price: the book sells worldwide, so Amazon shows the local one. -->
       <div class="cta-band" style="margin-top:22px">
-        <a href="/toolkit/" class="btn-primary">Get the free Toolkit →</a>
-        <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-secondary" target="_blank" rel="noopener">Buy the paperback or hardcover</a>
+        <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-primary buy" target="_blank" rel="noopener">Buy on Amazon →</a>
       </div>
+      <p class="hero-free" style="margin-top:10px">Kindle, paperback or hardcover. See the price in your region on Amazon.</p>
       <p class="hero-free" style="margin-top:14px"><a href="#newsletter">Or read the first chapter free →</a></p>
     </div>
     <div class="book-wrap">
@@ -648,11 +649,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           <span class="path-num">Read it</span>
           <h2>On Amazon</h2>
           <p>Kindle, paperback or hardcover. Every print copy includes the nine appendices and a QR code to the companion library on this site.</p>
-          <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-primary" target="_blank" rel="noopener">Buy on Amazon</a>
-          <p class="path-note">If it helps you, an honest review is the single most useful thing you can send back.</p>
+          <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-primary buy" target="_blank" rel="noopener">Buy on Amazon</a>
+          <p class="path-note">See the price in your region on Amazon. If it helps you, an honest review is the single most useful thing you can send back.</p>
         </div>
       </div>
-      <p class="hero-free"><a href="#newsletter">Not ready for either? Read the first chapter free &rarr;</a></p>
+      <p class="hero-free"><a href="#newsletter">Not ready yet? Read the first chapter free &rarr;</a></p>
 </div></section>
 
 <section class="optinband">
@@ -684,7 +685,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <div class="proof-divider"></div>
     <div class="proof-item"><div class="proof-num">0</div><div class="proof-label">Tech Background Required</div></div>
     <div class="proof-divider"></div>
-    <div class="proof-authority">By <strong>Elvin M. Peters</strong><br/>big-tech ads · Canadian lending</div>
+    <div class="proof-authority">By <strong>Elvin M. Peters</strong><br/>adtech · Canadian fintech</div>
   </div>
 </div>
 
@@ -718,7 +719,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <div class="section-label">Why This Book Exists</div>
     <h2 class="section-title">I watched the gap widen<br/>every single day inside big tech.</h2>
     <div class="story-block">
-      <p>I ran $1.2M a month in paid media for three years, then advised brands inside Google, watching highly capable professionals use AI every day and consistently pull a fraction of what it could deliver. The reason was never intelligence. <strong>Effective AI direction is a skill, and no one had handed them a framework for it.</strong></p>
+      <p>I ran $1.2M a month in paid media for three years, then advised brands at an adtech giant building AI, watching highly capable professionals use AI every day and consistently pull a fraction of what it could deliver. The reason was never intelligence. <strong>Effective AI direction is a skill, and no one had handed them a framework for it.</strong></p>
       <p>The whole book rests on one idea: <strong>stop asking AI, start directing it.</strong> Here is what that looks like with the same task and two different people:</p>
     </div>
 
@@ -779,7 +780,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
     <div class="story-block" style="margin-top: 24px;">
       <p>Same tool. Same task. Same professional context. The only difference was AI literacy.</p>
-      <p>I led digital marketing at one of Canada's largest consumer lenders, running campaigns at scale, and Google brought me in afterward to advise other brands. The pattern showed up everywhere. <strong>The professionals getting exceptional results were not more technical. They were more deliberate.</strong></p>
+      <p>The pattern showed up everywhere I worked. <strong>The professionals getting exceptional results were not more technical. They were more deliberate.</strong></p>
       <p>I wrote this book because I could not find the one I wished I had.</p>
     </div>
   </div>
@@ -888,71 +889,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   </div>
 </section>
 
-<!-- ───────────── 7. THE OFFER + VALUE STACK ───────────── -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-label">The Complete System</div>
-    <h2 class="section-title" style="text-align: center;">The book, plus a free toolkit to make it stick</h2>
-    <p class="section-body center">The complete System gets you the full ebook and the entire kit below, delivered instantly by email. Prefer reading on paper? You can buy the paperback and hardcover on Amazon, and every copy includes the appendices plus a QR code to the companion resource library on this site. My honest recommendation: get both. Run the System from your screen, and keep a paper copy so the ideas stick. Not ready for either? Start free with your email and get the starter kit: fifty prompts for the jobs that eat your week, the cheat sheets for briefing a model properly, and the first chapter.</p>
+<!-- 7. The $37 System offer + value stack was parked on 2026-09-27: /components/complete-system-v1.html -->
 
-    <div class="includes">
-      <div class="inc-card">
-        <span class="ribbon">CORE</span>
-        <div class="inc-thumb"><img src="/img/cover-hero.webp" alt="The Artificial Advantage book" loading="lazy" width="600" height="960" /></div>
-        <h4>The Artificial Advantage</h4>
-        <p>Direct AI like the top 10%. Turn vague requests into precise, professional output, every single time.</p>
-        <div class="inc-meta"><span class="ck">Ebook in the System · paper on Amazon</span></div>
-      </div>
-      <div class="inc-card">
-        <span class="ribbon">SYSTEM</span>
-        <div class="inc-thumb"><img src="img/cover_workbook.png" alt="7-Day AI Workbook" loading="lazy" width="800" height="1280" /></div>
-        <h4>7-Day AI Workbook</h4>
-        <p>Make it muscle memory in a week. By Friday, your three biggest work tasks run on AI.</p>
-        <div class="inc-meta"><span class="ck">In the System</span></div>
-      </div>
-      <div class="inc-card">
-        <span class="ribbon">FREE</span>
-        <div class="inc-thumb"><img src="/img/magnets/50-prompts.webp" alt="50 Best AI Prompts" loading="lazy" width="440" height="704" /></div>
-        <h4>50 Best AI Prompts</h4>
-        <p>Named for the job each one does: The Inbox Killer, The Objection Crusher, The Pre-Mortem. Ten sections, five prompts each.</p>
-        <div class="inc-meta"><span class="ck">Free with your email</span></div>
-      </div>
-      <div class="inc-card">
-        <span class="ribbon">SYSTEM</span>
-        <div class="inc-thumb"><img src="img/cover_roles.png" alt="12 AI Role Packs" loading="lazy" width="800" height="1280" /></div>
-        <h4>12 Professional Role Packs</h4>
-        <p>Done-for-you AI playbooks by job: Marketing, Sales, Finance, HR and more. Hit the ground running.</p>
-        <div class="inc-meta"><span class="ck">In the System</span></div>
-      </div>
-    </div>
-
-    <div class="stack-wrap">
-      <div class="stack">
-        <details class="stack-row"><summary><div class="item"><span class="tag">System</span><strong>The Artificial Advantage (ebook)</strong> · the full book + all 9 appendices</div><div class="val">Included</div></summary><div class="sx"><p>The complete ebook: fifteen chapters on directing AI instead of asking it, plus nine appendices of reference material including the 25-prompt library and 25 pre-built personas.</p><div class="chips"><span>Choose Your Tool</span><span>Direct Your Tool</span><span>Trust, but Verify</span></div></div></details>
-        <details class="stack-row bonus"><summary><div class="item"><span class="tag">System</span><strong>7-Day AI Workbook</strong> · guided daily practice</div><div class="val">7 days</div></summary><div class="sx"><p>One short exercise a day with a fill-in prompt template. By Friday your three most common work tasks run through AI.</p><div class="chips"><span>Day 1 · Map your workflow</span><span>Day 2 · Master the prompt</span><span>Day 3 · Email at speed</span><span>Day 4 · Research & analysis</span><span>Day 5 · Meeting intelligence</span><span>Day 6 · Content & reporting</span><span>Day 7 · Your personal AI system</span></div></div></details>
-        <details class="stack-row bonus"><summary><div class="item"><span class="tag">Free</span><strong>50 Best AI Prompts</strong> · Fifty prompts for the jobs that actually eat your week</div><div class="val">50 prompts</div></summary><div class="sx"><p>Not clever prompts. Prompts for the work sitting in your inbox right now: the reply you keep putting off, the review you have to write, the pricing call you cannot defend yet. Every one is named for the job it does and says when to reach for it. Ten sections, five prompts each, written for people whose output is judged at work.</p><ul class="pnames"><li><b>The Inbox Killer</b><span>clearing 20+ emails in 30 minutes</span></li><li><b>The Hard Conversation Draft</b><span>performance reviews, late payments, client conflict</span></li><li><b>The Objection Crusher</b><span>handling "too expensive" and "not right now"</span></li><li><b>The Pre-Mortem</b><span>new launches, major hires, funding decisions</span></li><li><b>The Performance Review Writer</b><span>annual reviews, mid-year check-ins</span></li><li><b>The Unit Economics Calculator</b><span>investor conversations, pricing decisions</span></li></ul><div class="chips"><span>Writing &amp; Communication</span><span>Marketing &amp; Growth</span><span>Sales &amp; Persuasion</span><span>Data &amp; Analysis</span><span>Strategy &amp; Decision-Making</span><span>Productivity &amp; Planning</span><span>HR &amp; People</span><span>Finance &amp; Operations</span><span>Learning &amp; Research</span><span>Content Creation</span></div></div></details>
-        <details class="stack-row bonus"><summary><div class="item"><span class="tag">System</span><strong>12 Professional Role Packs</strong> · Marketing, Sales, Finance, HR &amp; more</div><div class="val">12 playbooks</div></summary><div class="sx"><p>Each playbook covers one role's recurring deliverables, pre-written: briefs, analyses, reports, plans, plus a four-week adoption plan. Pick your role, or hand the rest to your team.</p><div class="chips"><span>Marketing Manager</span><span>Sales Manager</span><span>Executive Assistant</span><span>Content Creator</span><span>Data Analyst</span><span>Finance Manager</span><span>HR Manager</span><span>Operations Manager</span><span>Product Manager</span><span>Project Manager</span><span>Customer Service Manager</span><span>Legal & Compliance Manager</span></div></div></details>
-        <details class="stack-row bonus"><summary><div class="item"><span class="tag">System</span><strong>The Complete 10-Guide AI Bonus Library</strong> · also free on this site one at a time; bundled so it all lives in one download</div><div class="val">10 guides</div></summary><div class="sx"><p>Ten focused field guides answering the questions the book raises next. All ten are also free on this site one at a time; they are bundled so everything lives in one download.</p></div></details>
-        <div class="stack-total"><div class="label">For scale</div><b style="color:var(--ink);font-weight:600">One coaching session with me is $300. This is the self-serve version.</b></div>
-      </div>
-      <div class="va-strip">
-        <img src="img/va/01-anthropic-decoded.png" alt="" loading="lazy" width="794" height="1123">
-        <img src="img/va/02-context-playbook.png" alt="" loading="lazy" width="794" height="1123">
-        <img src="img/va/03-anti-hallucination.png" alt="" loading="lazy" width="794" height="1123">
-        <img src="img/va/05-automation-starter.png" alt="" loading="lazy" width="794" height="1123">
-        <img src="img/va/08-what-not-to-put.png" alt="" loading="lazy" width="794" height="1123">
-        <span>+ 5 more · the 10-guide library rides along free</span>
-      </div>
-      <div class="cta-band" style="margin-top: 28px;">
-        <a href="/toolkit/" class="btn-primary">Get the free Toolkit →</a>
-        <a href="#newsletter" class="btn-secondary">Start free with your email →</a>
-        <div class="trust-row">
-          <span class="trust-secure">Prefer paper? The paperback and hardcover live on <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600">Amazon →</a> (Amazon’s own return policy applies there)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ───────────── 9. READER PROOF (real, attributed) ───────────── -->
 <section class="section">
@@ -980,7 +918,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <div>
         <div class="author-name">Elvin M. Peters</div>
         <div class="author-title">Author · Marketing Strategist · A decade in marketing</div>
-        <p class="author-bio">I led digital marketing at one of Canada's largest consumer lenders, running AI-integrated campaigns across Google, Meta, and Quora at scale. Google then brought me in to advise other brands, where I watched brilliant people get mediocre results from AI, and I figured out exactly why. I have been testing and directing AI tools since ChatGPT launched in 2022.<br/><br/>I wrote <em>The Artificial Advantage</em> because I watched too many capable professionals underuse tools that could have transformed how they worked. Not because the tools weren't powerful, but because nobody gave them a framework for directing them.<br/><br/><em>The Artificial Advantage</em> is Volume 1 of the AI Fluency Series. Volume 2, <em>The Systematic Advantage</em>, is in progress.</p>
+        <p class="author-bio">I led digital marketing at a large Canadian fintech, running AI-integrated campaigns across Google, Meta, and Quora at scale. An adtech giant building AI then brought me in to advise other brands, where I watched brilliant people get mediocre results from AI, and I figured out exactly why. I have been testing and directing AI tools since ChatGPT launched in 2022.<br/><br/>I wrote <em>The Artificial Advantage</em> because I watched too many capable professionals underuse tools that could have transformed how they worked. Nobody had given them a framework for directing them.<br/><br/><em>The Artificial Advantage</em> is Volume 1 of the AI Fluency Series. Volume 2, <em>The Systematic Advantage</em>, is in progress.</p>
       </div>
     </div>
     <!-- /ep:bk-author -->
@@ -1006,11 +944,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">How long until I see results? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Most readers feel the difference in their first week of using the frameworks. The 7-Day Workbook is built to get you there fast.</div>
+        <div class="faq-a">Most readers feel the difference in their first week of using the frameworks.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">PDF or physical book? <span class="faq-icon">+</span></button>
-        <div class="faq-a">Both. The System on this site delivers the ebook instantly, together with the complete kit. Paperback and hardcover are on Amazon. My honest advice: get both. Paper for the read, the System for the practice.</div>
+        <button class="faq-q" onclick="toggleFaq(this)">Ebook or print? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Both. Kindle, paperback and hardcover are all on Amazon. Every print copy includes the nine appendices and a QR code to the companion library on this site.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">What if I'm already using AI regularly? <span class="faq-icon">+</span></button>
@@ -1018,7 +956,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">Where do I buy it, and can I return it? <span class="faq-icon">+</span></button>
-        <div class="faq-a">The System (ebook + complete kit) is sold right here with a 14-day money-back guarantee. Paperback and hardcover are on Amazon, with Amazon's standard returns. The free starter kit is yours to keep either way.</div>
+        <div class="faq-a">On Amazon, in Kindle, paperback and hardcover, with Amazon's standard returns. See the price in your region on Amazon. The free starter kit is yours to keep either way.</div>
       </div>
     </div>
   </div>
@@ -1026,11 +964,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
 <!-- ───────────── 13. URGENCY + FINAL CTA + TWO-PATHS ───────────── -->
 <div class="bottom-cta">
-  <h2>Two ways in, and one of them is free.</h2>
+  <h2>Get the book on Amazon.</h2>
   <div class="two-paths">
-    Buy the book on <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600">Amazon</a>, or get the System here and have the whole working kit with it. If you are not ready for either, take the free kit below and decide afterwards.
+    Kindle, paperback or hardcover. See the price in your region on Amazon. If you are not ready yet, take the free starter kit below and decide afterwards.
   </div>
-  <a href="/toolkit/" class="btn-primary">Get the free Toolkit</a>
+  <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-primary buy" target="_blank" rel="noopener">Buy on Amazon →</a>
 </div>
 
 <section class="optinband">
@@ -1054,9 +992,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <!-- ───────────── 14. P.S. SKIMMER RECAP ───────────── -->
 <section class="section" style="padding: 56px 24px;">
   <div class="ps-block">
-    <strong>P.S.</strong> <em>The Artificial Advantage</em> is the framework for professionals who tried AI and weren't impressed. Get the complete System here for the ebook and the full kit, or the paperback on Amazon. My advice: both, paper for reading, the System for doing. Not ready? Start free with your email (fifty prompts for the jobs that eat your week, the briefing cheat sheets, and the first chapter). If you've ever closed an AI tab thinking "this is overhyped," this is the book that changes that.
+    <strong>P.S.</strong> <em>The Artificial Advantage</em> is the framework for professionals who tried AI and weren't impressed. It is on Amazon in Kindle, paperback and hardcover. Not ready? Start free with your email (fifty prompts for the jobs that eat your week, the briefing cheat sheets, and the first chapter). If you've ever closed an AI tab thinking "this is overhyped," this is the book that changes that.
     <br/>
-    <a href="/toolkit/" class="ps-cta">Get the free Toolkit →</a> &nbsp;·&nbsp; <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="ps-cta buy" target="_blank" rel="noopener">Paperback on Amazon →</a>
+    <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="ps-cta buy" target="_blank" rel="noopener">Buy on Amazon →</a> &nbsp;·&nbsp; <a href="#newsletter" class="ps-cta">Start free with your email →</a>
   </div>
 </section>
 
@@ -1067,59 +1005,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <p>© 2026 Elvin M. Peters &nbsp;·&nbsp; <a href="mailto:elvin@elvinpeters.com">elvin@elvinpeters.com</a> &nbsp;·&nbsp; <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="buy" target="_blank" rel="noopener">Buy the Book</a> &nbsp;·&nbsp; <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp; <a href="/tos.html">Terms</a></p>
 </footer>
 
-<!-- ───────────── EXIT-INTENT POPUP (owned vs Amazon) ───────────── -->
-<div id="exitpop" class="exitpop hidden" role="dialog" aria-modal="true">
-  <div class="exitpop-card">
-    <button class="exitpop-x" aria-label="Close" onclick="closeExit()">×</button>
-    <h2>Wait, grab the free toolkit first</h2>
-    <p>Before you go, join the email list and get <span class="gold">the starter kit free</span>: fifty prompts for the jobs that eat your week, the cheat sheets for briefing a model properly, and the first chapter. Enough to test the method this week.</p>
-    <div class="exitpop-covers">
-      <img class="lead" src="/img/cover-hero.webp" alt="The Artificial Advantage" loading="lazy" width="600" height="960" />
-      <img src="/img/magnets/50-prompts.webp" alt="50 Best AI Prompts" loading="lazy" width="440" height="704" />
-    </div>
-    <div class="exitpop-btns">
-      <a class="exitpop-yes" href="#newsletter" onclick="closeExit()">Yes, send me the free toolkit →</a>
-      <a class="exitpop-no" href="#newsletter" onclick="closeExit()">No thanks, just the free chapter</a>
-    </div>
-  </div>
-</div>
+<!-- The exit-intent popup (a public Toolkit offer, Rule 37) was parked on 2026-09-27: /components/book-system-parked-2026-09.html -->
 
-<script>
-(function () {
-  var pop = document.getElementById('exitpop');
-  function show() {
-    if (!pop || sessionStorage.getItem('exit_shown')) return;
-    sessionStorage.setItem('exit_shown', '1');
-    lastFocus = document.activeElement;
-    pop.classList.remove('hidden');
-    var x = pop.querySelector('.exitpop-x'); if (x) x.focus();
-    try { gtag('event', 'exit_popup_shown'); } catch (e) {}
-  }
-  var lastFocus = null;
-  window.closeExit = function () {
-    if (!pop) return;
-    pop.classList.add('hidden');
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  };
-  document.addEventListener('keydown', function (e) {
-    if (!pop || pop.classList.contains('hidden')) return;
-    if (e.key === 'Escape') { closeExit(); return; }
-    if (e.key === 'Tab') {
-      // Trap focus inside the dialog: aria-modal hides the page from AT, so the
-      // keyboard must not wander behind the overlay.
-      var f = pop.querySelectorAll('button, a[href], input');
-      if (!f.length) return;
-      var first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-  });
-  document.addEventListener('mouseout', function (e) {
-    if (e.clientY <= 0 && !e.relatedTarget) show();   // cursor left the top of the viewport
-  });
-  if (pop) pop.addEventListener('click', function (e) { if (e.target === pop) closeExit(); });
-})();
-</script>
 
 <script>
   /* ── FAQ accordion ── */
