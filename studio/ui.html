@@ -544,7 +544,7 @@ function discardAll(){
 }
 
 /* ---- Pages tab ---- */
-var PAGE_ICONS = {book: "flag", claude: "text", "content-machine": "video", site: "gear"};
+var PAGE_ICONS = {claude: "text", "content-machine": "video", site: "gear"};
 function viewPages(){
   var names = Object.keys(SECTIONS).filter(function(n){ return n !== "essays" && n !== "nav"; });
   return '<div class="grid apps pagecards">' + names.map(function(n){

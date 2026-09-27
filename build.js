@@ -445,7 +445,7 @@ const GEN_NAV_KEYS = new Set(
 const navOnly = Object.keys(NAVC.pages)
   .filter(p => p !== 'index.html' && p !== 'book.html' && !GEN_NAV_KEYS.has(p));
 for (const pk of navOnly) applyRegions(pk, { 'nav': () => renderNav(pk) });
-console.log('Regions applied: index.html (nav), book.html (nav), nav on: ' + navOnly.join(', '));
+console.log('Regions applied: index.html (nav), nav on: ' + navOnly.join(', '));
 
 
 /* ==================================================================== */
