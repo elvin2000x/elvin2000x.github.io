@@ -1,7 +1,7 @@
 {
   "title": "Menu & buttons",
   "file": "nav.json",
-  "preview": "/book.html",
+  "preview": "/services/",
   "help": "The menu on every page except the homepage (the homepage keeps its own short menu and buy button). Order here is the order on the page.",
   "fields": [
     {
