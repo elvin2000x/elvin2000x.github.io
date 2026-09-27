@@ -122,10 +122,6 @@
           "href": "/services/"
         },
         {
-          "label": "The Book",
-          "href": "/book.html"
-        },
-        {
           "label": "Projects",
           "href": "/projects/"
         },
@@ -153,10 +149,6 @@
         {
           "label": "Services",
           "href": "/services/"
-        },
-        {
-          "label": "Le livre",
-          "href": "/book.html"
         },
         {
           "label": "Projets",

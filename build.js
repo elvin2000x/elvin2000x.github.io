@@ -367,13 +367,8 @@ function renderOptin(slot, page) {
   ].join('\n');
 }
 
-applyRegions('book.html', {
-  'bk-review': renderBkReview,
-  'bk-author': renderBkAuthor,
-  'bk-optin-top': () => renderOptin('top'),
-  'bk-optin-bottom': () => renderOptin('bottom'),
-});
-console.log('Regions applied: book.html (review, author, optin x2)');
+// book.html closed 2026-09-27 (redirect stub to the homepage), so its bk-* regions are no longer applied.
+// The renderers stay for reuse; the last full page is archive/book-2026-09-27.html.
 
 /* The three money pages get the same component with page-matched copy. Until
    now /system/ had only a desktop exit-intent popup (mouseout never fires on
@@ -432,9 +427,7 @@ console.log('Regions applied: claude/index.html (hero, price), content-machine/i
 applyRegions('index.html', {
   'nav': () => renderNav('index.html'),
 });
-applyRegions('book.html', {
-  'nav': () => renderNav('book.html'),
-});
+// book.html (nav) no longer applied: the page is a redirect stub since 2026-09-27.
 // Every other page in nav.json gets its nav from the same renderer, so the menu
 // cannot drift between pages. index/book are applied above with their other regions.
 // Pages owned by the bilingual engine render their own nav (it carries the
@@ -1410,7 +1403,7 @@ function smUrl(rel) {
 }
 function smPriority(u) {
   if (u === '/') return '1.0';
-  if (u === '/book.html' || u === '/services/') return '0.9';
+  if (u === '/' || u === '/services/') return '0.9';
   if (u === '/projects/' || u === '/writing/') return '0.8';
   if (u.startsWith('/free/') || u.startsWith('/apps/calculators/') || u.startsWith('/quiz')) return '0.7';
   return '0.6';
@@ -1436,6 +1429,10 @@ function smAlternates(u) {
 SM_EXCLUDE.push('tsa-toolkit');
 // The Anatomy Sandbox is shared by link (noindex), so it stays out of the sitemap too (2026-09-25).
 SM_SKIP_FILES.push('projects/anatomy-sandbox/index.html');
+// Saved components and the archived homepage are unlisted (noindex), kept only for reuse (2026-09-27).
+SM_EXCLUDE.push('components', 'archive');
+// /book.html is a redirect stub to the homepage since 2026-09-27; the address stays live for ads, emails and QR codes.
+SM_SKIP_FILES.push('book.html');
 const smPages = smWalk(DIR, '', []).map(smUrl).sort();
 const smXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' +
