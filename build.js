@@ -1457,7 +1457,7 @@ function smUrl(rel) {
 }
 function smPriority(u) {
   if (u === '/') return '1.0';
-  if (u === '/book.html' || u === '/services/') return '0.9';
+  if (u === '/' || u === '/services/') return '0.9';
   if (u === '/projects/' || u === '/writing/') return '0.8';
   if (u.startsWith('/free/') || u.startsWith('/apps/calculators/') || u.startsWith('/quiz')) return '0.7';
   return '0.6';
@@ -1485,6 +1485,8 @@ SM_EXCLUDE.push('tsa-toolkit');
 SM_SKIP_FILES.push('projects/anatomy-sandbox/index.html');
 // Saved components and the archived homepage are unlisted (noindex), kept only for reuse (2026-09-27).
 SM_EXCLUDE.push('components', 'archive');
+// /book.html is unlisted since 2026-09-27: the homepage sells the book; the address stays live for ads, emails and QR codes.
+SM_SKIP_FILES.push('book.html');
 const smPages = smWalk(DIR, '', []).map(smUrl).sort();
 const smXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' +
