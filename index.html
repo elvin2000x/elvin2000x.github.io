@@ -208,7 +208,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .fcard{ display:grid; grid-template-columns:72px 1fr; gap:4px 16px; align-items:start; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); padding:16px; text-decoration:none; color:inherit }
     .fcard--noimg{ grid-template-columns:1fr }
     .fcard:hover{ border-color:var(--accent) }
-    .fcard img{ grid-row:1 / span 3; width:72px; border-radius:3px; box-shadow:0 8px 18px -12px rgba(10,24,40,.6) }
+    .fcard img{ grid-row:1 / span 3; width:72px; height:auto; aspect-ratio:5 / 8; object-fit:contain; object-position:center bottom; border-radius:3px; filter:drop-shadow(0 8px 10px rgba(10,24,40,.22)) }
     .fcard b{ font:600 20px/1.25 var(--serif); color:var(--ink) }
     .fcard span{ font-size:15px; color:var(--ink-2); line-height:1.5 }
     .fcard .go{ font-weight:600; color:var(--accent-ink) }
@@ -480,8 +480,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <p>Three free guides, each one built to fix a problem you already have.</p>
     <div class="freecards">
       <a class="fcard" href="/free/free-chapter/"><img src="/img/cover-hero.webp" alt="" width="600" height="960" loading="lazy"><b>Read Chapter 8 Free: Direct Your Tool</b><span>If AI ever handed you a fifty-page answer when you needed ten slides, this chapter shows you which mode fits which job.</span><span class="go">Read the free chapter &rarr;</span></a>
-      <a class="fcard fcard--noimg" href="/free/50-prompts/"><b>50 Prompts for the Jobs That Eat Your Week</b><span>Each prompt is named for the job it does, like The Inbox Killer for the reply you keep putting off, so you fill in the brackets and send.</span><span class="go">Get the 50 prompts &rarr;</span></a>
-      <a class="fcard fcard--noimg" href="/free/anti-hallucination/"><b>Tell Me the Truth: Stop AI Making Things Up</b><span>If AI has ever given you a confident answer that turned out wrong, this guide shows you when to double-check and the prompts that make it cite sources you can check.</span><span class="go">Get the free guide &rarr;</span></a>
+      <a class="fcard" href="/free/50-prompts/"><img src="/img/magnets/50-prompts.webp" alt="" width="440" height="704" loading="lazy"><b>50 Prompts for the Jobs That Eat Your Week</b><span>Each prompt is named for the job it does, like The Inbox Killer for the reply you keep putting off, so you fill in the brackets and send.</span><span class="go">Get the 50 prompts &rarr;</span></a>
+      <a class="fcard" href="/free/anti-hallucination/"><img src="/img/magnets/anti-hallucination.webp" alt="" width="440" height="622" loading="lazy"><b>Tell Me the Truth: Stop AI Making Things Up</b><span>If AI has ever given you a confident answer that turned out wrong, this guide shows you when to double-check and the prompts that make it cite sources you can check.</span><span class="go">Get the free guide &rarr;</span></a>
     </div>
     <p style="margin-top:20px"><a href="/free/">See the whole free library &rarr;</a></p>
   </div>
@@ -493,15 +493,15 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <div class="optin">
       <span class="oi-eyebrow">The newsletter</span>
       <h2>The Artificial Advantage, Once a Month</h2>
-      <p>The AI news worth knowing, tips you can use that week, my take, and a note from the book. The first issue, on AI and back to school, lands October 1.</p>
+      <p>The AI news worth knowing, tips you can use that week, my take, and a note from the book. It lands on the first of every month.</p>
       <form class="oi-form" data-source="newsletter-homepage-v2" novalidate>
         <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
         <label class="visually-hidden" for="nl-email">Your email</label>
         <input id="nl-email" type="email" required autocomplete="email" placeholder="you@work.com">
-        <button type="submit">Send me the first issue</button>
+        <button type="submit">Get the monthly update</button>
       </form>
-      <p class="oi-note">Free, one email a month. Unsubscribe anytime.</p>
-      <p class="oi-msg" data-success="You're in. Look for the first issue on October 1, and check promotions if it isn't in your inbox."></p>
+      <p class="oi-note">Free. Unsubscribe anytime.</p>
+      <p class="oi-msg" data-success="You're in. Look for it on the first of the month, and check your promotions tab if it isn't in your inbox."></p>
     </div>
   </div>
 </section>
