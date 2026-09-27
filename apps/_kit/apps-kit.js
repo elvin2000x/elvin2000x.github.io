@@ -58,7 +58,7 @@
         '</a>' +
         '<nav class="links">' +
           '<a href="https://elvinpeters.com/services/">Services</a>' +
-          '<a href="https://elvinpeters.com/book.html">The Book</a>' +
+          '<a href="https://elvinpeters.com/">The Book</a>' +
           '<a href="/projects/">Projects</a>' +
           extra +
           '<a href="https://elvinpeters.com/writing/">Blog</a>' +

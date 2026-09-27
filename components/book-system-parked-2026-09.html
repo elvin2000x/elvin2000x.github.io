@@ -1,0 +1,103 @@
+<!-- component: book-system-parked-2026-09
+     saved 2026-09-27 from book.html (origin/master 9998c8c) when the $37 System sale was parked
+     and /book went Amazon-first. Elvin 2026-09-27: "we're not deleting, we're parking it / unlisting it for now."
+     The offer + value stack itself is in complete-system-v1.html. This file holds the rest:
+     the hero Toolkit button, the System FAQ answers, the two-paths CTA, the P.S., and the
+     exit-intent popup (CSS + markup + script). To reuse: paste into a page that loads book.html's CSS.
+     Note: the System checkout itself was retired on 2026-09-23 (/system/ redirects to /book.html). -->
+
+<!-- hero CTA band (book.html 626-632) -->
+      <!-- The hero sat with ZERO calls to action: the only clickable in screen
+           one was the Amazon badge, on the page whose job is the $37 sale. -->
+      <div class="cta-band" style="margin-top:22px">
+        <a href="/toolkit/" class="btn-primary">Get the free Toolkit →</a>
+        <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="btn-secondary" target="_blank" rel="noopener">Buy the paperback or hardcover</a>
+      </div>
+      <p class="hero-free" style="margin-top:14px"><a href="/book.html#newsletter">Or read the first chapter free →</a></p>
+
+<!-- FAQ items about the System (book.html 1007-1014, 1019-1022) -->
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How long until I see results? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Most readers feel the difference in their first week of using the frameworks. The 7-Day Workbook is built to get you there fast.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">PDF or physical book? <span class="faq-icon">+</span></button>
+        <div class="faq-a">Both. The System on this site delivers the ebook instantly, together with the complete kit. Paperback and hardcover are on Amazon. My honest advice: get both. Paper for the read, the System for the practice.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Where do I buy it, and can I return it? <span class="faq-icon">+</span></button>
+        <div class="faq-a">The System (ebook + complete kit) is sold right here with a 14-day money-back guarantee. Paperback and hardcover are on Amazon, with Amazon's standard returns. The free starter kit is yours to keep either way.</div>
+      </div>
+
+<!-- ───────────── 13. URGENCY + FINAL CTA + TWO-PATHS ───────────── -->
+<div class="bottom-cta">
+  <h2>Two ways in, and one of them is free.</h2>
+  <div class="two-paths">
+    Buy the book on <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent-ink);font-weight:600">Amazon</a>, or get the System here and have the whole working kit with it. If you are not ready for either, take the free kit below and decide afterwards.
+  </div>
+  <a href="/toolkit/" class="btn-primary">Get the free Toolkit</a>
+</div>
+
+<!-- ───────────── 14. P.S. SKIMMER RECAP ───────────── -->
+<section class="section" style="padding: 56px 24px;">
+  <div class="ps-block">
+    <strong>P.S.</strong> <em>The Artificial Advantage</em> is the framework for professionals who tried AI and weren't impressed. Get the complete System here for the ebook and the full kit, or the paperback on Amazon. My advice: both, paper for reading, the System for doing. Not ready? Start free with your email (fifty prompts for the jobs that eat your week, the briefing cheat sheets, and the first chapter). If you've ever closed an AI tab thinking "this is overhyped," this is the book that changes that.
+    <br/>
+    <a href="/toolkit/" class="ps-cta">Get the free Toolkit →</a> &nbsp;·&nbsp; <a href="https://www.amazon.com/dp/B0H4X2S2JD" class="ps-cta buy" target="_blank" rel="noopener">Paperback on Amazon →</a>
+  </div>
+</section>
+
+<!-- The .exitpop CSS was left in book.html's <style> block, so the popup restyles as-is when pasted back. -->
+<!-- ───────────── EXIT-INTENT POPUP (owned vs Amazon) ───────────── -->
+<div id="exitpop" class="exitpop hidden" role="dialog" aria-modal="true">
+  <div class="exitpop-card">
+    <button class="exitpop-x" aria-label="Close" onclick="closeExit()">×</button>
+    <h2>Wait, grab the free toolkit first</h2>
+    <p>Before you go, join the email list and get <span class="gold">the starter kit free</span>: fifty prompts for the jobs that eat your week, the cheat sheets for briefing a model properly, and the first chapter. Enough to test the method this week.</p>
+    <div class="exitpop-covers">
+      <img class="lead" src="/img/cover-hero.webp" alt="The Artificial Advantage" loading="lazy" width="600" height="960" />
+      <img src="/img/magnets/50-prompts.webp" alt="50 Best AI Prompts" loading="lazy" width="440" height="704" />
+    </div>
+    <div class="exitpop-btns">
+      <a class="exitpop-yes" href="/book.html#newsletter" onclick="closeExit()">Yes, send me the free toolkit →</a>
+      <a class="exitpop-no" href="/book.html#newsletter" onclick="closeExit()">No thanks, just the free chapter</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var pop = document.getElementById('exitpop');
+  function show() {
+    if (!pop || sessionStorage.getItem('exit_shown')) return;
+    sessionStorage.setItem('exit_shown', '1');
+    lastFocus = document.activeElement;
+    pop.classList.remove('hidden');
+    var x = pop.querySelector('.exitpop-x'); if (x) x.focus();
+    try { gtag('event', 'exit_popup_shown'); } catch (e) {}
+  }
+  var lastFocus = null;
+  window.closeExit = function () {
+    if (!pop) return;
+    pop.classList.add('hidden');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  };
+  document.addEventListener('keydown', function (e) {
+    if (!pop || pop.classList.contains('hidden')) return;
+    if (e.key === 'Escape') { closeExit(); return; }
+    if (e.key === 'Tab') {
+      // Trap focus inside the dialog: aria-modal hides the page from AT, so the
+      // keyboard must not wander behind the overlay.
+      var f = pop.querySelectorAll('button, a[href], input');
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  document.addEventListener('mouseout', function (e) {
+    if (e.clientY <= 0 && !e.relatedTarget) show();   // cursor left the top of the viewport
+  });
+  if (pop) pop.addEventListener('click', function (e) { if (e.target === pop) closeExit(); });
+})();
+</script>
