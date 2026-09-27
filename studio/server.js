@@ -1,10 +1,18 @@
 #!/usr/bin/env node
 /* Site Studio: the owned, zero-dependency admin for elvinpeters.com.
    Write posts, edit pages and the menu in a browser, preview the REAL build,
-   publish = pull --rebase + build + verify + commit + push (Pages deploys).
-   Git is the database, history, and rollback. No node_modules, ever.
+   test the whole site with your drafts at a private address, and publish one
+   page at a time (pull + build + verify + commit by name + push; Pages deploys).
+
+   Drafts are private: they live in studio.db (studio/store.js), outside the public
+   repo, and git only ever sees what is published. Git stays the record of
+   everything live, its history, and rollback. No node_modules, ever.
 
    Run:   node studio/server.js --port 8820
+   Env:   STUDIO_DATA (default /var/lib/sitestudio, else ~/.sitestudio)
+          STUDIO_TEST_HOST (default test.elvinpeters.com): requests for that host
+          get the test site and nothing else.
+   Test:  node studio/test-drafts.js  (the draft-leak test; throwaway clones only)
    Binds 127.0.0.1 only. Auth is the reverse proxy's job (the studio login in
    production; nothing on localhost). Serves no dotfiles, no .git. */
 'use strict';
@@ -12,12 +20,19 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { execFileSync, execFile } = require('child_process');
+// Long jobs (pull, build, verify, push) run async: a blocked event loop stalls every
+// other request and lets idle keep-alive sockets time out under the publish request.
+const execFileP = require('util').promisify(execFile);
 const crypto = require('crypto');
+const Store = require('./store.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const SCHEMA_DIR = path.join(ROOT, 'content', '_schema');
-const PREVIEWS = path.join(__dirname, '.previews');
-const UPLOADS = path.join(ROOT, 'img', 'uploads');
+const store = Store.open();
+const PREVIEWS = path.join(store.dir, 'previews');
+const TESTS = path.join(store.dir, 'test');
+const TEST_HOST = (process.env.STUDIO_TEST_HOST || 'test.elvinpeters.com').toLowerCase();
+const PULL_MS = +process.env.STUDIO_PULL_MS || 5 * 60 * 1000;   // keep the server copy fresh
 const PORT = (() => { const i = process.argv.indexOf('--port'); return i > -1 ? +process.argv[i + 1] : 8796; })();
 
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
@@ -25,17 +40,19 @@ const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': '
   '.gif': 'image/gif', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.pdf': 'application/pdf', '.xml': 'text/xml',
   '.txt': 'text/plain; charset=utf-8', '.woff2': 'font/woff2' };
 
-// What an edit in the studio touches, and what the build regenerates from it.
-// Anything else dirty in the clone means someone is working in it by hand, and a
-// publish would sweep their files live.
-// essays/ holds the hand-coded post bodies: the studio edits them too, so a failed
-// publish must never reset them as if they were build output.
+// What a publish may commit: the draft files it writes (content/, essays/ post
+// bodies, img/uploads/) and what the build regenerates from them. Anything else
+// dirty in the clone means someone is working in it by hand, and a publish would
+// sweep their files live.
 const EDITS = /^(content\/|img\/uploads\/|essays\/)/;
 const GENERATED = /(\.html|^sitemap\.xml|^llms\.txt)$/;
 const publishable = f => EDITS.test(f) || GENERATED.test(f);
 
-let publishing = false;   // one publish (or roll back) at a time, ever
+// One job on the server copy at a time: a publish, a roll back or the pull.
+// Saving a draft never waits for it: drafts don't touch the copy.
+let busy = null;
 let lastSync = { at: 0, ok: true, msg: '' };
+let lastTest = null;   // { id, at }
 
 /* ---------- helpers ---------- */
 function git(args, opts) {
@@ -56,6 +73,65 @@ function allowed(name) {
 }
 function contentPath(name) { return path.join(ROOT, 'content', name + '.json'); }
 function version(buf) { return crypto.createHash('sha1').update(buf).digest('hex').slice(0, 16); }
+
+/* ---------- drafts ---------- */
+// A draft's key is the repo path it replaces.
+const contentKey = name => 'content/' + name + '.json';
+function keyOk(key) {
+  const m = /^content\/([a-z][a-z0-9-]{0,40})\.json$/.exec(key);
+  return m ? allowed(m[1]) : BODY_FILE.test(key);
+}
+function live(key) { const f = path.join(ROOT, key); return fs.existsSync(f) ? fs.readFileSync(f) : null; }
+// What the editor sees: the draft if there is one, else the live file.
+function current(key) {
+  const d = store.get(key);
+  if (d) return { buf: d.data, version: 'd' + d.rev, draft: d };
+  const b = live(key);
+  return b ? { buf: b, version: 'p' + version(b), draft: null } : null;
+}
+function stale(d) { const b = live(d.key); return d.base !== (b ? version(b) : 'new'); }
+function saveDraft(req, key, buf) {
+  const want = String(req.headers['if-match'] || '').replace(/"/g, '');
+  return store.save(key, buf, want, live(key), author(req));
+}
+// Authelia passes the signed-in user; localhost has none.
+function author(req) { return String(req.headers['remote-user'] || 'elvin').replace(/[^\w.@-]/g, '').slice(0, 40) || 'elvin'; }
+// Every draft and unpublished upload, written at its repo path under dir.
+function materialize(dir) {
+  for (const d of store.list()) {
+    const f = path.join(dir, d.key);
+    fs.mkdirSync(path.dirname(f), { recursive: true });
+    fs.writeFileSync(f, store.get(d.key).data);
+  }
+  for (const u of store.uploads()) {
+    const f = path.join(dir, 'img', 'uploads', u.name);
+    fs.mkdirSync(path.dirname(f), { recursive: true });
+    fs.writeFileSync(f, store.getUpload(u.name));
+  }
+}
+// The real build, with every draft laid over the repo. Output lands in <dir>/out.
+function buildWithDrafts(dir, cb) {
+  fs.rmSync(dir, { recursive: true, force: true });
+  fs.mkdirSync(path.join(dir, 'out'), { recursive: true });
+  fs.mkdirSync(path.join(dir, 'overlay'), { recursive: true });
+  materialize(path.join(dir, 'overlay'));
+  execFile(process.execPath, [path.join(__dirname, 'build-drafts.js'), '--overlay', path.join(dir, 'overlay'), '--out', path.join(dir, 'out')],
+    { cwd: ROOT, timeout: 120000 }, (err, so, se) => cb(err ? String(se || err.message).slice(0, 500) : null));
+}
+// A file of a built draft site: generated page, then draft or upload, then the repo.
+function builtFile(dir, rel) {
+  for (const base of [path.join(dir, 'out'), path.join(dir, 'overlay'), ROOT]) {
+    const f = safeJoin(base, rel);
+    if (f && fs.existsSync(f)) return f;
+  }
+  return null;
+}
+function prune(parent, keep) {
+  if (!fs.existsSync(parent)) return;
+  const all = fs.readdirSync(parent).filter(d => /^[a-f0-9]{12}$/.test(d))
+    .map(d => ({ d, t: fs.statSync(path.join(parent, d)).mtimeMs })).sort((a, b) => b.t - a.t);
+  for (const old of all.slice(keep)) fs.rmSync(path.join(parent, old.d), { recursive: true, force: true });
+}
 function textWords(html) {
   const t = String(html || '').replace(/<(style|script)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ');
   return (t.match(/\S+/g) || []).length;
@@ -92,8 +168,11 @@ function serveFile(res, file, extra) {
   });
 }
 // Preview pages must not count as visits: drop GA and the Meta pixel.
+// Each script on its own, so every page template's layout is covered.
 function stripTracking(html) {
-  return html.replace(/<script async src="https:\/\/www\.googletagmanager\.com[^<]*<\/script>\s*<script>window\.dataLayer[^<]*<\/script>\s*<script>!function\(f,b,e,v,n,t,s\)[^<]*<\/script>/, '');
+  return html
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, s => /googletagmanager|gtag\(|dataLayer|fbq\(|connect\.facebook\.net/.test(s) ? '' : s)
+    .replace(/<noscript>(?:(?!<\/noscript>)[\s\S])*facebook\.com\/tr(?:(?!<\/noscript>)[\s\S])*<\/noscript>/gi, '');
 }
 
 /* ---------- content validation ---------- */
@@ -120,9 +199,31 @@ function validate(name, data) {
 /* ---------- posts ---------- */
 const BODY_FILE = /^essays\/[a-z0-9-]+\.html$/;
 const BIG = { maxBuffer: 32 * 1024 * 1024 };
-function loadPosts() {
-  const data = JSON.parse(fs.readFileSync(contentPath('essays'), 'utf8'));
-  return Array.isArray(data) ? data : data.posts;
+const postsOf = data => (Array.isArray(data) ? data : data.posts) || [];
+// The posts as the editor sees them (draft if there is one).
+function loadPosts() { return postsOf(JSON.parse(current(contentKey('essays')).buf.toString('utf8'))); }
+// What of a draft may go live. essays.json: the draft minus posts still ticked
+// Draft (those stay in the store, never in the public repo). A post body: only
+// when its post is live after this publish. null = nothing to publish.
+function publishForm(key, data, postsAfter) {
+  if (key === contentKey('essays')) {
+    const d = JSON.parse(data.toString('utf8'));
+    const keep = p => p && !p.draft;
+    const out = Array.isArray(d) ? d.filter(keep) : { ...d, posts: postsOf(d).filter(keep) };
+    return Buffer.from(JSON.stringify(out, null, 2) + '\n');
+  }
+  if (BODY_FILE.test(key)) {
+    const post = postsAfter.find(p => p && p.file === key);
+    return post && !post.draft ? data : null;
+  }
+  return data;
+}
+// Upload names a published file points at (/img/uploads/x.png or uploads/x.png).
+function uploadsIn(buf) {
+  const names = new Set(), re = /(?:^|[\/"'(\s])uploads\/([a-z0-9][a-z0-9._-]{0,120})/gi;
+  let m; const s = buf.toString('utf8');
+  while ((m = re.exec(s))) if (store.hasUpload(m[1])) names.add(m[1]);
+  return [...names];
 }
 // A hand-coded post's body file, only if that post really points at it.
 function bodyFileOf(slug) {
@@ -138,51 +239,39 @@ function showAt(sha, file) {
 }
 
 /* ---------- git sync ---------- */
-// Keep the clone current while nobody has unpublished edits, so the editor never
-// starts from a stale copy of the site.
-function autoSync() {
-  if (publishing || Date.now() - lastSync.at < 60000) return;
-  lastSync.at = Date.now();
-  try {
-    if (porcelain().length) { lastSync = { at: Date.now(), ok: true, msg: 'unpublished edits; sync paused' }; return; }
-    git(['pull', '--rebase', '--quiet'], { timeout: 30000 });
-    lastSync = { at: Date.now(), ok: true, msg: 'up to date' };
-  } catch (e) {
-    try { git(['rebase', '--abort']); } catch (e2) {}
-    lastSync = { at: Date.now(), ok: false, msg: String(e.message).split('\n')[0].slice(0, 160) };
-  }
-}
-// Pull under unpublished edits: stash them, pull, put them back. If the same lines
-// changed upstream the pull is undone and the edits stay safely in the stash.
-function pullKeepingEdits(say) {
-  const dirty = porcelain().length > 0;
-  const stamp = 'site-studio ' + new Date().toISOString();
-  if (dirty) git(['stash', 'push', '--include-untracked', '-m', stamp]);
-  try { git(['pull', '--rebase']); }
-  catch (e) {
-    try { git(['rebase', '--abort']); } catch (e2) {}
-    if (dirty) git(['stash', 'pop']);
-    throw new Error('Could not pull the latest site from GitHub. Your edits are untouched. Try again in a minute.');
-  }
-  if (!dirty) return;
-  try { git(['stash', 'pop']); }
-  catch (e) {
-    git(['reset', '--hard', 'HEAD']);
-    const err = new Error('The site changed on GitHub in the same place you edited. Your edits are kept in the stash "' +
-      stamp + '" on the server; reload the editor to see the latest, then redo the change.');
-    err.stashed = true;
-    throw err;
-  }
-  if (say) say('  (your unpublished edits were carried over)');
-}
-
-// Put regenerated pages back to their committed state; the studio's edits stay.
+// Put regenerated pages back to their committed state (a build that ran here by hand
+// or a publish that stopped halfway). Drafts are never in the copy, so this loses nothing.
 function resetBuildOutput() {
   try {
-    const files = porcelain().filter(x => !EDITS.test(x.file) && GENERATED.test(x.file) && x.code !== '??').map(x => x.file);
+    const files = porcelain().filter(x => GENERATED.test(x.file) && x.code !== '??').map(x => x.file);
     for (let i = 0; i < files.length; i += 100) git(['checkout', '--', ...files.slice(i, i + 100)]);
   } catch (e) {}
 }
+// The server copy must be clean between jobs. Returns the files that are not.
+function dirtyFiles() {
+  let st = porcelain();
+  if (st.length) { resetBuildOutput(); st = porcelain(); }
+  return st.map(x => x.file);
+}
+// Fast-forward the server copy to GitHub. Never merges or rebases: the copy only
+// ever holds what GitHub has, plus a publish in flight.
+async function pull() {
+  const dirty = dirtyFiles();
+  if (dirty.length) throw new Error('The server copy has files that are not committed (' + dirty.slice(0, 3).join(', ') + '), so it cannot update from GitHub.');
+  try { await execFileP('git', ['pull', '--ff-only', '--quiet'], { cwd: ROOT, timeout: 60000 }); }
+  catch (e) { throw new Error('Could not get the latest site from GitHub: ' + (String(e.stderr || e.message).split('\n').filter(Boolean)[0] || '').slice(0, 160)); }
+}
+// The pull every few minutes, under the same lock as publish, so the two never
+// run on the copy at once.
+async function autoSync() {
+  if (busy) return false;
+  busy = 'pull';
+  try { await pull(); lastSync = { at: Date.now(), ok: true, msg: 'up to date' }; }
+  catch (e) { lastSync = { at: Date.now(), ok: false, msg: String(e.message).slice(0, 200) }; }
+  finally { busy = null; }
+  return lastSync.ok;
+}
+const node = (script) => execFileP(process.execPath, [path.join(ROOT, script)], { cwd: ROOT, encoding: 'utf8', timeout: 120000, ...BIG }).then(r => r.stdout);
 
 /* ---------- history ---------- */
 function history() {
@@ -257,6 +346,8 @@ function imageInfo(b) {
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://x');
   const p = url.pathname;
+  // The test site's host gets the test site and nothing else: no editor, no API.
+  if (String(req.headers.host || '').toLowerCase().replace(/:\d+$/, '') === TEST_HOST) return serveTest(req, res, p);
   // Every change must come from the studio page itself. A custom header cannot be
   // sent cross-site without a CORS preflight this server never answers.
   if (!['GET', 'HEAD'].includes(req.method) && req.headers['x-studio'] !== '1')
@@ -274,29 +365,54 @@ const server = http.createServer((req, res) => {
     }
 
     if (p === '/api/state' && req.method === 'GET') {
-      autoSync();
+      if (Date.now() - lastSync.at > PULL_MS) autoSync();
       let repo = {};
       try {
         const st = porcelain();
+        const drafts = store.list().map(d => ({ key: d.key, rev: d.rev, updated: d.updated, author: d.author, stale: stale(d) }));
         repo = {
           branch: git(['branch', '--show-current']),
           head: git(['log', '-1', '--pretty=%h %s']),
-          changed: st.filter(x => EDITS.test(x.file)).map(x => x.file),
+          changed: drafts.map(d => d.key),
+          drafts,
           blocked: st.filter(x => !publishable(x.file)).map(x => x.file).slice(0, 8),
           sync: lastSync,
+          test: lastTest && { at: lastTest.at, url: 'https://' + TEST_HOST + '/' },
         };
       } catch (e) { repo.error = String(e.message).slice(0, 200); }
-      return json(res, 200, { sections: schemas(), repo, publishing });
+      return json(res, 200, { sections: schemas(), repo, publishing: busy === 'publish' || busy === 'revert' });
+    }
+
+    // Get the latest site from GitHub now (the editor's refresh; also runs every 5 minutes).
+    if (p === '/api/sync' && req.method === 'POST') {
+      if (busy) return json(res, 409, { error: 'The server copy is busy (' + busy + '). Try again in a moment.' });
+      return autoSync().then(() => json(res, lastSync.ok ? 200 : 502, { sync: lastSync, error: lastSync.ok ? undefined : lastSync.msg }));
     }
 
     if (p === '/api/history' && req.method === 'GET') return json(res, 200, { history: history() });
 
+    // Drafts: what's waiting, and each one's revisions (newest first).
+    if (p === '/api/drafts' && req.method === 'GET') {
+      if (url.searchParams.has('key')) {
+        const key = url.searchParams.get('key');
+        if (!keyOk(key)) return json(res, 404, { error: 'unknown page' });
+        return json(res, 200, { key, revisions: store.revisions(key, 50) });
+      }
+      return json(res, 200, { drafts: store.list().map(d => ({ ...d, stale: stale(d) })), uploads: store.uploads() });
+    }
+    if (p === '/api/drafts/revision' && req.method === 'GET') {
+      const r = store.revision(+url.searchParams.get('id'));
+      if (!r || !r.data) return json(res, 404, { error: 'no such revision' });
+      return send(res, 200, r.data, { 'Content-Type': r.key.endsWith('.json') ? 'application/json' : 'text/plain; charset=utf-8' });
+    }
+
     if (p.startsWith('/api/content/')) {
       const name = p.split('/')[3];
       if (!allowed(name)) return json(res, 404, { error: 'unknown section' });
+      const key = contentKey(name);
       if (req.method === 'GET') {
-        const buf = fs.readFileSync(contentPath(name));
-        return send(res, 200, buf, { 'Content-Type': 'application/json', ETag: '"' + version(buf) + '"' });
+        const c = current(key);
+        return send(res, 200, c.buf, { 'Content-Type': 'application/json', ETag: '"' + c.version + '"' });
       }
       if (req.method === 'PUT') {
         return readBody(req, 4 * 1024 * 1024, body => {
@@ -304,14 +420,13 @@ const server = http.createServer((req, res) => {
           try { data = JSON.parse(body.toString('utf8')); } catch (e) { return json(res, 400, { error: 'not valid JSON: ' + e.message }); }
           const bad = validate(name, data);
           if (bad) return json(res, 422, { error: bad });
-          if (publishing) return json(res, 409, { error: 'A publish is running. Your change will save when it finishes.', retry: true });
-          const cur = fs.readFileSync(contentPath(name));
-          const want = String(req.headers['if-match'] || '').replace(/"/g, '');
-          if (want && want !== version(cur))
-            return json(res, 409, { error: 'This section changed somewhere else (another tab, or the site was updated). Reload to get the latest before saving.' });
-          const out = Buffer.from(JSON.stringify(data, null, 2) + '\n');
-          fs.writeFileSync(contentPath(name), out);
-          json(res, 200, { saved: true, version: version(out) });
+          try {
+            const r = saveDraft(req, key, Buffer.from(JSON.stringify(data, null, 2) + '\n'));
+            json(res, 200, { saved: true, version: r.version, draft: !r.live });
+          } catch (e) {
+            if (!e.stale) return json(res, 500, { error: 'Could not save the draft: ' + String(e.message).slice(0, 200) });
+            json(res, 409, { error: 'This page changed somewhere else (another tab or device, or it was just published). Reload to get the latest before saving.' });
+          }
         }, () => json(res, 413, { error: 'too large' }));
       }
     }
@@ -331,7 +446,7 @@ const server = http.createServer((req, res) => {
         let inner;
         if (post.body_format === 'markdown') inner = '<div id="studio-body"></div>';
         else if (override !== null) inner = override;
-        else if (post.file) inner = fs.readFileSync(path.join(ROOT, post.file), 'utf8');
+        else if (post.file && BODY_FILE.test(post.file)) inner = (current(post.file) || { buf: '' }).buf.toString('utf8');
         else inner = String(post.html || '');
         const html = stripTracking(essayPage({ ...post, slug: post.slug || 'untitled' }, inner));
         send(res, 200, html, { 'Content-Type': 'text/html; charset=utf-8' });
@@ -344,18 +459,18 @@ const server = http.createServer((req, res) => {
       const bf = bodyFileOf(slug);
       if (bf.error) return json(res, bf.code, { error: bf.error });
       if (req.method === 'GET') {
-        const buf = fs.readFileSync(bf.abs);
-        return json(res, 200, { html: buf.toString('utf8'), version: version(buf) });
+        const c = current(bf.file) || { buf: Buffer.alloc(0), version: 'p' + version(Buffer.alloc(0)) };
+        return json(res, 200, { html: c.buf.toString('utf8'), version: c.version });
       }
       if (req.method === 'PUT') {
         return readBody(req, 2 * 1024 * 1024, body => {
-          if (publishing) return json(res, 409, { error: 'A publish is running. Your change will save when it finishes.', retry: true });
-          const cur = fs.existsSync(bf.abs) ? fs.readFileSync(bf.abs) : Buffer.alloc(0);
-          const want = String(req.headers['if-match'] || '').replace(/"/g, '');
-          if (want !== version(cur))
-            return json(res, 409, { error: 'This post body changed somewhere else (another tab, or the site was updated). Reload to get the latest before saving.' });
-          fs.writeFileSync(bf.abs, body);
-          json(res, 200, { saved: true, version: version(body) });
+          try {
+            const r = saveDraft(req, bf.file, body);
+            json(res, 200, { saved: true, version: r.version, draft: !r.live });
+          } catch (e) {
+            if (!e.stale) return json(res, 500, { error: 'Could not save the draft: ' + String(e.message).slice(0, 200) });
+            json(res, 409, { error: 'This post body changed somewhere else (another tab or device, or it was just published). Reload to get the latest before saving.' });
+          }
         }, () => json(res, 413, { error: 'The page body must be under 2 MB.' }));
       }
     }
@@ -386,10 +501,9 @@ const server = http.createServer((req, res) => {
 
     if (p.startsWith('/api/convert/')) {
       const slug = decodeURIComponent(p.split('/')[3] || '');
-      const file = contentPath('essays');
-      const buf = fs.readFileSync(file);
-      const data = JSON.parse(buf);
-      const posts = Array.isArray(data) ? data : data.posts;
+      const cur = current(contentKey('essays'));
+      const data = JSON.parse(cur.buf.toString('utf8'));
+      const posts = postsOf(data);
       const post = posts.find(x => x.slug === slug);
       if (!post) return json(res, 404, { error: 'no such post' });
       const { checkPost } = fresh(path.join(__dirname, 'convert.js'));
@@ -397,15 +511,16 @@ const server = http.createServer((req, res) => {
       if (req.method === 'GET') return json(res, 200, { ok: r.ok, reason: r.reason || '', words: r.ok ? (r.markdown.match(/\S+/g) || []).length : 0 });
       if (req.method === 'POST') {
         if (!r.ok) return json(res, 422, { error: r.reason });
-        if (publishing) return json(res, 409, { error: 'A publish is running. Try again when it finishes.' });
-        const want = String(req.headers['if-match'] || '').replace(/"/g, '');
-        if (want && want !== version(buf)) return json(res, 409, { error: 'Posts changed somewhere else. Reload first.' });
         post.body_format = 'markdown';
         post.body = r.markdown;
         delete post.html;
-        const out = Buffer.from(JSON.stringify(data, null, 2) + '\n');
-        fs.writeFileSync(file, out);
-        return json(res, 200, { converted: true, version: version(out) });
+        try {
+          const s = saveDraft(req, contentKey('essays'), Buffer.from(JSON.stringify(data, null, 2) + '\n'));
+          return json(res, 200, { converted: true, version: s.version });
+        } catch (e) {
+          if (!e.stale) throw e;
+          return json(res, 409, { error: 'Posts changed somewhere else. Reload first.' });
+        }
       }
     }
 
@@ -415,38 +530,46 @@ const server = http.createServer((req, res) => {
         if (!info || !info.w || !info.h) return json(res, 415, { error: 'Use a PNG, JPG, WebP or GIF image.' });
         const base = String(url.searchParams.get('name') || 'image').toLowerCase().replace(/\.[a-z0-9]+$/, '')
           .normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'image';
-        fs.mkdirSync(UPLOADS, { recursive: true });
+        // Held in the store until a publish that uses it; the repo only gets it then.
+        const inRepo = n => path.join(ROOT, 'img', 'uploads', n);
         let name = `${base}-${info.w}x${info.h}.${info.ext}`, n = 2;
-        while (fs.existsSync(path.join(UPLOADS, name))) {
-          if (fs.readFileSync(path.join(UPLOADS, name)).equals(buf)) break;     // same file again: reuse it
+        for (;;) {
+          const have = store.getUpload(name) || (fs.existsSync(inRepo(name)) ? fs.readFileSync(inRepo(name)) : null);
+          if (!have || have.equals(buf)) break;     // free name, or the same file again: reuse it
           name = `${base}-${n++}-${info.w}x${info.h}.${info.ext}`;
         }
-        fs.writeFileSync(path.join(UPLOADS, name), buf);
+        if (!fs.existsSync(inRepo(name))) store.putUpload(name, buf);
         json(res, 200, { src: '/img/uploads/' + name, image: 'uploads/' + name, width: info.w, height: info.h, bytes: buf.length });
       }, () => json(res, 413, { error: 'Images must be under 8 MB. Export a smaller JPG or WebP.' }));
     }
 
     if (p === '/api/preview' && req.method === 'POST') {
       const id = crypto.randomBytes(6).toString('hex');
-      const out = path.join(PREVIEWS, id);
-      fs.mkdirSync(out, { recursive: true });
-      return execFile(process.execPath, [path.join(ROOT, 'build.js'), '--out', out], { cwd: ROOT, timeout: 60000 }, (err, so, se) => {
-        if (err) return json(res, 500, { error: 'build failed', detail: String(se || err.message).slice(0, 500) });
-        const all = fs.readdirSync(PREVIEWS).map(d => ({ d, t: fs.statSync(path.join(PREVIEWS, d)).mtimeMs }))
-          .sort((a, b) => b.t - a.t);
-        for (const old of all.slice(5)) fs.rmSync(path.join(PREVIEWS, old.d), { recursive: true, force: true });
+      return buildWithDrafts(path.join(PREVIEWS, id), err => {
+        if (err) return json(res, 500, { error: 'build failed', detail: err });
+        prune(PREVIEWS, 5);
         json(res, 200, { id });
+      });
+    }
+
+    // Test: the whole site with every draft in it, at the test address.
+    if (p === '/api/test' && req.method === 'POST') {
+      const id = crypto.randomBytes(6).toString('hex');
+      return buildWithDrafts(path.join(TESTS, id), err => {
+        if (err) return json(res, 500, { error: 'build failed', detail: err });
+        lastTest = { id, at: new Date().toISOString() };
+        fs.writeFileSync(path.join(TESTS, 'current'), id);
+        prune(TESTS, 2);
+        json(res, 200, { url: 'https://' + TEST_HOST + '/', at: lastTest.at, drafts: store.list().length });
       });
     }
 
     if (p.startsWith('/preview/') && req.method === 'GET') {
       const [, , id, ...rest] = p.split('/');
-      let rel = rest.join('/') || 'index.html';
+      let rel = decodeURIComponent(rest.join('/')) || 'index.html';
       if (rel.endsWith('/')) rel += 'index.html';
       if (!/^[a-f0-9]{12}$/.test(id)) return send(res, 404, '');
-      const built = safeJoin(path.join(PREVIEWS, id), rel);
-      const fallback = safeJoin(ROOT, rel);
-      const file = built && fs.existsSync(built) ? built : fallback && fs.existsSync(fallback) ? fallback : null;
+      const file = builtFile(path.join(PREVIEWS, id), rel);
       if (!file || fs.statSync(file).isDirectory()) return send(res, 404, 'not found');
       // The proxy says X-Frame-Options DENY for the whole host; frame-ancestors
       // overrides it in browsers, so previews can sit inside the studio page.
@@ -456,56 +579,35 @@ const server = http.createServer((req, res) => {
       return serveFile(res, file, frame);
     }
 
+    // Publish: ?keys=content/claude.json,essays/x.html (the pages to ship; none = every
+    // draft), &force=1 (mine wins over a live file that changed since the draft began),
+    // &msg=. Streams progress lines.
     if (p === '/api/publish' && req.method === 'POST') {
-      if (publishing) return json(res, 409, { error: 'a publish is already running' });
-      publishing = true;
+      if (busy) return json(res, 409, { error: busy === 'pull' ? 'The server copy is updating from GitHub. Try again in a few seconds.' : 'A publish is already running.' });
+      const want = String(url.searchParams.get('keys') || '').split(',').map(s => s.trim()).filter(Boolean);
+      const bad = want.find(k => !keyOk(k));
+      if (bad) return json(res, 400, { error: 'unknown page ' + bad });
+      busy = 'publish';
       res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store', 'X-Accel-Buffering': 'no' });
       const say = t => res.write(t + '\n');
-      const run = (label, fn) => { say('▸ ' + label); const out = fn(); if (out) say(String(out).split('\n').slice(-4).map(l => l.length > 160 ? l.slice(0, 157) + '…' : l).join('\n')); };
-      const before = git(['rev-parse', 'HEAD']);
-      try {
-        const blocked = porcelain().filter(x => !publishable(x.file));
-        if (blocked.length) {
-          say('✗ The server copy has files outside the website content that are not committed, so publishing could ship them:');
-          blocked.slice(0, 5).forEach(x => say('   ' + x.file));
-          throw new Error('dirty');
-        }
-        run('Getting the latest site from GitHub', () => pullKeepingEdits(say));
-        run('Building', () => execFileSync(process.execPath, [path.join(ROOT, 'build.js')], { cwd: ROOT, encoding: 'utf8', timeout: 120000 }));
-        run('Checking (verify gate)', () => execFileSync(process.execPath, [path.join(ROOT, 'verify.js')], { cwd: ROOT, encoding: 'utf8', timeout: 120000 }));
-        const changed = porcelain();
-        if (!changed.length) { say('✓ Nothing changed. Everything is published already.'); return; }
-        const msg = String(url.searchParams.get('msg') || '').replace(/[\r\n]+/g, ' ').slice(0, 120);
-        run('Saving a version', () => { git(['add', '-A']); return git(['commit', '-m', 'Site Studio: ' + (msg || 'content edits')]); });
-        run('Pushing (the site updates in about a minute)', () => git(['push']));
-        say('✓ PUBLISHED. GitHub Pages takes about a minute, then it is live.');
-      } catch (e) {
-        const m = String(e.message);
-        if (m !== 'dirty') {
-          const detail = (e.stdout || '') + (e.stderr || '');
-          say('✗ ' + (detail.includes('FAIL') ? 'The verify gate failed:\n' + detail.split('\n').filter(l => /✗|FAIL/.test(l)).slice(0, 8).join('\n') : m.split('\n').slice(0, 6).join('\n')));
-        }
-        // A commit that never reached GitHub must not linger and ride along later,
-        // and half-built pages must not block the next publish.
-        try { if (git(['rev-parse', 'HEAD']) !== before && git(['status', '-sb']).includes('ahead')) git(['reset', '--mixed', before]); } catch (e2) {}
-        resetBuildOutput();
-        say('Nothing shipped. The live site is untouched.' + (e.stashed ? '' : ' Your edits are still saved here.'));
-      } finally {
-        publishing = false;
-        res.end();
-      }
-      return;
+      return publish({ keys: want, force: url.searchParams.get('force') === '1', say, who: author(req),
+          msg: String(url.searchParams.get('msg') || '').replace(/[\r\n]+/g, ' ').slice(0, 120) })
+        .catch(e => say('✗ ' + String(e.message).slice(0, 200)))
+        .finally(() => { busy = null; res.end(); });
     }
 
-    // Throw away unpublished studio edits: content back to the last version, unpublished uploads removed.
+    // Throw away drafts: {keys: [...]} or every draft. Each one stays in its revision
+    // history (kind "discard"), so a slip can be recovered.
     if (p === '/api/discard' && req.method === 'POST') {
-      if (publishing) return json(res, 409, { error: 'A publish is running.' });
-      try {
-        git(['checkout', '--', 'content/', 'essays/']);
-        git(['clean', '-fdq', '--', 'content/', 'img/uploads/']);
-        resetBuildOutput();
-        return json(res, 200, { discarded: true });
-      } catch (e) { return json(res, 500, { error: String(e.message).slice(0, 200) }); }
+      return readBody(req, 64 * 1024, body => {
+        let keys = null;
+        try { const b = body.length ? JSON.parse(body.toString('utf8')) : {}; keys = Array.isArray(b.keys) && b.keys.length ? b.keys : null; }
+        catch (e) { return json(res, 400, { error: 'bad body' }); }
+        const list = keys || store.list().map(d => d.key);
+        let n = 0;
+        for (const k of list) if (keyOk(k) && store.end(k, 'discard', 0, author(req))) n++;
+        json(res, 200, { discarded: n });
+      });
     }
 
     if (p === '/api/revert' && req.method === 'POST') {
@@ -513,28 +615,28 @@ const server = http.createServer((req, res) => {
         let sha;
         try { sha = JSON.parse(body.toString('utf8')).sha; } catch (e) { return json(res, 400, { error: 'bad body' }); }
         if (!/^[a-f0-9]{7,40}$/.test(sha || '')) return json(res, 400, { error: 'bad sha' });
-        if (publishing) return json(res, 409, { error: 'A publish is running. Try again when it finishes.' });
-        if (porcelain().length) return json(res, 409, { error: 'You have unpublished edits. Publish or discard them before rolling back.' });
+        if (busy) return json(res, 409, { error: 'A publish is running. Try again when it finishes.' });
         const item = history().find(h => h.sha.startsWith(sha) || sha.startsWith(h.sha));
         if (!item) return json(res, 404, { error: 'That version is not in the recent publish history.' });
         if (!item.revertable) return json(res, 422, { error: item.why });
-        publishing = true;
+        busy = 'revert';
         const before = git(['rev-parse', 'HEAD']);
-        try {
-          pullKeepingEdits();
+        (async () => {
+          await pull();
           git(['revert', '--no-commit', sha]);
-          execFileSync(process.execPath, [path.join(ROOT, 'build.js')], { cwd: ROOT, timeout: 120000 });
-          execFileSync(process.execPath, [path.join(ROOT, 'verify.js')], { cwd: ROOT, timeout: 120000 });
-          git(['add', '-A']);
+          await node('build.js');
+          await node('verify.js');
+          // Tracked files only: the copy was clean before, so this is the revert plus
+          // the pages the build regenerated from it.
+          git(['add', '-u']);
           git(['commit', '-m', 'Site Studio: roll back "' + item.msg.replace(/^Site Studio: /, '').slice(0, 80) + '" (' + item.sha + ')']);
-          git(['push']);
-          json(res, 200, { reverted: sha });
-        } catch (e) {
+          await execFileP('git', ['push'], { cwd: ROOT, timeout: 60000 });
+        })().then(() => json(res, 200, { reverted: sha }), e => {
           try { git(['revert', '--abort']); } catch (e2) {}
           try { git(['reset', '--hard', before]); } catch (e2) {}
           const detail = String((e.stdout || '') + (e.stderr || '') || e.message);
           json(res, 500, { error: 'Roll back failed, nothing shipped: ' + detail.split('\n').filter(Boolean).slice(0, 4).join(' ').slice(0, 300) });
-        } finally { publishing = false; }
+        }).finally(() => { busy = null; });
       });
     }
 
@@ -543,6 +645,9 @@ const server = http.createServer((req, res) => {
     // never source or content directories.
     if (req.method === 'GET' && (/\.(css|svg|png|jpg|jpeg|webp|gif|ico|woff2|pdf)$/i.test(p) || /^\/js\/[\w.-]+\.js$/.test(p))
         && !/^\/(studio|content|essays)\//i.test(p)) {
+      const up = /^\/img\/uploads\/([a-z0-9][a-z0-9._-]{0,120})$/i.exec(p);
+      const held = up && store.getUpload(up[1]);
+      if (held) return send(res, 200, held, { 'Content-Type': MIME[path.extname(up[1]).toLowerCase()] || 'application/octet-stream' });
       const asset = safeJoin(ROOT, decodeURIComponent(p));
       if (asset && fs.existsSync(asset)) return serveFile(res, asset);
     }
@@ -553,5 +658,142 @@ const server = http.createServer((req, res) => {
   }
 });
 
+/* ---------- publish ---------- */
+// Ship the chosen drafts and nothing else: write them into the clean server copy,
+// build, verify, commit those files and the pages the build regenerated BY NAME,
+// push. Any other draft never leaves the store. If anything fails, the copy goes
+// back to the commit it started from and every draft stays as it was.
+async function publish({ keys, force, msg, say, who }) {
+  const run = async (label, fn) => { say('▸ ' + label); const out = await fn(); if (out) say(String(out).trim().split('\n').slice(-4).map(l => l.length > 160 ? l.slice(0, 157) + '…' : l).join('\n')); };
+  const before = git(['rev-parse', 'HEAD']);
+  const wrote = [];
+  try {
+    await run('Getting the latest site from GitHub', () => pull());
+    const all = store.list();
+    const picked = (keys.length ? all.filter(d => keys.includes(d.key)) : all).map(d => store.get(d.key));
+    if (!picked.length) { say('✓ Nothing to publish: no drafts' + (keys.length ? ' for that page.' : '.')); return; }
+
+    // Live changed under a draft (a Claude push, another device's publish): stop
+    // unless the editor chose "mine wins", so nobody's work is overwritten silently.
+    const moved = picked.filter(d => stale(d));
+    if (moved.length && !force) {
+      say('✗ ' + moved.map(d => d.key).join(', ') + ' changed on the live site after this draft started.');
+      say('  Open the page and check it. Publishing anyway replaces the live version with yours.');
+      throw Object.assign(new Error('stale'), { quiet: true, stale: moved.map(d => d.key) });
+    }
+
+    // Posts as they will be after this publish decide which post bodies may go.
+    const essaysK = contentKey('essays');
+    const essaysD = picked.find(d => d.key === essaysK);
+    const postsAfter = postsOf(JSON.parse((essaysD ? essaysD.data : live(essaysK) || Buffer.from('[]')).toString('utf8')));
+    const plan = [], held = [];
+    for (const d of picked) {
+      const out = publishForm(d.key, d.data, postsAfter);
+      if (!out) { held.push(d.key); continue; }
+      plan.push({ d, out });
+    }
+    held.forEach(k => say('  ' + k + ' stays private: its post is still a draft.'));
+    if (!plan.length) { say('✓ Nothing to publish: only private drafts.'); return; }
+
+    await run('Writing ' + plan.map(x => x.d.key).join(', '), () => {
+      for (const { d, out } of plan) {
+        fs.mkdirSync(path.dirname(path.join(ROOT, d.key)), { recursive: true });
+        fs.writeFileSync(path.join(ROOT, d.key), out);
+        wrote.push(d.key);
+        for (const u of uploadsIn(out)) {
+          const rel = 'img/uploads/' + u;
+          if (wrote.includes(rel)) continue;
+          fs.mkdirSync(path.join(ROOT, 'img', 'uploads'), { recursive: true });
+          fs.writeFileSync(path.join(ROOT, rel), store.getUpload(u));
+          wrote.push(rel);
+        }
+      }
+    });
+    await run('Building', () => node('build.js'));
+    await run('Checking (verify gate)', () => node('verify.js'));
+
+    // Commit by name: the files written above plus pages the build regenerated.
+    // Anything else changed means something is wrong; ship nothing.
+    const changed = porcelain().map(x => x.file);
+    const odd = changed.filter(f => !wrote.includes(f) && !GENERATED.test(f));
+    if (odd.length) throw new Error('The build changed files it should not have (' + odd.slice(0, 3).join(', ') + ').');
+    if (!changed.length) {
+      say('✓ Nothing changed. That page is live already.');
+      for (const { d } of plan) store.end(d.key, 'publish', d.rev, who, 'already live');
+      return;
+    }
+    const titles = plan.map(x => pageTitle(x.d.key)).join(', ');
+    await run('Saving a version', () => {
+      for (let i = 0; i < changed.length; i += 100) git(['add', '--', ...changed.slice(i, i + 100)]);
+      return git(['commit', '-m', 'Site Studio: ' + (msg || titles)]);
+    });
+    await run('Pushing (the site updates in about a minute)', () => execFileP('git', ['push', '--quiet'], { cwd: ROOT, timeout: 60000 }).then(() => ''));
+    const sha = git(['rev-parse', '--short', 'HEAD']);
+
+    // Close what shipped. A draft saved again during the publish, or one that keeps
+    // private posts, stays open against the new live file.
+    for (const { d, out } of plan) {
+      if (!out.equals(d.data) || !store.end(d.key, 'publish', d.rev, who, sha)) store.rebase(d.key, live(d.key));
+      for (const u of uploadsIn(out)) store.dropUpload(u);
+    }
+    say('✓ PUBLISHED ' + titles + ' (' + sha + '). GitHub Pages takes about a minute, then it is live.');
+  } catch (e) {
+    if (!e.quiet) {
+      const detail = (e.stdout || '') + (e.stderr || '');
+      say('✗ ' + (detail.includes('FAIL') ? 'The verify gate failed:\n' + detail.split('\n').filter(l => /✗|FAIL/.test(l)).slice(0, 8).join('\n') : String(e.message).split('\n').slice(0, 6).join('\n')));
+    }
+    // Back to where we started: no commit left to ride along later, no half-built
+    // pages, no draft file left in the copy.
+    try { git(['reset', '--hard', before]); } catch (e2) {}
+    for (const f of wrote) { try { if (porcelain().some(x => x.file === f && x.code === '??')) fs.rmSync(path.join(ROOT, f)); } catch (e2) {} }
+    try { for (const x of porcelain()) if (x.code === '??' && GENERATED.test(x.file)) fs.rmSync(path.join(ROOT, x.file), { force: true }); } catch (e2) {}
+    say('Nothing shipped. The live site is untouched. Your drafts are still saved.');
+  }
+}
+function pageTitle(key) {
+  const m = /^content\/([a-z0-9-]+)\.json$/.exec(key);
+  if (!m) return key;
+  if (m[1] === 'essays') return 'Blog posts';
+  if (m[1] === 'nav') return 'Menu';
+  try { return JSON.parse(fs.readFileSync(path.join(SCHEMA_DIR, m[1] + '.json'), 'utf8')).title || m[1]; } catch (e) { return m[1]; }
+}
+
+/* ---------- the test site ---------- */
+// test.elvinpeters.com: the latest Test build (every draft laid over the repo),
+// served like GitHub Pages serves the live site. Behind the studio login, never
+// indexed, analytics stripped so test visits never count.
+function serveTest(req, res, p) {
+  const noindex = { 'X-Robots-Tag': 'noindex, nofollow, noarchive' };
+  if (!['GET', 'HEAD'].includes(req.method)) return send(res, 405, 'read only', noindex);
+  if (p === '/robots.txt') return send(res, 200, 'User-agent: *\nDisallow: /\n', { 'Content-Type': MIME['.txt'], ...noindex });
+  let id = lastTest && lastTest.id;
+  if (!id) { try { id = fs.readFileSync(path.join(TESTS, 'current'), 'utf8').trim(); } catch (e) {} }
+  if (!id || !/^[a-f0-9]{12}$/.test(id) || !fs.existsSync(path.join(TESTS, id)))
+    return send(res, 404, '<!doctype html><meta name="robots" content="noindex"><title>No test yet</title><p style="font:18px system-ui;margin:3em">No test build yet. Open Site Studio and tap <b>Test</b>.</p>',
+      { 'Content-Type': MIME['.html'], ...noindex });
+  let rel;
+  try { rel = decodeURIComponent(p).replace(/^\/+/, ''); } catch (e) { return send(res, 400, 'bad path', noindex); }
+  if (/^studio(\/|$)/i.test(rel)) return send(res, 404, 'not found', noindex);
+  const dir = path.join(TESTS, id);
+  const cands = !rel || rel.endsWith('/') ? [rel + 'index.html'] : path.extname(rel) ? [rel] : [rel, rel + '.html', rel + '/index.html'];
+  let file = null;
+  for (const c of cands) { const f = builtFile(dir, c); if (f && fs.statSync(f).isFile()) { file = f; break; } }
+  if (!file && !rel.endsWith('/') && !path.extname(rel) && builtFile(dir, rel + '/index.html')) {
+    res.writeHead(301, { Location: '/' + rel + '/', ...noindex }); return res.end();
+  }
+  let code = 200;
+  if (!file) { file = builtFile(dir, '404.html'); code = 404; if (!file) return send(res, 404, 'not found', noindex); }
+  if (file.endsWith('.html'))
+    return send(res, code, stripTracking(fs.readFileSync(file, 'utf8')), { 'Content-Type': MIME['.html'], ...noindex });
+  fs.readFile(file, (err, data) => err ? send(res, 404, 'not found', noindex)
+    : send(res, code, data, { 'Content-Type': MIME[path.extname(file).toLowerCase()] || 'application/octet-stream', ...noindex }));
+}
+
 fs.mkdirSync(PREVIEWS, { recursive: true });
-server.listen(PORT, '127.0.0.1', () => console.log('Site Studio on http://127.0.0.1:' + PORT + '  (repo: ' + ROOT + ')'));
+fs.mkdirSync(TESTS, { recursive: true });
+try {   // the last Test survives a restart
+  const id = fs.readFileSync(path.join(TESTS, 'current'), 'utf8').trim();
+  if (/^[a-f0-9]{12}$/.test(id)) lastTest = { id, at: fs.statSync(path.join(TESTS, id)).mtime.toISOString() };
+} catch (e) {}
+setInterval(autoSync, PULL_MS).unref();
+server.listen(PORT, '127.0.0.1', () => console.log('Site Studio on http://127.0.0.1:' + PORT + '  (repo: ' + ROOT + ', drafts: ' + store.dir + ')'));
