@@ -79,14 +79,15 @@ function htmlToMd(html) {
 }
 
 /* -> { ok: true, markdown } or { ok: false, reason } */
-function checkPost(post) {
+function checkPost(post, md2html) {
+  const toHtml = md2html || mdToHtml;   // the blog passes epeters.ca's own md.js
   if (post.body_format === 'markdown') return { ok: false, reason: 'Already in the editor.' };
   if (post.file || post.custom)
     return { ok: false, reason: 'Hand-coded page with its own layout and styles (' + (post.file || 'custom') + '). It stays as built; edit its settings here.' };
   if (typeof post.html !== 'string') return { ok: false, reason: 'No body to convert.' };
   const md = htmlToMd(post.html);
   if (md == null) return { ok: false, reason: 'Uses HTML the editor cannot express (tables, figures or custom blocks), so converting would change the page.' };
-  if (normalize(mdToHtml(md)) !== normalize(post.html))
+  if (normalize(toHtml(md)) !== normalize(post.html))
     return { ok: false, reason: 'A test conversion did not render identically, so the post stays as HTML.' };
   return { ok: true, markdown: md };
 }
