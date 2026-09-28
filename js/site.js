@@ -254,3 +254,17 @@
     } catch (err) {}
   }, true);
 })();
+
+/* ---------------- email popup (#388, 2026-09-28) ----------------
+   capture.js decides for itself where it may open (home + the free guides).
+   Loaded after the page, so it never touches first paint. */
+(function () {
+  function load() {
+    var s = document.createElement('script');
+    s.src = '/js/capture.js?v=1';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+  if (document.readyState === 'complete') load();
+  else window.addEventListener('load', load);
+})();
