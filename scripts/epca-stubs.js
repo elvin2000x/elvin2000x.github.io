@@ -9,11 +9,13 @@
 'use strict';
 const fs = require('fs'), path = require('path');
 const ROOT = path.join(__dirname, '..');
-// .com folder -> path on epeters.ca. Colour Match sits under Projects there.
+// .com folder -> path on epeters.ca. Colour Match sits under Projects there. The blog
+// is /blog/ on epeters.ca since #367 (its old /writing/ there is stubs too), so these
+// point straight at /blog/ and a reader takes one hop, not two.
 // quiz/ (the AI-style quiz) is not here: it stays on .com as an ad-funnel lead
 // magnet, Meta ads and conversions run through it (Elvin, 2026-09-27, card #358).
 const MOVED = {
-  'writing': 'writing', 'play': 'play', 'apps': 'apps', 'projects': 'projects',
+  'writing': 'blog', 'play': 'play', 'apps': 'apps', 'projects': 'projects',
   'quiz-ai-risk': 'quiz-ai-risk', 'quiz-time-waste': 'quiz-time-waste',
   'quiz-tool-picker': 'quiz-tool-picker', 'colour': 'projects/colour',
 };
