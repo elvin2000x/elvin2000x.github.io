@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
 {{^isHome}}
   <!-- PREVIEW (2026-09-27): unlisted long-form homepage test build. GA4 only; the ad pixels stay off so testing never trains ad audiences. -->
+{{#robots_off}}
   <meta name="robots" content="noindex, nofollow" />
+{{/robots_off}}
 {{/isHome}}
 {{#isHome}}
   <!-- Google Analytics (GA4) -->

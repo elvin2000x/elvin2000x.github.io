@@ -207,6 +207,72 @@ async function main() {
   check(/PUBLISHED/.test(pub.text) && remoteLog().includes(B), 'force publish ships B', pub.text);
   check(!remoteLog().includes(C), 'C is still not in fake GitHub');
   check(git(SRV, 'status', '--porcelain') === '', 'server copy clean at the end');
+  console.log('\n9. Slice 3: presets stay in Studio, photos lose GPS, alt text is required, New page ships');
+  const P = canary('P'), G = canary('G'), N = canary('N');
+  const faq = (await getJSON('/api/library')).types.find(t => t.type === 'faq');
+  const pre = await req('POST', '/api/presets', { body: JSON.stringify({ name: 'Leak preset', type: 'faq', data: { ...faq.blank, heading: P } }) });
+  check(pre.status === 200, 'preset saved', pre.text);
+  const lib = await getJSON('/api/library');
+  check(lib.presets.some(p => p.data.heading === P), 'the library lists the preset');
+  const badPre = await req('POST', '/api/presets', { body: JSON.stringify({ name: 'x', type: 'no-such-type', data: {} }) });
+  check(badPre.status === 422, 'a preset of an unknown type is refused', badPre.status);
+
+  // A JPEG carrying an Exif block with a GPS tag and a canary, plus a comment.
+  const seg = (m, body) => { const b = Buffer.from(body); const h = Buffer.from([0xff, m, 0, 0]); h.writeUInt16BE(b.length + 2, 2); return Buffer.concat([h, b]); };
+  const jpg = Buffer.concat([Buffer.from([0xff, 0xd8]),
+    seg(0xe1, 'Exif\0\0GPSLatitude ' + G), seg(0xfe, 'comment ' + G),
+    Buffer.from([0xff, 0xc0, 0, 11, 8, 0, 1, 0, 1, 1, 1, 0x11, 0]),
+    Buffer.from([0xff, 0xda, 0, 8, 1, 1, 0, 0, 0x3f, 0, 0x00, 0xff, 0xd9])]);
+  const gup = await req('POST', '/api/upload?name=gps-photo.jpg', { body: jpg, headers: { 'Content-Type': 'application/octet-stream' } });
+  const gJ = JSON.parse(gup.text);
+  check(gup.status === 200, 'a phone photo with GPS uploads (' + gJ.src + ')', gup.text);
+  const gName = gJ.src.split('/').pop();
+  const gBack = await req('GET', gJ.src);
+  check(gBack.status === 200 && !gBack.text.includes(G) && !gBack.text.includes('GPSLatitude'), 'the held photo has no GPS or comment left', gBack.status);
+
+  const slug = 'leak-' + N.toLowerCase().slice(-6);
+  const reserved = await req('POST', '/api/pages', { body: JSON.stringify({ from: 'page-home', slug: 'books', title: 'x' }) });
+  check(reserved.status === 422, 'New page refuses a reserved address (/books/)', reserved.status);
+  const taken = await req('POST', '/api/pages', { body: JSON.stringify({ from: 'page-home', slug: 'claude', title: 'x' }) });
+  check(taken.status === 422, 'New page refuses an address a hand-built page already uses (/claude/)', taken.status + ' ' + taken.text);
+  const np = await req('POST', '/api/pages', { body: JSON.stringify({ from: 'page-home', slug, title: 'Leak page' }) });
+  const npJ = JSON.parse(np.text);
+  check(np.status === 200 && npJ.name === 'page-' + slug, 'New page made as a draft (' + npJ.url + ')', np.text);
+  check(!fs.existsSync(path.join(SRV, slug)) && git(SRV, 'status', '--porcelain') === '', 'the new page is not in the server copy yet');
+  const again = await req('POST', '/api/pages', { body: JSON.stringify({ from: 'page-home', slug, title: 'Leak page' }) });
+  check(again.status === 409, 'the same address cannot be made twice', again.status);
+
+  const noAlt = await editContent('page-' + slug, d => { const h = d.sections.find(s => s.data && 'image_alt' in s.data); h.data.image = gJ.src; h.data.image_alt = ''; });
+  check(noAlt.put.status === 422 && /descri|alt/i.test(noAlt.put.text), 'a photo with no description is refused', noAlt.put.status + ' ' + noAlt.put.text);
+  const withAlt = await editContent('page-' + slug, d => {
+    const h = d.sections.find(s => s.data && 'image_alt' in s.data); h.data.image = gJ.src; h.data.image_alt = 'A test photo';
+    d.sections[0].data.headline = N;
+    d.sections.push({ id: 'faq-9', type: 'faq', data: lib.presets.find(p => p.data.heading === P).data });
+    d.sections[d.sections.length - 1].data.heading = 'Questions';   // the preset's words stay out of git
+  });
+  check(withAlt.put.status === 200, 'the new page saves with the photo, its description and a preset section', withAlt.put.text);
+  const pv2 = JSON.parse((await req('POST', '/api/preview')).text);
+  const pvNew = await req('GET', '/preview/' + pv2.id + '/' + slug + '/');
+  check(pvNew.status === 200 && pvNew.text.includes(N) && /<!-- ep:sec:/.test(pvNew.text), 'preview shows the new page with its tap-to-edit markers', pvNew.status);
+  const t4 = await req('POST', '/api/test');
+  const tNew = await req('GET', '/' + slug + '/', { host: TEST_HOST });
+  check(t4.status === 200 && tNew.status === 200 && tNew.text.includes(N) && !/ep:sec/.test(tNew.text), 'test site has the new page, with no markers', tNew.status);
+  check(/<meta name="robots" content="noindex, nofollow"/.test(tNew.text), 'the new page starts hidden from Google');
+
+  pub = await req('POST', '/api/publish?keys=content/page-' + slug + '.json');
+  check(/PUBLISHED/.test(pub.text), 'publishing the new page succeeds', pub.text);
+  const nFiles = git(REMOTE, 'show', '--name-only', '--pretty=format:', 'master').split('\n').filter(Boolean);
+  check(nFiles.includes('content/page-' + slug + '.json') && nFiles.includes(slug + '/index.html') && nFiles.includes('img/uploads/' + gName), 'the commit has the page, its built HTML and its photo', nFiles.join(', '));
+  check(nFiles.every(f => f === 'content/page-' + slug + '.json' || f === 'img/uploads/' + gName || /\.html$|^sitemap\.xml$|^llms\.txt$/.test(f)), 'and nothing else', nFiles.join(', '));
+  const built = fs.readFileSync(path.join(SRV, slug, 'index.html'), 'utf8');
+  check(!/ep:sec/.test(built) && /noindex/.test(built) && built.includes('https://elvinpeters.com/' + slug + '/'), 'the live page has no markers, is noindex and has its own canonical');
+  check(!fs.readFileSync(path.join(SRV, 'sitemap.xml'), 'utf8').includes('/' + slug + '/'), 'the hidden page is not in the sitemap');
+  log = remoteLog();
+  check(!log.includes(P) && !treeHas(SRV, P), 'the preset never reaches git or the server copy');
+  check(!log.includes(G), 'the photo\'s GPS canary never reaches git');
+  check(git(SRV, 'status', '--porcelain') === '', 'server copy clean after the new page ships');
+  const home = await req('GET', '/api/state');
+  check(home.status === 200, 'Studio still serves after the new page ships', home.status);
 }
 
 main().catch(e => { failed++; console.log('  ✗ crashed: ' + (e.stack || e)); })
