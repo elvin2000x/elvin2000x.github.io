@@ -1,30 +1,112 @@
 {
  "_comment": "The single copy of the site menu. Edited by Site Studio or by hand; node build.js renders it into every page that carries the ep:nav region.",
  "brand": "Elvin Peters",
- "links": [
+ "_menu": "Phase 1 menu (Elvin, 2026-09-27). Edit menu/footer/unlisted/lightLock here, then run node scripts/menu-swap.js && node build.js. The script writes links and footerLinks from these (resolving the newsletter fallback) and patches the hand-authored pages.",
+ "menu": [
   {
-   "label": "Services",
-   "href": "/services/",
-   "dropdown": "services"
+   "label": "Home",
+   "href": "/"
   },
   {
-   "label": "Products",
-   "href": "/products/",
-   "dropdown": "products"
-  },
-  {
-   "label": "Free",
+   "label": "Free Toolkit",
    "href": "/free/"
   },
   {
-   "label": "Blog",
-   "href": "/writing/",
-   "items": [
-    {
-     "label": "Projects",
-     "href": "/projects/"
-    }
-   ]
+   "label": "Newsletter",
+   "href": "/newsletter/",
+   "fallback": "/updates/"
+  },
+  {
+   "label": "Contact",
+   "href": "/contact/"
+  }
+ ],
+ "footer": [
+  {
+   "label": "Free Toolkit",
+   "href": "/free/"
+  },
+  {
+   "label": "Newsletter",
+   "href": "/newsletter/",
+   "fallback": "/updates/"
+  },
+  {
+   "label": "Contact",
+   "href": "/contact/"
+  },
+  {
+   "label": "LinkedIn",
+   "href": "https://www.linkedin.com/in/elvinmpeters",
+   "ext": true
+  },
+  {
+   "label": "Privacy",
+   "href": "/privacy.html"
+  }
+ ],
+ "_unlisted": "Unlisted = off every menu, noindex, out of sitemap.xml. Never deleted: printed QR codes, the Oct 13 cold emails and old posts point at these (PHASE1-PLAN section 2, Rule 68). Paths without the leading slash; a prefix covers everything under it.",
+ "unlisted": [
+  "services/",
+  "fr/services/",
+  "consulting/",
+  "fr/consulting/",
+  "ai-coaching/",
+  "ai-workflow-build/",
+  "aio-consulting/",
+  "fr/aio-consulting/",
+  "google-ads/",
+  "fr/google-ads/",
+  "seo/",
+  "fr/seo/",
+  "setup/",
+  "team-ai-workshop/",
+  "quiz/",
+  "quiz-ai-risk/",
+  "quiz-time-waste/",
+  "quiz-tool-picker/",
+  "writing/",
+  "essays/",
+  "apps/",
+  "play/",
+  "studio/",
+  "claude/",
+  "content-machine/",
+  "projects/",
+  "toolkit/",
+  "components/",
+  "tsa-toolkit/",
+  "vault/",
+  "colour/"
+ ],
+ "_unlistedExcept": "Inside an unlisted folder but still indexed: the calculators are evergreen search pages on no menu (Elvin, 2026-09-27).",
+ "unlistedExcept": [
+  "apps/calculators/"
+ ],
+ "_lightLock": "Sales pages: dark text on light, no theme toggle (Rule 34). Generated pages (build.js) are always locked.",
+ "lightLock": [
+  "free/",
+  "newsletter/",
+  "updates/",
+  "press/",
+  "series/",
+  "products/",
+  "claude/",
+  "content-machine/",
+  "systematic-advantage.html"
+ ],
+ "links": [
+  {
+   "label": "Home",
+   "href": "/"
+  },
+  {
+   "label": "Free Toolkit",
+   "href": "/free/"
+  },
+  {
+   "label": "Newsletter",
+   "href": "/newsletter/"
   },
   {
    "label": "Contact",
@@ -32,7 +114,7 @@
   }
  ],
  "cta": {
-  "label": "Buy the Book",
+  "label": "Get the book",
   "href": "https://www.amazon.com/dp/B0H4X2S2JD",
   "ext": true
  },
@@ -40,11 +122,29 @@
   "index.html": {
    "style": "buybar",
    "links": [
-    { "label": "Free Toolkit", "href": "/free/" },
-    { "label": "Newsletter", "href": "/newsletter/" },
-    { "label": "Contact", "href": "/contact/" }
+    {
+     "label": "Home",
+     "href": "/"
+    },
+    {
+     "label": "Free Toolkit",
+     "href": "/free/"
+    },
+    {
+     "label": "Newsletter",
+     "href": "/newsletter/"
+    },
+    {
+     "label": "Contact",
+     "href": "/contact/"
+    }
    ],
-   "cta": { "label": "Get the book", "href": "https://www.amazon.com/dp/B0H4X2S2JD", "amazon": true, "aria": "Get the book on Amazon" }
+   "cta": {
+    "label": "Get the book",
+    "href": "https://www.amazon.com/dp/B0H4X2S2JD",
+    "amazon": true,
+    "aria": "Get the book on Amazon"
+   }
   },
   "series/index.html": {
    "brandHref": "/",
@@ -84,17 +184,11 @@
   },
   "contact/index.html": {
    "brandHref": "/",
-   "themebtn": true,
-   "ctaArrow": false,
-   "brandStyle": "inline",
-   "indent": 2
-  },
-  "google-ads-audit/index.html": {
-   "brandHref": "/",
    "themebtn": false,
    "ctaArrow": false,
    "brandStyle": "inline",
-   "indent": 2
+   "indent": 2,
+   "active": "/contact/"
   },
   "google-ads/index.html": {
    "brandHref": "/",
@@ -399,7 +493,7 @@
   },
   "press/index.html": {
    "brandHref": "/",
-   "themebtn": true,
+   "themebtn": false,
    "ctaArrow": false,
    "brandStyle": "inline",
    "indent": 0
@@ -425,6 +519,20 @@
    "brandStyle": "inline",
    "indent": 2
   },
+  "speaking/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "speaking/feedback/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
   "team-ai-workshop/index.html": {
    "brandHref": "/",
    "themebtn": false,
@@ -432,12 +540,56 @@
    "brandStyle": "inline",
    "indent": 2
   },
-  "updates/index.html": {
-   "brandHref": "/",
-   "themebtn": false,
-   "ctaArrow": false,
-   "brandStyle": "inline",
-   "indent": 2
+  "newsletter/index.html": {
+   "style": "buybar",
+   "links": [
+    {
+     "label": "Home",
+     "href": "/"
+    },
+    {
+     "label": "Free Toolkit",
+     "href": "/free/"
+    },
+    {
+     "label": "Newsletter",
+     "href": "/newsletter/"
+    },
+    {
+     "label": "Contact",
+     "href": "/contact/"
+    }
+   ],
+   "cta": {
+    "label": "Get the book",
+    "href": "https://www.amazon.com/dp/B0H4X2S2JD",
+    "amazon": true,
+    "aria": "Get the book on Amazon"
+   },
+   "active": "/newsletter/"
   }
- }
+ },
+ "footerLinks": [
+  {
+   "label": "Free Toolkit",
+   "href": "/free/"
+  },
+  {
+   "label": "Newsletter",
+   "href": "/newsletter/"
+  },
+  {
+   "label": "Contact",
+   "href": "/contact/"
+  },
+  {
+   "label": "LinkedIn",
+   "href": "https://www.linkedin.com/in/elvinmpeters",
+   "ext": true
+  },
+  {
+   "label": "Privacy",
+   "href": "/privacy.html"
+  }
+ ]
 }

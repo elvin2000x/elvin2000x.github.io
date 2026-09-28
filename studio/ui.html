@@ -452,9 +452,32 @@ function pendingBanner(){
   var r = STATE.repo || {}, n = (r.changed || []).length, out = "";
   if (r.error) out += '<div class="banner warn">' + icon("flag") + '<span>Could not read the site repository: ' + esc(r.error) + '</span></div>';
   if (r.sync && !r.sync.ok) out += '<div class="banner amber">' + icon("refresh") + '<span>Could not fetch the latest site from GitHub (' + esc(r.sync.msg) + '). Publishing will try again.</span></div>';
-  if (n) out += '<div class="banner" id="pending">' + icon("rocket") + '<span><b>' + n + ' unpublished change' + (n > 1 ? "s" : "") + '.</b> Saved here, not on elvinpeters.com yet.</span><span class="sp"></span>' +
-    '<button class="btn sm" onclick="discardAll()">Discard</button><button class="btn sm filled" onclick="openPublish()">Review and publish</button></div>';
+  var moved = (r.drafts || []).filter(function(d){ return d.stale; });
+  if (moved.length) out += '<div class="banner amber">' + icon("flag") + '<span><b>' + esc(moved.map(function(d){ return pageName(d.key); }).join(", ")) + '</b> changed on the live site after your draft started. Check the page before you publish; publishing replaces the live version with yours.</span></div>';
+  if (n) out += '<div class="banner" id="pending">' + icon("rocket") + '<span><b>' + n + ' unpublished draft' + (n > 1 ? "s" : "") + '.</b> Private: only you can see them, in Test and previews.</span><span class="sp"></span>' +
+    '<button class="btn sm" onclick="discardAll()">Discard</button><button class="btn sm" onclick="runTest(\'/\')">Test</button><button class="btn sm filled" onclick="openPublish()">Review and publish</button></div>';
+  if (r.sync && r.sync.at) out += '<p class="subtle" style="font-size:12.5px;margin:0 0 10px">Site copy: ' + (r.sync.ok ? "up to date " + relTime(new Date(r.sync.at).toISOString()) : "update failed " + relTime(new Date(r.sync.at).toISOString())) +
+    (r.test ? " · last test " + relTime(r.test.at) : "") + '</p>';
   return out;
+}
+function pageName(key){
+  var m = /^content\/([a-z0-9-]+)\.json$/.exec(key);
+  if (m) return m[1] === "essays" ? "Blog posts" : m[1] === "nav" ? "Menu" : SECTIONS[m[1]] ? SECTIONS[m[1]].title : m[1];
+  if (/^essays\//.test(key)) { var p = DOCS.essays ? posts().filter(function(x){ return x.file === key; })[0] : null; return p ? "Post body: " + (p.title || p.slug) : key; }
+  return key;
+}
+/* Test: build the whole site with every draft and open it at the private test
+   address. The tab opens on the tap (so no popup blocker), then goes to the page. */
+function runTest(pagePath){
+  var w = null;
+  try { w = window.open("", "_blank"); if (w) w.document.write('<p style="font:18px system-ui;margin:3em">Building your test site…</p>'); } catch (e) {}
+  toast("Building the test site with your drafts…");
+  flushSaves().then(function(){ return api("POST", "/api/test"); }).then(function(r){
+    var url = r.data.url.replace(/\/$/, "") + (pagePath || "/");
+    if (w) w.location.href = url; else window.open(url, "_blank");
+    toast("Test site ready: " + (r.data.drafts ? r.data.drafts + " draft" + (r.data.drafts > 1 ? "s" : "") + " in it." : "no drafts, same as live."));
+    pendingChanges();
+  }).catch(function(e){ if (w) w.close(); toast("Test build failed: " + (e.data && e.data.detail || e.message)); });
 }
 function pendingChanges(soft){
   refreshState().then(function(){
@@ -471,6 +494,7 @@ function viewSite(){
   else body = '<div id="histwrap"><div class="empty">Loading publish history…</div></div>';
   return '<div class="head"><h1>Website</h1>' + helpBtn("site") + '<span class="urlpill" style="padding-right:12px">elvinpeters.com</span><div class="sp"></div>' +
     '<a class="btn" href="https://elvinpeters.com" target="_blank" rel="noopener">' + icon("open") + 'View site</a>' +
+    '<button class="btn" onclick="runTest(\'/\')" title="Open the whole site with your drafts at the private test address">' + icon("eye") + 'Test</button>' +
     '<button class="btn" onclick="openPublish()">' + icon("rocket") + 'Publish<span id="pubcount"></span></button>' +
     '<a class="btn filled" href="#post-new">' + icon("plus") + 'New post</a></div>' +
     '<div id="pendingwrap">' + pendingBanner() + '</div>' +
@@ -532,11 +556,11 @@ function delPost(i){
 }
 function discardAll(){
   var n = (STATE.repo.changed || []).length;
-  showModal('<div class="mh"><h2>Discard unpublished changes?</h2></div><div class="mb"><p>This throws away the ' + n + ' change' + (n > 1 ? "s" : "") + ' saved here since the last publish and puts everything back to what is live. It cannot be undone.</p><ul class="filelist">' +
+  showModal('<div class="mh"><h2>Discard unpublished changes?</h2></div><div class="mb"><p>This throws away the ' + n + ' draft' + (n > 1 ? "s" : "") + ' saved here since the last publish and puts everything back to what is live. A copy stays in the draft history on the server.</p><ul class="filelist">' +
     STATE.repo.changed.map(function(f){ return '<li>' + changeLabel(f) + '</li>'; }).join("") + '</ul></div>' +
     '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="dodiscard">Discard changes</button></div>');
   $("#dodiscard").onclick = function(){
-    api("POST", "/api/discard").then(function(){
+    api("POST", "/api/discard", {keys: STATE.repo.changed}).then(function(){
       closeModal(); return Promise.all([loadDoc("essays"), refreshState()]);
     }).then(function(){ toast("Changes discarded. Everything matches the live site."); route(); })
       .catch(function(e){ closeModal(); toast("Could not discard: " + e.message); });
@@ -574,7 +598,8 @@ function openSection(name){
     '<div><div class="crumb"><a href="#pages">Website</a><span>›</span><span style="color:var(--ink)">' + esc(s.title) + '</span></div>' +
     '<span class="urlpill" style="padding-right:12px">elvinpeters.com' + esc(s.preview || "/") + '</span></div>' +
     '<div class="sp"></div><span class="save" id="savestate">' + icon("check", "width:16px;height:16px") + 'All changes saved</span>' +
-    '<button class="btn filled" onclick="openPublish()">' + icon("rocket") + 'Publish</button></div>' +
+    '<button class="btn" onclick="runTest(\'' + esc(s.preview || "/") + '\')" title="Open the whole site with your drafts at the private test address">' + icon("eye") + 'Test</button>' +
+    '<button class="btn filled" onclick="openPublish([\'content/' + esc(name) + '.json\'])">' + icon("rocket") + 'Publish</button></div>' +
     '<div class="ed" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)"><div class="card"><div class="panel-h"><h2>' + esc(s.title) + '</h2></div><div class="form" id="secform"><div class="empty">Loading…</div></div></div>' +
     '<div id="secpv"></div></div>';
   loadDoc(name).then(function(){ SEC = s; SECROOT = $("#secform"); drawSection(); drawRealPreview("#secpv", s.preview || "/", true); })
@@ -928,7 +953,7 @@ function wireWriter(){
   wireSettings();
   $$("[data-pv]").forEach(function(btn){ btn.onclick = function(){ pvMode = btn.dataset.pv; try { localStorage.setItem("site-studio-pvmode", pvMode); } catch (e) {} layoutWriter(); }; });
   $$("#main .head [data-dev]").forEach(function(btn){ btn.onclick = function(){ setDevice(btn.dataset.dev); layoutWriter(); }; });
-  $("#pubbtn").onclick = openPublish;
+  $("#pubbtn").onclick = function(){ openPublish(["content/essays.json"].concat(POST && POST.file ? [POST.file] : [])); };
   $("#setbtn").onclick = function(){ showSettings = !showSettings; try { localStorage.setItem("site-studio-settings", showSettings ? "1" : "0"); } catch (e) {} layoutWriter(); if (showSettings && innerWidth <= 1280) $("#setcol").scrollIntoView({behavior: "smooth"}); };
   $("#exactbtn").onclick = exactPreview;
   $("#exactlink").onclick = function(e){ e.preventDefault(); exactPreview(); };
@@ -1251,27 +1276,42 @@ function exactPreview(){
 }
 
 /* ================= Publish ================= */
-function openPublish(){
+/* Publish ships the pages you tick, nothing else. Opened from a page, only that
+   page is ticked; from the Website view, every draft is. */
+function openPublish(focus){
+  focus = Array.isArray(focus) ? focus : null;
   flushSaves().then(refreshState).then(function(){
-    var r = STATE.repo || {}, changed = r.changed || [], drafts = DOCS.essays ? posts().filter(function(p){ return p.draft; }).length : 0;
+    var r = STATE.repo || {}, drafts = r.drafts || [], hidden = DOCS.essays ? posts().filter(function(p){ return p.draft; }).length : 0;
     var blocked = r.blocked || [];
+    var on = function(d){ return !focus || focus.indexOf(d.key) > -1; };
     showModal('<div class="mh"><h2>Publish to elvinpeters.com</h2><div class="sp"></div><button class="iconbtn" onclick="closeModal()" aria-label="Close">×</button></div><div class="mb">' +
-      (changed.length ? '<p><b>' + changed.length + ' change' + (changed.length > 1 ? "s" : "") + ' will go live:</b></p><ul class="filelist">' + changed.map(function(f){ return '<li>' + changeLabel(f) + '</li>'; }).join("") + '</ul>'
-        : '<p>Nothing new is waiting. Publishing rebuilds the site anyway, which is harmless.</p>') +
-      (drafts ? '<p class="subtle">' + drafts + ' draft' + (drafts > 1 ? "s stay" : " stays") + ' hidden.</p>' : '') +
+      (drafts.length ? '<p><b>Tick what goes live:</b></p><div id="publist">' + drafts.map(function(d, i){
+          return '<label class="switch" style="border-top:0;padding:8px 0;align-items:flex-start"><input type="checkbox" class="tog" data-pubkey="' + esc(d.key) + '"' + (on(d) ? " checked" : "") + ' aria-label="Publish ' + esc(pageName(d.key)) + '">' +
+            '<span class="sx">' + esc(pageName(d.key)) + '<small>' + esc(d.key) + ' · saved ' + esc(relTime(d.updated)) + (d.stale ? ' · <b style="color:var(--amber)">changed on the live site since</b>' : '') + '</small></span></label>';
+        }).join("") + '</div>' +
+        (drafts.some(function(d){ return d.stale; }) ? '<label class="switch" style="border-top:0"><input type="checkbox" class="tog" id="pubforce" aria-label="Replace the live version"><span class="sx">Replace the live version with mine<small>A page marked amber changed on the live site after your draft started (Claude or another device). Ticking this puts your version live instead.</small></span></label>' : '')
+        : '<p>Nothing is waiting: every page matches the live site.</p>') +
+      (hidden ? '<p class="subtle">' + hidden + ' post' + (hidden > 1 ? "s" : "") + ' ticked Draft stay' + (hidden > 1 ? "" : "s") + ' private, even when Blog posts is published.</p>' : '') +
       (blocked.length ? '<div class="banner warn">Publishing is blocked: the server copy has other uncommitted files (' + esc(blocked.slice(0, 3).join(", ")) + ').</div>' : '') +
-      '<div class="field"><label for="pubmsg">What changed? (optional, shows in Publish history)</label><input type="text" id="pubmsg" maxlength="120" placeholder="e.g. New post: The link page that edits itself"></div>' +
-      '<p class="subtle" style="font-size:13px">Steps: get the latest site, build, run the verify gate, save a version, push. If any step fails nothing ships. Live in about a minute.</p>' +
+      '<div class="field"><label for="pubmsg">What changed? (optional, shows in Publish history)</label><input type="text" id="pubmsg" maxlength="120" placeholder="e.g. New headline on the Claude page"></div>' +
+      '<p class="subtle" style="font-size:13px">Steps: get the latest site, write the ticked pages, build, run the verify gate, save a version of just those pages, push. If any step fails nothing ships. Live in about a minute.</p>' +
       '<div class="log hidden" id="publog"></div></div>' +
-      '<div class="mf"><button class="btn" onclick="closeModal()" id="pubcancel">Cancel</button><button class="btn filled" id="pubgo"' + (blocked.length ? " disabled" : "") + '>' + icon("rocket", "width:18px;height:18px") + 'Publish now</button></div>');
+      '<div class="mf"><button class="btn" onclick="closeModal()" id="pubcancel">Cancel</button><button class="btn filled" id="pubgo"' + (blocked.length || !drafts.length ? " disabled" : "") + '>' + icon("rocket", "width:18px;height:18px") + 'Publish now</button></div>');
+    var sync = function(){ var n = $$("[data-pubkey]").filter(function(x){ return x.checked; }).length, g = $("#pubgo"); if (!g || g.textContent === "Publishing…") return;
+      g.disabled = !!blocked.length || !n; g.innerHTML = icon("rocket", "width:18px;height:18px") + (n ? "Publish " + n + " page" + (n > 1 ? "s" : "") : "Tick a page"); };
+    $$("[data-pubkey]").forEach(function(x){ x.onchange = sync; });
+    if (drafts.length) sync();
     $("#pubgo").onclick = runPublish;
   });
 }
 function runPublish(){
   var go = $("#pubgo"), log = $("#publog"), msg = $("#pubmsg").value;
+  var keys = $$("[data-pubkey]").filter(function(x){ return x.checked; }).map(function(x){ return x.dataset.pubkey; });
+  if (!keys.length) return;
+  var force = $("#pubforce") && $("#pubforce").checked ? "&force=1" : "";
   go.disabled = true; go.textContent = "Publishing…"; $("#pubcancel").disabled = true;
   log.classList.remove("hidden"); log.textContent = "";
-  fetch("/api/publish?msg=" + encodeURIComponent(msg), {method: "POST", headers: {"X-Studio": "1"}}).then(function(r){
+  fetch("/api/publish?keys=" + encodeURIComponent(keys.join(",")) + force + "&msg=" + encodeURIComponent(msg), {method: "POST", headers: {"X-Studio": "1"}}).then(function(r){
     if (!r.ok || !r.body) return r.text().then(function(t){ throw new Error(t); });
     var reader = r.body.getReader(), dec = new TextDecoder();
     var pump = function(){
@@ -1283,7 +1323,7 @@ function runPublish(){
     };
     return pump();
   }).then(function(){
-    var ok = /PUBLISHED|Nothing changed/.test(log.textContent);
+    var ok = /PUBLISHED|Nothing changed|Nothing to publish/.test(log.textContent);
     $("#pubcancel").disabled = false; $("#pubcancel").textContent = "Close";
     go.innerHTML = ok ? icon("check", "width:18px;height:18px") + "Done" : "Try again";
     go.disabled = false; go.onclick = ok ? closeModal : runPublish;
