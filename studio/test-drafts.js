@@ -109,27 +109,27 @@ async function main() {
   await startServer();
 
   console.log('\n2. Drafts are saved privately');
-  const a = await editContent('claude', d => { d.hero.headline = A; });
-  check(a.put.status === 200 && a.json.draft === true && /^d\d+$/.test(a.json.version), 'claude page draft saved (' + a.json.version + ')', a.put.text);
-  const b = await editContent('content-machine', d => { d.hero.headline = B; });
-  check(b.put.status === 200 && b.json.draft === true, 'content-machine page draft saved', b.put.text);
-  const staleTab = await editContent('claude', d => { d.hero.headline = 'old tab'; }, a.before);
+  const a = await editContent('page-home', d => { d.sections[0].data.sub = A; });
+  check(a.put.status === 200 && a.json.draft === true && /^d\d+$/.test(a.json.version), 'home page draft saved (' + a.json.version + ')', a.put.text);
+  const b = await editContent('nav', d => { d.cta.label = B; });
+  check(b.put.status === 200 && b.json.draft === true, 'menu draft saved', b.put.text);
+  const staleTab = await editContent('page-home', d => { d.sections[0].data.sub = 'old tab'; }, a.before);
   check(staleTab.put.status === 409, 'a save from a stale tab is refused (409)', staleTab.put.status);
   check(!treeHas(SRV, A) && !treeHas(SRV, B), 'server copy working tree has no draft text');
   check(git(SRV, 'status', '--porcelain') === '', 'server copy is clean (git status)');
   const st = await getJSON('/api/state');
-  check(st.repo.drafts.length === 2 && st.repo.changed.includes('content/claude.json'), 'state lists 2 drafts', JSON.stringify(st.repo.drafts));
+  check(st.repo.drafts.length === 2 && st.repo.changed.includes('content/page-home.json'), 'state lists 2 drafts', JSON.stringify(st.repo.drafts));
 
   console.log('\n3. Preview and the test site show drafts, privately');
   const pv = JSON.parse((await req('POST', '/api/preview')).text);
-  const pvPage = await req('GET', '/preview/' + pv.id + '/claude/');
-  check(pvPage.status === 200 && pvPage.text.includes(A), 'preview of the claude page shows draft A', pvPage.status + ' ' + pvPage.text.slice(0, 120));
+  const pvPage = await req('GET', '/preview/' + pv.id + '/');
+  check(pvPage.status === 200 && pvPage.text.includes(A), 'preview of the home page shows draft A', pvPage.status + ' ' + pvPage.text.slice(0, 120));
   const t = await req('POST', '/api/test');
   check(t.status === 200, 'Test build succeeds', t.text);
-  const t1 = await req('GET', '/claude/', { host: TEST_HOST });
-  const t2 = await req('GET', '/content-machine/', { host: TEST_HOST });
-  check(t1.status === 200 && t1.text.includes(A), 'test site: claude page has draft A');
-  check(t2.status === 200 && t2.text.includes(B), 'test site: content-machine page has draft B');
+  const t1 = await req('GET', '/', { host: TEST_HOST });
+  const t2 = await req('GET', '/setup/', { host: TEST_HOST });
+  check(t1.status === 200 && t1.text.includes(A), 'test site: home page has draft A');
+  check(t2.status === 200 && t2.text.includes(B), 'test site: the menu has draft B');
   check(/noindex/.test(t1.headers['x-robots-tag'] || ''), 'test site sends X-Robots-Tag noindex', t1.headers['x-robots-tag']);
   check(!/googletagmanager|fbq\(/.test(t1.text + t2.text), 'test site pages carry no analytics');
   const robots = await req('GET', '/robots.txt', { host: TEST_HOST });
@@ -143,16 +143,16 @@ async function main() {
   check(git(SRV, 'status', '--porcelain') === '' && ![A, B].some(x => remoteLog().includes(x)), 'still nothing in git after preview and test');
 
   console.log('\n4. Publish one page: only that page ships');
-  let pub = await req('POST', '/api/publish?keys=content/claude.json&msg=leak%20test');
-  check(/PUBLISHED/.test(pub.text), 'publish of the claude page succeeds', pub.text);
+  let pub = await req('POST', '/api/publish?keys=content/page-home.json&msg=leak%20test');
+  check(/PUBLISHED/.test(pub.text), 'publish of the home page succeeds', pub.text);
   let log = remoteLog();
   check(log.includes(A), 'fake GitHub now has A (the published page)');
   check(!log.includes(B), 'fake GitHub does NOT have B (the other draft)');
   const files = git(REMOTE, 'show', '--name-only', '--pretty=format:', 'master').split('\n').filter(Boolean);
-  check(files.every(f => f === 'content/claude.json' || /\.html$|^sitemap\.xml$|^llms\.txt$/.test(f)), 'the commit holds claude.json plus generated pages only', files.join(', '));
+  check(files.every(f => f === 'content/page-home.json' || /\.html$|^sitemap\.xml$|^llms\.txt$/.test(f)), 'the commit holds page-home.json plus generated pages only', files.join(', '));
   check(git(SRV, 'status', '--porcelain') === '', 'server copy clean after publish');
   const st2 = await getJSON('/api/state');
-  check(st2.repo.drafts.map(d => d.key).join() === 'content/content-machine.json', 'only the content-machine draft is left', JSON.stringify(st2.repo.drafts));
+  check(st2.repo.drafts.map(d => d.key).join() === 'content/nav.json', 'only the menu draft is left', JSON.stringify(st2.repo.drafts));
 
   console.log('\n5. The blog lives on epeters.ca: the .com blog files are locked out (no blog copy here)');
   const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
@@ -178,18 +178,18 @@ async function main() {
 
   console.log('\n6. Live changed under a draft: publish refuses unless "mine wins"');
   git(PC, 'pull', '-q', '--ff-only');
-  const cmFile = path.join(PC, 'content', 'content-machine.json');
+  const cmFile = path.join(PC, 'content', 'nav.json');
   const cm = JSON.parse(fs.readFileSync(cmFile, 'utf8'));
-  cm.hero.sub = (cm.hero.sub || '') + ' Upstream edit.';
+  cm._comment = (cm._comment || '') + ' Upstream edit.';
   fs.writeFileSync(cmFile, JSON.stringify(cm, null, 2) + '\n');
-  git(PC, 'commit', '-q', '-am', 'leak test: someone else edits content-machine');
+  git(PC, 'commit', '-q', '-am', 'leak test: someone else edits the menu');
   git(PC, 'push', '-q');
   const sync = await req('POST', '/api/sync');
   check(sync.status === 200, 'sync pulls the upstream change', sync.text);
   const st3 = await getJSON('/api/state');
-  check((st3.repo.drafts.find(d => d.key === 'content/content-machine.json') || {}).stale === true, 'the content-machine draft is marked stale');
+  check((st3.repo.drafts.find(d => d.key === 'content/nav.json') || {}).stale === true, 'the menu draft is marked stale');
   const head = remoteHead();
-  pub = await req('POST', '/api/publish?keys=content/content-machine.json');
+  pub = await req('POST', '/api/publish?keys=content/nav.json');
   check(/changed on the live site/.test(pub.text) && remoteHead() === head, 'publish refuses the stale draft, nothing pushed', pub.text);
   check(!remoteLog().includes(B), 'B is still not in fake GitHub');
   check(git(SRV, 'status', '--porcelain') === '', 'server copy clean after the refusal');
@@ -199,13 +199,13 @@ async function main() {
   await startServer();
   const dr = await getJSON('/api/drafts');
   const keys = dr.drafts.map(d => d.key).sort().join();
-  check(keys === 'content/content-machine.json', 'the open draft is back after restart', keys);
+  check(keys === 'content/nav.json', 'the open draft is back after restart', keys);
   check(dr.uploads.some(u => u.name === upName), 'the held image is back after restart');
-  const t3 = await req('GET', '/claude/', { host: TEST_HOST });
+  const t3 = await req('GET', '/', { host: TEST_HOST });
   check(t3.status === 200, 'the last Test build is still served after restart', t3.status);
 
   console.log('\n8. "Mine wins" publishes the stale draft on purpose');
-  pub = await req('POST', '/api/publish?keys=content/content-machine.json&force=1');
+  pub = await req('POST', '/api/publish?keys=content/nav.json&force=1');
   check(/PUBLISHED/.test(pub.text) && remoteLog().includes(B), 'force publish ships B', pub.text);
   check(!remoteLog().includes(C), 'C is still not in fake GitHub');
   check(git(SRV, 'status', '--porcelain') === '', 'server copy clean at the end');
