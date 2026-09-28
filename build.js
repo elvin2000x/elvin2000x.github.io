@@ -242,7 +242,7 @@ applyRegions('claude/index.html', {
 /* The unit charts are one mark per real thing counted, emitted here rather than
    hand-written so the marks can never drift from the audit they describe. The
    numbers are the verified ones: 200 of 200 titles, and 22 of 78 stories.
-   Sourced to Brain/deliverables/VERIFIED-NUMBERS.md. */
+   Sourced to Brain/01 Command/deliverables/VERIFIED-NUMBERS.md. */
 const FIG_TITLES_TOTAL = 200;   // pieces audited
 const FIG_STORIES_TOTAL = 78;   // short stories
 const FIG_STORIES_HIT = 22;     // protagonist named Marina

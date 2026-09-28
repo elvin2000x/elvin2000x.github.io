@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Document Engine</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<style>
+:root{--ink:#1a1a1a;--muted:#5c5c5c;--line:#e3e3e3;--bg:#fafaf8;--card:#fff;--ok:#1d7a3a;--warn:#b45309;--bad:#b91c1c;--accent:#1f3a5f;--soft:#eef2f7}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--accent);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header h1{font-size:17px;margin:0;font-weight:600} header small{opacity:.85;font-weight:400}
+nav{display:flex;gap:4px;flex-wrap:wrap} nav button{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35);padding:6px 12px;border-radius:6px;cursor:pointer;font:inherit}
+nav button.active{background:#fff;color:var(--accent)}
+main{max-width:1180px;margin:0 auto;padding:18px}
+section{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin-bottom:16px}
+h2{font-size:13px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14px} th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.pill{display:inline-block;padding:1px 8px;border-radius:99px;font-size:12px;border:1px solid var(--line);background:#f3f3f1;white-space:nowrap}
+.ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)} .muted{color:var(--muted)} .small{font-size:12.5px}
+button,input,select,textarea{font:inherit} button{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer}
+button.secondary{background:#e9e9e6;color:var(--ink)} button.danger{background:var(--bad)} button:disabled{opacity:.5;cursor:default}
+input[type=text],input[type=email],input[type=password],input[type=number],select,textarea{width:100%;padding:8px 10px;border:1px solid #c9c9c4;border-radius:6px;background:#fff;color:var(--ink)}
+textarea{min-height:110px;resize:vertical}
+pre{background:#f6f6f4;border:1px solid var(--line);border-radius:6px;padding:10px;overflow:auto;max-height:520px;white-space:pre-wrap;font-size:12.5px;color:var(--ink)}
+.row{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap} .row>*{flex:1 1 160px} .row>button{flex:0 0 auto}
+.grid{display:grid;gap:16px;grid-template-columns:1fr 1fr} @media(max-width:820px){.grid{grid-template-columns:1fr} .hide-m{display:none}}
+a{color:var(--accent)} .drop{border:2px dashed #b9c3d1;border-radius:8px;padding:22px;text-align:center;color:var(--muted);background:#fff}
+.drop.over{background:var(--soft)} .bar{height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden} .bar>i{display:block;height:100%;background:var(--accent);transition:width .3s}
+.card-login{max-width:400px;margin:60px auto} .facts{font-size:12.5px;color:var(--muted)} .facts b{color:var(--ink)}
+.art{background:#fff;border:1px solid var(--line);border-radius:8px;padding:18px;font-size:14.5px;line-height:1.55}
+.art h1{font-size:20px} .art h2{font-size:16px;text-transform:none;letter-spacing:0;color:var(--ink);margin-top:18px} .art h3{font-size:14.5px}
+.art table{margin:8px 0} .art .cite{font-size:11px;color:var(--accent);border:1px solid #c9d3e0;border-radius:4px;padding:0 4px;text-decoration:none;margin-left:2px}
+.art .cite.dead{color:var(--muted);border-color:var(--line)} .credit{font-size:26px;font-weight:600}
+[hidden]{display:none!important}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.hero{max-width:980px;margin:40px auto 0;display:grid;grid-template-columns:1.3fr 1fr;gap:24px;align-items:start} @media(max-width:820px){.hero{grid-template-columns:1fr;margin-top:12px}}
+.hero h1{font-size:30px;line-height:1.15;margin:0 0 12px;font-weight:650;color:var(--ink)} .hero p.lead{font-size:16.5px;color:var(--muted);margin:0 0 18px}
+.steps{display:grid;gap:12px;grid-template-columns:repeat(3,1fr)} @media(max-width:820px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px} .step b.n{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;margin-bottom:8px}
+.step h3{margin:0 0 4px;font-size:15px} .step p{margin:0;font-size:13.5px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px} .chips button{background:var(--soft);color:var(--accent);border:1px solid #c9d3e0;font-size:13.5px;text-align:left;padding:7px 12px}
+.start{border-left:4px solid #f4c542}
+.chat-wrap{display:grid;grid-template-columns:260px 1fr;gap:16px;align-items:start} @media(max-width:820px){.chat-wrap{grid-template-columns:1fr}}
+.chat-list button{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:1px solid var(--line);margin-bottom:6px;padding:8px 10px;border-radius:6px}
+.chat-list button.active{border-color:var(--accent);background:var(--soft)} .chat-list .t{display:block;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.msgs{display:flex;flex-direction:column;gap:10px;min-height:240px;max-height:62vh;overflow:auto;padding:4px 2px}
+.msg{max-width:88%;padding:10px 14px;border-radius:12px;font-size:14.5px;line-height:1.5} .msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px} .msg.bot p{margin:0 0 6px} .msg.bot table{margin:6px 0;font-size:13.5px}
+.msg .meta{font-size:11.5px;color:var(--muted);margin-top:6px} .msg.user .meta{color:rgba(255,255,255,.75)} .thinking{font-size:12.5px;color:var(--muted);font-style:italic}
+.chat-in{display:flex;gap:8px;margin-top:10px;align-items:flex-end} .chat-in textarea{min-height:44px;max-height:160px;flex:1} .empty{padding:26px;text-align:center;color:var(--muted)}
+.art{padding:34px 42px;font-size:15px;line-height:1.62;max-width:920px;margin:0 auto;box-shadow:0 1px 4px rgba(20,30,50,.06)}
+.art h1{font-size:25px;line-height:1.25;margin:0 0 12px;color:var(--accent)}
+.art h2{font-size:17.5px;color:var(--accent);margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid #dfe5ee}
+.art h3{font-size:15.5px;margin:20px 0 6px} .art h4{font-size:14.5px;margin:16px 0 4px}
+.art p{margin:0 0 11px} .art ul,.art ol{margin:0 0 14px;padding-left:26px} .art li{margin:4px 0} .art li>ul,.art li>ol{margin:4px 0}
+.art .tbl,.msg .tbl{overflow-x:auto;margin:10px 0 18px} .art table{border:1px solid var(--line);font-size:13.5px} .msg .tbl table{font-size:13px}
+.art th,.msg th{background:var(--soft);color:var(--accent);text-transform:none;letter-spacing:0;font-size:12.5px}
+.art tbody tr:nth-child(even) td{background:#fafbfc}
+.art blockquote,.msg blockquote{margin:12px 0;padding:10px 16px;border-left:3px solid #c9d3e0;background:#f7f9fc;color:#333}
+.art code,.msg code{background:#f1f1ee;border-radius:4px;padding:1px 5px;font-size:.9em}
+.art hr{border:0;border-top:1px solid var(--line);margin:22px 0} .art i{color:#4a4a4a}
+.cite.calc{color:var(--ok);border-color:#bfe0c9}
+.files{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px} .files-h{font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:2px 0 0}
+.file{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #c9d3e0;border-radius:8px;background:#fff;text-decoration:none;color:var(--ink);font-size:14px}
+.file:hover{background:var(--soft)} .file .kind{font-size:10.5px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--accent);border-radius:4px;padding:2px 6px}
+.btn-dl{display:inline-block;padding:6px 12px;border:1px solid #c9d3e0;border-radius:6px;background:#fff;text-decoration:none;font-size:13.5px}
+@media(max-width:640px){.art{padding:18px 16px;font-size:14.5px}}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 16px;border-radius:8px;display:none;max-width:90vw}
+</style></head><body>
+<header><div><h1>Document Engine <small id="hdr-sub">Â· document intelligence</small></h1></div>
+<nav id="nav" hidden><button id="fb-btn" onclick="openFeedback()" style="background:#f4c542;color:#1a1a1a;border-color:#f4c542;font-weight:600">Feedback</button>
+<button data-v="chat">Chat</button><button data-v="documents">Documents</button><button data-v="tasks">Tasks</button><button data-v="artifacts">Artifacts</button>
+<button data-v="credits">Credits</button><button data-v="admin" id="nav-admin" hidden>Admin</button><button data-v="help">Help</button><button data-v="account">Account</button>
+</nav></header>
+<main>
+
+<div id="v-login" class="hero" hidden>
+<div>
+  <h1>Your documents, read, sorted and cited.</h1>
+  <p class="lead">Drop in any pile of documents: PDFs, scans, photos, Word files, spreadsheets, emails. Legal files, contracts, invoices, resumes, correspondence. Ask for what you need in plain English. Get a report, Word file or spreadsheet where every fact links to the page it came from.</p>
+  <div class="steps">
+    <div class="step"><b class="n">1</b><h3>Add files</h3><p>Drag a folder of documents in. Scans and photos are OCR'd, emails bring their attachments.</p></div>
+    <div class="step"><b class="n">2</b><h3>Ask</h3><p>"Build a chronology of this file, one line per event, with a page cite on every line."</p></div>
+    <div class="step"><b class="n">3</b><h3>Check and use</h3><p>Every number is computed in code and re-checked. Click any cite to see the source page.</p></div>
+  </div>
+  <p class="muted small" style="margin-top:14px">Private, password-protected server. The text of your documents is read by Anthropic's Claude AI to do the work, and Anthropic does not train on it. During the trial please use closed matters or non-sensitive files. Your files are deleted the moment you ask.</p>
+</div>
+<section style="margin:0">
+  <h2>Sign in</h2>
+  <div class="row"><input id="li-email" type="email" placeholder="email" autocomplete="username"></div>
+  <div class="row"><input id="li-pw" type="password" placeholder="password" autocomplete="current-password"></div>
+  <div class="row"><button onclick="doLogin()">Sign in</button></div>
+  <div id="li-msg" class="bad small"></div>
+  <p class="muted small">Every output is a draft with page cites for you to verify.</p>
+</section>
+</div>
+
+<div id="v-chat" class="view" hidden>
+<div class="chat-wrap">
+  <section style="margin:0">
+    <div class="row" style="justify-content:space-between"><h2 style="margin:0">Chats</h2><button style="flex:0 0 auto" onclick="newChat()">New chat</button></div>
+    <div id="chat-list" class="chat-list"></div>
+  </section>
+  <section style="margin:0">
+    <div class="row" style="justify-content:space-between"><h2 id="chat-title" style="margin:0">Ask your documents</h2><button id="chat-del" class="secondary small" style="flex:0 0 auto" onclick="delChat()" hidden>Delete chat</button></div>
+    <div id="msgs" class="msgs"><div class="empty">Ask anything about the files in this workspace. Answers come with page cites. Say "write this up as a Word report" when you want a file.</div></div>
+    <div class="chat-in"><textarea id="chat-text" placeholder="e.g. Which document is the most recent, and what is it about?"></textarea><button id="chat-send" onclick="sendChat()">Send</button></div>
+    <div class="small muted" style="margin-top:6px">Enter sends, Shift+Enter for a new line. Each answer costs a few cents; reports cost more.</div>
+  </section>
+</div>
+</div>
+
+<div id="v-documents" class="view" hidden>
+<section id="start" class="start" hidden>
+  <div class="row" style="justify-content:space-between"><h2 style="margin:0">Start here</h2><button class="secondary small" style="flex:0 0 auto" onclick="dismissStart()">Hide</button></div>
+  <div class="steps">
+    <div class="step"><b class="n">1</b><h3>Add the files</h3><p>Any documents, any mix: a case file, a contract folder, a stack of invoices, a batch of resumes. Drop them below and wait until every row shows a type and page count.</p></div>
+    <div class="step"><b class="n">2</b><h3>Tell it what you want</h3><p>Tasks tab. Plain English. Pick Word or Excel if you want a file. One to three minutes per request.</p></div>
+    <div class="step"><b class="n">3</b><h3>Open the report</h3><p>Artifacts tab. Click any page chip to see the source. Use the yellow Feedback button to tell Elvin what worked and what did not.</p></div>
+  </div>
+  <div class="small muted" style="margin:12px 0 6px">Try one of these once your files are in:</div>
+  <div class="chips" id="start-chips"></div>
+</section>
+<section>
+  <h2>Add documents</h2>
+  <div id="drop" class="drop">Drop files or a whole folder here, or <label style="color:var(--accent);cursor:pointer"><input id="files" type="file" multiple hidden> choose files</label> or <label style="color:var(--accent);cursor:pointer"><input id="folder" type="file" webkitdirectory multiple hidden> choose a folder</label>
+  <div class="small" id="drop-hint"></div></div>
+  <div id="up-progress" hidden style="margin-top:10px"><div class="bar"><i id="up-bar" style="width:0"></i></div><div id="up-msg" class="small muted"></div><pre id="up-items" style="max-height:220px"></pre></div>
+  <div class="muted small" style="margin-top:8px">Ingest is deterministic: hash, OCR for scans and photos, classify, extract fields with page cites. Email attachments and zip contents are ingested and linked to their parent. Nothing is moved or changed.</div>
+</section>
+<section>
+  <h2>Documents <span id="doc-count" class="pill"></span></h2>
+  <div class="row"><input id="q" type="text" placeholder='Exact search, e.g. a file number, a name, "Termination date"'><button class="secondary" onclick="search()">Search</button></div>
+  <pre id="searchout" hidden></pre>
+  <div style="overflow-x:auto"><table id="docs"><thead><tr><th>File</th><th>Type</th><th class="hide-m">Pages</th><th>OCR</th><th>Extracted facts (click a page)</th></tr></thead><tbody></tbody></table></div>
+</section>
+</div>
+
+<div id="v-tasks" class="view" hidden>
+<section>
+  <div class="row" style="justify-content:space-between;align-items:flex-start">
+    <div style="flex:1 1 320px"><h2>Working mode</h2><div id="mode-blurb" class="small muted"></div></div>
+    <select id="task-mode" style="flex:0 0 300px" onchange="setMode(this.value)"></select>
+  </div>
+  <div class="small muted" style="margin-bottom:6px">Try one of these:</div>
+  <div class="chips" id="task-chips"></div>
+</section>
+<section>
+  <h2>General task</h2>
+  <textarea id="task-text" placeholder="What do you want done with these documents? For example: put these files in date order and write a one-paragraph summary of each. Or: list every dollar amount across the invoices with who billed it and when."></textarea>
+  <div class="row" style="margin-top:8px"><select id="task-fmt" style="flex:0 0 200px"><option value="markdown">Output: on-screen report</option><option value="docx">Output: Word (.docx)</option><option value="pdf">Output: PDF</option><option value="xlsx">Output: Excel (.xlsx)</option></select>
+  <button onclick="runFree()">Run</button><span id="task-credit" class="muted small"></span></div>
+  <div class="muted small">The engine works only from the documents in this workspace. It never produces a number itself: totals, day counts and deadlines are computed in code and every figure is recomputed before the report is shown. It flags; it does not decide.</div>
+</section>
+<section id="oneclick" hidden>
+  <h2>One-click tasks</h2>
+  <div class="row">
+    <button class="secondary" onclick="runTask('assemble_case_files')">Assemble case files</button>
+    <button class="secondary" onclick="runTask('matter_readiness')">Matter readiness</button>
+    <button class="secondary" onclick="runTask('deadline_sweep')">Deadline sweep</button>
+  </div>
+  <div class="muted small">Assemble proposes a matter tree from everything uploaded (you confirm it in Artifacts). Readiness and deadline sweep are deterministic rule checks on confirmed matters and cost no credits.</div>
+</section>
+<section id="task-live" hidden><h2>Running</h2><div class="bar"><i id="task-bar" style="width:15%"></i></div><div id="task-msg" class="small muted"></div></section>
+</div>
+
+<div id="v-artifacts" class="view" hidden>
+<section>
+  <h2>Task runs</h2>
+  <div style="overflow-x:auto"><table id="runs"><thead><tr><th>Started</th><th>Task</th><th>Status</th><th>Verification</th><th>Cost</th><th></th></tr></thead><tbody></tbody></table></div>
+</section>
+<section id="art-box" hidden>
+  <div class="row"><h2 id="art-title" style="margin:0">Artifact</h2><span id="art-dl"></span></div>
+  <div id="art-files"></div>
+  <div id="art" class="art"></div>
+  <details style="margin-top:10px"><summary class="muted small">Cite index</summary><pre id="art-cites"></pre></details>
+  <details><summary class="muted small">Agent transcript</summary><pre id="art-tr"></pre></details>
+</section>
+</div>
+
+<div id="v-credits" class="view" hidden>
+<section>
+  <h2>Credits remaining</h2>
+  <div class="credit" id="cr-remaining"></div>
+  <div class="muted small" id="cr-detail"></div>
+  <div class="muted small">Cost is computed per model call from token counts at current pricing. When the balance reaches zero, tasks stop with a clear message until the administrator tops up.</div>
+</section>
+<section><h2>Recent model calls</h2><div style="overflow-x:auto"><table id="cr-calls"><thead><tr><th>When</th><th>Purpose</th><th>In</th><th>Out</th><th>Cache</th><th>Cost</th></tr></thead><tbody></tbody></table></div></section>
+<section><h2>Top-ups</h2><table id="cr-topups"><thead><tr><th>When</th><th>Amount</th><th>Note</th></tr></thead><tbody></tbody></table></section>
+</div>
+
+<div id="v-admin" class="view" hidden>
+<section>
+  <h2>Workspaces</h2>
+  <div style="overflow-x:auto"><table id="ad-ws"><thead><tr><th>Workspace</th><th>Users</th><th>Docs</th><th>Spent</th><th>Credits</th><th>Top up</th><th>View</th></tr></thead><tbody></tbody></table></div>
+</section>
+<section>
+  <h2>Add user</h2>
+  <div class="row"><input id="au-email" type="email" placeholder="email"><input id="au-name" type="text" placeholder="name (optional)">
+  <select id="au-role" style="flex:0 0 130px"><option value="member">member</option><option value="admin">admin</option></select>
+  <input id="au-topup" type="number" placeholder="initial credits $" style="flex:0 0 150px"><button onclick="addUser()">Create</button></div>
+  <div class="muted small">A generated password is shown once. New members get their own workspace.</div>
+  <pre id="au-out" hidden></pre>
+</section>
+<section><h2>Users</h2><div style="overflow-x:auto"><table id="ad-users"><thead><tr><th>Email</th><th>Role</th><th>Workspace</th><th>Last login</th><th></th></tr></thead><tbody></tbody></table></div></section>
+<section>
+  <h2>Feedback from users <span id="ad-fb-count" class="pill"></span></h2>
+  <div style="overflow-x:auto"><table id="ad-fb"><thead><tr><th>When</th><th>Who</th><th>Kind</th><th>Feedback</th><th>About</th><th></th></tr></thead><tbody></tbody></table></div>
+</section>
+<section>
+  <div class="row"><h2 style="margin:0">Activity log (every workspace)</h2><a id="ad-export" href="#">download full log (JSON)</a></div>
+  <div class="muted small">What each user asked, in their words, with the outcome, verification and cost. Use it to see what Allistair actually needs. Transcripts of a workspace are wiped when its owner deletes their files; the request text, outcome and cost stay.</div>
+  <div style="overflow-x:auto;margin-top:8px"><table id="ad-act"><thead><tr><th>When</th><th>Who</th><th>Task and request</th><th>Outcome</th><th>Cost</th><th></th></tr></thead><tbody></tbody></table></div>
+  <details style="margin-top:10px"><summary class="muted small">Events (logins, uploads, deletes, top-ups)</summary><div style="overflow-x:auto"><table id="ad-ev"><thead><tr><th>When</th><th>Who</th><th>Event</th><th>Detail</th></tr></thead><tbody></tbody></table></div></details>
+</section>
+</div>
+
+<div id="v-help" class="view" hidden>
+<section>
+  <h2>How to use this</h2>
+  <ol style="padding-left:20px;line-height:1.7">
+    <li><b>Add documents.</b> Documents tab: drag files in, or choose them. PDFs, Word files, scans, phone photos, spreadsheets, emails (.eml or .msg, attachments come along) and zip folders all work. Closed matters only during the trial.</li>
+    <li><b>Wait for the green list.</b> Each file is read, OCR'd if it is a scan, sorted by type and its key facts are pulled out. Click any page number to see the exact page a fact came from.</li>
+    <li><b>Ask a question.</b> Chat tab: ask anything about the files and get a short answer with page cites in seconds. Say "write this up as a Word report" when you want a file. "Ask about this file" on the Documents tab starts a chat scoped to one document.</li>
+    <li><b>Get files back.</b> Ask for folders ("organize these into folders by matter, date-named, as a zip"), a table of contents added to a PDF ("add a table of contents to the front of this PDF with a tab divider for each subject and number every page"), a book of documents from many files, pages pulled out, exhibit stamps, a redacted copy, or files merged into one PDF or one editable Word document. They appear as download buttons under the answer and in Artifacts. Originals are never changed.</li>
+    <li><b>Ask for a full report.</b> Tasks tab: type it in plain English, pick PDF, Word or Excel if you want a file, press Run. It takes one to three minutes.</li>
+    <li><b>Check the report.</b> Artifacts tab. Every value has a small page chip; click it to see the source page. "calc" means the number was computed by code and recomputed before you saw it. Anything the engine could not confirm is marked and the report says so.</li>
+    <li><b>Delete when done.</b> Account tab, Delete my files. Everything from your workspace is gone at once.</li>
+  </ol>
+  <p style="margin:12px 0 0"><b>Handouts:</b> <a data-guide="Document-Engine-Quick-Guide.pdf" target="_blank" rel="noopener">Quick guide (PDF)</a> Â· <a data-guide="LTB-Rules-Checklist.docx">LTB rules checklist (Word)</a></p>
+</section>
+<section>
+  <h2>Things you can ask</h2>
+  <ul style="line-height:1.7">
+    <li>Sort these files into matters and put each matter's documents in date order.</li>
+    <li>For every N4 on file: tenant, unit, termination date and amount claimed, with page cites. Flag any without a certificate of service.</li>
+    <li>Build a chronology of everything that happened in the Ashworth matter, one line per event, each with its source page.</li>
+    <li>Reconstruct the rent ledger from the statements and the bank spreadsheet and tell me the arrears as of August 14, 2026.</li>
+    <li>What is missing before an L1 can be filed on this matter?</li>
+    <li>List every document that mentions 412-88 Bloor Street West.</li>
+    <li>Add a table of contents with a tab for each part and number every page consecutively.</li>
+    <li>Give me a one-page fact sheet for the hearing, in Word.</li>
+    <li>Make a book of documents for the hearing: one PDF with an index, a tab for each document and page numbers.</li>
+    <li>Organize everything into folders by matter and document type, date-named, and give me a zip.</li>
+    <li>Make a redacted copy of the lease with the tenant's phone number and email blacked out.</li>
+  </ul>
+  <div class="muted small">It never decides anything legal and never invents a number. It finds, organizes, computes and cites; you make the calls. If it cannot do something with the files on hand it says what is missing. Tell Elvin what you asked and what you expected; that is how the tool gets tuned to your work.</div>
+</section>
+</div>
+
+<div id="v-account" class="view" hidden>
+<section><h2>Signed in</h2><div id="acct"></div><div class="row" style="margin-top:8px"><button class="secondary" onclick="doLogout()">Sign out</button></div></section>
+<section><h2>Change password</h2>
+  <div class="row"><input id="pw-cur" type="password" placeholder="current password" autocomplete="current-password"><input id="pw-new" type="password" placeholder="new password (10+ characters)" autocomplete="new-password"><button onclick="changePw()">Change</button></div>
+  <div id="pw-msg" class="small"></div></section>
+<section><h2>Delete my files</h2>
+  <p class="small">Hard-deletes every document, page image, extracted fact, original file, note and report in this workspace. Model-usage records stay for billing. This cannot be undone.</p>
+  <div class="row"><input id="del-confirm" type="text" placeholder='type DELETE to confirm' style="flex:0 0 220px"><button class="danger" onclick="deleteFiles()">Delete all my files</button></div>
+  <div id="del-msg" class="small"></div></section>
+</div>
+</main>
+<div id="fb-modal" class="modal" hidden>
+  <section style="max-width:520px;width:100%;margin:0">
+    <h2>Send feedback to Elvin</h2>
+    <div class="row"><select id="fb-kind" style="flex:0 0 100%"><option value="general">General comment</option><option value="wrong">Something was wrong or missing</option><option value="idea">A request or idea</option><option value="bug">Something broke</option></select></div>
+    <div class="row"><span class="small muted" style="flex:0 0 100%">How did it do? <label><input type="radio" name="fb-r" value="good"> good</label> &nbsp;<label><input type="radio" name="fb-r" value="ok"> ok</label> &nbsp;<label><input type="radio" name="fb-r" value="bad"> bad</label></span></div>
+    <textarea id="fb-text" placeholder="What did you ask, what did you expect, and what did you get? Anything at all helps."></textarea>
+    <div id="fb-about" class="small muted" style="margin-top:6px"></div>
+    <div class="row" style="margin-top:8px"><button onclick="sendFeedback()">Send</button><button class="secondary" onclick="closeFeedback()">Cancel</button></div>
+    <div id="fb-msg" class="small"></div>
+  </section>
+</div>
+<div id="toast" class="toast"></div>
+<script>window.DE_API='https://api.elvinpeters.com/docs';</script>
+<script>
+const API = (window.DE_API !== undefined) ? window.DE_API : (location.pathname.startsWith('/docs') ? '/docs' : '');
+document.querySelectorAll('a[data-guide]').forEach(a => { a.href = API + '/guide/' + a.dataset.guide; });
+const $ = s => document.querySelector(s);
+let ME = null, WS = null, MODES = [];
+const qs = () => (WS && ME && ME.user.role === 'admin' && WS !== ME.user.workspace_id) ? `?ws=${WS}` : '';
+const qsAmp = () => qs() ? qs() + '&' : '?';
+async function j(path, opts = {}) {
+  const r = await fetch(API + path, { credentials: 'include', ...opts });
+  if (r.status === 401) { showLogin(); throw new Error('Please sign in.'); }
+  if (!r.ok) { let t = await r.text(); try { t = JSON.parse(t).detail || t } catch (e) {} throw new Error(t); }
+  const ct = r.headers.get('content-type') || '';
+  return ct.includes('json') ? r.json() : r.text();
+}
+const post = (p, body) => j(p, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body || {}) });
+function toast(m, bad) { const t = $('#toast'); t.textContent = m; t.style.background = bad ? '#b91c1c' : '#1a1a1a'; t.style.display = 'block'; clearTimeout(t._h); t._h = setTimeout(() => t.style.display = 'none', 4200); }
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const money = x => '$' + Number(x || 0).toFixed(2);
+
+function showLogin() { $('#nav').hidden = true; document.querySelectorAll('.view').forEach(v => v.hidden = true); $('#v-login').hidden = false; }
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.hidden = true); $('#v-login').hidden = true;
+  $('#v-' + name).hidden = false; document.querySelectorAll('nav button[data-v]').forEach(b => b.classList.toggle('active', b.dataset.v === name));
+  localStorage.setItem('de_view', name);
+  ({ chat: loadChat, documents: loadDocs, tasks: loadTasks, artifacts: loadRuns, credits: loadCredits, admin: loadAdmin, account: loadAccount, help: () => {} })[name]();
+}
+document.querySelectorAll('nav button[data-v]').forEach(b => b.onclick = () => showView(b.dataset.v));
+
+async function boot() {
+  try { ME = await j('/api/me'); } catch (e) { showLogin(); return; }
+  WS = ME.user.workspace_id;
+  if (!MODES.length) MODES = await j('/api/modes');
+  $('#nav').hidden = false; $('#nav-admin').hidden = ME.user.role !== 'admin';
+  $('#hdr-sub').textContent = 'Â· ' + (ME.workspace ? ME.workspace.name : '') + ' Â· ' + money(ME.credits.remaining_usd) + ' credits';
+  showView(localStorage.getItem('de_view') || 'documents');
+}
+async function doLogin() {
+  $('#li-msg').textContent = '';
+  try { await post('/api/login', { email: $('#li-email').value, password: $('#li-pw').value }); localStorage.setItem('de_view', 'documents'); await boot(); }
+  catch (e) { $('#li-msg').textContent = e.message; }
+}
+['#li-email', '#li-pw'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); doLogin(); } }));
+async function doLogout() { await post('/api/logout'); ME = null; showLogin(); }
+
+// ---------- documents ----------
+async function loadDocs() {
+  const s = await j('/api/status' + qs());
+  $('#drop-hint').textContent = `Accepted: ${s.limits.extensions.join(' ')} Â· up to ${s.limits.max_upload_mb} MB per file`;
+  $('#hdr-sub').textContent = `Â· ${s.documents} docs Â· ${s.facts} facts Â· ${money(s.credits.remaining_usd)} credits`;
+  const docs = await j('/api/documents' + qs());
+  $('#doc-count').textContent = docs.length;
+  const tb = $('#docs tbody'); tb.innerHTML = '';
+  const byId = Object.fromEntries(docs.map(d => [d.id, d]));
+  $('#start').hidden = docs.length > 0 && localStorage.getItem('de_start_hidden') === '1';
+  $('#start-chips').innerHTML = chips(curMode().examples);
+  if (!docs.length) tb.innerHTML = '<tr><td colspan="5" class="empty">No documents yet. Drop the files from one matter into the box above to begin.</td></tr>';
+  for (const d of docs) {
+    const parent = d.parent_document_id && byId[d.parent_document_id];
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${parent ? '<span class="muted small">â†³ from ' + esc(parent.filename) + '</span><br>' : ''}<a href="${API}/api/documents/${d.id}/original${qs()}" target="_blank">${esc(d.filename)}</a>
+      <div class="small muted">${d.file_kind}${d.ledger_candidate ? ' Â· <span class=warn>ledger candidate</span>' : ''}</div></td>
+      <td><span class="pill">${esc(d.doc_type || 'unclassified')}</span></td><td class="hide-m">${d.page_count}</td>
+      <td>${d.ocr_applied ? `<span class="${d.needs_review ? 'warn' : 'ok'}">${(d.ocr_confidence ?? 0).toFixed(2)}${d.needs_review ? ' review' : ''}</span>` : '<span class="muted">digital</span>'}</td>
+      <td class="facts">${d.facts.map(f => `${esc(f.field)}: <b>${esc(f.value_text)}</b> <a href="${API}/pages/${d.id}/${f.page_number}${qs()}" target="_blank">p${f.page_number}</a> ${f.verified ? '<span class=ok>âœ“</span>' : '<span class=warn>?</span>'}`).join('<br>') || '<span class="muted">no extracted fields</span>'}<div style="margin-top:6px"><button class="secondary small" onclick="askDoc('${d.id}')">Ask about this file</button></div></td>`;
+    tb.appendChild(tr);
+  }
+}
+async function search() { const o = $('#searchout'); o.hidden = false; try { o.textContent = JSON.stringify(await j('/api/search' + qsAmp() + 'q=' + encodeURIComponent($('#q').value)), null, 1); } catch (e) { o.textContent = e.message; } }
+async function uploadFiles(list) {
+  if (!list.length) return;
+  const fd = new FormData(); for (const it of list) { const f = it.file || it; fd.append('files', f, f.name); fd.append('paths', it.path || f.webkitRelativePath || f.name); }
+  $('#up-progress').hidden = false; $('#up-msg').textContent = `uploading ${list.length} file(s)â€¦`; $('#up-bar').style.width = '5%'; $('#up-items').textContent = '';
+  let r; try { r = await j('/api/ingest/upload' + qs(), { method: 'POST', body: fd }); } catch (e) { $('#up-msg').textContent = e.message; return; }
+  await pollJob(r.job_id, jb => {
+    const pct = jb.total ? Math.round(100 * jb.done / jb.total) : 100;
+    $('#up-bar').style.width = Math.max(5, pct) + '%'; $('#up-msg').textContent = `${jb.done}/${jb.total} Â· ${jb.message || ''}`;
+    $('#up-items').textContent = jb.items.map(i => `${i.status.padEnd(10)} ${i.filename}${i.doc_type ? ' â†’ ' + i.doc_type : ''}${i.facts != null ? ' Â· ' + i.facts + ' facts' : ''}${i.error ? ' Â· ' + i.error : ''}`).join('\n');
+    if (jb.status !== 'running') loadDocs();
+  });
+}
+$('#files').addEventListener('change', e => uploadFiles([...e.target.files]));
+$('#folder').addEventListener('change', e => uploadFiles([...e.target.files].map(f => ({ file: f, path: f.webkitRelativePath || f.name }))));
+const dz = $('#drop');
+['dragenter', 'dragover'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.add('over'); }));
+['dragleave', 'drop'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.remove('over'); }));
+dz.addEventListener('drop', async e => {
+  const entries = [...(e.dataTransfer.items || [])].map(i => i.webkitGetAsEntry && i.webkitGetAsEntry()).filter(Boolean);
+  if (entries.some(x => x.isDirectory)) { const out = []; for (const en of entries) await walkEntry(en, '', out); uploadFiles(out); }
+  else uploadFiles([...e.dataTransfer.files]);
+});
+async function walkEntry(entry, prefix, out) {
+  if (entry.isFile) { const f = await new Promise((res, rej) => entry.file(res, rej)); out.push({ file: f, path: prefix + f.name }); return; }
+  if (!entry.isDirectory) return;
+  const rd = entry.createReader(); let batch;
+  do { batch = await new Promise((res, rej) => rd.readEntries(res, rej)); for (const c of batch) await walkEntry(c, prefix + entry.name + '/', out); } while (batch.length);
+}
+async function pollJob(id, onUpdate) {
+  for (;;) {
+    const jb = await j('/api/jobs/' + id + qs()); onUpdate(jb);
+    if (jb.status !== 'running') return jb;
+    await new Promise(r => setTimeout(r, 1500));
+  }
+}
+
+// ---------- tasks ----------
+async function loadTasks() { renderMode(); const s = await j('/api/status' + qs()); $('#task-credit').textContent = `${money(s.credits.remaining_usd)} credits remaining Â· ${s.documents} documents in workspace`; }
+async function runFree() { const t = $('#task-text').value.trim(); if (!t) return toast('Describe what you want done.', true); runTask('free_form', { instructions: t, renderer: $('#task-fmt').value, mode: curMode().key }); }
+async function runTask(key, body) {
+  const live = $('#task-live'); live.hidden = false; $('#task-msg').textContent = 'startingâ€¦'; $('#task-bar').style.width = '10%';
+  let r; try { r = await post('/api/tasks/' + key + '/run' + qs(), body || {}); } catch (e) { $('#task-msg').textContent = e.message; toast(e.message, true); return; }
+  let n = 0;
+  const jb = await pollJob(r.job_id, jb => { n++; $('#task-bar').style.width = Math.min(90, 10 + n * 3) + '%'; $('#task-msg').textContent = jb.message || jb.status; });
+  $('#task-bar').style.width = '100%';
+  if (jb.status === 'done') { toast('Done. Opening the artifact.'); showView('artifacts'); await showArtifact(jb.result.task_run_id); }
+  else { $('#task-msg').textContent = jb.error || 'failed'; toast(jb.error || 'Task failed', true); }
+}
+
+// ---------- artifacts ----------
+async function loadRuns() {
+  const runs = await j('/api/task_runs' + qs()); const tb = $('#runs tbody'); tb.innerHTML = '';
+  for (const r of runs) {
+    const v = r.verification_json ? JSON.parse(r.verification_json) : null; const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="small">${esc(r.started_at).replace('T', ' ').slice(0, 16)}</td><td>${esc(r.task_key)}<div class="small muted">${esc((JSON.parse(r.inputs_json || '{}').instructions || '').slice(0, 90))}</div></td>
+      <td class="${r.status === 'done' ? 'ok' : 'warn'}">${esc(r.status)}${r.error ? '<div class="small bad">' + esc(r.error.slice(0, 160)) + '</div>' : ''}</td>
+      <td class="small">${v ? `${v.verified} âœ“ Â· ${v.unverified} ? Â· ${v.failed} âœ— ${v.blocked ? '<span class=bad>blocked</span>' : '<span class=ok>clear</span>'}` : ''}</td>
+      <td class="small">${money(r.cost_usd)}</td><td>${(r.artifact_path || (r.deliverables || []).length) ? `<button class="secondary" onclick="showArtifact('${r.id}')">${r.artifact_path ? 'view' : 'files'}</button>` : ''}${(r.deliverables || []).length ? `<div class="small muted">${r.deliverables.length} file(s)</div>` : ''}</td>`;
+    tb.appendChild(tr);
+  }
+}
+// same shape as registries/renderers/cites.py: p4, p9-15, "p1, p4", pp. 9-15, the file alone, escaped brackets
+const CITE_RE = /\\?\[doc:([0-9a-f]{8})[0-9a-f]*((?:[\s,]+(?:pp?\.?|pages?)\s*\d+(?:\s*[-â€“]\s*\d+)?(?:\s*,\s*(?:pp?\.?\s*)?\d+(?:\s*[-â€“]\s*\d+)?)*)?)\s*\\?\]/g;
+function inlineMd(s, byMarker) {
+  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+  s = s.replace(/(^|[\s(>])_([^_\n]+)_(?=[\s).,;:!?<]|$)/g, '$1<i>$2</i>');
+  s = s.replace(/(^|[\s(>])\*([^*\n]+)\*(?=[\s).,;:!?<]|$)/g, '$1<i>$2</i>');
+  s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  s = s.replace(CITE_RE, (m, id, rest) => {
+    const pages = (rest.match(/\d+(?:\s*[-â€“]\s*\d+)?/g) || []).map(x => x.replace(/\s*[-â€“]\s*/, '-')).join(', ');
+    const c = byMarker[m];
+    return c && c.page_image ? `<a class="cite" target="_blank" href="${API}${c.page_image}${qs()}">p${pages || (c.page || 1)}</a>` : `<span class="cite dead" title="Unresolved source">${pages ? 'p' + pages : 'source?'}</span>`;
+  });
+  s = s.replace(/\[computed: ([^\]]+)\]/g, '<span class="cite calc" title="computed in code and recomputed by the verifier: $1">calc</span>');
+  s = s.replace(/\\?\[(?:doc|fact|calc):[^\]\n]{0,120}\\?\]/g, '');
+  return s;
+}
+function renderMd(md, cites) {
+  const byMarker = {}; for (const v of Object.values(cites || {})) if (v && v.marker) byMarker[v.marker] = v;
+  const inl = s => inlineMd(s, byMarker);
+  const lines = esc(md || '').replace(/\r\n/g, '\n').split('\n');
+  const out = [], stack = []; let para = [];
+  const flush = () => { if (para.length) { out.push('<p>' + inl(para.join(' ')) + '</p>'); para = []; } };
+  const closeTo = ind => { while (stack.length && stack[stack.length - 1].indent > ind) out.push('</li></' + stack.pop().type + '>'); };
+  const isItem = l => /^\s*([-*+]|\d+[.)])\s+/.test(l || '');
+  const isRule = r => /^\|?\s*:?-{3,}/.test(r);
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i], t = raw.trim();
+    if (!t) { flush(); if (!isItem(lines[i + 1])) closeTo(-1); continue; }
+    if (t.startsWith('|')) {
+      flush(); closeTo(-1);
+      const block = []; while (i < lines.length && lines[i].trim().startsWith('|')) { block.push(lines[i].trim()); i++; } i--;
+      const head = block.length > 1 && isRule(block[1]);
+      const rowsT = block.filter(r => !isRule(r)).map(r => r.replace(/^\||\|$/g, '').split('|').map(c => c.trim()));
+      let h = '<div class="tbl"><table>';
+      rowsT.forEach((r, k) => { const th = head && k === 0; h += (th ? '<thead>' : (head && k === 1 ? '<tbody>' : '')) + '<tr>' + r.map(c => th ? `<th>${inl(c)}</th>` : `<td>${inl(c)}</td>`).join('') + '</tr>' + (th ? '</thead>' : ''); });
+      out.push(h + (head && rowsT.length > 1 ? '</tbody>' : '') + '</table></div>'); continue;
+    }
+    const hm = t.match(/^(#{1,6})\s+(.*)$/);
+    if (hm) { flush(); closeTo(-1); const n = Math.min(hm[1].length, 4); out.push(`<h${n}>${inl(hm[2])}</h${n}>`); continue; }
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(t)) { flush(); closeTo(-1); out.push('<hr>'); continue; }
+    if (t.startsWith('&gt;')) {
+      flush(); closeTo(-1); const q = [];
+      while (i < lines.length && lines[i].trim().startsWith('&gt;')) { q.push(lines[i].trim().replace(/^&gt;\s?/, '')); i++; } i--;
+      out.push('<blockquote>' + inl(q.join(' ')) + '</blockquote>'); continue;
+    }
+    const lm = raw.match(/^(\s*)([-*+]|\d+[.)])\s+(.*)$/);
+    if (lm) {
+      flush();
+      const ind = lm[1].replace(/\t/g, '    ').length, type = /\d/.test(lm[2]) ? 'ol' : 'ul';
+      const top = stack[stack.length - 1];
+      if (!top || ind > top.indent) { out.push(`<${type}>`); stack.push({ type, indent: ind }); }
+      else {
+        closeTo(ind); const cur = stack[stack.length - 1];
+        if (!cur) { out.push(`<${type}>`); stack.push({ type, indent: ind }); }
+        else if (cur.type !== type && cur.indent === ind) { out.push('</li></' + stack.pop().type + `><${type}>`); stack.push({ type, indent: ind }); }
+        else out.push('</li>');
+      }
+      out.push('<li>' + inl(lm[3])); continue;
+    }
+    if (stack.length && /^\s+/.test(raw)) { out.push(' ' + inl(t)); continue; }
+    closeTo(-1); para.push(t);
+  }
+  flush(); closeTo(-1);
+  return out.join('\n');
+}
+async function showArtifact(id) {
+  $('#art-box').hidden = false;
+  const runs = await j('/api/task_runs' + qs()); const run = runs.find(r => r.id === id) || {};
+  let md = null, cites = {};
+  if (run.artifact_path) {
+    try { md = await j(`/api/task_runs/${id}/artifact` + qs()); } catch (e) { md = null; }
+    try { cites = (await j(`/api/task_runs/${id}/cites` + qs())).index || {}; } catch (e) { cites = {}; }
+  }
+  $('#art-title').textContent = run.task_key === 'chat' ? 'From chat' : (run.task_key || 'Artifact').replace(/_/g, ' ');
+  const files = run.deliverables || [];
+  $('#art-files').innerHTML = files.length ? '<div class="files-h">Files to download</div>' + filesHtml(id, files) : '';
+  $('#art').hidden = !md;
+  $('#art').innerHTML = md ? renderMd(md, cites) : '';
+  $('#art-cites').textContent = JSON.stringify(cites, null, 1);
+  const names = { pdf: 'PDF', docx: 'Word', xlsx: 'Excel', md: 'Markdown' };
+  const dl = ['pdf', 'docx', 'xlsx', 'md'].filter(f => run.files && run.files[f]).map(f => `<a class="btn-dl" href="${API}/api/task_runs/${id}/download${qsAmp()}fmt=${f}">${names[f]}</a>`);
+  dl.push(`<button class="secondary" onclick="openFeedback('${id}')">Feedback on this report</button>`);
+  if (run.task_key === 'assemble_case_files') dl.push(`<button class="secondary" onclick="confirmTree('${id}')">Confirm this matter tree</button>`);
+  $('#art-dl').innerHTML = dl.join(' ');
+  try { $('#art-tr').textContent = JSON.stringify(await j(`/api/task_runs/${id}/transcript` + qs()), null, 1); } catch (e) { $('#art-tr').textContent = ''; }
+  $('#art-box').scrollIntoView({ behavior: 'smooth' });
+}
+async function confirmTree(id) { try { const r = await post(`/api/task_runs/${id}/confirm` + qs()); toast(`Created ${r.created.length} matter(s). Readiness and deadline sweep now have something to check.`); } catch (e) { toast(e.message, true); } }
+
+// ---------- credits ----------
+async function loadCredits() {
+  const c = await j('/api/credits' + qs());
+  $('#cr-remaining').innerHTML = `${money(c.remaining_usd)} <span class="muted small">remaining</span>`;
+  $('#cr-detail').textContent = `${money(c.topups_usd)} added Â· ${money(c.spent_usd)} spent over ${c.calls} model calls Â· ${c.input_tokens.toLocaleString()} in / ${c.output_tokens.toLocaleString()} out tokens Â· ${c.model} at $${c.pricing.input}/M in, $${c.pricing.output}/M out`;
+  $('#cr-calls tbody').innerHTML = (c.recent_calls || []).map(x => `<tr><td class="small">${esc(x.called_at).replace('T', ' ').slice(0, 16)}</td><td>${esc(x.purpose)}</td><td>${x.input_tokens}</td><td>${x.output_tokens}</td><td>${x.cache_read || 0}</td><td>${money(x.cost_usd)}</td></tr>`).join('');
+  $('#cr-topups tbody').innerHTML = (c.topups || []).map(t => `<tr><td class="small">${esc(t.created_at).replace('T', ' ').slice(0, 16)}</td><td>${money(t.amount_usd)}</td><td>${esc(t.note)}</td></tr>`).join('');
+}
+
+// ---------- admin ----------
+async function loadAdmin() {
+  const ws = await j('/api/admin/workspaces'); const tb = $('#ad-ws tbody'); tb.innerHTML = '';
+  for (const w of ws) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${esc(w.name)}<div class="small muted">${w.id.slice(0, 8)}</div></td><td class="small">${w.users.map(esc).join('<br>')}</td><td>${w.documents}</td><td>${money(w.spent_usd)}</td><td><b>${money(w.credits)}</b></td>
+      <td><div class="row" style="margin:0"><input type="number" placeholder="$" id="tu-${w.id}" style="flex:0 0 90px"><button class="secondary" onclick="topup('${w.id}')">Add</button></div></td>
+      <td><button class="secondary" onclick="WS='${w.id}';toast('Viewing workspace ${esc(w.name)}');showView('documents')">open</button></td>`;
+    tb.appendChild(tr);
+  }
+  $('#ad-export').href = API + '/api/admin/activity/export';
+  const fb = await j('/api/admin/feedback');
+  $('#ad-fb-count').textContent = fb.filter(f => !f.seen).length + ' new';
+  $('#ad-fb tbody').innerHTML = fb.map(f => `<tr style="${f.seen ? '' : 'background:#fff8dc'}"><td class="small">${esc(f.created_at).replace('T', ' ').slice(0, 16)}</td><td class="small">${esc(f.user_email || '')}</td><td><span class="pill">${esc(f.kind)}</span>${f.rating ? '<div class="small">' + esc(f.rating) + '</div>' : ''}</td>
+    <td style="white-space:pre-wrap">${esc(f.text)}</td><td class="small muted">${f.task_run_id ? esc(f.task_key || '') + ': ' + esc((f.run_instructions || '').slice(0, 80)) : esc(f.page || '')}</td>
+    <td>${f.seen ? '' : `<button class="secondary" onclick="post('/api/admin/feedback/${f.id}/seen').then(loadAdmin)">seen</button>`}</td></tr>`).join('') || '<tr><td colspan="6" class="muted">No feedback yet.</td></tr>';
+  const act = await j('/api/admin/activity');
+  $('#ad-act tbody').innerHTML = act.runs.map(r => `<tr><td class="small">${esc(r.started_at).replace('T', ' ').slice(0, 16)}</td><td class="small">${esc(r.user_email || '')}<div class="muted">${esc(r.workspace_name || '')}</div></td>
+    <td><b>${esc(r.task_key)}</b>${r.renderer !== 'markdown' ? ' <span class="pill">' + esc(r.renderer) + '</span>' : ''}<div class="small">${esc(r.instructions)}</div>${r.error ? '<div class="small bad">' + esc(r.error.slice(0, 200)) + '</div>' : ''}</td>
+    <td class="small"><span class="${r.status === 'done' ? 'ok' : 'warn'}">${esc(r.status)}</span>${r.verification ? `<div>${r.verification.verified} âœ“ Â· ${r.verification.unverified} ? Â· ${r.verification.failed} âœ—</div>` : ''}${(r.problems || []).map(p => '<div class="muted">' + esc(p) + '</div>').join('')}</td>
+    <td class="small">${money(r.cost_usd)}</td><td>${r.has_artifact ? `<button class="secondary" onclick="WS='${r.workspace_id}';showView('artifacts');showArtifact('${r.id}')">open</button>` : ''}</td></tr>`).join('');
+  $('#ad-ev tbody').innerHTML = act.events.map(e => `<tr><td class="small">${esc(e.created_at).replace('T', ' ').slice(0, 16)}</td><td class="small">${esc(e.user_email || '')}<div class="muted">${esc(e.workspace_name || '')}</div></td><td>${esc(e.action)}</td><td class="small muted">${esc(JSON.stringify(e.detail))}</td></tr>`).join('');
+  const us = await j('/api/admin/users');
+  $('#ad-users tbody').innerHTML = us.map(u => `<tr><td>${esc(u.email)}<div class="small muted">${esc(u.name || '')}</div></td><td>${esc(u.role)}</td><td class="small">${esc(u.workspace_name || '')}</td><td class="small">${esc((u.last_login_at || '').replace('T', ' ').slice(0, 16))}</td><td><button class="secondary" onclick="resetPw('${u.id}','${esc(u.email)}')">reset password</button></td></tr>`).join('');
+}
+async function topup(wid) { const v = parseFloat($('#tu-' + wid).value); if (!(v > 0)) return toast('Enter a dollar amount', true); try { await post('/api/admin/topup', { workspace_id: wid, amount_usd: v, note: 'admin top-up' }); toast('Credits added'); loadAdmin(); } catch (e) { toast(e.message, true); } }
+async function addUser() { const o = $('#au-out'); o.hidden = false; try { const r = await post('/api/admin/users', { email: $('#au-email').value, name: $('#au-name').value, role: $('#au-role').value, topup_usd: parseFloat($('#au-topup').value || 0) }); o.textContent = `Created ${r.email} (${r.role}). Password (shown once): ${r.password}`; loadAdmin(); } catch (e) { o.textContent = e.message; } }
+async function resetPw(uid, email) { if (!confirm('Reset the password for ' + email + '?')) return; try { const r = await post(`/api/admin/users/${uid}/password`, {}); $('#au-out').hidden = false; $('#au-out').textContent = `New password for ${email} (shown once): ${r.password}`; } catch (e) { toast(e.message, true); } }
+
+// ---------- files produced by a run ----------
+function fmtBytes(b) { if (b == null) return ''; return b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB'; }
+function fileUrl(runId, name) { return `${API}/api/task_runs/${runId}/files/${String(name).split('/').map(encodeURIComponent).join('/')}${qs()}`; }
+function filesHtml(runId, files) {
+  if (!runId || !files || !files.length) return '';
+  return '<div class="files">' + files.map(f => `<a class="file" href="${fileUrl(runId, f.name)}" target="_blank" rel="noopener"><span class="kind">${esc((f.kind || 'file').toUpperCase())}</span><span>${esc(f.label || f.name)}</span><span class="muted small">${fmtBytes(f.bytes)}</span></a>`).join('') + '</div>';
+}
+
+// ---------- chat ----------
+let CHAT = null;
+async function loadChat() {
+  const list = await j('/api/chats' + qs());
+  $('#chat-list').innerHTML = list.map(c => `<button class="${CHAT === c.id ? 'active' : ''}" onclick="openChat('${c.id}')"><span class="t">${esc(c.title || 'New chat')}</span><span class="small muted">${c.document_name ? 'about ' + esc(c.document_name) + ' Â· ' : ''}${c.messages} msgs Â· ${money(c.cost_usd)}</span></button>`).join('') || '<div class="small muted">No chats yet.</div>';
+  if (CHAT) await renderChat(); else { $('#chat-del').hidden = true; }
+}
+async function newChat(docId) {
+  const c = await post('/api/chats' + qs(), docId ? { document_id: docId } : {});
+  CHAT = c.id; localStorage.setItem('de_chat', CHAT); await loadChat(); $('#chat-text').focus();
+}
+async function askDoc(docId) { showView('chat'); await newChat(docId); }
+async function openChat(id) { CHAT = id; localStorage.setItem('de_chat', id); await loadChat(); }
+async function delChat() { if (!CHAT) return; await j('/api/chats/' + CHAT + qs(), { method: 'DELETE' }); CHAT = null; localStorage.removeItem('de_chat'); $('#msgs').innerHTML = ''; await loadChat(); }
+function msgEl(role, html, meta) { const d = document.createElement('div'); d.className = 'msg ' + role; d.innerHTML = html + (meta ? `<div class="meta">${meta}</div>` : ''); return d; }
+async function renderChat() {
+  const r = await j('/api/chats/' + CHAT + qs());
+  $('#chat-title').textContent = r.chat.title || 'Chat'; $('#chat-del').hidden = false;
+  const box = $('#msgs'); box.innerHTML = '';
+  for (const m of r.messages) {
+    if (m.role === 'user') box.appendChild(msgEl('user', esc(m.content)));
+    else box.appendChild(msgEl('bot', renderMd((m.content || '').replace(/\s*DONE\.?\s*$/, ''), m.cites) + filesHtml(r.chat.task_run_id, m.files), `${(m.tools || []).length} lookups Â· ${money(m.cost_usd)}${m.artifact ? ' Â· <a href="#" onclick="showView(\'artifacts\');return false">report in Artifacts</a>' : ''}`));
+  }
+  box.scrollTop = box.scrollHeight;
+}
+async function sendChat() {
+  const t = $('#chat-text').value.trim(); if (!t) return;
+  if (!CHAT) await newChat();
+  $('#chat-text').value = ''; $('#chat-send').disabled = true;
+  const box = $('#msgs'); if (box.querySelector('.empty')) box.innerHTML = '';
+  box.appendChild(msgEl('user', esc(t)));
+  const bot = msgEl('bot', '<span class="thinking">lookingâ€¦</span>'); box.appendChild(bot); box.scrollTop = box.scrollHeight;
+  let text = '', steps = [];
+  const paint = () => { bot.innerHTML = (text ? renderMd(text, {}) : '') + (steps.length ? `<div class="thinking">${esc(steps[steps.length - 1])}</div>` : '<span class="thinking">lookingâ€¦</span>'); box.scrollTop = box.scrollHeight; };
+  try {
+    const res = await fetch(API + '/api/chats/' + CHAT + '/message' + qs(), { method: 'POST', credentials: 'include', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text: t }) });
+    if (!res.ok) { let e = 'error ' + res.status; try { e = (await res.json()).detail || e; } catch (_) {} bot.innerHTML = `<span class="bad">${esc(e)}</span>`; $('#chat-send').disabled = false; return; }
+    const rd = res.body.getReader(); const dec = new TextDecoder(); let buf = '';
+    for (;;) {
+      const { value, done } = await rd.read(); if (done) break;
+      buf += dec.decode(value, { stream: true });
+      let i; while ((i = buf.indexOf('\n\n')) >= 0) {
+        const line = buf.slice(0, i).trim(); buf = buf.slice(i + 2); if (!line.startsWith('data: ')) continue;
+        const ev = JSON.parse(line.slice(6));
+        if (ev.type === 'delta') { text += ev.text; paint(); }
+        else if (ev.type === 'tool') { steps.push(ev.summary); paint(); }
+        else if (ev.type === 'error') { bot.innerHTML = `<span class="bad">${esc(ev.error)}</span>`; }
+        else if (ev.type === 'done') {
+          bot.innerHTML = renderMd(ev.text, ev.cites) + filesHtml(ev.task_run_id, ev.files) + `<div class="meta">${steps.length} lookups Â· ${money(ev.cost_usd)}${ev.artifact ? ' Â· <a href="#" onclick="showView(\'artifacts\');return false">report in Artifacts</a>' : ''}</div>`;
+          box.scrollTop = box.scrollHeight;
+        }
+      }
+    }
+  } catch (e) { bot.innerHTML = `<span class="bad">${esc(e.message)}</span>`; }
+  $('#chat-send').disabled = false; $('#chat-text').focus();
+  loadChat();
+}
+CHAT = localStorage.getItem('de_chat') || null;
+$('#chat-text').addEventListener('keydown', e => { if ((e.key === 'Enter' || e.keyCode === 13) && !e.shiftKey && !e.isComposing) { e.preventDefault(); sendChat(); } });
+
+// ---------- modes ----------
+function curMode() { const k = (ME && ME.workspace && ME.workspace.mode) || 'general'; return MODES.find(m => m.key === k) || MODES[0] || { key: 'general', examples: [], tasks: [] }; }
+function chips(ex) { return (ex || []).map(e => `<button onclick="tryPrompt(this)">${esc(e)}</button>`).join(''); }
+function renderMode() {
+  const m = curMode();
+  $('#task-mode').innerHTML = MODES.map(x => `<option value="${x.key}" ${x.key === m.key ? 'selected' : ''}>${esc(x.label)}</option>`).join('');
+  $('#mode-blurb').textContent = m.blurb || '';
+  $('#task-chips').innerHTML = chips(m.examples);
+  $('#oneclick').hidden = !(m.tasks && m.tasks.length);
+}
+async function setMode(k) { await post('/api/workspace/mode' + qs(), { mode: k }); ME.workspace.mode = k; renderMode(); toast('Mode: ' + curMode().label); }
+
+// ---------- onboarding ----------
+function dismissStart() { localStorage.setItem('de_start_hidden', '1'); $('#start').hidden = true; }
+function tryPrompt(b) { showView('tasks'); $('#task-text').value = b.textContent; $('#task-text').focus(); toast('Prompt loaded. Press Run when your files are in.'); }
+
+// ---------- feedback ----------
+let FB_RUN = null;
+function openFeedback(runId) { FB_RUN = runId || null; $('#fb-modal').hidden = false; $('#fb-msg').textContent = ''; $('#fb-about').textContent = runId ? 'About the report you are viewing.' : 'About: ' + (localStorage.getItem('de_view') || 'the app'); $('#fb-text').focus(); }
+function closeFeedback() { $('#fb-modal').hidden = true; }
+async function sendFeedback() {
+  const r = document.querySelector('input[name=fb-r]:checked');
+  try { await post('/api/feedback', { text: $('#fb-text').value, kind: $('#fb-kind').value, rating: r ? r.value : null, task_run_id: FB_RUN, page: localStorage.getItem('de_view') || '' });
+    $('#fb-text').value = ''; if (r) r.checked = false; closeFeedback(); toast('Thank you. Elvin sees this on his admin panel.'); }
+  catch (e) { $('#fb-msg').textContent = e.message; $('#fb-msg').className = 'small bad'; }
+}
+
+// ---------- account ----------
+function loadAccount() { $('#acct').innerHTML = `<b>${esc(ME.user.email)}</b> Â· role ${esc(ME.user.role)} Â· workspace ${esc(ME.workspace ? ME.workspace.name : '')}`; }
+async function changePw() { try { await post('/api/me/password', { current: $('#pw-cur').value, new: $('#pw-new').value }); $('#pw-msg').textContent = 'Password changed.'; $('#pw-msg').className = 'small ok'; } catch (e) { $('#pw-msg').textContent = e.message; $('#pw-msg').className = 'small bad'; } }
+async function deleteFiles() {
+  if ($('#del-confirm').value !== 'DELETE') return toast('Type DELETE to confirm', true);
+  if (!confirm('Delete every file in this workspace? This cannot be undone.')) return;
+  try { const r = await post('/api/workspace/delete_files' + qs(), { confirm: 'DELETE' }); $('#del-msg').textContent = `Deleted ${r.deleted.documents} documents, ${r.deleted.pages} pages, ${r.deleted.facts} facts, ${r.files_removed} files on disk.`; $('#del-msg').className = 'small ok'; $('#del-confirm').value = ''; }
+  catch (e) { $('#del-msg').textContent = e.message; $('#del-msg').className = 'small bad'; }
+}
+boot();
+</script></body></html>
