@@ -85,35 +85,33 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
 <div class="mcard" id="card">
 <div class="form-in">
 <img class="mcover" src="/img/cover-hero.webp" alt="The Artificial Advantage cover" width="600" height="960">
-<h2>Get the Toolkit free</h2>
-<div class="sub">One email, and it is yours. No spam, unsubscribe anytime.</div>
+<h2 id="fh">Get the Toolkit free</h2>
+<div class="sub" id="fs">One email, and it is yours. No spam, unsubscribe anytime.</div>
 <form id="f" novalidate>
 <div class="fieldrow"><input class="field" id="name" type="text" placeholder="First name (optional)" maxlength="80" autocomplete="given-name"></div>
 <div class="fieldrow"><input class="field" id="email" type="email" placeholder="Your best email" maxlength="120" required autocomplete="email"></div>
 <div class="hp" aria-hidden="true"><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
 <button class="btn btn--primary btn--full" type="submit" id="btn">Send me the Toolkit</button>
-<div class="msg" id="msg"></div>
-<div class="fine">Instant access, right on this page.</div>
+<div class="msg" id="msg" role="alert"></div>
+<div class="fine" id="ff">The Toolkit arrives by email. Confirm your address and a private download link follows.</div>
 </form>
 </div>
-<div class="done" id="done">
-<div class="tick">&#10003;</div>
-<h2>It is yours</h2>
-<p>Thanks<span id="dn"></span>. The whole kit is below. Download it now and keep it.</p>
-<a class="btn btn--primary btn--full" id="dl" href="/dl/The-Artificial-Advantage-Toolkit.zip">Download the Toolkit (.zip)</a>
+<div class="done" id="done" tabindex="-1">
+<div class="tick" aria-hidden="true">&#10003;</div>
+<h2 id="dh">Check your inbox</h2>
+<p id="dp">Thanks<span id="dn"></span>. I've sent you a short email. Click "Yes, that's me" and the Toolkit follows in a second email, with a private download link that works for 7 days. Nothing there in a few minutes? Check your spam folder.</p>
 <div class="files">
-<h3>Or take one piece at a time (Word, or plain text)</h3>
+<h3>What's in the zip (Word, plus plain text)</h3>
 <ol>
-<li><a href="/dl/taa-toolkit/00_START_HERE.docx" target="_blank" rel="noopener">Start here</a> <em>&middot; what is in the kit and where to begin &middot; <a href="/dl/taa-toolkit/00_START_HERE.md" target="_blank" rel="noopener">text</a></em></li>
-<li><a href="/dl/taa-toolkit/01_Exercises_Editable.docx" target="_blank" rel="noopener">The Exercises, editable</a> <em>&middot; every exercise (Ch 2 to 13) &middot; <a href="/dl/taa-toolkit/01_Exercises_Editable.md" target="_blank" rel="noopener">text</a></em></li>
-<li><a href="/dl/taa-toolkit/02_30_Day_Practice_Plan.docx" target="_blank" rel="noopener">The 30-Day Practice Plan</a> <em>&middot; with a checklist (Ch 1, Ch 14) &middot; <a href="/dl/taa-toolkit/02_30_Day_Practice_Plan.md" target="_blank" rel="noopener">text</a></em></li>
-<li><a href="/dl/taa-toolkit/03_3_Month_Practice_Plan.docx" target="_blank" rel="noopener">The 3-Month AI Practice Plan</a> <em>&middot; (Ch 14) &middot; <a href="/dl/taa-toolkit/03_3_Month_Practice_Plan.md" target="_blank" rel="noopener">text</a></em></li>
-<li><a href="/dl/taa-toolkit/04_Prompt_Library_Importable.docx" target="_blank" rel="noopener">The Professional Prompt Library, importable</a> <em>&middot; all twenty-five, plus a <a href="/dl/taa-toolkit/04_Prompt_Library_Importable.csv" target="_blank" rel="noopener">.csv</a> (Appendix E) &middot; <a href="/dl/taa-toolkit/04_Prompt_Library_Importable.md" target="_blank" rel="noopener">text</a></em></li>
-<li><a href="/dl/taa-toolkit/05_Role_Library.docx" target="_blank" rel="noopener">The Role Library</a> <em>&middot; all twenty-five roles (Appendix G) &middot; <a href="/dl/taa-toolkit/05_Role_Library.md" target="_blank" rel="noopener">text</a></em></li>
-<li><a href="/dl/taa-toolkit/06_Directors_Cheat_Sheet.docx" target="_blank" rel="noopener">The Director's Cheat Sheet</a> <em>&middot; CLEAR, RTC, Diagnostic Ladder, Two-Step &middot; <a href="/dl/taa-toolkit/06_Directors_Cheat_Sheet.md" target="_blank" rel="noopener">text</a></em></li>
-<li><a href="/dl/taa-toolkit/07_Tool_Selection_Cheat_Sheet.docx" target="_blank" rel="noopener">The Tool-Selection Cheat Sheet</a> <em>&middot; dated September 2026 &middot; <a href="/dl/taa-toolkit/07_Tool_Selection_Cheat_Sheet.md" target="_blank" rel="noopener">text</a></em></li>
+<li>Start here: what's in the kit and where to begin</li>
+<li>The Exercises, editable (Ch 2 to 13)</li>
+<li>The 30-Day Practice Plan, with a checklist (Ch 1, Ch 14)</li>
+<li>The 3-Month AI Practice Plan (Ch 14)</li>
+<li>The Professional Prompt Library, importable, plus a .csv (Appendix E)</li>
+<li>The Role Library, all twenty-five roles (Appendix G)</li>
+<li>The Director's Cheat Sheet: CLEAR, RTC, Diagnostic Ladder, Two-Step</li>
+<li>The Tool-Selection Cheat Sheet, dated September 2026</li>
 </ol>
-<p style="font-size:var(--fs-sm);color:var(--muted);margin-top:18px;border-top:1px solid var(--line-soft);padding-top:16px">Prefer to work on screen? The <a href="/books/the-artificial-advantage/" style="color:var(--accent-ink);font-weight:700">Companion Library</a> has the same material in your browser, no email needed.</p>
 </div>
 </div>
 </div>
@@ -122,12 +120,25 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
 </div>
 <script>
 (function(){
-  var SLUG="book1-toolkit", TITLE="The Artificial Advantage Toolkit", DL="/dl/The-Artificial-Advantage-Toolkit.zip";
+  // 2026-09-28 Runway v2 item 7: the Toolkit is reader-only (Rule 37). No file on
+  // this page: double opt-in, then fulfill.py emails a private 7-day link.
+  // ?m=expired (the link-expired landing) asks for a fresh link instead.
+  var SLUG="book1-toolkit", TITLE="The Artificial Advantage Toolkit";
   var GADS="AW-637214471/bylsCMuW0NUcEIe-7K8C", XEVT="";
   var f=document.getElementById('f'),msg=document.getElementById('msg'),btn=document.getElementById('btn');
+  var RELINK=false;try{RELINK=new URLSearchParams(location.search).get('m')==='expired';}catch(e){}
+  if(RELINK){
+    document.getElementById('fh').textContent='Get a fresh Toolkit link';
+    document.getElementById('fs').textContent='Your download link has expired. They last 7 days, so the Toolkit stays private to readers.';
+    document.getElementById('ff').textContent='Use the email the Toolkit went to. A new 7-day link follows in a minute or two.';
+    btn.textContent='Send me a fresh link';
+    document.getElementById('dh').textContent='A fresh link is on its way';
+    document.getElementById('dp').textContent='If that address already had the Toolkit, a new private link lands in a minute or two, good for 7 days. Nothing there? Check your spam folder, or clear the address bar back to elvinpeters.com/toolkit and sign up again.';
+  }
   function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
   function fail(t){msg.className='msg err';msg.textContent=t;}
   function source(){
+    if(RELINK)return 'relink:'+SLUG;
     var base='magnet:'+SLUG;
     try{var p=new URLSearchParams(location.search),b=[];
       ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=p.get(k);if(v)b.push(k.replace('utm_','')+'='+v);});
@@ -137,6 +148,8 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
     return base;
   }
   function convert(email){
+    if(RELINK)return;  // a fresh link for an existing reader is not a new lead
+    try{if(typeof gtag==='function')gtag('event','free_optin',{magnet:SLUG,page_path:location.pathname,transport_type:'beacon'});}catch(e){}
     // Enhanced conversions: hand Google the email (it hashes client-side) so it
     // can match conversions cookies would lose. Set before firing the event.
     try{if(email&&typeof gtag==='function')gtag('set','user_data',{email:email});}catch(e){}
@@ -148,7 +161,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
   function reveal(name){
     document.getElementById('dn').textContent=name?(' '+name):'';
     document.querySelector('#card .form-in').style.display='none';
-    document.getElementById('done').classList.add('on');
+    var d=document.getElementById('done');d.classList.add('on');try{d.focus();}catch(e){}
   }
   f.addEventListener('submit',function(e){
     e.preventDefault();msg.className='msg';msg.textContent='';
@@ -156,10 +169,11 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
     var email=val('email'),name=val('name');
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){return fail('Please enter a valid email.');}
     btn.disabled=true;btn.textContent='Sending...';
-    var body=new URLSearchParams({name:name||'Toolkit lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:val('website')}).toString();
+    var body=new URLSearchParams({name:name||(RELINK?'Fresh link':'Toolkit lead'),email:email,message:(RELINK?'Fresh link: ':'Lead magnet: ')+TITLE,source:source(),website:val('website')}).toString();
     fetch("https://ultimateaidirectory.com/api/lead",{method:'POST',mode:'cors',keepalive:true,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
-      .then(function(){convert(email);reveal(name);})
-      .catch(function(){convert(email);reveal(name);});  // always deliver the kit
+      .then(function(r){if(!r.ok)throw 0;convert(email);reveal(name);})
+      .catch(function(){btn.disabled=false;btn.textContent=RELINK?'Send me a fresh link':'Send me the Toolkit';
+        fail('That did not go through. Please try again in a minute, or email hello@elvinpeters.com and I will send it.');});
   });
 })();
 </script>

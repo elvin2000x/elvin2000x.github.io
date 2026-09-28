@@ -137,6 +137,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:v
     try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
     try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG});}catch(e){}
     try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG+'-'+POS});}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','free_optin',{magnet:SLUG,page_path:location.pathname});}catch(e){}
   }
   function reveal(){
     document.querySelector('#card .form-in').style.display='none';

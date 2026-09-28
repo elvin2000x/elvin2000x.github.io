@@ -182,7 +182,8 @@
     <div class="progress-wrap"><div class="progress-bar" id="bar"></div></div>
     <div id="stage"></div>
   </div>
-  <footer>© 2026 Elvin M. Peters · <a href="https://elvinpeters.com">elvinpeters.com</a></footer>
+  <footer>© 2026 Elvin M. Peters · <a href="https://elvinpeters.com">elvinpeters.com</a><p class="amz-disclosure" style="flex-basis:100%;width:100%;font-size:12px;margin:10px 0 0;opacity:.85">As an Amazon Associate I earn from qualifying purchases.</p>
+</footer>
 
 <script>
 /* =========================================================================
@@ -193,7 +194,7 @@
    runs from this copy. Keep it valid.
    ========================================================================= */
 var QUIZ = {
-  bookUrl: "https://www.amazon.com/dp/B0H4X2S2JD",
+  bookUrl: "https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20",
   salesUrl: "https://elvinpeters.com/",
   leadApi: "https://ultimateaidirectory.com/api/lead", // owned lead DB (HTTPS, CORS-enabled)
 
@@ -507,6 +508,10 @@ function startQuizEngine() {
       .then(function (cfg) {
         if (!started && cfg && cfg.intro && cfg.questions && cfg.questions.length && cfg.archetypes) {
           QUIZ = cfg;
+          // Runway v2 item 6: the remote config may carry an untagged amazon.com link.
+          if (/^https:\/\/www\.amazon\.com\//.test(QUIZ.bookUrl || "") && !/[?&]tag=/.test(QUIZ.bookUrl)) {
+            QUIZ.bookUrl += (QUIZ.bookUrl.indexOf("?") < 0 ? "?" : "&") + "tag=elvinpeters-20";
+          }
         }
         clearTimeout(timer); start();
       })
@@ -514,5 +519,12 @@ function startQuizEngine() {
   } catch (e) { clearTimeout(timer); start(); }
 })();
 </script>
+<script>/* outbound Amazon clicks (Runway v2 item 6): same listener as js/site.js, for pages without it */
+(function(){if(window.__epAmazonClicks)return;window.__epAmazonClicks=true;
+document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href*="amazon."]'):null;if(!a)return;
+var m=/^https?:\/\/(?:www\.)?amazon\.([a-z.]+)\/(?:[^?#]*\/)?(?:dp|gp\/product)\/([A-Z0-9]{10})|asin=([A-Z0-9]{10})/i.exec(a.href);
+var store=(/amazon\.([a-z.]+)\//i.exec(a.href)||[])[1]||'';var sec=a.closest('[data-placement]');
+var place=sec?sec.getAttribute('data-placement'):((a.closest('section[id],header[id],footer[id],div[id]')||{}).id||(a.closest('footer')?'footer':(a.closest('nav,header')?'nav':'body')));
+try{gtag('event','amazon_click',{surface:'site',store:store,asin:m?(m[2]||m[3]||''):'',placement:place,page_path:location.pathname,link_text:(a.textContent||'').trim().slice(0,60),transport_type:'beacon'});}catch(err){}},true);})();</script>
 </body>
 </html>

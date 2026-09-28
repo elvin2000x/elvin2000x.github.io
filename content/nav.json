@@ -108,7 +108,7 @@
  ],
  "cta": {
   "label": "Get the book",
-  "href": "https://www.amazon.com/dp/B0H4X2S2JD",
+  "href": "https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20",
   "ext": true
  },
  "pages": {
@@ -134,7 +134,7 @@
    ],
    "cta": {
     "label": "Get the book",
-    "href": "https://www.amazon.com/dp/B0H4X2S2JD",
+    "href": "https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20",
     "amazon": true,
     "aria": "Get the book on Amazon"
    }
@@ -548,7 +548,7 @@
    ],
    "cta": {
     "label": "Get the book",
-    "href": "https://www.amazon.com/dp/B0H4X2S2JD",
+    "href": "https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20",
     "amazon": true,
     "aria": "Get the book on Amazon"
    },
