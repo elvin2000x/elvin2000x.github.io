@@ -145,6 +145,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
     try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
     try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG});}catch(e){}
     try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG});}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','free_optin',{magnet:SLUG,page_path:location.pathname});}catch(e){}
   }
   function reveal(name){
     document.getElementById('dn').textContent=name?(' '+name):'';

@@ -216,10 +216,41 @@
         msg.style.display = 'block';
         try { fbq('track', 'Lead', { content_name: f.dataset.source }); } catch (e) {}
         try { gtag('event', 'generate_lead', { method: f.dataset.source }); } catch (e) {}
+        /* Runway v2 item 6: one named event per door, so GA4 can tell them apart. */
+        try {
+          if (f.dataset.magnet) gtag('event', 'free_optin', { magnet: f.dataset.source, page_path: location.pathname });
+          else gtag('event', 'newsletter_signup', { source: f.dataset.source, page_path: location.pathname });
+        } catch (e) {}
       }).catch(function () { failWith('Network hiccup. Try again.'); });
     });
   }
   function bootOptins() { document.querySelectorAll('.oi-form').forEach(wire); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootOptins);
   else bootOptins();
+})();
+
+/* ---------------- outbound Amazon clicks (Runway v2 item 6, 2026-09-28) ----------------
+   One delegated listener counts every click to any Amazon store as GA4 "amazon_click":
+   surface=site (emails are counted server-side), the store, the ASIN, where on the
+   page (data-placement, else the nearest section id), and the page. Beacon transport
+   so the hit survives the tab switch. Guarded: some pages load this file twice. */
+(function () {
+  'use strict';
+  if (window.__epAmazonClicks) return;
+  window.__epAmazonClicks = true;
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="amazon."]') : null;
+    if (!a) return;
+    var m = /^https?:\/\/(?:www\.)?amazon\.([a-z.]+)\/(?:[^?#]*\/)?(?:dp|gp\/product)\/([A-Z0-9]{10})|asin=([A-Z0-9]{10})/i.exec(a.href);
+    var store = (/amazon\.([a-z.]+)\//i.exec(a.href) || [])[1] || '';
+    var sec = a.closest('[data-placement]');
+    var place = sec ? sec.getAttribute('data-placement') : ((a.closest('section[id],header[id],footer[id],div[id]') || {}).id || (a.closest('footer') ? 'footer' : (a.closest('nav,header') ? 'nav' : 'body')));
+    try {
+      gtag('event', 'amazon_click', {
+        surface: 'site', store: store, asin: m ? (m[2] || m[3] || '') : '',
+        placement: place, page_path: location.pathname, link_text: (a.textContent || '').trim().slice(0, 60),
+        transport_type: 'beacon'
+      });
+    } catch (err) {}
+  }, true);
 })();

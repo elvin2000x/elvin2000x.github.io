@@ -181,13 +181,14 @@
         <div class="big">🙏</div>
         <h2>Got it. Thank you!</h2>
         <p>Your feedback just landed in my inbox and I read every single one. If you enjoyed the book, a quick Amazon review helps more than you know.</p>
-        <a class="btn ghost" href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">Leave an Amazon review</a>
+        <a class="btn ghost" href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener">Leave an Amazon review</a>
       </div>
     </div>
 
     <footer>
       The Artificial Advantage · <a href="https://elvinpeters.com/">elvinpeters.com</a>
-    </footer>
+    <p class="amz-disclosure" style="flex-basis:100%;width:100%;font-size:12px;margin:10px 0 0;opacity:.85">As an Amazon Associate I earn from qualifying purchases.</p>
+</footer>
   </div>
 
   <script>
@@ -258,5 +259,12 @@
       });
     });
   </script>
+<script>/* outbound Amazon clicks (Runway v2 item 6): same listener as js/site.js, for pages without it */
+(function(){if(window.__epAmazonClicks)return;window.__epAmazonClicks=true;
+document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href*="amazon."]'):null;if(!a)return;
+var m=/^https?:\/\/(?:www\.)?amazon\.([a-z.]+)\/(?:[^?#]*\/)?(?:dp|gp\/product)\/([A-Z0-9]{10})|asin=([A-Z0-9]{10})/i.exec(a.href);
+var store=(/amazon\.([a-z.]+)\//i.exec(a.href)||[])[1]||'';var sec=a.closest('[data-placement]');
+var place=sec?sec.getAttribute('data-placement'):((a.closest('section[id],header[id],footer[id],div[id]')||{}).id||(a.closest('footer')?'footer':(a.closest('nav,header')?'nav':'body')));
+try{gtag('event','amazon_click',{surface:'site',store:store,asin:m?(m[2]||m[3]||''):'',placement:place,page_path:location.pathname,link_text:(a.textContent||'').trim().slice(0,60),transport_type:'beacon'});}catch(err){}},true);})();</script>
 </body>
 </html>
