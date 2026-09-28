@@ -1,0 +1,60 @@
+{
+  "label": "Tick-list",
+  "about": "Checkboxes visitors tick (\"sound familiar?\"), each pointing to the chapter with the fix.",
+  "locked": "The tally line is driven by the page script.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "items",
+      "type": "list",
+      "label": "Lines",
+      "fields": [
+        {
+          "key": "text",
+          "type": "html",
+          "label": "Line"
+        },
+        {
+          "key": "fix",
+          "type": "text",
+          "label": "Where the fix is"
+        }
+      ]
+    },
+    {
+      "key": "tally",
+      "type": "html",
+      "label": "Tally line (before anything is ticked)"
+    },
+    {
+      "key": "banner",
+      "type": "html",
+      "label": "Closing banner"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "label": "The close",
+  "about": "Back to the opening promise with one more clear ask.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "image",
+      "type": "text",
+      "label": "Image"
+    },
+    {
+      "key": "image_alt",
+      "type": "text",
+      "label": "Image description"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "lede",
+      "type": "html",
+      "label": "Line under the heading"
+    },
+    {
+      "key": "value",
+      "type": "html",
+      "label": "Value line (optional)"
+    },
+    {
+      "key": "summary",
+      "type": "object",
+      "label": "Recap list (optional)",
+      "fields": [
+        {
+          "key": "points",
+          "type": "list",
+          "label": "Points"
+        }
+      ]
+    },
+    {
+      "key": "note",
+      "type": "object",
+      "label": "Signed note (optional)",
+      "fields": [
+        {
+          "key": "text",
+          "type": "html",
+          "label": "Note"
+        },
+        {
+          "key": "sig",
+          "type": "text",
+          "label": "Signature"
+        }
+      ]
+    },
+    {
+      "key": "buy",
+      "type": "buybox",
+      "label": "Buy box (optional)"
+    },
+    {
+      "key": "ps",
+      "type": "html",
+      "label": "P.S. (optional)"
+    }
+  ]
+}

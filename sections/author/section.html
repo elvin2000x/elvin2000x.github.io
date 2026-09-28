@@ -1,0 +1,13 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in author">
+    <img src="{{photo}}" alt="{{photo_alt}}" width="400" height="400" loading="lazy">
+    <div>
+      <span class="eyebrow">{{eyebrow}}</span>
+      <h2>{{heading}}</h2>
+      <p class="role">{{role}}</p>
+{{#paras}}
+      <p>{{.}}</p>
+{{/paras}}
+    </div>
+  </div>
+</section>

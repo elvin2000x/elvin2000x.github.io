@@ -1,0 +1,67 @@
+{
+  "label": "Email sign-up",
+  "about": "One email ask for visitors not ready to buy. Sign-ups go to the lead API.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "text",
+      "type": "html",
+      "label": "Text"
+    },
+    {
+      "key": "source",
+      "type": "text",
+      "label": "Lead source tag (keep it stable: reports group by it)"
+    },
+    {
+      "key": "placeholder",
+      "type": "text",
+      "label": "Email box placeholder"
+    },
+    {
+      "key": "button",
+      "type": "text",
+      "label": "Button"
+    },
+    {
+      "key": "fine_print",
+      "type": "text",
+      "label": "Fine print"
+    },
+    {
+      "key": "success",
+      "type": "text",
+      "label": "Message after signing up"
+    },
+    {
+      "key": "after",
+      "type": "html",
+      "label": "Line after (optional)"
+    }
+  ]
+}

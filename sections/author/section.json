@@ -1,0 +1,52 @@
+{
+  "label": "About the author",
+  "about": "Headshot, name, role and a few paragraphs.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "photo",
+      "type": "text",
+      "label": "Photo"
+    },
+    {
+      "key": "photo_alt",
+      "type": "text",
+      "label": "Photo description"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "role",
+      "type": "text",
+      "label": "Role line"
+    },
+    {
+      "key": "paras",
+      "type": "list",
+      "label": "Paragraphs"
+    }
+  ]
+}

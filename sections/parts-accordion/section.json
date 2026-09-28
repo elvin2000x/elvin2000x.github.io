@@ -1,0 +1,69 @@
+{
+  "label": "Parts of the book",
+  "about": "The book's parts as outcomes, each opening to its chapter list, then a buy box.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "parts",
+      "type": "list",
+      "label": "Parts",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Part"
+        },
+        {
+          "key": "outcome",
+          "type": "html",
+          "label": "Outcome"
+        },
+        {
+          "key": "points",
+          "type": "list",
+          "label": "Chapters"
+        }
+      ]
+    },
+    {
+      "key": "value",
+      "type": "html",
+      "label": "Value line"
+    },
+    {
+      "key": "buy",
+      "type": "buybox",
+      "label": "Buy box (optional)"
+    }
+  ]
+}

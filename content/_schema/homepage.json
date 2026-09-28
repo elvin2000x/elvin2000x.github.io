@@ -1,0 +1,9 @@
+{
+  "title": "Which page is the homepage",
+  "kind": "homepage",
+  "file": "homepage.json",
+  "preview": "/",
+  "fields": [
+    { "key": "home", "type": "text", "label": "The page shown at elvinpeters.com/" }
+  ]
+}

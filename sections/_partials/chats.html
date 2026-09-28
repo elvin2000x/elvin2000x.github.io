@@ -1,0 +1,13 @@
+<div class="chat chat--before">
+  <div class="chat-h"><span>Asked</span>{{#before_time}}<span class="timer timer--slow">{{before_time}}</span>{{/before_time}}{{#before_res}}<b class="res">{{before_res}}</b>{{/before_res}}</div>
+  <p class="bubble">{{before_prompt}}</p>
+  <p class="chat-out">{{before_result}}</p>
+</div>
+<div class="chat chat--after">
+  <div class="chat-h"><span>Directed</span>{{#after_time}}<span class="timer timer--fast">{{after_time}}</span>{{/after_time}}{{#after_res}}<b class="res">{{after_res}}</b>{{/after_res}}</div>
+  <p class="bubble">{{after_prompt}}</p>
+  <p class="chat-out">{{after_result}}</p>
+{{#note}}
+  <p class="timing-note">{{note}}</p>
+{{/note}}
+</div>

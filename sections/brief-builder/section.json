@@ -1,0 +1,98 @@
+{
+  "label": "Brief builder",
+  "about": "The interactive role, task and constraint builder.",
+  "locked": "The three boxes are wired to the page script.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "quote",
+      "type": "html",
+      "label": "Pull quote"
+    },
+    {
+      "key": "quote_source",
+      "type": "text",
+      "label": "Quote source"
+    },
+    {
+      "key": "form_note",
+      "type": "text",
+      "label": "Note above the boxes"
+    },
+    {
+      "key": "role_hint",
+      "type": "text",
+      "label": "Role hint"
+    },
+    {
+      "key": "role_example",
+      "type": "text",
+      "label": "Role example"
+    },
+    {
+      "key": "task_hint",
+      "type": "text",
+      "label": "Task hint"
+    },
+    {
+      "key": "task_example",
+      "type": "text",
+      "label": "Task example"
+    },
+    {
+      "key": "con_hint",
+      "type": "text",
+      "label": "Constraint hint"
+    },
+    {
+      "key": "con_example",
+      "type": "text",
+      "label": "Constraint example"
+    },
+    {
+      "key": "example_out",
+      "type": "text",
+      "label": "Example brief shown before typing"
+    },
+    {
+      "key": "after",
+      "type": "html",
+      "label": "Line after the builder"
+    },
+    {
+      "key": "buy",
+      "type": "buybox",
+      "label": "Buy box (optional)"
+    }
+  ]
+}

@@ -570,11 +570,128 @@ function discardAll(){
 /* ---- Pages tab ---- */
 var PAGE_ICONS = {claude: "text", "content-machine": "video", site: "gear"};
 function viewPages(){
-  var names = Object.keys(SECTIONS).filter(function(n){ return n !== "essays" && n !== "nav"; });
-  return '<div class="grid apps pagecards">' + names.map(function(n){
-    var s = SECTIONS[n];
-    return '<a class="card app" href="#page/' + esc(n) + '" style="text-decoration:none"><span class="ic t-blue">' + icon(PAGE_ICONS[n] || "layout") + '</span><span class="tx"><span class="t">' + esc(s.title) + '</span><small>' + esc(s.help || ("Shows on " + (s.preview || "/"))) + '</small></span></a>';
-  }).join("") + '</div><p class="subtle" style="font-size:13px;margin-top:18px">These are the parts of elvinpeters.com that are driven by content files. Everything else on the site is hand-built and changes through code.</p>';
+  var names = Object.keys(SECTIONS).filter(function(n){ return n !== "essays" && n !== "nav" && SECTIONS[n].kind !== "homepage"; });
+  var stacks = names.filter(function(n){ return SECTIONS[n].kind === "stack"; });
+  var others = names.filter(function(n){ return SECTIONS[n].kind !== "stack"; });
+  function card(n){
+    var s = SECTIONS[n], st = s.kind === "stack";
+    var home = st && HOMEPAGE && HOMEPAGE.home === n;
+    var where = st ? (home ? "Shows on / (the homepage)" : "Not the homepage. " + (s.help || "")) : (s.help || ("Shows on " + (s.preview || "/")));
+    return '<a class="card app" href="#page/' + esc(n) + '" style="text-decoration:none"><span class="ic t-blue">' + icon(PAGE_ICONS[n] || "layout") + '</span><span class="tx"><span class="t">' + esc(s.title) +
+      (home ? ' <span class="chip live"><span class="dot"></span>Homepage</span>' : "") + '</span><small>' + esc(where) + '</small></span></a>';
+  }
+  if (stacks.length && !HOMEPAGE) loadHomepage().then(function(){ if (ROUTE === "pages" && SITETAB === "pages") route(); });
+  return (stacks.length ? '<div class="panel-h" style="margin:0 0 10px"><h2 style="font-size:17px">Pages built from sections</h2><div class="sp"></div><button class="btn tonal sm" onclick="openLibrary()">' + icon("layout", "width:16px;height:16px") + 'Section library</button></div>' +
+      '<div class="grid apps pagecards" style="margin-bottom:22px">' + stacks.map(card).join("") + '</div><h2 style="font-size:17px;margin:0 0 10px">Content blocks</h2>' : "") +
+    '<div class="grid apps pagecards">' + others.map(card).join("") + '</div><p class="subtle" style="font-size:13px;margin-top:18px">These are the parts of elvinpeters.com that are driven by content files. Everything else on the site is hand-built and changes through code.</p>';
+}
+
+/* ================= Stack pages (slice 2): a page as a list of section cards ================= */
+var HOMEPAGE = null, LIBRARY = null;
+function loadHomepage(){ return SECTIONS.homepage ? loadDoc("homepage").then(function(d){ HOMEPAGE = d; return d; }) : Promise.resolve(null); }
+function loadLibrary(){
+  if (LIBRARY) return Promise.resolve(LIBRARY);
+  return api("GET", "/api/library").then(function(r){ LIBRARY = {}; r.data.types.forEach(function(t){ LIBRARY[t.type] = t; }); return LIBRARY; });
+}
+function stackPath(name, stack){ return HOMEPAGE && HOMEPAGE.home === name ? "/" : (stack && stack.preview_path ? "/" + stack.preview_path.replace(/index\.html$/, "") : "/"); }
+// Every word a section carries, in field order, for the read-only view.
+function sectionWords(fields, data){
+  var out = [];
+  (fields || []).forEach(function(f){
+    if (f.hidden || data == null) return;
+    var v = data[f.key];
+    if (v == null || v === "" || v === false) return;
+    if (f.type === "list") (v || []).forEach(function(it, i){
+      if (typeof it === "string") out.push({label: f.label + " " + (i + 1), text: it});
+      else sectionWords(f.fields, it).forEach(function(w){ out.push({label: f.label + " " + (i + 1) + " · " + w.label, text: w.text}); });
+    });
+    else if (f.type === "object") sectionWords(f.fields, v).forEach(function(w){ out.push({label: f.label + " · " + w.label, text: w.text}); });
+    else if (f.type === "bool") out.push({label: f.label, text: "Yes"});
+    else if (f.type !== "choice" || v) out.push({label: f.label, text: String(v)});
+  });
+  return out;
+}
+function openStack(name){
+  var s = SECTIONS[name];
+  $("#main").innerHTML = '<div class="head"><a class="iconbtn" href="#pages" title="Back">' + icon("back") + '</a>' +
+    '<div><div class="crumb"><a href="#pages">Website</a><span>›</span><span style="color:var(--ink)">' + esc(s.title) + '</span></div>' +
+    '<span class="urlpill" id="stackurl" style="padding-right:12px">elvinpeters.com/</span></div>' +
+    '<div class="sp"></div><span class="save" id="savestate">' + icon("check", "width:16px;height:16px") + 'All changes saved</span>' +
+    '<span id="homebtn"></span>' +
+    '<button class="btn" id="stacktest" title="Open the whole site with your drafts at the private test address">' + icon("eye") + 'Test</button>' +
+    '<button class="btn filled" onclick="openPublish([\'content/' + esc(name) + '.json\'])">' + icon("rocket") + 'Publish</button></div>' +
+    '<div class="ed" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)"><div class="card"><div class="panel-h"><h2>Sections</h2><div class="sp"></div><button class="btn tonal sm" onclick="openLibrary()">Library</button></div><div class="form" id="secform"><div class="empty">Loading…</div></div></div>' +
+    '<div id="secpv"></div></div>';
+  Promise.all([loadDoc(name), loadLibrary(), loadHomepage()]).then(function(){ SEC = s; drawStack(); })
+    .catch(function(e){ $("#secform").innerHTML = '<div class="empty">Could not load: ' + esc(e.message) + '</div>'; });
+}
+function drawStack(){
+  var name = SEC.name, stack = DOCS[name], path = stackPath(name, stack), home = HOMEPAGE && HOMEPAGE.home === name;
+  $("#stackurl").textContent = "elvinpeters.com" + path;
+  $("#stacktest").onclick = function(){ runTest(path); };
+  $("#homebtn").innerHTML = home ? '<span class="chip live" title="This page is what visitors see at elvinpeters.com/"><span class="dot"></span>Homepage</span>'
+    : (SECTIONS.homepage ? '<button class="btn" onclick="makeHomepage(\'' + esc(name) + '\')">' + icon("rocket") + 'Make this the homepage</button>' : "");
+  var h = '<p class="subtle" style="margin:0 0 12px">' + esc(stack.sections.length) + ' sections, top to bottom in page order. Open a card to read its words.</p>';
+  stack.sections.forEach(function(sec, i){
+    var t = LIBRARY[sec.type] || {label: sec.type, fields: []};
+    var words = sectionWords(t.fields, sec.data);
+    h += '<details class="item stackcard" data-i="' + i + '"' + (sec.hidden ? ' style="opacity:.55"' : "") + '><summary>' +
+      '<span class="grip" style="font:600 13px/1 var(--sans,inherit);min-width:22px;text-align:center">' + (i + 1) + '</span>' +
+      '<span class="it">' + esc(t.label) + ' <small class="subtle">' + esc(sec.id) + '</small>' +
+      (sec.hidden ? ' <span class="chip draft" title="Hidden sections stay in the list but are not on the page">Hidden</span>' : "") +
+      (t.locked ? ' <span class="chip" title="' + esc(t.locked) + '">Interactive</span>' : "") + '</span>' +
+      '<button class="iconbtn" title="Move up" data-smv="-1"' + (i === 0 ? " disabled" : "") + '>' + icon("up", "width:18px;height:18px") + '</button>' +
+      '<button class="iconbtn" title="Move down" data-smv="1"' + (i === stack.sections.length - 1 ? " disabled" : "") + '>' + icon("down", "width:18px;height:18px") + '</button>' +
+      '<button class="iconbtn" title="' + (sec.hidden ? "Show on the page" : "Hide from the page") + '" data-shide="1">' + icon("eye", "width:18px;height:18px") + '</button></summary>' +
+      '<div class="form"><p class="subtle" style="margin:0 0 8px">' + esc(t.about || "") + '</p>' +
+      words.map(function(w){ return '<div class="field"><label>' + esc(w.label) + '</label><div class="help" style="white-space:pre-wrap;color:var(--ink)">' + esc(textOf(w.text).replace(/\s+/g, " ").trim()) + '</div></div>'; }).join("") +
+      '<p class="subtle" style="font-size:12px;margin:8px 0 0">Word editing arrives in the next Studio update. For now, change the words in content/' + esc(name) + '.json.</p></div></details>';
+  });
+  $("#secform").innerHTML = h;
+  $$("#secform [data-smv]").forEach(function(b){ b.onclick = function(e){
+    e.preventDefault(); var i = +b.closest("[data-i]").dataset.i, j = i + (+b.dataset.smv), arr = DOCS[name].sections;
+    if (j < 0 || j >= arr.length) return; var x = arr[i]; arr[i] = arr[j]; arr[j] = x; stackChanged();
+  }; });
+  $$("#secform [data-shide]").forEach(function(b){ b.onclick = function(e){
+    e.preventDefault(); var sec = DOCS[name].sections[+b.closest("[data-i]").dataset.i];
+    if (sec.hidden) delete sec.hidden; else sec.hidden = true; stackChanged();
+  }; });
+  drawRealPreview("#secpv", path, true);
+}
+function stackChanged(){
+  drawStack();
+  queueSave(SEC.name);
+  clearTimeout(stackChanged.t);
+  stackChanged.t = setTimeout(function(){ flushSaves().then(function(){ drawRealPreview("#secpv", stackPath(SEC.name, DOCS[SEC.name]), true); }); }, 1200);
+}
+function makeHomepage(name){
+  var s = SECTIONS[name], cur = HOMEPAGE && SECTIONS[HOMEPAGE.home];
+  showModal('<h2 style="margin-top:0">Make "' + esc(s.title) + '" the homepage?</h2>' +
+    '<p>Visitors to <b>elvinpeters.com/</b> will see this page instead of ' + (cur ? '"' + esc(cur.title) + '"' : "the current homepage") + '. It gets the homepage\'s search listing, social preview and ad tracking. Its old test address will send people to /.</p>' +
+    '<p>This only saves a <b>draft</b>. Nothing changes on the live site until you press Test to check it and then Publish. You can switch back the same way.</p>' +
+    '<div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px"><button class="btn" onclick="closeModal()">Cancel</button>' +
+    '<button class="btn filled" id="mkhome">Save as a draft</button></div>');
+  $("#mkhome").onclick = function(){
+    var data = {home: name};
+    api("PUT", "/api/content/homepage", data, {"If-Match": VERS.homepage || ""}).then(function(r){
+      HOMEPAGE = data; DOCS.homepage = data; VERS.homepage = r.data.version; pendingChanges(true);
+      closeModal(); toast("Homepage switch saved as a draft. Test it, then publish content/homepage.json.");
+      refreshState().then(function(){ drawStack(); });
+    }).catch(function(e){ closeModal(); toast("Could not save: " + e.message); });
+  };
+}
+function openLibrary(){
+  loadLibrary().then(function(lib){
+    var used = {};
+    Object.keys(SECTIONS).forEach(function(n){ var d = DOCS[n]; if (SECTIONS[n].kind === "stack" && d && d.sections) d.sections.forEach(function(x){ (used[x.type] = used[x.type] || []).indexOf(SECTIONS[n].title) < 0 && used[x.type].push(SECTIONS[n].title); }); });
+    showModal('<h2 style="margin-top:0">Section library</h2><p class="subtle">The section types a page can be built from. ' + Object.keys(lib).length + ' types.</p>' +
+      Object.keys(lib).map(function(k){ var t = lib[k];
+        return '<div class="card" style="padding:12px 14px;margin:8px 0"><b>' + esc(t.label) + '</b> <small class="subtle">' + esc(k) + '</small>' +
+          (t.locked ? ' <span class="chip" title="' + esc(t.locked) + '">Interactive</span>' : "") +
+          '<div class="subtle" style="font-size:13px;margin-top:4px">' + esc(t.about || "") + '</div>' +
+          (used[k] ? '<div style="font-size:12px;margin-top:4px">Used on: ' + esc(used[k].join(", ")) + '</div>' : "") + '</div>';
+      }).join(""), true);
+  }).catch(function(e){ toast("Could not load the library: " + e.message); });
 }
 
 /* ================= Generic section editor (pages + menu) ================= */
@@ -593,6 +710,8 @@ function fieldHtml(f, key, val){
 var SEC = null, SECROOT = null, OPENITEM = {};
 function openSection(name){
   if (!SECTIONS[name] || name === "essays") { location.hash = "#pages"; return; }
+  if (SECTIONS[name].kind === "stack") return openStack(name);
+  if (SECTIONS[name].kind === "homepage") { location.hash = "#pages"; return; }
   var s = SECTIONS[name];
   $("#main").innerHTML = '<div class="head"><a class="iconbtn" href="#pages" title="Back">' + icon("back") + '</a>' +
     '<div><div class="crumb"><a href="#pages">Website</a><span>›</span><span style="color:var(--ink)">' + esc(s.title) + '</span></div>' +

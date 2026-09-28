@@ -1,0 +1,136 @@
+{
+  "label": "Before and after (swipe)",
+  "about": "Asked-vs-directed cases in a swipe row, each with its brief split into role, task and constraint.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "cases",
+      "type": "list",
+      "label": "Cases",
+      "fields": [
+        {
+          "key": "before_time",
+          "type": "text",
+          "label": "Asked: time taken (or leave empty and use a result tag)"
+        },
+        {
+          "key": "before_res",
+          "type": "text",
+          "label": "Asked: result tag"
+        },
+        {
+          "key": "before_prompt",
+          "type": "html",
+          "label": "Asked: the prompt"
+        },
+        {
+          "key": "before_result",
+          "type": "html",
+          "label": "Asked: what came back"
+        },
+        {
+          "key": "after_time",
+          "type": "text",
+          "label": "Directed: time taken"
+        },
+        {
+          "key": "after_res",
+          "type": "text",
+          "label": "Directed: result tag"
+        },
+        {
+          "key": "after_prompt",
+          "type": "html",
+          "label": "Directed: the brief"
+        },
+        {
+          "key": "after_result",
+          "type": "html",
+          "label": "Directed: what came back"
+        },
+        {
+          "key": "note",
+          "type": "text",
+          "label": "Small note under the directed side (optional)"
+        },
+        {
+          "key": "parts_label",
+          "type": "text",
+          "label": "Parts toggle label"
+        },
+        {
+          "key": "parts",
+          "type": "list",
+          "label": "The brief's parts",
+          "fields": [
+            {
+              "key": "kind",
+              "type": "choice",
+              "label": "Part",
+              "options": [
+                "r",
+                "t",
+                "c"
+              ]
+            },
+            {
+              "key": "label",
+              "type": "text",
+              "label": "Label"
+            },
+            {
+              "key": "text",
+              "type": "html",
+              "label": "Text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "hint",
+      "type": "html",
+      "label": "Swipe hint"
+    },
+    {
+      "key": "pullline",
+      "type": "html",
+      "label": "Closing line"
+    },
+    {
+      "key": "buy",
+      "type": "buybox",
+      "label": "Buy box (optional)"
+    }
+  ]
+}

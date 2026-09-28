@@ -1,0 +1,19 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <h2>{{heading}}</h2>
+    <p>{{intro}}</p>
+    <div class="cast">
+{{#cast}}
+      <details class="card"><summary><img class="face" src="{{image}}" alt="" width="400" height="400" loading="lazy"><span class="tag">{{tag}}</span><span class="ct">{{name}}</span><span class="cl">{{line}}</span><span class="ci" aria-hidden="true">+</span></summary>
+        <div class="cx">{{body}}</div></details>
+{{/cast}}
+    </div>
+    <p class="cast-note">{{cast_note}}</p>
+    <h3 class="h3">{{fit_heading}}</h3>
+    <div class="cards cards--2">
+{{#fits}}
+      <details class="card card--row"><summary><span class="ct">{{title}}</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx">{{body}}</div></details>
+{{/fits}}
+    </div>
+  </div>
+</section>

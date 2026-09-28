@@ -1,0 +1,25 @@
+<header class="hero"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="in--wide">
+    <div>
+{{#eyebrow}}
+      <span class="eyebrow">{{eyebrow}}</span>
+{{/eyebrow}}
+      <h1 id="hl">{{headline}}</h1>
+      <p class="hero-sub" id="sub">{{sub}}</p>
+{{#hook_note}}
+      <!-- #hook: {{hook_note}} -->
+{{/hook_note}}
+      <p class="hero-sub" id="hook" style="font-weight:600;color:var(--ink)"></p>
+{{#review}}
+      <a class="hero-review" href="#reviews"><span class="stars" aria-label="Rated 5 out of 5 stars">★★★★★</span> {{quote}} <small>{{source}}</small></a>
+{{/review}}
+{{#buy}}
+      {{>buybox}}
+{{/buy}}
+      <p class="trust">{{trust}}</p>
+    </div>
+    <div class="hero-art">
+      <img src="{{image}}" alt="{{image_alt}}" width="686" height="1140" fetchpriority="high">
+    </div>
+  </div>
+</header>

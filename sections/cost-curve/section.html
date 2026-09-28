@@ -1,0 +1,21 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <h2>{{heading}}</h2>
+    <p class="pullline" style="margin:0 0 18px">{{quote}} <small class="price-line" style="font-style:normal">{{quote_source}}</small></p>
+    <svg class="curves" viewBox="0 0 320 150" role="img" aria-label="{{chart_label}}">
+      <line x1="20" y1="130" x2="310" y2="130" stroke="currentColor" stroke-opacity=".25"/>
+      <line x1="20" y1="10" x2="20" y2="130" stroke="currentColor" stroke-opacity=".25"/>
+      <path d="M20 125 C 90 115, 150 80, 300 40" fill="none" stroke="var(--accent)" stroke-width="3"/>
+      <path d="M150 128 C 200 126, 240 90, 300 18" fill="none" stroke="#8f2f2f" stroke-width="3" stroke-dasharray="6 5"/>
+      <text x="200" y="68" font-size="11" fill="var(--accent-ink)">{{early_label}}</text>
+      <text x="236" y="112" font-size="11" fill="#8f2f2f">{{late_label}}</text>
+      <text x="24" y="146" font-size="10" fill="currentColor" fill-opacity=".6">{{axis_label}}</text>
+    </svg>
+    <div class="cards cards--2">
+{{#cards}}
+      <details class="card"><summary><span class="ct">{{title}}</span><span class="cl">{{line}}</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx">{{body}}</div></details>
+{{/cards}}
+    </div>
+    <p class="banner" style="margin-top:8px">{{banner}}</p>
+  </div>
+</section>

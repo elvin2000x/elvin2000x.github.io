@@ -177,8 +177,24 @@ function stripTracking(html) {
 
 /* ---------- content validation ---------- */
 const SLUG = /^[a-z0-9][a-z0-9-]{0,79}$/;
+const Sections = require(path.join(ROOT, 'sections.js'));
+const kindOf = name => { try { return JSON.parse(fs.readFileSync(path.join(SCHEMA_DIR, name + '.json'), 'utf8')).kind || ''; } catch (e) { return ''; } };
 function validate(name, data) {
   if (data === null || typeof data !== 'object') return 'content must be a JSON object';
+  // A stack page (slice 2): the section list must be sound AND render, so a
+  // draft that would break the build is refused at save time, not at publish.
+  if (kindOf(name) === 'stack') {
+    const errs = Sections.checkStack(data, name);
+    if (errs.length) return errs.slice(0, 3).join('; ');
+    try {
+      const site = JSON.parse(current(contentKey('site')).buf.toString('utf8'));
+      Sections.renderStack(data, name, { site, isHome: false });
+    } catch (e) { return 'this page would not build: ' + String(e.message).slice(0, 160); }
+  }
+  if (name === 'homepage') {
+    if (typeof data.home !== 'string' || kindOf(data.home) !== 'stack' || !current(contentKey(data.home)))
+      return 'the homepage must be one of the pages built from sections';
+  }
   if (name === 'essays') {
     const posts = Array.isArray(data) ? data : data.posts;
     if (!Array.isArray(posts)) return 'essays.json needs a posts list';
@@ -390,6 +406,9 @@ const server = http.createServer((req, res) => {
     }
 
     if (p === '/api/history' && req.method === 'GET') return json(res, 200, { history: history() });
+
+    // The section library: every type a stack page can use (sections/<type>/section.json).
+    if (p === '/api/library' && req.method === 'GET') return json(res, 200, { types: Sections.library() });
 
     // Drafts: what's waiting, and each one's revisions (newest first).
     if (p === '/api/drafts' && req.method === 'GET') {

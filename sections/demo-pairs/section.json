@@ -1,0 +1,151 @@
+{
+  "label": "Before and after (open)",
+  "about": "One asked-vs-directed pair shown open, more pairs behind a \"more examples\" toggle.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "lead",
+      "type": "object",
+      "label": "The pair shown open",
+      "fields": [
+        {
+          "key": "before_time",
+          "type": "text",
+          "label": "Asked: time taken (or leave empty and use a result tag)"
+        },
+        {
+          "key": "before_res",
+          "type": "text",
+          "label": "Asked: result tag"
+        },
+        {
+          "key": "before_prompt",
+          "type": "html",
+          "label": "Asked: the prompt"
+        },
+        {
+          "key": "before_result",
+          "type": "html",
+          "label": "Asked: what came back"
+        },
+        {
+          "key": "after_time",
+          "type": "text",
+          "label": "Directed: time taken"
+        },
+        {
+          "key": "after_res",
+          "type": "text",
+          "label": "Directed: result tag"
+        },
+        {
+          "key": "after_prompt",
+          "type": "html",
+          "label": "Directed: the brief"
+        },
+        {
+          "key": "after_result",
+          "type": "html",
+          "label": "Directed: what came back"
+        },
+        {
+          "key": "note",
+          "type": "text",
+          "label": "Small note under the directed side (optional)"
+        }
+      ]
+    },
+    {
+      "key": "more_label",
+      "type": "text",
+      "label": "Toggle label"
+    },
+    {
+      "key": "more",
+      "type": "list",
+      "label": "More pairs",
+      "fields": [
+        {
+          "key": "before_time",
+          "type": "text",
+          "label": "Asked: time taken (or leave empty and use a result tag)"
+        },
+        {
+          "key": "before_res",
+          "type": "text",
+          "label": "Asked: result tag"
+        },
+        {
+          "key": "before_prompt",
+          "type": "html",
+          "label": "Asked: the prompt"
+        },
+        {
+          "key": "before_result",
+          "type": "html",
+          "label": "Asked: what came back"
+        },
+        {
+          "key": "after_time",
+          "type": "text",
+          "label": "Directed: time taken"
+        },
+        {
+          "key": "after_res",
+          "type": "text",
+          "label": "Directed: result tag"
+        },
+        {
+          "key": "after_prompt",
+          "type": "html",
+          "label": "Directed: the brief"
+        },
+        {
+          "key": "after_result",
+          "type": "html",
+          "label": "Directed: what came back"
+        },
+        {
+          "key": "note",
+          "type": "text",
+          "label": "Small note under the directed side (optional)"
+        }
+      ]
+    },
+    {
+      "key": "pullline",
+      "type": "html",
+      "label": "Closing line"
+    }
+  ]
+}

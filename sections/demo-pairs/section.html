@@ -1,0 +1,21 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <span class="eyebrow">{{eyebrow}}</span>
+    <h2>{{heading}}</h2>
+    <p class="lede">{{intro}}</p>
+    <div class="demo-pair">
+{{#lead}}
+        {{>chats}}
+{{/lead}}
+      </div>
+    <details class="more">
+      <summary>{{more_label}}</summary>
+{{#more}}
+      <div class="demo-pair">
+        {{>chats}}
+      </div>
+{{/more}}
+    </details>
+    <p class="pullline">{{pullline}}</p>
+  </div>
+</section>

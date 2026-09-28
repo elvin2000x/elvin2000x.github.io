@@ -1,0 +1,96 @@
+{
+  "label": "About the author (cards)",
+  "about": "Headshot, intro, career cards that open, and the book series.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "photo",
+      "type": "text",
+      "label": "Photo"
+    },
+    {
+      "key": "photo_alt",
+      "type": "text",
+      "label": "Photo description"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "cards",
+      "type": "list",
+      "label": "Career cards",
+      "fields": [
+        {
+          "key": "tag",
+          "type": "text",
+          "label": "Tag"
+        },
+        {
+          "key": "title",
+          "type": "html",
+          "label": "Title"
+        },
+        {
+          "key": "body",
+          "type": "html",
+          "label": "Opened text"
+        }
+      ]
+    },
+    {
+      "key": "series",
+      "type": "list",
+      "label": "The series",
+      "fields": [
+        {
+          "key": "live",
+          "type": "bool",
+          "label": "Out now"
+        },
+        {
+          "key": "status",
+          "type": "text",
+          "label": "Status"
+        },
+        {
+          "key": "title",
+          "type": "text",
+          "label": "Title"
+        }
+      ]
+    },
+    {
+      "key": "after",
+      "type": "html",
+      "label": "Closing line"
+    }
+  ]
+}

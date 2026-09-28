@@ -1,0 +1,19 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+{{#eyebrow}}
+    <span class="eyebrow">{{eyebrow}}</span>
+{{/eyebrow}}
+    <h2>{{heading}}</h2>
+{{#intro}}
+    <p>{{intro}}</p>
+{{/intro}}
+    <ol class="tl">
+{{#steps}}
+      <li><details class="card"><summary><span class="tag">{{tag}}</span><span class="ct">{{title}}</span>{{#line}}<span class="cl">{{line}}</span>{{/line}}<span class="ci" aria-hidden="true">+</span></summary><div class="cx">{{body}}</div></details></li>
+{{/steps}}
+    </ol>
+{{#buy}}
+    {{>buybox}}
+{{/buy}}
+  </div>
+</section>

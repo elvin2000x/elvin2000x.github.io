@@ -1,0 +1,69 @@
+{
+  "label": "Timeline",
+  "about": "Steps down a line, each opening to its story.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading (optional)"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line (optional)"
+    },
+    {
+      "key": "steps",
+      "type": "list",
+      "label": "Steps",
+      "fields": [
+        {
+          "key": "tag",
+          "type": "text",
+          "label": "Tag"
+        },
+        {
+          "key": "title",
+          "type": "html",
+          "label": "Title"
+        },
+        {
+          "key": "line",
+          "type": "html",
+          "label": "One line (optional)"
+        },
+        {
+          "key": "body",
+          "type": "html",
+          "label": "Opened text"
+        }
+      ]
+    },
+    {
+      "key": "buy",
+      "type": "buybox",
+      "label": "Buy box (optional)"
+    }
+  ]
+}

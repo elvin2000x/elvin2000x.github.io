@@ -1,0 +1,35 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <span class="eyebrow">{{eyebrow}}</span>
+    <h2>{{heading}}</h2>
+{{#grid}}
+    <div class="reviews-grid">
+{{/grid}}
+    <!-- ep:bk-review ({{review_note}}) -->
+{{#reviews}}
+    <figure class="quote">
+      <div class="head"><span class="stars" aria-label="{{stars_label}}">{{stars}}</span><span class="vp">{{badge}}</span></div>
+      <h3>{{title}}</h3>
+{{#paras}}
+      <p>{{.}}</p>
+{{/paras}}
+      <p class="meta">{{meta}} &middot; <a data-amazon href="{{amazon}}" target="_blank" rel="noopener">{{link}}</a></p>
+    </figure>
+{{/reviews}}
+    <!-- /ep:bk-review -->
+{{#todo}}
+    <!-- {{todo}} -->
+{{/todo}}
+{{#grid}}
+    </div>
+{{/grid}}
+    <div class="friends">
+{{#friends}}
+      <figure><blockquote>{{quote}}</blockquote><figcaption>{{who}}</figcaption></figure>
+{{/friends}}
+    </div>
+{{#after}}
+    <p style="margin-top:22px">{{after}}</p>
+{{/after}}
+  </div>
+</section>

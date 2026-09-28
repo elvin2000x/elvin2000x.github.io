@@ -1,0 +1,26 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <span class="eyebrow">{{eyebrow}}</span>
+    <h2>{{heading}}</h2>
+    <p>{{intro}}</p>
+    <p class="pullline" style="margin:0 0 6px">{{quote}}</p>
+    <p class="price-line">{{quote_source}}</p>
+    <form class="builder" id="builder" onsubmit="return false" autocomplete="off">
+      <p class="note" style="margin:0">{{form_note}}</p>
+      <label for="b-role" class="lab-r">Role <i>· {{role_hint}}</i></label>
+      <input id="b-role" class="in-r" placeholder="{{role_example}}">
+      <label for="b-task">Task <i>· {{task_hint}}</i></label>
+      <input id="b-task" class="in-t" placeholder="{{task_example}}">
+      <label for="b-con">Constraint <i>· {{con_hint}}</i></label>
+      <input id="b-con" class="in-c" placeholder="{{con_example}}">
+      <div class="row"><button type="button" id="b-build">Build my brief</button><button type="button" id="b-copy">Copy brief</button></div>
+      <p class="note" style="margin-top:14px;font-weight:700;color:var(--ink)">Your brief</p>
+      <p class="out" id="b-out" aria-live="polite" style="color:var(--muted)">{{example_out}}</p>
+      <p class="note" id="b-msg" aria-live="polite"></p>
+    </form>
+    <p>{{after}}</p>
+{{#buy}}
+    {{>buybox}}
+{{/buy}}
+  </div>
+</section>

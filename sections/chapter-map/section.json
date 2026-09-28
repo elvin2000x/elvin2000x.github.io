@@ -1,0 +1,104 @@
+{
+  "label": "Chapter map",
+  "about": "A tappable map of every chapter, then the parts as cards that open.",
+  "locked": "The map stops are wired to the page script.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "map",
+      "type": "list",
+      "label": "Map rows",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Part"
+        },
+        {
+          "key": "chapters",
+          "type": "list",
+          "label": "Chapters",
+          "fields": [
+            {
+              "key": "n",
+              "type": "text",
+              "label": "Number"
+            },
+            {
+              "key": "title",
+              "type": "text",
+              "label": "Title"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "caption",
+      "type": "text",
+      "label": "Caption before a tap"
+    },
+    {
+      "key": "cards",
+      "type": "list",
+      "label": "Part cards",
+      "fields": [
+        {
+          "key": "tag",
+          "type": "text",
+          "label": "Tag"
+        },
+        {
+          "key": "title",
+          "type": "html",
+          "label": "Outcome"
+        },
+        {
+          "key": "points",
+          "type": "list",
+          "label": "Chapters"
+        }
+      ]
+    },
+    {
+      "key": "sample",
+      "type": "html",
+      "label": "Free chapter link text"
+    },
+    {
+      "key": "sample_href",
+      "type": "text",
+      "label": "Free chapter link"
+    }
+  ]
+}
