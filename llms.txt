@@ -12,6 +12,11 @@ Start with the book, the free AI Toolkit (https://elvinpeters.com/free/) or the 
 - [The Artificial Advantage](https://elvinpeters.com/): Learn more
 - [Books Two and Three, on the way](https://elvinpeters.com/series/): The series
 
+## Products - Guides and Systems
+
+- [The Claude Operator's Manual](https://elvinpeters.com/free/claude-manual/): Claude, set up for your job, free
+- [The Content Machine](https://elvinpeters.com/free/content-machine/): AI volume worth publishing, free
+
 ## Products - Tools and Apps
 
 - [AI Tools Directory](https://ultimateaidirectory.com): Find the right AI tool

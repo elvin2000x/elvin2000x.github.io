@@ -38,14 +38,14 @@
     {
       "bucket": "guides",
       "title": "The Claude Operator's Manual",
-      "sub": "Claude, set up for your job, $67",
-      "href": "/claude/"
+      "sub": "Claude, set up for your job, free",
+      "href": "/free/claude-manual/"
     },
     {
       "bucket": "guides",
       "title": "The Content Machine",
-      "sub": "AI volume worth publishing, $47",
-      "href": "/content-machine/"
+      "sub": "AI volume worth publishing, free",
+      "href": "/free/content-machine/"
     },
     {
       "bucket": "tools",
