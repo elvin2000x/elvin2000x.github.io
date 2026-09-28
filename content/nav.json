@@ -49,7 +49,7 @@
    "href": "/privacy.html"
   }
  ],
- "_unlisted": "Unlisted = off every menu, noindex, out of sitemap.xml. Never deleted: printed QR codes, the Oct 13 cold emails and old posts point at these (PHASE1-PLAN section 2, Rule 68). Paths without the leading slash; a prefix covers everything under it. The blog, games, apps, quizzes and projects moved to epeters.ca (ticket #12, 2026-09-27); their old paths are redirect stubs (scripts/epca-stubs.js), noindex by their own meta.",
+ "_unlisted": "Unlisted = off every menu, noindex, out of sitemap.xml. Never deleted: printed QR codes, the Oct 13 cold emails and old posts point at these (PHASE1-PLAN section 2, Rule 68). Paths without the leading slash; a prefix covers everything under it. The blog, games, apps, three quizzes and projects moved to epeters.ca (ticket #12, 2026-09-27); their old paths are redirect stubs (scripts/epca-stubs.js), noindex by their own meta. quiz/ stays here (ad-funnel lead magnet, card #358).",
  "unlisted": [
   "services/",
   "fr/services/",
@@ -65,6 +65,7 @@
   "fr/seo/",
   "setup/",
   "team-ai-workshop/",
+  "quiz/",
   "essays/",
   "studio/",
   "claude/",
