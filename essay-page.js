@@ -57,12 +57,16 @@ footer a:hover{color:var(--gold-2)}
 @media(max-width:640px){.nav .lk a:not(.cta){display:none}}
 `;
 
+// The menu and footer come from content/nav.json (links, footerLinks), the same
+// config every other page uses; scripts/menu-swap.js resolves it (2026-09-27).
+const NAVC = JSON.parse(require('fs').readFileSync(require('path').join(__dirname, 'content', 'nav.json'), 'utf8'));
+const X = l => (l.ext ? ' target="_blank" rel="noopener"' : '');
 const NAV = `<nav class="nav"><div class="in">
   <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
-  <div class="lk"><a href="/services/">Services</a><a href="/projects/">Projects</a><a href="/contact/">Contact</a><a class="cta" href="/">Read the book</a></div>
+  <div class="lk">${NAVC.links.map(l => `<a href="${l.href}"${X(l)}>${l.label}</a>`).join('')}<a class="cta" href="${NAVC.cta.href}"${X(NAVC.cta)}>${NAVC.cta.label}</a></div>
 </div></nav>`;
 
-const FOOT = `<footer><div class="in"><span>&copy; 2026 Elvin Peters. Built and hosted by hand.</span><span><a href="/writing/">Blog</a> &middot; <a href="/">The book</a> &middot; <a href="/updates/">Newsletter</a> &middot; Toronto</span></div></footer>`;
+const FOOT = `<footer><div class="in"><span>&copy; 2026 Elvin Peters</span><span>${NAVC.footerLinks.map(l => `<a href="${l.href}"${X(l)}>${l.label}</a>`).join(' &middot; ')}</span></div></footer>`;
 
 const THEME = `<script>(function(){var r=document.documentElement;document.addEventListener('click',function(e){if(e.target.closest('#tg')){var d=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');r.setAttribute('data-theme',d==='dark'?'light':'dark')}})})();</script>`;
 
@@ -76,13 +80,14 @@ const NLCSS = `
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function head(title, desc, ogimg, canon){
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>${esc(title)} · Elvin Peters</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canon}">
 <meta property="og:type" content="article"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="https://elvinpeters.com${ogimg}"><meta property="og:url" content="${canon}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:creator" content="@elvin_peters">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5v14M6 5h9M6 12h7M6 19h9' stroke='%23c9a250' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='19.5' cy='18.6' r='1.9' fill='%23c9a250'/%3E%3C/svg%3E">
-${GA}${FONTS}<style>${CSS}${NLCSS}</style></head><body>`;
+${GA}${FONTS}<style>${CSS}${NLCSS}</style><link rel="stylesheet" href="/css/nav-drawer.css"><script src="/js/site.js"></script></head><body>`;
 }
 
 // End-of-post CTA: book first, services second, owned newsletter capture third.
@@ -90,7 +95,7 @@ ${GA}${FONTS}<style>${CSS}${NLCSS}</style></head><body>`;
 const ENDCTA = `<section class="endcta"><div class="card">
 <h3>Liked this? The book goes deeper.</h3>
 <p>The Artificial Advantage: the frameworks behind everything here, written for professionals, not programmers.</p>
-<div class="ctarow"><a class="btn primary" href="/">Read The Artificial Advantage</a><a class="btn ghost" href="/services/">Work with me</a></div>
+<div class="ctarow"><a class="btn primary" href="/">Read The Artificial Advantage</a><a class="btn ghost" href="/free/">Get the Free Toolkit</a></div>
 <form id="nlform" class="nlrow" novalidate><input type="text" name="website" value="" style="position:absolute;left:-5000px" tabindex="-1" autocomplete="off" aria-hidden="true"><input id="nlemail" type="email" name="email" required placeholder="you@work.com" aria-label="Email address"><button class="btn ghost" type="submit">Get new posts</button></form>
 <p class="nlmsg" id="nlmsg"></p>
 <script>(function(){var f=document.getElementById('nlform'),m=document.getElementById('nlmsg');if(!f)return;f.addEventListener('submit',function(ev){ev.preventDefault();var em=document.getElementById('nlemail').value.trim();if(!em){m.textContent='Enter your email first.';return}m.textContent='One sec…';fetch('https://ultimateaidirectory.com/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'newsletter-blog-'+location.pathname.split('/').filter(Boolean).pop(),website:f.website.value})}).then(function(r){return r.json().catch(function(){return{}})}).then(function(){m.textContent='Done. Watch your inbox.';f.reset()}).catch(function(){m.textContent='That did not go through. Try again in a minute.'})})})();</script>
