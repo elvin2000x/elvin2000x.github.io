@@ -64,10 +64,12 @@ if(t==="auto")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light
 .share .sd{font-size:13px;color:var(--ink2);line-height:1.4;overflow-wrap:anywhere}
 .verlist li{flex-wrap:wrap}
 .verlist .what{min-width:0;overflow-wrap:anywhere}
-.modalwrap{position:fixed;inset:0;z-index:75;display:grid;place-items:center;padding:16px}
+.modalwrap{position:fixed;inset:0;z-index:75;display:grid;grid-template-columns:minmax(0,1fr);place-items:center;padding:16px}
 .modal{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-lg);width:min(720px,100%);max-height:88vh;display:flex;flex-direction:column}
 .modal.wide{width:min(1280px,100%);height:88vh}
 .modal .mh{display:flex;align-items:center;gap:10px;padding:14px 16px 10px 22px;border-bottom:1px solid var(--line)}
+.modal .mh{flex-wrap:wrap}.modal .mh>*,.modal .mb{min-width:0}
+@media (max-width:600px){.modal .mh #exactnote{order:9;flex-basis:100%}}
 .modal .mb{padding:16px 22px;overflow:auto;flex:1}
 .modal .mf{display:flex;gap:10px;justify-content:flex-end;padding:12px 22px 16px;border-top:1px solid var(--line);flex-wrap:wrap}
 .log{font:12.5px/1.6 var(--mono);background:var(--container);border-radius:10px;padding:12px 14px;white-space:pre-wrap;max-height:40vh;overflow:auto;margin-top:12px}
@@ -296,6 +298,19 @@ function refreshState(){
   });
 }
 function posts(){ var d = DOCS.essays; return Array.isArray(d) ? d : d.posts; }
+/* The blog lives on epeters.ca. Its folder (blog/ or writing/) comes from the server,
+   which reads it from the epeters.ca build, so every address here follows it. */
+function blogReady(){ return !!(STATE && STATE.blog && STATE.blog.ready); }
+function blogDir(){ return (STATE && STATE.blog && STATE.blog.dir) || "blog"; }
+function blogPath(slug){ return "/" + blogDir() + "/" + (slug || "…") + "/"; }
+function blogUrl(slug){ return "epeters.ca" + blogPath(slug); }
+/* Blog posts, or an empty list with the reason when the epeters.ca copy is missing. */
+function loadPostsDoc(){
+  return loadDoc("essays").catch(function(e){ if (!DOCS.essays || e.status === 503) DOCS.essays = {posts: []}; BLOGERR = e.message; });
+}
+var BLOGERR = "";
+/* Server keys: "ca:..." is an epeters.ca file, anything else is elvinpeters.com. */
+function isBlogKey(k){ return String(k).indexOf("ca:") === 0; }
 /* A hand-coded post's body file rides the same save queue under "body:<file>". */
 function bodyKey(p){ return "body:" + p.file; }
 function isBodyKey(name){ return name.indexOf("body:") === 0; }
@@ -523,6 +538,7 @@ function wordsOf(p){
   return t ? (t.match(/\S+/g) || []).length : null;
 }
 function changeLabel(f){
+  if (isBlogKey(f)) return 'epeters.ca: ' + changeLabel(f.slice(3));
   var m = /^content\/([a-z0-9-]+)\.json$/.exec(f);
   if (m) return (m[1] === "essays" ? "Blog posts" : m[1] === "nav" ? "Menu" : SECTIONS[m[1]] ? SECTIONS[m[1]].title : m[1]) + ' <span class="subtle">' + esc(f) + '</span>';
   if (/^img\/uploads\//.test(f)) return 'New image <span class="subtle">' + esc(f.slice(12)) + '</span>';
@@ -537,12 +553,23 @@ function pendingBanner(){
   var moved = (r.drafts || []).filter(function(d){ return d.stale; });
   if (moved.length) out += '<div class="banner amber">' + icon("flag") + '<span><b>' + esc(moved.map(function(d){ return pageName(d.key); }).join(", ")) + '</b> changed on the live site after your draft started. Check the page before you publish; publishing replaces the live version with yours.</span></div>';
   if (n) out += '<div class="banner" id="pending">' + icon("rocket") + '<span><b>' + n + ' unpublished draft' + (n > 1 ? "s" : "") + '.</b> Private: only you can see them, in Test and previews.</span><span class="sp"></span>' +
-    '<button class="btn sm" onclick="discardAll()">Discard</button><button class="btn sm" onclick="runTest(\'/\')">Test</button><button class="btn sm filled" onclick="openPublish()">Review and publish</button></div>';
+    '<button class="btn sm" onclick="discardAll()">Discard</button><button class="btn sm" onclick="testDrafts()">Test</button><button class="btn sm filled" onclick="openPublish()">Review and publish</button></div>';
   if (r.sync && r.sync.at) out += '<p class="subtle" style="font-size:12.5px;margin:0 0 10px">Site copy: ' + (r.sync.ok ? "up to date " + relTime(new Date(r.sync.at).toISOString()) : "update failed " + relTime(new Date(r.sync.at).toISOString())) +
     (r.test ? " · last test " + relTime(r.test.at) : "") + '</p>';
   return out;
 }
+/* Test the drafts where they live: all on the blog = the epeters.ca Test, else the test site. */
+function testDrafts(){
+  var ds = (STATE && STATE.repo && STATE.repo.drafts) || [];
+  if (ds.length && ds.every(function(d){ return isBlogKey(d.key); })) blogTest(); else runTest("/");
+}
 function pageName(key){
+  if (isBlogKey(key)) {
+    var k = key.slice(3);
+    if (k === "content/essays.json") return "Blog posts";
+    var p = DOCS.essays ? posts().filter(function(x){ return x.file === k; })[0] : null;
+    return p ? "Post body: " + (p.title || p.slug) : k;
+  }
   var m = /^content\/([a-z0-9-]+)\.json$/.exec(key);
   if (m) return m[1] === "essays" ? "Blog posts" : m[1] === "nav" ? "Menu" : SECTIONS[m[1]] ? SECTIONS[m[1]].title : m[1];
   if (/^essays\//.test(key)) { var p = DOCS.essays ? posts().filter(function(x){ return x.file === key; })[0] : null; return p ? "Post body: " + (p.title || p.slug) : key; }
@@ -574,9 +601,11 @@ function viewSite(){
   else if (SITETAB === "pages") body = viewPages();
   else if (SITETAB === "menu") body = '<div id="menued"><div class="empty">Loading the menu…</div></div>';
   else body = '<div id="histwrap"><div class="empty">Loading publish history…</div></div>';
-  return '<div class="head"><h1>Website</h1>' + helpBtn("site") + '<span class="urlpill" style="padding-right:12px">elvinpeters.com</span><div class="sp"></div>' +
-    '<a class="btn" href="https://elvinpeters.com" target="_blank" rel="noopener">' + icon("open") + 'View site</a>' +
-    '<button class="btn" onclick="runTest(\'/\')" title="Open the whole site with your drafts at the private test address">' + icon("eye") + 'Test</button>' +
+  var onBlog = SITETAB === "posts", home = onBlog ? "epeters.ca/" + blogDir() + "/" : "elvinpeters.com";
+  return '<div class="head"><h1>Website</h1>' + helpBtn("site") + '<span class="urlpill" style="padding-right:12px">' + esc(home) + '</span><div class="sp"></div>' +
+    '<a class="btn" href="https://' + esc(home) + '" target="_blank" rel="noopener">' + icon("open") + (onBlog ? 'View blog' : 'View site') + '</a>' +
+    (onBlog ? '<button class="btn" onclick="blogTest()" title="Build epeters.ca with your blog drafts and look at it here"' + (blogReady() ? '' : ' disabled') + '>' + icon("eye") + 'Test</button>'
+      : '<button class="btn" onclick="runTest(\'/\')" title="Open the whole site with your drafts at the private test address">' + icon("eye") + 'Test</button>') +
     '<button class="btn" onclick="openPublish()">' + icon("rocket") + 'Publish<span id="pubcount"></span></button>' +
     '<a class="btn filled" href="#post-new">' + icon("plus") + 'New post</a></div>' +
     '<div id="pendingwrap">' + pendingBanner() + '</div>' +
@@ -588,16 +617,17 @@ function wireSite(){
   if (SITETAB === "history") drawHistory();
 }
 function viewPosts(){
+  if (!blogReady()) return '<div class="banner warn">' + icon("flag") + '<span>' + esc((STATE && STATE.blog && STATE.blog.error) || BLOGERR || "Blog posts could not load.") + '</span></div>';
   var list = posts();
   var shown = list.filter(function(p){ return POSTFILTER === "all" || (POSTFILTER === "draft" ? p.draft : !p.draft); });
   var fmtLabel = {editor: ['Editor', 't-blue'], html: ['HTML', 't-amber'], hand: ['Hand-coded', 't-grey']};
   var rows = shown.map(function(p){
     var f = formatOf(p), w = wordsOf(p), idx = list.indexOf(p);
-    return '<tr class="row" data-slug="' + esc(p.slug) + '"><td><div class="ttl">' + esc(p.title || "Untitled") + '</div><div class="slug">/writing/' + esc(p.slug) + '/</div></td>' +
+    return '<tr class="row" data-slug="' + esc(p.slug) + '"><td><div class="ttl">' + esc(p.title || "Untitled") + '</div><div class="slug">' + esc(blogPath(p.slug)) + '</div></td>' +
       '<td>' + statusChip(p) + '</td><td class="hide-sm"><span class="fmt ' + fmtLabel[f][1] + '">' + fmtLabel[f][0] + '</span></td>' +
       '<td class="num hide-sm">' + (w == null ? '<span class="subtle">—</span>' : w.toLocaleString()) + '</td><td class="hide-sm subtle nowrap">' + esc(p.date || "") + '</td>' +
       '<td><div class="rowacts">' +
-        (p.draft ? '' : '<a class="iconbtn" title="Open on the live site" href="https://elvinpeters.com/writing/' + esc(p.slug) + '/" target="_blank" rel="noopener">' + icon("open") + '</a>') +
+        (p.draft ? '' : '<a class="iconbtn" title="Open on the live site" href="https://' + esc(blogUrl(p.slug)) + '" target="_blank" rel="noopener">' + icon("open") + '</a>') +
         (f === "hand" ? '' : '<button class="iconbtn" title="Duplicate as a draft" data-dup="' + idx + '">' + icon("copy") + '</button>') +
         '<button class="iconbtn" title="Delete" data-del="' + idx + '">' + icon("trash") + '</button></div></td></tr>';
   }).join("");
@@ -606,7 +636,7 @@ function viewPosts(){
       return '<button class="fchip' + (POSTFILTER === x[0] ? " on" : "") + '" data-filter="' + x[0] + '">' + x[1] + ' ' + counts[x[0]] + '</button>'; }).join("") + '</div>' +
     (shown.length ? '<table class="tbl"><thead><tr><th>Post</th><th>Status</th><th class="hide-sm">Format</th><th class="num hide-sm">Words</th><th class="hide-sm">Date</th><th></th></tr></thead><tbody>' + rows + '</tbody></table>'
       : '<div class="empty">' + (POSTFILTER === "draft" ? "No drafts. " : "No posts yet. ") + '<a href="#post-new">Write one</a>.</div>') +
-    '<p class="subtle" style="font-size:13px;margin-top:18px">Top of the list is newest on elvinpeters.com/writing/. <b>Editor</b> posts are written here. <b>HTML</b> posts can be converted into the editor when nothing would change. <b>Hand-coded</b> posts are custom pages with their own HTML and styles: edit that HTML here and check Exact preview before publishing.</p>';
+    '<p class="subtle" style="font-size:13px;margin-top:18px">Top of the list is newest on ' + esc("epeters.ca/" + blogDir() + "/") + '. <b>Editor</b> posts are written here. <b>HTML</b> posts can be converted into the editor when nothing would change. <b>Hand-coded</b> posts are custom pages with their own HTML and styles: edit that HTML here and check Test before publishing.</p>';
 }
 document.addEventListener("click", function(e){
   var f = e.target.closest("[data-filter]"); if (f) { POSTFILTER = f.dataset.filter; $("#main").innerHTML = viewSite(); wireSite(); return; }
@@ -643,7 +673,7 @@ function discardAll(){
     '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="dodiscard">Discard changes</button></div>');
   $("#dodiscard").onclick = function(){
     api("POST", "/api/discard", {keys: STATE.repo.changed}).then(function(){
-      closeModal(); return Promise.all([loadDoc("essays"), refreshState()]);
+      closeModal(); return Promise.all([loadPostsDoc(), refreshState()]);
     }).then(function(){ toast("Changes discarded. Everything matches the live site."); route(); })
       .catch(function(e){ closeModal(); toast("Could not discard: " + e.message); });
   };
@@ -1463,11 +1493,11 @@ function newPost(){
     drawWriter();
   });
 }
-function ensureEssays(){ return DOCS.essays ? Promise.resolve() : loadDoc("essays"); }
+function ensureEssays(){ return DOCS.essays ? Promise.resolve() : loadPostsDoc(); }
 function openPost(slug){
   ensureEssays().then(function(){
     var p = posts().filter(function(x){ return x.slug === slug; })[0];
-    if (!p) { $("#main").innerHTML = '<div class="empty">No post at /writing/' + esc(slug) + '/. <a href="#posts">Back to posts</a></div>'; return; }
+    if (!p) { $("#main").innerHTML = '<div class="empty">No post at ' + esc(blogPath(slug)) + '. <a href="#posts">Back to posts</a></div>'; return; }
     POST = p; POSTIS_NEW = false; slugTouched = true;
     drawWriter();
   });
@@ -1477,7 +1507,7 @@ function validatePosts(){
   for (var i = 0; i < list.length; i++) {
     var s = list[i].slug || "";
     if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(s)) return "Needs a web address (type a title first)";
-    if (seen[s]) return "Another post already uses /writing/" + s + "/";
+    if (seen[s]) return "Another post already uses " + blogPath(s);
     seen[s] = 1;
   }
   return "";
@@ -1486,7 +1516,7 @@ function unloadWriter(){ if (PV.ro) PV.ro.disconnect(); PV = {shellKey: "", fram
 
 function drawWriter(){
   var p = POST, f = formatOf(p), isMd = f === "editor";
-  var url = "elvinpeters.com/writing/" + (p.slug || "…") + "/";
+  var url = blogUrl(p.slug);
   var tb = function(label, cmd, title){ return '<button class="iconbtn" data-cmd="' + cmd + '" title="' + title + '" aria-label="' + title + '">' + label + '</button>'; };
   var tbi = function(ic, cmd, title){ return tb(icon(ic, "width:18px;height:18px"), cmd, title); };
   var bodyCol;
@@ -1496,7 +1526,7 @@ function drawWriter(){
       tbi("note", "note", "Callout box") + tbi("image", "image", "Image: upload and insert") + tb("&lt;/&gt;", "code", "Code (Ctrl E)") + tb("{ }", "prompt", "Prompt block") +
       '<span class="sp"></span><button class="iconbtn" data-tip="Markdown cheat sheet" aria-label="Formatting help" id="cheatbtn">' + icon("help", "width:18px;height:18px") + '</button></div>';
   } else bodyCol = "";
-  var lock = "", codeNote = '<div class="codenote">This is the page\'s own HTML and styles. Check Exact preview before publishing.</div>';
+  var lock = "", codeNote = '<div class="codenote">This is the page\'s own HTML and styles. Check Test before publishing.</div>';
   if (f === "hand" && !p.file) lock = '<div class="lockcard"><b>Hand-coded post.</b> It has no body file, so there is nothing to edit here. The title, summary, cover, date and search settings on this screen are editable.</div>';
   else if (f === "hand") lock = codeNote + '<textarea class="bodyin codein" id="pcode" spellcheck="false" disabled placeholder="Loading the page body…" aria-label="Page body HTML"></textarea>';
   else if (f === "html") lock = '<div class="lockcard" id="convertcard"><b>Written in HTML.</b> Checking whether it can move into the editor without changing a word or a style…</div>' +
@@ -1512,7 +1542,7 @@ function drawWriter(){
       '<button class="iconbtn" id="setbtn" data-tip="Post settings: address, cover, date, search" aria-label="Post settings" aria-pressed="false">' + icon("sidebar") + '</button>' +
       '<button class="btn" id="verbtn" title="Earlier published versions of this post">' + icon("history", "width:18px;height:18px") + 'Versions</button>' +
       '<button class="chip chipbtn sched" id="chksum" title="Ready-to-publish checklist"></button>' +
-      '<button class="btn" id="exactbtn" title="Build the whole site and show this page exactly as it will ship">' + icon("eye", "width:18px;height:18px") + 'Exact preview</button>' +
+      '<button class="btn" id="exactbtn" title="Build epeters.ca with your drafts and show this post full screen, exactly as it will ship">' + icon("eye", "width:18px;height:18px") + 'Test</button>' +
       '<button class="btn filled" id="pubbtn">' + icon("rocket", "width:18px;height:18px") + 'Publish</button></div>' +
     '<div id="pendingwrap"></div>' +
     '<div class="writer" id="writer">' +
@@ -1522,7 +1552,7 @@ function drawWriter(){
         (isMd ? '<textarea class="bodyin" id="pbody" spellcheck="true" placeholder="Start writing. ## makes a heading, **bold**, > quote, - list. Paste or drop an image to upload it." aria-label="Post body">' + esc(p.body) + '</textarea>' : '') +
         '<div class="counter" id="pcount"></div></div>' +
       '<div class="pvcol" id="pvcol"><div class="phone-t">' + icon("eye", "width:18px;height:18px") + 'Preview in the site’s design<div class="sp"></div><span class="subtle" style="font-weight:400">' + (isMd ? "Updates as you type" : p.file || f === "html" ? "Updates a moment after you type" : "The real page body") + '</span></div>' +
-        '<div class="pvframe" id="pvframe"></div><div class="pvnote">Same template the build uses. Scripts and analytics are off in previews. <a href="#" id="exactlink">Exact preview</a> builds the whole site.</div></div>' +
+        '<div class="pvframe" id="pvframe"></div><div class="pvnote">Same template the build uses. Scripts and analytics are off in previews. <a href="#" id="exactlink">Test</a> builds the real epeters.ca.</div></div>' +
       '<div class="card" id="setcol"><div class="panel-h"><h2>Post settings</h2></div><div class="form" id="pset"></div></div>' +
     '</div>';
   drawSettings();
@@ -1538,10 +1568,10 @@ function drawSettings(){
   var p = POST, isMd = formatOf(p) === "editor";
   var cnt = function(id, v, max){ return '<span class="count' + (String(v || "").length > max ? " over" : "") + '" data-count="' + id + '">' + String(v || "").length + '/' + max + '</span>'; };
   var h = '<div id="checks"></div><div class="switch" style="border-top:0;margin-top:0"><span class="sx">Draft<small>' + (p.draft ? "Hidden from the site. Publishing keeps it hidden." : "Live on the site after you publish.") + '</small></span><input type="checkbox" class="tog" id="sdraft"' + (p.draft ? " checked" : "") + ' aria-label="Draft"></div>' +
-    '<div class="field"><label for="sslug">Web address</label><input type="text" id="sslug" maxlength="80" value="' + esc(p.slug) + '" placeholder="made from the title"><div class="help" id="slughelp">elvinpeters.com/writing/' + esc(p.slug || "…") + '/' + (!p.draft && !POSTIS_NEW ? '<br><b>Live post:</b> changing this breaks existing links to it.' : '') + '</div></div>' +
+    '<div class="field"><label for="sslug">Web address</label><input type="text" id="sslug" maxlength="80" value="' + esc(p.slug) + '" placeholder="made from the title"><div class="help" id="slughelp">' + esc(blogUrl(p.slug)) + (!p.draft && !POSTIS_NEW ? '<br><b>Live post:</b> changing this breaks existing links to it.' : '') + '</div></div>' +
     '<div class="field"><label for="skicker">Eyebrow</label><input type="text" id="skicker" maxlength="40" value="' + esc(p.kicker || "") + '" placeholder="Playbook"><div class="help">Small label above the title.</div></div>' +
     '<div class="field"><label for="stags">Tags</label><input type="text" id="stags" maxlength="200" value="' + esc(tagsText(p)) + '" placeholder="AI at work, Systems"><div class="help">Comma separated. Added to the page for search and sharing.</div></div>' +
-    '<div class="field"><label>Cover image</label><div class="cover"><img id="coverimg" alt="" src="/img/' + esc(p.image || "og.jpg") + '"><div><button class="btn tonal sm" id="coverbtn">' + icon("image", "width:16px;height:16px") + 'Choose image</button><div class="help" style="margin-top:6px">Blog list, homepage card and share image. Posts open on the title, not a photo.</div></div></div></div>' +
+    '<div class="field"><label>Cover image</label><div class="cover"><img id="coverimg" alt="" src="/ca/img/' + esc(p.image || "og.jpg") + '"><div><button class="btn tonal sm" id="coverbtn">' + icon("image", "width:16px;height:16px") + 'Choose image</button><div class="help" style="margin-top:6px">Blog list, homepage card and share image. Posts open on the title, not a photo.</div></div></div></div>' +
     '<div class="field"><label for="steaser">Card teaser' + cnt("steaser", p.short_dek, 200) + '</label><textarea id="steaser" maxlength="200" rows="2" placeholder="Blank uses the summary">' + esc(p.short_dek || "") + '</textarea></div>' +
     '<div class="row2"><div class="field"><label for="sdate">Publish date</label><input type="date" id="sdate" value="' + esc(toISO(p.date)) + '"></div>' +
     '<div class="field"><label for="saccent">Accent</label><select id="saccent">' + [["amber", "Amber"], ["good", "Green"], ["blue", "Blue"]].map(function(o){ return '<option value="' + o[0] + '"' + ((p.accent || "amber") === o[0] ? " selected" : "") + '>' + o[1] + '</option>'; }).join("") + '</select></div></div>' +
@@ -1559,11 +1589,11 @@ function drawSettings(){
 }
 function drawSerp(){
   var p = POST, t = p.seo_title || p.title || "Untitled", d = p.seo_description || p.dek || "";
-  $("#serp").innerHTML = '<div class="u">elvinpeters.com › writing › ' + esc(p.slug || "…") + '</div><div class="h">' + esc(t.length > 62 ? t.slice(0, 60) + "…" : t) + ' · Elvin Peters</div><div class="d">' + esc(d.length > 160 ? d.slice(0, 157) + "…" : d) + '</div>';
+  $("#serp").innerHTML = '<div class="u">epeters.ca › ' + esc(blogDir()) + ' › ' + esc(p.slug || "…") + '</div><div class="h">' + esc(t.length > 62 ? t.slice(0, 60) + "…" : t) + ' · Elvin Peters</div><div class="d">' + esc(d.length > 160 ? d.slice(0, 157) + "…" : d) + '</div>';
   // Share card: the same og:image, og:title and og:description the page ships with.
   var sh = $("#share"); if (!sh) return;
   var img = p.og || p.image || "og.jpg";
-  sh.innerHTML = '<img alt="" src="/img/' + esc(img) + '"><div class="sx2"><div class="dom">elvinpeters.com</div><div class="st">' + esc(t) + '</div><div class="sd">' + esc(d.length > 110 ? d.slice(0, 107) + "…" : d) + '</div></div>';
+  sh.innerHTML = '<img alt="" src="/ca/img/' + esc(img) + '"><div class="sx2"><div class="dom">epeters.ca</div><div class="st">' + esc(t) + '</div><div class="sd">' + esc(d.length > 110 ? d.slice(0, 107) + "…" : d) + '</div></div>';
 }
 
 /* Ready-to-publish checklist: recomputed on every change, client side only. */
@@ -1587,7 +1617,7 @@ function postChecks(){
     while ((m = re.exec(body))) { n++; if (badAlt(m[1])) bad++; }
     add(!bad, n ? "Images described (" + n + ")" : "No images to describe", bad + " image" + (bad > 1 ? "s need" : " needs") + " real alt text: say what it shows inside the [brackets].");
   }
-  var have = {}, broken = [], drafts = [], lr = /\/writing\/([a-z0-9-]+)\//g, lm;
+  var have = {}, broken = [], drafts = [], lr = new RegExp("\\/" + blogDir() + "\\/([a-z0-9-]+)\\/", "g"), lm;
   posts().forEach(function(x){ have[x.slug] = x; });
   while ((lm = lr.exec(body))) {
     var t = have[lm[1]];
@@ -1595,7 +1625,7 @@ function postChecks(){
     else if (t && t !== p && t.draft && !p.draft && drafts.indexOf(lm[1]) < 0) drafts.push(lm[1]);
   }
   add(!broken.length && !drafts.length, "Links to other posts work",
-    (broken.length ? "No post at /writing/" + broken.slice(0, 3).join("/, /writing/") + "/. " : "") + (drafts.length ? "Still a draft: /writing/" + drafts.slice(0, 3).join("/, /writing/") + "/." : ""));
+    (broken.length ? "No post at " + broken.slice(0, 3).map(blogPath).join(", ") + ". " : "") + (drafts.length ? "Still a draft: " + drafts.slice(0, 3).map(blogPath).join(", ") + "." : ""));
   var dash = function(v){ return (String(v || "").match(/—|&mdash;|&#(8212|x2014);/gi) || []).length; };
   var dashes = ["title", "dek", "short_dek", "kicker", "seo_title", "seo_description"].reduce(function(a, k){ return a + dash(p[k]); }, 0) + dash(body);
   add(!dashes, dashes ? dashes + " em dash" + (dashes > 1 ? "es" : "") : "No em dashes", "Rewrite with a period, comma or colon. The house style has zero em dashes.");
@@ -1673,11 +1703,11 @@ function wireWriter(){
   wireSettings();
   $$("[data-pv]").forEach(function(btn){ btn.onclick = function(){ pvMode = btn.dataset.pv; try { localStorage.setItem("site-studio-pvmode", pvMode); } catch (e) {} layoutWriter(); }; });
   $$("#main .head [data-dev]").forEach(function(btn){ btn.onclick = function(){ setDevice(btn.dataset.dev); layoutWriter(); }; });
-  $("#pubbtn").onclick = function(){ openPublish(["content/essays.json"].concat(POST && POST.file ? [POST.file] : [])); };
+  $("#pubbtn").onclick = function(){ openPublish(["ca:content/essays.json"].concat(POST && POST.file ? ["ca:" + POST.file] : [])); };
   $("#setbtn").onclick = function(){ showSettings = !showSettings; try { localStorage.setItem("site-studio-settings", showSettings ? "1" : "0"); } catch (e) {} layoutWriter(); if (showSettings && innerWidth <= 1280) $("#setcol").scrollIntoView({behavior: "smooth"}); };
   $("#exactbtn").onclick = exactPreview;
   $("#exactlink").onclick = function(e){ e.preventDefault(); exactPreview(); };
-  $("#copyurl").onclick = function(){ copyText("https://elvinpeters.com/writing/" + p.slug + "/"); };
+  $("#copyurl").onclick = function(){ copyText("https://" + blogUrl(p.slug)); };
 }
 function wireSettings(){
   var p = POST;
@@ -1703,7 +1733,7 @@ function wireSettings(){
     var s = slugify(sl.value);
     if (sl.value !== s && !/-$/.test(sl.value)) sl.value = s;
     p.slug = s; slugHelp();
-    var urlp = $("#urlpill"); if (urlp) urlp.firstChild.textContent = "elvinpeters.com/writing/" + (s || "…") + "/";
+    var urlp = $("#urlpill"); if (urlp) urlp.firstChild.textContent = blogUrl(s);
     postChanged({});
   });
   sl.addEventListener("blur", function(){ sl.value = slugify(sl.value); p.slug = sl.value; slugHelp(); postChanged({}); });
@@ -1739,8 +1769,8 @@ function uniqueSlugFor(title){
 }
 function slugHelp(){
   var h = $("#slughelp"), dup = posts().some(function(x){ return x !== POST && x.slug === POST.slug; });
-  if (h) h.innerHTML = (dup ? '<b style="color:var(--red)">Another post already uses this address.</b><br>' : '') + 'elvinpeters.com/writing/' + esc(POST.slug || "…") + '/' + (!POST.draft && !POSTIS_NEW ? '<br><b>Live post:</b> changing this breaks existing links to it.' : '');
-  var urlp = $("#urlpill"); if (urlp) urlp.firstChild.textContent = "elvinpeters.com/writing/" + (POST.slug || "…") + "/";
+  if (h) h.innerHTML = (dup ? '<b style="color:var(--red)">Another post already uses this address.</b><br>' : '') + esc(blogUrl(POST.slug)) + (!POST.draft && !POSTIS_NEW ? '<br><b>Live post:</b> changing this breaks existing links to it.' : '');
+  var urlp = $("#urlpill"); if (urlp) urlp.firstChild.textContent = blogUrl(POST.slug);
 }
 function layoutWriter(){
   $$("[data-pv]").forEach(function(x){ x.classList.toggle("on", x.dataset.pv === pvMode); });
@@ -1910,7 +1940,7 @@ function convertPost(){
     return api("POST", "/api/convert/" + encodeURIComponent(slug), undefined, {"If-Match": VERS.essays || ""});
   }).then(function(r){
     VERS.essays = r.data.version;
-    return loadDoc("essays");
+    return loadPostsDoc();
   }).then(function(){ toast("Converted. The post is now written in the editor."); unloadWriter(); openPost(slug); pendingChanges(); })
     .catch(function(e){ toast("Not converted: " + e.message); });
 }
@@ -1935,7 +1965,7 @@ function openVersions(){
 }
 function confirmRestore(p, v){
   showModal('<div class="mh"><h2>Restore this version?</h2></div><div class="mb"><p><b>' + esc(v.msg) + '</b><br><span class="subtle">' + esc(relTime(v.date)) + ' · ' + esc(v.sha) + '</span></p>' +
-    '<p>It replaces what is in the editor now and saves as an unpublished change. The address stays /writing/' + esc(p.slug) + '/. Nothing goes live until you publish, and Undo brings back what you have now.</p><div class="log hidden" id="reslog"></div></div>' +
+    '<p>It replaces what is in the editor now and saves as an unpublished change. The address stays ' + esc(blogPath(p.slug)) + '. Nothing goes live until you publish, and Undo brings back what you have now.</p><div class="log hidden" id="reslog"></div></div>' +
     '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="dorestore">' + icon("history", "width:18px;height:18px") + 'Restore</button></div>');
   $("#dorestore").onclick = function(){
     var b = this; b.disabled = true; b.textContent = "Restoring…";
@@ -1971,26 +2001,34 @@ function restoreBody(p, html){
   toast("Version restored. Publish to put it live.", function(){ apply(before); toast("Restore undone."); });
 }
 
-/* Exact preview: build the whole site and show this page as it will ship. */
+/* Test: build the real epeters.ca with every blog draft laid over it (nothing is
+   pushed) and show one post, or the blog's front page, full screen. Posts ticked
+   Draft show here too; they stay private when you publish. */
 function exactPreview(){
-  var slug = POST.slug; if (!slug) { toast("Give the post a title first."); return; }
-  showModal('<div class="mh"><h2>Exact preview</h2><span class="subtle" id="exactnote">Building the whole site…</span><div class="sp"></div>' +
+  if (!POST.slug) { toast("Give the post a title first."); return; }
+  blogTest(POST.slug);
+}
+function blogTest(slug){
+  if (!blogReady()) { toast((STATE && STATE.blog && STATE.blog.error) || "The epeters.ca copy is not set up yet."); return; }
+  showModal('<div class="mh"><h2>Test</h2><span class="subtle" id="exactnote">Building epeters.ca with your drafts…</span><div class="sp"></div>' +
     '<div class="seg" role="group" aria-label="Device"><button data-xdev="desktop" title="Desktop">' + icon("desktop", "width:16px;height:16px") + '</button><button data-xdev="phone" title="Phone">' + icon("phone", "width:16px;height:16px") + '</button></div>' +
     '<button class="iconbtn" onclick="closeModal()" aria-label="Close">×</button></div><div class="mb" style="padding:12px"><div class="pvframe" id="xframe" style="height:100%"></div></div>', true);
-  var id = null;
+  var src = null;
   var draw = function(){
     $$("[data-xdev]").forEach(function(x){ x.classList.toggle("on", x.dataset.xdev === pvDevice); });
-    if (!id) return;
+    if (!src) return;
     var host = $("#xframe"); if (!host) return;
     host.classList.toggle("phone", pvDevice === "phone");
-    host.innerHTML = '<iframe title="Exact preview" src="/preview/' + id + '/writing/' + encodeURIComponent(slug) + '/"></iframe>';
+    host.innerHTML = '<iframe title="Test" src="' + esc(src) + '"></iframe>';
     fitFrame(host, $("iframe", host));
   };
   $$("[data-xdev]").forEach(function(x){ x.onclick = function(){ setDevice(x.dataset.xdev); draw(); }; });
   draw();
-  flushSaves().then(function(){ return api("POST", "/api/preview"); }).then(function(r){
-    id = r.data.id;
-    var n = $("#exactnote"); if (n) n.innerHTML = 'Byte for byte what ships, analytics off.' + (POST.draft ? ' Drafts appear in previews only.' : '') + ' <a target="_blank" rel="noopener" href="/preview/' + id + '/writing/' + encodeURIComponent(slug) + '/">Open in a tab</a>';
+  flushSaves().then(function(){ return api("POST", "/api/blog-test"); }).then(function(r){
+    var d = r.data;
+    src = "/preview/" + d.id + "/" + d.dir + "/" + (slug ? encodeURIComponent(slug) + "/" : "");
+    var gate = (d.gate || []).length ? ' <b style="color:var(--amber)">Publishing would stop here: ' + esc(d.gate.slice(0, 2).join(" ")) + '</b>' : '';
+    var n = $("#exactnote"); if (n) n.innerHTML = 'The real epeters.ca build, analytics off.' + (d.drafts ? ' Posts ticked Draft show here only.' : '') + gate + ' <a target="_blank" rel="noopener" href="' + esc(src) + '">Open in a tab</a>';
     draw();
   }).catch(function(e){ var n = $("#exactnote"); if (n) n.textContent = "Build failed: " + (e.data && e.data.detail || e.message); });
 }
@@ -2002,12 +2040,15 @@ function openPublish(focus){
   focus = Array.isArray(focus) ? focus : null;
   flushSaves().then(refreshState).then(function(){
     var r = STATE.repo || {}, drafts = r.drafts || [], hidden = DOCS.essays ? posts().filter(function(p){ return p.draft; }).length : 0;
-    var blocked = r.blocked || [];
     var on = function(d){ return !focus || focus.indexOf(d.key) > -1; };
-    showModal('<div class="mh"><h2>Publish to elvinpeters.com</h2><div class="sp"></div><button class="iconbtn" onclick="closeModal()" aria-label="Close">×</button></div><div class="mb">' +
+    var mine = drafts.filter(on), ca = mine.filter(function(d){ return isBlogKey(d.key); }).length;
+    var blocked = (mine.length - ca ? r.blocked || [] : []).concat(ca ? (STATE.blog && STATE.blog.blocked) || [] : []);
+    var where = !mine.length ? "Publish" : !ca ? "Publish to elvinpeters.com" : ca === mine.length ? "Publish to epeters.ca" : "Publish to epeters.ca and elvinpeters.com";
+    if (POST && focus && ca === mine.length && mine.length) where = "Publish to " + blogUrl(POST.slug);
+    showModal('<div class="mh"><h2>' + esc(where) + '</h2><div class="sp"></div><button class="iconbtn" onclick="closeModal()" aria-label="Close">×</button></div><div class="mb">' +
       (drafts.length ? '<p><b>Tick what goes live:</b></p><div id="publist">' + drafts.map(function(d, i){
           return '<label class="switch" style="border-top:0;padding:8px 0;align-items:flex-start"><input type="checkbox" class="tog" data-pubkey="' + esc(d.key) + '"' + (on(d) ? " checked" : "") + ' aria-label="Publish ' + esc(pageName(d.key)) + '">' +
-            '<span class="sx">' + esc(pageName(d.key)) + '<small>' + esc(d.key) + ' · saved ' + esc(relTime(d.updated)) + (d.stale ? ' · <b style="color:var(--amber)">changed on the live site since</b>' : '') + '</small></span></label>';
+            '<span class="sx">' + esc(pageName(d.key)) + '<small>' + esc(isBlogKey(d.key) ? "epeters.ca · " + d.key.slice(3) : "elvinpeters.com · " + d.key) + ' · saved ' + esc(relTime(d.updated)) + (d.stale ? ' · <b style="color:var(--amber)">changed on the live site since</b>' : '') + '</small></span></label>';
         }).join("") + '</div>' +
         (drafts.some(function(d){ return d.stale; }) ? '<label class="switch" style="border-top:0"><input type="checkbox" class="tog" id="pubforce" aria-label="Replace the live version"><span class="sx">Replace the live version with mine<small>A page marked amber changed on the live site after your draft started (Claude or another device). Ticking this puts your version live instead.</small></span></label>' : '')
         : '<p>Nothing is waiting: every page matches the live site.</p>') +
@@ -2048,8 +2089,13 @@ function runPublish(){
     go.innerHTML = ok ? icon("check", "width:18px;height:18px") + "Done" : "Try again";
     go.disabled = false; go.onclick = ok ? closeModal : runPublish;
     if (ok) toast(/PUBLISHED/.test(log.textContent) ? "Published. Live in about a minute." : "Everything was already live.");
+    if (ok && POST && POST.slug && !POST.draft && /PUBLISHED[^\n]*epeters\.ca/.test(log.textContent)) {
+      var open = document.createElement("p"); open.className = "subtle";
+      open.innerHTML = '<a href="https://' + esc(blogUrl(POST.slug)) + '" target="_blank" rel="noopener">Open it on ' + esc(blogUrl(POST.slug)) + '</a> (live in about a minute)';
+      log.parentNode.insertBefore(open, log.nextSibling);
+    }
     HISTORY = null;
-    return Promise.all([refreshState(), loadDoc("essays")]);
+    return Promise.all([refreshState(), loadPostsDoc()]);
   }).then(function(){ var w = $("#pendingwrap"); if (w && !POST) w.innerHTML = pendingBanner(); if (SITETAB === "history" && !POST) drawHistory(); })
     .catch(function(e){ log.textContent += "\n✗ " + e.message; go.disabled = false; go.textContent = "Try again"; go.onclick = runPublish; $("#pubcancel").disabled = false; });
 }
@@ -2062,28 +2108,37 @@ function relTime(iso){
 }
 function drawHistory(){
   var host = $("#histwrap"); if (!host) return;
-  api("GET", "/api/history").then(function(r){
-    HISTORY = r.data.history;
-    if (!HISTORY.length) { host.innerHTML = '<div class="empty">No publishes yet.</div>'; return; }
-    host.innerHTML = '<div class="card"><ul class="attn">' + HISTORY.map(function(h, i){
-      var studio = /^Site Studio: |via Site Studio/.test(h.msg);
-      return '<li><span class="chip ' + (i === 0 ? "live" : "draft") + '"><span class="dot"></span>' + (i === 0 ? "Live now" : "Published") + '</span>' +
-        '<span class="what">' + esc(h.msg) + '<small>' + esc(relTime(h.date)) + ' · ' + esc(studio ? "Site Studio" : h.author) + ' · ' + h.files + ' file' + (h.files === 1 ? "" : "s") + ' · <span style="font-family:var(--mono)">' + esc(h.sha) + '</span></small></span>' +
-        (h.revertable ? '<button class="btn sm" data-revert="' + esc(h.sha) + '">' + icon("history", "width:16px;height:16px") + 'Roll back</button>'
-          : '<button class="btn sm" disabled data-tip="' + esc(h.why) + '" title="' + esc(h.why) + '">' + icon("history", "width:16px;height:16px") + 'Roll back</button>') + '</li>';
-    }).join("") + '</ul></div><p class="subtle" style="font-size:13px;margin-top:14px">Every publish that touched the website’s content. Roll back undoes that one publish with a new version, so nothing is ever lost; later changes stay.</p>';
-    $$("[data-revert]", host).forEach(function(b){ b.onclick = function(){ confirmRevert(b.dataset.revert); }; });
+  var get = function(site){ return api("GET", "/api/history" + (site === "blog" ? "?site=blog" : "")).then(function(r){ return r.data.history.map(function(h){ h.site = site; return h; }); }); };
+  Promise.all([blogReady() ? get("blog").catch(function(e){ return {error: e.message}; }) : Promise.resolve({error: (STATE.blog && STATE.blog.error) || "The epeters.ca copy is not set up yet."}), get("com")]).then(function(both){
+    HISTORY = (Array.isArray(both[0]) ? both[0] : []).concat(both[1]);
+    var list = function(items, title, empty){
+      if (!Array.isArray(items)) return '<h2 class="panel-h" style="margin:18px 0 8px">' + esc(title) + '</h2><div class="empty">' + esc(items.error) + '</div>';
+      if (!items.length) return '<h2 class="panel-h" style="margin:18px 0 8px">' + esc(title) + '</h2><div class="empty">' + esc(empty) + '</div>';
+      return '<h2 class="panel-h" style="margin:18px 0 8px">' + esc(title) + '</h2><div class="card"><ul class="attn">' + items.map(function(h, i){
+        var studio = /^Site Studio: |via Site Studio/.test(h.msg);
+        return '<li><span class="chip ' + (i === 0 ? "live" : "draft") + '"><span class="dot"></span>' + (i === 0 ? "Live now" : "Published") + '</span>' +
+          '<span class="what">' + esc(h.msg) + '<small>' + esc(relTime(h.date)) + ' · ' + esc(studio ? "Site Studio" : h.author) + ' · ' + h.files + ' file' + (h.files === 1 ? "" : "s") + ' · <span style="font-family:var(--mono)">' + esc(h.sha) + '</span></small></span>' +
+          (h.revertable ? '<button class="btn sm" data-revert="' + esc(h.sha) + '" data-site="' + h.site + '">' + icon("history", "width:16px;height:16px") + 'Roll back</button>'
+            : '<button class="btn sm" disabled data-tip="' + esc(h.why) + '" title="' + esc(h.why) + '">' + icon("history", "width:16px;height:16px") + 'Roll back</button>') + '</li>';
+      }).join("") + '</ul></div>';
+    };
+    host.innerHTML = list(both[0], "Blog on epeters.ca/" + blogDir() + "/", "No blog publishes on epeters.ca yet.") +
+      '<p class="subtle" style="font-size:13px;margin-top:10px">Blog history on epeters.ca starts when the blog moved there (Sep 27, 2026). Older blog publishes are in elvinpeters.com\u2019s list and stay there.</p>' +
+      list(both[1], "Pages on elvinpeters.com", "No publishes yet.") +
+      '<p class="subtle" style="font-size:13px;margin-top:14px">Every publish that touched the website’s content. Roll back undoes that one publish with a new version, so nothing is ever lost; later changes stay.</p>';
+    $$("[data-revert]", host).forEach(function(b){ b.onclick = function(){ confirmRevert(b.dataset.revert, b.dataset.site); }; });
   }).catch(function(e){ host.innerHTML = '<div class="empty">Could not load history: ' + esc(e.message) + '</div>'; });
 }
-function confirmRevert(sha){
-  var h = (HISTORY || []).filter(function(x){ return x.sha === sha; })[0] || {msg: sha};
-  showModal('<div class="mh"><h2>Roll back this publish?</h2></div><div class="mb"><p><b>' + esc(h.msg) + '</b></p><p>This undoes the changes from that publish, rebuilds, checks and pushes. The site updates in about a minute. You can roll back the roll back later.</p><div class="log hidden" id="revlog"></div></div>' +
+function confirmRevert(sha, site){
+  var h = (HISTORY || []).filter(function(x){ return x.sha === sha && x.site === site; })[0] || {msg: sha};
+  var where = site === "blog" ? "epeters.ca" : "elvinpeters.com";
+  showModal('<div class="mh"><h2>Roll back this publish?</h2></div><div class="mb"><p><b>' + esc(h.msg) + '</b> <span class="subtle">on ' + where + '</span></p><p>This undoes the changes from that publish on ' + where + ', rebuilds, checks and pushes. The site updates in about a minute. You can roll back the roll back later.</p><div class="log hidden" id="revlog"></div></div>' +
     '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="dorevert">' + icon("history", "width:18px;height:18px") + 'Roll back</button></div>');
   $("#dorevert").onclick = function(){
     var b = this; b.disabled = true; b.textContent = "Rolling back…";
-    api("POST", "/api/revert", {sha: sha}).then(function(){
+    api("POST", "/api/revert", {sha: sha, site: site === "blog" ? "blog" : "com"}).then(function(){
       closeModal(); toast("Rolled back. Live in about a minute."); HISTORY = null;
-      return Promise.all([refreshState(), loadDoc("essays")]);
+      return Promise.all([refreshState(), loadPostsDoc()]);
     }).then(function(){ if (SITETAB === "history") { $("#main").innerHTML = viewSite(); wireSite(); } })
       .catch(function(e){ var l = $("#revlog"); if (l) { l.classList.remove("hidden"); l.textContent = e.message; } b.disabled = false; b.textContent = "Try again"; });
   };
@@ -2137,8 +2192,7 @@ document.addEventListener("keydown", function(e){
 /* ================= Boot ================= */
 Promise.all([
   fetch("/tools.json").then(function(r){ return r.json(); }).then(function(t){ REG = {tools: t.tools || [], external: t.external || [], home: t.home || REG.home}; }).catch(function(){}),
-  refreshState(),
-  loadDoc("essays")
+  refreshState().then(loadPostsDoc)
 ]).then(function(){
   $("#brandlink").href = REG.home;
   drawRail(); route();

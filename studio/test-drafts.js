@@ -62,7 +62,7 @@ const getJSON = async p => JSON.parse((await req('GET', p)).text);
 let proc = null;
 async function startServer() {
   proc = spawn(process.execPath, [path.join(SRV, 'studio', 'server.js'), '--port', String(PORT)],
-    { cwd: SRV, env: { ...process.env, STUDIO_DATA: DATA, STUDIO_TEST_HOST: TEST_HOST, STUDIO_PULL_MS: '3600000' }, stdio: ['ignore', 'pipe', 'pipe'] });
+    { cwd: SRV, env: { ...process.env, STUDIO_BLOG_REPO: path.join(TMP, 'no-blog-here'), STUDIO_BLOG_DIR: '', STUDIO_DATA: DATA, STUDIO_TEST_HOST: TEST_HOST, STUDIO_PULL_MS: '3600000' }, stdio: ['ignore', 'pipe', 'pipe'] });
   let log = '';
   const keep = c => { log += c; fs.appendFileSync(path.join(TMP, 'server.log'), c); };
   proc.stdout.on('data', keep);
@@ -101,6 +101,11 @@ async function main() {
   git(SRV, 'config', 'user.name', 'Site Studio'); git(SRV, 'config', 'user.email', 'studio@example.invalid');
   git(SRV, 'config', 'core.hooksPath', path.join(TMP, 'no-hooks'));
   check(![A, B, C, D, U].some(x => remoteLog().includes(x)), 'fake GitHub starts with none of this run\'s canaries');
+  // A draft of the old .com blog file, as a store from before slice 5a holds it.
+  const legacy = require(path.join(SRV, 'studio', 'store.js')).open(DATA);
+  const oldEssays = fs.readFileSync(path.join(SRV, 'content', 'essays.json'));
+  legacy.save('content/essays.json', Buffer.from(oldEssays.toString('utf8').replace('"dek": "', '"dek": "' + C + ' ')), 'p' + legacy.hash(oldEssays), oldEssays, 'elvin');
+  legacy.close();
   await startServer();
 
   console.log('\n2. Drafts are saved privately');
@@ -149,30 +154,27 @@ async function main() {
   const st2 = await getJSON('/api/state');
   check(st2.repo.drafts.map(d => d.key).join() === 'content/content-machine.json', 'only the content-machine draft is left', JSON.stringify(st2.repo.drafts));
 
-  console.log('\n5. Blog posts: a Draft-ticked post and its image stay private');
+  console.log('\n5. The blog lives on epeters.ca: the .com blog files are locked out (no blog copy here)');
   const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==', 'base64');
   const up = await req('POST', '/api/upload?name=' + U, { body: png, headers: { 'Content-Type': 'image/png' } });
   const upJ = JSON.parse(up.text);
   check(up.status === 200 && upJ.src.startsWith('/img/uploads/'), 'image upload held (' + upJ.src + ')', up.text);
   const upName = upJ.src.split('/').pop();
   check(!fs.existsSync(path.join(SRV, 'img', 'uploads', upName)), 'the upload is not in the server copy');
-  const e = await editContent('essays', d => {
-    const posts = Array.isArray(d) ? d : d.posts;
-    const live = posts.find(p => !p.draft);
-    live.dek = D;
-    posts.unshift({ slug: 'leak-test-' + C.toLowerCase().slice(-8), title: 'Leak test ' + C, dek: C, date: live.date,
-      body_format: 'markdown', body: 'Private words ' + C + '\n\n![x](/img/uploads/' + upName + ')\n', draft: true });
-  });
-  check(e.put.status === 200, 'essays draft saved (one live edit D, one draft post C)', e.put.text);
-  pub = await req('POST', '/api/publish?keys=content/essays.json');
-  check(/PUBLISHED/.test(pub.text), 'publish of Blog posts succeeds', pub.text);
+  const lock = await req('POST', '/api/publish?keys=content/essays.json');
+  check(lock.status === 400 && remoteHead() === git(SRV, 'rev-parse', 'HEAD'), 'publishing the .com essays.json is refused (400)', lock.status + ' ' + lock.text);
+  const lockD = await req('GET', '/api/drafts?key=content/essays.json');
+  check(lockD.status === 404, 'the old .com blog draft cannot be opened', lockD.status);
+  const lockC = await req('GET', '/api/content/essays');
+  check(lockC.status === 503 && /epeters\.ca/.test(lockC.text), 'Blog posts say plainly the epeters.ca copy is not set up (503)', lockC.status + ' ' + lockC.text);
+  const lockP = await req('PUT', '/api/post-body/assembly-line', { body: 'x', headers: { 'If-Match': '"p0"' } });
+  check(lockP.status === 503, 'a post body cannot be saved without the blog copy', lockP.status);
+  const stL = await getJSON('/api/state');
+  check(stL.blog && stL.blog.ready === false && !stL.repo.drafts.some(d => d.key === 'content/essays.json'), 'state: blog not ready, the old blog draft is not listed', JSON.stringify(stL.blog));
+  const dis = JSON.parse((await req('POST', '/api/discard', { body: JSON.stringify({ keys: ['content/essays.json'] }) })).text);
+  check(dis.discarded === 0, 'discard does not touch the old blog draft (it stays in the store)', JSON.stringify(dis));
   log = remoteLog();
-  check(log.includes(D), 'fake GitHub has D (the live post edit)');
-  check(!log.includes(C), 'fake GitHub does NOT have C (the Draft-ticked post)');
-  check(!log.includes(upName), 'fake GitHub does NOT have the draft post\'s image');
-  check(!treeHas(SRV, C), 'server copy has no C anywhere');
-  const essays = await req('GET', '/api/content/essays');
-  check(essays.text.includes(C) && /^"d\d+"$/.test(essays.headers.etag), 'the Draft-ticked post is still in the private draft', essays.headers.etag);
+  check(!log.includes(C) && !treeHas(SRV, C), 'the old blog draft never reaches git or the server copy');
 
   console.log('\n6. Live changed under a draft: publish refuses unless "mine wins"');
   git(PC, 'pull', '-q', '--ff-only');
@@ -197,7 +199,7 @@ async function main() {
   await startServer();
   const dr = await getJSON('/api/drafts');
   const keys = dr.drafts.map(d => d.key).sort().join();
-  check(keys === 'content/content-machine.json,content/essays.json', 'both open drafts are back after restart', keys);
+  check(keys === 'content/content-machine.json', 'the open draft is back after restart', keys);
   check(dr.uploads.some(u => u.name === upName), 'the held image is back after restart');
   const t3 = await req('GET', '/claude/', { host: TEST_HOST });
   check(t3.status === 200, 'the last Test build is still served after restart', t3.status);

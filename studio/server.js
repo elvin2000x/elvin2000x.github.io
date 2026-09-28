@@ -8,11 +8,22 @@
    repo, and git only ever sees what is published. Git stays the record of
    everything live, its history, and rollback. No node_modules, ever.
 
+   The blog lives on epeters.ca (#342, slice 5a): every Blog route reads and writes
+   a second clone, the epeters-ca repo, and publishes there with that repo's own
+   build.js and verify.js. The .com copies of the blog (content/essays.json,
+   essays/, writing/, blog/) are locked out: no route edits them and a .com publish
+   that would change them ships nothing.
+
    Run:   node studio/server.js --port 8820
    Env:   STUDIO_DATA (default /var/lib/sitestudio, else ~/.sitestudio)
           STUDIO_TEST_HOST (default test.elvinpeters.com): requests for that host
           get the test site and nothing else.
+          STUDIO_BLOG_REPO (default /opt/site-studio/epeters-ca): the epeters-ca
+          clone. Missing = the Blog tab says it is not set up; pages still work.
+          STUDIO_BLOG_DIR: force the blog folder (blog or writing). Default: read
+          from the epeters-ca build output, so the rename needs no Studio change.
    Test:  node studio/test-drafts.js  (the draft-leak test; throwaway clones only)
+          node studio/test-blog.js    (the blog on epeters.ca; throwaway clones only)
    Binds 127.0.0.1 only. Auth is the reverse proxy's job (the studio login in
    production; nothing on localhost). Serves no dotfiles, no .git. */
 'use strict';
@@ -40,27 +51,53 @@ const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': '
   '.gif': 'image/gif', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.pdf': 'application/pdf', '.xml': 'text/xml',
   '.txt': 'text/plain; charset=utf-8', '.woff2': 'font/woff2' };
 
-// What a publish may commit: the draft files it writes (content/, essays/ post
-// bodies, img/uploads/) and what the build regenerates from them. Anything else
-// dirty in the clone means someone is working in it by hand, and a publish would
-// sweep their files live.
-const EDITS = /^(content\/|img\/uploads\/|essays\/)/;
-const GENERATED = /(\.html|^sitemap\.xml|^llms\.txt)$/;
-const publishable = f => EDITS.test(f) || GENERATED.test(f);
+/* ---------- the two sites ---------- */
+// What a publish may commit: the draft files it writes (edits) and what the build
+// regenerates from them (generated). Anything else dirty in a clone means someone
+// is working in it by hand, and a publish would sweep their files live.
+// off: paths a publish on that site must never change (the .com blog copies).
+const COM = { id: 'com', name: 'elvinpeters.com', root: ROOT, prefix: '',
+  edits: /^(content\/|img\/uploads\/)/, generated: /(\.html|^sitemap\.xml|^llms\.txt)$/,
+  off: /^(content\/essays\.json$|essays\/|writing\/|blog\/)/, logPaths: ['content/'] };
+const CA_ROOT = (() => {
+  const p = path.resolve(process.env.STUDIO_BLOG_REPO || '/opt/site-studio/epeters-ca');
+  return fs.existsSync(path.join(p, 'build.js')) && fs.existsSync(path.join(p, 'essay-page.js')) && fs.existsSync(path.join(p, '.git')) ? p : null;
+})();
+const CA = CA_ROOT && { id: 'ca', name: 'epeters.ca', root: CA_ROOT, prefix: 'ca:',
+  edits: /^(content\/essays\.json$|essays\/[a-z0-9-]+\.html$|img\/uploads\/)/, generated: /(\.html|^sitemap\.xml|^robots\.txt)$/,
+  off: null, logPaths: ['content/essays.json', 'essays/'] };
+const SITES = [CA, COM].filter(Boolean);
+const publishable = (site, f) => !(site.off && site.off.test(f)) && (site.edits.test(f) || site.generated.test(f));
+// A draft key is the repo path it replaces; blog keys carry the ca: prefix.
+const ESSAYS = 'ca:content/essays.json';
+const siteOf = key => String(key).startsWith('ca:') ? CA : COM;
+const fileOf = key => String(key).replace(/^ca:/, '');
+const blogKey = file => 'ca:' + file;
+// The blog's folder on epeters.ca: one setting for every address the Studio shows.
+// The rename writing/ -> blog/ is its own job (#367), so read it from the build
+// output instead of hardcoding either.
+function blogDir(root) {
+  if (/^(blog|writing)$/.test(process.env.STUDIO_BLOG_DIR || '')) return process.env.STUDIO_BLOG_DIR;
+  root = root || CA_ROOT;
+  if (root && fs.existsSync(path.join(root, 'blog', 'index.html'))) return 'blog';
+  if (root && fs.existsSync(path.join(root, 'writing', 'index.html'))) return 'writing';
+  return 'blog';
+}
+const NO_BLOG = 'The epeters.ca copy is not set up on this server yet, so blog posts cannot be opened. Pages still work.';
 
-// One job on the server copy at a time: a publish, a roll back or the pull.
-// Saving a draft never waits for it: drafts don't touch the copy.
+// One job on the server copies at a time: a publish, a roll back or the pull.
+// Saving a draft never waits for it: drafts don't touch the copies.
 let busy = null;
-let lastSync = { at: 0, ok: true, msg: '' };
+let lastSync = { at: 0, ok: true, msg: '' }, lastSyncCa = { at: 0, ok: true, msg: '' };
 let lastTest = null;   // { id, at }
 
 /* ---------- helpers ---------- */
 function git(args, opts) {
   return execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', timeout: 60000, ...opts }).trim();
 }
-function porcelain() {
+function porcelain(root) {
   // Not git(): its trim() would eat the leading space of the first " M file" line.
-  return execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], { cwd: ROOT, encoding: 'utf8', timeout: 60000 })
+  return execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], { cwd: root || ROOT, encoding: 'utf8', timeout: 60000 })
     .split('\n').filter(Boolean)
     .map(l => ({ code: l.slice(0, 2), file: l.slice(3).replace(/^"|"$/g, '').replace(/^.* -> /, '') }));
 }
@@ -92,11 +129,21 @@ function version(buf) { return crypto.createHash('sha1').update(buf).digest('hex
 /* ---------- drafts ---------- */
 // A draft's key is the repo path it replaces.
 const contentKey = name => 'content/' + name + '.json';
+// .com: page content only. The blog's keys live on the ca: side; the .com
+// essays.json, essays/, writing/ and blog/ are never a draft key.
 function keyOk(key) {
+  key = String(key || '');
+  if (key.startsWith('ca:')) return !!CA && (key === ESSAYS || BODY_FILE.test(fileOf(key)));
   const m = /^content\/([a-z][a-z0-9-]{0,40})\.json$/.exec(key);
-  return m ? allowed(m[1]) : BODY_FILE.test(key);
+  return !!m && m[1] !== 'essays' && allowed(m[1]);
 }
-function live(key) { const f = path.join(ROOT, key); return fs.existsSync(f) ? fs.readFileSync(f) : null; }
+const drafts = site => store.list().filter(d => keyOk(d.key) && (!site || siteOf(d.key) === site));
+function live(key) {
+  const s = siteOf(key);
+  if (!s) return null;
+  const f = path.join(s.root, fileOf(key));
+  return fs.existsSync(f) ? fs.readFileSync(f) : null;
+}
 // What the editor sees: the draft if there is one, else the live file.
 function current(key) {
   const d = store.get(key);
@@ -111,10 +158,10 @@ function saveDraft(req, key, buf) {
 }
 // Authelia passes the signed-in user; localhost has none.
 function author(req) { return String(req.headers['remote-user'] || 'elvin').replace(/[^\w.@-]/g, '').slice(0, 40) || 'elvin'; }
-// Every draft and unpublished upload, written at its repo path under dir.
-function materialize(dir) {
-  for (const d of store.list()) {
-    const f = path.join(dir, d.key);
+// Every draft of one site and every unpublished upload, written at its repo path under dir.
+function materialize(dir, site) {
+  for (const d of drafts(site)) {
+    const f = path.join(dir, fileOf(d.key));
     fs.mkdirSync(path.dirname(f), { recursive: true });
     fs.writeFileSync(f, store.get(d.key).data);
   }
@@ -131,13 +178,49 @@ function buildWithDrafts(dir, cb, markers) {
   fs.rmSync(dir, { recursive: true, force: true });
   fs.mkdirSync(path.join(dir, 'out'), { recursive: true });
   fs.mkdirSync(path.join(dir, 'overlay'), { recursive: true });
-  materialize(path.join(dir, 'overlay'));
+  materialize(path.join(dir, 'overlay'), COM);
   execFile(process.execPath, [path.join(__dirname, 'build-drafts.js'), '--overlay', path.join(dir, 'overlay'), '--out', path.join(dir, 'out')],
     { cwd: ROOT, timeout: 120000, env: { ...process.env, SITE_STACK_MARKERS: markers ? '1' : '' } },
     (err, so, se) => cb(err ? String(se || err.message).slice(0, 500) : null));
 }
+// The blog Test: a copy of the epeters-ca repo (no .git) with the blog drafts and
+// uploads laid over it, built by its own build.js. It writes in place, so it runs
+// in the copy, never the clone. Posts ticked Draft show too: that is what Test is
+// for. Output lands in <dir>/site, served by /preview/<id>/.
+async function buildBlogTest(dir) {
+  fs.rmSync(dir, { recursive: true, force: true });
+  const site = path.join(dir, 'site');
+  fs.cpSync(CA.root, site, { recursive: true, filter: src => path.relative(CA.root, src).split(path.sep)[0] !== '.git' });
+  materialize(site, CA);
+  const ef = path.join(site, 'content', 'essays.json');
+  const d = JSON.parse(fs.readFileSync(ef, 'utf8'));
+  let hidden = 0;
+  for (const p of postsOf(d)) if (p && p.draft) { delete p.draft; hidden++; }
+  fs.writeFileSync(ef, JSON.stringify(d, null, 2) + '\n');
+  const opt = { cwd: site, encoding: 'utf8', timeout: 120000, ...BIG };
+  try { await execFileP(process.execPath, ['build.js'], opt); }
+  catch (e) { throw new Error(String(e.stderr || e.stdout || e.message).split('\n').filter(Boolean).slice(-4).join(' ').slice(0, 400)); }
+  // The gate, as a heads-up: a publish runs it for real.
+  let gate = [];
+  try { await execFileP(process.execPath, ['verify.js'], opt); }
+  catch (e) { gate = gateLines((e.stdout || '') + (e.stderr || '')); }
+  return { dir: blogDir(site), drafts: hidden, gate };
+}
+// What a verify gate said was wrong: its ✗ lines, or the lines under its FAIL line.
+function gateLines(out) {
+  const lines = String(out).split('\n').map(l => l.trim()).filter(Boolean);
+  const x = lines.filter(l => /✗/.test(l));
+  const at = lines.findIndex(l => /^FAIL\b/.test(l));
+  const got = x.length ? x : at > -1 ? lines.slice(at + 1) : [];
+  return got.length ? got.slice(0, 6) : ['the epeters.ca check did not pass'];
+}
 // A file of a built draft site: generated page, then draft or upload, then the repo.
+// A blog Test (<dir>/site) serves its own built copy and nothing else.
 function builtFile(dir, rel) {
+  if (fs.existsSync(path.join(dir, 'site'))) {
+    const f = safeJoin(path.join(dir, 'site'), rel);
+    return f && fs.existsSync(f) ? f : null;
+  }
   for (const base of [path.join(dir, 'out'), path.join(dir, 'overlay'), ROOT]) {
     const f = safeJoin(base, rel);
     if (f && fs.existsSync(f)) return f;
@@ -155,6 +238,11 @@ function textWords(html) {
   return (t.match(/\S+/g) || []).length;
 }
 function fresh(mod) { const p = require.resolve(mod); delete require.cache[p]; return require(p); }
+// An epeters-ca module with everything it requires re-read (the clone pulls every 5 minutes).
+function freshCa(file) {
+  for (const k of Object.keys(require.cache)) if (k.startsWith(CA.root + path.sep)) delete require.cache[k];
+  return require(path.join(CA.root, file));
+}
 
 function send(res, code, body, headers) {
   res.writeHead(code, { 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow', ...headers });
@@ -191,6 +279,13 @@ function stripTracking(html) {
   return html
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, s => /googletagmanager|gtag\(|dataLayer|fbq\(|connect\.facebook\.net/.test(s) ? '' : s)
     .replace(/<noscript>(?:(?!<\/noscript>)[\s\S])*facebook\.com\/tr(?:(?!<\/noscript>)[\s\S])*<\/noscript>/gi, '');
+}
+// An epeters.ca page shown inside the Studio: its root paths (/css/post.css,
+// /img/x.png, /blog/other-post/) point under prefix, so it loads epeters.ca's own
+// files, never elvinpeters.com's files with the same names.
+function rootTo(text, prefix, css) {
+  const t = String(text).replace(/url\(\s*(['"]?)\/(?!\/)/g, 'url($1' + prefix + '/');
+  return css ? t : t.replace(/(\s(?:src|href|poster|action)\s*=\s*["'])\/(?!\/)/gi, '$1' + prefix + '/');
 }
 
 /* ---------- content validation ---------- */
@@ -274,19 +369,19 @@ const BODY_FILE = /^essays\/[a-z0-9-]+\.html$/;
 const BIG = { maxBuffer: 32 * 1024 * 1024 };
 const postsOf = data => (Array.isArray(data) ? data : data.posts) || [];
 // The posts as the editor sees them (draft if there is one).
-function loadPosts() { return postsOf(JSON.parse(current(contentKey('essays')).buf.toString('utf8'))); }
+function loadPosts() { return postsOf(JSON.parse(current(ESSAYS).buf.toString('utf8'))); }
 // What of a draft may go live. essays.json: the draft minus posts still ticked
 // Draft (those stay in the store, never in the public repo). A post body: only
 // when its post is live after this publish. null = nothing to publish.
 function publishForm(key, data, postsAfter) {
-  if (key === contentKey('essays')) {
+  if (key === ESSAYS) {
     const d = JSON.parse(data.toString('utf8'));
     const keep = p => p && !p.draft;
     const out = Array.isArray(d) ? d.filter(keep) : { ...d, posts: postsOf(d).filter(keep) };
     return Buffer.from(JSON.stringify(out, null, 2) + '\n');
   }
-  if (BODY_FILE.test(key)) {
-    const post = postsAfter.find(p => p && p.file === key);
+  if (siteOf(key) === CA && BODY_FILE.test(fileOf(key))) {
+    const post = postsAfter.find(p => p && p.file === fileOf(key));
     return post && !post.draft ? data : null;
   }
   return data;
@@ -304,57 +399,74 @@ function bodyFileOf(slug) {
   if (!post) return { error: 'no such post', code: 404 };
   if (!post.file) return { error: 'this post has no body file', code: 404 };
   if (!BODY_FILE.test(post.file)) return { error: 'bad body file on ' + slug, code: 422 };
-  return { post, file: post.file, abs: path.join(ROOT, post.file) };
+  return { post, file: post.file, key: blogKey(post.file) };
 }
-// A file as it was at a commit. Not git(): its trim() would change the bytes.
-function showAt(sha, file) {
-  return execFileSync('git', ['show', sha + ':' + file], { cwd: ROOT, encoding: 'utf8', timeout: 60000, ...BIG });
+// A file as it was at a commit (the blog's history is epeters.ca's). Not git():
+// its trim() would change the bytes.
+function showAt(sha, file, site) {
+  return execFileSync('git', ['show', sha + ':' + file], { cwd: (site || CA).root, encoding: 'utf8', timeout: 60000, ...BIG });
+}
+// An upload no remaining draft points at can leave the store once it is in a repo.
+function uploadInUse(name) {
+  return drafts().some(d => { const x = store.get(d.key); return x && x.data.includes('uploads/' + name); });
 }
 
 /* ---------- git sync ---------- */
 // Put regenerated pages back to their committed state (a build that ran here by hand
 // or a publish that stopped halfway). Drafts are never in the copy, so this loses nothing.
-function resetBuildOutput() {
+function resetBuildOutput(site) {
+  site = site || COM;
   try {
-    const files = porcelain().filter(x => GENERATED.test(x.file) && x.code !== '??').map(x => x.file);
-    for (let i = 0; i < files.length; i += 100) git(['checkout', '--', ...files.slice(i, i + 100)]);
+    const files = porcelain(site.root).filter(x => site.generated.test(x.file) && x.code !== '??').map(x => x.file);
+    for (let i = 0; i < files.length; i += 100) git(['checkout', '--', ...files.slice(i, i + 100)], { cwd: site.root });
   } catch (e) {}
 }
-// The server copy must be clean between jobs. Returns the files that are not.
-function dirtyFiles() {
-  let st = porcelain();
-  if (st.length) { resetBuildOutput(); st = porcelain(); }
+// A server copy must be clean between jobs. Returns the files that are not.
+function dirtyFiles(site) {
+  site = site || COM;
+  let st = porcelain(site.root);
+  if (st.length) { resetBuildOutput(site); st = porcelain(site.root); }
   return st.map(x => x.file);
 }
-// Fast-forward the server copy to GitHub. Never merges or rebases: the copy only
+// Fast-forward a server copy to GitHub. Never merges or rebases: the copy only
 // ever holds what GitHub has, plus a publish in flight.
-async function pull() {
-  const dirty = dirtyFiles();
-  if (dirty.length) throw new Error('The server copy has files that are not committed (' + dirty.slice(0, 3).join(', ') + '), so it cannot update from GitHub.');
-  try { await execFileP('git', ['pull', '--ff-only', '--quiet'], { cwd: ROOT, timeout: 60000 }); }
-  catch (e) { throw new Error('Could not get the latest site from GitHub: ' + (String(e.stderr || e.message).split('\n').filter(Boolean)[0] || '').slice(0, 160)); }
+async function pull(site) {
+  site = site || COM;
+  const dirty = dirtyFiles(site);
+  if (dirty.length) throw new Error('The ' + site.name + ' copy has files that are not committed (' + dirty.slice(0, 3).join(', ') + '), so it cannot update from GitHub.');
+  try { await execFileP('git', ['pull', '--ff-only', '--quiet'], { cwd: site.root, timeout: 60000 }); }
+  catch (e) { throw new Error('Could not get the latest ' + site.name + ' from GitHub: ' + (String(e.stderr || e.message).split('\n').filter(Boolean)[0] || '').slice(0, 160)); }
 }
 // The pull every few minutes, under the same lock as publish, so the two never
-// run on the copy at once.
+// run on a copy at once.
 async function autoSync() {
   if (busy) return false;
   busy = 'pull';
-  try { await pull(); lastSync = { at: Date.now(), ok: true, msg: 'up to date' }; }
-  catch (e) { lastSync = { at: Date.now(), ok: false, msg: String(e.message).slice(0, 200) }; }
-  finally { busy = null; }
-  return lastSync.ok;
+  try {
+    try { await pull(COM); lastSync = { at: Date.now(), ok: true, msg: 'up to date' }; }
+    catch (e) { lastSync = { at: Date.now(), ok: false, msg: String(e.message).slice(0, 200) }; }
+    if (CA) {
+      try { await pull(CA); lastSyncCa = { at: Date.now(), ok: true, msg: 'up to date' }; }
+      catch (e) { lastSyncCa = { at: Date.now(), ok: false, msg: String(e.message).slice(0, 200) }; }
+    }
+  } finally { busy = null; }
+  return lastSync.ok && lastSyncCa.ok;
 }
-const node = (script) => execFileP(process.execPath, [path.join(ROOT, script)], { cwd: ROOT, encoding: 'utf8', timeout: 120000, ...BIG }).then(r => r.stdout);
+const node = (site, script) => execFileP(process.execPath, [path.join(site.root, script)], { cwd: site.root, encoding: 'utf8', timeout: 120000, ...BIG }).then(r => r.stdout);
 
 /* ---------- history ---------- */
-function history() {
-  const log = git(['log', '-25', '--pretty=%H|%h|%ad|%an|%s', '--date=iso-strict', '--', 'content/', 'essays/']).split('\n').filter(Boolean);
+function history(site) {
+  site = site || COM;
+  const g = a => git(a, { cwd: site.root });
+  const log = g(['log', '-25', '--pretty=%H|%h|%ad|%an|%s', '--date=iso-strict', '--', ...site.logPaths]).split('\n').filter(Boolean);
   return log.map(l => {
     const [full, sha, date, author, ...s] = l.split('|');
-    const files = git(['show', '--pretty=format:', '--name-only', full]).split('\n').filter(Boolean);
-    const offPath = files.filter(f => !publishable(f));
-    return { sha, date, author, msg: s.join('|'), files: files.length,
-      revertable: offPath.length === 0, why: offPath.length ? 'Also changed code (' + offPath.slice(0, 2).join(', ') + '). Roll this back by hand.' : '' };
+    const files = g(['show', '--pretty=format:', '--name-only', full]).split('\n').filter(Boolean);
+    const blog = site.off ? files.filter(f => site.off.test(f)) : [];
+    const offPath = files.filter(f => !publishable(site, f));
+    return { sha, date, author, msg: s.join('|'), files: files.length, revertable: offPath.length === 0,
+      why: blog.length ? 'This publish changed the old blog files on elvinpeters.com. The blog lives on epeters.ca now.'
+        : offPath.length ? 'Also changed code (' + offPath.slice(0, 2).join(', ') + '). Roll this back by hand.' : '' };
   });
 }
 
@@ -366,7 +478,7 @@ function postHistory(slug) {
   const post = loadPosts().find(x => x.slug === slug);
   if (!post) return null;
   const target = post.file && BODY_FILE.test(post.file) ? post.file : 'content/essays.json';
-  const log = git(['log', '--format=%H|%h|%aI|%s', '-n', '60', '--', target]).split('\n').filter(Boolean)
+  const log = git(['log', '--format=%H|%h|%aI|%s', '-n', '60', '--', target], { cwd: CA.root }).split('\n').filter(Boolean)
     .map(l => { const [full, sha, date, ...m] = l.split('|'); return { full, sha, date, msg: m.join('|') }; });
   if (target !== 'content/essays.json') {
     return log.slice(0, 20).map(c => {
@@ -485,8 +597,8 @@ const server = http.createServer((req, res) => {
     if (p === '/studio.css' || p === '/tools.json') return serveFile(res, path.join(__dirname, p.slice(1)));
     if (p === '/md.js') {
       // md.js is a CommonJS module; the browser gets it wrapped so the live preview
-      // renders with the exact converter the build uses.
-      const src = fs.readFileSync(path.join(ROOT, 'md.js'), 'utf8').replace(/\/\* ---- self test[\s\S]*$/, '');
+      // renders with the exact converter the build uses (the blog's: epeters.ca's).
+      const src = fs.readFileSync(path.join(CA ? CA.root : ROOT, 'md.js'), 'utf8').replace(/\/\* ---- self test[\s\S]*$/, '');
       return send(res, 200, '(function(){var module={exports:{}};\n' + src + '\nwindow.mdToHtml=module.exports.mdToHtml;})();',
         { 'Content-Type': 'text/javascript' });
     }
@@ -494,29 +606,46 @@ const server = http.createServer((req, res) => {
     if (p === '/api/state' && req.method === 'GET') {
       if (Date.now() - lastSync.at > PULL_MS) autoSync();
       let repo = {};
+      const blog = { ready: !!CA, host: 'epeters.ca', dir: blogDir(), error: CA ? '' : NO_BLOG };
       try {
         const st = porcelain();
-        const drafts = store.list().map(d => ({ key: d.key, rev: d.rev, updated: d.updated, author: d.author, stale: stale(d) }));
+        const list = drafts().map(d => ({ key: d.key, site: siteOf(d.key).id, rev: d.rev, updated: d.updated, author: d.author, stale: stale(d) }));
         repo = {
           branch: git(['branch', '--show-current']),
           head: git(['log', '-1', '--pretty=%h %s']),
-          changed: drafts.map(d => d.key),
-          drafts,
-          blocked: st.filter(x => !publishable(x.file)).map(x => x.file).slice(0, 8),
+          changed: list.map(d => d.key),
+          drafts: list,
+          blocked: st.filter(x => !publishable(COM, x.file)).map(x => x.file).slice(0, 8),
           sync: lastSync,
           test: lastTest && { at: lastTest.at, url: 'https://' + TEST_HOST + '/' },
         };
       } catch (e) { repo.error = String(e.message).slice(0, 200); }
-      return json(res, 200, { sections: schemas(), repo, publishing: busy === 'publish' || busy === 'revert' });
+      if (CA) {
+        try {
+          blog.head = git(['log', '-1', '--pretty=%h %s'], { cwd: CA.root });
+          blog.blocked = porcelain(CA.root).filter(x => !publishable(CA, x.file)).map(x => x.file).slice(0, 8);
+          blog.sync = lastSyncCa;
+        } catch (e) { blog.error = 'Could not read the epeters.ca copy: ' + String(e.message).slice(0, 160); }
+      }
+      return json(res, 200, { sections: schemas(), repo, blog, publishing: busy === 'publish' || busy === 'revert' });
     }
+
+    // Every blog route works on the epeters.ca copy; without one, say so plainly.
+    if (!CA && (/^\/api\/(post-|convert\/|blog-test)/.test(p) || p === '/api/content/essays' || p.startsWith('/ca/') || (p === '/api/history' && url.searchParams.get('site') === 'blog')))
+      return json(res, 503, { error: NO_BLOG });
 
     // Get the latest site from GitHub now (the editor's refresh; also runs every 5 minutes).
     if (p === '/api/sync' && req.method === 'POST') {
       if (busy) return json(res, 409, { error: 'The server copy is busy (' + busy + '). Try again in a moment.' });
-      return autoSync().then(() => json(res, lastSync.ok ? 200 : 502, { sync: lastSync, error: lastSync.ok ? undefined : lastSync.msg }));
+      return autoSync().then(ok => json(res, ok ? 200 : 502, { sync: lastSync, blog: CA ? lastSyncCa : undefined,
+        error: ok ? undefined : (lastSync.ok ? lastSyncCa.msg : lastSync.msg) }));
     }
 
-    if (p === '/api/history' && req.method === 'GET') return json(res, 200, { history: history() });
+    // Publish history: elvinpeters.com's pages, or ?site=blog for epeters.ca's posts.
+    if (p === '/api/history' && req.method === 'GET') {
+      const site = url.searchParams.get('site') === 'blog' ? CA : COM;
+      return json(res, 200, { site: site.id, dir: site === CA ? blogDir() : undefined, history: history(site) });
+    }
 
     // The section library: every type a stack page can use (sections/<type>/section.json).
     // Each type carries `blank`, the empty words a new section of it starts with;
@@ -575,18 +704,19 @@ const server = http.createServer((req, res) => {
         if (!keyOk(key)) return json(res, 404, { error: 'unknown page' });
         return json(res, 200, { key, revisions: store.revisions(key, 50) });
       }
-      return json(res, 200, { drafts: store.list().map(d => ({ ...d, stale: stale(d) })), uploads: store.uploads() });
+      return json(res, 200, { drafts: drafts().map(d => ({ ...d, site: siteOf(d.key).id, stale: stale(d) })), uploads: store.uploads() });
     }
     if (p === '/api/drafts/revision' && req.method === 'GET') {
       const r = store.revision(+url.searchParams.get('id'));
-      if (!r || !r.data) return json(res, 404, { error: 'no such revision' });
+      if (!r || !r.data || !keyOk(r.key)) return json(res, 404, { error: 'no such revision' });
       return send(res, 200, r.data, { 'Content-Type': r.key.endsWith('.json') ? 'application/json' : 'text/plain; charset=utf-8' });
     }
 
     if (p.startsWith('/api/content/')) {
       const name = p.split('/')[3];
       if (!allowed(name)) return json(res, 404, { error: 'unknown section' });
-      const key = contentKey(name);
+      // Blog posts are epeters.ca's essays.json; the .com copy is never read or written.
+      const key = name === 'essays' ? ESSAYS : contentKey(name);
       if (req.method === 'GET') {
         const c = current(key);
         if (!c) return json(res, 404, { error: 'That page does not exist (it may have been discarded).' });
@@ -617,16 +747,17 @@ const server = http.createServer((req, res) => {
         try { post = JSON.parse(body.toString('utf8')); } catch (e) { return json(res, 400, { error: 'bad body' }); }
         const bad = validate('essays', { posts: [{ ...post, slug: post.slug || 'untitled' }] });
         if (bad) return json(res, 422, { error: bad });
-        const { essayPage } = fresh(path.join(ROOT, 'essay-page.js'));
+        const { essayPage } = freshCa('essay-page.js');
         // body_override: a body typed in the studio that may not be saved yet.
         const override = typeof post.body_override === 'string' ? post.body_override : null;
         delete post.body_override;
         let inner;
         if (post.body_format === 'markdown') inner = '<div id="studio-body"></div>';
         else if (override !== null) inner = override;
-        else if (post.file && BODY_FILE.test(post.file)) inner = (current(post.file) || { buf: '' }).buf.toString('utf8');
+        else if (post.file && BODY_FILE.test(post.file)) inner = (current(blogKey(post.file)) || { buf: '' }).buf.toString('utf8');
         else inner = String(post.html || '');
-        const html = stripTracking(essayPage({ ...post, slug: post.slug || 'untitled' }, inner));
+        // epeters.ca's own css, fonts and images, served under /ca/.
+        const html = rootTo(stripTracking(essayPage({ ...post, slug: post.slug || 'untitled' }, inner)), '/ca');
         send(res, 200, html, { 'Content-Type': 'text/html; charset=utf-8' });
       });
     }
@@ -637,13 +768,13 @@ const server = http.createServer((req, res) => {
       const bf = bodyFileOf(slug);
       if (bf.error) return json(res, bf.code, { error: bf.error });
       if (req.method === 'GET') {
-        const c = current(bf.file) || { buf: Buffer.alloc(0), version: 'p' + version(Buffer.alloc(0)) };
+        const c = current(bf.key) || { buf: Buffer.alloc(0), version: 'p' + version(Buffer.alloc(0)) };
         return json(res, 200, { html: c.buf.toString('utf8'), version: c.version });
       }
       if (req.method === 'PUT') {
         return readBody(req, 2 * 1024 * 1024, body => {
           try {
-            const r = saveDraft(req, bf.file, body);
+            const r = saveDraft(req, bf.key, body);
             json(res, 200, { saved: true, version: r.version, draft: !r.live });
           } catch (e) {
             if (!e.stale) return json(res, 500, { error: 'Could not save the draft: ' + String(e.message).slice(0, 200) });
@@ -670,7 +801,7 @@ const server = http.createServer((req, res) => {
           if (!BODY_FILE.test(post.file)) return json(res, 422, { error: 'bad body file on ' + slug });
           return json(res, 200, { html: showAt(sha, post.file) });
         }
-        const d = JSON.parse(showAt(sha, 'content/essays.json'));
+        const d = JSON.parse(showAt(sha, fileOf(ESSAYS)));
         const old = (Array.isArray(d) ? d : d.posts || []).find(x => x && x.slug === slug);
         if (!old) return json(res, 404, { error: 'This post did not exist in that version.' });
         return json(res, 200, { post: old });
@@ -679,13 +810,13 @@ const server = http.createServer((req, res) => {
 
     if (p.startsWith('/api/convert/')) {
       const slug = decodeURIComponent(p.split('/')[3] || '');
-      const cur = current(contentKey('essays'));
+      const cur = current(ESSAYS);
       const data = JSON.parse(cur.buf.toString('utf8'));
       const posts = postsOf(data);
       const post = posts.find(x => x.slug === slug);
       if (!post) return json(res, 404, { error: 'no such post' });
       const { checkPost } = fresh(path.join(__dirname, 'convert.js'));
-      const r = checkPost(post);
+      const r = checkPost(post, freshCa('md.js').mdToHtml);
       if (req.method === 'GET') return json(res, 200, { ok: r.ok, reason: r.reason || '', words: r.ok ? (r.markdown.match(/\S+/g) || []).length : 0 });
       if (req.method === 'POST') {
         if (!r.ok) return json(res, 422, { error: r.reason });
@@ -693,7 +824,7 @@ const server = http.createServer((req, res) => {
         post.body = r.markdown;
         delete post.html;
         try {
-          const s = saveDraft(req, contentKey('essays'), Buffer.from(JSON.stringify(data, null, 2) + '\n'));
+          const s = saveDraft(req, ESSAYS, Buffer.from(JSON.stringify(data, null, 2) + '\n'));
           return json(res, 200, { converted: true, version: s.version });
         } catch (e) {
           if (!e.stale) throw e;
@@ -710,15 +841,17 @@ const server = http.createServer((req, res) => {
         try { buf = stripMeta(raw, info.ext); } catch (e) { return json(res, 415, { error: 'That image file looks damaged. Try exporting it again.' }); }
         const base = String(url.searchParams.get('name') || 'image').toLowerCase().replace(/\.[a-z0-9]+$/, '')
           .normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'image';
-        // Held in the store until a publish that uses it; the repo only gets it then.
-        const inRepo = n => path.join(ROOT, 'img', 'uploads', n);
+        // Held in the store until a publish that uses it; the post's repo only gets it
+        // then. One name means one image in both repos, so a name taken in either with
+        // different bytes is skipped.
+        const inRepos = n => SITES.map(s => path.join(s.root, 'img', 'uploads', n)).filter(f => fs.existsSync(f));
         let name = `${base}-${info.w}x${info.h}.${info.ext}`, n = 2;
         for (;;) {
-          const have = store.getUpload(name) || (fs.existsSync(inRepo(name)) ? fs.readFileSync(inRepo(name)) : null);
-          if (!have || have.equals(buf)) break;     // free name, or the same file again: reuse it
+          const have = [store.getUpload(name), ...inRepos(name).map(f => fs.readFileSync(f))].filter(Boolean);
+          if (have.every(h => h.equals(buf))) break;     // free name, or the same file again: reuse it
           name = `${base}-${n++}-${info.w}x${info.h}.${info.ext}`;
         }
-        if (!fs.existsSync(inRepo(name))) store.putUpload(name, buf);
+        if (inRepos(name).length < SITES.length) store.putUpload(name, buf);
         json(res, 200, { src: '/img/uploads/' + name, image: 'uploads/' + name, width: info.w, height: info.h, bytes: buf.length });
       }, () => json(res, 413, { error: 'Images must be under 8 MB. Export a smaller JPG or WebP.' }));
     }
@@ -732,6 +865,17 @@ const server = http.createServer((req, res) => {
       }, true);
     }
 
+    // Blog Test: the real epeters.ca build with the blog drafts in it, shown full
+    // screen at /preview/<id>/<blog dir>/<slug>/. Nothing is pushed.
+    if (p === '/api/blog-test' && req.method === 'POST') {
+      if (busy === 'publish' || busy === 'revert') return json(res, 409, { error: 'A publish is running. Try again when it finishes.' });
+      const id = crypto.randomBytes(6).toString('hex');
+      return buildBlogTest(path.join(PREVIEWS, id)).then(r => {
+        prune(PREVIEWS, 5);
+        json(res, 200, { id, ...r });
+      }, e => json(res, 500, { error: 'The epeters.ca build failed: ' + String(e.message).slice(0, 400) }));
+    }
+
     // Test: the whole site with every draft in it, at the test address.
     if (p === '/api/test' && req.method === 'POST') {
       const id = crypto.randomBytes(6).toString('hex');
@@ -740,7 +884,7 @@ const server = http.createServer((req, res) => {
         lastTest = { id, at: new Date().toISOString() };
         fs.writeFileSync(path.join(TESTS, 'current'), id);
         prune(TESTS, 2);
-        json(res, 200, { url: 'https://' + TEST_HOST + '/', at: lastTest.at, drafts: store.list().length });
+        json(res, 200, { url: 'https://' + TEST_HOST + '/', at: lastTest.at, drafts: drafts(COM).length });
       });
     }
 
@@ -750,12 +894,41 @@ const server = http.createServer((req, res) => {
       if (rel.endsWith('/')) rel += 'index.html';
       if (!/^[a-f0-9]{12}$/.test(id)) return send(res, 404, '');
       const file = builtFile(path.join(PREVIEWS, id), rel);
-      if (!file || fs.statSync(file).isDirectory()) return send(res, 404, 'not found');
+      if (!file) return send(res, 404, 'not found');
+      // /blog/x without the slash: go to the folder, so its relative links work.
+      if (fs.statSync(file).isDirectory()) {
+        if (!fs.existsSync(path.join(file, 'index.html'))) return send(res, 404, 'not found');
+        res.writeHead(302, { Location: p + '/' + (url.search || ''), 'Cache-Control': 'no-store' });
+        return res.end();
+      }
       // The proxy says X-Frame-Options DENY for the whole host; frame-ancestors
       // overrides it in browsers, so previews can sit inside the studio page.
       const frame = { 'Content-Security-Policy': "frame-ancestors 'self'" };
-      if (file.endsWith('.html'))
-        return send(res, 200, stripTracking(fs.readFileSync(file, 'utf8')), { 'Content-Type': MIME['.html'], ...frame });
+      // A blog Test is a whole epeters.ca: its root paths stay inside this preview.
+      const whole = fs.existsSync(path.join(PREVIEWS, id, 'site'));
+      if (file.endsWith('.html')) {
+        const html = stripTracking(fs.readFileSync(file, 'utf8'));
+        return send(res, 200, whole ? rootTo(html, '/preview/' + id) : html, { 'Content-Type': MIME['.html'], ...frame });
+      }
+      if (whole && file.endsWith('.css'))
+        return send(res, 200, rootTo(fs.readFileSync(file, 'utf8'), '/preview/' + id, true), { 'Content-Type': MIME['.css'], ...frame });
+      return serveFile(res, file, frame);
+    }
+
+    // epeters.ca's live files for the quick post preview (/ca/css/post.css, its images,
+    // its pages): held uploads first, then the ca copy. Never source or content.
+    if (p.startsWith('/ca/') && req.method === 'GET') {
+      let rel = decodeURIComponent(p.slice(3));
+      if (/^\/(content|essays|node_modules)\//i.test(rel) || (/\.(js|json|md|txt)$/i.test(rel) && !/^\/js\/[\w.-]+\.js$/.test(rel))) return send(res, 404, 'not found');
+      const up = /^\/img\/uploads\/([a-z0-9][a-z0-9._-]{0,120})$/i.exec(rel);
+      const held = up && store.getUpload(up[1]);
+      if (held) return send(res, 200, held, { 'Content-Type': MIME[path.extname(up[1]).toLowerCase()] || 'application/octet-stream' });
+      if (rel.endsWith('/')) rel += 'index.html';
+      const file = safeJoin(CA.root, rel);
+      if (!file || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return send(res, 404, 'not found');
+      const frame = { 'Content-Security-Policy': "frame-ancestors 'self'" };
+      if (file.endsWith('.html')) return send(res, 200, rootTo(stripTracking(fs.readFileSync(file, 'utf8')), '/ca'), { 'Content-Type': MIME['.html'], ...frame });
+      if (file.endsWith('.css')) return send(res, 200, rootTo(fs.readFileSync(file, 'utf8'), '/ca', true), { 'Content-Type': MIME['.css'] });
       return serveFile(res, file, frame);
     }
 
@@ -763,10 +936,10 @@ const server = http.createServer((req, res) => {
     // draft), &force=1 (mine wins over a live file that changed since the draft began),
     // &msg=. Streams progress lines.
     if (p === '/api/publish' && req.method === 'POST') {
-      if (busy) return json(res, 409, { error: busy === 'pull' ? 'The server copy is updating from GitHub. Try again in a few seconds.' : 'A publish is already running.' });
       const want = String(url.searchParams.get('keys') || '').split(',').map(s => s.trim()).filter(Boolean);
       const bad = want.find(k => !keyOk(k));
       if (bad) return json(res, 400, { error: 'unknown page ' + bad });
+      if (busy) return json(res, 409, { error: busy === 'pull' ? 'The server copy is updating from GitHub. Try again in a few seconds.' : 'A publish is already running.' });
       busy = 'publish';
       res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store', 'X-Accel-Buffering': 'no' });
       const say = t => res.write(t + '\n');
@@ -792,28 +965,33 @@ const server = http.createServer((req, res) => {
 
     if (p === '/api/revert' && req.method === 'POST') {
       return readBody(req, 1024, body => {
-        let sha;
-        try { sha = JSON.parse(body.toString('utf8')).sha; } catch (e) { return json(res, 400, { error: 'bad body' }); }
+        let sha, site;
+        try { const b = JSON.parse(body.toString('utf8')); sha = b.sha; site = b.site === 'blog' ? CA : COM; } catch (e) { return json(res, 400, { error: 'bad body' }); }
+        if (!site) return json(res, 503, { error: NO_BLOG });
         if (!/^[a-f0-9]{7,40}$/.test(sha || '')) return json(res, 400, { error: 'bad sha' });
         if (busy) return json(res, 409, { error: 'A publish is running. Try again when it finishes.' });
-        const item = history().find(h => h.sha.startsWith(sha) || sha.startsWith(h.sha));
+        const g = (a, o) => git(a, { cwd: site.root, ...o });
+        const item = history(site).find(h => h.sha.startsWith(sha) || sha.startsWith(h.sha));
         if (!item) return json(res, 404, { error: 'That version is not in the recent publish history.' });
         if (!item.revertable) return json(res, 422, { error: item.why });
         busy = 'revert';
-        const before = git(['rev-parse', 'HEAD']);
+        const before = g(['rev-parse', 'HEAD']);
         (async () => {
-          await pull();
-          git(['revert', '--no-commit', sha]);
-          await node('build.js');
-          await node('verify.js');
+          await pull(site);
+          g(['revert', '--no-commit', sha]);
+          await node(site, 'build.js');
+          await node(site, 'verify.js');
           // Tracked files only: the copy was clean before, so this is the revert plus
-          // the pages the build regenerated from it.
-          git(['add', '-u']);
-          git(['commit', '-m', 'Site Studio: roll back "' + item.msg.replace(/^Site Studio: /, '').slice(0, 80) + '" (' + item.sha + ')']);
-          await execFileP('git', ['push'], { cwd: ROOT, timeout: 60000 });
-        })().then(() => json(res, 200, { reverted: sha }), e => {
-          try { git(['revert', '--abort']); } catch (e2) {}
-          try { git(['reset', '--hard', before]); } catch (e2) {}
+          // the pages the build regenerated from it. Never the old .com blog files.
+          const touched = porcelain(site.root).map(x => x.file).filter(f => !publishable(site, f));
+          if (touched.length) throw new Error('The roll back would change ' + touched.slice(0, 3).join(', ') + '.');
+          g(['add', '-u']);
+          g(['commit', '-m', 'Site Studio: roll back "' + item.msg.replace(/^Site Studio: /, '').slice(0, 80) + '" (' + item.sha + ')']);
+          await execFileP('git', ['push'], { cwd: site.root, timeout: 60000 });
+        })().then(() => json(res, 200, { reverted: sha, site: site.id }), e => {
+          try { g(['revert', '--abort']); } catch (e2) {}
+          try { g(['reset', '--hard', before]); } catch (e2) {}
+          try { for (const x of porcelain(site.root)) if (x.code === '??' && site.generated.test(x.file)) fs.rmSync(path.join(site.root, x.file), { force: true }); } catch (e2) {}
           const detail = String((e.stdout || '') + (e.stderr || '') || e.message);
           json(res, 500, { error: 'Roll back failed, nothing shipped: ' + detail.split('\n').filter(Boolean).slice(0, 4).join(' ').slice(0, 300) });
         }).finally(() => { busy = null; });
@@ -830,6 +1008,9 @@ const server = http.createServer((req, res) => {
       if (held) return send(res, 200, held, { 'Content-Type': MIME[path.extname(up[1]).toLowerCase()] || 'application/octet-stream' });
       const asset = safeJoin(ROOT, decodeURIComponent(p));
       if (asset && fs.existsSync(asset)) return serveFile(res, asset);
+      // A blog post's images live in epeters.ca (the markdown preview asks the studio's root).
+      const caAsset = CA && /^\/img\//.test(p) && safeJoin(CA.root, decodeURIComponent(p));
+      if (caAsset && fs.existsSync(caAsset)) return serveFile(res, caAsset);
     }
 
     send(res, 404, 'not found');
@@ -844,96 +1025,152 @@ const server = http.createServer((req, res) => {
 // push. Any other draft never leaves the store. If anything fails, the copy goes
 // back to the commit it started from and every draft stays as it was.
 async function publish({ keys, force, msg, say, who }) {
+  const all = drafts();
+  const picked = keys.length ? all.filter(d => keys.includes(d.key)) : all;
+  if (!picked.length) { say('✓ Nothing to publish: no drafts' + (keys.length ? ' for that page.' : '.')); return; }
+  // One site at a time, the blog first. A site that fails stops the rest.
+  for (const site of SITES) {
+    const mine = picked.filter(d => siteOf(d.key) === site).map(d => d.key);
+    if (!mine.length) continue;
+    if (!(await publishSite(site, mine, { force, msg, say, who }))) return;
+  }
+}
+
+// Ship the chosen drafts of one site and nothing else: write them into the clean
+// server copy, build, verify, commit those files and the pages the build regenerated
+// BY NAME, push. Any other draft never leaves the store. If GitHub turns the push
+// away (someone pushed first), start again once from the new GitHub copy. If
+// anything fails, the copy goes back to the commit it started from and every draft
+// stays as it was. Returns true when the site is live or had nothing to ship.
+async function publishSite(site, keys, { force, msg, say, who }) {
   const run = async (label, fn) => { say('▸ ' + label); const out = await fn(); if (out) say(String(out).trim().split('\n').slice(-4).map(l => l.length > 160 ? l.slice(0, 157) + '…' : l).join('\n')); };
-  const before = git(['rev-parse', 'HEAD']);
+  const g = (a, o) => git(a, { cwd: site.root, ...o });
+  let before = g(['rev-parse', 'HEAD']);
   const wrote = [];
-  try {
-    await run('Getting the latest site from GitHub', () => pull());
-    const all = store.list();
-    const picked = (keys.length ? all.filter(d => keys.includes(d.key)) : all).map(d => store.get(d.key));
-    if (!picked.length) { say('✓ Nothing to publish: no drafts' + (keys.length ? ' for that page.' : '.')); return; }
+  const cleanUp = () => {
+    try { g(['reset', '--hard', before]); } catch (e2) {}
+    for (const f of wrote) { try { if (porcelain(site.root).some(x => x.file === f && x.code === '??')) fs.rmSync(path.join(site.root, f)); } catch (e2) {} }
+    try { for (const x of porcelain(site.root)) if (x.code === '??' && site.generated.test(x.file)) fs.rmSync(path.join(site.root, x.file), { force: true }); } catch (e2) {}
+    wrote.length = 0;
+  };
+  // Pull, check, write, build, verify, commit. Returns the plan, or null when there
+  // is nothing to push.
+  const attempt = async () => {
+    await run('Getting the latest ' + site.name + ' from GitHub', () => pull(site));
+    before = g(['rev-parse', 'HEAD']);
+    const picked = keys.map(k => store.get(k)).filter(Boolean);
+    if (!picked.length) { say('✓ Nothing to publish on ' + site.name + '.'); return null; }
 
     // Live changed under a draft (a Claude push, another device's publish): stop
     // unless the editor chose "mine wins", so nobody's work is overwritten silently.
     const moved = picked.filter(d => stale(d));
     if (moved.length && !force) {
-      say('✗ ' + moved.map(d => d.key).join(', ') + ' changed on the live site after this draft started.');
+      say('✗ ' + moved.map(d => pageTitle(d.key)).join(', ') + ' changed on the live site after this draft started.');
       say('  Open the page and check it. Publishing anyway replaces the live version with yours.');
       throw Object.assign(new Error('stale'), { quiet: true, stale: moved.map(d => d.key) });
     }
 
     // Posts as they will be after this publish decide which post bodies may go.
-    const essaysK = contentKey('essays');
-    const essaysD = picked.find(d => d.key === essaysK);
-    const postsAfter = postsOf(JSON.parse((essaysD ? essaysD.data : live(essaysK) || Buffer.from('[]')).toString('utf8')));
+    let postsAfter = [];
+    if (site === CA) {
+      const e = picked.find(d => d.key === ESSAYS);
+      postsAfter = postsOf(JSON.parse((e ? e.data : live(ESSAYS) || Buffer.from('[]')).toString('utf8')));
+    }
     const plan = [], held = [];
     for (const d of picked) {
       const out = publishForm(d.key, d.data, postsAfter);
       if (!out) { held.push(d.key); continue; }
       plan.push({ d, out });
     }
-    held.forEach(k => say('  ' + k + ' stays private: its post is still a draft.'));
-    if (!plan.length) { say('✓ Nothing to publish: only private drafts.'); return; }
+    held.forEach(k => say('  ' + pageTitle(k) + ' stays private: its post is still a draft.'));
+    if (!plan.length) { say('✓ Nothing to publish: only private drafts.'); return null; }
 
-    await run('Writing ' + plan.map(x => x.d.key).join(', '), () => {
+    await run('Writing ' + plan.map(x => pageTitle(x.d.key)).join(', '), () => {
       for (const { d, out } of plan) {
-        fs.mkdirSync(path.dirname(path.join(ROOT, d.key)), { recursive: true });
-        fs.writeFileSync(path.join(ROOT, d.key), out);
-        wrote.push(d.key);
+        const file = fileOf(d.key);
+        fs.mkdirSync(path.dirname(path.join(site.root, file)), { recursive: true });
+        fs.writeFileSync(path.join(site.root, file), out);
+        wrote.push(file);
         for (const u of uploadsIn(out)) {
-          const rel = 'img/uploads/' + u;
+          const rel = 'img/uploads/' + u, abs = path.join(site.root, rel);
           if (wrote.includes(rel)) continue;
-          fs.mkdirSync(path.join(ROOT, 'img', 'uploads'), { recursive: true });
-          fs.writeFileSync(path.join(ROOT, rel), store.getUpload(u));
+          const img = store.getUpload(u);
+          if (fs.existsSync(abs) && fs.readFileSync(abs).equals(img)) continue;
+          fs.mkdirSync(path.dirname(abs), { recursive: true });
+          fs.writeFileSync(abs, img);
           wrote.push(rel);
         }
       }
     });
-    await run('Building', () => node('build.js'));
-    await run('Checking (verify gate)', () => node('verify.js'));
+    await run('Building ' + site.name, () => node(site, 'build.js'));
+    await run('Checking (verify gate)', () => node(site, 'verify.js'));
 
     // Commit by name: the files written above plus pages the build regenerated.
     // Anything else changed means something is wrong; ship nothing.
-    const changed = porcelain().map(x => x.file);
-    const odd = changed.filter(f => !wrote.includes(f) && !GENERATED.test(f));
+    const changed = porcelain(site.root).map(x => x.file);
+    const odd = changed.filter(f => !wrote.includes(f) && !site.generated.test(f));
     if (odd.length) throw new Error('The build changed files it should not have (' + odd.slice(0, 3).join(', ') + ').');
+    const off = site.off ? changed.filter(f => site.off.test(f)) : [];
+    if (off.length) throw new Error('This publish would change the old blog files (' + off.slice(0, 3).join(', ') + '). The blog lives on epeters.ca now.');
     if (!changed.length) {
       say('✓ Nothing changed. That page is live already.');
       for (const { d } of plan) store.end(d.key, 'publish', d.rev, who, 'already live');
-      return;
+      return null;
     }
     const titles = plan.map(x => pageTitle(x.d.key)).join(', ');
     await run('Saving a version', () => {
-      for (let i = 0; i < changed.length; i += 100) git(['add', '--', ...changed.slice(i, i + 100)]);
-      return git(['commit', '-m', 'Site Studio: ' + (msg || titles)]);
+      for (let i = 0; i < changed.length; i += 100) g(['add', '--', ...changed.slice(i, i + 100)]);
+      return g(['commit', '-m', 'Site Studio: ' + (msg || titles)]);
     });
-    await run('Pushing (the site updates in about a minute)', () => execFileP('git', ['push', '--quiet'], { cwd: ROOT, timeout: 60000 }).then(() => ''));
-    const sha = git(['rev-parse', '--short', 'HEAD']);
+    return { plan, titles };
+  };
+  const push = () => run('Pushing to ' + site.name + ' (it updates in about a minute)', () => execFileP('git', ['push', '--quiet'], { cwd: site.root, timeout: 60000 }).then(() => ''));
+
+  try {
+    let done = await attempt();
+    if (!done) return true;
+    try { await push(); }
+    catch (e) {
+      // Someone pushed first. Start over from GitHub's copy, once.
+      say('  GitHub turned the push away (' + (String(e.stderr || e.message).split('\n').filter(Boolean)[0] || '').slice(0, 120) + '). Trying again on the latest copy.');
+      cleanUp();
+      done = await attempt();
+      if (!done) return true;
+      await push();
+    }
+    const sha = g(['rev-parse', '--short', 'HEAD']);
 
     // Close what shipped. A draft saved again during the publish, or one that keeps
     // private posts, stays open against the new live file.
-    for (const { d, out } of plan) {
+    for (const { d, out } of done.plan) {
       if (!out.equals(d.data) || !store.end(d.key, 'publish', d.rev, who, sha)) store.rebase(d.key, live(d.key));
-      for (const u of uploadsIn(out)) store.dropUpload(u);
     }
-    say('✓ PUBLISHED ' + titles + ' (' + sha + '). GitHub Pages takes about a minute, then it is live.');
+    // An image leaves the store once no draft still points at it (a later upload of
+    // the same file for the other site puts it back).
+    for (const { out } of done.plan) for (const u of uploadsIn(out)) if (!uploadInUse(u)) store.dropUpload(u);
+    const where = site === CA ? ' to ' + site.name : '';
+    say('✓ PUBLISHED ' + done.titles + where + ' (' + sha + '). GitHub Pages takes about a minute, then it is live.');
+    return true;
   } catch (e) {
     if (!e.quiet) {
       const detail = (e.stdout || '') + (e.stderr || '');
-      say('✗ ' + (detail.includes('FAIL') ? 'The verify gate failed:\n' + detail.split('\n').filter(l => /✗|FAIL/.test(l)).slice(0, 8).join('\n') : String(e.message).split('\n').slice(0, 6).join('\n')));
+      say('✗ ' + (detail.includes('FAIL') || detail.includes('✗') ? 'The verify gate failed:\n' + gateLines(detail).map(l => '  ' + l).join('\n') : String(e.message).split('\n').slice(0, 6).join('\n')));
     }
     // Back to where we started: no commit left to ride along later, no half-built
     // pages, no draft file left in the copy.
-    try { git(['reset', '--hard', before]); } catch (e2) {}
-    for (const f of wrote) { try { if (porcelain().some(x => x.file === f && x.code === '??')) fs.rmSync(path.join(ROOT, f)); } catch (e2) {} }
-    try { for (const x of porcelain()) if (x.code === '??' && GENERATED.test(x.file)) fs.rmSync(path.join(ROOT, x.file), { force: true }); } catch (e2) {}
-    say('Nothing shipped. The live site is untouched. Your drafts are still saved.');
+    cleanUp();
+    say('Nothing shipped to ' + site.name + '. The live site is untouched. Your drafts are still saved.');
+    return false;
   }
 }
 function pageTitle(key) {
+  if (key === ESSAYS) return 'Blog posts';
+  if (String(key).startsWith('ca:')) {
+    const post = (() => { try { return loadPosts().find(p => p && p.file === fileOf(key)); } catch (e) { return null; } })();
+    return post ? 'Blog post "' + String(post.title || post.slug).slice(0, 60) + '"' : fileOf(key);
+  }
   const m = /^content\/([a-z0-9-]+)\.json$/.exec(key);
   if (!m) return key;
-  if (m[1] === 'essays') return 'Blog posts';
   if (m[1] === 'nav') return 'Menu';
   try { return JSON.parse(fs.readFileSync(path.join(SCHEMA_DIR, m[1] + '.json'), 'utf8')).title || m[1]; } catch (e) {}
   try { return JSON.parse(fs.readFileSync(path.join(ROOT, key), 'utf8')).title || m[1]; } catch (e) { return m[1]; }
