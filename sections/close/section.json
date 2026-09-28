@@ -20,8 +20,13 @@
     },
     {
       "key": "image",
-      "type": "text",
-      "label": "Image"
+      "type": "image",
+      "label": "Image",
+      "alt": "image_alt",
+      "size": [
+        600,
+        600
+      ]
     },
     {
       "key": "image_alt",

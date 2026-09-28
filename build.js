@@ -431,9 +431,13 @@ console.log('Regions applied: claude/index.html (hero, price), content-machine/i
 // carries a GENERATED banner, and verify.js fails a hand edit. The homepage v3
 // frame keeps its ep:nav region, filled here like every other page's nav.
 const STACK_SITE = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'site.json'), 'utf8'));
-const stackPages = require('./sections.js').buildAll(path.join(DIR, 'content'), { site: STACK_SITE });
+// SITE_STACK_MARKERS is set by Site Studio's editor previews only (tap a section
+// to edit it); a real build and the test site never set it.
+const stackPages = require('./sections.js').buildAll(path.join(DIR, 'content'),
+  { site: STACK_SITE, markers: process.env.SITE_STACK_MARKERS === '1' });
 for (const p of stackPages) {
-  const html = p.file === 'index.html' && /<!-- ep:nav[ >]/.test(p.html)
+  // A page made with New page (slice 3) gets the homepage's menu, so it can't drift.
+  const html = (p.file === 'index.html' || p.made) && /<!-- ep:nav[ >]/.test(p.html)
     ? fillRegions(p.html, p.file, { 'nav': () => renderNav('index.html') }) : p.html;
   const dest = path.join(OUT, p.file);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
