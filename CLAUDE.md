@@ -17,7 +17,7 @@ This repo IS the live site. Pushing to master deploys via GitHub Pages in ~60s. 
 - book.html is DELIBERATELY light/white via `data-theme="book"`; it never theme-flips. Do not dark-theme it.
 
 ## Content rules
-- Voice: follow `Brain/VOICE-RULES.md` for anything reader-facing (no em-dashes, no "not just X, it's Y", no AI-tell vocab).
+- Voice: follow `Brain/01 Command/Rules and Guides/VOICE-RULES.md` for anything reader-facing (no em-dashes, no "not just X, it's Y", no AI-tell vocab).
 - Email capture is OWNED: forms post to `https://ultimateaidirectory.com/api/lead` with a unique per-page `source` tag + honeypot `website` field (copy the pattern in index.html or build.js ENDCTA). No third-party form embeds (Beehiiv retired 2026-08-02).
 - Analytics on every page: GA4 `G-CLZ7N26J1Q` + Meta Pixel `1699232654449762`.
 
@@ -27,3 +27,4 @@ This repo IS the live site. Pushing to master deploys via GitHub Pages in ~60s. 
 - The Book 2 and Book 3 Companion Libraries (`/books/the-systematic-advantage/`, `/books/the-agentic-advantage/`) are private until each book ships (Elvin, 2026-09-24). Their source lives outside this public repo in `coding\site-unpublished\`, with restore steps. Never restore or relink them without his go.
 - `/play/**` game internals, `index_v1-4.html` (retired stubs), `book1-feedback/`, `oto/`, `dl/` binaries.
 - Blog URLs stay under `/writing/` (label is "Blog"; URL churn = SEO churn).
+- Every blog post follows `Brain/04 Marketing and PR/reference/BLOG-STANDARD.md` (structure, format, design, voice, claims, pre-publish checklist; since 2026-09-24).

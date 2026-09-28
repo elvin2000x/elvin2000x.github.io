@@ -520,6 +520,20 @@
    "brandStyle": "inline",
    "indent": 2
   },
+  "speaking/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
+  "speaking/feedback/index.html": {
+   "brandHref": "/",
+   "themebtn": false,
+   "ctaArrow": false,
+   "brandStyle": "inline",
+   "indent": 2
+  },
   "team-ai-workshop/index.html": {
    "brandHref": "/",
    "themebtn": false,

@@ -1,5 +1,5 @@
 /* post.css: the blog post design system.
-   Canonical spec: Brain/deliverables/token-efficiency-report/BLOG-DESIGN-SYSTEM.md
+   Canonical spec: Brain/01 Command/deliverables/token-efficiency-report/BLOG-DESIGN-SYSTEM.md
    Loaded only by pages under /writing/. Everything that styles post content is
    scoped under .trp so it can never reach the site's global stylesheet.
 
