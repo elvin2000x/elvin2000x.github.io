@@ -106,7 +106,7 @@
   },
   {
    "label": "Newsletter",
-   "href": "/updates/"
+   "href": "/newsletter/"
   },
   {
    "label": "Contact",
@@ -132,7 +132,7 @@
     },
     {
      "label": "Newsletter",
-     "href": "/updates/"
+     "href": "/newsletter/"
     },
     {
      "label": "Contact",
@@ -526,13 +526,33 @@
    "brandStyle": "inline",
    "indent": 2
   },
-  "updates/index.html": {
-   "brandHref": "/",
-   "themebtn": false,
-   "ctaArrow": false,
-   "brandStyle": "inline",
-   "indent": 2,
-   "active": "/updates/"
+  "newsletter/index.html": {
+   "style": "buybar",
+   "links": [
+    {
+     "label": "Home",
+     "href": "/"
+    },
+    {
+     "label": "Free Toolkit",
+     "href": "/free/"
+    },
+    {
+     "label": "Newsletter",
+     "href": "/newsletter/"
+    },
+    {
+     "label": "Contact",
+     "href": "/contact/"
+    }
+   ],
+   "cta": {
+    "label": "Get the book",
+    "href": "https://www.amazon.com/dp/B0H4X2S2JD",
+    "amazon": true,
+    "aria": "Get the book on Amazon"
+   },
+   "active": "/newsletter/"
   }
  },
  "footerLinks": [
@@ -542,7 +562,7 @@
   },
   {
    "label": "Newsletter",
-   "href": "/updates/"
+   "href": "/newsletter/"
   },
   {
    "label": "Contact",
