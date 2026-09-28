@@ -10,9 +10,11 @@
 const fs = require('fs'), path = require('path');
 const ROOT = path.join(__dirname, '..');
 // .com folder -> path on epeters.ca. Colour Match sits under Projects there.
+// quiz/ (the AI-style quiz) is not here: it stays on .com as an ad-funnel lead
+// magnet, Meta ads and conversions run through it (Elvin, 2026-09-27, card #358).
 const MOVED = {
   'writing': 'writing', 'play': 'play', 'apps': 'apps', 'projects': 'projects',
-  'quiz': 'quiz', 'quiz-ai-risk': 'quiz-ai-risk', 'quiz-time-waste': 'quiz-time-waste',
+  'quiz-ai-risk': 'quiz-ai-risk', 'quiz-time-waste': 'quiz-time-waste',
   'quiz-tool-picker': 'quiz-tool-picker', 'colour': 'projects/colour',
 };
 const DROP = new Set(['writing/_homepage_cards.html']);
