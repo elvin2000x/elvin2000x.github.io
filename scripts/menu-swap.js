@@ -46,7 +46,9 @@ const KEEP_CHROME = ['play/', 'apps/', 'studio/', 'colour/', 'components/', 'arc
   'content-machine/', 'projects/', 'essays/', 'google-ads-audit', 'index_v', 'book.html',
   'index.html',
   // A single-offer squeeze page with its own header CTA; a menu would compete with it.
-  'free/ai-toolkit/'];
+  'free/ai-toolkit/', 'free/directors-cheat-sheet/',
+  // Unlisted previews own their chrome (the long-form homepage goes live only on Elvin's yes).
+  'preview/'];
 
 const under = (rel, list) => list.some(p => rel === p || rel.startsWith(p));
 const urlOf = rel => '/' + rel.replace(/(^|\/)index\.html$/, '$1');
@@ -140,7 +142,8 @@ for (const rel of pages) {
   if ((under(url.slice(1), NAVC.lightLock) || url === '/privacy.html' || url === '/tos.html') && !/http-equiv="refresh"/i.test(h)) {
     const n = (h.match(/<button[^>]*data-theme-toggle[^>]*>[\s\S]*?<\/button>/g) || []).length;
     if (n) { h = h.replace(/\s*<button[^>]*data-theme-toggle[^>]*>[\s\S]*?<\/button>/g, ''); bump('theme toggle removed', rel); }
-    if (!/<html[^>]*data-theme-lock/.test(h)) {
+    // data-theme="book" is its own light palette and already never flips (js/site.js).
+    if (!/<html[^>]*(data-theme-lock|data-theme="book")/.test(h)) {
       h = h.replace(/<html([^>]*)>/i, (m, a) =>
         '<html' + a.replace(/\sdata-theme="[^"]*"/, '') + ' data-theme="light" data-theme-lock>');
       bump('light lock', rel);
@@ -171,7 +174,9 @@ for (const rel of pages) {
 
     // Quiet footer: swap the link span; odd footers get a rebuilt inside.
     const fm = h.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/);
-    if (fm) {
+    // A footer that already links exactly the quiet set is left as its author built it.
+    const hrefs = fm && [...fm[0].matchAll(/href="([^"]*)"/g)].map(m => m[1]).sort().join(' ');
+    if (fm && hrefs !== FOOT.map(l => l.href).sort().join(' ')) {
       const quiet = `<span>${footLinks()}</span>`;
       let f = fm[0];
       const spans = [...f.matchAll(/<span>((?:(?!<\/?span)[\s\S])*?<a [\s\S]*?)<\/span>/g)];

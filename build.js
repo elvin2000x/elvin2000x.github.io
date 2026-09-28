@@ -1442,6 +1442,8 @@ SM_EXCLUDE.push('tsa-toolkit');
 SM_SKIP_FILES.push('projects/anatomy-sandbox/index.html');
 // Saved components and the archived homepage are unlisted (noindex), kept only for reuse (2026-09-27).
 SM_EXCLUDE.push('components', 'archive');
+// Preview pages (e.g. /preview/home-long/) are unlisted test builds, noindex, never in the sitemap (2026-09-27).
+SM_EXCLUDE.push('preview');
 // /book.html is a redirect stub to the homepage since 2026-09-27; the address stays live for ads, emails and QR codes.
 SM_SKIP_FILES.push('book.html');
 const smPages = smWalk(DIR, '', []).map(smUrl).sort();
