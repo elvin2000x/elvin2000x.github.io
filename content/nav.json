@@ -146,13 +146,6 @@
    "brandStyle": "inline",
    "indent": 2
   },
-  "products/index.html": {
-   "brandHref": "/",
-   "themebtn": false,
-   "ctaArrow": false,
-   "brandStyle": "inline",
-   "indent": 2
-  },
   "book.html": {
    "brandHref": "/",
    "themebtn": false,
