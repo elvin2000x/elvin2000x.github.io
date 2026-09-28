@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://elvinpeters.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/ad-spend-roi/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/compound-interest/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/debt-payoff/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/freelance-rate/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/land-transfer-tax-ontario/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/loan-payment/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/mortgage-payment/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/mortgage-stress-test/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/percentage-calculator/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/rent-vs-buy/</loc><priority>0.7</priority></url>
-  <url><loc>https://elvinpeters.com/apps/calculators/savings-goal/</loc><priority>0.7</priority></url>
   <url><loc>https://elvinpeters.com/contact/</loc><priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://elvinpeters.com/contact/"/>
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://elvinpeters.com/fr/contact/"/>

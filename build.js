@@ -5,56 +5,11 @@ const fs = require('fs'), path = require('path');
 const DIR = __dirname;
 const outArg = process.argv.indexOf('--out');
 const OUT = outArg > -1 ? path.resolve(process.argv[outArg + 1]) : DIR;
-const { mdToHtml } = require('./md.js');
-// Page template (head, nav, CTA, footer, post shell) lives in essay-page.js so Site
-// Studio's live preview renders the exact page this build writes.
-const { NAV, FOOT, THEME, esc, head, essayPage } = require('./essay-page.js');
-// Essays live in content/ with the rest of the CMS data so Site Studio can edit
-// them. Accepts a bare array too, which is what the file looked like before the move.
-const essaysRaw = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'essays.json'), 'utf8'));
-const allEssays = Array.isArray(essaysRaw) ? essaysRaw : essaysRaw.posts;
-// Drafts are built in preview only. A real build never writes them, never lists
-// them, and never puts them in the sitemap, so an unfinished post cannot ship.
-const isPreview = OUT !== DIR;
-const essays = allEssays.filter(e => !e.draft || isPreview);
-const published = allEssays.filter(e => !e.draft);
-
-fs.mkdirSync(path.join(OUT,'writing'), {recursive:true});
-const cards = [];
-for(const e of essays){
-  // Body source: a scoped HTML file, Markdown written in Site Studio, or raw HTML.
-  const body = e.file ? fs.readFileSync(path.join(DIR, e.file), 'utf8')
-             : e.body_format === 'markdown' ? mdToHtml(e.body)
-             : e.html;
-  const page = essayPage(e, body);
-  fs.mkdirSync(path.join(OUT,'writing',e.slug), {recursive:true});
-  fs.writeFileSync(path.join(OUT,'writing',e.slug,'index.html'), page);
-  if(!e.draft) cards.push({slug:e.slug,title:e.short_title||e.title,dek:e.short_dek||e.dek,image:e.image,readmins:e.readmins||8});
-}
-
-// writing index page
-const list = head('Blog','Posts on building software, games, and a company of one with AI as a co-worker.','/img/og.jpg','https://elvinpeters.com/writing/') + NAV +
-  `<article style="max-width:820px"><span class="eyebrow">Blog</span><h1 style="margin-bottom:6px">Notes from a workshop of one.</h1><p class="dek" style="margin-bottom:30px">How I actually build: the harness around the AI, the zero-dependency habit, the tools that let one person ship like a team.</p>`+
-  published.map(e=>`<a href="/writing/${e.slug}/" style="display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line-soft);align-items:center">`+
-    `<img src="/img/${e.image}" alt="" width="150" height="94" loading="lazy" style="aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--line)">`+
-    `<span><span class="eyebrow">Post${e.date?' &middot; '+e.date:''} &middot; ${e.readmins||8} min</span><h2 style="font-family:var(--serif);font-weight:600;font-size:1.35rem;margin:6px 0 4px">${esc(e.title)}</h2><span style="color:var(--ink-2);font-size:14px">${esc(e.dek)}</span></span></a>`).join('')+
-  `</article>`+FOOT+THEME+`</body></html>`;
-fs.writeFileSync(path.join(OUT,'writing','index.html'), list);
-
-// homepage "Writing" section cards fragment — matches the homepage card markup
-// exactly (short display fields when present), ready to become an ep: region.
-const frag = cards.map(c=>
-`      <a class="card" href="/writing/${c.slug}/">
-        <div class="thumb" style="background-image:url(/img/${c.image})"></div>
-        <div class="body"><div class="kicker"><span class="tag">Post</span><span class="pill read">${c.readmins} min</span></div>
-        <h3>${esc(c.title)}</h3><p class="desc">${esc(c.dek)}</p><span class="go">Read <span class="arw">→</span></span></div>
-      </a>`).join('\n');
-fs.writeFileSync(path.join(OUT,'writing','_homepage_cards.html'), frag);
-
-const drafts = allEssays.length - published.length;
-console.log('Built', essays.length, 'essays -> writing/<slug>/ + writing/ index',
-  drafts ? `(${drafts} draft${drafts>1?'s':''} ` + (isPreview ? 'shown in preview only)' : 'withheld)') : '',
-  OUT !== DIR ? `(out: ${OUT})` : '');
+const { esc } = require('./essay-page.js');
+// The blog moved to epeters.ca (ticket #12, 2026-09-27). This build no longer
+// writes writing/: those paths are now redirect stubs (scripts/epca-stubs.js), and
+// the epeters-ca repo builds the posts. content/essays.json, essays/ and essay-page.js
+// stay here only because Site Studio still edits and previews them (until #323).
 
 
 /* ==========================================================================
@@ -1404,7 +1359,7 @@ if (unstyled.length) {
 /* sitemap.xml - generated from the page walk so it can never go stale.
    No lastmod on purpose: builds must be byte-idempotent. */
 const SM_EXCLUDE = ['titles', 'books', 'play', 'book1-feedback', 'oto', 'dl', 'studio', 'toolkit', 'thank-you', 'record'];
-const SM_SKIP_FILES = ['apps/index.html', 'writing/_homepage_cards.html', 'system/index.html'];
+const SM_SKIP_FILES = ['system/index.html'];
 function smWalk(dir, rel, out) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (e.name.startsWith('.') || e.name === 'node_modules') continue;
@@ -1428,8 +1383,7 @@ function smUrl(rel) {
 function smPriority(u) {
   if (u === '/') return '1.0';
   if (u === '/' || u === '/services/') return '0.9';
-  if (u === '/projects/' || u === '/writing/') return '0.8';
-  if (u.startsWith('/free/') || u.startsWith('/apps/calculators/') || u.startsWith('/quiz')) return '0.7';
+  if (u.startsWith('/free/')) return '0.7';
   return '0.6';
 }
 /* hreflang annotations for the bilingual pairs. Every page already carries
