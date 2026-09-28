@@ -193,10 +193,9 @@ function renderCmPrice() {
 }
 
 // /system/ retired 2026-09-23: the page is a redirect stub to /book.html now.
-applyRegions('claude/index.html', {
-  'cl-hero': renderClHero,
-  'cl-price': renderClPrice,
-});
+// /claude/ and /content-machine/ retired 2026-09-28 (ticket 13): both guides are free at
+// /free/claude-manual/ and /free/content-machine/, and the old pages are redirect stubs,
+// so their cl-* and cm-* regions are no longer applied. The renderers stay for reuse.
 /* The unit charts are one mark per real thing counted, emitted here rather than
    hand-written so the marks can never drift from the audit they describe. The
    numbers are the verified ones: 200 of 200 titles, and 22 of 78 stories.
@@ -221,12 +220,6 @@ function renderFigMarina() {
   return out;
 }
 
-applyRegions('content-machine/index.html', {
-  'cm-hero': renderCmHero,
-  'cm-price': renderCmPrice,
-  'fig-titles': renderFigTitles,
-  'fig-marina': renderFigMarina,
-});
 
 /* ---- book.html reusable blocks ---------------------------------------
    The reader review and the author bio were hand-written HTML, which is why
@@ -332,9 +325,6 @@ function renderOptin(slot, page) {
    now /system/ had only a desktop exit-intent popup (mouseout never fires on
    touch, so the $37 page had zero mobile capture), and /claude/ and
    /content-machine/ had no capture at all. */
-applyRegions('claude/index.html', { 'cl-optin': () => renderOptin('end', 'claude') });
-applyRegions('content-machine/index.html', { 'cm-optin': () => renderOptin('end', 'content-machine') });
-console.log('Regions applied: money-page opt-ins (claude, content-machine)');
 
 /* One honest Amazon-vs-System table, rendered on both pages from this source.
    The rows Amazon wins outright (paper, formats, reviews) are what make it
@@ -377,7 +367,6 @@ function renderCompare() {
 }
 
 
-console.log('Regions applied: claude/index.html (hero, price), content-machine/index.html (hero, price)');
 
 // Stack pages (Site Studio slice 2, 2026-09-27): the homepage and every
 // content/page-*.json are built by the section engine (sections.js) from the
