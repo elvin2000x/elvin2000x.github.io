@@ -91,7 +91,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,58px);line-
 <h2>Your cheat sheet is ready</h2>
 <p>Download it below. I also sent you a short email: tap confirm and a copy lands in your inbox, so you can find it later.</p>
 <a class="btn btn--primary btn--full" id="dl" href="/dl/Directors-Cheat-Sheet.pdf" target="_blank" rel="noopener">Download the cheat sheet (PDF)</a>
-<p class="nudge">When you want the chapters behind each page, <a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">The Artificial Advantage is on Amazon</a>.</p>
+<p class="nudge">When you want the chapters behind each page, <a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener">The Artificial Advantage is on Amazon</a>.</p>
 <p class="fine">You'll also get my monthly newsletter. <a href="/newsletter/">See what's in it</a>.</p>
 </div>
 </div>
@@ -100,7 +100,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,58px);line-
 <div class="more">
 <ul class="blist"><li>Get a usable first draft by giving every prompt a Role, a Task and a Constraint (the RTC framework).</li><li>Fix a weak answer with one targeted follow-up, using the Diagnostic Ladder.</li><li>Know which AI answers to check before they reach a client, and how much checking the stakes call for (the Two-Step Verification Method).</li></ul>
 <div class="byline"><img src="/img/headshot.jpg" alt="Elvin Peters" width="48" height="48" loading="lazy"><span>From Elvin M. Peters, who wrote <em>The Artificial Advantage</em> after a decade in marketing and $40M+ in profitable ad spend.</span></div>
-<p class="withbook">This sheet is one piece of the book's Toolkit. Readers get the full Toolkit and the Companion Library with <a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener">the book</a>.</p>
+<p class="withbook">This sheet is one piece of the book's Toolkit. Readers get the full Toolkit and the Companion Library with <a data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener">the book</a>.</p>
 </div>
 </main>
 <div class="mfoot"><a href="/free/">More free guides</a> &nbsp;&middot;&nbsp; <a href="/">elvinpeters.com</a> &nbsp;&middot;&nbsp; <a href="/privacy.html">Privacy</a></div>
@@ -108,7 +108,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,58px);line-
 <script>
 (function(){
   var SLUG="directors-cheat-sheet", TITLE="The Director's Cheat Sheet";
-  var ASIN="B0H4X2S2JD", AMAZON="https://www.amazon.com/dp/"+ASIN;
+  var ASIN="B0H4X2S2JD", AMAZON="https://www.amazon.com/dp/"+ASIN+"?tag=elvinpeters-20";
   var GADS="AW-637214471/bylsCMuW0NUcEIe-7K8C";
   var f=document.getElementById('f'),msg=document.getElementById('msg'),btn=document.getElementById('btn');
   Array.prototype.forEach.call(document.querySelectorAll('[data-amazon]'),function(a){a.href=AMAZON;});
@@ -129,6 +129,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,58px);line-
     try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
     try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG});}catch(e){}
     try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG});}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','free_optin',{magnet:SLUG,page_path:location.pathname});}catch(e){}
   }
   function reveal(){
     document.querySelector('#card .form-in').style.display='none';
@@ -147,4 +148,5 @@ h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,58px);line-
   });
 })();
 </script>
+<p class="amz-disclosure" style="text-align:center;font-size:12px;color:var(--muted,#555);margin:16px auto 24px;padding:0 16px">As an Amazon Associate I earn from qualifying purchases.</p>
 </body></html>

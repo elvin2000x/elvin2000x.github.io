@@ -61,4 +61,11 @@ document.querySelectorAll('.stores a').forEach(function(a){a.addEventListener('c
   try{gtag('event','review_click',{event_label:'book1-'+a.getAttribute('data-store')});}catch(e){}
 });});
 </script>
+<script>/* outbound Amazon clicks (Runway v2 item 6): same listener as js/site.js, for pages without it */
+(function(){if(window.__epAmazonClicks)return;window.__epAmazonClicks=true;
+document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href*="amazon."]'):null;if(!a)return;
+var m=/^https?:\/\/(?:www\.)?amazon\.([a-z.]+)\/(?:[^?#]*\/)?(?:dp|gp\/product)\/([A-Z0-9]{10})|asin=([A-Z0-9]{10})/i.exec(a.href);
+var store=(/amazon\.([a-z.]+)\//i.exec(a.href)||[])[1]||'';var sec=a.closest('[data-placement]');
+var place=sec?sec.getAttribute('data-placement'):((a.closest('section[id],header[id],footer[id],div[id]')||{}).id||(a.closest('footer')?'footer':(a.closest('nav,header')?'nav':'body')));
+try{gtag('event','amazon_click',{surface:'site',store:store,asin:m?(m[2]||m[3]||''):'',placement:place,page_path:location.pathname,link_text:(a.textContent||'').trim().slice(0,60),transport_type:'beacon'});}catch(err){}},true);})();</script>
 </body></html>

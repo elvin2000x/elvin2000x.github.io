@@ -97,6 +97,15 @@ for (const rel of PAGES) {
   for (const m of html.matchAll(/amazon\.[a-z.]+\/(?:[^"'\s]*\/)?dp\/([A-Z0-9]{10})/g))
     if (m[1] !== BOOK_ASIN) fail(rel, 'Amazon link to ' + m[1] + ', expected ' + BOOK_ASIN + ' (content/site.json amazon_url)');
 
+  // ASSOCIATES (Runway v2 item 6, 2026-09-28): every amazon.com book link carries the one
+  // tag; the tag is US-store only, so a tagged .ca/.co.uk/.com.au link is a mistake; a
+  // page with tagged links shows the disclosure the Operating Agreement requires.
+  for (const m of html.matchAll(/https?:\/\/(?:www\.)?amazon\.com\/(?:[^"'\s]*\/)?dp\/[A-Z0-9]{10}[^"'\s<]*/g))
+    if (!/[?&]tag=elvinpeters-20\b/.test(m[0])) fail(rel, 'amazon.com link without tag=elvinpeters-20: ' + m[0].slice(0, 80));
+  for (const m of html.matchAll(/https?:\/\/(?:www\.)?amazon\.(?:ca|co\.uk|com\.au)\/[^"'\s<]*/g))
+    if (/[?&]tag=elvinpeters-20\b/.test(m[0])) fail(rel, 'elvinpeters-20 is a US tag, not for ' + m[0].slice(0, 60));
+  if (html.includes('tag=elvinpeters-20') && !html.includes('amz-disclosure')) fail(rel, 'tagged Amazon links but no Associates disclosure');
+
   // SECRET tripwires (public repo).
   for (const re of [/sk-[A-Za-z0-9]{16}/, /ghp_[A-Za-z0-9]/, /github_pat_/, /AKIA[0-9A-Z]{12}/, /BEGIN [A-Z ]*PRIVATE KEY/])
     if (re.test(html)) fail(rel, 'possible secret matches ' + re);
@@ -467,6 +476,21 @@ if (process.argv.includes('--live')) {
   for (const b of bad) fail('live', 'moved stub target not 200: ' + b);
   console.log('live: ' + (targets.length - bad.length) + '/' + targets.length + ' stub targets answer 200');
 }
+
+// TOOLKIT LEAK (Runway v2 item 7, 2026-09-28): the Book 1 Toolkit is reader-only and goes
+// out by private email link. No public copy, and no page links one (toolkit/ is excluded
+// from the page loop above, so this scans every page, including excluded ones).
+for (const p of ['dl/The-Artificial-Advantage-Toolkit.zip', 'dl/taa-toolkit'])
+  if (fs.existsSync(path.join(ROOT, p))) fail(p, 'public Toolkit file is back (reader-only, Rule 37)');
+(function scanToolkitLinks(dir) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (e.name === 'node_modules' || e.name === '.git') continue;
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) scanToolkitLinks(p);
+    else if (e.name.endsWith('.html') && /\/dl\/(?:The-Artificial-Advantage-Toolkit\.zip|taa-toolkit\/)/.test(fs.readFileSync(p, 'utf8')))
+      fail(path.relative(ROOT, p), 'links the retired public Toolkit download');
+  }
+})(ROOT);
 
 // Report.
 if (warns.length) {

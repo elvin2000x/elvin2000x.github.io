@@ -606,6 +606,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
 footer{border-top:1px solid var(--line-soft);padding:30px 24px;color:var(--muted);font-size:13px}
 footer .container{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;max-width:1120px}
 footer a{color:var(--ink-2)}footer a:hover{color:var(--gold-2)}
+footer .amz-disclosure{flex-basis:100%;width:100%;font-size:12px;margin:10px 0 0}
 :focus-visible{outline:2px solid var(--gold-2);outline-offset:3px;border-radius:4px}
 `;
 
@@ -769,6 +770,7 @@ ${o.body}
 <footer><div class="container">
   <span>${esc(I18N.footer[o.lang].copyright)}</span>
   <span>${NAVC.footerLinks.map(l => `<a href="${loc(l.href, o.lang)}"${EXT(l)}>${esc(tnav(l.label, o.lang))}</a>`).join(' &middot; ')}</span>
+  <p class="amz-disclosure">${o.lang === 'fr' ? 'En tant que Partenaire Amazon, je réalise un bénéfice sur les achats remplissant les conditions requises.' : 'As an Amazon Associate I earn from qualifying purchases.'}</p>
 </div></footer>
 </body>
 </html>

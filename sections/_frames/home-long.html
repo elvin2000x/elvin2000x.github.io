@@ -76,7 +76,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <script src="/js/site.js"></script>
 {{#isHome}}
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Book","name":"The Artificial Advantage","alternativeHeadline":"Mastering AI in the Modern Workplace","author":{"@type":"Person","name":"Elvin M. Peters","url":"https://elvinpeters.com/","sameAs":["https://www.linkedin.com/in/elvinmpeters"]},"isbn":"9798254324782","bookFormat":["https://schema.org/Paperback","https://schema.org/Hardcover","https://schema.org/EBook"],"image":"https://elvinpeters.com/cover.png","url":"https://elvinpeters.com/","workExample":{"@type":"Book","url":"https://www.amazon.com/dp/B0H4X2S2JD"}}
+  {"@context":"https://schema.org","@type":"Book","name":"The Artificial Advantage","alternativeHeadline":"Mastering AI in the Modern Workplace","author":{"@type":"Person","name":"Elvin M. Peters","url":"https://elvinpeters.com/","sameAs":["https://www.linkedin.com/in/elvinmpeters"]},"isbn":"9798254324782","bookFormat":["https://schema.org/Paperback","https://schema.org/Hardcover","https://schema.org/EBook"],"image":"https://elvinpeters.com/cover.png","url":"https://elvinpeters.com/","workExample":{"@type":"Book","url":"https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20"}}
   </script>
 {{/isHome}}
   <style>
@@ -427,7 +427,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <a href="#about">Author</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a class="btn btn--primary nav-buy" id="buy-nav" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
+  <a class="btn btn--primary nav-buy" id="buy-nav" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
 </div></nav>
 <!-- /ep:sec:nav -->
 
@@ -442,23 +442,21 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="in--wide">
   <span>&copy; 2026 Elvin M. Peters</span> <span><a href="/free/">Free Toolkit</a> &middot; <a href="/newsletter/">Newsletter</a> &middot; <a href="/contact/">Contact</a> &middot; <a href="https://epeters.ca/?utm_source=elvinpeters.com&utm_medium=footer&utm_campaign=crosslink">Fun stuff</a> &middot; <a href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="/privacy.html">Privacy</a></span>
 </div>
+<p class="amz-disclosure" style="flex-basis:100%;width:100%;font-size:12px;margin:10px 0 0;opacity:.85">As an Amazon Associate I earn from qualifying purchases.</p>
 </footer>
 <!-- /ep:sec:footer -->
 
 <!-- ep:sec:sticky -->
-<div class="sticky-buy" id="sticky" aria-hidden="true"><span><b>The Artificial Advantage</b><br>Kindle · Paperback · Hardcover</span><a class="btn btn--primary" id="buy-sticky" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" tabindex="-1" aria-label="Get it on Amazon">Get it on Amazon</a></div>
+<div class="sticky-buy" id="sticky" aria-hidden="true"><span><b>The Artificial Advantage</b><br>Kindle · Paperback · Hardcover</span><a class="btn btn--primary" id="buy-sticky" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" tabindex="-1" aria-label="Get it on Amazon">Get it on Amazon</a></div>
 <!-- /ep:sec:sticky -->
 
 <script>
   /* The Amazon link lives in ONE constant. The 2E upload may change the ASIN
      (plan v2, section 6): change it here and every buy link on the page follows. */
-  var AMAZON_URL = 'https://www.amazon.com/dp/B0H4X2S2JD';
+  var AMAZON_URL = 'https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20';
   document.querySelectorAll('a[data-amazon]').forEach(function (a) {
     a.href = AMAZON_URL;
-    a.addEventListener('click', function () {
-      /* Outbound to Amazon is not a checkout event (see /book.html history). */
-      try { gtag('event', 'amazon_outbound', { event_label: a.getAttribute('aria-label') || a.textContent.trim() }); } catch (e) {}
-    });
+    /* clicks are counted once, as amazon_click, by js/site.js (Runway v2 item 6) */
   });
 
   /* Dynamic audience-matched headline (DTR), ported unchanged from /book.html.
