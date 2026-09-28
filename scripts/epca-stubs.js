@@ -20,6 +20,8 @@ const MOVED = {
   'quiz-tool-picker': 'quiz-tool-picker', 'colour': 'projects/colour',
 };
 const DROP = new Set(['writing/_homepage_cards.html']);
+// The Anatomy Sandbox stays a real page on .com: Elvin shared that link (2026-09-28, card #390).
+const KEEP = new Set(['projects/anatomy-sandbox/index.html']);
 
 function walk(rel) {
   const out = [];
@@ -49,6 +51,7 @@ for (const [from, to] of Object.entries(MOVED)) {
   if (!fs.existsSync(path.join(ROOT, from))) continue;
   for (const r of walk(from)) {
     const f = path.join(ROOT, r);
+    if (KEEP.has(r)) continue;
     if (!r.endsWith('.html') || DROP.has(r)) { fs.unlinkSync(f); removed++; continue; }
     const rest = r.slice(from.length + 1).replace(/(^|\/)index\.html$/, '$1');
     fs.writeFileSync(f, stub(`https://epeters.ca/${to}/${rest}`));
