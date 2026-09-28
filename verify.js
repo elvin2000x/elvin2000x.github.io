@@ -450,6 +450,24 @@ if (process.argv.includes('--visual')) {
   catch (e) { console.log('visual layer skipped (playwright for node not installed)'); }
 }
 
+// --live: every moved stub's target answers 200 on epeters.ca itself (no redirect).
+// Before the ticket #12 DNS flip epeters.ca 301s to the Studio login, so a push of the
+// stubs would send every old blog, game and app link to a login wall. Run before pushing.
+(async () => {
+if (process.argv.includes('--live')) {
+  const targets = [...new Set(MOVED_STUBS.map(rel =>
+    fs.readFileSync(path.join(ROOT, rel), 'utf8').match(/<link rel="canonical" href="([^"]+)"/)[1]))];
+  const bad = [];
+  for (let i = 0; i < targets.length; i += 8) await Promise.all(targets.slice(i, i + 8).map(async u => {
+    try {
+      const r = await fetch(u, { redirect: 'manual' });
+      if (r.status !== 200) bad.push(u + ' -> ' + r.status + (r.headers.get('location') ? ' ' + r.headers.get('location') : ''));
+    } catch (e) { bad.push(u + ' -> ' + (e.cause && e.cause.code || e.message)); }
+  }));
+  for (const b of bad) fail('live', 'moved stub target not 200: ' + b);
+  console.log('live: ' + (targets.length - bad.length) + '/' + targets.length + ' stub targets answer 200');
+}
+
 // Report.
 if (warns.length) {
   console.log('WARN (' + warns.length + ') — visible debt, does not block:');
@@ -462,3 +480,4 @@ if (fails.length) {
   process.exit(1);
 }
 console.log('verify: GREEN (' + PAGES.length + ' pages checked, ' + MOVED_STUBS.length + ' moved stubs, ' + warns.length + ' warnings)');
+})();
