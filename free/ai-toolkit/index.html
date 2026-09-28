@@ -315,6 +315,7 @@ border-radius:11px;background:#0c1426;color:var(--ink)}
     try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
 try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-ai-toolkit'});}catch(e){}
     try{if(typeof gtag==='function')gtag('event','generate_lead',{'value':1,'currency':'USD','items':[{'item_name':TITLE}]});}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','free_optin',{magnet:'ai-toolkit',page_path:location.pathname});}catch(e){}
   }
   function send(email,name){
     var body=new URLSearchParams({name:name||'Vault lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:val('website')}).toString();

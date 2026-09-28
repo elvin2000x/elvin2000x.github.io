@@ -169,7 +169,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <a href="/newsletter/">Newsletter</a>
     <a href="/contact/">Contact</a>
   </div>
-  <a class="btn btn--primary nav-buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
+  <a class="btn btn--primary nav-buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
 </div></nav>
 <!-- /ep:nav -->
 
@@ -239,6 +239,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="in--wide">
   <span>&copy; 2026 Elvin M. Peters</span> <span><a href="/free/">Free Toolkit</a> &middot; <a href="/newsletter/">Newsletter</a> &middot; <a href="/contact/">Contact</a> &middot; <a href="https://epeters.ca/?utm_source=elvinpeters.com&utm_medium=footer&utm_campaign=crosslink">Fun stuff</a> &middot; <a href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="/privacy.html">Privacy</a></span>
 </div>
+<p class="amz-disclosure" style="flex-basis:100%;width:100%;font-size:12px;margin:10px 0 0;opacity:.85">As an Amazon Associate I earn from qualifying purchases.</p>
 </footer>
 
 <script>
@@ -368,9 +369,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         bk.appendChild(el('b', '', 'From the book: '));
         bk.appendChild(document.createTextNode('The Artificial Advantage teaches you to direct AI in plain language, for real work. '));
         var ba = el('a', '', 'Get it on Amazon');
-        ba.href = 'https://www.amazon.com/dp/B0H4X2S2JD'; ba.target = '_blank'; ba.rel = 'noopener';
+        ba.href = 'https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20'; ba.target = '_blank'; ba.rel = 'noopener';
         ba.setAttribute('data-amazon', ''); ba.setAttribute('aria-label', 'Get the book on Amazon (newsletter archive)');
-        ba.addEventListener('click', function () { try { gtag('event', 'amazon_outbound', { event_label: 'newsletter archive book footer' }); } catch (e) {} });
+        ba.setAttribute('data-placement', 'newsletter-archive-footer');
         bk.appendChild(ba);
         card.appendChild(bk);
         if (/^https:\/\/api\.elvinpeters\.com\//.test(it.url || '')) {
@@ -445,6 +446,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       render();
       try { fbq('track', 'Lead', { content_name: form.dataset.source }); } catch (e2) {}
       try { gtag('event', 'generate_lead', { method: form.dataset.source }); } catch (e2) {}
+      try { gtag('event', 'newsletter_signup', { source: form.dataset.source, page_path: location.pathname }); } catch (e2) {}
     }).catch(function () { failWith('Network hiccup. Try again.'); });
   });
 
@@ -458,12 +460,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (e3) { input.focus(); } }, 350);
   });
 
-  /* Outbound to Amazon from the nav button, same event as the homepage. */
-  document.querySelectorAll('a[data-amazon]').forEach(function (a) {
-    a.addEventListener('click', function () {
-      try { gtag('event', 'amazon_outbound', { event_label: a.getAttribute('aria-label') || a.textContent.trim() }); } catch (e) {}
-    });
-  });
+  /* Outbound Amazon clicks are counted once, as amazon_click, by js/site.js (Runway v2 item 6). */
 
   load();
 })();

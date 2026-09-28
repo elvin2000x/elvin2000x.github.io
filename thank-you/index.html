@@ -102,7 +102,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           <li>Keep the <b>50 Prompts</b> and your <b>Role Pack</b> open while you work.</li>
         </ol>
       </div>
-      <p class="muted" id="s-extra" style="margin-top:18px">Want it on paper too? The paperback and hardcover include all nine appendices plus a QR code to the companion library. <a href="https://www.amazon.com/dp/B0H4X2S2JD" target="_blank" rel="noopener" style="color:var(--accent)">Get the physical copy on Amazon &rarr;</a></p>
+      <p class="muted" id="s-extra" style="margin-top:18px">Want it on paper too? The paperback and hardcover include all nine appendices plus a QR code to the companion library. <a href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" style="color:var(--accent)">Get the physical copy on Amazon &rarr;</a></p>
     </div>
 
     <div id="fallback" class="hidden">
@@ -244,5 +244,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       });
   })();
 </script>
+<script>/* outbound Amazon clicks (Runway v2 item 6): same listener as js/site.js, for pages without it */
+(function(){if(window.__epAmazonClicks)return;window.__epAmazonClicks=true;
+document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href*="amazon."]'):null;if(!a)return;
+var m=/^https?:\/\/(?:www\.)?amazon\.([a-z.]+)\/(?:[^?#]*\/)?(?:dp|gp\/product)\/([A-Z0-9]{10})|asin=([A-Z0-9]{10})/i.exec(a.href);
+var store=(/amazon\.([a-z.]+)\//i.exec(a.href)||[])[1]||'';var sec=a.closest('[data-placement]');
+var place=sec?sec.getAttribute('data-placement'):((a.closest('section[id],header[id],footer[id],div[id]')||{}).id||(a.closest('footer')?'footer':(a.closest('nav,header')?'nav':'body')));
+try{gtag('event','amazon_click',{surface:'site',store:store,asin:m?(m[2]||m[3]||''):'',placement:place,page_path:location.pathname,link_text:(a.textContent||'').trim().slice(0,60),transport_type:'beacon'});}catch(err){}},true);})();</script>
+<p class="amz-disclosure" style="text-align:center;font-size:12px;color:var(--muted,#555);margin:16px auto 24px;padding:0 16px">As an Amazon Associate I earn from qualifying purchases.</p>
 </body>
 </html>
