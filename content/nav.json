@@ -77,8 +77,7 @@
   "components/",
   "tsa-toolkit/",
   "vault/",
-  "colour/",
-  "products/"
+  "colour/"
  ],
  "_unlistedExcept": "Inside an unlisted folder but still indexed: the calculators are evergreen search pages on no menu (Elvin, 2026-09-27).",
  "unlistedExcept": [
