@@ -15,6 +15,7 @@ const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studi
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
+const BOOK_ASIN = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8')).amazon_url.match(/dp\/([A-Z0-9]{10})/)[1];
 const fails = [], warns = [];
 function fail(f, msg) { fails.push(f + ': ' + msg); }
 function warn(f, msg) { warns.push(f + ': ' + msg); }
@@ -40,6 +41,10 @@ for (const rel of PAGES) {
   // STALE-TRUTH tripwires (these were real incidents).
   for (const bad of ['elvin2000x.github.io', 'epeters.ca', 'href="/#apps"', 'href="/#games"', 'beehiiv'])
     if (html.includes(bad)) fail(rel, 'stale-truth tripwire: ' + bad);
+
+  // ASIN: every Amazon product link is the book in content/site.json amazon_url (one source of truth).
+  for (const m of html.matchAll(/amazon\.[a-z.]+\/(?:[^"'\s]*\/)?dp\/([A-Z0-9]{10})/g))
+    if (m[1] !== BOOK_ASIN) fail(rel, 'Amazon link to ' + m[1] + ', expected ' + BOOK_ASIN + ' (content/site.json amazon_url)');
 
   // SECRET tripwires (public repo).
   for (const re of [/sk-[A-Za-z0-9]{16}/, /ghp_[A-Za-z0-9]/, /github_pat_/, /AKIA[0-9A-Z]{12}/, /BEGIN [A-Z ]*PRIVATE KEY/])
@@ -334,6 +339,53 @@ for (const rel of PAGES) {
     const t = fs.readFileSync(path.join(ROOT, rel), 'utf8');
     if (DASH.test(t)) fail(rel, `em-dash or en-dash on a built blog page: ${where(t)}`);
   }
+})();
+
+// INTERNAL LINKS: every internal href/src must resolve to a file in the built
+// tree (GitHub Pages serves the repo as-is). Added 2026-09-27 after the 2026-08-28
+// gap: /receipts/ was deleted and the gate stayed GREEN with 4 links to a 404.
+// Unlisted pages (noindex, sitemap-excluded, EXCLUDE'd from the other checks)
+// are valid targets: only the file has to exist. Absolute links to
+// elvinpeters.com count as internal. Placeholders (${...}, {{...}}) are skipped.
+(() => {
+  const SELF = /^https?:\/\/(www\.)?elvinpeters\.com(?=\/|$)/i;
+  const cache = new Map();
+  const exists = (abs) => {
+    if (!cache.has(abs)) cache.set(abs, fs.existsSync(abs) ? (fs.statSync(abs).isDirectory() ? 'dir' : 'file') : null);
+    return cache.get(abs);
+  };
+  const resolves = (abs, trailingSlash) => {
+    const k = exists(abs);
+    if (k === 'file') return !trailingSlash;
+    if (k === 'dir') return exists(path.join(abs, 'index.html')) === 'file';
+    return !trailingSlash && exists(abs + '.html') === 'file';   // Pages serves /tos as tos.html
+  };
+  const strip = (h) => h.replace(/<!--[\s\S]*?-->/g, '').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, (s) => s.replace(/>[\s\S]*<\/script>$/i, '>'));
+  for (const rel of PAGES) {
+    const html = strip(fs.readFileSync(path.join(ROOT, rel), 'utf8'));
+    const seen = new Set();
+    for (const m of html.matchAll(/\s(?:href|src)\s*=\s*["']([^"']*)["']/gi)) {
+      let u = m[1].trim().replace(/&amp;/g, '&');
+      if (!u || u.startsWith('#') || /\$\{|\{\{|<%/.test(u)) continue;
+      if (SELF.test(u)) u = u.replace(SELF, '') || '/';
+      else if (/^([a-z][a-z0-9+.-]*:|\/\/)/i.test(u)) continue;   // other hosts, mailto:, tel:, data:, javascript:
+      u = u.split('#')[0].split('?')[0];
+      if (!u) continue;
+      try { u = decodeURI(u); } catch (e) { /* keep raw */ }
+      const abs = u.startsWith('/') ? path.join(ROOT, u) : path.join(ROOT, path.dirname(rel), u);
+      if (!abs.startsWith(ROOT)) { fail(rel, 'internal link escapes the site root: ' + m[1]); continue; }
+      if (seen.has(abs + u.endsWith('/'))) continue;
+      seen.add(abs + u.endsWith('/'));
+      if (!resolves(abs, u.endsWith('/'))) fail(rel, 'broken internal link: ' + m[1]);
+    }
+  }
+  // The sitemap is a promise to crawlers: every <loc> must be a real page too.
+  const sm = path.join(ROOT, 'sitemap.xml');
+  if (fs.existsSync(sm))
+    for (const m of fs.readFileSync(sm, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)) {
+      const u = decodeURI(m[1].trim().replace(SELF, '') || '/');
+      if (!resolves(path.join(ROOT, u), u.endsWith('/'))) fail('sitemap.xml', 'loc points at a missing page: ' + m[1]);
+    }
 })();
 
 // KEY PAGES exist and are non-trivial. links/index.html is not here: since #258 it is
