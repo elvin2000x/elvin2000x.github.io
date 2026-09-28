@@ -15,6 +15,7 @@ const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studi
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
+const BOOK_ASIN = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8')).amazon_url.match(/dp\/([A-Z0-9]{10})/)[1];
 const fails = [], warns = [];
 function fail(f, msg) { fails.push(f + ': ' + msg); }
 function warn(f, msg) { warns.push(f + ': ' + msg); }
@@ -40,6 +41,10 @@ for (const rel of PAGES) {
   // STALE-TRUTH tripwires (these were real incidents).
   for (const bad of ['elvin2000x.github.io', 'epeters.ca', 'href="/#apps"', 'href="/#games"', 'beehiiv'])
     if (html.includes(bad)) fail(rel, 'stale-truth tripwire: ' + bad);
+
+  // ASIN: every Amazon product link is the book in content/site.json amazon_url (one source of truth).
+  for (const m of html.matchAll(/amazon\.[a-z.]+\/(?:[^"'\s]*\/)?dp\/([A-Z0-9]{10})/g))
+    if (m[1] !== BOOK_ASIN) fail(rel, 'Amazon link to ' + m[1] + ', expected ' + BOOK_ASIN + ' (content/site.json amazon_url)');
 
   // SECRET tripwires (public repo).
   for (const re of [/sk-[A-Za-z0-9]{16}/, /ghp_[A-Za-z0-9]/, /github_pat_/, /AKIA[0-9A-Z]{12}/, /BEGIN [A-Z ]*PRIVATE KEY/])
