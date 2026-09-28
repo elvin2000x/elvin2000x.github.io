@@ -11,7 +11,7 @@ const ROOT = __dirname;
 // Pages excluded from every check: other businesses, retired stubs, parked
 // component fragments (components/: not pages, styled by the page that embeds them),
 // generated-elsewhere pipelines, binaries.
-const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio|components)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^system\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$/;
+const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio|components)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^system\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$|^google-ads-audit\/index\.html$/;
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
