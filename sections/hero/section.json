@@ -13,7 +13,7 @@
     ] },
     { "key": "buy", "type": "buybox", "label": "Buy box" },
     { "key": "trust", "type": "html", "label": "Trust line" },
-    { "key": "image", "type": "text", "label": "Cover image" },
+    { "key": "image", "type": "image", "label": "Cover image", "alt": "image_alt", "size": [686, 1140] },
     { "key": "image_alt", "type": "text", "label": "Cover image description" }
   ]
 }

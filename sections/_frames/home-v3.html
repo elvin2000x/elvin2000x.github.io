@@ -2,6 +2,9 @@
 <html lang="en" data-theme="book">
 <head>
   <meta charset="UTF-8" />
+{{#robots_off}}
+  <meta name="robots" content="noindex, nofollow" />
+{{/robots_off}}
   <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
   <script>
@@ -44,9 +47,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Artificial Advantage · Elvin M. Peters</title>
   <meta name="description" content="For professionals who tried AI and weren't impressed: learn to direct it in plain language, for real work. The Artificial Advantage by Elvin M. Peters." />
-  <link rel="canonical" href="https://elvinpeters.com/" />
+  <link rel="canonical" href="{{page_url}}" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://elvinpeters.com/" />
+  <meta property="og:url" content="{{page_url}}" />
   <meta property="og:title" content="The Artificial Advantage by Elvin M. Peters" />
   <meta property="og:description" content="You tried AI. You weren't impressed. Learn to direct it, in plain language, for real work." />
   <meta property="og:image" content="https://elvinpeters.com/cover.png" />

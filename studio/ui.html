@@ -98,6 +98,86 @@ if(t==="auto")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light
   .writer,.writer.noset,.writer.noset.nopreview{grid-template-columns:minmax(0,1fr)}
   #toast{left:12px;right:12px}
 }
+/* Stack page editor (slice 3): section cards, bottom sheet, phone action bar */
+.ed.stacked{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.ed.stacked .stackcol{order:2}.ed.stacked .pvcol2{order:1;min-width:0}
+.tapbar{display:flex;justify-content:flex-end;margin:0 0 6px}
+.tapsw{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer}
+.tapsw .tog{transform:scale(.8);margin:-4px}
+.scard{display:flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:12px;background:var(--surface);margin:8px 0 0;padding:2px 2px 2px 0;position:relative;transition:box-shadow .12s}
+.scard.off .sbody{opacity:.55}
+.scard .iconbtn{width:36px;height:36px;flex:none}
+.scard .iconbtn[disabled]{opacity:.3}
+.sgrip{flex:none;width:36px;height:52px;border:0;background:transparent;color:var(--muted);display:grid;place-items:center;cursor:grab;touch-action:none;border-radius:10px 0 0 10px}
+.sgrip:active{cursor:grabbing}
+.sbody{flex:1;min-width:0;border:0;background:transparent;text-align:left;padding:8px 4px;color:var(--ink);display:flex;flex-direction:column;gap:2px;cursor:pointer;border-radius:8px}
+.sbody:hover{background:var(--hover)}
+.sbody .sl{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sbody small{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scard.dragging{z-index:5;box-shadow:var(--shadow-lg);transition:none;background:var(--surface)}
+.scard.gapb{box-shadow:0 -3px 0 var(--primary)}
+.scard.gapa{box-shadow:0 3px 0 var(--primary)}
+.cardmenu{position:fixed;z-index:90;min-width:230px}
+.cardmenu button{min-height:44px}
+.actbar{display:none}
+.deskonly{}
+.sheetscrim{display:none}
+.sheet{position:fixed;z-index:44;right:16px;top:72px;bottom:16px;width:min(460px,calc(100vw - 32px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden}
+.sheet .shandle{display:none}
+.sheet .shead{display:flex;align-items:center;gap:4px;padding:12px 12px 10px 18px;border-bottom:1px solid var(--line)}
+.sheet .shead .st{font-weight:700;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sheet .shead small{font-size:12px}
+.sheet .sbodyw{overflow:auto;flex:1;overscroll-behavior:contain;padding-bottom:env(safe-area-inset-bottom)}
+.sheet .field input,.sheet .field textarea,.sheet .field select{font-size:16px}
+.sheet .field textarea{height:auto;min-height:64px}
+.sheet .help.warn{color:var(--red)}
+.sheet .flash{box-shadow:0 0 0 3px var(--primary-soft)!important;border-color:var(--primary)!important}
+.sgroup{border:1px solid var(--line);border-radius:12px;padding:4px 12px 12px;margin:14px 0 0;min-width:0}
+.sgroup legend{font-size:12px;font-weight:700;color:var(--ink2);padding:0 6px}
+div.sgroup{border:0;padding:0}
+.slist .lh{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.slist .lh label{font-size:12px;font-weight:600;color:var(--ink2)}
+.sitem{border:1px solid var(--line);border-radius:10px;margin:8px 0 0;background:var(--surface)}
+.sitem>summary{list-style:none;display:flex;align-items:center;gap:4px;padding:4px 4px 4px 10px;cursor:pointer;min-height:44px}
+.sitem>summary::-webkit-details-marker{display:none}
+.sitem .n{font-size:12px;font-weight:700;color:var(--muted);min-width:18px}
+.sitem .it{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
+.sitem .iconbtn{width:34px;height:34px}
+.sitem[open]>summary{border-bottom:1px solid var(--line)}
+.sitemf{padding:0 12px 12px}
+.simg .imgrow{display:flex;gap:12px;align-items:center}
+.simg img,.simg .noimg{width:84px;max-height:120px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:var(--container);flex:none}
+.simg .noimg{height:84px;display:grid;place-items:center;color:var(--muted)}
+.simg label{display:block}
+.libsheet .libh{font-size:13px;margin:16px 0 4px;color:var(--ink2)}
+.libitem{display:flex;align-items:center;gap:6px;margin:8px 0 0}
+.libpick{flex:1;min-width:0;text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);padding:12px 14px;display:flex;flex-direction:column;gap:3px;cursor:pointer}
+.libpick:not([disabled]):hover{border-color:var(--primary)}
+.libpick[disabled]{cursor:default;opacity:1}
+.libpick small{color:var(--muted);font-size:12.5px;line-height:1.4}
+.slugrow{display:flex;align-items:center;gap:4px;font:13px var(--mono);color:var(--ink2)}
+.slugrow input{flex:1;min-width:0}
+@media (max-width:900px){
+  .ed.stacked{grid-template-columns:minmax(0,1fr)}
+  .ed.stacked .stackcol{order:1}.ed.stacked .pvcol2{order:2}
+  .ed.stacked .pvframe{height:78vh!important}
+  .deskonly{display:none!important}
+  .stackhead{gap:4px;margin-bottom:12px}
+  .stackhead .urlpill{max-width:calc(100vw - 150px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .stackhead .save{order:6;width:100%;padding-left:52px}
+  .stackcol .card{border:0;background:transparent}
+  .stackcol .panel-h{padding:0 0 4px}.stackcol .form{padding:0}
+  .main:has(.actbar){padding-bottom:96px}
+  .actbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;position:fixed;z-index:35;left:0;right:0;bottom:0;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:var(--surface);border-top:1px solid var(--line);box-shadow:var(--shadow)}
+  .actbar .btn{padding:0 6px;justify-content:center;height:44px;font-size:13px;gap:5px}
+  .sheetscrim{display:block;position:fixed;inset:0;z-index:43;background:var(--scrim)}
+  .sheet{left:0;right:0;top:auto;bottom:0;width:auto;max-height:88vh;height:88vh;border-radius:20px 20px 0 0;border-bottom:0}
+  .sheet .shandle{display:block;width:36px;height:4px;border-radius:2px;background:var(--line-strong);margin:8px auto 0}
+  .sheet .shead{padding:6px 8px 8px 16px}
+  body.sheet-open{overflow:hidden}
+  #toast{bottom:84px}
+  body.sheet-open #toast{bottom:16px}
+}
 </style>
 </head>
 <body>
@@ -145,6 +225,8 @@ if(t==="auto")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light
   <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-sidebar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><g fill="currentColor" stroke="none"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></g></symbol>
+  <symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6C3.8 8.4 2 12 2 12s3.5 7 10 7c1.8 0 3.4-.5 4.8-1.3M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
   <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 19l3-1 8-8a6 6 0 0 0 2-6 6 6 0 0 0-6 2l-8 8-1 3zM14 7l3 3M8 13l3 3"/></symbol>
 </svg>
 
@@ -415,7 +497,7 @@ var ROUTE = "";
 function route(){
   var h = decodeURIComponent((location.hash || "#posts").slice(1));
   if (h === "site") h = "posts";
-  ROUTE = h; hideTip(); closeModal();
+  ROUTE = h; hideTip(); closeModal(); closeSheet(true); closeCardMenu();
   var m = $("#main");
   $$('#rail [data-nav="settings"]').forEach(function(a){ a.classList.toggle("on", h === "settings"); });
   $$('#rail [data-help="site"]').forEach(function(a){ a.classList.toggle("on", h !== "settings"); });
@@ -581,96 +663,628 @@ function viewPages(){
       (home ? ' <span class="chip live"><span class="dot"></span>Homepage</span>' : "") + '</span><small>' + esc(where) + '</small></span></a>';
   }
   if (stacks.length && !HOMEPAGE) loadHomepage().then(function(){ if (ROUTE === "pages" && SITETAB === "pages") route(); });
-  return (stacks.length ? '<div class="panel-h" style="margin:0 0 10px"><h2 style="font-size:17px">Pages built from sections</h2><div class="sp"></div><button class="btn tonal sm" onclick="openLibrary()">' + icon("layout", "width:16px;height:16px") + 'Section library</button></div>' +
+  return (stacks.length ? '<div class="panel-h" style="margin:0 0 10px"><h2 style="font-size:17px">Pages built from sections</h2><div class="sp"></div><button class="btn sm" onclick="openLibrary()">' + icon("layout", "width:16px;height:16px") + 'Library</button><button class="btn tonal sm" onclick="openNewPage()">' + icon("plus", "width:16px;height:16px") + 'New page</button></div>' +
       '<div class="grid apps pagecards" style="margin-bottom:22px">' + stacks.map(card).join("") + '</div><h2 style="font-size:17px;margin:0 0 10px">Content blocks</h2>' : "") +
     '<div class="grid apps pagecards">' + others.map(card).join("") + '</div><p class="subtle" style="font-size:13px;margin-top:18px">These are the parts of elvinpeters.com that are driven by content files. Everything else on the site is hand-built and changes through code.</p>';
 }
 
-/* ================= Stack pages (slice 2): a page as a list of section cards ================= */
-var HOMEPAGE = null, LIBRARY = null;
+/* ================= Stack pages (slice 3): the phone editor =================
+   A page is a list of section cards. Tap a card to edit its words in a bottom
+   sheet built from the section's field list. Drag the grip (or use the arrows)
+   to reorder; the eye hides a section; the ⋯ menu copies, deletes and saves
+   presets. Photos are cropped, shrunk and re-encoded on the phone, and only land
+   once they have a description. Tap a spot in the preview to jump to its field. */
+var HOMEPAGE = null, LIBRARY = null, PRESETS = [], SHEET = null, TAPEDIT = true;
+try { TAPEDIT = localStorage.getItem("site-studio-tapedit") !== "0"; } catch (e) {}
 function loadHomepage(){ return SECTIONS.homepage ? loadDoc("homepage").then(function(d){ HOMEPAGE = d; return d; }) : Promise.resolve(null); }
-function loadLibrary(){
-  if (LIBRARY) return Promise.resolve(LIBRARY);
-  return api("GET", "/api/library").then(function(r){ LIBRARY = {}; r.data.types.forEach(function(t){ LIBRARY[t.type] = t; }); return LIBRARY; });
+function loadLibrary(fresh){
+  if (LIBRARY && !fresh) return Promise.resolve(LIBRARY);
+  return api("GET", "/api/library").then(function(r){
+    LIBRARY = {}; r.data.types.forEach(function(t){ LIBRARY[t.type] = t; });
+    PRESETS = r.data.presets || [];
+    return LIBRARY;
+  });
 }
-function stackPath(name, stack){ return HOMEPAGE && HOMEPAGE.home === name ? "/" : (stack && stack.preview_path ? "/" + stack.preview_path.replace(/index\.html$/, "") : "/"); }
-// Every word a section carries, in field order, for the read-only view.
-function sectionWords(fields, data){
-  var out = [];
+function stackPath(name, stack){
+  if (HOMEPAGE && HOMEPAGE.home === name) return "/";
+  if (stack && stack.path) return "/" + stack.path.replace(/index\.html$/, "");
+  return stack && stack.preview_path ? "/" + stack.preview_path.replace(/index\.html$/, "") : "/";
+}
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+
+/* Words on screen vs words in the file. Text fields hold HTML-safe text (the
+   templates insert values as-is), so they are shown decoded and saved escaped.
+   HTML fields keep their tags; only named entities like &rarr; are shown as the
+   character, and &lt; &gt; &amp; stay visible so a saved tag never appears. */
+var decoder = document.createElement("textarea");
+function decodeAll(s){ decoder.innerHTML = String(s == null ? "" : s); return decoder.value; }
+function decodeSoft(s){ return String(s == null ? "" : s).replace(/&(?!(?:amp|lt|gt);)#?[a-z0-9]+;/gi, function(m){ return decodeAll(m); }); }
+function encodeText(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function plainOf(v){ return decodeAll(textOf(v)).replace(/\s+/g, " ").trim(); }
+var DASHES = /[–—]|&[mn]dash;|&#821[12];/;
+
+// Every editable leaf of a section: {p: "cast.0.name", f: field, v: value}.
+function fieldLeaves(fields, data, prefix, out){
+  out = out || [];
   (fields || []).forEach(function(f){
     if (f.hidden || data == null) return;
-    var v = data[f.key];
-    if (v == null || v === "" || v === false) return;
-    if (f.type === "list") (v || []).forEach(function(it, i){
-      if (typeof it === "string") out.push({label: f.label + " " + (i + 1), text: it});
-      else sectionWords(f.fields, it).forEach(function(w){ out.push({label: f.label + " " + (i + 1) + " · " + w.label, text: w.text}); });
+    var p = (prefix ? prefix + "." : "") + f.key, v = data[f.key];
+    if (f.type === "object") { if (v) fieldLeaves(f.fields, v, p, out); }
+    else if (f.type === "list") (v || []).forEach(function(it, i){
+      if (f.fields) fieldLeaves(f.fields, it, p + "." + i, out); else out.push({p: p + "." + i, f: {type: "html", label: f.label}, v: it});
     });
-    else if (f.type === "object") sectionWords(f.fields, v).forEach(function(w){ out.push({label: f.label + " · " + w.label, text: w.text}); });
-    else if (f.type === "bool") out.push({label: f.label, text: "Yes"});
-    else if (f.type !== "choice" || v) out.push({label: f.label, text: String(v)});
+    else out.push({p: p, f: f, v: v});
   });
   return out;
 }
+function altKeys(fields){ var a = {}; (fields || []).forEach(function(f){ if (f.type === "image" && f.alt) a[f.alt] = 1; }); return a; }
+function secType(sec){ return LIBRARY[sec.type] || {label: sec.type, fields: [], about: ""}; }
+function secSummary(sec){
+  var leaves = fieldLeaves(secType(sec).fields, sec.data).filter(function(l){ return (l.f.type === "html" || l.f.type === "text") && !/^anchor$|href|aria/.test(l.p); });
+  for (var i = 0; i < leaves.length; i++) { var t = plainOf(leaves[i].v); if (t) return t; }
+  return "";
+}
+function uniqueId(base){
+  var ids = {}; DOCS[SEC.name].sections.forEach(function(s){ ids[s.id] = 1; });
+  base = String(base || "section").toLowerCase().replace(/[^a-z0-9-]+/g, "-").replace(/-\d+$/, "").replace(/^[^a-z]+/, "").slice(0, 34) || "section";
+  if (!ids[base]) return base;
+  for (var n = 2; ; n++) if (!ids[base + "-" + n]) return base + "-" + n;
+}
+
 function openStack(name){
   var s = SECTIONS[name];
-  $("#main").innerHTML = '<div class="head"><a class="iconbtn" href="#pages" title="Back">' + icon("back") + '</a>' +
-    '<div><div class="crumb"><a href="#pages">Website</a><span>›</span><span style="color:var(--ink)">' + esc(s.title) + '</span></div>' +
+  closeSheet(true);
+  $("#main").innerHTML = '<div class="head stackhead"><a class="iconbtn" href="#pages" title="Back">' + icon("back") + '</a>' +
+    '<div style="min-width:0"><div class="crumb"><a href="#pages">Website</a><span>›</span><span style="color:var(--ink)">' + esc(s.title) + '</span></div>' +
     '<span class="urlpill" id="stackurl" style="padding-right:12px">elvinpeters.com/</span></div>' +
     '<div class="sp"></div><span class="save" id="savestate">' + icon("check", "width:16px;height:16px") + 'All changes saved</span>' +
-    '<span id="homebtn"></span>' +
-    '<button class="btn" id="stacktest" title="Open the whole site with your drafts at the private test address">' + icon("eye") + 'Test</button>' +
-    '<button class="btn filled" onclick="openPublish([\'content/' + esc(name) + '.json\'])">' + icon("rocket") + 'Publish</button></div>' +
-    '<div class="ed" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)"><div class="card"><div class="panel-h"><h2>Sections</h2><div class="sp"></div><button class="btn tonal sm" onclick="openLibrary()">Library</button></div><div class="form" id="secform"><div class="empty">Loading…</div></div></div>' +
-    '<div id="secpv"></div></div>';
-  Promise.all([loadDoc(name), loadLibrary(), loadHomepage()]).then(function(){ SEC = s; drawStack(); })
-    .catch(function(e){ $("#secform").innerHTML = '<div class="empty">Could not load: ' + esc(e.message) + '</div>'; });
+    '<span id="homebtn" class="deskonly"></span>' +
+    (s.made ? '<button class="iconbtn" id="pagesettings" title="Page settings: name and search engines">' + icon("gear") + '</button>' : "") +
+    '<button class="btn deskonly" id="stacktest" title="Open the whole site with your drafts at the private test address">' + icon("eye") + 'Test</button>' +
+    '<button class="btn filled deskonly" id="stackpub">' + icon("rocket") + 'Publish</button></div>' +
+    '<div class="ed stacked"><div class="stackcol"><div class="card"><div class="panel-h"><h2>Sections</h2><div class="sp"></div>' +
+    '<button class="btn tonal sm" id="addsec">' + icon("plus", "width:16px;height:16px") + 'Add section</button></div>' +
+    '<div class="form" id="secform"><div class="empty">Loading…</div></div></div></div>' +
+    '<div class="pvcol2"><div class="tapbar"><label class="tapsw"><input type="checkbox" class="tog" id="tapedit"' + (TAPEDIT ? " checked" : "") + '> Tap the preview to edit</label></div><div id="secpv"></div></div></div>' +
+    '<div class="actbar"><button class="btn tonal" id="ab_add">' + icon("plus", "width:18px;height:18px") + 'Add</button>' +
+    '<button class="btn" id="ab_pv">' + icon("eye", "width:18px;height:18px") + 'Preview</button>' +
+    '<button class="btn" id="ab_test">' + icon("open", "width:18px;height:18px") + 'Test</button>' +
+    '<button class="btn filled" id="ab_pub">' + icon("rocket", "width:18px;height:18px") + 'Publish</button></div>';
+  var pub = function(){ flushSaves().then(function(){ openPublish(["content/" + name + ".json"]); }); };
+  $("#stackpub").onclick = pub; $("#ab_pub").onclick = pub;
+  $("#addsec").onclick = function(){ openLibrary(DOCS[name].sections.length); };
+  $("#ab_add").onclick = function(){ openLibrary(DOCS[name].sections.length); };
+  $("#ab_pv").onclick = function(){ var p = $("#secpv"); if (p) p.scrollIntoView({behavior: "smooth", block: "start"}); };
+  $("#tapedit").onchange = function(){ TAPEDIT = this.checked; try { localStorage.setItem("site-studio-tapedit", TAPEDIT ? "1" : "0"); } catch (e) {} wireTapToEdit(); };
+  if (s.made) $("#pagesettings").onclick = function(){ openPageSettings(name); };
+  Promise.all([loadDoc(name), loadLibrary(), loadHomepage()]).then(function(){
+    SEC = s;
+    var path = stackPath(name, DOCS[name]);
+    $("#stacktest").onclick = function(){ runTest(stackPath(name, DOCS[name])); };
+    $("#ab_test").onclick = function(){ runTest(stackPath(name, DOCS[name])); };
+    $("#secpv")._onload = wireTapToEdit;
+    drawStack();
+    drawRealPreview("#secpv", path, true);
+  }).catch(function(e){ $("#secform").innerHTML = '<div class="empty">Could not load: ' + esc(e.message) + '</div>'; });
 }
 function drawStack(){
   var name = SEC.name, stack = DOCS[name], path = stackPath(name, stack), home = HOMEPAGE && HOMEPAGE.home === name;
   $("#stackurl").textContent = "elvinpeters.com" + path;
-  $("#stacktest").onclick = function(){ runTest(path); };
   $("#homebtn").innerHTML = home ? '<span class="chip live" title="This page is what visitors see at elvinpeters.com/"><span class="dot"></span>Homepage</span>'
-    : (SECTIONS.homepage ? '<button class="btn" onclick="makeHomepage(\'' + esc(name) + '\')">' + icon("rocket") + 'Make this the homepage</button>' : "");
-  var h = '<p class="subtle" style="margin:0 0 12px">' + esc(stack.sections.length) + ' sections, top to bottom in page order. Open a card to read its words.</p>';
+    : (SECTIONS.homepage && !SEC.made ? '<button class="btn" onclick="makeHomepage(\'' + esc(name) + '\')">' + icon("rocket") + 'Make this the homepage</button>' : "");
+  var n = stack.sections.length;
+  var h = '<p class="subtle" style="margin:0 0 4px;font-size:13px">' + n + ' section' + (n === 1 ? "" : "s") + ', top to bottom. Tap one to edit its words. Drag the dots to move it.' +
+    (SEC.made && stack.noindex !== false ? ' <span class="chip draft" title="Search engines are asked not to list this page">Hidden from Google</span>' : "") + '</p><div id="scards">';
   stack.sections.forEach(function(sec, i){
-    var t = LIBRARY[sec.type] || {label: sec.type, fields: []};
-    var words = sectionWords(t.fields, sec.data);
-    h += '<details class="item stackcard" data-i="' + i + '"' + (sec.hidden ? ' style="opacity:.55"' : "") + '><summary>' +
-      '<span class="grip" style="font:600 13px/1 var(--sans,inherit);min-width:22px;text-align:center">' + (i + 1) + '</span>' +
-      '<span class="it">' + esc(t.label) + ' <small class="subtle">' + esc(sec.id) + '</small>' +
-      (sec.hidden ? ' <span class="chip draft" title="Hidden sections stay in the list but are not on the page">Hidden</span>' : "") +
-      (t.locked ? ' <span class="chip" title="' + esc(t.locked) + '">Interactive</span>' : "") + '</span>' +
-      '<button class="iconbtn" title="Move up" data-smv="-1"' + (i === 0 ? " disabled" : "") + '>' + icon("up", "width:18px;height:18px") + '</button>' +
-      '<button class="iconbtn" title="Move down" data-smv="1"' + (i === stack.sections.length - 1 ? " disabled" : "") + '>' + icon("down", "width:18px;height:18px") + '</button>' +
-      '<button class="iconbtn" title="' + (sec.hidden ? "Show on the page" : "Hide from the page") + '" data-shide="1">' + icon("eye", "width:18px;height:18px") + '</button></summary>' +
-      '<div class="form"><p class="subtle" style="margin:0 0 8px">' + esc(t.about || "") + '</p>' +
-      words.map(function(w){ return '<div class="field"><label>' + esc(w.label) + '</label><div class="help" style="white-space:pre-wrap;color:var(--ink)">' + esc(textOf(w.text).replace(/\s+/g, " ").trim()) + '</div></div>'; }).join("") +
-      '<p class="subtle" style="font-size:12px;margin:8px 0 0">Word editing arrives in the next Studio update. For now, change the words in content/' + esc(name) + '.json.</p></div></details>';
+    var t = secType(sec), sum = secSummary(sec);
+    h += '<div class="scard' + (sec.hidden ? " off" : "") + '" data-i="' + i + '">' +
+      '<button class="sgrip" aria-label="Drag to move ' + esc(t.label) + '" title="Drag to move">' + icon("grip", "width:18px;height:18px") + '</button>' +
+      '<button class="sbody" data-open="1"><span class="sl">' + esc(t.label) +
+      (sec.hidden ? ' <span class="chip draft">Hidden</span>' : "") + (t.locked ? ' <span class="chip" title="' + esc(t.locked) + '">Interactive</span>' : "") + '</span>' +
+      '<small>' + esc(sum || sec.id) + '</small></button>' +
+      '<button class="iconbtn" title="Move up" aria-label="Move up" data-smv="-1"' + (i === 0 ? " disabled" : "") + '>' + icon("up", "width:18px;height:18px") + '</button>' +
+      '<button class="iconbtn" title="Move down" aria-label="Move down" data-smv="1"' + (i === n - 1 ? " disabled" : "") + '>' + icon("down", "width:18px;height:18px") + '</button>' +
+      '<button class="iconbtn" title="' + (sec.hidden ? "Show on the page" : "Hide from the page") + '" aria-label="' + (sec.hidden ? "Show" : "Hide") + '" aria-pressed="' + (sec.hidden ? "true" : "false") + '" data-shide="1">' + icon(sec.hidden ? "eyeoff" : "eye", "width:18px;height:18px") + '</button>' +
+      '<button class="iconbtn" title="More" aria-label="More for ' + esc(t.label) + '" data-smore="1">' + icon("more", "width:18px;height:18px") + '</button></div>';
   });
+  h += '</div>' + (n ? "" : '<div class="empty">No sections yet. Add one from the library.</div>');
   $("#secform").innerHTML = h;
-  $$("#secform [data-smv]").forEach(function(b){ b.onclick = function(e){
-    e.preventDefault(); var i = +b.closest("[data-i]").dataset.i, j = i + (+b.dataset.smv), arr = DOCS[name].sections;
-    if (j < 0 || j >= arr.length) return; var x = arr[i]; arr[i] = arr[j]; arr[j] = x; stackChanged();
-  }; });
-  $$("#secform [data-shide]").forEach(function(b){ b.onclick = function(e){
-    e.preventDefault(); var sec = DOCS[name].sections[+b.closest("[data-i]").dataset.i];
-    if (sec.hidden) delete sec.hidden; else sec.hidden = true; stackChanged();
-  }; });
-  drawRealPreview("#secpv", path, true);
+  $$("#secform [data-smv]").forEach(function(b){ b.onclick = function(){ moveSection(+b.closest("[data-i]").dataset.i, +b.dataset.smv); }; });
+  $$("#secform [data-shide]").forEach(function(b){ b.onclick = function(){ toggleHide(+b.closest("[data-i]").dataset.i); }; });
+  $$("#secform [data-open]").forEach(function(b){ b.onclick = function(){ openSheet(+b.closest("[data-i]").dataset.i); }; });
+  $$("#secform [data-smore]").forEach(function(b){ b.onclick = function(e){ e.stopPropagation(); cardMenu(b, +b.closest("[data-i]").dataset.i); }; });
+  $$("#secform .sgrip").forEach(wireDrag);
 }
-function stackChanged(){
-  drawStack();
+/* Something about the page changed: save it, redraw the list, rebuild the preview soon. */
+function stackChanged(keepList){
+  if (!keepList) drawStack();
   queueSave(SEC.name);
   clearTimeout(stackChanged.t);
   stackChanged.t = setTimeout(function(){ flushSaves().then(function(){ drawRealPreview("#secpv", stackPath(SEC.name, DOCS[SEC.name]), true); }); }, 1200);
 }
+function moveSection(i, d){
+  var arr = DOCS[SEC.name].sections, j = i + d;
+  if (j < 0 || j >= arr.length) return;
+  arr.splice(j, 0, arr.splice(i, 1)[0]);
+  stackChanged();
+  var c = $('#secform [data-i="' + j + '"] [data-smv="' + d + '"]'); if (c && !c.disabled) c.focus(); else { c = $('#secform [data-i="' + j + '"] .sbody'); if (c) c.focus(); }
+}
+function toggleHide(i){
+  var sec = DOCS[SEC.name].sections[i];
+  if (sec.hidden) delete sec.hidden; else sec.hidden = true;
+  stackChanged();
+  toast(sec.hidden ? "Hidden. It stays in the list but is not on the page." : "Showing on the page again.");
+}
+function copySection(i){
+  var arr = DOCS[SEC.name].sections, c = clone(arr[i]);
+  c.id = uniqueId(arr[i].id);
+  if (c.data && c.data.anchor) c.data.anchor = "";   // two sections can't share a jump link
+  arr.splice(i + 1, 0, c);
+  stackChanged();
+  toast("Copied. The copy sits right under the original.", function(){ var k = arr.indexOf(c); if (k > -1) { arr.splice(k, 1); stackChanged(); } });
+}
+function deleteSection(i){
+  var arr = DOCS[SEC.name].sections, gone = arr.splice(i, 1)[0];
+  stackChanged();
+  toast("Deleted " + secType(gone).label + ".", function(){ arr.splice(Math.min(i, arr.length), 0, gone); stackChanged(); });
+}
+function cardMenu(btn, i){
+  closeCardMenu();
+  var sec = DOCS[SEC.name].sections[i];
+  var m = document.createElement("div"); m.className = "menu cardmenu"; m.id = "cardmenu"; m.setAttribute("role", "menu");
+  var items = [["edit", "text", "Edit words"], ["above", "up", "Add a section above"], ["below", "down", "Add a section below"], ["copy", "copy", "Copy"],
+    ["hide", sec.hidden ? "eye" : "eyeoff", sec.hidden ? "Show on the page" : "Hide from the page"], ["preset", "layout", "Save as a preset"], ["del", "trash", "Delete"]];
+  m.innerHTML = items.map(function(x){ return '<button role="menuitem" data-act="' + x[0] + '">' + icon(x[1], "width:18px;height:18px") + x[2] + '</button>'; }).join("");
+  document.body.appendChild(m);
+  var r = btn.getBoundingClientRect(), mh = m.offsetHeight, mw = m.offsetWidth;
+  m.style.left = Math.max(8, Math.min(innerWidth - mw - 8, r.right - mw)) + "px";
+  m.style.top = (r.bottom + mh + 8 > innerHeight ? Math.max(8, r.top - mh - 4) : r.bottom + 4) + "px";
+  $$("button", m).forEach(function(b){ b.onclick = function(){
+    closeCardMenu();
+    var a = b.dataset.act;
+    if (a === "edit") openSheet(i);
+    else if (a === "above") openLibrary(i);
+    else if (a === "below") openLibrary(i + 1);
+    else if (a === "copy") copySection(i);
+    else if (a === "hide") toggleHide(i);
+    else if (a === "preset") savePreset(i);
+    else if (a === "del") deleteSection(i);
+  }; });
+  $("button", m).focus();
+  setTimeout(function(){ document.addEventListener("click", closeCardMenu, {once: true}); }, 0);
+}
+function closeCardMenu(){ var m = $("#cardmenu"); if (m) m.remove(); }
+document.addEventListener("keydown", function(e){ if (e.key === "Escape") { closeCardMenu(); if (SHEET && $("#modal").classList.contains("hidden")) closeSheet(); } });
+
+/* Drag to reorder with the grip: pointer events, so it works with a finger.
+   The page scrolls when the card nears the top or bottom edge. */
+function wireDrag(grip){
+  grip.onpointerdown = function(e){
+    if (e.button > 0) return;
+    e.preventDefault();
+    var card = grip.closest(".scard"), from = +card.dataset.i, cards = $$("#scards .scard");
+    var startY = e.clientY + scrollY, lastY = e.clientY, to = from, raf = 0, moved = false;
+    grip.setPointerCapture(e.pointerId);
+    card.classList.add("dragging");
+    function place(){
+      var y = lastY + scrollY;
+      if (Math.abs(y - startY) > 4) moved = true;
+      card.style.transform = "translateY(" + (y - startY) + "px)";
+      to = 0;
+      cards.forEach(function(c){ c.classList.remove("gapb", "gapa"); });
+      var others = cards.filter(function(c){ return c !== card; });
+      others.forEach(function(c){ var r = c.getBoundingClientRect(); if (lastY > r.top + r.height / 2) to++; });
+      if (to < others.length) others[to].classList.add("gapb"); else if (others.length) others[others.length - 1].classList.add("gapa");
+    }
+    function tick(){
+      var edge = 70, bar = $(".actbar"), bottom = innerHeight - (bar && bar.offsetHeight && getComputedStyle(bar).display !== "none" ? bar.offsetHeight : 0);
+      if (lastY < edge) scrollBy(0, -Math.ceil((edge - lastY) / 5));
+      else if (lastY > bottom - edge) scrollBy(0, Math.ceil((lastY - bottom + edge) / 5));
+      place(); raf = requestAnimationFrame(tick);
+    }
+    grip.onpointermove = function(ev){ lastY = ev.clientY; };
+    grip.onpointerup = grip.onpointercancel = function(ev){
+      cancelAnimationFrame(raf);
+      grip.onpointermove = grip.onpointerup = grip.onpointercancel = null;
+      card.classList.remove("dragging"); card.style.transform = "";
+      cards.forEach(function(c){ c.classList.remove("gapb", "gapa"); });
+      if (ev.type === "pointerup" && moved && to !== from) {
+        var arr = DOCS[SEC.name].sections; arr.splice(to, 0, arr.splice(from, 1)[0]);
+        stackChanged();
+        toast("Moved to position " + (to + 1) + ".");
+      }
+    };
+    raf = requestAnimationFrame(tick);
+  };
+  // Keyboard: the grip also moves with the arrow keys.
+  grip.onkeydown = function(e){
+    if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+    e.preventDefault();
+    var i = +grip.closest(".scard").dataset.i, j = i + (e.key === "ArrowUp" ? -1 : 1);
+    moveSection(i, e.key === "ArrowUp" ? -1 : 1);
+    var g = $('#secform [data-i="' + j + '"] .sgrip'); if (g) g.focus();
+  };
+}
+
+/* ---- The bottom sheet: one section's words ---- */
+var OPENIT = {};
+function openSheet(i, focusPath){
+  var sec = DOCS[SEC.name].sections[i]; if (!sec) return;
+  closeCardMenu();
+  if (SHEET && SHEET.sec !== sec) OPENIT = {};
+  SHEET = {i: i, sec: sec};
+  var el = $("#sheet");
+  if (!el) {
+    el = document.createElement("div"); el.id = "sheet"; el.className = "sheet"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "false");
+    document.body.appendChild(el);
+    var sc = document.createElement("div"); sc.id = "sheetscrim"; sc.className = "sheetscrim"; sc.onclick = function(){ closeSheet(); };
+    document.body.appendChild(sc);
+  }
+  if (focusPath) { var m = /^(.+?)\.(\d+)(?:\.|$)/.exec(focusPath); if (m) OPENIT[m[1] + "." + m[2]] = 1; }
+  drawSheet(focusPath);
+  document.body.classList.add("sheet-open");
+  jumpPreview(sec.id);
+}
+function closeSheet(quiet){
+  var el = $("#sheet"), sc = $("#sheetscrim");
+  if (el) el.remove(); if (sc) sc.remove();
+  document.body.classList.remove("sheet-open");
+  var was = SHEET; SHEET = null;
+  if (!quiet && was && SEC && DOCS[SEC.name]) { drawStack(); var k = DOCS[SEC.name].sections.indexOf(was.sec); var b = $('#secform [data-i="' + k + '"] .sbody'); if (b) b.focus(); }
+}
+function drawSheet(focusPath){
+  var sec = SHEET.sec, t = secType(sec), el = $("#sheet"), arr = DOCS[SEC.name].sections, i = arr.indexOf(sec);
+  if (i < 0) { closeSheet(true); return; }
+  SHEET.i = i;
+  var scroll = $(".sbodyw", el) ? $(".sbodyw", el).scrollTop : 0;
+  el.setAttribute("aria-label", "Edit " + t.label);
+  el.innerHTML = '<div class="shandle" aria-hidden="true"></div><div class="shead"><div style="min-width:0;flex:1"><div class="st">' + esc(t.label) + '</div><small class="subtle">Section ' + (i + 1) + ' of ' + arr.length + ' · ' + esc(sec.id) + '</small></div>' +
+    '<button class="iconbtn" title="Previous section" aria-label="Previous section" data-sgo="-1"' + (i === 0 ? " disabled" : "") + '>' + icon("up", "width:18px;height:18px") + '</button>' +
+    '<button class="iconbtn" title="Next section" aria-label="Next section" data-sgo="1"' + (i === arr.length - 1 ? " disabled" : "") + '>' + icon("down", "width:18px;height:18px") + '</button>' +
+    '<button class="btn filled sm" data-sdone>Done</button></div>' +
+    '<div class="sbodyw"><div class="form">' + (t.about ? '<p class="subtle" style="margin:4px 0 0;font-size:13px">' + esc(t.about) + '</p>' : "") +
+    (t.locked ? '<p class="chip" style="margin-top:8px;height:auto;white-space:normal;padding:4px 10px">' + esc(t.locked) + '</p>' : "") +
+    (sec.hidden ? '<div class="switch"><span class="sx">Hidden from the page<small>It stays in the list. Turn it back on from the card.</small></span></div>' : "") +
+    formFields(t.fields, sec.data, "") + '</div></div>';
+  $(".sbodyw", el).scrollTop = scroll;
+  $("[data-sdone]", el).onclick = function(){ closeSheet(); };
+  $$("[data-sgo]", el).forEach(function(b){ b.onclick = function(){ var k = SHEET.i + (+b.dataset.sgo); OPENIT = {}; if (arr[k]) openSheet(k); }; });
+  wireSheet(el, t);
+  if (focusPath) {
+    var f = el.querySelector('[data-p="' + focusPath + '"]');
+    if (f) { f.scrollIntoView({block: "center"}); try { f.focus({preventScroll: true}); } catch (e) { f.focus(); } f.classList.add("flash"); setTimeout(function(){ f.classList.remove("flash"); }, 1400); }
+  }
+}
+function fid(p){ return "sf_" + p.replace(/[^a-z0-9]/gi, "_"); }
+function formFields(fields, data, prefix){
+  var alts = altKeys(fields), h = "";
+  (fields || []).forEach(function(f){
+    if (f.hidden || alts[f.key]) return;
+    var p = (prefix ? prefix + "." : "") + f.key, v = data ? data[f.key] : undefined;
+    h += fieldControl(f, p, v, data);
+  });
+  return h;
+}
+function fieldControl(f, p, v, parent){
+  var id = fid(p);
+  if (f.type === "bool") return '<div class="switch"><label class="sx" for="' + id + '">' + esc(f.label) + '</label><input type="checkbox" class="tog" id="' + id + '" data-p="' + esc(p) + '" data-t="bool"' + (v ? " checked" : "") + '></div>';
+  if (f.type === "choice") return '<div class="field"><label for="' + id + '">' + esc(f.label) + '</label><select id="' + id + '" data-p="' + esc(p) + '" data-t="choice">' +
+    (f.options || []).map(function(o){ return '<option value="' + esc(o) + '"' + (o === (v || "") ? " selected" : "") + '>' + esc(o || "Default") + '</option>'; }).join("") + '</select></div>';
+  if (f.type === "image") return imageControl(f, p, v, parent);
+  if (f.type === "object") {
+    if (!v) return '<div class="field sgroup"><label>' + esc(f.label) + '</label><button class="btn tonal sm" data-objadd="' + esc(p) + '">' + icon("plus", "width:16px;height:16px") + 'Add ' + esc(f.label.replace(/\s*\(optional\)$/i, "").toLowerCase()) + '</button></div>';
+    return '<fieldset class="sgroup"><legend>' + esc(f.label) + '</legend>' + formFields(f.fields, v, p) +
+      '<button class="btn sm" style="margin-top:12px" data-objdel="' + esc(p) + '">' + icon("trash", "width:16px;height:16px") + 'Remove</button>' + '</fieldset>';
+  }
+  if (f.type === "list") {
+    var items = v || [], h = '<div class="sgroup slist"><div class="lh"><label>' + esc(f.label) + '</label><small class="subtle">' + items.length + '</small></div>';
+    items.forEach(function(it, i){
+      var ip = p + "." + i, title = f.fields ? (fieldLeaves(f.fields, it).map(function(l){ return plainOf(l.v); }).filter(Boolean)[0] || "") : plainOf(it);
+      h += '<details class="sitem" data-ip="' + esc(ip) + '"' + (OPENIT[ip] ? " open" : "") + '><summary><span class="n">' + (i + 1) + '</span><span class="it">' + esc(title || "Empty") + '</span>' +
+        '<button class="iconbtn" title="Move up" aria-label="Move up" data-imv="-1"' + (i === 0 ? " disabled" : "") + '>' + icon("up", "width:16px;height:16px") + '</button>' +
+        '<button class="iconbtn" title="Move down" aria-label="Move down" data-imv="1"' + (i === items.length - 1 ? " disabled" : "") + '>' + icon("down", "width:16px;height:16px") + '</button>' +
+        '<button class="iconbtn" title="Remove" aria-label="Remove" data-irm="1">' + icon("trash", "width:16px;height:16px") + '</button></summary><div class="sitemf">' +
+        (f.fields ? formFields(f.fields, it, ip) : textControl({type: "html", label: f.label + " " + (i + 1)}, ip, it)) + '</div></details>';
+    });
+    return h + '<button class="btn tonal sm" style="margin-top:10px" data-iadd="' + esc(p) + '">' + icon("plus", "width:16px;height:16px") + 'Add item</button></div>';
+  }
+  return textControl(f, p, v);
+}
+function textControl(f, p, v){
+  var id = fid(p), html = f.type === "html", shown = html ? decodeSoft(v) : decodeAll(v);
+  var warn = DASHES.test(v || "") ? '<div class="help warn" data-warn="' + id + '">Has a long dash (— or –). House style uses commas or full stops instead.</div>' : '<div class="help warn hidden" data-warn="' + id + '"></div>';
+  var long = html || shown.length > 60;
+  var input = long ? '<textarea id="' + id + '" data-p="' + esc(p) + '" data-t="' + (html ? "html" : "text") + '" rows="' + Math.min(8, Math.max(2, Math.ceil(shown.length / 38))) + '">' + esc(shown) + '</textarea>'
+    : '<input type="text" id="' + id + '" data-p="' + esc(p) + '" data-t="text" value="' + esc(shown) + '"' + (/href|link/i.test(f.key || "") ? ' inputmode="url"' : "") + '>';
+  return '<div class="field"><label for="' + id + '">' + esc(f.label) + '</label>' + input + (html ? '<div class="help">Tags like &lt;em&gt; and &lt;br&gt; work here.</div>' : "") + warn + '</div>';
+}
+function imageControl(f, p, v, parent){
+  var id = fid(p), altP = f.alt ? p.replace(/[^.]+$/, f.alt) : "", alt = f.alt && parent ? parent[f.alt] : "";
+  var shape = f.size ? f.size[0] + " × " + f.size[1] : "";
+  return '<div class="field simg" data-imgp="' + esc(p) + '"><label>' + esc(f.label) + '</label>' +
+    '<div class="imgrow">' + (v ? '<img src="' + esc(v) + '" alt="" style="aspect-ratio:' + (f.size ? f.size[0] + "/" + f.size[1] : "auto") + '">' : '<div class="noimg">' + icon("image") + '</div>') +
+    '<div style="flex:1;min-width:0"><button class="btn tonal sm" id="' + id + '" data-p="' + esc(p) + '" data-pick="1">' + icon("image", "width:16px;height:16px") + (v ? "Change photo" : "Choose photo") + '</button>' +
+    '<div class="help">' + (shape ? "Cropped to " + esc(shape) + " shape. " : "") + 'Location and camera details are removed.</div></div></div>' +
+    (f.alt ? '<label for="' + fid(altP) + '" style="margin-top:10px">Describe the photo (for screen readers)</label><input type="text" id="' + fid(altP) + '" data-p="' + esc(altP) + '" data-t="text" data-alt="1" value="' + esc(decodeAll(alt)) + '" placeholder="What is in the photo?">' +
+      (v && !String(alt || "").trim() ? '<div class="help warn">A description is required before this can be saved.</div>' : "") : '<div class="help">Decorative: screen readers skip it, so it needs no description.</div>') + '</div>';
+}
+function wireSheet(el, t){
+  var data = SHEET.sec.data;
+  $$("[data-p]", el).forEach(function(inp){
+    var tp = inp.dataset.t; if (!tp) return;
+    var ev = tp === "bool" || tp === "choice" ? "change" : "input";
+    inp.addEventListener(ev, function(){
+      var v = tp === "bool" ? inp.checked : tp === "text" ? encodeText(inp.value) : inp.value;
+      setPath(data, inp.dataset.p, v);
+      var w = el.querySelector('[data-warn="' + inp.id + '"]');
+      if (w) { var d = DASHES.test(inp.value); w.classList.toggle("hidden", !d); w.textContent = d ? "Has a long dash (— or –). House style uses commas or full stops instead." : ""; }
+      if (inp.dataset.alt) { var wn = inp.parentNode.querySelector(".help.warn"); if (wn && inp.value.trim()) wn.remove(); }
+      stackChanged(true);
+    });
+  });
+  $$("textarea[data-p]", el).forEach(function(ta){ ta.addEventListener("input", function(){ ta.style.height = "auto"; ta.style.height = Math.min(ta.scrollHeight + 2, 320) + "px"; }); });
+  function listOf(p){ var a = getPath(data, p); if (!Array.isArray(a)) { a = []; setPath(data, p, a); } return a; }
+  function fieldAt(p){   // the field definition behind a data path
+    var fs = t.fields, f = null;
+    p.split(".").forEach(function(k){ if (/^\d+$/.test(k)) return; f = (fs || []).filter(function(x){ return x.key === k; })[0]; fs = f && f.fields; });
+    return f;
+  }
+  $$("[data-iadd]", el).forEach(function(b){ b.onclick = function(){
+    var p = b.dataset.iadd, f = fieldAt(p), a = listOf(p);
+    a.push(f && f.fields ? Sections_blank(f.fields) : "");
+    OPENIT[p + "." + (a.length - 1)] = 1;
+    stackChanged(true); drawSheet(p + "." + (a.length - 1) + (f && f.fields ? "." + firstKey(f.fields) : ""));
+  }; });
+  $$("[data-irm],[data-imv]", el).forEach(function(b){ b.onclick = function(e){
+    e.preventDefault(); e.stopPropagation();
+    var ip = b.closest("[data-ip]").dataset.ip, m = /^(.*)\.(\d+)$/.exec(ip), a = listOf(m[1]), i = +m[2];
+    if (b.dataset.irm != null) {
+      var gone = a.splice(i, 1)[0]; OPENIT = {};
+      stackChanged(true); drawSheet();
+      toast("Item removed.", function(){ a.splice(Math.min(i, a.length), 0, gone); stackChanged(true); if (SHEET) drawSheet(); });
+    } else {
+      var j = i + (+b.dataset.imv); if (j < 0 || j >= a.length) return;
+      a.splice(j, 0, a.splice(i, 1)[0]);
+      var wasOpen = OPENIT[ip]; delete OPENIT[ip]; if (wasOpen) OPENIT[m[1] + "." + j] = 1;
+      stackChanged(true); drawSheet();
+      var nb = el.querySelector('[data-ip="' + m[1] + "." + j + '"] [data-imv="' + b.dataset.imv + '"]'); if (nb && !nb.disabled) nb.focus();
+    }
+  }; });
+  $$("details.sitem", el).forEach(function(d){ d.addEventListener("toggle", function(){ if (d.open) OPENIT[d.dataset.ip] = 1; else delete OPENIT[d.dataset.ip]; }); });
+  $$("[data-objadd]", el).forEach(function(b){ b.onclick = function(){ var p = b.dataset.objadd, f = fieldAt(p); setPath(data, p, Sections_blank(f.fields)); stackChanged(true); drawSheet(p + "." + firstKey(f.fields)); }; });
+  $$("[data-objdel]", el).forEach(function(b){ b.onclick = function(){
+    var p = b.dataset.objdel, old = getPath(data, p);
+    setPath(data, p, null); stackChanged(true); drawSheet();
+    toast("Removed.", function(){ setPath(data, p, old); stackChanged(true); if (SHEET) drawSheet(); });
+  }; });
+  $$("[data-pick]", el).forEach(function(b){ b.onclick = function(){ var p = b.dataset.p, f = fieldAt(p); pickFile(function(file){ photoFlow(file, f, p); }); }; });
+}
+function firstKey(fields){ var f = (fields || []).filter(function(x){ return !x.hidden && x.type !== "image" && x.type !== "bool"; })[0]; return f ? f.key : ""; }
+// The same blank the server hands out for a new section (sections.js blankData).
+function Sections_blank(fields){
+  var d = {};
+  (fields || []).forEach(function(f){
+    if (f.default !== undefined) d[f.key] = f.default;
+    else if (f.type === "bool") d[f.key] = false;
+    else if (f.type === "list") d[f.key] = [f.fields ? Sections_blank(f.fields) : ""];
+    else if (f.type === "object") d[f.key] = null;
+    else if (f.type === "choice") d[f.key] = (f.options || [""])[0];
+    else d[f.key] = "";
+  });
+  return d;
+}
+
+/* ---- Photos from the camera roll ----
+   Crop to the shape the section shows, shrink so the long side is at most 1600px,
+   and re-encode as JPEG on the phone. Drawing through a canvas drops every tag
+   (GPS included); the server strips again anyway. The photo lands only once it
+   has a description, unless the field is decorative. */
+function shrinkPhoto(file, size){
+  var read = window.createImageBitmap ? createImageBitmap(file, {imageOrientation: "from-image"}).catch(function(){ return createImageBitmap(file); })
+    : new Promise(function(ok, no){ var im = new Image(); im.onload = function(){ ok(im); }; im.onerror = no; im.src = URL.createObjectURL(file); });
+  return read.then(function(bmp){
+    var w0 = bmp.width, h0 = bmp.height, sx = 0, sy = 0, sw = w0, sh = h0;
+    if (size) { var r = size[0] / size[1]; if (w0 / h0 > r) { sw = Math.round(h0 * r); sx = Math.round((w0 - sw) / 2); } else { sh = Math.round(w0 / r); sy = Math.round((h0 - sh) / 2); } }
+    var k = Math.min(1, 1600 / Math.max(sw, sh)), cw = Math.max(1, Math.round(sw * k)), ch = Math.max(1, Math.round(sh * k));
+    var c = document.createElement("canvas"); c.width = cw; c.height = ch;
+    var g = c.getContext("2d"); g.fillStyle = "#ffffff"; g.fillRect(0, 0, cw, ch);
+    g.imageSmoothingQuality = "high"; g.drawImage(bmp, sx, sy, sw, sh, 0, 0, cw, ch);
+    if (bmp.close) bmp.close();
+    return new Promise(function(ok, no){ c.toBlob(function(b){ b ? ok({blob: b, w: cw, h: ch}) : no(new Error("encode")); }, "image/jpeg", 0.85); });
+  });
+}
+function photoFlow(file, f, p){
+  if (file.size > 40 * 1024 * 1024) { toast("That photo is over 40 MB. Pick a smaller one."); return; }
+  var sec0 = SHEET && SHEET.sec; if (!sec0) return;
+  toast("Preparing the photo…");
+  var base = file.name.replace(/\.[a-z0-9]+$/i, "") || "photo";
+  if (/^(image|img|photo|dsc|pxl)[-_ ]?\d*/i.test(base)) base = (SHEET && SHEET.sec.id) || "photo";
+  shrinkPhoto(file, f.size).then(function(r){
+    return api("POST", "/api/upload?name=" + encodeURIComponent(base + ".jpg"), r.blob, {"Content-Type": "application/octet-stream"});
+  }, function(){ throw new Error("This phone can't read that photo. Try a JPG or PNG."); }).then(function(r){
+    var src = r.data.src, sec = sec0, here = function(){ return SHEET && SHEET.sec === sec0; };
+    if (!f.alt) { setPath(sec.data, p, src); stackChanged(true); if (here()) drawSheet(p); toast("Photo added."); pendingChanges(); return; }
+    askAlt(src, f, function(alt){
+      var altP = p.replace(/[^.]+$/, f.alt);
+      setPath(sec.data, p, src); setPath(sec.data, altP, encodeText(alt));
+      stackChanged(true); if (here()) drawSheet(p); toast("Photo added with its description."); pendingChanges();
+    });
+  }).catch(function(e){ toast("Photo not added: " + e.message); });
+}
+function askAlt(src, f, done){
+  showModal('<div class="mh"><h2>Describe this photo</h2></div><div class="mb"><img src="' + esc(src) + '" alt="" style="display:block;max-width:100%;max-height:34vh;margin:0 auto 12px;border-radius:10px">' +
+    '<div class="field"><label for="altin">What is in the photo? (required)</label><input type="text" id="altin" maxlength="200" placeholder="For example: Elvin holding the book in a bookshop"></div>' +
+    '<div class="help">Screen readers read this out, and it shows if the photo fails to load. One plain sentence.</div></div>' +
+    '<div class="mf"><button class="btn" id="altno">Cancel</button><button class="btn filled" id="altok" disabled>Use photo</button></div>');
+  var inp = $("#altin"), ok = $("#altok");
+  inp.oninput = function(){ ok.disabled = !inp.value.trim(); };
+  inp.onkeydown = function(e){ if (e.key === "Enter" && inp.value.trim()) ok.click(); };
+  $("#altno").onclick = function(){ closeModal(); toast("Photo not added. It needs a description."); };
+  ok.onclick = function(){ var a = inp.value.trim(); if (!a) return; closeModal(); done(a); };
+  inp.focus();
+}
+
+/* ---- Presets: a filled-in section kept in the library ---- */
+function savePreset(i){
+  var sec = DOCS[SEC.name].sections[i], t = secType(sec);
+  showModal('<div class="mh"><h2>Save as a preset</h2></div><div class="mb"><p class="subtle" style="margin-top:0">Keeps this ' + esc(t.label) + ' with its words and photos in the library, ready to add to any page. Presets live in Studio only.</p>' +
+    '<div class="field"><label for="prename">Preset name</label><input type="text" id="prename" maxlength="60" value="' + esc(t.label + " (" + (SEC.title || SEC.name) + ")") + '"></div></div>' +
+    '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="presave">Save preset</button></div>');
+  $("#presave").onclick = function(){
+    var nm = $("#prename").value.trim(); if (!nm) return;
+    api("POST", "/api/presets", {name: nm, type: sec.type, data: sec.data}).then(function(){ closeModal(); toast("Saved \"" + nm + "\" to the library."); return loadLibrary(true); })
+      .catch(function(e){ toast("Could not save the preset: " + e.message); });
+  };
+}
+
+/* ---- The library: add a section (presets first) ---- */
+function openLibrary(at){
+  var adding = at != null && SEC && SEC.kind === "stack" && DOCS[SEC.name] && location.hash.indexOf("#page/") === 0;
+  loadLibrary().then(function(lib){
+    var used = {};
+    Object.keys(SECTIONS).forEach(function(n){ var d = DOCS[n]; if (SECTIONS[n].kind === "stack" && d && d.sections) d.sections.forEach(function(x){ (used[x.type] = used[x.type] || []).indexOf(SECTIONS[n].title) < 0 && used[x.type].push(SECTIONS[n].title); }); });
+    var h = '<div class="mh"><h2 style="flex:1">' + (adding ? "Add a section" : "Section library") + '</h2><button class="iconbtn" onclick="closeModal()" aria-label="Close">' + icon("back") + '</button></div><div class="mb">' +
+      (adding ? '<p class="subtle" style="margin-top:0">It goes in at position ' + (at + 1) + '. You can move it after.</p>' : '<p class="subtle" style="margin-top:0">The section types a page can be built from. ' + Object.keys(lib).length + ' types.</p>');
+    if (PRESETS.length) h += '<h3 class="libh">Your presets</h3>' + PRESETS.map(function(p){
+      return '<div class="libitem"><button class="libpick" data-pre="' + p.id + '"' + (adding ? "" : " disabled") + '><b>' + esc(p.name) + '</b><small>' + esc((lib[p.type] || {label: p.type}).label) + '</small></button>' +
+        '<button class="iconbtn" title="Delete preset" aria-label="Delete preset ' + esc(p.name) + '" data-predel="' + p.id + '">' + icon("trash", "width:18px;height:18px") + '</button></div>';
+    }).join("") + '<h3 class="libh">Section types</h3>';
+    h += Object.keys(lib).map(function(k){ var t = lib[k];
+      return '<div class="libitem"><button class="libpick" data-type="' + esc(k) + '"' + (adding ? "" : " disabled") + '><b>' + esc(t.label) + (t.locked ? ' <span class="chip" title="' + esc(t.locked) + '">Interactive</span>' : "") + '</b>' +
+        '<small>' + esc(t.about || "") + '</small>' + (used[k] ? '<small style="color:var(--ink2)">Used on: ' + esc(used[k].join(", ")) + '</small>' : "") + '</button></div>';
+    }).join("") + '</div>';
+    showModal(h, true);
+    $("#modal .modal").classList.add("libsheet");
+    $$("#modal [data-type]").forEach(function(b){ b.onclick = function(){ insertSection(at, b.dataset.type, clone(lib[b.dataset.type].blank || {})); }; });
+    $$("#modal [data-pre]").forEach(function(b){ b.onclick = function(){ var p = PRESETS.filter(function(x){ return String(x.id) === b.dataset.pre; })[0]; if (p) insertSection(at, p.type, clone(p.data), p.name); }; });
+    $$("#modal [data-predel]").forEach(function(b){ b.onclick = function(){
+      var p = PRESETS.filter(function(x){ return String(x.id) === b.dataset.predel; })[0]; if (!p) return;
+      if (!confirm("Delete the preset \"" + p.name + "\"? Pages that already use it keep their copy.")) return;
+      api("DELETE", "/api/presets/" + p.id).then(function(){ return loadLibrary(true); }).then(function(){ toast("Preset deleted."); openLibrary(at); })
+        .catch(function(e){ toast("Could not delete: " + e.message); });
+    }; });
+  }).catch(function(e){ toast("Could not load the library: " + e.message); });
+}
+function insertSection(at, type, data, fromPreset){
+  var arr = DOCS[SEC.name].sections, sec = {id: uniqueId(type), type: type, data: data};
+  at = Math.max(0, Math.min(at, arr.length));
+  arr.splice(at, 0, sec);
+  closeModal();
+  stackChanged();
+  toast((fromPreset ? "Added \"" + fromPreset + "\"." : "Added " + secType(sec).label + ".") + " Fill in its words.");
+  openSheet(at, firstKey(secType(sec).fields));
+}
+
+/* ---- Page settings (pages made with New page) ---- */
+function openPageSettings(name){
+  var d = DOCS[name]; if (!d) return;
+  showModal('<div class="mh"><h2>Page settings</h2></div><div class="mb">' +
+    '<div class="field"><label for="pgtitle">Page name (the browser tab and search result title)</label><input type="text" id="pgtitle" maxlength="80" value="' + esc(decodeAll(d.title)) + '"></div>' +
+    '<div class="field"><label>Address</label><div class="urlpill" style="padding-right:12px">elvinpeters.com' + esc(stackPath(name, d)) + '</div><div class="help">The address is set when the page is made.</div></div>' +
+    '<div class="switch"><label class="sx" for="pgnoindex">Hidden from Google<small>Asks search engines not to list this page. People with the link can still open it.</small></label><input type="checkbox" class="tog" id="pgnoindex"' + (d.noindex !== false ? " checked" : "") + '></div></div>' +
+    '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="pgsave">Save</button></div>');
+  $("#pgsave").onclick = function(){
+    var t = $("#pgtitle").value.trim(); if (!t) { $("#pgtitle").focus(); return; }
+    d.title = encodeText(t); d.noindex = $("#pgnoindex").checked;
+    closeModal(); stackChanged(); toast("Page settings saved as a draft.");
+  };
+}
+
+/* ---- New page: a copy of an existing page at its own address, hidden from Google ---- */
+function openNewPage(){
+  var stacks = Object.keys(SECTIONS).filter(function(n){ return SECTIONS[n].kind === "stack"; });
+  var def = HOMEPAGE && HOMEPAGE.home && stacks.indexOf(HOMEPAGE.home) > -1 ? HOMEPAGE.home : stacks[0];
+  showModal('<div class="mh"><h2>New page</h2></div><div class="mb">' +
+    '<div class="field"><label for="npname">Page name</label><input type="text" id="npname" maxlength="80" placeholder="For example: Speaking"></div>' +
+    '<div class="field"><label for="npslug">Address</label><div class="slugrow"><span>elvinpeters.com/</span><input type="text" id="npslug" maxlength="40" autocapitalize="off" autocomplete="off" spellcheck="false"><span>/</span></div>' +
+    '<div class="help" id="npslugh">a-z, 0-9 and dashes.</div></div>' +
+    '<div class="field"><label for="npfrom">Start from a copy of</label><select id="npfrom">' + stacks.map(function(n){ return '<option value="' + esc(n) + '"' + (n === def ? " selected" : "") + '>' + esc(SECTIONS[n].title) + '</option>'; }).join("") + '</select>' +
+    '<div class="help">Every section is copied. Delete, hide or change what you don\'t need.</div></div>' +
+    '<p class="subtle" style="font-size:13px">New pages start hidden from Google and are only a draft. Nothing goes live until you Test and Publish.</p></div>' +
+    '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="npmake" disabled>Make the page</button></div>');
+  var nm = $("#npname"), sl = $("#npslug"), go = $("#npmake"), touched = false;
+  function check(){
+    var s = sl.value, ok = /^[a-z0-9][a-z0-9-]{0,39}$/.test(s) && !/-$/.test(s);
+    $("#npslugh").textContent = s && !ok ? "Use a-z, 0-9 and dashes, not starting or ending with a dash." : "a-z, 0-9 and dashes.";
+    go.disabled = !(ok && nm.value.trim());
+  }
+  nm.oninput = function(){ if (!touched) sl.value = slugify(nm.value).slice(0, 40).replace(/-+$/, ""); check(); };
+  sl.oninput = function(){ touched = true; sl.value = sl.value.toLowerCase().replace(/[^a-z0-9-]/g, "-"); check(); };
+  go.onclick = function(){
+    go.disabled = true;
+    api("POST", "/api/pages", {title: nm.value.trim(), slug: sl.value, from: $("#npfrom").value}).then(function(r){
+      closeModal(); toast("Page made as a draft at " + r.data.url + ". Hidden from Google until you change it.");
+      return refreshState().then(function(){ pendingChanges(); location.hash = "#page/" + r.data.name; });
+    }).catch(function(e){ go.disabled = false; $("#npslugh").textContent = e.message; });
+  };
+  nm.focus();
+}
+
+/* ---- Tap to edit: click a spot in the preview, land on its field ----
+   The preview build wraps each section in ep:sec comments (never the real site). */
+function wireTapToEdit(){
+  var host = $("#secpv"), f = host && $("iframe", host), doc;
+  try { doc = f && f.contentDocument; } catch (e) { return; }
+  if (!doc || !doc.body) return;
+  if (!doc._epmarked) {
+    doc._epmarked = true;
+    var w = doc.createTreeWalker(doc.body, NodeFilter.SHOW_COMMENT), c, open = null, list = [];
+    while ((c = w.nextNode())) list.push(c);
+    list.forEach(function(cm){
+      var m = /^\s*ep:sec:([a-z0-9-]+)\s*$/.exec(cm.data); if (!m) return;
+      for (var n = cm.nextSibling; n; n = n.nextSibling) {
+        if (n.nodeType === 8 && /^\s*\/ep:sec:/.test(n.data)) break;
+        if (n.nodeType === 1) n.setAttribute("data-epsec", m[1]);
+      }
+    });
+    var st = doc.createElement("style"); st.id = "eptap";
+    st.textContent = "html.eptap [data-epsec]{cursor:pointer}html.eptap [data-epsec]:hover{outline:2px dashed #1a73e8;outline-offset:-2px}";
+    doc.head.appendChild(st);
+    doc.addEventListener("click", function(e){
+      if (!TAPEDIT) return;
+      var el = e.target.closest && e.target.closest("[data-epsec]"); if (!el) return;
+      e.preventDefault(); e.stopPropagation();
+      var arr = DOCS[SEC.name].sections, i = -1;
+      arr.forEach(function(s, k){ if (s.id === el.getAttribute("data-epsec")) i = k; });
+      if (i < 0) return;
+      openSheet(i, matchField(arr[i], e.target, el));
+    }, true);
+  }
+  doc.documentElement.classList.toggle("eptap", TAPEDIT);
+  if (SHEET) jumpPreview(SHEET.sec.id);
+}
+function matchField(sec, target, root){
+  var leaves = fieldLeaves(secType(sec).fields, sec.data), best = null, score = 0;
+  if (target.tagName === "IMG") {
+    var src = target.getAttribute("src");
+    leaves.forEach(function(l){ if (l.f.type === "image" && l.v === src) best = l.p; });
+    if (best) return best;
+  }
+  for (var el = target; el && el !== root.parentNode; el = el.parentNode) {
+    var tx = (el.textContent || "").replace(/\s+/g, " ").trim(); if (!tx) continue;
+    leaves.forEach(function(l){
+      if (l.f.type !== "text" && l.f.type !== "html") return;
+      var v = plainOf(l.v); if (!v) return;
+      var s = tx === v ? 10000 + v.length : tx.indexOf(v) > -1 ? v.length : (v.indexOf(tx) > -1 && tx.length > 3 ? tx.length : 0);
+      if (s > score) { score = s; best = l.p; }
+    });
+    if (best) return best;
+  }
+  return undefined;
+}
+function jumpPreview(id){
+  var f = $("#secpv iframe"), doc;
+  try { doc = f && f.contentDocument; } catch (e) { return; }
+  var el = doc && doc.querySelector('[data-epsec="' + id + '"]');
+  if (el) try { el.scrollIntoView({block: "start", behavior: "smooth"}); } catch (e) { el.scrollIntoView(); }
+}
+
 function makeHomepage(name){
   var s = SECTIONS[name], cur = HOMEPAGE && SECTIONS[HOMEPAGE.home];
-  showModal('<h2 style="margin-top:0">Make "' + esc(s.title) + '" the homepage?</h2>' +
+  showModal('<div class="mh"><h2>Make "' + esc(s.title) + '" the homepage?</h2></div><div class="mb">' +
     '<p>Visitors to <b>elvinpeters.com/</b> will see this page instead of ' + (cur ? '"' + esc(cur.title) + '"' : "the current homepage") + '. It gets the homepage\'s search listing, social preview and ad tracking. Its old test address will send people to /.</p>' +
-    '<p>This only saves a <b>draft</b>. Nothing changes on the live site until you press Test to check it and then Publish. You can switch back the same way.</p>' +
-    '<div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px"><button class="btn" onclick="closeModal()">Cancel</button>' +
-    '<button class="btn filled" id="mkhome">Save as a draft</button></div>');
+    '<p>This only saves a <b>draft</b>. Nothing changes on the live site until you press Test to check it and then Publish. You can switch back the same way.</p></div>' +
+    '<div class="mf"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn filled" id="mkhome">Save as a draft</button></div>');
   $("#mkhome").onclick = function(){
     var data = {home: name};
     api("PUT", "/api/content/homepage", data, {"If-Match": VERS.homepage || ""}).then(function(r){
@@ -679,19 +1293,6 @@ function makeHomepage(name){
       refreshState().then(function(){ drawStack(); });
     }).catch(function(e){ closeModal(); toast("Could not save: " + e.message); });
   };
-}
-function openLibrary(){
-  loadLibrary().then(function(lib){
-    var used = {};
-    Object.keys(SECTIONS).forEach(function(n){ var d = DOCS[n]; if (SECTIONS[n].kind === "stack" && d && d.sections) d.sections.forEach(function(x){ (used[x.type] = used[x.type] || []).indexOf(SECTIONS[n].title) < 0 && used[x.type].push(SECTIONS[n].title); }); });
-    showModal('<h2 style="margin-top:0">Section library</h2><p class="subtle">The section types a page can be built from. ' + Object.keys(lib).length + ' types.</p>' +
-      Object.keys(lib).map(function(k){ var t = lib[k];
-        return '<div class="card" style="padding:12px 14px;margin:8px 0"><b>' + esc(t.label) + '</b> <small class="subtle">' + esc(k) + '</small>' +
-          (t.locked ? ' <span class="chip" title="' + esc(t.locked) + '">Interactive</span>' : "") +
-          '<div class="subtle" style="font-size:13px;margin-top:4px">' + esc(t.about || "") + '</div>' +
-          (used[k] ? '<div style="font-size:12px;margin-top:4px">Used on: ' + esc(used[k].join(", ")) + '</div>' : "") + '</div>';
-      }).join(""), true);
-  }).catch(function(e){ toast("Could not load the library: " + e.message); });
 }
 
 /* ================= Generic section editor (pages + menu) ================= */
@@ -826,7 +1427,7 @@ function drawRealPreview(sel, pagePath, auto){
     frameHost.innerHTML = '<iframe title="Page preview" src="' + esc(url) + '"></iframe>';
     var f = $("iframe", frameHost);
     fitFrame(frameHost, f);
-    f.onload = function(){ try { f.contentWindow.scrollTo(0, prevScroll); } catch (e) {} };
+    f.onload = function(){ try { f.contentWindow.scrollTo(0, prevScroll); } catch (e) {} if (host._onload) host._onload(f); };
     note.innerHTML = 'Built just now. <a href="' + esc(url) + '" target="_blank" rel="noopener">Open full size</a>';
   }).catch(function(e){ note.textContent = "Preview build failed: " + (e.data && e.data.detail || e.message); });
 }

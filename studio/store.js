@@ -49,6 +49,11 @@ function open(dir) {
       data BLOB, at TEXT NOT NULL, author TEXT NOT NULL, note TEXT);
     CREATE INDEX IF NOT EXISTS revisions_key ON revisions (key, id);
     CREATE TABLE IF NOT EXISTS uploads (name TEXT PRIMARY KEY, data BLOB NOT NULL, at TEXT NOT NULL);
+    -- Presets (slice 3): a filled-in section kept as a reusable template in the
+    -- library. Studio-only; a preset reaches the site only as a section on a page.
+    CREATE TABLE IF NOT EXISTS presets (
+      id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, type TEXT NOT NULL,
+      data TEXT NOT NULL, at TEXT NOT NULL, author TEXT NOT NULL);
   `);
   const q = {
     next: db.prepare('UPDATE counter SET n = n + 1 WHERE id = 1 RETURNING n'),
@@ -68,6 +73,9 @@ function open(dir) {
     upHas: db.prepare('SELECT 1 AS x FROM uploads WHERE name = ?'),
     upList: db.prepare('SELECT name, length(data) AS bytes, at FROM uploads ORDER BY at'),
     upDel: db.prepare('DELETE FROM uploads WHERE name = ?'),
+    preList: db.prepare('SELECT id, name, type, data, at, author FROM presets ORDER BY name COLLATE NOCASE, id'),
+    preAdd: db.prepare('INSERT INTO presets (name, type, data, at, author) VALUES (?, ?, ?, ?, ?) RETURNING id'),
+    preDel: db.prepare('DELETE FROM presets WHERE id = ?'),
   };
   const tx = fn => { db.exec('BEGIN IMMEDIATE'); try { const r = fn(); db.exec('COMMIT'); return r; } catch (e) { db.exec('ROLLBACK'); throw e; } };
   const buf = x => Buffer.from(x);
@@ -124,6 +132,9 @@ function open(dir) {
     hasUpload(name) { return !!q.upHas.get(name); },
     uploads() { return q.upList.all().map(r => ({ ...r })); },
     dropUpload(name) { q.upDel.run(name); },
+    presets() { return q.preList.all().map(r => ({ ...r, data: JSON.parse(r.data) })); },
+    addPreset(name, type, data, author) { return q.preAdd.get(name, type, JSON.stringify(data), now(), author || 'elvin').id; },
+    dropPreset(id) { return q.preDel.run(id).changes > 0; },
     close() { db.close(); },
   };
 }
