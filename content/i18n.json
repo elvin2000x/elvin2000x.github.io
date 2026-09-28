@@ -27,6 +27,12 @@
   },
   "nav": {
     "en": {
+      "Home": "Home",
+      "Free Toolkit": "Free Toolkit",
+      "Newsletter": "Newsletter",
+      "Get the book": "Get the book",
+      "LinkedIn": "LinkedIn",
+      "Privacy": "Privacy",
       "Services": "Services",
       "Products": "Products",
       "Free": "Free",
@@ -68,6 +74,12 @@
       "Free tools, built and hosted here": "Free tools, built and hosted here"
     },
     "fr": {
+      "Home": "Accueil",
+      "Free Toolkit": "Boîte à outils gratuite",
+      "Newsletter": "Infolettre",
+      "Get the book": "Obtenir le livre",
+      "LinkedIn": "LinkedIn",
+      "Privacy": "Confidentialité",
       "Services": "Services",
       "Products": "Produits",
       "Free": "Gratuit",

@@ -6,9 +6,9 @@
   "ogImage": "https://elvinpeters.com/cover.png",
   "en": {
     "title": "Contact | Elvin M. Peters",
-    "description": "Send Elvin M. Peters a message about AI consulting, Google Ads, workshops, the book, or anything else. Replies come from a person, not an autoresponder.",
+    "description": "Send Elvin M. Peters a message about the book, the free toolkit, the newsletter or anything else. A person reads every message and replies.",
     "ogTitle": "Contact | Elvin M. Peters",
-    "ogDescription": "Send a message about AI consulting, Google Ads, workshops, or the book. Replies come from a person.",
+    "ogDescription": "Send a message about the book, the free toolkit or the newsletter. A person reads every one and replies.",
     "breadcrumb": [
       {
         "label": "Elvin Peters",
@@ -20,20 +20,12 @@
     ],
     "eyebrow": "Contact",
     "h1": "Tell me what you're working on.",
-    "lede": "One person reads this, and it is me. Tell me what you are trying to get done and where it is stuck, in whatever words you would use out loud. You will get a real answer from a real person, usually within one business day, and if I am not the right help I will say so and point you somewhere better.",
+    "lede": "I read every message myself. Tell me what you are working on and where it is stuck, in the words you would use out loud. I usually reply within one business day.",
     "alts": [
-      {
-        "icon": "calendar",
-        "href": "/contact/",
-        "contact": "Working together on ",
-        "source": "contact",
-        "label": "Rather just talk?",
-        "sub": "Twenty free minutes, booked at least a day ahead"
-      },
       {
         "icon": "mail",
         "label": "Replies come from me",
-        "sub": "Not a ticket queue, not an autoresponder"
+        "sub": "I answer every message personally"
       },
       {
         "icon": "linkedin",
@@ -44,7 +36,7 @@
     ],
     "form": {
       "heading": "Send a message",
-      "hint": "Three fields, no account, and you are not being signed up to anything. The form exists so my address is not sitting on a public page for scrapers to harvest; your message still lands in my inbox either way.",
+      "hint": "Three fields and no account. Your message lands straight in my inbox.",
       "nameLabel": "Your name",
       "namePlaceholder": "Jane Rivera",
       "emailLabel": "Your email",
@@ -61,9 +53,9 @@
   },
   "fr": {
     "title": "Contact | Elvin M. Peters",
-    "description": "Écrivez à Elvin M. Peters au sujet du conseil en IA, de Google Ads, des ateliers, du livre ou d'autre chose. C'est une personne qui répond, pas un répondeur automatique.",
+    "description": "Écrivez à Elvin M. Peters au sujet du livre, de la boîte à outils gratuite, de l'infolettre ou d'autre chose. Une personne lit chaque message et y répond.",
     "ogTitle": "Contact | Elvin M. Peters",
-    "ogDescription": "Écrivez-moi au sujet du conseil en IA, de Google Ads, des ateliers ou du livre. C'est une personne qui répond.",
+    "ogDescription": "Écrivez-moi au sujet du livre, de la boîte à outils gratuite ou de l'infolettre. Une personne lit chaque message et y répond.",
     "breadcrumb": [
       {
         "label": "Elvin Peters",
@@ -75,20 +67,12 @@
     ],
     "eyebrow": "Contact",
     "h1": "Dites-moi sur quoi vous travaillez.",
-    "lede": "Une seule personne lit ces messages, et c'est moi. Dites-moi ce que vous cherchez à accomplir et où ça bloque, dans les mots que vous emploieriez à voix haute. Vous recevrez une vraie réponse d'une vraie personne, en général en un jour ouvrable, et si je ne suis pas la bonne ressource, je vous le dirai et je vous orienterai ailleurs.",
+    "lede": "Je lis chaque message moi-même. Dites-moi sur quoi vous travaillez et où ça bloque, dans les mots que vous emploieriez à voix haute. Je réponds en général en un jour ouvrable.",
     "alts": [
-      {
-        "icon": "calendar",
-        "href": "/contact/",
-        "contact": "Travailler ensemble sur ",
-        "source": "contact",
-        "label": "Vous préférez en parler?",
-        "sub": "Vingt minutes gratuites, réservées au moins un jour à l'avance"
-      },
       {
         "icon": "mail",
         "label": "C'est moi qui réponds",
-        "sub": "Pas une file de billets, pas un répondeur automatique"
+        "sub": "Je réponds personnellement à chaque message"
       },
       {
         "icon": "linkedin",
@@ -99,7 +83,7 @@
     ],
     "form": {
       "heading": "Envoyer un message",
-      "hint": "Trois champs, aucun compte à créer, et vous n'êtes inscrit à rien. Le formulaire existe pour que mon adresse ne traîne pas sur une page publique à la portée des robots collecteurs; votre message arrive dans ma boîte de réception dans les deux cas.",
+      "hint": "Trois champs, aucun compte. Votre message arrive directement dans ma boîte de réception.",
       "nameLabel": "Votre nom",
       "namePlaceholder": "Jeanne Rivard",
       "emailLabel": "Votre courriel",
