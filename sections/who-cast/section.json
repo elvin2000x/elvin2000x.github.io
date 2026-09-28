@@ -35,8 +35,13 @@
       "fields": [
         {
           "key": "image",
-          "type": "text",
-          "label": "Portrait"
+          "type": "image",
+          "label": "Portrait",
+          "decorative": true,
+          "size": [
+            400,
+            400
+          ]
         },
         {
           "key": "tag",

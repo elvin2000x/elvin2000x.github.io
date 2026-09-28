@@ -20,8 +20,13 @@
     },
     {
       "key": "photo",
-      "type": "text",
-      "label": "Photo"
+      "type": "image",
+      "label": "Photo",
+      "alt": "photo_alt",
+      "size": [
+        400,
+        400
+      ]
     },
     {
       "key": "photo_alt",

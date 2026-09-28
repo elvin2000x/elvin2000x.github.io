@@ -134,11 +134,15 @@ function compiled(file, label) {
   return cache.get(k);
 }
 const TYPE_RE = /^[a-z][a-z0-9-]{0,40}$/;
+const ORIGIN = 'https://elvinpeters.com';
+const PAGE_PATH = /^[a-z0-9][a-z0-9-]{0,60}\/index\.html$/;
+// Top-level folders a New page may never take (site code, Studio, generated areas).
+const RESERVED = new Set(['api', 'books', 'content', 'css', 'dl', 'essays', 'fr', 'img', 'js', 'node_modules', 'play', 'preview', 'scripts', 'sections', 'studio', 'titles', 'writing']);
 // A "buybox" field is shorthand for the object _partials/buybox.html reads.
 const BUYBOX_FIELDS = [
-  { key: 'label', type: 'html', label: 'Button' },
-  { key: 'aria', type: 'text', label: 'Button, read aloud' },
-  { key: 'avail', type: 'text', label: 'Formats line under the Amazon badge (empty hides the badge)' },
+  { key: 'label', type: 'html', label: 'Button', default: 'Get the book on Amazon &rarr;' },
+  { key: 'aria', type: 'text', label: 'Button, read aloud', default: 'Get the book on Amazon' },
+  { key: 'avail', type: 'text', label: 'Formats line under the Amazon badge (empty hides the badge)', default: 'Kindle, paperback and hardcover' },
   { key: 'price', type: 'text', label: 'Price line (optional)' },
   { key: 'sample', type: 'html', label: 'Free chapter link text (optional)' },
   { key: 'sample_href', type: 'text', label: 'Free chapter link' },
@@ -164,6 +168,23 @@ function renderTpl(file, label, scopes) {
   return run(compiled(file, label), scopes, { label });
 }
 
+/* Empty words for a new section of a type, shaped by its field list: text is "",
+   a switch is off, a list has one empty item, an optional part (an object: a buy
+   box, a review) is left out until it's added. A choice takes its first option;
+   a field with a default starts with it. */
+function blankData(fields) {
+  const d = {};
+  for (const f of fields || []) {
+    if (f.default !== undefined) d[f.key] = f.default;
+    else if (f.type === 'bool') d[f.key] = false;
+    else if (f.type === 'list') d[f.key] = f.fields ? [blankData(f.fields)] : [''];
+    else if (f.type === 'object') d[f.key] = null;
+    else if (f.type === 'choice') d[f.key] = (f.options || [''])[0];
+    else d[f.key] = '';
+  }
+  return d;
+}
+
 /* ---- stacks ---- */
 const STACK_RE = /^page-[a-z0-9-]{1,40}$/;
 function stackNames(contentDir) {
@@ -179,6 +200,10 @@ function checkStack(stack, name) {
     errs.push('unknown frame "' + stack.frame + '"');
   if (stack.preview_path != null && !/^preview\/[a-z0-9-]+\/index\.html$/.test(stack.preview_path))
     errs.push('preview_path must look like preview/<name>/index.html');
+  // A page made in Studio with New page (slice 3) lives at its own address.
+  if (stack.path != null && !PAGE_PATH.test(stack.path)) errs.push('path must look like <name>/index.html');
+  if (stack.path != null && stack.preview_path != null) errs.push('a page has a path or a preview_path, not both');
+  if (stack.path != null && RESERVED.has(String(stack.path).split('/')[0])) errs.push('the address /' + String(stack.path).split('/')[0] + '/ is reserved');
   if (!Array.isArray(stack.sections)) return errs.concat('sections must be a list');
   const types = new Set(library().map(t => t.type)), ids = new Set();
   stack.sections.forEach((s, i) => {
@@ -200,17 +225,24 @@ function renderSection(s, globals) {
   return note + html;
 }
 
-/* Render one stack to a full page. `site` is content/site.json. */
-function renderStack(stack, name, { site, isHome }) {
+/* Render one stack to a full page. `site` is content/site.json. `markers` (Studio
+   previews only, never the real build) wraps every section in ep:sec comments so
+   a tap on the preview can find its section. */
+function renderStack(stack, name, { site, isHome, markers }) {
   const errs = checkStack(stack, name);
   if (errs.length) throw new Error('content/' + name + '.json: ' + errs.join('; '));
   const globals = { site, isHome: !!isHome, amazon: site.amazon_url };
   const parts = stack.sections.filter(s => !s.hidden).map(s => {
     const html = renderSection(s, globals);
-    return stack.markers ? '<!-- ep:sec:' + s.id + ' -->\n' + html + '\n<!-- /ep:sec:' + s.id + ' -->' : html;
+    return stack.markers || markers ? '<!-- ep:sec:' + s.id + ' -->\n' + html + '\n<!-- /ep:sec:' + s.id + ' -->' : html;
   });
   const frame = path.join(SEC_DIR, '_frames', stack.frame + '.html');
-  return renderTpl(frame, '_frames/' + stack.frame, [{ ...globals, sections: parts.join('\n\n') }]) + '\n';
+  // page_url: a New page's own address; the two homepages keep elvinpeters.com/.
+  // robots_off: hidden from Google. Every page that is not the homepage, unless a
+  // New page switched it off ("noindex": false).
+  const page_url = ORIGIN + '/' + (!isHome && stack.path ? stack.path.replace(/index\.html$/, '') : '');
+  const robots_off = !isHome && stack.noindex !== false;
+  return renderTpl(frame, '_frames/' + stack.frame, [{ ...globals, page_url, robots_off, sections: parts.join('\n\n') }]) + '\n';
 }
 
 /* The page a stack becomes: which file, and whether it's the homepage.
@@ -229,7 +261,7 @@ function redirectStub(name) {
     '<body><p>This page is now the homepage: <a href="/">elvinpeters.com</a>.</p></body></html>\n';
 }
 
-function buildAll(contentDir, { site, banner = true } = {}) {
+function buildAll(contentDir, { site, banner = true, markers = false } = {}) {
   const names = stackNames(contentDir);
   if (!names.length) return [];
   const homeCfg = readJson(path.join(contentDir, 'homepage.json'));
@@ -238,18 +270,23 @@ function buildAll(contentDir, { site, banner = true } = {}) {
   for (const name of names) {
     const stack = readJson(path.join(contentDir, name + '.json'));
     const isHome = name === homeCfg.home;
-    let html = renderStack(stack, name, { site, isHome });
+    let html = renderStack(stack, name, { site, isHome, markers });
     if (banner) html = withBanner(html, name);
     if (isHome) {
       out.push({ name, file: 'index.html', html, isHome });
       if (stack.preview_path) out.push({ name, file: stack.preview_path, html: redirectStub(name), stub: true });
-    } else if (stack.preview_path) {
-      out.push({ name, file: stack.preview_path, html, isHome });
+    } else if (stack.preview_path || stack.path) {
+      out.push({ name, file: stack.preview_path || stack.path, html, isHome, made: !!stack.path });
     }
     // A stack that is neither the homepage nor has a preview address builds nothing
     // public; Studio still previews it.
   }
+  const seen = new Map();
+  for (const p of out) {
+    if (seen.has(p.file)) throw new Error('content/' + p.name + '.json and content/' + seen.get(p.file) + '.json both build ' + p.file);
+    seen.set(p.file, p.name);
+  }
   return out;
 }
 
-module.exports = { parse, run, expand, readTpl, renderStack, renderSection, buildAll, checkStack, library, sectionMeta, stackNames, withBanner, BANNER, STACK_RE, SEC_DIR };
+module.exports = { parse, run, expand, readTpl, renderStack, renderSection, buildAll, checkStack, library, sectionMeta, stackNames, withBanner, blankData, BANNER, STACK_RE, SEC_DIR, PAGE_PATH, RESERVED };

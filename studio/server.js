@@ -65,11 +65,26 @@ function porcelain() {
     .map(l => ({ code: l.slice(0, 2), file: l.slice(3).replace(/^"|"$/g, '').replace(/^.* -> /, '') }));
 }
 function schemas() {
-  return fs.readdirSync(SCHEMA_DIR).filter(f => f.endsWith('.json'))
+  const list = fs.readdirSync(SCHEMA_DIR).filter(f => f.endsWith('.json'))
     .map(f => ({ name: f.replace('.json', ''), ...JSON.parse(fs.readFileSync(path.join(SCHEMA_DIR, f), 'utf8')) }));
+  // Pages made with New page (slice 3) have no schema file: a page-*.json is a stack.
+  for (const name of madePages()) {
+    let title = name.slice(5);
+    try { title = JSON.parse(current(contentKey(name)).buf.toString('utf8')).title || title; } catch (e) {}
+    list.push({ name, title, kind: 'stack', file: name + '.json', made: true, help: 'Made with New page. Hidden from Google until you switch that off.' });
+  }
+  return list;
+}
+const hasSchema = name => fs.existsSync(path.join(SCHEMA_DIR, name + '.json'));
+// page-*.json files and drafts without a schema file: the pages made with New page.
+function madePages() {
+  const names = new Set();
+  for (const f of fs.readdirSync(path.join(ROOT, 'content'))) { const m = /^(page-[a-z0-9-]{1,40})\.json$/.exec(f); if (m) names.add(m[1]); }
+  for (const d of store.list()) { const m = /^content\/(page-[a-z0-9-]{1,40})\.json$/.exec(d.key); if (m) names.add(m[1]); }
+  return [...names].filter(n => !hasSchema(n)).sort();
 }
 function allowed(name) {
-  return /^[a-z][a-z0-9-]{0,40}$/.test(name) && fs.existsSync(path.join(SCHEMA_DIR, name + '.json'));
+  return /^[a-z][a-z0-9-]{0,40}$/.test(name) && (hasSchema(name) || Sections.STACK_RE.test(name));
 }
 function contentPath(name) { return path.join(ROOT, 'content', name + '.json'); }
 function version(buf) { return crypto.createHash('sha1').update(buf).digest('hex').slice(0, 16); }
@@ -110,13 +125,16 @@ function materialize(dir) {
   }
 }
 // The real build, with every draft laid over the repo. Output lands in <dir>/out.
-function buildWithDrafts(dir, cb) {
+// markers (editor previews only, never the test site): section comments so a tap
+// on the preview finds its section.
+function buildWithDrafts(dir, cb, markers) {
   fs.rmSync(dir, { recursive: true, force: true });
   fs.mkdirSync(path.join(dir, 'out'), { recursive: true });
   fs.mkdirSync(path.join(dir, 'overlay'), { recursive: true });
   materialize(path.join(dir, 'overlay'));
   execFile(process.execPath, [path.join(__dirname, 'build-drafts.js'), '--overlay', path.join(dir, 'overlay'), '--out', path.join(dir, 'out')],
-    { cwd: ROOT, timeout: 120000 }, (err, so, se) => cb(err ? String(se || err.message).slice(0, 500) : null));
+    { cwd: ROOT, timeout: 120000, env: { ...process.env, SITE_STACK_MARKERS: markers ? '1' : '' } },
+    (err, so, se) => cb(err ? String(se || err.message).slice(0, 500) : null));
 }
 // A file of a built draft site: generated page, then draft or upload, then the repo.
 function builtFile(dir, rel) {
@@ -178,7 +196,36 @@ function stripTracking(html) {
 /* ---------- content validation ---------- */
 const SLUG = /^[a-z0-9][a-z0-9-]{0,79}$/;
 const Sections = require(path.join(ROOT, 'sections.js'));
-const kindOf = name => { try { return JSON.parse(fs.readFileSync(path.join(SCHEMA_DIR, name + '.json'), 'utf8')).kind || ''; } catch (e) { return ''; } };
+const kindOf = name => { try { return JSON.parse(fs.readFileSync(path.join(SCHEMA_DIR, name + '.json'), 'utf8')).kind || ''; } catch (e) { return Sections.STACK_RE.test(name) ? 'stack' : ''; } };
+// Every photo on a stack page needs its description (alt text), unless the
+// section marks it decorative. Returns the first problem as a sentence.
+function missingAlt(stack) {
+  const lib = {}; for (const t of Sections.library()) lib[t.type] = t;
+  const walk = (fields, data, where) => {
+    for (const f of fields || []) {
+      const v = data && data[f.key];
+      if (f.type === 'image' && v && f.alt && !String(data[f.alt] || '').trim()) return where + ': describe the photo (' + f.label + ') for people who can\'t see it';
+      if (f.type === 'object' && v) { const r = walk(f.fields, v, where); if (r) return r; }
+      if (f.type === 'list' && Array.isArray(v)) for (const it of v) { const r = it && typeof it === 'object' && walk(f.fields, it, where); if (r) return r; }
+    }
+    return null;
+  };
+  for (const [i, s] of (stack.sections || []).entries()) {
+    const t = lib[s.type]; if (!t) continue;
+    const r = walk(t.fields, s.data, 'Section ' + (i + 1) + ' (' + t.label + ')');
+    if (r) return r;
+  }
+  return null;
+}
+// Where a stack page builds, for every page (live or draft) except `skip`.
+function stackTargets(skip) {
+  const out = new Map();
+  for (const n of Sections.stackNames(path.join(ROOT, 'content')).concat(madePages())) {
+    if (n === skip || out.has(n)) continue;
+    try { const s = JSON.parse(current(contentKey(n)).buf.toString('utf8')); out.set(n, s.path || s.preview_path || ''); } catch (e) {}
+  }
+  return out;
+}
 function validate(name, data) {
   if (data === null || typeof data !== 'object') return 'content must be a JSON object';
   // A stack page (slice 2): the section list must be sound AND render, so a
@@ -186,6 +233,16 @@ function validate(name, data) {
   if (kindOf(name) === 'stack') {
     const errs = Sections.checkStack(data, name);
     if (errs.length) return errs.slice(0, 3).join('; ');
+    const alt = missingAlt(data);
+    if (alt) return alt;
+    // A New page's address: never a folder the site already has (unless this page
+    // made it), never another page's address.
+    if (data.path) {
+      const dir = data.path.split('/')[0], was = live(contentKey(name));
+      const mine = was && JSON.parse(was.toString('utf8')).path === data.path;
+      if (!mine && fs.existsSync(path.join(ROOT, dir))) return 'elvinpeters.com/' + dir + '/ is already a page on the site. Pick another address.';
+      for (const [n, p] of stackTargets(name)) if (p === data.path) return 'the page "' + n + '" already uses elvinpeters.com/' + dir + '/';
+    }
     try {
       const site = JSON.parse(current(contentKey('site')).buf.toString('utf8'));
       Sections.renderStack(data, name, { site, isHome: false });
@@ -358,6 +415,60 @@ function imageInfo(b) {
   return null;
 }
 
+/* Drop the parts of an image that can carry GPS, the camera and dates (slice 3).
+   The phone editor already re-encodes every photo, which drops them; this makes
+   sure of it for anything else that uploads. JPEG: APP1 (Exif, XMP), APP3-APP13
+   and comments (APP0 JFIF, APP2 colour profile and APP14 Adobe stay). PNG: eXIf
+   and the text and time chunks. WebP: EXIF and XMP chunks. GIF has none. */
+function stripMeta(b, ext) {
+  if (ext === 'jpg') {
+    const parts = [b.subarray(0, 2)];
+    let i = 2;
+    while (i + 4 <= b.length && b[i] === 0xff) {
+      const m = b[i + 1];
+      if (m === 0xda) break;                                   // start of scan: the rest is image data
+      if (m === 0xff) { i++; continue; }                       // fill byte
+      if (m === 0xd8 || m === 0x01 || (m >= 0xd0 && m <= 0xd7)) { parts.push(b.subarray(i, i + 2)); i += 2; continue; }
+      const len = b.readUInt16BE(i + 2), end = i + 2 + len;
+      if (end > b.length) break;
+      const drop = m === 0xe1 || (m >= 0xe3 && m <= 0xed) || m === 0xfe;
+      if (!drop) parts.push(b.subarray(i, end));
+      i = end;
+    }
+    parts.push(b.subarray(i));
+    return Buffer.concat(parts);
+  }
+  if (ext === 'png') {
+    const parts = [b.subarray(0, 8)];
+    let i = 8;
+    while (i + 12 <= b.length) {
+      const len = b.readUInt32BE(i), type = b.toString('ascii', i + 4, i + 8), end = i + 12 + len;
+      if (end > b.length) { parts.push(b.subarray(i)); break; }
+      if (!['eXIf', 'tEXt', 'iTXt', 'zTXt', 'tIME'].includes(type)) parts.push(b.subarray(i, end));
+      i = end;
+      if (type === 'IEND') break;
+    }
+    return Buffer.concat(parts);
+  }
+  if (ext === 'webp') {
+    const parts = [];
+    let i = 12;
+    while (i + 8 <= b.length) {
+      const type = b.toString('ascii', i, i + 4), len = b.readUInt32LE(i + 4), end = Math.min(b.length, i + 8 + len + (len & 1));
+      if (type !== 'EXIF' && type !== 'XMP ') {
+        const c = Buffer.from(b.subarray(i, end));
+        if (type === 'VP8X') c[8] &= ~0x0c;                     // clear the EXIF and XMP flags
+        parts.push(c);
+      }
+      i = end;
+    }
+    const body = Buffer.concat(parts), head = Buffer.from(b.subarray(0, 12));
+    head.writeUInt32LE(body.length + 4, 4);
+    return Buffer.concat([head, body]);
+  }
+  return b;
+}
+
 /* ---------- routes ---------- */
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://x');
@@ -408,7 +519,54 @@ const server = http.createServer((req, res) => {
     if (p === '/api/history' && req.method === 'GET') return json(res, 200, { history: history() });
 
     // The section library: every type a stack page can use (sections/<type>/section.json).
-    if (p === '/api/library' && req.method === 'GET') return json(res, 200, { types: Sections.library() });
+    // Each type carries `blank`, the empty words a new section of it starts with;
+    // presets are filled-in sections saved from a page (slice 3).
+    if (p === '/api/library' && req.method === 'GET')
+      return json(res, 200, { types: Sections.library().map(t => ({ ...t, blank: Sections.blankData(t.fields) })), presets: store.presets() });
+
+    // Save a filled-in section as a preset: {name, type, data}.
+    if (p === '/api/presets' && req.method === 'POST') {
+      return readBody(req, 512 * 1024, body => {
+        let b;
+        try { b = JSON.parse(body.toString('utf8')); } catch (e) { return json(res, 400, { error: 'bad body' }); }
+        const name = String(b.name || '').replace(/[\r\n\t]+/g, ' ').trim().slice(0, 60);
+        if (!name) return json(res, 422, { error: 'Give the preset a name.' });
+        if (!Sections.library().some(t => t.type === b.type)) return json(res, 422, { error: 'unknown section type' });
+        if (!b.data || typeof b.data !== 'object' || Array.isArray(b.data)) return json(res, 422, { error: 'the section has no words' });
+        try {
+          const site = JSON.parse(current(contentKey('site')).buf.toString('utf8'));
+          Sections.renderSection({ type: b.type, id: 'preset', data: b.data }, { site, isHome: false, amazon: site.amazon_url });
+        } catch (e) { return json(res, 422, { error: 'this section would not build: ' + String(e.message).slice(0, 160) }); }
+        json(res, 200, { id: store.addPreset(name, b.type, b.data, author(req)) });
+      }, () => json(res, 413, { error: 'too large' }));
+    }
+    if (/^\/api\/presets\/\d+$/.test(p) && req.method === 'DELETE')
+      return store.dropPreset(+p.split('/')[3]) ? json(res, 200, { deleted: true }) : json(res, 404, { error: 'no such preset' });
+
+    // New page: {from: 'page-home', slug, title}. Copies that page's sections to a
+    // private draft at elvinpeters.com/<slug>/, hidden from Google. Nothing is
+    // public until it's published.
+    if (p === '/api/pages' && req.method === 'POST') {
+      return readBody(req, 64 * 1024, body => {
+        let b;
+        try { b = JSON.parse(body.toString('utf8')); } catch (e) { return json(res, 400, { error: 'bad body' }); }
+        const slug = String(b.slug || ''), title = String(b.title || '').replace(/[\r\n\t]+/g, ' ').trim().slice(0, 80);
+        if (!/^[a-z0-9][a-z0-9-]{0,39}$/.test(slug) || /-$/.test(slug)) return json(res, 422, { error: 'The address can use a-z, 0-9 and dashes (up to 40).' });
+        if (!title) return json(res, 422, { error: 'Give the page a name.' });
+        if (Sections.RESERVED.has(slug)) return json(res, 422, { error: 'elvinpeters.com/' + slug + '/ is reserved for the site itself. Pick another address.' });
+        const name = 'page-' + slug, key = contentKey(name);
+        if (current(key)) return json(res, 409, { error: 'There is already a page called ' + slug + '.' });
+        if (!allowed(String(b.from || '')) || kindOf(b.from) !== 'stack' || !current(contentKey(b.from))) return json(res, 422, { error: 'Pick a page to start from.' });
+        const src = JSON.parse(current(contentKey(b.from)).buf.toString('utf8'));
+        const data = { title, frame: src.frame, path: slug + '/index.html', noindex: true, sections: JSON.parse(JSON.stringify(src.sections)) };
+        const bad = validate(name, data);
+        if (bad) return json(res, 422, { error: bad });
+        try {
+          const r = store.save(key, Buffer.from(JSON.stringify(data, null, 2) + '\n'), 'p' + version(Buffer.alloc(0)), null, author(req));
+          json(res, 200, { name, version: r.version, url: '/' + slug + '/' });
+        } catch (e) { json(res, e.stale ? 409 : 500, { error: e.stale ? 'That page was just made somewhere else. Reload.' : String(e.message).slice(0, 200) }); }
+      });
+    }
 
     // Drafts: what's waiting, and each one's revisions (newest first).
     if (p === '/api/drafts' && req.method === 'GET') {
@@ -431,6 +589,7 @@ const server = http.createServer((req, res) => {
       const key = contentKey(name);
       if (req.method === 'GET') {
         const c = current(key);
+        if (!c) return json(res, 404, { error: 'That page does not exist (it may have been discarded).' });
         return send(res, 200, c.buf, { 'Content-Type': 'application/json', ETag: '"' + c.version + '"' });
       }
       if (req.method === 'PUT') {
@@ -544,9 +703,11 @@ const server = http.createServer((req, res) => {
     }
 
     if (p === '/api/upload' && req.method === 'POST') {
-      return readBody(req, 8 * 1024 * 1024, buf => {
-        const info = imageInfo(buf);
+      return readBody(req, 8 * 1024 * 1024, raw => {
+        const info = imageInfo(raw);
         if (!info || !info.w || !info.h) return json(res, 415, { error: 'Use a PNG, JPG, WebP or GIF image.' });
+        let buf;
+        try { buf = stripMeta(raw, info.ext); } catch (e) { return json(res, 415, { error: 'That image file looks damaged. Try exporting it again.' }); }
         const base = String(url.searchParams.get('name') || 'image').toLowerCase().replace(/\.[a-z0-9]+$/, '')
           .normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'image';
         // Held in the store until a publish that uses it; the repo only gets it then.
@@ -568,7 +729,7 @@ const server = http.createServer((req, res) => {
         if (err) return json(res, 500, { error: 'build failed', detail: err });
         prune(PREVIEWS, 5);
         json(res, 200, { id });
-      });
+      }, true);
     }
 
     // Test: the whole site with every draft in it, at the test address.
@@ -774,7 +935,8 @@ function pageTitle(key) {
   if (!m) return key;
   if (m[1] === 'essays') return 'Blog posts';
   if (m[1] === 'nav') return 'Menu';
-  try { return JSON.parse(fs.readFileSync(path.join(SCHEMA_DIR, m[1] + '.json'), 'utf8')).title || m[1]; } catch (e) { return m[1]; }
+  try { return JSON.parse(fs.readFileSync(path.join(SCHEMA_DIR, m[1] + '.json'), 'utf8')).title || m[1]; } catch (e) {}
+  try { return JSON.parse(fs.readFileSync(path.join(ROOT, key), 'utf8')).title || m[1]; } catch (e) { return m[1]; }
 }
 
 /* ---------- the test site ---------- */
