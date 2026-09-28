@@ -11,7 +11,7 @@ const ROOT = __dirname;
 // Pages excluded from every check: other businesses, retired stubs, parked
 // component fragments (components/: not pages, styled by the page that embeds them),
 // generated-elsewhere pipelines, binaries.
-const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio|components)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^system\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$|^google-ads-audit\/index\.html$/;
+const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio|components|sections)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^system\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$|^google-ads-audit\/index\.html$/;
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
@@ -168,13 +168,20 @@ function* builtHtml(dir, rel) {
     // Drafts are excluded because a real build never writes them.
     const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'essays.json'), 'utf8'));
     const slugs = (Array.isArray(reg) ? reg : reg.posts).filter(e => !e.draft).map(e => e.slug);
-    const gen = ['index.html', 'writing/index.html', 'writing/_homepage_cards.html'].concat(
-      slugs.map(s => 'writing/' + s + '/index.html'));
+    // Stack pages (the homepage and every content/page-*.json output, slice 2):
+    // the section engine owns the whole file, so any hand edit fails here.
+    const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'site.json'), 'utf8'));
+    const stackFiles = new Set(require(path.join(ROOT, 'sections.js'))
+      .buildAll(path.join(ROOT, 'content'), { site }).map(p => p.file));
+    const gen = [...new Set(['index.html', ...stackFiles, 'writing/index.html', 'writing/_homepage_cards.html'].concat(
+      slugs.map(s => 'writing/' + s + '/index.html')))];
     for (const g of gen) {
       const a = path.join(ROOT, g), b = path.join(tmp, g);
       if (!fs.existsSync(a) || !fs.existsSync(b)) { warn(g, 'missing from build comparison'); continue; }
       if (eol(fs.readFileSync(a, 'utf8')) !== eol(fs.readFileSync(b, 'utf8')))
-        fail(g, 'committed file differs from a fresh build (stale build — run node build.js)');
+        fail(g, stackFiles.has(g)
+          ? 'generated page differs from its stack (a hand edit, or a stale build): edit content/page-*.json or Site Studio, then node build.js'
+          : 'committed file differs from a fresh build (stale build — run node build.js)');
     }
     // REGION-DRIFT: inside every <!-- ep:name --> region build.js fills, the
     // committed page must hold exactly what the content JSON renders. A hand

@@ -1,0 +1,84 @@
+{
+  "label": "Cost curve",
+  "about": "A quote, the start-early vs start-late chart, and cards explaining it.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "quote",
+      "type": "html",
+      "label": "Quote"
+    },
+    {
+      "key": "quote_source",
+      "type": "text",
+      "label": "Quote source"
+    },
+    {
+      "key": "chart_label",
+      "type": "text",
+      "label": "Chart, read aloud"
+    },
+    {
+      "key": "early_label",
+      "type": "text",
+      "label": "Early curve label"
+    },
+    {
+      "key": "late_label",
+      "type": "text",
+      "label": "Late curve label"
+    },
+    {
+      "key": "axis_label",
+      "type": "text",
+      "label": "Axis label"
+    },
+    {
+      "key": "cards",
+      "type": "list",
+      "label": "Cards",
+      "fields": [
+        {
+          "key": "title",
+          "type": "html",
+          "label": "Title"
+        },
+        {
+          "key": "line",
+          "type": "html",
+          "label": "One-line summary"
+        },
+        {
+          "key": "body",
+          "type": "html",
+          "label": "Opened text"
+        }
+      ]
+    },
+    {
+      "key": "banner",
+      "type": "html",
+      "label": "Closing banner"
+    }
+  ]
+}

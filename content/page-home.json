@@ -1,0 +1,322 @@
+{
+  "title": "Homepage v3 (short)",
+  "frame": "home-v3",
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "note": "1. Hero: the whole pitch in one screen",
+      "data": {
+        "anchor": "",
+        "eyebrow": "",
+        "headline": "You tried AI.<br/><span>You weren't impressed.</span>",
+        "sub": "The people getting great results type into the same box you do. They give it a proper brief, and this book shows you how in plain English, one real work task at a time.",
+        "hook_note": "third line of every ?aud= / ?v= ad segment (DTR script below). Empty by default.",
+        "review": null,
+        "buy": {
+          "spaced": true,
+          "style": "",
+          "bid": "",
+          "aria": "Get the book on Amazon",
+          "label": "Get the book on Amazon &rarr;",
+          "eager": true,
+          "avail": "Kindle, paperback and hardcover · 200 pages",
+          "price": "",
+          "sample_href": "/free/free-chapter/",
+          "sample": "Or read Chapter 8 free first &rarr;"
+        },
+        "trust": "By <strong>Elvin M. Peters</strong>, who ran $40M+ in profitable ad spend and then advised the media teams at big advertisers for an adtech giant building AI.",
+        "image": "/img/book-3d.webp",
+        "image_alt": "The Artificial Advantage by Elvin M. Peters, paperback"
+      }
+    },
+    {
+      "id": "demo",
+      "type": "demo-pairs",
+      "note": "2. The demo: proof the skill is real, shown open",
+      "data": {
+        "bg": "",
+        "anchor": "demo",
+        "eyebrow": "See the difference",
+        "heading": "The same task, two very different results.",
+        "intro": "One person asked AI for help. The other gave it a brief, the way you would brief a sharp new hire.",
+        "lead": {
+          "before_time": "10 minutes",
+          "before_res": "",
+          "before_prompt": "&ldquo;Write me an email to a client about a project delay.&rdquo;",
+          "before_result": "A generic draft in the wrong tone. They rewrote the whole thing.",
+          "after_time": "2 minutes",
+          "after_res": "",
+          "after_prompt": "&ldquo;Client delay email. Two weeks late. Client values transparency. Tone: collaborative, not apologetic. Under 150 words. New date: March 15.&rdquo;",
+          "after_result": "Right voice and right length. One minute of polish, then sent.",
+          "note": ""
+        },
+        "more_label": "Three more examples",
+        "more": [
+          {
+            "before_time": "",
+            "before_res": "A shorter pile of notes",
+            "before_prompt": "&ldquo;Summarize these meeting notes.&rdquo;",
+            "before_result": "No decisions, no owners, nothing anyone can act on.",
+            "after_time": "",
+            "after_res": "A follow-up, sent the same day",
+            "after_prompt": "&ldquo;From these notes: decisions made, action items with owner and date, open questions. Three lists, nothing else.&rdquo;",
+            "after_result": "The meeting produces something.",
+            "note": ""
+          },
+          {
+            "before_time": "",
+            "before_res": "Your own columns, read back",
+            "before_prompt": "&ldquo;What does this data tell me?&rdquo;",
+            "before_result": "A description where you needed a decision.",
+            "after_time": "",
+            "after_res": "A briefing you can defend",
+            "after_prompt": "&ldquo;Act as an analyst briefing a skeptical CFO. Name the three changes that matter, why each happened, and what the numbers cannot explain.&rdquo;",
+            "after_result": "Findings, causes and the honest gaps.",
+            "note": ""
+          },
+          {
+            "before_time": "",
+            "before_res": "A posting like every other posting",
+            "before_prompt": "&ldquo;Write a job description for a marketing manager.&rdquo;",
+            "before_result": "Buzzwords and no reason to apply.",
+            "after_time": "",
+            "after_res": "A posting people answer",
+            "after_prompt": "&ldquo;Job posting, marketing manager, 12-person B2B firm. Lead with the problems this person owns in month one. Plain language, under 400 words.&rdquo;",
+            "after_result": "Specific and honest about the work.",
+            "note": ""
+          }
+        ],
+        "pullline": "Both people had the same tool. The second one had learned to direct it, and that is the skill this book teaches."
+      }
+    },
+    {
+      "id": "reviews",
+      "type": "reviews",
+      "note": "3. Proof: the one Amazon review, large and verbatim; two friends' lines, labelled",
+      "data": {
+        "bg": "tint",
+        "anchor": "reviews",
+        "eyebrow": "The first review the book got, unedited",
+        "heading": "What readers say",
+        "grid": false,
+        "review_note": "verbatim from Amazon, checked 2026-09-27",
+        "reviews": [
+          {
+            "stars_label": "Rated 5 out of 5 stars",
+            "stars": "★★★★★",
+            "badge": "Verified Purchase · Amazon.ca",
+            "title": "&ldquo;Must-read if you're looking to enhance your output.&rdquo;",
+            "paras": [
+              "&ldquo;What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.",
+              "Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.&rdquo;"
+            ],
+            "meta": "Amazon reviewer 2Buyer · Paperback · Reviewed in Canada · July 15, 2026",
+            "link": "Read it on Amazon &rarr;"
+          }
+        ],
+        "todo": "SECOND AMAZON REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).\n         When it appears, add it verbatim as a second .quote and drop one friend line.",
+        "friends": [
+          {
+            "quote": "&ldquo;The beginning also made me tear up.&rdquo;",
+            "who": "Early reader, a friend of the author"
+          },
+          {
+            "quote": "&ldquo;I didn't realize that my AI skills were bad, then Elvin explained I just sucked at prompting.&rdquo;",
+            "who": "Early reader, a friend of the author"
+          }
+        ],
+        "after": ""
+      }
+    },
+    {
+      "id": "inside",
+      "type": "parts-accordion",
+      "note": "4. What you'll be able to do: the four parts as outcomes",
+      "data": {
+        "bg": "",
+        "anchor": "inside",
+        "eyebrow": "Inside the book",
+        "heading": "What you'll be able to do",
+        "intro": "Read it in order once, then keep the back of the book open beside your work.",
+        "parts": [
+          {
+            "label": "Part 1",
+            "outcome": "Hand AI its first proper task this week, and know what happens when you type.",
+            "points": [
+              "Why it felt like a gimmick, and the Mirror Principle (Ch 1)",
+              "The four fears that hold people back, and the way past each (Ch 2)",
+              "The Director's Mindset and the RTC framework: role, task, constraint (Ch 3)",
+              "Your first saved template (Ch 5)"
+            ]
+          },
+          {
+            "label": "Part 2",
+            "outcome": "Pick one tool with confidence and know which mode suits each job.",
+            "points": [
+              "Three questions that settle which tool to use (Ch 7)",
+              "Default, reasoning or creative mode, matched to the task (Ch 8, free to read)",
+              "Six hands-on exercises, starting with the email you've been avoiding (Ch 9)"
+            ]
+          },
+          {
+            "label": "Part 3",
+            "outcome": "Fix a weak draft with one precise note, and catch an error before anyone else sees it.",
+            "points": [
+              "The Three Fundamental Rules: be specific, ask for one thing, iterate (Ch 10)",
+              "The Diagnostic Ladder for fixing a draft that missed (Ch 11)",
+              "Meta-prompting and template thinking (Ch 12)",
+              "Two-Step Verification and a 3-month practice plan (Ch 13 and Ch 14)"
+            ]
+          },
+          {
+            "label": "The appendices",
+            "outcome": "Reach for a written fix or a starting point whenever a prompt misfires or a new task lands.",
+            "points": [
+              "25 copy-ready prompts and 25 ready-made roles",
+              "12 before-and-after prompt makeovers, each explained",
+              "Ten common failures, each with its corrective prompt",
+              "A quick reference card, a tool comparison and a plain-English glossary"
+            ]
+          }
+        ],
+        "value": "It costs less than a dinner out. If one idea in it saves you an hour a month, the book has paid for itself.",
+        "buy": {
+          "spaced": true,
+          "aria": "Get the book on Amazon",
+          "label": "Get the book on Amazon &rarr;",
+          "avail": "Kindle, paperback and hardcover · 200 pages",
+          "sample_href": "/free/free-chapter/",
+          "sample": "Or read Chapter 8 free first &rarr;"
+        }
+      }
+    },
+    {
+      "id": "who",
+      "type": "who-list",
+      "note": "5. Who it's for: three plain lines",
+      "data": {
+        "bg": "line",
+        "anchor": "",
+        "heading": "Who this book is for",
+        "people": [
+          {
+            "title": "The skeptic who tried it once",
+            "text": "You suspected the approach was the problem, which is good news, because an approach can be learned."
+          },
+          {
+            "title": "The professional whose workplace now expects AI",
+            "text": "You become the colleague people ask for help when AI comes up at work."
+          },
+          {
+            "title": "The manager getting a team started",
+            "text": "Settle on a tool in one afternoon, then build the saved prompts your whole team works from."
+          }
+        ]
+      }
+    },
+    {
+      "id": "about",
+      "type": "author",
+      "note": "6. About the author (facts: 02 Books/reference/elvin-verified-profile.md; employers anonymised at Elvin's request)",
+      "data": {
+        "bg": "tint",
+        "anchor": "about",
+        "photo": "/img/headshot.jpg",
+        "photo_alt": "Elvin M. Peters",
+        "eyebrow": "About the author",
+        "heading": "Elvin M. Peters",
+        "role": "Author of the AI Fluency Series · Toronto",
+        "paras": [
+          "My first lesson in directing machines came at a large Canadian fintech. I ran over $12M a year in paid media there, and I cut the cost per funded loan by more than half by teaching the bidding algorithms what a good customer looked like.",
+          "Then an adtech giant building AI brought me in to advise the media teams at big advertisers, where AI cut my account audits from hours to minutes. On both sides of the table I met capable people getting a fraction of what AI could give them. I wrote this book for them.",
+          "<em>The Artificial Advantage</em> is book one of the AI Fluency Series. Book two, <em>The Systematic Advantage</em>, is in progress. <a href=\"https://www.linkedin.com/in/elvinmpeters\" target=\"_blank\" rel=\"noopener\">Find me on LinkedIn</a>."
+        ]
+      }
+    },
+    {
+      "id": "faq",
+      "type": "faq",
+      "note": "7. FAQ (adapted from /book.html)",
+      "data": {
+        "bg": "",
+        "anchor": "faq",
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "q": "Do I need a technical background?",
+            "a": "None. The book is written for professionals with no technical training. If you can write an email, you can use everything in it."
+          },
+          {
+            "q": "Which AI tool does it use?",
+            "a": "It works with ChatGPT, Claude, Gemini and Copilot. Part 2 helps you pick one, and the directing skill carries over to all of them."
+          },
+          {
+            "q": "Will it go out of date when the tools change?",
+            "a": "The book teaches you how to direct AI, and that skill carries over from one model to the next. The product names will keep changing, and your briefs will keep working."
+          },
+          {
+            "q": "I already use AI at work. Is it still for me?",
+            "a": "Yes, if your results are hit and miss. The frameworks turn scattered habits into a method you can repeat, and the appendices give you prompts and fixes to keep beside your work."
+          },
+          {
+            "q": "Which format should I get?",
+            "a": "Kindle, paperback and hardcover are all on Amazon, with Amazon's standard returns. The paperback is handy to keep open beside your desk for the appendices."
+          },
+          {
+            "q": "Can I read some of it first?",
+            "a": "Yes. <a href=\"/free/free-chapter/\">Chapter 8 is free to read</a>, and it shows you which AI mode fits which job."
+          }
+        ],
+        "buy": null
+      }
+    },
+    {
+      "id": "close",
+      "type": "close",
+      "note": "8. The close: back to the opening promise, one more clear ask",
+      "data": {
+        "bg": "tint",
+        "anchor": "book",
+        "image": "/img/book-desk.webp",
+        "image_alt": "The Artificial Advantage paperback on a desk",
+        "heading": "You tried AI once. Give it a proper brief this time.",
+        "lede": "<em>The Artificial Advantage</em> shows you how, one real work task at a time.",
+        "value": "It costs less than a dinner out. If one idea in it saves you an hour a month, the book has paid for itself.",
+        "summary": null,
+        "note": null,
+        "buy": {
+          "spaced": true,
+          "style": "",
+          "bid": "",
+          "aria": "Get the book on Amazon",
+          "label": "Get the book on Amazon &rarr;",
+          "eager": false,
+          "avail": "Kindle, paperback and hardcover · 200 pages",
+          "price": "",
+          "sample_href": "/free/free-chapter/",
+          "sample": "Or read Chapter 8 free first &rarr;"
+        },
+        "ps": ""
+      }
+    },
+    {
+      "id": "newsletter",
+      "type": "newsletter",
+      "note": "9. One email ask for the not-yet buyers (lead API via the shared .oi-form handler in /js/site.js)",
+      "data": {
+        "bg": "",
+        "anchor": "newsletter",
+        "eyebrow": "Not ready yet?",
+        "heading": "Get one useful AI email a month",
+        "text": "The AI news worth knowing, tips you can use that week, and a note from the book. It lands on the first of every month. The free guides live in the <a href=\"/free/\">Free Toolkit</a>.",
+        "source": "newsletter-homepage-v3",
+        "placeholder": "you@work.com",
+        "button": "Send me the monthly update",
+        "fine_print": "Free. Unsubscribe anytime.",
+        "success": "You're in. Look for it on the first of the month, and check your promotions tab if it isn't in your inbox.",
+        "after": ""
+      }
+    }
+  ]
+}

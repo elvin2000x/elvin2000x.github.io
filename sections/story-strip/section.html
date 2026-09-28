@@ -1,0 +1,17 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <h2>{{heading}}</h2>
+    <p>{{intro}}</p>
+    <div class="strip">
+{{#panels}}
+      <div class="panel"><span class="pnum">{{label}}</span><p>{{text}}</p></div>
+{{/panels}}
+    </div>
+    <p class="cast-note" style="margin:0 0 18px">{{note}}</p>
+    <div class="cards cards--2">
+{{#cards}}
+      <details class="card"><summary><span class="tag">{{tag}}</span><span class="ct">{{title}}</span><span class="cl">{{line}}</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx">{{body}}</div></details>
+{{/cards}}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,91 @@
+{
+  "label": "Who it's for (with images)",
+  "about": "The book's characters with portraits, then \"this book is for you if\" cards.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "cast",
+      "type": "list",
+      "label": "Characters",
+      "fields": [
+        {
+          "key": "image",
+          "type": "text",
+          "label": "Portrait"
+        },
+        {
+          "key": "tag",
+          "type": "text",
+          "label": "Tag"
+        },
+        {
+          "key": "name",
+          "type": "text",
+          "label": "Name"
+        },
+        {
+          "key": "line",
+          "type": "html",
+          "label": "One line"
+        },
+        {
+          "key": "body",
+          "type": "html",
+          "label": "Opened text"
+        }
+      ]
+    },
+    {
+      "key": "cast_note",
+      "type": "html",
+      "label": "Note under the characters"
+    },
+    {
+      "key": "fit_heading",
+      "type": "html",
+      "label": "Second heading"
+    },
+    {
+      "key": "fits",
+      "type": "list",
+      "label": "For you if",
+      "fields": [
+        {
+          "key": "title",
+          "type": "html",
+          "label": "Line"
+        },
+        {
+          "key": "body",
+          "type": "html",
+          "label": "Opened text"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in author">
+    <img src="{{photo}}" alt="{{photo_alt}}" width="400" height="400" loading="lazy">
+    <div>
+      <span class="eyebrow">{{eyebrow}}</span>
+      <h2>{{heading}}</h2>
+      <p>{{intro}}</p>
+      <div class="cards">
+{{#cards}}
+        <details class="card"><summary><span class="tag">{{tag}}</span><span class="ct">{{title}}</span><span class="ci" aria-hidden="true">+</span></summary><div class="cx">{{body}}</div></details>
+{{/cards}}
+      </div>
+      <div class="series">
+{{#series}}
+        <div{{#live}} class="live"{{/live}}><span>{{status}}</span><b>{{title}}</b></div>
+{{/series}}
+      </div>
+      <p>{{after}}</p>
+    </div>
+  </div>
+</section>

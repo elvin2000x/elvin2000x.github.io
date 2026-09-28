@@ -1,0 +1,20 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <div class="optin">
+      <span class="oi-eyebrow">{{eyebrow}}</span>
+      <h2>{{heading}}</h2>
+      <p>{{text}}</p>
+      <form class="oi-form" data-source="{{source}}{{^isHome}}-preview{{/isHome}}" novalidate>
+        <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
+        <label class="visually-hidden" for="nl-email">Your email</label>
+        <input id="nl-email" type="email" required autocomplete="email" placeholder="{{placeholder}}">
+        <button type="submit">{{button}}</button>
+      </form>
+      <p class="oi-note">{{fine_print}}</p>
+      <p class="oi-msg" data-success="{{success}}"></p>
+{{#after}}
+      <p style="margin-top:14px">{{after}}</p>
+{{/after}}
+    </div>
+  </div>
+</section>

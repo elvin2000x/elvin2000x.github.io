@@ -1,0 +1,44 @@
+{
+  "label": "Who it's for (list)",
+  "about": "Three plain lines naming the readers the book is for.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (optional)"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "people",
+      "type": "list",
+      "label": "Readers",
+      "fields": [
+        {
+          "key": "title",
+          "type": "html",
+          "label": "Who"
+        },
+        {
+          "key": "text",
+          "type": "html",
+          "label": "What changes for them"
+        }
+      ]
+    }
+  ]
+}

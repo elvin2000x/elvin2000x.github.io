@@ -1,0 +1,27 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}} close" id="{{anchor}}">
+  <div class="in--wide">
+    <img class="desk" src="{{image}}" alt="{{image_alt}}" width="600" height="600" loading="lazy">
+    <div>
+      <h2>{{heading}}</h2>
+      <p class="lede">{{lede}}</p>
+{{#value}}
+      <p class="value">{{value}}</p>
+{{/value}}
+{{#summary}}
+      <ul class="restate">{{#points}}<li>{{.}}</li>{{/points}}</ul>
+{{/summary}}
+{{#note}}
+      <div class="note-card">
+        <p>{{text}}</p>
+        <p class="sig">{{sig}}</p>
+      </div>
+{{/note}}
+{{#buy}}
+      {{>buybox}}
+{{/buy}}
+{{#ps}}
+      <p class="ps">{{ps}}</p>
+{{/ps}}
+    </div>
+  </div>
+</section>

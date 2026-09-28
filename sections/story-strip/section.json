@@ -1,0 +1,81 @@
+{
+  "label": "Story strip",
+  "about": "A short story in numbered panels, then cards with the lesson.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "panels",
+      "type": "list",
+      "label": "Panels",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Panel label"
+        },
+        {
+          "key": "text",
+          "type": "html",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "key": "note",
+      "type": "html",
+      "label": "Note under the panels"
+    },
+    {
+      "key": "cards",
+      "type": "list",
+      "label": "Cards",
+      "fields": [
+        {
+          "key": "tag",
+          "type": "text",
+          "label": "Tag"
+        },
+        {
+          "key": "title",
+          "type": "html",
+          "label": "Title"
+        },
+        {
+          "key": "line",
+          "type": "html",
+          "label": "One-line summary"
+        },
+        {
+          "key": "body",
+          "type": "html",
+          "label": "Opened text"
+        }
+      ]
+    }
+  ]
+}

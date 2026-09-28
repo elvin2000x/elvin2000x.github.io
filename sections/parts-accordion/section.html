@@ -1,0 +1,20 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <span class="eyebrow">{{eyebrow}}</span>
+    <h2>{{heading}}</h2>
+    <p>{{intro}}</p>
+    <div class="parts">
+{{#parts}}
+      <details class="part"><summary><span class="pn">{{label}}</span><span class="pt">{{outcome}}</span><span class="pi" aria-hidden="true">+</span></summary><ul>{{#points}}<li>{{.}}</li>{{/points}}</ul></details>
+{{/parts}}
+    </div>
+    <p class="value">{{value}}</p>
+{{#buy}}
+    <div class="buyblock{{#spaced}} {{/spaced}}">
+        <a class="btn btn--primary buy amz-btn{{#spaced}} {{/spaced}}" data-amazon href="{{amazon}}" target="_blank" rel="noopener" aria-label="{{aria}}">{{label}}</a>
+        <div class="avail"><a class="badge-btn" data-amazon href="{{amazon}}" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>{{avail}}</span></div>
+        <a class="sample" href="{{sample_href}}">{{sample}}</a>
+      </div>
+{{/buy}}
+  </div>
+</section>

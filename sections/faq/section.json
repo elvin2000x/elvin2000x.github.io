@@ -1,0 +1,49 @@
+{
+  "label": "FAQ",
+  "about": "Questions that open to their answers.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "items",
+      "type": "list",
+      "label": "Questions",
+      "fields": [
+        {
+          "key": "q",
+          "type": "html",
+          "label": "Question"
+        },
+        {
+          "key": "a",
+          "type": "html",
+          "label": "Answer"
+        }
+      ]
+    },
+    {
+      "key": "buy",
+      "type": "buybox",
+      "label": "Buy box (optional)"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <h2>{{heading}}</h2>
+    <p>{{intro}}</p>
+    <ul class="ticks" id="ticks">
+{{#items}}
+      <li><label><input type="checkbox"> {{text}} <em class="fix">{{fix}}</em></label></li>
+{{/items}}
+    </ul>
+    <p class="tally" id="tally" aria-live="polite">{{tally}}</p>
+    <p class="banner">{{banner}}</p>
+  </div>
+</section>

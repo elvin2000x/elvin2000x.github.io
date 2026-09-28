@@ -1,0 +1,12 @@
+<div class="buyblock{{#spaced}} {{/spaced}}"{{#style}} style="{{style}}"{{/style}}>
+  <a class="btn btn--primary buy amz-btn{{#spaced}} {{/spaced}}"{{#bid}} id="{{bid}}"{{/bid}} data-amazon href="{{amazon}}" target="_blank" rel="noopener" aria-label="{{aria}}">{{label}}</a>
+{{#avail}}
+  <div class="avail"><a class="badge-btn" data-amazon href="{{amazon}}" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104"{{^eager}} loading="lazy"{{/eager}}><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>{{avail}}</span></div>
+{{/avail}}
+{{#price}}
+  <p class="price-line">{{price}}</p>
+{{/price}}
+{{#sample}}
+  <a class="sample" href="{{sample_href}}">{{sample}}</a>
+{{/sample}}
+</div>

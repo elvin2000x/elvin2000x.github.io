@@ -1,0 +1,907 @@
+{
+  "title": "Long-form homepage",
+  "frame": "home-long",
+  "markers": true,
+  "preview_path": "preview/home-long/index.html",
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "data": {
+        "anchor": "top",
+        "eyebrow": "Stop prompting. Start directing.",
+        "headline": "You tried AI.<br/><span>You weren't impressed.</span>",
+        "sub": "The people getting great results type into the same box you do. They give it a proper brief, and this book shows you how in plain English, so you can hand AI its first real task this week.",
+        "hook_note": "",
+        "review": {
+          "quote": "&ldquo;Must-read if you're looking to enhance your output.&rdquo;",
+          "source": "Verified Purchase, Amazon.ca"
+        },
+        "buy": {
+          "spaced": false,
+          "style": "",
+          "bid": "buy-hero",
+          "aria": "Get the book on Amazon",
+          "label": "Get the book on Amazon &rarr;",
+          "eager": true,
+          "avail": "Kindle · Paperback · Hardcover",
+          "price": "See the price in your region on Amazon",
+          "sample_href": "/free/free-chapter/",
+          "sample": "Read Chapter 8 free: which AI mode fits which job &rarr;"
+        },
+        "trust": "By <strong>Elvin M. Peters</strong>, who ran $40M+ in profitable ad spend and then advised the media teams at big advertisers for an adtech giant building AI.",
+        "image": "/img/book-3d.webp",
+        "image_alt": "The Artificial Advantage by Elvin M. Peters, paperback"
+      }
+    },
+    {
+      "id": "demo",
+      "type": "demo-swipe",
+      "data": {
+        "bg": "",
+        "anchor": "demo",
+        "eyebrow": "See the difference",
+        "heading": "Same tool, same task, and the brief made the difference.",
+        "intro": "One person asked AI for help. The other briefed it the way you'd brief a sharp new hire.",
+        "cases": [
+          {
+            "before_time": "10 minutes",
+            "before_res": "",
+            "before_prompt": "&ldquo;Write me an email to a client about a project delay.&rdquo;",
+            "before_result": "A generic draft in the wrong tone, rewritten from scratch.",
+            "after_time": "2 minutes",
+            "after_res": "",
+            "after_prompt": "&ldquo;<span class=\"rtc-t\">Client delay email. Two weeks late.</span> <span class=\"rtc-c\">Client values transparency. Tone: confident and collaborative. Under 150 words.</span> <span class=\"rtc-t\">New date: March 15.</span>&rdquo;",
+            "after_result": "Right voice and right length, one minute of polish, then sent.",
+            "note": "Example timings",
+            "parts_label": "See the brief's parts",
+            "parts": [
+              {
+                "kind": "t",
+                "label": "Task",
+                "text": "Client delay email. Two weeks late. New date: March 15."
+              },
+              {
+                "kind": "c",
+                "label": "Constraint",
+                "text": "Client values transparency. Tone: confident and collaborative. Under 150 words."
+              },
+              {
+                "kind": "r",
+                "label": "Role",
+                "text": "Left light on purpose. The book puts it plainly: &ldquo;A sharp task with a light role almost always beats an elaborate role with a fuzzy task.&rdquo; (Ch 3)"
+              }
+            ]
+          },
+          {
+            "before_time": "",
+            "before_res": "Meeting notes",
+            "before_prompt": "&ldquo;Summarize these meeting notes.&rdquo;",
+            "before_result": "No decisions, no owners, nothing anyone can act on.",
+            "after_time": "",
+            "after_res": "A follow-up, sent today",
+            "after_prompt": "&ldquo;<span class=\"rtc-t\">From these notes: decisions made, action items with owner and date, open questions.</span> <span class=\"rtc-c\">Three lists, nothing else.</span>&rdquo;",
+            "after_result": "A follow-up you can send the same day.",
+            "note": "",
+            "parts_label": "See the brief's parts",
+            "parts": [
+              {
+                "kind": "t",
+                "label": "Task",
+                "text": "Decisions made, action items with owner and date, open questions."
+              },
+              {
+                "kind": "c",
+                "label": "Constraint",
+                "text": "Three lists, nothing else."
+              },
+              {
+                "kind": "r",
+                "label": "Role",
+                "text": "None needed. The shape of the output did the work."
+              }
+            ]
+          },
+          {
+            "before_time": "",
+            "before_res": "Your own data",
+            "before_prompt": "&ldquo;What does this data tell me?&rdquo;",
+            "before_result": "A description where you needed a decision.",
+            "after_time": "",
+            "after_res": "A briefing you can defend",
+            "after_prompt": "&ldquo;<span class=\"rtc-r\">Act as an analyst briefing a skeptical CFO.</span> <span class=\"rtc-t\">Name the three changes that matter, why each happened,</span> <span class=\"rtc-c\">and what the numbers cannot explain.</span>&rdquo;",
+            "after_result": "Findings, causes and the honest gaps.",
+            "note": "",
+            "parts_label": "See the brief's parts",
+            "parts": [
+              {
+                "kind": "r",
+                "label": "Role",
+                "text": "An analyst briefing a skeptical CFO."
+              },
+              {
+                "kind": "t",
+                "label": "Task",
+                "text": "Name the three changes that matter and why each happened."
+              },
+              {
+                "kind": "c",
+                "label": "Constraint",
+                "text": "Say what the numbers cannot explain."
+              }
+            ]
+          },
+          {
+            "before_time": "",
+            "before_res": "A job posting",
+            "before_prompt": "&ldquo;Write a job description for a marketing manager.&rdquo;",
+            "before_result": "Buzzwords and no reason to apply.",
+            "after_time": "",
+            "after_res": "A posting people answer",
+            "after_prompt": "&ldquo;<span class=\"rtc-t\">Job posting, marketing manager, 12-person B2B firm.</span> <span class=\"rtc-c\">Lead with the problems this person owns in month one. Plain language, under 400 words.</span>&rdquo;",
+            "after_result": "Specific and honest about the work.",
+            "note": "",
+            "parts_label": "See the brief's parts",
+            "parts": [
+              {
+                "kind": "t",
+                "label": "Task",
+                "text": "Job posting, marketing manager, 12-person B2B firm."
+              },
+              {
+                "kind": "c",
+                "label": "Constraint",
+                "text": "Lead with the problems this person owns in month one, plain language, under 400 words."
+              }
+            ]
+          }
+        ],
+        "hint": "Swipe for three more examples &rarr;",
+        "pullline": "Both people had the same tool. The second one had learned to direct it, and that is the skill this book teaches.",
+        "buy": {
+          "spaced": false,
+          "style": "margin-top:22px",
+          "bid": "buy-demo",
+          "aria": "Learn to brief like that: get the book on Amazon",
+          "label": "Learn to brief like that &rarr;",
+          "avail": "",
+          "price": "",
+          "sample": ""
+        }
+      }
+    },
+    {
+      "id": "familiar",
+      "type": "checklist",
+      "data": {
+        "bg": "tint",
+        "anchor": "familiar",
+        "heading": "Sound familiar? Every one of these has a fix.",
+        "intro": "Tick the ones that have happened to you.",
+        "items": [
+          {
+            "text": "I asked for an email and rewrote the whole thing.",
+            "fix": "Fix in Ch 3"
+          },
+          {
+            "text": "I got a summary with no decisions in it.",
+            "fix": "Fix in Ch 10"
+          },
+          {
+            "text": "It gave me a list I could have found on any blog.",
+            "fix": "Fix in Ch 11"
+          },
+          {
+            "text": "I asked a follow-up and the draft got worse.",
+            "fix": "Fix in Ch 11"
+          },
+          {
+            "text": "I tried two tools and couldn't tell which was better.",
+            "fix": "Fix in Ch 7"
+          },
+          {
+            "text": "The answer sounded sure of itself and was wrong.",
+            "fix": "Fix in Ch 13"
+          }
+        ],
+        "tally": "None so far. The book will turn what already works into a method you can repeat.",
+        "banner": "You already know how to brief a sharp new hire. <strong>Directing AI uses the same skill.</strong>"
+      }
+    },
+    {
+      "id": "beliefs",
+      "type": "detail-cards",
+      "data": {
+        "bg": "",
+        "anchor": "beliefs",
+        "eyebrow": "",
+        "heading": "Three reasons people wait, and what the book says to each.",
+        "intro": "",
+        "two_col": false,
+        "cards": [
+          {
+            "title": "&ldquo;AI is overhyped.&rdquo;",
+            "line": "The Mirror Principle: AI reflects the quality of your direction (Ch 1).",
+            "body": "<p>The model has no goals of its own, so it mirrors back what you bring. The book's image is a lamp against a beam: a vague prompt lights the whole room, and a precise one narrows the beam onto the thing you need. A flat answer usually tells you the brief was thin, and a brief can be fixed.</p>"
+          },
+          {
+            "title": "&ldquo;I'm not technical.&rdquo;",
+            "line": "The skill is direction, and you already use it at work (Ch 3).",
+            "body": "<p>The Director's Mindset puts you in the chair with AI as the crew. You supply the judgment, the direction and the check, which is what you already do when you hand work to a colleague.</p><p>Priya, a consultant in the book (a character, a composite), practised for two weeks in January and had twelve templates by March, and &ldquo;no technical training went into any of it.&rdquo;</p>"
+          },
+          {
+            "title": "&ldquo;The tools change too fast.&rdquo;",
+            "line": "A good brief carries over from one model to the next (Ch 6).",
+            "body": "<p>ChatGPT, Claude and Gemini share the same engine underneath, and each one mirrors the quality of what you type. In the book's words, &ldquo;The skill you're building here transfers to every tool, because the underlying engine is the same one.&rdquo; Product names will keep changing, and your briefs keep working.</p>"
+          }
+        ],
+        "buy": null
+      }
+    },
+    {
+      "id": "mirror",
+      "type": "brief-builder",
+      "data": {
+        "bg": "tint",
+        "anchor": "mirror",
+        "eyebrow": "The method",
+        "heading": "AI mirrors the brief you give it. Build one now.",
+        "intro": "This is the three-part brief from Chapter 3. Fill it in for a task on your desk this week.",
+        "quote": "&ldquo;A vague prompt covers ground the way a lamp covers a room. A precise one narrows the beam to a point.&rdquo;",
+        "quote_source": "Adapted from Chapter 1",
+        "form_note": "Three boxes, one brief. Nothing you type leaves this page.",
+        "role_hint": "Who should AI be for this?",
+        "role_example": "a chief of staff who writes for busy executives",
+        "task_hint": "What do you need done?",
+        "task_example": "turn my notes below into a weekly update for my director",
+        "con_hint": "What are the limits?",
+        "con_example": "lead with the one decision I need, three bullets at most, under 120 words",
+        "example_out": "Act as a chief of staff who writes for busy executives. Turn my notes below into a weekly update for my director. Lead with the one decision I need, three bullets at most, under 120 words.",
+        "after": "That's one framework. Chapter 3 teaches the rest of the brief, and Chapter 11 shows you how to fix the draft when it misses.",
+        "buy": {
+          "spaced": false,
+          "style": "",
+          "bid": "buy-mech",
+          "aria": "Get the full method: the book on Amazon",
+          "label": "Get the full method &rarr;",
+          "avail": "",
+          "price": "",
+          "sample": ""
+        }
+      }
+    },
+    {
+      "id": "reviews",
+      "type": "reviews",
+      "data": {
+        "bg": "",
+        "anchor": "reviews",
+        "eyebrow": "The first review the book got, unedited",
+        "heading": "What the first readers said",
+        "grid": true,
+        "review_note": "verbatim from Amazon, checked 2026-09-27",
+        "reviews": [
+          {
+            "stars_label": "Rated 5 out of 5 stars",
+            "stars": "★★★★★",
+            "badge": "Verified Purchase · Amazon.ca",
+            "title": "&ldquo;Must-read if you're looking to enhance your output.&rdquo;",
+            "paras": [
+              "&ldquo;What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.",
+              "Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.&rdquo;"
+            ],
+            "meta": "Amazon reviewer 2Buyer · Paperback · Reviewed in Canada · July 15, 2026",
+            "link": "Read it on Amazon &rarr;"
+          }
+        ],
+        "todo": "SECOND AMAZON REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).\n         When it appears, add it verbatim as a second .quote inside .reviews-grid (the grid holds one to six).",
+        "friends": [
+          {
+            "quote": "&ldquo;The beginning also made me tear up.&rdquo;",
+            "who": "Early reader, a friend of the author"
+          },
+          {
+            "quote": "&ldquo;I didn't realize that my AI skills were bad, then Elvin explained I just sucked at prompting.&rdquo;",
+            "who": "Early reader, a friend of the author"
+          }
+        ],
+        "after": "<a class=\"sample\" href=\"/contact/\">Read the book? Tell me what changed &rarr;</a>"
+      }
+    },
+    {
+      "id": "inside",
+      "type": "chapter-map",
+      "data": {
+        "bg": "tint",
+        "anchor": "inside",
+        "eyebrow": "Inside the book",
+        "heading": "Fifteen chapters in three parts, built into one method you can repeat.",
+        "intro": "Read it in order once, then keep it beside your work.",
+        "map": [
+          {
+            "label": "Part 1",
+            "chapters": [
+              {
+                "title": "From Gimmick to Daily Assistant",
+                "n": "1"
+              },
+              {
+                "title": "Overcoming the Hesitation",
+                "n": "2"
+              },
+              {
+                "title": "The Mental Shift That Makes AI Work",
+                "n": "3"
+              },
+              {
+                "title": "Setting Realistic Expectations",
+                "n": "4"
+              },
+              {
+                "title": "How AI Skills Compound",
+                "n": "5"
+              }
+            ]
+          },
+          {
+            "label": "Part 2",
+            "chapters": [
+              {
+                "title": "The Race You're Joining",
+                "n": "6"
+              },
+              {
+                "title": "Choose Your Tool",
+                "n": "7"
+              },
+              {
+                "title": "Direct Your Tool (free to read)",
+                "n": "8"
+              },
+              {
+                "title": "Your AI Toolkit in Action",
+                "n": "9"
+              }
+            ]
+          },
+          {
+            "label": "Part 3",
+            "chapters": [
+              {
+                "title": "The Three Fundamental Rules for Beginners",
+                "n": "10"
+              },
+              {
+                "title": "Iteration Patterns",
+                "n": "11"
+              },
+              {
+                "title": "The Invisible Skills",
+                "n": "12"
+              },
+              {
+                "title": "Trust, but Verify",
+                "n": "13"
+              },
+              {
+                "title": "Building Your AI Practice",
+                "n": "14"
+              },
+              {
+                "title": "The Long Game",
+                "n": "15"
+              }
+            ]
+          }
+        ],
+        "caption": "Tap a stop to see its chapter. The line ends at the back of the book.",
+        "cards": [
+          {
+            "tag": "Part 1 · Building Your Foundation",
+            "title": "Hand AI its first proper task this week, and know what happens when you type.",
+            "points": [
+              "Why the same question gets a generic answer for you and a sharp one for a colleague (Ch 1)",
+              "The four fears that hold capable people back, and the way past each one (Ch 2)",
+              "The three-part brief of role, task and constraint (Ch 3)",
+              "What AI does well, where it slips, and where your judgment stays in charge (Ch 4)",
+              "Your first saved template, and why each one makes the next task faster (Ch 5)"
+            ]
+          },
+          {
+            "tag": "Part 2 · Choose Your Tools",
+            "title": "Pick one tool with confidence and know which mode suits each job.",
+            "points": [
+              "The three ways AI shows up at work (Ch 6)",
+              "Three questions that settle which tool to use (Ch 7)",
+              "Default, reasoning or creative mode, matched to the task (Ch 8, free to read)",
+              "Six hands-on exercises, starting with the email you've been avoiding (Ch 9)"
+            ]
+          },
+          {
+            "tag": "Part 3 · The Core Skills of Conversation",
+            "title": "Fix a weak draft with one precise note, and catch an error before anyone else sees it.",
+            "points": [
+              "Three fundamental rules: be specific, ask for one thing, iterate (Ch 10)",
+              "The Diagnostic Ladder: name the symptom, trace the cause, write one corrective prompt (Ch 11)",
+              "How to get AI to ask you questions before it answers yours (Ch 12)",
+              "A two-step check for the confident answer that is wrong (Ch 13)",
+              "A 3-month plan that turns trying AI into a working habit (Ch 14)",
+              "What eight months of practice looks like, told through Marcus (Ch 15)"
+            ]
+          }
+        ],
+        "sample_href": "/free/free-chapter/",
+        "sample": "Read Chapter 8 free: which AI mode fits which job &rarr;"
+      }
+    },
+    {
+      "id": "stack",
+      "type": "detail-cards",
+      "data": {
+        "bg": "",
+        "anchor": "stack",
+        "eyebrow": "",
+        "heading": "The back of the book stays open beside your keyboard.",
+        "intro": "Eight appendices and a quick reference card ship inside every copy.",
+        "two_col": true,
+        "cards": [
+          {
+            "title": "<span class=\"num\">25</span>copy-ready prompts",
+            "line": "For the jobs that fill a working week (Appendix E).",
+            "body": "<p>Organised by task type: communication, analysis and research, writing and editing, planning and strategy, learning and development. Adapt them to your work so you never start from a blank box.</p>"
+          },
+          {
+            "title": "<span class=\"num\">25</span>ready-made roles",
+            "line": "A starting persona for eight areas of work (Appendix G).",
+            "body": "<p>Marketing and communications, operations, finance, HR, sales, legal and compliance, research and strategy, and leadership. Paste a role at the top of a prompt and adjust it. A short formula at the end shows you how to build your own.</p>"
+          },
+          {
+            "title": "<span class=\"num\">12</span>before-and-after makeovers",
+            "line": "Weak prompts rebuilt, with every change explained (Appendix D).",
+            "body": "<p>They cover real tasks, from a difficult email and a performance review to a client proposal and a research brief. The book calls this the first place to go when a prompt isn't producing what you need.</p>"
+          },
+          {
+            "title": "<span class=\"num\">10</span>common failures, each with its fix",
+            "line": "For the output that's wrong when you can't say why (Appendix F).",
+            "body": "<p>Too generic, too long, off-topic, the wrong tone, invented facts and five more. Each one comes with its symptoms, its likely cause and a corrective prompt.</p>"
+          },
+          {
+            "title": "<span class=\"num\">1</span>quick reference card",
+            "line": "Every core move on one page.",
+            "body": "<p>The RTC brief, model selection at a glance, phrases that make AI reason step by step, Two-Step Verification, the iteration vocabulary and CLEAR at a glance.</p>"
+          },
+          {
+            "title": "<span class=\"num\">4</span>reference appendices",
+            "line": "Frameworks, tools and plain-English terms (Appendices A, B, C and H).",
+            "body": "<p>A glossary, a tools reference with free tiers, every framework in one place with a 30-day quick-start, and a research-grounded look at AI and the environment.</p>"
+          }
+        ],
+        "buy": {
+          "spaced": false,
+          "style": "",
+          "bid": "buy-stack",
+          "aria": "Put the back of the book on your desk: get it on Amazon",
+          "label": "Put the back of the book on your desk &rarr;",
+          "avail": "",
+          "price": "",
+          "sample": ""
+        }
+      }
+    },
+    {
+      "id": "who",
+      "type": "who-cast",
+      "data": {
+        "bg": "tint",
+        "anchor": "who",
+        "heading": "Written for professionals who want AI to do real work.",
+        "intro": "The book follows three characters whose starting points may look like yours.",
+        "cast": [
+          {
+            "image": "/img/cast/maya-painted.webp",
+            "tag": "A character from the book",
+            "name": "Maya",
+            "line": "A high-school English teacher who doubted AI on principle (Ch 2).",
+            "body": "<p>After eleven years in the classroom, she tested AI on her own work first, on a task that reliably took forty minutes. Six months later she still reads every output before it reaches her students. What changed was her question, from whether to use it at all to whether she has checked it.</p>"
+          },
+          {
+            "image": "/img/cast/priya-painted.webp",
+            "tag": "A character from the book",
+            "name": "Priya",
+            "line": "A consultant with more client work than hours (Ch 5).",
+            "body": "<p>She gave herself two weeks in January to draft every client brief with AI first. By March she had twelve templates. Within a few months those workflows had clawed back close to two days a week, and she put that time into a fourth client account.</p>"
+          },
+          {
+            "image": "/img/cast/marcus-painted.webp",
+            "tag": "A character from the book",
+            "name": "Marcus",
+            "line": "A launch manager who closed the tab after one bad answer (Ch 3).",
+            "body": "<p>His story runs through the whole book. <a href=\"#marcus\">It's told in the next section.</a></p>"
+          }
+        ],
+        "cast_note": "Characters from the book. The Preface says they are composites drawn from real patterns. The portraits are illustrations.",
+        "fit_heading": "This book is for you if&hellip;",
+        "fits": [
+          {
+            "title": "You've tried AI and shrugged.",
+            "body": "<p>Chapter 1 explains why the first try felt like a gimmick, and Chapter 3 gives you the brief that changes the result.</p>"
+          },
+          {
+            "title": "Your workplace now expects you to use it.",
+            "body": "<p>The Introduction covers why the baseline has shifted, and Part 2 gets you set up with one tool you can trust.</p>"
+          },
+          {
+            "title": "People at work ask you about it.",
+            "body": "<p>Chapter 7's three questions help a team settle on one tool, and the roles in Appendix G give everyone a shared starting point.</p>"
+          },
+          {
+            "title": "You write, summarise or analyse for a living.",
+            "body": "<p>Chapter 9 runs you through six exercises on that kind of work, and Appendix E gives you 25 prompts for it.</p>"
+          },
+          {
+            "title": "You want a method you can repeat.",
+            "body": "<p>CLEAR ties the book together: choose your tool, lead with clear direction, evolve the output, audit it, and repeat it until it's a practice.</p>"
+          },
+          {
+            "title": "You want a reference on your desk.",
+            "body": "<p>The appendices and quick reference card are built to stay open while you work.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "id": "marcus",
+      "type": "timeline",
+      "data": {
+        "bg": "",
+        "anchor": "marcus",
+        "eyebrow": "Marcus is a character from the book, a composite",
+        "heading": "Marcus closed the tab for two months. Then he learned to brief it.",
+        "intro": "",
+        "steps": [
+          {
+            "tag": "Ch 3",
+            "title": "One bad first try",
+            "line": "He typed a vague question and got a generic list.",
+            "body": "<p>Marcus managed product launches at a mid-sized software company. He typed &ldquo;best go-to-market strategy for B2B SaaS&rdquo; and got a list he could have found on any marketing blog. He didn't open the tool again for two months.</p>"
+          },
+          {
+            "tag": "Ch 3",
+            "title": "Three minutes of direction",
+            "line": "A colleague nudged him back, and he tried a proper brief.",
+            "body": "<p>He gave the model his product, his timeline, his team size and the two obstacles his sales team kept hitting. He brought the working first draft to leadership that afternoon.</p>"
+          },
+          {
+            "tag": "Ch 14",
+            "title": "A library that grows",
+            "line": "Six months in, he had fourteen saved templates.",
+            "body": "<p>Product launches stopped feeling hard, and his manager started handing him the cross-functional problems that tend to come before a promotion. Each saved template made the next task faster.</p>"
+          },
+          {
+            "tag": "Ch 15",
+            "title": "Senior Director",
+            "line": "Promoted that spring, with a method his team copied.",
+            "body": "<p>Within six weeks of his first strategy review, his team had adapted his brief for their own work. More than twenty templates lived in a shared folder by the end of the year, and he never asked anyone to use them.</p>"
+          }
+        ],
+        "buy": {
+          "spaced": false,
+          "style": "",
+          "bid": "buy-marcus",
+          "aria": "Start where Marcus started: get the book on Amazon",
+          "label": "Start where Marcus started &rarr;",
+          "avail": "",
+          "price": "",
+          "sample": ""
+        }
+      }
+    },
+    {
+      "id": "plan",
+      "type": "timeline",
+      "data": {
+        "bg": "tint",
+        "anchor": "plan",
+        "eyebrow": "",
+        "heading": "Your first week, then your first three months.",
+        "intro": "Chapter 14 turns what you read into a practice plan.",
+        "steps": [
+          {
+            "tag": "First week · Quick-start",
+            "title": "One real task a day, with low stakes.",
+            "line": "",
+            "body": "<p>Each workday, use AI for one task that needs doing anyway: an email, a summary, an outline or some research for a decision. Keep the stakes low enough that a mistake costs nothing. Save the first prompt that works (Ch 5 shows you how).</p>"
+          },
+          {
+            "tag": "Month 1 · Make it habitual",
+            "title": "Reaching for AI becomes your default.",
+            "line": "",
+            "body": "<p>Keep one real task a day. At the end of each week, find one task you did more than once and save a template for it. You'll know it's working when you stop asking whether to use AI for something and just use it.</p>"
+          },
+          {
+            "tag": "Month 2 · Make it strategic",
+            "title": "You can say why a good output was good.",
+            "line": "",
+            "body": "<p>Sharpen the templates that needed fixing every time. Try ranking the details that matter most and putting them first. On one complex task, ask AI to interview you before it answers.</p>"
+          },
+          {
+            "tag": "Month 3 · Make it systematic",
+            "title": "Your prompt library becomes part of how you work.",
+            "line": "",
+            "body": "<p>Organise your library by task, workflow or audience. The book pictures a Tuesday at week twelve where a request that once ate your afternoon becomes a strong draft twenty minutes later.</p>"
+          }
+        ],
+        "buy": null
+      }
+    },
+    {
+      "id": "verify",
+      "type": "story-strip",
+      "data": {
+        "bg": "",
+        "anchor": "verify",
+        "heading": "AI can sound certain and still be wrong. Two steps catch it.",
+        "intro": "A story from Chapter 13 about two colleagues and one confident number.",
+        "panels": [
+          {
+            "label": "1 · Same prompt",
+            "text": "Diana and James asked AI for a market size for the same client pitch. It came back confident, with a growth rate to the decimal."
+          },
+          {
+            "label": "2 · James",
+            "text": "He pasted the number into his slide and moved on. It looked right and read right."
+          },
+          {
+            "label": "3 · Diana",
+            "text": "She paused and checked where the figure came from before it went on a slide."
+          },
+          {
+            "label": "4 · The meeting",
+            "text": "The client flagged James's number as outdated. He spent fifteen minutes explaining. Diana spent thirty seconds citing her source."
+          }
+        ],
+        "note": "Diana and James are characters from the book, composites.",
+        "cards": [
+          {
+            "tag": "Step one",
+            "title": "Sort the claim",
+            "line": "Is it a fact, a judgment call or a creative draft?",
+            "body": "<p>Facts can be flatly right or wrong, so that's where your checking goes. Judgment calls get your own judgment, and drafts get judged on fit.</p>"
+          },
+          {
+            "tag": "Step two",
+            "title": "Match effort to stakes",
+            "line": "A glance for small things, and an expert for big ones.",
+            "body": "<p>A book suggestion gets a quick look. A figure going in front of a client gets a real check. Legal, financial or medical claims go to a professional.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tax",
+      "type": "cost-curve",
+      "data": {
+        "bg": "tint",
+        "anchor": "tax",
+        "heading": "Waiting has a cost, and the book calls it the Foundation Tax.",
+        "quote": "&ldquo;The most expensive time to learn something is right after you needed it.&rdquo;",
+        "quote_source": "Chapter 5",
+        "chart_label": "Two curves: starting early climbs gently, starting late climbs steeply after the skill is already expected",
+        "early_label": "Start early",
+        "late_label": "Start late",
+        "axis_label": "Time",
+        "cards": [
+          {
+            "title": "What the tax is",
+            "line": "The extra cost of learning a skill after it's expected (Ch 5).",
+            "body": "<p>The book defines it as &ldquo;the extra cost, in time, energy, and credibility, that deferred learning charges when the environment already assumes a fluency you haven't built.&rdquo; It builds slowly and then shows up all at once.</p>"
+          },
+          {
+            "title": "What two early weeks bought",
+            "line": "Priya's head start came from her calendar (Ch 5, a character from the book).",
+            "body": "<p>She practised for two weeks in January while the learning curve was forgiving. Within a few months she had close to two days a week back. The book's advice is to start while free tiers and patient teams still make practice cheap.</p>"
+          }
+        ],
+        "banner": "The cheapest place to start is <strong>one brief on one real task this week.</strong>"
+      }
+    },
+    {
+      "id": "about",
+      "type": "author-cards",
+      "data": {
+        "bg": "grey",
+        "anchor": "about",
+        "photo": "/img/headshot.jpg",
+        "photo_alt": "Elvin M. Peters",
+        "eyebrow": "About the author",
+        "heading": "A marketer who spent years directing AI at work.",
+        "intro": "I spent a decade in marketing, most of it teaching ad algorithms what good results looked like. On both sides of the table I met capable people getting a fraction of what AI could give them, so I wrote this book for them.",
+        "cards": [
+          {
+            "tag": "At a large Canadian fintech",
+            "title": "I ran $40M+ in profitable ad spend over three years.",
+            "body": "<ul>\n          <li>Cut the cost per funded loan by more than half by teaching the bidding algorithms what a good customer looked like</li>\n          <li>Ran spend across two regulated brands, where every campaign passed legal review before launch</li>\n          <li>Hand-built 250+ location pages that brought in $74,000 in organic revenue within six months</li>\n        </ul>"
+          },
+          {
+            "tag": "At an adtech giant building AI",
+            "title": "I advised the media teams at big advertisers.",
+            "body": "<p>AI cut my account audits from hours to minutes. That freed my time for the part that needed a person: shaping the recommendation for each client.</p>"
+          },
+          {
+            "tag": "Today",
+            "title": "I write and build with AI full-time in Toronto.",
+            "body": "<p>I built this site and its email system by directing AI, along with 20+ working tools in 2026. I taught myself to build this way, and the book teaches the same method from the first brief up.</p>"
+          }
+        ],
+        "series": [
+          {
+            "live": true,
+            "status": "Book one · Out now",
+            "title": "The Artificial Advantage"
+          },
+          {
+            "live": false,
+            "status": "Book two · In progress",
+            "title": "The Systematic Advantage"
+          },
+          {
+            "live": false,
+            "status": "Book three · Planned",
+            "title": "The Agentic Advantage"
+          }
+        ],
+        "after": "<a href=\"https://www.linkedin.com/in/elvinmpeters\" target=\"_blank\" rel=\"noopener\">Find me on LinkedIn &rarr;</a>"
+      }
+    },
+    {
+      "id": "formats",
+      "type": "format-picker",
+      "data": {
+        "bg": "",
+        "anchor": "formats",
+        "heading": "Pick your format, or read a chapter free first.",
+        "price": "See the price in your region on Amazon",
+        "formats": [
+          {
+            "name": "Kindle",
+            "blurb": "Start reading tonight.",
+            "bid": "buy-format-kindle",
+            "aria": "Get it on Kindle",
+            "label": "Get it on Kindle &rarr;"
+          },
+          {
+            "name": "Paperback",
+            "blurb": "Keep it open beside your keyboard for the appendices.",
+            "bid": "buy-format-paperback",
+            "aria": "Get the paperback",
+            "label": "Get the paperback &rarr;"
+          },
+          {
+            "name": "Hardcover",
+            "blurb": "The shelf copy, or a gift for the friend who gave up on AI.",
+            "bid": "buy-format-hardcover",
+            "aria": "Get the hardcover",
+            "label": "Get the hardcover &rarr;"
+          }
+        ],
+        "team": "Getting a team started? One copy per person gives everyone the same method and the same starting prompts.",
+        "cards": [
+          {
+            "title": "Chapter 8 is free on this site",
+            "line": "Which AI mode fits which job.",
+            "body": "<p>Read it tonight with nothing to buy. If the way it's written works for you, the rest of the book reads the same way. <a href=\"/free/free-chapter/\">Read Chapter 8 free &rarr;</a></p>"
+          },
+          {
+            "title": "Amazon's standard returns",
+            "line": "The usual Amazon rules cover your order.",
+            "body": "<p>Every format is bought on Amazon, so Amazon's standard returns apply.</p>"
+          }
+        ]
+      }
+    },
+    {
+      "id": "faq",
+      "type": "faq",
+      "data": {
+        "bg": "tint",
+        "anchor": "faq",
+        "heading": "Questions people ask before they buy",
+        "items": [
+          {
+            "q": "Do I need a technical background?",
+            "a": "None. The book is written for professionals with no technical training. If you can write an email, you can use everything in it."
+          },
+          {
+            "q": "Which AI tool does it use?",
+            "a": "It works with ChatGPT, Claude, Gemini and Copilot. Part 2 helps you pick one, and the directing skill carries over to all of them."
+          },
+          {
+            "q": "Will it go out of date when the tools change?",
+            "a": "The book teaches you how to direct AI, and that skill carries over from one model to the next. The product names will keep changing, and your briefs will keep working."
+          },
+          {
+            "q": "I already use AI at work. Is it still for me?",
+            "a": "Yes, if your results are hit and miss. The frameworks turn scattered habits into a method you can repeat, and the appendices give you prompts and fixes to keep beside your work."
+          },
+          {
+            "q": "What if AI gets something wrong?",
+            "a": "Chapter 13 gives you a two-step check: sort the claim, then match your checking to the stakes. Appendix F covers invented facts and nine other common failures, each with a corrective prompt."
+          },
+          {
+            "q": "I'm a manager. Can my team use it?",
+            "a": "Yes. Chapter 7 helps a team settle on one tool, and the saved-template habit gives everyone prompts to share. One copy per person keeps the whole team on the same method."
+          },
+          {
+            "q": "Can I read some of it first?",
+            "a": "Yes. <a href=\"/free/free-chapter/\">Chapter 8 is free to read</a>, and it shows you which AI mode fits which job."
+          }
+        ],
+        "buy": {
+          "spaced": false,
+          "style": "margin-top:26px",
+          "bid": "buy-faq",
+          "aria": "Get your copy on Amazon",
+          "label": "Get your copy on Amazon &rarr;",
+          "avail": "",
+          "price": "",
+          "sample_href": "/free/free-chapter/",
+          "sample": "Read Chapter 8 free: which AI mode fits which job &rarr;"
+        }
+      }
+    },
+    {
+      "id": "close",
+      "type": "close",
+      "data": {
+        "bg": "",
+        "anchor": "book",
+        "image": "/img/book-desk.webp",
+        "image_alt": "The Artificial Advantage paperback on a desk",
+        "heading": "You tried AI once. Give it a proper brief this time.",
+        "lede": "<em>The Artificial Advantage</em> shows you how, one real work task at a time.",
+        "value": "",
+        "summary": {
+          "points": [
+            "15 chapters, one method",
+            "8 appendices and a quick reference card",
+            "Kindle, paperback, hardcover",
+            "Chapter 8 free"
+          ]
+        },
+        "note": {
+          "text": "I wrote this book for the capable people I kept meeting who were getting a fraction of what AI could give them. If you've been one of them, pick one real task this week and give AI a proper brief. The book will show you the rest.",
+          "sig": "Elvin"
+        },
+        "buy": {
+          "spaced": false,
+          "style": "",
+          "bid": "buy-close",
+          "aria": "Get The Artificial Advantage on Amazon",
+          "label": "Get The Artificial Advantage &rarr;",
+          "avail": "",
+          "price": "See the price in your region on Amazon",
+          "sample_href": "/free/free-chapter/",
+          "sample": "Read Chapter 8 free: which AI mode fits which job &rarr;"
+        },
+        "ps": "<b>P.S.</b> If you skimmed straight here, this is the whole deal. The book teaches you to brief AI the way you'd brief a sharp new hire, and the back of the book gives you prompts, roles and fixes to keep beside your keyboard. The book's Foundation Tax says every month you wait makes the skill cost more to learn, so the cheapest start is Chapter 8, free, tonight."
+      }
+    },
+    {
+      "id": "newsletter",
+      "type": "newsletter",
+      "data": {
+        "bg": "tint",
+        "anchor": "newsletter",
+        "eyebrow": "Not ready yet?",
+        "heading": "Get one useful AI email a month.",
+        "text": "The AI news worth knowing, tips you can use that week, and a note from the book. It lands on the first of every month.",
+        "source": "newsletter-home-long",
+        "placeholder": "you@work.com",
+        "button": "Send me the monthly update",
+        "fine_print": "Free. Unsubscribe anytime.",
+        "success": "You're in. Look for it on the first of the month, and check your promotions tab if it isn't in your inbox.",
+        "after": "More free guides live on the <a href=\"/free/\">free guides page</a>."
+      }
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "label": "Reviews",
+  "about": "The Amazon review(s) verbatim, plus labelled lines from early readers.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "grid",
+      "type": "bool",
+      "label": "Grid layout (room for up to six reviews)"
+    },
+    {
+      "key": "review_note",
+      "type": "text",
+      "label": "Where the review text was checked"
+    },
+    {
+      "key": "reviews",
+      "type": "list",
+      "label": "Amazon reviews (verbatim only)",
+      "fields": [
+        {
+          "key": "stars_label",
+          "type": "text",
+          "label": "Stars, read aloud"
+        },
+        {
+          "key": "stars",
+          "type": "text",
+          "label": "Stars"
+        },
+        {
+          "key": "badge",
+          "type": "text",
+          "label": "Badge"
+        },
+        {
+          "key": "title",
+          "type": "html",
+          "label": "Review title"
+        },
+        {
+          "key": "paras",
+          "type": "list",
+          "label": "Paragraphs"
+        },
+        {
+          "key": "meta",
+          "type": "html",
+          "label": "Reviewer line"
+        },
+        {
+          "key": "link",
+          "type": "html",
+          "label": "Link text"
+        }
+      ]
+    },
+    {
+      "key": "todo",
+      "type": "text",
+      "label": "Note for editors",
+      "hidden": true
+    },
+    {
+      "key": "friends",
+      "type": "list",
+      "label": "Early readers",
+      "fields": [
+        {
+          "key": "quote",
+          "type": "html",
+          "label": "Quote"
+        },
+        {
+          "key": "who",
+          "type": "text",
+          "label": "Who said it"
+        }
+      ]
+    },
+    {
+      "key": "after",
+      "type": "html",
+      "label": "Line after (optional)"
+    }
+  ]
+}

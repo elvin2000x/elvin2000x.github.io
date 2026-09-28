@@ -1,0 +1,25 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <span class="eyebrow">{{eyebrow}}</span>
+    <h2>{{heading}}</h2>
+    <p class="lede">{{intro}}</p>
+    <p class="rtc-key" aria-hidden="true"><span><i class="rtc-r"></i>Role</span><span><i class="rtc-t"></i>Task</span><span><i class="rtc-c"></i>Constraint</span></p>
+    <div class="swipe">
+{{#cases}}
+      <div class="demo-case">
+        {{>chats}}
+        <details class="more more--sm"><summary>{{parts_label}}</summary>
+{{#parts}}
+          <p><span class="rtc-{{kind}}">{{label}}</span> {{text}}</p>
+{{/parts}}
+        </details>
+      </div>
+{{/cases}}
+    </div>
+    <p class="swipe-hint">{{hint}}</p>
+    <p class="pullline">{{pullline}}</p>
+{{#buy}}
+    {{>buybox}}
+{{/buy}}
+  </div>
+</section>

@@ -1,0 +1,13 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <h2>{{heading}}</h2>
+    <div class="faq">
+{{#items}}
+      <details><summary>{{q}}</summary><p>{{a}}</p></details>
+{{/items}}
+    </div>
+{{#buy}}
+    {{>buybox}}
+{{/buy}}
+  </div>
+</section>

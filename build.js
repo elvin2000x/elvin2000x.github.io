@@ -185,7 +185,12 @@ const REGIONS_DONE = new Set();
 function applyRegions(pagePath, regions) {
   const src = path.join(REGIONS_DONE.has(pagePath) ? OUT : DIR, pagePath);
   REGIONS_DONE.add(pagePath);
-  let html = fs.readFileSync(src, 'utf8');
+  const html = fillRegions(fs.readFileSync(src, 'utf8'), pagePath, regions);
+  const dest = path.join(OUT, pagePath);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.writeFileSync(dest, html);
+}
+function fillRegions(html, pagePath, regions) {
   for (const [name, render] of Object.entries(regions)) {
     // A marker may carry a note after the name: <!-- ep:nav (why) -->
     const open = new RegExp('([ \t]*)<!-- ep:' + name + '(?: [^>]*?)? -->\r?\n');
@@ -198,9 +203,7 @@ function applyRegions(pagePath, regions) {
     if (end < start) throw new Error(pagePath + ': region ep:' + name + ' inverted');
     html = html.slice(0, start) + render() + '\n' + html.slice(end);
   }
-  const dest = path.join(OUT, pagePath);
-  fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.writeFileSync(dest, html);
+  return html;
 }
 
 /* ---- money pages: /claude/ and /content-machine/ ----------------------
@@ -421,12 +424,22 @@ function renderCompare() {
 
 console.log('Regions applied: claude/index.html (hero, price), content-machine/index.html (hero, price)');
 
-// Homepage v3 is hand-written; its only CMS region is the nav (buy-bar style,
-// own three links, see nav.json pages["index.html"]). Its review block is
-// hand-written too until slice 2 moves the homepage onto the section engine.
-applyRegions('index.html', {
-  'nav': () => renderNav('index.html'),
-});
+// Stack pages (Site Studio slice 2, 2026-09-27): the homepage and every
+// content/page-*.json are built by the section engine (sections.js) from the
+// stack's sections plus its frame in sections/_frames/. content/homepage.json
+// says which stack is "/"; the others build at their preview_path. Each output
+// carries a GENERATED banner, and verify.js fails a hand edit. The homepage v3
+// frame keeps its ep:nav region, filled here like every other page's nav.
+const STACK_SITE = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'site.json'), 'utf8'));
+const stackPages = require('./sections.js').buildAll(path.join(DIR, 'content'), { site: STACK_SITE });
+for (const p of stackPages) {
+  const html = p.file === 'index.html' && /<!-- ep:nav[ >]/.test(p.html)
+    ? fillRegions(p.html, p.file, { 'nav': () => renderNav('index.html') }) : p.html;
+  const dest = path.join(OUT, p.file);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.writeFileSync(dest, html);
+}
+console.log('Stack pages: ' + stackPages.map(p => p.file + ' (' + p.name + (p.stub ? ', redirect' : '') + ')').join(', '));
 // book.html (nav) no longer applied: the page is a redirect stub since 2026-09-27.
 // Every other page in nav.json gets its nav from the same renderer, so the menu
 // cannot drift between pages. index/book are applied above with their other regions.

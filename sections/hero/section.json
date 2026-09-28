@@ -1,0 +1,19 @@
+{
+  "label": "Hero",
+  "about": "The first screen: the headline, one line under it, the buy button and the book cover.",
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor id (optional)" },
+    { "key": "eyebrow", "type": "text", "label": "Small line above the headline (optional)" },
+    { "key": "headline", "type": "html", "label": "Headline" },
+    { "key": "sub", "type": "html", "label": "Line under the headline" },
+    { "key": "hook_note", "type": "text", "label": "Note for the ad-segment hook line", "hidden": true },
+    { "key": "review", "type": "object", "label": "Review teaser (optional)", "fields": [
+      { "key": "quote", "type": "html", "label": "Quote" },
+      { "key": "source", "type": "text", "label": "Source" }
+    ] },
+    { "key": "buy", "type": "buybox", "label": "Buy box" },
+    { "key": "trust", "type": "html", "label": "Trust line" },
+    { "key": "image", "type": "text", "label": "Cover image" },
+    { "key": "image_alt", "type": "text", "label": "Cover image description" }
+  ]
+}
