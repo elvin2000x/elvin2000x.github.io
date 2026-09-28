@@ -11,7 +11,7 @@ const ROOT = __dirname;
 // Pages excluded from every check: other businesses, retired stubs, parked
 // component fragments (components/: not pages, styled by the page that embeds them),
 // generated-elsewhere pipelines, binaries.
-const EXCLUDE = /^essays([\/]|$)|^(titles|books|play|book1-feedback|oto|dl|studio|components|sections)([\\/]|$)|^index_v[0-9]\.html$|^apps\/index\.html$|^system\/index\.html$|^writing\/_homepage_cards\.html$|^toolkit\/index\.html$|^google-ads-audit\/index\.html$/;
+const EXCLUDE = /^essays([\/]|$)|^(titles|books|book1-feedback|oto|dl|studio|components|sections)([\\/]|$)|^index_v[0-9]\.html$|^system\/index\.html$|^toolkit\/index\.html$|^google-ads-audit\/index\.html$/;
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
@@ -19,6 +19,49 @@ const BOOK_ASIN = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'
 const fails = [], warns = [];
 function fail(f, msg) { fails.push(f + ': ' + msg); }
 function warn(f, msg) { warns.push(f + ': ' + msg); }
+
+// epeters.ca (ticket #12, 2026-09-27). The public address stays elvin@elvinpeters.com;
+// epeters.ca mail is private routing, so that address never ships. The domain itself may
+// appear only as a UTM-tagged link from .com (footer "Fun stuff", cross-links) or as a
+// moved-section stub's target. Anything else is the old tripwire's incident again.
+const isMovedStub = html => html.includes('<!-- ep:moved-stub -->');
+function epcaTripwire(html) {
+  const out = [];
+  if (/elvin@epeters\.ca/i.test(html)) out.push('stale-truth tripwire: elvin@epeters.ca (public address is elvin@elvinpeters.com)');
+  let rest = html.replace(/href="https:\/\/epeters\.ca\/[^"]*[?&](?:amp;)?utm_source=elvinpeters\.com[^"]*"/g, '');
+  if (isMovedStub(html)) {
+    const to = (html.match(/<link rel="canonical" href="(https:\/\/epeters\.ca\/[^"]*)"/) || [])[1];
+    if (to) rest = rest.split(to).join('');
+  }
+  if (/epeters\.ca/i.test(rest)) out.push('stale-truth tripwire: epeters.ca outside a UTM-tagged link or a moved-section stub');
+  return out;
+}
+function movedStubCheck(html) {
+  const out = [], to = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
+  if (!to || !to.startsWith('https://epeters.ca/')) return ['moved stub without an epeters.ca canonical'];
+  if (!/<meta name="robots" content="noindex/.test(html)) out.push('moved stub is not noindex');
+  if (!html.includes(`<meta http-equiv="refresh" content="0; url=${to}">`)) out.push('moved stub refresh does not match its canonical');
+  // Calculators read ?amount= and posts use #anchors, so the JS redirect must carry both.
+  if (!html.includes(`location.replace('${to}' + location.search + location.hash)`)) out.push('moved stub JS redirect drops the query string or hash');
+  return out;
+}
+// Done-test: the tripwire must still catch the address and must pass a real stub and footer.
+(function () {
+  const stub = `<!-- ep:moved-stub --><meta name="robots" content="noindex, follow"><link rel="canonical" href="https://epeters.ca/apps/calculators/mortgage-payment/"><script>location.replace('https://epeters.ca/apps/calculators/mortgage-payment/' + location.search + location.hash);</script><meta http-equiv="refresh" content="0; url=https://epeters.ca/apps/calculators/mortgage-payment/"><a href="https://epeters.ca/apps/calculators/mortgage-payment/">Go</a>`;
+  const foot = '<a href="https://epeters.ca/?utm_source=elvinpeters.com&utm_medium=footer&utm_campaign=crosslink">Fun stuff</a>';
+  const cases = [
+    ['planted elvin@epeters.ca', '<a href="mailto:elvin@epeters.ca">mail</a>', true],
+    ['bare epeters.ca link', '<a href="https://epeters.ca/play/">Play</a>', true],
+    ['epeters.ca in copy', '<p>See epeters.ca</p>', true],
+    ['address on a stub', stub + 'elvin@epeters.ca', true],
+    ['moved stub', stub, false],
+    ['footer cross-link', foot, false],
+  ];
+  for (const [name, html, shouldFail] of cases)
+    if ((epcaTripwire(html).length > 0) !== shouldFail) fail('verify.js', `tripwire done-test "${name}" expected ${shouldFail ? 'FAIL' : 'pass'}`);
+  if (movedStubCheck(stub).length) fail('verify.js', 'stub done-test: ' + movedStubCheck(stub).join('; '));
+  if (!movedStubCheck(stub.replace(" + location.search + location.hash", '')).length) fail('verify.js', 'stub done-test: a redirect that drops ?amount= passed');
+})();
 
 function* htmlFiles(dir, rel) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -29,7 +72,14 @@ function* htmlFiles(dir, rel) {
   }
 }
 
-const PAGES = [...htmlFiles(ROOT, '')];
+// Moved-section stubs are only redirects (ticket #12): their own checks, none of the page checks.
+const MOVED_STUBS = [], PAGES = [];
+for (const rel of htmlFiles(ROOT, ''))
+  (isMovedStub(fs.readFileSync(path.join(ROOT, rel), 'utf8')) ? MOVED_STUBS : PAGES).push(rel);
+for (const rel of MOVED_STUBS) {
+  const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  for (const msg of [...epcaTripwire(html), ...movedStubCheck(html)]) fail(rel, msg);
+}
 
 for (const rel of PAGES) {
   const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -39,8 +89,9 @@ for (const rel of PAGES) {
   if (!html.includes('1699232654449762') && html.includes('G-CLZ7N26J1Q')) warn(rel, 'missing Meta pixel');
 
   // STALE-TRUTH tripwires (these were real incidents).
-  for (const bad of ['elvin2000x.github.io', 'epeters.ca', 'href="/#apps"', 'href="/#games"', 'beehiiv'])
+  for (const bad of ['elvin2000x.github.io', 'href="/#apps"', 'href="/#games"', 'beehiiv'])
     if (html.includes(bad)) fail(rel, 'stale-truth tripwire: ' + bad);
+  for (const msg of epcaTripwire(html)) fail(rel, msg);
 
   // ASIN: every Amazon product link is the book in content/site.json amazon_url (one source of truth).
   for (const m of html.matchAll(/amazon\.[a-z.]+\/(?:[^"'\s]*\/)?dp\/([A-Z0-9]{10})/g))
@@ -168,18 +219,13 @@ function* builtHtml(dir, rel) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ep-verify-'));
   try {
     execFileSync(process.execPath, [path.join(ROOT, 'build.js'), '--out', tmp], { stdio: 'pipe' });
-    // Slugs come from the registry, not a hardcoded list, so a new post is
-    // covered by this check automatically instead of slipping through on a WARN.
-    // Drafts are excluded because a real build never writes them.
-    const reg = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'essays.json'), 'utf8'));
-    const slugs = (Array.isArray(reg) ? reg : reg.posts).filter(e => !e.draft).map(e => e.slug);
     // Stack pages (the homepage and every content/page-*.json output, slice 2):
     // the section engine owns the whole file, so any hand edit fails here.
     const site = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'site.json'), 'utf8'));
     const stackFiles = new Set(require(path.join(ROOT, 'sections.js'))
       .buildAll(path.join(ROOT, 'content'), { site }).map(p => p.file));
-    const gen = [...new Set(['index.html', ...stackFiles, 'writing/index.html', 'writing/_homepage_cards.html'].concat(
-      slugs.map(s => 'writing/' + s + '/index.html')))];
+    // The blog moved to epeters.ca (ticket #12): writing/ is stubs now, built there.
+    const gen = [...new Set(['index.html', ...stackFiles])];
     for (const g of gen) {
       const a = path.join(ROOT, g), b = path.join(tmp, g);
       if (!fs.existsSync(a) || !fs.existsSync(b)) { warn(g, 'missing from build comparison'); continue; }
@@ -391,8 +437,8 @@ for (const rel of PAGES) {
 // KEY PAGES exist and are non-trivial. links/index.html is not here: since #258 it is
 // a small forwarder to links.elvinpeters.com, by design.
 // book.html is not here either: since 2026-09-27 it is a redirect stub to the homepage.
-for (const key of ['index.html', 'services/index.html', 'contact/index.html',
-  'projects/index.html', 'writing/index.html']) {
+// projects/ and writing/ are not here: since ticket #12 they are stubs to epeters.ca.
+for (const key of ['index.html', 'services/index.html', 'contact/index.html']) {
   try {
     if (fs.statSync(path.join(ROOT, key)).size < 2000) fail(key, 'suspiciously small');
   } catch (e) { fail(key, 'MISSING'); }
@@ -415,4 +461,4 @@ if (fails.length) {
   for (const f of fails) console.log('  ✗ ' + f);
   process.exit(1);
 }
-console.log('verify: GREEN (' + PAGES.length + ' pages checked, ' + warns.length + ' warnings)');
+console.log('verify: GREEN (' + PAGES.length + ' pages checked, ' + MOVED_STUBS.length + ' moved stubs, ' + warns.length + ' warnings)');
