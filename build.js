@@ -495,6 +495,14 @@ function langsFor(page) { return hasFr(page) ? LANGS : ['en']; }
 // keeps pointing at the English URL, which is honest and avoids 404s.
 const FR_TWINS = new Set(PAGES.filter(hasFr).map(p => '/' + p.slug + '/'));
 
+/* Unlisted pages (nav.json "unlisted", 2026-09-27): off every menu, noindex and
+   so out of the sitemap. Their addresses keep working. Takes a site path. */
+function isUnlisted(p) {
+  const r = String(p).replace(/^https?:\/\/[^/]+/, '').replace(/^\//, '');
+  const hit = l => (l || []).some(u => r === u || r.startsWith(u));
+  return hit(NAVC.unlisted) && !hit(NAVC.unlistedExcept);
+}
+
 function stripTags(s) { return String(s).replace(/<[^>]*>/g, ''); }
 function attr(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;'); }
 
@@ -750,11 +758,14 @@ const CONTACT_ICONS = {
    they drift, and they are invisible on the rendered page. */
 function renderShell(o) {
   const L = I18N.locales[o.lang];
+  // Every generated page is a sales page: pinned light, no toggle (Rule 34).
+  // js/site.js honours data-theme-lock, so a saved "dark" cannot flip it.
   return `<!DOCTYPE html>
-<html lang="${L.htmlLang}">
+<html lang="${L.htmlLang}" data-theme="light" data-theme-lock>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">${isUnlisted(o.selfUrl) ? `
+<meta name="robots" content="noindex">` : ''}
 <title>${esc(o.title)}</title>
 <meta name="description" content="${attr(o.description)}">
 <link rel="canonical" href="${o.selfUrl}">${o.hasFr === false ? `
@@ -796,7 +807,7 @@ ${renderNavL(o.navKey, o.lang, o.slug, o.hasFr !== false)}
 ${o.body}
 <footer><div class="container">
   <span>${esc(I18N.footer[o.lang].copyright)}</span>
-  <span>${I18N.footer[o.lang].links.map(l => `<a href="${loc(l.href, o.lang)}">${esc(l.label)}</a>`).join(' &middot; ')}</span>
+  <span>${NAVC.footerLinks.map(l => `<a href="${loc(l.href, o.lang)}"${EXT(l)}>${esc(tnav(l.label, o.lang))}</a>`).join(' &middot; ')}</span>
 </div></footer>
 </body>
 </html>
@@ -1469,9 +1480,19 @@ function llmsList(title, rows) {
 function llmsAbs(href) {
   return /^https?:/.test(href) ? href : ORIGIN + href;
 }
+/* Unlisted pages stay out of llms.txt too, the same as the sitemap. A product
+   whose page is a noindex redirect stub (the parked $37 System) is left out
+   the same way. */
+function llmsListed(href) {
+  if (/^https?:/.test(href) && !href.startsWith(ORIGIN)) return true;
+  if (isUnlisted(href)) return false;
+  const rel = href.replace(ORIGIN, '').replace(/^\//, '').replace(/[#?].*$/, '');
+  const f = path.join(DIR, rel === '' || rel.endsWith('/') ? rel + 'index.html' : rel);
+  return !(fs.existsSync(f) && /<meta name="robots" content="[^"]*noindex/i.test(fs.readFileSync(f, 'utf8')));
+}
 for (const b of SVCS.buckets) {
   llmsList('Services - ' + b.label, SVCS.cards
-    .filter(c => c.bucket === b.id)
+    .filter(c => c.bucket === b.id && llmsListed(c.href))
     .map(c => '- [' + c.title + '](' + llmsAbs(c.href) + '): ' + c.home_blurb));
 }
 /* A few Products entries are menu affordances rather than names -- the nav
@@ -1481,27 +1502,25 @@ for (const b of SVCS.buckets) {
 const LLMS_GENERIC = new Set(['Learn more', 'Buy on Amazon', 'The series']);
 for (const b of PRODS.buckets) {
   llmsList('Products - ' + b.label, PRODS.items
-    .filter(i => i.bucket === b.id)
+    .filter(i => i.bucket === b.id && llmsListed(i.href))
     .map(i => LLMS_GENERIC.has(i.title)
       ? '- [' + i.sub + '](' + llmsAbs(i.href) + '): ' + i.title
       : '- [' + i.title + '](' + llmsAbs(i.href) + '): ' + i.sub));
 }
-llmsList('French', PAGES.filter(hasFr)
+llmsList('French', PAGES.filter(p => hasFr(p) && !isUnlisted('/' + p.slug + '/'))
   .sort((a, b) => a.slug.localeCompare(b.slug))
   .map(p => '- [' + p.fr.title.split(' | ')[0] + '](' + ORIGIN + '/fr/' + p.slug + '/): ' +
     'French (Canada) version of ' + ORIGIN + '/' + p.slug + '/'));
 llmsList('Contact', [
-  '- [Contact](' + ORIGIN + '/contact/): send a message or book a call',
-  '- [Book a call](' + SITE.meet_url + '): scheduler',
+  '- [Contact](' + ORIGIN + '/contact/): send a message; a person reads every one',
   '- Email: ' + SITE.email
 ]);
 const llmsTxt =
   '# Elvin Peters\n\n' +
-  '> Toronto AI consultant and author of The Artificial Advantage. I help teams\n' +
-  '> install AI that ships, run better Google Ads, and train staff to use AI well.\n\n' +
-  'Independent consultant, not an agency: the person who scopes the work is the\n' +
-  'person who does it. Commercial pages are published in English and Canadian\n' +
-  'French; the French translations are marked below.\n\n' +
+  '> Toronto author of The Artificial Advantage, Book One of the AI Fluency series.\n' +
+  '> I write practical guides that help working professionals get real results from AI.\n\n' +
+  'Start with the book, the free AI Toolkit (' + ORIGIN + '/free/) or the newsletter\n' +
+  '(' + ORIGIN + NAVC.footerLinks.find(l => l.label === 'Newsletter').href + '). French translations are marked below.\n\n' +
   llmsSections.join('\n\n') + '\n\n' +
   '## Notes\n\n' +
   '- Full URL list: ' + ORIGIN + '/sitemap.xml\n' +
