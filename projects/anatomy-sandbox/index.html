@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="anatomy-data" content="https://api.elvinpeters.com/anatomy-sandbox/"><meta name="anatomy-campus" content="https://api.elvinpeters.com/anatomy-campus/"><meta name="robots" content="noindex"><meta name="description" content="A 3D human from the Z-Anatomy atlas: skin, fat, fascia, muscles and bones you can peel back, pose, walk and put through exercise reps."><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui,sans-serif;background:#fafaf9}img{max-width:100%}[hidden]{display:none!important}</style><!-- pwa #421 --><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b7469"><link rel="apple-touch-icon" href="icon-192.png"><script src="pwa.js" defer></script></head><body><title>Anatomy Sandbox</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="anatomy-data" content="https://api.elvinpeters.com/anatomy-sandbox/"><meta name="anatomy-campus" content="https://api.elvinpeters.com/anatomy-campus/"><meta name="robots" content="noindex"><meta name="description" content="A 3D human from the Z-Anatomy atlas: skin, fat, fascia, muscles and bones you can peel back, pose, walk and put through exercise reps."><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui,sans-serif;background:#fafaf9}img{max-width:100%}[hidden]{display:none!important}</style><meta name="anatomy-data-v" content="data/exercises.bin=0b6238d5c4 data/info.bin=e750e6ab2c data/parts.json=eae380addd data/rig.json=402a5fb90c models/attachments.bin=780370bccd models/attachments.skin=fa7700f6b8 models/bones.bin=53ff782a45 models/fascia.bin=24a1c38ffc models/fascia.skin=82e45a3dbb models/fat.bin=15f0f96256 models/fat.fat=290fe316bb models/fat.fem=54152884da models/fat.skin=0b124b2916 models/joints.bin=c995017a20 models/joints.skin=54f4c3b3af models/lymph.bin=67b1441db4 models/lymph.skin=4b8e221304 models/muscles.bin=c76ce26b8d models/muscles.skin=9e8b31e6b1 models/nerves.bin=b438bf9c95 models/nerves.skin=73f903d271 models/organs.bin=5b3568896a models/organs.skin=347e62f49f models/skin.bin=7a64c5772e models/skin.fat=cc11a744c2 models/skin.fem=68de551914 models/skin.skin=d93f5dc39b models/vessels.bin=d77076a157 models/vessels.skin=8e33263589"><!-- pwa #421 --><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b7469"><link rel="apple-touch-icon" href="icon-192.png"><script src="pwa.js" defer></script></head><body><title>Anatomy Sandbox</title>
 <link rel="stylesheet" href="vendor/fonts/fonts.css">
 <style>
 :root {
@@ -192,6 +192,8 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 .bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
 .bar span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.15s; }
 .loader-card p { margin: 0; color: var(--muted); }
+.loader-card .no-gl { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.loader-card .no-gl code { font-size: 12px; padding: 1px 5px; border-radius: 4px; background: var(--raised); border: 1px solid var(--line); word-break: break-all; }
 .toast { position: fixed; z-index: 7; left: 50%; transform: translateX(-50%); bottom: calc(80px + var(--bottom)); padding: 8px 14px; border-radius: 10px; background: var(--ink); color: var(--stage); font-size: 13px; box-shadow: var(--shadow); }
 
 /* classroom mode (#392): campus links only */
@@ -221,7 +223,11 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
   .card { top: auto; left: 16px; right: 16px; width: auto; bottom: calc(76px + var(--bottom)); max-height: 42%; }
   .card + .card { bottom: calc(76px + var(--bottom)); }
   .card .name { font-size: 21px; }
-  .dock { left: 16px; right: 16px; transform: none; max-width: none; justify-content: flex-start; }
+  .dock { left: 16px; right: 16px; transform: none; max-width: none; justify-content: flex-start; gap: 4px; padding: 5px; }
+  .dock-group, .dock .speed { gap: 4px; }
+  .dock button { padding: 6px 7px; font-size: 12px; }  /* the 7 Explore buttons fit 343px (a 375px phone), no sideways scroll (#401) */
+  .dock .sep { margin: 2px 0; }
+  .dock .hint { display: none; }
   .compass { top: calc(116px + var(--top)); bottom: auto; width: 52px; height: 52px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -468,8 +474,12 @@ function toast(msg, ms = 2600) {
 // ---------- files: every model file is gzip; the browser inflates it natively ----------
 // The public copy on elvinpeters.com keeps its data on the VPS: <meta name="anatomy-data" content="https://...">.
 const DATA_BASE = document.querySelector('meta[name="anatomy-data"]')?.content || '';
-async function fetchBytes(url, onProgress) {
-  const res = await fetch(DATA_BASE + url);
+// deploy_public.py stamps each data file's content hash here ("models/bones.bin=1a2b3c4d5e ..."). A file's URL changes
+// only when its bytes do, so the VPS can let browsers keep it for a year (#401); a school's second visit is near zero.
+const DATA_V = Object.fromEntries((document.querySelector('meta[name="anatomy-data-v"]')?.content || '')
+  .split(/\s+/).filter(Boolean).map((kv) => kv.split('=')));
+async function fetchBytes(url, onProgress, opts = {}) {
+  const res = await fetch(DATA_BASE + url + (DATA_V[url] ? `?v=${DATA_V[url]}` : ''), opts.low ? { priority: 'low' } : undefined);
   if (!res.ok) throw new Error(`Could not load ${url} (HTTP ${res.status}).`);
   const total = Number(res.headers.get('content-length')) || 0;
   const reader = res.body.getReader();
@@ -566,11 +576,29 @@ function decodeSkin(buf, metas, V) {
 const canvas = $('#stage');
 let renderer;
 try {
+  // probe a spare canvas first: three.js logs console errors of its own when it can't get a context
+  if (!document.createElement('canvas').getContext('webgl2')) throw new Error('WebGL 2 is not available.');
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-} catch (err) {
+} catch (err) {  // WebGL 2 off: hardware acceleration disabled (often by school policy), an old GPU, some remote desktops
+  console.warn(err);
+  $('#loadEyebrow').textContent = '3D is switched off';
   $('#loadTitle').textContent = 'This browser cannot show 3D';
-  $('#loadText').textContent = 'WebGL 2 is switched off or unsupported here. Try a recent Chrome, Edge, Safari or Firefox.';
-  throw err;
+  $('#loadBar').parentElement.hidden = true;
+  $('#loadText').textContent = '';
+  const edge = /\bEdg\//.test(navigator.userAgent);
+  const settings = edge ? 'edge://settings/system' : 'chrome://settings/system';
+  $('#loadText').insertAdjacentHTML('afterend', `<p id="noGL">The page needs WebGL 2, which is off here. To turn it on:</p>
+<ol class="no-gl"><li>Open a new tab and go to <code class="data">${settings}</code></li>
+<li>Turn on <b>Use graphics acceleration when available</b>, then press <b>Relaunch</b>.</li></ol>
+<p>On a school or work computer that setting may be locked: ask IT to allow hardware acceleration and WebGL 2. Firefox and Safari: update to a recent version.</p>`);
+  $('#loadActions').hidden = false;
+  $('#retry').insertAdjacentHTML('beforebegin', `<button id="copySettings">Copy ${settings}</button>`);
+  $('#copySettings').addEventListener('click', async (e) => {  // browsers won't open chrome:// links from a page, so hand over the address
+    try { await navigator.clipboard.writeText(settings); e.target.textContent = 'Copied: paste it in a new tab'; }
+    catch { e.target.textContent = settings; }
+  });
+  $('#retry').addEventListener('click', () => location.reload());
+  await new Promise(() => {});  // stop here without a console error: nothing below can run without WebGL
 }
 renderer.setPixelRatio(Math.min(devicePixelRatio, isNarrow() ? 1.5 : 2));
 renderer.localClippingEnabled = true;
@@ -584,7 +612,7 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.12;
 controls.zoomToCursor = true;
 controls.screenSpacePanning = true;
-controls.minDistance = 0.05;
+controls.minDistance = 0.08;
 controls.maxDistance = 16;
 controls.maxPolarAngle = Math.PI * 0.96;
 
@@ -671,6 +699,7 @@ const character = new THREE.Group();
 scene.add(character);
 let needsRender = true;
 const requestRender = () => { needsRender = true; };
+controls.addEventListener('change', requestRender);
 let selected = null, hovered = null, infoMap = null, infoPromise = null;
 
 // ---------- colours ----------
@@ -950,7 +979,7 @@ function poseChanged() {
 }
 
 // ---------- loading ----------
-async function loadLayer(L, onProgress) {
+async function loadLayer(L, onProgress, opts = {}) {
   if (L.loaded) return;
   if (L.loading) return L.loading;
   L.loading = (async () => {
@@ -960,8 +989,8 @@ async function loadLayer(L, onProgress) {
     const fatUrl = rig.fat?.files?.[L.key];  // skin and fat: which way each vertex moves with body fat, and how far
     const femUrl = fatUrl && rig.fat?.fem?.[L.key];  // the female skin shape and fat pattern for the same vertices
     const [mbuf, sbuf, fbuf, mmbuf] = await Promise.all([
-      fetchBytes(L.file, (n) => { prog.model = n; report(); }),
-      skinUrl ? fetchBytes(skinUrl, (n) => { prog.skin = n; report(); }) : Promise.resolve(null),
+      fetchBytes(L.file, (n) => { prog.model = n; report(); }, opts),
+      skinUrl ? fetchBytes(skinUrl, (n) => { prog.skin = n; report(); }, opts) : Promise.resolve(null),
       fatUrl ? fetchBytes(fatUrl) : Promise.resolve(null),
       femUrl ? fetchBytes(femUrl) : Promise.resolve(null),
     ]);
@@ -977,6 +1006,7 @@ async function loadLayer(L, onProgress) {
       if (!p || p.id !== m.id) throw new Error('Model and parts list are out of step.');
       p.center = new THREE.Vector3(m.min[0] + m.ext[0] / 2, m.min[1] + m.ext[1] / 2, m.min[2] + m.ext[2] / 2);
       p.radius = 0.5 * Math.hypot(m.ext[0], m.ext[1], m.ext[2]);
+      p.v0 = m.v0; p.vn = m.vn;
     });
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(d.pos, 3));
@@ -1017,8 +1047,10 @@ async function loadLayer(L, onProgress) {
   })();
   try { await L.loading; } finally { L.loading = null; }
 }
-async function setLayerVisible(L, on) {
+// opts.auto: turned on by an exercise or a link, not by the visitor, so it isn't remembered for the next visit (#401)
+async function setLayerVisible(L, on, opts = {}) {
   L.want = on;
+  if (!on || !opts.auto) L.auto = false; else if (!L.visible) L.auto = true;
   updateFatRow();
   if (on && !L.loaded) {
     L.progress = 0; renderLayerList();
@@ -1035,8 +1067,9 @@ async function setLayerVisible(L, on) {
   for (const M of LAYERS) if (M.loaded && M.parts.some((p) => p.cp === L.key)) recolorLayer(M);  // copies step aside
   if (!on && selected && selected.layer === L) select(null);
   renderLayerList(); renderLegend(); requestRender();
-  store.set('layers2', LAYERS.filter((l) => l.visible).map((l) => l.key));
+  saveLayers();
 }
+function saveLayers() { store.set('layers2', LAYERS.filter((l) => l.visible && !l.auto).map((l) => l.key)); }
 
 // ---------- UI: layers + legend ----------
 function renderLayerList() {
@@ -1092,13 +1125,13 @@ function renderLegend() {
     el.innerHTML = rows.map(([l, c]) => `<div class="row"><span class="sw" style="background:${c}"></span><span>${l}</span><span></span></div>`).join('');
   }
 }
-function setColorMode(m) {
+function setColorMode(m, opts = {}) {
   if (m === 'exercise' && !exCurrent) m = 'natural';
   state.colorMode = m;
   $$('#colorMode button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.color === m)));
   if (m === 'heat') { poseDirty = true; if (state.mode === 'explore') toast('Switch to Pose or Walk to see muscles stretch and shorten.'); }
   recolorAll();
-  store.set('color', m);
+  if (opts.save !== false) store.set('color', m);
 }
 
 // ---------- cut plane (stays anatomical as the body moves) ----------
@@ -1288,14 +1321,15 @@ function bodyFrame() {
   const yaw = character.rotation.y;
   return { pel, fwd: new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw)), left: new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw)) };
 }
-function viewPreset(name) {
+function viewPreset(name, instant) {
   const { pel, fwd, left } = bodyFrame();
   const t = new THREE.Vector3(pel.x, Math.max(0.55, pel.y + 0.06), pel.z);
   const d = camera.aspect < 0.8 ? 4.2 : 3.3;  // portrait phone: header and dock cover the ends of the stage
   const off = { front: fwd.clone().multiplyScalar(d).add(new THREE.Vector3(0, 0.25, 0)), back: fwd.clone().multiplyScalar(-d).add(new THREE.Vector3(0, 0.25, 0)),
     left: left.clone().multiplyScalar(d).add(new THREE.Vector3(0, 0.2, 0)), right: left.clone().multiplyScalar(-d).add(new THREE.Vector3(0, 0.2, 0)),
     top: new THREE.Vector3(0, 3.6, 0).addScaledVector(fwd, 0.02) }[name];
-  flyTo(t, t.clone().add(off));
+  if (!instant) { flyTo(t, t.clone().add(off)); return; }
+  camTween = null; controls.target.copy(t); camera.position.copy(t).add(off); controls.update(); requestRender();  // a link: #view= then #part= flies from here
 }
 
 // ---------- mouth: the jaw hinge at the temporomandibular joint ----------
@@ -1663,7 +1697,7 @@ addEventListener('pointerdown', (e) => {
 addEventListener('pointermove', (e) => {
   if (!limbDrag || e.pointerId !== limbDrag.id) return;
   e.stopImmediatePropagation();
-  if (!limbDrag.moved && Math.hypot(e.clientX - limbDrag.x, e.clientY - limbDrag.y) < 5) return;
+  if (!limbDrag.moved && Math.hypot(e.clientX - limbDrag.x, e.clientY - limbDrag.y) < (e.pointerType === 'mouse' ? 2 : 5)) return;  // a short mouse drag counts (#401)
   if (!limbDrag.moved) { limbDrag.moved = true; if (rep) toggleRep(false); poseTween = null; $('#tip').hidden = true; }
   if (!rayAt(e.clientX, e.clientY).intersectPlane(dragPlane, dragHit)) return;
   dragLimb(limbDrag.end, dragHit.add(limbDrag.off));
@@ -1970,21 +2004,26 @@ function runSearch(q) {
     li.setAttribute('aria-selected', String(i === activeResult));
     li.innerHTML = `<span class="r-name"></span><span class="r-layer"></span><span class="r-meta"></span>`;
     li.querySelector('.r-name').textContent = e.p.n;
-    li.querySelector('.r-layer').textContent = e.p.layer.label;
+    li.querySelector('.r-layer').textContent = e.p.layer.progress != null ? `${e.p.layer.label} · loading…` : e.p.layer.label;
     li.querySelector('.r-meta').textContent = e.parts.length > 1 ? 'Left & right' : sideWord(e.p.s);
     li.addEventListener('mousedown', (ev) => { ev.preventDefault(); chooseResult(i); });
     ul.append(li);
   });
   ul.hidden = false; $('#q').setAttribute('aria-expanded', 'true');
 }
+let chooseTok = 0;
 async function chooseResult(i) {
   const e = results[i];
   if (!e) return;
   $('#results').hidden = true; $('#q').blur();
-  const L = e.p.layer;
-  if (!L.visible) await setLayerVisible(L, true);
-  if (!L.loaded) return;
+  const L = e.p.layer, tok = ++chooseTok;
   const want = searchWords.includes('left') ? 'l' : searchWords.includes('right') ? 'r' : null;
+  // a layer still downloading (slow school Wi-Fi): say so and open the part when it lands, no second search (#402)
+  if (!L.loaded) toast(`Loading ${L.label.toLowerCase()}… ${e.p.n} opens when it’s ready.`, 60000);
+  if (!L.visible) await setLayerVisible(L, true);
+  if (tok !== chooseTok) return;  // another result was chosen meanwhile: that one wins
+  if (!L.loaded) return;
+  if (!$('#toast').hidden && $('#toast').textContent.startsWith('Loading ')) $('#toast').hidden = true;
   const p = e.parts.find((q) => q.s === want) || nearestPart(e.parts);
   if (L.hidden.has(p.index)) { L.hidden.delete(p.index); writePart(p); L.tex.needsUpdate = true; updateShowAll(); }
   select(p, { focus: true });
@@ -2128,7 +2167,7 @@ async function openExercise(e, opts = {}) {
   setColorMode('exercise');
   setHash(`ex=${e.id}`);
   const L = layerByKey.muscles;
-  if (!L.visible) await setLayerVisible(L, true);
+  if (!L.visible) await setLayerVisible(L, true, { auto: true });  // a returning visitor still opens on their own layers
   if (exCurrent === e && opts.fly !== false) focusExercise(e);
 }
 function focusExercise(e) {
@@ -2307,6 +2346,30 @@ canvas.addEventListener('pointerup', (e) => {
   select(hit);
 });
 canvas.addEventListener('dblclick', (e) => { const hit = pickAt(e.clientX, e.clientY); if (hit) focusPart(hit); });
+// wheel zoom (#401 demo notes): over a part, zoom to the cursor but stop short of the part instead of diving through the
+// body; over empty space, zoom on the orbit centre so the view doesn't slide sideways. Runs before OrbitControls' own
+// wheel listener (capture fires first on the target), one pick render per 60 ms at most.
+let wheelPick = { t: 0, hit: null };
+canvas.addEventListener('wheel', (e) => {
+  if (e.deltaY >= 0) { controls.zoomToCursor = true; return; }  // zooming out never clips
+  const now = performance.now();
+  if (now - wheelPick.t > 60) wheelPick = { t: now, hit: pickAt(e.clientX, e.clientY) };
+  const hit = wheelPick.hit;
+  controls.zoomToCursor = !!hit;
+  if (!hit?.vn) return;
+  if (partSurfaceDistance(hit, camera.position) < 0.1) { e.preventDefault(); e.stopImmediatePropagation(); }
+}, { capture: true, passive: false });
+function partSurfaceDistance(p, pt) {  // metres from pt to the part's nearest vertex, in the part's segment space
+  updateSkinMatrices();
+  const q = pt.clone().applyMatrix4(skinM[segOfPart(p)].clone().invert());
+  const a = p.layer.mesh.geometry.attributes.position.array;
+  let best = Infinity;
+  for (let i = p.v0 * 3, e = (p.v0 + p.vn) * 3; i < e; i += 3) {
+    const dx = a[i] - q.x, dy = a[i + 1] - q.y, dz = a[i + 2] - q.z, d = dx * dx + dy * dy + dz * dz;
+    if (d < best) best = d;
+  }
+  return Math.sqrt(best);
+}
 canvas.addEventListener('pointermove', (e) => {
   if (!finePointer || e.buttons || state.mode === 'walk') return;
   const now = performance.now();
@@ -2470,13 +2533,22 @@ async function boot() {
   buildSkeleton();
   buildContacts();
   buildSearch();
+  const link = readLink();  // read before setSex, which rewrites the hash
   exHash = location.hash.match(/[#&](ex=[^&#]+)/)?.[1] || '';  // keep an #ex= link while the body is set
   setSex(location.hash.match(/[#&]sex=([mf])/)?.[1] || store.get('sex', 'm'), { quiet: true });  // before any layer loads, so hidden parts never flash
   if (campus.link) { applyClassroom(); loadCampus(); }  // a campus link: locked now, the server may say otherwise
   loadMyPoses();
   readTheme();
   resize();
-  const first = ['muscles', 'bones'].map((k) => layerByKey[k]);
+  const saved = store.get('layers2', null);  // key renamed when the default became skeleton only, so older saves don't override it
+  const keep = link.layers || (Array.isArray(saved) && saved.length ? saved.filter((k) => layerByKey[k]) : ['bones']);  // first look is the skeleton
+  const linked = decodeURIComponent(location.hash.match(/[#&]ex=([^&#]+)/)?.[1] || '');  // #ex=<id> opens that exercise
+  const linkedPart = link.part ? findLinkedPart(link.part, link.side) : null;
+  // Lite load (#401): the loader waits only for what the first view shows. On the default skeleton that is the bones
+  // (3.7 MB, ~4.3 MB with the parts list); the muscles (10.4 MB) stream in right behind it for picks, reps and exercises.
+  const needMuscles = keep.includes('muscles') || !!linked || linkedPart?.l === 'muscles';
+  const first = needMuscles ? [layerByKey.muscles, layerByKey.bones] : [layerByKey.bones];
+  $('#loadTitle').textContent = needMuscles ? 'Muscles and bones' : 'The skeleton';
   const total = first.reduce((a, L) => a + L.bytes, 0);
   const got = {};
   const report = () => {
@@ -2486,10 +2558,8 @@ async function boot() {
   };
   await Promise.all(first.map((L) => loadLayer(L, (n) => { got[L.key] = n; report(); })));
   $('#loadText').textContent = 'Building the body…';
-  const saved = store.get('layers2', null);  // key renamed when the default became skeleton only, so older saves don't override it
-  const keep = Array.isArray(saved) && saved.length ? saved : ['bones'];  // first look is the skeleton; muscles still load for picks and reps
-  for (const L of first) { L.want = L.visible = L.mesh.visible = keep.includes(L.key); }
-  for (const k of keep) if (layerByKey[k] && !layerByKey[k].visible) setLayerVisible(layerByKey[k], true);
+  for (const L of first) { L.want = L.visible = L.mesh.visible = keep.includes(L.key); L.auto = L.visible && !!link.layers; }
+  for (const k of keep) if (layerByKey[k] && !layerByKey[k].visible) setLayerVisible(layerByKey[k], true, { auto: !!link.layers });
   renderLayerList();
   state.fat = clamp(Number(store.get('fat', 0)) || 0, 0, 1);
   $('#fatAmt').value = String(state.fat);
@@ -2500,21 +2570,75 @@ async function boot() {
   solveGround(false);
   setAnchorHere();
   const start = layerByKey.muscles.parts.find((p) => p.n === 'Rectus femoris muscle' && p.s === 'r');
-  const linked = decodeURIComponent(location.hash.match(/[#&]ex=([^&#]+)/)?.[1] || '');  // #ex=<id> opens that exercise
-  if (start && layerByKey.muscles.visible && !isNarrow() && !linked) select(start);  // on a phone the card would cover the legs; the whole body is the better first look
+  if (start && layerByKey.muscles.visible && !isNarrow() && !linked && !link.part) select(start);  // on a phone the card would cover the legs; the whole body is the better first look
   if (camera.aspect < 0.8) camera.position.sub(controls.target).multiplyScalar(1.25).add(controls.target);
   $('#loader').hidden = true;
   requestRender();
+  const M = layerByKey.muscles;
+  if (!M.loaded) {  // background, low priority: the skeleton is already live
+    M.progress = 0; renderLayerList();
+    loadLayer(M, (n) => { M.progress = n; updateLayerProgress(M); }, { low: true })
+      .then(() => { M.progress = null; renderLayerList(); }, (err) => { console.warn(err); M.progress = null; renderLayerList(); });
+  }
   // A link followed on the open page (pasted into the same tab, or a lesson link) only changes the hash: no reload, so
   // the reads above never see it. setHash uses replaceState, which fires no hashchange, so this can't loop.
   addEventListener('hashchange', () => {
+    const lk = readLink();  // before setSex rewrites the hash
     const ex = location.hash.match(/[#&](ex=[^&#]+)/)?.[1];
     const sx = location.hash.match(/[#&]sex=([mf])/)?.[1];
     if (ex) exHash = ex;  // before setSex, which rewrites the hash from exHash
     if (sx) setSex(sx);
     if (ex) openLinkedExercise(decodeURIComponent(ex.slice(3)));
+    applyLink(lk);
   });
   if (linked) await openLinkedExercise(linked);
+  await applyLink({ ...link, layers: null });  // layers already set above
+}
+
+// ---------- deep links (#401; #430's tour stops and #402's lesson packs use them) ----------
+// #part=<atlas name or id>[&side=l|r]  #layers=muscles,bones,organs  #view=front|back|left|right|top
+// #cut=sagittal|coronal|transverse|off  #color=natural|heat|action, alongside #ex= and #sex=f. They follow hashchange
+// (#414), and never open what classroom mode hides (#392): a locked part by link gets a note, not the part.
+// What a link turns on is not remembered for the next visit.
+function readLink(hash = location.hash) {
+  const q = new URLSearchParams(hash.replace(/^#/, ''));
+  const get = (k) => (q.get(k) || '').trim().toLowerCase();
+  const pick = (k, ok) => (ok.includes(get(k)) ? get(k) : '');
+  const layers = get('layers') ? get('layers').split(',').map((k) => k.trim()).filter((k) => layerByKey[k]) : [];
+  const color = get('color') === 'stretch' ? 'heat' : pick('color', ['natural', 'heat', 'action']);
+  return { part: (q.get('part') || '').trim(), side: pick('side', ['l', 'r']), layers: layers.length ? layers : null,
+    view: pick('view', ['front', 'back', 'left', 'right', 'top']), cut: pick('cut', ['sagittal', 'coronal', 'transverse', 'off']), color };
+}
+function findLinkedPart(q, side) {  // "P01234", or an atlas name in any case ("biceps brachii" finds "Biceps brachii muscle")
+  const all = [...partById.values()].filter((p) => !p.cp);
+  let parts = /^p\d+$/i.test(q) ? all.filter((p) => p.id === q.toUpperCase()) : [];
+  if (!parts.length) {
+    const k = q.toLowerCase().replace(/[_+]/g, ' ').replace(/\s+/g, ' ');
+    let hits = all.filter((p) => p.n.toLowerCase() === k);
+    if (!hits.length) hits = all.filter((p) => p.n.toLowerCase().startsWith(k)).sort((a, b) => a.n.length - b.n.length || a.layer.index - b.layer.index);
+    parts = hits.filter((p) => hits.length && p.n === hits[0].n && p.l === hits[0].l);
+  }
+  return parts.find((p) => p.s === side) || parts.find((p) => p.s === 'r') || parts[0] || null;
+}
+async function applyLink(lk) {
+  if (!lk.part && !lk.layers && !lk.view && !lk.cut && !lk.color) return;
+  const tok = ++chooseTok;
+  if (lk.layers) for (const L of LAYERS) { const on = lk.layers.includes(L.key); if (on !== !!L.want) setLayerVisible(L, on, { auto: true }); }
+  if (lk.cut) setCut(lk.cut);
+  if (lk.color) setColorMode(lk.color, { save: false });
+  if (lk.view) viewPreset(lk.view, !!lk.part);  // with a part: jump to this side, then fly in to the part from it
+  if (!lk.part) return;
+  const p = findLinkedPart(lk.part, lk.side);
+  if (!p) { toast(`This atlas has no part called “${lk.part.slice(0, 60)}”.`); return; }
+  if (p.sx === 'c' || (campus.locked && p.sx)) { toast('That part is hidden on this campus link.'); return; }
+  if (p.sx && p.sx !== state.sex) setSex(p.sx);
+  const L = p.layer;
+  if (!L.loaded) toast(`Loading ${L.label.toLowerCase()}… ${p.n} opens when it’s ready.`, 60000);
+  if (!L.visible) await setLayerVisible(L, true, { auto: true });
+  if (tok !== chooseTok || !L.loaded || sexOff(p)) return;  // a newer link or search won, or the load failed
+  if (!$('#toast').hidden && $('#toast').textContent.startsWith('Loading ')) $('#toast').hidden = true;
+  if (L.hidden.has(p.index)) { L.hidden.delete(p.index); writePart(p); L.tex.needsUpdate = true; updateShowAll(); }
+  select(p, { focus: true });
 }
 async function openLinkedExercise(id) {  // #ex=<id> opens that exercise
   if (isNarrow()) openPanel(true);
@@ -2536,6 +2660,8 @@ window.anatomySandbox = {
   },
   exGroups: () => exData && Object.fromEntries(exData.groups.map((g, i) => [g, [...new Set(exGroups()[i].map((p) => p.n))]])),
   get rep() { return rep; }, get bones() { return bones; }, get character() { return character; }, camera, controls, gait,
+  layers: () => LAYERS.map((L) => ({ key: L.key, loaded: L.loaded, visible: L.visible, auto: !!L.auto })),
+  get selected() { return selected && { id: selected.id, name: selected.n, side: selected.s, layer: selected.l }; },
   step(seconds = 1) { for (let t = 0; t < seconds; t += 1 / 60) update(1 / 60); needsRender = true; draw(); },
   strain(name, side = 'r') {
     const p = layerByKey.muscles?.parts.find((q) => q.n === name && q.s === side);
