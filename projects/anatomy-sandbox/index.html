@@ -1,7 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="anatomy-data" content="https://api.elvinpeters.com/anatomy-sandbox/"><meta name="anatomy-campus" content="https://api.elvinpeters.com/anatomy-campus/"><meta name="robots" content="noindex"><meta name="description" content="A 3D human from the Z-Anatomy atlas: skin, fat, fascia, muscles and bones you can peel back, pose, walk and put through exercise reps."><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui,sans-serif;background:#fafaf9}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Anatomy Sandbox</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,500;1,8..60,600&display=swap">
+<link rel="stylesheet" href="vendor/fonts/fonts.css">
 <style>
 :root {
   --stage: #dde5e3;
@@ -437,8 +435,8 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 
 <script type="importmap">
 { "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  "three": "./vendor/three/0.170.0/build/three.module.js",
+  "three/addons/": "./vendor/three/0.170.0/examples/jsm/"
 } }
 </script>
 <script type="module">
