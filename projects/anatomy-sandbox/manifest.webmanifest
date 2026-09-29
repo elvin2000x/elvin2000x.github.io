@@ -1,0 +1,28 @@
+{
+ "start_url": "./",
+ "name": "Anatomy Sandbox",
+ "short_name": "Anatomy",
+ "description": "A 3D human you can peel back layer by layer: skin, muscles, bones, nerves and organs. Works offline.",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#dde5e3",
+ "theme_color": "#0b7469",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
