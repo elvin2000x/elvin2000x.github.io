@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en-CA"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Anatomy Sandbox for schools: a free 3D body for your campus</title>
+<meta name="description" content="A 3D human body in the browser for PSW, massage, fitness and kinesiology students. No student accounts. Free for your whole campus until April 30, 2027.">
+<link rel="icon" href="/projects/anatomy-sandbox/icon-192.png">
+<style>
+:root { color-scheme: light; --ink: #13201e; --muted: #45534f; --line: #d4dcda; --accent: #0b7469; --accent-dk: #085a52;
+  --bg: #fbfcfb; --card: #ffffff; --soft: #eef3f1; --err: #a3231a; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 18px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid #e0a100; outline-offset: 2px; }
+.top { border-bottom: 1px solid var(--line); background: var(--card); }
+.top .in { max-width: 960px; margin: 0 auto; padding: 12px 16px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.brand { font-weight: 700; color: var(--ink); text-decoration: none; }
+main { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+.narrow { max-width: 760px; }
+h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 16px; letter-spacing: -0.01em; }
+h2 { font-size: 1.5rem; line-height: 1.3; margin: 0 0 12px; }
+h3 { font-size: 1.15rem; margin: 0 0 6px; }
+section { padding: 32px 0; border-top: 1px solid var(--line); }
+section.first { border-top: 0; padding-top: 0; }
+p { margin: 0 0 14px; }
+.lead { font-size: 1.15rem; color: var(--ink); }
+.small { font-size: 0.95rem; color: var(--muted); }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0 8px; }
+.btn { display: inline-block; padding: 13px 22px; border-radius: 8px; font-weight: 700; text-decoration: none; border: 2px solid var(--accent);
+  font-size: 1rem; line-height: 1.3; cursor: pointer; font-family: inherit; }
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.primary:hover { background: var(--accent-dk); border-color: var(--accent-dk); }
+.btn.ghost { background: var(--card); color: var(--accent); }
+.btn.ghost:hover { background: var(--soft); }
+.trust { font-size: 0.95rem; color: var(--muted); margin-top: 16px; }
+.video { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #dce5e2; border: 1px solid var(--line); }
+.video img, .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.video button { position: absolute; inset: 0; width: 100%; height: 100%; background: transparent; border: 0; cursor: pointer; }
+.video .play { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: rgba(11,116,105,.92); }
+.video .play::after { content: ""; position: absolute; left: 30px; top: 22px; border-style: solid; border-width: 16px 0 16px 26px; border-color: transparent transparent transparent #fff; }
+.video .note { position: absolute; left: 12px; right: 12px; bottom: 12px; background: rgba(255,255,255,.94); color: var(--ink); padding: 10px 14px; border-radius: 8px; font-size: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.card p { margin: 0; }
+.card .btn { align-self: flex-start; margin-top: auto; }
+.offer { background: var(--card); border: 2px solid var(--accent); border-radius: 12px; padding: 22px; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: 700; }
+details p { margin: 10px 0 0; }
+form { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px; max-width: 620px; }
+label { display: block; font-weight: 700; margin: 14px 0 4px; }
+.hint { display: block; font-weight: 400; font-size: 0.95rem; color: var(--muted); }
+input[type=text], input[type=email] { width: 100%; font-size: 17px; padding: 12px; border: 1px solid #8a9a96; border-radius: 6px; background: #fff; color: var(--ink); font-family: inherit; }
+input[aria-invalid=true] { border-color: var(--err); border-width: 2px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; margin: 16px 0 0; }
+.check input { width: 22px; height: 22px; margin: 3px 0 0; flex: none; }
+.err { color: var(--err); font-weight: 600; font-size: 1rem; margin: 4px 0 0; }
+.err:empty { display: none; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.stop { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; margin: 16px 0; }
+.stop p { margin: 8px 0 0; }
+.stop .btn { margin-top: 4px; }
+.lbl { font-weight: 700; }
+ul.plain { padding-left: 20px; }
+.foot { border-top: 1px solid var(--line); background: var(--card); }
+.foot .in { max-width: 960px; margin: 0 auto; padding: 24px 16px 96px; font-size: 0.95rem; color: var(--muted); }
+.foot nav { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
+.sticky { position: fixed; left: 0; right: 0; bottom: 0; display: none; gap: 8px; padding: 10px 12px; background: var(--card); border-top: 1px solid var(--line); box-shadow: 0 -4px 14px rgba(0,0,0,.08); z-index: 5; }
+.sticky .btn { flex: 1; text-align: center; padding: 11px 8px; }
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.3rem; }
+  main { padding-top: 24px; }
+  .btns .btn { flex: 1 1 100%; text-align: center; }
+  .sticky.on { display: flex; }
+  .video .note { position: static; border-radius: 0; }
+  .video.has-note { aspect-ratio: auto; }
+  .video.has-note img { position: static; display: block; aspect-ratio: 16 / 9; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+@media print { .top, .foot, .sticky, .btns { display: none; } body { background: #fff; } }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="/projects/anatomy-sandbox/schools/">Anatomy Sandbox for schools</a><a href="/projects/anatomy-sandbox/">Try it now</a></div></header>
+<main>
+<section class="first" aria-labelledby="h1">
+<h1 id="h1">Give your students a human body they can open up and watch move, free until April 30.</h1>
+<p class="lead">Anatomy Sandbox is a 3D body in the browser with 4,080 named parts and no student accounts. It's free for your whole campus from November 1 until April 30, 2027.</p>
+<div class="btns"><a class="btn primary" href="#campus-link">Get your free campus link</a><a class="btn ghost" href="/projects/anatomy-sandbox/">Try it now</a></div>
+<p class="small">Try it now opens the public app. The classroom lock comes with your campus link.</p>
+<p class="trust">Built in Toronto by 1000338311 Ontario Inc. · No student accounts and no student data · <a href="privacy/">Privacy and accessibility pack</a> ready by October 25</p>
+</section>
+
+<section aria-label="Demo video" id="video">
+<div class="video has-note" id="demo">
+<img src="hero.jpg" alt="The Anatomy Sandbox body mid-squat, with the working muscles coloured" width="1280" height="720">
+<p class="note">Demo video coming. In the meantime, press Try it now and play the squat yourself.</p>
+</div>
+</section>
+
+<section aria-labelledby="what">
+<h2 id="what">What your students do with it</h2>
+<p>Anatomy Sandbox is built on the open Z-Anatomy atlas: 4,080 parts across 11 layers, from skin and fascia down to bones, nerves, organs and lymph. Students click any part to see its name, or search in plain gym words like "quads" and "rotator cuff".</p>
+<p>They can also play a real exercise rep, like a squat or a sit-to-stand, and watch each muscle turn red as it shortens and blue as it stretches. The colours show change in length only, so they don't measure effort or force.</p>
+<p><a href="/projects/anatomy-sandbox/#ex=Bodyweight_Squat">Try it yourself: play the squat</a></p>
+</section>
+
+<section aria-labelledby="programs">
+<h2 id="programs">Pick your program</h2>
+<p>Each walkthrough takes about 5 minutes and opens the app at every stop. Or skip it and press Try it now to explore on your own.</p>
+<div class="grid">
+<div class="card"><h3>Personal support worker (PSW)</h3><p>Find the major bones, then cut the body open to see where the heart and lungs sit.</p><a class="btn ghost" href="tour/psw/">Start the walkthrough</a></div>
+<div class="card"><h3>Massage therapy</h3><p>Peel back the skin and fascia to find a muscle by its layer, then see the stretches listed for it.</p><a class="btn ghost" href="tour/massage/">Start the walkthrough</a></div>
+<div class="card"><h3>Kinesiology and fitness</h3><p>Play a squat or a push-up and see which muscles shorten and which ones stretch through the rep.</p><a class="btn ghost" href="tour/kinesiology/">Start the walkthrough</a></div>
+<div class="card"><h3>Physio assistant (OTA/PTA)</h3><p>Click a muscle to see the exercises that train it and the stretches for it, then play a sit-to-stand.</p><a class="btn ghost" href="tour/physio/">Start the walkthrough</a></div>
+<div class="card"><h3>Biology (Grade 11 and 12)</h3><p>Use the body planes and the Cut tool to see how the organ systems sit inside the body.</p><a class="btn ghost" href="tour/biology/">Start the walkthrough</a></div>
+</div>
+</section>
+
+<section aria-labelledby="pilot">
+<div class="offer">
+<h2 id="pilot">The free pilot</h2>
+<p>Your whole campus gets Anatomy Sandbox free from November 1 until April 30, 2027. There's no card and no contract. You tick one box to accept the pilot terms: classroom mode stays on, we count anonymous usage, and you answer two short check-ins.</p>
+<p>The pilot comes with the IT setup kit and the lesson packs.</p>
+<p>Nothing renews or bills on its own. If you do nothing, the pilot simply ends on April 30.</p>
+<p>If you'd like to keep it, sign by May 31, 2027 and CA$390 a year is locked for 3 years. The list price is CA$790 a year.</p>
+<p class="small">Teaching at a school that isn't in the pilot? A one-teacher licence is CA$190 a year.</p>
+<div class="btns"><a class="btn primary" href="#campus-link">Get your free campus link</a></div>
+</div>
+</section>
+
+<section aria-labelledby="it">
+<h2 id="it">IT setup</h2>
+<p>Runs in the browser with nothing to install. If your IT team wants it on every computer or offline, it's one policy and about 5 minutes of IT setup on Chromebooks, Group Policy or iPads (under 10 with Intune).</p>
+<p><a href="it-setup/">Read the IT setup guide</a></p>
+</section>
+
+<section aria-labelledby="classroom">
+<h2 id="classroom">Classroom mode</h2>
+<p>On your campus link, reproductive and genital anatomy is hidden when the app opens. Only a teacher with your campus PIN can show it, and students can't get around it by editing the link. Your program decides when those systems are taught.</p>
+</section>
+
+<section aria-labelledby="packs">
+<h2 id="packs">Lesson packs</h2>
+<p>Three packs are included, each with 5 activities and a printable answer sheet: PSW body systems, fitness program muscle ID, and Grade 12 kinesiology (PSK4U B1.1 and B1.2). An instructor can run one in their next lab without building anything. The answer sheets arrive with your campus link.</p>
+<p><a href="lessons/">See the lesson packs</a></p>
+</section>
+
+<section aria-labelledby="privacy">
+<h2 id="privacy">Privacy and accessibility</h2>
+<p>Students never create an account, and we never ask a student for a name or an email. The app sets no cookies, and settings like which layers are on stay on the student's own computer. This page runs no trackers. Your IT or privacy team gets a one-page data-flow statement to review before you sign up.</p>
+<p>For accessibility, we're building to WCAG 2.1 AA, with a full keyboard path and a text list of every part as the alternative to the 3D view. Our Accessibility Conformance Report states any gaps plainly.</p>
+<p><a href="privacy/">Privacy</a> (ready by October 25) · <a href="accessibility/">Accessibility</a> (ready by October 25)</p>
+</section>
+
+<section id="faq" aria-labelledby="faq-h">
+  <h2 id="faq-h">Common questions</h2>
+
+  <details>
+    <summary>What does the pilot cost, and what happens on April 30?</summary>
+    <p>Nothing. The pilot is free for your whole campus until April 30, 2027, with no card and no contract. You tick one box to accept the pilot terms: classroom mode on, anonymous usage counts and two short check-ins. Nothing renews or bills on its own, so doing nothing ends it. If you want to keep it, sign by May 31, 2027 and CA$390 a year is locked for 3 years (list CA$790), or one teacher can keep it for CA$190 a year.</p>
+  </details>
+
+  <details>
+    <summary>Do we have to install anything?</summary>
+    <p>No. It runs in the browser with nothing to install. If your IT team wants it on every computer or offline, it's one policy and about 5 minutes of IT setup on Chromebooks, Group Policy or iPads (under 10 with Intune), and the <a href="it-setup/">IT setup page</a> has the steps for Google Admin, Intune and Group Policy, plus an offline file for labs with no internet.</p>
+  </details>
+
+  <details>
+    <summary>Will it run on our Chromebooks and our Wi-Fi?</summary>
+    <p>The quickest way to know is to <a href="../">open it now</a> on one of your own Chromebooks, with no form. The model is about 27 MB, and after the first open it's saved on the device, so later classes load it from the device instead of your network. A lighter first view for older machines is planned.</p>
+  </details>
+
+  <details>
+    <summary>What about reproductive and genital anatomy?</summary>
+    <p>On your campus link it's hidden when the app opens. Only a teacher with your campus PIN can show it, it hides again when the page reloads, and students can't get around it by editing the link. Your program decides when those systems are taught.</p>
+  </details>
+
+  <details>
+    <summary>What do you collect about students?</summary>
+    <p>No names, no emails and no accounts. There's no sign-in and no cookie, and our classroom service stores no IP addresses. The page itself is served by GitHub Pages, and the model files come from our own server in Helsinki, whose standard logs are kept for a short period. Your campus link counts how many times it was opened each day, with no names attached, so you can see it's being used. Everything loads from our own server. The offline file loads nothing from anywhere. The <a href="privacy/">privacy page</a> has the full data flow for your review.</p>
+  </details>
+
+  <details>
+    <summary>Is it accessible?</summary>
+    <p>We're building to WCAG 2.1 AA: a full keyboard path, a searchable text list of every part as the alternative to the 3D view, labelled controls, contrast and reduced motion. Our <a href="accessibility/">Accessibility Conformance Report</a> will state any gaps plainly, and it's ready by October 25.</p>
+  </details>
+
+  <details>
+    <summary>How does it fit our program?</summary>
+    <p>Three lesson packs are included, each with 5 activities and a printable answer sheet: PSW body systems, fitness program muscle ID, and Grade 12 kinesiology (PSK4U B1.1 and B1.2). Massage therapy, physio assistant and biology programs get a free 5-minute walkthrough that opens the app at each stop. Every exercise also has its own link, which an instructor can paste into Brightspace or Google Classroom.</p>
+  </details>
+
+  <details>
+    <summary>Who made the anatomy, and is it accurate?</summary>
+    <p>The body comes from Z-Anatomy, an open 3D atlas, with female organs from the NIH Human Reference Atlas and 876 exercises from free-exercise-db, all credited on the <a href="credits/">credits page</a>. Lesson-pack answers are checked against OpenStax Anatomy and Physiology 2e and TeachMeAnatomy. Red and blue during a rep show a muscle shortening or stretching, and they don't show effort or force.</p>
+  </details>
+
+  <details>
+    <summary>How is it different from Visible Body or Complete Anatomy?</summary>
+    <p>Students press Play on a real exercise and watch each muscle shorten and stretch, and every muscle links to the exercises that train it and the stretches for it. There are no student accounts, and the price is published: one campus licence covers every student. It also runs fine beside a tool you already have.</p>
+  </details>
+
+  <details>
+    <summary>Who supports it, and what if you stop running it?</summary>
+    <p>Your named contact emails <a href="mailto:elvin@elvinpeters.com">elvin@elvinpeters.com</a> and gets a written answer. Anatomy Sandbox is built and run by 1000338311 Ontario Inc. in Toronto. The offline file runs on your own computers with no connection to us, and the model data is open-licence and credited, so your campus never depends on a sales rep.</p>
+  </details>
+
+  <details>
+    <summary>Is there a French version?</summary>
+    <p>Not yet. The interface and labels are in English for this pilot.</p>
+  </details>
+</section>
+
+<section aria-labelledby="campus-link-h" id="campus-link">
+<h2 id="campus-link-h">Get your free campus link</h2>
+<p>Three fields and one box. Your campus link arrives by email within a day, or by October 25 if you sign up before then. You can also reply yes to Elvin's email.</p>
+<form id="signup" method="post" action="https://api.elvinpeters.com/anatomy-campus/signup" novalidate>
+<label for="f-name">Your name</label>
+<input type="text" id="f-name" name="name" autocomplete="name" maxlength="80" required aria-describedby="e-name">
+<p class="err" id="e-name" aria-live="polite"></p>
+<label for="f-email">Work email <span class="hint">We'll send the campus link here.</span></label>
+<input type="email" id="f-email" name="email" autocomplete="email" maxlength="120" required aria-describedby="e-email">
+<p class="err" id="e-email" aria-live="polite"></p>
+<label for="f-school">School <span class="hint">The college or school board, and the campus if you have more than one.</span></label>
+<input type="text" id="f-school" name="school" autocomplete="organization" maxlength="120" required aria-describedby="e-school">
+<p class="err" id="e-school" aria-live="polite"></p>
+<label class="check"><input type="checkbox" id="f-terms" name="terms" value="1" required aria-describedby="e-terms"><span>I accept the pilot terms. Classroom mode stays on, you count anonymous page loads on our campus link, and I'll answer two short check-ins of 3 questions each, in month 3 and month 5.</span></label>
+<p class="err" id="e-terms" aria-live="polite"></p>
+<label class="check"><input type="checkbox" id="f-casl" name="casl" value="1"><span>Yes, email me near the end of the pilot about keeping Anatomy Sandbox. Elvin Peters of 1000338311 Ontario Inc. sends it, and you can ask to stop at any time.</span></label>
+<div class="hp" aria-hidden="true"><label for="f-website">Website</label><input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
+<input type="hidden" name="t" id="f-t" value="">
+<div class="btns"><button class="btn primary" type="submit" id="f-go">Get your free campus link</button></div>
+<p class="err" id="e-form" aria-live="polite"></p>
+<p class="small">Your details go to Elvin Peters only and are used to set up your pilot. No one else gets them.</p>
+</form>
+</section>
+</main>
+<div class="sticky" id="sticky"><a class="btn primary" href="#campus-link">Get your free campus link</a><a class="btn ghost" href="/projects/anatomy-sandbox/">Try it now</a></div>
+<footer class="foot"><div class="in">
+<nav aria-label="Schools pages"><a href="/projects/anatomy-sandbox/schools/it-setup/">IT setup</a><a href="/projects/anatomy-sandbox/schools/privacy/">Privacy</a><a href="/projects/anatomy-sandbox/schools/accessibility/">Accessibility</a><a href="/projects/anatomy-sandbox/schools/credits/">Credits</a><a href="mailto:elvin@elvinpeters.com">Contact (elvin@elvinpeters.com)</a></nav>
+<p>Anatomy Sandbox is built and run by 1000338311 Ontario Inc. in Toronto.</p>
+</div></footer>
+<script>
+(function () {
+  var t0 = Date.now(), f = document.getElementById('signup'), tf = document.getElementById('f-t');
+  f.addEventListener('input', function () { tf.value = String(Date.now() - t0); });
+  var MSG = { name: 'Please add your name.', email: 'Please add a work email, like name@yourcollege.ca.',
+    school: "Please add your school's name.", terms: 'Please tick the box to accept the pilot terms.',
+    fail: "That didn't go through, and your answers are still here. Try again in a minute, or email elvin@elvinpeters.com." };
+  function show(k, on) {
+    var el = document.getElementById('e-' + k), inp = document.getElementById('f-' + k);
+    el.textContent = on ? MSG[k] : '';
+    if (inp) inp.setAttribute('aria-invalid', on ? 'true' : 'false');
+  }
+  function check() {
+    var bad = [], v = function (id) { return document.getElementById('f-' + id).value.trim(); };
+    if (!v('name')) bad.push('name');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v('email'))) bad.push('email');
+    if (!v('school')) bad.push('school');
+    if (!document.getElementById('f-terms').checked) bad.push('terms');
+    ['name', 'email', 'school', 'terms'].forEach(function (k) { show(k, bad.indexOf(k) > -1); });
+    return bad;
+  }
+  f.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    tf.value = String(Date.now() - t0);
+    document.getElementById('e-form').textContent = '';
+    var bad = check();
+    if (bad.length) { document.getElementById(bad[0] === 'terms' ? 'f-terms' : 'f-' + bad[0]).focus(); return; }
+    var go = document.getElementById('f-go'); go.disabled = true;
+    var body = { name: f.name.value.trim(), email: f.email.value.trim(), school: f.school.value.trim(),
+      terms: f.terms.checked, casl: f.casl.checked, website: f.website.value, t: Number(tf.value) };
+    fetch(f.action, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (res.ok && res.j.ok) { location.href = 'thanks/'; return; }
+        var k = res.j && res.j.error;
+        if (k === 'name' || k === 'email' || k === 'school' || k === 'terms') { show(k, true); document.getElementById('f-' + k).focus(); }
+        else document.getElementById('e-form').textContent = MSG.fail;
+        go.disabled = false;
+      })
+      .catch(function () { document.getElementById('e-form').textContent = MSG.fail; go.disabled = false; });
+  });
+  // Phone: after the video, a bar with both buttons; it steps aside while the form is on screen.
+  var bar = document.getElementById('sticky'), past = false, atForm = false;
+  function upd() { bar.className = 'sticky' + (past && !atForm ? ' on' : ''); }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { es.forEach(function (x) { past = !x.isIntersecting && x.boundingClientRect.top < 0; }); upd(); })
+      .observe(document.getElementById('video'));
+    new IntersectionObserver(function (es) { es.forEach(function (x) { atForm = x.isIntersecting; }); upd(); })
+      .observe(document.getElementById('campus-link'));
+  }
+})();
+</script>
+</body></html>

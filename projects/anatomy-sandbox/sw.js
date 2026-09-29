@@ -59,7 +59,10 @@ async function page(req) {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
-  if (req.mode === 'navigate' && req.url.startsWith(SCOPE)) return e.respondWith(page(req));
+  // Only the app page itself: /schools/* (#422) sits inside this scope and must never be served or saved as the app.
+  const u = new URL(req.url);
+  const isApp = u.origin + u.pathname === SCOPE || u.origin + u.pathname === SCOPE + 'index.html';
+  if (req.mode === 'navigate' && isApp) return e.respondWith(page(req));
   const key = keyFor(req.url);
   if (key) return e.respondWith(fromStore(key));
   if (LIBS.includes(req.url)) return e.respondWith(cacheFirst(LIB, req));
