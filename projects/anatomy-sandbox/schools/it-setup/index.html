@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Anatomy Sandbox: IT setup</title>
+<meta name="description" content="Install the Anatomy Sandbox on every school computer: Google Admin console, Intune, Group Policy, iPads, or one offline file.">
+<style>
+:root { color-scheme: light; --ink: #13201e; --muted: #4a5a57; --line: #d4dcda; --accent: #0b7469; --bg: #fbfcfb; --code: #eef3f1; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 12px; }
+h2 { font-size: 1.3rem; margin: 40px 0 8px; padding-top: 16px; border-top: 1px solid var(--line); }
+a { color: var(--accent); }
+code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: .9em; overflow-wrap: anywhere; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .95rem; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 600; }
+li { margin: 4px 0; }
+@media (max-width: 560px) { table, thead, tbody, tr, th, td { display: block; } thead { display: none; }
+  tr { padding: 8px 0; border-bottom: 1px solid var(--line); } td { border: 0; padding: 2px 0; } }
+@media print { body { font-size: 12pt; background: #fff; } main { padding: 0; } h2 { break-after: avoid; } }
+</style></head>
+<body><main>
+<p><a href="/projects/anatomy-sandbox/schools/">Anatomy Sandbox for schools</a></p>
+<h1>Anatomy Sandbox: IT setup</h1>
+<p>Anatomy Sandbox is a 3D human body that runs in the browser. Students peel back skin, muscles, bones, nerves and organs. There are no accounts, no sign-in and no student data.</p>
+<p><strong>Your part takes about 5 minutes on Chromebooks, Group Policy or iPads</strong> (under 10 with Intune): paste one link into one policy. The app then reaches your devices on the policy's own schedule (usually minutes, up to a day; see the table at the end).</p>
+<p><strong>What you get from us</strong> (email elvin@elvinpeters.com): your campus ID, your campus link, the teacher PIN (for teachers, not students) and, if you need it, your campus's offline kit.
+Your campus link: <code>https://elvinpeters.com/projects/anatomy-sandbox/?c=YOUR-CAMPUS-ID</code></p>
+<p><strong>What teachers and students see:</strong> the link opens in classroom mode. Reproductive and genital anatomy stay hidden. A teacher can show them by typing the campus PIN; that lasts until the page reloads, then it hides again. Five wrong PINs in a row lock the PIN box for 10 minutes.</p>
+<h2>Pick one</h2>
+<table>
+<thead>
+<tr>
+<th>Your devices</th>
+<th>Use</th>
+<th>Your time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chromebooks</td>
+<td>A1. Google Admin console</td>
+<td>about 5 minutes</td>
+</tr>
+<tr>
+<td>Windows with Edge or Chrome, managed by Intune</td>
+<td>A2. Intune</td>
+<td>about 7 minutes</td>
+</tr>
+<tr>
+<td>Windows with Group Policy</td>
+<td>A3. Group Policy</td>
+<td>about 5 minutes</td>
+</tr>
+<tr>
+<td>iPads managed by Intune or Jamf</td>
+<td>A4. Web clip</td>
+<td>about 5 minutes</td>
+</tr>
+<tr>
+<td>Windows labs with no internet</td>
+<td>B. Offline file</td>
+<td>about 5 minutes by startup script, about 15 as an Intune app</td>
+</tr>
+</tbody>
+</table>
+<p>Options A install it as an app that works offline after the first open and updates itself. Option B is one file with everything inside it.</p>
+<p><strong>Needs:</strong> a current Chrome, Edge, Safari or Firefox with <strong>WebGL 2 and hardware acceleration on</strong> (the default). If a policy turns off hardware acceleration (<code>HardwareAccelerationModeEnabled</code> = false) or WebGL, the app shows "This browser cannot show 3D".</p>
+<p><strong>Before you start (web filter, options A only):</strong> allow <code>elvinpeters.com</code> and <code>api.elvinpeters.com</code>. Nothing else: the app loads no third-party code, fonts or trackers. Option B needs nothing allowed.</p>
+<h2>A1. Chromebooks (Google Admin console)</h2>
+<ol>
+<li>Go to admin.google.com &gt; <strong>Devices &gt; Chrome &gt; Apps &amp; extensions &gt; Users &amp; browsers</strong>.</li>
+<li>On the left, pick the student group (organizational unit). Google suggests a small test group first.</li>
+<li>Click the yellow <strong>+</strong> &gt; <strong>Add by URL</strong>. Paste your campus link. Open it <strong>in a separate window</strong>. Click <strong>Save</strong>.</li>
+<li>Set <strong>Installation policy</strong> to <strong>Force install + pin to ChromeOS taskbar</strong>. Click <strong>Save</strong>.</li>
+</ol>
+<h2>A2. Windows, Edge or Chrome (Intune)</h2>
+<ol>
+<li>In the Intune admin center: <strong>Devices &gt; Manage devices &gt; Configuration &gt; Create &gt; New policy</strong>.</li>
+<li>Platform <strong>Windows 10 and later</strong>, profile type <strong>Settings catalog</strong>, then <strong>Create</strong>. Name it "Anatomy Sandbox".</li>
+<li><strong>Add settings</strong>, search <strong>force-installed Web Apps</strong>, and tick the <strong>Microsoft Edge</strong> one (and the <strong>Google Chrome</strong> one if students use Chrome).</li>
+<li>Turn it on and paste this, with your campus link:
+   <code>[{"url":"https://elvinpeters.com/projects/anatomy-sandbox/?c=YOUR-CAMPUS-ID","default_launch_container":"window","create_desktop_shortcut":true}]</code></li>
+<li>Assign it to the student device group. <strong>Create</strong>.</li>
+</ol>
+<h2>A3. Windows (Group Policy)</h2>
+<ol>
+<li>Open the Group Policy Management Editor on the policy for student computers.</li>
+<li>Edge: <strong>Computer Configuration &gt; Policies &gt; Administrative Templates &gt; Microsoft Edge &gt; Configure list of force-installed Web Apps</strong>. Chrome: the same policy under <strong>Google &gt; Google Chrome</strong> (needs the Chrome ADMX templates).</li>
+<li>Set it to <strong>Enabled</strong> and paste the same line as in A2, step 4. <strong>OK</strong>.</li>
+</ol>
+<h2>A4. iPads (Intune or Jamf)</h2>
+<ol>
+<li>Intune: <strong>Apps &gt; All apps &gt; Create &gt; iOS/iPadOS web clip</strong>. Jamf: a configuration profile with a <strong>Web Clip</strong> payload.</li>
+<li>Name "Anatomy Sandbox", URL = your campus link, <strong>Full screen = Yes</strong>. Leave "Require a managed browser" off.</li>
+<li>Assign it to the student iPads.</li>
+</ol>
+<p>Test on one iPad first: Apple doesn't say whether a pushed web clip keeps its offline copy the way a home-screen app does.</p>
+<h2>B. Offline file (Windows labs with no internet)</h2>
+<p>Download <strong>anatomy-sandbox-school-kit.zip</strong> (about 28 MB; we send your classroom copy). Inside: <code>Anatomy Sandbox.html</code>, <code>install.cmd</code>, <code>uninstall.cmd</code>, a README and an icon. Your classroom copy checks the teacher PIN inside the file, so it never goes online.</p>
+<ul>
+<li><strong>Check and unblock it:</strong> we send a SHA-256 with each zip. In PowerShell, <code>Get-FileHash anatomy-sandbox-school-kit.zip</code> should match it. Then right-click the zip &gt; <strong>Properties</strong> &gt; tick <strong>Unblock</strong> &gt; <strong>OK</strong> before you unzip, so Windows doesn't flag the files as downloaded. If AppLocker or WDAC blocks scripts, allow <code>install.cmd</code> by its hash or run it from your trusted share.</li>
+<li><strong>Try it:</strong> unzip and double-click <code>Anatomy Sandbox.html</code>. It opens in the default browser in about 10 seconds. Nothing needs to be running.</li>
+<li><strong>Intune (Win32 app):</strong> wrap the unzipped folder with IntuneWinAppUtil (setup file <code>install.cmd</code>). Install command <code>install.cmd</code>, uninstall command <code>uninstall.cmd</code>, install behaviour <strong>System</strong>. Detection rule: the file <code>C:\Program Files\Anatomy Sandbox\Anatomy Sandbox.html</code> exists.</li>
+<li><strong>SCCM / ConfigMgr:</strong> an Application with the same two commands and detection rule.</li>
+<li><strong>Group Policy:</strong> put the unzipped folder on a share every computer can read, then <strong>Computer Configuration &gt; Policies &gt; Windows Settings &gt; Scripts &gt; Startup</strong> &gt; add <code>install.cmd</code> from that share.</li>
+<li><strong>One computer:</strong> right-click <code>install.cmd</code> &gt; <strong>Run as administrator</strong>.</li>
+</ul>
+<p><code>install.cmd</code> is silent, takes about 2 seconds and needs no reboot. It adds a Start menu and a desktop shortcut for everyone.</p>
+<p>Chromebooks: use A1. Many Chromebooks block opening files from disk.</p>
+<h2>Check it worked (1 minute, on one student device)</h2>
+<ol>
+<li>Options A: the Anatomy Sandbox icon is on the shelf, taskbar or Start menu. Option B: it's in the Start menu and on the desktop.</li>
+<li>Open it. A 3D skeleton appears and the top reads "Classroom mode".</li>
+<li>Options A: wait for "Saved for offline use", turn Wi-Fi off, close and reopen it. It should still open.</li>
+</ol>
+<h2>After install</h2>
+<ul>
+<li><strong>Open it once on school Wi-Fi.</strong> The first open saves the whole model (27 MB) for offline use. A small note says "Saved for offline use" when it's done.</li>
+<li><strong>Updates:</strong> options A update themselves the next time they open online. For option B we send a new file; run <code>install.cmd</code> again.</li>
+<li><strong>Computers that wipe themselves at sign-out</strong> (Chromebook "wipe user data on sign-out", guest mode, Deep Freeze, virtual desktops) download the 27 MB again each session. It still works, just slower to start. On Windows labs, option B avoids this.</li>
+<li><strong>Remove it:</strong> take the link out of the policy, or run <code>uninstall.cmd</code>.</li>
+<li><strong>If it says "This browser cannot show 3D":</strong> WebGL 2 is off. Turn hardware acceleration back on (Chrome and Edge: Settings &gt; System &gt; "Use graphics acceleration when available", or the <code>HardwareAccelerationModeEnabled</code> policy set to true), update the graphics driver, and check <code>chrome://gpu</code> or <code>edge://gpu</code> shows "WebGL2: Hardware accelerated". Old or remote virtual desktops without a GPU may not run it.</li>
+<li><strong>If the offline file opens blank:</strong> your browser policy may block files from disk (URLBlocklist with <code>file://*</code>). Allow <code>file:///C:/Program%20Files/Anatomy%20Sandbox/*</code> in URLAllowlist.</li>
+</ul>
+<h2>Privacy</h2>
+<p>No accounts, no sign-in, no cookies and no ad or analytics trackers. Nothing a student does is sent anywhere.</p>
+<ul>
+<li><strong>The online app</strong> loads everything from our own two addresses: the page, three.js and fonts from elvinpeters.com and the model from api.elvinpeters.com. It contacts no third party. On a campus link it asks our server once which campus the link belongs to, which also counts one open for that campus. When a teacher types the PIN, the PIN goes to our server to be checked.</li>
+<li><strong>What our server keeps:</strong> per campus, its name, the PIN as a one-way hash (never the PIN itself) and a daily count of opens. It writes no IP address anywhere and keeps no access log for these requests.</li>
+<li><strong>The offline file</strong> never goes online. The model, three.js and fonts are inside it, and a classroom copy checks the PIN inside the file.</li>
+</ul>
+<h2>How long it takes to reach devices</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Your time</th>
+<th>When devices get it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Admin console</td>
+<td>about 5 minutes</td>
+<td>"typically ... in minutes, but can take up to 24 hours" (Google)</td>
+</tr>
+<tr>
+<td>Intune</td>
+<td>about 7 minutes</td>
+<td>usually minutes to a few hours; devices also check in about every 8 hours (Microsoft)</td>
+</tr>
+<tr>
+<td>Group Policy</td>
+<td>about 5 minutes</td>
+<td>at the next refresh, every 90 minutes plus up to 30 (Microsoft), or at restart</td>
+</tr>
+<tr>
+<td>Offline file</td>
+<td>about 5 minutes (startup script), about 15 (Intune or SCCM app)</td>
+<td>at the next check-in or restart</td>
+</tr>
+</tbody>
+</table>
+</main></body></html>
