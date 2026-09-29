@@ -2359,7 +2359,7 @@ async function boot() {
   buildSkeleton();
   buildContacts();
   buildSearch();
-  exHash = location.hash.match(/^#(ex=[^&]+)/)?.[1] || '';  // keep an #ex= link while the body is set
+  exHash = location.hash.match(/[#&](ex=[^&#]+)/)?.[1] || '';  // keep an #ex= link while the body is set
   setSex(location.hash.match(/[#&]sex=([mf])/)?.[1] || store.get('sex', 'm'), { quiet: true });  // before any layer loads, so hidden parts never flash
   loadMyPoses();
   readTheme();
@@ -2388,18 +2388,28 @@ async function boot() {
   solveGround(false);
   setAnchorHere();
   const start = layerByKey.muscles.parts.find((p) => p.n === 'Rectus femoris muscle' && p.s === 'r');
-  const linked = decodeURIComponent(location.hash.match(/^#ex=([^&]+)/)?.[1] || '');  // #ex=<id> opens that exercise
+  const linked = decodeURIComponent(location.hash.match(/[#&]ex=([^&#]+)/)?.[1] || '');  // #ex=<id> opens that exercise
   if (start && layerByKey.muscles.visible && !isNarrow() && !linked) select(start);  // on a phone the card would cover the legs; the whole body is the better first look
   if (camera.aspect < 0.8) camera.position.sub(controls.target).multiplyScalar(1.25).add(controls.target);
   $('#loader').hidden = true;
   requestRender();
-  if (linked) {
-    if (isNarrow()) openPanel(true);
-    setPanelTab('ex');
-    const d = await loadExercises();
-    const e = d && exAll.find((x) => x.id === linked);
-    if (e) openExercise(e); else setHash('');
-  }
+  // A link followed on the open page (pasted into the same tab, or a lesson link) only changes the hash: no reload, so
+  // the reads above never see it. setHash uses replaceState, which fires no hashchange, so this can't loop.
+  addEventListener('hashchange', () => {
+    const ex = location.hash.match(/[#&](ex=[^&#]+)/)?.[1];
+    const sx = location.hash.match(/[#&]sex=([mf])/)?.[1];
+    if (ex) exHash = ex;  // before setSex, which rewrites the hash from exHash
+    if (sx) setSex(sx);
+    if (ex) openLinkedExercise(decodeURIComponent(ex.slice(3)));
+  });
+  if (linked) await openLinkedExercise(linked);
+}
+async function openLinkedExercise(id) {  // #ex=<id> opens that exercise
+  if (isNarrow()) openPanel(true);
+  setPanelTab('ex');
+  const d = await loadExercises();
+  const e = d && exAll.find((x) => x.id === id);
+  if (e) openExercise(e); else setHash('');
 }
 // console handle for poking at the sandbox: anatomySandbox.strain('Soleus muscle', 'r')
 window.anatomySandbox = {
