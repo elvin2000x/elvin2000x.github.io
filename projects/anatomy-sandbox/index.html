@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="anatomy-data" content="https://api.elvinpeters.com/anatomy-sandbox/"><meta name="robots" content="noindex"><meta name="description" content="A 3D human from the Z-Anatomy atlas: skin, fat, fascia, muscles and bones you can peel back, pose, walk and put through exercise reps."><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui,sans-serif;background:#fafaf9}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Anatomy Sandbox</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="anatomy-data" content="https://api.elvinpeters.com/anatomy-sandbox/"><meta name="anatomy-campus" content="https://api.elvinpeters.com/anatomy-campus/"><meta name="robots" content="noindex"><meta name="description" content="A 3D human from the Z-Anatomy atlas: skin, fat, fascia, muscles and bones you can peel back, pose, walk and put through exercise reps."><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0;font:14px system-ui,sans-serif;background:#fafaf9}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Anatomy Sandbox</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,500;1,8..60,600&display=swap">
@@ -196,6 +196,17 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 .loader-card p { margin: 0; color: var(--muted); }
 .toast { position: fixed; z-index: 7; left: 50%; transform: translateX(-50%); bottom: calc(80px + var(--bottom)); padding: 8px 14px; border-radius: 10px; background: var(--ink); color: var(--stage); font-size: 13px; box-shadow: var(--shadow); }
 
+/* classroom mode (#392): campus links only */
+.class-btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.class-pop { position: fixed; z-index: 6; top: calc(64px + var(--top)); left: 16px; width: min(320px, calc(100% - 32px)); box-sizing: border-box; padding: 16px; background: var(--panel-solid); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; }
+.class-pop p { margin: 0; font-size: 13px; color: var(--muted); }
+.class-pop form { display: flex; gap: 8px; align-items: flex-end; }
+.class-pop label { display: flex; flex-direction: column; gap: 4px; flex: 1; font-size: 12px; font-weight: 600; color: var(--ink); }
+.class-pop input { font-size: 16px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--raised); min-width: 0; letter-spacing: 0.2em; }
+.class-pop button { border: 0; border-radius: 10px; padding: 9px 14px; background: var(--accent); color: var(--on-accent); font-size: 13px; font-weight: 600; }
+.class-pop button.quiet { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.class-pop button:disabled { opacity: 0.5; cursor: default; }
+.class-pop .err { color: var(--shorter); min-height: 1em; }
 @media (max-width: 900px) {
   .brand-sub { display: none; }
 }
@@ -227,6 +238,7 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
     <span class="brand-name">Anatomy Sandbox</span>
     <span class="brand-sub" id="brandSub">Z-Anatomy male · 1.71 m · 20 joints</span>
   </div>
+  <button id="classBtn" class="icon-btn class-btn" aria-expanded="false" aria-controls="classPop" aria-pressed="false" hidden>Classroom</button>
   <div class="seg sexes" role="group" aria-label="Body">
     <button id="sex-m" data-sex="m" data-short="M" aria-pressed="true" aria-label="Male">Male</button>
     <button id="sex-f" data-sex="f" data-short="F" aria-pressed="false" aria-label="Female">Female</button>
@@ -243,6 +255,16 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
   <button id="exToggle" class="icon-btn" aria-pressed="false" aria-controls="panel" title="Exercise library (E)">Exercises</button>
   <button id="panelToggle" class="icon-btn only-narrow" aria-expanded="false" aria-controls="panel">Layers</button>
 </header>
+<div id="classPop" class="class-pop" role="dialog" aria-labelledby="classTitle" hidden>
+  <h2 id="classTitle">Classroom mode</h2>
+  <p id="classMsg">Reproductive and genital anatomy is hidden on this campus link.</p>
+  <form id="classForm" autocomplete="off">
+    <label>Teacher PIN<input id="classPin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" autocomplete="off" spellcheck="false"></label>
+    <button id="classGo" type="submit">Unlock</button>
+  </form>
+  <button id="classLock" type="button" class="quiet" hidden>Hide it again</button>
+  <p id="classErr" class="err" role="status" aria-live="polite"></p>
+</div>
 
 <aside id="panel" class="panel" aria-label="Body systems, display and exercises">
   <div class="seg" role="tablist" aria-label="Panel">
@@ -821,7 +843,7 @@ function writePart(p) {
   else if (state.colorMode === 'exercise' && p.l === 'muscles') rgb = EX_RGB[exRole.get(p) || 0];
   else rgb = naturalColor(p);
   const off = L.hidden.has(p.index) || !!(p.cp && layerByKey[p.cp]?.visible)  // a copy hides while its home layer shows
-    || !!(p.sx && p.sx !== state.sex)  // male-only or female-only part, other body chosen
+    || sexOff(p)  // male-only or female-only part, other body chosen (or a locked classroom)
     || (exOnly && state.colorMode === 'exercise' && p.l === 'muscles' && exRole.get(p) !== 2);  // "Main only": peel the rest away
   d[o] = rgb[0]; d[o + 1] = rgb[1]; d[o + 2] = rgb[2]; d[o + 3] = off ? 0 : 255;
 }
@@ -1031,7 +1053,7 @@ function renderLayerList() {
     li.innerHTML = `<input type="checkbox" class="toggle" id="${id}" ${L.want ? 'checked' : ''} aria-label="Show ${L.label}">
 <span class="sw" style="background: rgb(${sw.join(',')})"></span>
 <label for="${id}">${L.label}</label>
-<span class="meta data">${L.loaded ? L.count.toLocaleString() : mb(L.bytes) + ' MB'}</span>`;
+<span class="meta data">${L.loaded ? L.parts.filter((p) => p.sx !== 'c' && !(campus.locked && p.sx)).length.toLocaleString() : mb(L.bytes) + ' MB'}</span>`;
     li.querySelector('input').addEventListener('change', (e) => setLayerVisible(L, e.target.checked));
     if (L.progress != null) {
       const pr = document.createElement('progress');
@@ -1771,17 +1793,17 @@ function setMode(m) {
 const SEX_SUB = { m: 'Z-Anatomy male · 1.71 m · 20 joints', f: 'Female organs, estimated female skin · 20 joints' };
 let femTarget = 0;  // FEM_U eases toward this, so the skin reshapes instead of jumping
 function setSex(sx, opts = {}) {
-  sx = sx === 'f' ? 'f' : 'm';
+  sx = sx === 'f' && !campus.locked ? 'f' : 'm';  // a locked classroom is always the male body with the groin covered
   const changed = state.sex !== sx;
   state.sex = sx;
   $$('.sexes button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.sex === sx)));
-  $('#brandSub').textContent = SEX_SUB[sx];
-  store.set('sex', sx);
+  $('#brandSub').textContent = campus.locked ? CLASS_SUB : SEX_SUB[sx];
+  if (!campus.link) store.set('sex', sx);  // a campus link never overwrites this browser's own choice
   femTarget = sx === 'f' ? 1 : 0;
   if (opts.quiet) FEM_U.value = femTarget;
   applyFat();
   if (!changed) return;
-  if (selected?.sx && selected.sx !== sx) select(null);
+  if (selected && sexOff(selected)) select(null);
   for (const L of LAYERS) if (L.loaded) recolorLayer(L);
   setHash(exHash);
   if ($('#results') && !$('#results').hidden) runSearch($('#q').value);
@@ -1789,6 +1811,97 @@ function setSex(sx, opts = {}) {
   if (!opts.quiet) toast(sx === 'f' ? 'Female organs from the NIH Human Reference Atlas; vulva from a CC0 surface scan; skin and fat reshaped by estimate. Muscles and bones are still male.' : 'Male organs and skin.');
 }
 $$('.sexes button').forEach((b) => b.addEventListener('click', () => setSex(b.dataset.sex)));
+
+// ---------- classroom mode (#392) ----------
+// A campus link (?c=<campus-id>; #399 hands them out and counts loads) opens locked: every male-only and female-only
+// part (organs, genitals, pubic hair, the vulva scan, urogenital skin) is hidden, the groin shows a smooth cover
+// (sx 'c'), and the Male/Female switch is gone. Any ?c= locks before anything loads, so a slow, missing or unknown
+// campus fails closed. The URL hash and localStorage can't unlock it; only the campus PIN, checked by the server,
+// can, and only for this page: a reload locks again. Without ?c= the page is exactly the public one.
+const CAMPUS_API = document.querySelector('meta[name="anatomy-campus"]')?.content || 'anatomy-campus/';
+const CLASS_SUB = 'Classroom mode · 20 joints';
+const campus = (() => {
+  const q = new URLSearchParams(location.search);
+  const id = (q.get('c') || '').trim().toLowerCase();
+  return { link: q.has('c'), id, locked: q.has('c'), state: 'wait', name: '' };
+})();
+function sexOff(p) {  // true when the chosen body (or a locked classroom) hides this part
+  if (!p.sx) return false;
+  return campus.locked ? p.sx !== 'c' : p.sx !== state.sex;
+}
+function applyClassroom() {
+  $('.sexes').hidden = campus.locked;
+  const b = $('#classBtn');
+  b.hidden = !campus.link;
+  b.textContent = campus.locked ? 'Classroom' : 'Full model';
+  b.setAttribute('aria-pressed', String(!campus.locked));
+  const known = campus.state === 'ok';
+  $('#classMsg').textContent = !campus.locked
+    ? 'The full model is showing, including reproductive and genital anatomy. It hides again when this page reloads.'
+    : campus.state === 'unknown' ? 'This campus link is not recognised, so reproductive and genital anatomy stays hidden. Check the link with your teacher.'
+    : `Reproductive and genital anatomy is hidden${campus.name ? ` for ${campus.name}` : ' on this campus link'}. A teacher can show it with the campus PIN.`;
+  $('#classForm').hidden = !campus.locked || campus.state === 'unknown';
+  $('#classLock').hidden = campus.locked;
+  $('#classGo').disabled = campus.locked && !known && campus.state !== 'offline';
+  setSex(state.sex, { quiet: true });
+  $('#brandSub').textContent = campus.locked ? CLASS_SUB : SEX_SUB[state.sex];
+  if (selected && sexOff(selected)) select(null);
+  for (const L of LAYERS) if (L.loaded) recolorLayer(L);
+  if (LAYERS.length) renderLayerList();
+  if ($('#results') && !$('#results').hidden) runSearch($('#q').value);
+  requestRender();
+}
+async function loadCampus() {
+  if (!/^[a-z][a-z0-9-]{2,40}$/.test(campus.id)) { campus.state = 'unknown'; applyClassroom(); return; }
+  try {
+    const r = await fetch(`${CAMPUS_API}c/${encodeURIComponent(campus.id)}`, { cache: 'no-store' });
+    if (r.status === 404) campus.state = 'unknown';
+    else if (!r.ok) campus.state = 'offline';
+    else {
+      const cfg = await r.json();
+      campus.state = 'ok';
+      campus.name = String(cfg.name || '').slice(0, 80);
+      if (cfg.classroom && cfg.classroom.lock === false) campus.locked = false;  // this campus chose the full model
+    }
+  } catch { campus.state = 'offline'; }
+  applyClassroom();
+}
+function openClassPop(open) {
+  $('#classPop').hidden = !open;
+  $('#classBtn').setAttribute('aria-expanded', String(open));
+  $('#classErr').textContent = '';
+  if (open) setTimeout(() => (campus.locked && !$('#classForm').hidden ? $('#classPin') : $('#classLock')).focus(), 0);
+}
+$('#classBtn').addEventListener('click', () => openClassPop($('#classPop').hidden));
+$('#classPop').addEventListener('keydown', (e) => { if (e.key === 'Escape') { openClassPop(false); $('#classBtn').focus(); } });
+$('#classForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const pin = $('#classPin').value.trim(), err = $('#classErr');
+  if (!/^\d{4,8}$/.test(pin)) { err.textContent = 'The PIN is 4 to 8 digits.'; return; }
+  $('#classGo').disabled = true;
+  err.textContent = 'Checking…';
+  try {
+    const r = await fetch(`${CAMPUS_API}c/${encodeURIComponent(campus.id)}/unlock`,
+      { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ pin }), cache: 'no-store' });
+    const d = await r.json().catch(() => ({}));
+    if (r.ok && d.ok === true) {
+      campus.locked = false; campus.state = 'ok';
+      $('#classPin').value = '';
+      applyClassroom(); openClassPop(false);
+      toast('Full model on for this page. It hides again when the page reloads.');
+      return;
+    }
+    err.textContent = r.status === 429 ? `Too many tries. Wait ${Math.max(1, Math.ceil((d.retry || 600) / 60))} min and try again.`
+      : r.status === 403 ? 'That PIN didn’t work.' : r.status === 404 ? 'This campus link is not recognised.' : 'The classroom server didn’t answer. Try again.';
+  } catch { err.textContent = 'Can’t reach the classroom server. Check the connection and try again.'; }
+  $('#classPin').select();
+  $('#classGo').disabled = false;
+});
+$('#classLock').addEventListener('click', () => {
+  campus.locked = true;
+  applyClassroom(); openClassPop(false);
+  toast('Classroom mode: reproductive and genital anatomy hidden.');
+});
 
 // ---------- search ----------
 // Everyday words for the organs, mapped onto the atlas names they mean.
@@ -1847,7 +1960,7 @@ function runSearch(q) {
   const ul = $('#results');
   if (!words.length) { ul.hidden = true; $('#q').setAttribute('aria-expanded', 'false'); return; }
   const terms = words.filter((w) => w !== 'left' && w !== 'right');
-  results = searchIndex.filter((e) => (!e.p.sx || e.p.sx === state.sex) && words.every((w) => e.text.includes(w)))
+  results = searchIndex.filter((e) => !sexOff(e.p) && words.every((w) => e.text.includes(w)))
     .map((e) => ({ e, r: searchRank(e, terms[0] || words[0]) }))
     .sort((a, b) => a.r[0] - b.r[0] || a.r[1] - b.r[1] || a.r[2] - b.r[2] || a.r[3] - b.r[3] || a.e.name.localeCompare(b.e.name))
     .slice(0, 14).map((x) => x.e);
@@ -2361,6 +2474,7 @@ async function boot() {
   buildSearch();
   exHash = location.hash.match(/[#&](ex=[^&#]+)/)?.[1] || '';  // keep an #ex= link while the body is set
   setSex(location.hash.match(/[#&]sex=([mf])/)?.[1] || store.get('sex', 'm'), { quiet: true });  // before any layer loads, so hidden parts never flash
+  if (campus.link) { applyClassroom(); loadCampus(); }  // a campus link: locked now, the server may say otherwise
   loadMyPoses();
   readTheme();
   resize();
