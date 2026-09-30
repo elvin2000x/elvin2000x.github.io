@@ -9,9 +9,15 @@
 (function(){var t="light";try{t=localStorage.getItem("studio-theme")||"light";}catch(e){}
 if(t==="auto")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t);})();
 </script>
+<script>/* ?embed=1 inside Empire Studio (#464): no top bar or rail of our own. */
+if (/[?&]embed=1(&|$)/.test(location.search) && window.parent !== window) document.documentElement.classList.add("embed");</script>
 <link rel="stylesheet" href="/studio.css">
 <style>
 /* Site Studio additions. Tokens from studio.css only; no colours of our own. */
+html.embed .bar,html.embed .rail,html.embed .railscrim{display:none!important}
+html.embed .shell{min-height:100vh}
+html.embed .main{margin:0;border-radius:0;padding:20px 24px 48px}
+@media (max-width:900px){html.embed .main{padding:14px 16px 40px}}
 .menubtn{display:grid}
 .rail.open{display:block;position:fixed;top:64px;left:0;bottom:0;z-index:60;background:var(--bg);width:280px;box-shadow:var(--shadow-lg);padding-top:8px}
 @media (min-width:901px){.shell.norail .rail{display:none}.shell.norail .main{margin-left:16px}}
@@ -328,9 +334,14 @@ function saveNow(name){
   var bad = name === "essays" ? validatePosts() : "";
   if (bad) { setSave("wait", bad); return Promise.resolve(false); }
   setSave("saving");
-  var put = isBodyKey(name) ? putBody(name) : api("PUT", "/api/content/" + name, DOCS[name], {"If-Match": VERS[name] || ""});
+  var put = isBodyKey(name) ? putBody(name)
+    : name.indexOf("free:") === 0 ? api("PUT", "/api/free/" + name.slice(5), DOCS[name], {"If-Match": VERS[name] || ""})
+    : name.indexOf("freehtml:") === 0 ? api("PUT", "/api/free-html/" + name.slice(9), DOCS[name], {"If-Match": VERS[name] || ""})
+    : api("PUT", "/api/content/" + name, DOCS[name], {"If-Match": VERS[name] || ""});
   saveBusy[name] = put.then(function(r){
     VERS[name] = r.data.version; saveBusy[name] = null;
+    // A lead magnet's HTML save also saves the words it holds as its fields.
+    if (r.data.fields_version) { var fk = "free:" + name.slice(9); VERS[fk] = r.data.fields_version; delete DOCS[fk]; }
     if (saveAgain[name]) { saveAgain[name] = false; return saveNow(name); }
     setSave("saved"); pendingChanges(true);
     return true;
@@ -507,6 +518,31 @@ function closeModal(){
 }
 $("#modal").addEventListener("click", function(e){ if (e.target.id === "modal") closeModal(); });
 
+/* ================= Embed (#464) =================
+   Inside Empire Studio's Website tab. Site Studio says hello once it has loaded
+   (so the parent knows the sign-in worked), reports every route, and follows the
+   parent's deep links: {type: "empire-studio", event: "go", hash, theme}. */
+var EMBED = document.documentElement.classList.contains("embed");
+var EMBED_OK = /^(https:\/\/studio\.elvinpeters\.com|http:\/\/(127\.0\.0\.1|localhost)(:\d+)?)$/;
+var PARENT = (function(){
+  if (!EMBED) return "";
+  var o = (location.ancestorOrigins && location.ancestorOrigins[0]) || "";
+  if (!o) { try { o = new URL(document.referrer).origin; } catch (e) {} }
+  return EMBED_OK.test(o) ? o : "";
+})();
+function embedSay(event){
+  if (!PARENT) return;
+  try { parent.postMessage({type: "site-studio", event: event, hash: location.hash || "#posts", title: document.title}, PARENT); } catch (e) {}
+}
+function embedTell(){ embedSay("route"); }
+window.addEventListener("message", function(e){
+  if (!PARENT || e.origin !== PARENT || e.source !== parent) return;
+  var m = e.data || {};
+  if (m.type !== "empire-studio") return;
+  if (m.theme === "light" || m.theme === "dark") document.documentElement.setAttribute("data-theme", m.theme);
+  if (m.event === "go" && typeof m.hash === "string" && /^#[\w\/.-]*$/.test(m.hash) && m.hash !== location.hash) location.hash = m.hash;
+});
+
 /* ================= Router ================= */
 var ROUTE = "";
 function route(){
@@ -520,7 +556,9 @@ function route(){
   else if (h === "post-new") { newPost(); return; }
   else if (h.indexOf("post/") === 0) { openPost(h.slice(5)); }
   else if (h.indexOf("page/") === 0) { openSection(h.slice(5)); }
-  else { SITETAB = ["posts", "pages", "menu", "history"].indexOf(h) > -1 ? h : "posts"; m.innerHTML = viewSite(); wireSite(); }
+  else if (h.indexOf("free/") === 0) { openFree(h.slice(5)); }
+  else { SITETAB = ["posts", "pages", "free", "menu", "history"].indexOf(h) > -1 ? h : "posts"; m.innerHTML = viewSite(); wireSite(); }
+  embedTell();
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", function(){
@@ -539,6 +577,7 @@ function wordsOf(p){
 }
 function changeLabel(f){
   if (isBlogKey(f)) return 'epeters.ca: ' + changeLabel(f.slice(3));
+  if (freeSlugOf(f)) return esc(pageName(f)) + ' <span class="subtle">' + esc(f) + '</span>';
   var m = /^content\/([a-z0-9-]+)\.json$/.exec(f);
   if (m) return (m[1] === "essays" ? "Blog posts" : m[1] === "nav" ? "Menu" : SECTIONS[m[1]] ? SECTIONS[m[1]].title : m[1]) + ' <span class="subtle">' + esc(f) + '</span>';
   if (/^img\/uploads\//.test(f)) return 'New image <span class="subtle">' + esc(f.slice(12)) + '</span>';
@@ -570,6 +609,11 @@ function pageName(key){
     var p = DOCS.essays ? posts().filter(function(x){ return x.file === k; })[0] : null;
     return p ? "Post body: " + (p.title || p.slug) : k;
   }
+  var fs = freeSlugOf(key);
+  if (fs) {
+    var fp = (FREELIST || []).filter(function(x){ return x.slug === fs; })[0];
+    return "Lead magnet: " + (fp ? fp.title : fs) + (/\.html$/.test(key) ? " (page HTML)" : "");
+  }
   var m = /^content\/([a-z0-9-]+)\.json$/.exec(key);
   if (m) return m[1] === "essays" ? "Blog posts" : m[1] === "nav" ? "Menu" : SECTIONS[m[1]] ? SECTIONS[m[1]].title : m[1];
   if (/^essays\//.test(key)) { var p = DOCS.essays ? posts().filter(function(x){ return x.file === key; })[0] : null; return p ? "Post body: " + (p.title || p.slug) : key; }
@@ -595,10 +639,11 @@ function pendingChanges(soft){
   }).catch(function(){});
 }
 function viewSite(){
-  var tabs = [["posts", "Blog posts"], ["pages", "Pages"], ["menu", "Menu"], ["history", "Publish history"]];
+  var tabs = [["posts", "Blog posts"], ["pages", "Pages"], ["free", "Lead magnets"], ["menu", "Menu"], ["history", "Publish history"]];
   var body = "";
   if (SITETAB === "posts") body = viewPosts();
   else if (SITETAB === "pages") body = viewPages();
+  else if (SITETAB === "free") body = '<div id="freelist"><div class="empty">Loading the lead magnet pages…</div></div>';
   else if (SITETAB === "menu") body = '<div id="menued"><div class="empty">Loading the menu…</div></div>';
   else body = '<div id="histwrap"><div class="empty">Loading publish history…</div></div>';
   var onBlog = SITETAB === "posts", home = onBlog ? "epeters.ca/" + blogDir() + "/" : "elvinpeters.com";
@@ -614,6 +659,7 @@ function viewSite(){
 function wireSite(){
   var pb = $("#pubcount"); if (pb && STATE) pb.textContent = (STATE.repo.changed || []).length ? " (" + STATE.repo.changed.length + ")" : "";
   if (SITETAB === "menu") drawMenuTab();
+  if (SITETAB === "free") drawFreeList();
   if (SITETAB === "history") drawHistory();
 }
 function viewPosts(){
@@ -696,6 +742,164 @@ function viewPages(){
   return (stacks.length ? '<div class="panel-h" style="margin:0 0 10px"><h2 style="font-size:17px">Pages built from sections</h2><div class="sp"></div><button class="btn sm" onclick="openLibrary()">' + icon("layout", "width:16px;height:16px") + 'Library</button><button class="btn tonal sm" onclick="openNewPage()">' + icon("plus", "width:16px;height:16px") + 'New page</button></div>' +
       '<div class="grid apps pagecards" style="margin-bottom:22px">' + stacks.map(card).join("") + '</div><h2 style="font-size:17px;margin:0 0 10px">Content blocks</h2>' : "") +
     '<div class="grid apps pagecards">' + others.map(card).join("") + '</div><p class="subtle" style="font-size:13px;margin-top:18px">These are the parts of elvinpeters.com that are driven by content files. Everything else on the site is hand-built and changes through code.</p>';
+}
+
+/* ---- Lead magnets tab (#464) ----
+   The 19 /free/ pages. Each one's words are content/free/<slug>.json, filled into
+   the page at build, so a field edit changes the words and nothing else. The five
+   pages with their own layout also open as HTML (everything but the scripts and
+   tracking codes, which the server keeps as they are). The preview is the real build. */
+var FREELIST = null, FREE = null, FREEMODE = "fields", FREEKEYS = [];
+function freeSlugOf(key){
+  var m = /^content\/free\/([a-z0-9-]+)\.json$/.exec(key) || /^free\/(?:([a-z0-9-]+)\/)?index\.html$/.exec(key);
+  return m ? (m[1] || "index") : null;
+}
+function loadFreeList(){ return api("GET", "/api/free").then(function(r){ FREELIST = r.data.pages; return FREELIST; }); }
+var FREELAYOUT = {guide: ["Guide", "t-blue"], squeeze: ["Squeeze page", "t-amber"], own: ["Own layout", "t-grey"]};
+function drawFreeList(){
+  loadFreeList().then(function(list){
+    var el = $("#freelist"); if (!el) return;
+    el.innerHTML = '<table class="tbl"><thead><tr><th>Lead magnet</th><th>Status</th><th class="hide-sm">Layout</th><th></th></tr></thead><tbody>' + list.map(function(p){
+      return '<tr class="row" data-free="' + esc(p.slug) + '"><td><div class="ttl">' + esc(p.title) + '</div><div class="slug">' + esc(p.url) + '</div></td>' +
+        '<td>' + (p.draft ? '<span class="chip draft"><span class="dot"></span>Draft</span>' + (p.stale ? ' <span class="chip draft" style="color:var(--amber)">changed live</span>' : '') : '<span class="chip live"><span class="dot"></span>Live</span>') + '</td>' +
+        '<td class="hide-sm"><span class="fmt ' + FREELAYOUT[p.layout][1] + '">' + FREELAYOUT[p.layout][0] + '</span>' + (p.odd ? ' <span class="fmt t-grey">+ HTML</span>' : '') + '</td>' +
+        '<td><div class="rowacts"><a class="iconbtn" title="Open on the live site" href="https://elvinpeters.com' + esc(p.url) + '" target="_blank" rel="noopener">' + icon("open") + '</a></div></td></tr>';
+    }).join("") + '</tbody></table>' +
+      '<p class="subtle" style="font-size:13px;margin-top:18px">' + list.length + ' pages under elvinpeters.com/free/. Tap one to change its words. The sign-up form, the tracking codes and the download script stay exactly as they are. Pages marked <b>+ HTML</b> have their own layout: anything no field holds is edited as the page HTML.</p>';
+  }).catch(function(e){ var el = $("#freelist"); if (el) el.innerHTML = '<div class="banner warn">' + icon("flag") + '<span>Could not load the lead magnet pages: ' + esc(e.message) + '</span></div>'; });
+}
+document.addEventListener("click", function(e){
+  if (e.target.closest(".rowacts")) return;
+  var row = e.target.closest("tr.row[data-free]"); if (row) location.hash = "free/" + row.dataset.free;
+});
+var FREEF = {
+  headline: ["Headline", "area"], label: ["Small label above the headline", "text"], hook: ["Hook (the bold line under the headline)", "area"],
+  tagline: ["Intro paragraph", "area"], bullets: ["What's inside (one line each)", "list"], cover: ["Cover image", "image"], cover_alt: ["Cover description (read out by screen readers)", "text"],
+  form_heading: ["Form heading", "text"], form_sub: ["Line under the form heading", "area"], button: ["Button text", "text"], fine_print: ["Small print under the button", "area"],
+  thanks_heading: ["Thank-you heading", "text"], thanks_text: ["Thank-you text", "area"], download_label: ["Download button text", "text"], pdf: ["PDF address", "text"],
+  title: ["Browser tab title", "text"], description: ["Google description", "area"], share_title: ["Share title (LinkedIn, X, texts)", "text"],
+  share_description: ["Share description", "area"], share_image: ["Share image address", "text"]
+};
+var FREEGROUPS = [["The page", ["label", "headline", "hook", "tagline", "bullets", "cover", "cover_alt"]], ["Sign-up form", ["form_heading", "form_sub", "button", "fine_print"]],
+  ["After they sign up", ["thanks_heading", "thanks_text", "download_label", "pdf"]], ["Google and sharing", ["title", "description", "share_title", "share_description", "share_image"]]];
+var FREEHELP = {
+  thanks_text: "{name} is where their first name goes (it reads “Thanks, Sam.”).",
+  pdf: "The file under /dl/ that the download button hands out after sign-up.",
+  title: "Shows in the browser tab and as the blue link on Google.",
+  share_title: "Leave empty to use the tab title without “| Elvin Peters”.", share_description: "Leave empty to use the Google description.",
+  share_image: "Leave empty to use the cover image.", bullets: "Each line is one bullet."
+};
+function freeShareDefault(d, k){
+  if (k === "share_title") return String(d.title || "").replace(/ \| Elvin Peters$/, "");
+  if (k === "share_description") return d.description || "";
+  if (k === "share_image") return d.cover ? (/^https?:/.test(d.cover) ? d.cover : "https://elvinpeters.com" + d.cover) : "";
+  return "";
+}
+function openFree(slug){
+  FREEMODE = "fields";
+  (FREELIST ? Promise.resolve(FREELIST) : loadFreeList()).then(function(list){
+    var fp = list.filter(function(x){ return x.slug === slug; })[0];
+    if (!fp) { location.hash = "#free"; return; }
+    FREEKEYS = ["content/free/" + slug + ".json"].concat(fp.odd ? [fp.file] : []);
+    $("#main").innerHTML = '<div class="head"><a class="iconbtn" href="#free" title="Back">' + icon("back") + '</a>' +
+      '<div><div class="crumb"><a href="#free">Lead magnets</a><span>›</span><span style="color:var(--ink)">' + esc(fp.title) + '</span></div>' +
+      '<span class="urlpill" style="padding-right:12px">elvinpeters.com' + esc(fp.url) + '</span></div>' +
+      '<div class="sp"></div><span class="save" id="savestate">' + icon("check", "width:16px;height:16px") + 'All changes saved</span>' +
+      '<a class="btn" href="https://elvinpeters.com' + esc(fp.url) + '" target="_blank" rel="noopener">' + icon("open") + 'View live</a>' +
+      '<button class="btn" onclick="runTest(\'' + esc(fp.url) + '\')" title="Open the whole site with your drafts at the private test address">' + icon("eye") + 'Test</button>' +
+      '<button class="btn filled" onclick="openPublish(FREEKEYS)">' + icon("rocket") + 'Publish</button></div>' +
+      '<div class="ed" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)"><div class="card"><div class="panel-h"><h2>' + esc(fp.title) + '</h2><div class="sp"></div>' +
+      (fp.odd ? '<div class="seg" role="group" aria-label="Edit as"><button data-fmode="fields" class="on">Fields</button><button data-fmode="html">Page HTML</button></div>' : '') +
+      '</div><div class="form" id="freeform"><div class="empty">Loading…</div></div></div><div id="secpv"></div></div>';
+    FREE = {slug: slug, url: fp.url, odd: fp.odd};
+    $$("[data-fmode]").forEach(function(b){ b.onclick = function(){
+      if (FREEMODE === b.dataset.fmode) return;
+      flushSaves().then(function(){
+        FREEMODE = b.dataset.fmode;
+        $$("[data-fmode]").forEach(function(x){ x.classList.toggle("on", x === b); });
+        drawFree();
+      });
+    }; });
+    drawFree();
+    drawRealPreview("#secpv", fp.url, true);
+  }).catch(function(e){ $("#main").innerHTML = '<div class="empty">Could not load: ' + esc(e.message) + '</div>'; });
+}
+function freeChanged(){
+  clearTimeout(freeChanged.t);
+  freeChanged.t = setTimeout(function(){ flushSaves().then(function(){ if (FREE) drawRealPreview("#secpv", FREE.url, true); }); }, 1600);
+}
+function drawFree(){
+  var slug = FREE.slug, form = $("#freeform"); if (!form) return;
+  form.innerHTML = '<div class="empty">Loading…</div>';
+  if (FREEMODE === "html") return drawFreeHtml();
+  var k = "free:" + slug;
+  Promise.resolve(saveBusy["freehtml:" + slug]).then(function(){ return api("GET", "/api/free/" + slug); }).then(function(r){
+    if (!FREE || FREE.slug !== slug || FREEMODE !== "fields") return;
+    DOCS[k] = r.data.data; VERS[k] = r.etag; FREE.slots = r.data.slots; FREE.live = r.data.live;
+    var d = DOCS[k], h = '<p class="subtle" style="margin:6px 0 0">Words show exactly as the page ships them: <code>&amp;amp;</code> is &amp;, <code>&lt;b&gt;</code>…<code>&lt;/b&gt;</code> is bold. ' +
+      (FREE.odd ? 'This page has its own layout: what no field holds is under <b>Page HTML</b>.' : 'The form, tracking codes and download script never change here.') + '</p>';
+    FREEGROUPS.forEach(function(g){
+      var keys = g[1].filter(function(x){ return FREE.slots.indexOf(x) > -1; });
+      if (!keys.length) return;
+      h += '<h3 style="font-size:15px;margin:18px 0 4px">' + esc(g[0]) + '</h3>';
+      keys.forEach(function(key){ h += freeField(key, d); });
+    });
+    form.innerHTML = h;
+    wireFree();
+  }).catch(function(e){ form.innerHTML = '<div class="empty">Could not load: ' + esc(e.message) + '</div>'; });
+}
+function freeField(key, d){
+  var f = FREEF[key], id = "ff_" + key, v = d[key], share = /^share_/.test(key);
+  var changed = JSON.stringify(v) !== JSON.stringify(FREE.live[key]);
+  var lab = '<label for="' + id + '">' + esc(f[0]) + (changed ? ' <span class="chip draft" title="Differs from the live page">changed</span>' : '') + '</label>';
+  var help = FREEHELP[key] ? '<div class="help">' + esc(FREEHELP[key]) + '</div>' : '';
+  var ph = share ? ' placeholder="' + esc(freeShareDefault(d, key)) + '"' : '';
+  if (f[1] === "list") return '<div class="field">' + lab + '<textarea id="' + id + '" data-fk="' + key + '" rows="' + Math.max(3, (v || []).length + 1) + '">' + esc((v || []).join("\n")) + '</textarea>' + help + '</div>';
+  if (f[1] === "area") return '<div class="field">' + lab + '<textarea id="' + id + '" data-fk="' + key + '" rows="3"' + ph + '>' + esc(v == null ? "" : v) + '</textarea>' + help + '</div>';
+  if (f[1] === "image") return '<div class="field">' + lab + '<div style="display:flex;gap:10px;align-items:center">' +
+    (v ? '<img src="' + esc(v) + '" alt="" style="width:56px;height:auto;border-radius:6px;border:1px solid var(--line)">' : '') +
+    '<input type="text" id="' + id + '" data-fk="' + key + '" value="' + esc(v || "") + '" style="flex:1">' +
+    '<button class="btn sm" type="button" data-fup="' + key + '">' + icon("plus", "width:16px;height:16px") + 'Upload</button></div>' +
+    (d.cover_width ? '<div class="help">' + d.cover_width + ' × ' + d.cover_height + ' px. An upload sets the size for you.</div>' : '') + '</div>';
+  return '<div class="field">' + lab + '<input type="text" id="' + id + '" data-fk="' + key + '" value="' + esc(v == null ? "" : v) + '"' + ph + '>' + help + '</div>';
+}
+function wireFree(){
+  var k = "free:" + FREE.slug, d = DOCS[k];
+  $$("[data-fk]", $("#freeform")).forEach(function(el){
+    el.addEventListener("input", function(){
+      var key = el.dataset.fk, t = FREEF[key][1];
+      if (t === "list") d[key] = el.value.split("\n").map(function(x){ return x.trim(); }).filter(Boolean);
+      else if (/^share_/.test(key) && !el.value.trim()) delete d[key];
+      else d[key] = el.value;
+      if (key === "title" || key === "description" || key === "cover")
+        ["share_title", "share_description", "share_image"].forEach(function(s){ var x = $("#ff_" + s); if (x) x.placeholder = freeShareDefault(d, s); });
+      queueSave(k); freeChanged();
+    });
+  });
+  $$("[data-fup]", $("#freeform")).forEach(function(b){
+    b.onclick = function(){ pickFile(function(file){
+      if (file.size > 8 * 1024 * 1024) { toast("That image is over 8 MB. Export a smaller JPG or WebP."); return; }
+      toast("Uploading " + file.name + "…");
+      api("POST", "/api/upload?name=" + encodeURIComponent(file.name), file, {"Content-Type": "application/octet-stream"}).then(function(r){
+        d.cover = r.data.src;
+        if (FREE.slots.indexOf("cover_width") > -1) { d.cover_width = r.data.width; d.cover_height = r.data.height; }
+        queueSave(k); freeChanged(); drawFree();
+        toast("Cover set. Describe it in the field below the picture.");
+      }).catch(function(e){ toast("Upload failed: " + e.message); });
+    }); };
+  });
+}
+function drawFreeHtml(){
+  var slug = FREE.slug, k = "freehtml:" + slug, form = $("#freeform");
+  form.innerHTML = '<p class="subtle" style="margin:6px 0 10px">The whole page as it ships, with today\'s words in it. Change anything the fields can\'t reach. The scripts and tracking codes must stay exactly as they are; the save stops if they change. Words you change here also update the fields.</p>' +
+    '<textarea class="bodyin codein" id="freecode" spellcheck="false" disabled placeholder="Loading the page HTML…" aria-label="Page HTML" style="min-height:60vh"></textarea>';
+  var code = $("#freecode");
+  Promise.resolve(saveBusy["free:" + slug]).then(function(){ return api("GET", "/api/free-html/" + slug); }).then(function(r){
+    if (!FREE || FREE.slug !== slug || FREEMODE !== "html") return;
+    DOCS[k] = r.data.html; VERS[k] = r.data.version;
+    code.value = DOCS[k]; code.disabled = false; code.placeholder = "";
+  }).catch(function(e){ code.placeholder = "Could not load the page HTML: " + e.message; });
+  code.addEventListener("input", function(){ DOCS[k] = code.value; queueSave(k, 1200); freeChanged(); });
 }
 
 /* ================= Stack pages (slice 3): the phone editor =================
@@ -1358,9 +1562,13 @@ function openSection(name){
 function drawMenuTab(){
   var s = SECTIONS.nav;
   if (!s) { $("#menued").innerHTML = '<div class="empty">No menu schema.</div>'; return; }
+  // Preview on a page the menu shows on (the homepage keeps its own short menu).
+  s.pv = s.pv || s.preview || "/free/";
+  var pick = (s.previews || []).length ? '<label class="subtle" for="menupv" style="font-size:13px">Preview on</label><select id="menupv" style="width:auto">' + s.previews.map(function(o){ return '<option value="' + esc(o.path) + '"' + (o.path === s.pv ? " selected" : "") + '>' + esc(o.label) + '</option>'; }).join("") + '</select>' : '';
   $("#menued").innerHTML = '<div class="ed" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)"><div class="card"><div class="panel-h"><h2>Menu</h2><div class="sp"></div><span class="save" id="savestate">' + icon("check", "width:16px;height:16px") + 'All changes saved</span></div>' +
-    '<div class="form" id="secform"><div class="empty">Loading…</div></div></div><div id="secpv"></div></div>';
-  loadDoc("nav").then(function(){ SEC = s; SECROOT = $("#secform"); drawSection(); drawRealPreview("#secpv", s.preview || "/", true); });
+    '<div class="form" id="secform"><div class="empty">Loading…</div></div></div><div><div class="panel-h" style="gap:8px;margin:0 0 8px;flex-wrap:wrap">' + pick + '<div class="sp"></div><button class="btn sm filled" onclick="openPublish([\'content/nav.json\'])">' + icon("rocket", "width:16px;height:16px") + 'Publish menu</button></div><div id="secpv"></div></div></div>';
+  var sel = $("#menupv"); if (sel) sel.onchange = function(){ s.pv = sel.value; flushSaves().then(function(){ drawRealPreview("#secpv", s.pv, false); }); };
+  loadDoc("nav").then(function(){ SEC = s; SECROOT = $("#secform"); drawSection(); drawRealPreview("#secpv", s.pv, true); });
 }
 function drawSection(){
   var s = SEC, data = DOCS[s.name], h = s.help ? '<p class="subtle" style="margin:6px 0 0">' + esc(s.help) + '</p>' : "";
@@ -1385,7 +1593,7 @@ function drawSection(){
 function sectionChanged(redraw){
   queueSave(SEC.name);
   clearTimeout(sectionChanged.t);
-  sectionChanged.t = setTimeout(function(){ flushSaves().then(function(){ drawRealPreview("#secpv", SEC.preview || "/", true); }); }, 1600);
+  sectionChanged.t = setTimeout(function(){ flushSaves().then(function(){ drawRealPreview("#secpv", SEC.pv || SEC.preview || "/", true); }); }, 1600);
   if (redraw) drawSection();
 }
 function wireSection(){
@@ -1437,14 +1645,15 @@ var pvDevice = "desktop";
 try { pvDevice = localStorage.getItem("site-studio-device") || "desktop"; } catch (e) {}
 function drawRealPreview(sel, pagePath, auto){
   var host = $(sel); if (!host) return;
+  host.dataset.path = pagePath;
   if (!host.dataset.wired) {
     host.dataset.wired = "1";
     host.innerHTML = '<div class="phone-t">' + icon("eye", "width:18px;height:18px") + 'Preview: the real build<div class="sp"></div>' +
       '<div class="seg" role="group" aria-label="Device"><button data-dev="desktop" title="Desktop">' + icon("desktop", "width:16px;height:16px") + '</button><button data-dev="phone" title="Phone">' + icon("phone", "width:16px;height:16px") + '</button></div>' +
       '<button class="iconbtn" title="Rebuild preview" data-rebuild>' + icon("refresh", "width:18px;height:18px") + '</button></div>' +
       '<div class="pvframe" data-pv style="height:calc(100vh - 170px)"></div><div class="pvnote" data-pvnote>Updates a moment after you stop typing.</div>';
-    $$("[data-dev]", host).forEach(function(b){ b.onclick = function(){ setDevice(b.dataset.dev); drawRealPreview(sel, pagePath, false); }; });
-    $("[data-rebuild]", host).onclick = function(){ flushSaves().then(function(){ drawRealPreview(sel, pagePath, false); }); };
+    $$("[data-dev]", host).forEach(function(b){ b.onclick = function(){ setDevice(b.dataset.dev); drawRealPreview(sel, host.dataset.path, false); }; });
+    $("[data-rebuild]", host).onclick = function(){ flushSaves().then(function(){ drawRealPreview(sel, host.dataset.path, false); }); };
   }
   $$("[data-dev]", host).forEach(function(b){ b.classList.toggle("on", b.dataset.dev === pvDevice); });
   var note = $("[data-pvnote]", host), frameHost = $("[data-pv]", host);
@@ -2195,7 +2404,7 @@ Promise.all([
   refreshState().then(loadPostsDoc)
 ]).then(function(){
   $("#brandlink").href = REG.home;
-  drawRail(); route();
+  drawRail(); route(); embedSay("hello");
   setInterval(function(){ if (document.visibilityState === "visible" && !POST) pendingChanges(); }, 60000);
 }).catch(function(e){
   drawRail();
