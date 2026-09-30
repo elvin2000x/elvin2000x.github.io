@@ -266,9 +266,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     success:     'Almost done: check your inbox and tap the confirm link. Issue 1 comes straight to you when it goes out. Until then, read the sample below.',
     successLink: 'read the sample below'      /* the words inside COPY.success that link to #archive */
   };
-  /* Ask 3: samples open in full for everyone, real issues keep the gate. Needs Elvin's yes
-     (via #516) before it goes true; false keeps today's gate on every card, samples included. */
-  var SAMPLES_UNGATED = false;
+  /* Ask 3: samples open in full for everyone, real issues keep the gate. Elvin, 2026-09-30
+     (in #516): "open to everyone". false puts today's gate back on every card, samples included. */
+  var SAMPLES_UNGATED = true;
 
   var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   var params;
