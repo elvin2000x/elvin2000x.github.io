@@ -77,7 +77,7 @@ button { cursor: pointer; }
 .icon-btn { border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 8px 12px; font-size: 13px; font-weight: 500; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .only-narrow { display: none; }
 
-.panel, .card { position: fixed; z-index: 4; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.panel, .card, .tour { position: fixed; z-index: 4; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 .panel { left: 16px; top: calc(70px + var(--top)); bottom: calc(84px + var(--bottom)); width: 286px; overflow: auto; display: flex; flex-direction: column; gap: 18px; padding: 16px; box-sizing: border-box; }
 .panel section { display: flex; flex-direction: column; gap: 10px; }
 .layers { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
@@ -207,6 +207,21 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
 .class-pop button.quiet { background: transparent; color: var(--ink); border: 1px solid var(--line); }
 .class-pop button:disabled { opacity: 0.5; cursor: default; }
 .class-pop .err { color: var(--shorter); min-height: 1em; }
+/* guided tour (#430): a Next/Back panel over the school walkthrough stops; bottom left on desktop, under the header on a phone */
+.tour { left: 16px; bottom: calc(84px + var(--bottom)); width: 286px; box-sizing: border-box; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+body.touring .panel { bottom: calc(96px + var(--tour-h, 150px) + var(--bottom)); }
+.tour-head { display: flex; align-items: center; gap: 8px; }
+.tour-head .eyebrow { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tour h3 { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.25; }
+.tour p { margin: 0; font-size: 13px; line-height: 1.45; }
+.tour button { border: 1px solid var(--line); background: var(--raised); border-radius: 8px; padding: 6px 12px; font-size: 13px; font-weight: 500; }
+.tour .tour-x { border: 0; background: transparent; padding: 2px 6px; font-size: 18px; line-height: 1; color: var(--muted); }
+.tour-nav { display: flex; align-items: center; gap: 8px; }
+.tour-nav .n { flex: 1; text-align: center; font-family: var(--font-data); font-size: 12px; color: var(--muted); }
+.tour #tourNext { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.tour button:disabled { opacity: 0.45; cursor: default; }
+.tour-pick { display: flex; flex-direction: column; gap: 6px; }
+.tour-pick button { text-align: left; }
 @media (max-width: 900px) {
   .brand-sub { display: none; }
 }
@@ -229,6 +244,8 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
   .dock .sep { margin: 2px 0; }
   .dock .hint { display: none; }
   .compass { top: calc(116px + var(--top)); bottom: auto; width: 52px; height: 52px; }
+  .tour { top: calc(116px + var(--top)); bottom: auto; right: 76px; width: auto; padding: 10px 12px; gap: 6px; }  /* top set from the header in layoutTour */
+  body.touring .panel { bottom: calc(76px + var(--bottom)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .panel, .toggle, .toggle::after, .bar span { transition: none; }
@@ -427,6 +444,19 @@ input[type="range"] { accent-color: var(--accent); width: 100%; margin: 0; }
   </svg>
 </div>
 
+<aside id="tour" class="tour" hidden aria-label="Guided tour">
+  <div class="tour-head"><p class="eyebrow" id="tourName"></p><button id="tourX" class="tour-x" aria-label="Close the tour" title="Close the tour">×</button></div>
+  <div id="tourStop">
+    <h3 id="tourTitle"></h3>
+    <p id="tourDo"></p>
+  </div>
+  <div class="tour-pick" id="tourPick" hidden></div>
+  <div class="tour-nav" id="tourNav">
+    <button id="tourBack">Back</button>
+    <span class="n" id="tourN" aria-live="polite"></span>
+    <button id="tourNext">Next</button>
+  </div>
+</aside>
 <div class="tip" id="tip" hidden></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <div class="loader" id="loader">
@@ -2583,21 +2613,27 @@ async function boot() {
   // A link followed on the open page (pasted into the same tab, or a lesson link) only changes the hash: no reload, so
   // the reads above never see it. setHash uses replaceState, which fires no hashchange, so this can't loop.
   addEventListener('hashchange', () => {
-    const lk = readLink();  // before setSex rewrites the hash
-    const ex = location.hash.match(/[#&](ex=[^&#]+)/)?.[1];
-    const sx = location.hash.match(/[#&]sex=([mf])/)?.[1];
-    if (ex) exHash = ex;  // before setSex, which rewrites the hash from exHash
-    if (sx) setSex(sx);
-    if (ex) openLinkedExercise(decodeURIComponent(ex.slice(3)));
-    applyLink(lk);
+    const t = readTour();
+    if (t) openTour(t.name, t.stop); else followLink(location.hash);
   });
   if (linked) await openLinkedExercise(linked);
-  await applyLink({ ...link, layers: null });  // layers already set above
+  const t = readTour();
+  if (t) openTour(t.name, t.stop);
+  else await applyLink({ ...link, layers: null });  // layers already set above
+}
+function followLink(hash) {  // one path for a followed link and a tour stop: #ex=, #sex=, then applyLink
+  const lk = readLink(hash);  // before setSex rewrites the hash
+  const ex = hash.match(/[#&](ex=[^&#]+)/)?.[1];
+  const sx = hash.match(/[#&]sex=([mf])/)?.[1];
+  if (ex) exHash = ex;  // before setSex, which rewrites the hash from exHash
+  if (sx) setSex(sx);
+  if (ex) openLinkedExercise(decodeURIComponent(ex.slice(3)));
+  return applyLink(lk);
 }
 
 // ---------- deep links (#401; #430's tour stops and #402's lesson packs use them) ----------
 // #part=<atlas name or id>[&side=l|r]  #layers=muscles,bones,organs  #view=front|back|left|right|top
-// #cut=sagittal|coronal|transverse|off  #color=natural|heat|action, alongside #ex= and #sex=f. They follow hashchange
+// #cut=sagittal|coronal|transverse|off  #color=natural|heat|action  #mode=explore|pose|walk (#430), alongside #ex= and #sex=f. They follow hashchange
 // (#414), and never open what classroom mode hides (#392): a locked part by link gets a note, not the part.
 // What a link turns on is not remembered for the next visit.
 function readLink(hash = location.hash) {
@@ -2607,7 +2643,8 @@ function readLink(hash = location.hash) {
   const layers = get('layers') ? get('layers').split(',').map((k) => k.trim()).filter((k) => layerByKey[k]) : [];
   const color = get('color') === 'stretch' ? 'heat' : pick('color', ['natural', 'heat', 'action']);
   return { part: (q.get('part') || '').trim(), side: pick('side', ['l', 'r']), layers: layers.length ? layers : null,
-    view: pick('view', ['front', 'back', 'left', 'right', 'top']), cut: pick('cut', ['sagittal', 'coronal', 'transverse', 'off']), color };
+    view: pick('view', ['front', 'back', 'left', 'right', 'top']), cut: pick('cut', ['sagittal', 'coronal', 'transverse', 'off']), color,
+    mode: pick('mode', ['explore', 'pose', 'walk']) };
 }
 function findLinkedPart(q, side) {  // "P01234", or an atlas name in any case ("biceps brachii" finds "Biceps brachii muscle")
   const all = [...partById.values()].filter((p) => !p.cp);
@@ -2621,8 +2658,9 @@ function findLinkedPart(q, side) {  // "P01234", or an atlas name in any case ("
   return parts.find((p) => p.s === side) || parts.find((p) => p.s === 'r') || parts[0] || null;
 }
 async function applyLink(lk) {
-  if (!lk.part && !lk.layers && !lk.view && !lk.cut && !lk.color) return;
+  if (!lk.part && !lk.layers && !lk.view && !lk.cut && !lk.color && !lk.mode) return;
   const tok = ++chooseTok;
+  if (lk.mode) setMode(lk.mode);  // before the colour, so Stretch doesn't warn about Explore
   if (lk.layers) for (const L of LAYERS) { const on = lk.layers.includes(L.key); if (on !== !!L.want) setLayerVisible(L, on, { auto: true }); }
   if (lk.cut) setCut(lk.cut);
   if (lk.color) setColorMode(lk.color, { save: false });
@@ -2647,6 +2685,115 @@ async function openLinkedExercise(id) {  // #ex=<id> opens that exercise
   const e = d && exAll.find((x) => x.id === id);
   if (e) openExercise(e); else setHash('');
 }
+// ---------- guided tours (#430): #tour=<program>[&stop=n] ----------
+// The 5 school walkthroughs (#422, /schools/tour/<program>/) as Next/Back stops, so a teacher runs one without leaving
+// the app. Each stop is a deep link run through followLink/applyLink, so a campus link stays locked and a stop never opens
+// a hidden part. Parts are P-ids where a name also matches an attachment or the other side. Stops start from Explore, no
+// cut and natural colour unless they say otherwise. What a stop turns on is not remembered, like any link.
+const TOURS = {
+  psw: { name: 'PSW: everyday care', stops: [
+    { t: 'The hip after a fall', l: 'layers=bones&part=P00827&view=front', d: 'The thigh bone, from the hip down to the knee. A broken hip is a fracture of its neck, at the top.' },
+    { t: 'Getting out of a chair', l: 'ex=Chair_Squat', d: 'Press Play rep. Main muscles show strong red, helpers soft orange: a map of what it trains, not effort.' },
+    { t: 'The heart, cut open', l: 'layers=vessels,organs&part=P02083&cut=coronal', d: 'The left ventricle. Move the Cut slider in the Body tab to open the chest from the front.' },
+    { t: 'Breathing in', l: 'layers=organs&part=P03382&view=front', d: 'The middle lobe of the right lung. Now search Diaphragm and pick the muscle: its dome is the floor of the chest.' },
+    { t: 'Taking a radial pulse', l: 'layers=bones,vessels&part=P02389&view=front', d: 'The radial artery runs down the forearm into the wrist, on the thumb side.' },
+  ] },
+  massage: { name: 'Massage therapy', stops: [
+    { t: 'Fascia over the thigh', l: 'layers=bones,muscles,fascia&part=P00654&view=front', d: 'Fascia shows as a white see-through film. The fascia lata wraps the thigh.' },
+    { t: 'The upper back', l: 'layers=bones,muscles&part=P00193&view=back', d: 'The trapezius spreads from the skull and neck down the back and out to the shoulder blades.' },
+    { t: 'A neck stretch to coach', l: 'ex=Side_Neck_Stretch', d: 'The camera flies to the neck muscles it targets, and the card lists the steps to coach.' },
+    { t: 'The long back muscles', l: 'layers=bones,muscles&part=P00158&view=back', d: 'Longissimus thoracis, one of the erector spinae. Click the others beside the spine to name them.' },
+    { t: 'Piriformis and the sciatic nerve', l: 'layers=bones,nerves&part=P03081&view=back', d: 'The sciatic nerve. Now search Piriformis and pick the muscle: the nerve leaves the pelvis just below it.' },
+  ] },
+  kinesiology: { name: 'Kinesiology and fitness', stops: [
+    { t: 'The squat, from the side', l: 'ex=Bodyweight_Squat', d: 'Press Play rep, then Left: hips and knees bend in one side-on (sagittal) plane.' },
+    { t: 'The lateral raise, from the front', l: 'ex=Side_Lateral_Raise', d: 'Press Play rep, then Front: the arms lift out to the sides in the coronal plane.' },
+    { t: 'Deep muscles with Main only', l: 'ex=Hyperextensions_Back_Extensions', d: 'Main only starts on here: the lower-back muscles sit deep, so the ones on top peel away.' },
+    { t: 'From a muscle to its exercises', l: 'layers=bones,muscles&part=P00237&view=front', d: 'Rectus abdominis. Its card lists up to four exercises that train it and a link to every abdominals exercise.' },
+    { t: 'Watch muscles change length', l: 'mode=walk&color=heat&layers=bones,muscles', d: 'Press Wander. Red is shorter than standing, blue is longer: length change only, not effort.' },
+  ] },
+  physio: { name: 'Physio (OTA/PTA)', stops: [
+    { t: 'Bend the knee', l: 'mode=pose&layers=bones,muscles&view=left', d: 'Click the right shin, then move Flex / extend on the Joint card. Joint limits keep it in range.' },
+    { t: 'Lift the arm', l: 'mode=pose&layers=bones,muscles&view=front', d: 'Click the right upper arm and move Side bend / abduct. Mirror to other side copies it.' },
+    { t: 'A rotator cuff muscle', l: 'layers=bones,muscles&part=P00267&view=back', d: 'Supraspinatus. Its card ranks playable reps and home-kit moves first.' },
+    { t: 'Hip stability', l: 'layers=bones,muscles&part=P00372&view=back', d: 'Gluteus medius. Read Exercises that train it and Stretches on its card.' },
+    { t: 'Sit-to-stand', l: 'mode=pose&color=heat&layers=bones,muscles&view=left', d: 'Press Sit, then Play rep. Red is shorter than standing, blue is longer: length change only.' },
+  ] },
+  biology: { name: 'Biology (Grade 11/12)', stops: [
+    { t: 'Body planes with Cut', l: 'layers=bones,muscles,organs&cut=sagittal&view=left', d: 'A sagittal cut. Move the slider, then try Coronal and Transverse under Cut in the Body tab.' },
+    { t: 'The four chambers', l: 'layers=vessels,organs&part=P02081&cut=coronal', d: 'The left atrium. Move the Cut slider until the heart opens, then click each chamber.' },
+    { t: 'Lungs and lobes', l: 'layers=organs&part=P03384&view=front', d: 'Click each lobe to count them: three on the right, two on the left.' },
+    { t: 'Brain, spinal cord and nerves', l: 'layers=nerves&view=back', d: 'The brain and spinal cord sit in the midline; the nerves branch out to every limb.' },
+    { t: 'Lymph nodes and the spleen', l: 'layers=bones,lymph&part=P03541&view=front', d: 'The central axillary nodes, in the armpit. Now search Spleen.' },
+  ] },
+};
+const tour = { name: '', i: 0 };
+function readTour(hash = location.hash) {
+  const q = new URLSearchParams(hash.replace(/^#/, ''));
+  if (!q.has('tour')) return null;
+  return { name: (q.get('tour') || '').trim().toLowerCase(), stop: Math.max(1, parseInt(q.get('stop'), 10) || 1) };
+}
+function openTour(name, stop = 1) {
+  document.body.classList.add('touring');
+  $('#tour').hidden = false;
+  const T = TOURS[name];
+  if (!T) {  // #tour= alone or an unknown name: pick one
+    if (name) toast(`There is no tour called “${name.slice(0, 40)}”. Pick one below.`);
+    tour.name = '';
+    $('#tourName').textContent = 'Guided tours';
+    $('#tourStop').hidden = true; $('#tourNav').hidden = true; $('#tourPick').hidden = false;
+    $('#tourPick').innerHTML = Object.entries(TOURS).map(([k, v]) => `<button data-tour="${k}">${esc(v.name)}</button>`).join('');
+    layoutTour();
+    return;
+  }
+  tour.name = name;
+  $('#tourName').textContent = T.name;
+  $('#tourStop').hidden = false; $('#tourNav').hidden = false; $('#tourPick').hidden = true;
+  goStop(Math.min(stop, T.stops.length) - 1);
+}
+function goStop(i) {
+  const T = TOURS[tour.name];
+  tour.i = i;
+  const s = T.stops[i], last = i === T.stops.length - 1;
+  $('#tourTitle').textContent = `${i + 1}. ${s.t}`;
+  $('#tourDo').textContent = s.d;
+  $('#tourN').textContent = `${i + 1} of ${T.stops.length}`;
+  $('#tourBack').disabled = i === 0;
+  $('#tourNext').textContent = last ? 'Done' : 'Next';
+  layoutTour();
+  const ex = /(^|&)ex=/.test(s.l);
+  if (!ex && exCurrent) clearExercise();
+  if (!/(^|&)part=/.test(s.l)) select(null);
+  if (!ex && isNarrow()) openPanel(false);  // a phone's panel would sit over the body
+  const def = { mode: 'explore', cut: 'off', ...(ex ? {} : { color: 'natural' }) };
+  const own = new URLSearchParams(s.l);
+  const extra = Object.entries(def).filter(([k]) => !own.has(k)).map(([k, v]) => `${k}=${v}`);
+  const h = [`tour=${tour.name}`, `stop=${i + 1}`, s.l, ...extra].join('&');
+  try { history.replaceState(null, '', `#${h}`); } catch { /* sandboxed frame */ }
+  followLink(`#${h}`);
+}
+function closeTour() {
+  tour.name = '';
+  $('#tour').hidden = true;
+  document.body.classList.remove('touring');
+  try { history.replaceState(null, '', location.pathname + location.search); } catch { /* sandboxed frame */ }
+  $('#stage').focus();
+}
+function layoutTour() {  // desktop: the Layers panel stops above the tour; phone: the tour sits just under the header
+  const el = $('#tour');
+  if (el.hidden) return;
+  el.style.top = isNarrow() ? `${Math.round($('.topbar').getBoundingClientRect().bottom + 6)}px` : '';
+  document.body.style.setProperty('--tour-h', `${el.offsetHeight}px`);
+}
+$('#tourBack').addEventListener('click', () => { if (tour.name && tour.i > 0) goStop(tour.i - 1); });
+$('#tourNext').addEventListener('click', () => {
+  if (!tour.name) return;
+  if (tour.i < TOURS[tour.name].stops.length - 1) goStop(tour.i + 1); else closeTour();
+});
+$('#tourX').addEventListener('click', closeTour);
+$('#tourPick').addEventListener('click', (e) => { const b = e.target.closest('[data-tour]'); if (b) openTour(b.dataset.tour, 1); });
+addEventListener('resize', layoutTour);
+
 // console handle for poking at the sandbox: anatomySandbox.strain('Soleus muscle', 'r')
 window.anatomySandbox = {
   state, setMode, setPose, setColorMode, flyTo, viewPreset, toggleRep, setPanelTab,
@@ -2661,6 +2808,7 @@ window.anatomySandbox = {
   exGroups: () => exData && Object.fromEntries(exData.groups.map((g, i) => [g, [...new Set(exGroups()[i].map((p) => p.n))]])),
   get rep() { return rep; }, get bones() { return bones; }, get character() { return character; }, camera, controls, gait,
   layers: () => LAYERS.map((L) => ({ key: L.key, loaded: L.loaded, visible: L.visible, auto: !!L.auto })),
+  get tour() { return tour.name ? { name: tour.name, stop: tour.i + 1, of: TOURS[tour.name].stops.length } : null; }, tours: TOURS,
   get selected() { return selected && { id: selected.id, name: selected.n, side: selected.s, layer: selected.l }; },
   step(seconds = 1) { for (let t = 0; t < seconds; t += 1 / 60) update(1 / 60); needsRender = true; draw(); },
   strain(name, side = 'r') {
