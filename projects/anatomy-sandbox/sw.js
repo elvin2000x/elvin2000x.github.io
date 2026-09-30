@@ -2,7 +2,7 @@
    page       network first (4 s), then the saved copy, so a deploy shows up on the next online open
    model data cache first, keyed by each file's hash, so only changed files download again after a deploy
    three.js + fonts (vendor/, pinned)   cache first   campus API (#392/#399): never cached, so offline fails closed */
-const VERSION = "c196877d71";
+const VERSION = "ec11557d99";
 const DATA = "https://api.elvinpeters.com/anatomy-sandbox/";
 const FILES = {"data/exercises.bin": "0b6238d5c4", "data/info.bin": "e750e6ab2c", "data/parts.json": "eae380addd", "data/rig.json": "402a5fb90c", "models/attachments.bin": "780370bccd", "models/attachments.skin": "fa7700f6b8", "models/bones.bin": "53ff782a45", "models/fascia.bin": "24a1c38ffc", "models/fascia.skin": "82e45a3dbb", "models/fat.bin": "15f0f96256", "models/fat.fat": "290fe316bb", "models/fat.fem": "54152884da", "models/fat.skin": "0b124b2916", "models/joints.bin": "c995017a20", "models/joints.skin": "54f4c3b3af", "models/lymph.bin": "67b1441db4", "models/lymph.skin": "4b8e221304", "models/muscles.bin": "c76ce26b8d", "models/muscles.skin": "9e8b31e6b1", "models/nerves.bin": "b438bf9c95", "models/nerves.skin": "73f903d271", "models/organs.bin": "5b3568896a", "models/organs.skin": "347e62f49f", "models/skin.bin": "7a64c5772e", "models/skin.fat": "cc11a744c2", "models/skin.fem": "68de551914", "models/skin.skin": "d93f5dc39b", "models/vessels.bin": "d77076a157", "models/vessels.skin": "8e33263589"};
 const PAGE = 'as-page', STORE = 'as-data', LIB = 'as-lib';
@@ -59,7 +59,10 @@ async function page(req) {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
-  if (req.mode === 'navigate' && req.url.startsWith(SCOPE)) return e.respondWith(page(req));
+  // Only the app page itself: /schools/* (#422) sits inside this scope and must never be served or saved as the app.
+  const u = new URL(req.url);
+  const isApp = u.origin + u.pathname === SCOPE || u.origin + u.pathname === SCOPE + 'index.html';
+  if (req.mode === 'navigate' && isApp) return e.respondWith(page(req));
   const key = keyFor(req.url);
   if (key) return e.respondWith(fromStore(key));
   if (LIBS.includes(req.url)) return e.respondWith(cacheFirst(LIB, req));

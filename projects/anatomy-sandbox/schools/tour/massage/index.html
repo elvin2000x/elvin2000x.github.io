@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en-CA"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Massage therapy: what sits under your hands: Anatomy Sandbox</title>
+<link rel="icon" href="/projects/anatomy-sandbox/icon-192.png">
+<style>
+:root { color-scheme: light; --ink: #13201e; --muted: #45534f; --line: #d4dcda; --accent: #0b7469; --accent-dk: #085a52;
+  --bg: #fbfcfb; --card: #ffffff; --soft: #eef3f1; --err: #a3231a; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 18px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid #e0a100; outline-offset: 2px; }
+.top { border-bottom: 1px solid var(--line); background: var(--card); }
+.top .in { max-width: 960px; margin: 0 auto; padding: 12px 16px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.brand { font-weight: 700; color: var(--ink); text-decoration: none; }
+main { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+.narrow { max-width: 760px; }
+h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 16px; letter-spacing: -0.01em; }
+h2 { font-size: 1.5rem; line-height: 1.3; margin: 0 0 12px; }
+h3 { font-size: 1.15rem; margin: 0 0 6px; }
+section { padding: 32px 0; border-top: 1px solid var(--line); }
+section.first { border-top: 0; padding-top: 0; }
+p { margin: 0 0 14px; }
+.lead { font-size: 1.15rem; color: var(--ink); }
+.small { font-size: 0.95rem; color: var(--muted); }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0 8px; }
+.btn { display: inline-block; padding: 13px 22px; border-radius: 8px; font-weight: 700; text-decoration: none; border: 2px solid var(--accent);
+  font-size: 1rem; line-height: 1.3; cursor: pointer; font-family: inherit; }
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.primary:hover { background: var(--accent-dk); border-color: var(--accent-dk); }
+.btn.ghost { background: var(--card); color: var(--accent); }
+.btn.ghost:hover { background: var(--soft); }
+.trust { font-size: 0.95rem; color: var(--muted); margin-top: 16px; }
+.video { position: relative; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #dce5e2; border: 1px solid var(--line); }
+.video img, .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+.video button { position: absolute; inset: 0; width: 100%; height: 100%; background: transparent; border: 0; cursor: pointer; }
+.video .play { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: rgba(11,116,105,.92); }
+.video .play::after { content: ""; position: absolute; left: 30px; top: 22px; border-style: solid; border-width: 16px 0 16px 26px; border-color: transparent transparent transparent #fff; }
+.video .note { position: absolute; left: 12px; right: 12px; bottom: 12px; background: rgba(255,255,255,.94); color: var(--ink); padding: 10px 14px; border-radius: 8px; font-size: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.card p { margin: 0; }
+.card .btn { align-self: flex-start; margin-top: auto; }
+.offer { background: var(--card); border: 2px solid var(--accent); border-radius: 12px; padding: 22px; }
+details { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: 700; }
+details p { margin: 10px 0 0; }
+form { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px; max-width: 620px; }
+label { display: block; font-weight: 700; margin: 14px 0 4px; }
+.hint { display: block; font-weight: 400; font-size: 0.95rem; color: var(--muted); }
+input[type=text], input[type=email] { width: 100%; font-size: 17px; padding: 12px; border: 1px solid #8a9a96; border-radius: 6px; background: #fff; color: var(--ink); font-family: inherit; }
+input[aria-invalid=true] { border-color: var(--err); border-width: 2px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; margin: 16px 0 0; }
+.check input { width: 22px; height: 22px; margin: 3px 0 0; flex: none; }
+.err { color: var(--err); font-weight: 600; font-size: 1rem; margin: 4px 0 0; }
+.err:empty { display: none; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.stop { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; margin: 16px 0; }
+.stop p { margin: 8px 0 0; }
+.stop .btn { margin-top: 4px; }
+.lbl { font-weight: 700; }
+ul.plain { padding-left: 20px; }
+.foot { border-top: 1px solid var(--line); background: var(--card); }
+.foot .in { max-width: 960px; margin: 0 auto; padding: 24px 16px 96px; font-size: 0.95rem; color: var(--muted); }
+.foot nav { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
+.sticky { position: fixed; left: 0; right: 0; bottom: 0; display: none; gap: 8px; padding: 10px 12px; background: var(--card); border-top: 1px solid var(--line); box-shadow: 0 -4px 14px rgba(0,0,0,.08); z-index: 5; }
+.sticky .btn { flex: 1; text-align: center; padding: 11px 8px; }
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.3rem; }
+  main { padding-top: 24px; }
+  .btns .btn { flex: 1 1 100%; text-align: center; }
+  .sticky.on { display: flex; }
+  .video .note { position: static; border-radius: 0; }
+  .video.has-note { aspect-ratio: auto; }
+  .video.has-note img { position: static; display: block; aspect-ratio: 16 / 9; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+@media print { .top, .foot, .sticky, .btns { display: none; } body { background: #fff; } }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="/projects/anatomy-sandbox/schools/">Anatomy Sandbox for schools</a><a href="/projects/anatomy-sandbox/">Try it now</a></div></header>
+<main class="narrow">
+<h1>Massage therapy: what sits under your hands</h1>
+<p class="small">About 5 minutes · 5 stops</p>
+<p><span class="lbl">Learning outcome:</span> Students can find the fascia, back and neck muscles and the sciatic nerve they work around, and open a stretch to coach for the neck.</p>
+<div class="stop"><h2>1. Fascia over the thigh</h2>
+<a class="btn ghost" href="/projects/anatomy-sandbox/">Open the app</a>
+<p><span class="lbl">Do:</span> In the Body tab under Body systems, turn on Fascia, then search Fascia lata and pick it.</p>
+<p><span class="lbl">You see:</span> Fascia shows as a white see-through film.</p>
+<p><span class="lbl">Fact:</span> The tensor fasciae latae is a small muscle at the front edge of the hip bone whose job is to tighten the fascia lata. (<a href="https://teachmeanatomy.info/lower-limb/muscles/gluteal-region/">source</a>)</p></div>
+<div class="stop"><h2>2. The upper back</h2>
+<p><span class="lbl">Do:</span> Search traps, pick the part of the trapezius that runs up to the neck, and press Back.</p>
+<p><span class="lbl">You see:</span> The trapezius spreads from the skull and neck down the middle of the back and out to the shoulder blades.</p>
+<p><span class="lbl">Fact:</span> The trapezius is the most superficial of all the back muscles. (<a href="https://teachmeanatomy.info/back/muscles/superficial/">source</a>)</p></div>
+<div class="stop"><h2>3. A neck stretch to coach</h2>
+<a class="btn ghost" href="/projects/anatomy-sandbox/#ex=Side_Neck_Stretch">Side Neck Stretch</a>
+<p><span class="lbl">You see:</span> The camera flies to the neck muscles this stretch targets, and the card lists the steps you&#x27;d coach.</p>
+<p><span class="lbl">Fact:</span> The levator scapulae runs from the first four neck vertebrae down to the inner border of the shoulder blade. (<a href="https://teachmeanatomy.info/back/muscles/superficial/">source</a>)</p></div>
+<div class="stop"><h2>4. The long back muscles</h2>
+<p><span class="lbl">Do:</span> Press Clear, search erectors, pick Longissimus thoracis muscle and press Back.</p>
+<p><span class="lbl">You see:</span> The long muscles of the lower back run up both sides of the spine, and clicking each one names it.</p>
+<p><span class="lbl">Fact:</span> The erector spinae sits on each side of the spine, between the spinous processes and the angles of the ribs. (<a href="https://teachmeanatomy.info/back/muscles/intrinsic/">source</a>)</p></div>
+<div class="stop"><h2>5. Piriformis and the sciatic nerve</h2>
+<p><span class="lbl">Do:</span> Search Piriformis and pick the muscle, then search Sciatic nerve and pick it.</p>
+<p><span class="lbl">You see:</span> The thick yellow sciatic nerve leaves the pelvis just below the piriformis and heads down the back of the thigh.</p>
+<p><span class="lbl">Fact:</span> The sciatic nerve enters the buttock directly below the piriformis, so the piriformis is the landmark used to find it. (<a href="https://teachmeanatomy.info/lower-limb/muscles/gluteal-region/">source</a>)</p></div>
+<p>Your whole campus can use it free until April 30, 2027, with no card and no contract.</p>
+<div class="btns"><a class="btn ghost" href="../../#campus-link">Get your free campus link</a><a class="btn primary" href="/projects/anatomy-sandbox/schools/#campus-link">Get your free campus link</a></div>
+</main>
+<footer class="foot"><div class="in">
+<nav aria-label="Schools pages"><a href="/projects/anatomy-sandbox/schools/it-setup/">IT setup</a><a href="/projects/anatomy-sandbox/schools/privacy/">Privacy</a><a href="/projects/anatomy-sandbox/schools/accessibility/">Accessibility</a><a href="/projects/anatomy-sandbox/schools/credits/">Credits</a><a href="mailto:elvin@elvinpeters.com">Contact (elvin@elvinpeters.com)</a></nav>
+<p>Anatomy Sandbox is built and run by 1000338311 Ontario Inc. in Toronto.</p>
+</div></footer>
+</body></html>
