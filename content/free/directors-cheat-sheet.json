@@ -10,9 +10,10 @@
     "Know which AI answers to check before they reach a client, and how much checking the stakes call for (the Two-Step Verification Method)."
   ],
   "cover": "/img/magnets/directors-cheat-sheet.webp",
-  "cover_alt": "The Director's Cheat Sheet: the cover and the first page, The CLEAR System",
-  "cover_width": 1200,
-  "cover_height": 900,
+  "cover_alt": "Cover of The Director's Cheat Sheet by Elvin M. Peters",
+  "cover_width": 800,
+  "cover_height": 1280,
+  "share_image": "https://elvinpeters.com/img/magnets/directors-cheat-sheet-share.jpg",
   "button": "Send me the cheat sheet",
   "fine_print": "Instant download. Confirm your email and a copy lands in your inbox too.",
   "thanks_heading": "Your cheat sheet is ready",
