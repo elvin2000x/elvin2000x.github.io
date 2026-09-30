@@ -146,7 +146,9 @@ function keyOk(key) {
    its scripts and tracking ids can never change here. */
 const FP = require(path.join(ROOT, 'free-pages.js'));
 // Who may frame the studio and its previews: itself, and Empire Studio (Website tab).
-const FRAME_OK = "frame-ancestors 'self' https://studio.elvinpeters.com";
+// Empire Studio frames us (#464). STUDIO_FRAME_LOCAL adds a local test parent (http://127.0.0.1:<port> only).
+const FRAME_LOCAL = /^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(process.env.STUDIO_FRAME_LOCAL || '') ? ' ' + process.env.STUDIO_FRAME_LOCAL : '';
+const FRAME_OK = "frame-ancestors 'self' https://studio.elvinpeters.com" + FRAME_LOCAL;
 const FREE_ODD = ['index', 'ai-toolkit', 'claude-manual', 'content-machine', 'link-expired'];
 const freeSlugs = () => FP.pages(ROOT).map(x => x.slug);
 const freeJsonKey = slug => 'content/free/' + slug + '.json';
