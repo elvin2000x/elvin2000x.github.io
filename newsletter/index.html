@@ -107,6 +107,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .optin .oi-note{ font-size:15px }
     .optin .oi-msg{ font-size:17px; line-height:1.5 }
     .optin .oi-msg a{ display:inline-flex; align-items:center; min-height:var(--tap) }
+    .optin .oi-msg a.in-text{ display:inline; min-height:0 }   /* a link inside the sentence stays in the sentence */
 
     /* what's in every issue: four numbered rows, no boxes */
     .parts{ list-style:none; margin:10px 0 0; padding:0; display:grid; gap:22px; counter-reset:part }
@@ -482,7 +483,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       if (samplesOnly()) {                         /* sample-only line; its link opens the sample */
         var at = COPY.success.indexOf(COPY.successLink);
         msg.textContent = at < 0 ? COPY.success : COPY.success.slice(0, at);
-        var rs = el('a', '', COPY.successLink);
+        var rs = el('a', at < 0 ? '' : 'in-text', COPY.successLink);
         rs.href = '#archive';
         if (at < 0) msg.appendChild(document.createTextNode(' '));
         msg.appendChild(rs);
