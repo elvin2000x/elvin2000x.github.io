@@ -1,0 +1,22 @@
+{
+  "title": "The Director's Cheat Sheet (Free) | Elvin Peters",
+  "description": "Free: the CLEAR system from The Artificial Advantage on a few printable pages. Give AI clear direction, fix a weak answer, and check it before you use it.",
+  "label": "Free from The Artificial Advantage",
+  "headline": "Turn generic AI answers into work you can send",
+  "tagline": "The CLEAR system from The Artificial Advantage, on a few printable pages you can keep by your desk.",
+  "bullets": [
+    "Get a usable first draft by giving every prompt a Role, a Task and a Constraint (the RTC framework).",
+    "Fix a weak answer with one targeted follow-up, using the Diagnostic Ladder.",
+    "Know which AI answers to check before they reach a client, and how much checking the stakes call for (the Two-Step Verification Method)."
+  ],
+  "cover": "/img/magnets/directors-cheat-sheet.webp",
+  "cover_alt": "The Director's Cheat Sheet: the cover and the first page, The CLEAR System",
+  "cover_width": 1200,
+  "cover_height": 900,
+  "button": "Send me the cheat sheet",
+  "fine_print": "Instant download. Confirm your email and a copy lands in your inbox too.",
+  "thanks_heading": "Your cheat sheet is ready",
+  "thanks_text": "Download it below. I also sent you a short email: tap confirm and a copy lands in your inbox, so you can find it later.",
+  "download_label": "Download the cheat sheet (PDF)",
+  "pdf": "/dl/Directors-Cheat-Sheet.pdf"
+}

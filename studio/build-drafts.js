@@ -47,5 +47,22 @@ fs.readdirSync = function (p, opts) {
   return names.sort();
 };
 
+// A menu draft (#464): scripts/menu-swap.js puts it on the hand-built pages, as a
+// publish does. It writes in place, so while it runs every write under ROOT lands
+// in the overlay instead; the reads above then give build.js those copies.
+if (fs.realExistsSync(path.join(OVERLAY, 'content', 'nav.json'))) {
+  const write = fs.writeFileSync;
+  fs.writeFileSync = function (p, ...a) {
+    const rel = typeof p === 'string' && inRoot(path.resolve(p));
+    if (!rel) return write.call(fs, p, ...a);
+    const o = path.join(OVERLAY, rel);
+    fs.mkdirSync(path.dirname(o), { recursive: true });
+    return write.call(fs, o, ...a);
+  };
+  const log = console.log;
+  console.log = () => {};
+  try { require(path.join(ROOT, 'scripts', 'menu-swap.js')); } finally { fs.writeFileSync = write; console.log = log; }
+}
+
 process.argv = [process.argv[0], path.join(ROOT, 'build.js'), '--out', OUT];
 require(path.join(ROOT, 'build.js'));

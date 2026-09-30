@@ -408,6 +408,29 @@ const navOnly = Object.keys(NAVC.pages)
 for (const pk of navOnly) applyRegions(pk, { 'nav': () => renderNav(pk) });
 console.log('Regions applied: index.html (nav), nav on: ' + navOnly.join(', '));
 
+/* LEAD MAGNET PAGES (#464): the words of every /free/ page come from
+   content/free/<slug>.json (free-pages.js fills the page's slots; its head,
+   pixels, menu and scripts stay as they are). Site Studio > Lead magnets edits
+   the JSON. A page without a JSON file is left alone. */
+{
+  const FP = require('./free-pages.js');
+  const FDIR = path.join(DIR, 'content', 'free');
+  let nFree = 0;
+  for (const { slug, file } of FP.pages(DIR)) {
+    const jf = path.join(FDIR, slug + '.json');
+    if (!fs.existsSync(jf)) continue;
+    const frame = fs.readFileSync(path.join(DIR, file), 'utf8').replace(/\r\n/g, '\n');
+    const html = FP.render(frame, JSON.parse(fs.readFileSync(jf, 'utf8')), file);
+    const dest = path.join(OUT, file);
+    // Only a real change is written in place (a Windows checkout is CRLF; git sees LF).
+    if (OUT === DIR && html === frame) { nFree++; continue; }
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, html);
+    nFree++;
+  }
+  console.log('Lead magnet pages filled from content/free/: ' + nFree);
+}
+
 
 /* ==================================================================== */
 /* BILINGUAL PAGE ENGINE                                                */

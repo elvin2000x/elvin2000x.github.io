@@ -1,0 +1,25 @@
+{
+  "title": "The Meeting and Email Machine · Free Download | Elvin Peters",
+  "description": "Done-for-you AI workflows for the email and meetings that eat your whole day.",
+  "label": "Free guide",
+  "headline": "The Meeting and Email Machine",
+  "hook": "Get your mornings back.",
+  "tagline": "Done-for-you AI workflows for the email and meetings that eat your whole day.",
+  "bullets": [
+    "Draft, triage and reply to email in a fraction of the time",
+    "Meeting prep, live notes and follow-ups, automated",
+    "The prompts and setup to run it all hands-off"
+  ],
+  "cover": "/img/magnets/email-meetings.webp",
+  "cover_alt": "The Meeting and Email Machine cover",
+  "cover_width": 440,
+  "cover_height": 622,
+  "form_heading": "Get it free",
+  "form_sub": "Enter your email and it is yours. No spam, unsubscribe anytime.",
+  "button": "Send me the guide",
+  "fine_print": "Instant access. We will also email you a copy.",
+  "thanks_heading": "It is yours",
+  "thanks_text": "Thanks{name}. Your guide is ready, and a copy is on its way to your inbox.",
+  "download_label": "Download the PDF",
+  "pdf": "/dl/AI-Email-Meeting-Machine.pdf"
+}

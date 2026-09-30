@@ -1,11 +1,16 @@
 {
   "title": "Menu & buttons",
   "file": "nav.json",
-  "preview": "/services/",
-  "help": "The menu on every page except the homepage (the homepage keeps its own short menu and buy button). Order here is the order on the page.",
+  "preview": "/free/",
+  "previews": [
+    { "path": "/free/", "label": "Free Toolkit (/free/)" },
+    { "path": "/contact/", "label": "Contact (/contact/)" },
+    { "path": "/newsletter/", "label": "Newsletter (/newsletter/)" }
+  ],
+  "help": "The menu and footer on every page of the site. The homepage keeps its own short menu and buy button, so it does not change here. Order here is the order on the page. Publishing puts the new menu on every hand-built page too.",
   "fields": [
     {
-      "key": "links",
+      "key": "menu",
       "type": "list",
       "label": "Menu links",
       "item_fields": [
@@ -19,6 +24,29 @@
           "key": "href",
           "type": "text",
           "label": "Link"
+        }
+      ]
+    },
+    {
+      "key": "footer",
+      "type": "list",
+      "label": "Footer links",
+      "item_fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Label",
+          "maxlen": 24
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link"
+        },
+        {
+          "key": "ext",
+          "type": "bool",
+          "label": "Another website (opens in a new tab)"
         }
       ]
     },

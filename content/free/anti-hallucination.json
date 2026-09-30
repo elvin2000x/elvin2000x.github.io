@@ -1,0 +1,25 @@
+{
+  "title": "Tell Me the Truth: The Anti-Hallucination Field Guide · Free Download | Elvin Peters",
+  "description": "Make AI stop making things up, and learn exactly when not to trust it.",
+  "label": "Free guide",
+  "headline": "Tell Me the Truth: The Anti-Hallucination Field Guide",
+  "hook": "If you have ever caught AI confidently inventing an answer, this is for you.",
+  "tagline": "Make AI stop making things up, and learn exactly when not to trust it.",
+  "bullets": [
+    "Verification workflows that force AI to show its work",
+    "The situations where AI lies most, so you know when to double-check",
+    "Citation-forcing prompts that keep answers grounded in real sources"
+  ],
+  "cover": "/img/magnets/anti-hallucination.webp",
+  "cover_alt": "Tell Me the Truth: The Anti-Hallucination Field Guide cover",
+  "cover_width": 440,
+  "cover_height": 622,
+  "form_heading": "Get it free",
+  "form_sub": "Enter your email and it is yours. No spam, unsubscribe anytime.",
+  "button": "Send me the guide",
+  "fine_print": "Instant access. We will also email you a copy.",
+  "thanks_heading": "It is yours",
+  "thanks_text": "Thanks{name}. Your guide is ready, and a copy is on its way to your inbox.",
+  "download_label": "Download the PDF",
+  "pdf": "/dl/Tell-Me-The-Truth-Anti-Hallucination.pdf"
+}
