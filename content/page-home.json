@@ -91,42 +91,22 @@
       }
     },
     {
-      "id": "reviews",
-      "type": "reviews",
-      "note": "3. Proof: the one Amazon review, large and verbatim; two friends' lines, labelled",
+      "id": "about",
+      "type": "author",
+      "note": "6. About the author (facts: 02 Books/reference/elvin-verified-profile.md; employers anonymised at Elvin's request)",
       "data": {
         "bg": "tint",
-        "anchor": "reviews",
-        "eyebrow": "The first review the book got, unedited",
-        "heading": "What readers say",
-        "grid": false,
-        "review_note": "verbatim from Amazon, checked 2026-09-27",
-        "reviews": [
-          {
-            "stars_label": "Rated 5 out of 5 stars",
-            "stars": "★★★★★",
-            "badge": "Verified Purchase · Amazon.ca",
-            "title": "&ldquo;Must-read if you're looking to enhance your output.&rdquo;",
-            "paras": [
-              "&ldquo;What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.",
-              "Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.&rdquo;"
-            ],
-            "meta": "Amazon reviewer 2Buyer · Paperback · Reviewed in Canada · July 15, 2026",
-            "link": "Get the book on Amazon &rarr;"
-          }
-        ],
-        "todo": "SECOND AMAZON REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).\n         When it appears, add it verbatim as a second .quote and drop one friend line.",
-        "friends": [
-          {
-            "quote": "&ldquo;The beginning also made me tear up.&rdquo;",
-            "who": "Early reader, a friend of the author"
-          },
-          {
-            "quote": "&ldquo;I didn't realize that my AI skills were bad, then Elvin explained I just sucked at prompting.&rdquo;",
-            "who": "Early reader, a friend of the author"
-          }
-        ],
-        "after": ""
+        "anchor": "about",
+        "photo": "/img/headshot.jpg",
+        "photo_alt": "Elvin M. Peters",
+        "eyebrow": "About the author",
+        "heading": "Elvin M. Peters",
+        "role": "Author of the AI Fluency Series · Toronto",
+        "paras": [
+          "My first lesson in directing machines came at a large Canadian fintech. I ran over $12M a year in paid media there, and I cut the cost per funded loan by more than half by teaching the bidding algorithms what a good customer looked like.",
+          "Then an adtech giant building AI brought me in to advise the media teams at big advertisers, where AI cut my account audits from hours to minutes. On both sides of the table I met capable people getting a fraction of what AI could give them. I wrote this book for them.",
+          "<em>The Artificial Advantage</em> is book one of the AI Fluency Series. Book two, <em>The Systematic Advantage</em>, is in progress. <a href=\"https://www.linkedin.com/in/elvinmpeters\" target=\"_blank\" rel=\"noopener\">Find me on LinkedIn</a>."
+        ]
       }
     },
     {
@@ -192,6 +172,45 @@
       }
     },
     {
+      "id": "reviews",
+      "type": "reviews",
+      "note": "3. Proof: the one Amazon review, large and verbatim; two friends' lines, labelled",
+      "data": {
+        "bg": "tint",
+        "anchor": "reviews",
+        "eyebrow": "The first review the book got, unedited",
+        "heading": "What readers say",
+        "grid": false,
+        "review_note": "verbatim from Amazon, checked 2026-09-27",
+        "reviews": [
+          {
+            "stars_label": "Rated 5 out of 5 stars",
+            "stars": "★★★★★",
+            "badge": "Verified Purchase · Amazon.ca",
+            "title": "&ldquo;Must-read if you're looking to enhance your output.&rdquo;",
+            "paras": [
+              "&ldquo;What an amazing read! I would highly recommend <em>The Artificial Advantage</em> if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life.",
+              "Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.&rdquo;"
+            ],
+            "meta": "Amazon reviewer 2Buyer · Paperback · Reviewed in Canada · July 15, 2026",
+            "link": "Get the book on Amazon &rarr;"
+          }
+        ],
+        "todo": "SECOND AMAZON REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).\n         When it appears, add it verbatim as a second .quote and drop one friend line.",
+        "friends": [
+          {
+            "quote": "&ldquo;The beginning also made me tear up.&rdquo;",
+            "who": "Early reader, a friend of the author"
+          },
+          {
+            "quote": "&ldquo;I didn't realize that my AI skills were bad, then Elvin explained I just sucked at prompting.&rdquo;",
+            "who": "Early reader, a friend of the author"
+          }
+        ],
+        "after": ""
+      }
+    },
+    {
       "id": "who",
       "type": "who-list",
       "note": "5. Who it's for: three plain lines",
@@ -213,62 +232,6 @@
             "text": "Settle on a tool in one afternoon, then build the saved prompts your whole team works from."
           }
         ]
-      }
-    },
-    {
-      "id": "about",
-      "type": "author",
-      "note": "6. About the author (facts: 02 Books/reference/elvin-verified-profile.md; employers anonymised at Elvin's request)",
-      "data": {
-        "bg": "tint",
-        "anchor": "about",
-        "photo": "/img/headshot.jpg",
-        "photo_alt": "Elvin M. Peters",
-        "eyebrow": "About the author",
-        "heading": "Elvin M. Peters",
-        "role": "Author of the AI Fluency Series · Toronto",
-        "paras": [
-          "My first lesson in directing machines came at a large Canadian fintech. I ran over $12M a year in paid media there, and I cut the cost per funded loan by more than half by teaching the bidding algorithms what a good customer looked like.",
-          "Then an adtech giant building AI brought me in to advise the media teams at big advertisers, where AI cut my account audits from hours to minutes. On both sides of the table I met capable people getting a fraction of what AI could give them. I wrote this book for them.",
-          "<em>The Artificial Advantage</em> is book one of the AI Fluency Series. Book two, <em>The Systematic Advantage</em>, is in progress. <a href=\"https://www.linkedin.com/in/elvinmpeters\" target=\"_blank\" rel=\"noopener\">Find me on LinkedIn</a>."
-        ]
-      }
-    },
-    {
-      "id": "faq",
-      "type": "faq",
-      "note": "7. FAQ (adapted from /book.html)",
-      "data": {
-        "bg": "",
-        "anchor": "faq",
-        "heading": "Frequently Asked Questions",
-        "items": [
-          {
-            "q": "Do I need a technical background?",
-            "a": "None. The book is written for professionals with no technical training. If you can write an email, you can use everything in it."
-          },
-          {
-            "q": "Which AI tool does it use?",
-            "a": "It works with ChatGPT, Claude, Gemini and Copilot. Part 2 helps you pick one, and the directing skill carries over to all of them."
-          },
-          {
-            "q": "Will it go out of date when the tools change?",
-            "a": "The book teaches you how to direct AI, and that skill carries over from one model to the next. The product names will keep changing, and your briefs will keep working."
-          },
-          {
-            "q": "I already use AI at work. Is it still for me?",
-            "a": "Yes, if your results are hit and miss. The frameworks turn scattered habits into a method you can repeat, and the appendices give you prompts and fixes to keep beside your work."
-          },
-          {
-            "q": "Which format should I get?",
-            "a": "Kindle, paperback and hardcover are all on Amazon, with Amazon's standard returns. The paperback is handy to keep open beside your desk for the appendices."
-          },
-          {
-            "q": "Can I read some of it first?",
-            "a": "Yes. <a href=\"/free/free-chapter/\">Chapter 8 is free to read</a>, and it shows you which AI mode fits which job."
-          }
-        ],
-        "buy": null
       }
     },
     {
@@ -316,6 +279,43 @@
         "fine_print": "Free. Unsubscribe anytime.",
         "success": "You're in. Look for it on the first of the month, and check your promotions tab if it isn't in your inbox.",
         "after": ""
+      }
+    },
+    {
+      "id": "faq",
+      "type": "faq",
+      "note": "7. FAQ (adapted from /book.html)",
+      "data": {
+        "bg": "",
+        "anchor": "faq",
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "q": "Do I need a technical background?",
+            "a": "None. The book is written for professionals with no technical training. If you can write an email, you can use everything in it."
+          },
+          {
+            "q": "Which AI tool does it use?",
+            "a": "It works with ChatGPT, Claude, Gemini and Copilot. Part 2 helps you pick one, and the directing skill carries over to all of them."
+          },
+          {
+            "q": "Will it go out of date when the tools change?",
+            "a": "The book teaches you how to direct AI, and that skill carries over from one model to the next. The product names will keep changing, and your briefs will keep working."
+          },
+          {
+            "q": "I already use AI at work. Is it still for me?",
+            "a": "Yes, if your results are hit and miss. The frameworks turn scattered habits into a method you can repeat, and the appendices give you prompts and fixes to keep beside your work."
+          },
+          {
+            "q": "Which format should I get?",
+            "a": "Kindle, paperback and hardcover are all on Amazon, with Amazon's standard returns. The paperback is handy to keep open beside your desk for the appendices."
+          },
+          {
+            "q": "Can I read some of it first?",
+            "a": "Yes. <a href=\"/free/free-chapter/\">Chapter 8 is free to read</a>, and it shows you which AI mode fits which job."
+          }
+        ],
+        "buy": null
       }
     }
   ]
