@@ -122,6 +122,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     @media(min-width:760px){ .issue{ padding:28px 32px } }
     .issue-meta{ font-size:14px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-ink); margin:0 0 6px }
     .issue-meta time{ color:var(--muted); font-weight:600; letter-spacing:.04em }
+    .issue-badge{ display:inline-block; padding:4px 12px; border-radius:999px; background:var(--panel-2); border:1px solid var(--line-strong); color:var(--accent-ink); font-size:13px; letter-spacing:.08em }
+    .issue-note{ font-size:15px; line-height:1.5; color:var(--muted); margin:0 0 10px }
     .issue h3{ font-size:clamp(24px,5.4vw,30px); line-height:1.2; margin:0 0 14px }
     .issue-body{ font-size:17px; line-height:1.7; color:var(--ink-2); overflow-wrap:anywhere }
     .issue-body h2, .issue-body h3, .issue-body h4{ font-size:22px; line-height:1.3; margin:26px 0 8px; color:var(--ink) }
@@ -252,6 +254,21 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   var memReader = false;           /* works for this visit even when storage is blocked */
   var issues = [];
 
+  /* ---- Sample issue (card #517). Samples carry sample:true, no date, and sort after real issues.
+     PLACEHOLDER WORDS, PENDING COPYWRITER MAIN: every line below is a placeholder until the final
+     words arrive via WEBDEV MAIN or #516. Drop them in here; no other code changes. The badge and
+     the note normally come from the feed (issue_label, note); COPY.badge is only a fallback. ---- */
+  var COPY = {
+    badge:       'Sample issue',
+    archH2:      'See what an issue looks like',
+    archLine:    'Until Issue 1 goes out, read this sample. Sign up and the real ones come straight to you.',
+    success:     'Almost done: check your inbox and tap the confirm link. Issue 1 comes straight to you when it goes out. Until then, read the sample below.',
+    successLink: 'read the sample below'      /* the words inside COPY.success that link to #archive */
+  };
+  /* Ask 3: samples open in full for everyone, real issues keep the gate. Needs Elvin's yes
+     (via #516) before it goes true; false keeps today's gate on every card, samples included. */
+  var SAMPLES_UNGATED = false;
+
   var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   var params;
   try { params = new URLSearchParams(location.search); } catch (e) { params = null; }
@@ -328,11 +345,29 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   }
   function head(it, wrap) {
     var meta = el('p', 'issue-meta');
-    if (it.issue_label) meta.appendChild(document.createTextNode(it.issue_label + ' · '));
-    var t = el('time', '', fmtDate(it.date)); t.setAttribute('datetime', it.date || '');
-    meta.appendChild(t);
-    wrap.appendChild(meta);
+    if (it.sample) {                             /* a sample is never dated: badge, then the feed's note */
+      meta.appendChild(el('span', 'issue-badge', it.issue_label || COPY.badge));
+      wrap.appendChild(meta);
+      if (it.note) wrap.appendChild(el('p', 'issue-note', it.note));
+    } else {
+      var d = fmtDate(it.date);
+      if (it.issue_label) meta.appendChild(document.createTextNode(it.issue_label + (d ? ' · ' : '')));
+      if (d) { var t = el('time', '', d); t.setAttribute('datetime', it.date); meta.appendChild(t); }
+      wrap.appendChild(meta);
+    }
     wrap.appendChild(el('h3', '', it.subject || 'The Artificial Advantage'));
+  }
+  function samplesOnly() {
+    return issues.length > 0 && issues.every(function (x) { return x.sample === true; });
+  }
+  /* The heading and the line above the cards swap to the sample wording while the feed holds
+     only samples, and swap back on their own the day Issue 1 lands in the feed. */
+  var archH = document.getElementById('arch-h'), archLine = document.getElementById('arch-line');
+  var ORIG = { h2: archH.textContent, line: archLine.textContent };
+  function archText() {
+    var only = samplesOnly();
+    archH.textContent = only ? COPY.archH2 : ORIG.h2;
+    archLine.textContent = only ? COPY.archLine : ORIG.line;
   }
 
   function render() {
@@ -340,12 +375,15 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     box.textContent = '';
     if (!issues.length) {
       box.appendChild(el('p', 'arch-status', 'Issue 1, on AI and back to school, lands on October 1, so sign up and it comes straight to you.'));
-      document.getElementById('arch-line').hidden = true;
+      archText();
+      archLine.hidden = true;
       return;
     }
-    document.getElementById('arch-line').hidden = isReader();
+    archText();
     var reader = isReader();
+    archLine.hidden = reader;
     issues.forEach(function (it, i) {
+      var open = reader || (SAMPLES_UNGATED && it.sample);
       var full = parse(it.body_html || (it.preview ? '<p>' + it.preview.replace(/[<>&]/g, '') + '</p>' : ''));
       var card;
       if (reader && i > 0) {                       /* older issues fold away for readers */
@@ -360,20 +398,23 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       }
       card.id = 'issue-' + String(it.id || i).replace(/[^a-z0-9-]/gi, '');
       var body = el('div', 'issue-body');
-      if (reader) {
+      if (open) {
         body.appendChild(full);
         card.appendChild(body);
         /* Section 4, the book footer, is a fixed banner in the email template and not in
-           body_html, so the page renders it here, the same under every issue. */
-        var bk = el('p', 'issue-book');
-        bk.appendChild(el('b', '', 'From the book: '));
-        bk.appendChild(document.createTextNode('The Artificial Advantage teaches you to direct AI in plain language, for real work. '));
-        var ba = el('a', '', 'Get it on Amazon');
-        ba.href = 'https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20'; ba.target = '_blank'; ba.rel = 'noopener';
-        ba.setAttribute('data-amazon', ''); ba.setAttribute('aria-label', 'Get the book on Amazon (newsletter archive)');
-        ba.setAttribute('data-placement', 'newsletter-archive-footer');
-        bk.appendChild(ba);
-        card.appendChild(bk);
+           body_html, so the page renders it here, the same under every real issue. A sample
+           gets none: under a sample, sign-up is the only next step. */
+        if (!it.sample) {
+          var bk = el('p', 'issue-book');
+          bk.appendChild(el('b', '', 'From the book: '));
+          bk.appendChild(document.createTextNode('The Artificial Advantage teaches you to direct AI in plain language, for real work. '));
+          var ba = el('a', '', 'Get it on Amazon');
+          ba.href = 'https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20'; ba.target = '_blank'; ba.rel = 'noopener';
+          ba.setAttribute('data-amazon', ''); ba.setAttribute('aria-label', 'Get the book on Amazon (newsletter archive)');
+          ba.setAttribute('data-placement', 'newsletter-archive-footer');
+          bk.appendChild(ba);
+          card.appendChild(bk);
+        }
         if (/^https:\/\/api\.elvinpeters\.com\//.test(it.url || '')) {
           var more = el('p', 'issue-more'), a = el('a', '', 'Open this issue on its own page');
           a.href = it.url; a.target = '_blank'; a.rel = 'noopener';
@@ -400,7 +441,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       .then(function (r) { if (!r.ok) throw new Error('feed ' + r.status); return r.json(); })
       .then(function (d) {
         var list = Array.isArray(d) ? d : (d && Array.isArray(d.issues) ? d.issues : []);
-        issues = list.filter(function (x) { return x && (x.subject || x.body_html); });
+        list = list.filter(function (x) { return x && (x.subject || x.body_html); });
+        /* Samples always sort after every real issue, so a sample is never the open first card. */
+        issues = list.filter(function (x) { return x.sample !== true; })
+          .concat(list.filter(function (x) { return x.sample === true; }));
       })
       .catch(function () { issues = []; })
       .then(function () { clearTimeout(timer); render(); });
@@ -435,8 +479,18 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       form.style.display = 'none';
       if (note) note.style.display = 'none';
       msg.style.color = '';
-      msg.textContent = issues.length ? msg.dataset.successIssues : msg.dataset.successEmpty;
-      if (issues.length) {
+      if (samplesOnly()) {                         /* sample-only line; its link opens the sample */
+        var at = COPY.success.indexOf(COPY.successLink);
+        msg.textContent = at < 0 ? COPY.success : COPY.success.slice(0, at);
+        var rs = el('a', '', COPY.successLink);
+        rs.href = '#archive';
+        if (at < 0) msg.appendChild(document.createTextNode(' '));
+        msg.appendChild(rs);
+        if (at >= 0) msg.appendChild(document.createTextNode(COPY.success.slice(at + COPY.successLink.length)));
+      } else {
+        msg.textContent = issues.length ? msg.dataset.successIssues : msg.dataset.successEmpty;
+      }
+      if (issues.length && !samplesOnly()) {
         msg.appendChild(document.createTextNode(' '));
         var go = el('a', '', 'Read the latest issue');
         go.href = '#archive';
