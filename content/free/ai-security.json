@@ -1,0 +1,25 @@
+{
+  "title": "What Not to Put Into AI · Free Download | Elvin Peters",
+  "description": "The security and privacy guide that keeps you and your company out of trouble.",
+  "label": "Free guide",
+  "headline": "What Not to Put Into AI",
+  "hook": "Before you paste that into ChatGPT, read this.",
+  "tagline": "The security and privacy guide that keeps you and your company out of trouble.",
+  "bullets": [
+    "What is safe to share and what will get you in trouble",
+    "How data leakage actually happens, and how to avoid it",
+    "A simple checklist for safe, policy-friendly AI use at work"
+  ],
+  "cover": "/img/magnets/ai-security.webp",
+  "cover_alt": "What Not to Put Into AI cover",
+  "cover_width": 440,
+  "cover_height": 622,
+  "form_heading": "Get it free",
+  "form_sub": "Enter your email and it is yours. No spam, unsubscribe anytime.",
+  "button": "Send me the guide",
+  "fine_print": "Instant access. We will also email you a copy.",
+  "thanks_heading": "It is yours",
+  "thanks_text": "Thanks{name}. Your guide is ready, and a copy is on its way to your inbox.",
+  "download_label": "Download the PDF",
+  "pdf": "/dl/What-Not-To-Type-AI-Security.pdf"
+}

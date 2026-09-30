@@ -1,0 +1,25 @@
+{
+  "title": "AI for Slides, Docs and Images · Free Download | Elvin Peters",
+  "description": "Generate decks, documents and visuals with AI, even if you are not a designer.",
+  "label": "Free guide",
+  "headline": "AI for Slides, Docs and Images",
+  "hook": "The stuff that used to take you all afternoon, in minutes.",
+  "tagline": "Generate decks, documents and visuals with AI, even if you are not a designer.",
+  "bullets": [
+    "Turn a rough outline into a finished deck",
+    "The exact image workflow that produces clean, on-brand visuals",
+    "Documents and one-pagers that look like a designer made them"
+  ],
+  "cover": "/img/magnets/slides-docs-images.webp",
+  "cover_alt": "AI for Slides, Docs and Images cover",
+  "cover_width": 440,
+  "cover_height": 622,
+  "form_heading": "Get it free",
+  "form_sub": "Enter your email and it is yours. No spam, unsubscribe anytime.",
+  "button": "Send me the guide",
+  "fine_print": "Instant access. We will also email you a copy.",
+  "thanks_heading": "It is yours",
+  "thanks_text": "Thanks{name}. Your guide is ready, and a copy is on its way to your inbox.",
+  "download_label": "Download the PDF",
+  "pdf": "/dl/AI-Slides-Docs-Images.pdf"
+}

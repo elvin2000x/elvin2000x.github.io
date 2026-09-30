@@ -1,0 +1,25 @@
+{
+  "title": "Build Your Own AI Assistant (No Code) · Free Download | Elvin Peters",
+  "description": "A reusable assistant that already knows your job, so you never retype your context again.",
+  "label": "Free guide",
+  "headline": "Build Your Own AI Assistant (No Code)",
+  "hook": "Set it up once. Use it every day.",
+  "tagline": "A reusable assistant that already knows your job, so you never retype your context again.",
+  "bullets": [
+    "Build a Custom GPT, Claude Project or Gemini Gem for your exact role",
+    "No code, no setup fee, done in an afternoon",
+    "The context and instructions to bake in so it works the first time"
+  ],
+  "cover": "/img/magnets/ai-assistant.webp",
+  "cover_alt": "Build Your Own AI Assistant (No Code) cover",
+  "cover_width": 440,
+  "cover_height": 622,
+  "form_heading": "Get it free",
+  "form_sub": "Enter your email and it is yours. No spam, unsubscribe anytime.",
+  "button": "Send me the guide",
+  "fine_print": "Instant access. We will also email you a copy.",
+  "thanks_heading": "It is yours",
+  "thanks_text": "Thanks{name}. Your guide is ready, and a copy is on its way to your inbox.",
+  "download_label": "Download the PDF",
+  "pdf": "/dl/Your-Own-AI-Assistant-No-Code.pdf"
+}

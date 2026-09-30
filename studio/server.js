@@ -134,8 +134,84 @@ const contentKey = name => 'content/' + name + '.json';
 function keyOk(key) {
   key = String(key || '');
   if (key.startsWith('ca:')) return !!CA && (key === ESSAYS || BODY_FILE.test(fileOf(key)));
+  if (freeOfKey(key)) return true;
   const m = /^content\/([a-z][a-z0-9-]{0,40})\.json$/.exec(key);
   return !!m && m[1] !== 'essays' && allowed(m[1]);
+}
+
+/* ---------- lead magnets (/free/*, #464) ----------
+   Each page's words are content/free/<slug>.json (free-pages.js fills them into
+   the page at build). The five pages that aren't the guide template also take a
+   draft of the page file itself (free/<slug>/index.html) for what no field holds;
+   its scripts and tracking ids can never change here. */
+const FP = require(path.join(ROOT, 'free-pages.js'));
+// Who may frame the studio and its previews: itself, and Empire Studio (Website tab).
+const FRAME_OK = "frame-ancestors 'self' https://studio.elvinpeters.com";
+const FREE_ODD = ['index', 'ai-toolkit', 'claude-manual', 'content-machine', 'link-expired'];
+const freeSlugs = () => FP.pages(ROOT).map(x => x.slug);
+const freeJsonKey = slug => 'content/free/' + slug + '.json';
+// {slug, kind: 'json'|'html'} for a lead magnet draft key, else null.
+function freeOfKey(key) {
+  let m = /^content\/free\/([a-z0-9-]{1,60})\.json$/.exec(key);
+  if (m && freeSlugs().includes(m[1])) return { slug: m[1], kind: 'json' };
+  m = /^free\/(?:([a-z0-9-]{1,60})\/)?index\.html$/.exec(key);
+  const slug = m && (m[1] || 'index');
+  if (m && FREE_ODD.includes(slug) && freeSlugs().includes(slug)) return { slug, kind: 'html' };
+  return null;
+}
+// The page file a lead magnet's fields are filled into: its HTML draft, else live. LF.
+const freeFrame = slug => { const c = current(FP.fileOfSlug(slug)); return c ? c.buf.toString('utf8').replace(/\r\n/g, '\n') : null; };
+const freeData = slug => { const c = current(freeJsonKey(slug)); return c ? JSON.parse(c.buf.toString('utf8')) : {}; };
+// Which fields a page has room for (share fields included when its head carries them).
+function freeSlots(html) {
+  return FP.SLOTS.filter(s => { const all = html.match(new RegExp(s.re.source, 'g')); return all && all.length === 1; }).map(s => s.key);
+}
+const scriptsOf = html => (html.match(/<script\b[\s\S]*?<\/script>/gi) || []).join('\n');
+function validateFree(slug, data) {
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return 'the page words must be a JSON object';
+  const frame = freeFrame(slug);
+  if (!frame) return 'that lead magnet page does not exist';
+  const room = freeSlots(frame);
+  for (const [k, v] of Object.entries(data)) {
+    const s = FP.SLOTS.find(x => x.key === k);
+    if (!s) return 'unknown field ' + k;
+    if (!room.includes(k)) return 'this page has no place for ' + k;
+    if (s.list ? !Array.isArray(v) || v.some(x => typeof x !== 'string') : s.num ? !Number.isInteger(v) || v < 1 || v > 10000 : typeof v !== 'string')
+      return k + (s.list ? ' must be a list of lines' : s.num ? ' must be a whole number' : ' must be text');
+    if (/<\/?(script|style|iframe|form|input)\b/i.test([].concat(v).join(' '))) return k + ' cannot hold scripts, styles or forms';
+    if (s.name && String(v).includes('<span id="dn">')) return 'write {name} where the reader\'s name goes';
+  }
+  let out;
+  try { out = FP.render(frame, data, FP.fileOfSlug(slug)); } catch (e) { return String(e.message).slice(0, 160); }
+  // Every value must read back as itself: text that closes its own tag would break the page.
+  let back;
+  try { back = FP.extract(out, 'the page'); } catch (e) { return 'those words would break the page: ' + String(e.message).slice(0, 120); }
+  const q = v => JSON.stringify(v).replace(/\\"|&quot;/g, '"');
+  for (const [k, v] of Object.entries(data)) {
+    if (!(k in back) && FP.SLOTS.find(x => x.key === k).share) continue;
+    if (q(back[k]) !== q(v)) return 'the ' + k.replace(/_/g, ' ') + ' has a tag in it that would break the page';
+  }
+  if (scriptsOf(out) !== scriptsOf(frame)) return 'the page scripts would change';
+  return null;
+}
+// An odd page's own HTML: same scripts and tracking as live, and its fields still fit.
+function validateFreeHtml(slug, html) {
+  const was = live(FP.fileOfSlug(slug));
+  if (!was) return 'that lead magnet page does not exist';
+  if (scriptsOf(html) !== scriptsOf(was.toString('utf8').replace(/\r\n/g, '\n'))) return 'the scripts and tracking codes on this page cannot change here. Put them back as they were.';
+  if (!/<\/html>\s*$/i.test(html) || !/<body\b/i.test(html)) return 'the page must stay a whole HTML page (<body> â€¦ </html>)';
+  try { FP.extract(html, 'the page'); } catch (e) { return String(e.message).replace(/^the page: /, '').slice(0, 160); }
+  return null;
+}
+function freeList() {
+  return FP.pages(ROOT).map(({ slug, file }) => {
+    const frame = freeFrame(slug) || '', d = freeData(slug);
+    const dj = store.get(freeJsonKey(slug)), dh = FREE_ODD.includes(slug) && store.get(file);
+    return { slug, file, url: FP.urlOfSlug(slug), odd: FREE_ODD.includes(slug),
+      layout: /<div class="head">/.test(frame) ? 'squeeze' : /<div class="copy">/.test(frame) ? 'guide' : 'own',
+      title: String(d.title || slug).replace(/ \| Elvin Peters$/, ''), headline: d.headline || '',
+      cover: d.cover || '', draft: !!(dj || dh), stale: !!((dj && stale(dj)) || (dh && stale(dh))) };
+  });
 }
 const drafts = site => store.list().filter(d => keyOk(d.key) && (!site || siteOf(d.key) === site));
 function live(key) {
@@ -206,10 +282,10 @@ async function buildBlogTest(dir) {
   catch (e) { gate = gateLines((e.stdout || '') + (e.stderr || '')); }
   return { dir: blogDir(site), drafts: hidden, gate };
 }
-// What a verify gate said was wrong: its ✗ lines, or the lines under its FAIL line.
+// What a verify gate said was wrong: its âœ— lines, or the lines under its FAIL line.
 function gateLines(out) {
   const lines = String(out).split('\n').map(l => l.trim()).filter(Boolean);
-  const x = lines.filter(l => /✗/.test(l));
+  const x = lines.filter(l => /âœ—/.test(l));
   const at = lines.findIndex(l => /^FAIL\b/.test(l));
   const got = x.length ? x : at > -1 ? lines.slice(at + 1) : [];
   return got.length ? got.slice(0, 6) : ['the epeters.ca check did not pass'];
@@ -592,8 +668,9 @@ const server = http.createServer((req, res) => {
   if (!['GET', 'HEAD'].includes(req.method) && req.headers['x-studio'] !== '1')
     return json(res, 403, { error: 'missing studio header' });
   try {
+    // ?embed=1: Site Studio inside Empire Studio (#464), which may frame it; else never framed.
     if (p === '/' && req.method === 'GET') return serveFile(res, path.join(__dirname, 'ui.html'),
-      { 'Content-Security-Policy': "frame-ancestors 'none'" });
+      { 'Content-Security-Policy': url.searchParams.get('embed') === '1' ? FRAME_OK : "frame-ancestors 'none'" });
     if (p === '/studio.css' || p === '/tools.json') return serveFile(res, path.join(__dirname, p.slice(1)));
     if (p === '/md.js') {
       // md.js is a CommonJS module; the browser gets it wrapped so the live preview
@@ -712,6 +789,57 @@ const server = http.createServer((req, res) => {
       return send(res, 200, r.data, { 'Content-Type': r.key.endsWith('.json') ? 'application/json' : 'text/plain; charset=utf-8' });
     }
 
+    // Lead magnets (#464): the list, one page's words (GET/PUT like /api/content),
+    // and an odd page's own HTML (GET/PUT, scripts locked).
+    if (p === '/api/free' && req.method === 'GET') return json(res, 200, { pages: freeList(), odd: FREE_ODD });
+    if (/^\/api\/free(-html)?\/[a-z0-9-]{1,60}$/.test(p)) {
+      const slug = p.split('/')[3], isHtml = p.startsWith('/api/free-html/');
+      if (!freeSlugs().includes(slug)) return json(res, 404, { error: 'no such lead magnet page' });
+      if (isHtml && !FREE_ODD.includes(slug)) return json(res, 404, { error: 'this page is edited as fields only' });
+      const key = isHtml ? FP.fileOfSlug(slug) : freeJsonKey(slug);
+      if (req.method === 'GET') {
+        const c = current(key);
+        if (!c) return json(res, 404, { error: 'That page does not exist.' });
+        const frame = freeFrame(slug), jc = current(freeJsonKey(slug));
+        if (isHtml) {
+          // The page as it will build: its fields filled in, so the HTML shows today's words.
+          let html = frame;
+          try { html = FP.render(frame, freeData(slug), FP.fileOfSlug(slug)); } catch (e) {}
+          return json(res, 200, { html, version: c.version, fields_version: jc ? jc.version : null }, { ETag: '"' + c.version + '"' });
+        }
+        return send(res, 200, JSON.stringify({ slug, url: FP.urlOfSlug(slug), odd: FREE_ODD.includes(slug), slots: freeSlots(frame),
+          data: JSON.parse(c.buf.toString('utf8')), live: JSON.parse((live(key) || c.buf).toString('utf8')) }), { 'Content-Type': 'application/json', ETag: '"' + c.version + '"' });
+      }
+      if (req.method === 'PUT') {
+        return readBody(req, 2 * 1024 * 1024, body => {
+          const staleMsg = 'This page changed somewhere else (another tab or device, or it was just published). Reload to get the latest before saving.';
+          if (!isHtml) {
+            let data;
+            try { data = JSON.parse(body.toString('utf8')); } catch (e) { return json(res, 400, { error: 'not valid JSON: ' + e.message }); }
+            const bad = validateFree(slug, data);
+            if (bad) return json(res, 422, { error: bad });
+            try {
+              const r = saveDraft(req, key, Buffer.from(JSON.stringify(data, null, 2) + '\n'));
+              return json(res, 200, { saved: true, version: r.version, draft: !r.live });
+            } catch (e) { return json(res, e.stale ? 409 : 500, { error: e.stale ? staleMsg : 'Could not save the draft: ' + String(e.message).slice(0, 200) }); }
+          }
+          // The HTML and the fields it holds are saved together, so a build fills the
+          // page with exactly the words typed here.
+          const html = body.toString('utf8').replace(/\r\n/g, '\n');
+          const bad = validateFreeHtml(slug, html);
+          if (bad) return json(res, 422, { error: bad });
+          const jb = Buffer.from(JSON.stringify(FP.extract(html, 'page'), null, 2) + '\n');
+          const jc = current(freeJsonKey(slug));
+          try {
+            const r = saveDraft(req, key, Buffer.from(html));
+            let fields = null;
+            if (!jc || !jc.buf.equals(jb)) fields = store.save(freeJsonKey(slug), jb, jc ? jc.version : 'p' + version(Buffer.alloc(0)), live(freeJsonKey(slug)), author(req)).version;
+            return json(res, 200, { saved: true, version: r.version, fields_version: fields, draft: !r.live });
+          } catch (e) { return json(res, e.stale ? 409 : 500, { error: e.stale ? staleMsg : 'Could not save the draft: ' + String(e.message).slice(0, 200) }); }
+        }, () => json(res, 413, { error: 'The page must be under 2 MB.' }));
+      }
+    }
+
     if (p.startsWith('/api/content/')) {
       const name = p.split('/')[3];
       if (!allowed(name)) return json(res, 404, { error: 'unknown section' });
@@ -729,7 +857,9 @@ const server = http.createServer((req, res) => {
           const bad = validate(name, data);
           if (bad) return json(res, 422, { error: bad });
           try {
-            const r = saveDraft(req, key, Buffer.from(JSON.stringify(data, null, 2) + '\n'));
+            // Keep the file's own indent (nav.json is 1 space, as menu-swap writes it).
+            const ind = /^\{\r?\n( +)"/.exec((live(key) || '').toString('utf8'));
+            const r = saveDraft(req, key, Buffer.from(JSON.stringify(data, null, ind ? ind[1].length : 2) + '\n'));
             json(res, 200, { saved: true, version: r.version, draft: !r.live });
           } catch (e) {
             if (!e.stale) return json(res, 500, { error: 'Could not save the draft: ' + String(e.message).slice(0, 200) });
@@ -903,7 +1033,7 @@ const server = http.createServer((req, res) => {
       }
       // The proxy says X-Frame-Options DENY for the whole host; frame-ancestors
       // overrides it in browsers, so previews can sit inside the studio page.
-      const frame = { 'Content-Security-Policy': "frame-ancestors 'self'" };
+      const frame = { 'Content-Security-Policy': FRAME_OK };
       // A blog Test is a whole epeters.ca: its root paths stay inside this preview.
       const whole = fs.existsSync(path.join(PREVIEWS, id, 'site'));
       if (file.endsWith('.html')) {
@@ -926,7 +1056,7 @@ const server = http.createServer((req, res) => {
       if (rel.endsWith('/')) rel += 'index.html';
       const file = safeJoin(CA.root, rel);
       if (!file || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return send(res, 404, 'not found');
-      const frame = { 'Content-Security-Policy': "frame-ancestors 'self'" };
+      const frame = { 'Content-Security-Policy': FRAME_OK };
       if (file.endsWith('.html')) return send(res, 200, rootTo(stripTracking(fs.readFileSync(file, 'utf8')), '/ca'), { 'Content-Type': MIME['.html'], ...frame });
       if (file.endsWith('.css')) return send(res, 200, rootTo(fs.readFileSync(file, 'utf8'), '/ca', true), { 'Content-Type': MIME['.css'] });
       return serveFile(res, file, frame);
@@ -945,7 +1075,7 @@ const server = http.createServer((req, res) => {
       const say = t => res.write(t + '\n');
       return publish({ keys: want, force: url.searchParams.get('force') === '1', say, who: author(req),
           msg: String(url.searchParams.get('msg') || '').replace(/[\r\n]+/g, ' ').slice(0, 120) })
-        .catch(e => say('✗ ' + String(e.message).slice(0, 200)))
+        .catch(e => say('âœ— ' + String(e.message).slice(0, 200)))
         .finally(() => { busy = null; res.end(); });
     }
 
@@ -1027,7 +1157,7 @@ const server = http.createServer((req, res) => {
 async function publish({ keys, force, msg, say, who }) {
   const all = drafts();
   const picked = keys.length ? all.filter(d => keys.includes(d.key)) : all;
-  if (!picked.length) { say('✓ Nothing to publish: no drafts' + (keys.length ? ' for that page.' : '.')); return; }
+  if (!picked.length) { say('âœ“ Nothing to publish: no drafts' + (keys.length ? ' for that page.' : '.')); return; }
   // One site at a time, the blog first. A site that fails stops the rest.
   for (const site of SITES) {
     const mine = picked.filter(d => siteOf(d.key) === site).map(d => d.key);
@@ -1043,7 +1173,7 @@ async function publish({ keys, force, msg, say, who }) {
 // anything fails, the copy goes back to the commit it started from and every draft
 // stays as it was. Returns true when the site is live or had nothing to ship.
 async function publishSite(site, keys, { force, msg, say, who }) {
-  const run = async (label, fn) => { say('▸ ' + label); const out = await fn(); if (out) say(String(out).trim().split('\n').slice(-4).map(l => l.length > 160 ? l.slice(0, 157) + '…' : l).join('\n')); };
+  const run = async (label, fn) => { say('â–¸ ' + label); const out = await fn(); if (out) say(String(out).trim().split('\n').slice(-4).map(l => l.length > 160 ? l.slice(0, 157) + 'â€¦' : l).join('\n')); };
   const g = (a, o) => git(a, { cwd: site.root, ...o });
   let before = g(['rev-parse', 'HEAD']);
   const wrote = [];
@@ -1059,13 +1189,13 @@ async function publishSite(site, keys, { force, msg, say, who }) {
     await run('Getting the latest ' + site.name + ' from GitHub', () => pull(site));
     before = g(['rev-parse', 'HEAD']);
     const picked = keys.map(k => store.get(k)).filter(Boolean);
-    if (!picked.length) { say('✓ Nothing to publish on ' + site.name + '.'); return null; }
+    if (!picked.length) { say('âœ“ Nothing to publish on ' + site.name + '.'); return null; }
 
     // Live changed under a draft (a Claude push, another device's publish): stop
     // unless the editor chose "mine wins", so nobody's work is overwritten silently.
     const moved = picked.filter(d => stale(d));
     if (moved.length && !force) {
-      say('✗ ' + moved.map(d => pageTitle(d.key)).join(', ') + ' changed on the live site after this draft started.');
+      say('âœ— ' + moved.map(d => pageTitle(d.key)).join(', ') + ' changed on the live site after this draft started.');
       say('  Open the page and check it. Publishing anyway replaces the live version with yours.');
       throw Object.assign(new Error('stale'), { quiet: true, stale: moved.map(d => d.key) });
     }
@@ -1083,7 +1213,7 @@ async function publishSite(site, keys, { force, msg, say, who }) {
       plan.push({ d, out });
     }
     held.forEach(k => say('  ' + pageTitle(k) + ' stays private: its post is still a draft.'));
-    if (!plan.length) { say('✓ Nothing to publish: only private drafts.'); return null; }
+    if (!plan.length) { say('âœ“ Nothing to publish: only private drafts.'); return null; }
 
     await run('Writing ' + plan.map(x => pageTitle(x.d.key)).join(', '), () => {
       for (const { d, out } of plan) {
@@ -1102,6 +1232,9 @@ async function publishSite(site, keys, { force, msg, say, who }) {
         }
       }
     });
+    // A menu change reaches the hand-built pages through menu-swap, before the build.
+    if (site === COM && plan.some(x => x.d.key === 'content/nav.json'))
+      await run('Putting the menu on every page', () => node(site, 'scripts/menu-swap.js'));
     await run('Building ' + site.name, () => node(site, 'build.js'));
     await run('Checking (verify gate)', () => node(site, 'verify.js'));
 
@@ -1113,7 +1246,7 @@ async function publishSite(site, keys, { force, msg, say, who }) {
     const off = site.off ? changed.filter(f => site.off.test(f)) : [];
     if (off.length) throw new Error('This publish would change the old blog files (' + off.slice(0, 3).join(', ') + '). The blog lives on epeters.ca now.');
     if (!changed.length) {
-      say('✓ Nothing changed. That page is live already.');
+      say('âœ“ Nothing changed. That page is live already.');
       for (const { d } of plan) store.end(d.key, 'publish', d.rev, who, 'already live');
       return null;
     }
@@ -1149,12 +1282,12 @@ async function publishSite(site, keys, { force, msg, say, who }) {
     // the same file for the other site puts it back).
     for (const { out } of done.plan) for (const u of uploadsIn(out)) if (!uploadInUse(u)) store.dropUpload(u);
     const where = site === CA ? ' to ' + site.name : '';
-    say('✓ PUBLISHED ' + done.titles + where + ' (' + sha + '). GitHub Pages takes about a minute, then it is live.');
+    say('âœ“ PUBLISHED ' + done.titles + where + ' (' + sha + '). GitHub Pages takes about a minute, then it is live.');
     return true;
   } catch (e) {
     if (!e.quiet) {
       const detail = (e.stdout || '') + (e.stderr || '');
-      say('✗ ' + (detail.includes('FAIL') || detail.includes('✗') ? 'The verify gate failed:\n' + gateLines(detail).map(l => '  ' + l).join('\n') : String(e.message).split('\n').slice(0, 6).join('\n')));
+      say('âœ— ' + (detail.includes('FAIL') || detail.includes('âœ—') ? 'The verify gate failed:\n' + gateLines(detail).map(l => '  ' + l).join('\n') : String(e.message).split('\n').slice(0, 6).join('\n')));
     }
     // Back to where we started: no commit left to ride along later, no half-built
     // pages, no draft file left in the copy.
@@ -1168,6 +1301,12 @@ function pageTitle(key) {
   if (String(key).startsWith('ca:')) {
     const post = (() => { try { return loadPosts().find(p => p && p.file === fileOf(key)); } catch (e) { return null; } })();
     return post ? 'Blog post "' + String(post.title || post.slug).slice(0, 60) + '"' : fileOf(key);
+  }
+  const fr = freeOfKey(String(key));
+  if (fr) {
+    let t = fr.slug;
+    try { t = String(freeData(fr.slug).title || t).replace(/ \| Elvin Peters$/, '').slice(0, 60); } catch (e) {}
+    return 'Lead magnet "' + t + '"' + (fr.kind === 'html' ? ' (page HTML)' : '');
   }
   const m = /^content\/([a-z0-9-]+)\.json$/.exec(key);
   if (!m) return key;

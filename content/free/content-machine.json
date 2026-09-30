@@ -1,0 +1,20 @@
+{
+  "title": "The Content Machine (Free) | Elvin Peters",
+  "description": "The full 51-page Content Machine guide, free by email. Publish AI content at volume without it all sounding the same.",
+  "label": "Free: the full 51-page guide",
+  "headline": "Publish AI content at volume without it all sounding the same",
+  "tagline": "My first 200 AI pieces all started their titles with the same word, and I only saw it when I counted. This 51-page guide is the system I'd have built on day one: five components you set up in an afternoon and nine steps you run every week.",
+  "bullets": [
+    "Catch the sameness before your readers do, with a counting check that found 200 of my 200 titles opening with \"The\".",
+    "Build the five components once (the brief, the rotation, the voice rules, the gate and the queue), then keep it running in thirty minutes a week.",
+    "Let a scoring gate turn down weak drafts before you read them, so only work that clears your bar goes out under your name."
+  ],
+  "cover": "/img/magnets/content-machine.webp",
+  "cover_alt": "Cover of The Content Machine by Elvin Peters",
+  "cover_width": 440,
+  "cover_height": 629,
+  "button": "Email me the guide",
+  "fine_print": "The guide arrives by email. Confirm your address and a private download link follows.",
+  "thanks_heading": "Check your inbox",
+  "thanks_text": "I've sent you a short email. Click \"Yes, that's me\" and the guide follows in a second email, with a private download link that works for 7 days. Nothing there in a few minutes? Check your spam folder."
+}

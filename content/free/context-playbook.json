@@ -1,0 +1,25 @@
+{
+  "title": "Feed It Your World: The Context Playbook · Free Download | Elvin Peters",
+  "description": "Stop starting from scratch. Learn to give AI your own documents, data and files the right way.",
+  "label": "Free guide",
+  "headline": "Feed It Your World: The Context Playbook",
+  "hook": "The number one thing beginners miss: AI is only as good as what you feed it.",
+  "tagline": "Stop starting from scratch. Learn to give AI your own documents, data and files the right way.",
+  "bullets": [
+    "How to load your own docs, data and long files so the AI actually uses them",
+    "NotebookLM, Projects and smart pasting, step by step",
+    "The simple &#x27;RAG-lite&#x27; method that makes AI answer as if it knows your business"
+  ],
+  "cover": "/img/magnets/context-playbook.webp",
+  "cover_alt": "Feed It Your World: The Context Playbook cover",
+  "cover_width": 440,
+  "cover_height": 622,
+  "form_heading": "Get it free",
+  "form_sub": "Enter your email and it is yours. No spam, unsubscribe anytime.",
+  "button": "Send me the guide",
+  "fine_print": "Instant access. We will also email you a copy.",
+  "thanks_heading": "It is yours",
+  "thanks_text": "Thanks{name}. Your guide is ready, and a copy is on its way to your inbox.",
+  "download_label": "Download the PDF",
+  "pdf": "/dl/Feed-It-Your-World-Context-Playbook.pdf"
+}

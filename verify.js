@@ -243,6 +243,16 @@ function* builtHtml(dir, rel) {
           ? 'generated page differs from its stack (a hand edit, or a stale build): edit content/page-*.json or Site Studio, then node build.js'
           : 'committed file differs from a fresh build (stale build — run node build.js)');
     }
+    // FREE-DRIFT (#464): the /free/ lead magnet pages take their words from
+    // content/free/<slug>.json. A hand edit to those words is lost on the next
+    // Studio publish, so the committed page must equal a fresh build.
+    if (fs.existsSync(path.join(tmp, 'free'))) {
+      for (const rel of builtHtml(path.join(tmp, 'free'), '')) {
+        const a = path.join(ROOT, 'free', rel), b = path.join(tmp, 'free', rel);
+        if (fs.existsSync(a) && eol(fs.readFileSync(a, 'utf8')) !== eol(fs.readFileSync(b, 'utf8')))
+          fail('free/' + rel, 'the words differ from content/free/*.json (a hand edit, or a stale build): edit them in Site Studio > Website > Lead magnets, then node build.js');
+      }
+    }
     // REGION-DRIFT: inside every <!-- ep:name --> region build.js fills, the
     // committed page must hold exactly what the content JSON renders. A hand
     // edit there is silently lost on the next Studio publish, so it fails here.
