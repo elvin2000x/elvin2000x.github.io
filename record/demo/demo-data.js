@@ -58,7 +58,7 @@
     return { spk, t0, t1, text, words: w.map((x, i) => ({ w: x, s: +(t0 + i * step).toFixed(2), e: +(t0 + (i + 1) * step).toFixed(2) })) };
   });
   const DURATION = Math.ceil(SEGMENTS[SEGMENTS.length - 1].t1 + 1.5);
-  const SPEAKERS = { S1: { name: 'Maya Chen' }, S2: { name: '', guess: 'Daniel Osei' } };
+  const SPEAKERS = { S1: { name: 'Maya Chen' }, S2: { name: 'Daniel Osei' } };
   const SUMMARY = {
     summary: 'A reporter asks how a bike repair co-op began and what it needs for a second shop.',
     keyPoints: [
@@ -469,6 +469,17 @@
   }
 
   function only() { toast(COPY.only); }
+
+  /* View-only: typing into any field (except the two search boxes) and submitting a form
+   * with empty required fields show the login line instead, so no edit lingers on screen. */
+  if (VIEW_ONLY) {
+    const SEARCH = new Set(['search', 'find']);
+    document.addEventListener('beforeinput', (e) => {
+      if (SEARCH.has(e.target.id)) return;
+      e.preventDefault(); only();
+    }, true);
+    document.addEventListener('invalid', (e) => { e.preventDefault(); only(); }, true);
+  }
 
   window.DEMO = { VIEW_ONLY, COPY, api, Recorder, audioUrl, download, showGdoc, only, badge, banner };
 })();
