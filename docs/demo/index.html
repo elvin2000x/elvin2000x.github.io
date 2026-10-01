@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Public demo: connect-src 'none' means this page cannot call any API, socket or server. Same pattern as /record/demo/. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; worker-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="theme-color" content="#1f3a5f">
+<title>Document Engine (demo) | Elvin M. Peters</title>
+<meta name="description" content="Your documents, read, sorted and cited.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://elvinpeters.com/docs/demo/">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="demo.css">
+</head><body>
+<header><div><h1>Document Engine <span class="demo-badge" id="demo-badge">Demo</span> <small id="hdr-sub">· document intelligence</small></h1></div>
+<nav id="nav"><button id="fb-btn" data-act="feedback" style="background:#f4c542;color:#1a1a1a;border-color:#f4c542;font-weight:600">Feedback</button>
+<button data-v="chat">Chat</button><button data-v="documents">Documents</button><button data-v="tasks">Tasks</button><button data-v="artifacts">Artifacts</button>
+<button data-v="credits">Credits</button><button data-v="help">Help</button><button data-v="account">Account</button>
+</nav></header>
+<main>
+<div class="demo-banner" role="note" id="demo-banner">Demo version. Login to use full functionality. This is a demo version only.</div>
+
+<div id="v-chat" class="view" hidden>
+<div class="chat-wrap">
+  <section style="margin:0">
+    <div class="row" style="justify-content:space-between"><h2 style="margin:0">Chats</h2><button style="flex:0 0 auto" data-act="only">New chat</button></div>
+    <div id="chat-list" class="chat-list"></div>
+  </section>
+  <section style="margin:0">
+    <div class="row" style="justify-content:space-between"><h2 id="chat-title" style="margin:0">Ask your documents</h2><button id="chat-del" class="secondary small" style="flex:0 0 auto" data-act="only" hidden>Delete chat</button></div>
+    <div id="msgs" class="msgs"><div class="empty">Ask anything about the files in this workspace. Answers come with page cites. Say "write this up as a Word report" when you want a file.</div></div>
+    <div class="chat-in"><textarea id="chat-text" placeholder="e.g. Which document is the most recent, and what is it about?"></textarea><button id="chat-send" data-act="only">Send</button></div>
+    <div class="small muted" style="margin-top:6px">Enter sends, Shift+Enter for a new line. Each answer costs a few cents; reports cost more.</div>
+  </section>
+</div>
+</div>
+
+<div id="v-documents" class="view" hidden>
+<section id="start" class="start">
+  <div class="row" style="justify-content:space-between"><h2 style="margin:0">Start here</h2><button class="secondary small" style="flex:0 0 auto" data-act="hide-start">Hide</button></div>
+  <div class="steps">
+    <div class="step"><b class="n">1</b><h3>Add the files</h3><p>Any documents, any mix: a case file, a contract folder, a stack of invoices, a batch of resumes. Drop them below and wait until every row shows a type and page count.</p></div>
+    <div class="step"><b class="n">2</b><h3>Tell it what you want</h3><p>Tasks tab. Plain English. Pick Word or Excel if you want a file. One to three minutes per request.</p></div>
+    <div class="step"><b class="n">3</b><h3>Open the report</h3><p>Artifacts tab. Click any page chip to see the source. Use the yellow Feedback button to tell Elvin what worked and what did not.</p></div>
+  </div>
+  <div class="small muted" style="margin:12px 0 6px">Try one of these once your files are in:</div>
+  <div class="chips" id="start-chips"></div>
+</section>
+<section>
+  <h2>Add documents</h2>
+  <div id="drop" class="drop" role="button" tabindex="0">Drop files or a whole folder here, or <span style="color:var(--accent);cursor:pointer">choose files</span> or <span style="color:var(--accent);cursor:pointer">choose a folder</span>
+  <div class="small" id="drop-hint"></div></div>
+  <div class="muted small" style="margin-top:8px">Ingest is deterministic: hash, OCR for scans and photos, classify, extract fields with page cites. Email attachments and zip contents are ingested and linked to their parent. Nothing is moved or changed.</div>
+</section>
+<section>
+  <h2>Documents <span id="doc-count" class="pill"></span></h2>
+  <div class="row"><input id="q" type="text" placeholder='Exact search, e.g. a file number, a name, "Termination date"'><button class="secondary" data-act="search">Search</button></div>
+  <pre id="searchout" hidden></pre>
+  <div style="overflow-x:auto"><table id="docs"><thead><tr><th>File</th><th>Type</th><th class="hide-m">Pages</th><th>OCR</th><th>Extracted facts (click a page)</th></tr></thead><tbody></tbody></table></div>
+</section>
+</div>
+
+<div id="v-tasks" class="view" hidden>
+<section>
+  <div class="row" style="justify-content:space-between;align-items:flex-start">
+    <div style="flex:1 1 320px"><h2>Working mode</h2><div id="mode-blurb" class="small muted"></div></div>
+    <select id="task-mode" style="flex:0 0 300px"></select>
+  </div>
+  <div class="small muted" style="margin-bottom:6px">Try one of these:</div>
+  <div class="chips" id="task-chips"></div>
+</section>
+<section>
+  <h2>General task</h2>
+  <textarea id="task-text" placeholder="What do you want done with these documents? For example: put these files in date order and write a one-paragraph summary of each. Or: list every dollar amount across the invoices with who billed it and when."></textarea>
+  <div class="row" style="margin-top:8px"><select id="task-fmt" style="flex:0 0 200px"><option value="markdown">Output: on-screen report</option><option value="docx">Output: Word (.docx)</option><option value="pdf">Output: PDF</option><option value="xlsx">Output: Excel (.xlsx)</option></select>
+  <button data-act="only">Run</button><span id="task-credit" class="muted small"></span></div>
+  <div class="muted small">The engine works only from the documents in this workspace. It never produces a number itself: totals, day counts and deadlines are computed in code and every figure is recomputed before the report is shown. It flags; it does not decide.</div>
+</section>
+<section id="oneclick" hidden>
+  <h2>One-click tasks</h2>
+  <div class="row">
+    <button class="secondary" data-act="only">Assemble case files</button>
+    <button class="secondary" data-act="only">Matter readiness</button>
+    <button class="secondary" data-act="only">Deadline sweep</button>
+  </div>
+  <div class="muted small">Assemble proposes a matter tree from everything uploaded (you confirm it in Artifacts). Readiness and deadline sweep are deterministic rule checks on confirmed matters and cost no credits.</div>
+</section>
+</div>
+
+<div id="v-artifacts" class="view" hidden>
+<section>
+  <h2>Task runs</h2>
+  <div style="overflow-x:auto"><table id="runs"><thead><tr><th>Started</th><th>Task</th><th>Status</th><th>Verification</th><th>Cost</th><th></th></tr></thead><tbody></tbody></table></div>
+</section>
+<section id="art-box" hidden>
+  <div class="row"><h2 id="art-title" style="margin:0">Artifact</h2><span id="art-dl"></span></div>
+  <div id="art-files"></div>
+  <div id="art" class="art"></div>
+  <details style="margin-top:10px"><summary class="muted small">Cite index</summary><pre id="art-cites"></pre></details>
+  <details><summary class="muted small">Agent transcript</summary><pre id="art-tr"></pre></details>
+</section>
+</div>
+
+<div id="v-credits" class="view" hidden>
+<section>
+  <h2>Credits remaining</h2>
+  <div class="credit" id="cr-remaining"></div>
+  <div class="muted small" id="cr-detail"></div>
+  <div class="muted small">Cost is computed per model call from token counts at current pricing. When the balance reaches zero, tasks stop with a clear message until the administrator tops up.</div>
+</section>
+<section><h2>Recent model calls</h2><div style="overflow-x:auto"><table id="cr-calls"><thead><tr><th>When</th><th>Purpose</th><th>In</th><th>Out</th><th>Cache</th><th>Cost</th></tr></thead><tbody></tbody></table></div></section>
+<section><h2>Top-ups</h2><table id="cr-topups"><thead><tr><th>When</th><th>Amount</th><th>Note</th></tr></thead><tbody></tbody></table></section>
+</div>
+
+<div id="v-help" class="view" hidden>
+<section>
+  <h2>How to use this</h2>
+  <ol style="padding-left:20px;line-height:1.7">
+    <li><b>Add documents.</b> Documents tab: drag files in, or choose them. PDFs, Word files, scans, phone photos, spreadsheets, emails (.eml or .msg, attachments come along) and zip folders all work. Closed matters only during the trial.</li>
+    <li><b>Wait for the green list.</b> Each file is read, OCR'd if it is a scan, sorted by type and its key facts are pulled out. Click any page number to see the exact page a fact came from.</li>
+    <li><b>Ask a question.</b> Chat tab: ask anything about the files and get a short answer with page cites in seconds. Say "write this up as a Word report" when you want a file. "Ask about this file" on the Documents tab starts a chat scoped to one document.</li>
+    <li><b>Get files back.</b> Ask for folders ("organize these into folders by matter, date-named, as a zip"), a table of contents added to a PDF ("add a table of contents to the front of this PDF with a tab divider for each subject and number every page"), a book of documents from many files, pages pulled out, exhibit stamps, a redacted copy, or files merged into one PDF or one editable Word document. They appear as download buttons under the answer and in Artifacts. Originals are never changed.</li>
+    <li><b>Ask for a full report.</b> Tasks tab: type it in plain English, pick PDF, Word or Excel if you want a file, press Run. It takes one to three minutes.</li>
+    <li><b>Check the report.</b> Artifacts tab. Every value has a small page chip; click it to see the source page. "calc" means the number was computed by code and recomputed before you saw it. Anything the engine could not confirm is marked and the report says so.</li>
+    <li><b>Delete when done.</b> Account tab, Delete my files. Everything from your workspace is gone at once.</li>
+  </ol>
+</section>
+<section>
+  <h2>Things you can ask</h2>
+  <ul style="line-height:1.7">
+    <li>Sort these files into matters and put each matter's documents in date order.</li>
+    <li>For every N4 on file: tenant, unit, termination date and amount claimed, with page cites. Flag any without a certificate of service.</li>
+    <li>Build a chronology of everything that happened in the Ashworth matter, one line per event, each with its source page.</li>
+    <li>Reconstruct the rent ledger from the statements and the bank spreadsheet and tell me the arrears as of August 14, 2026.</li>
+    <li>What is missing before an L1 can be filed on this matter?</li>
+    <li>List every document that mentions 412-88 Bloor Street West.</li>
+    <li>Add a table of contents with a tab for each part and number every page consecutively.</li>
+    <li>Give me a one-page fact sheet for the hearing, in Word.</li>
+    <li>Make a book of documents for the hearing: one PDF with an index, a tab for each document and page numbers.</li>
+    <li>Organize everything into folders by matter and document type, date-named, and give me a zip.</li>
+    <li>Make a redacted copy of the lease with the tenant's phone number and email blacked out.</li>
+  </ul>
+  <div class="muted small">It never decides anything legal and never invents a number. It finds, organizes, computes and cites; you make the calls. If it cannot do something with the files on hand it says what is missing. Tell Elvin what you asked and what you expected; that is how the tool gets tuned to your work.</div>
+</section>
+</div>
+
+<div id="v-account" class="view" hidden>
+<section><h2>Signed in</h2><div id="acct"></div><div class="row" style="margin-top:8px"><button class="secondary" data-act="only">Sign out</button></div></section>
+<section><h2>Change password</h2>
+  <div class="row"><input id="pw-cur" type="password" placeholder="current password" autocomplete="off" disabled><input id="pw-new" type="password" placeholder="new password (10+ characters)" autocomplete="off" disabled><button data-act="only">Change</button></div></section>
+<section><h2>Delete my files</h2>
+  <p class="small">Hard-deletes every document, page image, extracted fact, original file, note and report in this workspace. Model-usage records stay for billing. This cannot be undone.</p>
+  <div class="row"><input id="del-confirm" type="text" placeholder='type DELETE to confirm' style="flex:0 0 220px"><button class="danger" data-act="only">Delete all my files</button></div></section>
+</div>
+</main>
+
+<div id="pv-modal" class="modal" hidden>
+  <div class="pv-win" role="dialog" aria-modal="true" aria-labelledby="pv-name">
+    <div class="pv-bar"><b id="pv-name"></b><button class="secondary" data-act="pv-close">Close</button></div>
+    <div class="pv-scroll"><div id="pv-page" class="pv-page"></div><div id="pv-foot" class="pv-foot"></div></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status"></div>
+<script src="demo-data.js" defer></script>
+<script src="app.js" defer></script>
+</body></html>
