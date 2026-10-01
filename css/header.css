@@ -1,7 +1,7 @@
 /* ===================================================================
    header.css: THE site header (#486, 2026-09-30). One look, one file.
 
-   build.js renders the markup (renderHeader, from content/nav.json) and
+   build.js renders the markup (renderNav, from content/nav.json) and
    links this file from inside every <!-- ep:nav --> region, so a page can
    no longer carry the header without its styles (/series/ and /press/ did).
    verify.js fails a page that styles .nav or .brandmark itself.
@@ -52,6 +52,14 @@
   padding:10px 12px; margin:0; border-radius:10px;
 }
 .nav .links a:hover, .nav .links a[aria-current]{ color:var(--hd-ink); background:var(--hd-bg2) }
+/* EN/FR switch on the bilingual pages: last in the menu, so on phones it is a
+   row in the burger menu (js/site.js reads its data-nav-label). */
+.nav .links a.langtog{
+  box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center; flex:none;
+  min-height:var(--hd-tap); margin-left:8px; padding:0 14px; border:1px solid var(--hd-line); border-radius:999px;
+  font:600 13px/1 var(--hd-sans); letter-spacing:.04em; color:var(--hd-ink2); background:none;
+}
+.nav .links a.langtog:hover{ border-color:var(--hd-gold); color:var(--hd-goldink); background:none }
 .nav .nav-buy{
   display:inline-flex; align-items:center; justify-content:center; gap:8px; flex:none;
   width:auto; min-height:var(--hd-tap); margin:0; padding:0 16px; border-radius:999px;
@@ -90,6 +98,6 @@
 
 @media(max-width:920px){
   .nav .navburger{ display:inline-flex }
-  .nav .links a{ display:none }
+  .nav .links a, .nav .links a.langtog{ display:none }
   .nav .nav-buy{ margin-left:auto }
 }

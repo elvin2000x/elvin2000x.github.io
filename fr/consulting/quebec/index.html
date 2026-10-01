@@ -206,17 +206,6 @@ body{background:radial-gradient(1100px 520px at 82% -8%,var(--glow),transparent 
 a{color:inherit;text-decoration:none}
 .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
 h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
-.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line-soft)}
-.nav .container{display:flex;align-items:center;gap:clamp(10px,1.6vw,20px);height:64px;max-width:1120px}
-.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px;white-space:nowrap}
-.brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel);box-shadow:var(--shadow);flex:none}
-.nav .links{margin-left:auto;display:flex;gap:clamp(12px,1.7vw,24px);align-items:center}
-.nav .links a{font-size:14px;color:var(--ink-2)}.nav .links a.active{color:var(--ink)}
-.nav .links a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:11px clamp(12px,1.4vw,16px);border-radius:999px;font-weight:600;white-space:nowrap}
-.nav .links a.cta:hover{background:var(--gold);color:var(--bg-2)}
-.langtog{border:1px solid var(--line);color:var(--ink-2);padding:8px 14px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.04em;min-height:44px;display:inline-flex;align-items:center;justify-content:center;flex:none}
-.langtog:hover{border-color:var(--gold);color:var(--gold-2)}
-@media(max-width:920px){.nav .links a:not(.cta):not(.langtog){display:none}.nav .links .navdd{display:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px clamp(16px,2.1vw,22px);border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:var(--sans);min-height:46px;text-align:center}
 .btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304;box-shadow:var(--shadow)}
 .btn.primary:hover{filter:brightness(1.05)}
@@ -260,10 +249,6 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
 .ctaband{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--panel)),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:clamp(28px,4vw,48px);text-align:center}
 .ctaband h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
 .ctaband p{color:var(--ink-2);margin:14px auto 26px;max-width:52ch}
-/* nav.json puts the light/dark toggle in the nav on some pages, so the
-   shared CSS has to carry it or those pages render a bare browser button. */
-.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:44px;height:44px;border-radius:9px;cursor:pointer;font-size:16px;line-height:1}
-.themebtn:hover{border-color:var(--gold);color:var(--gold-2)}
 .epform{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3.4vw,34px);box-shadow:var(--shadow);max-width:640px;margin:26px auto 0}
 .epform h2{font-size:clamp(1.4rem,2.6vw,1.85rem)}
 .epform .fsub{color:var(--ink-2);font-size:15px;margin:10px 0 22px}
@@ -318,16 +303,17 @@ footer .amz-disclosure{flex-basis:100%;width:100%;font-size:12px;margin:10px 0 0
 </head>
 <body>
 <!-- ep:nav -->
-  <nav class="nav"><div class="container">
-    <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
+  <link rel="stylesheet" href="/css/header.css">
+  <nav class="nav" aria-label="Main"><div class="container">
+    <a class="brandmark" href="/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>Elvin&nbsp;Peters</a>
     <div class="links">
       <a href="/">Accueil</a>
       <a href="/free/">Boîte à outils gratuite</a>
       <a href="/newsletter/">Infolettre</a>
       <a href="/fr/contact/">Contact</a>
-      <a class="cta" href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener">Obtenir le livre <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="langtog" href="/consulting/quebec/" hreflang="en-CA" lang="en" aria-label="View this page in English" data-lang-switch="en">EN</a>
+      <a class="langtog" href="/consulting/quebec/" hreflang="en-CA" lang="en" aria-label="View this page in English" data-lang-switch="en" data-nav-label="English">EN</a>
     </div>
+    <a class="nav-buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener">Obtenir le livre</a>
   </div></nav>
 <!-- /ep:nav -->
 <header class="hero"><div class="container">

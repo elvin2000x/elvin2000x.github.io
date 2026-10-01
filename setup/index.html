@@ -51,16 +51,6 @@ body{background:radial-gradient(1100px 520px at 82% -8%,var(--glow),transparent 
 .container{max-width:var(--w-wide);margin:0 auto;padding:0 24px}
 a{color:inherit;text-decoration:none}
 h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;text-wrap:balance}
-.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line-soft)}
-.nav .container{display:flex;align-items:center;gap:20px;height:64px}
-.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:var(--fs-lead)}
-.brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel);box-shadow:var(--shadow)}
-.nav .links{margin-left:auto;display:flex;gap:24px;align-items:center}
-.nav .links a{font-size:var(--fs-sm);color:var(--ink-2)}
-.nav .links a:hover,.nav .links a.active{color:var(--ink)}
-.nav .links a.cta{border:1px solid var(--accent);color:var(--accent-ink);padding:11px 16px;border-radius:var(--r-pill);font-weight:600}
-.nav .links a.cta:hover{background:var(--accent);color:var(--accent-on)}
-@media(max-width:920px){.nav .links a:not(.cta){display:none}}
 .breadcrumb{font-size:var(--fs-label);color:var(--muted);margin-bottom:14px}
 .breadcrumb a:hover{color:var(--accent-ink)}
 .hero{padding:60px 0 44px;border-bottom:1px solid var(--line-soft)}
@@ -143,15 +133,16 @@ footer a{color:var(--ink-2)}footer a:hover{color:var(--accent-ink)}
 </head>
 <body>
   <!-- ep:nav -->
-  <nav class="nav"><div class="container">
-    <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
+  <link rel="stylesheet" href="/css/header.css">
+  <nav class="nav" aria-label="Main"><div class="container">
+    <a class="brandmark" href="/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>Elvin&nbsp;Peters</a>
     <div class="links">
       <a href="/">Home</a>
       <a href="/free/">Free Toolkit</a>
       <a href="/newsletter/">Newsletter</a>
       <a href="/contact/">Contact</a>
-      <a class="cta" href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener">Get the book <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
+    <a class="nav-buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
   </div></nav>
   <!-- /ep:nav -->
 

@@ -24,73 +24,11 @@ const SVCS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'services.json
 const PRODS = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'products.json'), 'utf8'));
 
 const NAV_SVG_SIG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>`;
-const NAV_SVG_ARROW = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
-// The Services menu is generated from content/services.json, the same file the
-// homepage cards render from, so the menu and the cards can no longer drift.
-// Adding a service to that file puts it in both places with no further edits.
-// The trigger is a real link to /services/, so the menu degrades to a plain
-// link with no JS and stays usable on touch, where hover does not exist.
-function renderNavDropdown(href, label, ind) {
-  const out = [];
-  out.push(`${ind}    <div class="navdd">`);
-  out.push(`${ind}      <a class="navdd-t" href="${href}">${esc(label)}<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>`);
-  out.push(`${ind}      <div class="navdd-p">`);
-  for (const b of SVCS.buckets) {
-    const cards = SVCS.cards.filter(x => x.bucket === b.id);
-    if (!cards.length) continue;
-    out.push(`${ind}        <div class="navdd-g">`);
-    out.push(`${ind}          <span class="navdd-l">${esc(b.label)}</span>`);
-    for (const c of cards) out.push(`${ind}          <a class="navdd-i" href="${c.href}">${esc(c.title)}</a>`);
-    out.push(`${ind}        </div>`);
-  }
-  out.push(`${ind}      </div>`);
-  out.push(`${ind}    </div>`);
-  return out.join('\n');
-}
-
-// The Products menu renders from content/products.json as two-line card rows
-// so the highest-value action (Buy on Amazon) reads as a button, not a link.
-// data-nav-label gives the mobile drawer a clean single-line label to clone.
-function renderNavProductsDropdown(href, label, ind) {
-  const out = [];
-  out.push(`${ind}    <div class="navdd">`);
-  out.push(`${ind}      <a class="navdd-t" href="${href}">${esc(label)}<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>`);
-  out.push(`${ind}      <div class="navdd-p navdd-cards">`);
-  for (const b of PRODS.buckets) {
-    const items = PRODS.items.filter(x => x.bucket === b.id);
-    if (!items.length) continue;
-    out.push(`${ind}        <div class="navdd-g">`);
-    out.push(`${ind}          <span class="navdd-l">${esc(b.label)}</span>`);
-    for (const it of items) {
-      const cls = it.buy ? 'navdd-i navdd-buy' : 'navdd-i';
-      const extra = it.ext ? ' target="_blank" rel="noopener"' : '';
-      out.push(`${ind}          <a class="${cls}" href="${it.href}"${extra} data-nav-label="${esc(it.title)}">${esc(it.title)}<span class="navdd-s">${esc(it.sub)}</span></a>`);
-    }
-    out.push(`${ind}        </div>`);
-  }
-  out.push(`${ind}      </div>`);
-  out.push(`${ind}    </div>`);
-  return out.join('\n');
-}
 
 // Nav items flagged "ext" in content/nav.json leave the site (the AI directory,
 // the Amazon listing). They open in a new tab; rel="noopener" keeps the
 // destination from reaching back through window.opener.
 const EXT = l => (l && l.ext ? ' target="_blank" rel="noopener"' : '');
-
-function renderNavItemsDropdown(href, label, items, ind) {
-  const out = [];
-  out.push(ind + '    <div class="navdd">');
-  out.push(ind + '      <a class="navdd-t" href="' + href + '">' + esc(label) + '<svg class="navdd-c" width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>');
-  out.push(ind + '      <div class="navdd-p">');
-  out.push(ind + '        <div class="navdd-g">');
-  for (const it of items) out.push(ind + '          <a class="navdd-i" href="' + it.href + '"' + EXT(it) + '>' + esc(it.label) + '</a>');
-  out.push(ind + '        </div>');
-  out.push(ind + '      </div>');
-  out.push(ind + '    </div>');
-  return out.join('\n');
-}
 
 // THE site header (#486): the homepage bar, brand, the menu and an always-visible
 // buy button. Its look is css/header.css, linked from inside the region so a page
@@ -108,36 +46,17 @@ function renderNavBuybar(pg) {
     ...(pg.links || NAVC.links).map(l => `${ind}    <a href="${l.href}"` +
       `${pg.active && l.href === pg.active ? ' aria-current="page"' : ''}${EXT(l)}>${esc(l.label)}</a>`),
     `${ind}  </div>`,
-    `${ind}  <a class="btn btn--primary nav-buy"${c.amazon ? ' data-amazon' : ''} href="${c.href}" target="_blank" rel="noopener"` +
+    `${ind}  <a class="nav-buy"${c.amazon ? ' data-amazon' : ''} href="${c.href}" target="_blank" rel="noopener"` +
       `${c.aria ? ` aria-label="${attrq(c.aria)}"` : ''}>${esc(c.label)}</a>`);
   out.push(`${ind}</div></nav>`);
   return out.join('\n');
 }
 const attrq = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 
+// Every page gets the one header (#486). Per-page options in nav.json: active,
+// logoOnly, indent (and links/cta, which only the homepage and /newsletter/ carry).
 function renderNav(pageKey) {
-  const pg = (NAVC.pages || {})[pageKey] || {};
-  if (pg.style === 'buybar') return renderNavBuybar(pg);
-  const ind = ' '.repeat(pg.indent || 0);
-  const cta = pg.cta || NAVC.cta;
-  const links = NAVC.links.map(l => {
-    let href = l.href;
-    if (href === '/#about' && pg.aboutHref) href = pg.aboutHref;
-    const active = pg.active && l.href === pg.active ? ' class="active"' : '';
-    if (l.dropdown === 'services') return renderNavDropdown(href, l.label, ind);
-    if (l.dropdown === 'products') return renderNavProductsDropdown(href, l.label, ind);
-    if (l.items) return renderNavItemsDropdown(href, l.label, l.items, ind);
-    return `${ind}    <a href="${href}"${active}${EXT(l)}>${esc(l.label)}</a>`;
-  });
-  const brand = pg.brandStyle === 'multiline'
-    ? `${ind}  <a class="brandmark" href="${pg.brandHref || '/'}">\n${ind}    <span class="sig">${NAV_SVG_SIG}</span>\n${ind}    ${esc(NAVC.brand).replace(' ', '&nbsp;')}\n${ind}  </a>`
-    : `${ind}  <a class="brandmark" href="${pg.brandHref || '/'}"><span class="sig">${NAV_SVG_SIG}</span>${esc(NAVC.brand).replace(' ', '&nbsp;')}</a>`;
-  const tail = [];
-  if (pg.themebtn) tail.push(`${ind}    <button class="themebtn" id="themeBtn" data-theme-toggle aria-label="Toggle light or dark theme">\u25d1</button>`);
-  tail.push(`${ind}    <a class="cta" href="${cta.href}"${EXT(cta)}>${esc(cta.label)}${pg.ctaArrow || cta.ext ? ' ' + NAV_SVG_ARROW : ''}</a>`);
-  return [`${ind}<nav class="nav"><div class="container">`, brand,
-          `${ind}  <div class="links">`, ...links, ...tail,
-          `${ind}  </div>`, `${ind}</div></nav>`].join('\n');
+  return renderNavBuybar((NAVC.pages || {})[pageKey] || {});
 }
 
 // Pages already written this run. A page applied twice (book.html, claude/)
@@ -518,7 +437,7 @@ function renderLangToggle(slug, lang, ind) {
   const other = lang === 'en' ? 'fr' : 'en';
   const o = I18N.locales[other];
   const href = other === 'fr' ? '/fr/' + slug + '/' : '/' + slug + '/';
-  return `${ind}    <a class="langtog" href="${href}" hreflang="${o.hreflang}" lang="${o.htmlLang}" aria-label="${attr(o.switchToAria)}" data-lang-switch="${other}">${esc(o.shortLabel)}</a>`;
+  return `${ind}    <a class="langtog" href="${href}" hreflang="${o.hreflang}" lang="${o.htmlLang}" aria-label="${attr(o.switchToAria)}" data-lang-switch="${other}" data-nav-label="${attr(o.switchTo)}">${esc(o.shortLabel)}</a>`;
 }
 
 /* Locale-aware nav. Reuses renderNav's output for English so the generated
@@ -541,20 +460,27 @@ function renderNavL(pageKey, lang, slug, withToggle = true) {
       return m.replace(trimmed, tr);
     });
     html = html.replace(/data-nav-label="([^"]+)"/g, (m, l) => `data-nav-label="${attr(tnav(l, 'fr'))}"`);
+    // The button's English aria-label would override its translated text.
+    html = html.replace(/(<a class="[^"]*nav-buy"[^>]*?) aria-label="[^"]*"/, '$1');
   }
   // An English-only page gets no toggle: it would point at a /fr/ URL that was
   // never built, which is a 404 for the one visitor it was aimed at.
   if (!withToggle) return html;
+  // Last in the menu: a pill on desktop, a row in the burger menu on phones
+  // (the bar has no room for it next to the button at 390 px).
   const toggle = renderLangToggle(slug, lang, ind);
-  return html.replace(`${ind}  </div>\n${ind}</div></nav>`, `${toggle}\n${ind}  </div>\n${ind}</div></nav>`);
+  const end = `${ind}  </div>\n${ind}  <a class="nav-buy"`;
+  if (!html.includes(end)) throw new Error('renderNavL: header shape changed, cannot place the language toggle');
+  return html.replace(end, `${toggle}\n${end}`);
 }
 
 /* Shared CSS for the generated commercial pages. Identical to the hand-authored
    offer-page CSS, plus:
-   - fluid nav gap and button padding so French (~20% longer than English) does
-     not overflow the header or blow out buttons. Uses clamp() rather than a new
-     breakpoint, so DESIGN-SYSTEM.md's 640/920 rule still holds.
-   - the language toggle and the embedded contact form. */
+   - fluid button padding so French (~20% longer than English) does not blow
+     out buttons. Uses clamp() rather than a new breakpoint, so DESIGN-SYSTEM.md's
+     640/920 rule still holds.
+   - the embedded contact form.
+   The header (and its language toggle) is styled by css/header.css only (#486). */
 const OFFERCSS = `
 :root{--bg:#e6ebf1;--bg-2:#dde4ec;--panel:#ffffff;--panel-2:#f3f6fa;--line:#c3cedd;--line-soft:#d3dce8;--ink:#0e1a2b;--ink-2:#3d4d63;--muted:#4f6076;--gold:#9c761f;--gold-2:#7a5a12;--glow:rgba(156,118,31,.14);--shadow:0 18px 40px -24px rgba(14,26,43,.45);--serif:'EB Garamond',Georgia,serif;--sans:'Inter',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;}
 @media(prefers-color-scheme:dark){:root{--bg:#0a1524;--bg-2:#060d18;--panel:#1b2c45;--panel-2:#131f33;--line:#2b405c;--line-soft:#223351;--ink:#e9eff7;--ink-2:#b7c6d9;--muted:#8ba2bd;--gold:#c9a250;--gold-2:#e0bd6b;--glow:rgba(201,162,80,.16);--shadow:0 24px 50px -28px rgba(0,0,0,.7);}}
@@ -566,17 +492,6 @@ body{background:radial-gradient(1100px 520px at 82% -8%,var(--glow),transparent 
 a{color:inherit;text-decoration:none}
 .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
 h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
-.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line-soft)}
-.nav .container{display:flex;align-items:center;gap:clamp(10px,1.6vw,20px);height:64px;max-width:1120px}
-.brandmark{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-size:18px;white-space:nowrap}
-.brandmark .sig{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;background:var(--panel);box-shadow:var(--shadow);flex:none}
-.nav .links{margin-left:auto;display:flex;gap:clamp(12px,1.7vw,24px);align-items:center}
-.nav .links a{font-size:14px;color:var(--ink-2)}.nav .links a.active{color:var(--ink)}
-.nav .links a.cta{border:1px solid var(--gold);color:var(--gold-2);padding:11px clamp(12px,1.4vw,16px);border-radius:999px;font-weight:600;white-space:nowrap}
-.nav .links a.cta:hover{background:var(--gold);color:var(--bg-2)}
-.langtog{border:1px solid var(--line);color:var(--ink-2);padding:8px 14px;border-radius:999px;font-weight:600;font-size:13px;letter-spacing:.04em;min-height:44px;display:inline-flex;align-items:center;justify-content:center;flex:none}
-.langtog:hover{border-color:var(--gold);color:var(--gold-2)}
-@media(max-width:920px){.nav .links a:not(.cta):not(.langtog){display:none}.nav .links .navdd{display:none}}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px clamp(16px,2.1vw,22px);border-radius:999px;font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;font-family:var(--sans);min-height:46px;text-align:center}
 .btn.primary{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#1b1304;box-shadow:var(--shadow)}
 .btn.primary:hover{filter:brightness(1.05)}
@@ -620,10 +535,6 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance}
 .ctaband{background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 16%,var(--panel)),var(--panel-2));border:1px solid var(--line);border-radius:20px;padding:clamp(28px,4vw,48px);text-align:center}
 .ctaband h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
 .ctaband p{color:var(--ink-2);margin:14px auto 26px;max-width:52ch}
-/* nav.json puts the light/dark toggle in the nav on some pages, so the
-   shared CSS has to carry it or those pages render a bare browser button. */
-.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:44px;height:44px;border-radius:9px;cursor:pointer;font-size:16px;line-height:1}
-.themebtn:hover{border-color:var(--gold);color:var(--gold-2)}
 .epform{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(24px,3.4vw,34px);box-shadow:var(--shadow);max-width:640px;margin:26px auto 0}
 .epform h2{font-size:clamp(1.4rem,2.6vw,1.85rem)}
 .epform .fsub{color:var(--ink-2);font-size:15px;margin:10px 0 22px}
