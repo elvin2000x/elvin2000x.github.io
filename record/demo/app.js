@@ -141,7 +141,7 @@
         location.hash = `#/rec/${r.recording.id}?start=1`;
       } catch (err) { toast(err.message); btn.disabled = false; }
     };
-    $('#uploadBtn').onclick = () => { $('#uploadZone').classList.toggle('hidden'); };
+    $('#uploadBtn').onclick = () => { if (DEMO.VIEW_ONLY) return DEMO.only(); /* DEMO */ $('#uploadZone').classList.toggle('hidden'); };
     const drop = $('#drop'), fileInput = $('#fileInput');
     // DEMO: no file is opened or read; the dropzone shows the demo note instead.
     drop.onclick = () => DEMO.only();
