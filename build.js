@@ -1345,6 +1345,8 @@ function smAlternates(u) {
 SM_EXCLUDE.push('tsa-toolkit');
 // The Anatomy Sandbox is shared by link (noindex), so it stays out of the sitemap too (2026-09-25).
 SM_SKIP_FILES.push('projects/anatomy-sandbox/index.html');
+// /anatomy-sandbox/ is only the short address: a noindex redirect stub to the app (card #547, 2026-10-01).
+SM_SKIP_FILES.push('anatomy-sandbox/index.html');
 // Saved components and the archived homepage are unlisted (noindex), kept only for reuse (2026-09-27).
 SM_EXCLUDE.push('components', 'archive');
 // Preview pages (e.g. /preview/home-long/) are unlisted test builds, noindex, never in the sitemap (2026-09-27).
