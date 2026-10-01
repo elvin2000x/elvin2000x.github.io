@@ -69,8 +69,7 @@ const navBefore = JSON.stringify(NAVC);
 NAVC.links = MENU;
 NAVC.footerLinks = FOOT;
 for (const [key, pg] of Object.entries(NAVC.pages || {})) {
-  if (pg.style === 'buybar' && pg.links) pg.links = MENU; // the rest take nav.json links (#486)
-  if (pg.themebtn) pg.themebtn = false;
+  if (pg.links) pg.links = MENU; // the rest take nav.json links (#486)
   const self = urlOf(key);
   const hit = MENU.find(l => l.href !== '/' && l.href === self);
   if (hit) pg.active = hit.href; else if (pg.active && !MENU.some(l => l.href === pg.active)) delete pg.active;
@@ -82,16 +81,7 @@ if (JSON.stringify(NAVC) !== navBefore) {
 
 /* ---- 2. the markup ------------------------------------------------------ */
 const EXT = l => (l.ext ? ' target="_blank" rel="noopener"' : '');
-const menuLinks = self => MENU.map(l =>
-  `<a href="${l.href}"${l.href === self ? ' aria-current="page"' : ''}>${l.label}</a>`).join('');
 const footLinks = () => FOOT.map(l => `<a href="${l.href}"${EXT(l)}>${l.label}</a>`).join(' &middot; ');
-// Hand pages with the small .mtop header (the /free/ guides, privacy, terms) get
-// the menu as a second item in that header. Scoped to .mnav so it cannot restyle
-// anything else on the page; tap targets are 44px (DESIGN-SYSTEM.md).
-const MNAV_CSS = '<style id="ep-mnav">.mtop{flex-wrap:wrap;gap:4px 16px}' +
-  '.mnav{display:flex;flex-wrap:wrap;gap:0 18px}' +
-  '.mnav a{font-size:15px;color:var(--ink-2);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}' +
-  '.mnav a:hover,.mnav a[aria-current]{color:var(--ink)}</style>';
 
 /* ---- 3. walk the pages --------------------------------------------------- */
 const GEN = new Set();
@@ -152,24 +142,8 @@ for (const rel of pages) {
 
   // Redirect stubs have no chrome to change.
   if (!under(rel, KEEP_CHROME) && !/http-equiv="refresh"/i.test(h)) {
-    let menu = /<!-- ep:nav/.test(h); // ep:nav pages get the menu from build.js
-    // The .mtop header.
-    const mt = h.match(/<div class="mtop">(<a class="brand"[^>]*>[\s\S]*?<\/a>)([\s\S]*?)<\/div>/);
-    if (mt) {
-      const want = `<div class="mtop">${mt[1]}<nav class="mnav" aria-label="Main">${menuLinks(url)}</nav></div>`;
-      if (mt[0] !== want) { h = h.replace(mt[0], want); bump('menu (mtop header)', rel); }
-      if (!h.includes('id="ep-mnav"')) h = h.replace(/<\/head>/i, MNAV_CSS + '</head>');
-      else h = h.replace(/<style id="ep-mnav">[\s\S]*?<\/style>/, MNAV_CSS);
-      menu = true;
-    }
-    // A bare <nav> with a logo link and plain links (systematic-advantage.html).
-    const bn = h.match(/<nav>\s*(<a href="\/" class="nav-logo">[\s\S]*?<\/a>)([\s\S]*?)<\/nav>/);
-    if (bn) {
-      const links = MENU.map(l => `<a href="${l.href}" class="nav-link">${l.label}</a>`).join('\n    ');
-      const want = `<nav>\n    ${bn[1]}\n    <span class="nav-links">${links}</span>\n  </nav>`;
-      if (bn[0] !== want) { h = h.replace(bn[0], want); bump('menu (bare nav)', rel); }
-      menu = true;
-    }
+    // ep:nav pages get the menu from build.js (the one header, #486).
+    const menu = /<!-- ep:nav/.test(h);
     if (!menu) bump('NO MENU (check by hand)', rel);
 
     // Quiet footer: swap the link span; odd footers get a rebuilt inside.
