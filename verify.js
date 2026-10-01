@@ -188,6 +188,19 @@ for (const rel of PAGES) {
     const hexes = (styleBlocks.join('').match(/#[0-9a-fA-F]{3,8}\b/g) || []).length;
     if (hexes > 12) warn(rel, hexes + ' hex literals in page CSS (target: 0, tokens only)');
   }
+
+  // ONE HEADER (#486, 2026-09-30): the header markup comes from build.js inside
+  // <!-- ep:nav --> and its look from css/header.css, which that region links. Pasted
+  // header CSS is how the logo drifted to six versions ("ElvinPeters" on /free/) and
+  // how /series/ shipped with no header styles at all. A page on the shared header may
+  // not style the bar or the logo itself. Pages not converted yet warn.
+  const ownHeaderCss = (html.match(/<style[^>]*>[\s\S]*?<\/style>/g) || []).join('\n')
+    .match(/(?:^|[}\s,])\.(nav|brandmark|mtop|brand)(?![\w-])[^{}]*\{/m);
+  if (/<!-- ep:nav[ >]/.test(html) && html.includes('href="/css/header.css"')) {
+    if (ownHeaderCss) fail(rel, 'styles the header itself (.' + ownHeaderCss[1] + '); the header look lives in css/header.css only');
+  } else if (/<!-- ep:nav[ >]|class="mtop"/.test(html)) {
+    warn(rel, 'header not on the shared header yet (#486)');
+  }
 }
 
 // CONTRAST-TOKENS: the palette defends itself. Pure math on css/site.css.

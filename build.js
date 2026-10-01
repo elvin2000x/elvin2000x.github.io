@@ -92,19 +92,26 @@ function renderNavItemsDropdown(href, label, items, ind) {
   return out.join('\n');
 }
 
-// Homepage v3: brand, its own short link list, and an always-visible buy button.
+// THE site header (#486): the homepage bar, brand, the menu and an always-visible
+// buy button. Its look is css/header.css, linked from inside the region so a page
+// can't carry the header without its styles. Links default to the site menu
+// (nav.json links) and the button to the homepage's; "logoOnly" pages (signup and
+// thank-you pages) show the brand alone, so nothing pulls people off the form.
 function renderNavBuybar(pg) {
   const ind = ' '.repeat(pg.indent || 0);
   const sig = NAV_SVG_SIG.replace('fill="none">', 'fill="none" aria-hidden="true">');
-  const c = pg.cta;
-  return [`${ind}<nav class="nav" aria-label="Main"><div class="container">`,
-    `${ind}  <a class="brandmark" href="${pg.brandHref || '/'}">${sig}${esc(NAVC.brand).replace(' ', '&nbsp;')}</a>`,
-    `${ind}  <div class="links">`,
-    ...pg.links.map(l => `${ind}    <a href="${l.href}"${EXT(l)}>${esc(l.label)}</a>`),
+  const c = pg.cta || NAVC.pages['index.html'].cta;
+  const out = [`${ind}<link rel="stylesheet" href="/css/header.css">`,
+    `${ind}<nav class="nav" aria-label="Main"><div class="container">`,
+    `${ind}  <a class="brandmark" href="${pg.brandHref || '/'}">${sig}${esc(NAVC.brand).replace(' ', '&nbsp;')}</a>`];
+  if (!pg.logoOnly) out.push(`${ind}  <div class="links">`,
+    ...(pg.links || NAVC.links).map(l => `${ind}    <a href="${l.href}"` +
+      `${pg.active && l.href === pg.active ? ' aria-current="page"' : ''}${EXT(l)}>${esc(l.label)}</a>`),
     `${ind}  </div>`,
     `${ind}  <a class="btn btn--primary nav-buy"${c.amazon ? ' data-amazon' : ''} href="${c.href}" target="_blank" rel="noopener"` +
-      `${c.aria ? ` aria-label="${attrq(c.aria)}"` : ''}>${esc(c.label)}</a>`,
-    `${ind}</div></nav>`].join('\n');
+      `${c.aria ? ` aria-label="${attrq(c.aria)}"` : ''}>${esc(c.label)}</a>`);
+  out.push(`${ind}</div></nav>`);
+  return out.join('\n');
 }
 const attrq = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 
@@ -419,7 +426,9 @@ console.log('Regions applied: index.html (nav), nav on: ' + navOnly.join(', '));
   for (const { slug, file } of FP.pages(DIR)) {
     const jf = path.join(FDIR, slug + '.json');
     if (!fs.existsSync(jf)) continue;
-    const frame = fs.readFileSync(path.join(DIR, file), 'utf8').replace(/\r\n/g, '\n');
+    // A page whose header region was filled above is read back from OUT, so a
+    // menu edit previewed with --out reaches the /free/ pages too.
+    const frame = fs.readFileSync(path.join(REGIONS_DONE.has(file) ? OUT : DIR, file), 'utf8').replace(/\r\n/g, '\n');
     const html = FP.render(frame, JSON.parse(fs.readFileSync(jf, 'utf8')), file);
     const dest = path.join(OUT, file);
     // Only a real change is written in place (a Windows checkout is CRLF; git sees LF).
