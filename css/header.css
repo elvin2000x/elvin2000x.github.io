@@ -1,0 +1,95 @@
+/* ===================================================================
+   header.css: THE site header (#486, 2026-09-30). One look, one file.
+
+   build.js renders the markup (renderHeader, from content/nav.json) and
+   links this file from inside every <!-- ep:nav --> region, so a page can
+   no longer carry the header without its styles (/series/ and /press/ did).
+   verify.js fails a page that styles .nav or .brandmark itself.
+
+   Self-contained on purpose. The pages under this header carry their own
+   tokens, some with no css/site.css at all (linking it restyles their h2
+   and h3, see css/nav-drawer.css), so nothing here reads a page token.
+   Values are the homepage bar, measured live 2026-09-30, in the book
+   palette (css/site.css --b-*): it is light on every page and never flips.
+   Box model and line height are pinned for the same reason: half the site
+   sets border-box on *, the homepage does not.
+   =================================================================== */
+
+.nav{
+  --hd-ink:#0a1828;      --hd-ink2:#3c4a5c;
+  --hd-line:#d6dfea;     --hd-linesoft:#e6ecf4;
+  --hd-panel:#ffffff;    --hd-bg2:#eef2f8;
+  --hd-gold:#9c761f;     --hd-goldhi:#b3892f;
+  --hd-goldink:#7a5a12;  --hd-goldon:#1b1304;
+  --hd-shadow:0 14px 34px -22px rgba(10,24,40,.38);
+  --hd-lift:0 22px 44px -26px rgba(10,24,40,.45);
+  --hd-serif:'EB Garamond', Georgia, 'Times New Roman', serif;
+  --hd-sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --hd-h:64px; --hd-tap:44px;
+  --gold:var(--hd-gold); /* the E. mark (NAV_SVG_SIG strokes var(--gold)) */
+
+  position:sticky; top:0; z-index:40; margin:0; padding:0;
+  background:rgba(255,255,255,.96); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border:0; border-bottom:1px solid var(--hd-linesoft); border-radius:0; box-shadow:none;
+  font-family:var(--hd-sans); font-size:16px; line-height:1.6; color:var(--hd-ink);
+  text-align:left; letter-spacing:normal; text-transform:none;
+}
+.nav, .nav *{ box-sizing:content-box }
+.nav .container{
+  max-width:1040px; width:auto; margin:0 auto; padding:0 16px; height:var(--hd-h);
+  display:flex; align-items:center; gap:12px; background:none; border:0;
+}
+.nav .brandmark{
+  display:flex; align-items:center; min-height:var(--hd-tap); gap:8px; margin:0; padding:0;
+  font:600 18px/1 var(--hd-serif); letter-spacing:normal; color:var(--hd-ink);
+  text-decoration:none; white-space:nowrap; background:none; border:0;
+}
+.nav .brandmark svg{ display:block; flex:none; width:20px; height:20px }
+.nav .links{ margin:0 0 0 auto; padding:0; display:flex; align-items:center; gap:4px; background:none; border:0 }
+.nav .links a{
+  display:inline-block; color:var(--hd-ink2); text-decoration:none; background:none; border:0;
+  font:500 15px/1.6 var(--hd-sans); letter-spacing:normal; text-transform:none;
+  padding:10px 12px; margin:0; border-radius:10px;
+}
+.nav .links a:hover, .nav .links a[aria-current]{ color:var(--hd-ink); background:var(--hd-bg2) }
+.nav .nav-buy{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; flex:none;
+  width:auto; min-height:var(--hd-tap); margin:0; padding:0 16px; border-radius:999px;
+  font:600 15px/1 var(--hd-sans); letter-spacing:normal; text-transform:none; white-space:nowrap;
+  border:1px solid transparent; cursor:pointer; text-decoration:none; text-align:center;
+  background:linear-gradient(135deg,var(--hd-gold),var(--hd-goldhi)); color:var(--hd-goldon);
+  box-shadow:var(--hd-shadow); filter:none;
+}
+.nav .nav-buy:hover{ filter:brightness(1.06) }
+.nav a:focus-visible, .nav button:focus-visible{ outline:2px solid var(--hd-goldink); outline-offset:3px }
+
+/* Burger and drawer: js/site.js builds them from .nav .links on every page. */
+.nav .navburger{
+  display:none; align-items:center; justify-content:center; flex:none;
+  width:var(--hd-tap); height:var(--hd-tap); margin:0 0 0 auto; padding:0;
+  background:none; border:1px solid var(--hd-line); border-radius:10px;
+  color:var(--hd-ink); cursor:pointer; font:18px/1 var(--hd-sans);
+}
+.nav .navburger[aria-expanded="true"]{ border-color:var(--hd-gold); color:var(--hd-goldink) }
+.navdrawer{
+  display:none; position:fixed; top:var(--hd-h, 64px); left:0; right:0; z-index:60;
+  background:#ffffff; border-bottom:1px solid #d6dfea;
+  box-shadow:0 22px 44px -26px rgba(10,24,40,.45); padding:16px 24px 24px;
+  max-height:calc(100vh - 64px); overflow:auto; box-sizing:border-box;
+  font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+.navdrawer a{
+  display:flex; align-items:center; min-height:44px; padding:0 8px;
+  font-size:clamp(17px, 1.25vw, 19px); line-height:1.6; color:#0a1828;
+  border-bottom:1px solid #e6ecf4; text-decoration:none; background:none;
+}
+.navdrawer a:last-child{ border-bottom:none }
+.navdrawer.open{ display:block }
+.navoverlay{ display:none; position:fixed; inset:64px 0 0 0; z-index:50; background:rgba(4,10,20,.45) }
+.navoverlay.open{ display:block }
+
+@media(max-width:920px){
+  .nav .navburger{ display:inline-flex }
+  .nav .links a{ display:none }
+  .nav .nav-buy{ margin-left:auto }
+}

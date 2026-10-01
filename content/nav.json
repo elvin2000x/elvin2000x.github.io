@@ -140,10 +140,7 @@
    }
   },
   "series/index.html": {
-   "brandHref": "/",
-   "themebtn": false,
-   "ctaArrow": false,
-   "brandStyle": "inline",
+   "style": "buybar",
    "indent": 2
   },
   "book.html": {
@@ -478,11 +475,7 @@
    "indent": 2
   },
   "press/index.html": {
-   "brandHref": "/",
-   "themebtn": false,
-   "ctaArrow": false,
-   "brandStyle": "inline",
-   "indent": 0
+   "style": "buybar"
   },
   "services/events/index.html": {
    "brandHref": "/",
@@ -553,6 +546,13 @@
     "aria": "Get the book on Amazon"
    },
    "active": "/newsletter/"
+  },
+  "free/index.html": {
+   "style": "buybar",
+   "active": "/free/"
+  },
+  "free/ai-assistant/index.html": {
+   "style": "buybar"
   }
  },
  "footerLinks": [

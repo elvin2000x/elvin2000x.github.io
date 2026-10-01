@@ -69,7 +69,7 @@ const navBefore = JSON.stringify(NAVC);
 NAVC.links = MENU;
 NAVC.footerLinks = FOOT;
 for (const [key, pg] of Object.entries(NAVC.pages || {})) {
-  if (pg.style === 'buybar') pg.links = MENU;
+  if (pg.style === 'buybar' && pg.links) pg.links = MENU; // the rest take nav.json links (#486)
   if (pg.themebtn) pg.themebtn = false;
   const self = urlOf(key);
   const hit = MENU.find(l => l.href !== '/' && l.href === self);

@@ -77,16 +77,6 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     img{ max-width:100%; height:auto }
     h1, h2, h3{ font-family:var(--serif); font-weight:600; letter-spacing:-.01em; text-wrap:balance; color:var(--ink) }
 
-    /* nav: links go into the burger on phones; the buy button always stays in the bar */
-    .nav{ position:sticky; top:0; z-index:40; background:rgba(255,255,255,.96); backdrop-filter:blur(8px); border-bottom:1px solid var(--line-soft) }
-    .nav .container{ max-width:var(--wide); margin:0 auto; padding:0 16px; height:var(--nav-h); display:flex; align-items:center; gap:12px }
-    .brandmark{ display:flex; align-items:center; min-height:var(--tap); gap:8px; font:600 18px/1 var(--serif); color:var(--ink); text-decoration:none }
-    .nav .links{ margin-left:auto; display:flex; align-items:center; gap:4px }
-    .nav .links a{ color:var(--ink-2); text-decoration:none; font-size:15px; font-weight:500; padding:10px 12px; border-radius:var(--r-sm) }
-    .nav .links a:hover{ color:var(--ink); background:var(--bg-2) }
-    .nav-buy{ min-height:var(--tap); display:inline-flex; align-items:center; padding:0 16px; font-size:15px; font-weight:600; white-space:nowrap }
-    @media(max-width:920px){ .nav-buy{ margin-left:auto } }
-
     .sec{ padding:64px 16px }
     @media(min-width:900px){ .sec{ padding:96px 24px } }
     .sec--tint{ background:var(--bg-2) }

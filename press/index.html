@@ -33,30 +33,6 @@ a{color:inherit;text-decoration:none}
 h1,h2,h3,h4{font-family:var(--serif);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.01em}
 .container{max-width:1080px;margin:0 auto;padding:0 24px}
 .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);font-weight:600}
-/* nav */
-.nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid var(--line-soft)}
-.nav .container{display:flex;align-items:center;gap:20px;height:62px}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:18px}
-.brand .sig{width:30px;height:30px;border:1px solid var(--line);border-radius:8px;display:grid;place-items:center;background:var(--panel)}
-.nav .links{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:14px;color:var(--ink-2)}
-.nav .links a:hover{color:var(--ink)}
-.nav .cta{border:1px solid var(--gold);color:var(--gold-2);padding:8px 15px;border-radius:999px;font-weight:600}
-.nav .cta:hover{background:var(--gold);color:var(--bg-2)}
-.themebtn{background:none;border:1px solid var(--line);color:var(--ink-2);width:44px;height:44px;border-radius:10px;cursor:pointer;font-size:15px;padding:0;display:inline-flex;align-items:center;justify-content:center}
-/* site.js injects a burger + drawer here; this page loads no shared stylesheet,
-   so without these the mobile menu rendered as bare links at the page foot. */
-.navburger{display:none;align-items:center;justify-content:center;width:44px;height:44px;margin-left:auto;background:none;border:1px solid var(--line);border-radius:10px;color:var(--ink);cursor:pointer;font-size:18px;line-height:1;padding:0}
-.navburger[aria-expanded="true"]{border-color:var(--gold);color:var(--gold-2)}
-.navdrawer{display:none;position:fixed;top:64px;left:0;right:0;z-index:60;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow);padding:16px 22px 24px;max-height:calc(100vh - 64px);overflow:auto}
-.navdrawer.open{display:block}
-.navdrawer a{display:flex;align-items:center;min-height:44px;padding:0 8px;font-size:18px;color:var(--ink);border-bottom:1px solid var(--line-soft);text-decoration:none}
-.navdrawer a:last-child{border-bottom:none}
-.navdrawer a.cta{justify-content:center;margin:0 0 12px;border:1px solid var(--gold);border-radius:999px;color:var(--gold-2);font-weight:600}
-.navoverlay{display:none;position:fixed;inset:64px 0 0 0;z-index:50;background:rgba(4,10,20,.45)}
-.navoverlay.open{display:block}
-@media(max-width:920px){.navburger{display:inline-flex}}
-@media(max-width:640px){.nav .links a.cta,.nav .lk a.cta{display:none}}
-@media(max-width:920px){.nav .links a:not(.cta){display:none}}
 /* hero */
 .hero{padding:56px 0 34px}
 .hero .grid{display:grid;grid-template-columns:230px 1fr;gap:40px;align-items:center}
@@ -128,15 +104,16 @@ ul.q li::before{content:"";position:absolute;left:6px;top:10px;width:7px;height:
 <body>
 
 <!-- ep:nav -->
-<nav class="nav"><div class="container">
-  <a class="brandmark" href="/"><span class="sig"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg></span>Elvin&nbsp;Peters</a>
+<link rel="stylesheet" href="/css/header.css">
+<nav class="nav" aria-label="Main"><div class="container">
+  <a class="brandmark" href="/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>Elvin&nbsp;Peters</a>
   <div class="links">
     <a href="/">Home</a>
     <a href="/free/">Free Toolkit</a>
     <a href="/newsletter/">Newsletter</a>
     <a href="/contact/">Contact</a>
-    <a class="cta" href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener">Get the book <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7v9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
+  <a class="btn btn--primary nav-buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
 </div></nav>
 <!-- /ep:nav -->
 
