@@ -21,11 +21,11 @@
    * Set false to bring back the caption playback, exports and Doc preview built for #530. */
   const VIEW_ONLY = true;
 
-  /* ---------------- new words (approved 2026-10-01; view-only lines pending COPYWRITER MAIN) ---------------- */
+  /* ---------------- new words (approved 2026-10-01; view-only banner + click line are Elvin's own words, 2026-10-01) ---------------- */
   const COPY = {
     badge: 'Demo',
     banner: VIEW_ONLY
-      ? '[DRAFT COPY] Demo version. Look around the sample interview. Login to use full functionality.'
+      ? 'Demo version. Login to use full functionality. This is a demo version only.'
       : 'Watch a made-up interview become a transcript and summary. Nothing is recorded.',
     only: VIEW_ONLY ? 'Login to use full functionality. This is a demo version only.' : "This needs the full app's server, so it's off here.",
     mic: 'off in the demo',
