@@ -10,7 +10,7 @@
         "anchor": "",
         "eyebrow": "",
         "headline": "You tried AI.<br/><span>You weren't impressed.</span>",
-        "sub": "The people getting great results type into the same box you do. They give it a proper brief, and this book shows you how in plain English, one real work task at a time.",
+        "sub": "AI gives generic answers because it has to guess what you want. This book shows you how to get the right answers.",
         "hook_note": "third line of every ?aud= / ?v= ad segment (DTR script below). Empty by default.",
         "review": null,
         "buy": {
@@ -20,74 +20,167 @@
           "aria": "Get the book on Amazon",
           "label": "Get the book on Amazon &rarr;",
           "eager": true,
-          "avail": "Kindle, paperback and hardcover · 200 pages",
+          "avail": "Kindle, paperback and hardcover · 198 pages in print",
           "price": "",
           "sample_href": "/free/free-chapter/",
           "sample": "Or read Chapter 8 free first &rarr;"
         },
-        "trust": "By <strong>Elvin M. Peters</strong>, who ran $40M+ in profitable ad spend and then advised the media teams at big advertisers for an adtech giant building AI.",
+        "trust": "Worked a decade in marketing, worked in big tech, and taught myself to build with AI",
         "image": "/img/book-3d.webp",
         "image_alt": "The Artificial Advantage by Elvin M. Peters, paperback"
       }
     },
     {
       "id": "demo",
-      "type": "demo-pairs",
-      "note": "2. The demo: proof the skill is real, shown open",
+      "type": "demo-slider",
+      "note": "2. The demo: 10 asked-vs-directed slides (#478 words, final 2026-10-05; placed by #546)",
       "data": {
         "bg": "",
         "anchor": "demo",
         "eyebrow": "See the difference",
         "heading": "The same task, two very different results.",
         "intro": "One person asked AI for help. The other gave it a brief, the way you would brief a sharp new hire.",
-        "lead": {
-          "before_time": "10 minutes",
-          "before_res": "",
-          "before_prompt": "&ldquo;Write me an email to a client about a project delay.&rdquo;",
-          "before_result": "A generic draft in the wrong tone. They rewrote the whole thing.",
-          "after_time": "2 minutes",
-          "after_res": "",
-          "after_prompt": "&ldquo;Client delay email. Two weeks late. Client values transparency. Tone: collaborative, not apologetic. Under 150 words. New date: March 15.&rdquo;",
-          "after_result": "Right voice and right length. One minute of polish, then sent.",
-          "note": ""
-        },
-        "more_label": "Three more examples",
-        "more": [
+        "slides": [
           {
-            "before_time": "",
-            "before_res": "A shorter pile of notes",
-            "before_prompt": "&ldquo;Summarize these meeting notes.&rdquo;",
-            "before_result": "No decisions, no owners, nothing anyone can act on.",
-            "after_time": "",
-            "after_res": "A follow-up, sent the same day",
-            "after_prompt": "&ldquo;From these notes: decisions made, action items with owner and date, open questions. Three lists, nothing else.&rdquo;",
-            "after_result": "The meeting produces something.",
-            "note": ""
+            "title": "A client proposal where AI interviews you",
+            "before_chip": "",
+            "before_file": "",
+            "before_prompt": "write me a proposal for a new marketing project for a client thanks",
+            "before_result": "AI knows nothing about the client, so it guesses.",
+            "after_chip": "90 percent right",
+            "after_file": "",
+            "after_prompt": "I need to write a proposal for a client, but I want to make sure you have everything you need to draft it well. Before you start, ask me the five questions that would most improve the quality of your draft.",
+            "after_replies": [
+              "What is the client's industry and size?",
+              "What specific problem are they trying to solve?",
+              "What is the project scope and budget range?",
+              "What is the timeline and key deliverable?",
+              "What has already been discussed or agreed with the client?"
+            ],
+            "after_result": "AI asks first, so it has what it needs."
           },
           {
-            "before_time": "",
-            "before_res": "Your own columns, read back",
-            "before_prompt": "&ldquo;What does this data tell me?&rdquo;",
-            "before_result": "A description where you needed a decision.",
-            "after_time": "",
-            "after_res": "A briefing you can defend",
-            "after_prompt": "&ldquo;Act as an analyst briefing a skeptical CFO. Name the three changes that matter, why each happened, and what the numbers cannot explain.&rdquo;",
-            "after_result": "Findings, causes and the honest gaps.",
-            "note": ""
+            "title": "A launch line nobody else would say",
+            "before_chip": "Forgettable",
+            "before_file": "",
+            "before_prompt": "give me three taglines for our launch deck something catchy",
+            "before_result": "Back came <span class=\"iq\">&ldquo;Work Smarter, Not Harder.&rdquo;</span>",
+            "after_chip": "",
+            "after_file": "",
+            "after_prompt": "Give me three opening lines a competitor would never dare to put on a slide, including one that's a little uncomfortable.",
+            "after_replies": [],
+            "after_result": "One of the three became the deck's hook."
           },
           {
-            "before_time": "",
-            "before_res": "A posting like every other posting",
-            "before_prompt": "&ldquo;Write a job description for a marketing manager.&rdquo;",
-            "before_result": "Buzzwords and no reason to apply.",
-            "after_time": "",
-            "after_res": "A posting people answer",
-            "after_prompt": "&ldquo;Job posting, marketing manager, 12-person B2B firm. Lead with the problems this person owns in month one. Plain language, under 400 words.&rdquo;",
-            "after_result": "Specific and honest about the work.",
-            "note": ""
+            "title": "Preparing for a meeting with the CFO",
+            "before_chip": "",
+            "before_file": "",
+            "before_prompt": "got a stakeholder meeting coming up can you help me get ready for it",
+            "before_result": "<span class=\"iq\">&ldquo;Stakeholder meeting&rdquo;</span> tells AI nothing useful.",
+            "after_chip": "",
+            "after_file": "",
+            "after_prompt": "Act as an executive coach. I have a 30-minute meeting tomorrow with the VP of Operations and the CFO... I expect pushback on implementation timeline and switching costs. Help me prepare by generating... the two or three objections most likely to come up and a one-sentence response to each...",
+            "after_replies": [],
+            "after_result": "AI is asked for the likely objections and an answer to each."
+          },
+          {
+            "title": "A 40-page report for a VP with five minutes",
+            "before_chip": "",
+            "before_file": "market-research-report.pdf",
+            "before_prompt": "summarize this report whats important in it",
+            "before_result": "A summary that takes longer to read than it's worth.",
+            "after_chip": "",
+            "after_file": "market-research-report.pdf",
+            "after_prompt": "Act as a senior analyst who has just read this 40-page market research report. I need a summary for a VP who has five minutes to read it before a board meeting. She needs to understand: (1) the top three findings that have strategic implications for our industry, (2) any finding that contradicts our current assumptions, and (3) one question she should be ready to answer if asked. Format as a three-section briefing with headers. Under 300 words total.",
+            "after_replies": [],
+            "after_result": "AI is asked for any finding that goes against your assumptions."
+          },
+          {
+            "title": "When someone keeps missing deadlines",
+            "before_chip": "",
+            "before_file": "",
+            "before_prompt": "need to talk to someone on my team about a problem what do i even say",
+            "before_result": "AI softens the message until the point is lost.",
+            "after_chip": "",
+            "after_file": "",
+            "after_prompt": "Act as an executive coach... I need to speak with a team member who has been consistently missing deadlines. I've given informal feedback twice in the past two months, but nothing has changed... Do not script the full conversation...",
+            "after_replies": [],
+            "after_result": "Now AI knows you've raised this twice already."
+          },
+          {
+            "title": "Rewriting a weak paragraph",
+            "before_chip": "",
+            "before_file": "",
+            "before_prompt": "make this better it doesnt sound right",
+            "before_result": "The changes are cosmetic and often miss what was wrong.",
+            "after_chip": "",
+            "after_file": "",
+            "after_prompt": "Act as a copy editor for business non-fiction. Rewrite the following paragraph for clarity and impact... The current version is too hedged and too long. Tighten it to four sentences maximum... Flag any sentence where you're unsure whether the change preserves my meaning.",
+            "after_replies": [],
+            "after_result": "Now AI knows what's wrong: too hedged and too long."
+          },
+          {
+            "title": "Marketing a product with no audience yet",
+            "before_chip": "",
+            "before_file": "",
+            "before_prompt": "write me a marketing plan cover all the bases",
+            "before_result": "AI goes broad and never gets specific.",
+            "after_chip": "",
+            "after_file": "",
+            "after_prompt": "what would an experienced growth marketer consider before setting a budget for a product with no existing audience?",
+            "after_replies": [],
+            "after_result": "The answer comes back precise, from an expert's point of view."
+          },
+          {
+            "title": "Writing a performance review",
+            "before_chip": "",
+            "before_file": "",
+            "before_prompt": "help me write a performance review for my direct report what should i put in it",
+            "before_result": "Flattering filler that you then have to strip out.",
+            "after_chip": "",
+            "after_file": "",
+            "after_prompt": "Act as a manager writing an annual performance review for a mid-level marketing analyst. This person consistently produces accurate, high-quality work but rarely speaks up in meetings... The review will be used for compensation and promotion decisions... Do not use filler phrases like <span class=\"iq\">&ldquo;team player&rdquo;</span> or <span class=\"iq\">&ldquo;hard worker.&rdquo;</span>",
+            "after_replies": [],
+            "after_result": "AI is told to skip <span class=\"iq\">&ldquo;team player&rdquo;</span> and <span class=\"iq\">&ldquo;hard worker.&rdquo;</span>"
+          },
+          {
+            "title": "Reading an employee survey",
+            "before_chip": "",
+            "before_file": "",
+            "before_prompt": "can you go through this employee survey and tell me the main takeaways",
+            "before_result": "A list of what came up most often.",
+            "after_chip": "",
+            "after_file": "",
+            "after_prompt": "Act as an organizational psychologist reviewing an internal employee engagement survey... Identify the top three patterns that suggest systemic issues rather than individual complaints... Do not make recommendations yet...",
+            "after_replies": [],
+            "after_result": "AI is asked which problems come from how the company runs."
+          },
+          {
+            "title": "Researching your competitors",
+            "before_chip": "",
+            "before_file": "",
+            "before_prompt": "can you look into the competition for my business whats out there",
+            "before_result": "An overview of the big names you already know.",
+            "after_chip": "",
+            "after_file": "",
+            "after_prompt": "Act as a market analyst. I need a competitive intelligence brief on the mid-market HR software category... I'm specifically looking for: pricing model trends in the past 18 months... Flag any claim where your training data may be outdated...",
+            "after_replies": [],
+            "after_result": "AI is told to flag anything that may be out of date."
           }
         ],
-        "pullline": "Both people had the same tool. The second one had learned to direct it, and that is the skill this book teaches."
+        "pullline": "Both people had the same tool. The second one had learned to direct it, and that is the skill this book teaches.",
+        "buy": {
+          "spaced": true,
+          "style": "",
+          "bid": "",
+          "aria": "Get the book on Amazon",
+          "label": "Get the book on Amazon &rarr;",
+          "eager": false,
+          "avail": "Kindle, paperback and hardcover · 198 pages in print",
+          "price": "",
+          "sample_href": "",
+          "sample": ""
+        }
       }
     },
     {
@@ -101,11 +194,9 @@
         "photo_alt": "Elvin M. Peters",
         "eyebrow": "About the author",
         "heading": "Elvin M. Peters",
-        "role": "Author of the AI Fluency Series · Toronto",
+        "role": "Marketer who builds his own tools with AI · Toronto",
         "paras": [
-          "My first lesson in directing machines came at a large Canadian fintech. I ran over $12M a year in paid media there, and I cut the cost per funded loan by more than half by teaching the bidding algorithms what a good customer looked like.",
-          "Then an adtech giant building AI brought me in to advise the media teams at big advertisers, where AI cut my account audits from hours to minutes. On both sides of the table I met capable people getting a fraction of what AI could give them. I wrote this book for them.",
-          "<em>The Artificial Advantage</em> is book one of the AI Fluency Series. Book two, <em>The Systematic Advantage</em>, is in progress. <a href=\"https://www.linkedin.com/in/elvinmpeters\" target=\"_blank\" rel=\"noopener\">Find me on LinkedIn</a>."
+          "At a company helping build AI, I saw capable people still learning to use it well. So I wrote this book. <a href=\"https://www.linkedin.com/in/elvinmpeters\" target=\"_blank\" rel=\"noopener\">My full story is on LinkedIn</a>"
         ]
       }
     },
@@ -165,7 +256,7 @@
           "spaced": true,
           "aria": "Get the book on Amazon",
           "label": "Get the book on Amazon &rarr;",
-          "avail": "Kindle, paperback and hardcover · 200 pages",
+          "avail": "Kindle, paperback and hardcover · 198 pages in print",
           "sample_href": "/free/free-chapter/",
           "sample": "Or read Chapter 8 free first &rarr;"
         }
@@ -255,7 +346,7 @@
           "aria": "Get the book on Amazon",
           "label": "Get the book on Amazon &rarr;",
           "eager": false,
-          "avail": "Kindle, paperback and hardcover · 200 pages",
+          "avail": "Kindle, paperback and hardcover · 198 pages in print",
           "price": "",
           "sample_href": "/free/free-chapter/",
           "sample": "Or read Chapter 8 free first &rarr;"
@@ -270,14 +361,14 @@
       "data": {
         "bg": "",
         "anchor": "newsletter",
-        "eyebrow": "Not ready yet?",
-        "heading": "Get one useful AI email a month",
-        "text": "The AI news worth knowing, tips you can use that week, and a note from the book. It lands on the first of every month. The free guides live in the <a href=\"/free/\">Free Toolkit</a>.",
+        "eyebrow": "",
+        "heading": "AI news and tips on the 1st of each month",
+        "text": "Every claim links to its source, so you can check it yourself.",
         "source": "newsletter-homepage-v3",
         "placeholder": "you@work.com",
-        "button": "Send me the monthly update",
-        "fine_print": "Free. Unsubscribe anytime.",
-        "success": "You're in. Look for it on the first of the month, and check your promotions tab if it isn't in your inbox.",
+        "button": "Send me the next issue",
+        "fine_print": "Confirm by email first. Then a welcome email and 7 short emails over two weeks. My monthly letter comes on the 1st. Unsubscribe any time.",
+        "success": "Check your inbox and click confirm. The next issue comes on the 1st.",
         "after": ""
       }
     },
