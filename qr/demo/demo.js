@@ -8,7 +8,7 @@
  */
 "use strict";
 (function () {
-  const ONLY = 'Login to use full functionality. This is a demo version only.';
+  const ONLY = 'Log in to use full functionality. This is a demo version only.';
   const DEMO_URL = 'https://elvinpeters.com/qr/demo/';
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 

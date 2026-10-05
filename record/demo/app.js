@@ -55,7 +55,7 @@
         ${admin ? `<a href="#/users" class="${active === 'users' ? 'active' : ''}">Team</a>` : ''}
       </nav>
       <span class="spacer"></span>
-      <span class="userchip"><span class="small">${esc(state.user.name || state.user.email)}</span><button class="btn sm ghost" id="logout">Sign out</button></span>
+      <span class="userchip"><span class="small">${esc(state.user.name || state.user.email)}</span></span>
     </div></header>
     <main class="main">${DEMO.banner()}${content}</main>
     <footer class="foot">${esc(DEMO.COPY.footer)}</footer>`;
