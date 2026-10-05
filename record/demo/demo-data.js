@@ -21,17 +21,20 @@
    * Set false to bring back the caption playback, exports and Doc preview built for #530. */
   const VIEW_ONLY = true;
 
-  /* ---------------- new words (approved 2026-10-01; view-only banner + click line are Elvin's own words, 2026-10-01) ---------------- */
+  /* ---------------- new words (approved 2026-10-01; view-only words from COPYWRITER brief 2, Elvin "yes all" 2026-10-01) ---------------- */
   const COPY = {
     badge: 'Demo',
     banner: VIEW_ONLY
-      ? 'Demo version. Login to use full functionality. This is a demo version only.'
+      ? "These are the app's real screens, with a made-up example. Look around."
       : 'Watch a made-up interview become a transcript and summary. Nothing is recorded.',
-    only: VIEW_ONLY ? 'Login to use full functionality. This is a demo version only.' : "This needs the full app's server, so it's off here.",
+    only: VIEW_ONLY ? 'Log in to use full functionality. This is a demo version only.' : "This needs the full app's server, so it's off here.",
     mic: 'off in the demo',
     scriptEnd: 'Now press Stop & transcribe to get the transcript and summary.',
     gdocNote: 'Preview only. In the full app, one click makes this a real Google Doc.',
-    audioNote: 'The player works. The sample is silent.',
+    audioNote: VIEW_ONLY ? '' : 'The player works. The sample is silent.',
+    listHint: 'Open the finished sample below for its transcript and summary.',
+    footer: 'Record Studio · built by Elvin M. Peters',
+    housekeeping: 'This interview was written for the demo. Nothing was recorded.',
     close: 'Close',
     sampleTitle: 'Bike co-op interview (sample)',
   };
@@ -479,6 +482,17 @@
       e.preventDefault(); only();
     }, true);
     document.addEventListener('invalid', (e) => { e.preventDefault(); only(); }, true);
+    // Toggles too: a checkbox never flips, and a dropdown snaps back to its first-rendered choice.
+    document.addEventListener('click', (e) => {
+      if (e.target.matches && e.target.matches('input[type="checkbox"], input[type="radio"]')) { e.preventDefault(); only(); }
+    }, true);
+    document.addEventListener('change', (e) => {
+      const el = e.target;
+      if (el.tagName !== 'SELECT') return;
+      const first = [...el.options].find((o) => o.defaultSelected) || el.options[0];
+      if (first) el.value = first.value;
+      e.stopImmediatePropagation(); only();
+    }, true);
   }
 
   window.DEMO = { VIEW_ONLY, COPY, api, Recorder, audioUrl, download, showGdoc, only, badge, banner };

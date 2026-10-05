@@ -58,7 +58,7 @@
       <span class="userchip"><span class="small">${esc(state.user.name || state.user.email)}</span><button class="btn sm ghost" id="logout">Sign out</button></span>
     </div></header>
     <main class="main">${DEMO.banner()}${content}</main>
-    <footer class="foot">Record Studio · audio and transcripts stay on your own server</footer>`;
+    <footer class="foot">${esc(DEMO.COPY.footer)}</footer>`;
   }
 
   function mount(html) {
@@ -108,7 +108,7 @@
     const rows = (list) => list.length ? list.map(rowHtml).join('') : `<div class="empty">No recordings yet. Start one above.</div>`;
     if (__t !== state.renderToken) return;
     mount(shell(`
-      <div class="hero"><div><h1>Recordings</h1><p>Hit start, put the phone or laptop on the table, and ask your questions. The words appear as they are spoken; the full transcript, speakers and summary land a minute after you stop.</p></div></div>
+      <div class="hero"><div><h1>Recordings</h1><p>${DEMO.VIEW_ONLY ? esc(DEMO.COPY.listHint) : 'Hit start, put the phone or laptop on the table, and ask your questions. The words appear as they are spoken; the full transcript, speakers and summary land a minute after you stop.'}</p></div></div>
       ${!state.gemini ? `<div class="error">Transcription is not configured on the server (no Gemini key). Recording still works, transcripts will not.</div>` : ''}
       <div class="card">
         <form class="newrec" id="newForm">
@@ -426,7 +426,7 @@
 
     mount(shell(`
       ${headHtml(rec, `<span class="pill ok">Ready</span><span class="pill">${labels.length} speaker${labels.length === 1 ? '' : 's'}</span><span class="pill">${(rec.word_count || 0).toLocaleString()} words</span>`)}
-      <div class="player"><audio id="audio" controls preload="metadata" src="${audioUrl}"></audio><div class="small muted">${esc(DEMO.COPY.audioNote)}</div></div>
+      <div class="player"><audio id="audio" controls preload="metadata" src="${audioUrl}"></audio>${DEMO.COPY.audioNote ? `<div class="small muted">${esc(DEMO.COPY.audioNote)}</div>` : ''}</div>
       <div class="split" style="grid-template-columns:1fr 380px">
         <div>
           ${summary ? `<div class="card summary">
@@ -452,7 +452,7 @@
           <div class="card"><h3>Share</h3><p class="small muted">A read-only link with the audio, summary and transcript. Anyone with the link can open it; turn it off any time.</p>
             <div id="shareBox">${rec.share_token ? `<input class="input" readonly value="${esc(shareUrl(rec.share_token))}" id="shareLink" style="margin-bottom:10px"><div class="btn-row"><button class="btn sm" id="copyShare">Copy link</button><button class="btn sm danger" id="shareOff">Turn off</button></div>` : `<button class="btn sm" id="shareOn">Create share link</button>`}</div>
           </div>
-          <div class="card"><h3>Housekeeping</h3><p class="small muted">Engine: ${esc(final.engine && final.engine.batch)} · audio from ${esc(final.source)} · ${final.windows} window${final.windows === 1 ? '' : 's'}</p>
+          <div class="card"><h3>Housekeeping</h3><p class="small muted">${esc(DEMO.COPY.housekeeping)}</p>
             <div class="btn-row"><button class="btn sm" id="reprocess">Process again</button><button class="btn sm danger" id="del">Delete</button></div></div>
         </div>
       </div>
