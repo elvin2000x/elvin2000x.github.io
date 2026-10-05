@@ -1,6 +1,8 @@
 /* demo.css: the few pieces the public demo adds on top of the real app.css (card #530). */
 .demo-badge { margin-left: 10px; flex: none; }
 .demo-banner { background: var(--rs-gold-soft); color: #5e4612; border: 1px solid #e8d7ac; padding: 10px 14px; border-radius: var(--rs-r); font-size: 14px; margin-bottom: 18px; }
+.demo-banner:has(+ .demo-tagline) { margin-bottom: 10px; }
+.demo-tagline { color: var(--rs-muted); font-size: 14px; margin: 0 0 18px; max-width: 760px; }
 
 /* Google Doc preview */
 .gd-overlay { position: fixed; inset: 0; background: rgba(14, 26, 43, .55); z-index: 60; display: flex; align-items: center; justify-content: center; padding: 16px; }

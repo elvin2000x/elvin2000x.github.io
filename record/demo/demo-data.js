@@ -24,6 +24,7 @@
   /* ---------------- new words (approved 2026-10-01; view-only words from COPYWRITER brief 2, Elvin "yes all" 2026-10-01) ---------------- */
   const COPY = {
     badge: 'Demo',
+    tagline: 'Turns an interview into a transcript of who said what and a summary.', // card #574, Elvin "yes to all" 2026-10-05
     banner: VIEW_ONLY
       ? "These are the app's real screens, with a made-up example. Look around."
       : 'Watch a made-up interview become a transcript and summary. Nothing is recorded.',
@@ -159,7 +160,7 @@
     if (p === '/api/logout') return demoOnly();
     if (p === '/api/admin/stats') {
       const all = listRecs();
-      return { recordings: all.length, seconds: all.reduce((n, r) => n + (r.duration_s || 0), 0) + 6.4 * 3600, users: 3, live: 0, diskFree: 0 };
+      return { recordings: all.length, seconds: all.reduce((n, r) => n + (r.duration_s || 0), 0) + 6.4 * 3600, users: 3, live: 0, diskFree: 412e9 };
     }
     if (p === '/api/users') {
       if (method !== 'GET') return demoOnly();
@@ -228,7 +229,9 @@
   }
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const badge = () => `<span class="pill gold demo-badge" title="${esc(COPY.banner)}">${esc(COPY.badge)}</span>`;
-  const banner = () => `<div class="demo-banner" role="note">${esc(COPY.banner)}</div>`;
+  // Tagline (card #574) shows under the banner on the Recordings screen only, so app.js stays verbatim.
+  const onHome = () => !location.hash || location.hash === '#/' || location.hash === '#';
+  const banner = () => `<div class="demo-banner" role="note">${esc(COPY.banner)}</div>${onHome() ? `<p class="demo-tagline">${esc(COPY.tagline)}</p>` : ''}`;
 
   /* ---------------- the caption replay (stands in for mic + WebSocket) ---------------- */
   class Recorder {
