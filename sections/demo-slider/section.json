@@ -1,0 +1,104 @@
+{
+  "label": "Before and after (slider)",
+  "about": "Asked-vs-directed examples, one per slide. Swipe or arrows, never moves by itself, dots show where you are. A file chip or a short tag is optional on either card.",
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        "",
+        "tint",
+        "line",
+        "grey"
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id (links like #faq jump here)"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above the heading"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro line"
+    },
+    {
+      "key": "slides",
+      "type": "list",
+      "label": "Slides (in order; the first one shows on arrival)",
+      "fields": [
+        {
+          "key": "title",
+          "type": "text",
+          "label": "Slide title"
+        },
+        {
+          "key": "before_chip",
+          "type": "text",
+          "label": "Asked: short tag (optional)"
+        },
+        {
+          "key": "before_file",
+          "type": "text",
+          "label": "Asked: attached file name (optional, shows a paperclip chip)"
+        },
+        {
+          "key": "before_prompt",
+          "type": "html",
+          "label": "Asked: the prompt (quote marks are added by the page)"
+        },
+        {
+          "key": "before_result",
+          "type": "html",
+          "label": "Asked: caption under the bubble"
+        },
+        {
+          "key": "after_chip",
+          "type": "text",
+          "label": "Directed: short tag (optional)"
+        },
+        {
+          "key": "after_file",
+          "type": "text",
+          "label": "Directed: attached file name (optional, shows a paperclip chip)"
+        },
+        {
+          "key": "after_prompt",
+          "type": "html",
+          "label": "Directed: the prompt (quote marks are added by the page; a quote inside it: wrap in <span class=\"iq\">)"
+        },
+        {
+          "key": "after_replies",
+          "type": "list",
+          "label": "Directed: AI's questions back, one per line (optional)"
+        },
+        {
+          "key": "after_result",
+          "type": "html",
+          "label": "Directed: caption under the bubble"
+        }
+      ]
+    },
+    {
+      "key": "pullline",
+      "type": "html",
+      "label": "Closing line"
+    },
+    {
+      "key": "buy",
+      "type": "buybox",
+      "label": "Buy box (optional)"
+    }
+  ]
+}

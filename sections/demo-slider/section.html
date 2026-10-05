@@ -1,0 +1,54 @@
+<section class="sec{{#bg}} sec--{{bg}}{{/bg}}" id="{{anchor}}">
+  <div class="in">
+    <span class="eyebrow">{{eyebrow}}</span>
+    <h2>{{heading}}</h2>
+    <p class="lede">{{intro}}</p>
+  </div>
+  <div class="ds" data-slider role="region" aria-roledescription="carousel" aria-label="{{heading}}">
+    <div class="ds-bar">
+      <button type="button" class="ds-arrow ds-prev" aria-label="Previous slide" disabled><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="ds-dots" aria-hidden="true">
+{{#slides}}
+        <span class="ds-dot"></span>
+{{/slides}}
+      </div>
+      <button type="button" class="ds-arrow ds-next" aria-label="Next slide"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="ds-track" tabindex="0">
+{{#slides}}
+      <div class="ds-slide" role="group" aria-roledescription="slide">
+        <h3 class="ds-title">{{title}}</h3>
+        <div class="ds-pair">
+          <div class="chat chat--before">
+            <div class="chat-h"><span>Asked</span>{{#before_chip}}<b class="ds-chip">{{before_chip}}</b>{{/before_chip}}</div>
+{{#before_file}}
+            <p class="ds-file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>{{before_file}}</p>
+{{/before_file}}
+            <p class="bubble ds-bubble">{{before_prompt}}</p>
+            <p class="chat-out">{{before_result}}</p>
+          </div>
+          <div class="chat chat--after">
+            <div class="chat-h"><span>Directed</span>{{#after_chip}}<b class="ds-chip ds-chip--good">{{after_chip}}</b>{{/after_chip}}</div>
+{{#after_file}}
+            <p class="ds-file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>{{after_file}}</p>
+{{/after_file}}
+            <p class="bubble ds-bubble">{{after_prompt}}</p>
+            <ol class="ds-reply">
+{{#after_replies}}
+              <li>{{.}}</li>
+{{/after_replies}}
+            </ol>
+            <p class="chat-out">{{after_result}}</p>
+          </div>
+        </div>
+      </div>
+{{/slides}}
+    </div>
+  </div>
+  <div class="in">
+    <p class="pullline">{{pullline}}</p>
+{{#buy}}
+    {{>buybox}}
+{{/buy}}
+  </div>
+</section>

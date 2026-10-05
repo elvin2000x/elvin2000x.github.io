@@ -140,6 +140,36 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .more[open] > summary{ margin-bottom:14px }
     .pullline{ font:italic 24px/1.4 var(--serif); color:var(--ink); margin:8px 0 0 }
 
+    /* the demo slider (#546): swipe or arrows, never moves by itself, slide 1 shows on arrival.
+       Position is in aria-label only, never printed (COPYWRITER MAIN, 2026-10-05). */
+    .ds{ max-width:var(--wide); margin:8px auto 22px }
+    .ds-bar{ display:flex; align-items:center; justify-content:center; gap:10px; margin:0 0 10px }
+    .ds-arrow{ width:var(--tap); height:var(--tap); min-width:var(--tap); border-radius:50%; border:1px solid var(--line-strong); background:var(--panel); color:var(--accent-ink); display:inline-flex; align-items:center; justify-content:center; cursor:pointer; padding:0 }
+    .ds-arrow:hover:not([disabled]){ border-color:var(--accent) }
+    .ds-arrow[disabled]{ opacity:.35; cursor:default }
+    .ds-dots{ display:flex; gap:7px; align-items:center }
+    .ds-dot{ width:8px; height:8px; border-radius:50%; background:var(--line-strong) }
+    .ds-dot.is-on{ background:var(--accent); transform:scale(1.25) }
+    .ds-track{ display:flex; align-items:flex-start; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none; -webkit-overflow-scrolling:touch }
+    .ds-track::-webkit-scrollbar{ display:none }
+    .ds-track:focus-visible{ outline:2px solid var(--accent-hi); outline-offset:2px }
+    .ds-slide{ flex:0 0 100%; min-width:0; box-sizing:border-box; padding:0 16px; scroll-snap-align:start; scroll-snap-stop:always }
+    .ds-title{ font-size:22px; line-height:1.3; margin:4px 0 14px; text-align:center }
+    .ds-pair{ display:grid; gap:14px }
+    @media(min-width:760px){ .ds-pair{ grid-template-columns:1fr 1fr; align-items:start } .ds-slide{ padding:0 24px } .ds-title{ font-size:24px } }
+    .ds-chip{ font-size:13px; letter-spacing:0; text-transform:none; font-weight:700; padding:4px 10px; border-radius:999px; background:var(--bg-2); color:var(--ink-2) }
+    .ds-chip--good{ background:var(--accent); color:var(--ink) }
+    .sec .ds-file{ display:inline-flex; align-items:center; gap:6px; max-width:100%; margin:0 0 10px; padding:5px 10px; border:1px solid var(--line-strong); border-radius:8px; background:var(--panel-2); font-size:14px; font-weight:600; color:var(--ink); overflow-wrap:anywhere }
+    .ds-file svg{ flex:none; color:var(--accent-ink) }
+    .ds-bubble::before{ content:"\201C" } .ds-bubble::after{ content:"\201D" }
+    .ds-bubble::before, .ds-bubble::after{ font-family:var(--serif); font-weight:600; color:var(--accent-ink) }
+    .iq{ font-style:italic; color:var(--ink) }
+    .ds-bubble .iq{ font-style:italic; background:var(--panel); border-radius:4px; padding:0 3px }
+    .ds-reply{ margin:0 0 12px; padding:10px 14px 10px 34px; background:var(--panel-2); border:1px solid var(--line); border-radius:14px 14px 4px 14px; font-size:15px; color:var(--ink-2) }
+    .ds-reply li{ margin:2px 0 }
+    .ds-reply li:empty, .ds-reply:not(:has(li:not(:empty))){ display:none }
+    @media (prefers-reduced-motion:no-preference){ .ds-track{ scroll-behavior:smooth } .ds-dot{ transition:background .2s, transform .2s } }
+
     /* the review: one big quote, two small labelled lines */
     /* review card, same look as /book */
     .quote{ margin:0; background:var(--panel-2); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:var(--r-card); padding:26px 22px }
@@ -253,36 +283,65 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     /* clicks are counted once, as amazon_click, by js/site.js (Runway v2 item 6) */
   });
 
+  /* Demo slider (#546): native swipe via scroll-snap, arrows step one slide, dots follow.
+     Never advances by itself. The track takes the height of the slide in view. */
+  document.querySelectorAll('[data-slider]').forEach(function (root) {
+    var track = root.querySelector('.ds-track');
+    var slides = [].slice.call(track.querySelectorAll('.ds-slide'));
+    var dots = [].slice.call(root.querySelectorAll('.ds-dot'));
+    var prev = root.querySelector('.ds-prev'), next = root.querySelector('.ds-next');
+    var n = slides.length, cur = -1;
+    slides.forEach(function (s, i) { s.setAttribute('aria-label', (i + 1) + ' of ' + n); });
+    function at() { return Math.max(0, Math.min(n - 1, Math.round(track.scrollLeft / (track.clientWidth || 1)))); }
+    function fit() { if (slides[cur]) track.style.height = slides[cur].offsetHeight + 'px'; }
+    function show(i) {
+      if (i !== cur) {
+        cur = i;
+        dots.forEach(function (d, k) { d.classList.toggle('is-on', k === i); });
+        slides.forEach(function (s, k) { if (k === i) s.removeAttribute('inert'); else s.setAttribute('inert', ''); });
+        prev.disabled = i === 0; next.disabled = i === n - 1;
+      }
+      fit();
+    }
+    function go(i) { track.scrollTo({ left: i * track.clientWidth }); show(i); }
+    prev.addEventListener('click', function () { go(Math.max(0, cur - 1)); });
+    next.addEventListener('click', function () { go(Math.min(n - 1, cur + 1)); });
+    var t; track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(function () { show(at()); }, 60); }, { passive: true });
+    window.addEventListener('resize', function () { track.scrollLeft = cur * track.clientWidth; fit(); });
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(root);
+    show(0);
+  });
+
   /* Dynamic audience-matched headline (DTR), ported unchanged from /book.html.
      Ad URLs append ?aud=<segment> or ?v=<angle>; no param keeps the HTML default. */
   (function () {
     var AUD = {
       "skeptic":  { hl: "You tried AI and<br/><span>weren't impressed.</span>",
-                    sub: "The problem wasn't the tool. It was that no one taught you to direct it. Here's the framework that fixes that.",
-                    hook: "The people getting astonishing results are typing into the same box you are. They just learned to direct it." },
+                    sub: "It had to guess what you wanted. This book shows you how to get the right answers.",
+                    hook: "" },
       "jobsec":   { hl: "AI won't take your job.<br/><span>Someone who uses it better will.</span>",
-                    sub: "Become that someone. This is the framework that turns AI from a gimmick into your unfair advantage at work.",
-                    hook: "It has almost nothing to do with being technical. It is a learnable skill, and most professionals never learn it." },
+                    sub: "Be that someone. This book shows you how to get the right answers from AI.",
+                    hook: "" },
       "senior":   { hl: "You're not too old for AI.<br/><span>You just need a system.</span>",
-                    sub: "Not a tech degree, a framework. If you can send an email, you can master this in a weekend of reading.",
-                    hook: "Written for professionals with zero technical background. Plain language, real work tasks, start to finish." },
+                    sub: "AI has to guess what you want. This book gives you a system to get the right answers.",
+                    hook: "" },
       "lowtech":  { hl: "If you can send an email,<br/><span>you can master AI.</span>",
-                    sub: "Zero code. Zero jargon. The directing framework that finally makes AI deliver for non-technical professionals.",
-                    hook: "The gap was never about being technical. It was about being taught how to direct the tool." },
+                    sub: "AI has to guess what you want. This book shows you how to get the right answers.",
+                    hook: "" },
       "student":  { hl: "Graduate already<br/><span>ahead of the room.</span>",
-                    sub: "The AI edge that outranks GPA. Learn to direct AI like the professionals who'll be hiring you.",
-                    hook: "Everyone your age is getting ahead with AI. This is how you get ahead of them." },
+                    sub: "AI has to guess what you want. This book shows you how to get the right answers.",
+                    hook: "" },
       "manager":  { hl: "Give your team an AI framework<br/><span>you can actually teach.</span>",
-                    sub: "One system for directing AI, simple enough to hand to your whole team. No technical training required.",
-                    hook: "The professionals getting exceptional results are not more technical. They are more deliberate. This is the system." }
+                    sub: "AI has to guess what your team wants. This book gives them a shared way to get the right answers.",
+                    hook: "" }
     };
     var ANG = {
       "status":   { hl: "Be the one<br/><span>they promote.</span>",
-                    sub: "Make AI look easy while your coworkers fight with it. This is the framework that gets you noticed.",
-                    hook: "Same tools, completely different results. The difference is learning to direct the tool instead of just asking it." },
+                    sub: "Two people give AI the same task and get different results. This book shows you how to get the right answers.",
+                    hook: "" },
       "time":     { hl: "A week's work<br/><span>before lunch.</span>",
-                    sub: "Get your afternoons back. Learn to direct AI so it does the heavy lifting right the first time.",
-                    hook: "Stop rewriting AI's garbage. The framework that gets it right on the first pass, every time." }
+                    sub: "Fixing a generic AI draft can take as long as writing it. This book shows you how to get the right answers.",
+                    hook: "" }
     };
     try {
       var p = new URLSearchParams(location.search);
