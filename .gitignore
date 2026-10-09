@@ -5,4 +5,9 @@ node_modules/
 _check.js
 ads/
 
-studio/.previews/
+# #545 (2026-10-09): the Site Studio admin code lives outside this public repo
+# (PC: coding\site-studio\, empire-01: /opt/site-studio/app/). Old local copies
+# of studio/ stay out of git, and so do hand-made backup files.
+/studio/
+*.bak
+*.bak-*
