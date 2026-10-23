@@ -455,15 +455,40 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     msg.style.display = 'block';
     input.focus();
   }
+  /* #491: the visitor's UTM tags (YouTube, email footer, ads) ride in the lead's
+     source after " | ", the same format the /free/ pages use, so the engine keeps
+     them with the sign-up. Built apart from form.dataset.source, which stays the
+     Pixel and GA4 label. js/site.js keeps tags across clicks; if an older cached
+     site.js has no keeper yet, this page reads its own address. */
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  function utmTags() {
+    if (window.EPUtm) return window.EPUtm.get();
+    var out = {};
+    try {
+      var p = new URLSearchParams(location.search);
+      UTM_KEYS.forEach(function (k) { var v = (p.get(k) || '').trim().slice(0, 100); if (v) out[k] = v; });
+    } catch (e3) {}
+    return out;
+  }
+  function leadSource(tags) {
+    var sfx = UTM_KEYS.filter(function (k) { return tags[k]; })
+      .map(function (k) { return k.slice(4) + '=' + encodeURIComponent(tags[k]); }).join('&');
+    return (form.dataset.source + (sfx ? ' | ' + sfx : '')).slice(0, 290);
+  }
+  function withTags(params, tags) {
+    UTM_KEYS.forEach(function (k) { if (tags[k]) params[k] = tags[k]; });
+    return params;
+  }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var email = input.value.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return failWith('Enter a full email address, like you@work.com.');
     btn.disabled = true;
     msg.style.display = 'none';
+    var tags = utmTags();
     fetch(LEAD_API, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, source: form.dataset.source, website: form.website ? form.website.value : '' })
+      body: JSON.stringify({ email: email, source: leadSource(tags), website: form.website ? form.website.value : '' })
     }).then(function (r) { return r.json(); }).then(function (r) {
       if (!r || !r.success) return failWith((r && r.error) || 'Something went wrong. Try again in a moment.');
       remember();
@@ -490,8 +515,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       msg.style.display = 'block';
       render();
       try { fbq('track', 'Lead', { content_name: form.dataset.source }); } catch (e2) {}
-      try { gtag('event', 'generate_lead', { method: form.dataset.source }); } catch (e2) {}
-      try { gtag('event', 'newsletter_signup', { source: form.dataset.source, page_path: location.pathname }); } catch (e2) {}
+      try { gtag('event', 'generate_lead', withTags({ method: form.dataset.source }, tags)); } catch (e2) {}
+      try { gtag('event', 'newsletter_signup', withTags({ source: form.dataset.source, page_path: location.pathname }, tags)); } catch (e2) {}
     }).catch(function () { failWith('Network hiccup. Try again.'); });
   });
 

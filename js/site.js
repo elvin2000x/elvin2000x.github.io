@@ -1,3 +1,49 @@
+/* ---------------------------------------------------------------------------
+   UTM keeper (card #491). First in the file so nothing below can stop it.
+   A page opened with utm_* tags in its address saves them for this browser
+   tab, so a sign-up a few clicks later still says which link brought the
+   visitor. Generic on purpose: YouTube links, email footer links
+   (utm_medium=email), ads, and any later landing page (/buy/<slug>) that loads
+   this file all work the same way.
+   - The page's own address wins for that page.
+   - Otherwise the FIRST set saved in this tab. A saved set is never
+     overwritten by a later link (an email click is not replaced by a YouTube
+     one), and the five keys always travel together as one set, never mixed.
+   window.EPUtm.get()    -> { utm_source: 'youtube', ... } (non-empty keys only)
+   window.EPUtm.suffix() -> 'source=youtube&medium=organic&campaign=treaty&content=pinned'
+                            (the format the /free/ pages put after " | " in a lead's source)
+   --------------------------------------------------------------------------- */
+(function () {
+  'use strict';
+  var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  var STORE = 'ep-utm';
+  function clean(v) { return String(v || '').replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 100); }
+  function pick(src) {
+    var out = {}, any = false;
+    KEYS.forEach(function (k) { var v = clean(src && src[k]); if (v) { out[k] = v; any = true; } });
+    return any ? out : null;
+  }
+  function fromAddress() {
+    try {
+      var p = new URLSearchParams(location.search), raw = {};
+      KEYS.forEach(function (k) { raw[k] = p.get(k); });
+      return pick(raw);
+    } catch (e) { return null; }
+  }
+  function saved() {
+    try { return pick(JSON.parse(sessionStorage.getItem(STORE) || 'null')); } catch (e) { return null; }
+  }
+  var here = fromAddress();
+  if (here && !saved()) { try { sessionStorage.setItem(STORE, JSON.stringify(here)); } catch (e) {} }
+  function get() { return pick(here || saved()) || {}; }   /* a fresh copy each call */
+  function suffix() {
+    var u = get();
+    return KEYS.filter(function (k) { return u[k]; })
+      .map(function (k) { return k.slice(4) + '=' + encodeURIComponent(u[k]); }).join('&');
+  }
+  window.EPUtm = { get: get, suffix: suffix };
+})();
+
 /* site.js — shared chrome behavior: persistent theme + accessible mobile menu.
    Zero dependencies. Load at the end of <head> (no defer) so the saved theme
    applies before first paint. The book page ([data-theme="book"]) never

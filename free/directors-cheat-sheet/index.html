@@ -118,10 +118,14 @@ h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,58px);line-
   function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
   function fail(t){msg.className='msg err';msg.textContent=t;btn.disabled=false;btn.textContent=BTN;}
   var BTN=btn.textContent;
+  var UTM=['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+  // #491: UTM tags from js/site.js's keeper (this address first, else the first tagged page in this tab); an older cached site.js falls back to this address
+  function tags(){var t={};try{if(window.EPUtm)return window.EPUtm.get();var p=new URLSearchParams(location.search);UTM.forEach(function(k){var v=(p.get(k)||'').trim().slice(0,100);if(v)t[k]=v;});}catch(e){}return t;}
+  function withTags(o){var t=tags();UTM.forEach(function(k){if(t[k])o[k]=t[k];});return o;}
   function source(){
     var base='magnet:'+SLUG;
-    try{var p=new URLSearchParams(location.search),b=[];
-      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=p.get(k);if(v)b.push(k.replace('utm_','')+'='+v);});
+    try{var p=new URLSearchParams(location.search),b=[],t=tags();
+      UTM.forEach(function(k){var v=t[k];if(v)b.push(k.replace('utm_','')+'='+v);});
       var g=p.get('gclid');if(g)b.push('gclid='+g);var fc=p.get('fbclid');if(fc)b.push('fbclid='+fc.slice(0,40));var tw=p.get('twclid');if(tw)b.push('twclid='+tw);
       if(b.length)base=(base+' | '+b.join('&')).slice(0,290);
     }catch(e){}
@@ -131,8 +135,8 @@ h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,6vw,58px);line-
     try{if(email&&typeof gtag==='function')gtag('set','user_data',{email:email});}catch(e){}
     try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
     try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG});}catch(e){}
-    try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG});}catch(e){}
-    try{if(typeof gtag==='function')gtag('event','free_optin',{magnet:SLUG,page_path:location.pathname});}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','generate_lead',withTags({event_label:'magnet-'+SLUG}));}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','free_optin',withTags({magnet:SLUG,page_path:location.pathname}));}catch(e){}
   }
   function reveal(){
     document.querySelector('#card .form-in').style.display='none';
