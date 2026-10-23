@@ -245,7 +245,7 @@ function renderOptin(slot, page) {
 }
 
 // book.html closed 2026-09-27 (redirect stub to the homepage), so its bk-* regions are no longer applied.
-// The renderers stay for reuse; the last full page is archive/book-2026-09-27.html.
+// The renderers stay for reuse; the last full page is archived outside this public repo.
 
 /* The three money pages get the same component with page-matched copy. Until
    now /system/ had only a desktop exit-intent popup (mouseout never fires on
@@ -1296,8 +1296,14 @@ if (unstyled.length) {
 /* ------------------------------------------------------------------ */
 /* sitemap.xml - generated from the page walk so it can never go stale.
    No lastmod on purpose: builds must be byte-idempotent. */
-const SM_EXCLUDE = ['titles', 'books', 'play', 'book1-feedback', 'oto', 'dl', 'studio', 'toolkit', 'thank-you', 'record'];
+const SM_EXCLUDE = ['titles', 'play', 'book1-feedback', 'oto', 'dl', 'studio', 'toolkit', 'thank-you'];
 const SM_SKIP_FILES = ['system/index.html'];
+// Book 1's Companion Library is public, so it is listed (2026-10-23). The Book 2 and 3
+// libraries stay private until each book ships; if one is ever restored, it stays unlisted.
+SM_EXCLUDE.push('books/the-systematic-advantage', 'books/the-agentic-advantage');
+// The library's pages are named files (glossary.html), not folder index pages.
+const smIsPage = (rel, name) => name === 'index.html' || (!rel && name.endsWith('.html')) ||
+  (rel.startsWith('books/') && name.endsWith('.html'));
 function smWalk(dir, rel, out) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (e.name.startsWith('.') || e.name === 'node_modules') continue;
@@ -1305,7 +1311,7 @@ function smWalk(dir, rel, out) {
     if (SM_EXCLUDE.includes(r) || SM_SKIP_FILES.includes(r)) continue;
     if (!rel && /^index_v[0-9]\.html$/.test(e.name)) continue;
     if (e.isDirectory()) smWalk(path.join(dir, e.name), r, out);
-    else if (e.name === 'index.html' || (!rel && e.name.endsWith('.html'))) {
+    else if (smIsPage(rel, e.name)) {
       // A noindex page in the sitemap is a Search Console error; skip it by its own meta.
       if (/<meta name="robots" content="[^"]*noindex/i.test(fs.readFileSync(path.join(dir, e.name), 'utf8'))) continue;
       out.push(r);
@@ -1426,7 +1432,7 @@ const llmsTxt =
   '# Elvin Peters\n\n' +
   '> Toronto author of The Artificial Advantage, Book One of the AI Fluency series.\n' +
   '> I write practical guides that help working professionals get real results from AI.\n\n' +
-  'Start with the book, the free AI Toolkit (' + ORIGIN + '/free/) or the newsletter\n' +
+  'Start with the book, the free guides (' + ORIGIN + '/free/) or the newsletter\n' +
   '(' + ORIGIN + NAVC.footerLinks.find(l => l.label === 'Newsletter').href + '). French translations are marked below.\n\n' +
   llmsSections.join('\n\n') + '\n\n' +
   '## Notes\n\n' +

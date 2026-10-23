@@ -11,3 +11,6 @@ ads/
 /studio/
 *.bak
 *.bak-*
+
+# 2026-10-23: the project note is private. It stays on the PC next to the checkout, never served.
+/PURPOSE.md
