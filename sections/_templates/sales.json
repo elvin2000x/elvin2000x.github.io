@@ -1,0 +1,190 @@
+{
+  "label": "Sales page",
+  "order": 1,
+  "stack": {
+    "title": "",
+    "frame": "landing",
+    "landing": {
+      "slug": "",
+      "old_slugs": [],
+      "funnel": "",
+      "hide_menu": true,
+      "step": "front",
+      "description": "[Description: one sentence for search and shares]"
+    },
+    "noindex": true,
+    "sections": [
+      {
+        "id": "steps",
+        "type": "lp-progress",
+        "data": {
+          "step": "1",
+          "steps": "4"
+        }
+      },
+      {
+        "id": "hero",
+        "type": "lp-hero",
+        "data": {
+          "anchor": "",
+          "eyebrow": "",
+          "headline": "[Headline: the one promise]",
+          "sub": "[Subhead: what they get and how fast]",
+          "button": {
+            "label": "[Button: the action]",
+            "checkout": true,
+            "href": ""
+          },
+          "note": "",
+          "image": "",
+          "image_alt": ""
+        }
+      },
+      {
+        "id": "problem",
+        "type": "text",
+        "data": {
+          "anchor": "",
+          "align": "left",
+          "heading": "[Heading: the problem they have]",
+          "paras": [
+            "[Paragraph: their situation, in their words]",
+            "[Paragraph: what changes with this]"
+          ]
+        }
+      },
+      {
+        "id": "offer",
+        "type": "lp-stack",
+        "data": {
+          "bg": "tint",
+          "anchor": "",
+          "heading": "[Heading: everything you get]",
+          "image": "",
+          "image_alt": "",
+          "items": [
+            {
+              "image": "",
+              "image_alt": "",
+              "name": "[Item: name and what it does]",
+              "value": "[Value: $XX]"
+            },
+            {
+              "image": "",
+              "image_alt": "",
+              "name": "[Item: name and what it does]",
+              "value": "[Value: $XX]"
+            },
+            {
+              "image": "",
+              "image_alt": "",
+              "name": "[Item: name and what it does]",
+              "value": "[Value: $XX]"
+            },
+            {
+              "image": "",
+              "image_alt": "",
+              "name": "[Item: name and what it does]",
+              "value": "[Value: $XX]"
+            }
+          ],
+          "total_label": "[Label: total value]",
+          "total": "[Total: $XXX]",
+          "price_label": "[Label: today]",
+          "price": "[Price: $XX]",
+          "bump": {
+            "image": "",
+            "image_alt": "",
+            "label": "[Add-on: yes, add the extra]",
+            "price": "[Price: $XX]"
+          },
+          "button": {
+            "label": "[Button: the action]",
+            "checkout": true,
+            "href": ""
+          },
+          "note": ""
+        }
+      },
+      {
+        "id": "quotes",
+        "type": "lp-quotes",
+        "data": {
+          "bg": "",
+          "anchor": "",
+          "heading": "[Heading: what readers say]",
+          "quotes": [
+            {
+              "quote": "[Quote: a real reader, with permission]",
+              "source": "[Name: who said it]"
+            },
+            {
+              "quote": "[Quote: a real reader, with permission]",
+              "source": "[Name: who said it]"
+            },
+            {
+              "quote": "[Quote: a real reader, with permission]",
+              "source": "[Name: who said it]"
+            }
+          ]
+        }
+      },
+      {
+        "id": "guarantee",
+        "type": "lp-guarantee",
+        "data": {
+          "bg": "",
+          "anchor": "",
+          "heading": "[Heading: the guarantee]",
+          "text": "[Guarantee: the promise and how to claim it]"
+        }
+      },
+      {
+        "id": "faq",
+        "type": "lp-faq",
+        "data": {
+          "bg": "",
+          "anchor": "",
+          "heading": "[Heading: questions]",
+          "items": [
+            {
+              "q": "[Question: a real objection]",
+              "a": "[Answer: the honest answer]"
+            },
+            {
+              "q": "[Question: a real objection]",
+              "a": "[Answer: the honest answer]"
+            },
+            {
+              "q": "[Question: a real objection]",
+              "a": "[Answer: the honest answer]"
+            },
+            {
+              "q": "[Question: a real objection]",
+              "a": "[Answer: the honest answer]"
+            }
+          ]
+        }
+      },
+      {
+        "id": "print",
+        "type": "lp-amazon",
+        "data": {
+          "bg": "",
+          "anchor": "",
+          "heading": "[Heading: prefer print?]",
+          "buttons": [
+            {
+              "label": "[Button: buy the paperback on Amazon]",
+              "href": ""
+            },
+            {
+              "label": "[Button: buy the hardcover on Amazon]",
+              "href": ""
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

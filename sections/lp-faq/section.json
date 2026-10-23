@@ -1,0 +1,53 @@
+{
+  "label": "Questions",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading",
+      "default": "[Heading: questions]"
+    },
+    {
+      "key": "items",
+      "type": "list",
+      "label": "Questions",
+      "fields": [
+        {
+          "key": "q",
+          "type": "html",
+          "label": "Question",
+          "default": "[Question: a real objection]"
+        },
+        {
+          "key": "a",
+          "type": "html",
+          "label": "Answer",
+          "default": "[Answer: the honest answer]"
+        }
+      ]
+    }
+  ]
+}

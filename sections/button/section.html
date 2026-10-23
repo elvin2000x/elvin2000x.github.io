@@ -1,0 +1,7 @@
+<div class="ep-block"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="ep-row ep-row--{{align}}">
+{{#buttons}}
+    <a class="btn btn--lg btn--{{style}}"{{#checkout}} href="{{store}}/start?funnel={{funnel}}" rel="nofollow" data-store-checkout="{{funnel}}"{{/checkout}}{{^checkout}} href="{{href}}"{{/checkout}}>{{label}}</a>
+{{/buttons}}
+  </div>
+</div>

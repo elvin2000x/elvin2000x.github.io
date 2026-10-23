@@ -1,0 +1,53 @@
+{
+  "label": "Print on Amazon",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading",
+      "default": "[Heading: prefer print?]"
+    },
+    {
+      "key": "buttons",
+      "type": "list",
+      "label": "Buttons",
+      "max": 2,
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Words",
+          "default": "[Button: buy the paperback on Amazon]"
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link (empty: the book on Amazon)"
+        }
+      ]
+    }
+  ]
+}

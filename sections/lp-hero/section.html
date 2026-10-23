@@ -1,0 +1,22 @@
+<section class="lp-sec lp-hero"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in lp-hero__grid">
+    <div>
+{{#eyebrow}}
+      <span class="lp-eyebrow">{{eyebrow}}</span>
+{{/eyebrow}}
+      <h1>{{headline}}</h1>
+{{#sub}}
+      <p class="lp-lede">{{sub}}</p>
+{{/sub}}
+{{#button}}
+      {{>lp-button}}
+{{/button}}
+{{#note}}
+      <p class="lp-note">{{note}}</p>
+{{/note}}
+    </div>
+{{#image}}
+    <img class="lp-hero__img" src="{{image}}" alt="{{image_alt}}" fetchpriority="high">
+{{/image}}
+  </div>
+</section>

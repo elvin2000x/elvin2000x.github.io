@@ -1,0 +1,37 @@
+{
+  "label": "Blank",
+  "order": 6,
+  "stack": {
+    "title": "",
+    "frame": "landing",
+    "landing": {
+      "slug": "",
+      "old_slugs": [],
+      "funnel": "",
+      "hide_menu": true,
+      "step": "front",
+      "description": "[Description: one sentence for search and shares]"
+    },
+    "noindex": true,
+    "sections": [
+      {
+        "id": "hero",
+        "type": "lp-hero",
+        "data": {
+          "anchor": "",
+          "eyebrow": "",
+          "headline": "[Headline: the one promise]",
+          "sub": "[Subhead: what they get and how fast]",
+          "button": {
+            "label": "[Button: the action]",
+            "checkout": true,
+            "href": ""
+          },
+          "note": "",
+          "image": "",
+          "image_alt": ""
+        }
+      }
+    ]
+  }
+}

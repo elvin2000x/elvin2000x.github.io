@@ -1,0 +1,38 @@
+{
+  "label": "Text",
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "align",
+      "type": "choice",
+      "label": "Align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "paras",
+      "type": "list",
+      "label": "Paragraphs",
+      "default": [
+        "[Paragraph: your words]"
+      ]
+    }
+  ]
+}

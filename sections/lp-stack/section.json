@@ -1,0 +1,170 @@
+{
+  "label": "Value stack",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading",
+      "default": "[Heading: everything you get]"
+    },
+    {
+      "key": "image",
+      "type": "image",
+      "label": "Bundle image",
+      "alt": "image_alt",
+      "size": [
+        1200,
+        800
+      ]
+    },
+    {
+      "key": "image_alt",
+      "type": "text",
+      "label": "Bundle image description"
+    },
+    {
+      "key": "items",
+      "type": "list",
+      "label": "Items",
+      "fields": [
+        {
+          "key": "image",
+          "type": "image",
+          "label": "Image",
+          "alt": "image_alt",
+          "size": [
+            200,
+            200
+          ]
+        },
+        {
+          "key": "image_alt",
+          "type": "text",
+          "label": "Image description"
+        },
+        {
+          "key": "name",
+          "type": "html",
+          "label": "Item",
+          "default": "[Item: name and what it does]"
+        },
+        {
+          "key": "value",
+          "type": "text",
+          "label": "Value",
+          "default": "[Value: $XX]"
+        }
+      ]
+    },
+    {
+      "key": "total_label",
+      "type": "text",
+      "label": "Total label",
+      "default": "[Label: total value]"
+    },
+    {
+      "key": "total",
+      "type": "text",
+      "label": "Total value",
+      "default": "[Total: $XXX]"
+    },
+    {
+      "key": "price_label",
+      "type": "text",
+      "label": "Price label",
+      "default": "[Label: today]"
+    },
+    {
+      "key": "price",
+      "type": "text",
+      "label": "Price",
+      "default": "[Price: $XX]"
+    },
+    {
+      "key": "bump",
+      "type": "object",
+      "label": "Add-on checkbox",
+      "fields": [
+        {
+          "key": "image",
+          "type": "image",
+          "label": "Image",
+          "alt": "image_alt",
+          "size": [
+            200,
+            200
+          ]
+        },
+        {
+          "key": "image_alt",
+          "type": "text",
+          "label": "Image description"
+        },
+        {
+          "key": "label",
+          "type": "html",
+          "label": "Words",
+          "default": "[Add-on: yes, add the extra]"
+        },
+        {
+          "key": "price",
+          "type": "text",
+          "label": "Price",
+          "default": "[Price: $XX]"
+        }
+      ]
+    },
+    {
+      "key": "button",
+      "type": "object",
+      "label": "Button",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Words",
+          "default": "[Button: the action]"
+        },
+        {
+          "key": "checkout",
+          "type": "bool",
+          "label": "Goes to checkout",
+          "default": true
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "key": "note",
+      "type": "html",
+      "label": "Small print"
+    }
+  ]
+}

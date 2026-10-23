@@ -532,3 +532,15 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 .nav .links a.navdd-buy .navdd-s{color:var(--accent-on,#141414);opacity:.75}
 .nav .links a.navdd-buy:hover,.nav .links a.navdd-buy:focus-visible{background:linear-gradient(135deg,var(--gold,#c9a250),var(--gold-2,#b3892f));color:var(--accent-on,#141414);filter:brightness(1.06)}
 .navdrawer .navdd-s{display:none}
+
+/* Blocks any page built from sections can place anywhere (store build, 2026-10-23):
+   sections/button (a row of up to two buttons) and sections/text (a heading and
+   paragraphs). Moving them in Site Studio moves the button or the words. */
+.ep-block{ max-width:var(--w-text); margin:0 auto; padding:24px 16px }
+.ep-row{ display:flex; flex-wrap:wrap; gap:12px; align-items:center }
+.ep-row--center{ justify-content:center }
+.ep-row--left{ justify-content:flex-start }
+.ep-row .btn{ white-space:normal; text-align:center; max-width:100% }
+.ep-text h2{ font-family:var(--serif); font-size:var(--fs-h2); line-height:var(--lh-snug); margin:0 0 14px }
+.ep-text p{ margin:0 0 14px; color:var(--ink-2) }
+.ep-text--center{ text-align:center }

@@ -1,0 +1,33 @@
+{
+  "label": "Step counter",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "step",
+      "type": "choice",
+      "label": "Step",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ]
+    },
+    {
+      "key": "steps",
+      "type": "choice",
+      "label": "Of",
+      "options": [
+        "4",
+        "2",
+        "3",
+        "5",
+        "6"
+      ]
+    }
+  ]
+}

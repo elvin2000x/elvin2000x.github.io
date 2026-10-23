@@ -1,0 +1,53 @@
+{
+  "label": "Quotes",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading",
+      "default": "[Heading: what readers say]"
+    },
+    {
+      "key": "quotes",
+      "type": "list",
+      "label": "Quotes",
+      "fields": [
+        {
+          "key": "quote",
+          "type": "html",
+          "label": "Quote",
+          "default": "[Quote: a real reader, with permission]"
+        },
+        {
+          "key": "source",
+          "type": "text",
+          "label": "Who",
+          "default": "[Name: who said it]"
+        }
+      ]
+    }
+  ]
+}

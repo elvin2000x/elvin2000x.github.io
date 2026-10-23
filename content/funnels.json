@@ -1,0 +1,7 @@
+{
+  "_comment": "Landing pages: elvinpeters.com/<prefix>/<slug>/. Edited in Site Studio > Website > Landing pages. A prefix that changes is kept in old_prefixes so every old address still forwards. store_base is the checkout (contract with the store build); previews and the Test host use store_base_test.",
+  "prefix": "buy",
+  "old_prefixes": [],
+  "store_base": "https://api.elvinpeters.com/api/store",
+  "store_base_test": "https://api.elvinpeters.com/store-test/api/store"
+}

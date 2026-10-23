@@ -1,0 +1,56 @@
+{
+  "label": "Upsell",
+  "order": 2,
+  "stack": {
+    "title": "",
+    "frame": "landing",
+    "landing": {
+      "slug": "",
+      "old_slugs": [],
+      "funnel": "",
+      "hide_menu": true,
+      "step": "upsell",
+      "description": "[Description: one sentence for search and shares]"
+    },
+    "noindex": true,
+    "sections": [
+      {
+        "id": "steps",
+        "type": "lp-progress",
+        "data": {
+          "step": "2",
+          "steps": "4"
+        }
+      },
+      {
+        "id": "offer",
+        "type": "lp-offer",
+        "data": {
+          "bg": "",
+          "anchor": "",
+          "heading": "[Headline: the one extra that makes it work]",
+          "image": "",
+          "image_alt": "",
+          "paras": [
+            "[Paragraph: why this, why now]"
+          ],
+          "was": "[Was: $XX]",
+          "price": "[Price: $XX]",
+          "yes": "[Yes button: yes, add it]",
+          "no": "[No link: no thanks]",
+          "fallback": "[Declined: what to do next]"
+        }
+      },
+      {
+        "id": "guarantee",
+        "type": "lp-guarantee",
+        "data": {
+          "bg": "",
+          "anchor": "",
+          "heading": "[Heading: the guarantee]",
+          "text": "[Guarantee: the promise and how to claim it]"
+        }
+      }
+    ]
+  }
+}

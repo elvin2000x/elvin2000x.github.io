@@ -1,0 +1,12 @@
+<section class="lp-sec lp-thanks"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+    <h1>{{heading}}</h1>
+{{#paras}}
+    <p>{{.}}</p>
+{{/paras}}
+    <p class="lp-thanks__order"><span>{{order_label}}</span> <strong data-store="order-number"></strong> <span data-store="total"></span></p>
+    <h2>{{files_label}}</h2>
+    <ul class="lp-thanks__files" data-store="files"></ul>
+    <a class="btn btn--ghost btn--lg" data-store="library" href="{{page_url}}">{{library}}</a>
+  </div>
+</section>

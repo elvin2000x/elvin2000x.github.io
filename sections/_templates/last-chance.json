@@ -1,0 +1,40 @@
+{
+  "label": "Last chance",
+  "order": 4,
+  "stack": {
+    "title": "",
+    "frame": "landing",
+    "landing": {
+      "slug": "",
+      "old_slugs": [],
+      "funnel": "",
+      "hide_menu": true,
+      "step": "last-chance",
+      "description": "[Description: one sentence for search and shares]"
+    },
+    "noindex": true,
+    "sections": [
+      {
+        "id": "steps",
+        "type": "lp-progress",
+        "data": {
+          "step": "3",
+          "steps": "4"
+        }
+      },
+      {
+        "id": "basket",
+        "type": "lp-basket",
+        "data": {
+          "anchor": "",
+          "heading": "[Headline: one last thing before you go]",
+          "intro": "[Intro: what is in the basket and the discount]",
+          "total_label": "[Label: total]",
+          "yes": "[Yes button: add these to my order]",
+          "no": "[No link: no thanks]",
+          "fallback": "[Declined: what to do next]"
+        }
+      }
+    ]
+  }
+}

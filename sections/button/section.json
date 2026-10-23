@@ -1,0 +1,66 @@
+{
+  "label": "Buttons",
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "align",
+      "type": "choice",
+      "label": "Align",
+      "options": [
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ]
+    },
+    {
+      "key": "buttons",
+      "type": "list",
+      "label": "Buttons",
+      "max": 2,
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Words",
+          "default": "[Button: what it does]"
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link",
+          "default": "[Link: where it goes]"
+        },
+        {
+          "key": "style",
+          "type": "choice",
+          "label": "Look",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Filled"
+            },
+            {
+              "value": "ghost",
+              "label": "Outline"
+            }
+          ]
+        },
+        {
+          "key": "checkout",
+          "type": "bool",
+          "label": "Goes to checkout (landing pages)",
+          "default": false
+        }
+      ]
+    }
+  ]
+}
