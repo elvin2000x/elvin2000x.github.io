@@ -3,7 +3,7 @@
   "file": "nav.json",
   "preview": "/free/",
   "previews": [
-    { "path": "/free/", "label": "Free Toolkit (/free/)" },
+    { "path": "/free/", "label": "Free Guides (/free/)" },
     { "path": "/contact/", "label": "Contact (/contact/)" },
     { "path": "/newsletter/", "label": "Newsletter (/newsletter/)" }
   ],

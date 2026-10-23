@@ -1,147 +1,17 @@
-<!DOCTYPE html><html lang="en" data-theme="light" data-theme-lock><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The AI Prompt Framework Cheatsheet · Free Download | Elvin Peters</title>
-<meta name="description" content="Two pages on the RTC method from The Artificial Advantage, with three worked before-and-after examples.">
-<link rel="canonical" href="https://elvinpeters.com/free/prompt-cheatsheet/">
-<meta property="og:title" content="The AI Prompt Framework Cheatsheet · Free Download">
-<meta property="og:description" content="Two pages on the RTC method from The Artificial Advantage, with three worked before-and-after examples.">
-<meta property="og:image" content="https://elvinpeters.com/img/og.jpg">
-<!-- GA4 + Google Ads -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','G-CLZ7N26J1Q');gtag('config','AW-637214471');</script>
-<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1699232654449762');fbq('track','PageView');</script>
-<!-- X pixel -->
-<script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
-},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
-a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css">
-<script src="/js/site.js"></script>
-<style>
-/* magnet LP — tokens only, no hex (see DESIGN-SYSTEM.md) */
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:var(--lh-body)}
-.mwrap{max-width:var(--w-wide);margin:0 auto;padding:0 22px}
-.mgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:start;padding:28px 0 64px}
-h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:var(--lh-tight);letter-spacing:-.01em;margin:14px 0 0}
-.hook{font-family:var(--serif);font-style:italic;font-size:var(--fs-lead);color:var(--accent-ink);margin:16px 0 8px}
-.tagline{font-size:var(--fs-lead);color:var(--ink-2);max-width:var(--measure);margin:0 0 14px}
-.blist{list-style:none;margin:6px 0 24px;padding:0}
-.blist li{position:relative;padding:8px 0 8px 28px;font-size:var(--fs-body)}
-.blist li::before{content:"";position:absolute;left:2px;top:16px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
-.byline{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line-soft);padding-top:18px;max-width:var(--measure)}
-.byline img{width:44px;height:44px;border-radius:50%;object-fit:cover}
-.byline span{font-size:var(--fs-sm);color:var(--muted)}
-.mcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-card);padding:28px;box-shadow:0 30px 70px -50px rgba(0,0,0,.5)}
-.mcover{display:block;margin:0 auto 22px;width:200px;height:auto;border-radius:var(--r-sm);box-shadow:0 18px 40px -22px rgba(0,0,0,.45)}
-.mcard h2{font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);line-height:var(--lh-snug)}
-.sub{color:var(--muted);font-size:var(--fs-sm);margin:6px 0 18px}
-.fieldrow{margin-bottom:12px}
-.btn--full{width:100%}
-.fine{font-size:var(--fs-label);color:var(--muted);text-align:center;margin-top:12px}
-.msg{font-size:var(--fs-sm);margin-top:12px;padding:11px 13px;border-radius:var(--r-sm);display:none}
-.msg.err{display:block;border:1px solid var(--warn);color:var(--warn)}
-.done{display:none;text-align:center}.done.on{display:block}
-.done .tick{width:60px;height:60px;border-radius:50%;border:1px solid var(--ok);display:grid;place-items:center;font-size:28px;color:var(--ok);margin:0 auto 16px}
-.done h2{margin-bottom:8px}.done p{color:var(--muted);font-size:var(--fs-sm);margin-bottom:18px}
-.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.mfoot{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:var(--fs-sm);text-align:center}
-.mfoot a{color:var(--muted);text-decoration:none}
-.mfoot a:hover{color:var(--accent-ink)}
-@media(max-width:920px){.mgrid{grid-template-columns:1fr;gap:30px;padding-bottom:44px}}
-</style></head><body>
-<!-- ep:nav -->
-<link rel="stylesheet" href="/css/header.css">
-<nav class="nav" aria-label="Main"><div class="container">
-  <a class="brandmark" href="/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>Elvin&nbsp;Peters</a>
-  <div class="links">
-    <a href="/">Home</a>
-    <a href="/free/">Free Guides</a>
-    <a href="/newsletter/">Newsletter</a>
-    <a href="/contact/">Contact</a>
-  </div>
-  <a class="nav-buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
-</div></nav>
-<!-- /ep:nav -->
-<div class="mwrap">
-<div class="mgrid">
-<div class="copy">
-<span class="label">Free guide</span>
-<h1>The AI Prompt Framework Cheatsheet</h1>
-<div class="hook">A good brief has three parts: a role, a task and a constraint.</div>
-<p class="tagline">Two pages on the RTC method from The Artificial Advantage, with three worked before-and-after examples.</p>
-<ul class="blist"><li>The three parts of a clear brief, with a template to copy</li><li>Three everyday requests rewritten, with notes on what changed</li><li>What to do after the first answer, and which part to fix when it misses</li></ul>
-<div class="byline"><img src="/img/headshot.jpg" alt="Elvin Peters" width="44" height="44">
-<span>Free from Elvin Peters, author of <em>The Artificial Advantage</em>. $50M+ in profitable ad spend, then advising brands inside Google.</span></div>
-</div>
-<div class="mcard" id="card">
-<div class="form-in">
-<h2>Get it free</h2>
-<div class="sub">Enter your email and it is yours. No spam, unsubscribe anytime.</div>
-<form id="f" novalidate>
-<div class="fieldrow"><input class="field" id="name" type="text" placeholder="First name (optional)" maxlength="80" autocomplete="given-name"></div>
-<div class="fieldrow"><input class="field" id="email" type="email" placeholder="Your best email" maxlength="120" required autocomplete="email"></div>
-<div class="hp" aria-hidden="true"><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
-<button class="btn btn--primary btn--full" type="submit" id="btn">Send me the guide</button>
-<div class="msg" id="msg"></div>
-<div class="fine">Instant access. We will also email you a copy.</div>
-</form>
-</div>
-<div class="done" id="done">
-<div class="tick">&#10003;</div>
-<h2>It is yours</h2>
-<p>Thanks<span id="dn"></span>. Your guide is ready, and a copy is on its way to your inbox.</p>
-<a class="btn btn--primary btn--full" id="dl" href="/dl/AI-Prompt-Framework-Cheatsheet.pdf" target="_blank" rel="noopener">Download the PDF</a>
-</div>
-</div>
-</div>
-<div class="mfoot"><a href="/free/">Free Guides</a> &middot; <a href="/newsletter/">Newsletter</a> &middot; <a href="/contact/">Contact</a> &middot; <a href="https://epeters.ca/?utm_source=elvinpeters.com&utm_medium=footer&utm_campaign=crosslink">Fun stuff</a> &middot; <a href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="/privacy.html">Privacy</a></div>
-<p class="amz-disclosure" style="font-size:12px;margin:0 0 20px;text-align:center;color:var(--muted);opacity:.85">As an Amazon Associate I earn from qualifying purchases.</p>
-</div>
-<script>
-(function(){
-  var SLUG="prompt-cheatsheet", TITLE="The AI Prompt Framework Cheatsheet", DL="/dl/AI-Prompt-Framework-Cheatsheet.pdf";
-  var GADS="AW-637214471/bylsCMuW0NUcEIe-7K8C", XEVT="";
-  var f=document.getElementById('f'),msg=document.getElementById('msg'),btn=document.getElementById('btn');
-  function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
-  function fail(t){msg.className='msg err';msg.textContent=t;}
-  function source(){
-    var base='magnet:'+SLUG;
-    try{var p=new URLSearchParams(location.search),b=[];
-      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=p.get(k);if(v)b.push(k.replace('utm_','')+'='+v);});
-      var g=p.get('gclid');if(g)b.push('gclid='+g);var tw=p.get('twclid');if(tw)b.push('twclid='+tw);
-      if(b.length)base=(base+' | '+b.join('&')).slice(0,290);
-    }catch(e){}
-    return base;
-  }
-  function convert(email){
-    // Enhanced conversions: hand Google the email (it hashes client-side) so it
-    // can match conversions cookies would lose. Set before firing the event.
-    try{if(email&&typeof gtag==='function')gtag('set','user_data',{email:email});}catch(e){}
-    try{if(XEVT&&typeof twq==='function')twq('event',XEVT,{});}catch(e){}
-    try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
-    try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG});}catch(e){}
-    try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG});}catch(e){}
-    try{if(typeof gtag==='function')gtag('event','free_optin',{magnet:SLUG,page_path:location.pathname});}catch(e){}
-  }
-  function reveal(name){
-    document.getElementById('dn').textContent=name?(' '+name):'';
-    document.querySelector('#card .form-in').style.display='none';
-    document.getElementById('done').classList.add('on');
-  }
-  f.addEventListener('submit',function(e){
-    e.preventDefault();msg.className='msg';msg.textContent='';
-    if(val('website')){reveal('');return;}
-    var email=val('email'),name=val('name');
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){return fail('Please enter a valid email.');}
-    btn.disabled=true;btn.textContent='Sending...';
-    var body=new URLSearchParams({name:name||'Magnet lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:val('website')}).toString();
-    fetch("https://ultimateaidirectory.com/api/lead",{method:'POST',mode:'cors',keepalive:true,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
-      .then(function(){convert(email);reveal(name);})
-      .catch(function(){convert(email);reveal(name);});  // always deliver the guide
-  });
-})();
-</script>
-</body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Director's Cheat Sheet (Free) | Elvin Peters</title>
+  <!-- The AI Prompt Framework Cheatsheet was retired on 2026-09-30 (offer strategy, section 4). Its address forwards to the Director's Cheat Sheet, so old links, emails and QR codes still land on a live guide. The old page is kept outside this public repo. -->
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://elvinpeters.com/free/directors-cheat-sheet/" />
+  <meta http-equiv="refresh" content="0; url=/free/directors-cheat-sheet/" />
+  <meta name="color-scheme" content="light" />
+  <script>location.replace('/free/directors-cheat-sheet/' + location.search + location.hash);</script>
+</head>
+<body style="font:18px/1.6 system-ui,sans-serif;background:#fff;color:#1f2a37;padding:40px 16px">
+  <p><a href="/free/directors-cheat-sheet/" style="color:#1d4ed8">If you aren't taken there automatically, go to the Director's Cheat Sheet.</a></p>
+</body>
+</html>

@@ -13,7 +13,7 @@
 // build.js reads too, so hand pages and generated pages cannot drift.
 //
 // What each part means:
-// - menu: Home, Free Toolkit, Newsletter, Contact on every page that carries a site
+// - menu: Home, Free Guides, Newsletter, Contact on every page that carries a site
 //   menu. /newsletter/ falls back to /updates/ while newsletter/index.html is still
 //   a redirect stub.
 // - unlisted: off every menu, noindex, and so out of sitemap.xml (build.js skips
