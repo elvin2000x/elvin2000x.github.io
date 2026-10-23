@@ -1,0 +1,45 @@
+{
+  "label": "Thank you",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Headline",
+      "default": "[Headline: you are in]"
+    },
+    {
+      "key": "paras",
+      "type": "list",
+      "label": "Paragraphs",
+      "default": [
+        "[Paragraph: what happens next]"
+      ]
+    },
+    {
+      "key": "order_label",
+      "type": "text",
+      "label": "Order label",
+      "default": "[Label: order]"
+    },
+    {
+      "key": "files_label",
+      "type": "text",
+      "label": "Downloads heading",
+      "default": "[Heading: your downloads]"
+    },
+    {
+      "key": "library",
+      "type": "text",
+      "label": "Library button",
+      "default": "[Button: open your library]"
+    }
+  ]
+}

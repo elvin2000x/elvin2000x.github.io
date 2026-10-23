@@ -303,12 +303,18 @@ function renderCompare() {
 const STACK_SITE = JSON.parse(fs.readFileSync(path.join(DIR, 'content', 'site.json'), 'utf8'));
 // SITE_STACK_MARKERS is set by Site Studio's editor previews only (tap a section
 // to edit it); a real build and the test site never set it.
+// SITE_STORE_TEST is set by Site Studio's previews and Test build: checkout buttons on
+// landing pages go to the test checkout there, the live one in a real build.
 const stackPages = require('./sections.js').buildAll(path.join(DIR, 'content'),
-  { site: STACK_SITE, markers: process.env.SITE_STACK_MARKERS === '1' });
+  { site: STACK_SITE, markers: process.env.SITE_STACK_MARKERS === '1', storeTest: process.env.SITE_STORE_TEST === '1' });
 for (const p of stackPages) {
   // A page made with New page (slice 3) gets the homepage's menu, so it can't drift.
-  const html = (p.file === 'index.html' || p.made) && /<!-- ep:nav[ >]/.test(p.html)
-    ? fillRegions(p.html, p.file, { 'nav': () => renderNav('index.html') }) : p.html;
+  // A landing page with "hide the menu" gets the same header with the logo alone, and
+  // the logo points at the page itself: nothing on it leads off the page.
+  const nav = p.landing && p.hideMenu ? () => renderNavBuybar({ logoOnly: true, brandHref: '/' + p.file.replace(/index\.html$/, '') })
+    : () => renderNav('index.html');
+  const html = (p.file === 'index.html' || p.made || p.landing) && /<!-- ep:nav[ >]/.test(p.html)
+    ? fillRegions(p.html, p.file, { 'nav': nav }) : p.html;
   const dest = path.join(OUT, p.file);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, html);

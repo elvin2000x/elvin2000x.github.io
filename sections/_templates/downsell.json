@@ -1,0 +1,46 @@
+{
+  "label": "Downsell",
+  "order": 3,
+  "stack": {
+    "title": "",
+    "frame": "landing",
+    "landing": {
+      "slug": "",
+      "old_slugs": [],
+      "funnel": "",
+      "hide_menu": true,
+      "step": "downsell",
+      "description": "[Description: one sentence for search and shares]"
+    },
+    "noindex": true,
+    "sections": [
+      {
+        "id": "steps",
+        "type": "lp-progress",
+        "data": {
+          "step": "2",
+          "steps": "4"
+        }
+      },
+      {
+        "id": "offer",
+        "type": "lp-offer",
+        "data": {
+          "bg": "",
+          "anchor": "",
+          "heading": "[Headline: the one extra that makes it work]",
+          "image": "",
+          "image_alt": "",
+          "paras": [
+            "[Paragraph: why this, why now]"
+          ],
+          "was": "[Was: $XX]",
+          "price": "[Price: $XX]",
+          "yes": "[Yes button: yes, add it]",
+          "no": "[No link: no thanks]",
+          "fallback": "[Declined: what to do next]"
+        }
+      }
+    ]
+  }
+}

@@ -138,9 +138,75 @@ const ORIGIN = 'https://elvinpeters.com';
 const PAGE_PATH = /^[a-z0-9][a-z0-9-]{0,60}\/index\.html$/;
 // Top-level folders a New page may never take (site code, Studio, generated areas).
 const RESERVED = new Set(['api', 'books', 'content', 'css', 'dl', 'essays', 'fr', 'img', 'js', 'node_modules', 'play', 'preview', 'scripts', 'sections', 'studio', 'titles', 'writing']);
+
+/* ---- landing pages (store build, 2026-10-23) ----
+   A stack with a "landing" block is a selling page at elvinpeters.com/<prefix>/<slug>/.
+   The prefix ("buy") and the checkout addresses live in content/funnels.json, so Elvin
+   changes them in Studio, never in code. Every address a page ever had keeps working:
+   old slugs and old prefixes build forward stubs that carry the query string and the
+   #fragment (UTMs, and the checkout's one-time #t= token). */
+const SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?(?:\/[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?)?$/;
+const PREFIX_RE = /^[a-z0-9](?:[a-z0-9-]{0,28}[a-z0-9])?$/;
+const FUNNEL_RE = /^[a-z0-9][a-z0-9-]{0,59}$/;
+const FUNNEL_DEFAULTS = { prefix: 'buy', old_prefixes: [],
+  store_base: 'https://api.elvinpeters.com/api/store', store_base_test: 'https://api.elvinpeters.com/store-test/api/store' };
+function funnelSettings(contentDir) {
+  const f = path.join(contentDir, 'funnels.json');
+  const got = fs.existsSync(f) ? readJson(f) : {};
+  return { ...FUNNEL_DEFAULTS, ...got, old_prefixes: Array.isArray(got.old_prefixes) ? got.old_prefixes : [] };
+}
+function checkFunnels(cfg) {
+  const errs = [];
+  if (!cfg || typeof cfg !== 'object' || Array.isArray(cfg)) return ['funnels.json must be an object'];
+  if (!PREFIX_RE.test(cfg.prefix || '')) errs.push('the address word can use a-z, 0-9 and dashes (up to 30)');
+  if (RESERVED.has(cfg.prefix)) errs.push('elvinpeters.com/' + cfg.prefix + '/ is reserved for the site itself');
+  if (cfg.old_prefixes != null && (!Array.isArray(cfg.old_prefixes) || cfg.old_prefixes.some(p => !PREFIX_RE.test(p) || p === cfg.prefix)))
+    errs.push('old address words must be a list of other words');
+  for (const k of ['store_base', 'store_base_test'])
+    if (cfg[k] != null && !/^https:\/\/[a-z0-9.-]+(\/[A-Za-z0-9._\/-]*)?$/.test(cfg[k])) errs.push(k + ' must be an https address');
+  return errs;
+}
+const landingDir = (prefix, slug) => prefix + '/' + slug + '/';
+// Placeholder text in a template: "[Headline: the one promise]". It must never ship,
+// so Studio's Publish and verify.js both refuse a visible section that still holds one.
+const PLACEHOLDER = /\[[A-Z][A-Za-z0-9 ,'&\/()-]{0,40}:[^\[\]\n]{1,200}\]/g;
+function placeholders(stack) {
+  const out = [], lib = {};
+  for (const t of library()) lib[t.type] = t;
+  const scan = (v, where) => {
+    if (typeof v === 'string') for (const m of v.match(PLACEHOLDER) || []) out.push({ where, text: m });
+    else if (Array.isArray(v)) v.forEach(x => scan(x, where));
+    else if (v && typeof v === 'object') Object.values(v).forEach(x => scan(x, where));
+  };
+  if (!stack || typeof stack !== 'object') return out;
+  scan(stack.title, 'Page name');
+  if (stack.landing) scan(stack.landing.description, 'Page settings');
+  (stack.sections || []).forEach((s, i) => {
+    if (s && !s.hidden) scan(s.data, 'Section ' + (i + 1) + ' (' + (lib[s.type] ? lib[s.type].label : s.type) + ')');
+  });
+  return out;
+}
+// The page an old address forwards to. JS keeps ?query and #fragment; the meta refresh is
+// the no-JS fallback. verify.js checks every one of these (ep:forward).
+function forwardStub(name, to) {
+  return '<!DOCTYPE html>\n' + BANNER(name) + '\n<!-- ep:forward -->\n<html lang="en"><head><meta charset="UTF-8" />' +
+    '<meta name="robots" content="noindex, follow" /><link rel="canonical" href="' + to + '" />' +
+    "<script>location.replace('" + to + "' + location.search + location.hash);</script>" +
+    '<meta http-equiv="refresh" content="0; url=' + to + '" /><title>Moved</title></head>' +
+    '<body><p><a href="' + to + '">' + to + '</a></p></body></html>\n';
+}
+// Templates for a new landing page: sections/_templates/<name>.json, each {label, order, stack}.
+function templates() {
+  const dir = path.join(SEC_DIR, '_templates');
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter(f => /^[a-z][a-z0-9-]{0,40}\.json$/.test(f))
+    .map(f => ({ name: f.slice(0, -5), ...readJson(path.join(dir, f)) }))
+    .sort((a, b) => (a.order || 99) - (b.order || 99));
+}
 // A "buybox" field is shorthand for the object _partials/buybox.html reads.
 const BUYBOX_FIELDS = [
   { key: 'label', type: 'html', label: 'Button', default: 'Get the book on Amazon &rarr;' },
+  { key: 'href', type: 'text', label: 'Button link (empty: the book on Amazon)' },
   { key: 'aria', type: 'text', label: 'Button, read aloud', default: 'Get the book on Amazon' },
   { key: 'avail', type: 'text', label: 'Formats line under the Amazon badge (empty hides the badge)', default: 'Kindle, paperback and hardcover' },
   { key: 'price', type: 'text', label: 'Price line (optional)' },
@@ -204,12 +270,33 @@ function checkStack(stack, name) {
   if (stack.path != null && !PAGE_PATH.test(stack.path)) errs.push('path must look like <name>/index.html');
   if (stack.path != null && stack.preview_path != null) errs.push('a page has a path or a preview_path, not both');
   if (stack.path != null && RESERVED.has(String(stack.path).split('/')[0])) errs.push('the address /' + String(stack.path).split('/')[0] + '/ is reserved');
+  if (stack.landing != null) {
+    const L = stack.landing;
+    if (typeof L !== 'object' || Array.isArray(L)) errs.push('landing must be an object');
+    else {
+      if (!SLUG_RE.test(L.slug || '')) errs.push('the address can use a-z, 0-9 and dashes (one / at most)');
+      if (stack.path != null || stack.preview_path != null) errs.push('a landing page has its own address, not a path');
+      if (L.old_slugs != null && (!Array.isArray(L.old_slugs) || L.old_slugs.some(s => !SLUG_RE.test(s) || s === L.slug))) errs.push('old addresses must be a list of other addresses');
+      if (L.funnel != null && L.funnel !== '' && !FUNNEL_RE.test(L.funnel)) errs.push('the funnel key can use a-z, 0-9 and dashes');
+      if (L.hide_menu != null && typeof L.hide_menu !== 'boolean') errs.push('hide_menu must be true or false');
+      for (const k of ['description'])
+        if (L[k] != null && (typeof L[k] !== 'string' || /[<>"]/.test(L[k]))) errs.push(k + ' must be plain text');
+    }
+    if (typeof stack.title !== 'string' || /[<>"]/.test(stack.title)) errs.push('the page name must be plain text');
+  }
+  if ((stack.frame === 'landing') !== (stack.landing != null)) errs.push(stack.landing != null ? 'a landing page uses the landing frame' : 'the landing frame is for landing pages');
   if (!Array.isArray(stack.sections)) return errs.concat('sections must be a list');
-  const types = new Set(library().map(t => t.type)), ids = new Set();
+  const lib = new Map(library().map(t => [t.type, t])), ids = new Set();
   stack.sections.forEach((s, i) => {
     const at = 'section ' + (i + 1);
     if (!s || typeof s !== 'object') return errs.push(at + ' is not an object');
-    if (!types.has(s.type)) errs.push(at + ' uses unknown section type "' + s.type + '"');
+    const t = lib.get(s.type);
+    if (!t) errs.push(at + ' uses unknown section type "' + s.type + '"');
+    else {
+      if (t.frames && !t.frames.includes(stack.frame)) errs.push(at + ' (' + t.label + ') works on landing pages only');
+      for (const f of t.fields) if (f.max && s.data && Array.isArray(s.data[f.key]) && s.data[f.key].length > f.max)
+        errs.push(at + ' (' + t.label + ') has room for ' + f.max + ' ' + f.label.toLowerCase());
+    }
     if (!/^[a-z][a-z0-9-]{0,40}$/.test(s.id || '')) errs.push(at + ' needs an id (a-z, 0-9, dashes)');
     else if (ids.has(s.id)) errs.push('two sections use the id ' + s.id);
     ids.add(s.id);
@@ -220,7 +307,8 @@ function checkStack(stack, name) {
 
 function renderSection(s, globals) {
   const file = path.join(SEC_DIR, s.type, 'section.html');
-  const html = renderTpl(file, s.type + ' (' + s.id + ')', [globals, s.data]);
+  // store and funnel are a landing page's checkout address; empty everywhere else.
+  const html = renderTpl(file, s.type + ' (' + s.id + ')', [{ store: '', funnel: '', page_url: '', ...globals }, s.data]);
   const note = s.note ? '<!-- ' + s.note + ' -->\n' : '';
   return note + html;
 }
@@ -228,21 +316,25 @@ function renderSection(s, globals) {
 /* Render one stack to a full page. `site` is content/site.json. `markers` (Studio
    previews only, never the real build) wraps every section in ep:sec comments so
    a tap on the preview can find its section. */
-function renderStack(stack, name, { site, isHome, markers }) {
+function renderStack(stack, name, { site, isHome, markers, funnels, store }) {
   const errs = checkStack(stack, name);
   if (errs.length) throw new Error('content/' + name + '.json: ' + errs.join('; '));
-  const globals = { site, isHome: !!isHome, amazon: site.amazon_url };
+  // page_url: a New page's own address, a landing page's /<prefix>/<slug>/; the two
+  // homepages keep elvinpeters.com/. robots_off: hidden from Google. Every page that is
+  // not the homepage, unless a New page switched it off ("noindex": false).
+  const L = stack.landing;
+  const fcfg = funnels || FUNNEL_DEFAULTS;
+  const page_url = ORIGIN + '/' + (L ? landingDir(fcfg.prefix, L.slug) : !isHome && stack.path ? stack.path.replace(/index\.html$/, '') : '');
+  const robots_off = !isHome && stack.noindex !== false;
+  const globals = { site, isHome: !!isHome, amazon: site.amazon_url, page_url,
+    store: L ? store || fcfg.store_base : '', funnel: L ? L.funnel || '' : '' };
   const parts = stack.sections.filter(s => !s.hidden).map(s => {
     const html = renderSection(s, globals);
     return stack.markers || markers ? '<!-- ep:sec:' + s.id + ' -->\n' + html + '\n<!-- /ep:sec:' + s.id + ' -->' : html;
   });
   const frame = path.join(SEC_DIR, '_frames', stack.frame + '.html');
-  // page_url: a New page's own address; the two homepages keep elvinpeters.com/.
-  // robots_off: hidden from Google. Every page that is not the homepage, unless a
-  // New page switched it off ("noindex": false).
-  const page_url = ORIGIN + '/' + (!isHome && stack.path ? stack.path.replace(/index\.html$/, '') : '');
-  const robots_off = !isHome && stack.noindex !== false;
-  return renderTpl(frame, '_frames/' + stack.frame, [{ ...globals, page_url, robots_off, sections: parts.join('\n\n') }]) + '\n';
+  const page = { title: stack.title || '', description: (L && L.description) || '', hide_menu: !!(L && L.hide_menu) };
+  return renderTpl(frame, '_frames/' + stack.frame, [{ ...globals, robots_off, page, sections: parts.join('\n\n') }]) + '\n';
 }
 
 /* The page a stack becomes: which file, and whether it's the homepage.
@@ -261,15 +353,33 @@ function redirectStub(name) {
     '<body><p>This page is now the homepage: <a href="/">elvinpeters.com</a>.</p></body></html>\n';
 }
 
-function buildAll(contentDir, { site, banner = true, markers = false } = {}) {
+// storeTest: Studio previews and the Test host point every checkout button at the
+// test checkout, so a QA click can never reach live Stripe. A real build never sets it.
+function buildAll(contentDir, { site, banner = true, markers = false, storeTest = false } = {}) {
   const names = stackNames(contentDir);
   if (!names.length) return [];
   const homeCfg = readJson(path.join(contentDir, 'homepage.json'));
   if (!names.includes(homeCfg.home)) throw new Error('content/homepage.json: "' + homeCfg.home + '" is not a page (have ' + names.join(', ') + ')');
+  const funnels = funnelSettings(contentDir);
+  const ferrs = checkFunnels(funnels);
+  if (ferrs.length) throw new Error('content/funnels.json: ' + ferrs.join('; '));
+  const store = storeTest ? funnels.store_base_test : funnels.store_base;
   const out = [];
   for (const name of names) {
     const stack = readJson(path.join(contentDir, name + '.json'));
     const isHome = name === homeCfg.home;
+    if (stack.landing) {
+      if (isHome) throw new Error('content/homepage.json: a landing page cannot be the homepage');
+      let html = renderStack(stack, name, { site, isHome: false, markers, funnels, store });
+      if (banner) html = withBanner(html, name);
+      const L = stack.landing, to = ORIGIN + '/' + landingDir(funnels.prefix, L.slug);
+      out.push({ name, file: landingDir(funnels.prefix, L.slug) + 'index.html', html, isHome: false, landing: true, hideMenu: !!L.hide_menu });
+      for (const p of [funnels.prefix, ...funnels.old_prefixes])
+        for (const s of [L.slug, ...(L.old_slugs || [])])
+          if (p !== funnels.prefix || s !== L.slug)
+            out.push({ name, file: landingDir(p, s) + 'index.html', html: forwardStub(name, to), stub: true, forward: true });
+      continue;
+    }
     let html = renderStack(stack, name, { site, isHome, markers });
     if (banner) html = withBanner(html, name);
     if (isHome) {
@@ -289,4 +399,5 @@ function buildAll(contentDir, { site, banner = true, markers = false } = {}) {
   return out;
 }
 
-module.exports = { parse, run, expand, readTpl, renderStack, renderSection, buildAll, checkStack, library, sectionMeta, stackNames, withBanner, blankData, BANNER, STACK_RE, SEC_DIR, PAGE_PATH, RESERVED };
+module.exports = { parse, run, expand, readTpl, renderStack, renderSection, buildAll, checkStack, library, sectionMeta, stackNames, withBanner, blankData, BANNER, STACK_RE, SEC_DIR, PAGE_PATH, RESERVED,
+  SLUG_RE, PREFIX_RE, FUNNEL_RE, PLACEHOLDER, funnelSettings, checkFunnels, placeholders, forwardStub, templates, landingDir };

@@ -1,0 +1,60 @@
+{
+  "label": "Thank you",
+  "order": 5,
+  "stack": {
+    "title": "",
+    "frame": "landing",
+    "landing": {
+      "slug": "",
+      "old_slugs": [],
+      "funnel": "",
+      "hide_menu": true,
+      "step": "thank-you",
+      "description": "[Description: one sentence for search and shares]"
+    },
+    "noindex": true,
+    "sections": [
+      {
+        "id": "steps",
+        "type": "lp-progress",
+        "data": {
+          "step": "4",
+          "steps": "4"
+        }
+      },
+      {
+        "id": "thanks",
+        "type": "lp-thanks",
+        "data": {
+          "anchor": "",
+          "heading": "[Headline: you are in]",
+          "paras": [
+            "[Paragraph: what happens next]"
+          ],
+          "order_label": "[Label: order]",
+          "files_label": "[Heading: your downloads]",
+          "library": "[Button: open your library]"
+        }
+      },
+      {
+        "id": "print",
+        "type": "lp-amazon",
+        "data": {
+          "bg": "",
+          "anchor": "",
+          "heading": "[Heading: prefer print?]",
+          "buttons": [
+            {
+              "label": "[Button: buy the paperback on Amazon]",
+              "href": ""
+            },
+            {
+              "label": "[Button: buy the hardcover on Amazon]",
+              "href": ""
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

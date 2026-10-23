@@ -1,0 +1,16 @@
+<section class="lp-sec lp-offer{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+    <h1>{{heading}}</h1>
+{{#image}}
+    <img class="lp-offer__img" src="{{image}}" alt="{{image_alt}}" fetchpriority="high">
+{{/image}}
+{{#paras}}
+    <p>{{.}}</p>
+{{/paras}}
+    <p class="lp-price"><s data-store="was">{{was}}</s> <strong data-store="price">{{price}}</strong></p>
+    <p class="lp-error" data-store="error" hidden></p>
+    <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>{{yes}}</button>
+    <button type="button" class="lp-no" data-store-decline>{{no}}</button>
+    <div class="lp-fallback" data-store-fallback hidden><p>{{fallback}}</p></div>
+  </div>
+</section>

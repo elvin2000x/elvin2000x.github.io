@@ -1,0 +1,40 @@
+{
+  "label": "Guarantee",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading",
+      "default": "[Heading: the guarantee]"
+    },
+    {
+      "key": "text",
+      "type": "html",
+      "label": "Words",
+      "default": "[Guarantee: the promise and how to claim it]"
+    }
+  ]
+}

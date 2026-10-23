@@ -72,14 +72,45 @@ function* htmlFiles(dir, rel) {
   }
 }
 
+// Landing page forwards (store build, 2026-10-23): an old /<prefix>/<slug>/ address after
+// Elvin renames a page or the prefix. Same shape as a moved stub, but the target is a
+// page on this site, and it must exist, or an ad or email link lands on a 404.
+const isForward = html => html.includes('<!-- ep:forward -->');
+function forwardCheck(html) {
+  const to = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
+  if (!to || !/^https:\/\/elvinpeters\.com\/[a-z0-9\/-]*$/.test(to)) return ['forward without an elvinpeters.com canonical'];
+  const out = [];
+  if (!/<meta name="robots" content="noindex/.test(html)) out.push('forward is not noindex');
+  if (!html.includes(`<meta http-equiv="refresh" content="0; url=${to}"`)) out.push('forward refresh does not match its canonical');
+  if (!html.includes(`location.replace('${to}' + location.search + location.hash)`)) out.push('forward JS drops the query string or hash');
+  const rel = to.replace('https://elvinpeters.com/', '');
+  if (!fs.existsSync(path.join(ROOT, rel, 'index.html'))) out.push('forwards to a page that does not exist: /' + rel);
+  return out;
+}
+
 // Moved-section stubs are only redirects (ticket #12): their own checks, none of the page checks.
-const MOVED_STUBS = [], PAGES = [];
-for (const rel of htmlFiles(ROOT, ''))
-  (isMovedStub(fs.readFileSync(path.join(ROOT, rel), 'utf8')) ? MOVED_STUBS : PAGES).push(rel);
+const MOVED_STUBS = [], FORWARDS = [], PAGES = [];
+for (const rel of htmlFiles(ROOT, '')) {
+  const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  (isMovedStub(html) ? MOVED_STUBS : isForward(html) ? FORWARDS : PAGES).push(rel);
+}
 for (const rel of MOVED_STUBS) {
   const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
   for (const msg of [...epcaTripwire(html), ...movedStubCheck(html)]) fail(rel, msg);
 }
+for (const rel of FORWARDS) for (const msg of forwardCheck(fs.readFileSync(path.join(ROOT, rel), 'utf8'))) fail(rel, msg);
+
+// PLACEHOLDERS (store build): template text like "[Headline: the one promise]" must never
+// ship. Site Studio refuses to publish a page that holds one; this catches a push from
+// anywhere else. Hidden sections are skipped: they are not on the page.
+(function () {
+  const S = require(path.join(ROOT, 'sections.js'));
+  for (const name of S.stackNames(path.join(ROOT, 'content'))) {
+    let stack;
+    try { stack = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', name + '.json'), 'utf8')); } catch (e) { continue; }
+    for (const p of S.placeholders(stack)) fail('content/' + name + '.json', p.where + ' still has placeholder text: ' + p.text.slice(0, 80));
+  }
+})();
 
 for (const rel of PAGES) {
   const html = fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -527,5 +558,5 @@ if (fails.length) {
   for (const f of fails) console.log('  ✗ ' + f);
   process.exit(1);
 }
-console.log('verify: GREEN (' + PAGES.length + ' pages checked, ' + MOVED_STUBS.length + ' moved stubs, ' + warns.length + ' warnings)');
+console.log('verify: GREEN (' + PAGES.length + ' pages checked, ' + MOVED_STUBS.length + ' moved stubs, ' + FORWARDS.length + ' forwards, ' + warns.length + ' warnings)');
 })();

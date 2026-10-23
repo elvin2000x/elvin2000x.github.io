@@ -1,0 +1,26 @@
+<section class="lp-sec{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+    <h2>{{heading}}</h2>
+    <div class="lp-stack">
+{{#image}}
+      <img class="lp-stack__shot" src="{{image}}" alt="{{image_alt}}" loading="lazy">
+{{/image}}
+      <ul class="lp-stack__items">
+{{#items}}
+        <li>{{#image}}<img src="{{image}}" alt="{{image_alt}}" loading="lazy">{{/image}}<span class="lp-stack__name">{{name}}</span><span class="lp-stack__value">{{value}}</span></li>
+{{/items}}
+      </ul>
+      <p class="lp-stack__total"><span>{{total_label}}</span> <s>{{total}}</s></p>
+      <p class="lp-stack__price"><span>{{price_label}}</span> <strong>{{price}}</strong></p>
+{{#bump}}
+      <label class="lp-bump">{{#image}}<img src="{{image}}" alt="{{image_alt}}" loading="lazy">{{/image}}<input type="checkbox" data-store-bump> <span>{{label}} <strong>{{price}}</strong></span></label>
+{{/bump}}
+{{#button}}
+      {{>lp-button}}
+{{/button}}
+{{#note}}
+      <p class="lp-note">{{note}}</p>
+{{/note}}
+    </div>
+  </div>
+</section>

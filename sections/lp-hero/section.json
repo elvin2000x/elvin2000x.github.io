@@ -1,0 +1,74 @@
+{
+  "label": "Landing hero",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "eyebrow",
+      "type": "text",
+      "label": "Small line above"
+    },
+    {
+      "key": "headline",
+      "type": "html",
+      "label": "Headline",
+      "default": "[Headline: the one promise]"
+    },
+    {
+      "key": "sub",
+      "type": "html",
+      "label": "Line under",
+      "default": "[Subhead: what they get and how fast]"
+    },
+    {
+      "key": "button",
+      "type": "object",
+      "label": "Button",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Words",
+          "default": "[Button: the action]"
+        },
+        {
+          "key": "checkout",
+          "type": "bool",
+          "label": "Goes to checkout",
+          "default": true
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "key": "note",
+      "type": "html",
+      "label": "Small print under the button"
+    },
+    {
+      "key": "image",
+      "type": "image",
+      "label": "Image",
+      "alt": "image_alt",
+      "size": [
+        800,
+        800
+      ]
+    },
+    {
+      "key": "image_alt",
+      "type": "text",
+      "label": "Image description"
+    }
+  ]
+}

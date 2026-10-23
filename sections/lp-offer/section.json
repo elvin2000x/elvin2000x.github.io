@@ -1,0 +1,87 @@
+{
+  "label": "Upsell or downsell",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Headline",
+      "default": "[Headline: the one extra that makes it work]"
+    },
+    {
+      "key": "image",
+      "type": "image",
+      "label": "Image",
+      "alt": "image_alt",
+      "size": [
+        800,
+        800
+      ]
+    },
+    {
+      "key": "image_alt",
+      "type": "text",
+      "label": "Image description"
+    },
+    {
+      "key": "paras",
+      "type": "list",
+      "label": "Paragraphs",
+      "default": [
+        "[Paragraph: why this, why now]"
+      ]
+    },
+    {
+      "key": "was",
+      "type": "text",
+      "label": "Was",
+      "default": "[Was: $XX]"
+    },
+    {
+      "key": "price",
+      "type": "text",
+      "label": "Price",
+      "default": "[Price: $XX]"
+    },
+    {
+      "key": "yes",
+      "type": "text",
+      "label": "Yes button",
+      "default": "[Yes button: yes, add it]"
+    },
+    {
+      "key": "no",
+      "type": "text",
+      "label": "No link",
+      "default": "[No link: no thanks]"
+    },
+    {
+      "key": "fallback",
+      "type": "html",
+      "label": "If the card is declined",
+      "default": "[Declined: what to do next]"
+    }
+  ]
+}
