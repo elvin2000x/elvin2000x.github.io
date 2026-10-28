@@ -245,7 +245,7 @@ function blankData(fields) {
     else if (f.type === 'bool') d[f.key] = false;
     else if (f.type === 'list') d[f.key] = f.fields ? [blankData(f.fields)] : [''];
     else if (f.type === 'object') d[f.key] = null;
-    else if (f.type === 'choice') d[f.key] = (f.options || [''])[0];
+    else if (f.type === 'choice') { const o = (f.options || [''])[0]; d[f.key] = o && typeof o === 'object' ? o.value : o; }
     else d[f.key] = '';
   }
   return d;
@@ -279,6 +279,7 @@ function checkStack(stack, name) {
       if (L.old_slugs != null && (!Array.isArray(L.old_slugs) || L.old_slugs.some(s => !SLUG_RE.test(s) || s === L.slug))) errs.push('old addresses must be a list of other addresses');
       if (L.funnel != null && L.funnel !== '' && !FUNNEL_RE.test(L.funnel)) errs.push('the funnel key can use a-z, 0-9 and dashes');
       if (L.hide_menu != null && typeof L.hide_menu !== 'boolean') errs.push('hide_menu must be true or false');
+      if (L.step != null && L.step !== '' && !FUNNEL_RE.test(L.step)) errs.push('the step can use a-z, 0-9 and dashes');
       for (const k of ['description'])
         if (L[k] != null && (typeof L[k] !== 'string' || /[<>"]/.test(L[k]))) errs.push(k + ' must be plain text');
     }
@@ -333,7 +334,7 @@ function renderStack(stack, name, { site, isHome, markers, funnels, store }) {
     return stack.markers || markers ? '<!-- ep:sec:' + s.id + ' -->\n' + html + '\n<!-- /ep:sec:' + s.id + ' -->' : html;
   });
   const frame = path.join(SEC_DIR, '_frames', stack.frame + '.html');
-  const page = { title: stack.title || '', description: (L && L.description) || '', hide_menu: !!(L && L.hide_menu) };
+  const page = { title: stack.title || '', description: (L && L.description) || '', hide_menu: !!(L && L.hide_menu), step: (L && L.step) || '' };
   return renderTpl(frame, '_frames/' + stack.frame, [{ ...globals, robots_off, page, sections: parts.join('\n\n') }]) + '\n';
 }
 
