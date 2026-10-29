@@ -1,0 +1,46 @@
+{
+  "label": "Shop",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading",
+      "default": "[Heading: the shop]"
+    },
+    {
+      "key": "buy",
+      "type": "text",
+      "label": "Button",
+      "default": "[Button: buy]"
+    },
+    {
+      "key": "empty",
+      "type": "text",
+      "label": "If the shop cannot load",
+      "default": "[Message: the shop could not load, try again]"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "label": "Shop",
+  "order": 6,
+  "stack": {
+    "title": "",
+    "frame": "landing",
+    "landing": {
+      "slug": "",
+      "old_slugs": [],
+      "funnel": "",
+      "hide_menu": false,
+      "step": "",
+      "description": "[Description: one sentence for search and shares]"
+    },
+    "noindex": true,
+    "sections": [
+      {
+        "id": "shop",
+        "type": "lp-shop",
+        "data": {
+          "bg": "",
+          "anchor": "",
+          "heading": "[Heading: the shop]",
+          "buy": "[Button: buy]",
+          "empty": "[Message: the shop could not load, try again]"
+        }
+      }
+    ]
+  }
+}

@@ -7,7 +7,7 @@
 {{/image}}
       <ul class="lp-stack__items">
 {{#items}}
-        <li>{{#image}}<img src="{{image}}" alt="{{image_alt}}" loading="lazy">{{/image}}<span class="lp-stack__name">{{name}}</span><span class="lp-stack__value">{{value}}</span></li>
+        <li>{{#image}}<img src="{{image}}" alt="{{image_alt}}" loading="lazy">{{/image}}<span class="lp-stack__name">{{name}}</span><span class="lp-stack__value">{{#was}}<s{{#product}} data-lp-price="{{product}}"{{/product}}>{{was}}</s> {{/was}}{{^was}}{{#product}}<s data-lp-price="{{product}}"></s> {{/product}}{{/was}}{{value}}</span></li>
 {{/items}}
       </ul>
       <p class="lp-stack__total"><span>{{total_label}}</span> <s>{{total}}</s></p>

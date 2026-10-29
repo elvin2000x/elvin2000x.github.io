@@ -61,6 +61,13 @@ body.lp{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--san
 .lp-thanks h2{ font-size:24px; margin-top:28px }
 .lp-thanks__files{ padding-left:20px; margin:0 0 20px }
 
+/* shop: one row per product (layout only until the brand spec) */
+.lp-shop{ list-style:none; margin:0; padding:0 }
+.lp-shop li{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line) }
+.lp-shop img{ width:56px; height:56px; object-fit:contain; flex:none }
+.lp-shop__name{ flex:1; min-width:0 }
+.lp-shop__price{ font-weight:600; white-space:nowrap }
+
 /* quotes, guarantee, questions */
 .lp-quotes{ display:grid; gap:16px }
 .lp-quotes figure{ margin:0; padding:20px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card) }

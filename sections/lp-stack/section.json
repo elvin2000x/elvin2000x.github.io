@@ -72,6 +72,16 @@
           "default": "[Item: name and what it does]"
         },
         {
+          "key": "product",
+          "type": "product",
+          "label": "Product"
+        },
+        {
+          "key": "was",
+          "type": "text",
+          "label": "Was"
+        },
+        {
           "key": "value",
           "type": "text",
           "label": "Value",
