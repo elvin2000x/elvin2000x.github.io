@@ -102,18 +102,24 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     if (bar && n) bar.style.width = Math.min(100, Math.round(s / n * 100)) + '%';
   });
   /* A buy button carries the visitor's UTMs from this tab (js/site.js keeps them),
-     whatever page they first landed on. funnel.js does the same for its POST path. */
+     whatever page they first landed on, and bump=1 when the add-on box is ticked.
+     funnel.js does the same for its POST path. */
   document.querySelectorAll('a[data-store-checkout]').forEach(function (a) {
     a.addEventListener('click', function () {
       try {
         var u = new URL(a.href), t = window.EPUtm ? window.EPUtm.get() : {};
         Object.keys(t).forEach(function (k) { if (!u.searchParams.has(k)) u.searchParams.set(k, t[k]); });
+        var box = (a.closest('section') || document).querySelector('[data-store-bump]');
+        if (box && box.checked) u.searchParams.set('bump', '1'); else u.searchParams.delete('bump');
         a.href = u.toString();
       } catch (e) {}
     });
   });
-  /* Purchase pixels, once per order: the checkout's funnel.js fires store:purchase
-     on the thank-you step. purchase_id is the dedupe id for every pixel. */
+</script>
+<script>
+  /* Purchase pixels, once per order: the checkout's funnel.js fires store:purchase on the
+     thank-you step, and purchase_id is the dedupe id for every pixel. Its own script, because
+     Studio previews drop pixel scripts and the step bar above must still run there. */
   document.addEventListener('store:purchase', function (e) {
     var d = e.detail || {}, id = String(d.purchase_id || ''), v = +d.value || 0, cur = d.currency || 'USD';
     if (!id) return;
