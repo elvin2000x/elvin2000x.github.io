@@ -3,5 +3,5 @@
   "prefix": "buy",
   "old_prefixes": [],
   "store_base": "https://api.elvinpeters.com/api/store",
-  "store_base_test": "https://api.elvinpeters.com/store-test/api/store"
+  "store_base_test": "https://test.elvinpeters.com/store-test/api/store"
 }

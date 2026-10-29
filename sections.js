@@ -149,7 +149,7 @@ const SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?(?:\/[a-z0-9](?:[a-z0-9-]{
 const PREFIX_RE = /^[a-z0-9](?:[a-z0-9-]{0,28}[a-z0-9])?$/;
 const FUNNEL_RE = /^[a-z0-9][a-z0-9-]{0,59}$/;
 const FUNNEL_DEFAULTS = { prefix: 'buy', old_prefixes: [],
-  store_base: 'https://api.elvinpeters.com/api/store', store_base_test: 'https://api.elvinpeters.com/store-test/api/store' };
+  store_base: 'https://api.elvinpeters.com/api/store', store_base_test: 'https://test.elvinpeters.com/store-test/api/store' };
 function funnelSettings(contentDir) {
   const f = path.join(contentDir, 'funnels.json');
   const got = fs.existsSync(f) ? readJson(f) : {};
