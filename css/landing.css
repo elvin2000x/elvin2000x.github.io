@@ -89,3 +89,60 @@ body.lp{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--san
   .lp-sec{ padding:40px 16px }
   .lp-stack{ padding:16px }
 }
+
+/* Brand layer (art direction #621, approved 2026-10-29): light pages, navy text, gold only
+   on navy or as a fill behind navy text or at 24px and up, no red. EB Garamond headings,
+   Inter body 18px, even-width digits for prices. */
+:root{ --lp-navy:#0a1828; --lp-navy-2:#060f1a; --lp-gold:#c9a250; --lp-band:#f0f5fa; --lp-soft:#6a8faa }
+body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
+.lp h1, .lp h2, .lp h3{ font-family:'EB Garamond',var(--serif); color:var(--lp-navy) }
+.lp h1{ font-size:44px } .lp h2{ font-size:36px }
+.lp-sec p, .lp-note, .lp-lede{ color:var(--lp-navy) }
+.lp-sec--tint{ background:var(--lp-band) }
+.lp-note, .lp-foot, .lp-foot a, .lp-quotes figcaption, .lp-stack__value{ color:var(--lp-navy); opacity:.78 }
+.lp a{ color:var(--lp-navy) }
+.lp-price strong, .lp-stack__price strong, .lp-stack__value, .lp-shop__price, .lp-basket__list li{ font-variant-numeric:tabular-nums }
+
+/* buttons: gold fill, navy text, 2px navy border; hover navy fill, gold text */
+.lp .btn--primary, .lp .btn--primary:hover{ background:var(--lp-gold); color:var(--lp-navy); border:2px solid var(--lp-navy); box-shadow:none; filter:none }
+.lp .btn--primary:hover, .lp .btn--primary:focus-visible{ background:var(--lp-navy); color:var(--lp-gold) }
+.lp .btn--ghost{ border:2px solid var(--lp-navy); color:var(--lp-navy) }
+.lp-no{ color:var(--lp-navy); font-size:18px; min-height:48px }
+
+/* the value stack: a navy price band with the price large in gold */
+.lp-stack{ background:#fff; border:1px solid var(--lp-navy); box-shadow:none; padding:0; overflow:hidden }
+.lp-stack__shot, .lp-stack__items, .lp-stack__total, .lp-bump, .lp-note{ margin-left:24px; margin-right:24px }
+.lp-stack__shot{ margin-top:24px }
+.lp-stack__items li{ border-bottom:1px solid var(--lp-band); min-height:56px }
+.lp-stack__name{ font-size:20px }
+.lp-stack__total{ font-weight:700; color:var(--lp-navy) }
+.lp-stack__total s{ color:var(--lp-navy); opacity:.6 }
+.lp-stack__price{ margin:16px 0 0; padding:20px 24px; background:linear-gradient(var(--lp-navy),var(--lp-navy-2)); color:#fff }
+.lp-stack__price strong{ color:var(--lp-gold); font-size:44px }
+.lp-stack .lp-cta{ width:calc(100% - 48px); margin:16px 24px 24px }
+
+/* "Free" pill: gold fill with navy text */
+.lp-stack__value em, .lp-pill{ font-style:normal; background:var(--lp-gold); color:var(--lp-navy); border-radius:999px; padding:2px 10px; font-weight:700 }
+
+/* progress: one segment per step, done navy, current navy with a gold tip, to come pale */
+.lp-progress__track{ display:flex; gap:4px; background:none; height:10px; overflow:visible }
+.lp-progress__track i{ display:none }
+.lp-progress__track b{ flex:1; border-radius:5px; border:1px solid var(--lp-navy); background:var(--lp-band) }
+.lp-progress__track b.is-done{ background:var(--lp-navy) }
+.lp-progress__track b.is-now{ background:linear-gradient(90deg,var(--lp-navy) 80%,var(--lp-gold) 80%) }
+.lp-progress__label{ color:var(--lp-navy); font-size:16px }
+
+/* the add-on box: navy border, large checkbox, whole box clickable */
+.lp-bump{ border:2px solid var(--lp-navy); border-style:solid; background:#fff; padding:16px }
+.lp-bump input{ width:28px; height:28px; accent-color:var(--lp-navy) }
+
+/* phone: 16px side margins, 56px thumbnails, the pay button sticks to the bottom */
+@media (max-width:640px){
+  .lp-sec, .lp-progress{ padding-left:16px; padding-right:16px }
+  .lp h1{ font-size:32px } .lp h2{ font-size:28px }
+  .lp-stack__shot, .lp-stack__items, .lp-stack__total, .lp-bump, .lp-note{ margin-left:16px; margin-right:16px }
+  .lp-stack__items li{ flex-wrap:wrap }
+  .lp-stack .lp-cta{ position:sticky; bottom:0; z-index:5; width:calc(100% - 32px); margin:16px 16px 0; box-shadow:0 -8px 16px #fff }
+}
+/* product tiles with no picture yet: a navy tile, never a broken image */
+.lp-stack__items img[src=""], .lp-shop img[src=""]{ visibility:hidden }

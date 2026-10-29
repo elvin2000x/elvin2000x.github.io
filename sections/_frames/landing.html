@@ -100,6 +100,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     var s = +el.getAttribute('data-step') || 0, n = +el.getAttribute('data-steps') || 0;
     var bar = el.querySelector('[data-store-progress-bar]');
     if (bar && n) bar.style.width = Math.min(100, Math.round(s / n * 100)) + '%';
+    var track = el.querySelector('.lp-progress__track');
+    if (track && n && !track.querySelector('b')) for (var i = 1; i <= n; i++) { var b = document.createElement('b'); b.className = i < s ? 'is-done' : i === s ? 'is-now' : ''; track.appendChild(b); }
   });
   /* A buy button carries the visitor's UTMs from this tab (js/site.js keeps them),
      whatever page they first landed on, and bump=1 when the add-on box is ticked.
