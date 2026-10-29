@@ -91,6 +91,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
 <form id="f" novalidate>
 <div class="fieldrow"><input class="field" id="name" type="text" placeholder="First name (optional)" maxlength="80" autocomplete="given-name"></div>
 <div class="fieldrow"><input class="field" id="email" type="email" placeholder="Your best email" maxlength="120" required autocomplete="email"></div>
+<div class="fieldrow" id="bookrow" hidden><label for="book" id="bookq"></label><input class="field" id="book" type="text" maxlength="80" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
 <div class="hp" aria-hidden="true"><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
 <button class="btn btn--primary btn--full" type="submit" id="btn">Send me the Toolkit</button>
 <div class="msg" id="msg" role="alert"></div>
@@ -125,6 +126,10 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
   // this page: double opt-in, then fulfill.py emails a private 7-day link.
   // ?m=expired (the link-expired landing) asks for a fresh link instead.
   var SLUG="book1-toolkit", TITLE="The Artificial Advantage Toolkit";
+  /* The book check: the Toolkit is for book owners. Empty = no question (the server asks for none either).
+     The accepted answer is only ever a salted hash on the server, never in this page. */
+  var BOOK_Q="";
+  if(BOOK_Q){document.getElementById("bookq").textContent=BOOK_Q;document.getElementById("bookrow").hidden=false;}
   var GADS="AW-637214471/bylsCMuW0NUcEIe-7K8C", XEVT="";
   var f=document.getElementById('f'),msg=document.getElementById('msg'),btn=document.getElementById('btn');
   var RELINK=false;try{RELINK=new URLSearchParams(location.search).get('m')==='expired';}catch(e){}
@@ -170,9 +175,9 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
     var email=val('email'),name=val('name');
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){return fail('Please enter a valid email.');}
     btn.disabled=true;btn.textContent='Sending...';
-    var body=new URLSearchParams({name:name||(RELINK?'Fresh link':'Toolkit lead'),email:email,message:(RELINK?'Fresh link: ':'Lead magnet: ')+TITLE,source:source(),website:val('website')}).toString();
+    var body=new URLSearchParams({name:name||(RELINK?'Fresh link':'Toolkit lead'),email:email,message:(RELINK?'Fresh link: ':'Lead magnet: ')+TITLE,source:source(),website:val('website'),book:BOOK_Q?val('book'):''}).toString();
     fetch("https://ultimateaidirectory.com/api/lead",{method:'POST',mode:'cors',keepalive:true,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
-      .then(function(r){if(!r.ok)throw 0;convert(email);reveal(name);})
+      .then(function(r){if(r.status===422)return r.json().then(function(j){btn.disabled=false;btn.textContent=RELINK?'Send me a fresh link':'Send me the Toolkit';fail(j&&j.error==='busy'?'Too many tries. Please try again in an hour.':'That is not the answer in the book. Please check and try again.');},function(){throw 0;});if(!r.ok)throw 0;convert(email);reveal(name);})
       .catch(function(){btn.disabled=false;btn.textContent=RELINK?'Send me a fresh link':'Send me the Toolkit';
         fail('That did not go through. Please try again in a minute, or email hello@elvinpeters.com and I will send it.');});
   });
