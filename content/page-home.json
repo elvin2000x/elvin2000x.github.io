@@ -31,6 +31,21 @@
       }
     },
     {
+      "id": "welcome-video",
+      "type": "video",
+      "hidden": true,
+      "note": "Welcome video",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "heading": "",
+        "url": "",
+        "caption": "",
+        "poster": "",
+        "poster_alt": ""
+      }
+    },
+    {
       "id": "demo",
       "type": "demo-slider",
       "note": "2. The demo: 10 asked-vs-directed slides (#478 words, final 2026-10-05; placed by #546)",
