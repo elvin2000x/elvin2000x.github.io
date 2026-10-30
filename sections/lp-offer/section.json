@@ -25,10 +25,20 @@
       "label": "Anchor id"
     },
     {
+      "key": "top",
+      "type": "text",
+      "label": "Line above the headline"
+    },
+    {
       "key": "heading",
       "type": "html",
       "label": "Headline",
       "default": "[Headline: the one extra that makes it work]"
+    },
+    {
+      "key": "sub",
+      "type": "html",
+      "label": "Line under the headline"
     },
     {
       "key": "image",
@@ -46,18 +56,14 @@
       "label": "Image description"
     },
     {
-      "key": "paras",
-      "type": "list",
-      "label": "Paragraphs",
-      "default": [
-        "[Paragraph: why this, why now]"
-      ]
+      "key": "body",
+      "type": "html",
+      "label": "Words"
     },
     {
       "key": "was",
       "type": "text",
-      "label": "Was",
-      "default": "[Was: $XX]"
+      "label": "Was (only a real store price)"
     },
     {
       "key": "price",
@@ -72,10 +78,25 @@
       "default": "[Yes button: yes, add it]"
     },
     {
+      "key": "yes_note",
+      "type": "text",
+      "label": "Under the Yes button (what the click does)"
+    },
+    {
       "key": "no",
       "type": "text",
       "label": "No link",
       "default": "[No link: no thanks]"
+    },
+    {
+      "key": "fine",
+      "type": "html",
+      "label": "Small print under the buttons"
+    },
+    {
+      "key": "small",
+      "type": "html",
+      "label": "Legal print"
     },
     {
       "key": "fallback",

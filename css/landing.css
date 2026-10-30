@@ -146,3 +146,32 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 }
 /* product tiles with no picture yet: a navy tile, never a broken image */
 .lp-stack__items img[src=""], .lp-shop img[src=""]{ visibility:hidden }
+
+/* step pages: page words, the downloads list, the final-offer basket, small print */
+.lp-body{ font-size:18px; line-height:1.6 }
+.lp-body p, .lp-body ul{ margin:0 0 16px }
+.lp-body ul{ padding-left:22px } .lp-body li{ margin:0 0 8px }
+.lp-body h3{ font-size:24px; margin:24px 0 8px }
+.lp-small{ font-size:16px; opacity:.78; margin-top:16px }
+.lp-small p{ margin:0 0 8px }
+.lp-yes-note{ text-align:center; margin:8px 0 4px }
+.lp-pill{ display:inline-block; margin-bottom:8px }
+.lp-start{ border:2px solid var(--lp-navy); border-radius:var(--r-card); padding:16px 20px; margin:0 0 16px }
+
+/* the downloads list the checkout fills in: the main one first and large, the rest smaller */
+.lp-thanks__files{ display:grid; gap:8px; margin:0 0 20px }
+.store-file{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border:1px solid var(--lp-navy); border-radius:var(--r-sm); background:#fff; min-height:56px; font-size:18px }
+.store-file--primary{ padding:20px; font-size:24px; background:var(--lp-band); border-width:2px }
+.store-file-btn{ display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:0 20px; border-radius:999px; background:var(--lp-gold); color:var(--lp-navy); border:2px solid var(--lp-navy); font-weight:700; text-decoration:none; white-space:nowrap }
+.store-file--primary .store-file-btn{ min-height:56px; padding:0 28px; font-size:20px }
+.store-file-btn:hover, .store-file-btn:focus-visible{ background:var(--lp-navy); color:var(--lp-gold) }
+.lp-thanks__help{ margin:24px 0 }
+.lp-thanks__print{ margin-top:32px; padding-top:16px; border-top:1px solid var(--lp-band); font-size:16px }
+.lp-thanks__print .btn{ min-height:48px }
+.lp-thanks__print .amz-disclosure{ font-size:12px; opacity:.7 }
+
+/* final offer: one row per item, a big tick box, the whole row clickable */
+.lp-basket__list{ display:grid; gap:8px; margin:0 0 12px }
+.store-basket-row, .lp-basket__list label{ display:flex; align-items:center; gap:14px; min-height:64px; padding:12px 16px; border:2px solid var(--lp-navy); border-radius:var(--r-sm); background:#fff; cursor:pointer; font-variant-numeric:tabular-nums }
+.lp-basket__list input[type=checkbox]{ width:28px; height:28px; flex:none; accent-color:var(--lp-navy) }
+@media (max-width:640px){ .store-file{ flex-wrap:wrap } .store-file--primary{ font-size:20px } }

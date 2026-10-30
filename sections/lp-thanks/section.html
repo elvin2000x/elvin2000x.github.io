@@ -1,12 +1,36 @@
 <section class="lp-sec lp-thanks"{{#anchor}} id="{{anchor}}"{{/anchor}}>
   <div class="lp-in">
     <h1>{{heading}}</h1>
-{{#paras}}
-    <p>{{.}}</p>
-{{/paras}}
-    <p class="lp-thanks__order"><span>{{order_label}}</span> <strong data-store="order-number"></strong> <span data-store="total"></span></p>
+{{#sub}}
+    <p class="lp-lede">{{sub}}</p>
+{{/sub}}
+    <p class="lp-thanks__order">{{#order_label}}<span>{{order_label}}</span> {{/order_label}}<strong data-store="order-number"></strong> <span data-store="total"></span></p>
+{{#files_label}}
     <h2>{{files_label}}</h2>
-    <ul class="lp-thanks__files" data-store="files"></ul>
+{{/files_label}}
+{{#start_body}}
+    <div class="lp-start">{{#start_label}}<span class="lp-pill">{{start_label}}</span>{{/start_label}}<div class="lp-body">{{start_body}}</div></div>
+{{/start_body}}
+    <div class="lp-thanks__files" data-store="files"></div>
+{{#library}}
     <a class="btn btn--ghost btn--lg" data-store="library" href="{{page_url}}">{{library}}</a>
+{{/library}}
+{{#help}}
+    <div class="lp-thanks__help">{{#help_heading}}<h3>{{help_heading}}</h3>{{/help_heading}}<div class="lp-body">{{help}}</div></div>
+{{/help}}
+    <div class="lp-thanks__print">
+{{#print_heading}}
+      <h3>{{print_heading}}</h3>
+{{/print_heading}}
+{{#print_text}}
+      <p>{{print_text}}</p>
+{{/print_text}}
+      <div class="ep-row ep-row--left">
+{{#buttons}}
+        <a class="btn btn--ghost" href="{{href}}" target="_blank" rel="noopener">{{label}}</a>
+{{/buttons}}
+      </div>
+      <p class="amz-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
+    </div>
   </div>
 </section>

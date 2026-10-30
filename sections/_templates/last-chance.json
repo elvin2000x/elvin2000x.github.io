@@ -1,5 +1,5 @@
 {
-  "label": "Last chance",
+  "label": "Final offer",
   "order": 4,
   "stack": {
     "title": "",
@@ -27,11 +27,15 @@
         "type": "lp-basket",
         "data": {
           "anchor": "",
-          "heading": "[Headline: one last thing before you go]",
-          "intro": "[Intro: what is in the basket and the discount]",
-          "total_label": "[Label: total]",
-          "yes": "[Yes button: add these to my order]",
-          "no": "[No link: no thanks]",
+          "heading": "A special offer before you go: 12% off my other products",
+          "sub": "Thank you for ordering The Artificial Advantage. To mark June 12, the day the book was first published in 2026, here is 12% off the products below.",
+          "intro": "<p>Your order is in, and your downloads are on the next page. Choose the products you want. The last column shows each price with your 12% off. Choose either the Operator Bundle or its two parts, not both.</p>\n<p>Products you already bought are not listed. Prices are in US dollars.</p>",
+          "total_label": "",
+          "yes": "Add my choices at 12% off",
+          "yes_note": "",
+          "no": "No thanks, take me to my downloads",
+          "fine": "Digital downloads. A 14-day money-back promise covers these purchases too: email elvin@elvinpeters.com within 14 days for a full refund.",
+          "small": "<p>The Global AI Race is a dated snapshot of the AI timeline, with no updates promised.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p>\n<p>Elvin Peters, author of The Artificial Advantage</p>",
           "fallback": "[Declined: what to do next]"
         }
       }

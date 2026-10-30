@@ -15,7 +15,10 @@ const EXCLUDE = /^essays([\/]|$)|^(titles|books|book1-feedback|oto|dl|studio|com
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
 
-const BOOK_ASIN = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8')).amazon_url.match(/dp\/([A-Z0-9]{10})/)[1];
+const SITE = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
+const BOOK_ASIN = SITE.amazon_url.match(/dp\/([A-Z0-9]{10})/)[1];
+// The paperback and hardcover listings of the same book (content/site.json amazon_print): the only other ASINs allowed.
+const PRINT_ASINS = new Set(Object.values(SITE.amazon_print || {}));
 const fails = [], warns = [];
 function fail(f, msg) { fails.push(f + ': ' + msg); }
 function warn(f, msg) { warns.push(f + ': ' + msg); }
@@ -126,7 +129,7 @@ for (const rel of PAGES) {
 
   // ASIN: every Amazon product link is the book in content/site.json amazon_url (one source of truth).
   for (const m of html.matchAll(/amazon\.[a-z.]+\/(?:[^"'\s]*\/)?dp\/([A-Z0-9]{10})/g))
-    if (m[1] !== BOOK_ASIN) fail(rel, 'Amazon link to ' + m[1] + ', expected ' + BOOK_ASIN + ' (content/site.json amazon_url)');
+    if (m[1] !== BOOK_ASIN && !PRINT_ASINS.has(m[1])) fail(rel, 'Amazon link to ' + m[1] + ', expected ' + BOOK_ASIN + ' (content/site.json amazon_url)');
 
   // ASSOCIATES (Runway v2 item 6, 2026-09-28): every amazon.com book link carries the one
   // tag; the tag is US-store only, so a tagged .ca/.co.uk/.com.au link is a mistake; a

@@ -28,16 +28,19 @@
         "data": {
           "bg": "",
           "anchor": "",
-          "heading": "[Headline: the one extra that makes it work]",
+          "top": "",
+          "heading": "Set up Claude once, so every new chat already knows your work",
+          "sub": "The Claude Operator's Manual on its own, 217 pages, for $27. It is the Manual from the Operator Bundle, without the 12 Role Packs.",
           "image": "",
           "image_alt": "",
-          "paras": [
-            "[Paragraph: why this, why now]"
-          ],
-          "was": "[Was: $XX]",
-          "price": "[Price: $XX]",
-          "yes": "[Yes button: yes, add it]",
-          "no": "[No link: no thanks]",
+          "body": "<p>If you use Claude and you are tired of re-explaining who you are and what you do in every new chat, this Manual shows you how to set that up once. It is about Claude only.</p>\n<p>Inside you will find:</p>\n<ul><li><strong>Setup in the Claude app, with no coding.</strong> Parts I and II cover talking to Claude well, Projects and knowledge files, Skills, and connecting your tools.</li><li><strong>Claude Code, when you are ready.</strong> Part III is for readers who are ready to open a terminal.</li><li><strong>Workflows to copy.</strong> Part IV gives you complete setups you can reuse.</li><li><strong>Checklists.</strong> Every chapter ends with one, and the appendices include a day-one setup checklist.</li></ul>\n<p>It is a PDF with 19 chapters. I'm Elvin Peters, and I wrote it.</p>",
+          "was": "",
+          "price": "$27",
+          "yes": "Yes, add the Manual for $27",
+          "yes_note": "",
+          "no": "No thanks, I'll skip this",
+          "fine": "Digital download, in US dollars. A 14-day money-back promise covers this purchase too: email elvin@elvinpeters.com within 14 days for a full refund.",
+          "small": "<p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p>",
           "fallback": "[Declined: what to do next]"
         }
       }

@@ -16,12 +16,20 @@
       "default": "[Headline: you are in]"
     },
     {
-      "key": "paras",
-      "type": "list",
-      "label": "Paragraphs",
-      "default": [
-        "[Paragraph: what happens next]"
-      ]
+      "key": "sub",
+      "type": "html",
+      "label": "Line under the headline"
+    },
+    {
+      "key": "start_label",
+      "type": "text",
+      "label": "Label on the main download",
+      "default": "[Label: start here]"
+    },
+    {
+      "key": "start_body",
+      "type": "html",
+      "label": "About the main download"
     },
     {
       "key": "order_label",
@@ -36,10 +44,49 @@
       "default": "[Heading: your downloads]"
     },
     {
+      "key": "help_heading",
+      "type": "html",
+      "label": "Help heading"
+    },
+    {
+      "key": "help",
+      "type": "html",
+      "label": "Help and refund words"
+    },
+    {
       "key": "library",
       "type": "text",
       "label": "Library button",
       "default": "[Button: open your library]"
+    },
+    {
+      "key": "print_heading",
+      "type": "html",
+      "label": "Printed copy heading"
+    },
+    {
+      "key": "print_text",
+      "type": "html",
+      "label": "Printed copy words"
+    },
+    {
+      "key": "buttons",
+      "type": "list",
+      "label": "Print buttons",
+      "max": 2,
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Words",
+          "default": "[Button: paperback on Amazon]"
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link"
+        }
+      ]
     }
   ]
 }

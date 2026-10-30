@@ -1,12 +1,24 @@
 <section class="lp-sec lp-basket"{{#anchor}} id="{{anchor}}"{{/anchor}}>
   <div class="lp-in">
     <h1>{{heading}}</h1>
-    <p class="lp-lede">{{intro}}</p>
-    <ul class="lp-basket__list" data-store="basket"></ul>
+{{#sub}}
+    <p class="lp-lede">{{sub}}</p>
+{{/sub}}
+    <div class="lp-body">{{intro}}</div>
+    <div class="lp-basket__list" data-store="basket"></div>
     <p class="lp-price"><span>{{total_label}}</span> <s data-store="was"></s> <strong data-store="total"></strong></p>
     <p class="lp-error" data-store="error" hidden></p>
     <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>{{yes}}</button>
+{{#yes_note}}
+    <p class="lp-note lp-yes-note">{{yes_note}}</p>
+{{/yes_note}}
     <button type="button" class="lp-no" data-store-decline>{{no}}</button>
     <div class="lp-fallback" data-store-fallback hidden><p>{{fallback}}</p></div>
+{{#fine}}
+    <p class="lp-note">{{fine}}</p>
+{{/fine}}
+{{#small}}
+    <div class="lp-small">{{small}}</div>
+{{/small}}
   </div>
 </section>

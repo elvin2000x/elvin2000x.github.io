@@ -28,27 +28,20 @@
         "data": {
           "bg": "",
           "anchor": "",
-          "heading": "[Headline: the one extra that makes it work]",
+          "top": "",
+          "heading": "Set up Claude once, and every chat starts out knowing your work",
+          "sub": "The Claude Operator's Manual and the 12 Role Packs, together for $47.",
           "image": "",
           "image_alt": "",
-          "paras": [
-            "[Paragraph: why this, why now]"
-          ],
-          "was": "[Was: $XX]",
-          "price": "[Price: $XX]",
-          "yes": "[Yes button: yes, add it]",
-          "no": "[No link: no thanks]",
+          "body": "<p>This bundle is only for people who use Claude. It gives you two pieces: a guide to setting Claude up so you stop re-explaining yourself in every chat, and twelve job-based packs of prompts to start from.</p>\n<h3>The Claude Operator's Manual</h3>\n<p>I wrote this Manual for Claude users who want to run Claude well. It is a 217-page PDF about Claude only.</p>\n<ul><li><strong>Set up Claude in the app.</strong> Start with the day-one setup checklist in the appendices. Parts I and II cover talking to Claude well, setting up Projects and knowledge files, Skills, and connecting Claude to the tools your work lives in, and they need no terminal.</li><li><strong>Go further with Claude Code.</strong> Part III is for readers who are ready to open a terminal.</li><li><strong>Copy complete workflows.</strong> Part IV puts the setup together into workflows you can reuse.</li><li><strong>Check your work.</strong> Every chapter ends with a checklist.</li></ul>\n<h3>The 12 Role Packs</h3>\n<p>Each pack is built around one job. You get an overview of the role, the AI tools that suit it, prompts grouped by task with brackets for your own details, and a plan for building the habit. The twelve jobs are:</p>\n<ul><li>Marketing Manager</li><li>Sales Manager</li><li>Finance Manager</li><li>Operations Manager</li><li>HR Manager</li><li>Customer Service Manager</li><li>Content Creator</li><li>Data Analyst</li><li>Project Manager</li><li>Executive Assistant</li><li>Product Manager</li><li>Legal and Compliance Manager</li></ul>\n<h3>The price</h3>\n<p>The Manual sells for $27 on its own in my store, and the 12 Role Packs sell for $27 on their own. In this bundle they cost $47 together, which is $7 less. Prices are in US dollars.</p>",
+          "was": "",
+          "price": "$47",
+          "yes": "Yes, add the Operator Bundle for $47",
+          "yes_note": "",
+          "no": "No thanks, I'll skip this",
+          "fine": "Digital downloads. A 14-day money-back promise covers this purchase too: email elvin@elvinpeters.com within 14 days for a full refund.",
+          "small": "<p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p>\n<p>Elvin Peters</p>",
           "fallback": "[Declined: what to do next]"
-        }
-      },
-      {
-        "id": "guarantee",
-        "type": "lp-guarantee",
-        "data": {
-          "bg": "",
-          "anchor": "",
-          "heading": "[Heading: the guarantee]",
-          "text": "[Guarantee: the promise and how to claim it]"
         }
       }
     ]

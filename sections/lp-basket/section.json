@@ -1,5 +1,5 @@
 {
-  "label": "Last-chance basket",
+  "label": "Final offer basket",
   "frames": [
     "landing"
   ],
@@ -16,9 +16,14 @@
       "default": "[Headline: one last thing before you go]"
     },
     {
+      "key": "sub",
+      "type": "html",
+      "label": "Line under the headline"
+    },
+    {
       "key": "intro",
       "type": "html",
-      "label": "Intro",
+      "label": "Words",
       "default": "[Intro: what is in the basket and the discount]"
     },
     {
@@ -34,10 +39,25 @@
       "default": "[Yes button: add these to my order]"
     },
     {
+      "key": "yes_note",
+      "type": "text",
+      "label": "Under the Yes button (what the click does)"
+    },
+    {
       "key": "no",
       "type": "text",
       "label": "No link",
       "default": "[No link: no thanks]"
+    },
+    {
+      "key": "fine",
+      "type": "html",
+      "label": "Small print under the buttons"
+    },
+    {
+      "key": "small",
+      "type": "html",
+      "label": "Legal print"
     },
     {
       "key": "fallback",

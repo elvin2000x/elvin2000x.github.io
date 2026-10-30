@@ -15,42 +15,29 @@
     "noindex": true,
     "sections": [
       {
-        "id": "steps",
-        "type": "lp-progress",
-        "data": {
-          "step": "4",
-          "steps": "4"
-        }
-      },
-      {
         "id": "thanks",
         "type": "lp-thanks",
         "data": {
           "anchor": "",
-          "heading": "[Headline: you are in]",
-          "paras": [
-            "[Paragraph: what happens next]"
-          ],
-          "order_label": "[Label: order]",
-          "files_label": "[Heading: your downloads]",
-          "library": "[Button: open your library]"
-        }
-      },
-      {
-        "id": "print",
-        "type": "lp-amazon",
-        "data": {
-          "bg": "",
-          "anchor": "",
-          "heading": "[Heading: prefer print?]",
+          "heading": "Thank you. Your order is in, and your downloads are below.",
+          "sub": "Start with the 7-Day AI Workbook.",
+          "start_label": "Start here",
+          "start_body": "<p><strong>The 7-Day AI Workbook.</strong> One step a day for seven days, using one real task of your own. On Day 1 you pick a task you do every week and name who it is for and what done looks like. The Workbook then points you to the book chapter to read each day.</p>",
+          "order_label": "",
+          "files_label": "",
+          "help_heading": "If something is wrong",
+          "help": "<p>If a download does not open, or a product is not what you expected, write to elvin@elvinpeters.com. Digital purchases made on this site are covered by a 14-day money-back promise, so email within 14 days of your purchase for a full refund. Anything else you added to your order is listed with your downloads.</p>",
+          "library": "",
+          "print_heading": "Want a printed copy of the ebook?",
+          "print_text": "The Artificial Advantage is also sold as a paperback and a hardcover on Amazon.",
           "buttons": [
             {
-              "label": "[Button: buy the paperback on Amazon]",
-              "href": ""
+              "label": "Paperback on Amazon",
+              "href": "https://www.amazon.com/dp/B0H7TB366R?tag=elvinpeters-20"
             },
             {
-              "label": "[Button: buy the hardcover on Amazon]",
-              "href": ""
+              "label": "Hardcover on Amazon",
+              "href": "https://www.amazon.com/dp/B0H9BX9LB4?tag=elvinpeters-20"
             }
           ]
         }
