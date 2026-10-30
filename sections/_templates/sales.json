@@ -41,6 +41,19 @@
         }
       },
       {
+        "id": "video",
+        "type": "video",
+        "data": {
+          "anchor": "",
+          "align": "center",
+          "heading": "",
+          "url": "",
+          "caption": "",
+          "poster": "",
+          "poster_alt": ""
+        }
+      },
+      {
         "id": "problem",
         "type": "text",
         "data": {

@@ -1,0 +1,292 @@
+{
+  "title": "The Book 1 bundle",
+  "frame": "landing",
+  "noindex": true,
+  "landing": {
+    "slug": "the-artificial-advantage",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "step": "front",
+    "description": "The Artificial Advantage, a full Toolkit and three bonuses, together for $27."
+  },
+  "sections": [
+    {
+      "id": "steps",
+      "type": "lp-progress",
+      "data": {
+        "step": "1",
+        "steps": "2"
+      }
+    },
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "",
+        "eyebrow": "",
+        "headline": "You tried AI once and got a mediocre answer back. The tool was fine. The request needed direction.",
+        "sub": "Learn to get a near-final draft from AI on your own work, and keep the method for every task after it. The Artificial Advantage, a full Toolkit and three bonuses, together for $27.",
+        "button": {
+          "label": "Get the bundle for $27",
+          "checkout": true,
+          "href": ""
+        },
+        "note": "",
+        "image": "/img/book-3d.webp",
+        "image_alt": "The Artificial Advantage by Elvin M. Peters, paperback"
+      }
+    },
+    {
+      "id": "video",
+      "type": "video",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "heading": "",
+        "url": "",
+        "caption": "",
+        "poster": "",
+        "poster_alt": ""
+      }
+    },
+    {
+      "id": "open",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "You opened an AI chat, typed in a task from your real week, and got back a paragraph that sounded like a brochure. Maybe you tried it twice. Then you went back to doing the task by hand and decided the people raving about AI were exaggerating.",
+          "I spent most of a decade running performance marketing, and I have watched smart, busy people do the same. The tool they tried was good, but the request they gave it was thin, so the answer was thin, and most of them had never been shown how to direct it.",
+          "Two professionals can sit in front of the same AI tool with the same task. One gets a generic draft to fix. The other gets a near-final email. The gap between them is a skill, and this page shows you how to build it.",
+          "That is why I wrote The Artificial Advantage, and it is why I put this page together."
+        ]
+      }
+    },
+    {
+      "id": "directing",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "What directing looks like",
+        "paras": [
+          "Here is an invented example, so you can see the difference before you decide anything.",
+          "A thin request: <em>Write an email about the delay.</em>",
+          "A directed request: <em>You are an operations manager at a mid-sized furniture company. Write a 120-word email to a customer whose sofa is two weeks late. Apologise once, give the new delivery date of November 14, offer free white-glove delivery, and keep the tone warm and direct.</em>",
+          "The second request gives the AI a role, a task and the limits to work within. The book calls this the Role, Task, Constraint brief, and it is one of the tools you will learn."
+        ]
+      }
+    },
+    {
+      "id": "who",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "Who is writing to you",
+        "paras": [
+          "My name is Elvin Peters. Three of those years were at goeasy, a Canadian lender with two regulated brands, easyfinancial and easyhome, where I ran the paid media myself. The budget was about $1.5M a month, more than $50M in all. Every campaign had to clear a compliance review before it went live, so I learned to be precise about what I asked for and careful about what I accepted.",
+          "After that I advised large advertisers at an ad tech company. In 2026 I became a founder, writing books and building with AI full time."
+        ]
+      }
+    },
+    {
+      "id": "book",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "What the book gives you",
+        "paras": [
+          "The Artificial Advantage is fifteen chapters of method, built around a system called CLEAR: Choose your tools, Lead with clear direction, Evolve your outputs, Audit for accuracy, and Repeat to build a practice. You will learn:",
+          "How to brief AI with the Role, Task, Constraint framework, so the first answer is close to what you meant.",
+          "How to fix a weak answer with the Diagnostic Ladder, which traces a bad result to its cause.",
+          "How to check an answer before your name goes on it, with the Two-Step Verification Method.",
+          "How to turn a task you have mastered into a template, so next week takes a fraction of the effort.",
+          "What to do in your first week: pick one task you do regularly that feels tedious, and use AI on it.",
+          "It also holds 12 before-and-after prompt pairs, a Professional Prompt Library, ten common failures with the fix for each, and a 3-Month AI Practice Plan that turns the method into a habit.",
+          "The ebook alone is on Amazon at $9.99, and you are welcome to buy it there. This page is for readers who want to start using the method the same day, so I built a bundle around the book. For $27 you get the book plus everything below. That is $17.01 more than the Amazon price."
+        ]
+      }
+    },
+    {
+      "id": "toolkit",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "Part 1: The Artificial Advantage Toolkit",
+        "paras": [
+          "The Toolkit comes with the book. It turns the chapters into files you can open, edit and use on your own work. The files are Word documents, with the Prompt Library also as a .csv.",
+          "Editable exercises for the book's chapters. Fill them in on your real tasks, in a document you can change.",
+          "The 30-Day and 3-Month Practice Plans. A 30-day plan and a 3-month plan that carry you past the first week.",
+          "The Professional Prompt Library, importable, plus a .csv. Prompts for recurring work, ready to paste or import into your own system.",
+          "The Role Library, 25 roles. Role statements you can drop into a brief, so the AI answers like the specialist you need.",
+          "The Tool-Selection Cheat Sheet. A short guide to picking the AI tool that fits the job in front of you."
+        ]
+      }
+    },
+    {
+      "id": "bonuses",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "Part 2: Three bonuses",
+        "paras": [
+          "The 7-Day AI Workbook. One stage of the CLEAR system each day, for seven days, using one real task of your own. On Day 2 you run the task the way you do today and save the result. On Day 7 you run the full loop again and compare. You finish with a before and an after, and a template you keep.",
+          "Everything AI 2026. A reference of 684 AI tools and resources, organised by the job you are doing. Each entry shows its level and cost, and every link was tested on October 29, 2026. Twelve job stacks cover people who would rather not choose, and it comes as an Excel spreadsheet and a designed PDF field guide.",
+          "The 12 Commandments to Make AI Obey. A guide of about 30 pages for the free and basic plans of ChatGPT, Gemini, Claude and Grok. It teaches twelve habits for getting the answer you meant on the first try, and it includes fill-in starter files for an About Me file and a voice file, plus a one-page card to keep by your screen."
+        ]
+      }
+    },
+    {
+      "id": "prices",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "The $9.99 is the Amazon price of the ebook. The other prices are what each item sells for separately in my store. Prices are in US dollars."
+        ]
+      }
+    },
+    {
+      "id": "offer",
+      "type": "lp-funnel-stack",
+      "data": {
+        "bg": "tint",
+        "anchor": "",
+        "heading": "What the stack adds up to",
+        "free_label": "Free",
+        "included_label": "Included",
+        "total_label": "Total value",
+        "price_label": "Your price",
+        "bump": null,
+        "button": {
+          "label": "Get the bundle for $27",
+          "checkout": true,
+          "href": ""
+        },
+        "note": ""
+      }
+    },
+    {
+      "id": "included",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "The Companion Library, eight reference pages that I keep current, and the Director's Cheat Sheet are free on my site for everyone. I have put them in your download so everything lives in one place, and they carry no dollar value above."
+        ]
+      }
+    },
+    {
+      "id": "guarantee",
+      "type": "lp-guarantee",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "My 14-day promise",
+        "text": "Everything on this page is a digital product. If it is not for you, email elvin@elvinpeters.com within 14 days of purchase and I will refund you in full."
+      }
+    },
+    {
+      "id": "faq",
+      "type": "lp-faq",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "Questions you may have",
+        "items": [
+          {
+            "q": "Do I need a paid AI plan?",
+            "a": "No. The book teaches skills that carry across AI tools, and The 12 Commandments is written for the free and basic plans of ChatGPT, Gemini, Claude and Grok."
+          },
+          {
+            "q": "Is this for beginners?",
+            "a": "The book was written for professionals who tried AI and shrugged, and for people whose company just told them to use it. If you already use AI daily, the Diagnostic Ladder and the verification method are the chapters most likely to help."
+          },
+          {
+            "q": "How is Everything AI 2026 different from your free AI Resource Vault?",
+            "a": "The Vault is a free list of 480 assets across 21 tabs. Everything AI 2026 contains only AI resources, and 517 of its 684 entries are not in the Vault."
+          },
+          {
+            "q": "What do I receive, and how?",
+            "a": "Digital downloads, available right after checkout, and nothing is shipped."
+          }
+        ]
+      }
+    },
+    {
+      "id": "proof",
+      "type": "lp-quotes",
+      "data": {
+        "bg": "tint",
+        "anchor": "",
+        "heading": "What readers say",
+        "quotes": [
+          {
+            "quote": "What an amazing read! I would highly recommend The Artificial Advantage if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life. Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.",
+            "source": "Amazon reviewer, paperback, reviewed in Canada, July 15, 2026"
+          }
+        ]
+      }
+    },
+    {
+      "id": "close",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "Your next step",
+        "paras": [
+          "Click the button, and the book, the Toolkit and the three bonuses are yours to download.",
+          "Elvin Peters",
+          "P.S. Pick one real task from this week, open the book, and try the method on it."
+        ]
+      }
+    },
+    {
+      "id": "buy",
+      "type": "button",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Get the bundle for $27",
+            "href": "",
+            "style": "primary",
+            "checkout": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "print",
+      "type": "lp-amazon",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "The Artificial Advantage is also sold as a paperback and a hardcover on Amazon.",
+        "buttons": [
+          {
+            "label": "Paperback on Amazon",
+            "href": "https://www.amazon.com/dp/B0H7TB366R?tag=elvinpeters-20"
+          },
+          {
+            "label": "Hardcover on Amazon",
+            "href": "https://www.amazon.com/dp/B0H9BX9LB4?tag=elvinpeters-20"
+          }
+        ]
+      }
+    }
+  ]
+}
