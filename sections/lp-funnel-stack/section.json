@@ -1,0 +1,133 @@
+{
+  "label": "Value stack (live)",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading",
+      "default": "[Heading: everything you get]"
+    },
+    {
+      "key": "free_label",
+      "type": "text",
+      "label": "Word on free items",
+      "default": "[Word: free]"
+    },
+    {
+      "key": "included_label",
+      "type": "text",
+      "label": "Word on included items",
+      "default": "[Word: included]"
+    },
+    {
+      "key": "total_label",
+      "type": "text",
+      "label": "Total value label",
+      "default": "[Label: total value]"
+    },
+    {
+      "key": "price_label",
+      "type": "text",
+      "label": "Price label",
+      "default": "[Label: today]"
+    },
+    {
+      "key": "bump",
+      "type": "object",
+      "label": "The $7 add-on box",
+      "fields": [
+        {
+          "key": "image",
+          "type": "image",
+          "label": "Image",
+          "alt": "image_alt",
+          "size": [
+            200,
+            200
+          ]
+        },
+        {
+          "key": "image_alt",
+          "type": "text",
+          "label": "Image description"
+        },
+        {
+          "key": "name",
+          "type": "html",
+          "label": "Name",
+          "default": "[Name: the add-on]"
+        },
+        {
+          "key": "line",
+          "type": "html",
+          "label": "One line",
+          "default": "[Line: what it is]"
+        },
+        {
+          "key": "price",
+          "type": "text",
+          "label": "Price",
+          "default": "[Price: $7]"
+        },
+        {
+          "key": "tab",
+          "type": "text",
+          "label": "Tab words",
+          "default": "[Tab: add to order]"
+        }
+      ]
+    },
+    {
+      "key": "button",
+      "type": "object",
+      "label": "Button",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Words",
+          "default": "[Button: the action]"
+        },
+        {
+          "key": "checkout",
+          "type": "bool",
+          "label": "Goes to checkout",
+          "default": true
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "key": "note",
+      "type": "html",
+      "label": "Small print"
+    }
+  ]
+}

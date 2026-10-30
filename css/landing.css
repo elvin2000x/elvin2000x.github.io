@@ -175,3 +175,11 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 .store-basket-row, .lp-basket__list label{ display:flex; align-items:center; gap:14px; min-height:64px; padding:12px 16px; border:2px solid var(--lp-navy); border-radius:var(--r-sm); background:#fff; cursor:pointer; font-variant-numeric:tabular-nums }
 .lp-basket__list input[type=checkbox]{ width:28px; height:28px; flex:none; accent-color:var(--lp-navy) }
 @media (max-width:640px){ .store-file{ flex-wrap:wrap } .store-file--primary{ font-size:20px } }
+
+/* the live value stack: the Toolkit as a group, its parts indented */
+.lp-stack__group{ display:block; padding:12px 0 4px; font-weight:700; font-size:20px; border-bottom:0 }
+.lp-stack__part{ padding-left:20px; min-height:48px }
+.lp-bump--box{ position:relative; margin-top:28px }
+.lp-bump__tab{ position:absolute; top:-14px; left:16px; background:var(--lp-navy); color:#fff; padding:2px 12px; border-radius:6px; font-size:14px; font-weight:700 }
+.lp-bump__words{ display:flex; flex-direction:column; flex:1; min-width:0 }
+.lp-bump__price{ white-space:nowrap }

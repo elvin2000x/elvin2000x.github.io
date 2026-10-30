@@ -123,7 +123,31 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
      stack line tied to a product shows that product's shop price, so a struck-through
      value is always a real price. The typed text stays if the store can't be reached. */
   (function () {
-    var shop = document.querySelector('[data-lp-shop]'), tagged = document.querySelectorAll('[data-lp-price]');
+    var shop = document.querySelector('[data-lp-shop]'), tagged = document.querySelectorAll('[data-lp-price]'), stack = document.querySelector('[data-lp-fstack]');
+    if (!shop && !tagged.length && !stack) return;
+    function money(c) { return '$' + (c / 100).toFixed(c % 100 ? 2 : 0); }
+    function fillStack(box) {
+      fetch(STORE + '/funnels').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
+        var f = (Array.isArray(list) ? list : []).filter(function (x) { return x.key === box.getAttribute('data-lp-fstack'); })[0];
+        if (!f || !f.stack) throw 0;
+        var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null;
+        ul.innerHTML = '';
+        f.stack.forEach(function (r) {
+          if (r.group && r.group !== last) { var h = document.createElement('li'); h.className = 'lp-stack__group'; h.textContent = r.group_name || r.group; ul.appendChild(h); }
+          last = r.group;
+          var li = document.createElement('li'), n = document.createElement('span'), v = document.createElement('span');
+          if (r.group) li.className = 'lp-stack__part';
+          n.className = 'lp-stack__name'; n.textContent = r.name; v.className = 'lp-stack__value';
+          if (r.status === 'included' || !r.standalone_price) { v.textContent = box.getAttribute('data-included') || ''; }
+          else if (r.status === 'free') { var s2 = document.createElement('s'); s2.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s2); var em = document.createElement('em'); em.textContent = ' ' + (box.getAttribute('data-free') || ''); v.appendChild(em); total += r.standalone_price; }
+          else { v.textContent = r.standalone_price_text || money(r.standalone_price); total += r.standalone_price; }
+          li.appendChild(n); li.appendChild(v); ul.appendChild(li);
+        });
+        box.querySelector('[data-lp-total]').textContent = money(total);
+        box.querySelector('[data-lp-front]').textContent = f.front_price_text || money(f.front_price);
+      }).catch(function () {});
+    }
+    if (stack) fillStack(stack);
     if (!shop && !tagged.length) return;
     fetch(STORE + '/products').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
       var by = {}, keys = [];

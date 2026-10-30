@@ -55,48 +55,22 @@
       },
       {
         "id": "offer",
-        "type": "lp-stack",
+        "type": "lp-funnel-stack",
         "data": {
           "bg": "tint",
           "anchor": "",
           "heading": "[Heading: everything you get]",
-          "image": "",
-          "image_alt": "",
-          "items": [
-            {
-              "image": "",
-              "image_alt": "",
-              "name": "[Item: name and what it does]",
-              "value": "[Value: $XX]"
-            },
-            {
-              "image": "",
-              "image_alt": "",
-              "name": "[Item: name and what it does]",
-              "value": "[Value: $XX]"
-            },
-            {
-              "image": "",
-              "image_alt": "",
-              "name": "[Item: name and what it does]",
-              "value": "[Value: $XX]"
-            },
-            {
-              "image": "",
-              "image_alt": "",
-              "name": "[Item: name and what it does]",
-              "value": "[Value: $XX]"
-            }
-          ],
+          "free_label": "[Word: free]",
+          "included_label": "[Word: included]",
           "total_label": "[Label: total value]",
-          "total": "[Total: $XXX]",
           "price_label": "[Label: today]",
-          "price": "[Price: $XX]",
           "bump": {
             "image": "",
             "image_alt": "",
-            "label": "[Add-on: yes, add the extra]",
-            "price": "[Price: $XX]"
+            "name": "[Name: the add-on]",
+            "line": "[Line: what it is]",
+            "price": "[Price: $7]",
+            "tab": "[Tab: add to order]"
           },
           "button": {
             "label": "[Button: the action]",
