@@ -19,7 +19,7 @@
         "heading": "Thank you. Your order is in, and your downloads are below.",
         "sub": "Start with the 7-Day AI Workbook.",
         "start_label": "Start here",
-        "start_body": "<p><strong>The 7-Day AI Workbook.</strong> One step a day for seven days, using one real task of your own. On Day 1 you pick a task you do every week and name who it is for and what done looks like. The Workbook then points you to the book chapter to read each day.</p>",
+        "start_body": "<p><img src=\"/img/store/mockup-workbook.webp\" alt=\"The 7-Day AI Workbook as a book and a tablet\" width=\"280\" height=\"420\"></p>\n<p><strong>The 7-Day AI Workbook.</strong> One step a day for seven days, using one real task of your own. On Day 1 you pick a task you do every week and name who it is for and what done looks like. The Workbook then points you to the book chapter to read each day.</p>",
         "order_label": "",
         "files_label": "",
         "help_heading": "If something is wrong",

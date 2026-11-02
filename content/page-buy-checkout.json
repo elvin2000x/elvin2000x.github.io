@@ -7,8 +7,7 @@
     "old_slugs": [],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
-    "step": "front",
-    "description": "Pay for The Book 1 Bundle. The download is ready right after."
+    "description": "Review The Book 1 Bundle, then pay. The download is ready right after."
   },
   "sections": [
     {
@@ -17,12 +16,27 @@
       "data": {
         "anchor": "",
         "eyebrow": "Checkout",
-        "headline": "Your order",
-        "sub": "The Book 1 Bundle. The card is taken on the next page. The download is ready as soon as it goes through.",
+        "headline": "The method, and the files, the same day.",
+        "sub": "You brief AI with a role, a task and a constraint, so the first answer is close to what you meant. This order is the book that teaches that, and the files that put it on your own work.",
         "button": null,
-        "note": "",
-        "image": "/img/book-3d.webp",
-        "image_alt": "The Artificial Advantage by Elvin M. Peters, paperback"
+        "note": "The card is taken on the next page. Nothing is shipped.",
+        "image": "/img/store/hero-3d.webp",
+        "image_alt": "The Artificial Advantage as a paperback"
+      }
+    },
+    {
+      "id": "why",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "Why this order is worth it",
+        "paras": [
+          "The Artificial Advantage ebook. Fifteen chapters of method, built around CLEAR: choose your tools, lead with clear direction, evolve your outputs, audit for accuracy, and repeat. You learn to brief AI so the first answer is close to what you meant, then check it before your name goes on it.",
+          "The 7-Day AI Workbook. One stage of that system each day, for seven days, on one real task of your own. You finish with a before and an after, and a template you keep.",
+          "The Toolkit. The exercises, the 30-day and 3-month practice plans, the Prompt Library, the Role Library and the Tool-Selection Cheat Sheet, as files you can open and edit.",
+          "The Companion Library. Eight reference pages I keep current, and the Director's Cheat Sheet. The third picture is that cheat sheet. Both are free on the site. They are in this order so you are not hunting for them later."
+        ]
       }
     },
     {
@@ -36,6 +50,24 @@
         "included_label": "Included",
         "total_label": "Total value",
         "price_label": "Your price",
+        "shots": [
+          {
+            "src": "/img/store/hero-3d.webp",
+            "alt": "The Artificial Advantage as a paperback",
+            "caption": "The ebook"
+          },
+          {
+            "src": "/img/store/mockup-workbook.webp",
+            "alt": "The 7-Day AI Workbook as a book and a tablet",
+            "caption": "The workbook"
+          },
+          {
+            "src": "/img/magnets/directors-cheat-sheet.webp",
+            "alt": "The Director's Cheat Sheet cover. A matching package photo does not exist yet.",
+            "caption": "The cheat sheet"
+          }
+        ],
+        "review_href": "/buy/operator-bundle/",
         "email_label": "Email for the receipt and the download",
         "email_button": "Continue to payment",
         "bump": null,
