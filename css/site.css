@@ -544,3 +544,15 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 .ep-text h2{ font-family:var(--serif); font-size:var(--fs-h2); line-height:var(--lh-snug); margin:0 0 14px }
 .ep-text p{ margin:0 0 14px; color:var(--ink-2) }
 .ep-text--center{ text-align:center }
+/* Video: a poster and a play button. js/site.js loads the player on click.
+   The frame stays the dark navy in every theme (--d-bg does not flip). */
+.ep-video h2{ font-family:var(--serif); font-size:var(--fs-h2); line-height:var(--lh-snug); margin:0 0 14px }
+.ep-video--center{ text-align:center }
+.ep-video--left{ text-align:left }
+.ep-video__frame{ position:relative; width:100%; max-width:100%; aspect-ratio:16/9; background:var(--d-bg); border-radius:var(--r-card); overflow:hidden }
+.ep-video__frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
+.ep-video__play{ position:absolute; inset:0; display:block; width:100%; height:100%; margin:0; padding:0; border:0; background:var(--d-bg); color:var(--d-accent); cursor:pointer }
+.ep-video__play img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
+.ep-video__mark{ position:absolute; left:50%; top:50%; z-index:1; transform:translate(-50%,-50%); width:68px; height:48px; display:flex; align-items:center; justify-content:center; background:var(--d-bg); color:var(--d-accent); border-radius:var(--r-sm); box-shadow:var(--shadow) }
+.ep-video__play:focus-visible{ outline:2px solid var(--accent-hi); outline-offset:3px }
+.ep-video__cap{ margin:12px 0 0; color:var(--ink-2) }

@@ -314,3 +314,79 @@
   if (document.readyState === 'complete') load();
   else window.addEventListener('load', load);
 })();
+
+/* Video block. The player loads only after a click, from youtube-nocookie or
+   player.vimeo.com. Keep parseVideoLink in step with site-studio ui.html. */
+(function () {
+  'use strict';
+  if (window.__epVideo) return;
+  window.__epVideo = true;
+  function parseVideoLink(raw) {
+    var s = String(raw || '').trim();
+    if (!s || s.length > 300 || /[\s"'<>]/.test(s)) return null;
+    var u;
+    try { u = new URL(s); } catch (e) { return null; }
+    if (u.protocol !== 'https:' && u.protocol !== 'http:') return null;
+    var host = u.hostname.replace(/^www\./, '').toLowerCase();
+    if (host === 'youtu.be') {
+      var shortId = (u.pathname.split('/').filter(Boolean)[0] || '');
+      if (!/^[A-Za-z0-9_-]{11}$/.test(shortId)) return null;
+      return { kind: 'youtube', id: shortId };
+    }
+    if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'music.youtube.com' || host === 'youtube-nocookie.com') {
+      var vid = u.searchParams.get('v') || '';
+      var parts = u.pathname.split('/').filter(Boolean);
+      if (!vid && parts.length >= 2 && (parts[0] === 'embed' || parts[0] === 'shorts' || parts[0] === 'live' || parts[0] === 'v')) vid = parts[1];
+      if (!/^[A-Za-z0-9_-]{11}$/.test(vid)) return null;
+      return { kind: 'youtube', id: vid };
+    }
+    if (host === 'vimeo.com' || host === 'player.vimeo.com') {
+      var bits = u.pathname.split('/').filter(Boolean);
+      var vimeoId = '', hash = u.searchParams.get('h') || '';
+      if (host === 'player.vimeo.com') {
+        var at = bits.indexOf('video');
+        if (at >= 0 && bits[at + 1]) vimeoId = bits[at + 1];
+      } else if (/^\d+$/.test(bits[0] || '')) {
+        vimeoId = bits[0];
+        if (bits[1] && /^[A-Za-z0-9]+$/.test(bits[1])) hash = bits[1];
+      }
+      if (!/^\d{6,12}$/.test(vimeoId)) return null;
+      if (hash && !/^[A-Za-z0-9]+$/.test(hash)) return null;
+      return { kind: 'vimeo', id: vimeoId, hash: hash };
+    }
+    return null;
+  }
+  function embedSrc(info) {
+    if (info.kind === 'youtube') return 'https://www.youtube-nocookie.com/embed/' + info.id + '?autoplay=1&rel=0';
+    var src = 'https://player.vimeo.com/video/' + info.id + '?autoplay=1&dnt=1';
+    if (info.hash) src += '&h=' + encodeURIComponent(info.hash);
+    return src;
+  }
+  function boot() {
+    document.querySelectorAll('[data-video]').forEach(function (frame) {
+      var info = parseVideoLink(frame.getAttribute('data-video'));
+      var block = frame.closest('.ep-video');
+      if (!info) { if (block) block.remove(); return; }
+      var btn = frame.querySelector('.ep-video__play');
+      if (!btn) return;
+      if (info.kind === 'youtube' && !btn.querySelector('img')) {
+        var img = document.createElement('img');
+        img.alt = '';
+        img.src = 'https://i.ytimg.com/vi/' + info.id + '/hqdefault.jpg';
+        btn.insertBefore(img, btn.firstChild);
+      }
+      btn.addEventListener('click', function () {
+        var iframe = document.createElement('iframe');
+        iframe.src = embedSrc(info);
+        var heading = block && block.querySelector('h2');
+        iframe.title = heading && heading.textContent.trim() ? heading.textContent.trim() : 'Video';
+        iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        frame.replaceChildren(iframe);
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();

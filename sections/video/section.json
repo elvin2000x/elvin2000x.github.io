@@ -1,0 +1,53 @@
+{
+  "label": "Video",
+  "about": "Paste a YouTube or Vimeo link. The player loads when a visitor presses play.",
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "align",
+      "type": "choice",
+      "label": "Align",
+      "options": [
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        }
+      ]
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Headline"
+    },
+    {
+      "key": "url",
+      "type": "video",
+      "label": "Video link"
+    },
+    {
+      "key": "caption",
+      "type": "html",
+      "label": "Caption"
+    },
+    {
+      "key": "poster",
+      "type": "image",
+      "label": "Poster image",
+      "alt": "poster_alt"
+    },
+    {
+      "key": "poster_alt",
+      "type": "text",
+      "label": "Poster description",
+      "hidden": true
+    }
+  ]
+}

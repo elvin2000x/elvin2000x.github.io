@@ -17,8 +17,9 @@
           "spaced": true,
           "style": "",
           "bid": "",
-          "aria": "Get the book on Amazon",
-          "label": "Get the book on Amazon &rarr;",
+          "aria": "Get the bundle",
+          "label": "Get the bundle",
+          "href": "/buy/the-artificial-advantage/",
           "eager": true,
           "avail": "Kindle, paperback and hardcover · 198 pages in print",
           "price": "",
@@ -28,6 +29,21 @@
         "trust": "Worked a decade in marketing, worked in big tech, and taught myself to build with AI",
         "image": "/img/book-3d.webp",
         "image_alt": "The Artificial Advantage by Elvin M. Peters, paperback"
+      }
+    },
+    {
+      "id": "welcome-video",
+      "type": "video",
+      "hidden": true,
+      "note": "Welcome video",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "heading": "",
+        "url": "",
+        "caption": "",
+        "poster": "",
+        "poster_alt": ""
       }
     },
     {
@@ -173,8 +189,9 @@
           "spaced": true,
           "style": "",
           "bid": "",
-          "aria": "Get the book on Amazon",
-          "label": "Get the book on Amazon &rarr;",
+          "aria": "Get the bundle",
+          "label": "Get the bundle",
+          "href": "/buy/the-artificial-advantage/",
           "eager": false,
           "avail": "Kindle, paperback and hardcover · 198 pages in print",
           "price": "",
@@ -254,8 +271,9 @@
         "value": "It costs less than a dinner out. If one idea in it saves you an hour a month, the book has paid for itself.",
         "buy": {
           "spaced": true,
-          "aria": "Get the book on Amazon",
-          "label": "Get the book on Amazon &rarr;",
+          "aria": "Get the bundle",
+          "label": "Get the bundle",
+          "href": "/buy/the-artificial-advantage/",
           "avail": "Kindle, paperback and hardcover · 198 pages in print",
           "sample_href": "/free/free-chapter/",
           "sample": "Or read Chapter 8 free first &rarr;"
@@ -343,8 +361,9 @@
           "spaced": true,
           "style": "",
           "bid": "",
-          "aria": "Get the book on Amazon",
-          "label": "Get the book on Amazon &rarr;",
+          "aria": "Get the bundle",
+          "label": "Get the bundle",
+          "href": "/buy/the-artificial-advantage/",
           "eager": false,
           "avail": "Kindle, paperback and hardcover · 198 pages in print",
           "price": "",
