@@ -147,6 +147,21 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       fetch(STORE + '/funnels').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
         var f = (Array.isArray(list) ? list : []).filter(function (x) { return x.key === box.getAttribute('data-lp-fstack'); })[0];
         if (!f || !f.stack) throw 0;
+        /* Until the live catalogue expands the Toolkit into priced pieces, the page
+           may carry a review preview so local review shows the full stack. Live wins
+           the moment those piece rows appear. Front price always stays live. */
+        var previewEl = box.querySelector('[data-lp-stack-preview]');
+        if (previewEl) {
+          try {
+            var preview = JSON.parse(previewEl.textContent);
+            var livePieces = (f.stack || []).some(function (r) {
+              return r.group === 'toolkit' || (r.key && String(r.key).indexOf('toolkit-') === 0);
+            });
+            if (!livePieces && preview && preview.stack && preview.stack.length) {
+              f = { front_price: f.front_price, front_price_text: f.front_price_text, stack: preview.stack };
+            }
+          } catch (e) {}
+        }
         var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null;
         ul.innerHTML = '';
         f.stack.forEach(function (r) {

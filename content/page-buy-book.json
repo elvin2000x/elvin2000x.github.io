@@ -113,19 +113,51 @@
     },
     {
       "id": "toolkit",
-      "type": "text",
+      "type": "lp-kit",
       "data": {
+        "bg": "",
         "anchor": "",
-        "align": "left",
         "heading": "Part 1: The Artificial Advantage Toolkit",
-        "paras": [
-          "The Toolkit comes with the book. It turns the chapters into files you can open, edit and use on your own work. The files are Word documents, with the Prompt Library also as a .csv.",
-          "Editable exercises for the book's chapters. Fill them in on your real tasks, in a document you can change.",
-          "The 30-Day and 3-Month Practice Plans. A 30-day plan and a 3-month plan that carry you past the first week.",
-          "The Professional Prompt Library, importable, plus a .csv. Prompts for recurring work, ready to paste or import into your own system.",
-          "The Role Library, 25 roles. Role statements you can drop into a brief, so the AI answers like the specialist you need.",
-          "The Tool-Selection Cheat Sheet. A short guide to picking the AI tool that fits the job in front of you."
-        ]
+        "intro": "The Toolkit comes with the book. It turns the chapters into files you can open, edit and use on your own work. The files are Word documents, with the Prompt Library also as a .csv.",
+        "tiles": [
+          {
+            "src": "/img/store/toolkit-exercises.webp",
+            "alt": "Editable exercises from The Artificial Advantage Toolkit",
+            "name": "Editable exercises",
+            "line": "Fill them in on your real tasks, in a document you can change."
+          },
+          {
+            "src": "/img/inside/workbook-day5.webp",
+            "alt": "A practice-plan page from the Toolkit",
+            "name": "30-Day and 3-Month Practice Plans",
+            "line": "A 30-day plan and a 3-month plan that carry you past the first week."
+          },
+          {
+            "src": "/img/store/cover-prompts.webp",
+            "alt": "Professional Prompt Library cover",
+            "name": "Professional Prompt Library",
+            "line": "Importable prompts, plus a .csv, ready for recurring work."
+          },
+          {
+            "src": "/img/store/cover-roles.webp",
+            "alt": "Role Library cover",
+            "name": "Role Library (25 roles)",
+            "line": "Role statements you can drop into a brief for the specialist you need."
+          },
+          {
+            "src": "/img/inside/cm-onesheet.webp",
+            "alt": "One-sheet reference standing in until a Tool-Selection product shot exists",
+            "name": "Tool-Selection Cheat Sheet",
+            "line": "A short guide to picking the AI tool that fits the job in front of you."
+          },
+          {
+            "src": "/img/magnets/directors-cheat-sheet.webp",
+            "alt": "The Director's Cheat Sheet cover",
+            "name": "Director's Cheat Sheet",
+            "line": "Included with the Toolkit download so the brief stays next to the files."
+          }
+        ],
+        "note": "The Practice Plans and Tool-Selection tiles use stand-in shots until dedicated package art is shot."
       }
     },
     {
@@ -148,7 +180,7 @@
         "align": "left",
         "heading": "",
         "paras": [
-          "The $9.99 is the Amazon price of the ebook. The other prices are what each item sells for separately in my store. Prices are in US dollars."
+          "The $9 ebook line is the Amazon Kindle price. Each Toolkit piece and the Workbook show the price they sell for on their own in this store, struck through because they come free in the bundle. The Companion Library and the Director's Cheat Sheet stay Included, with no dollar. Prices are in US dollars."
         ]
       }
     },
@@ -159,6 +191,7 @@
         "bg": "tint",
         "anchor": "",
         "heading": "What the stack adds up to",
+        "preview_stack_json": "{\"stack\":[{\"key\":\"book1-ebook\",\"name\":\"The Artificial Advantage, 2E ebook\",\"status\":\"price\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":null,\"group_name\":null},{\"key\":\"workbook-2e\",\"name\":\"7-Day AI Workbook, 2E\",\"status\":\"free\",\"standalone_price\":1200,\"standalone_price_text\":\"$12\",\"group\":null,\"group_name\":null},{\"key\":\"toolkit-exercises\",\"name\":\"Toolkit: Editable Exercises\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-practice-plans\",\"name\":\"Toolkit: 30-Day and 3-Month Practice Plans\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-prompt-library\",\"name\":\"Toolkit: Prompt Library\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-role-library\",\"name\":\"Toolkit: Role Library\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-tool-sheet\",\"name\":\"Toolkit: Tool-Selection Cheat Sheet\",\"status\":\"free\",\"standalone_price\":400,\"standalone_price_text\":\"$4\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":null,\"name\":\"The Director's Cheat Sheet\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"companion-library\",\"name\":\"The Companion Library\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":null,\"group_name\":null}]}",
         "shots": [
           {
             "src": "/img/store/hero-3d.webp",
@@ -171,9 +204,19 @@
             "caption": "The workbook"
           },
           {
+            "src": "/img/store/cover-prompts.webp",
+            "alt": "Professional Prompt Library cover",
+            "caption": "Prompt Library"
+          },
+          {
+            "src": "/img/store/cover-roles.webp",
+            "alt": "Role Library cover",
+            "caption": "Role Library"
+          },
+          {
             "src": "/img/magnets/directors-cheat-sheet.webp",
             "alt": "The Director's Cheat Sheet cover",
-            "caption": "The cheat sheet"
+            "caption": "Cheat sheet"
           }
         ],
         "free_label": "Free",

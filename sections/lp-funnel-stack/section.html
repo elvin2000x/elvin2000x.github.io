@@ -2,6 +2,9 @@
   <div class="lp-in">
     <h2>{{heading}}</h2>
     <div class="lp-stack" data-lp-fstack="{{funnel}}" data-free="{{free_label}}" data-included="{{included_label}}">
+{{#preview_stack_json}}
+      <script type="application/json" data-lp-stack-preview>{{preview_stack_json}}</script>
+{{/preview_stack_json}}
       <div class="lp-shots">
 {{#shots}}
         <figure class="lp-shot"><img src="{{src}}" alt="{{alt}}" width="280" height="420"><figcaption>{{caption}}</figcaption></figure>

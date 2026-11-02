@@ -47,6 +47,12 @@
       ]
     },
     {
+      "key": "preview_stack_json",
+      "type": "text",
+      "label": "Review stack JSON (used only until live expands the Toolkit)"
+    },
+
+    {
       "key": "heading",
       "type": "html",
       "label": "Heading",

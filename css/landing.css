@@ -38,9 +38,9 @@ body.lp{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--san
 .lp-stack__items img{ width:56px; height:56px; object-fit:contain; flex:none }
 .lp-stack__name{ flex:1; min-width:0 }
 .lp-stack__value{ font-weight:600; color:var(--ink-2); white-space:nowrap }
-.lp-stack__total, .lp-stack__price, .lp-price{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin:8px 0 }
+.lp-stack__total, .lp-stack__price, .lp-price{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin:8px 0; font-variant-numeric:tabular-nums }
 .lp-stack__total s{ color:var(--muted) }
-.lp-stack__price strong, .lp-price strong{ font:600 32px/1.1 var(--serif); color:var(--ink) }
+.lp-stack__price strong, .lp-price strong{ font:600 32px/1.1 var(--serif); color:var(--ink); font-variant-numeric:tabular-nums }
 .lp-price s{ color:var(--muted) }
 .lp-bump{ display:flex; align-items:center; gap:12px; margin:16px 0; padding:14px; border:2px dashed var(--accent); border-radius:var(--r-sm); background:var(--bg); cursor:pointer }
 .lp-bump img{ width:48px; height:48px; object-fit:contain; flex:none }
@@ -109,30 +109,42 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 .lp .btn--ghost{ border:2px solid var(--lp-navy); color:var(--lp-navy) }
 .lp-no{ color:var(--lp-navy); font-size:18px; min-height:48px }
 
+/* Toolkit product beats mid-page */
+.lp-kit{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:8px 0 4px }
+.lp-kit__tile{ margin:0; background:#fff; border:1px solid var(--lp-navy); border-radius:12px; overflow:hidden }
+.lp-kit__tile img{ display:block; width:100%; aspect-ratio:4 / 3; object-fit:cover; object-position:top center; background:var(--lp-band) }
+.lp-kit__tile figcaption{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:4px }
+.lp-kit__tile strong{ font-family:'EB Garamond',var(--serif); font-size:22px; font-weight:600; color:var(--lp-navy); line-height:1.2 }
+.lp-kit__tile span{ font-size:16px; line-height:1.45; color:var(--lp-navy); opacity:.78 }
+.lp-kit__note{ margin-top:16px }
+@media (min-width:921px){ .lp-kit{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px } }
+
 /* the value stack: a navy price band with the price large in gold */
-.lp-stack{ background:#fff; border:1px solid var(--lp-navy); box-shadow:none; padding:0; overflow:hidden }
-.lp-shots{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 24px 0 }
+.lp-stack{ --lp-stack-pad:24px; background:#fff; border:1px solid var(--lp-navy); box-shadow:none; padding:0; overflow:hidden }
+.lp-shots{ display:grid; grid-template-columns:repeat(auto-fit,minmax(132px,1fr)); gap:12px; margin:16px var(--lp-stack-pad) 0 }
 .lp-shots:empty{ display:none }
 .lp-shot{ margin:0 }
 .lp-shot img{ display:block; width:100%; height:auto; border-radius:10px }
 .lp-shot figcaption{ margin-top:6px; font-size:13px; font-weight:700; color:var(--lp-navy); line-height:1.3 }
-@media (max-width:640px){ .lp-shots{ grid-template-columns:1fr 1fr; margin-left:16px; margin-right:16px } }
-.lp-stack__shot, .lp-stack__items, .lp-stack__total, .lp-bump, .lp-note{ margin-left:24px; margin-right:24px }
+.lp-stack__shot, .lp-stack__items, .lp-bump, .lp-note{ margin-left:var(--lp-stack-pad); margin-right:var(--lp-stack-pad) }
 .lp-stack__shot{ margin-top:24px }
-.lp-stack__items li{ border-bottom:1px solid var(--lp-band); min-height:56px }
+.lp-stack__items li{ border-bottom:1px solid var(--lp-band); min-height:56px; flex-wrap:nowrap }
 .lp-stack__name{ font-size:20px }
+.lp-stack__value{ margin-left:auto; text-align:right; font-variant-numeric:tabular-nums }
+.lp-stack__total, .lp-stack__price{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; box-sizing:border-box; width:100%; margin:8px 0 0; padding-left:var(--lp-stack-pad); padding-right:var(--lp-stack-pad) }
 .lp-stack__total{ font-weight:700; color:var(--lp-navy) }
+.lp-stack__total strong{ font-variant-numeric:tabular-nums; white-space:nowrap }
 .lp-stack__total s{ color:var(--lp-navy); opacity:.6 }
-.lp-stack__price{ margin:16px 0 0; padding:20px 24px; background:linear-gradient(var(--lp-navy),var(--lp-navy-2)); color:#fff }
+.lp-stack__price{ margin:16px 0 0; padding-top:20px; padding-bottom:20px; background:linear-gradient(var(--lp-navy),var(--lp-navy-2)); color:#fff }
 .lp-stack__price span{ color:#fff; font-size:16px; font-weight:700 }
-.lp-stack__price strong{ color:var(--lp-gold); font-size:44px }
-.lp-pay{ margin:0 24px 24px }
+.lp-stack__price strong{ color:var(--lp-gold); font-size:44px; font-variant-numeric:tabular-nums; white-space:nowrap }
+.lp-pay{ margin:0 var(--lp-stack-pad) 24px }
 .lp-pay label{ display:block; margin:16px 0 0; font-weight:700; color:var(--lp-navy) }
 .lp-pay input{ display:block; width:100%; box-sizing:border-box; margin-top:8px; min-height:48px; padding:12px 14px; border:1px solid var(--lp-navy); border-radius:12px; font:16px/1.4 var(--sans); color:var(--ink); background:#fff }
 .lp-pay .lp-cta{ width:100%; margin:16px 0 0 }
-.lp-review{ margin:8px 24px 16px; font-size:16px; line-height:1.45 }
+.lp-review{ margin:8px var(--lp-stack-pad) 16px; font-size:16px; line-height:1.45 }
 .lp-review a{ color:var(--lp-navy); font-weight:700 }
-.lp-stack .lp-cta{ width:calc(100% - 48px); margin:16px 24px 24px }
+.lp-stack .lp-cta{ width:calc(100% - (var(--lp-stack-pad) * 2)); margin:16px var(--lp-stack-pad) 24px }
 
 /* "Free" pill: gold fill with navy text */
 .lp-stack__value em, .lp-pill{ font-style:normal; background:var(--lp-gold); color:var(--lp-navy); border-radius:999px; padding:2px 10px; font-weight:700 }
@@ -153,9 +165,10 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 @media (max-width:640px){
   .lp-sec, .lp-progress{ padding-left:16px; padding-right:16px }
   .lp h1{ font-size:32px } .lp h2{ font-size:28px }
-  .lp-stack__shot, .lp-stack__items, .lp-stack__total, .lp-bump, .lp-note, .lp-pay, .lp-review{ margin-left:16px; margin-right:16px }
-  .lp-stack__items li{ flex-wrap:wrap }
-  .lp-stack .lp-cta{ position:sticky; bottom:0; z-index:5; width:calc(100% - 32px); margin:16px 16px 0; box-shadow:0 -8px 16px #fff }
+  .lp-stack{ --lp-stack-pad:16px }
+  .lp-kit{ grid-template-columns:1fr }
+  .lp-stack__items li{ flex-wrap:nowrap }
+  .lp-stack .lp-cta{ position:sticky; bottom:0; z-index:5; box-shadow:0 -8px 16px #fff }
 }
 /* product tiles with no picture yet: a navy tile, never a broken image */
 .lp-stack__items img[src=""], .lp-shop img[src=""]{ visibility:hidden }

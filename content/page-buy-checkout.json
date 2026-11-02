@@ -50,6 +50,7 @@
         "included_label": "Included",
         "total_label": "Total value",
         "price_label": "Your price",
+        "preview_stack_json": "{\"stack\":[{\"key\":\"book1-ebook\",\"name\":\"The Artificial Advantage, 2E ebook\",\"status\":\"price\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":null,\"group_name\":null},{\"key\":\"workbook-2e\",\"name\":\"7-Day AI Workbook, 2E\",\"status\":\"free\",\"standalone_price\":1200,\"standalone_price_text\":\"$12\",\"group\":null,\"group_name\":null},{\"key\":\"toolkit-exercises\",\"name\":\"Toolkit: Editable Exercises\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-practice-plans\",\"name\":\"Toolkit: 30-Day and 3-Month Practice Plans\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-prompt-library\",\"name\":\"Toolkit: Prompt Library\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-role-library\",\"name\":\"Toolkit: Role Library\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-tool-sheet\",\"name\":\"Toolkit: Tool-Selection Cheat Sheet\",\"status\":\"free\",\"standalone_price\":400,\"standalone_price_text\":\"$4\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":null,\"name\":\"The Director's Cheat Sheet\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"companion-library\",\"name\":\"The Companion Library\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":null,\"group_name\":null}]}",
         "shots": [
           {
             "src": "/img/store/hero-3d.webp",
@@ -62,9 +63,19 @@
             "caption": "The workbook"
           },
           {
+            "src": "/img/store/cover-prompts.webp",
+            "alt": "Professional Prompt Library cover",
+            "caption": "Prompt Library"
+          },
+          {
+            "src": "/img/store/cover-roles.webp",
+            "alt": "Role Library cover",
+            "caption": "Role Library"
+          },
+          {
             "src": "/img/magnets/directors-cheat-sheet.webp",
-            "alt": "The Director's Cheat Sheet cover. A matching package photo does not exist yet.",
-            "caption": "The cheat sheet"
+            "alt": "The Director's Cheat Sheet cover",
+            "caption": "Cheat sheet"
           }
         ],
         "review_href": "/buy/operator-bundle/",

@@ -1,0 +1,71 @@
+{
+  "label": "Toolkit product tiles",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading",
+      "default": "[Heading: the Toolkit]"
+    },
+    {
+      "key": "intro",
+      "type": "html",
+      "label": "Intro"
+    },
+    {
+      "key": "tiles",
+      "type": "list",
+      "label": "Pieces",
+      "fields": [
+        {
+          "key": "src",
+          "type": "text",
+          "label": "Image address"
+        },
+        {
+          "key": "alt",
+          "type": "text",
+          "label": "Description"
+        },
+        {
+          "key": "name",
+          "type": "text",
+          "label": "Name"
+        },
+        {
+          "key": "line",
+          "type": "text",
+          "label": "One short line"
+        }
+      ]
+    },
+    {
+      "key": "note",
+      "type": "html",
+      "label": "Note under the tiles"
+    }
+  ]
+}

@@ -101,10 +101,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="lp-in">
     <h2>What you're buying</h2>
     <div class="lp-stack" data-lp-fstack="the-artificial-advantage-1" data-free="Free" data-included="Included">
+      <script type="application/json" data-lp-stack-preview>{"stack":[{"key":"book1-ebook","name":"The Artificial Advantage, 2E ebook","status":"price","standalone_price":900,"standalone_price_text":"$9","group":null,"group_name":null},{"key":"workbook-2e","name":"7-Day AI Workbook, 2E","status":"free","standalone_price":1200,"standalone_price_text":"$12","group":null,"group_name":null},{"key":"toolkit-exercises","name":"Toolkit: Editable Exercises","status":"free","standalone_price":900,"standalone_price_text":"$9","group":"toolkit","group_name":"The Toolkit"},{"key":"toolkit-practice-plans","name":"Toolkit: 30-Day and 3-Month Practice Plans","status":"free","standalone_price":700,"standalone_price_text":"$7","group":"toolkit","group_name":"The Toolkit"},{"key":"toolkit-prompt-library","name":"Toolkit: Prompt Library","status":"free","standalone_price":900,"standalone_price_text":"$9","group":"toolkit","group_name":"The Toolkit"},{"key":"toolkit-role-library","name":"Toolkit: Role Library","status":"free","standalone_price":700,"standalone_price_text":"$7","group":"toolkit","group_name":"The Toolkit"},{"key":"toolkit-tool-sheet","name":"Toolkit: Tool-Selection Cheat Sheet","status":"free","standalone_price":400,"standalone_price_text":"$4","group":"toolkit","group_name":"The Toolkit"},{"key":null,"name":"The Director's Cheat Sheet","status":"included","standalone_price":null,"standalone_price_text":null,"group":"toolkit","group_name":"The Toolkit"},{"key":"companion-library","name":"The Companion Library","status":"included","standalone_price":null,"standalone_price_text":null,"group":null,"group_name":null}]}</script>
       <div class="lp-shots">
         <figure class="lp-shot"><img src="/img/store/hero-3d.webp" alt="The Artificial Advantage as a paperback" width="280" height="420"><figcaption>The ebook</figcaption></figure>
         <figure class="lp-shot"><img src="/img/store/mockup-workbook.webp" alt="The 7-Day AI Workbook as a book and a tablet" width="280" height="420"><figcaption>The workbook</figcaption></figure>
-        <figure class="lp-shot"><img src="/img/magnets/directors-cheat-sheet.webp" alt="The Director's Cheat Sheet cover. A matching package photo does not exist yet." width="280" height="420"><figcaption>The cheat sheet</figcaption></figure>
+        <figure class="lp-shot"><img src="/img/store/cover-prompts.webp" alt="Professional Prompt Library cover" width="280" height="420"><figcaption>Prompt Library</figcaption></figure>
+        <figure class="lp-shot"><img src="/img/store/cover-roles.webp" alt="Role Library cover" width="280" height="420"><figcaption>Role Library</figcaption></figure>
+        <figure class="lp-shot"><img src="/img/magnets/directors-cheat-sheet.webp" alt="The Director's Cheat Sheet cover" width="280" height="420"><figcaption>Cheat sheet</figcaption></figure>
       </div>
       <ul class="lp-stack__items" data-lp-rows></ul>
       <p class="lp-stack__total"><span>Total value</span> <strong data-lp-total></strong></p>
@@ -170,6 +173,21 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       fetch(STORE + '/funnels').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
         var f = (Array.isArray(list) ? list : []).filter(function (x) { return x.key === box.getAttribute('data-lp-fstack'); })[0];
         if (!f || !f.stack) throw 0;
+        /* Until the live catalogue expands the Toolkit into priced pieces, the page
+           may carry a review preview so local review shows the full stack. Live wins
+           the moment those piece rows appear. Front price always stays live. */
+        var previewEl = box.querySelector('[data-lp-stack-preview]');
+        if (previewEl) {
+          try {
+            var preview = JSON.parse(previewEl.textContent);
+            var livePieces = (f.stack || []).some(function (r) {
+              return r.group === 'toolkit' || (r.key && String(r.key).indexOf('toolkit-') === 0);
+            });
+            if (!livePieces && preview && preview.stack && preview.stack.length) {
+              f = { front_price: f.front_price, front_price_text: f.front_price_text, stack: preview.stack };
+            }
+          } catch (e) {}
+        }
         var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null;
         ul.innerHTML = '';
         f.stack.forEach(function (r) {

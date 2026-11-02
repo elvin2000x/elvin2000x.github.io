@@ -1,0 +1,22 @@
+<section class="lp-sec{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+    <h2>{{heading}}</h2>
+{{#intro}}
+    <p>{{intro}}</p>
+{{/intro}}
+    <div class="lp-kit">
+{{#tiles}}
+      <figure class="lp-kit__tile">
+        <img src="{{src}}" alt="{{alt}}" width="280" height="360" loading="lazy">
+        <figcaption>
+          <strong>{{name}}</strong>
+          <span>{{line}}</span>
+        </figcaption>
+      </figure>
+{{/tiles}}
+    </div>
+{{#note}}
+    <p class="lp-note lp-kit__note">{{note}}</p>
+{{/note}}
+  </div>
+</section>
