@@ -64,6 +64,11 @@
       "type": "html",
       "label": "If the card is declined",
       "default": "[Declined: what to do next]"
+    },
+    {
+      "key": "review_href",
+      "type": "text",
+      "label": "Review path link"
     }
   ]
 }

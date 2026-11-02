@@ -25,6 +25,28 @@
       "label": "Anchor id"
     },
     {
+      "key": "shots",
+      "type": "list",
+      "label": "Product pictures",
+      "fields": [
+        {
+          "key": "src",
+          "type": "text",
+          "label": "Image address"
+        },
+        {
+          "key": "alt",
+          "type": "text",
+          "label": "Description"
+        },
+        {
+          "key": "caption",
+          "type": "text",
+          "label": "Caption"
+        }
+      ]
+    },
+    {
       "key": "heading",
       "type": "html",
       "label": "Heading",
@@ -109,6 +131,11 @@
       "key": "email_button",
       "type": "text",
       "label": "Pay button"
+    },
+    {
+      "key": "review_href",
+      "type": "text",
+      "label": "Review path link"
     },
     {
       "key": "button",
