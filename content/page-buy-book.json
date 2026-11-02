@@ -29,8 +29,8 @@
         "sub": "Learn to get a near-final draft from AI on your own work, and keep the method for every task after it. The ebook, the Toolkit, and the 7-Day Workbook are in the box below.",
         "button": {
           "label": "Get the bundle",
-          "checkout": true,
-          "href": ""
+          "checkout": false,
+          "href": "/buy/the-artificial-advantage/checkout/"
         },
         "note": "",
         "image": "/img/book-3d.webp",
@@ -167,8 +167,8 @@
         "bump": null,
         "button": {
           "label": "Get the bundle",
-          "checkout": true,
-          "href": ""
+          "checkout": false,
+          "href": "/buy/the-artificial-advantage/checkout/"
         },
         "note": ""
       }
@@ -260,9 +260,9 @@
         "buttons": [
           {
             "label": "Get the bundle",
-            "href": "",
+            "href": "/buy/the-artificial-advantage/checkout/",
             "style": "primary",
-            "checkout": true
+            "checkout": false
           }
         ]
       }

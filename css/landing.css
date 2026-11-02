@@ -118,7 +118,12 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 .lp-stack__total{ font-weight:700; color:var(--lp-navy) }
 .lp-stack__total s{ color:var(--lp-navy); opacity:.6 }
 .lp-stack__price{ margin:16px 0 0; padding:20px 24px; background:linear-gradient(var(--lp-navy),var(--lp-navy-2)); color:#fff }
+.lp-stack__price span{ color:#fff; font-size:16px; font-weight:700 }
 .lp-stack__price strong{ color:var(--lp-gold); font-size:44px }
+.lp-pay{ margin:0 24px 24px }
+.lp-pay label{ display:block; margin:16px 0 0; font-weight:700; color:var(--lp-navy) }
+.lp-pay input{ display:block; width:100%; box-sizing:border-box; margin-top:8px; min-height:48px; padding:12px 14px; border:1px solid var(--lp-navy); border-radius:12px; font:16px/1.4 var(--sans); color:var(--ink); background:#fff }
+.lp-pay .lp-cta{ width:100%; margin:16px 0 0 }
 .lp-stack .lp-cta{ width:calc(100% - 48px); margin:16px 24px 24px }
 
 /* "Free" pill: gold fill with navy text */
@@ -140,7 +145,7 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 @media (max-width:640px){
   .lp-sec, .lp-progress{ padding-left:16px; padding-right:16px }
   .lp h1{ font-size:32px } .lp h2{ font-size:28px }
-  .lp-stack__shot, .lp-stack__items, .lp-stack__total, .lp-bump, .lp-note{ margin-left:16px; margin-right:16px }
+  .lp-stack__shot, .lp-stack__items, .lp-stack__total, .lp-bump, .lp-note, .lp-pay{ margin-left:16px; margin-right:16px }
   .lp-stack__items li{ flex-wrap:wrap }
   .lp-stack .lp-cta{ position:sticky; bottom:0; z-index:5; width:calc(100% - 32px); margin:16px 16px 0; box-shadow:0 -8px 16px #fff }
 }

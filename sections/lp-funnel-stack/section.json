@@ -101,6 +101,16 @@
       ]
     },
     {
+      "key": "email_label",
+      "type": "text",
+      "label": "Email field label"
+    },
+    {
+      "key": "email_button",
+      "type": "text",
+      "label": "Pay button"
+    },
+    {
       "key": "button",
       "type": "object",
       "label": "Button",

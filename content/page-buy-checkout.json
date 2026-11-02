@@ -1,0 +1,47 @@
+{
+  "title": "Checkout",
+  "frame": "landing",
+  "noindex": true,
+  "landing": {
+    "slug": "the-artificial-advantage/checkout",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "step": "front",
+    "description": "Pay for The Book 1 Bundle. The download is ready right after."
+  },
+  "sections": [
+    {
+      "id": "order",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "",
+        "eyebrow": "Checkout",
+        "headline": "Your order",
+        "sub": "The Book 1 Bundle. The card is taken on the next page. The download is ready as soon as it goes through.",
+        "button": null,
+        "note": "",
+        "image": "/img/book-3d.webp",
+        "image_alt": "The Artificial Advantage by Elvin M. Peters, paperback"
+      }
+    },
+    {
+      "id": "pay",
+      "type": "lp-funnel-stack",
+      "data": {
+        "bg": "tint",
+        "anchor": "",
+        "heading": "What you're buying",
+        "free_label": "Free",
+        "included_label": "Included",
+        "total_label": "Total value",
+        "price_label": "Your price",
+        "email_label": "Email for the receipt and the download",
+        "email_button": "Continue to payment",
+        "bump": null,
+        "button": null,
+        "note": "Digital. Nothing is shipped. If it is not for you, email elvin@elvinpeters.com within 14 days for a full refund."
+      }
+    }
+  ]
+}
