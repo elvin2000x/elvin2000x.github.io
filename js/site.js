@@ -3,7 +3,7 @@
    A page opened with utm_* tags in its address saves them for this browser
    tab, so a sign-up a few clicks later still says which link brought the
    visitor. Generic on purpose: YouTube links, email footer links
-   (utm_medium=email), ads, and any later landing page (/buy/<slug>) that loads
+   (utm_medium=email), ads, and any later landing page (/book/<step>) that loads
    this file all work the same way.
    - The page's own address wins for that page.
    - Otherwise the FIRST set saved in this tab. A saved set is never

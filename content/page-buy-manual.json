@@ -3,7 +3,7 @@
   "frame": "landing",
   "landing": {
     "slug": "manual",
-    "old_slugs": ["claude-manual"],
+    "old_slugs": [],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
     "step": "manual-only",

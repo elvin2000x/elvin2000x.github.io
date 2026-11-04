@@ -216,5 +216,48 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     try { ttq.track('CompletePayment', { value: v, currency: cur }, { event_id: id }); } catch (x) {}
   });
 </script>
+<script>
+  /* Audience headline (ad links carry ?aud=<segment> or ?v=<angle>), the way the homepage does it.
+     No tag keeps the page's own words. The headline set is the homepage's, unchanged. */
+  (function () {
+    var AUD = {
+          "skeptic":  { hl: "You tried AI and<br/><span>weren't impressed.</span>",
+                        sub: "It had to guess what you wanted. This book shows you how to get the right answers.",
+                        hook: "" },
+          "jobsec":   { hl: "AI won't take your job.<br/><span>Someone who uses it better will.</span>",
+                        sub: "Be that someone. This book shows you how to get the right answers from AI.",
+                        hook: "" },
+          "senior":   { hl: "You're not too old for AI.<br/><span>You just need a system.</span>",
+                        sub: "AI has to guess what you want. This book gives you a system to get the right answers.",
+                        hook: "" },
+          "lowtech":  { hl: "If you can send an email,<br/><span>you can master AI.</span>",
+                        sub: "AI has to guess what you want. This book shows you how to get the right answers.",
+                        hook: "" },
+          "student":  { hl: "Graduate already<br/><span>ahead of the room.</span>",
+                        sub: "AI has to guess what you want. This book shows you how to get the right answers.",
+                        hook: "" },
+          "manager":  { hl: "Give your team an AI framework<br/><span>you can actually teach.</span>",
+                        sub: "AI has to guess what your team wants. This book gives them a shared way to get the right answers.",
+                        hook: "" }
+        };
+        var ANG = {
+          "status":   { hl: "Be the one<br/><span>they promote.</span>",
+                        sub: "Two people give AI the same task and get different results. This book shows you how to get the right answers.",
+                        hook: "" },
+          "time":     { hl: "A week's work<br/><span>before lunch.</span>",
+                        sub: "Fixing a generic AI draft can take as long as writing it. This book shows you how to get the right answers.",
+                        hook: "" }
+        };
+    try {
+      var p = new URLSearchParams(location.search);
+      var pick = AUD[(p.get("aud") || "").toLowerCase()] || ANG[(p.get("v") || "").toLowerCase()] || null;
+      if (pick) {
+        var h = document.querySelector(".lp-hero h1"), s = document.querySelector(".lp-hero .lp-lede");
+        if (h) h.innerHTML = pick.hl;
+        if (s) s.textContent = pick.sub;
+      }
+    } catch (e) {}
+  })();
+</script>
 </body>
 </html>

@@ -4,9 +4,10 @@
   "noindex": true,
   "landing": {
     "slug": "",
-    "old_slugs": ["the-artificial-advantage/start"],
+    "old_slugs": [],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
+    "aud": true,
     "description": "A short note from Elvin before you meet his AI avatar and see The Artificial Advantage bundle."
   },
   "sections": [

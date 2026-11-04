@@ -15,7 +15,7 @@
   // Sample links (made-up demo data, not real scan counts).
   const LINKS = [
     { id: 'demo-poster', name: 'Sample poster', campaign: 'cleaner-recruit', target_url: 'https://ultimateonlinedirectory.com/', scans: 142, fg: '#173D30', bg: '#F6F3EC' },
-    { id: 'demo-book', name: 'Sample book insert', campaign: 'book-launch', target_url: 'https://elvinpeters.com/book.html', scans: 96, fg: '#0E1A2B', bg: '#FFFFFF' },
+    { id: 'demo-book', name: 'Sample book insert', campaign: 'book-launch', target_url: 'https://elvinpeters.com/book/', scans: 96, fg: '#0E1A2B', bg: '#FFFFFF' },
     { id: 'demo-card', name: 'Sample business card', campaign: 'networking', target_url: 'https://elvinpeters.com/links/', scans: 58, fg: '#000000', bg: '#FFFFFF' },
     { id: 'demo-talk', name: 'Sample talk slide', campaign: 'speaking', target_url: 'https://elvinpeters.com/newsletter/', scans: 37, fg: '#1A1204', bg: '#F3E6C4' },
     { id: 'demo-flyer', name: 'Sample event flyer', campaign: 'speaking', target_url: 'https://elvinpeters.com/contact/', scans: 21, fg: '#173D30', bg: '#FFFFFF' }

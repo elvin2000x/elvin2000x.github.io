@@ -3,7 +3,7 @@
   "frame": "landing",
   "landing": {
     "slug": "last-chance",
-    "old_slugs": ["before-you-go"],
+    "old_slugs": [],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
     "step": "last-chance",
