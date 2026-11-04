@@ -3,8 +3,8 @@
   "frame": "landing",
   "noindex": true,
   "landing": {
-    "slug": "the-artificial-advantage/checkout",
-    "old_slugs": [],
+    "slug": "checkout",
+    "old_slugs": ["the-artificial-advantage/checkout"],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
     "description": "Review The Book 1 Bundle, then pay. The download is ready right after."
@@ -78,7 +78,7 @@
             "caption": "Cheat sheet"
           }
         ],
-        "review_href": "/buy/operator-bundle/",
+        "review_href": "/book/operator-bundle/",
         "email_label": "Email for the receipt and the download",
         "email_button": "Continue to payment",
         "bump": null,

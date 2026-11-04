@@ -3,8 +3,8 @@
   "frame": "landing",
   "noindex": true,
   "landing": {
-    "slug": "the-artificial-advantage/start",
-    "old_slugs": [],
+    "slug": "",
+    "old_slugs": ["the-artificial-advantage/start"],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
     "description": "A short note from Elvin before you meet his AI avatar and see The Artificial Advantage bundle."
@@ -21,7 +21,7 @@
         "button": {
           "label": "Continue to the bundle",
           "checkout": false,
-          "href": "/buy/the-artificial-advantage/"
+          "href": "/book/offer/"
         },
         "note": "The button under the video opens Step 1. It does not charge you.",
         "image": "/img/store/hero-3d.webp",
@@ -63,7 +63,7 @@
         "buttons": [
           {
             "label": "Meet the avatar and see the bundle",
-            "href": "/buy/the-artificial-advantage/",
+            "href": "/book/offer/",
             "style": "primary",
             "checkout": false
           }

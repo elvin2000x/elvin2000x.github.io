@@ -166,7 +166,8 @@ function checkFunnels(cfg) {
     if (cfg[k] != null && !/^https:\/\/[a-z0-9.-]+(\/[A-Za-z0-9._\/-]*)?$/.test(cfg[k])) errs.push(k + ' must be an https address');
   return errs;
 }
-const landingDir = (prefix, slug) => prefix + '/' + slug + '/';
+// A page with an empty address sits at the folder root: /<prefix>/ itself (the first step of a product's flow).
+const landingDir = (prefix, slug) => prefix + '/' + (slug ? slug + '/' : '');
 // Placeholder text in a template: "[Headline: the one promise]". It must never ship,
 // so Studio's Publish and verify.js both refuse a visible section that still holds one.
 const PLACEHOLDER = /\[[A-Z][A-Za-z0-9 ,'&\/()-]{0,40}:[^\[\]\n]{1,200}\]/g;
@@ -274,7 +275,7 @@ function checkStack(stack, name) {
     const L = stack.landing;
     if (typeof L !== 'object' || Array.isArray(L)) errs.push('landing must be an object');
     else {
-      if (!SLUG_RE.test(L.slug || '')) errs.push('the address can use a-z, 0-9 and dashes (one / at most)');
+      if (typeof L.slug !== 'string' || (L.slug !== '' && !SLUG_RE.test(L.slug))) errs.push('the address can use a-z, 0-9 and dashes (one / at most), or be empty for the first page of the folder');
       if (stack.path != null || stack.preview_path != null) errs.push('a landing page has its own address, not a path');
       if (L.old_slugs != null && (!Array.isArray(L.old_slugs) || L.old_slugs.some(s => !SLUG_RE.test(s) || s === L.slug))) errs.push('old addresses must be a list of other addresses');
       if (L.funnel != null && L.funnel !== '' && !FUNNEL_RE.test(L.funnel)) errs.push('the funnel key can use a-z, 0-9 and dashes');

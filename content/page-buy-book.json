@@ -3,8 +3,8 @@
   "frame": "landing",
   "noindex": true,
   "landing": {
-    "slug": "the-artificial-advantage",
-    "old_slugs": [],
+    "slug": "offer",
+    "old_slugs": ["the-artificial-advantage"],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
     "description": "The Artificial Advantage ebook, the Toolkit, the 7-Day Workbook, and the Companion Library."
@@ -29,7 +29,7 @@
         "button": {
           "label": "Get the bundle",
           "checkout": false,
-          "href": "/buy/the-artificial-advantage/checkout/"
+          "href": "/book/checkout/"
         },
         "note": "This opens the order page so you can review it. It does not charge you.",
         "image": "/img/store/ugc-hands-holding.webp",
@@ -227,7 +227,7 @@
         "button": {
           "label": "Get the bundle",
           "checkout": false,
-          "href": "/buy/the-artificial-advantage/checkout/"
+          "href": "/book/checkout/"
         },
         "note": "This opens the order page so you can review it. It does not charge you."
       }
@@ -319,7 +319,7 @@
         "buttons": [
           {
             "label": "Get the bundle",
-            "href": "/buy/the-artificial-advantage/checkout/",
+            "href": "/book/checkout/",
             "style": "primary",
             "checkout": false
           }

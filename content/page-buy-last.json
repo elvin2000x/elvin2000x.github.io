@@ -2,8 +2,8 @@
   "title": "Before you go",
   "frame": "landing",
   "landing": {
-    "slug": "before-you-go",
-    "old_slugs": [],
+    "slug": "last-chance",
+    "old_slugs": ["before-you-go"],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
     "step": "last-chance",
@@ -34,7 +34,7 @@
         "fine": "Digital downloads. A 14-day money-back promise covers these purchases too: email elvin@elvinpeters.com within 14 days for a full refund.",
         "small": "<p>The Global AI Race is a dated snapshot of the AI timeline, with no updates promised.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p>\n<p>Elvin Peters, author of The Artificial Advantage</p>",
         "fallback": "Pay with another card",
-        "review_href": "/buy/thank-you/"
+        "review_href": "/book/thank-you/"
       }
     }
   ]
