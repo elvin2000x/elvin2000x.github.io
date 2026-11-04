@@ -1,0 +1,74 @@
+{
+  "title": "Before the bundle",
+  "frame": "landing",
+  "noindex": true,
+  "landing": {
+    "slug": "the-artificial-advantage/start",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "A short note from Elvin before you meet his AI avatar and see The Artificial Advantage bundle."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "",
+        "eyebrow": "",
+        "headline": "Before you continue, I want to show you something.",
+        "sub": "On the next page you will meet my AI avatar. It is not a studio recording. It was built with the same kind of practical AI tools the book teaches.",
+        "button": {
+          "label": "Continue to the bundle",
+          "checkout": false,
+          "href": "/buy/the-artificial-advantage/"
+        },
+        "note": "The button under the video opens Step 1. It does not charge you.",
+        "image": "/img/store/hero-3d.webp",
+        "image_alt": "The Artificial Advantage as a paperback"
+      }
+    },
+    {
+      "id": "video",
+      "type": "video",
+      "data": {
+        "anchor": "watch",
+        "align": "center",
+        "heading": "",
+        "url": "",
+        "caption": "Paste the Step 0 YouTube or Vimeo link here when the upload is ready.",
+        "poster": "/img/store/ugc-hands-holding.webp",
+        "poster_alt": "A person holding The Artificial Advantage, cover facing the camera"
+      }
+    },
+    {
+      "id": "bridge",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "Just a few years ago this would have needed a professional studio and a large budget. Today it is possible from a home office.",
+          "Click the button below and let my AI avatar explain why most people get disappointing results from AI, and what to do about it. The next page has the full offer, the Toolkit, the Workbook, and the live price."
+        ]
+      }
+    },
+    {
+      "id": "go",
+      "type": "button",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Meet the avatar and see the bundle",
+            "href": "/buy/the-artificial-advantage/",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -40,13 +40,13 @@
       "id": "video",
       "type": "video",
       "data": {
-        "anchor": "",
+        "anchor": "watch",
         "align": "center",
         "heading": "",
         "url": "",
-        "caption": "",
-        "poster": "",
-        "poster_alt": ""
+        "caption": "The voice on this page is my AI avatar. The order below is the live store price for the Book 1 bundle.",
+        "poster": "/img/store/ugc-hands-holding.webp",
+        "poster_alt": "A person holding The Artificial Advantage, cover facing the camera"
       }
     },
     {
