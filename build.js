@@ -269,7 +269,7 @@ const COMPARE_ROWS = [
    '<span class="no">No paper copy</span>'],
   ['Guarantee',
    '<span class="no">Amazon’s return policy</span>',
-   '<span class="win">14 days, money back, keep the files</span>'],
+   '<span class="win">30 days, money back, keep the files</span>'],
   ['Your purchase helps the book',
    '<span class="win">Yes: every Amazon copy and review moves it up the rankings</span>',
    'It supports me directly'],
