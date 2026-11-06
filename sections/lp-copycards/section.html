@@ -1,4 +1,4 @@
-<section class="lp-sec{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+<section class="lp-sec{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}{{#only_for}} hidden data-only-for="{{only_for}}"{{/only_for}}>
   <div class="lp-in">
     <h2>{{heading}}</h2>
 {{#intro}}
@@ -18,6 +18,18 @@
   <script>
   (function () {
     var root = document.currentScript.parentNode;
+    /* Shown only to buyers of the product named in data-only-for: the thank-you data lists
+       what the order delivers (files[].product). ?show=setups shows it for checking a page. */
+    var need = root.getAttribute('data-only-for');
+    if (need) {
+      document.addEventListener('store:ready', function (e) {
+        var d = e.detail || {};
+        if (d.kind !== 'thanks') return;
+        var has = (d.files || []).some(function (f) { return f.product === need; });
+        if (has) root.hidden = false;
+      });
+      if (/[?&]show=setups\b/.test(location.search)) root.hidden = false;
+    }
     root.addEventListener('click', function (e) {
       var b = e.target.closest('[data-copy-text]');
       if (!b) return;
