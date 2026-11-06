@@ -45,7 +45,7 @@
         "small": "<p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p>",
         "fallback": "Pay with another card",
         "review_href": "/book/thank-you/",
-        "after_total": "Each purchase sends its own email and download link.",
+        "after_total": "[Words: one email with a download link for everything; exact line from the Stage 3a copy session]",
         "rows": [
           {
             "product": "operator-bundle",
