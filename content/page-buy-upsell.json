@@ -70,6 +70,18 @@
       }
     },
     {
+      "id": "specialists-hero",
+      "type": "lp-image",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "",
+        "desktop": "/img/store/your-personal-specialists-hero.webp",
+        "phone": "",
+        "alt": "The cover of Your Personal Specialists by Elvin Peters beside a phone showing one page of the guide: the Marketing Specialist, with its setup to paste first and a worked example."
+      }
+    },
+    {
       "id": "why-it-works",
       "type": "text",
       "data": {
