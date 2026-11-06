@@ -1,0 +1,17 @@
+<section class="lp-sec{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+    <p class="lp-eg__label">Example conversation, invented details</p>
+    <h2>{{heading}}</h2>
+{{#draft}}
+    <p class="lp-note">{{draft}}</p>
+{{/draft}}
+    <div class="lp-eg">
+{{#turns}}
+      <div class="lp-eg__turn"><p class="lp-eg__who">{{who}}</p><div class="lp-eg__text">{{text}}</div></div>
+{{/turns}}
+    </div>
+{{#note}}
+    <p class="lp-note">{{note}}</p>
+{{/note}}
+  </div>
+</section>

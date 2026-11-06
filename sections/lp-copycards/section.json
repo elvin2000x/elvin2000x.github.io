@@ -1,0 +1,14 @@
+{
+  "label": "Copy cards (text with a Copy button)",
+  "frames": ["landing"],
+  "fields": [
+    { "key": "bg", "type": "choice", "label": "Background", "options": [ { "value": "", "label": "Plain" }, { "value": "tint", "label": "Tint" } ] },
+    { "key": "anchor", "type": "text", "label": "Anchor id" },
+    { "key": "heading", "type": "html", "label": "Heading", "default": "[Heading: what the buyer can copy]" },
+    { "key": "intro", "type": "html", "label": "One line under the heading", "default": "" },
+    { "key": "cards", "type": "list", "label": "Cards", "fields": [
+      { "key": "name", "type": "text", "label": "Name", "default": "[Name: the card]" },
+      { "key": "text", "type": "html", "label": "Text to copy (write < as &lt; and & as &amp;)", "default": "[Text: what the Copy button copies]" }
+    ] }
+  ]
+}

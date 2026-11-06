@@ -1,0 +1,15 @@
+{
+  "label": "Example conversation",
+  "frames": ["landing"],
+  "fields": [
+    { "key": "bg", "type": "choice", "label": "Background", "options": [ { "value": "", "label": "Plain" }, { "value": "tint", "label": "Tint" } ] },
+    { "key": "anchor", "type": "text", "label": "Anchor id" },
+    { "key": "heading", "type": "html", "label": "Heading", "default": "[Heading: which Specialist]" },
+    { "key": "draft", "type": "html", "label": "Draft marker (delete once the final words are in)", "default": "" },
+    { "key": "turns", "type": "list", "label": "Turns", "fields": [
+      { "key": "who", "type": "text", "label": "Who speaks", "default": "You" },
+      { "key": "text", "type": "html", "label": "Words", "default": "[Words: what is said]" }
+    ] },
+    { "key": "note", "type": "html", "label": "What happened (one line)", "default": "" }
+  ]
+}

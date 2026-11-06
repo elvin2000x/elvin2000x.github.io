@@ -1,0 +1,14 @@
+{
+  "label": "What is included (list)",
+  "frames": ["landing"],
+  "fields": [
+    { "key": "bg", "type": "choice", "label": "Background", "options": [ { "value": "", "label": "Plain" }, { "value": "tint", "label": "Tint" } ] },
+    { "key": "anchor", "type": "text", "label": "Anchor id" },
+    { "key": "heading", "type": "html", "label": "Heading", "default": "What is included" },
+    { "key": "items", "type": "list", "label": "Items", "fields": [
+      { "key": "name", "type": "text", "label": "Name", "default": "[Name: the product]" },
+      { "key": "detail", "type": "html", "label": "What is in it", "default": "[Details: what the buyer gets]" }
+    ] },
+    { "key": "foot", "type": "html", "label": "Note under the list (optional)", "default": "" }
+  ]
+}

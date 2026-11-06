@@ -197,6 +197,62 @@
       }
     },
     {
+      "id": "included-list",
+      "type": "lp-included",
+      "data": {
+        "bg": "tint",
+        "anchor": "included-list",
+        "heading": "What is included",
+        "items": [
+          {
+            "name": "The Artificial Advantage, second edition",
+            "detail": "The 2026 second edition ebook."
+          },
+          {
+            "name": "The 7-Day AI Workbook",
+            "detail": "18 pages: one real task, seven days, the CLEAR system. Seven daily exercises, each with a fill-in section and a check-yourself question."
+          },
+          {
+            "name": "Everything AI 2026",
+            "detail": "A 23-page field guide."
+          },
+          {
+            "name": "The 12 Commandments to Make AI Obey",
+            "detail": "[Words: what is inside waits on the final guide from the 12 Commandments page]"
+          },
+          {
+            "name": "The Toolkit",
+            "detail": "16 exercises from 10 chapters, 25 prompts plus an importable spreadsheet, 25 role statements plus the formula for your own, a 30-day plan, a 3-month plan, and a 12-job tool guide, all editable."
+          }
+        ],
+        "foot": ""
+      }
+    },
+    {
+      "id": "workbook-day1-a",
+      "type": "lp-image",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "",
+        "desktop": "/img/store/workbook-day1-p1.webp",
+        "phone": "",
+        "alt": "Workbook page 4, Day 1: The Director's Mindset. It shows today's skill, a short note on taking the director's chair, and the start of the Task Card with lines to fill in: the task in one sentence, who it is for, and what done looks like."
+      }
+    },
+    {
+      "id": "workbook-day1-b",
+      "type": "lp-image",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "",
+        "desktop": "/img/store/workbook-day1-p2.webp",
+        "phone": "",
+        "alt": "Workbook page 5, the rest of Day 1: the last Task Card lines (what I currently do step by step, how long it takes me now), a Check yourself box, and a note that tomorrow you pick your tool and run the task once."
+      }
+    },
+    {
       "id": "offer",
       "type": "lp-funnel-stack",
       "data": {

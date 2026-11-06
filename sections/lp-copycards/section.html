@@ -1,0 +1,39 @@
+<section class="lp-sec{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+    <h2>{{heading}}</h2>
+{{#intro}}
+    <p class="lp-lede">{{intro}}</p>
+{{/intro}}
+    <div class="lp-copy">
+{{#cards}}
+      <details class="lp-copy__card">
+        <summary>{{name}}</summary>
+        <pre class="lp-copy__text">{{text}}</pre>
+        <button type="button" class="btn btn--primary lp-copy__btn" data-copy-text>Copy {{name}} setup</button>
+        <span class="lp-copy__done" role="status" aria-live="polite"></span>
+      </details>
+{{/cards}}
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.currentScript.parentNode;
+    root.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-copy-text]');
+      if (!b) return;
+      var card = b.closest('.lp-copy__card'), text = card.querySelector('.lp-copy__text').textContent;
+      var done = card.querySelector('.lp-copy__done');
+      function ok() { done.textContent = 'Copied'; setTimeout(function () { done.textContent = ''; }, 2500); }
+      function fallback() {
+        var t = document.createElement('textarea'); t.value = text; t.setAttribute('readonly', '');
+        t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select();
+        var good = false;
+        try { good = document.execCommand('copy'); } catch (x) {}
+        document.body.removeChild(t);
+        if (good) ok(); else done.textContent = 'Select the text and copy it';
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(ok, fallback); else fallback();
+    });
+  })();
+  </script>
+</section>
