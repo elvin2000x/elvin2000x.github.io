@@ -19,9 +19,9 @@
         "headline": "The 12 Commandments to Make AI Obey",
         "sub": "Twelve habits for fewer corrections, so your free messages go further",
         "button": {
-          "label": "[Button: Buy for $17; the checkout address waits on Commerce]",
+          "label": "Buy for $17",
           "checkout": false,
-          "href": "#buy"
+          "href": "https://api.elvinpeters.com/api/store/start?product=seven-rules"
         },
         "note": "By Elvin Peters, author of <em>The Artificial Advantage</em>, with a decade in marketing.",
         "image": "/img/store/twelve-commandments.webp",
@@ -145,8 +145,8 @@
         "align": "center",
         "buttons": [
           {
-            "label": "[Button: Buy for $17; the checkout address waits on Commerce]",
-            "href": "#buy",
+            "label": "Buy for $17",
+            "href": "https://api.elvinpeters.com/api/store/start?product=seven-rules",
             "style": "primary",
             "checkout": false
           }
