@@ -1,0 +1,11 @@
+<section class="lp-sec{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+    {{#heading}}<h2>{{heading}}</h2>{{/heading}}
+    <figure class="lp-image">
+      <picture>
+        {{#phone}}<source media="(max-width: 767px)" srcset="{{phone}}" />{{/phone}}
+        <img src="{{desktop}}" alt="{{alt}}" loading="lazy" decoding="async" />
+      </picture>
+    </figure>
+  </div>
+</section>

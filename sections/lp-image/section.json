@@ -1,0 +1,14 @@
+{
+  "label": "Picture (desktop and phone)",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    { "key": "bg", "type": "choice", "label": "Background", "options": [ { "value": "", "label": "Plain" }, { "value": "tint", "label": "Tint" } ] },
+    { "key": "anchor", "type": "text", "label": "Anchor id" },
+    { "key": "heading", "type": "html", "label": "Heading (optional)", "default": "" },
+    { "key": "desktop", "type": "text", "label": "Desktop picture address", "default": "[Picture: desktop image address]" },
+    { "key": "phone", "type": "text", "label": "Phone picture address (under 768px)", "default": "" },
+    { "key": "alt", "type": "text", "label": "Description for screen readers", "default": "[Description: what the picture shows]" }
+  ]
+}

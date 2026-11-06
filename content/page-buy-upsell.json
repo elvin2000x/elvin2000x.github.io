@@ -20,6 +20,18 @@
       }
     },
     {
+      "id": "valuestack",
+      "type": "lp-image",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "",
+        "desktop": "/img/store/stack-operator-bundle-47-desktop.webp",
+        "phone": "/img/store/stack-operator-bundle-47-phone.webp",
+        "alt": "What you get for $47: The Claude Operator's Manual ($27), Your Personal Specialists ($27) and Standing Orders for Your AI ($27). Standalone value $81. Your price: $47."
+      }
+    },
+    {
       "id": "offer",
       "type": "lp-offer",
       "data": {

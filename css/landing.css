@@ -209,3 +209,7 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 .lp-bump__tab{ position:absolute; top:-14px; left:16px; background:var(--lp-navy); color:#fff; padding:2px 12px; border-radius:6px; font-size:14px; font-weight:700 }
 .lp-bump__words{ display:flex; flex-direction:column; flex:1; min-width:0 }
 .lp-bump__price{ white-space:nowrap }
+
+/* lp-image: one picture, a phone version under 768px */
+.lp-image{ margin:0 }
+.lp-image img{ display:block; width:100%; height:auto; border-radius:var(--r-card) }
