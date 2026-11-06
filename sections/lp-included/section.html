@@ -3,7 +3,7 @@
     <h2>{{heading}}</h2>
     <ul class="lp-included">
 {{#items}}
-      <li><strong>{{name}}</strong> <span>{{detail}}</span></li>
+      <li>{{#thumb}}<img class="lp-included__thumb" src="{{thumb}}" alt="{{thumb_alt}}" width="96" height="154" loading="lazy" decoding="async" />{{/thumb}}<div><strong>{{name}}</strong> <span>{{detail}}</span></div></li>
 {{/items}}
     </ul>
 {{#foot}}

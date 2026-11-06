@@ -236,3 +236,5 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 .lp-pair__fig{ margin:0 }
 .lp-pair__fig img{ display:block; width:100%; height:auto; border:1px solid #c5ccd6 }
 @media (max-width:767px){ .lp-pair{ grid-template-columns:1fr } }
+.lp-included li:has(.lp-included__thumb){ display:flex; gap:16px; align-items:flex-start }
+.lp-included__thumb{ width:64px; height:auto; flex:none; border-radius:4px }

@@ -7,7 +7,9 @@
     { "key": "heading", "type": "html", "label": "Heading", "default": "What is included" },
     { "key": "items", "type": "list", "label": "Items", "fields": [
       { "key": "name", "type": "text", "label": "Name", "default": "[Name: the product]" },
-      { "key": "detail", "type": "html", "label": "What is in it", "default": "[Details: what the buyer gets]" }
+      { "key": "detail", "type": "html", "label": "What is in it", "default": "[Details: what the buyer gets]" },
+      { "key": "thumb", "type": "text", "label": "Small cover picture address (optional)", "default": "" },
+      { "key": "thumb_alt", "type": "text", "label": "Description of the small cover (optional)", "default": "" }
     ] },
     { "key": "foot", "type": "html", "label": "Note under the list (optional)", "default": "" }
   ]
