@@ -1,0 +1,14 @@
+{
+  "label": "Author block (cover and link)",
+  "frames": ["landing"],
+  "fields": [
+    { "key": "bg", "type": "choice", "label": "Background", "options": [ { "value": "", "label": "Plain" }, { "value": "tint", "label": "Tint" } ] },
+    { "key": "anchor", "type": "text", "label": "Anchor id" },
+    { "key": "heading", "type": "html", "label": "Heading (optional)", "default": "" },
+    { "key": "cover", "type": "text", "label": "Book cover picture address", "default": "[Picture: the book cover address]" },
+    { "key": "cover_alt", "type": "text", "label": "Description of the cover", "default": "[Description: what the cover shows]" },
+    { "key": "text", "type": "html", "label": "Words about the author", "default": "[Words: who the author is]" },
+    { "key": "href", "type": "text", "label": "Link to the book", "default": "" },
+    { "key": "link_label", "type": "text", "label": "Link words", "default": "[Link: words for the link]" }
+  ]
+}

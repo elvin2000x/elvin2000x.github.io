@@ -238,3 +238,18 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 @media (max-width:767px){ .lp-pair{ grid-template-columns:1fr } }
 .lp-included li:has(.lp-included__thumb){ display:flex; gap:16px; align-items:flex-start }
 .lp-included__thumb{ width:64px; height:auto; flex:none; border-radius:4px }
+
+/* lp-beforeafter: two panels, side by side on desktop, stacked under 768px */
+.lp-ba{ display:grid; grid-template-columns:1fr 1fr; gap:16px }
+.lp-ba__panel{ padding:18px 20px; border:1px solid var(--line); border-radius:var(--r-card); background:var(--panel) }
+.lp-ba__panel--after{ background:#fff; border-color:#0a1828; border-width:2px }
+.lp-ba__label{ margin:0 0 8px; font:700 13px/1.2 var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink) }
+.lp-ba__text{ margin:0; font:17px/1.55 var(--sans); color:var(--ink) }
+@media (max-width:767px){ .lp-ba{ grid-template-columns:1fr } }
+/* lp-author: small cover beside a few words */
+.lp-auth{ display:flex; gap:20px; align-items:flex-start }
+.lp-auth__cover img{ display:block; width:96px; height:auto; border-radius:4px }
+.lp-auth h2{ margin-top:0 }
+.lp-auth p{ margin:0 0 8px }
+/* 12 Commandments hero: keep the tall cover modest on a phone */
+@media (max-width:767px){ #twelve-hero .lp-hero__img{ max-width:200px; height:auto; margin:8px 0 0 } }

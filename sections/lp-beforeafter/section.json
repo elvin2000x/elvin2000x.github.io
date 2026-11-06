@@ -1,0 +1,14 @@
+{
+  "label": "Before and after (two panels)",
+  "frames": ["landing"],
+  "fields": [
+    { "key": "bg", "type": "choice", "label": "Background", "options": [ { "value": "", "label": "Plain" }, { "value": "tint", "label": "Tint" } ] },
+    { "key": "anchor", "type": "text", "label": "Anchor id" },
+    { "key": "heading", "type": "html", "label": "Heading (optional)", "default": "" },
+    { "key": "before_label", "type": "text", "label": "Left label", "default": "Before" },
+    { "key": "before", "type": "html", "label": "Left text (write < as &lt; and & as &amp;)", "default": "[Before: the weak request]" },
+    { "key": "after_label", "type": "text", "label": "Right label", "default": "After" },
+    { "key": "after", "type": "html", "label": "Right text (write < as &lt; and & as &amp;)", "default": "[After: the better request]" },
+    { "key": "foot", "type": "html", "label": "Line under the panels (optional)", "default": "" }
+  ]
+}
