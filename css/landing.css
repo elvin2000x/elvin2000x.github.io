@@ -230,3 +230,9 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 .lp-eg__who{ margin:0 0 6px; font:700 13px/1.2 var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink) }
 .lp-eg__text p{ margin:0 0 8px }
 .lp-eg__text ol{ margin:0 0 8px; padding-left:22px }
+
+/* lp-image-pair: two pages side by side on desktop, stacked under 768px; no tilt, thin border */
+.lp-pair{ display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:16px; background:#fff; border:1px solid #c5ccd6; border-radius:var(--r-card) }
+.lp-pair__fig{ margin:0 }
+.lp-pair__fig img{ display:block; width:100%; height:auto; border:1px solid #c5ccd6 }
+@media (max-width:767px){ .lp-pair{ grid-template-columns:1fr } }

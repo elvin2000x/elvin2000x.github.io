@@ -1,0 +1,13 @@
+{
+  "label": "Two pictures side by side (stacked on a phone)",
+  "frames": ["landing"],
+  "fields": [
+    { "key": "bg", "type": "choice", "label": "Background", "options": [ { "value": "", "label": "Plain" }, { "value": "tint", "label": "Tint" } ] },
+    { "key": "anchor", "type": "text", "label": "Anchor id" },
+    { "key": "heading", "type": "html", "label": "Heading (optional)", "default": "" },
+    { "key": "first", "type": "text", "label": "First picture address", "default": "[Picture: first image address]" },
+    { "key": "first_alt", "type": "text", "label": "Description of the first picture", "default": "[Description: what the first picture shows]" },
+    { "key": "second", "type": "text", "label": "Second picture address", "default": "[Picture: second image address]" },
+    { "key": "second_alt", "type": "text", "label": "Description of the second picture", "default": "[Description: what the second picture shows]" }
+  ]
+}
