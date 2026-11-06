@@ -1,0 +1,168 @@
+{
+  "title": "The 12 Commandments to Make AI Obey",
+  "frame": "landing",
+  "landing": {
+    "slug": "12-commandments",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "The 12 Commandments to Make AI Obey: twelve habits for fewer corrections, so your free messages go further. $17."
+  },
+  "noindex": true,
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "",
+        "eyebrow": "",
+        "headline": "The 12 Commandments to Make AI Obey",
+        "sub": "Twelve habits for fewer corrections, so your free messages go further",
+        "button": {
+          "label": "[Button: Buy for $17; the checkout address waits on Commerce]",
+          "checkout": false,
+          "href": "#buy"
+        },
+        "note": "By Elvin Peters, author of <em>The Artificial Advantage</em>, with a decade in marketing.",
+        "image": "",
+        "image_alt": ""
+      }
+    },
+    {
+      "id": "description",
+      "type": "text",
+      "data": {
+        "anchor": "description",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "You ask AI for something, and what comes back is too long, too stiff or beside the point. So you correct it, and correct it again. Free plans cap how much you can send, so every correction costs you.",
+          "This guide gives you twelve habits for getting a usable answer with less back-and-forth.",
+          "It is for people on the free or basic plans of everyday chat apps who aren’t sure AI is worth their time yet. It is also for anyone who has been asked to use more AI at work. You don’t need a paid plan, and you don’t need to code."
+        ]
+      }
+    },
+    {
+      "id": "taste",
+      "type": "text",
+      "data": {
+        "anchor": "taste",
+        "align": "left",
+        "heading": "A taste of the twelve",
+        "paras": [
+          "<ul><li>Give each job its own chat.</li><li>Paste the real thing instead of describing it.</li><li>Two strikes, then start fresh.</li><li>Check its work before your name goes on it.</li></ul>"
+        ]
+      }
+    },
+    {
+      "id": "sample",
+      "type": "text",
+      "data": {
+        "anchor": "sample",
+        "align": "left",
+        "heading": "A sample page",
+        "paras": [
+          "[Sample page: Commandment 1 page image; the layout waits on DESIGN MAIN]"
+        ]
+      }
+    },
+    {
+      "id": "parts",
+      "type": "text",
+      "data": {
+        "anchor": "parts",
+        "align": "left",
+        "heading": "Every commandment has five parts",
+        "paras": [
+          "<ul><li>The rule in one line.</li><li>Why it works, in plain words.</li><li>A before-and-after example from work and from home.</li><li>Where to find the setting in your app.</li><li>A short test to run before you hit send.</li></ul>"
+        ]
+      }
+    },
+    {
+      "id": "also",
+      "type": "text",
+      "data": {
+        "anchor": "also",
+        "align": "left",
+        "heading": "Also inside",
+        "paras": [
+          "<ul><li>Three kinds of request: plan, make and check. The guide shows you how to keep them apart.</li><li>Two fill-in sheets you can copy and paste, so the AI knows who you are and writes in your voice.</li><li>A one-page card with all twelve, to print or keep by your screen.</li></ul>"
+        ]
+      }
+    },
+    {
+      "id": "companions",
+      "type": "lp-included",
+      "data": {
+        "bg": "tint",
+        "anchor": "companions",
+        "heading": "Three free companion guides",
+        "items": [
+          {
+            "name": "<a href=\"/free/decoded/\">Decoded</a>",
+            "detail": "Goes deeper into how to word a request, including giving the AI a role and breaking big jobs into steps."
+          },
+          {
+            "name": "<a href=\"/free/context-playbook/\">Feed It Your World</a>",
+            "detail": "Shows how to give the AI your own material so its answers fit your situation."
+          },
+          {
+            "name": "<a href=\"/free/ai-security/\">What Not to Put Into AI</a>",
+            "detail": "Covers what should never go into an AI chat, such as private, client or company information."
+          }
+        ],
+        "foot": ""
+      }
+    },
+    {
+      "id": "format",
+      "type": "text",
+      "data": {
+        "anchor": "format",
+        "align": "left",
+        "heading": "Format and delivery",
+        "paras": [
+          "[Pages: the real page count waits on DESIGN MAIN after layout] pages, as a PDF. The app notes cover ChatGPT, Gemini and Claude as of October 2026, and the habits work in any chat. Instant download plus an email. For your own use."
+        ]
+      }
+    },
+    {
+      "id": "guarantee",
+      "type": "lp-guarantee",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "My [[refund]]",
+        "text": "If it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full."
+      }
+    },
+    {
+      "id": "buy",
+      "type": "button",
+      "data": {
+        "anchor": "buy",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "[Button: Buy for $17; the checkout address waits on Commerce]",
+            "href": "#buy",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "legal",
+      "type": "text",
+      "data": {
+        "anchor": "legal",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "<em>Independent guide, not affiliated with or endorsed by OpenAI, Google or Anthropic.</em>"
+        ]
+      }
+    }
+  ]
+}
