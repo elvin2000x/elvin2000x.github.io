@@ -13,6 +13,16 @@
 {{#body}}
     <div class="lp-body">{{body}}</div>
 {{/body}}
+{{#stack_desktop}}
+    <figure class="lp-image lp-offer__stack">
+      <picture>
+{{#stack_phone}}
+        <source media="(max-width: 767px)" srcset="{{stack_phone}}" />
+{{/stack_phone}}
+        <img src="{{stack_desktop}}" alt="{{stack_alt}}" loading="lazy" decoding="async" />
+      </picture>
+    </figure>
+{{/stack_desktop}}
     <p class="lp-price">{{#was}}<s data-store="was">{{was}}</s> {{/was}}<strong data-store="price">{{price}}</strong></p>
     <p class="lp-error" data-store="error" hidden></p>
     <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>{{yes}}</button>

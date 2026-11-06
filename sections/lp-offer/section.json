@@ -61,6 +61,24 @@
       "label": "Words"
     },
     {
+      "key": "stack_desktop",
+      "type": "text",
+      "label": "Value stack picture, desktop address",
+      "default": ""
+    },
+    {
+      "key": "stack_phone",
+      "type": "text",
+      "label": "Value stack picture, phone address (under 768px)",
+      "default": ""
+    },
+    {
+      "key": "stack_alt",
+      "type": "text",
+      "label": "Value stack picture, full description for screen readers",
+      "default": ""
+    },
+    {
       "key": "was",
       "type": "text",
       "label": "Was (only a real store price)"

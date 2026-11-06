@@ -20,18 +20,6 @@
       }
     },
     {
-      "id": "valuestack",
-      "type": "lp-image",
-      "data": {
-        "bg": "",
-        "anchor": "",
-        "heading": "",
-        "desktop": "/img/store/stack-operator-bundle-47-desktop.webp",
-        "phone": "/img/store/stack-operator-bundle-47-phone.webp",
-        "alt": "What you get for $47: The Claude Operator's Manual ($27), Your Personal Specialists ($27) and Standing Orders for Your AI ($27). Standalone value $81. Your price: $47."
-      }
-    },
-    {
       "id": "offer",
       "type": "lp-offer",
       "data": {
@@ -51,7 +39,10 @@
         "fine": "Digital downloads. A [[refund]] covers this purchase too: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
         "small": "<p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p>\n<p>Elvin Peters</p>",
         "fallback": "Pay with another card",
-        "review_href": "/book/manual/"
+        "review_href": "/book/manual/",
+        "stack_desktop": "/img/store/stack-operator-bundle-47-desktop.webp",
+        "stack_phone": "/img/store/stack-operator-bundle-47-phone.webp",
+        "stack_alt": "What you get for $47: The Claude Operator's Manual ($27), Your Personal Specialists ($27) and Standing Orders for Your AI ($27). Standalone value $81. Your price: $47."
       }
     }
   ]
