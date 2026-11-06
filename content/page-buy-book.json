@@ -250,8 +250,8 @@
       "data": {
         "bg": "",
         "anchor": "",
-        "heading": "My 14-day promise",
-        "text": "Everything on this page is a digital product. If it is not for you, email elvin@elvinpeters.com within 14 days of purchase and I will refund you in full."
+        "heading": "My [[refund]]",
+        "text": "Everything on this page is a digital product. If it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full."
       }
     },
     {

@@ -31,7 +31,7 @@
         "yes": "Add my choices at 12% off",
         "yes_note": "",
         "no": "No thanks, take me to my downloads",
-        "fine": "Digital downloads. A 14-day money-back promise covers these purchases too: email elvin@elvinpeters.com within 14 days for a full refund.",
+        "fine": "Digital downloads. A [[refund]] covers these purchases too: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
         "small": "<p>The Global AI Race is a dated snapshot of the AI timeline, with no updates promised.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p>\n<p>Elvin Peters, author of The Artificial Advantage</p>",
         "fallback": "Pay with another card",
         "review_href": "/book/thank-you/"

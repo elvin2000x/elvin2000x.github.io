@@ -149,6 +149,7 @@ const SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?(?:\/[a-z0-9](?:[a-z0-9-]{
 const PREFIX_RE = /^[a-z0-9](?:[a-z0-9-]{0,28}[a-z0-9])?$/;
 const FUNNEL_RE = /^[a-z0-9][a-z0-9-]{0,59}$/;
 const FUNNEL_DEFAULTS = { prefix: 'buy', old_prefixes: [],
+  refund_line: '30-day money-back guarantee', refund_days: '30 days',
   store_base: 'https://api.elvinpeters.com/api/store', store_base_test: 'https://test.elvinpeters.com/store-test/api/store' };
 function funnelSettings(contentDir) {
   const f = path.join(contentDir, 'funnels.json');
@@ -308,10 +309,19 @@ function checkStack(stack, name) {
   return errs;
 }
 
+/* The refund promise is one setting (content/funnels.json: refund_line, refund_days).
+   A page's words write [[refund]] and [[refund_days]]; they are filled in here, so the
+   promise changes in one place for every product page. */
+function fillRefund(v, g) {
+  if (typeof v === 'string') return v.split('[[refund]]').join(g.refund_line).split('[[refund_days]]').join(g.refund_days);
+  if (Array.isArray(v)) return v.map(x => fillRefund(x, g));
+  if (v && typeof v === 'object') { const o = {}; for (const k of Object.keys(v)) o[k] = fillRefund(v[k], g); return o; }
+  return v;
+}
 function renderSection(s, globals) {
   const file = path.join(SEC_DIR, s.type, 'section.html');
   // store and funnel are a landing page's checkout address; empty everywhere else.
-  const html = renderTpl(file, s.type + ' (' + s.id + ')', [{ store: '', funnel: '', page_url: '', ...globals }, s.data]);
+  const html = renderTpl(file, s.type + ' (' + s.id + ')', [{ store: '', funnel: '', page_url: '', ...globals }, fillRefund(s.data, { refund_line: globals.refund_line || FUNNEL_DEFAULTS.refund_line, refund_days: globals.refund_days || FUNNEL_DEFAULTS.refund_days })]);
   const note = s.note ? '<!-- ' + s.note + ' -->\n' : '';
   return note + html;
 }
@@ -329,7 +339,7 @@ function renderStack(stack, name, { site, isHome, markers, funnels, store }) {
   const fcfg = funnels || FUNNEL_DEFAULTS;
   const page_url = ORIGIN + '/' + (L ? landingDir(fcfg.prefix, L.slug) : !isHome && stack.path ? stack.path.replace(/index\.html$/, '') : '');
   const robots_off = !isHome && stack.noindex !== false;
-  const globals = { site, isHome: !!isHome, amazon: site.amazon_url, page_url,
+  const globals = { site, isHome: !!isHome, amazon: site.amazon_url, page_url, refund_line: fcfg.refund_line, refund_days: fcfg.refund_days,
     store: L ? store || fcfg.store_base : '', funnel: L ? L.funnel || '' : '' };
   const parts = stack.sections.filter(s => !s.hidden).map(s => {
     const html = renderSection(s, globals);

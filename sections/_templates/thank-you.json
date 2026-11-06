@@ -26,7 +26,7 @@
           "order_label": "",
           "files_label": "",
           "help_heading": "If something is wrong",
-          "help": "<p>If a download does not open, or a product is not what you expected, write to elvin@elvinpeters.com. Digital purchases made on this site are covered by a 14-day money-back promise, so email within 14 days of your purchase for a full refund. Anything else you added to your order is listed with your downloads.</p>",
+          "help": "<p>If a download does not open, or a product is not what you expected, write to elvin@elvinpeters.com. Digital purchases made on this site are covered by a [[refund]], so email within [[refund_days]] of your purchase for a full refund. Anything else you added to your order is listed with your downloads.</p>",
           "library": "",
           "print_heading": "Want a printed copy of the ebook?",
           "print_text": "The Artificial Advantage is also sold as a paperback and a hardcover on Amazon.",

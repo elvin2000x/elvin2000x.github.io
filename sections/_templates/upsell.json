@@ -39,7 +39,7 @@
           "yes": "Yes, add the Operator Bundle for $47",
           "yes_note": "",
           "no": "No thanks, I'll skip this",
-          "fine": "Digital downloads. A 14-day money-back promise covers this purchase too: email elvin@elvinpeters.com within 14 days for a full refund.",
+          "fine": "Digital downloads. A [[refund]] covers this purchase too: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
           "small": "<p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p>\n<p>Elvin Peters</p>",
           "fallback": "[Declined: what to do next]"
         }

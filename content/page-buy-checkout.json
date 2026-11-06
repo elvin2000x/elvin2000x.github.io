@@ -83,7 +83,7 @@
         "email_button": "Continue to payment",
         "bump": null,
         "button": null,
-        "note": "Digital. Nothing is shipped. If it is not for you, email elvin@elvinpeters.com within 14 days for a full refund."
+        "note": "Digital. Nothing is shipped. [[refund]]: if it is not for you, email elvin@elvinpeters.com within [[refund_days]] for a full refund."
       }
     }
   ]
