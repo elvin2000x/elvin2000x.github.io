@@ -61,9 +61,9 @@
         "bg": "tint",
         "anchor": "sample",
         "heading": "A sample page",
-        "first": "/img/store/listings/twelve-commandments/01-sample-page.webp",
+        "first": "/img/store/listings/seven-rules/01-sample-page.webp",
         "first_alt": "Guide page 6 of 22, where Part 3 begins. Commandment 1, Give each job its own chat: the rule in one line, why it works, a before-and-after example for work (a sales rep and a thank-you note) and one for everyday life (a birthday dinner chat and a letter to an insurer), and where to find the setting in your app.",
-        "second": "/img/store/listings/twelve-commandments/02-sample-page.webp",
+        "second": "/img/store/listings/seven-rules/02-sample-page.webp",
         "second_alt": "Guide page 7 of 22. The end of Commandment 1 with its 10-second check, then Commandment 2, Choose your prompt: plan, make or check, with three starter sentences to copy and before-and-after examples for work and for a trip plan."
       }
     },
