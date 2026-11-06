@@ -84,25 +84,52 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   </div>
 </div>
 
+<section class="lp-sec lp-ordered">
+  <div class="lp-in">
+    <div class="lp-ordered__row">
+      <img class="lp-ordered__img" src="/img/book-3d.webp" alt="The Artificial Advantage by Elvin M. Peters" width="48" height="72" decoding="async" />
+      <p class="lp-ordered__text">You ordered The Artificial Advantage Bundle</p>
+    </div>
+  </div>
+</section>
+
 <section class="lp-sec lp-basket">
   <div class="lp-in">
-    <h1>A special offer before you go: 12% off my other products</h1>
-    <p class="lp-lede">Thank you for ordering The Artificial Advantage. To mark June 12, the day the book was first published in 2026, here is 12% off the products below.</p>
-    <div class="lp-body"><p><img src="/img/magnets/claude-manual.webp" alt="The Claude Operator's Manual by Elvin M. Peters" width="280" height="420"></p>
-<p>Your order is in, and your downloads are on the next page. Choose the products you want. The last column shows each price with your 12% off. Choose either the Operator Bundle or its two parts, not both. The picture is the Manual. The Role Packs file is not a finished download.</p>
-<p>Products you already bought are not listed. Prices are in US dollars.</p></div>
+    <h1>Last chance: 12% off any other guide, for this order only</h1>
+    <p class="lp-lede">Take 12% off any product below. I will not send this offer again.</p>
+    <div class="lp-body"><p>Your order is in, and your downloads are on the next page. The AI Setup Bundle already includes the Manual and Standing Orders, so choose the AI Setup Bundle or the single guides. Products you already bought are not listed. The last column shows each price with your 12% off.</p><p>Prices are in US dollars.</p></div>
     <div class="lp-basket__list" data-store="basket"></div>
     <p class="lp-price"><span>Total</span> <s data-store="was"></s> <strong data-store="total"></strong></p>
+    <p class="lp-note">Each purchase sends its own email and download link.</p>
     <p class="lp-error" data-store="error" hidden></p>
     <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>Add my choices at 12% off</button>
+    <p class="lp-note lp-yes-note">Charges the card you just used, no re-entry. 30-day money-back guarantee.</p>
     <button type="button" class="lp-no" data-store-decline>No thanks, take me to my downloads</button>
     <div class="lp-fallback" data-store-fallback hidden><p>Pay with another card</p></div>
-    <p class="lp-note">Digital downloads. A 30-day money-back guarantee covers these purchases too: email elvin@elvinpeters.com within 30 days for a full refund.</p>
-    <div class="lp-small"><p>The Global AI Race is a dated snapshot of the AI timeline, with no updates promised.</p>
-<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p>
-<p>Elvin Peters, author of The Artificial Advantage</p></div>
+    <p class="lp-note">Digital downloads, for your own use. You get an instant download plus an email. A 30-day money-back guarantee covers these purchases: email elvin@elvinpeters.com within 30 days for a full refund.</p>
+    <div class="lp-small"><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p></div>
     <p class="lp-review"><a href="/book/thank-you/">Review the next step</a> This link is the review path. It does not charge you.</p>
   </div>
+  <div hidden data-lp-rows><p data-product="operator-bundle">Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Standing Orders for Your AI and Your Personal Specialists has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it is sold only in this bundle.</p><p data-product="claude-manual">A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work.</p><p data-product="standing-orders">Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok.</p><p data-product="global-ai-race">One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined.</p><p data-product="thirty-ways">A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip.</p></div>
+  <script>
+  (function () {
+    var root = document.currentScript.parentNode, rows = {};
+    Array.prototype.forEach.call(root.querySelectorAll('[data-lp-rows] p'), function (r) { rows[r.getAttribute('data-product')] = r.textContent; });
+    /* The store script draws the rows; this adds what each one holds, and tags it so the page can style it. */
+    function dress() {
+      Array.prototype.forEach.call(root.querySelectorAll('.lp-basket__list label'), function (l) {
+        var cb = l.querySelector('input[type=checkbox]'); if (!cb) return;
+        l.setAttribute('data-product', cb.value);
+        if (rows[cb.value] && !l.querySelector('.lp-basket__row-text')) {
+          var p = document.createElement('span'); p.className = 'lp-basket__row-text'; p.textContent = rows[cb.value]; l.appendChild(p);
+        }
+      });
+    }
+    var box = root.querySelector('.lp-basket__list');
+    if (box && window.MutationObserver) new MutationObserver(dress).observe(box, { childList: true });
+    dress();
+  })();
+  </script>
 </section>
 
 </main>

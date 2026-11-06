@@ -253,3 +253,28 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 .lp-auth p{ margin:0 0 8px }
 /* 12 Commandments hero: keep the tall cover modest on a phone */
 @media (max-width:767px){ #twelve-hero .lp-hero__img{ max-width:200px; height:auto; margin:8px 0 0 } }
+
+/* lp-ordered: what the buyer already has, at the top of every offer page */
+.lp-ordered{ padding-top:16px; padding-bottom:0 }
+.lp-ordered__row{ display:flex; align-items:center; gap:14px; padding:10px 14px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card) }
+.lp-ordered__img{ width:48px; height:auto; flex:none; border-radius:3px }
+.lp-ordered__text{ margin:0; font:600 17px/1.35 var(--sans); color:var(--ink) }
+/* lp-offer early: price block and Accept sit right under the opening line; a bar follows on a phone */
+.lp-sticky{ display:none }
+@media (max-width:767px){
+  .lp-sticky:not([hidden]){ display:flex; align-items:center; justify-content:space-between; gap:12px; position:fixed; left:0; right:0; bottom:0; z-index:20; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:#fff; border-top:1px solid var(--line); box-shadow:0 -6px 16px rgba(10,24,40,.12) }
+  .lp-sticky strong{ font:700 22px/1 var(--sans); color:var(--ink) }
+  .lp-sticky__btn{ white-space:normal; text-align:center }
+  .lp-offer--early{ padding-bottom:84px }
+}
+/* the last-chance list: each row leads with its 12% price; only the bundle keeps a comparison */
+.lp-basket__list label{ flex-wrap:wrap }
+.store-basket-name{ flex:1 1 0; min-width:0; font:600 18px/1.3 var(--sans) }
+.store-basket-price{ font:700 22px/1.1 var(--sans); color:var(--ink); white-space:nowrap }
+.store-basket-price s{ font:400 15px/1 var(--sans); color:#5b6675 }
+.lp-basket__list label:not([data-product="operator-bundle"]) .store-basket-price s{ display:none }
+.lp-basket__row-text{ flex:0 0 100%; box-sizing:border-box; margin:0; padding-left:42px; font:15px/1.5 var(--sans); color:#2c3a4b }
+/* a small "what it holds" fold on the single-guide offer */
+.lp-fold{ margin:18px 0 0; font:15px/1.5 var(--sans) }
+.lp-fold summary{ cursor:pointer; color:var(--ink); font-weight:600 }
+.lp-fold p, .lp-fold ul{ margin:8px 0 0 }

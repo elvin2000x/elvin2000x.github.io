@@ -41,6 +41,21 @@
       "label": "Line under the headline"
     },
     {
+      "key": "early",
+      "type": "choice",
+      "label": "Put the price and Accept button right under the opening line",
+      "options": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "1",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
       "key": "image",
       "type": "image",
       "label": "Image",

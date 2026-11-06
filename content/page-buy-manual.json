@@ -20,6 +20,16 @@
       }
     },
     {
+      "id": "ordered",
+      "type": "lp-ordered",
+      "data": {
+        "anchor": "",
+        "image": "/img/book-3d.webp",
+        "image_alt": "The Artificial Advantage by Elvin M. Peters",
+        "text": "You ordered The Artificial Advantage Bundle"
+      }
+    },
+    {
       "id": "offer",
       "type": "lp-offer",
       "data": {
@@ -27,17 +37,17 @@
         "anchor": "",
         "top": "",
         "heading": "Set up Claude once, so every new chat already knows your work",
-        "sub": "The Claude Operator's Manual on its own, 217 pages, for $27. It is the Manual from the Operator Bundle, without the 12 Role Packs.",
+        "sub": "The Claude Operator’s Manual on its own: 217 pages for $27.",
         "image": "/img/magnets/claude-manual.webp",
         "image_alt": "The Claude Operator's Manual by Elvin M. Peters",
-        "body": "<p>If you use Claude and you are tired of re-explaining who you are and what you do in every new chat, this Manual shows you how to set that up once. It is about Claude only.</p>\n<p>Inside you will find:</p>\n<ul><li><strong>Setup in the Claude app, with no coding.</strong> Parts I and II cover talking to Claude well, Projects and knowledge files, Skills, and connecting your tools.</li><li><strong>Claude Code, when you are ready.</strong> Part III is for readers who are ready to open a terminal.</li><li><strong>Workflows to copy.</strong> Part IV gives you complete setups you can reuse.</li><li><strong>Checklists.</strong> Every chapter ends with one, and the appendices include a day-one setup checklist.</li></ul>\n<p>It is a PDF with 19 chapters. I'm Elvin Peters, and I wrote it.</p>",
+        "body": "<p>This Manual shows you how to stop re-explaining who you are and what you do in every new chat. It covers Claude only: it does not cover ChatGPT or other tools. It is a separate $27 charge, and your book order stays as it is.</p><p>Inside you will find:</p><ul><li><strong>Setup in the Claude app, with no coding.</strong> Talking to Claude well, Projects and knowledge files, Skills, and connecting your tools.</li><li><strong>Claude Code, when you are ready.</strong> The Claude Code chapters are optional, and they are the only ones that ask you to open a terminal.</li><li><strong>Workflows to copy.</strong> The last part puts the setup together, with a chapter of complete workflows to copy and a chapter on keeping your setup working.</li><li><strong>Checklists.</strong> Every chapter ends with one, and the appendices include a day-one setup checklist.</li></ul><p>It is a PDF with 19 chapters. Prices are in US dollars.</p><p><a href=\"/dl/Claude-Operators-Manual-Sample-14-pages.pdf\">Read the contents page and Chapter 3 first (14-page PDF)</a></p><details class=\"lp-fold\"><summary>What The AI Setup Bundle holds</summary><ul><li>The Claude Operator’s Manual</li><li>Your Personal Specialists</li><li>Standing Orders for Your AI</li></ul></details>",
         "was": "",
         "price": "$27",
         "yes": "Yes, add the Manual for $27",
-        "yes_note": "",
-        "no": "No thanks, I'll skip this",
-        "fine": "Digital download, in US dollars. A [[refund]] covers this purchase too: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
-        "small": "<p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p>",
+        "yes_note": "Charges the card you just used, no re-entry. [[refund]].",
+        "no": "No thanks, I’ll skip this",
+        "fine": "Digital download, for your own use. You get an instant download plus an email. A [[refund]] covers this purchase: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
+        "small": "<p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p><p>Elvin Peters, author of The Artificial Advantage</p>",
         "fallback": "Pay with another card",
         "review_href": "/book/last-chance/"
       }

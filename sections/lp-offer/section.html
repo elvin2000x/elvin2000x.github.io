@@ -1,4 +1,4 @@
-<section class="lp-sec lp-offer{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+<section class="lp-sec lp-offer{{#early}} lp-offer--early{{/early}}{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
   <div class="lp-in">
 {{#top}}
     <p class="lp-note">{{top}}</p>
@@ -7,6 +7,33 @@
 {{#sub}}
     <p class="lp-lede">{{sub}}</p>
 {{/sub}}
+{{#early}}
+{{#image}}
+    <img class="lp-offer__img" src="{{image}}" alt="{{image_alt}}" fetchpriority="high">
+{{/image}}
+{{#stack_desktop}}
+    <figure class="lp-image lp-offer__stack">
+      <picture>
+{{#stack_phone}}
+        <source media="(max-width: 767px)" srcset="{{stack_phone}}" />
+{{/stack_phone}}
+        <img src="{{stack_desktop}}" alt="{{stack_alt}}" loading="lazy" decoding="async" />
+      </picture>
+    </figure>
+{{/stack_desktop}}
+    <p class="lp-price">{{#was}}<s data-store="was">{{was}}</s> {{/was}}<strong data-store="price">{{price}}</strong></p>
+    <p class="lp-error" data-store="error" hidden></p>
+    <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>{{yes}}</button>
+{{#yes_note}}
+    <p class="lp-note lp-yes-note">{{yes_note}}</p>
+{{/yes_note}}
+    <button type="button" class="lp-no" data-store-decline>{{no}}</button>
+    <div class="lp-fallback" data-store-fallback hidden><p>{{fallback}}</p></div>
+{{#body}}
+    <div class="lp-body">{{body}}</div>
+{{/body}}
+{{/early}}
+{{^early}}
 {{#image}}
     <img class="lp-offer__img" src="{{image}}" alt="{{image_alt}}" fetchpriority="high">
 {{/image}}
@@ -31,6 +58,7 @@
 {{/yes_note}}
     <button type="button" class="lp-no" data-store-decline>{{no}}</button>
     <div class="lp-fallback" data-store-fallback hidden><p>{{fallback}}</p></div>
+{{/early}}
 {{#fine}}
     <p class="lp-note">{{fine}}</p>
 {{/fine}}
@@ -41,4 +69,19 @@
     <p class="lp-review"><a href="{{review_href}}">Review the next step</a> This link is the review path. It does not charge you.</p>
 {{/review_href}}
   </div>
+{{#early}}
+    <div class="lp-sticky" data-lp-sticky hidden>
+      <strong data-store="price">{{price}}</strong>
+      <button type="button" class="btn btn--primary lp-sticky__btn" data-store-accept>{{yes}}</button>
+    </div>
+  <script>
+  (function () {
+    var bar = document.currentScript.parentNode.querySelector('[data-lp-sticky]');
+    var main = document.currentScript.parentNode.querySelector('.lp-cta[data-store-accept]');
+    if (!bar || !main || !('IntersectionObserver' in window)) return;
+    /* On a phone, the bar shows once the main Accept button has scrolled out of view. */
+    new IntersectionObserver(function (e) { bar.hidden = e[0].isIntersecting || e[0].boundingClientRect.top > 0; }).observe(main);
+  })();
+  </script>
+{{/early}}
 </section>

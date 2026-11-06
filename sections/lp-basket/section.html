@@ -7,6 +7,9 @@
     <div class="lp-body">{{intro}}</div>
     <div class="lp-basket__list" data-store="basket"></div>
     <p class="lp-price"><span>{{total_label}}</span> <s data-store="was"></s> <strong data-store="total"></strong></p>
+{{#after_total}}
+    <p class="lp-note">{{after_total}}</p>
+{{/after_total}}
     <p class="lp-error" data-store="error" hidden></p>
     <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>{{yes}}</button>
 {{#yes_note}}
@@ -24,4 +27,24 @@
     <p class="lp-review"><a href="{{review_href}}">Review the next step</a> This link is the review path. It does not charge you.</p>
 {{/review_href}}
   </div>
+  <div hidden data-lp-rows>{{#rows}}<p data-product="{{product}}">{{text}}</p>{{/rows}}</div>
+  <script>
+  (function () {
+    var root = document.currentScript.parentNode, rows = {};
+    Array.prototype.forEach.call(root.querySelectorAll('[data-lp-rows] p'), function (r) { rows[r.getAttribute('data-product')] = r.textContent; });
+    /* The store script draws the rows; this adds what each one holds, and tags it so the page can style it. */
+    function dress() {
+      Array.prototype.forEach.call(root.querySelectorAll('.lp-basket__list label'), function (l) {
+        var cb = l.querySelector('input[type=checkbox]'); if (!cb) return;
+        l.setAttribute('data-product', cb.value);
+        if (rows[cb.value] && !l.querySelector('.lp-basket__row-text')) {
+          var p = document.createElement('span'); p.className = 'lp-basket__row-text'; p.textContent = rows[cb.value]; l.appendChild(p);
+        }
+      });
+    }
+    var box = root.querySelector('.lp-basket__list');
+    if (box && window.MutationObserver) new MutationObserver(dress).observe(box, { childList: true });
+    dress();
+  })();
+  </script>
 </section>

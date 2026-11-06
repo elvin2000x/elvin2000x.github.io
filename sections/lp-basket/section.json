@@ -33,6 +33,31 @@
       "default": "[Label: total]"
     },
     {
+      "key": "after_total",
+      "type": "html",
+      "label": "Line under the total (optional)",
+      "default": ""
+    },
+    {
+      "key": "rows",
+      "type": "list",
+      "label": "What each product holds (shown under its row; product is its store key)",
+      "fields": [
+        {
+          "key": "product",
+          "type": "text",
+          "label": "Store key",
+          "default": ""
+        },
+        {
+          "key": "text",
+          "type": "text",
+          "label": "Words",
+          "default": "[Words: what this product holds]"
+        }
+      ]
+    },
+    {
       "key": "yes",
       "type": "text",
       "label": "Yes button",

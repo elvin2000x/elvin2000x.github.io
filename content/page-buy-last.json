@@ -20,21 +20,54 @@
       }
     },
     {
+      "id": "ordered",
+      "type": "lp-ordered",
+      "data": {
+        "anchor": "",
+        "image": "/img/book-3d.webp",
+        "image_alt": "The Artificial Advantage by Elvin M. Peters",
+        "text": "You ordered The Artificial Advantage Bundle"
+      }
+    },
+    {
       "id": "basket",
       "type": "lp-basket",
       "data": {
         "anchor": "",
-        "heading": "A special offer before you go: 12% off my other products",
-        "sub": "Thank you for ordering The Artificial Advantage. To mark June 12, the day the book was first published in 2026, here is 12% off the products below.",
-        "intro": "<p><img src=\"/img/magnets/claude-manual.webp\" alt=\"The Claude Operator's Manual by Elvin M. Peters\" width=\"280\" height=\"420\"></p>\n<p>Your order is in, and your downloads are on the next page. Choose the products you want. The last column shows each price with your 12% off. Choose either the Operator Bundle or its two parts, not both. The picture is the Manual. The Role Packs file is not a finished download.</p>\n<p>Products you already bought are not listed. Prices are in US dollars.</p>",
+        "heading": "Last chance: 12% off any other guide, for this order only",
+        "sub": "Take 12% off any product below. I will not send this offer again.",
+        "intro": "<p>Your order is in, and your downloads are on the next page. The AI Setup Bundle already includes the Manual and Standing Orders, so choose the AI Setup Bundle or the single guides. Products you already bought are not listed. The last column shows each price with your 12% off.</p><p>Prices are in US dollars.</p>",
         "total_label": "Total",
         "yes": "Add my choices at 12% off",
-        "yes_note": "",
+        "yes_note": "Charges the card you just used, no re-entry. [[refund]].",
         "no": "No thanks, take me to my downloads",
-        "fine": "Digital downloads. A [[refund]] covers these purchases too: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
-        "small": "<p>The Global AI Race is a dated snapshot of the AI timeline, with no updates promised.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p>\n<p>Elvin Peters, author of The Artificial Advantage</p>",
+        "fine": "Digital downloads, for your own use. You get an instant download plus an email. A [[refund]] covers these purchases: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
+        "small": "<p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p>",
         "fallback": "Pay with another card",
-        "review_href": "/book/thank-you/"
+        "review_href": "/book/thank-you/",
+        "after_total": "Each purchase sends its own email and download link.",
+        "rows": [
+          {
+            "product": "operator-bundle",
+            "text": "Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Standing Orders for Your AI and Your Personal Specialists has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it is sold only in this bundle."
+          },
+          {
+            "product": "claude-manual",
+            "text": "A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work."
+          },
+          {
+            "product": "standing-orders",
+            "text": "Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok."
+          },
+          {
+            "product": "global-ai-race",
+            "text": "One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined."
+          },
+          {
+            "product": "thirty-ways",
+            "text": "A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip."
+          }
+        ]
       }
     }
   ]

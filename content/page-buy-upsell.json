@@ -1,5 +1,5 @@
 {
-  "title": "Operator Bundle",
+  "title": "The AI Setup Bundle",
   "frame": "landing",
   "landing": {
     "slug": "operator-bundle",
@@ -7,7 +7,7 @@
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
     "step": "upsell",
-    "description": "The Claude Operator's Manual and the 12 Role Packs, together for $47."
+    "description": "The AI Setup Bundle: the Claude Operator’s Manual, Your Personal Specialists and Standing Orders for Your AI, together for $47."
   },
   "noindex": true,
   "sections": [
@@ -20,53 +20,40 @@
       }
     },
     {
+      "id": "ordered",
+      "type": "lp-ordered",
+      "data": {
+        "anchor": "",
+        "image": "/img/book-3d.webp",
+        "image_alt": "The Artificial Advantage by Elvin M. Peters",
+        "text": "You ordered The Artificial Advantage Bundle"
+      }
+    },
+    {
       "id": "offer",
       "type": "lp-offer",
       "data": {
         "bg": "",
         "anchor": "",
-        "top": "Thank you for your order. Here is one more thing you can add to it.",
-        "heading": "Set up Claude once, and every chat starts out knowing your work",
-        "sub": "The Claude Operator's Manual and the 12 Role Packs, together for $47.",
-        "image": "/img/magnets/claude-manual.webp",
-        "image_alt": "The Claude Operator's Manual by Elvin M. Peters",
-        "body": "<p>This bundle is only for people who use Claude. It gives you two pieces: a guide to setting Claude up so you stop re-explaining yourself in every chat, and twelve job-based packs of prompts to start from.</p>\n<p>The picture is the Manual. There is no Role Packs cover, and the Role Packs file is not a finished download.</p>\n<h3>The Claude Operator's Manual</h3>\n<p>I wrote this Manual for Claude users who want to run Claude well. It is a 217-page PDF about Claude only.</p>\n<ul><li><strong>Set up Claude in the app.</strong> Start with the day-one setup checklist in the appendices. Parts I and II cover talking to Claude well, setting up Projects and knowledge files, Skills, and connecting Claude to the tools your work lives in, and they need no terminal.</li><li><strong>Go further with Claude Code.</strong> Part III is for readers who are ready to open a terminal.</li><li><strong>Copy complete workflows.</strong> Part IV puts the setup together into workflows you can reuse.</li><li><strong>Check your work.</strong> Every chapter ends with a checklist.</li></ul>\n<h3>The 12 Role Packs</h3>\n<p>Each pack is built around one job. A finished pack would include an overview of the role, the AI tools that suit it, prompts grouped by task with brackets for your own details, and a plan for building the habit. The twelve jobs are:</p>\n<ul><li>Marketing Manager</li><li>Sales Manager</li><li>Finance Manager</li><li>Operations Manager</li><li>HR Manager</li><li>Customer Service Manager</li><li>Content Creator</li><li>Data Analyst</li><li>Project Manager</li><li>Executive Assistant</li><li>Product Manager</li><li>Legal and Compliance Manager</li></ul>\n<h3>The price</h3>\n<p>The Manual sells for $27 on its own in my store, and the 12 Role Packs sell for $27 on their own. In this bundle they cost $47 together, which is $7 less. Prices are in US dollars.</p>",
+        "top": "",
+        "heading": "Set up your AI once, and every chat starts out knowing your work",
+        "sub": "The AI Setup Bundle: 14 ready-made Specialists, your rules in every chat, and the full 217-page Claude guide, together for $47.",
+        "image": "",
+        "image_alt": "",
+        "body": "<p>This bundle is for people who use AI at work. It gives you three pieces: a guide to setting Claude up so you stop re-explaining yourself in every chat, a set of 14 Specialists with 231 prompts to start from, and a set of rules you load once so your AI follows them.</p><h3>The Claude Operator’s Manual</h3><p>I wrote this Manual for Claude users who want to run Claude well. It is a 217-page PDF about Claude only.</p><ul><li><strong>Set up Claude in the app.</strong> Start with the day-one setup checklist in the appendices. The first half covers talking to Claude well, setting up Projects and knowledge files, Skills, and connecting Claude to the tools your work lives in, and they need no terminal.</li><li><strong>Go further with Claude Code.</strong> The Claude Code chapters are optional, and they are the only ones that ask you to open a terminal.</li><li><strong>Copy complete workflows.</strong> The last part puts the setup together into workflows you can reuse.</li><li><strong>Check your work.</strong> Every chapter ends with a checklist.</li></ul><h3>Your Personal Specialists</h3><p>A Specialist is a setup message you paste into your AI, plus prompts for the problems in its area. Bring a problem to the right Specialist and paste your prompt. This is a 72-page PDF with 14 Specialists and 231 prompts, with brackets for your own details. Set each Specialist up once in the AI you already use: the guide shows how to set each one up in ChatGPT, Claude, Gemini or Grok. The 14 Specialists are Marketing, Sales, Finance, Operations, HR, Customer Service, Content, Data, Project Management, Executive Assistant, Product, Legal and Compliance, Small Business, and Freelancer and Consultant.</p><h3>Standing Orders for Your AI</h3><p>A set of 20 rules you load into your AI once, so it follows them in every chat. Each rule can be switched on or off, and you can set the strength to Light, Standard or Full. For example, rule 1 is “Never make things up.” At Light, your AI says so when it isn’t sure a fact is right. At Full, it gives no fact without a source you can check. A guide shows how to load the rules into ChatGPT, Claude, Gemini and Grok, and another shows how to edit them.</p><figure class=\"lp-image\"><img src=\"/img/store/standing-orders-rule1-sample.webp\" alt=\"Rule 1 of Standing Orders for Your AI, switched on: Never make things up. Light: if you aren’t sure a fact is right, say so. Standard: say where each fact, number, name and quote came from; if you can’t, mark it unverified or leave it out. Full: give me no fact without a source I can check; when you have a gap, ask me or tell me what is missing, and don’t fill it with a guess.\" loading=\"lazy\" decoding=\"async\" /></figure><p>Prices are in US dollars.</p>",
         "was": "",
         "price": "$47",
-        "yes": "Yes, add the Operator Bundle for $47",
-        "yes_note": "",
-        "no": "No thanks, I'll skip this",
-        "fine": "Digital downloads. A [[refund]] covers this purchase too: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
-        "small": "<p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p>\n<p>The Claude Operator's Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p>\n<p>Elvin Peters</p>",
+        "yes": "Yes, add the AI Setup Bundle for $47",
+        "yes_note": "Charges the card you just used, no re-entry. [[refund]].",
+        "no": "No thanks, I’ll skip this",
+        "fine": "Digital downloads, for your own use. You get an instant download plus an email. A [[refund]] covers this purchase too: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
+        "small": "<p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p><p>Elvin Peters</p>",
         "fallback": "Pay with another card",
         "review_href": "/book/manual/",
-        "stack_desktop": "/img/store/stack-operator-bundle-47-desktop.webp",
-        "stack_phone": "/img/store/stack-operator-bundle-47-phone.webp",
-        "stack_alt": "What you get for $47: The Claude Operator's Manual ($27), Your Personal Specialists ($27) and Standing Orders for Your AI ($27). Standalone value $81. Your price: $47."
-      }
-    },
-    {
-      "id": "included-list",
-      "type": "lp-included",
-      "data": {
-        "bg": "tint",
-        "anchor": "included-list",
-        "heading": "What is included",
-        "items": [
-          {
-            "name": "The Claude Operator's Manual",
-            "detail": "A 217-page PDF about Claude only. Parts I and II cover talking to Claude well, Projects, Skills and connecting your tools, with no terminal. Part III is for Claude Code. Part IV puts it together into workflows. Every chapter ends with a checklist."
-          },
-          {
-            "name": "Your Personal Specialists",
-            "detail": "The 72-page guide, the searchable prompt spreadsheet, and a plain-text setups file. 14 Specialists and 231 prompts."
-          },
-          {
-            "name": "Standing Orders for Your AI",
-            "detail": "20 rules and 16 optional add-ons, in three strengths (Light, Standard, Full), with a switch on every rule. Made to load into ChatGPT, Claude, Gemini and Grok."
-          }
-        ],
-        "foot": ""
+        "stack_desktop": "/img/store/stack-ai-setup-bundle-47-desktop.webp",
+        "stack_phone": "/img/store/stack-ai-setup-bundle-47-phone.webp",
+        "stack_alt": "What you get for $47: The Claude Operator's Manual ($27), Your Personal Specialists ($27) and Standing Orders for Your AI ($27). Standalone value $81. Your price: $47.",
+        "early": "1"
       }
     },
     {
@@ -87,14 +74,12 @@
       "data": {
         "anchor": "why-it-works",
         "align": "left",
-        "heading": "Why it works",
+        "heading": "Why the Specialists work",
         "paras": [
-          "[Words: this section waits on the final why-it-works copy; the text below is the draft]",
-          "Most prompts fail for one reason: the AI does not know your situation, so it guesses. You get a confident, generic answer that fits nobody.",
-          "Each Specialist starts with a setup you paste once. The setup tells the AI to ask before it guesses. So when you skip the details, it does not make them up. It does one of two things:",
-          "<ol><li><strong>It interviews you.</strong> You get three to five short questions about what it needs: who it is for, what you have tried, what a good result looks like. You answer in a line or two, and the next reply fits your situation.</li><li><strong>It drafts with gaps marked.</strong> You get a usable draft with [PLACEHOLDERS] where your facts belong, and it tells you what to fill in. Nothing invented sits in your draft looking like a fact.</li></ol>",
-          "<strong>Tested in Gemini and Grok.</strong> Elvin ran the setups in Gemini and Grok. In both, a prompt sent without context came back as one of those two replies: questions first, or a draft with the gaps marked. The tool changed. The behaviour did not.",
-          "That is the point of the setup. You do not need to write a perfect prompt. Paste the setup, paste the prompt, answer what it asks."
+          "A common reason a prompt fails is that the AI does not know your situation, so it guesses. You get a confident, generic answer that fits nobody.",
+          "Each Specialist starts with a setup you paste once. The setup tells the AI to ask before it guesses. So when you skip the details, it does one of two things:",
+          "<ol><li><strong>It interviews you.</strong> You get a few short questions about what it needs: who it is for, what you have tried, what a good result looks like. You answer in a line or two, and the next reply fits your situation.</li><li><strong>It drafts with the gaps marked.</strong> You get a usable draft with [PLACEHOLDERS] where your facts belong, and it tells you what to fill in. Nothing invented sits in your draft looking like a fact.</li></ol>",
+          "I ran the setups in Gemini and Grok. In both, a prompt sent without context came back as one of those two replies. The tool changed. The behaviour did not. You do not need to write a perfect prompt: paste the setup, paste the prompt, answer what it asks."
         ]
       }
     },
@@ -104,15 +89,15 @@
       "data": {
         "bg": "",
         "anchor": "example-1",
-        "heading": "Sales Specialist",
+        "heading": "See it happen: Sales Specialist",
         "turns": [
           {
             "who": "You paste",
-            "text": "<p>[the Sales Specialist setup] then \"Write a cold email to Priya Shah, Operations Director at Northline Freight. My product: scheduling software for delivery fleets. The specific pain I solve: dispatchers lose time re-planning routes by hand. Keep it under 100 words, avoid jargon, end with a specific call to action, and include a subject line. Use only what I tell you about Northline Freight.\"</p>"
+            "text": "<p>The Sales Specialist setup, then: “Write a cold email to Priya Shah, Operations Director at Northline Freight. My product: scheduling software for delivery fleets. The specific pain I solve: dispatchers lose time re-planning routes by hand. Keep it under 100 words, avoid jargon, end with a specific call to action, and include a subject line. Use only what I tell you about Northline Freight.”</p>"
           },
           {
             "who": "AI",
-            "text": "<p>Before I draft, four quick questions:<br>1. Is this a first contact with Priya, or has she replied to you before?<br>2. Do you want pricing in the email, or should it wait for a call?<br>3. What should Priya do next: book a call, reply, or watch a short demo?<br>4. Who is sending it, and what is your name and title?</p>"
+            "text": "<p>Before I draft, four quick questions:</p><ol><li>Is this a first contact with Priya, or has she replied to you before?</li><li>Do you want pricing in the email, or should it wait for a call?</li><li>What should Priya do next: book a call, reply, or watch a short demo?</li><li>Who is sending it, and what is your name and title?</li></ol>"
           },
           {
             "who": "You",
@@ -120,40 +105,11 @@
           },
           {
             "who": "AI",
-            "text": "<p>Subject: Dispatch re-planning, one idea for Northline</p><p>Hi Priya,</p><p>Dispatchers often lose hours re-planning routes by hand when a stop changes. Halcyon Routing builds scheduling software for delivery fleets that re-plans routes for you, so your team spends less time on rework.</p><p>We are a small team, so I would rather show you than describe it. Are you free for a 15-minute call on Tuesday at 10 am?</p><p>Marcus<br>Halcyon Routing</p>"
+            "text": "<p>Subject: Dispatch re-planning, one idea for Northline</p><p>Hi Priya,</p><p>Dispatchers often lose hours when a stop changes. Halcyon Routing builds scheduling software for delivery fleets, so your dispatchers spend less time re-planning routes by hand.</p><p>We are a small team, so I would rather show you than describe it. Are you free for a 15-minute call on Tuesday at 10 am?</p><p>Marcus<br>Halcyon Routing</p>"
           }
         ],
-        "note": "the setup tells the AI to ask about the buyer and the deal before drafting, so the questions covered only what the AI could not know, and the draft stayed inside the facts Marcus gave.",
-        "draft": "[Words: example conversations wait on the final copy; these are the drafts]"
-      }
-    },
-    {
-      "id": "example-2",
-      "type": "lp-conversation",
-      "data": {
-        "bg": "tint",
-        "anchor": "example-2",
-        "heading": "Finance Specialist",
-        "turns": [
-          {
-            "who": "You paste",
-            "text": "<p>[the Finance Specialist setup] then \"Here are my budget vs actuals for October: Marketing budget 12,000, actual 14,500; Software budget 8,000, actual 7,200; Travel budget 5,000, actual 2,100. Write a variance analysis explanation for each major line item. Include the dollar and percentage difference. Use plain language. Where you don't know the reason, ask me instead of guessing.\"</p>"
-          },
-          {
-            "who": "AI",
-            "text": "<p>Before I write the explanations, I need five answers:<br>1. Who will read this: the owner, the board, or a lender? That sets how much detail to give.<br>2. What drove the marketing overspend of $2,500? Was it planned, or an invoice that came in higher?<br>3. Is the software underspend a cancelled tool, a discount, or an invoice that has not arrived yet?<br>4. Were the travel trips cancelled, moved, or still unbooked?<br>5. Are these totals final, or are invoices still coming in?</p>"
-          },
-          {
-            "who": "You",
-            "text": "<p>Lena, I run a nine-person design studio. The board reads this. Marketing: we approved a second ad campaign in October. Software: we cancelled one seat. Travel: two client trips moved to November. Totals are final.</p>"
-          },
-          {
-            "who": "AI",
-            "text": "<p>October summary (actual minus budget, divided by budget):</p><p>Marketing: budget $12,000, actual $14,500. Over by $2,500, or 20.8 percent. The cause was a second ad campaign approved in October.</p><p>Software: budget $8,000, actual $7,200. Under by $800, or 10.0 percent. One seat was cancelled.</p><p>Travel: budget $5,000, actual $2,100. Under by $2,900, or 58.0 percent. Two client trips moved to November, so some of that cost may land next month.</p><p>Total: budget $25,000, actual $23,800. Under by $1,200, or 4.8 percent.</p><p>A qualified accountant should check these figures and the wording before the board sees them.</p>"
-          }
-        ],
-        "note": "the prompt said to ask when the reason is unknown, so the AI asked for the three causes, and Lena's answers let it explain each line in plain language without guessing.",
-        "draft": "[Words: example conversations wait on the final copy; these are the drafts]"
+        "note": "The AI asked only what it could not know, and the draft stayed inside the facts Marcus gave.",
+        "draft": "One example conversation. The names and businesses are invented, and your own answers will look different."
       }
     }
   ]
