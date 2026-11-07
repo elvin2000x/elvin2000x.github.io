@@ -279,3 +279,6 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 .lp-fold{ margin:18px 0 0; font:15px/1.5 var(--sans) }
 .lp-fold summary{ cursor:pointer; color:var(--ink); font-weight:600 }
 .lp-fold p, .lp-fold ul{ margin:8px 0 0 }
+/* A group header that carries the struck price and label, with its pieces under it and no figure */
+.lp-stack__group--row{ display:flex; align-items:center; gap:12px; border-bottom:0 }
+.lp-stack__group--row .lp-stack__name{ flex:1 1 auto }

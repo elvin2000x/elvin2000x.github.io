@@ -45,8 +45,8 @@
       "data": {
         "bg": "",
         "anchor": "copy-setups",
-        "heading": "[Words: heading for the setups, from the final copy]",
-        "intro": "[Words: one line on how to use a setup: paste it as the first message of a new chat]",
+        "heading": "Your 14 setups, ready to paste",
+        "intro": "Paste a setup as the first message of a new chat, then tell the AI what you need.",
         "cards": [
           {
             "name": "Marketing Specialist",

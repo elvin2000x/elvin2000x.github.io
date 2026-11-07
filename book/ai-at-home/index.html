@@ -200,16 +200,30 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             }
           } catch (e) {}
         }
-        var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null;
+        var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null, headerGroup = null;
         ul.innerHTML = '';
         f.stack.forEach(function (r) {
+          /* Rows may carry a label ("Free" or "Included") and one header row
+             (group_header) that owns the struck price for a group of pieces, which then
+             show no figure. Rows without a label keep the old words. */
+          var hasLabel = typeof r.label === 'string';
+          var label = hasLabel ? r.label : (r.status === 'free' ? (box.getAttribute('data-free') || '') : (box.getAttribute('data-included') || ''));
+          var struck = r.standalone_price && (r.status === 'free' || (hasLabel && r.label));
+          if (r.group_header) {
+            var hh = document.createElement('li'), hn = document.createElement('span'), hv = document.createElement('span');
+            hh.className = 'lp-stack__group lp-stack__group--row'; hn.className = 'lp-stack__name'; hn.textContent = r.group_name || r.name; hv.className = 'lp-stack__value';
+            if (r.standalone_price) { var hs = document.createElement('s'); hs.textContent = r.standalone_price_text || money(r.standalone_price); hv.appendChild(hs); total += r.standalone_price; }
+            if (label) { var he = document.createElement('em'); he.textContent = ' ' + label; hv.appendChild(he); }
+            hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group; return;
+          }
           if (r.group && r.group !== last) { var h = document.createElement('li'); h.className = 'lp-stack__group'; h.textContent = r.group_name || r.group; ul.appendChild(h); }
           last = r.group;
           var li = document.createElement('li'), n = document.createElement('span'), v = document.createElement('span');
           if (r.group) li.className = 'lp-stack__part';
           n.className = 'lp-stack__name'; n.textContent = r.name; v.className = 'lp-stack__value';
-          if (r.status === 'included' || !r.standalone_price) { v.textContent = box.getAttribute('data-included') || ''; }
-          else if (r.status === 'free') { var s2 = document.createElement('s'); s2.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s2); var em = document.createElement('em'); em.textContent = ' ' + (box.getAttribute('data-free') || ''); v.appendChild(em); total += r.standalone_price; }
+          if (r.group && headerGroup === r.group && !r.standalone_price) { /* a piece under a header: no figure */ }
+          else if (r.status === 'included' || !r.standalone_price) { v.textContent = hasLabel ? r.label : (box.getAttribute('data-included') || ''); }
+          else if (struck) { var s2 = document.createElement('s'); s2.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s2); var em = document.createElement('em'); em.textContent = ' ' + label; v.appendChild(em); total += r.standalone_price; }
           else { v.textContent = r.standalone_price_text || money(r.standalone_price); total += r.standalone_price; }
           li.appendChild(n); li.appendChild(v); ul.appendChild(li);
         });

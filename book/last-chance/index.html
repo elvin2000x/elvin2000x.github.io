@@ -97,7 +97,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="lp-in">
     <h1>Last chance: 12% off any other guide, for this order only</h1>
     <p class="lp-lede">Take 12% off any product below. I will not send this offer again.</p>
-    <div class="lp-body"><p>Your order is in, and your downloads are on the next page. The AI Setup Bundle already includes the Manual and Rules of Engagement, so choose the AI Setup Bundle or the single guides. Products you already bought are not listed. The last column shows each price with your 12% off.</p><p>Prices are in US dollars.</p></div>
+    <div class="lp-body"><p>Your order is in, and your downloads are on the next page. The AI Setup Bundle already includes the Manual and Rules of Engagement, so choose the AI Setup Bundle or the single guides. Products you already bought are not listed. Each price shown has your 12% off.</p><p>Prices are in US dollars.</p></div>
     <div class="lp-basket__list" data-store="basket"></div>
     <p class="lp-price"><span>Total</span> <s data-store="was"></s> <strong data-store="total"></strong></p>
     <p class="lp-note">One receipt email lists everything you bought and links to your library, where each product has its own download. Anything added later in the same order gets a second email titled Added to your order.</p>
@@ -110,7 +110,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <div class="lp-small"><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p></div>
     <p class="lp-review"><a href="/book/thank-you/">Review the next step</a> This link is the review path. It does not charge you.</p>
   </div>
-  <div hidden data-lp-rows><p data-product="operator-bundle">Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Rules of Engagement and Your Personal Specialists, which has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it is sold only in this bundle.</p><p data-product="claude-manual">A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work.</p><p data-product="top-15-rules">Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok.</p><p data-product="global-ai-race">One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined.</p><p data-product="thirty-ways">A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip.</p></div>
+  <div hidden data-lp-rows><p data-product="operator-bundle">Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Rules of Engagement and Your Personal Specialists. Your Personal Specialists has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it is sold only in this bundle.</p><p data-product="claude-manual">A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work.</p><p data-product="top-15-rules">Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok.</p><p data-product="global-ai-race">One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined.</p><p data-product="thirty-ways">A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip.</p></div>
   <script>
   (function () {
     var root = document.currentScript.parentNode, rows = {};
@@ -196,16 +196,30 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             }
           } catch (e) {}
         }
-        var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null;
+        var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null, headerGroup = null;
         ul.innerHTML = '';
         f.stack.forEach(function (r) {
+          /* Rows may carry a label ("Free" or "Included") and one header row
+             (group_header) that owns the struck price for a group of pieces, which then
+             show no figure. Rows without a label keep the old words. */
+          var hasLabel = typeof r.label === 'string';
+          var label = hasLabel ? r.label : (r.status === 'free' ? (box.getAttribute('data-free') || '') : (box.getAttribute('data-included') || ''));
+          var struck = r.standalone_price && (r.status === 'free' || (hasLabel && r.label));
+          if (r.group_header) {
+            var hh = document.createElement('li'), hn = document.createElement('span'), hv = document.createElement('span');
+            hh.className = 'lp-stack__group lp-stack__group--row'; hn.className = 'lp-stack__name'; hn.textContent = r.group_name || r.name; hv.className = 'lp-stack__value';
+            if (r.standalone_price) { var hs = document.createElement('s'); hs.textContent = r.standalone_price_text || money(r.standalone_price); hv.appendChild(hs); total += r.standalone_price; }
+            if (label) { var he = document.createElement('em'); he.textContent = ' ' + label; hv.appendChild(he); }
+            hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group; return;
+          }
           if (r.group && r.group !== last) { var h = document.createElement('li'); h.className = 'lp-stack__group'; h.textContent = r.group_name || r.group; ul.appendChild(h); }
           last = r.group;
           var li = document.createElement('li'), n = document.createElement('span'), v = document.createElement('span');
           if (r.group) li.className = 'lp-stack__part';
           n.className = 'lp-stack__name'; n.textContent = r.name; v.className = 'lp-stack__value';
-          if (r.status === 'included' || !r.standalone_price) { v.textContent = box.getAttribute('data-included') || ''; }
-          else if (r.status === 'free') { var s2 = document.createElement('s'); s2.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s2); var em = document.createElement('em'); em.textContent = ' ' + (box.getAttribute('data-free') || ''); v.appendChild(em); total += r.standalone_price; }
+          if (r.group && headerGroup === r.group && !r.standalone_price) { /* a piece under a header: no figure */ }
+          else if (r.status === 'included' || !r.standalone_price) { v.textContent = hasLabel ? r.label : (box.getAttribute('data-included') || ''); }
+          else if (struck) { var s2 = document.createElement('s'); s2.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s2); var em = document.createElement('em'); em.textContent = ' ' + label; v.appendChild(em); total += r.standalone_price; }
           else { v.textContent = r.standalone_price_text || money(r.standalone_price); total += r.standalone_price; }
           li.appendChild(n); li.appendChild(v); ul.appendChild(li);
         });
