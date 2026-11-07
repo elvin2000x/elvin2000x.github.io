@@ -1,0 +1,324 @@
+{
+  "title": "Everything AI 2026",
+  "frame": "landing",
+  "landing": {
+    "slug": "everything-ai-2026",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "Everything AI 2026: 684 AI tools, models and guides, sorted by the job you’re doing. $19."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "eai-hero",
+        "eyebrow": "",
+        "headline": "Everything AI 2026",
+        "sub": "684 AI tools, models and guides, sorted by the job you’re doing",
+        "button": {
+          "label": "Buy for $19",
+          "checkout": false,
+          "href": "https://api.elvinpeters.com/api/store/start?product=everything-ai-2026"
+        },
+        "note": "$19. [[refund]].",
+        "image": "/img/store/everything-ai-2026.webp",
+        "image_alt": "Cover of Everything AI 2026 by Elvin Peters"
+      }
+    },
+    {
+      "id": "description",
+      "type": "text",
+      "data": {
+        "anchor": "description",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "You have a job to do with AI and no idea which of the hundreds of tools to try. Everything AI 2026 holds 684 AI resources in 28 tabs, so you open the tab for your job and start with the Picks. You do not search a list sorted by name.",
+          "A resource is an AI tool, model, dataset, course or guide. Each carries a level, and 246 of the 684 are labelled Beginner, 224 Intermediate and 214 Developer."
+        ]
+      }
+    },
+    {
+      "id": "look",
+      "type": "lp-image-pair",
+      "data": {
+        "bg": "tint",
+        "anchor": "look",
+        "heading": "A look inside",
+        "first": "/img/store/listings/everything-ai-2026/01-pdf-cover.webp",
+        "first_alt": "The cover page of the Everything AI 2026 PDF field guide.",
+        "second": "/img/store/listings/everything-ai-2026/02-start-here-sheet.webp",
+        "second_alt": "The Start Here sheet of the Everything AI 2026 spreadsheet."
+      }
+    },
+    {
+      "id": "rows",
+      "type": "text",
+      "data": {
+        "anchor": "rows",
+        "align": "left",
+        "heading": "A few rows",
+        "paras": [
+          "<div style=\"overflow-x:auto\"><table><thead><tr><th>Tool</th><th>Tab</th><th>What it does</th><th>Level</th><th>Cost</th></tr></thead><tbody><tr><td>Fathom</td><td>Meetings Notes and Productivity</td><td>Free meeting recorder with summaries and highlights</td><td>Beginner</td><td>Freemium</td></tr><tr><td>Perplexity</td><td>AI Search and Research</td><td>Answer engine that cites every claim and offers deep multi-step research</td><td>Beginner</td><td>Freemium</td></tr><tr><td>Ollama</td><td>Run Models Locally</td><td>Downloads and runs open models with one command</td><td>Intermediate</td><td>Open source</td></tr></tbody></table></div>",
+          "All three are marked as Picks, the first ones to try in their tabs. There are 64 Picks in all, at most one in five entries in any tab, and each is chosen for a reason a beginner can follow."
+        ]
+      }
+    },
+    {
+      "id": "look2",
+      "type": "lp-image-pair",
+      "data": {
+        "bg": "",
+        "anchor": "look2",
+        "heading": "",
+        "first": "/img/store/listings/everything-ai-2026/03-category-tab.webp",
+        "first_alt": "A category tab of the Everything AI 2026 spreadsheet.",
+        "second": "/img/store/listings/everything-ai-2026/04-job-stack.webp",
+        "second_alt": "A job stack from Everything AI 2026."
+      }
+    },
+    {
+      "id": "stacks",
+      "type": "lp-included",
+      "data": {
+        "bg": "tint",
+        "anchor": "stacks",
+        "heading": "Twelve job stacks, if you would rather not choose",
+        "items": [
+          {
+            "name": "Write and edit faster",
+            "detail": ""
+          },
+          {
+            "name": "Run marketing with a small team",
+            "detail": ""
+          },
+          {
+            "name": "Make short videos",
+            "detail": ""
+          },
+          {
+            "name": "Research anything",
+            "detail": ""
+          },
+          {
+            "name": "Meetings and notes",
+            "detail": ""
+          },
+          {
+            "name": "Build a first app without coding",
+            "detail": ""
+          },
+          {
+            "name": "Code with AI every day (for developers)",
+            "detail": ""
+          },
+          {
+            "name": "Automate the busywork",
+            "detail": ""
+          },
+          {
+            "name": "Build AI agents (for developers)",
+            "detail": ""
+          },
+          {
+            "name": "Run AI privately on your own computer",
+            "detail": ""
+          },
+          {
+            "name": "Use AI responsibly at work in Canada",
+            "detail": ""
+          },
+          {
+            "name": "Learn AI from zero, then keep up",
+            "detail": ""
+          }
+        ],
+        "foot": ""
+      }
+    },
+    {
+      "id": "stackline",
+      "type": "text",
+      "data": {
+        "anchor": "stackline",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "A stack is a short set of resources for one job."
+        ]
+      }
+    },
+    {
+      "id": "every",
+      "type": "lp-included",
+      "data": {
+        "bg": "",
+        "anchor": "every",
+        "heading": "What every entry has",
+        "items": [
+          {
+            "name": "A level: Beginner, Intermediate or Developer.",
+            "detail": ""
+          },
+          {
+            "name": "A cost label, such as Free, Open source, Freemium or Paid.",
+            "detail": ""
+          },
+          {
+            "name": "A one-line description in our own words, written for this guide.",
+            "detail": ""
+          },
+          {
+            "name": "A link tested on October 29, 2026.",
+            "detail": ""
+          }
+        ],
+        "foot": ""
+      }
+    },
+    {
+      "id": "prices",
+      "type": "text",
+      "data": {
+        "anchor": "prices",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "For 79 paid tools it also shows plan names and prices, read from the vendor’s pricing page on that date. Three of the 79 come from price trackers, and they are marked."
+        ]
+      }
+    },
+    {
+      "id": "trust",
+      "type": "text",
+      "data": {
+        "anchor": "trust",
+        "align": "left",
+        "heading": "Why you can trust the links",
+        "paras": [
+          "AI tools change names, owners and addresses often. Testing every link on October 29, 2026 turned up 30 notable changes, and the guide logs each one. Windsurf is now Devin Desktop. Play.ht has closed. Everything AI 2026 is a snapshot as of that date."
+        ]
+      }
+    },
+    {
+      "id": "isnot",
+      "type": "text",
+      "data": {
+        "anchor": "isnot",
+        "align": "left",
+        "heading": "What it is not",
+        "paras": [
+          "It is not every AI tool. An entry goes in only if it is about AI, its link works, it has shipped or posted in the last 12 months, its job can be stated in one line, and its pricing is public or it has a free tier. No vendor paid to be listed or to get a Pick, and no link carries an affiliate code.",
+          "Prices change, so confirm on the vendor’s site before you pay."
+        ]
+      }
+    },
+    {
+      "id": "buy",
+      "type": "button",
+      "data": {
+        "anchor": "buy",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Buy for $19",
+            "href": "https://api.elvinpeters.com/api/store/start?product=everything-ai-2026",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "get",
+      "type": "text",
+      "data": {
+        "anchor": "get",
+        "align": "left",
+        "heading": "What you get",
+        "paras": [
+          "Two digital files:",
+          "<ul><li>A spreadsheet (.xlsx) that opens in Excel and Google Sheets. Filter it by level, cost or tab.</li><li>A PDF field guide that explains how the list is organised and how to choose.</li></ul>"
+        ]
+      }
+    },
+    {
+      "id": "who",
+      "type": "text",
+      "data": {
+        "anchor": "who",
+        "align": "left",
+        "heading": "Who made it",
+        "paras": [
+          "Elvin Peters wrote The Artificial Advantage, a book on working with AI, and ran paid media for two regulated brands at goeasy, a Canadian consumer lender. The Picks follow the written entry rules above, and no one paid for them."
+        ]
+      }
+    },
+    {
+      "id": "vault",
+      "type": "text",
+      "data": {
+        "anchor": "vault",
+        "align": "left",
+        "heading": "The free Vault",
+        "paras": [
+          "The free AI Resource Vault is a separate list that stays free. Everything AI 2026 is AI only and sorted by job, and 565 of its 684 entries are new beyond the free Vault. The other 119 are in both, and each was re-checked and rewritten."
+        ]
+      }
+    },
+    {
+      "id": "price",
+      "type": "text",
+      "data": {
+        "anchor": "price",
+        "align": "left",
+        "heading": "$19",
+        "paras": [
+          "Digital files, as an instant download plus an email, for your own use. [[refund]]: if it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full."
+        ]
+      }
+    },
+    {
+      "id": "buy2",
+      "type": "button",
+      "data": {
+        "anchor": "buy2",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Buy for $19",
+            "href": "https://api.elvinpeters.com/api/store/start?product=everything-ai-2026",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "guarantee",
+      "type": "lp-guarantee",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "My [[refund]]",
+        "text": "If it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full. For your own use."
+      }
+    },
+    {
+      "id": "legal",
+      "type": "text",
+      "data": {
+        "anchor": "legal",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "<em>Independent list. Not affiliated with or endorsed by any company or tool in it.</em>"
+        ]
+      }
+    }
+  ],
+  "noindex": true
+}

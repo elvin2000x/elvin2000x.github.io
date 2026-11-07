@@ -6,7 +6,7 @@
     "old_slugs": [],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
-    "description": "The Artificial Advantage Toolkit on its own: 16 exercises, 25 prompts, 25 role statements, two practice plans and a 12-job tool guide, all editable. $17."
+    "description": "The Artificial Advantage Toolkit: the exercises, prompts, roles and plans from the book, in files you can edit. $17."
   },
   "sections": [
     {
@@ -16,15 +16,28 @@
         "anchor": "tk-hero",
         "eyebrow": "",
         "headline": "The Artificial Advantage Toolkit",
-        "sub": "The book holds what stays true. The Toolkit holds what changes.",
+        "sub": "The exercises, prompts, roles and plans from the book, in files you can edit",
         "button": {
           "label": "Buy for $17",
           "checkout": false,
           "href": "https://api.elvinpeters.com/api/store/start?product=toolkit"
         },
-        "note": "$17. [[refund]]. Own the book? <a href=\"/toolkit/\">Get it free here</a>.",
+        "note": "$17. [[refund]].",
         "image": "/img/store/toolkit.webp",
         "image_alt": "Cover of The Artificial Advantage Toolkit by Elvin Peters"
+      }
+    },
+    {
+      "id": "description",
+      "type": "text",
+      "data": {
+        "anchor": "description",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "The book teaches you how to direct AI. The Toolkit is where you practise it, in order, on your own work.",
+          "You get the working files from the book, already typed out and ready to change:"
+        ]
       }
     },
     {
@@ -33,34 +46,47 @@
       "data": {
         "bg": "tint",
         "anchor": "pieces",
-        "heading": "What is in it",
+        "heading": "What you get",
         "items": [
           {
-            "name": "The Exercises, editable",
-            "detail": "16 exercises from 10 chapters, ready to run on your own work."
+            "name": "16 exercises from 10 chapters, each one run on your own work, with a record of what happened.",
+            "detail": ""
           },
           {
-            "name": "The 30-Day Practice Plan",
-            "detail": "The first week and the first month, with a 6-point checklist."
+            "name": "25 prompts for common work tasks, in 5 groups, plus a spreadsheet you can import into your own tools.",
+            "detail": ""
           },
           {
-            "name": "The 3-Month AI Practice Plan",
-            "detail": "Four stages, with three month-end check-ins."
+            "name": "25 role statements for your AI, in 8 work areas, plus the formula for writing your own.",
+            "detail": ""
           },
           {
-            "name": "The Professional Prompt Library",
-            "detail": "25 prompts in 5 groups, plus a spreadsheet you can import."
+            "name": "A 30-day plan, from your first real task to using AI every working day.",
+            "detail": ""
           },
           {
-            "name": "The Role Library",
-            "detail": "25 role statements in 8 work areas, plus the formula for writing your own."
+            "name": "A 3-month plan, from habit to saved workflows you reuse.",
+            "detail": ""
           },
           {
-            "name": "The Tool-Selection Cheat Sheet",
-            "detail": "12 jobs, each matched to the kind of tool and today’s examples. Dated."
+            "name": "A 12-job tool guide, dated, so you look up the job and see which kind of tool fits.",
+            "detail": ""
           }
         ],
         "foot": ""
+      }
+    },
+    {
+      "id": "more",
+      "type": "text",
+      "data": {
+        "anchor": "more",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "Everything comes as editable Word documents and plain text. Typing this much out of the book would take you more than four hours, and it is done.",
+          "The exercises point to chapters in <em>The Artificial Advantage</em>, so it works best with the book. The Step 1 bundle with the book is $27."
+        ]
       }
     },
     {
@@ -99,7 +125,7 @@
         "align": "left",
         "heading": "Format and delivery",
         "paras": [
-          "Every file comes as an editable Word document and as plain text. The Prompt Library also comes as a spreadsheet. Instant download plus an email. For your own use."
+          "Word documents and plain-text files, with the prompts also as a spreadsheet you can import. Instant download plus an email. For your own use."
         ]
       }
     },
@@ -112,21 +138,9 @@
         "heading": "",
         "cover": "/img/cover-hero.webp",
         "cover_alt": "Cover of The Artificial Advantage by Elvin M. Peters",
-        "text": "By Elvin Peters, author of <em>The Artificial Advantage</em>, with a decade in marketing.",
+        "text": "By Elvin Peters, author of <em>The Artificial Advantage</em>.",
         "href": "/books/the-artificial-advantage/",
         "link_label": "About the book"
-      }
-    },
-    {
-      "id": "owners",
-      "type": "text",
-      "data": {
-        "anchor": "owners",
-        "align": "left",
-        "heading": "Already have the book?",
-        "paras": [
-          "Book owners still get the Toolkit free: <a href=\"/toolkit/\">use the form on the Toolkit page</a>. The Toolkit is also one of the items in <a href=\"/book/offer/\">The Artificial Advantage Bundle</a>."
-        ]
       }
     },
     {
@@ -137,6 +151,18 @@
         "anchor": "",
         "heading": "My [[refund]]",
         "text": "If it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full. For your own use."
+      }
+    },
+    {
+      "id": "legal",
+      "type": "text",
+      "data": {
+        "anchor": "legal",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "<em>Independent guide. Not affiliated with or endorsed by OpenAI, Google or Anthropic.</em>"
+        ]
       }
     }
   ]

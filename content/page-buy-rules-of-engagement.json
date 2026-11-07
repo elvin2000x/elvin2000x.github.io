@@ -35,7 +35,7 @@
         "align": "left",
         "heading": "",
         "paras": [
-          "A new chat knows nothing about how you like to work, so the AI guesses. You correct it, and in the next chat you correct it again."
+          "A new chat knows nothing about how you like to work, so the AI guesses. You correct it, and in the next chat you correct it again. Without a prompt or rules, the AI gives a more random result from chat to chat."
         ]
       }
     },

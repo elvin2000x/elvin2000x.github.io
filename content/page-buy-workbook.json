@@ -1,0 +1,157 @@
+{
+  "title": "The 7-Day AI Workbook",
+  "frame": "landing",
+  "landing": {
+    "slug": "workbook",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "The 7-Day AI Workbook: one real task, seven days, the CLEAR system. $9."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "wb-hero",
+        "eyebrow": "",
+        "headline": "The 7-Day AI Workbook",
+        "sub": "One real task, seven days, the CLEAR system",
+        "button": {
+          "label": "Buy for $9",
+          "checkout": false,
+          "href": "https://api.elvinpeters.com/api/store/start?product=workbook-2e"
+        },
+        "note": "$9. [[refund]].",
+        "image": "/img/store/workbook-2e.webp",
+        "image_alt": "Cover of The 7-Day AI Workbook by Elvin Peters"
+      }
+    },
+    {
+      "id": "description",
+      "type": "text",
+      "data": {
+        "anchor": "description",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "Pick one task from your own work and carry it through seven days. Each day teaches one stage of the CLEAR system from <em>The Artificial Advantage</em>. By Day 7 you’ve finished a piece of your own work, saved a template you can reuse and measured the difference between your first try and your last."
+        ]
+      }
+    },
+    {
+      "id": "sample",
+      "type": "lp-image-pair",
+      "data": {
+        "bg": "tint",
+        "anchor": "sample",
+        "heading": "A look at Day 1",
+        "first": "/img/store/workbook-day1-p1.webp",
+        "first_alt": "Workbook page 4, Day 1: The Director’s Mindset. It shows today’s skill, a short note on taking the director’s chair, and the start of the Task Card with lines to fill in: the task in one sentence, who it is for, and what done looks like.",
+        "second": "/img/store/workbook-day1-p2.webp",
+        "second_alt": "Workbook page 5, the rest of Day 1: the last Task Card lines (what I currently do step by step, how long it takes me now), a Check yourself box, and a note that tomorrow you pick your tool and run the task once."
+      }
+    },
+    {
+      "id": "inside",
+      "type": "lp-included",
+      "data": {
+        "bg": "",
+        "anchor": "inside",
+        "heading": "What’s inside",
+        "items": [
+          {
+            "name": "A Task Card that turns one real task into your practice project",
+            "detail": ""
+          },
+          {
+            "name": "Seven daily exercises, one per day, that cover all five CLEAR stages, each with a fill-in section and a check-yourself question",
+            "detail": ""
+          },
+          {
+            "name": "The RTC brief, the Diagnostic Ladder and the Two-Step Verification Method, explained step by step",
+            "detail": ""
+          },
+          {
+            "name": "A before-and-after comparison so you can see the change in your own work",
+            "detail": ""
+          },
+          {
+            "name": "A one-page CLEAR loop you can reuse for any task",
+            "detail": ""
+          },
+          {
+            "name": "A chapter pointer on every day for readers who want to go deeper",
+            "detail": ""
+          }
+        ],
+        "foot": ""
+      }
+    },
+    {
+      "id": "buy",
+      "type": "button",
+      "data": {
+        "anchor": "buy",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Buy for $9",
+            "href": "https://api.elvinpeters.com/api/store/start?product=workbook-2e",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "format",
+      "type": "text",
+      "data": {
+        "anchor": "format",
+        "align": "left",
+        "heading": "Format and delivery",
+        "paras": [
+          "An 18-page PDF, Letter size. Instant download plus an email. For your own use."
+        ]
+      }
+    },
+    {
+      "id": "author",
+      "type": "lp-author",
+      "data": {
+        "bg": "tint",
+        "anchor": "author",
+        "heading": "",
+        "cover": "/img/cover-hero.webp",
+        "cover_alt": "Cover of The Artificial Advantage by Elvin M. Peters",
+        "text": "By Elvin Peters, author of <em>The Artificial Advantage</em>.",
+        "href": "/books/the-artificial-advantage/",
+        "link_label": "About the book"
+      }
+    },
+    {
+      "id": "guarantee",
+      "type": "lp-guarantee",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "My [[refund]]",
+        "text": "If it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full. For your own use."
+      }
+    },
+    {
+      "id": "legal",
+      "type": "text",
+      "data": {
+        "anchor": "legal",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "<em>Independent guide. Not affiliated with or endorsed by OpenAI, Google or Anthropic.</em>"
+        ]
+      }
+    }
+  ],
+  "noindex": true
+}
