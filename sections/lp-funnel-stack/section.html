@@ -21,9 +21,6 @@
         <button type="submit" class="btn btn--primary btn--lg lp-cta">{{email_button}}</button>
       </form>
 {{/email_label}}
-{{#review_href}}
-      <p class="lp-review"><a href="{{review_href}}">Review the next step</a> This link is the review path. It does not charge you.</p>
-{{/review_href}}
 {{#bump}}
       <label class="lp-bump lp-bump--box">{{#tab}}<span class="lp-bump__tab">{{tab}}</span>{{/tab}}{{#image}}<img src="{{image}}" alt="{{image_alt}}" loading="lazy">{{/image}}<input type="checkbox" data-store-bump> <span class="lp-bump__words"><strong>{{name}}</strong>{{#line}}<span>{{line}}</span>{{/line}}</span><strong class="lp-bump__price">{{price}}</strong></label>
 {{/bump}}
