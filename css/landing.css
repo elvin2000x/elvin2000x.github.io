@@ -256,9 +256,10 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 
 /* lp-ordered: what the buyer already has, at the top of every offer page */
 .lp-ordered{ padding-top:16px; padding-bottom:0 }
-.lp-ordered__row{ display:flex; align-items:center; gap:14px; padding:10px 14px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card) }
-.lp-ordered__img{ width:48px; height:auto; flex:none; border-radius:3px }
-.lp-ordered__text{ margin:0; font:600 17px/1.35 var(--sans); color:var(--ink) }
+.lp-ordered__row{ display:flex; flex-direction:column; align-items:stretch; gap:10px; padding:0 0 12px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden }
+.lp-ordered__row picture{ display:block }
+.lp-ordered__img{ display:block; width:100%; height:auto }
+.lp-ordered__text{ margin:0; padding:0 14px; font:600 17px/1.35 var(--sans); color:var(--ink) }
 /* lp-offer early: price block and Accept sit right under the opening line; a bar follows on a phone */
 .lp-sticky{ display:none }
 @media (max-width:767px){

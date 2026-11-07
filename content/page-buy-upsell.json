@@ -24,9 +24,10 @@
       "type": "lp-ordered",
       "data": {
         "anchor": "",
-        "image": "/img/book-3d.webp",
-        "image_alt": "The Artificial Advantage by Elvin M. Peters",
-        "text": "You ordered The Artificial Advantage Bundle"
+        "image": "/img/store/bundle-banner-artificial-advantage.webp",
+        "image_alt": "The covers in The Artificial Advantage Bundle: the ebook, the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey",
+        "text": "You ordered The Artificial Advantage Bundle",
+        "image_phone": "/img/store/bundle-banner-artificial-advantage-phone.webp"
       }
     },
     {

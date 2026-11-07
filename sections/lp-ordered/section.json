@@ -1,10 +1,36 @@
 {
   "label": "What the buyer already ordered (top of an offer page)",
-  "frames": ["landing"],
+  "frames": [
+    "landing"
+  ],
   "fields": [
-    { "key": "anchor", "type": "text", "label": "Anchor id" },
-    { "key": "image", "type": "text", "label": "Product picture address", "default": "[Picture: the product picture address]" },
-    { "key": "image_alt", "type": "text", "label": "Description of the picture", "default": "[Description: what the picture shows]" },
-    { "key": "text", "type": "html", "label": "Words", "default": "[Words: what the buyer ordered]" }
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "image",
+      "type": "text",
+      "label": "Product picture address",
+      "default": "[Picture: the product picture address]"
+    },
+    {
+      "key": "image_phone",
+      "type": "text",
+      "label": "Phone picture address (optional)"
+    },
+    {
+      "key": "image_alt",
+      "type": "text",
+      "label": "Description of the picture",
+      "default": "[Description: what the picture shows]"
+    },
+    {
+      "key": "text",
+      "type": "html",
+      "label": "Words",
+      "default": "[Words: what the buyer ordered]"
+    }
   ]
 }

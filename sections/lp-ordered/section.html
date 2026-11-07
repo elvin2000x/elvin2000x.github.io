@@ -1,7 +1,7 @@
 <section class="lp-sec lp-ordered"{{#anchor}} id="{{anchor}}"{{/anchor}}>
   <div class="lp-in">
     <div class="lp-ordered__row">
-      <img class="lp-ordered__img" src="{{image}}" alt="{{image_alt}}" width="48" height="72" decoding="async" />
+      <picture>{{#image_phone}}<source media="(max-width:767px)" srcset="{{image_phone}}" width="720" height="200" />{{/image_phone}}<img class="lp-ordered__img" src="{{image}}" alt="{{image_alt}}" width="1200" height="240" decoding="async" /></picture>
       <p class="lp-ordered__text">{{text}}</p>
     </div>
   </div>
