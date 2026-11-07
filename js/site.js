@@ -390,3 +390,30 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
+
+/* Notice for a buyer the store sent back: ?checkout=busy or ?checkout=off.
+   Words approved by COPYWRITER (COPY-checkout-notices.md). */
+(function () {
+  var words = {
+    busy: 'Checkout is busy for a moment. Please try again in a minute.',
+    off: 'That item isn’t on sale right now. Email elvin@elvinpeters.com and I’ll sort it out.'
+  };
+  function show() {
+    var m = /[?&]checkout=(busy|off)(?:&|$)/.exec(location.search);
+    if (!m || document.getElementById('checkout-notice')) return;
+    var box = document.createElement('div');
+    box.id = 'checkout-notice';
+    box.setAttribute('role', 'status');
+    box.style.cssText = 'position:sticky;top:0;z-index:1000;background:#0a1828;color:#fff;' +
+      'border-bottom:3px solid #c9a250;padding:14px 16px;text-align:center;' +
+      'font:600 16px/1.45 Inter,system-ui,sans-serif';
+    box.textContent = words[m[1]];
+    document.body.insertBefore(box, document.body.firstChild);
+    try {
+      var q = location.search.replace(/([?&])checkout=(busy|off)(&|$)/, function (s, a, b, c) { return c ? a : ''; });
+      history.replaceState(null, '', location.pathname + q + location.hash);
+    } catch (e) {}
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show);
+  else show();
+})();
