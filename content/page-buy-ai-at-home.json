@@ -111,6 +111,18 @@
         "href": "/books/the-artificial-advantage/",
         "link_label": "About the book"
       }
+    },
+    {
+      "id": "legal",
+      "type": "text",
+      "data": {
+        "anchor": "legal",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "<em>Independent guide. Not affiliated with or endorsed by OpenAI, Google or Anthropic.</em>"
+        ]
+      }
     }
   ],
   "noindex": true
