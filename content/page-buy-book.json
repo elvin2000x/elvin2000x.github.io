@@ -180,7 +180,7 @@
         "align": "left",
         "heading": "",
         "paras": [
-          "The $9 ebook line is the Amazon Kindle price. Each Toolkit piece and the Workbook show the price they sell for on their own in this store, struck through because they come free in the bundle. The Companion Library and the Director's Cheat Sheet stay Included, with no dollar. Prices are in US dollars."
+          "The $9.99 ebook line is the Amazon price. The Toolkit, the Workbook, Everything AI 2026 and The 12 Commandments show the price they sell for on their own in this store, struck through because they come free in the bundle. The Companion Library stays Included, with no dollar. Prices are in US dollars."
         ]
       }
     },
@@ -193,7 +193,7 @@
         "heading": "",
         "desktop": "/img/store/stack-artificial-advantage-bundle-27-desktop.webp",
         "phone": "/img/store/stack-artificial-advantage-bundle-27-phone.webp",
-        "alt": "What you get for $27: the second edition ebook ($9.99), the 7-Day AI Workbook ($9), Everything AI 2026 ($19), The 12 Commandments to Make AI Obey ($17) and the Toolkit, included with the book. Standalone value, plus the Toolkit, $54.99. Your price: $27."
+        "alt": "What you get for $27: the 2026 edition ebook ($9.99), The Toolkit ($17), The Companion Library, online, the 7-Day AI Workbook ($9), Everything AI 2026 ($19) and The 12 Commandments to Make AI Obey ($17). The five priced items bought separately: $71.99. Your price: $27."
       }
     },
     {
@@ -209,6 +209,12 @@
             "detail": "The 2026 second edition ebook."
           },
           {
+            "name": "The Toolkit",
+            "detail": "16 exercises from 10 chapters, 25 prompts plus an importable spreadsheet, 25 role statements plus the formula for your own, a 30-day plan, a 3-month plan, and a 12-job tool guide, all editable.",
+            "thumb": "/img/store/toolkit-thumb.webp",
+            "thumb_alt": "Cover of The Artificial Advantage Toolkit"
+          },
+          {
             "name": "The 7-Day AI Workbook",
             "detail": "18 pages: one real task, seven days, the CLEAR system. Seven daily exercises, each with a fill-in section and a check-yourself question."
           },
@@ -221,10 +227,6 @@
             "detail": "[Words: what is inside waits on the final guide from the 12 Commandments page]",
             "thumb": "/img/store/twelve-commandments-thumb.webp",
             "thumb_alt": "Cover of The 12 Commandments to Make AI Obey"
-          },
-          {
-            "name": "The Toolkit",
-            "detail": "16 exercises from 10 chapters, 25 prompts plus an importable spreadsheet, 25 role statements plus the formula for your own, a 30-day plan, a 3-month plan, and a 12-job tool guide, all editable."
           }
         ],
         "foot": ""
@@ -261,7 +263,7 @@
         "bg": "tint",
         "anchor": "",
         "heading": "What the stack adds up to",
-        "preview_stack_json": "{\"stack\":[{\"key\":\"book1-ebook\",\"name\":\"The Artificial Advantage, 2E ebook\",\"status\":\"price\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":null,\"group_name\":null},{\"key\":\"workbook-2e\",\"name\":\"7-Day AI Workbook, 2E\",\"status\":\"free\",\"standalone_price\":1200,\"standalone_price_text\":\"$12\",\"group\":null,\"group_name\":null},{\"key\":\"toolkit-exercises\",\"name\":\"Toolkit: Editable Exercises\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-practice-plans\",\"name\":\"Toolkit: 30-Day and 3-Month Practice Plans\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-prompt-library\",\"name\":\"Toolkit: Prompt Library\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-role-library\",\"name\":\"Toolkit: Role Library\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-tool-sheet\",\"name\":\"Toolkit: Tool-Selection Cheat Sheet\",\"status\":\"free\",\"standalone_price\":400,\"standalone_price_text\":\"$4\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":null,\"name\":\"The Director's Cheat Sheet\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"companion-library\",\"name\":\"The Companion Library\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":null,\"group_name\":null}]}",
+        "preview_stack_json": "{\"stack\":[{\"key\":\"book1-ebook\",\"name\":\"The Artificial Advantage, 2026 edition ebook (the Amazon price)\",\"status\":\"price\",\"standalone_price\":999,\"standalone_price_text\":\"$9.99\",\"group\":null,\"group_name\":null},{\"key\":\"toolkit\",\"name\":\"The Toolkit\",\"status\":\"free\",\"standalone_price\":1700,\"standalone_price_text\":\"$17\",\"group\":null,\"group_name\":null},{\"key\":\"companion-library\",\"name\":\"The Companion Library, online\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":null,\"group_name\":null},{\"key\":\"workbook-2e\",\"name\":\"Bonus: The 7-Day AI Workbook\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":null,\"group_name\":null},{\"key\":\"everything-ai-2026\",\"name\":\"Bonus: Everything AI 2026\",\"status\":\"free\",\"standalone_price\":1900,\"standalone_price_text\":\"$19\",\"group\":null,\"group_name\":null},{\"key\":\"seven-rules\",\"name\":\"Bonus: The 12 Commandments to Make AI Obey\",\"status\":\"free\",\"standalone_price\":1700,\"standalone_price_text\":\"$17\",\"group\":null,\"group_name\":null}]}",
         "shots": [
           {
             "src": "/img/store/hero-3d.webp",

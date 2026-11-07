@@ -1,0 +1,222 @@
+{
+  "title": "Rules of Engagement",
+  "frame": "landing",
+  "landing": {
+    "slug": "rules-of-engagement",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "Rules of Engagement: set the conditions to get the most out of AI in every chat. 20 rules you can turn up or down, with guides for ChatGPT, Claude, Gemini and Grok. $27."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "roe-hero",
+        "eyebrow": "",
+        "headline": "Rules of Engagement",
+        "sub": "Set the conditions to get the most out of AI in every chat. 20 rules you can turn up or down, with guides for ChatGPT, Claude, Gemini and Grok.",
+        "button": {
+          "label": "Buy for $27",
+          "checkout": false,
+          "href": "https://api.elvinpeters.com/api/store/start?product=top-15-rules"
+        },
+        "note": "$27. [[refund]].",
+        "image": "/img/store/rules-of-engagement.webp",
+        "image_alt": "Cover of Rules of Engagement by Elvin Peters"
+      }
+    },
+    {
+      "id": "intro",
+      "type": "text",
+      "data": {
+        "anchor": "intro",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "A new chat knows nothing about how you like to work, so the AI guesses. You correct it, and in the next chat you correct it again."
+        ]
+      }
+    },
+    {
+      "id": "beforeafter",
+      "type": "lp-beforeafter",
+      "data": {
+        "bg": "tint",
+        "anchor": "one-rule",
+        "heading": "Here is what one rule looks like, at all three strengths",
+        "before_label": "Rule 4",
+        "before": "<strong>Prove it before you say it’s done.</strong>",
+        "after_label": "The three strengths",
+        "after": "<strong>Light:</strong> Don’t say something works or is finished until you have checked it.<br><strong>Standard:</strong> Before you say “done”, “fixed” or “it works”, check the result and tell me how you checked. If you couldn’t check, say “not checked”.<br><strong>Full:</strong> As Standard, and show the proof: the line, the figure, the source or the test result. “Should work” is not an answer.",
+        "foot": ""
+      }
+    },
+    {
+      "id": "rule-sample",
+      "type": "lp-image",
+      "data": {
+        "bg": "tint",
+        "anchor": "",
+        "heading": "",
+        "desktop": "/img/store/rules-of-engagement-rule1-sample.webp",
+        "phone": "",
+        "alt": "A sample page from the pack: rule 1, Never make things up, shown at Light, Standard and Full strength."
+      }
+    },
+    {
+      "id": "pack",
+      "type": "text",
+      "data": {
+        "anchor": "pack",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "This pack gives your AI your rules once. You get one zip download of text files. You paste the short rules into the settings of the app you use, and they apply to every chat after that. The install guide shows each step, and the short versions of the rules fit the settings box on ChatGPT’s free plan."
+        ]
+      }
+    },
+    {
+      "id": "strength",
+      "type": "text",
+      "data": {
+        "anchor": "strength",
+        "align": "left",
+        "heading": "You choose how much power the AI gets",
+        "paras": [
+          "Every rule has three strengths and can be turned off. Light is a polite helper that checks with you often. Standard is a balanced default. Full finishes jobs without stopping to ask. Start at Light if you want the basics, and turn the strength up when you are ready. At every strength, your AI prepares drafts and leaves the sending, posting and buying to you."
+        ]
+      }
+    },
+    {
+      "id": "buy",
+      "type": "button",
+      "data": {
+        "anchor": "buy",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Buy for $27",
+            "href": "https://api.elvinpeters.com/api/store/start?product=top-15-rules",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "inside",
+      "type": "text",
+      "data": {
+        "anchor": "inside",
+        "align": "left",
+        "heading": "What is in the pack",
+        "paras": [
+          "<ul><li><strong>20 rules.</strong> They tell your AI to put the answer first, say where each fact came from, and check its work before it says “done”. They also keep your passwords out of the chat.</li><li><strong>An install guide</strong> for ChatGPT, Claude, Gemini and Grok, with the menu path for each app. The paths were checked on each company’s own help page in October 2026.</li><li><strong>An editing guide</strong> that teaches you to change a rule, write your own and adjust how your AI behaves by editing a text file. You don’t need to code.</li><li><strong>Three short versions</strong> of the rules, one per strength.</li></ul>"
+        ]
+      }
+    },
+    {
+      "id": "also",
+      "type": "text",
+      "data": {
+        "anchor": "also",
+        "align": "left",
+        "heading": "Also included",
+        "paras": [
+          "<details class=\"lp-fold\" data-fold><summary>Show what else is in the pack</summary><ul><li>16 optional add-ons, all off until you want them. They come in five sets: working with you, writing and marketing, design and documents, building websites and tools, and job search.</li><li>Two fill-in templates: an About Me file and a voice file that the rules use.</li><li>A one-page rule card you can print, with a box to tick for each rule and each strength.</li></ul></details><script>(function(){var d=document.querySelectorAll(\"[data-fold]\");if(window.innerWidth>=768){for(var i=0;i<d.length;i++)d[i].open=true;}})();</script>"
+        ]
+      }
+    },
+    {
+      "id": "all20",
+      "type": "text",
+      "data": {
+        "anchor": "all20",
+        "align": "left",
+        "heading": "All 20 rules, by short name",
+        "paras": [
+          "<details class=\"lp-fold\" data-fold><summary>Show all 20 rules</summary><ul><li>Never make things up.</li><li>Never put words in my mouth.</li><li>Own your mistakes.</li><li>Prove it before you say it’s done.</li><li>Answer first, then the detail.</li><li>Lead with your pick.</li><li>Plain words.</li><li>No filler, no flattery.</li><li>Give me what I asked for. (A plan if you ask for a plan.)</li><li>Match my message. (Small talk gets a short reply.)</li><li>Keep going. (Finish the whole job.)</li><li>Make clear improvements. (It fixes obvious flaws in a draft and tells you what it changed.)</li><li>Name the goal and the reader first.</li><li>Give me versions for creative work.</li><li>Fewest steps. (Numbered steps with the exact clicks.)</li><li>Write like me. (It follows your voice file.)</li><li>Read it cold before you hand it over. (It rereads its own work as a stranger would.)</li><li>Invented examples only. (Sample data uses made-up people.)</li><li>Never repeat a secret. (It won’t echo your passwords back.)</li><li>Drafts only. (It never sends, posts or buys for you.)</li></ul></details><script>(function(){var d=document.querySelectorAll(\"[data-fold]\");if(window.innerWidth>=768){for(var i=0;i<d.length;i++)d[i].open=true;}})();</script>"
+        ]
+      }
+    },
+    {
+      "id": "who",
+      "type": "text",
+      "data": {
+        "anchor": "who",
+        "align": "left",
+        "heading": "Who it is for",
+        "paras": [
+          "If you are new to AI and unsure it is worth your time, you start with good habits already set, and you don’t need to know how to write a prompt. If your work now expects you to use more AI, the rules keep your facts sourced and your drafts in your hands, and nothing goes out without you."
+        ]
+      }
+    },
+    {
+      "id": "author",
+      "type": "lp-author",
+      "data": {
+        "bg": "tint",
+        "anchor": "author",
+        "heading": "",
+        "cover": "/img/cover-hero.webp",
+        "cover_alt": "Cover of The Artificial Advantage by Elvin M. Peters",
+        "text": "I’m Elvin Peters, a marketer who taught myself to build with AI, and the author of <em>The Artificial Advantage</em>. The rules come from how I set up my own AI.",
+        "href": "/books/the-artificial-advantage/",
+        "link_label": "About the book"
+      }
+    },
+    {
+      "id": "price",
+      "type": "text",
+      "data": {
+        "anchor": "price",
+        "align": "left",
+        "heading": "$27 on its own, or inside the $47 AI Setup Bundle",
+        "paras": [
+          "The AI Setup Bundle also holds the Claude Operator’s Manual and Your Personal Specialists. You get an instant download plus an email, and it is for your own use. [[refund]]: if it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full."
+        ]
+      }
+    },
+    {
+      "id": "buy2",
+      "type": "button",
+      "data": {
+        "anchor": "buy2",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Buy for $27",
+            "href": "https://api.elvinpeters.com/api/store/start?product=top-15-rules",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "guarantee",
+      "type": "lp-guarantee",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "My [[refund]]",
+        "text": "If it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full. For your own use."
+      }
+    },
+    {
+      "id": "legal",
+      "type": "text",
+      "data": {
+        "anchor": "legal",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "<em>ChatGPT, Claude, Gemini and Grok are trademarks of their owners. This pack isn’t made, endorsed or approved by any of them.</em>"
+        ]
+      }
+    }
+  ],
+  "noindex": true
+}

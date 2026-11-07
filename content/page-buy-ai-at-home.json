@@ -1,0 +1,117 @@
+{
+  "title": "AI at Home",
+  "frame": "landing",
+  "landing": {
+    "slug": "ai-at-home",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "AI at Home: a short guide for the chat app you already use. Don’t pay for a plant app. Describe the leaves to an AI. $7."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "aah-hero",
+        "eyebrow": "",
+        "headline": "AI at Home",
+        "sub": "Don’t pay for a plant app. Describe the leaves to an AI.",
+        "button": {
+          "label": "Add AI at Home for $7",
+          "checkout": false,
+          "href": "https://api.elvinpeters.com/api/store/start?product=thirty-ways"
+        },
+        "note": "$7 USD for a digital file, a 19-page PDF. Nothing is shipped. [[refund]].",
+        "image": "/img/store/ai-at-home.webp",
+        "image_alt": "Cover of AI at Home by Elvin Peters"
+      }
+    },
+    {
+      "id": "description",
+      "type": "text",
+      "data": {
+        "anchor": "description",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "AI at Home is a short guide for the chat app you already use. Every job has four parts: the problem, the exact words to paste, what a good answer looks like, and your next click.",
+          "I’ve replaced a faucet and recaulked a bathroom with AI help. I still have a lawyer, an accountant and a broker. I use AI to learn what to ask and to follow a process.",
+          "You can ask any chat app anything. The guide gives you the exact words, what a good answer looks like, and the check to run yourself.",
+          "The first job is the plant doctor: tell the AI its job, describe the leaves, and run the check it names. The same four parts cover:",
+          "<ul><li>Recipes and dinners</li><li>A trip</li><li>A part you cannot name</li><li>Your internet bill</li><li>A Windows device that stopped working</li><li>An old computer</li><li>The check engine light</li><li>A slow tire leak</li></ul>",
+          "Shorter jobs cover an appliance, paperwork, and school emails."
+        ]
+      }
+    },
+    {
+      "id": "sample",
+      "type": "lp-image-pair",
+      "data": {
+        "bg": "tint",
+        "anchor": "sample",
+        "heading": "A sample of the plant doctor job",
+        "first": "/img/store/listings/thirty-ways/01-sample-page.webp",
+        "first_alt": "Guide page 2 of 19: Don’t pay for a plant app. Describe the leaves to an AI. The first of the four-part jobs, with how to use the guide and where to start.",
+        "second": "/img/store/listings/thirty-ways/02-sample-page.webp",
+        "second_alt": "Guide page 3 of 19: the plant doctor job, message 2. The words to paste with brackets for your plant, what you see, what changed, how you water and the room."
+      }
+    },
+    {
+      "id": "price",
+      "type": "text",
+      "data": {
+        "anchor": "price",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "$7 USD for a digital file, a 19-page PDF. Nothing is shipped.",
+          "If it is not for you, email elvin@elvinpeters.com within 30 days for a full refund."
+        ]
+      }
+    },
+    {
+      "id": "buy",
+      "type": "button",
+      "data": {
+        "anchor": "buy",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Add AI at Home for $7",
+            "href": "https://api.elvinpeters.com/api/store/start?product=thirty-ways",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "limits",
+      "type": "text",
+      "data": {
+        "anchor": "limits",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "I tried the ten main jobs in Claude. I did not test other chat apps. The shorter jobs use the same method and were not each tried. I still call a person for a damaged tire, a gas smell, or anything burning. The AI can be wrong. This is not medical, legal, financial, or safety advice."
+        ]
+      }
+    },
+    {
+      "id": "author",
+      "type": "lp-author",
+      "data": {
+        "bg": "tint",
+        "anchor": "author",
+        "heading": "",
+        "cover": "/img/cover-hero.webp",
+        "cover_alt": "Cover of The Artificial Advantage by Elvin M. Peters",
+        "text": "By Elvin Peters, author of <em>The Artificial Advantage</em>.",
+        "href": "/books/the-artificial-advantage/",
+        "link_label": "About the book"
+      }
+    }
+  ],
+  "noindex": true
+}

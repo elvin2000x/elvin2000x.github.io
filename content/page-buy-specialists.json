@@ -1,0 +1,274 @@
+{
+  "title": "Your Personal Specialists",
+  "frame": "landing",
+  "landing": {
+    "slug": "your-personal-specialists",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "Your Personal Specialists: 14 Specialists and 231 prompts, set up once in the AI you already use. $27."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "sp-hero",
+        "eyebrow": "",
+        "headline": "Your Personal Specialists",
+        "sub": "14 Specialists and 231 prompts, set up once in the AI you already use",
+        "button": {
+          "label": "Buy for $27",
+          "checkout": false,
+          "href": "https://api.elvinpeters.com/api/store/start?product=role-packs"
+        },
+        "note": "$27. [[refund]].",
+        "image": "/img/store/your-personal-specialists.webp",
+        "image_alt": "Cover of Your Personal Specialists by Elvin Peters"
+      }
+    },
+    {
+      "id": "sp-art",
+      "type": "lp-image",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "",
+        "desktop": "/img/store/your-personal-specialists-hero.webp",
+        "phone": "",
+        "alt": "The cover of Your Personal Specialists by Elvin Peters beside a phone showing one page of the guide: the Marketing Specialist, with its setup to paste first and a worked example."
+      }
+    },
+    {
+      "id": "description",
+      "type": "text",
+      "data": {
+        "anchor": "description",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "A Specialist is a setup message you paste into your AI, plus prompts for the problems in its area.",
+          "Bring a problem to the right Specialist, and use one method every time. Plan: decide the task, who the result is for and the facts you can supply. Prime: paste the Specialist’s setup as the first message. Prompt: paste the prompt and replace the brackets with your own details.",
+          "This is a 72-page PDF with 14 Specialists and 231 prompts. Set each Specialist up once in the AI you already use. The guide shows the steps for ChatGPT and Claude (a Project), Gemini (a Skill) and Grok (an Agent). The 14 Specialists are:"
+        ]
+      }
+    },
+    {
+      "id": "specialists",
+      "type": "lp-included",
+      "data": {
+        "bg": "tint",
+        "anchor": "specialists",
+        "heading": "The 14 Specialists",
+        "items": [
+          {
+            "name": "Marketing",
+            "detail": ""
+          },
+          {
+            "name": "Sales",
+            "detail": ""
+          },
+          {
+            "name": "Finance",
+            "detail": ""
+          },
+          {
+            "name": "Operations",
+            "detail": ""
+          },
+          {
+            "name": "HR",
+            "detail": ""
+          },
+          {
+            "name": "Customer Service",
+            "detail": ""
+          },
+          {
+            "name": "Content",
+            "detail": ""
+          },
+          {
+            "name": "Data",
+            "detail": ""
+          },
+          {
+            "name": "Project Management",
+            "detail": ""
+          },
+          {
+            "name": "Executive Assistant",
+            "detail": ""
+          },
+          {
+            "name": "Product",
+            "detail": ""
+          },
+          {
+            "name": "Legal and Compliance",
+            "detail": ""
+          },
+          {
+            "name": "Small Business",
+            "detail": ""
+          },
+          {
+            "name": "Freelancer and Consultant",
+            "detail": ""
+          }
+        ],
+        "foot": ""
+      }
+    },
+    {
+      "id": "buy",
+      "type": "button",
+      "data": {
+        "anchor": "buy",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Buy for $27",
+            "href": "https://api.elvinpeters.com/api/store/start?product=role-packs",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "why-it-works",
+      "type": "text",
+      "data": {
+        "anchor": "why-it-works",
+        "align": "left",
+        "heading": "Why the Specialists work",
+        "paras": [
+          "A common reason a prompt fails is that the AI does not know your situation, so it guesses. You get a confident, generic answer that fits nobody.",
+          "Each Specialist starts with a setup you paste once. The setup tells the AI to ask before it guesses. So when you skip the details, it does one of two things:",
+          "<ol><li><strong>It interviews you.</strong> You get a few short questions about what it needs: who it is for, what you have tried, what a good result looks like. You answer in a line or two, and the next reply fits your situation.</li><li><strong>It drafts with the gaps marked.</strong> You get a usable draft with [PLACEHOLDERS] where your facts belong, and it tells you what to fill in. The setup tells the AI to mark a gap instead of inventing a fact.</li></ol>",
+          "I tested the setups in Gemini and Grok. In both, a prompt sent without context came back as one of those two replies. The tool changed. The behaviour did not. You do not need to write a perfect prompt: paste the setup, paste the prompt, answer what it asks."
+        ]
+      }
+    },
+    {
+      "id": "example-1",
+      "type": "lp-conversation",
+      "data": {
+        "bg": "",
+        "anchor": "example-1",
+        "heading": "See it happen: Sales Specialist",
+        "turns": [
+          {
+            "who": "You paste",
+            "text": "<p>The Sales Specialist setup, then: “Write a cold email to Priya Shah, Operations Director at Northline Freight. My product: scheduling software for delivery fleets. The specific pain I solve: dispatchers lose time re-planning routes by hand. Keep it under 100 words, avoid jargon, end with a specific call to action, and include a subject line. Use only what I tell you about Northline Freight.”</p>"
+          },
+          {
+            "who": "AI",
+            "text": "<p>Before I draft, four quick questions:</p><ol><li>Is this a first contact with Priya, or has she replied to you before?</li><li>Do you want pricing in the email, or should it wait for a call?</li><li>What should Priya do next: book a call, reply, or watch a short demo?</li><li>Who is sending it, and what is your name and title?</li></ol>"
+          },
+          {
+            "who": "You",
+            "text": "<p>Marcus, I run Halcyon Routing, a four-person software company. First contact, nothing from her yet. Leave pricing out. I want a 15-minute call.</p>"
+          },
+          {
+            "who": "AI",
+            "text": "<p>Subject: Dispatch re-planning, one idea for Northline</p><p>Hi Priya,</p><p>Dispatchers often lose time re-planning routes by hand when a stop changes. Halcyon Routing builds scheduling software for delivery fleets that re-plans routes for you, so your team spends less time on rework.</p><p>We are a small team, so I would rather show you than describe it. Are you free for a 15-minute call on Tuesday at 10 am?</p><p>Marcus<br>Halcyon Routing</p>"
+          }
+        ],
+        "note": "The AI asked only what it could not know, and the draft stayed inside the facts Marcus gave. The names and businesses in this example are invented, and your own answers will look different.",
+        "draft": ""
+      }
+    },
+    {
+      "id": "get",
+      "type": "lp-included",
+      "data": {
+        "bg": "tint",
+        "anchor": "get",
+        "heading": "What you get",
+        "items": [
+          {
+            "name": "A 72-page PDF guide with 14 Specialists and 231 prompts.",
+            "detail": ""
+          },
+          {
+            "name": "A spreadsheet of the 231 prompts and the 14 setups, so you can search them.",
+            "detail": ""
+          },
+          {
+            "name": "A plain-text file of all 14 setups to paste.",
+            "detail": ""
+          }
+        ],
+        "foot": ""
+      }
+    },
+    {
+      "id": "author",
+      "type": "lp-author",
+      "data": {
+        "bg": "tint",
+        "anchor": "author",
+        "heading": "",
+        "cover": "/img/cover-hero.webp",
+        "cover_alt": "Cover of The Artificial Advantage by Elvin M. Peters",
+        "text": "By Elvin Peters, author of <em>The Artificial Advantage</em>, with a decade in marketing.",
+        "href": "/books/the-artificial-advantage/",
+        "link_label": "About the book"
+      }
+    },
+    {
+      "id": "price",
+      "type": "text",
+      "data": {
+        "anchor": "price",
+        "align": "left",
+        "heading": "$27 (US dollars)",
+        "paras": [
+          "Also inside the $47 AI Setup Bundle. [[refund]]."
+        ]
+      }
+    },
+    {
+      "id": "buy2",
+      "type": "button",
+      "data": {
+        "anchor": "buy2",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Buy for $27",
+            "href": "https://api.elvinpeters.com/api/store/start?product=role-packs",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "format",
+      "type": "text",
+      "data": {
+        "anchor": "format",
+        "align": "left",
+        "heading": "Format and delivery",
+        "paras": [
+          "Instant download plus an email. For your own use."
+        ]
+      }
+    },
+    {
+      "id": "guarantee",
+      "type": "lp-guarantee",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "My [[refund]]",
+        "text": "If it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full. For your own use."
+      }
+    }
+  ],
+  "noindex": true
+}

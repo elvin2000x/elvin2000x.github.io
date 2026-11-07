@@ -81,7 +81,14 @@
         "review_href": "/book/operator-bundle/",
         "email_label": "Email for the receipt and the download",
         "email_button": "Continue to payment",
-        "bump": null,
+        "bump": {
+          "image": "/img/store/ai-at-home-thumb.webp",
+          "image_alt": "Cover of AI at Home",
+          "name": "AI at Home",
+          "line": "A short guide: describe a sick plant to an AI instead of paying for a plant app, then use the same steps on recipes, a Windows device that stopped working, a car warning light, your internet bill, and more.",
+          "price": "$7",
+          "tab": ""
+        },
         "button": null,
         "note": "Digital. Nothing is shipped. [[refund]]: if it is not for you, email elvin@elvinpeters.com within [[refund_days]] for a full refund."
       }

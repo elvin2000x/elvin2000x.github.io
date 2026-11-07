@@ -1,0 +1,143 @@
+{
+  "title": "The Artificial Advantage Toolkit",
+  "frame": "landing",
+  "landing": {
+    "slug": "the-toolkit",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "The Artificial Advantage Toolkit on its own: 16 exercises, 25 prompts, 25 role statements, two practice plans and a 12-job tool guide, all editable. $17."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "data": {
+        "anchor": "tk-hero",
+        "eyebrow": "",
+        "headline": "The Artificial Advantage Toolkit",
+        "sub": "The book holds what stays true. The Toolkit holds what changes.",
+        "button": {
+          "label": "Buy for $17",
+          "checkout": false,
+          "href": "https://api.elvinpeters.com/api/store/start?product=toolkit"
+        },
+        "note": "$17. [[refund]]. Own the book? <a href=\"/toolkit/\">Get it free here</a>.",
+        "image": "/img/store/toolkit.webp",
+        "image_alt": "Cover of The Artificial Advantage Toolkit by Elvin Peters"
+      }
+    },
+    {
+      "id": "pieces",
+      "type": "lp-included",
+      "data": {
+        "bg": "tint",
+        "anchor": "pieces",
+        "heading": "What is in it",
+        "items": [
+          {
+            "name": "The Exercises, editable",
+            "detail": "16 exercises from 10 chapters, ready to run on your own work."
+          },
+          {
+            "name": "The 30-Day Practice Plan",
+            "detail": "The first week and the first month, with a 6-point checklist."
+          },
+          {
+            "name": "The 3-Month AI Practice Plan",
+            "detail": "Four stages, with three month-end check-ins."
+          },
+          {
+            "name": "The Professional Prompt Library",
+            "detail": "25 prompts in 5 groups, plus a spreadsheet you can import."
+          },
+          {
+            "name": "The Role Library",
+            "detail": "25 role statements in 8 work areas, plus the formula for writing your own."
+          },
+          {
+            "name": "The Tool-Selection Cheat Sheet",
+            "detail": "12 jobs, each matched to the kind of tool and today’s examples. Dated."
+          }
+        ],
+        "foot": ""
+      }
+    },
+    {
+      "id": "tk-sample",
+      "type": "lp-image",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "",
+        "desktop": "/img/store/toolkit-exercises.webp",
+        "phone": "",
+        "alt": "A page from the Toolkit: an editable exercise with lines to fill in."
+      }
+    },
+    {
+      "id": "buy",
+      "type": "button",
+      "data": {
+        "anchor": "buy",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Buy for $17",
+            "href": "https://api.elvinpeters.com/api/store/start?product=toolkit",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "format",
+      "type": "text",
+      "data": {
+        "anchor": "format",
+        "align": "left",
+        "heading": "Format and delivery",
+        "paras": [
+          "Every file comes as an editable Word document and as plain text. The Prompt Library also comes as a spreadsheet. Instant download plus an email. For your own use."
+        ]
+      }
+    },
+    {
+      "id": "author",
+      "type": "lp-author",
+      "data": {
+        "bg": "tint",
+        "anchor": "author",
+        "heading": "",
+        "cover": "/img/cover-hero.webp",
+        "cover_alt": "Cover of The Artificial Advantage by Elvin M. Peters",
+        "text": "By Elvin Peters, author of <em>The Artificial Advantage</em>, with a decade in marketing.",
+        "href": "/books/the-artificial-advantage/",
+        "link_label": "About the book"
+      }
+    },
+    {
+      "id": "owners",
+      "type": "text",
+      "data": {
+        "anchor": "owners",
+        "align": "left",
+        "heading": "Already have the book?",
+        "paras": [
+          "Book owners still get the Toolkit free: <a href=\"/toolkit/\">use the form on the Toolkit page</a>. The Toolkit is also one of the items in <a href=\"/book/offer/\">The Artificial Advantage Bundle</a>."
+        ]
+      }
+    },
+    {
+      "id": "guarantee",
+      "type": "lp-guarantee",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "My [[refund]]",
+        "text": "If it is not for you, email elvin@elvinpeters.com within [[refund_days]] of purchase and I will refund you in full. For your own use."
+      }
+    }
+  ]
+}
