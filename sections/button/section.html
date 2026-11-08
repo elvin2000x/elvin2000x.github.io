@@ -4,4 +4,7 @@
     <a class="btn btn--lg btn--{{style}}"{{#checkout}} href="{{store}}/start?funnel={{funnel}}" rel="nofollow" data-store-checkout="{{funnel}}"{{/checkout}}{{^checkout}} href="{{href}}"{{/checkout}}>{{label}}</a>
 {{/buttons}}
   </div>
+{{#note}}
+  <p class="lp-note ep-note">{{note}}</p>
+{{/note}}
 </div>

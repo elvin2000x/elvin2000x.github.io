@@ -27,6 +27,11 @@
       "default": "[Subhead: what they get and how fast]"
     },
     {
+      "key": "proof",
+      "type": "html",
+      "label": "Proof line under the subhead"
+    },
+    {
       "key": "button",
       "type": "object",
       "label": "Button",

@@ -22,6 +22,11 @@
       ]
     },
     {
+      "key": "note",
+      "type": "html",
+      "label": "Line under the buttons"
+    },
+    {
       "key": "buttons",
       "type": "list",
       "label": "Buttons",

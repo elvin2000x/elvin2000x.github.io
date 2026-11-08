@@ -145,6 +145,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             }
           } catch (e) {}
         }
+        /* One row per group: the header row stays, its pieces become one line under it. */
+        var rows = [], cur = null;
+        f.stack.forEach(function (r) {
+          if (r.group_header) { cur = {}; for (var k in r) cur[k] = r[k]; cur._parts = []; rows.push(cur); return; }
+          if (cur && r.group && r.group === cur.key) { cur._parts.push(String(r.name || '').replace(/^[^:]+:\s*/, '')); return; }
+          cur = null; rows.push(r);
+        });
+        f = { front_price: f.front_price, front_price_text: f.front_price_text, stack: rows };
         var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null, headerGroup = null;
         ul.innerHTML = '';
         f.stack.forEach(function (r) {
@@ -159,7 +167,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             hh.className = 'lp-stack__group lp-stack__group--row'; hn.className = 'lp-stack__name'; hn.textContent = r.group_name || r.name; hv.className = 'lp-stack__value';
             if (r.standalone_price) { var hs = document.createElement('s'); hs.textContent = r.standalone_price_text || money(r.standalone_price); hv.appendChild(hs); total += r.standalone_price; }
             if (label) { var he = document.createElement('em'); he.textContent = ' ' + label; hv.appendChild(he); }
-            hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group; return;
+            hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group;
+            if (r._parts && r._parts.length) { var pl = document.createElement('li'); pl.className = 'lp-stack__parts'; pl.textContent = r._parts.join(', '); ul.appendChild(pl); }
+            return;
           }
           if (r.group && r.group !== last) { var h = document.createElement('li'); h.className = 'lp-stack__group'; h.textContent = r.group_name || r.group; ul.appendChild(h); }
           last = r.group;

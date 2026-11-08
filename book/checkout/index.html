@@ -91,10 +91,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
 <div class="ep-block ep-text ep-text--left">
   <h2>Why this order is worth it</h2>
-  <p>The Artificial Advantage ebook. Fifteen chapters of method, built around CLEAR: choose your tools, lead with clear direction, evolve your outputs, audit for accuracy, and repeat. You learn to brief AI so the first answer is close to what you meant, then check it before your name goes on it.</p>
+  <p>The Artificial Advantage ebook. Fourteen chapters of method, built around CLEAR: choose your tools, lead with clear direction, evolve your outputs, audit for accuracy, and repeat. You learn to brief AI so the first answer is close to what you meant, then check it before your name goes on it.</p>
   <p>The 7-Day AI Workbook. One stage of that system each day, for seven days, on one real task of your own. You finish with a before and an after, and a template you keep.</p>
   <p>The Toolkit. The exercises, the 30-day and 3-month practice plans, the Prompt Library, the Role Library and the Tool-Selection Cheat Sheet, as files you can open and edit.</p>
   <p>The Companion Library. Eight reference pages I keep current, and the Director's Cheat Sheet. Both are free on the site. They are in this order so you are not hunting for them later.</p>
+</div>
+
+<div class="ep-block ep-text ep-text--left">
+  <p>You're one step from The Artificial Advantage Bundle: the book, its Toolkit, the Companion Library and three bonuses, $27 in US dollars, as an instant download plus an email.</p>
 </div>
 
 <section class="lp-sec lp-sec--tint">
@@ -105,8 +109,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <div class="lp-shots">
         <figure class="lp-shot"><img src="/img/store/hero-3d.webp" alt="The Artificial Advantage as a paperback" width="280" height="420"><figcaption>The ebook</figcaption></figure>
         <figure class="lp-shot"><img src="/img/store/mockup-workbook.webp" alt="The 7-Day AI Workbook as a book and a tablet" width="280" height="420"><figcaption>The workbook</figcaption></figure>
-        <figure class="lp-shot"><img src="/img/store/cover-prompts.webp" alt="Professional Prompt Library cover" width="280" height="420"><figcaption>Prompt Library</figcaption></figure>
-        <figure class="lp-shot"><img src="/img/store/cover-roles.webp" alt="Role Library cover" width="280" height="420"><figcaption>Role Library</figcaption></figure>
+        <figure class="lp-shot"><img src="/img/store/toolkit.webp" alt="Cover of The Artificial Advantage Toolkit" width="280" height="420"><figcaption>The Toolkit</figcaption></figure>
         <figure class="lp-shot"><img src="/img/magnets/directors-cheat-sheet.webp" alt="The Director's Cheat Sheet cover" width="280" height="420"><figcaption>Cheat sheet</figcaption></figure>
       </div>
       <ul class="lp-stack__items" data-lp-rows></ul>
@@ -188,6 +191,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             }
           } catch (e) {}
         }
+        /* One row per group: the header row stays, its pieces become one line under it. */
+        var rows = [], cur = null;
+        f.stack.forEach(function (r) {
+          if (r.group_header) { cur = {}; for (var k in r) cur[k] = r[k]; cur._parts = []; rows.push(cur); return; }
+          if (cur && r.group && r.group === cur.key) { cur._parts.push(String(r.name || '').replace(/^[^:]+:\s*/, '')); return; }
+          cur = null; rows.push(r);
+        });
+        f = { front_price: f.front_price, front_price_text: f.front_price_text, stack: rows };
         var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null, headerGroup = null;
         ul.innerHTML = '';
         f.stack.forEach(function (r) {
@@ -202,7 +213,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             hh.className = 'lp-stack__group lp-stack__group--row'; hn.className = 'lp-stack__name'; hn.textContent = r.group_name || r.name; hv.className = 'lp-stack__value';
             if (r.standalone_price) { var hs = document.createElement('s'); hs.textContent = r.standalone_price_text || money(r.standalone_price); hv.appendChild(hs); total += r.standalone_price; }
             if (label) { var he = document.createElement('em'); he.textContent = ' ' + label; hv.appendChild(he); }
-            hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group; return;
+            hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group;
+            if (r._parts && r._parts.length) { var pl = document.createElement('li'); pl.className = 'lp-stack__parts'; pl.textContent = r._parts.join(', '); ul.appendChild(pl); }
+            return;
           }
           if (r.group && r.group !== last) { var h = document.createElement('li'); h.className = 'lp-stack__group'; h.textContent = r.group_name || r.group; ul.appendChild(h); }
           last = r.group;

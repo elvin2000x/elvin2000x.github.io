@@ -3,12 +3,12 @@
   "frame": "landing",
   "noindex": true,
   "landing": {
-    "slug": "",
+    "slug": "start",
     "old_slugs": [],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
     "aud": true,
-    "description": "A short note from Elvin before you meet his AI avatar and see The Artificial Advantage bundle."
+    "description": "Before you continue, here is why AI answers come back bland."
   },
   "sections": [
     {
@@ -17,16 +17,16 @@
       "data": {
         "anchor": "",
         "eyebrow": "",
-        "headline": "Before you continue, I want to show you something.",
-        "sub": "On the next page you will meet my AI avatar. It is not a studio recording. It was built with the same kind of practical AI tools the book teaches.",
+        "headline": "Before you continue, here is why AI answers come back bland.",
+        "sub": "Try AI once, get a bland answer back, and it is easy to decide the tool is the problem. The next page shows what I changed, along with the full offer and the live price.",
         "button": {
           "label": "Continue to the bundle",
           "checkout": false,
           "href": "/book/offer/"
         },
-        "note": "The button under the video opens Step 1. It does not charge you.",
-        "image": "/img/store/hero-3d.webp",
-        "image_alt": "The Artificial Advantage as a paperback"
+        "note": "",
+        "image": "",
+        "image_alt": ""
       }
     },
     {
@@ -37,9 +37,21 @@
         "align": "center",
         "heading": "",
         "url": "",
-        "caption": "Paste the Step 0 YouTube or Vimeo link here when the upload is ready.",
+        "caption": "",
         "poster": "/img/store/ugc-hands-holding.webp",
         "poster_alt": "A person holding The Artificial Advantage, cover facing the camera"
+      }
+    },
+    {
+      "id": "picture",
+      "type": "lp-image",
+      "data": {
+        "bg": "",
+        "anchor": "picture",
+        "heading": "",
+        "desktop": "/img/store/ugc-hands-holding.webp",
+        "phone": "",
+        "alt": "A person holding The Artificial Advantage, cover facing the camera"
       }
     },
     {
@@ -50,8 +62,8 @@
         "align": "left",
         "heading": "",
         "paras": [
-          "Just a few years ago this would have needed a professional studio and a large budget. Today it is possible from a home office.",
-          "Click the button below and let my AI avatar explain why most people get disappointing results from AI, and what to do about it. The next page has the full offer, the Toolkit, the Workbook, and the live price."
+          "I got poor answers from AI too, until I learned to treat it like a person who can't read my mind. I still slip when I'm lazy, and I pay for it by doing the work again.",
+          "The bundle on the next page is the book that teaches that skill, with a Toolkit of prompts and roles, a Workbook that has you run one real task from your week, and two more guides. It is $27, with a 30-day money-back promise."
         ]
       }
     },
@@ -63,7 +75,7 @@
         "align": "center",
         "buttons": [
           {
-            "label": "Meet the avatar and see the bundle",
+            "label": "Continue to the bundle",
             "href": "/book/offer/",
             "style": "primary",
             "checkout": false

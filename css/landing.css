@@ -282,3 +282,44 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 /* A group header that carries the struck price and label, with its pieces under it and no figure */
 .lp-stack__group--row{ display:flex; align-items:center; gap:12px; border-bottom:0 }
 .lp-stack__group--row .lp-stack__name{ flex:1 1 auto }
+
+/* Group row: the pieces of a group as one line under its header */
+.lp-stack__parts{ display:block; padding:0 0 10px; font-size:14px; line-height:1.4; color:var(--lp-muted,#4a5568); border-bottom:0 }
+
+/* Step 0: one portrait photo at its own ratio, 520 wide and centred; hero without a picture runs one column */
+#picture .lp-in{ max-width:720px }
+#picture .lp-image img{ display:block; width:100%; max-width:520px; height:auto; margin:0 auto }
+.lp-hero__grid:not(:has(.lp-hero__img)){ grid-template-columns:1fr }
+/* a line under a button and a proof line in the hero */
+.ep-row--center + .ep-note{ text-align:center }
+.lp-proof{ font-size:16px; margin:14px 0 0 }
+
+/* Button 3 (2026-11-08): one type scale and one set of widths on every landing page.
+   Numbers from DESIGN-SPEC-BOOK-PAGES-2026-11-08.md section 1: h1 56/36, h2 36/28, body 19 navy,
+   small print 14, text column 720, grids 1040, hero 1120, sections 72/40, buttons 60 tall. */
+body.lp{ font-size:19px; line-height:1.58; color:var(--lp-navy) }
+body.lp .lp-sec h1{ font-size:36px; line-height:1.11 }
+body.lp .lp-sec h2, body.lp .ep-text h2{ font-size:28px; line-height:1.2 }
+body.lp .lp-sec p, body.lp .ep-text p, body.lp .lp-sec li, body.lp .ep-text li, body.lp .lp-faq summary{ font-size:19px; line-height:1.58; color:var(--lp-navy) }
+body.lp .lp-lede{ font-size:19px; line-height:1.5 }
+body.lp .lp-note, body.lp .lp-sec p.lp-note, body.lp .lp-shot figcaption, body.lp .lp-stack__parts, body.lp .lp-foot, body.lp .lp-quotes figcaption{ font-size:14px; line-height:1.5 }
+body.lp .lp-eyebrow{ font-size:14px }
+body.lp .lp-sec{ padding:40px 16px }
+body.lp .ep-block{ max-width:720px; padding:20px 16px }
+body.lp .lp-in{ max-width:720px }
+body.lp .lp-hero__grid{ max-width:1120px }
+body.lp .lp-sec:has(.lp-stack, .lp-kit, .lp-shop) > .lp-in{ max-width:1040px }
+/* stack: 18 px rows, 56 px thumbnails */
+body.lp .lp-stack__name, body.lp .lp-stack__value, body.lp .lp-stack__total, body.lp .lp-stack__price > span{ font-size:18px }
+body.lp .lp-stack__items img{ width:56px; height:56px }
+/* buy button: full column width, 60 tall, gold */
+body.lp .ep-block > .ep-row .btn--primary{ flex:1 1 100%; width:100%; min-height:60px; font-size:20px; font-weight:700; border-radius:6px }
+body.lp .lp-hero .btn--primary, body.lp .lp-stack .lp-cta{ min-height:60px; font-size:20px; font-weight:700; border-radius:6px }
+body.lp .lp-hero .btn--primary{ width:100%; max-width:480px }
+@media (min-width:768px){
+  body.lp .lp-sec h1{ font-size:56px; line-height:1.1 }
+  body.lp .lp-sec h2, body.lp .ep-text h2{ font-size:36px; line-height:1.17 }
+  body.lp .lp-lede{ font-size:20px; line-height:1.5 }
+  body.lp .lp-sec{ padding:72px 24px }
+  body.lp .ep-block{ padding:28px 24px }
+}
