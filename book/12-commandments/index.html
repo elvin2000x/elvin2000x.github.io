@@ -281,6 +281,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           cur = null; rows.push(r);
         });
         f = { front_price: f.front_price, front_price_text: f.front_price_text, stack: rows };
+        var thumbs = {}; try { thumbs = JSON.parse(box.getAttribute('data-thumbs') || '{}'); } catch (e) {}
         var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null, headerGroup = null;
         ul.innerHTML = '';
         f.stack.forEach(function (r) {
@@ -295,6 +296,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             hh.className = 'lp-stack__group lp-stack__group--row'; hn.className = 'lp-stack__name'; hn.textContent = r.group_name || r.name; hv.className = 'lp-stack__value';
             if (r.standalone_price) { var hs = document.createElement('s'); hs.textContent = r.standalone_price_text || money(r.standalone_price); hv.appendChild(hs); total += r.standalone_price; }
             if (label) { var he = document.createElement('em'); he.textContent = ' ' + label; hv.appendChild(he); }
+            if (thumbs[r.key]) { var ti = document.createElement('img'); ti.src = thumbs[r.key]; ti.alt = ''; ti.width = 56; ti.height = 90; ti.loading = 'lazy'; hh.appendChild(ti); }
             hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group;
             if (r._parts && r._parts.length) { var pl = document.createElement('li'); pl.className = 'lp-stack__parts'; pl.textContent = r._parts.join(', '); ul.appendChild(pl); }
             return;
@@ -308,13 +310,28 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           else if (r.status === 'included' || !r.standalone_price) { v.textContent = hasLabel ? r.label : (box.getAttribute('data-included') || ''); }
           else if (struck) { var s2 = document.createElement('s'); s2.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s2); var em = document.createElement('em'); em.textContent = ' ' + label; v.appendChild(em); total += r.standalone_price; }
           else { v.textContent = r.standalone_price_text || money(r.standalone_price); total += r.standalone_price; }
+          if (thumbs[r.key]) { var im2 = document.createElement('img'); im2.src = thumbs[r.key]; im2.alt = ''; im2.width = 56; im2.height = 90; im2.loading = 'lazy'; li.appendChild(im2); }
           li.appendChild(n); li.appendChild(v); ul.appendChild(li);
         });
+        [].forEach.call(document.querySelectorAll('[data-lp-total-all]'), function (el) { el.textContent = money(total); });
+        [].forEach.call(document.querySelectorAll('[data-lp-front-all]'), function (el) { el.textContent = money(f.front_price); });
         box.querySelector('[data-lp-total]').textContent = money(total);
         box.querySelector('[data-lp-front]').textContent = f.front_price_text || money(f.front_price);
       }).catch(function () {});
     }
     if (stack) fillStack(stack);
+    /* Phone sticky price bar: on from load, off while a buy button of the page is on screen. */
+    (function () {
+      var bar = document.querySelector('[data-lp-sticky]');
+      if (!bar || !('IntersectionObserver' in window)) return;
+      var seen = {}, btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-sticky__btn)');
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { seen[e.target.getAttribute('data-sid')] = e.isIntersecting; });
+        var any = false; for (var k in seen) if (seen[k]) any = true;
+        if (any) bar.setAttribute('data-off', ''); else bar.removeAttribute('data-off');
+      });
+      [].forEach.call(btns, function (b, i) { b.setAttribute('data-sid', i); io.observe(b); });
+    })();
     if (!shop && !tagged.length) return;
     fetch(STORE + '/products').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
       var by = {}, keys = [];

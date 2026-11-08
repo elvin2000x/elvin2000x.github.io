@@ -1,0 +1,48 @@
+{
+  "label": "Proof band",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "photo",
+      "type": "text",
+      "label": "Author photo, 224 px"
+    },
+    {
+      "key": "photo_small",
+      "type": "text",
+      "label": "Author photo, 128 px"
+    },
+    {
+      "key": "photo_alt",
+      "type": "text",
+      "label": "Photo description"
+    },
+    {
+      "key": "proof",
+      "type": "html",
+      "label": "Proof line"
+    },
+    {
+      "key": "byline",
+      "type": "html",
+      "label": "Small line under it"
+    },
+    {
+      "key": "cover",
+      "type": "text",
+      "label": "Book cover"
+    },
+    {
+      "key": "cover_alt",
+      "type": "text",
+      "label": "Cover description"
+    }
+  ]
+}

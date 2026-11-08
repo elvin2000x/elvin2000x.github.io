@@ -1,0 +1,42 @@
+<section class="lp-ohero"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+{{#pre}}
+  <div class="lp-ohero__pre"><p>{{pre}}</p></div>
+{{/pre}}
+  <div class="lp-ohero__band">
+    <div class="lp-ohero__in">
+      <h1>{{headline}}</h1>
+{{#sub}}
+      <p class="lp-ohero__lede">{{sub}}</p>
+{{/sub}}
+{{#proof}}
+      <p class="lp-ohero__proof lp-ohero__proof--top">{{proof}}</p>
+{{/proof}}
+      <div class="lp-ohero__grid">
+        <picture class="lp-ohero__shot">
+{{#shot_phone}}
+          <source media="(max-width: 767px)" srcset="{{shot_phone}}" width="375" height="160">
+{{/shot_phone}}
+          <img src="{{shot}}" alt="{{shot_alt}}" width="680" height="264" fetchpriority="high">
+        </picture>
+        <div class="lp-ohero__buy">
+          <p class="lp-ohero__price"><s data-lp-total-all>{{struck}}</s><strong data-lp-front-all>{{price}}</strong></p>
+{{#button}}
+          <a class="btn btn--primary btn--lg lp-ohero__btn" href="{{href}}">{{label}}</a>
+{{/button}}
+{{#note}}
+          <p class="lp-ohero__line">{{note}}</p>
+{{/note}}
+        </div>
+      </div>
+{{#proof}}
+      <p class="lp-ohero__proof lp-ohero__proof--after">{{proof}}</p>
+{{/proof}}
+    </div>
+  </div>
+{{#button}}
+  <div class="lp-sticky" data-lp-sticky>
+    <p class="lp-sticky__price"><s data-lp-total-all>{{struck}}</s><strong data-lp-front-all>{{price}}</strong></p>
+    <a class="btn btn--primary lp-sticky__btn" href="{{href}}">{{label}}</a>
+  </div>
+{{/button}}
+</section>

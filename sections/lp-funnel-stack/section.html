@@ -1,7 +1,7 @@
 <section class="lp-sec{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
   <div class="lp-in">
     <h2>{{heading}}</h2>
-    <div class="lp-stack" data-lp-fstack="{{funnel}}" data-free="{{free_label}}" data-included="{{included_label}}">
+    <div class="lp-stack{{#layout}} lp-stack--{{layout}}{{/layout}}" data-lp-fstack="{{funnel}}" data-free="{{free_label}}" data-included="{{included_label}}"{{#thumbs_json}} data-thumbs='{{thumbs_json}}'{{/thumbs_json}}>
 {{#preview_stack_json}}
       <script type="application/json" data-lp-stack-preview>{{preview_stack_json}}</script>
 {{/preview_stack_json}}

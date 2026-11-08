@@ -1,0 +1,14 @@
+<section class="lp-pband"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-pband__in">
+    <img class="lp-pband__photo" src="{{photo}}" srcset="{{photo_small}} 128w, {{photo}} 224w" sizes="(max-width: 767px) 64px, 112px" width="112" height="112" alt="{{photo_alt}}" loading="lazy" decoding="async">
+    <div class="lp-pband__words">
+      <p class="lp-pband__proof">{{proof}}</p>
+{{#byline}}
+      <p class="lp-pband__by">{{byline}}</p>
+{{/byline}}
+    </div>
+{{#cover}}
+    <img class="lp-pband__cover" src="{{cover}}" alt="{{cover_alt}}" width="80" height="128" loading="lazy" decoding="async">
+{{/cover}}
+  </div>
+</section>

@@ -12,21 +12,37 @@
   "sections": [
     {
       "id": "hero",
-      "type": "lp-hero",
+      "type": "lp-offer-hero",
       "data": {
         "anchor": "",
-        "eyebrow": "For professionals who tried AI and shrugged",
+        "pre": "For professionals who tried AI and shrugged",
         "headline": "You tried AI once and got a mediocre answer back. The tool was fine. The request needed direction.",
         "sub": "Learn to direct AI the way you would brief a capable new colleague, so the first draft that comes back is one you edit rather than rewrite. You get the book, its Toolkit, the Companion Library and three bonuses, together for $27.",
+        "proof": "<strong>By Elvin Peters,</strong> who ran paid media for two regulated brands at about $1.5M a month for three years, then advised large advertisers at an ad tech company.",
+        "shot": "/img/store/bundle-hero-wide.webp",
+        "shot_phone": "/img/store/bundle-hero-phone.webp",
+        "shot_alt": "The five items in the bundle, side by side: The Artificial Advantage Toolkit, the 7-Day AI Workbook, The Artificial Advantage, Everything AI 2026 and The 12 Commandments to Make AI Obey.",
+        "struck": "$71.99",
+        "price": "$27",
         "button": {
           "label": "Get the bundle for $27",
-          "checkout": false,
           "href": "/book/checkout/"
         },
-        "note": "<s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars.",
-        "image": "/img/store/ugc-hands-holding.webp",
-        "image_alt": "A person holding The Artificial Advantage, cover facing the camera",
-        "proof": "By Elvin Peters, who ran paid media for two regulated brands at about $1.5M a month for three years, then advised large advertisers at an ad tech company."
+        "note": "<s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars."
+      }
+    },
+    {
+      "id": "proofband",
+      "type": "lp-proofband",
+      "data": {
+        "anchor": "",
+        "photo": "/img/author-headshot-224.webp",
+        "photo_small": "/img/author-headshot-128.webp",
+        "photo_alt": "Elvin Peters",
+        "proof": "<strong>By Elvin Peters,</strong> who ran paid media for two regulated brands at about $1.5M a month for three years, then advised large advertisers at an ad tech company.",
+        "byline": "",
+        "cover": "/img/cover-hero.webp",
+        "cover_alt": "Cover of The Artificial Advantage by Elvin M. Peters"
       }
     },
     {
@@ -234,30 +250,15 @@
         "anchor": "",
         "heading": "What it adds up to",
         "preview_stack_json": "{\"stack\":[{\"key\":\"book1-ebook\",\"name\":\"The Artificial Advantage, 2026 edition ebook (the Amazon price)\",\"status\":\"price\",\"standalone_price\":999,\"standalone_price_text\":\"$9.99\",\"group\":null,\"group_name\":null},{\"key\":\"toolkit\",\"name\":\"The Toolkit\",\"status\":\"free\",\"standalone_price\":1700,\"standalone_price_text\":\"$17\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"group_header\":true,\"label\":\"Included\"},{\"key\":\"toolkit-exercises\",\"name\":\"Editable Exercises\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"label\":\"\"},{\"key\":\"toolkit-practice-plans\",\"name\":\"30-Day and 3-Month Practice Plans\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"label\":\"\"},{\"key\":\"toolkit-prompt-library\",\"name\":\"Prompt Library\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"label\":\"\"},{\"key\":\"toolkit-role-library\",\"name\":\"Role Library\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"label\":\"\"},{\"key\":\"toolkit-tool-sheet\",\"name\":\"Tool-Selection Cheat Sheet\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"label\":\"\"},{\"key\":\"companion-library\",\"name\":\"The Companion Library, online\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":null,\"group_name\":null,\"label\":\"Included\"},{\"key\":\"workbook-2e\",\"name\":\"Bonus: The 7-Day AI Workbook\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":null,\"group_name\":null,\"label\":\"Included\"},{\"key\":\"everything-ai-2026\",\"name\":\"Bonus: Everything AI 2026\",\"status\":\"free\",\"standalone_price\":1900,\"standalone_price_text\":\"$19\",\"group\":null,\"group_name\":null,\"label\":\"Included\"},{\"key\":\"seven-rules\",\"name\":\"Bonus: The 12 Commandments to Make AI Obey\",\"status\":\"free\",\"standalone_price\":1700,\"standalone_price_text\":\"$17\",\"group\":null,\"group_name\":null,\"label\":\"Included\"}]}",
-        "shots": [
-          {
-            "src": "/img/store/hero-3d.webp",
-            "alt": "The Artificial Advantage as a paperback",
-            "caption": "The ebook"
-          },
-          {
-            "src": "/img/store/mockup-workbook.webp",
-            "alt": "The 7-Day AI Workbook as a book and a tablet",
-            "caption": "The workbook"
-          },
-          {
-            "src": "/img/store/toolkit.webp",
-            "alt": "Cover of The Artificial Advantage Toolkit",
-            "caption": "The Toolkit"
-          }
-        ],
+        "shots": [],
         "free_label": "Free",
         "included_label": "Included",
         "total_label": "Total value",
         "price_label": "Your price",
         "bump": null,
         "button": null,
-        "note": "Prices are in US dollars."
+        "note": "Prices are in US dollars.",
+        "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}"
       }
     },
     {

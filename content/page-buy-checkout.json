@@ -11,41 +11,12 @@
   },
   "sections": [
     {
-      "id": "order",
-      "type": "lp-hero",
-      "data": {
-        "anchor": "",
-        "eyebrow": "Checkout",
-        "headline": "The method, and the files, the same day.",
-        "sub": "You brief AI with a role, a task and a constraint, so the first answer is close to what you meant. This order is the book that teaches that, and the files that put it on your own work.",
-        "button": null,
-        "note": "The card is taken on the next page. Nothing is shipped.",
-        "image": "/img/store/hero-3d.webp",
-        "image_alt": "The Artificial Advantage as a paperback"
-      }
-    },
-    {
-      "id": "why",
+      "id": "head",
       "type": "text",
       "data": {
-        "anchor": "",
+        "anchor": "co-head",
         "align": "left",
-        "heading": "Why this order is worth it",
-        "paras": [
-          "The Artificial Advantage ebook. Fourteen chapters of method, built around CLEAR: choose your tools, lead with clear direction, evolve your outputs, audit for accuracy, and repeat. You learn to brief AI so the first answer is close to what you meant, then check it before your name goes on it.",
-          "The 7-Day AI Workbook. One stage of that system each day, for seven days, on one real task of your own. You finish with a before and an after, and a template you keep.",
-          "The Toolkit. The exercises, the 30-day and 3-month practice plans, the Prompt Library, the Role Library and the Tool-Selection Cheat Sheet, as files you can open and edit.",
-          "The Companion Library. Eight reference pages I keep current, and the Director's Cheat Sheet. Both are free on the site. They are in this order so you are not hunting for them later."
-        ]
-      }
-    },
-    {
-      "id": "oneline",
-      "type": "text",
-      "data": {
-        "anchor": "",
-        "align": "left",
-        "heading": "",
+        "heading": "The method, and the files, the same day.",
         "paras": [
           "You're one step from The Artificial Advantage Bundle: the book, its Toolkit, the Companion Library and three bonuses, $27 in US dollars, as an instant download plus an email."
         ]
@@ -57,34 +28,13 @@
       "data": {
         "bg": "tint",
         "anchor": "",
-        "heading": "What you're buying",
+        "heading": "",
         "free_label": "Free",
         "included_label": "Included",
         "total_label": "Total value",
         "price_label": "Your price",
         "preview_stack_json": "{\"stack\":[{\"key\":\"book1-ebook\",\"name\":\"The Artificial Advantage, 2E ebook\",\"status\":\"price\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":null,\"group_name\":null},{\"key\":\"workbook-2e\",\"name\":\"7-Day AI Workbook, 2E\",\"status\":\"free\",\"standalone_price\":1200,\"standalone_price_text\":\"$12\",\"group\":null,\"group_name\":null},{\"key\":\"toolkit-exercises\",\"name\":\"Toolkit: Editable Exercises\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-practice-plans\",\"name\":\"Toolkit: 30-Day and 3-Month Practice Plans\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-prompt-library\",\"name\":\"Toolkit: Prompt Library\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-role-library\",\"name\":\"Toolkit: Role Library\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-tool-sheet\",\"name\":\"Toolkit: Tool-Selection Cheat Sheet\",\"status\":\"free\",\"standalone_price\":400,\"standalone_price_text\":\"$4\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":null,\"name\":\"The Director's Cheat Sheet\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"companion-library\",\"name\":\"The Companion Library\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":null,\"group_name\":null}]}",
-        "shots": [
-          {
-            "src": "/img/store/hero-3d.webp",
-            "alt": "The Artificial Advantage as a paperback",
-            "caption": "The ebook"
-          },
-          {
-            "src": "/img/store/mockup-workbook.webp",
-            "alt": "The 7-Day AI Workbook as a book and a tablet",
-            "caption": "The workbook"
-          },
-          {
-            "src": "/img/store/toolkit.webp",
-            "alt": "Cover of The Artificial Advantage Toolkit",
-            "caption": "The Toolkit"
-          },
-          {
-            "src": "/img/magnets/directors-cheat-sheet.webp",
-            "alt": "The Director's Cheat Sheet cover",
-            "caption": "Cheat sheet"
-          }
-        ],
+        "shots": [],
         "review_href": "/book/operator-bundle/",
         "email_label": "Email for the receipt and the download",
         "email_button": "Continue to payment",
@@ -97,7 +47,26 @@
           "tab": ""
         },
         "button": null,
-        "note": "Digital. Nothing is shipped. [[refund]]: if it is not for you, email elvin@elvinpeters.com within [[refund_days]] for a full refund."
+        "note": "Digital. Nothing is shipped. [[refund]]: if it is not for you, email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
+        "layout": "co",
+        "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}"
+      }
+    },
+    {
+      "id": "why",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "Why this order is worth it",
+        "paras": [
+          "You brief AI with a role, a task and a constraint, so the first answer is close to what you meant. This order is the book that teaches that, and the files that put it on your own work.",
+          "The card is taken on the next page. Nothing is shipped.",
+          "The Artificial Advantage ebook. Fourteen chapters of method, built around CLEAR: choose your tools, lead with clear direction, evolve your outputs, audit for accuracy, and repeat. You learn to brief AI so the first answer is close to what you meant, then check it before your name goes on it.",
+          "The 7-Day AI Workbook. One stage of that system each day, for seven days, on one real task of your own. You finish with a before and an after, and a template you keep.",
+          "The Toolkit. The exercises, the 30-day and 3-month practice plans, the Prompt Library, the Role Library and the Tool-Selection Cheat Sheet, as files you can open and edit.",
+          "The Companion Library. Eight reference pages I keep current, and the Director's Cheat Sheet. Both are free on the site. They are in this order so you are not hunting for them later."
+        ]
       }
     }
   ]

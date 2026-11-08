@@ -1,0 +1,80 @@
+{
+  "label": "Offer first screen",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "pre",
+      "type": "text",
+      "label": "Strip above the headline"
+    },
+    {
+      "key": "headline",
+      "type": "html",
+      "label": "Headline"
+    },
+    {
+      "key": "sub",
+      "type": "html",
+      "label": "Line under the headline"
+    },
+    {
+      "key": "proof",
+      "type": "html",
+      "label": "Proof line"
+    },
+    {
+      "key": "shot",
+      "type": "text",
+      "label": "Bundle picture, desktop (680 x 264)"
+    },
+    {
+      "key": "shot_phone",
+      "type": "text",
+      "label": "Bundle picture, phone (375 x 160)"
+    },
+    {
+      "key": "shot_alt",
+      "type": "text",
+      "label": "Bundle picture description"
+    },
+    {
+      "key": "struck",
+      "type": "text",
+      "label": "Struck price"
+    },
+    {
+      "key": "price",
+      "type": "text",
+      "label": "Price"
+    },
+    {
+      "key": "button",
+      "type": "object",
+      "label": "Button",
+      "fields": [
+        {
+          "key": "label",
+          "type": "text",
+          "label": "Words"
+        },
+        {
+          "key": "href",
+          "type": "text",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "key": "note",
+      "type": "html",
+      "label": "Line under the button"
+    }
+  ]
+}

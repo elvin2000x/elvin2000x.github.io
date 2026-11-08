@@ -20,6 +20,16 @@
       ]
     },
     {
+      "key": "layout",
+      "type": "text",
+      "label": "Layout (co = checkout, two columns)"
+    },
+    {
+      "key": "thumbs_json",
+      "type": "text",
+      "label": "Row pictures (JSON: product key to picture)"
+    },
+    {
       "key": "anchor",
       "type": "text",
       "label": "Anchor id"
@@ -51,7 +61,6 @@
       "type": "text",
       "label": "Review stack JSON (used only until live expands the Toolkit)"
     },
-
     {
       "key": "heading",
       "type": "html",
