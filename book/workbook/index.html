@@ -227,6 +227,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         var thumbs = {}; try { thumbs = JSON.parse(box.getAttribute('data-thumbs') || '{}'); } catch (e) {}
         var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null, headerGroup = null;
         ul.innerHTML = '';
+        var sumHead = box.getAttribute('data-summary');
+        if (sumHead) { var shl = document.createElement('li'); shl.className = 'lp-stack__sumhead'; shl.textContent = sumHead; ul.appendChild(shl); }
         f.stack.forEach(function (r) {
           /* Rows may carry a label ("Free" or "Included") and one header row
              (group_header) that owns the struck price for a group of pieces, which then
@@ -265,9 +267,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     if (stack) fillStack(stack);
     /* Phone sticky price bar: on from load, off while a buy button of the page is on screen. */
     (function () {
-      var bar = document.querySelector('[data-lp-sticky]');
+      var bar = document.querySelector('[data-lp-obar]');
       if (!bar || !('IntersectionObserver' in window)) return;
-      var seen = {}, btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-sticky__btn)');
+      var seen = {}, btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-obar__btn)');
       var io = new IntersectionObserver(function (es) {
         es.forEach(function (e) { seen[e.target.getAttribute('data-sid')] = e.isIntersecting; });
         var any = false; for (var k in seen) if (seen[k]) any = true;

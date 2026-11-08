@@ -360,15 +360,15 @@ body.lp .lp-hero .btn--primary{ width:100%; max-width:480px }
   .lp-ohero__line{ text-align:left }
 }
 /* phone sticky bar */
-.lp-sticky{ display:none }
+.lp-obar{ display:none }
 @media (max-width:767px){
-  .lp-sticky{ display:flex; position:fixed; left:0; right:0; bottom:0; z-index:50; align-items:center; justify-content:space-between; gap:12px; background:#fff; border-top:2px solid var(--lp-navy); padding:8px 16px calc(8px + env(safe-area-inset-bottom)); min-height:64px; box-sizing:border-box }
-  .lp-sticky[data-off]{ display:none }
-  .lp-sticky__price{ display:flex; flex-direction:column; margin:0; width:110px; line-height:1.1; color:var(--lp-navy) }
-  .lp-sticky__price s{ font-size:14px }
-  .lp-sticky__price strong{ font:700 28px/1.1 var(--sans) }
-  .lp-sticky__btn{ display:flex; align-items:center; justify-content:center; width:220px; min-height:48px; font-size:16px; font-weight:700; border-radius:6px }
-  body.lp:has(.lp-sticky){ padding-bottom:72px }
+  .lp-obar{ display:flex; position:fixed; left:0; right:0; bottom:0; z-index:50; align-items:center; justify-content:space-between; gap:12px; background:#fff; border-top:2px solid var(--lp-navy); padding:8px 16px calc(8px + env(safe-area-inset-bottom)); min-height:64px; box-sizing:border-box }
+  .lp-obar[data-off]{ display:none }
+  .lp-obar__price{ display:flex; flex-direction:column; margin:0; width:110px; line-height:1.1; color:var(--lp-navy) }
+  .lp-obar__price s{ font-size:14px }
+  .lp-obar__price strong{ font:700 28px/1.1 var(--sans) }
+  .lp-obar__btn{ display:flex; align-items:center; justify-content:center; width:220px; min-height:48px; font-size:16px; font-weight:700; border-radius:6px }
+  body.lp:has(.lp-obar){ padding-bottom:72px }
 }
 /* proof band */
 .lp-pband{ background:linear-gradient(180deg,#0a1828,#060f1a); padding:24px 16px }
@@ -436,3 +436,22 @@ body.lp .lp-stack--co .lp-bump{ padding:12px 14px; margin:0 }
 .lp-funnel-offer-rows li:has(img){ min-height:106px }
 body.lp .lp-stack:not(.lp-stack--co) .lp-stack__items img{ width:56px; height:90px; object-fit:cover; border-radius:3px }
 .lp-stack:not(.lp-stack--co) .lp-stack__items li:has(img){ min-height:106px }
+
+/* The $7 add-on as an offer: above the button, dashed gold border, pale band inside, cover at the left */
+body.lp .lp-bump--offer{ display:flex; align-items:flex-start; gap:16px; margin:16px 0 0; padding:20px 16px 16px; border:2px dashed var(--lp-gold); border-radius:8px; background:var(--lp-band); cursor:pointer }
+body.lp .lp-bump--offer .lp-bump__cover{ height:96px; width:auto; flex:none; border-radius:3px; box-shadow:0 2px 6px rgba(10,24,40,.30) }
+body.lp .lp-bump--offer .lp-bump__words{ display:flex; flex-direction:column; gap:6px; flex:1; min-width:0 }
+body.lp .lp-bump--offer .lp-bump__head{ font-size:20px; font-weight:700; line-height:1.25; color:var(--lp-navy) }
+body.lp .lp-bump--offer .lp-bump__yes{ display:flex; align-items:center; gap:10px; font-size:18px; font-weight:700; color:var(--lp-navy) }
+body.lp .lp-bump--offer .lp-bump__yes b{ font-weight:700 }
+body.lp .lp-bump--offer .lp-bump__line{ font-size:14px; line-height:1.45; color:var(--lp-navy) }
+body.lp .lp-bump--offer .lp-bump__small{ font-size:14px; line-height:1.4; color:var(--lp-navy); opacity:.78 }
+body.lp .lp-stack--co .lp-pay .lp-bump--offer{ grid-area:auto; margin:16px 0 0; padding:20px 16px 16px }
+body.lp .lp-sec li.lp-stack__sumhead{ display:block; font-size:20px; font-weight:700; line-height:1.3; padding:4px 0 8px; min-height:0; border-bottom:1px solid var(--lp-band) }
+@media (min-width:768px){ .lp-ohero__band{ padding-top:28px } .lp-ohero__grid{ margin-top:20px } }
+body.lp .lp-pay .lp-bump--offer input[type=checkbox]{ display:inline-block; width:28px; height:28px; min-height:0; margin:0; padding:0; border:0; flex:none; accent-color:var(--lp-navy) }
+body.lp .lp-pay .lp-bump--offer .lp-bump__line, body.lp .lp-pay .lp-bump--offer .lp-bump__small{ font-weight:400 }
+body.lp .lp-pay .lp-bump--offer{ position:relative; margin-top:16px; font-weight:400 }
+
+/* checkout: the pay button stays in the flow now that the add-on sits above it */
+@media (max-width:767px){ .lp-stack--co .lp-cta{ position:static; box-shadow:none } }

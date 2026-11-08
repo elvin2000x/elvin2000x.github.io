@@ -1,7 +1,7 @@
 <section class="lp-sec{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
   <div class="lp-in">
     <h2>{{heading}}</h2>
-    <div class="lp-stack{{#layout}} lp-stack--{{layout}}{{/layout}}" data-lp-fstack="{{funnel}}" data-free="{{free_label}}" data-included="{{included_label}}"{{#thumbs_json}} data-thumbs='{{thumbs_json}}'{{/thumbs_json}}>
+    <div class="lp-stack{{#layout}} lp-stack--{{layout}}{{/layout}}" data-lp-fstack="{{funnel}}" data-free="{{free_label}}" data-included="{{included_label}}"{{#thumbs_json}} data-thumbs='{{thumbs_json}}'{{/thumbs_json}}{{#summary_heading}} data-summary="{{summary_heading}}"{{/summary_heading}}>
 {{#preview_stack_json}}
       <script type="application/json" data-lp-stack-preview>{{preview_stack_json}}</script>
 {{/preview_stack_json}}
@@ -18,12 +18,17 @@
         <label>{{email_label}}
           <input type="email" name="email" required autocomplete="email" placeholder="you@work.com">
         </label>
+{{#bump}}
+        <label class="lp-bump lp-bump--box lp-bump--offer">{{#tab}}<span class="lp-bump__tab">{{tab}}</span>{{/tab}}{{#image}}<img class="lp-bump__cover" src="{{image}}" alt="{{image_alt}}" height="96" loading="lazy">{{/image}}<span class="lp-bump__words"><strong class="lp-bump__head">{{#headline}}{{headline}}{{/headline}}{{^headline}}{{name}}{{/headline}}</strong><span class="lp-bump__yes"><input type="checkbox" data-store-bump> <b>{{#yes}}{{yes}}{{/yes}}{{^yes}}Yes, add {{name}} for {{price}}{{/yes}}</b></span>{{#line}}<span class="lp-bump__line">{{line}}</span>{{/line}}{{#lines}}<span class="lp-bump__line">{{.}}</span>{{/lines}}{{#small}}<span class="lp-bump__small">{{small}}</span>{{/small}}</span></label>
+{{/bump}}
         <button type="submit" class="btn btn--primary btn--lg lp-cta">{{email_button}}</button>
       </form>
 {{/email_label}}
+{{^email_label}}
 {{#bump}}
       <label class="lp-bump lp-bump--box">{{#tab}}<span class="lp-bump__tab">{{tab}}</span>{{/tab}}{{#image}}<img src="{{image}}" alt="{{image_alt}}" loading="lazy">{{/image}}<input type="checkbox" data-store-bump> <span class="lp-bump__words"><strong>{{name}}</strong>{{#line}}<span>{{line}}</span>{{/line}}</span><strong class="lp-bump__price">{{price}}</strong></label>
 {{/bump}}
+{{/email_label}}
 {{#button}}
       {{>lp-button}}
 {{/button}}

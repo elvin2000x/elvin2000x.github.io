@@ -39,17 +39,26 @@
         "email_label": "Email for the receipt and the download",
         "email_button": "Continue to payment",
         "bump": {
-          "image": "/img/store/ai-at-home-thumb.webp",
+          "image": "/img/store/ai-at-home-bump-thumb.webp",
           "image_alt": "Cover of AI at Home",
           "name": "AI at Home",
-          "line": "A short guide: describe a sick plant to an AI instead of paying for a plant app, then use the same steps on recipes, a Windows device that stopped working, a car warning light, your internet bill, and more.",
+          "line": "",
           "price": "$7",
-          "tab": ""
+          "tab": "",
+          "headline": "Who to ask for when your internet bill jumps",
+          "yes": "Yes, add AI at Home for $7",
+          "lines": [
+            "Your bill went up when the promo ended. The guide tells you which department to ask for and writes the first sentence you say.",
+            "It sets the lowest price you will accept, lets the AI play the company so you can practise the call, and ends with the price and the confirmation number to write down before you hang up.",
+            "The same four parts then cover a sick plant, a car warning light and a Windows device that stopped working."
+          ],
+          "small": "19-page PDF, instant download plus an email. Same 30-day promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars."
         },
         "button": null,
         "note": "Digital. Nothing is shipped. [[refund]]: if it is not for you, email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
         "layout": "co",
-        "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}"
+        "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}",
+        "summary_heading": "Your order"
       }
     },
     {

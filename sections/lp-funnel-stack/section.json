@@ -30,6 +30,11 @@
       "label": "Row pictures (JSON: product key to picture)"
     },
     {
+      "key": "summary_heading",
+      "type": "text",
+      "label": "Heading above the order rows"
+    },
+    {
       "key": "anchor",
       "type": "text",
       "label": "Anchor id"

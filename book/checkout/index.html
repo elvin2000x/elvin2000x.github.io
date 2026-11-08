@@ -85,7 +85,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <section class="lp-sec lp-sec--tint">
   <div class="lp-in">
     <h2></h2>
-    <div class="lp-stack lp-stack--co" data-lp-fstack="the-artificial-advantage-1" data-free="Free" data-included="Included" data-thumbs='{"book1-ebook":"/img/store/thumbs/artificial-advantage-ebook-thumb.webp","toolkit":"/img/store/thumbs/toolkit-thumb.webp","workbook-2e":"/img/store/thumbs/workbook-2e-thumb.webp","everything-ai-2026":"/img/store/thumbs/everything-ai-2026-thumb.webp","seven-rules":"/img/store/thumbs/twelve-commandments-thumb.webp"}'>
+    <div class="lp-stack lp-stack--co" data-lp-fstack="the-artificial-advantage-1" data-free="Free" data-included="Included" data-thumbs='{"book1-ebook":"/img/store/thumbs/artificial-advantage-ebook-thumb.webp","toolkit":"/img/store/thumbs/toolkit-thumb.webp","workbook-2e":"/img/store/thumbs/workbook-2e-thumb.webp","everything-ai-2026":"/img/store/thumbs/everything-ai-2026-thumb.webp","seven-rules":"/img/store/thumbs/twelve-commandments-thumb.webp"}' data-summary="Your order">
       <script type="application/json" data-lp-stack-preview>{"stack":[{"key":"book1-ebook","name":"The Artificial Advantage, 2E ebook","status":"price","standalone_price":900,"standalone_price_text":"$9","group":null,"group_name":null},{"key":"workbook-2e","name":"7-Day AI Workbook, 2E","status":"free","standalone_price":1200,"standalone_price_text":"$12","group":null,"group_name":null},{"key":"toolkit-exercises","name":"Toolkit: Editable Exercises","status":"free","standalone_price":900,"standalone_price_text":"$9","group":"toolkit","group_name":"The Toolkit"},{"key":"toolkit-practice-plans","name":"Toolkit: 30-Day and 3-Month Practice Plans","status":"free","standalone_price":700,"standalone_price_text":"$7","group":"toolkit","group_name":"The Toolkit"},{"key":"toolkit-prompt-library","name":"Toolkit: Prompt Library","status":"free","standalone_price":900,"standalone_price_text":"$9","group":"toolkit","group_name":"The Toolkit"},{"key":"toolkit-role-library","name":"Toolkit: Role Library","status":"free","standalone_price":700,"standalone_price_text":"$7","group":"toolkit","group_name":"The Toolkit"},{"key":"toolkit-tool-sheet","name":"Toolkit: Tool-Selection Cheat Sheet","status":"free","standalone_price":400,"standalone_price_text":"$4","group":"toolkit","group_name":"The Toolkit"},{"key":null,"name":"The Director's Cheat Sheet","status":"included","standalone_price":null,"standalone_price_text":null,"group":"toolkit","group_name":"The Toolkit"},{"key":"companion-library","name":"The Companion Library","status":"included","standalone_price":null,"standalone_price_text":null,"group":null,"group_name":null}]}</script>
       <div class="lp-shots">
       </div>
@@ -96,9 +96,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         <label>Email for the receipt and the download
           <input type="email" name="email" required autocomplete="email" placeholder="you@work.com">
         </label>
+        <label class="lp-bump lp-bump--box lp-bump--offer"><img class="lp-bump__cover" src="/img/store/ai-at-home-bump-thumb.webp" alt="Cover of AI at Home" height="96" loading="lazy"><span class="lp-bump__words"><strong class="lp-bump__head">Who to ask for when your internet bill jumps</strong><span class="lp-bump__yes"><input type="checkbox" data-store-bump> <b>Yes, add AI at Home for $7</b></span><span class="lp-bump__line">Your bill went up when the promo ended. The guide tells you which department to ask for and writes the first sentence you say.</span><span class="lp-bump__line">It sets the lowest price you will accept, lets the AI play the company so you can practise the call, and ends with the price and the confirmation number to write down before you hang up.</span><span class="lp-bump__line">The same four parts then cover a sick plant, a car warning light and a Windows device that stopped working.</span><span class="lp-bump__small">19-page PDF, instant download plus an email. Same 30-day promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars.</span></span></label>
         <button type="submit" class="btn btn--primary btn--lg lp-cta">Continue to payment</button>
       </form>
-      <label class="lp-bump lp-bump--box"><img src="/img/store/ai-at-home-thumb.webp" alt="Cover of AI at Home" loading="lazy"><input type="checkbox" data-store-bump> <span class="lp-bump__words"><strong>AI at Home</strong><span>A short guide: describe a sick plant to an AI instead of paying for a plant app, then use the same steps on recipes, a Windows device that stopped working, a car warning light, your internet bill, and more.</span></span><strong class="lp-bump__price">$7</strong></label>
       <p class="lp-note">Digital. Nothing is shipped. 30-day money-back guarantee: if it is not for you, email elvin@elvinpeters.com within 30 days for a full refund.</p>
     </div>
   </div>
@@ -189,6 +189,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         var thumbs = {}; try { thumbs = JSON.parse(box.getAttribute('data-thumbs') || '{}'); } catch (e) {}
         var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null, headerGroup = null;
         ul.innerHTML = '';
+        var sumHead = box.getAttribute('data-summary');
+        if (sumHead) { var shl = document.createElement('li'); shl.className = 'lp-stack__sumhead'; shl.textContent = sumHead; ul.appendChild(shl); }
         f.stack.forEach(function (r) {
           /* Rows may carry a label ("Free" or "Included") and one header row
              (group_header) that owns the struck price for a group of pieces, which then
@@ -227,9 +229,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     if (stack) fillStack(stack);
     /* Phone sticky price bar: on from load, off while a buy button of the page is on screen. */
     (function () {
-      var bar = document.querySelector('[data-lp-sticky]');
+      var bar = document.querySelector('[data-lp-obar]');
       if (!bar || !('IntersectionObserver' in window)) return;
-      var seen = {}, btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-sticky__btn)');
+      var seen = {}, btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-obar__btn)');
       var io = new IntersectionObserver(function (es) {
         es.forEach(function (e) { seen[e.target.getAttribute('data-sid')] = e.isIntersecting; });
         var any = false; for (var k in seen) if (seen[k]) any = true;
