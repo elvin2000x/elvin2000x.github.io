@@ -305,8 +305,97 @@ function checkStack(stack, name) {
     else if (ids.has(s.id)) errs.push('two sections use the id ' + s.id);
     ids.add(s.id);
     if (s.data == null || typeof s.data !== 'object' || Array.isArray(s.data)) errs.push(at + ' (' + s.id + ') needs its words (data)');
+    if (s.style != null) errs.push(...checkStyle(s.style, at));
   });
+  if (stack.css != null) errs.push(...checkCss(stack.css).map(e => 'Custom CSS: ' + e));
   return errs;
+}
+
+/* ---- section styles (Studio Editor, 2026-11-08) ----
+   A section may carry a "style" object: the looks picked in Studio's Style tab. Each
+   key takes one of a few words; styleClasses turns them into ep-s-* classes on the
+   section's root element and css/site.css draws them. No key, no class: a section
+   without a style renders byte for byte as before, so nothing is hand-coded per page.
+   A page may also carry "css": its own stylesheet, inlined by the frame ({{page.css}})
+   once checkCss has passed it. */
+const STYLE = [
+  { key: 'space', label: 'Space above and below', options: [['', 'As designed'], ['s', 'S'], ['m', 'M'], ['l', 'L'], ['xl', 'XL']] },
+  { key: 'width', label: 'Width', options: [['', 'As designed'], ['text', 'Text'], ['wide', 'Wide'], ['full', 'Full']] },
+  { key: 'band', label: 'Background band', options: [['', 'As designed'], ['none', 'None'], ['pale', 'Pale'], ['dark', 'Dark']] },
+  { key: 'heading', label: 'Heading size', options: [['', 'As designed'], ['s', 'S'], ['m', 'M'], ['l', 'L']] },
+  { key: 'ink', label: 'Text colour', options: [['', 'As designed'], ['ink', 'Ink'], ['muted', 'Muted'], ['accent', 'Accent']] },
+  { key: 'align', label: 'Text alignment', options: [['', 'As designed'], ['left', 'Left'], ['center', 'Centre'], ['right', 'Right']] },
+  { key: 'button', label: 'Button size', options: [['', 'As designed'], ['regular', 'Regular'], ['large', 'Large'], ['full', 'Full width']] },
+  { key: 'image', label: 'Image size', options: [['', 'As designed'], ['s', 'S'], ['m', 'M'], ['l', 'L'], ['full', 'Full']] },
+  { key: 'image_align', label: 'Image alignment', options: [['', 'As designed'], ['left', 'Left'], ['center', 'Centre'], ['right', 'Right']], cls: 'imgalign' },
+];
+function checkStyle(st, at) {
+  if (!st || typeof st !== 'object' || Array.isArray(st)) return [at + ': style must be an object'];
+  const errs = [];
+  for (const [k, v] of Object.entries(st)) {
+    const f = STYLE.find(x => x.key === k);
+    if (!f) { errs.push(at + ': unknown style "' + k + '"'); continue; }
+    if (v !== '' && !f.options.some(o => o[0] === v)) errs.push(at + ': ' + f.label.toLowerCase() + ' can be ' + f.options.map(o => o[0]).filter(Boolean).join(', ') + ', not "' + v + '"');
+  }
+  return errs;
+}
+// The classes a style object puts on its section, in a fixed order (a stable render).
+function styleClasses(st) {
+  if (!st || typeof st !== 'object') return [];
+  return STYLE.filter(f => st[f.key] && f.options.some(o => o[0] === st[f.key])).map(f => 'ep-s-' + (f.cls || f.key) + '-' + st[f.key]);
+}
+// Put the classes on the section's first element. A free block (sections/text, button,
+// video: the block IS its own text-width container) is wrapped instead, so a band or
+// spacing can run the full width while the words keep their measure.
+function withStyle(html, classes) {
+  if (!classes.length) return html;
+  const m = /<([a-z][a-z0-9]*)((?:\s[^>]*)?)>/i.exec(html);
+  if (!m) return html;
+  const attrs = m[2] || '';
+  const cm = /\sclass="([^"]*)"/.exec(attrs);
+  if (cm && /(^|\s)ep-block(\s|$)/.test(cm[1])) return '<div class="ep-s ' + classes.join(' ') + '">\n' + html + '\n</div>';
+  const tag = cm ? '<' + m[1] + attrs.replace(cm[0], ' class="' + cm[1] + ' ' + classes.join(' ') + '"') + '>'
+    : '<' + m[1] + ' class="' + classes.join(' ') + '"' + attrs + '>';
+  return html.slice(0, m.index) + tag + html.slice(m.index + m[0].length);
+}
+/* A page's own CSS: plain rules only. Nothing that could close the style block, load or
+   run anything, point off the site, break the type floor verify.js enforces, or name a
+   token the site does not define. */
+const CSS_MAX = 20000;
+let tokenCache = null;
+function siteTokens() {
+  const files = [path.join(ROOT, 'css', 'site.css'), path.join(ROOT, 'css', 'landing.css')];
+  const fdir = path.join(SEC_DIR, '_frames');
+  if (fs.existsSync(fdir)) for (const f of fs.readdirSync(fdir)) if (f.endsWith('.html')) files.push(path.join(fdir, f));
+  const stamp = files.map(f => (fs.existsSync(f) ? fs.statSync(f).mtimeMs : 0)).join(',');
+  if (!tokenCache || tokenCache.stamp !== stamp) {
+    const names = new Set();
+    for (const f of files) if (fs.existsSync(f)) for (const m of fs.readFileSync(f, 'utf8').matchAll(/--([a-z0-9-]+)\s*:/gi)) names.add(m[1].toLowerCase());
+    tokenCache = { stamp, names };
+  }
+  return tokenCache.names;
+}
+function checkCss(css) {
+  if (typeof css !== 'string') return ['must be text'];
+  const errs = [];
+  if (css.length > CSS_MAX) errs.push('is over ' + CSS_MAX + ' characters');
+  if (/</.test(css)) errs.push('cannot hold a < sign (no tags; nothing may close the style block)');
+  if (/@import|expression\s*\(|javascript:|behavior\s*:|-moz-binding/i.test(css)) errs.push('cannot import, load or run anything');
+  for (const m of css.matchAll(/url\(\s*['"]?([^'")]+)/gi))
+    if (!/^(\/[^\/]|data:image\/)/.test(m[1].trim())) errs.push('pictures must be on this site (an address starting with /): ' + m[1].trim().slice(0, 60));
+  const bare = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  let depth = 0, extra = false;
+  for (const ch of bare) { if (ch === '{') depth++; else if (ch === '}') depth--; if (depth < 0) { extra = true; break; } }
+  if (extra) errs.push('has a } with no { before it'); else if (depth) errs.push('has ' + depth + ' { never closed');
+  for (const m of bare.matchAll(/font-size\s*:\s*(\d+(?:\.\d+)?)px/gi)) {
+    const n = +m[1];
+    if (n < 12) errs.push('font-size ' + m[1] + 'px is under the 12px floor');
+    else if (n % 1) errs.push('font-size ' + m[1] + 'px: use whole pixels');
+  }
+  const own = new Set([...bare.matchAll(/--([a-z0-9-]+)\s*:/gi)].map(m => m[1].toLowerCase()));
+  for (const m of bare.matchAll(/var\(\s*--([a-z0-9-]+)/gi))
+    if (!own.has(m[1].toLowerCase()) && !siteTokens().has(m[1].toLowerCase())) errs.push('var(--' + m[1] + ') is not a token the site defines');
+  return [...new Set(errs)];
 }
 
 /* The refund promise is one setting (content/funnels.json: refund_line, refund_days).
@@ -323,7 +412,7 @@ function renderSection(s, globals) {
   // store and funnel are a landing page's checkout address; empty everywhere else.
   const html = renderTpl(file, s.type + ' (' + s.id + ')', [{ store: '', funnel: '', page_url: '', ...globals }, fillRefund(s.data, { refund_line: globals.refund_line || FUNNEL_DEFAULTS.refund_line, refund_days: globals.refund_days || FUNNEL_DEFAULTS.refund_days })]);
   const note = s.note ? '<!-- ' + s.note + ' -->\n' : '';
-  return note + html;
+  return note + withStyle(html, styleClasses(s.style));
 }
 
 /* Render one stack to a full page. `site` is content/site.json. `markers` (Studio
@@ -346,7 +435,9 @@ function renderStack(stack, name, { site, isHome, markers, funnels, store }) {
     return stack.markers || markers ? '<!-- ep:sec:' + s.id + ' -->\n' + html + '\n<!-- /ep:sec:' + s.id + ' -->' : html;
   });
   const frame = path.join(SEC_DIR, '_frames', stack.frame + '.html');
-  const page = { title: stack.title || '', description: (L && L.description) || '', hide_menu: !!(L && L.hide_menu), step: (L && L.step) || '', aud: !!(L && L.aud) };
+  // css: the page's own stylesheet (Studio's Custom CSS box), checked by checkStack above.
+  const page = { title: stack.title || '', description: (L && L.description) || '', hide_menu: !!(L && L.hide_menu), step: (L && L.step) || '', aud: !!(L && L.aud),
+    css: typeof stack.css === 'string' ? stack.css.trim() : '' };
   return renderTpl(frame, '_frames/' + stack.frame, [{ ...globals, robots_off, page, sections: parts.join('\n\n') }]) + '\n';
 }
 
@@ -413,4 +504,5 @@ function buildAll(contentDir, { site, banner = true, markers = false, storeTest 
 }
 
 module.exports = { parse, run, expand, readTpl, renderStack, renderSection, buildAll, checkStack, library, sectionMeta, stackNames, withBanner, blankData, BANNER, STACK_RE, SEC_DIR, PAGE_PATH, RESERVED,
-  SLUG_RE, PREFIX_RE, FUNNEL_RE, PLACEHOLDER, funnelSettings, checkFunnels, placeholders, forwardStub, templates, landingDir };
+  SLUG_RE, PREFIX_RE, FUNNEL_RE, PLACEHOLDER, funnelSettings, checkFunnels, placeholders, forwardStub, templates, landingDir,
+  STYLE, checkStyle, styleClasses, withStyle, checkCss };

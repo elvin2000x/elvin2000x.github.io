@@ -1,46 +1,45 @@
-/* capture.js — the email popup (#388, 2026-09-28). Loaded by site.js.
+/* capture.js — the email popup (#388, 2026-09-28; words from content since 2026-11-08).
+   Loaded by site.js straight after js/popups.js, which build.js writes from
+   content/popups.json (Site Studio > Website > Popups edits the words, the picture,
+   the pages and the trigger). This file holds the behaviour only.
    Owned end to end (Rule 03): posts to the same intake as every site form
    (honeypot, per-IP rate limit, dedupe, then the double opt-in confirm).
    Never on first paint, never twice: closing it keeps it away 30 days,
    signing up (here or in a page form) keeps it away for good.
-   Desktop opens on exit intent; a phone opens at half the page or 30 s,
+   Desktop opens on exit intent; a phone opens at a scroll depth or after a delay,
    and never in the first 8 s. Amazon is never inside it (Associates rule on
    links in pop-ups), and the page's own Amazon buttons stay where they are.
-   COPY below is the one place to edit the words. */
+   ?ep-popup=<id> opens that popup at once (previews and checks only; it changes
+   nothing about what is sent). */
 (function () {
   'use strict';
 
-  var COPY = {
-    // Default: the homepage. The free chapter plus the monthly letter.
-    main: {
-      eyebrow: 'Stop prompting. Start directing.',
-      head: 'Get better answers from the AI you already use',
-      body: 'Get Chapter 8 of The Artificial Advantage free, plus 50 prompts and a cheat sheet. Then one letter a month from me.',
-      button: 'Send me the chapter',
-      success: 'Check your inbox and click confirm. Your free chapter, 50 prompts and cheat sheet come next.'
-    },
-    // /free/ and /free/<guide>/ pages. {guide} becomes the guide's name.
-    guide: {
-      eyebrow: '{guide}',
-      head: 'Keep it for the day you need it',
-      body: "I'll email it to you so it's in your inbox when that day comes, along with my monthly letter.",
-      button: 'Email it to me',
-      success: 'Check your inbox and click confirm. Your guide comes next.'
-    },
-    dismiss: 'Maybe later',
-    consent: "You'll get a few welcome emails and a monthly letter from Elvin Peters. Unsubscribe anytime. Questions: elvin@elvinpeters.com",
-    error: 'Something went wrong. Try again in a moment.',
-    bad: 'Please check your email address.'
-  };
+  var CFG = window.EP_POPUPS, LIST = CFG && CFG.popups;
+  if (!LIST || !LIST.length) return;
 
   var API = 'https://ultimateaidirectory.com/api/lead';
   var KEY = 'ep_cap';                 // "sub" or the time it was last closed
   var QUIET = 30 * 864e5;             // 30 days after a close
-  var MIN_WAIT = 8000, PHONE_WAIT = 30000, PHONE_DEPTH = 0.5;
-  // Where it may open: the homepage and the free guides (the ad's landing pages).
+  var MIN_WAIT = 8000;
+  var ERROR = 'Something went wrong. Try again in a moment.';
+  var BAD = 'Please check your email address.';
   var path = location.pathname.replace(/index\.html$/, '');
   var guideSlug = (/^\/free\/([a-z0-9-]+)\/$/.exec(path) || [])[1] || '';
-  var ALLOWED = path === '/' || path === '/free/' || (guideSlug && guideSlug !== 'link-expired');
+
+  // Which popup this page gets: the first one whose pages name it and whose except list does not.
+  function hit(pat) {
+    if (pat === path) return true;
+    if (pat.charAt(pat.length - 1) !== '*') return false;
+    var base = pat.slice(0, -1);
+    return path.indexOf(base) === 0 && path.length > base.length;
+  }
+  function names(p) { return (p.pages || []).some(hit) && !(p.except || []).some(hit); }
+  var POP = null, i;
+  for (i = 0; i < LIST.length && !POP; i++) if (names(LIST[i])) POP = LIST[i];
+  var force = (/[?&]ep-popup=([a-z0-9-]+)/.exec(location.search) || [])[1] || '';
+  if (force) for (i = 0; i < LIST.length; i++) if (LIST[i].id === force) POP = LIST[i];
+  if (!POP) return;
+  var T = POP.trigger || {};
 
   function get(k, store) { try { return (store || localStorage).getItem(k); } catch (e) { return null; } }
   function set(k, v, store) { try { (store || localStorage).setItem(k, v); } catch (e) {} }
@@ -62,7 +61,8 @@
   }, true);
 
   function blocked() {
-    if (!ALLOWED || !window.HTMLDialogElement) return true;
+    if (!window.HTMLDialogElement) return true;
+    if (force) return false;
     var v = get(KEY);
     if (v === 'sub') return true;
     if (v && Date.now() - +v < QUIET) return true;
@@ -71,18 +71,23 @@
   }
   if (blocked()) return;
 
-  function copy() { return (guideSlug || path === '/free/') ? COPY.guide : COPY.main; }
+  // "page" means the guide on this page: its name comes from the title, the folder page has its own.
+  var onPage = POP.source === 'page';
   function guideName() {
-    if (path === '/free/') return "The Director's Cheat Sheet";   // the hub's own offer
+    if (!guideSlug) return POP.hub_name || 'this guide';
     var t = document.title.split(/\s[·|]\s|\s\(Free\)/)[0].trim();
     return t.length > 60 ? 'this guide' : t;
   }
+  function fill(s) { return String(s == null ? '' : s).replace('{guide}', guideName()); }
+  function baseSource() {
+    if (!onPage) return POP.source;
+    return guideSlug ? 'magnet:' + guideSlug : (POP.hub_source || POP.source);
+  }
   function source(door) {
-    var base = guideSlug ? 'magnet:' + guideSlug : (path === '/free/' ? 'magnet:directors-cheat-sheet' : 'newsletter-popup');
     var b = ['pos=' + door, 'path=' + path];
     var tags = get('ep_tags', sessionStorage);
     if (tags) b.push(tags);
-    return (base + ' | ' + b.join('&')).slice(0, 290);
+    return (baseSource() + ' | ' + b.join('&')).slice(0, 290);
   }
   function track(name, params) {
     try { if (typeof gtag === 'function') gtag('event', name, params); } catch (e) {}
@@ -93,8 +98,10 @@
     'background:var(--bg,#fff);color:var(--ink,#1a1a1a);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.28);overflow:auto}' +
     '#ep-cap::backdrop{background:rgba(10,12,16,.55)}' +
     '#ep-cap .cap-in{position:relative;padding:28px 24px 20px}' +
+    '#ep-cap .cap-img{display:block;width:100%;height:auto;max-height:200px;object-fit:cover}' +
     '#ep-cap .cap-x{position:absolute;top:6px;right:6px;width:44px;height:44px;border:0;border-radius:50%;background:transparent;' +
     'color:var(--ink,#1a1a1a);font-size:26px;line-height:1;cursor:pointer}' +
+    '#ep-cap .cap-img~.cap-in .cap-x{background:var(--bg,#fff)}' +
     '#ep-cap .cap-x:hover,#ep-cap .cap-x:focus-visible{background:var(--line-soft,rgba(0,0,0,.06))}' +
     '#ep-cap .cap-eye{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--accent-ink,var(--accent,#8a6a12))}' +
     '#ep-cap h2{margin:0 44px 10px 0;font-size:22px;line-height:1.25}' +
@@ -120,28 +127,27 @@
 
   var dlg, shown = false, lastFocus = null;
   function build() {
-    var c = copy();
-    var head = c.head.replace('{guide}', guideName());
     var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
     dlg = document.createElement('dialog');
     dlg.id = 'ep-cap';
     dlg.setAttribute('aria-labelledby', 'ep-cap-h');
     dlg.setAttribute('aria-describedby', 'ep-cap-b');
     dlg.innerHTML =
+      (POP.image ? '<img class="cap-img" src="' + esc(POP.image) + '" alt="' + esc(POP.image_alt || '') + '">' : '') +
       '<div class="cap-in">' +
       '<button type="button" class="cap-x" aria-label="Close">&times;</button>' +
-      '<p class="cap-eye">' + esc(c.eyebrow.replace('{guide}', guideName())) + '</p>' +
-      '<h2 id="ep-cap-h">' + esc(head) + '</h2>' +
-      '<p class="cap-body" id="ep-cap-b">' + esc(c.body) + '</p>' +
+      (POP.eyebrow ? '<p class="cap-eye">' + esc(fill(POP.eyebrow)) + '</p>' : '') +
+      '<h2 id="ep-cap-h">' + esc(fill(POP.heading)) + '</h2>' +
+      '<p class="cap-body" id="ep-cap-b">' + esc(fill(POP.text)) + '</p>' +
       '<form id="ep-cap-form" novalidate>' +
       '<label for="ep-cap-email" class="cap-hp">Email address</label>' +
       '<input type="email" id="ep-cap-email" name="email" autocomplete="email" inputmode="email" placeholder="you@work.com" aria-label="Email address" required>' +
       '<div class="cap-hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>' +
-      '<button type="submit">' + esc(c.button) + '</button>' +
+      '<button type="submit">' + esc(fill(POP.button)) + '</button>' +
       '</form>' +
       '<p class="cap-msg" role="status" aria-live="polite"></p>' +
-      '<p class="cap-fine">' + esc(COPY.consent) + '</p>' +
-      '<button type="button" class="cap-no">' + esc(COPY.dismiss) + '</button>' +
+      (POP.fine ? '<p class="cap-fine">' + esc(fill(POP.fine)) + '</p>' : '') +
+      '<button type="button" class="cap-no">' + esc(fill(POP.dismiss) || 'Maybe later') + '</button>' +
       '</div>';
     document.body.appendChild(dlg);
 
@@ -165,32 +171,30 @@
     var email = f.email.value.trim();
     msg.className = 'cap-msg'; msg.textContent = '';
     if (f.website.value) { done(); return; }              // a bot: look finished, send nothing
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.className = 'cap-msg err'; msg.textContent = COPY.bad; f.email.focus(); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { msg.className = 'cap-msg err'; msg.textContent = BAD; f.email.focus(); return; }
     btn.disabled = true;
-    var src = source('popup');
-    var body = new URLSearchParams({
-      name: 'Popup lead', email: email, source: src, website: '',
-      message: guideSlug ? 'Lead magnet: ' + guideName() : 'Popup: free chapter + monthly letter'
-    }).toString();
+    var src = source('popup'), label = src.split(' | ')[0];
+    var note = onPage && guideSlug && POP.guide_message ? fill(POP.guide_message) : fill(POP.message);
+    var body = new URLSearchParams({ name: 'Popup lead', email: email, source: src, website: '', message: note }).toString();
     fetch(API, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
       .then(function (r) { return r.json().catch(function () { return { success: r.ok }; }); })
       .then(function (r) {
-        if (r && r.success === false) { btn.disabled = false; msg.className = 'cap-msg err'; msg.textContent = r.error || COPY.error; return; }
+        if (r && r.success === false) { btn.disabled = false; msg.className = 'cap-msg err'; msg.textContent = r.error || ERROR; return; }
         done();
         try { if (typeof gtag === 'function') gtag('set', 'user_data', { email: email }); } catch (x) {}
-        try { if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: src.split(' | ')[0] + '-popup' }); } catch (x) {}
+        try { if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: label + '-popup' }); } catch (x) {}
         track('generate_lead', { method: 'popup' });
-        if (guideSlug || path === '/free/') track('free_optin', { magnet: src.split(' | ')[0].replace('magnet:', ''), page_path: path, pos: 'popup' });
-        else track('newsletter_signup', { source: 'newsletter-popup', page_path: path });
+        if (label.indexOf('magnet:') === 0) track('free_optin', { magnet: label.replace('magnet:', ''), page_path: path, pos: 'popup' });
+        else track('newsletter_signup', { source: label, page_path: path });
       })
-      .catch(function () { btn.disabled = false; msg.className = 'cap-msg err'; msg.textContent = COPY.error; });
+      .catch(function () { btn.disabled = false; msg.className = 'cap-msg err'; msg.textContent = ERROR; });
   }
 
   function done() {
     set(KEY, 'sub');
     dlg.querySelector('form').style.display = 'none';
     var msg = dlg.querySelector('.cap-msg');
-    msg.className = 'cap-msg'; msg.textContent = copy().success;
+    msg.className = 'cap-msg'; msg.textContent = fill(POP.success);
     dlg.querySelector('.cap-no').textContent = 'Close';
   }
 
@@ -212,16 +216,17 @@
   function onOut(e) { if (!e.relatedTarget && e.clientY <= 0 && ready()) open('exit'); }
   function onScroll() {
     var h = document.documentElement.scrollHeight - innerHeight;
-    if (h > 0 && scrollY / h >= PHONE_DEPTH && ready()) open('scroll');
+    if (h > 0 && scrollY / h >= T.scroll / 100 && ready()) open('scroll');
   }
   function detach() {
     document.removeEventListener('mouseout', onOut);
     removeEventListener('scroll', onScroll);
     if (timer) clearTimeout(timer);
   }
-  if (fine) document.addEventListener('mouseout', onOut);
+  if (force) { open('force'); return; }
+  if (fine && T.exit) document.addEventListener('mouseout', onOut);
   else {
-    addEventListener('scroll', onScroll, { passive: true });
-    timer = setTimeout(function () { open('time'); }, PHONE_WAIT);
+    if (T.scroll > 0) addEventListener('scroll', onScroll, { passive: true });
+    if (T.delay > 0) timer = setTimeout(function () { open('time'); }, T.delay * 1000);
   }
 })();

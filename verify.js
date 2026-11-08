@@ -282,7 +282,8 @@ function* builtHtml(dir, rel) {
     const stackFiles = new Set(require(path.join(ROOT, 'sections.js'))
       .buildAll(path.join(ROOT, 'content'), { site }).map(p => p.file));
     // The blog moved to epeters.ca (ticket #12): writing/ is stubs now, built there.
-    const gen = [...new Set(['index.html', ...stackFiles])];
+    // js/popups.js is built from content/popups.json (Studio Editor): a hand edit or a stale build fails too.
+    const gen = [...new Set(['index.html', ...stackFiles, 'js/popups.js'])];
     for (const g of gen) {
       const a = path.join(ROOT, g), b = path.join(tmp, g);
       if (!fs.existsSync(a) || !fs.existsSync(b)) { warn(g, 'missing from build comparison'); continue; }

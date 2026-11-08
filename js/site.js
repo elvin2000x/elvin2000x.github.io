@@ -302,14 +302,17 @@
 })();
 
 /* ---------------- email popup (#388, 2026-09-28) ----------------
-   capture.js decides for itself where it may open (home + the free guides).
-   Loaded after the page, so it never touches first paint. */
+   js/popups.js (built from content/popups.json) says which pages get a popup and
+   with which words; capture.js shows it. Both load after the page, in that order
+   (async=false keeps dynamic scripts in sequence), so they never touch first paint. */
 (function () {
   function load() {
-    var s = document.createElement('script');
-    s.src = '/js/capture.js?v=1';
-    s.async = true;
-    document.body.appendChild(s);
+    ['/js/popups.js?v=1', '/js/capture.js?v=2'].forEach(function (src) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = false;
+      document.body.appendChild(s);
+    });
   }
   if (document.readyState === 'complete') load();
   else window.addEventListener('load', load);

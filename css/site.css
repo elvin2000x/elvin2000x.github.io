@@ -556,3 +556,64 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 .ep-video__mark{ position:absolute; left:50%; top:50%; z-index:1; transform:translate(-50%,-50%); width:68px; height:48px; display:flex; align-items:center; justify-content:center; background:var(--d-bg); color:var(--d-accent); border-radius:var(--r-sm); box-shadow:var(--shadow) }
 .ep-video__play:focus-visible{ outline:2px solid var(--accent-hi); outline-offset:3px }
 .ep-video__cap{ margin:12px 0 0; color:var(--ink-2) }
+
+/* ===================================================================
+   SECTION STYLES (Studio Editor, 2026-11-08). Site Studio's Style tab writes a
+   "style" object on a section; sections.js turns it into these ep-s-* classes on
+   the section's root (a free block is wrapped in .ep-s). Each rule doubles its
+   class so it outranks the frame's own .sec / .lp-sec / .in rules without
+   !important. A section with no style gets no class and no change.
+   =================================================================== */
+/* space above and below */
+.ep-s-space-s.ep-s-space-s{ padding-top:16px; padding-bottom:16px }
+.ep-s-space-m.ep-s-space-m{ padding-top:32px; padding-bottom:32px }
+.ep-s-space-l.ep-s-space-l{ padding-top:64px; padding-bottom:64px }
+.ep-s-space-xl.ep-s-space-xl{ padding-top:112px; padding-bottom:112px }
+.ep-s[class*=" ep-s-space-"] > .ep-block{ padding-top:0; padding-bottom:0 }
+@media (max-width:640px){
+  .ep-s-space-s.ep-s-space-s{ padding-top:12px; padding-bottom:12px }
+  .ep-s-space-m.ep-s-space-m{ padding-top:24px; padding-bottom:24px }
+  .ep-s-space-l.ep-s-space-l{ padding-top:40px; padding-bottom:40px }
+  .ep-s-space-xl.ep-s-space-xl{ padding-top:64px; padding-bottom:64px }
+}
+/* width of the inner column */
+.ep-s-width-text.ep-s-width-text .in, .ep-s-width-text.ep-s-width-text .in--wide, .ep-s-width-text.ep-s-width-text .lp-in, .ep-s-width-text.ep-s-width-text > .ep-block{ max-width:var(--w-text) }
+.ep-s-width-wide.ep-s-width-wide .in, .ep-s-width-wide.ep-s-width-wide .in--wide, .ep-s-width-wide.ep-s-width-wide .lp-in, .ep-s-width-wide.ep-s-width-wide > .ep-block{ max-width:var(--w-wide) }
+.ep-s-width-full.ep-s-width-full .in, .ep-s-width-full.ep-s-width-full .in--wide, .ep-s-width-full.ep-s-width-full .lp-in, .ep-s-width-full.ep-s-width-full > .ep-block{ max-width:none }
+/* background band */
+.ep-s-band-none.ep-s-band-none{ background:transparent }
+.ep-s-band-pale.ep-s-band-pale{ background:var(--bg-2) }
+.lp .ep-s-band-pale.ep-s-band-pale{ background:var(--lp-band, var(--bg-2)) }
+.ep-s-band-dark.ep-s-band-dark{ background:var(--d-bg); color:var(--d-ink) }
+.ep-s-band-dark.ep-s-band-dark h1, .ep-s-band-dark.ep-s-band-dark h2, .ep-s-band-dark.ep-s-band-dark h3, .ep-s-band-dark.ep-s-band-dark p,
+.ep-s-band-dark.ep-s-band-dark li, .ep-s-band-dark.ep-s-band-dark .lp-lede, .ep-s-band-dark.ep-s-band-dark .lp-note,
+.ep-s-band-dark.ep-s-band-dark figcaption, .ep-s-band-dark.ep-s-band-dark blockquote{ color:var(--d-ink) }
+.ep-s-band-dark.ep-s-band-dark .eyebrow, .ep-s-band-dark.ep-s-band-dark .lp-eyebrow, .ep-s-band-dark.ep-s-band-dark a:not(.btn){ color:var(--d-accentink) }
+.ep-s-band-dark.ep-s-band-dark .btn--ghost{ border-color:var(--d-ink); color:var(--d-ink) }
+/* heading size */
+.ep-s-heading-s.ep-s-heading-s h1, .ep-s-heading-s.ep-s-heading-s h2{ font-size:clamp(22px, 3.2vw, 30px) }
+.ep-s-heading-m.ep-s-heading-m h1, .ep-s-heading-m.ep-s-heading-m h2{ font-size:clamp(28px, 4.4vw, 40px) }
+.ep-s-heading-l.ep-s-heading-l h1, .ep-s-heading-l.ep-s-heading-l h2{ font-size:clamp(38px, 6vw, 60px) }
+/* text colour: ink, muted, or the gold that passes contrast (--accent-ink, never the fill) */
+.ep-s-ink-ink.ep-s-ink-ink p, .ep-s-ink-ink.ep-s-ink-ink li, .ep-s-ink-ink.ep-s-ink-ink .lp-lede, .ep-s-ink-ink.ep-s-ink-ink .lp-note, .ep-s-ink-ink.ep-s-ink-ink .hero-sub, .ep-s-ink-ink.ep-s-ink-ink .trust{ color:var(--ink); opacity:1 }
+.ep-s-ink-muted.ep-s-ink-muted p, .ep-s-ink-muted.ep-s-ink-muted li, .ep-s-ink-muted.ep-s-ink-muted .lp-lede, .ep-s-ink-muted.ep-s-ink-muted .lp-note, .ep-s-ink-muted.ep-s-ink-muted .hero-sub, .ep-s-ink-muted.ep-s-ink-muted .trust{ color:var(--muted); opacity:1 }
+.ep-s-ink-accent.ep-s-ink-accent p, .ep-s-ink-accent.ep-s-ink-accent li, .ep-s-ink-accent.ep-s-ink-accent .lp-lede, .ep-s-ink-accent.ep-s-ink-accent .lp-note, .ep-s-ink-accent.ep-s-ink-accent .hero-sub, .ep-s-ink-accent.ep-s-ink-accent .trust{ color:var(--accent-ink); opacity:1 }
+/* text alignment (button rows follow) */
+.ep-s-align-left.ep-s-align-left{ text-align:left }
+.ep-s-align-center.ep-s-align-center{ text-align:center }
+.ep-s-align-right.ep-s-align-right{ text-align:right }
+.ep-s-align-left.ep-s-align-left .ep-row{ justify-content:flex-start }
+.ep-s-align-center.ep-s-align-center .ep-row{ justify-content:center }
+.ep-s-align-right.ep-s-align-right .ep-row{ justify-content:flex-end }
+/* button size */
+.ep-s-button-regular.ep-s-button-regular .btn{ min-height:var(--tap); padding:0 22px; font-size:var(--fs-body) }
+.ep-s-button-large.ep-s-button-large .btn{ min-height:56px; padding:0 30px; font-size:var(--fs-lead) }
+.ep-s-button-full.ep-s-button-full .btn{ display:flex; width:100%; min-height:56px; padding:0 30px; font-size:var(--fs-lead); white-space:normal; text-align:center }
+/* image size and alignment: the section's pictures, not list thumbnails or the video poster */
+.ep-s-image-s.ep-s-image-s img:not(li img):not(.ep-video__play img){ display:block; width:100%; max-width:240px; height:auto; max-height:none }
+.ep-s-image-m.ep-s-image-m img:not(li img):not(.ep-video__play img){ display:block; width:100%; max-width:480px; height:auto; max-height:none }
+.ep-s-image-l.ep-s-image-l img:not(li img):not(.ep-video__play img){ display:block; width:100%; max-width:720px; height:auto; max-height:none }
+.ep-s-image-full.ep-s-image-full img:not(li img):not(.ep-video__play img){ display:block; width:100%; max-width:100%; height:auto; max-height:none }
+.ep-s-imgalign-left.ep-s-imgalign-left img:not(li img):not(.ep-video__play img){ display:block; margin-left:0; margin-right:auto; justify-self:start }
+.ep-s-imgalign-center.ep-s-imgalign-center img:not(li img):not(.ep-video__play img){ display:block; margin-left:auto; margin-right:auto; justify-self:center }
+.ep-s-imgalign-right.ep-s-imgalign-right img:not(li img):not(.ep-video__play img){ display:block; margin-left:auto; margin-right:0; justify-self:end }

@@ -1,0 +1,61 @@
+{
+  "_comment": "Every popup on the site: words, picture, the pages it opens on and when. Edited in Site Studio > Website > Popups. build.js writes js/popups.js from it; js/capture.js shows the popup. The two entries below are the live popup as it was in js/capture.js before 2026-11-08, word for word.",
+  "popups": [
+    {
+      "id": "home",
+      "name": "Homepage popup",
+      "on": true,
+      "pages": [
+        "/"
+      ],
+      "except": [],
+      "trigger": {
+        "exit": true,
+        "scroll": 50,
+        "delay": 30
+      },
+      "source": "newsletter-popup",
+      "message": "Popup: free chapter + monthly letter",
+      "image": "",
+      "image_alt": "",
+      "eyebrow": "Stop prompting. Start directing.",
+      "heading": "Get better answers from the AI you already use",
+      "text": "Get Chapter 8 of The Artificial Advantage free, plus 50 prompts and a cheat sheet. Then one letter a month from me.",
+      "button": "Send me the chapter",
+      "success": "Check your inbox and click confirm. Your free chapter, 50 prompts and cheat sheet come next.",
+      "dismiss": "Maybe later",
+      "fine": "You'll get a few welcome emails and a monthly letter from Elvin Peters. Unsubscribe anytime. Questions: elvin@elvinpeters.com"
+    },
+    {
+      "id": "guides",
+      "name": "Free guide pages popup",
+      "on": true,
+      "pages": [
+        "/free/",
+        "/free/*"
+      ],
+      "except": [
+        "/free/link-expired/"
+      ],
+      "trigger": {
+        "exit": true,
+        "scroll": 50,
+        "delay": 30
+      },
+      "source": "page",
+      "hub_source": "magnet:directors-cheat-sheet",
+      "hub_name": "The Director's Cheat Sheet",
+      "guide_message": "Lead magnet: {guide}",
+      "message": "Popup: free chapter + monthly letter",
+      "image": "",
+      "image_alt": "",
+      "eyebrow": "{guide}",
+      "heading": "Keep it for the day you need it",
+      "text": "I'll email it to you so it's in your inbox when that day comes, along with my monthly letter.",
+      "button": "Email it to me",
+      "success": "Check your inbox and click confirm. Your guide comes next.",
+      "dismiss": "Maybe later",
+      "fine": "You'll get a few welcome emails and a monthly letter from Elvin Peters. Unsubscribe anytime. Questions: elvin@elvinpeters.com"
+    }
+  ]
+}
