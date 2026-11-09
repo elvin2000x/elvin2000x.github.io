@@ -431,7 +431,8 @@ body.lp .lp-stack--co .lp-bump{ padding:12px 14px; margin:0 }
 @media (max-width:767px){
   .lp-stack--co .lp-stack__items{ padding:8px 12px }
   body.lp .lp-stack--co .lp-stack__name, body.lp .lp-stack--co .lp-stack__value{ font-size:16px }
-  .lp-stack--co .lp-stack__name{ overflow-wrap:anywhere }
+  .lp-stack--co .lp-stack__name{ overflow-wrap:normal; word-break:normal; hyphens:none; min-width:0; flex:1 1 0 }
+  body.lp .lp-stack--co .lp-stack__items img{ width:48px; height:77px }
 }
 .lp-funnel-offer-rows li:has(img){ min-height:106px }
 body.lp .lp-stack:not(.lp-stack--co) .lp-stack__items img{ width:56px; height:90px; object-fit:cover; border-radius:3px }
