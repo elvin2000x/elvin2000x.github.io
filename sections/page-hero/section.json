@@ -1,0 +1,16 @@
+{
+  "label": "Page hero (link button)",
+  "about": "The first screen of a service or offer page: the headline, one or two lines under it and a button that links somewhere (a form, a booking page). No checkout, no image.",
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor id (optional)" },
+    { "key": "eyebrow", "type": "text", "label": "Small line above the headline (optional)" },
+    { "key": "headline", "type": "html", "label": "Headline" },
+    { "key": "sub", "type": "html", "label": "Line under the headline" },
+    { "key": "more", "type": "html", "label": "Second line (optional)" },
+    { "key": "button", "type": "object", "label": "Button", "fields": [
+      { "key": "label", "type": "text", "label": "Words" },
+      { "key": "href", "type": "text", "label": "Link" }
+    ] },
+    { "key": "note", "type": "html", "label": "Small print under the button (optional)" }
+  ]
+}
