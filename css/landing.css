@@ -455,3 +455,9 @@ body.lp .lp-pay .lp-bump--offer{ position:relative; margin-top:16px; font-weight
 
 /* checkout: the pay button stays in the flow now that the add-on sits above it */
 @media (max-width:767px){ .lp-stack--co .lp-cta{ position:static; box-shadow:none } }
+
+/* Workbook sample: one Day 1 page at the text-column width */
+#workbook-sample .lp-in{ max-width:720px }
+#workbook-sample .lp-image img{ width:100%; max-width:720px; margin:0 auto; border:1px solid var(--lp-line, #c7d2dd) }
+/* Step 0 and every landing button stays inside the screen on a phone */
+@media (max-width:767px){ body.lp .lp-cta, body.lp .lp-hero .btn--primary, body.lp .btn--lg{ max-width:100%; box-sizing:border-box } }
