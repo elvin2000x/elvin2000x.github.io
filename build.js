@@ -319,6 +319,18 @@ for (const p of stackPages) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, html);
 }
+// Popups (Studio Editor, 2026-11-08): content/popups.json becomes js/popups.js, which
+// js/site.js loads before js/capture.js. The funnel folder never gets a popup.
+{
+  const POP = require('./popups.js');
+  const pf = path.join(DIR, 'content', 'popups.json');
+  const pops = fs.existsSync(pf) ? JSON.parse(fs.readFileSync(pf, 'utf8')) : { popups: [] };
+  const perrs = POP.check(pops, require('./sections.js').funnelSettings(path.join(DIR, 'content')).prefix);
+  if (perrs.length) throw new Error('content/popups.json: ' + perrs.join('; '));
+  fs.mkdirSync(path.join(OUT, 'js'), { recursive: true });
+  fs.writeFileSync(path.join(OUT, 'js', 'popups.js'), POP.render(pops));
+  console.log('Popups: ' + pops.popups.filter(p => p.on).length + ' on of ' + pops.popups.length + ' (js/popups.js)');
+}
 console.log('Stack pages: ' + stackPages.map(p => p.file + ' (' + p.name + (p.stub ? ', redirect' : '') + ')').join(', '));
 // book.html (nav) no longer applied: the page is a redirect stub since 2026-09-27.
 // Every other page in nav.json gets its nav from the same renderer, so the menu
