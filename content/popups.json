@@ -11,8 +11,8 @@
       "except": [],
       "trigger": {
         "exit": true,
-        "scroll": 50,
-        "delay": 30
+        "scroll": 60,
+        "delay": 0
       },
       "source": "newsletter-popup",
       "message": "Popup: free chapter + monthly letter",

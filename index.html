@@ -234,9 +234,94 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     footer.foot nav{ display:flex; flex-wrap:wrap; gap:4px 18px }
     footer.foot a{ color:var(--ink-2); text-decoration:none; min-height:var(--tap); display:inline-flex; align-items:center }
     footer.foot a:hover{ color:var(--accent-ink) }
+
+    /* ---- 2026-11-08 homepage clean-up (HOMEPAGE-SPEC-2026-11-08): the funnel type scale, the first screen,
+       the carousel at one height, the Amazon line once at the bottom. Sizes in use: 56 36 28 20 19 18 16 14. ---- */
+    :root{ --accent-ink:#8a5a14; --hp-navy:#0a1828; --hp-gold:#c9a250; --hp-band:#f0f5fa; --hp-line:#c7d2dd }
+    body{ font-size:19px; line-height:1.47 }
+    @media(min-width:768px){ body{ line-height:1.58 } }
+    .sec{ padding:40px 16px }
+    @media(min-width:768px){ .sec{ padding:72px 24px } }
+    .in{ max-width:720px }
+    .in--wide{ max-width:1040px }
+    main > section:nth-of-type(odd){ background:#fff }
+    main > section:nth-of-type(even){ background:var(--hp-band) }
+    .sec h2{ font-size:28px; line-height:1.21; margin:0 0 16px }
+    @media(min-width:768px){ .sec h2{ font-size:36px; line-height:1.17 } }
+    .eyebrow, .vp, .chat-h, .ds-chip, .part .pn, .timer{ font-size:14px }
+    .lede{ font-size:19px; line-height:1.42 }
+    @media(min-width:768px){ .lede{ font-size:20px; line-height:1.5 } }
+    .sec p.value{ font-size:20px }
+    .pullline{ font-size:28px }
+    .ds-title{ font-size:28px; line-height:1.3 }
+    .part .pt, .who b, .friends blockquote{ font-size:20px }
+    .quote h3{ font-size:28px }
+    .quote p, .who span{ font-size:19px; line-height:1.5 }
+    .quote .meta, .part ul, .faq summary{ font-size:18px }
+    .faq summary{ font-size:19px }
+    .part ul{ font-size:19px }
+    .ds-reply{ font-size:16px }
+
+    /* one button: gold fill, navy border and label, 6px corners */
+    .btn--primary.buy{ background:var(--hp-gold); color:var(--hp-navy); border:2px solid var(--hp-navy); border-radius:6px; box-shadow:none; box-sizing:border-box; font-weight:700; filter:none }
+    .btn--primary.buy:hover{ background:var(--hp-navy); color:var(--hp-gold); filter:none }
+    .btn--primary.buy{ width:100%; max-width:400px; min-height:56px; font-size:20px; padding:0 16px }
+    @media(min-width:768px){ .btn--primary.buy{ width:400px; min-height:60px } }
+    .buyblock .price-line{ font-size:14px; line-height:1.43; margin:0; color:var(--ink); max-width:560px }
+    .buyblock .price-line s{ font-size:16px }
+    .buyblock .price-line b{ font-size:20px; font-weight:700 }
+    .sample{ font-size:18px; font-weight:600; color:#8a5a14 }
+
+    /* the first screen: headline, line, button and its line; the book beside it on a desktop */
+    .hero{ background:var(--hp-band); padding:24px 16px 40px }
+    .hero .in--wide{ max-width:1120px; display:grid; grid-template-columns:minmax(0,1fr); gap:0; align-items:start }
+    .hero .in--wide > div:first-child, .hero .buyblock{ display:contents }
+    .hero h1{ order:1; font-size:36px; line-height:1.11; margin:0 0 16px }
+    .hero h1 span{ color:#8a5a14 }
+    .hero-sub{ order:2; font-size:19px; line-height:1.42; margin:0 0 20px; max-width:none }
+    .hero .buy{ order:3; margin:0 0 12px }
+    .hero .price-line{ order:4 }
+    .hero .hero-art{ order:5; margin:24px 0 8px }
+    .hero .hero-art img{ width:220px; height:auto }
+    .hero .trust{ order:6; font-size:16px; line-height:1.5; color:var(--ink); border-top:1px solid var(--hp-line); padding-top:16px; margin:16px 0 0; max-width:560px }
+    .hero .sample{ order:7; margin:12px 0 0; justify-self:center; min-height:44px }
+    @media(min-width:900px){
+      .hero{ padding:56px 24px 64px }
+      .hero .in--wide{ grid-template-columns:minmax(0,560px) minmax(0,400px); column-gap:80px; justify-content:center }
+      .hero h1{ font-size:56px; line-height:1.1; grid-column:1 }
+      .hero-sub{ font-size:20px; line-height:1.5; grid-column:1; max-width:560px }
+      .hero .buy{ grid-column:1; justify-self:start }
+      .hero .price-line{ grid-column:1 }
+      .hero .sample{ order:5; grid-column:1; justify-self:start; margin:16px 0 0 }
+      .hero .trust{ order:6; grid-column:1; margin:20px 0 0 }
+      .hero .hero-art{ grid-column:2; grid-row:1 / span 7; margin:0; align-self:center }
+      .hero .hero-art img{ width:313px }
+    }
+
+    /* the before-and-after cards: equal height, the short card carries one pinned label */
+    .ds{ max-width:1040px }
+    .ds-pair{ display:grid; gap:16px; align-items:stretch }
+    @media(min-width:768px){ .ds-pair{ grid-template-columns:1fr 1.4fr; gap:32px } }
+    .chat{ display:flex; flex-direction:column; background:#fff; border:1px solid var(--hp-line); border-radius:8px; padding:20px }
+    @media(min-width:768px){ .chat{ padding:28px } }
+    .chat--after{ border:2px solid var(--hp-navy) }
+    .chat-h{ color:#8a5a14; margin-bottom:16px }
+    .bubble{ font-size:19px !important; line-height:1.5 }
+    .chat-out{ font-size:19px !important }
+    .chat-note{ margin:16px 0 0 !important; padding-top:16px; border-top:1px solid var(--hp-line); font-size:14px !important; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink) !important }
+    @media(min-width:768px){ .chat-note{ margin-top:auto !important } }
+
+    /* the Amazon line, once */
+    .amz-strip{ padding:28px 16px }
+    .amz-strip .avail{ justify-content:center; font-size:16px; color:var(--ink) }
+    .author .role{ font-size:16px }
+    .part .pi{ font-size:20px }
+    .sec .oi-note, .oi-note{ font-size:14px }
+    footer.foot{ font-size:14px }
+    footer.foot a{ font-size:14px }
   </style>
 </head>
-<body>
+<body class="hp">
 
 <!-- ep:nav (homepage v3: three links plus an always-visible buy button) -->
 <link rel="stylesheet" href="/css/header.css">
@@ -248,7 +333,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <a href="/newsletter/">Newsletter</a>
     <a href="/contact/">Contact</a>
   </div>
-  <a class="nav-buy" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Get the book on Amazon">Get the book</a>
+  <a class="nav-buy" href="/book/offer/" aria-label="Get the bundle">Get the bundle</a>
 </div></nav>
 <!-- /ep:nav -->
 
@@ -259,18 +344,18 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="in--wide">
     <div>
       <h1 id="hl">You tried AI.<br/><span>You weren't impressed.</span></h1>
-      <p class="hero-sub" id="sub">AI gives generic answers because it has to guess what you want. This book shows you how to get the right answers.</p>
+      <p class="hero-sub" id="sub">Learn to brief AI the way you would brief a capable new colleague, one real work task at a time.</p>
       <!-- #hook: third line of every ?aud= / ?v= ad segment (DTR script below). Empty by default. -->
       <p class="hero-sub" id="hook" style="font-weight:600;color:var(--ink)"></p>
       <div class="buyblock ">
-        <a class="btn btn--primary buy amz-btn " href="/book/offer/">Get the bundle</a>
-        <div class="avail"><a class="badge-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>Kindle, paperback and hardcover · 198 pages in print</span></div>
+        <a class="btn btn--primary buy amz-btn " href="/book/offer/">Get the bundle for $27</a>
+        <p class="price-line"><s>$71.99</s> <b>$27</b>, paid once. 30-day money-back promise.</p>
         <a class="sample" href="/free/free-chapter/">Or read Chapter 8 free first &rarr;</a>
       </div>
-      <p class="trust">Worked a decade in marketing, worked in big tech, and taught myself to build with AI</p>
+      <p class="trust">Ran paid media for two regulated brands at about $1.5M a month, then advised large advertisers at an ad tech company.</p>
     </div>
     <div class="hero-art">
-      <img src="/img/book-3d.webp" alt="The Artificial Advantage by Elvin M. Peters, paperback" width="686" height="1140" fetchpriority="high">
+      <img src="/img/book-3d-hero.webp" alt="The Artificial Advantage by Elvin M. Peters, paperback" width="686" height="1140" fetchpriority="high">
     </div>
   </div>
 </header>
@@ -307,6 +392,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <div class="chat-h"><span>Asked</span></div>
             <p class="bubble ds-bubble">write me a proposal for a new marketing project for a client thanks</p>
             <p class="chat-out">AI knows nothing about the client, so it guesses.</p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span><b class="ds-chip ds-chip--good">90 percent right</b></div>
@@ -329,6 +415,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <div class="chat-h"><span>Asked</span><b class="ds-chip">Forgettable</b></div>
             <p class="bubble ds-bubble">give me three taglines for our launch deck something catchy</p>
             <p class="chat-out">Back came <span class="iq">&ldquo;Work Smarter, Not Harder.&rdquo;</span></p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span></div>
@@ -346,6 +433,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <div class="chat-h"><span>Asked</span></div>
             <p class="bubble ds-bubble">got a stakeholder meeting coming up can you help me get ready for it</p>
             <p class="chat-out"><span class="iq">&ldquo;Stakeholder meeting&rdquo;</span> tells AI nothing useful.</p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span></div>
@@ -364,6 +452,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <p class="ds-file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5.5 5.5 0 0 1-7.8-7.8l8.6-8.6a3.7 3.7 0 0 1 5.2 5.2l-8.6 8.6a1.8 1.8 0 0 1-2.6-2.6l7.9-7.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>market-research-report.pdf</p>
             <p class="bubble ds-bubble">summarize this report whats important in it</p>
             <p class="chat-out">A summary that takes longer to read than it's worth.</p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span></div>
@@ -382,6 +471,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <div class="chat-h"><span>Asked</span></div>
             <p class="bubble ds-bubble">need to talk to someone on my team about a problem what do i even say</p>
             <p class="chat-out">AI softens the message until the point is lost.</p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span></div>
@@ -399,6 +489,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <div class="chat-h"><span>Asked</span></div>
             <p class="bubble ds-bubble">make this better it doesnt sound right</p>
             <p class="chat-out">The changes are cosmetic and often miss what was wrong.</p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span></div>
@@ -416,6 +507,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <div class="chat-h"><span>Asked</span></div>
             <p class="bubble ds-bubble">write me a marketing plan cover all the bases</p>
             <p class="chat-out">AI goes broad and never gets specific.</p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span></div>
@@ -433,6 +525,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <div class="chat-h"><span>Asked</span></div>
             <p class="bubble ds-bubble">help me write a performance review for my direct report what should i put in it</p>
             <p class="chat-out">Flattering filler that you then have to strip out.</p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span></div>
@@ -450,6 +543,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <div class="chat-h"><span>Asked</span></div>
             <p class="bubble ds-bubble">can you go through this employee survey and tell me the main takeaways</p>
             <p class="chat-out">A list of what came up most often.</p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span></div>
@@ -467,6 +561,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             <div class="chat-h"><span>Asked</span></div>
             <p class="bubble ds-bubble">can you look into the competition for my business whats out there</p>
             <p class="chat-out">An overview of the big names you already know.</p>
+            <p class="chat-note">The AI had to guess</p>
           </div>
           <div class="chat chat--after">
             <div class="chat-h"><span>Directed</span></div>
@@ -482,8 +577,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="in">
     <p class="pullline">Both people had the same tool. The second one had learned to direct it, and that is the skill this book teaches.</p>
     <div class="buyblock ">
-      <a class="btn btn--primary buy amz-btn " href="/book/offer/">Get the bundle</a>
-      <div class="avail"><a class="badge-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>Kindle, paperback and hardcover · 198 pages in print</span></div>
+      <a class="btn btn--primary buy amz-btn " href="/book/offer/">Get the bundle for $27</a>
+      <p class="price-line"><s>$71.99</s> <b>$27</b>, paid once. 30-day money-back promise.</p>
     </div>
   </div>
 </section>
@@ -515,10 +610,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     </div>
     <p class="value">It costs less than a dinner out. If one idea in it saves you an hour a month, the book has paid for itself.</p>
     <div class="buyblock ">
-        <a class="btn btn--primary buy amz-btn " href="/book/offer/" aria-label="Get the bundle">Get the bundle</a>
-        <div class="avail"><a class="badge-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>Kindle, paperback and hardcover · 198 pages in print</span></div>
-        <a class="sample" href="/free/free-chapter/">Or read Chapter 8 free first &rarr;</a>
-      </div>
+      <a class="btn btn--primary buy amz-btn " href="/book/offer/">Get the bundle for $27</a>
+      <p class="price-line"><s>$71.99</s> <b>$27</b>, paid once. 30-day money-back promise.</p>
+      <a class="sample" href="/free/free-chapter/">Or read Chapter 8 free first &rarr;</a>
+    </div>
   </div>
 </section>
 
@@ -566,8 +661,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <p class="lede"><em>The Artificial Advantage</em> shows you how, one real work task at a time.</p>
       <p class="value">It costs less than a dinner out. If one idea in it saves you an hour a month, the book has paid for itself.</p>
       <div class="buyblock ">
-        <a class="btn btn--primary buy amz-btn " href="/book/offer/">Get the bundle</a>
-        <div class="avail"><a class="badge-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy"><img class="amz-on-dark" src="/img/amazon/available-at-amazon-dark.png" alt="" width="640" height="104" loading="lazy"></a><span>Kindle, paperback and hardcover · 198 pages in print</span></div>
+        <a class="btn btn--primary buy amz-btn " href="/book/offer/">Get the bundle for $27</a>
+        <p class="price-line"><s>$71.99</s> <b>$27</b>, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars.</p>
         <a class="sample" href="/free/free-chapter/">Or read Chapter 8 free first &rarr;</a>
       </div>
     </div>
@@ -607,6 +702,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   </div>
 </section>
 
+<!-- Also sold on Amazon: one strip at the bottom (the words are the ones that sat under the buttons) -->
+<section class="sec amz-strip">
+  <div class="in--wide">
+    <div class="avail"><a class="badge-btn" data-amazon href="https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20" target="_blank" rel="noopener" aria-label="Available at Amazon"><img class="amz-on-light" src="/img/amazon/available-at-amazon-light.png" alt="Available at Amazon" width="640" height="104" loading="lazy"></a><span>Kindle, paperback and hardcover · 198 pages in print</span></div>
+  </div>
+</section>
+
 </main>
 
 <footer class="foot">
@@ -621,7 +723,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <a href="/privacy.html">Privacy</a>
     </nav>
   </div>
-<p class="amz-disclosure" style="flex-basis:100%;width:100%;font-size:12px;margin:10px 0 0;opacity:.85">As an Amazon Associate I earn from qualifying purchases.</p>
+<p class="amz-disclosure" style="flex-basis:100%;width:100%;font-size:14px;margin:10px 0 0">As an Amazon Associate I earn from qualifying purchases.</p>
 </footer>
 
 <script>
@@ -634,7 +736,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   });
 
   /* Demo slider (#546): native swipe via scroll-snap, arrows step one slide, dots follow.
-     Never advances by itself. The track takes the height of the slide in view. */
+     Never advances by itself. The track takes the height of the tallest slide, so the page does not jump. */
   document.querySelectorAll('[data-slider]').forEach(function (root) {
     var track = root.querySelector('.ds-track');
     var slides = [].slice.call(track.querySelectorAll('.ds-slide'));
@@ -643,7 +745,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     var n = slides.length, cur = -1;
     slides.forEach(function (s, i) { s.setAttribute('aria-label', (i + 1) + ' of ' + n); });
     function at() { return Math.max(0, Math.min(n - 1, Math.round(track.scrollLeft / (track.clientWidth || 1)))); }
-    function fit() { if (slides[cur]) track.style.height = slides[cur].offsetHeight + 'px'; }
+    function fit() { var h = 0; slides.forEach(function (s) { h = Math.max(h, s.offsetHeight); }); if (h) track.style.height = h + 'px'; }
     function show(i) {
       if (i !== cur) {
         cur = i;

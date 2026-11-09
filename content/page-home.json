@@ -10,24 +10,24 @@
         "anchor": "",
         "eyebrow": "",
         "headline": "You tried AI.<br/><span>You weren't impressed.</span>",
-        "sub": "AI gives generic answers because it has to guess what you want. This book shows you how to get the right answers.",
+        "sub": "Learn to brief AI the way you would brief a capable new colleague, one real work task at a time.",
         "hook_note": "third line of every ?aud= / ?v= ad segment (DTR script below). Empty by default.",
         "review": null,
         "buy": {
           "spaced": true,
           "style": "",
           "bid": "",
-          "aria": "Get the bundle",
-          "label": "Get the bundle",
+          "aria": "Get the bundle for $27",
+          "label": "Get the bundle for $27",
           "href": "/book/offer/",
           "eager": true,
-          "avail": "Kindle, paperback and hardcover · 198 pages in print",
-          "price": "",
+          "avail": "",
+          "price": "<s>$71.99</s> <b>$27</b>, paid once. 30-day money-back promise.",
           "sample_href": "/free/free-chapter/",
           "sample": "Or read Chapter 8 free first &rarr;"
         },
-        "trust": "Worked a decade in marketing, worked in big tech, and taught myself to build with AI",
-        "image": "/img/book-3d.webp",
+        "trust": "Ran paid media for two regulated brands at about $1.5M a month, then advised large advertisers at an ad tech company.",
+        "image": "/img/book-3d-hero.webp",
         "image_alt": "The Artificial Advantage by Elvin M. Peters, paperback"
       }
     },
@@ -39,9 +39,9 @@
       "data": {
         "anchor": "",
         "align": "center",
-        "heading": "",
+        "heading": "Hello from Elvin",
         "url": "",
-        "caption": "",
+        "caption": "Elvin Peters, author of The Artificial Advantage.",
         "poster": "",
         "poster_alt": ""
       }
@@ -189,15 +189,16 @@
           "spaced": true,
           "style": "",
           "bid": "",
-          "aria": "Get the bundle",
-          "label": "Get the bundle",
+          "aria": "Get the bundle for $27",
+          "label": "Get the bundle for $27",
           "href": "/book/offer/",
           "eager": false,
-          "avail": "Kindle, paperback and hardcover · 198 pages in print",
-          "price": "",
+          "avail": "",
+          "price": "<s>$71.99</s> <b>$27</b>, paid once. 30-day money-back promise.",
           "sample_href": "",
           "sample": ""
-        }
+        },
+        "short_label": "The AI had to guess"
       }
     },
     {
@@ -271,12 +272,13 @@
         "value": "It costs less than a dinner out. If one idea in it saves you an hour a month, the book has paid for itself.",
         "buy": {
           "spaced": true,
-          "aria": "Get the bundle",
-          "label": "Get the bundle",
+          "aria": "Get the bundle for $27",
+          "label": "Get the bundle for $27",
           "href": "/book/offer/",
-          "avail": "Kindle, paperback and hardcover · 198 pages in print",
+          "avail": "",
           "sample_href": "/free/free-chapter/",
-          "sample": "Or read Chapter 8 free first &rarr;"
+          "sample": "Or read Chapter 8 free first &rarr;",
+          "price": "<s>$71.99</s> <b>$27</b>, paid once. 30-day money-back promise."
         }
       }
     },
@@ -361,12 +363,12 @@
           "spaced": true,
           "style": "",
           "bid": "",
-          "aria": "Get the bundle",
-          "label": "Get the bundle",
+          "aria": "Get the bundle for $27",
+          "label": "Get the bundle for $27",
           "href": "/book/offer/",
           "eager": false,
-          "avail": "Kindle, paperback and hardcover · 198 pages in print",
-          "price": "",
+          "avail": "",
+          "price": "<s>$71.99</s> <b>$27</b>, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars.",
           "sample_href": "/free/free-chapter/",
           "sample": "Or read Chapter 8 free first &rarr;"
         },
@@ -426,6 +428,15 @@
           }
         ],
         "buy": null
+      }
+    },
+    {
+      "id": "amazon-strip",
+      "type": "amazon-strip",
+      "note": "Also sold on Amazon: one strip at the bottom (the words are the ones that sat under the buttons)",
+      "data": {
+        "anchor": "",
+        "text": "Kindle, paperback and hardcover · 198 pages in print"
       }
     }
   ]

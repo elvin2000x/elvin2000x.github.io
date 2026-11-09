@@ -46,7 +46,7 @@ function renderNavBuybar(pg) {
     ...(pg.links || NAVC.links).map(l => `${ind}    <a href="${l.href}"` +
       `${pg.active && l.href === pg.active ? ' aria-current="page"' : ''}${EXT(l)}>${esc(l.label)}</a>`),
     `${ind}  </div>`,
-    `${ind}  <a class="nav-buy"${c.amazon ? ' data-amazon' : ''} href="${c.href}" target="_blank" rel="noopener"` +
+    `${ind}  <a class="nav-buy"${c.amazon ? ' data-amazon' : ''} href="${c.href}"${/^https?:/.test(c.href) ? ' target="_blank" rel="noopener"' : ''}` +
       `${c.aria ? ` aria-label="${attrq(c.aria)}"` : ''}>${esc(c.label)}</a>`);
   out.push(`${ind}</div></nav>`);
   return out.join('\n');

@@ -34,6 +34,11 @@
       "label": "Intro line"
     },
     {
+      "key": "short_label",
+      "type": "text",
+      "label": "Label at the bottom of each Asked card (optional)"
+    },
+    {
       "key": "slides",
       "type": "list",
       "label": "Slides (in order; the first one shows on arrival)",

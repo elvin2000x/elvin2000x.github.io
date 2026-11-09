@@ -1,0 +1,19 @@
+{
+  "label": "Also sold on Amazon (strip)",
+  "about": "One quiet line with the Amazon badge, at the bottom of the homepage.",
+  "frames": [
+    "home-v3"
+  ],
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "text",
+      "type": "text",
+      "label": "Line next to the badge"
+    }
+  ]
+}

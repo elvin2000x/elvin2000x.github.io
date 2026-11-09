@@ -297,7 +297,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
             hh.className = 'lp-stack__group lp-stack__group--row'; hn.className = 'lp-stack__name'; hn.textContent = r.group_name || r.name; hv.className = 'lp-stack__value';
             if (r.standalone_price) { var hs = document.createElement('s'); hs.textContent = r.standalone_price_text || money(r.standalone_price); hv.appendChild(hs); total += r.standalone_price; }
             if (label) { var he = document.createElement('em'); he.textContent = ' ' + label; hv.appendChild(he); }
-            if (thumbs[r.key]) { var ti = document.createElement('img'); ti.src = thumbs[r.key]; ti.alt = ''; ti.width = 56; ti.height = 90; ti.loading = 'lazy'; hh.appendChild(ti); }
+            if (thumbs[r.key]) { var ti = document.createElement('img'); ti.src = thumbs[r.key]; ti.alt = ''; ti.width = 56; ti.height = 90; ti.loading = 'eager'; hh.appendChild(ti); }
             hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group;
             if (r._parts && r._parts.length) { var pl = document.createElement('li'); pl.className = 'lp-stack__parts'; pl.textContent = r._parts.join(', '); ul.appendChild(pl); }
             return;
@@ -311,7 +311,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           else if (r.status === 'included' || !r.standalone_price) { v.textContent = hasLabel ? r.label : (box.getAttribute('data-included') || ''); }
           else if (struck) { var s2 = document.createElement('s'); s2.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s2); var em = document.createElement('em'); em.textContent = ' ' + label; v.appendChild(em); total += r.standalone_price; }
           else { v.textContent = r.standalone_price_text || money(r.standalone_price); total += r.standalone_price; }
-          if (thumbs[r.key]) { var im2 = document.createElement('img'); im2.src = thumbs[r.key]; im2.alt = ''; im2.width = 56; im2.height = 90; im2.loading = 'lazy'; li.appendChild(im2); }
+          if (thumbs[r.key]) { var im2 = document.createElement('img'); im2.src = thumbs[r.key]; im2.alt = ''; im2.width = 56; im2.height = 90; im2.loading = 'eager'; li.appendChild(im2); }
           li.appendChild(n); li.appendChild(v); ul.appendChild(li);
         });
         [].forEach.call(document.querySelectorAll('[data-lp-total-all]'), function (el) { el.textContent = money(total); });

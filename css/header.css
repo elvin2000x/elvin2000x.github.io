@@ -101,3 +101,6 @@
   .nav .links a, .nav .links a.langtog{ display:none }
   .nav .nav-buy{ margin-left:auto }
 }
+/* Homepage (2026-11-08): the nav button is the funnel button, gold fill, navy border and label, 6px corners, 44 high */
+body.hp .nav .nav-buy{ min-height:44px; padding:0 16px; font:700 16px/1 var(--hd-sans); background:#c9a250; color:#0a1828; border:2px solid #0a1828; border-radius:6px; box-shadow:none; box-sizing:border-box }
+body.hp .nav .nav-buy:hover{ background:#0a1828; color:#c9a250; filter:none }

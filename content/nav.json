@@ -107,9 +107,9 @@
   }
  ],
  "cta": {
-  "label": "Get the book",
-  "href": "https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20",
-  "ext": true
+  "label": "Get the bundle",
+  "href": "/book/offer/",
+  "aria": "Get the bundle"
  },
  "pages": {
   "index.html": {
@@ -132,10 +132,9 @@
     }
    ],
    "cta": {
-    "label": "Get the book",
-    "href": "https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20",
-    "amazon": true,
-    "aria": "Get the book on Amazon"
+    "label": "Get the bundle",
+    "href": "/book/offer/",
+    "aria": "Get the bundle"
    }
   },
   "series/index.html": {
@@ -320,10 +319,9 @@
     }
    ],
    "cta": {
-    "label": "Get the book",
-    "href": "https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20",
-    "amazon": true,
-    "aria": "Get the book on Amazon"
+    "label": "Get the bundle",
+    "href": "/book/offer/",
+    "aria": "Get the bundle"
    }
   },
   "free/index.html": {
