@@ -29,7 +29,7 @@
           "sample_href": "/free/free-chapter/",
           "sample": "Read Chapter 8 free: which AI mode fits which job &rarr;"
         },
-        "trust": "By <strong>Elvin M. Peters</strong>, who ran $50M+ in profitable ad spend and then advised the media teams at big advertisers for an adtech giant building AI.",
+        "trust": "By <strong>Elvin M. Peters</strong>, who ran more than $50M in digital ad spend and then advised large advertisers on how to grow their business at a tech company building one of the leading AIs.",
         "image": "/img/book-3d.webp",
         "image_alt": "The Artificial Advantage by Elvin M. Peters, paperback"
       }
@@ -718,13 +718,13 @@
         "intro": "I spent a decade in marketing, most of it teaching ad algorithms what good results looked like. On both sides of the table I met capable people getting a fraction of what AI could give them, so I wrote this book for them.",
         "cards": [
           {
-            "tag": "At a large Canadian fintech",
-            "title": "I ran $50M+ in profitable ad spend over three years.",
+            "tag": "For two regulated lending brands",
+            "title": "I ran more than $50M in digital ad spend over three years.",
             "body": "<ul>\n          <li>Cut the cost per funded loan by more than half by teaching the bidding algorithms what a good customer looked like</li>\n          <li>Ran spend across two regulated brands, where every campaign passed legal review before launch</li>\n          <li>Hand-built 250+ location pages that brought in $74,000 in organic revenue within six months</li>\n        </ul>"
           },
           {
-            "tag": "At an adtech giant building AI",
-            "title": "I advised the media teams at big advertisers.",
+            "tag": "At a tech company building one of the leading AIs",
+            "title": "I advised large advertisers on how to grow their business.",
             "body": "<p>AI cut my account audits from hours to minutes. That freed my time for the part that needed a person: shaping the recommendation for each client.</p>"
           },
           {
