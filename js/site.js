@@ -375,7 +375,8 @@
       if (info.kind === 'youtube' && !btn.querySelector('img')) {
         var img = document.createElement('img');
         img.alt = '';
-        img.src = 'https://i.ytimg.com/vi/' + info.id + '/hqdefault.jpg';
+        img.width = 480; img.height = 360; img.decoding = 'async';
+        img.src ='https://i.ytimg.com/vi/' + info.id + '/hqdefault.jpg';
         btn.insertBefore(img, btn.firstChild);
       }
       btn.addEventListener('click', function () {

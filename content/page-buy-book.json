@@ -31,6 +31,20 @@
       }
     },
     {
+      "id": "video",
+      "type": "video",
+      "data": {
+        "anchor": "watch",
+        "align": "center",
+        "heading": "",
+        "url": "",
+        "caption": "",
+        "poster": "/img/store/ugc-hands-holding.webp",
+        "poster_alt": "A person holding The Artificial Advantage, cover facing the camera"
+      },
+      "note": "Video: paste the link in Video link. Nothing shows on the page until there is one."
+    },
+    {
       "id": "proofband",
       "type": "lp-proofband",
       "data": {
@@ -42,19 +56,6 @@
         "byline": "Elvin Peters, author of The Artificial Advantage",
         "cover": "/img/cover-hero.webp",
         "cover_alt": "Cover of The Artificial Advantage by Elvin M. Peters"
-      }
-    },
-    {
-      "id": "video",
-      "type": "video",
-      "data": {
-        "anchor": "watch",
-        "align": "center",
-        "heading": "",
-        "url": "",
-        "caption": "",
-        "poster": "/img/store/ugc-hands-holding.webp",
-        "poster_alt": "A person holding The Artificial Advantage, cover facing the camera"
       }
     },
     {

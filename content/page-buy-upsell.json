@@ -20,6 +20,20 @@
       }
     },
     {
+      "id": "video",
+      "type": "video",
+      "note": "Video: paste the link in Video link. Nothing shows on the page until there is one.",
+      "data": {
+        "anchor": "watch",
+        "align": "center",
+        "heading": "",
+        "url": "",
+        "caption": "",
+        "poster": "",
+        "poster_alt": ""
+      }
+    },
+    {
       "id": "ordered",
       "type": "lp-ordered",
       "data": {
