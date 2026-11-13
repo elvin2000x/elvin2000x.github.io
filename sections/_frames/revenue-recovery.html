@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="book">
+<head>
+  <meta charset="UTF-8" />
+{{#robots_off}}
+  <meta name="robots" content="noindex, nofollow" />
+{{/robots_off}}
+  <!-- Revenue Recovery frame (Mission Control #651, 2026-11-09): the chrome around
+       content/page-revenue-recovery.json. Same light sales-page look as the landing
+       frame (css/landing.css) without the store scripts, because nothing on this page
+       goes to a checkout: the one action is the intake form. Light only (Rule 34). -->
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CLZ7N26J1Q');
+  </script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1699232654449762');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1699232654449762&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Silent Revenue Recovery System, Toronto | Elvin Peters</title>
+  <meta name="description" content="Five automations that catch the money a Toronto business already earned the chance to collect: missed calls, slow replies, late invoices, reviews and a Monday numbers email. Installed in your own accounts for a one-time fee." />
+  <link rel="canonical" href="{{page_url}}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{page_url}}" />
+  <meta property="og:title" content="The Silent Revenue Recovery System, Toronto" />
+  <meta property="og:description" content="Five automations that catch missed calls, slow replies, late invoices and unasked reviews, installed in your own accounts for a one-time fee." />
+  <meta property="og:image" content="https://elvinpeters.com/cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <meta name="color-scheme" content="light" />
+  <link rel="stylesheet" href="/css/site.css" />
+  <link rel="stylesheet" href="/css/landing.css" />
+  <script src="/js/site.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Service","name":"The Silent Revenue Recovery System","serviceType":"Business automation install","areaServed":{"@type":"City","name":"Toronto"},"url":"{{page_url}}","provider":{"@type":"Person","name":"Elvin M. Peters","url":"https://elvinpeters.com/","sameAs":["https://www.linkedin.com/in/elvinmpeters"]}}
+  </script>
+{{#page.css}}
+  <style>{{page.css}}</style>
+{{/page.css}}
+</head>
+<body class="lp">
+
+<!-- ep:nav (the shared site header, filled by build.js) -->
+<!-- /ep:nav -->
+
+<main>
+
+{{sections}}
+
+</main>
+
+<footer class="lp-foot">
+  <div class="lp-in">
+    <span>&copy; 2026 Elvin M. Peters</span>
+    <nav aria-label="Footer">
+      <a href="/free/">Free Guides</a>
+      <a href="/newsletter/">Newsletter</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/tos.html">Terms</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
