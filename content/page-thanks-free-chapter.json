@@ -1,0 +1,122 @@
+{
+  "title": "Your free chapter",
+  "frame": "landing",
+  "noindex": true,
+  "landing": {
+    "slug": "thanks/free-chapter",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "Your free chapter is ready to download."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
+      "data": {
+        "anchor": "",
+        "eyebrow": "",
+        "headline": "Chapter 8 is yours. Here's what it doesn't cover.",
+        "sub": "",
+        "note": "",
+        "image": "",
+        "image_alt": ""
+      }
+    },
+    {
+      "id": "delivery",
+      "type": "button",
+      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "note": "A copy is on its way to your inbox.",
+        "buttons": [
+          {
+            "label": "Download Chapter 8 (PDF)",
+            "href": "/dl/The-Artificial-Advantage-Chapter-8.pdf",
+            "style": "ghost",
+            "checkout": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "video",
+      "type": "video",
+      "note": "Video: paste the link in Video link. Nothing shows on the page until there is one, and the button under it stays.",
+      "data": {
+        "anchor": "watch",
+        "align": "center",
+        "heading": "",
+        "url": "",
+        "caption": "",
+        "poster": "",
+        "poster_alt": ""
+      }
+    },
+    {
+      "id": "go-top",
+      "type": "button",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Continue to the bundle",
+            "href": "/book/offer/",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      },
+      "note": "First button, directly under the video. Same words as the button at the bottom."
+    },
+    {
+      "id": "copy",
+      "type": "text",
+      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "After Chapter 8 you'll know which AI setting to use and when: fast and cheap for a quick question, so you stop burning your usage on overkill, and slower for serious work, so a missed fact doesn't cost you later. It's one piece of a bigger method.",
+          "AI answers come back bland for one reason: a thin request gets a thin answer.",
+          "One habit to use today. Before AI writes anything, tell it: \"Ask me the five questions that would most improve your draft.\"",
+          "The full method is in The Artificial Advantage. The bundle has the book, the Toolkit and three exclusive bonuses."
+        ]
+      }
+    },
+    {
+      "id": "price",
+      "type": "text",
+      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "heading": "",
+        "paras": [
+          "$71.99 bought separately. $27 in the bundle. A 30-day money-back promise."
+        ]
+      }
+    },
+    {
+      "id": "go",
+      "type": "button",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Continue to the bundle",
+            "href": "/book/offer/",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    }
+  ]
+}

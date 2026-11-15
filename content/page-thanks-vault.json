@@ -1,0 +1,117 @@
+{
+  "title": "Your Vault is on its way",
+  "frame": "landing",
+  "noindex": true,
+  "landing": {
+    "slug": "thanks/vault",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "description": "Check your inbox for the Vault download link."
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "lp-hero",
+      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
+      "data": {
+        "anchor": "",
+        "eyebrow": "",
+        "headline": "The Vault is on its way. Here's how to get more out of every tool in it.",
+        "sub": "",
+        "note": "",
+        "image": "",
+        "image_alt": ""
+      }
+    },
+    {
+      "id": "delivery",
+      "type": "text",
+      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "heading": "",
+        "paras": [
+          "Check your inbox for the download link. If it isn't there in a couple of minutes, look in spam or promotions."
+        ]
+      }
+    },
+    {
+      "id": "video",
+      "type": "video",
+      "note": "Video: paste the link in Video link. Nothing shows on the page until there is one, and the button under it stays.",
+      "data": {
+        "anchor": "watch",
+        "align": "center",
+        "heading": "",
+        "url": "",
+        "caption": "",
+        "poster": "",
+        "poster_alt": ""
+      }
+    },
+    {
+      "id": "go-top",
+      "type": "button",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Continue to the bundle",
+            "href": "/book/offer/",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      },
+      "note": "First button, directly under the video. Same words as the button at the bottom."
+    },
+    {
+      "id": "copy",
+      "type": "text",
+      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "When it lands, pick one job you need done this week and open that tab.",
+          "A list of tools can't give you a method for using them.",
+          "One habit to use today, in any tool on the list: \"Ask me the five questions that would most improve your draft.\"",
+          "The full method is in The Artificial Advantage. The bundle has the book, the Toolkit and three exclusive bonuses."
+        ]
+      }
+    },
+    {
+      "id": "price",
+      "type": "text",
+      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "heading": "",
+        "paras": [
+          "$71.99 bought separately. $27 in the bundle. A 30-day money-back promise."
+        ]
+      }
+    },
+    {
+      "id": "go",
+      "type": "button",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Continue to the bundle",
+            "href": "/book/offer/",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    }
+  ]
+}

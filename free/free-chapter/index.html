@@ -55,14 +55,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
 <!-- ep:nav -->
 <link rel="stylesheet" href="/css/header.css">
 <nav class="nav" aria-label="Main"><div class="container">
-  <a class="brandmark" href="/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>Elvin&nbsp;Peters</a>
-  <div class="links">
-    <a href="/">Home</a>
-    <a href="/free/">Free Guides</a>
-    <a href="/newsletter/">Newsletter</a>
-    <a href="/contact/">Contact</a>
-  </div>
-  <a class="nav-buy" href="/book/offer/" aria-label="Get the bundle">Get the bundle</a>
+  <a class="brandmark" href="/free/free-chapter/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 5v14M6 5h9M6 12h7M6 19h9" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="19.5" cy="18.6" r="1.9" fill="var(--gold)"/></svg>Elvin&nbsp;Peters</a>
 </div></nav>
 <!-- /ep:nav -->
 <div class="mwrap">
@@ -98,7 +91,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
 </div>
 </div>
 </div>
-<div class="mfoot"><a href="/free/">Free Guides</a> &middot; <a href="/newsletter/">Newsletter</a> &middot; <a href="/contact/">Contact</a> &middot; <a href="https://epeters.ca/?utm_source=elvinpeters.com&utm_medium=footer&utm_campaign=crosslink">Fun stuff</a> &middot; <a href="https://www.linkedin.com/in/elvinmpeters" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="/privacy.html">Privacy</a></div>
+<div class="mfoot"><a href="/privacy.html">Privacy</a> &middot; <a href="/tos.html">Terms</a></div>
 <p class="amz-disclosure" style="font-size:12px;margin:0 0 20px;text-align:center;color:var(--muted);opacity:.85">As an Amazon Associate I earn from qualifying purchases.</p>
 </div>
 <script>
@@ -117,14 +110,19 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
     }catch(e){}
     return base;
   }
-  function convert(email){
+  var THANKS="/book/thanks/free-chapter/";
+  var moved=false;
+  function go(){if(moved)return;moved=true;location.replace(THANKS+location.search);}
+  function convert(email,after){
+    var left=2;function one(){left--;if(left<=0&&after)after();}
+    if(after)setTimeout(after,900);
     // Enhanced conversions: hand Google the email (it hashes client-side) so it
     // can match conversions cookies would lose. Set before firing the event.
     try{if(email&&typeof gtag==='function')gtag('set','user_data',{email:email});}catch(e){}
     try{if(XEVT&&typeof twq==='function')twq('event',XEVT,{});}catch(e){}
-    try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS});}catch(e){}
+    try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS,'event_callback':one});else one();}catch(e){}
     try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG});}catch(e){}
-    try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG});}catch(e){}
+    try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG,'event_callback':one});else one();}catch(e){}
     try{if(typeof gtag==='function')gtag('event','free_optin',{magnet:SLUG,page_path:location.pathname});}catch(e){}
   }
   function reveal(name){
@@ -140,8 +138,8 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
     btn.disabled=true;btn.textContent='Sending...';
     var body=new URLSearchParams({name:name||'Magnet lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:val('website')}).toString();
     fetch("https://ultimateaidirectory.com/api/lead",{method:'POST',mode:'cors',keepalive:true,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
-      .then(function(){convert(email);reveal(name);})
-      .catch(function(){convert(email);reveal(name);});  // always deliver the guide
+      .then(function(){convert(email,go);})
+      .catch(function(){convert(email,go);});  // always take the visitor on to the thank-you page
   });
 })();
 </script>

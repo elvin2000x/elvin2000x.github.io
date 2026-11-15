@@ -421,3 +421,18 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show);
   else show();
 })();
+
+/* Thank-you pages of the lead magnets (/book/thanks/...): the visitor arrives with the ad's
+   query string (utm_*, gclid, aud...). The Continue to the bundle buttons carry it on to
+   /book/offer/, so a sale can be traced back to the lead magnet and the ad. Only links to
+   /book/offer/ with no query of their own; nothing else on the site is touched. */
+(function () {
+  if (location.pathname.indexOf('/book/thanks/') !== 0 || !location.search) return;
+  function carry() {
+    document.querySelectorAll('a[href="/book/offer/"]').forEach(function (a) {
+      a.setAttribute('href', '/book/offer/' + location.search);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', carry);
+  else carry();
+})();

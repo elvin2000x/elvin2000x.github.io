@@ -351,7 +351,10 @@
   "free/cost-roi/index.html": {},
   "free/decoded/index.html": {},
   "free/email-meetings/index.html": {},
-  "free/free-chapter/index.html": {},
+  "free/free-chapter/index.html": {
+   "logoOnly": true,
+   "brandHref": "/free/free-chapter/"
+  },
   "free/link-expired/index.html": {},
   "free/slides-docs-images/index.html": {},
   "books/index.html": {},
