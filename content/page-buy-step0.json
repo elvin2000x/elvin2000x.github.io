@@ -33,8 +33,8 @@
         "heading": "",
         "url": "",
         "caption": "",
-        "poster": "/img/store/ugc-hands-holding.webp",
-        "poster_alt": "A person holding The Artificial Advantage, cover facing the camera"
+        "poster": "",
+        "poster_alt": ""
       }
     },
     {
@@ -95,5 +95,6 @@
         ]
       }
     }
-  ]
+  ],
+  "css": "@media (min-width:768px){ body.lp .lp-hero{ padding-bottom:24px } body.lp .lp-hero + .ep-block{ padding-top:0 } }"
 }
