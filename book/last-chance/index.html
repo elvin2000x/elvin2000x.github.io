@@ -284,7 +284,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
      Studio previews drop pixel scripts and the step bar above must still run there. */
   document.addEventListener('store:purchase', function (e) {
     var d = e.detail || {}, id = String(d.purchase_id || ''), v = +d.value || 0, cur = d.currency || 'USD';
-    if (!id) return;
+    if (!id || d.test) return;   /* a test-mode order never reports a sale */
     try { var k = 'ep_purchased_' + id; if (localStorage.getItem(k)) return; localStorage.setItem(k, '1'); } catch (x) {}
     try { gtag('event', 'purchase', { transaction_id: id, value: v, currency: cur }); } catch (x) {}
     try { fbq('track', 'Purchase', { value: v, currency: cur }, { eventID: id }); } catch (x) {}

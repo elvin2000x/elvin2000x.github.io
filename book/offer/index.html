@@ -131,6 +131,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <p>What changed: the second prompt tells the AI who is reading, why the delay happened and how that reader takes bad news. The words "not apologetic" do particular work, because without them the AI hedges for a paragraph. The book calls this the Role, Task, Constraint brief, and it is the habit the whole method is built on.</p>
 </div>
 
+<!-- Same button and line as the other buy buttons, so a phone reader has one to press after the example. -->
+<div class="ep-block">
+  <div class="ep-row ep-row--center">
+    <a class="btn btn--lg btn--primary" href="/book/checkout/">Get the bundle for $27</a>
+  </div>
+  <p class="lp-note ep-note">$27, paid once. 30-day money-back promise.</p>
+</div>
+
 <div class="ep-block ep-text ep-text--left">
   <h2>Who is writing to you</h2>
   <p>My name is Elvin Peters. For three years I ran paid media for two regulated lending brands, more than $50M in digital ad spend in all. Every campaign had to clear a compliance review before it went live, so I learned to be precise about what I asked for and careful about what I accepted.</p>
@@ -399,7 +407,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
      Studio previews drop pixel scripts and the step bar above must still run there. */
   document.addEventListener('store:purchase', function (e) {
     var d = e.detail || {}, id = String(d.purchase_id || ''), v = +d.value || 0, cur = d.currency || 'USD';
-    if (!id) return;
+    if (!id || d.test) return;   /* a test-mode order never reports a sale */
     try { var k = 'ep_purchased_' + id; if (localStorage.getItem(k)) return; localStorage.setItem(k, '1'); } catch (x) {}
     try { gtag('event', 'purchase', { transaction_id: id, value: v, currency: cur }); } catch (x) {}
     try { fbq('track', 'Purchase', { value: v, currency: cur }, { eventID: id }); } catch (x) {}
