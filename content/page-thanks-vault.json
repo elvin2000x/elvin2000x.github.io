@@ -13,7 +13,6 @@
     {
       "id": "hero",
       "type": "lp-hero",
-      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
       "data": {
         "anchor": "",
         "eyebrow": "",
@@ -27,13 +26,12 @@
     {
       "id": "delivery",
       "type": "text",
-      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
       "data": {
         "anchor": "",
         "align": "center",
         "heading": "",
         "paras": [
-          "Copy it to your Google Drive, or download the Excel file. Same 480+ resources either way."
+          "Copy it to your Google Drive, or download the Excel file if you don't use Google. Both hold the same 480+ resources."
         ]
       }
     },
@@ -94,7 +92,6 @@
     {
       "id": "copy",
       "type": "text",
-      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
       "data": {
         "anchor": "",
         "align": "left",
@@ -110,7 +107,6 @@
     {
       "id": "price",
       "type": "text",
-      "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
       "data": {
         "anchor": "",
         "align": "center",
