@@ -17,7 +17,7 @@
       "data": {
         "anchor": "",
         "eyebrow": "",
-        "headline": "The Vault is on its way. Here's how to get more out of every tool in it.",
+        "headline": "The Vault is yours. Here's how to get more out of every tool in it.",
         "sub": "",
         "note": "",
         "image": "",
@@ -33,7 +33,30 @@
         "align": "center",
         "heading": "",
         "paras": [
-          "Check your inbox for the download link. If it isn't there in a couple of minutes, look in spam or promotions."
+          "Copy it to your Google Drive, or download the Excel file. Same 480+ resources either way."
+        ]
+      }
+    },
+    {
+      "id": "delivery-buttons",
+      "type": "button",
+      "note": "Two delivery buttons. They open in a new tab and report to Google Analytics (script in js/site.js). Keep the two links as they are.",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "buttons": [
+          {
+            "label": "Copy to Google Drive",
+            "href": "https://docs.google.com/spreadsheets/d/1bF2qvJNQ77gFLrzptc7xbYEuEhteZN4xnvO4mGjK92c/copy",
+            "style": "ghost",
+            "checkout": false
+          },
+          {
+            "label": "Download the Excel file",
+            "href": "https://docs.google.com/spreadsheets/d/1bF2qvJNQ77gFLrzptc7xbYEuEhteZN4xnvO4mGjK92c/export?format=xlsx",
+            "style": "ghost",
+            "checkout": false
+          }
         ]
       }
     },
@@ -77,7 +100,7 @@
         "align": "left",
         "heading": "",
         "paras": [
-          "When it lands, pick one job you need done this week and open the tab for it.",
+          "Pick one job you need done this week and open the tab for it.",
           "A list of tools can't give you a method for using them.",
           "One habit to use today, in any tool on the list: \"Ask me the five questions that would most improve the quality of your draft.\"",
           "The full method is in The Artificial Advantage. The bundle has the book, the Toolkit and three exclusive bonuses."

@@ -436,3 +436,26 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', carry);
   else carry();
 })();
+
+/* The Vault thank-you page (/book/thanks/vault/): the Vault is delivered on the page as a
+   Google Sheet to copy and an Excel file. Both buttons open in a new tab, so this page and
+   its Continue to the bundle button stay open; each reports to Google Analytics. */
+(function () {
+  if (location.pathname.indexOf('/book/thanks/vault/') !== 0) return;
+  function wire() {
+    document.querySelectorAll('a[href^="https://docs.google.com/spreadsheets/d/"]').forEach(function (a) {
+      var xlsx = /\/export\?format=xlsx$/.test(a.getAttribute('href'));
+      a.target = '_blank'; a.rel = 'noopener';
+      if (xlsx) a.setAttribute('download', 'AI-Resource-Vault.xlsx');
+      a.addEventListener('click', function () {
+        try {
+          if (typeof gtag !== 'function') return;
+          if (xlsx) gtag('event', 'file_download', { file_name: 'AI-Resource-Vault.xlsx', file_extension: 'xlsx', link_url: a.href });
+          else gtag('event', 'vault_copy', { link_url: a.href });
+        } catch (e) {}
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
+  else wire();
+})();
