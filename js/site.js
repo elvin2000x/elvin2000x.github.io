@@ -422,19 +422,57 @@
   else show();
 })();
 
-/* Thank-you pages of the lead magnets (/book/thanks/...): the visitor arrives with the ad's
-   query string (utm_*, gclid, aud...). The Continue to the bundle buttons carry it on to
-   /book/offer/, so a sale can be traced back to the lead magnet and the ad. Only links to
-   /book/offer/ with no query of their own; nothing else on the site is touched. */
+/* Order source (card 625, the page half). The first page of a visit decides where an order
+   came from. This keeps that FIRST touch in this tab (sessionStorage 'ep-ft') and never
+   overwrites it on a later page: utm_source, utm_medium, utm_campaign, utm_content, utm_term,
+   gclid, fbclid from the address, referrer (the outside host only), landing (the first page
+   path, no query) and entry (the first /book/ page: offer, start, thanks-free-chapter,
+   thanks-vault or checkout). A visit that first arrived with no source takes the first source it
+   meets later, and keeps its landing, referrer and entry. The whole set is written to the
+   checkout's own 'ep_utm' key, which the checkout script sends as "utm" with the order.
+   On /book/ pages, links to other /book/ pages with no query of their own carry the source
+   tags, so a copy of the address opened elsewhere still knows. Nothing else is touched.
+   /book/checkout/ reports GA4 begin_checkout once per load with the same fields. */
 (function () {
-  if (location.pathname.indexOf('/book/thanks/') !== 0 || !location.search) return;
+  'use strict';
+  var FT = 'ep-ft', TAGS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'];
+  var ENTRY = { '/book/offer/': 'offer', '/book/start/': 'start', '/book/thanks/free-chapter/': 'thanks-free-chapter', '/book/thanks/vault/': 'thanks-vault', '/book/checkout/': 'checkout' };
+  function cl(v) { return String(v || '').replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 100); }
+  function read() { try { var o = JSON.parse(sessionStorage.getItem(FT) || 'null'); return o && typeof o === 'object' ? o : null; } catch (e) { return null; } }
+  function hasSource(o) { return TAGS.some(function (k) { return o[k]; }); }
+  var ft = read() || {}, changed = false, here = {};
+  try { var q = new URLSearchParams(location.search); TAGS.forEach(function (k) { var v = cl(q.get(k)); if (v) here[k] = v; }); } catch (e) {}
+  if (!hasSource(ft) && hasSource(here)) { TAGS.forEach(function (k) { if (here[k]) ft[k] = here[k]; }); changed = true; }
+  if (!ft.landing) {
+    ft.landing = cl(location.pathname); changed = true;
+    try { var rh = document.referrer ? new URL(document.referrer).host : ''; if (rh && rh !== location.host) ft.referrer = cl(rh); } catch (e) {}
+  }
+  if (!ft.entry && ENTRY[location.pathname]) { ft.entry = ENTRY[location.pathname]; changed = true; }
+  if (changed) { try { sessionStorage.setItem(FT, JSON.stringify(ft)); } catch (e) {} }
+  if (ft.landing) { try { sessionStorage.setItem('ep_utm', JSON.stringify(ft)); } catch (e) {} }
+  var inFunnel = location.pathname.indexOf('/book/') === 0;
+  function tagQuery() { return TAGS.filter(function (k) { return ft[k]; }).map(function (k) { return k + '=' + encodeURIComponent(ft[k]); }).join('&'); }
   function carry() {
-    document.querySelectorAll('a[href="/book/offer/"]').forEach(function (a) {
-      a.setAttribute('href', '/book/offer/' + location.search);
+    var t = tagQuery(); if (!t) return;
+    document.querySelectorAll('a[href^="/book/"]').forEach(function (a) {
+      var h = a.getAttribute('href'); if (h.indexOf('?') > -1) return;
+      var i = h.indexOf('#'), base = i > -1 ? h.slice(0, i) : h, hash = i > -1 ? h.slice(i) : '';
+      a.setAttribute('href', base + '?' + t + hash);
     });
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', carry);
-  else carry();
+  function begin() {
+    if (location.pathname.indexOf('/book/checkout/') !== 0) return;
+    try {
+      if (typeof gtag !== 'function') return;
+      var p = { currency: 'USD', entry: ft.entry || '', landing: ft.landing || '' };
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'].forEach(function (k) { if (ft[k]) p[k] = ft[k]; });
+      if (ft.referrer) p.referrer = ft.referrer;
+      gtag('event', 'begin_checkout', p);
+    } catch (e) {}
+  }
+  function ready() { if (inFunnel) { carry(); begin(); } }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
+  else ready();
 })();
 
 /* The Vault thank-you page (/book/thanks/vault/): the Vault is delivered on the page as a

@@ -89,6 +89,24 @@
       }
     },
     {
+      "id": "buy-mid",
+      "type": "button",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "note": "$27, paid once. 30-day money-back promise.",
+        "buttons": [
+          {
+            "label": "Get the bundle for $27",
+            "href": "/book/checkout/",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      },
+      "note": "Same button and line as the other buy buttons, so a phone reader has one to press after the example."
+    },
+    {
       "id": "who",
       "type": "text",
       "data": {
