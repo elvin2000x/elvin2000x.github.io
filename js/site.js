@@ -327,6 +327,7 @@
   function parseVideoLink(raw) {
     var s = String(raw || '').trim();
     if (!s || s.length > 300 || /[\s"'<>]/.test(s)) return null;
+    if (/^\/[A-Za-z0-9_\/.-]+\.mp4$/.test(s) && s.indexOf('..') < 0) return { kind: 'file', src: s };
     var u;
     try { u = new URL(s); } catch (e) { return null; }
     if (u.protocol !== 'https:' && u.protocol !== 'http:') return null;
@@ -383,6 +384,16 @@
       if (!lead || !lead.textContent.trim()) lead = document.querySelector('h1');
       if (lead && lead.textContent.trim()) btn.setAttribute('aria-label', 'Play video: ' + lead.textContent.trim().replace(/\s+/g, ' '));
       btn.addEventListener('click', function () {
+        if (info.kind === 'file') {
+          var vid = document.createElement('video');
+          vid.src = info.src; vid.controls = true; vid.autoplay = true; vid.playsInline = true; vid.preload = 'auto';
+          vid.setAttribute('playsinline', '');
+          var img0 = btn.querySelector('img'); if (img0 && img0.getAttribute('src')) vid.poster = img0.getAttribute('src');
+          vid.setAttribute('aria-label', (btn.getAttribute('aria-label') || 'Video').replace(/^Play video: /, ''));
+          frame.replaceChildren(vid);
+          var pr = vid.play(); if (pr && pr.catch) pr.catch(function () {});
+          return;
+        }
         var iframe = document.createElement('iframe');
         iframe.src = embedSrc(info);
         var heading = block && block.querySelector('h2');
