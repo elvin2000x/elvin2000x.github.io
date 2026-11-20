@@ -4,10 +4,11 @@
 {{/pre}}
   <div class="lp-ohero__band">
     <div class="lp-ohero__in">
-      <h1>{{headline}}</h1>
+      <h1 data-hook-h>{{headline}}</h1>
 {{#sub}}
-      <p class="lp-ohero__lede">{{sub}}</p>
+      <p class="lp-ohero__lede" data-hook-s>{{sub}}</p>
 {{/sub}}
+{{>hookpick}}
 {{#proof}}
       <p class="lp-ohero__proof lp-ohero__proof--top">{{proof}}</p>
 {{/proof}}

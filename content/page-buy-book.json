@@ -47,7 +47,31 @@
         "shot_w": "1600",
         "shot_h": "1067",
         "shot_phone_w": "800",
-        "shot_phone_h": "533"
+        "shot_phone_h": "533",
+        "hook_page": "offer",
+        "variants": [
+          {
+            "key": "A",
+            "headline": "Every time you rewrite a generic AI answer, you've done the task twice.",
+            "sub": "A book, a toolkit and a 7-day workbook that teach you to tell AI what you want. Practise on one real task from your week.",
+            "on": true,
+            "on_since": "2026-11-20"
+          },
+          {
+            "key": "B",
+            "headline": "Ever get an AI answer so generic you shrugged and closed the tab?",
+            "sub": "Learn how to tell AI what you want: a book, a toolkit and a 7-day workbook for $27.",
+            "on": true,
+            "on_since": "2026-11-20"
+          },
+          {
+            "key": "C",
+            "headline": "Same AI, same task. One gets a generic answer, the other a near-final draft.",
+            "sub": "The difference is a skill, and this bundle teaches it for $27.",
+            "on": true,
+            "on_since": "2026-11-20"
+          }
+        ]
       }
     },
     {

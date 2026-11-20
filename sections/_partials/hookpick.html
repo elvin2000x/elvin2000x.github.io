@@ -1,0 +1,26 @@
+{{#hook_page}}
+<ul hidden data-hook-variants data-page="{{hook_page}}">{{#variants}}<li data-key="{{key}}" data-on="{{#on}}1{{/on}}" data-since="{{on_since}}"><b>{{headline}}</b><i>{{sub}}</i></li>{{/variants}}</ul>
+<script>
+(function () {
+  /* Headline rotation. Each visitor gets one on-variant, kept in localStorage (ep_hook_<page>); a variant switched off in
+     the page data is never shown and a saved one that is now off is re-rolled. Runs before the page paints, so nothing flashes.
+     The view is reported once per page load to the store. */
+  var ul = document.querySelector('[data-hook-variants]'); if (!ul) return;
+  var page = ul.getAttribute('data-page'), items = [];
+  [].forEach.call(ul.children, function (li) { items.push({ k: li.getAttribute('data-key'), on: li.getAttribute('data-on') === '1', h: li.querySelector('b').textContent, s: li.querySelector('i').textContent }); });
+  var on = items.filter(function (x) { return x.on; }); if (!on.length) return;
+  var key = 'ep_hook_' + page, saved = null; try { saved = localStorage.getItem(key); } catch (e) {}
+  var pick = on.filter(function (x) { return x.k === saved; })[0] || on[Math.floor(Math.random() * on.length)];
+  try { localStorage.setItem(key, pick.k); } catch (e) {}
+  var h = document.querySelector('[data-hook-h]'), s = document.querySelector('[data-hook-s]');
+  if (h) h.textContent = pick.h; if (s) s.textContent = pick.s;
+  window.EP_HOOK = { page: page, variant: pick.k };
+  window.EP_HOOK_SEND = function (event) {
+    try { fetch('https://api.elvinpeters.com/api/store/hook', { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, body: JSON.stringify({ funnel: 'the-artificial-advantage-1', page: page, variant: pick.k, event: event }) }).catch(function () {}); } catch (e) {}
+  };
+  window.EP_HOOK_SEND('view');
+  /* the homepage report counts a click on the hero's buy button (the offer page reports buy clicks itself) */
+  if (page === 'home') document.addEventListener('click', function (e) { var b = e.target.closest && e.target.closest('header.hero a.btn'); if (b) window.EP_HOOK_SEND('click'); });
+})();
+</script>
+{{/hook_page}}

@@ -9,8 +9,8 @@
       "data": {
         "anchor": "",
         "eyebrow": "",
-        "headline": "You tried AI.<br/><span>You weren't impressed.</span>",
-        "sub": "Learn to brief AI the way you would brief a capable new colleague, one real work task at a time.",
+        "headline": "You can explain a job to a new hire. Explain it to AI the same way.",
+        "sub": "The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.",
         "hook_note": "third line of every ?aud= / ?v= ad segment (DTR script below). Empty by default.",
         "review": null,
         "buy": {
@@ -30,7 +30,31 @@
         "image": "/img/store/bundle-hero-suite.webp",
         "image_alt": "The Artificial Advantage as a book, a tablet and a phone, with the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey in front.",
         "image_w": "1600",
-        "image_h": "1067"
+        "image_h": "1067",
+        "hook_page": "home",
+        "variants": [
+          {
+            "key": "A",
+            "headline": "You can explain a job to a new hire. Explain it to AI the same way.",
+            "sub": "The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.",
+            "on": true,
+            "on_since": "2026-11-20"
+          },
+          {
+            "key": "B",
+            "headline": "Have you spent longer fixing an AI answer than writing it yourself?",
+            "sub": "The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.",
+            "on": true,
+            "on_since": "2026-11-20"
+          },
+          {
+            "key": "C",
+            "headline": "You tried AI. You weren't impressed.",
+            "sub": "Learn to brief AI the way you would brief a capable new colleague, one real work task at a time.",
+            "on": true,
+            "on_since": "2026-11-20"
+          }
+        ]
       }
     },
     {

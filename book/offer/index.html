@@ -81,8 +81,32 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="lp-ohero__pre"><p>For professionals who tried AI and shrugged</p></div>
   <div class="lp-ohero__band">
     <div class="lp-ohero__in">
-      <h1>Every time you rewrite a generic AI answer, you've done the task twice.</h1>
-      <p class="lp-ohero__lede">A book, a toolkit and a 7-day workbook that teach you to tell AI what you want. Practise on one real task from your week.</p>
+      <h1 data-hook-h>Every time you rewrite a generic AI answer, you've done the task twice.</h1>
+      <p class="lp-ohero__lede" data-hook-s>A book, a toolkit and a 7-day workbook that teach you to tell AI what you want. Practise on one real task from your week.</p>
+<ul hidden data-hook-variants data-page="offer"><li data-key="A" data-on="1" data-since="2026-11-20"><b>Every time you rewrite a generic AI answer, you've done the task twice.</b><i>A book, a toolkit and a 7-day workbook that teach you to tell AI what you want. Practise on one real task from your week.</i></li><li data-key="B" data-on="1" data-since="2026-11-20"><b>Ever get an AI answer so generic you shrugged and closed the tab?</b><i>Learn how to tell AI what you want: a book, a toolkit and a 7-day workbook for $27.</i></li><li data-key="C" data-on="1" data-since="2026-11-20"><b>Same AI, same task. One gets a generic answer, the other a near-final draft.</b><i>The difference is a skill, and this bundle teaches it for $27.</i></li></ul>
+<script>
+(function () {
+  /* Headline rotation. Each visitor gets one on-variant, kept in localStorage (ep_hook_<page>); a variant switched off in
+     the page data is never shown and a saved one that is now off is re-rolled. Runs before the page paints, so nothing flashes.
+     The view is reported once per page load to the store. */
+  var ul = document.querySelector('[data-hook-variants]'); if (!ul) return;
+  var page = ul.getAttribute('data-page'), items = [];
+  [].forEach.call(ul.children, function (li) { items.push({ k: li.getAttribute('data-key'), on: li.getAttribute('data-on') === '1', h: li.querySelector('b').textContent, s: li.querySelector('i').textContent }); });
+  var on = items.filter(function (x) { return x.on; }); if (!on.length) return;
+  var key = 'ep_hook_' + page, saved = null; try { saved = localStorage.getItem(key); } catch (e) {}
+  var pick = on.filter(function (x) { return x.k === saved; })[0] || on[Math.floor(Math.random() * on.length)];
+  try { localStorage.setItem(key, pick.k); } catch (e) {}
+  var h = document.querySelector('[data-hook-h]'), s = document.querySelector('[data-hook-s]');
+  if (h) h.textContent = pick.h; if (s) s.textContent = pick.s;
+  window.EP_HOOK = { page: page, variant: pick.k };
+  window.EP_HOOK_SEND = function (event) {
+    try { fetch('https://api.elvinpeters.com/api/store/hook', { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, body: JSON.stringify({ funnel: 'the-artificial-advantage-1', page: page, variant: pick.k, event: event }) }).catch(function () {}); } catch (e) {}
+  };
+  window.EP_HOOK_SEND('view');
+  /* the homepage report counts a click on the hero's buy button (the offer page reports buy clicks itself) */
+  if (page === 'home') document.addEventListener('click', function (e) { var b = e.target.closest && e.target.closest('header.hero a.btn'); if (b) window.EP_HOOK_SEND('click'); });
+})();
+</script>
       <div class="lp-ohero__grid">
         <picture class="lp-ohero__shot">
           <source media="(max-width: 767px)" srcset="/img/store/bundle-hero-suite-phone.webp" width="800" height="533">
@@ -503,12 +527,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         var bp = { currency: 'USD', entry: ft.entry || '', landing: ft.landing || '' };
         ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'].forEach(function (k) { if (ft[k]) bp[k] = ft[k]; });
         if (ft.referrer) bp.referrer = ft.referrer;
+        if (window.EP_HOOK) bp.hook_offer = window.EP_HOOK.variant;
         gtag('event', 'begin_checkout', bp);
       }
     } catch (x) {}
+    if (window.EP_HOOK_SEND) window.EP_HOOK_SEND('click');
     if (a.getAttribute('data-busy')) return; a.setAttribute('data-busy', '1');
     var timer = setTimeout(function () { if (ctl) ctl.abort(); go(); }, 1800);
-    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify((function () { var b = { funnel: funnel, utm: utm, code: '' }; if (ADDON_ON) b.bump = true; else if (SEND_BUMP_FALSE) b.bump = false; return b; })()), signal: ctl ? ctl.signal : undefined })
+    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify((function () { var b = { funnel: funnel, utm: utm, code: '' }; if (window.EP_HOOK && window.EP_HOOK.page === 'offer') b.hook = { page: 'offer', variant: window.EP_HOOK.variant }; if (ADDON_ON) b.bump = true; else if (SEND_BUMP_FALSE) b.bump = false; return b; })()), signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { var u = j && (j.url || j.checkout_url); clearTimeout(timer); if (!settled && u && /^https:\/\/checkout\.stripe\.com\//.test(u)) { settled = true; location.assign(u); } else go(); })
       .catch(function () { clearTimeout(timer); go(); });
