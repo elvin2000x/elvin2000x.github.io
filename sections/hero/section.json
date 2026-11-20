@@ -14,6 +14,8 @@
     { "key": "buy", "type": "buybox", "label": "Buy box" },
     { "key": "trust", "type": "html", "label": "Trust line" },
     { "key": "image", "type": "image", "label": "Cover image", "alt": "image_alt", "size": [686, 1140] },
-    { "key": "image_alt", "type": "text", "label": "Cover image description" }
+    { "key": "image_alt", "type": "text", "label": "Cover image description" },
+    { "key": "image_w", "type": "text", "label": "Image width in pixels", "default": "686" },
+    { "key": "image_h", "type": "text", "label": "Image height in pixels", "default": "1140" }
   ]
 }

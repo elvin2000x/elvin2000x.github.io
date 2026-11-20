@@ -1,0 +1,14 @@
+{
+  "label": "Dark full-width band",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    { "key": "anchor", "type": "text", "label": "Anchor id" },
+    { "key": "image", "type": "text", "label": "Picture address", "default": "" },
+    { "key": "image_phone", "type": "text", "label": "Phone picture address (optional)", "default": "" },
+    { "key": "image_alt", "type": "text", "label": "Description for screen readers (leave empty if only decoration)", "default": "" },
+    { "key": "image_w", "type": "text", "label": "Picture width in pixels", "default": "1344" },
+    { "key": "image_h", "type": "text", "label": "Picture height in pixels", "default": "768" }
+  ]
+}

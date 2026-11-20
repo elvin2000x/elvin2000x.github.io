@@ -14,9 +14,9 @@
       <div class="lp-ohero__grid">
         <picture class="lp-ohero__shot">
 {{#shot_phone}}
-          <source media="(max-width: 767px)" srcset="{{shot_phone}}" width="375" height="160">
+          <source media="(max-width: 767px)" srcset="{{shot_phone}}" width="{{shot_phone_w}}" height="{{shot_phone_h}}">
 {{/shot_phone}}
-          <img src="{{shot}}" alt="{{shot_alt}}" width="680" height="264" fetchpriority="high">
+          <img src="{{shot}}" alt="{{shot_alt}}" width="{{shot_w}}" height="{{shot_h}}" fetchpriority="high">
         </picture>
         <div class="lp-ohero__buy">
           <p class="lp-ohero__price"><s data-lp-total-all>{{struck}}</s><strong data-lp-front-all>{{price}}</strong></p>

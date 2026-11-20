@@ -1,0 +1,19 @@
+{
+  "label": "Words beside a picture",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    { "key": "bg", "type": "choice", "label": "Background", "options": [ { "value": "", "label": "Plain" }, { "value": "tint", "label": "Tint" } ] },
+    { "key": "anchor", "type": "text", "label": "Anchor id" },
+    { "key": "side", "type": "choice", "label": "Picture side on a wide screen", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
+    { "key": "shape", "type": "choice", "label": "Picture shape", "options": [ { "value": "wide", "label": "Wide (landscape)" }, { "value": "portrait", "label": "Tall (a cover)" } ] },
+    { "key": "heading", "type": "html", "label": "Heading (optional)", "default": "" },
+    { "key": "body", "type": "html", "label": "Words", "default": "<p>[Paragraph: your words]</p>" },
+    { "key": "image", "type": "text", "label": "Picture address", "default": "" },
+    { "key": "image_phone", "type": "text", "label": "Phone picture address (optional)", "default": "" },
+    { "key": "image_alt", "type": "text", "label": "Description for screen readers", "default": "" },
+    { "key": "image_w", "type": "text", "label": "Picture width in pixels", "default": "800" },
+    { "key": "image_h", "type": "text", "label": "Picture height in pixels", "default": "1280" }
+  ]
+}

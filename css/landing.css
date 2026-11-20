@@ -469,3 +469,29 @@ body.lp .lp-pay .lp-bump--offer{ position:relative; margin-top:16px; font-weight
 #workbook-sample .lp-image img{ width:100%; max-width:720px; margin:0 auto; border:1px solid var(--lp-line, #c7d2dd) }
 /* Step 0 and every landing button stays inside the screen on a phone */
 body.lp .btn, body.lp .lp-cta{ box-sizing:border-box; max-width:100% }
+
+/* lp-split: words beside a picture (image first on a phone, beside the words from 920px).
+   lp-band: one full-width dark band. 2026-11-19, visual overhaul Job 3. */
+.lp-in.lp-split__grid{ max-width:1080px; display:grid; grid-template-columns:1fr; gap:28px; align-items:center }
+.lp-split__fig{ margin:0 }
+.lp-split__fig img{ display:block; width:100%; height:auto; border-radius:18px }
+.lp-split--portrait .lp-split__fig{ max-width:300px; margin:0 auto }
+.lp-split__body h2{ margin-top:0 }
+.lp-split__body > :last-child{ margin-bottom:0 }
+.lp-split__body ul{ padding-left:1.1em; margin:12px 0 0 }
+.lp-split__body li{ margin:0 0 8px }
+@media (min-width:920px){
+  .lp-split__grid{ gap:56px }
+  .lp-split--wide.lp-split--right .lp-split__grid{ grid-template-columns:1.05fr .95fr }
+  .lp-split--wide.lp-split--left .lp-split__grid{ grid-template-columns:.95fr 1.05fr }
+  .lp-split--portrait.lp-split--right .lp-split__grid{ grid-template-columns:1fr 340px }
+  .lp-split--portrait.lp-split--left .lp-split__grid{ grid-template-columns:340px 1fr }
+  .lp-split--portrait .lp-split__fig{ max-width:340px; width:100% }
+  .lp-split--right .lp-split__fig{ order:2 }
+}
+.lp-band{ background:#191e2a; padding:0; line-height:0 }
+.lp-band picture{ display:block }
+.lp-band img{ display:block; width:100%; max-width:1344px; height:auto; margin:0 auto }
+@media (min-width:768px){ .lp-band img{ max-width:none; height:520px; object-fit:cover } }
+.lp-ohero__shot img{ mix-blend-mode:multiply }
+body.lp:has(.lp-progress) .ep-block.ep-video{ max-width:36rem }

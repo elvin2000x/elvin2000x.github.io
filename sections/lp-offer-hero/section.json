@@ -40,6 +40,26 @@
       "label": "Bundle picture, phone (375 x 160)"
     },
     {
+      "key": "shot_w",
+      "type": "text",
+      "label": "Picture width in pixels"
+    },
+    {
+      "key": "shot_h",
+      "type": "text",
+      "label": "Picture height in pixels"
+    },
+    {
+      "key": "shot_phone_w",
+      "type": "text",
+      "label": "Phone picture width in pixels"
+    },
+    {
+      "key": "shot_phone_h",
+      "type": "text",
+      "label": "Phone picture height in pixels"
+    },
+    {
       "key": "shot_alt",
       "type": "text",
       "label": "Bundle picture description"

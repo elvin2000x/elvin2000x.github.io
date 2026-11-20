@@ -1,0 +1,16 @@
+<section class="lp-sec lp-split{{#bg}} lp-sec--{{bg}}{{/bg}} lp-split--{{side}} lp-split--{{shape}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in lp-split__grid">
+    <figure class="lp-split__fig">
+      <picture>
+        {{#image_phone}}<source media="(max-width: 767px)" srcset="{{image_phone}}" />{{/image_phone}}
+        <img src="{{image}}" alt="{{image_alt}}" width="{{image_w}}" height="{{image_h}}" loading="lazy" decoding="async" />
+      </picture>
+    </figure>
+    <div class="lp-split__body">
+{{#heading}}
+      <h2>{{heading}}</h2>
+{{/heading}}
+      {{body}}
+    </div>
+  </div>
+</section>

@@ -18,16 +18,20 @@
         "pre": "For professionals who tried AI and shrugged",
         "headline": "Brief AI like a new colleague and get drafts worth editing",
         "sub": "The book, its Toolkit and three bonuses teach you to direct AI, so the first draft is ready to edit.",
-        "shot": "/img/store/bundle-hero-wide.webp",
-        "shot_phone": "/img/store/bundle-hero-phone.webp",
-        "shot_alt": "The five items in the bundle, side by side: The Artificial Advantage Toolkit, the 7-Day AI Workbook, The Artificial Advantage, Everything AI 2026 and The 12 Commandments to Make AI Obey.",
+        "shot": "/img/store/bundle-hero-suite.webp",
+        "shot_phone": "/img/store/bundle-hero-suite-phone.webp",
+        "shot_alt": "The Artificial Advantage as a book, a tablet and a phone, with the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey in front.",
         "struck": "$71.99",
         "price": "$27",
         "button": {
           "label": "Get the bundle for $27",
           "href": "/book/checkout/"
         },
-        "note": "<s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars."
+        "note": "<s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars.",
+        "shot_w": "1600",
+        "shot_h": "1067",
+        "shot_phone_w": "800",
+        "shot_phone_h": "533"
       }
     },
     {
@@ -153,17 +157,37 @@
       }
     },
     {
-      "id": "get-a",
-      "type": "text",
+      "id": "get-ebook",
+      "type": "lp-split",
       "data": {
+        "bg": "",
         "anchor": "",
-        "align": "left",
+        "side": "left",
+        "shape": "portrait",
         "heading": "What you get, and what each piece does for you",
-        "paras": [
-          "<strong>1. The Artificial Advantage, the 2026 edition ebook.</strong> Fourteen chapters in three parts, built around CLEAR: Choose your tools, Lead with clear direction, Evolve your outputs, Audit for accuracy, and Repeat to build a practice. Part 1 gets you past the hesitation. Part 2 shows you how to choose a tool and a mode for the job, so you stop getting a fifty-page strategy document when you needed ten slides. Chapter 8 covers that, and you can read it free <a href=\"/free/free-chapter/\">here</a>. Part 3 is the core skill: the three rules for beginners, how to take a first draft to a final one, and how to read an AI answer critically before your name goes on it. Along the way you brief AI with Role, Task, Constraint, so the first answer is close to what you meant, and you check an answer with the Two-Step Verification Method before you use it. When an answer comes back wrong, the Diagnostic Ladder traces it to its cause, so you fix the request instead of starting over. Your first assignment is to pick one task you do every week and dread, and run it through the method. Chapter 14, the last in Part 3, turns the method into a practice you keep.",
-          "<strong>2. The Toolkit: the method in files you can edit.</strong> Every exercise, prompt and role from the book, already typed into Word documents, so the practice starts the day you open it rather than after an evening of copying things out.",
-          "<ul><li><em>Twenty-five prompts for the tasks that eat your week</em>, each one already carrying the role, the task and the limits. Paste, fill in your details, and the job starts. They come as a spreadsheet too, for import into whatever you already use.</li><li><em>Twenty-five role setups you paste once</em>, so the AI answers as someone who knows your field, with the formula for writing your own.</li><li><em>Sixteen exercises from ten chapters</em>, each run on your own work, with a record of what happened.</li><li><em>A 30-day plan and a 3-month plan</em>, from your first real task to saved workflows you reuse.</li><li><em>A 12-job tool guide</em>, so you look up the job and see which kind of tool fits.</li></ul>"
-        ]
+        "body": "<p><strong>1. The Artificial Advantage, the 2026 edition ebook.</strong> Fourteen chapters in three parts, built around CLEAR: Choose your tools, Lead with clear direction, Evolve your outputs, Audit for accuracy, and Repeat to build a practice. Part 1 gets you past the hesitation. Part 2 shows you how to choose a tool and a mode for the job, so you stop getting a fifty-page strategy document when you needed ten slides. Chapter 8 covers that, and you can read it free <a href=\"/free/free-chapter/\">here</a>. Part 3 is the core skill: the three rules for beginners, how to take a first draft to a final one, and how to read an AI answer critically before your name goes on it. Along the way you brief AI with Role, Task, Constraint, so the first answer is close to what you meant, and you check an answer with the Two-Step Verification Method before you use it. When an answer comes back wrong, the Diagnostic Ladder traces it to its cause, so you fix the request instead of starting over. Your first assignment is to pick one task you do every week and dread, and run it through the method. Chapter 14, the last in Part 3, turns the method into a practice you keep.</p>",
+        "image": "/img/cover-hero.webp",
+        "image_phone": "",
+        "image_alt": "The cover of The Artificial Advantage, the 2026 edition ebook",
+        "image_w": "600",
+        "image_h": "960"
+      }
+    },
+    {
+      "id": "get-toolkit",
+      "type": "lp-split",
+      "data": {
+        "bg": "tint",
+        "anchor": "",
+        "side": "right",
+        "shape": "wide",
+        "heading": "",
+        "body": "<p><strong>2. The Toolkit: the method in files you can edit.</strong> Every exercise, prompt and role from the book, already typed into Word documents, so the practice starts the day you open it rather than after an evening of copying things out.</p><ul><li><em>Twenty-five prompts for the tasks that eat your week</em>, each one already carrying the role, the task and the limits. Paste, fill in your details, and the job starts. They come as a spreadsheet too, for import into whatever you already use.</li><li><em>Twenty-five role setups you paste once</em>, so the AI answers as someone who knows your field, with the formula for writing your own.</li><li><em>Sixteen exercises from ten chapters</em>, each run on your own work, with a record of what happened.</li><li><em>A 30-day plan and a 3-month plan</em>, from your first real task to saved workflows you reuse.</li><li><em>A 12-job tool guide</em>, so you look up the job and see which kind of tool fits.</li></ul>",
+        "image": "/img/store/product-toolkit-suite-wide.webp",
+        "image_phone": "/img/store/product-toolkit-suite-wide-phone.webp",
+        "image_alt": "The Artificial Advantage Toolkit on a tablet, as a printed booklet and on a phone",
+        "image_w": "1500",
+        "image_h": "1000"
       }
     },
     {
@@ -184,18 +208,71 @@
       }
     },
     {
-      "id": "get-b",
-      "type": "text",
+      "id": "get-library",
+      "type": "lp-split",
       "data": {
+        "bg": "",
         "anchor": "",
-        "align": "left",
+        "side": "left",
+        "shape": "portrait",
         "heading": "",
-        "paras": [
-          "<strong>3. The Companion Library, online, kept current.</strong> Everything in the book you would otherwise flip back to, on a page that opens from the code printed in the book (the ebook included), on any screen, with no email and no login. The Prompt Builder assembles a correct brief from three answers, the Quick Reference Card puts the method on one page, and the tools reference is updated as the tools change, so the book does not go stale on your shelf.",
-          "<strong>4. The 7-Day AI Workbook.</strong> Seven days, one real task of your own. You run it the old way on Day 2 and save the result. You run it through the full method on Day 7 and compare. You finish the week with a before, an after, and a template you keep, which means by next Friday you have proof in your own work that the method holds.",
-          "<strong>5. Everything AI 2026.</strong> When a new job lands on your desk, you look it up and see the tools that fit and what each costs, instead of reading reviews. A reference of 684 AI tools organised by job, as a spreadsheet and a PDF field guide.",
-          "<strong>6. The 12 Commandments to Make AI Obey.</strong> Twenty-two pages of habits for the free and basic plans of ChatGPT, Gemini, Claude and Grok, with two starter files you fill in once: an About Me file, so you stop re-typing who you are in every chat, and a voice file, so the drafts sound like you."
-        ]
+        "body": "<p><strong>3. The Companion Library, online, kept current.</strong> Everything in the book you would otherwise flip back to, on a page that opens from the code printed in the book (the ebook included), on any screen, with no email and no login. The Prompt Builder assembles a correct brief from three answers, the Quick Reference Card puts the method on one page, and the tools reference is updated as the tools change, so the book does not go stale on your shelf.</p>",
+        "image": "/img/store/ugc-tablet.webp",
+        "image_phone": "",
+        "image_alt": "A person holding a tablet that shows the cover of The Artificial Advantage",
+        "image_w": "750",
+        "image_h": "1200"
+      }
+    },
+    {
+      "id": "get-workbook",
+      "type": "lp-split",
+      "data": {
+        "bg": "tint",
+        "anchor": "",
+        "side": "right",
+        "shape": "wide",
+        "heading": "",
+        "body": "<p><strong>4. The 7-Day AI Workbook.</strong> Seven days, one real task of your own. You run it the old way on Day 2 and save the result. You run it through the full method on Day 7 and compare. You finish the week with a before, an after, and a template you keep, which means by next Friday you have proof in your own work that the method holds.</p>",
+        "image": "/img/store/product-workbook-suite-wide.webp",
+        "image_phone": "/img/store/product-workbook-suite-wide-phone.webp",
+        "image_alt": "The 7-Day AI Workbook on a tablet, as a printed book and on a phone",
+        "image_w": "1200",
+        "image_h": "800"
+      }
+    },
+    {
+      "id": "get-everything",
+      "type": "lp-split",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "side": "left",
+        "shape": "wide",
+        "heading": "",
+        "body": "<p><strong>5. Everything AI 2026.</strong> When a new job lands on your desk, you look it up and see the tools that fit and what each costs, instead of reading reviews. A reference of 684 AI tools organised by job, as a spreadsheet and a PDF field guide.</p>",
+        "image": "/img/store/product-everything-ai-suite-wide.webp",
+        "image_phone": "/img/store/product-everything-ai-suite-wide-phone.webp",
+        "image_alt": "Everything AI 2026 on a tablet, as a printed book and on a phone",
+        "image_w": "1200",
+        "image_h": "800"
+      }
+    },
+    {
+      "id": "get-commandments",
+      "type": "lp-split",
+      "data": {
+        "bg": "tint",
+        "anchor": "",
+        "side": "right",
+        "shape": "wide",
+        "heading": "",
+        "body": "<p><strong>6. The 12 Commandments to Make AI Obey.</strong> Twenty-two pages of habits for the free and basic plans of ChatGPT, Gemini, Claude and Grok, with two starter files you fill in once: an About Me file, so you stop re-typing who you are in every chat, and a voice file, so the drafts sound like you.</p>",
+        "image": "/img/store/product-commandments-suite-wide.webp",
+        "image_phone": "/img/store/product-commandments-suite-wide-phone.webp",
+        "image_alt": "The 12 Commandments to Make AI Obey on a tablet, as a printed book and on a phone",
+        "image_w": "1200",
+        "image_h": "800"
       }
     },
     {
@@ -279,17 +356,32 @@
       }
     },
     {
-      "id": "close",
-      "type": "text",
+      "id": "band",
+      "type": "lp-band",
       "data": {
         "anchor": "",
-        "align": "left",
+        "image": "/img/store/band-book-dark.webp",
+        "image_phone": "/img/store/band-book-dark-phone.webp",
+        "image_alt": "",
+        "image_w": "1344",
+        "image_h": "768"
+      }
+    },
+    {
+      "id": "close",
+      "type": "lp-split",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "side": "left",
+        "shape": "portrait",
         "heading": "Your next step",
-        "paras": [
-          "Click the button, and the ebook, the Toolkit and the Workbook are yours to download.",
-          "Elvin Peters",
-          "P.S. Pick one real task from this week, open the book, and try the method on it."
-        ]
+        "body": "<p>Click the button, and the ebook, the Toolkit and the Workbook are yours to download.</p><p>Elvin Peters</p><p>P.S. Pick one real task from this week, open the book, and try the method on it.</p>",
+        "image": "/img/store/ugc-stack-nightstand.webp",
+        "image_phone": "",
+        "image_alt": "The Artificial Advantage on a bedside table, under a pair of glasses",
+        "image_w": "640",
+        "image_h": "1024"
       }
     },
     {
