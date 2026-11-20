@@ -75,17 +75,6 @@
       }
     },
     {
-      "type": "lp-image",
-      "id": "lifestyle",
-      "data": {
-        "anchor": "lifestyle",
-        "desktop": "/img/store/lifestyle-in-hand-living-room.webp",
-        "alt": "The Artificial Advantage held in one hand in a living room",
-        "w": "800",
-        "h": "800"
-      }
-    },
-    {
       "id": "go-top",
       "type": "button",
       "data": {
@@ -101,6 +90,17 @@
         ]
       },
       "note": "First button, directly under the video. Same words as the button at the bottom."
+    },
+    {
+      "type": "lp-image",
+      "id": "lifestyle",
+      "data": {
+        "anchor": "lifestyle",
+        "desktop": "/img/store/lifestyle-in-hand-living-room.webp",
+        "alt": "The Artificial Advantage held in one hand in a living room",
+        "w": "800",
+        "h": "800"
+      }
     },
     {
       "id": "copy",
