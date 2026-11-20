@@ -276,10 +276,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   }, true);
   /* Direct checkout (Round 2 switch). With ?direct=1 in the address (kept for the session), a buy button
      that points at /book/checkout/ posts straight to the store and lands on Stripe, with no add-on flag
-     (Stripe's page offers it). It is the default; ?direct=0 turns it off for a session (testing only).
-     To go back to the checkout page for everyone, set DIRECT_DEFAULT to false. begin_checkout still fires from js/site.js on the same click. */
-  var DIRECT_DEFAULT = true, DIRECT = DIRECT_DEFAULT;
-  try { if (/[?&]direct=1(?:&|$)/.test(location.search)) sessionStorage.setItem('ep-direct', '1'); if (/[?&]direct=0(?:&|$)/.test(location.search)) sessionStorage.setItem('ep-direct', '0'); var dv = sessionStorage.getItem('ep-direct'); if (dv === '1') DIRECT = true; if (dv === '0') DIRECT = false; } catch (x) {}
+     (Stripe's page offers it). Without the switch nothing changes. To make it the default for everyone,
+     set DIRECT_DEFAULT to true. begin_checkout still fires from js/site.js on the same click. */
+  var DIRECT_DEFAULT = false, DIRECT = DIRECT_DEFAULT;
+  try { if (/[?&]direct=1(?:&|$)/.test(location.search)) sessionStorage.setItem('ep-direct', '1'); if (sessionStorage.getItem('ep-direct') === '1') DIRECT = true; } catch (x) {}
   if (DIRECT) document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a.btn--primary[href^="/book/checkout/"]');
     if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
