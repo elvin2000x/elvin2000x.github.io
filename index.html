@@ -348,32 +348,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 <header class="hero">
   <div class="in--wide">
     <div>
-      <h1 id="hl" data-hook-h>You can explain a job to a new hire. Explain it to AI the same way.</h1>
-      <p class="hero-sub" id="sub" data-hook-s>The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.</p>
-<ul hidden data-hook-variants data-page="home"><li data-key="A" data-on="1" data-since="2026-11-20"><b>You can explain a job to a new hire. Explain it to AI the same way.</b><i>The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.</i></li><li data-key="B" data-on="1" data-since="2026-11-20"><b>Have you spent longer fixing an AI answer than writing it yourself?</b><i>The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.</i></li><li data-key="C" data-on="1" data-since="2026-11-20"><b>You tried AI. You weren't impressed.</b><i>Learn to brief AI the way you would brief a capable new colleague, one real work task at a time.</i></li></ul>
-<script>
-(function () {
-  /* Headline rotation. Each visitor gets one on-variant, kept in localStorage (ep_hook_<page>); a variant switched off in
-     the page data is never shown and a saved one that is now off is re-rolled. Runs before the page paints, so nothing flashes.
-     The view is reported once per page load to the store. */
-  var ul = document.querySelector('[data-hook-variants]'); if (!ul) return;
-  var page = ul.getAttribute('data-page'), items = [];
-  [].forEach.call(ul.children, function (li) { items.push({ k: li.getAttribute('data-key'), on: li.getAttribute('data-on') === '1', h: li.querySelector('b').textContent, s: li.querySelector('i').textContent }); });
-  var on = items.filter(function (x) { return x.on; }); if (!on.length) return;
-  var key = 'ep_hook_' + page, saved = null; try { saved = localStorage.getItem(key); } catch (e) {}
-  var pick = on.filter(function (x) { return x.k === saved; })[0] || on[Math.floor(Math.random() * on.length)];
-  try { localStorage.setItem(key, pick.k); } catch (e) {}
-  var h = document.querySelector('[data-hook-h]'), s = document.querySelector('[data-hook-s]');
-  if (h) h.textContent = pick.h; if (s) s.textContent = pick.s;
-  window.EP_HOOK = { page: page, variant: pick.k };
-  window.EP_HOOK_SEND = function (event) {
-    try { fetch('https://api.elvinpeters.com/api/store/hook', { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, body: JSON.stringify({ funnel: 'the-artificial-advantage-1', page: page, variant: pick.k, event: event, text: pick.h.slice(0, 140) }) }).catch(function () {}); } catch (e) {}
-  };
-  window.EP_HOOK_SEND('view');
-  /* the homepage report counts a click on the hero's buy button (the offer page reports buy clicks itself) */
-  if (page === 'home') document.addEventListener('click', function (e) { var b = e.target.closest && e.target.closest('header.hero a.btn'); if (b) window.EP_HOOK_SEND('click'); });
-})();
-</script>
+      <h1 id="hl">You tried AI.<br/><span>You weren't impressed.</span></h1>
+      <p class="hero-sub" id="sub">Learn to brief AI the way you would brief a capable new colleague, one real work task at a time.</p>
       <!-- #hook: third line of every ?aud= / ?v= ad segment (DTR script below). Empty by default. -->
       <p class="hero-sub" id="hook" style="font-weight:600;color:var(--ink)"></p>
       <div class="buyblock ">

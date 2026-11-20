@@ -2,122 +2,20 @@
   "label": "Hero",
   "about": "The first screen: the headline, one line under it, the buy button and the book cover.",
   "fields": [
-    {
-      "key": "anchor",
-      "type": "text",
-      "label": "Anchor id (optional)"
-    },
-    {
-      "key": "eyebrow",
-      "type": "text",
-      "label": "Small line above the headline (optional)"
-    },
-    {
-      "key": "headline",
-      "type": "html",
-      "label": "Headline"
-    },
-    {
-      "key": "sub",
-      "type": "html",
-      "label": "Line under the headline"
-    },
-    {
-      "key": "hook_note",
-      "type": "text",
-      "label": "Note for the ad-segment hook line",
-      "hidden": true
-    },
-    {
-      "key": "review",
-      "type": "object",
-      "label": "Review teaser (optional)",
-      "fields": [
-        {
-          "key": "quote",
-          "type": "html",
-          "label": "Quote"
-        },
-        {
-          "key": "source",
-          "type": "text",
-          "label": "Source"
-        }
-      ]
-    },
-    {
-      "key": "buy",
-      "type": "buybox",
-      "label": "Buy box"
-    },
-    {
-      "key": "trust",
-      "type": "html",
-      "label": "Trust line"
-    },
-    {
-      "key": "image",
-      "type": "image",
-      "label": "Cover image",
-      "alt": "image_alt",
-      "size": [
-        686,
-        1140
-      ]
-    },
-    {
-      "key": "image_alt",
-      "type": "text",
-      "label": "Cover image description"
-    },
-    {
-      "key": "image_w",
-      "type": "text",
-      "label": "Image width in pixels",
-      "default": "686"
-    },
-    {
-      "key": "image_h",
-      "type": "text",
-      "label": "Image height in pixels",
-      "default": "1140"
-    },
-    {
-      "key": "variants",
-      "type": "list",
-      "label": "Headline variants (rotation): one is shown per visitor",
-      "fields": [
-        {
-          "key": "key",
-          "type": "text",
-          "label": "Letter (A, B, C)"
-        },
-        {
-          "key": "headline",
-          "type": "text",
-          "label": "Headline"
-        },
-        {
-          "key": "sub",
-          "type": "text",
-          "label": "Line under it"
-        },
-        {
-          "key": "on",
-          "type": "bool",
-          "label": "On (switch off to stop showing it)"
-        },
-        {
-          "key": "on_since",
-          "type": "text",
-          "label": "On since (date)"
-        }
-      ]
-    },
-    {
-      "key": "hook_page",
-      "type": "text",
-      "label": "Rotation page name (lowercase, dashes)"
-    }
+    { "key": "anchor", "type": "text", "label": "Anchor id (optional)" },
+    { "key": "eyebrow", "type": "text", "label": "Small line above the headline (optional)" },
+    { "key": "headline", "type": "html", "label": "Headline" },
+    { "key": "sub", "type": "html", "label": "Line under the headline" },
+    { "key": "hook_note", "type": "text", "label": "Note for the ad-segment hook line", "hidden": true },
+    { "key": "review", "type": "object", "label": "Review teaser (optional)", "fields": [
+      { "key": "quote", "type": "html", "label": "Quote" },
+      { "key": "source", "type": "text", "label": "Source" }
+    ] },
+    { "key": "buy", "type": "buybox", "label": "Buy box" },
+    { "key": "trust", "type": "html", "label": "Trust line" },
+    { "key": "image", "type": "image", "label": "Cover image", "alt": "image_alt", "size": [686, 1140] },
+    { "key": "image_alt", "type": "text", "label": "Cover image description" },
+    { "key": "image_w", "type": "text", "label": "Image width in pixels", "default": "686" },
+    { "key": "image_h", "type": "text", "label": "Image height in pixels", "default": "1140" }
   ]
 }
