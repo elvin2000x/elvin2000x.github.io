@@ -1,8 +1,13 @@
-<section class="lp-sec lp-ordered"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+<section class="lp-sec lp-ordered{{^image}} lp-ordered--slim{{/image}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
   <div class="lp-in">
+{{#image}}
     <div class="lp-ordered__row">
       <picture>{{#image_phone}}<source media="(max-width:767px)" srcset="{{image_phone}}" width="720" height="200" />{{/image_phone}}<img class="lp-ordered__img" src="{{image}}" alt="{{image_alt}}" width="1200" height="240" decoding="async" /></picture>
       <p class="lp-ordered__text">{{text}}</p>
     </div>
+{{/image}}
+{{^image}}
+    <p class="lp-ordered__slim"><b aria-hidden="true">&#10003;</b> {{text}}</p>
+{{/image}}
   </div>
 </section>

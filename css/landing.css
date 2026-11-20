@@ -627,3 +627,16 @@ body.lp .lp-sec.lp-addon-sec{ padding-top:24px; padding-bottom:24px }
 .lp-addon__tick input{ flex:none; width:28px; height:28px; margin:0; accent-color:var(--lp-navy) }
 .lp-addon:has(input:checked){ border-style:solid; border-color:var(--lp-navy); background:#faf3e0 }
 .lp-answers + .lp-addon-sec{ padding-top:8px }
+/* slim confirmation under the progress bar */
+body.lp .lp-sec.lp-ordered--slim{ padding-top:12px; padding-bottom:0 }
+.lp-ordered__slim{ margin:0; font:600 16px/24px var(--sans); color:var(--lp-navy) }
+.lp-ordered__slim b{ font-weight:700; margin-right:2px }
+/* AI at Home card on a phone: cover on its own row, text at the size of the answer lines */
+@media (max-width:599px){
+  .lp-addon__top{ flex-direction:column; gap:10px }
+  .lp-addon__cover{ width:120px }
+  .lp-addon__words h3{ font-size:17px; line-height:23px }
+  .lp-addon__words p, .lp-addon__words ul{ font-size:14px; line-height:20px }
+}
+body.lp .lp-sec .lp-ordered__slim{ margin:0; font:600 16px/24px var(--sans); color:var(--lp-navy) }
+@media (max-width:599px){ body.lp .lp-sec .lp-addon__words p, body.lp .lp-sec .lp-addon__words li{ font-size:14px; line-height:20px; min-height:0 } body.lp .lp-sec .lp-addon__words ul{ padding-left:18px } }

@@ -23,6 +23,14 @@
       }
     },
     {
+      "id": "ordered",
+      "type": "lp-ordered",
+      "data": {
+        "anchor": "",
+        "text": "Paid: The Artificial Advantage Bundle"
+      }
+    },
+    {
       "id": "video",
       "type": "video",
       "note": "Video: paste the link in Video link. Nothing shows on the page until there is one.",
@@ -36,17 +44,6 @@
         "caption": "",
         "poster": "/img/store/video-poster-upsell.webp",
         "poster_alt": ""
-      }
-    },
-    {
-      "id": "ordered",
-      "type": "lp-ordered",
-      "data": {
-        "anchor": "",
-        "image": "/img/store/bundle-banner-artificial-advantage.webp",
-        "image_alt": "The covers in The Artificial Advantage Bundle: the ebook, the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey",
-        "text": "You ordered The Artificial Advantage Bundle",
-        "image_phone": "/img/store/bundle-banner-artificial-advantage-phone.webp"
       }
     },
     {
