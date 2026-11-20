@@ -101,10 +101,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
     /* hero: words and button first on phones, the book beside them on desktop */
     /* dark full-width band (the book in gold light) */
-    .lp-band{ background:#191e2a; padding:0; line-height:0 }
+    .lp-band{ background:#0a1828; padding:0; line-height:0 }
     .lp-band picture{ display:block }
-    .lp-band img{ display:block; width:100%; max-width:1344px; height:auto; margin:0 auto }
-    @media (min-width:768px){ .lp-band img{ max-width:none; height:520px; object-fit:cover } }
+    .lp-band img{ display:block; width:100%; max-width:1344px; height:auto; margin:0 auto; aspect-ratio:1344 / 768; background:#0a1828 }
+    @media (min-width:768px){ .lp-band img{ max-width:none; height:520px; object-fit:cover; aspect-ratio:auto } }
     .hero{ background:linear-gradient(170deg,var(--panel) 0%,var(--bg-2) 100%); padding:32px 16px 48px }
     .hero .in--wide{ display:grid; gap:24px; align-items:center }
     .hero h1{ font-size:clamp(38px,9.6vw,66px); line-height:1.08; margin:0 0 16px }

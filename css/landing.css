@@ -492,7 +492,7 @@ body.lp .btn, body.lp .lp-cta{ box-sizing:border-box; max-width:100% }
   .lp-split--portrait .lp-split__fig{ max-width:340px; width:100% }
   .lp-split--right .lp-split__fig{ order:2 }
 }
-.lp-band{ background:#191e2a; padding:0; line-height:0 }
+.lp-band{ background:#0a1828; padding:0; line-height:0 }
 .lp-band picture{ display:block }
 .lp-band img{ display:block; width:100%; max-width:1344px; height:auto; margin:0 auto }
 @media (min-width:768px){ .lp-band img{ max-width:none; height:520px; object-fit:cover } }
@@ -598,3 +598,8 @@ body.lp .lp-stack--pay .lp-pay__go .lp-note{ margin:12px 0 0; font:14px/20px var
 /* step pages with the ordered card: the video is a little smaller on desktop so the headline starts inside the first screen */
 @media (min-width:768px){ body.lp:has(.lp-ordered) .ep-video__frame{ max-width:560px } }
 @media (min-width:768px){ body.lp .lp-sec.lp-ordered{ padding-top:16px; padding-bottom:0 } body.lp .lp-sec.lp-ordered + .lp-sec{ padding-top:24px } }
+/* band: a fixed box so nothing flashes white or jumps while the picture loads */
+.lp-band img{ aspect-ratio:1344 / 768; background:#0a1828 }
+@media (min-width:768px){ .lp-band img{ aspect-ratio:auto } }
+/* the line above an early yes button */
+.lp-above{ margin:8px 0 12px; font:600 17px/24px var(--sans); color:var(--lp-navy) }

@@ -10,10 +10,16 @@
 {{#early}}
     <p class="lp-price">{{#was}}<s data-store="was">{{was}}</s> {{/was}}<strong data-store="price">{{price}}</strong></p>
     <p class="lp-error" data-store="error" hidden></p>
+{{#above}}
+    <p class="lp-above">{{above}}</p>
+{{/above}}
     <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>{{yes}}</button>
 {{#yes_note}}
     <p class="lp-note lp-yes-note">{{yes_note}}</p>
 {{/yes_note}}
+{{#after_yes}}
+    <p class="lp-note lp-after-yes">{{after_yes}}</p>
+{{/after_yes}}
     <button type="button" class="lp-no" data-store-decline>{{no}}</button>
     <div class="lp-fallback" data-store-fallback hidden><p>{{fallback}}</p></div>
 {{#image}}

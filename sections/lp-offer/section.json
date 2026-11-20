@@ -143,24 +143,14 @@
       "label": "Review path link"
     },
     {
-      "key": "stack_w",
-      "type": "text",
-      "label": "Stack picture width"
+      "key": "above",
+      "type": "html",
+      "label": "Line above the early yes button"
     },
     {
-      "key": "stack_h",
-      "type": "text",
-      "label": "Stack picture height"
-    },
-    {
-      "key": "stack_phone_w",
-      "type": "text",
-      "label": "Phone stack picture width"
-    },
-    {
-      "key": "stack_phone_h",
-      "type": "text",
-      "label": "Phone stack picture height"
+      "key": "after_yes",
+      "type": "html",
+      "label": "Line under the early yes button (for example a sample link)"
     }
   ]
 }
