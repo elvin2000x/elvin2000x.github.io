@@ -4,8 +4,9 @@
 {{#eyebrow}}
       <span class="eyebrow">{{eyebrow}}</span>
 {{/eyebrow}}
-      <h1 id="hl">{{headline}}</h1>
-      <p class="hero-sub" id="sub">{{sub}}</p>
+      <h1 id="hl" data-hook-h>{{headline}}</h1>
+      <p class="hero-sub" id="sub" data-hook-s>{{sub}}</p>
+{{>hookpick}}
 {{#hook_note}}
       <!-- #hook: {{hook_note}} -->
 {{/hook_note}}
