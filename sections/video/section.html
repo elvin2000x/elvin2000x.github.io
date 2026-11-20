@@ -6,9 +6,12 @@
   <div class="ep-video__frame" data-video="{{url}}">
     <button type="button" class="ep-video__play" aria-label="Play video">
 {{#poster}}
-      <img src="{{poster}}" alt="{{poster_alt}}">
+      <img src="{{poster}}" alt="{{poster_alt}}" width="1280" height="720" loading="lazy" decoding="async">
 {{/poster}}
       <span class="ep-video__mark" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+{{#duration}}
+      <span class="ep-video__time">{{duration}}</span>
+{{/duration}}
     </button>
   </div>
 {{#caption}}

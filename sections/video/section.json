@@ -33,6 +33,11 @@
       "label": "Video link"
     },
     {
+      "key": "duration",
+      "type": "text",
+      "label": "Length shown on the poster (for example 1:56)"
+    },
+    {
       "key": "caption",
       "type": "html",
       "label": "Caption"

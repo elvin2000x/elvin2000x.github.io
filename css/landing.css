@@ -260,6 +260,12 @@ body.lp{ background:#fff; color:var(--lp-navy); font-size:18px }
 .lp-ordered__row picture{ display:block }
 .lp-ordered__img{ display:block; width:100%; height:auto }
 .lp-ordered__text{ margin:0; padding:0 14px; font:600 17px/1.35 var(--sans); color:var(--ink) }
+@media (max-width:767px){
+  .lp-ordered{ padding-top:0 }
+  .lp-ordered__row{ flex-direction:row; align-items:center; gap:12px; padding:0 12px 0 0 }
+  .lp-ordered__row picture{ flex:0 0 48%; max-width:48% }
+  .lp-ordered__text{ padding:0; font-size:15px; line-height:1.3 }
+}
 /* lp-offer early: price block and Accept sit right under the opening line; a bar follows on a phone */
 .lp-sticky{ display:none }
 @media (max-width:767px){
@@ -306,6 +312,7 @@ body.lp .lp-note, body.lp .lp-sec p.lp-note, body.lp .lp-shot figcaption, body.l
 body.lp .lp-eyebrow{ font-size:14px }
 body.lp .lp-sec{ padding:40px 16px }
 body.lp .ep-block{ max-width:720px; padding:20px 16px }
+body.lp .ep-block.ep-video{ max-width:56rem; padding-bottom:12px }
 body.lp .lp-in{ max-width:720px }
 body.lp .lp-hero__grid{ max-width:1120px }
 body.lp .lp-sec:has(.lp-stack, .lp-kit, .lp-shop) > .lp-in{ max-width:1040px }

@@ -360,7 +360,7 @@
     return null;
   }
   function embedSrc(info) {
-    if (info.kind === 'youtube') return 'https://www.youtube-nocookie.com/embed/' + info.id + '?autoplay=1&rel=0';
+    if (info.kind === 'youtube') return 'https://www.youtube-nocookie.com/embed/' + info.id + '?autoplay=1&rel=0&playsinline=1';
     var src = 'https://player.vimeo.com/video/' + info.id + '?autoplay=1&dnt=1';
     if (info.hash) src += '&h=' + encodeURIComponent(info.hash);
     return src;
@@ -379,11 +379,14 @@
         img.src ='https://i.ytimg.com/vi/' + info.id + '/hqdefault.jpg';
         btn.insertBefore(img, btn.firstChild);
       }
+      var lead = block && block.querySelector('h2');
+      if (!lead || !lead.textContent.trim()) lead = document.querySelector('h1');
+      if (lead && lead.textContent.trim()) btn.setAttribute('aria-label', 'Play video: ' + lead.textContent.trim().replace(/\s+/g, ' '));
       btn.addEventListener('click', function () {
         var iframe = document.createElement('iframe');
         iframe.src = embedSrc(info);
         var heading = block && block.querySelector('h2');
-        iframe.title = heading && heading.textContent.trim() ? heading.textContent.trim() : 'Video';
+        iframe.title = heading && heading.textContent.trim() ? heading.textContent.trim() : (btn.getAttribute('aria-label') || 'Video').replace(/^Play video: /, '');
         iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
         iframe.setAttribute('allowfullscreen', '');
         iframe.referrerPolicy = 'strict-origin-when-cross-origin';

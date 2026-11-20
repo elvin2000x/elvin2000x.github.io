@@ -34,15 +34,15 @@
     {
       "id": "welcome-video",
       "type": "video",
-      "hidden": true,
       "note": "Welcome video",
       "data": {
         "anchor": "",
         "align": "center",
         "heading": "Hello from Elvin",
-        "url": "",
+        "url": "https://www.youtube.com/watch?v=DddIVvw4pZ8",
+        "duration": "1:56",
         "caption": "Elvin Peters, author of The Artificial Advantage.",
-        "poster": "",
+        "poster": "/img/store/video-poster-home.webp",
         "poster_alt": ""
       }
     },

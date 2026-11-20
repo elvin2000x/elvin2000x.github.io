@@ -28,7 +28,7 @@
       "type": "text",
       "data": {
         "anchor": "",
-        "align": "center",
+        "align": "left",
         "heading": "",
         "paras": [
           "Copy it to your Google Drive, or download the Excel file if you don't use Google. Both hold the same 480+ resources."
@@ -41,7 +41,7 @@
       "note": "Two delivery buttons. They open in a new tab and report to Google Analytics (script in js/site.js). Keep the two links as they are.",
       "data": {
         "anchor": "",
-        "align": "center",
+        "align": "left",
         "buttons": [
           {
             "label": "Copy to Google Drive",
@@ -66,9 +66,10 @@
         "anchor": "watch",
         "align": "center",
         "heading": "",
-        "url": "",
+        "url": "https://www.youtube.com/watch?v=DNXW6_zh_UQ",
+        "duration": "1:18",
         "caption": "",
-        "poster": "",
+        "poster": "/img/store/video-poster-thanks-vault.webp",
         "poster_alt": ""
       }
     },
@@ -109,7 +110,7 @@
       "type": "text",
       "data": {
         "anchor": "",
-        "align": "center",
+        "align": "left",
         "heading": "",
         "paras": [
           "$71.99 bought separately, $27 in the bundle, 30-day money-back promise."
@@ -132,5 +133,6 @@
         ]
       }
     }
-  ]
+  ],
+  "css": "body.lp .lp-hero__grid{ max-width:720px } body.lp .lp-hero{ padding-top:32px; padding-bottom:0 } body.lp .lp-hero h1{ margin-bottom:0 } body.lp .ep-block.ep-video{ max-width:720px } body.lp .ep-row{ flex-direction:column; align-items:stretch; gap:12px } body.lp .ep-row .btn{ width:100%; min-height:60px; font-size:20px; font-weight:700 } body.lp .ep-note{ text-align:left }"
 }

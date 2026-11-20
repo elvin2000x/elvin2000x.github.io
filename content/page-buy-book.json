@@ -37,10 +37,11 @@
         "anchor": "watch",
         "align": "center",
         "heading": "",
-        "url": "",
+        "url": "https://www.youtube.com/watch?v=qp0xq4YwNpg",
+        "duration": "3:33",
         "caption": "",
-        "poster": "/img/store/ugc-hands-holding.webp",
-        "poster_alt": "A person holding The Artificial Advantage, cover facing the camera"
+        "poster": "/img/store/video-poster-offer.webp",
+        "poster_alt": ""
       },
       "note": "Video: paste the link in Video link. Nothing shows on the page until there is one."
     },
