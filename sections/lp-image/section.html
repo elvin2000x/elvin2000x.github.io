@@ -4,7 +4,7 @@
     <figure class="lp-image">
       <picture>
         {{#phone}}<source media="(max-width: 767px)" srcset="{{phone}}" />{{/phone}}
-        <img src="{{desktop}}" alt="{{alt}}" loading="lazy" decoding="async" />
+        <img src="{{desktop}}" alt="{{alt}}"{{#w}} width="{{w}}" height="{{h}}"{{/w}} loading="lazy" decoding="async" />
       </picture>
     </figure>
   </div>

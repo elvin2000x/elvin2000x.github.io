@@ -59,6 +59,17 @@
       }
     },
     {
+      "type": "lp-image",
+      "id": "lifestyle",
+      "data": {
+        "anchor": "lifestyle",
+        "desktop": "/img/store/lifestyle-tablet-living-room.webp",
+        "alt": "The Artificial Advantage on a tablet in a living room",
+        "w": "750",
+        "h": "750"
+      }
+    },
+    {
       "id": "go-top",
       "type": "button",
       "data": {
