@@ -23,6 +23,13 @@
         "shot_alt": "The Artificial Advantage as a book, a tablet and a phone, with the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey in front.",
         "struck": "$71.99",
         "price": "$27",
+        "answers": {
+          "lines": [
+            { "line": "Works with ChatGPT, Claude, Gemini and Copilot. A free plan is enough to start." },
+            { "line": "The Toolkit is 25 prompts, 25 role setups and 16 exercises, in Word files you can edit." },
+            { "line": "The Workbook is one step a day for seven days, on one real task from your own week." }
+          ]
+        },
         "bar_left": "The Bundle, $27 once",
         "bar_button": "Get the bundle",
         "button": {

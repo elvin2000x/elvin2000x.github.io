@@ -105,6 +105,25 @@
       "key": "bar_button",
       "type": "text",
       "label": "Phone bar, button words"
+    },
+    {
+      "key": "answers",
+      "type": "object",
+      "label": "Three small lines under the button",
+      "fields": [
+        {
+          "key": "lines",
+          "type": "list",
+          "label": "Lines",
+          "fields": [
+            {
+              "key": "line",
+              "type": "text",
+              "label": "Line"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
