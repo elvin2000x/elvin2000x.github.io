@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=a9637986" />
+  <link rel="stylesheet" href="/css/landing.css?v=fd9f0c5b" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp">
@@ -182,6 +182,26 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
      that points at /book/checkout/ posts straight to the store and lands on Stripe, with no add-on flag
      (Stripe's page offers it). It is the default; ?direct=0 turns it off for a session (testing only).
      To go back to the checkout page for everyone, set DIRECT_DEFAULT to false. begin_checkout still fires from js/site.js on the same click. */
+  /* AI at Home add-on: every box on the page shares one state. It starts unticked on every load, reload and back
+     navigation (never remembered, never pre-ticked). Ticked sends bump: true with the buy request; unticked sends no
+     bump key at all, so Stripe still shows its own add-on box. Set SEND_BUMP_FALSE to true to send bump: false instead. */
+  var SEND_BUMP_FALSE = false, ADDON_ON = false;
+  function addonBoxes() { return document.querySelectorAll('[data-lp-addon]'); }
+  function addonCents() { var b = addonBoxes()[0], m = b && /\$\s*(\d+(?:\.\d+)?)/.exec(b.getAttribute('data-lp-addon-price') || ''); return m ? Math.round(parseFloat(m[1]) * 100) : 0; }
+  function paintAddon() {
+    [].forEach.call(addonBoxes(), function (c) { c.checked = ADDON_ON; });
+    [].forEach.call(document.querySelectorAll('.lp-obar__price--text'), function (el) {
+      if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
+      var o = el.getAttribute('data-orig'), m = /\$\s*(\d+(?:\.\d+)?)/.exec(o);
+      if (!m) return;
+      var c = Math.round(parseFloat(m[1]) * 100) + (ADDON_ON ? addonCents() : 0);
+      el.textContent = o.replace(m[0], '$' + (c / 100).toFixed(c % 100 ? 2 : 0));
+    });
+  }
+  function resetAddon() { ADDON_ON = false; paintAddon(); }
+  document.addEventListener('change', function (e) { if (e.target && e.target.hasAttribute && e.target.hasAttribute('data-lp-addon')) { ADDON_ON = !!e.target.checked; paintAddon(); } });
+  window.addEventListener('pageshow', resetAddon);
+  resetAddon();
   var DIRECT_DEFAULT = true, DIRECT = DIRECT_DEFAULT;
   try { if (/[?&]direct=1(?:&|$)/.test(location.search)) sessionStorage.setItem('ep-direct', '1'); if (/[?&]direct=0(?:&|$)/.test(location.search)) sessionStorage.setItem('ep-direct', '0'); var dv = sessionStorage.getItem('ep-direct'); if (dv === '1') DIRECT = true; if (dv === '0') DIRECT = false; } catch (x) {}
   if (DIRECT) document.addEventListener('click', function (e) {
@@ -206,7 +226,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     } catch (x) {}
     if (a.getAttribute('data-busy')) return; a.setAttribute('data-busy', '1');
     var timer = setTimeout(function () { if (ctl) ctl.abort(); go(); }, 1800);
-    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ funnel: funnel, utm: utm, code: '' }), signal: ctl ? ctl.signal : undefined })
+    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify((function () { var b = { funnel: funnel, utm: utm, code: '' }; if (ADDON_ON) b.bump = true; else if (SEND_BUMP_FALSE) b.bump = false; return b; })()), signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { var u = j && (j.url || j.checkout_url); clearTimeout(timer); if (!settled && u && /^https:\/\/checkout\.stripe\.com\//.test(u)) { settled = true; location.assign(u); } else go(); })
       .catch(function () { clearTimeout(timer); go(); });

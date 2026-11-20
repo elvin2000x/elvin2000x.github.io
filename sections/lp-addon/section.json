@@ -1,0 +1,70 @@
+{
+  "label": "Add-on card (a box the buyer ticks)",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "image",
+      "type": "image",
+      "label": "Cover",
+      "alt": "image_alt",
+      "size": [
+        192,
+        307
+      ]
+    },
+    {
+      "key": "image_alt",
+      "type": "text",
+      "label": "Cover description"
+    },
+    {
+      "key": "image_w",
+      "type": "text",
+      "label": "Cover width"
+    },
+    {
+      "key": "image_h",
+      "type": "text",
+      "label": "Cover height"
+    },
+    {
+      "key": "headline",
+      "type": "html",
+      "label": "Headline"
+    },
+    {
+      "key": "line",
+      "type": "html",
+      "label": "One line"
+    },
+    {
+      "key": "jobs",
+      "type": "list",
+      "label": "Example jobs",
+      "fields": [
+        {
+          "key": "job",
+          "type": "text",
+          "label": "Job"
+        }
+      ]
+    },
+    {
+      "key": "label",
+      "type": "text",
+      "label": "Box label (never ticked for the buyer)"
+    },
+    {
+      "key": "price",
+      "type": "text",
+      "label": "Price (adds to the total when ticked)"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<section class="lp-sec lp-addon-sec"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+    <div class="lp-addon">
+      <div class="lp-addon__top">
+{{#image}}
+        <img class="lp-addon__cover" src="{{image}}" alt="{{image_alt}}" width="{{image_w}}" height="{{image_h}}" loading="lazy" decoding="async">
+{{/image}}
+        <div class="lp-addon__words">
+          <h3>{{headline}}</h3>
+          <p>{{line}}</p>
+          <ul>
+{{#jobs}}
+            <li>{{job}}</li>
+{{/jobs}}
+          </ul>
+        </div>
+      </div>
+      <label class="lp-addon__tick"><input type="checkbox" data-lp-addon data-lp-addon-price="{{price}}" autocomplete="off"><span>{{label}}</span></label>
+    </div>
+  </div>
+</section>
