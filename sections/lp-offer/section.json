@@ -151,6 +151,51 @@
       "key": "after_yes",
       "type": "html",
       "label": "Line under the early yes button (for example a sample link)"
+    },
+    {
+      "key": "stack_w",
+      "type": "text",
+      "label": "Stack picture width"
+    },
+    {
+      "key": "stack_h",
+      "type": "text",
+      "label": "Stack picture height"
+    },
+    {
+      "key": "stack_phone_w",
+      "type": "text",
+      "label": "Phone stack picture width"
+    },
+    {
+      "key": "stack_phone_h",
+      "type": "text",
+      "label": "Phone stack picture height"
+    },
+    {
+      "key": "image_wide",
+      "type": "text",
+      "label": "Wide picture (768 and up)"
+    },
+    {
+      "key": "image_wide_w",
+      "type": "text",
+      "label": "Wide picture width"
+    },
+    {
+      "key": "image_wide_h",
+      "type": "text",
+      "label": "Wide picture height"
+    },
+    {
+      "key": "image_w",
+      "type": "text",
+      "label": "Picture width"
+    },
+    {
+      "key": "image_h",
+      "type": "text",
+      "label": "Picture height"
     }
   ]
 }

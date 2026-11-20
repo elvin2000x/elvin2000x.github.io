@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=95dba62e" />
+  <link rel="stylesheet" href="/css/landing.css?v=a9637986" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp" data-store-step="upsell">
@@ -77,10 +77,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
 <main>
 
-<div class="lp-progress" data-lp-progress data-step="2" data-steps="3">
+<div class="lp-progress lp-stages" role="navigation" aria-label="Your order progress">
   <div class="lp-in">
-    <p class="lp-progress__label" data-store="progress">Step 2 of 3</p>
-    <div class="lp-progress__track"><i data-store-progress-bar></i></div>
+    <ol class="lp-stages__list">
+      <li class="lp-stages__item is-done"><i class="lp-stages__bar" aria-hidden="true"></i><span class="lp-stages__label"><b aria-hidden="true">&#10003;</b> Paid</span></li>
+      <li class="lp-stages__item is-now" aria-current="step"><i class="lp-stages__bar" aria-hidden="true"></i><span class="lp-stages__label">Optional extras</span></li>
+      <li class="lp-stages__item"><i class="lp-stages__bar" aria-hidden="true"></i><span class="lp-stages__label">Your downloads</span></li>
+    </ol>
   </div>
 </div>
 
@@ -116,10 +119,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <p class="lp-note lp-yes-note">This charges the card you just used. You will not need to enter it again. 30-day money-back guarantee.</p>
     <button type="button" class="lp-no" data-store-decline>No thanks, I’ll skip this</button>
     <div class="lp-fallback" data-store-fallback hidden><p>Pay with another card</p></div>
+    <picture>
+      <img class="lp-offer__img" src="/img/store/ai-setup-bundle-hero.webp" alt="The AI Setup Bundle: The Claude Operator's Manual, Your Personal Specialists and Rules of Engagement as printed guides, on a tablet and on a phone" width="1600" height="1067" loading="lazy" decoding="async">
+    </picture>
     <figure class="lp-image lp-offer__stack">
       <picture>
-        <source media="(max-width: 767px)" srcset="/img/store/stack-ai-setup-bundle-47-phone.webp" />
-        <img src="/img/store/stack-ai-setup-bundle-47-desktop.webp" alt="What you get for $47: The Claude Operator's Manual ($27), Your Personal Specialists ($27) and Rules of Engagement ($27). Standalone value $81. Your price: $47." loading="lazy" decoding="async" />
+        <source media="(max-width: 767px)" srcset="/img/store/stack-ai-setup-bundle-47-phone.webp" width="750" height="1268" />
+        <img src="/img/store/stack-ai-setup-bundle-47-desktop.webp" alt="What you get for $47: The Claude Operator's Manual ($27), Your Personal Specialists ($27) and Rules of Engagement ($27). Standalone value $81. Your price: $47." width="1200" height="809" loading="lazy" decoding="async" />
       </picture>
     </figure>
     <div class="lp-body"><details class="lp-fold"><summary>What is in the Claude Operator's Manual</summary><p>I wrote this Manual for Claude users who want to run Claude well. It is a 217-page PDF about Claude only.</p><ul><li><strong>Set up Claude in the app.</strong> Start with the day-one setup checklist in the appendices. The first half covers talking to Claude well, setting up Projects and knowledge files, Skills, and connecting Claude to the tools your work lives in, and they need no terminal.</li><li><strong>Go further with Claude Code.</strong> The Claude Code chapters are optional, and they are the only ones that ask you to open a terminal.</li><li><strong>Copy complete workflows.</strong> The last part puts the setup together into workflows you can reuse.</li><li><strong>Check your work.</strong> Every chapter ends with a checklist.</li></ul></details><details class="lp-fold"><summary>What is in Your Personal Specialists</summary><p>A Specialist is a setup message you paste into your AI, plus prompts for the problems in its area. Bring a problem to the right Specialist and paste your prompt. This is a 72-page PDF with 14 Specialists and 231 prompts, with brackets for your own details. Set each Specialist up once in the AI you already use: the guide shows how to set each one up in ChatGPT, Claude, Gemini or Grok. The 14 Specialists are Marketing, Sales, Finance, Operations, HR, Customer Service, Content, Data, Project Management, Executive Assistant, Product, Legal and Compliance, Small Business, and Freelancer and Consultant.</p></details><details class="lp-fold"><summary>What is in Rules of Engagement</summary><p>A set of 20 rules you load into your AI once, so it follows them in every chat. Each rule can be switched on or off, and you can set the strength to Light, Standard or Full. For example, rule 1 is “Never make things up.” At Light, your AI says so when it isn’t sure a fact is right. At Full, it gives no fact without a source you can check. A guide shows how to load the rules into ChatGPT, Claude, Gemini and Grok, and another shows how to edit them.</p></details><figure class="lp-image"><img src="/img/store/rules-of-engagement-rule1-sample.webp" alt="Rule 1 of Rules of Engagement, switched on: Never make things up. Light: if you aren’t sure a fact is right, say so. Standard: say where each fact, number, name and quote came from; if you can’t, mark it unverified or leave it out. Full: give me no fact without a source I can check; when you have a gap, ask me or tell me what is missing, and don’t fill it with a guess." loading="lazy" decoding="async" /></figure><p>Prices are in US dollars.</p></div>

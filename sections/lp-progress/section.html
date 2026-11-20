@@ -1,6 +1,9 @@
-<div class="lp-progress" data-lp-progress data-step="{{step}}" data-steps="{{steps}}">
+<div class="lp-progress lp-stages" role="navigation" aria-label="{{aria}}">
   <div class="lp-in">
-    <p class="lp-progress__label" data-store="progress">Step {{step}} of {{steps}}</p>
-    <div class="lp-progress__track"><i data-store-progress-bar></i></div>
+    <ol class="lp-stages__list">
+      <li class="lp-stages__item is-done"><i class="lp-stages__bar" aria-hidden="true"></i><span class="lp-stages__label"><b aria-hidden="true">&#10003;</b> {{paid}}</span></li>
+      <li class="lp-stages__item{{#extras_now}} is-now{{/extras_now}}"{{#extras_now}} aria-current="step"{{/extras_now}}><i class="lp-stages__bar" aria-hidden="true"></i><span class="lp-stages__label">{{extras}}</span></li>
+      <li class="lp-stages__item{{#downloads_now}} is-now{{/downloads_now}}"{{#downloads_now}} aria-current="step"{{/downloads_now}}><i class="lp-stages__bar" aria-hidden="true"></i><span class="lp-stages__label">{{downloads}}</span></li>
+    </ol>
   </div>
 </div>

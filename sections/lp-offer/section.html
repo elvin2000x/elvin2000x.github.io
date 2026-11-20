@@ -23,7 +23,12 @@
     <button type="button" class="lp-no" data-store-decline>{{no}}</button>
     <div class="lp-fallback" data-store-fallback hidden><p>{{fallback}}</p></div>
 {{#image}}
-    <img class="lp-offer__img" src="{{image}}" alt="{{image_alt}}" fetchpriority="high">
+    <picture>
+{{#image_wide}}
+      <source media="(min-width: 768px)" srcset="{{image_wide}}"{{#image_wide_w}} width="{{image_wide_w}}" height="{{image_wide_h}}"{{/image_wide_w}}>
+{{/image_wide}}
+      <img class="lp-offer__img" src="{{image}}" alt="{{image_alt}}"{{#image_w}} width="{{image_w}}" height="{{image_h}}"{{/image_w}} loading="lazy" decoding="async">
+    </picture>
 {{/image}}
 {{#stack_desktop}}
     <figure class="lp-image lp-offer__stack">
@@ -41,7 +46,12 @@
 {{/early}}
 {{^early}}
 {{#image}}
-    <img class="lp-offer__img" src="{{image}}" alt="{{image_alt}}" fetchpriority="high">
+    <picture>
+{{#image_wide}}
+      <source media="(min-width: 768px)" srcset="{{image_wide}}"{{#image_wide_w}} width="{{image_wide_w}}" height="{{image_wide_h}}"{{/image_wide_w}}>
+{{/image_wide}}
+      <img class="lp-offer__img" src="{{image}}" alt="{{image_alt}}"{{#image_w}} width="{{image_w}}" height="{{image_h}}"{{/image_w}} loading="lazy" decoding="async">
+    </picture>
 {{/image}}
 {{#body}}
     <div class="lp-body">{{body}}</div>

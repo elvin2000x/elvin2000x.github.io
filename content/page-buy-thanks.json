@@ -12,6 +12,17 @@
   "noindex": true,
   "sections": [
     {
+      "type": "lp-progress",
+      "id": "steps",
+      "data": {
+        "aria": "Your order progress",
+        "paid": "Paid",
+        "extras": "Optional extras",
+        "downloads": "Your downloads",
+        "downloads_now": true
+      }
+    },
+    {
       "id": "thanks",
       "type": "lp-thanks",
       "data": {

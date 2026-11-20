@@ -1,33 +1,38 @@
 {
-  "label": "Step counter",
+  "label": "Progress: three stages",
   "frames": [
     "landing"
   ],
   "fields": [
     {
-      "key": "step",
-      "type": "choice",
-      "label": "Step",
-      "options": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6"
-      ]
+      "key": "aria",
+      "type": "text",
+      "label": "Description for screen readers"
     },
     {
-      "key": "steps",
-      "type": "choice",
-      "label": "Of",
-      "options": [
-        "4",
-        "2",
-        "3",
-        "5",
-        "6"
-      ]
+      "key": "paid",
+      "type": "text",
+      "label": "First stage (ticked)"
+    },
+    {
+      "key": "extras",
+      "type": "text",
+      "label": "Second stage"
+    },
+    {
+      "key": "downloads",
+      "type": "text",
+      "label": "Third stage"
+    },
+    {
+      "key": "extras_now",
+      "type": "bool",
+      "label": "Second stage is the current one"
+    },
+    {
+      "key": "downloads_now",
+      "type": "bool",
+      "label": "Third stage is the current one"
     }
   ]
 }

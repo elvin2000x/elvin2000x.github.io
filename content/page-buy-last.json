@@ -15,8 +15,11 @@
       "id": "steps",
       "type": "lp-progress",
       "data": {
-        "step": "3",
-        "steps": "3"
+        "aria": "Your order progress",
+        "paid": "Paid",
+        "extras": "Optional extras",
+        "downloads": "Your downloads",
+        "extras_now": true
       }
     },
     {

@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=95dba62e" />
+  <link rel="stylesheet" href="/css/landing.css?v=a9637986" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp" data-store-step="manual-only">
@@ -77,10 +77,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 
 <main>
 
-<div class="lp-progress" data-lp-progress data-step="2" data-steps="3">
+<div class="lp-progress lp-stages" role="navigation" aria-label="Your order progress">
   <div class="lp-in">
-    <p class="lp-progress__label" data-store="progress">Step 2 of 3</p>
-    <div class="lp-progress__track"><i data-store-progress-bar></i></div>
+    <ol class="lp-stages__list">
+      <li class="lp-stages__item is-done"><i class="lp-stages__bar" aria-hidden="true"></i><span class="lp-stages__label"><b aria-hidden="true">&#10003;</b> Paid</span></li>
+      <li class="lp-stages__item is-now" aria-current="step"><i class="lp-stages__bar" aria-hidden="true"></i><span class="lp-stages__label">Optional extras</span></li>
+      <li class="lp-stages__item"><i class="lp-stages__bar" aria-hidden="true"></i><span class="lp-stages__label">Your downloads</span></li>
+    </ol>
   </div>
 </div>
 
@@ -117,7 +120,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <p class="lp-note lp-after-yes"><a href="/dl/Claude-Operators-Manual-Sample-14-pages.pdf">Read the contents page and Chapter 3 first (14-page PDF)</a></p>
     <button type="button" class="lp-no" data-store-decline>No thanks, I’ll skip this</button>
     <div class="lp-fallback" data-store-fallback hidden><p>Pay with another card</p></div>
-    <img class="lp-offer__img" src="/img/magnets/claude-manual.webp" alt="The Claude Operator's Manual by Elvin M. Peters" fetchpriority="high">
+    <picture>
+      <source media="(min-width: 768px)" srcset="/img/store/manual-suite-wide.webp" width="1500" height="1000">
+      <img class="lp-offer__img" src="/img/store/manual-suite.webp" alt="The Claude Operator's Manual as a printed guide, on a tablet and on a phone" width="1200" height="1200" loading="lazy" decoding="async">
+    </picture>
     <div class="lp-body"><p>This Manual shows you how to stop re-explaining who you are and what you do in every new chat. It covers Claude only: it does not cover ChatGPT or other tools. It is a separate $27 charge, and your book order stays as it is.</p><p>Inside you will find:</p><ul><li><strong>Setup in the Claude app, with no coding.</strong> Talking to Claude well, Projects and knowledge files, Skills, and connecting your tools.</li><li><strong>Claude Code, when you are ready.</strong> The Claude Code chapters are optional, and they are the only ones that ask you to open a terminal.</li><li><strong>Workflows to copy.</strong> The last part puts the setup together, with a chapter of complete workflows to copy and a chapter on keeping your setup working.</li><li><strong>Checklists.</strong> Every chapter ends with one, and the appendices include a day-one setup checklist.</li></ul><p>It is a PDF with 19 chapters. Prices are in US dollars.</p></div>
     <p class="lp-note">Digital download, for your own use. You get an instant download plus an email. A 30-day money-back guarantee covers this purchase: email elvin@elvinpeters.com within 30 days for a full refund.</p>
     <div class="lp-small"><p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p><p>Elvin Peters, author of The Artificial Advantage</p></div>

@@ -15,8 +15,11 @@
       "id": "steps",
       "type": "lp-progress",
       "data": {
-        "step": "2",
-        "steps": "3"
+        "aria": "Your order progress",
+        "paid": "Paid",
+        "extras": "Optional extras",
+        "downloads": "Your downloads",
+        "extras_now": true
       }
     },
     {
@@ -55,8 +58,8 @@
         "top": "",
         "heading": "Open a new Claude chat and it already knows what you do for work.",
         "sub": "The Claude Operator’s Manual on its own: 217 pages for $27.",
-        "image": "/img/magnets/claude-manual.webp",
-        "image_alt": "The Claude Operator's Manual by Elvin M. Peters",
+        "image": "/img/store/manual-suite.webp",
+        "image_alt": "The Claude Operator's Manual as a printed guide, on a tablet and on a phone",
         "body": "<p>This Manual shows you how to stop re-explaining who you are and what you do in every new chat. It covers Claude only: it does not cover ChatGPT or other tools. It is a separate $27 charge, and your book order stays as it is.</p><p>Inside you will find:</p><ul><li><strong>Setup in the Claude app, with no coding.</strong> Talking to Claude well, Projects and knowledge files, Skills, and connecting your tools.</li><li><strong>Claude Code, when you are ready.</strong> The Claude Code chapters are optional, and they are the only ones that ask you to open a terminal.</li><li><strong>Workflows to copy.</strong> The last part puts the setup together, with a chapter of complete workflows to copy and a chapter on keeping your setup working.</li><li><strong>Checklists.</strong> Every chapter ends with one, and the appendices include a day-one setup checklist.</li></ul><p>It is a PDF with 19 chapters. Prices are in US dollars.</p>",
         "was": "",
         "price": "$27",
@@ -69,7 +72,12 @@
         "early": "1",
         "review_href": "/book/last-chance/",
         "after_yes": "<a href=\"/dl/Claude-Operators-Manual-Sample-14-pages.pdf\">Read the contents page and Chapter 3 first (14-page PDF)</a>",
-        "above": "A separate $27 charge on the card you just used. Your book order stays as it is."
+        "above": "A separate $27 charge on the card you just used. Your book order stays as it is.",
+        "image_w": "1200",
+        "image_h": "1200",
+        "image_wide": "/img/store/manual-suite-wide.webp",
+        "image_wide_w": "1500",
+        "image_wide_h": "1000"
       }
     }
   ]
