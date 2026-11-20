@@ -83,6 +83,31 @@
       }
     },
     {
+      "type": "lp-addon",
+      "id": "addon-mid",
+      "data": {
+        "headline": "AI at Home: ten jobs with the words already written",
+        "line": "Open the chat app you already use, paste the words, and fill the brackets with your own details.",
+        "jobs": [
+          {
+            "job": "Dinners for the week"
+          },
+          {
+            "job": "Your internet bill"
+          },
+          {
+            "job": "A trip that fits everyone"
+          }
+        ],
+        "label": "Add AI at Home, $7",
+        "price": "$7",
+        "image": "/img/store/ai-at-home-thumb.webp",
+        "image_alt": "The AI at Home guide cover",
+        "image_w": "192",
+        "image_h": "307"
+      }
+    },
+    {
       "id": "proofband",
       "type": "lp-proofband",
       "data": {
@@ -345,31 +370,6 @@
             "a": "Digital downloads, available right after checkout, and nothing is shipped."
           }
         ]
-      }
-    },
-    {
-      "type": "lp-addon",
-      "id": "addon-mid",
-      "data": {
-        "headline": "AI at Home: ten jobs with the words already written",
-        "line": "Open the chat app you already use, paste the words, and fill the brackets with your own details.",
-        "jobs": [
-          {
-            "job": "Dinners for the week"
-          },
-          {
-            "job": "Your internet bill"
-          },
-          {
-            "job": "A trip that fits everyone"
-          }
-        ],
-        "label": "Add AI at Home, $7",
-        "price": "$7",
-        "image": "/img/store/ai-at-home-thumb.webp",
-        "image_alt": "The AI at Home guide cover",
-        "image_w": "192",
-        "image_h": "307"
       }
     },
     {
