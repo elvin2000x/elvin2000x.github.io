@@ -438,7 +438,7 @@ function renderStack(stack, name, { site, isHome, markers, funnels, store }) {
   // css: the page's own stylesheet (Studio's Custom CSS box), checked by checkStack above.
   const page = { title: stack.title || '', description: (L && L.description) || '', hide_menu: !!(L && L.hide_menu), step: (L && L.step) || '', aud: !!(L && L.aud),
     css: typeof stack.css === 'string' ? stack.css.trim() : '' };
-  return renderTpl(frame, '_frames/' + stack.frame, [{ ...globals, robots_off, page, sections: parts.join('\n\n') }]) + '\n';
+  return renderTpl(frame, '_frames/' + stack.frame, [{ ...globals, robots_off, page, redirect_to: (L && typeof L.redirect_to === 'string') ? L.redirect_to : '', sections: parts.join('\n\n') }]) + '\n';
 }
 
 /* The page a stack becomes: which file, and whether it's the homepage.
