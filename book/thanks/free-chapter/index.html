@@ -171,6 +171,35 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       a.href = u.toString();
     } catch (x) {}
   }, true);
+  /* Direct checkout (Round 2 switch). With ?direct=1 in the address (kept for the session), a buy button
+     that points at /book/checkout/ posts straight to the store and lands on Stripe, with no add-on flag
+     (Stripe's page offers it). Without the switch nothing changes. To make it the default for everyone,
+     set DIRECT_DEFAULT to true. begin_checkout still fires from js/site.js on the same click. */
+  var DIRECT_DEFAULT = false, DIRECT = DIRECT_DEFAULT;
+  try { if (/[?&]direct=1(?:&|$)/.test(location.search)) sessionStorage.setItem('ep-direct', '1'); if (sessionStorage.getItem('ep-direct') === '1') DIRECT = true; } catch (x) {}
+  if (DIRECT) document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a.btn--primary[href^="/book/checkout/"]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    var funnel = 'the-artificial-advantage-1'; if (!funnel) return;
+    e.preventDefault();
+    var ft = {}; try { ft = JSON.parse(sessionStorage.getItem('ep-ft') || '{}') || {}; } catch (x) {}
+    var utm = {}; try { utm = window.EPUtm ? window.EPUtm.get() : {}; } catch (x) {}
+    Object.keys(ft).forEach(function (k) { if (!(k in utm)) utm[k] = ft[k]; });
+    var go = function () { location.href = a.href; };
+    try {
+      if (typeof gtag === 'function') {
+        var bp = { currency: 'USD', entry: ft.entry || '', landing: ft.landing || '' };
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'].forEach(function (k) { if (ft[k]) bp[k] = ft[k]; });
+        if (ft.referrer) bp.referrer = ft.referrer;
+        gtag('event', 'begin_checkout', bp);
+      }
+    } catch (x) {}
+    if (a.getAttribute('data-busy')) return; a.setAttribute('data-busy', '1');
+    fetch('/api/store/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ funnel: funnel, utm: utm, code: '' }) })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { var u = j && (j.url || j.checkout_url); if (u && /^https:\/\//.test(u)) location.assign(u); else go(); })
+      .catch(go);
+  }, false);
   /* Live prices: the shop lists every product the store sells on its own, and a value
      stack line tied to a product shows that product's shop price, so a struck-through
      value is always a real price. The typed text stays if the store can't be reached. */
