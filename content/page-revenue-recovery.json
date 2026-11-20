@@ -1,0 +1,152 @@
+{
+  "_comment": "The Revenue Recovery landing page at elvinpeters.com/revenue-recovery/ (Mission Control #651). Words from Brain/05 Business and Money/deliverables/revenue-recovery/PAGE.md, which passed facts and voice in gate.py on 2026-11-08. The poster QR points at /fix, a redirect to this page. Edit the words here or in Site Studio; the frame is sections/_frames/revenue-recovery.html.",
+  "title": "The Silent Revenue Recovery System, Toronto",
+  "frame": "revenue-recovery",
+  "path": "revenue-recovery/index.html",
+  "noindex": false,
+  "css": "body.lp .sec{padding:56px 16px}\nbody.lp .sec--tint{background:var(--bg-2)}\nbody.lp .sec .in{max-width:720px;margin:0 auto}\nbody.lp .sec h2{font-size:28px;line-height:1.2;margin:0 0 18px}\nbody.lp .faq summary{font-size:18px;color:var(--ink)}\nbody.lp .faq details > p{font-size:19px;line-height:1.58;color:var(--lp-navy)}\nbody.lp .ep-text p strong{color:var(--ink)}\nbody.lp .lp-hero .lp-lede{margin-bottom:14px}",
+  "sections": [
+    {
+      "id": "hero",
+      "type": "page-hero",
+      "data": {
+        "anchor": "",
+        "eyebrow": "",
+        "headline": "The Silent Revenue Recovery System, Toronto",
+        "sub": "You scanned the poster because something in your business slips through the cracks. A call you couldn't pick up. A quote request that sat until the next morning. An invoice that's three weeks late. A happy customer you never asked for a review.",
+        "more": "Each of those is money you already earned the chance to collect. This page shows the five automations that catch them. You can build them yourself with the guide below, or I can have them installed for you in your own accounts for a one-time fee, with no monthly retainer.",
+        "button": {
+          "label": "Fill in the intake form",
+          "href": "https://docs.google.com/forms/d/e/1FAIpQLSd5E5olS63--MTn2P3Os986A-KwoGLqi2i172Ove2J9zdxO8A/viewform"
+        },
+        "note": ""
+      }
+    },
+    {
+      "id": "who",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "Built for Toronto businesses whose customers reach them by phone or an online form: trades, cleaners, clinics, contractors, salons and repair shops.",
+          "Run a restaurant or a shop and mostly need people to find you online? Ask on the call about the smaller starter install. It gets you set up on Google and social, with an automatic reply to questions, in one visit, and it's built for owners who don't want to learn new software."
+        ]
+      }
+    },
+    {
+      "id": "leaks",
+      "type": "text",
+      "data": {
+        "anchor": "leaks",
+        "align": "left",
+        "heading": "The five leaks, and what catches each one",
+        "paras": [
+          "<strong>1. Missed calls.</strong> When you miss a call, the caller gets a text from your business number within seconds: \"Sorry we missed you, how can we help?\" They can answer by text while you're on the job, before they try the next name on the list.",
+          "<strong>2. Slow replies to new leads.</strong> A form, email or Facebook lead gets a reply within 5 minutes, with your booking link in it. The reply is written by AI from your own words and services, and you see every message it sends.",
+          "<strong>3. Unpaid invoices.</strong> Your invoicing tool sends a polite reminder with a payment link 1 day, 3 days and 7 days after the due date while the invoice stays unpaid, so you stop chasing by phone.",
+          "<strong>4. Reviews you never asked for.</strong> About 2 hours after a job is marked done, every customer gets a thank-you and your Google review link. Every customer gets the same message. Google's rules don't allow businesses to ask only the happy ones, so this asks everyone.",
+          "<strong>5. Not knowing your numbers.</strong> Every Monday at 7:00 AM you get a one-page email: new leads, missed calls caught, invoices paid and outstanding, and new reviews."
+        ]
+      }
+    },
+    {
+      "id": "how",
+      "type": "text",
+      "data": {
+        "anchor": "how",
+        "align": "left",
+        "heading": "How the done-for-you install works",
+        "paras": [
+          "<strong>1. Fill in the intake form (about a minute).</strong> It asks what phone system, booking tool and invoicing tool you use, so I can check what we can connect before we talk.",
+          "<strong>2. Book a 15-minute call with me.</strong> The booking link appears when you send the form. We go through where calls, leads and payments slip today, and I tell you what I'd build and what it costs.",
+          "<strong>3. Half to start.</strong> You pay half of the setup fee when we agree the build.",
+          "<strong>4. Install in 7 days from the day we have access.</strong> You give access to your phone number, booking or CRM tool, invoicing tool and Google Business Profile. The automations are built and tested inside your own accounts.",
+          "<strong>5. The other half on install.</strong> When all five are live and tested in front of you, you pay the second half.",
+          "<strong>6. 30 days of monitoring.</strong> I watch the first month, fix anything that misfires and send you the Monday numbers.",
+          "<strong>One-time setup fee, no retainer.</strong> You own every account and everything built in it. Your tools bill you directly for their own small monthly fees, such as texting, so nothing runs through me."
+        ]
+      }
+    },
+    {
+      "id": "guarantee",
+      "type": "text",
+      "data": {
+        "anchor": "guarantee",
+        "align": "left",
+        "heading": "The guarantee",
+        "paras": [
+          "If the system doesn't recover at least 50% of your missed leads in your first 30 days, I refund your setup fee and you keep everything built.",
+          "Here's how it's counted. A missed lead is a call to your business number that nobody answers, or a message through your connected form. Each number counts once a day, and spam doesn't count. It's recovered when that person replies to the automatic text or email, calls back and gets through, or books, within 48 hours. The count comes from your own call log, text log and lead sheet, and it's in your Monday email every week."
+        ]
+      }
+    },
+    {
+      "id": "diy",
+      "type": "text",
+      "data": {
+        "anchor": "build-it-yourself",
+        "align": "left",
+        "heading": "Build it yourself",
+        "paras": [
+          "If you'd rather do it yourself, here's the plan. You'll need an automation tool (Make or Zapier), a texting service (such as Twilio), an AI model for the lead replies, and your own CRM and invoicing tool.",
+          "<strong>Missed-call text-back.</strong> Use a phone number that can send a signal when a call is missed. Set your automation to fire on a missed or no-answer call and send a short text from your business number.",
+          "<strong>Instant lead reply.</strong> Connect your website form, email and Facebook leads to your automation tool. Pass each new lead to an AI prompt that reads the request, sorts it and drafts a short reply with your booking link. Have it send within 5 minutes.",
+          "<strong>Invoice chasing.</strong> Connect your invoicing tool (QuickBooks, Stripe or Square). Schedule reminders at 1, 3 and 7 days past due while the invoice is unpaid, each with a payment link.",
+          "<strong>Review requests.</strong> Trigger on a job marked complete in your CRM or dispatch tool. Wait about 2 hours, then send a thank-you with your Google review link to every customer.",
+          "<strong>Monday dashboard.</strong> Pull your missed-call log, lead count, payments and reviews into one summary, scheduled for Monday at 7:00 AM.",
+          "Every text and email carries your business name and a way to opt out. Canada's anti-spam law and US carrier rules both apply to business texting, and the install handles that set-up for you."
+        ]
+      }
+    },
+    {
+      "id": "faq",
+      "type": "faq",
+      "data": {
+        "bg": "tint",
+        "anchor": "questions",
+        "heading": "Questions",
+        "items": [
+          {
+            "q": "Do I need new software?",
+            "a": "Usually not. The install connects the phone, booking and invoicing tools you already use. If one of them can't connect, I'll tell you on the call before you pay anything."
+          },
+          {
+            "q": "Will it work with my CRM?",
+            "a": "Most CRMs and job tools connect. The intake form asks which one you use so I can check before the call."
+          },
+          {
+            "q": "How fast is setup?",
+            "a": "7 days from the day you give access."
+          },
+          {
+            "q": "Is there a monthly fee?",
+            "a": "No fee to me. Your texting and automation tools bill you directly, usually a small monthly amount."
+          },
+          {
+            "q": "Who will I be working with?",
+            "a": "Me, Elvin Peters, in Toronto. I ran paid media for two regulated lending brands at goeasy, where every campaign went through compliance review, then advised large advertisers at an ad tech company. Now I build with AI. A small team of builders does the technical wiring to my checklist, and I test every install before you pay the second half."
+          }
+        ]
+      }
+    },
+    {
+      "id": "cta",
+      "type": "button",
+      "data": {
+        "anchor": "intake",
+        "align": "center",
+        "note": "Elvin Peters · Toronto · elvinpeters.com/fix · elvin@elvinpeters.com",
+        "buttons": [
+          {
+            "label": "Fill in the intake form",
+            "href": "https://docs.google.com/forms/d/e/1FAIpQLSd5E5olS63--MTn2P3Os986A-KwoGLqi2i172Ove2J9zdxO8A/viewform",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
+      }
+    }
+  ]
+}
