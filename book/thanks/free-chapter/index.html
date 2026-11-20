@@ -185,6 +185,15 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     [].forEach.call(addonBoxes(), function (c) { c.checked = ADDON_ON; });
     [].forEach.call(document.querySelectorAll('[data-lp-addon-off]'), function (el) { el.hidden = ADDON_ON; });
     [].forEach.call(document.querySelectorAll('[data-lp-addon-on]'), function (el) { el.hidden = !ADDON_ON; });
+    /* every buy button names what it charges: with the add-on ticked "Get the bundle for $27" reads "Get both for $34"
+       and the short "Get the bundle" reads "Get both" */
+    [].forEach.call(document.querySelectorAll('a.btn--primary[href^="/book/checkout/"]'), function (a) {
+      if (a.classList.contains('lp-addon__btn')) return;
+      if (!a.hasAttribute('data-orig')) a.setAttribute('data-orig', a.textContent.trim());
+      var o = a.getAttribute('data-orig'), m = /^Get the bundle for \$(\d+(?:\.\d+)?)$/.exec(o);
+      if (m) { var c = Math.round(parseFloat(m[1]) * 100) + (ADDON_ON ? addonCents() : 0); a.textContent = ADDON_ON ? 'Get both for $' + (c / 100).toFixed(c % 100 ? 2 : 0) : o; }
+      else if (o === 'Get the bundle') a.textContent = ADDON_ON ? 'Get both' : o;
+    });
     [].forEach.call(document.querySelectorAll('.lp-obar__price--text'), function (el) {
       if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
       var o = el.getAttribute('data-orig'), m = /\$\s*(\d+(?:\.\d+)?)/.exec(o);
