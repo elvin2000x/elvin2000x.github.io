@@ -267,7 +267,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     var ft = {}; try { ft = JSON.parse(sessionStorage.getItem('ep-ft') || '{}') || {}; } catch (x) {}
     var utm = {}; try { utm = window.EPUtm ? window.EPUtm.get() : {}; } catch (x) {}
     Object.keys(ft).forEach(function (k) { if (!(k in utm)) utm[k] = ft[k]; });
-    var go = function () { location.href = a.href; };
+    /* If the store gives no url, say so on this page; /book/checkout/ forwards here, so it is never a way out. */
+    var go = function () { a.removeAttribute('data-busy'); location.href = '/book/offer/?checkout=busy'; };
     try {
       if (typeof gtag === 'function') {
         var bp = { currency: 'USD', entry: ft.entry || '', landing: ft.landing || '' };
@@ -277,7 +278,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       }
     } catch (x) {}
     if (a.getAttribute('data-busy')) return; a.setAttribute('data-busy', '1');
-    fetch('/api/store/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ funnel: funnel, utm: utm, code: '' }) })
+    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ funnel: funnel, utm: utm, code: '' }) })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { var u = j && (j.url || j.checkout_url); if (u && /^https:\/\//.test(u)) location.assign(u); else go(); })
       .catch(go);
