@@ -141,6 +141,26 @@
       "key": "review_href",
       "type": "text",
       "label": "Review path link"
+    },
+    {
+      "key": "stack_w",
+      "type": "text",
+      "label": "Stack picture width"
+    },
+    {
+      "key": "stack_h",
+      "type": "text",
+      "label": "Stack picture height"
+    },
+    {
+      "key": "stack_phone_w",
+      "type": "text",
+      "label": "Phone stack picture width"
+    },
+    {
+      "key": "stack_phone_h",
+      "type": "text",
+      "label": "Phone stack picture height"
     }
   ]
 }

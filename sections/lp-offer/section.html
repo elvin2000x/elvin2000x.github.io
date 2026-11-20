@@ -15,9 +15,9 @@
     <figure class="lp-image lp-offer__stack">
       <picture>
 {{#stack_phone}}
-        <source media="(max-width: 767px)" srcset="{{stack_phone}}" />
+        <source media="(max-width: 767px)" srcset="{{stack_phone}}"{{#stack_phone_w}} width="{{stack_phone_w}}" height="{{stack_phone_h}}"{{/stack_phone_w}} />
 {{/stack_phone}}
-        <img src="{{stack_desktop}}" alt="{{stack_alt}}" loading="lazy" decoding="async" />
+        <img src="{{stack_desktop}}" alt="{{stack_alt}}"{{#stack_w}} width="{{stack_w}}" height="{{stack_h}}"{{/stack_w}} loading="lazy" decoding="async" />
       </picture>
     </figure>
 {{/stack_desktop}}
@@ -44,9 +44,9 @@
     <figure class="lp-image lp-offer__stack">
       <picture>
 {{#stack_phone}}
-        <source media="(max-width: 767px)" srcset="{{stack_phone}}" />
+        <source media="(max-width: 767px)" srcset="{{stack_phone}}"{{#stack_phone_w}} width="{{stack_phone_w}}" height="{{stack_phone_h}}"{{/stack_phone_w}} />
 {{/stack_phone}}
-        <img src="{{stack_desktop}}" alt="{{stack_alt}}" loading="lazy" decoding="async" />
+        <img src="{{stack_desktop}}" alt="{{stack_alt}}"{{#stack_w}} width="{{stack_w}}" height="{{stack_h}}"{{/stack_w}} loading="lazy" decoding="async" />
       </picture>
     </figure>
 {{/stack_desktop}}
