@@ -599,7 +599,7 @@ body.lp .lp-stack--pay .lp-pay__go .lp-note{ margin:12px 0 0; font:14px/20px var
 @media (min-width:768px){ body.lp:has(.lp-ordered) .ep-video__frame{ max-width:560px } }
 @media (min-width:768px){ body.lp .lp-sec.lp-ordered{ padding-top:16px; padding-bottom:0 } body.lp .lp-sec.lp-ordered + .lp-sec{ padding-top:24px } }
 /* band: a fixed box so nothing flashes white or jumps while the picture loads */
-.lp-band img{ aspect-ratio:1344 / 768; background:#0a1828 }
+.lp-band img{ aspect-ratio:720 / 576; background:#0a1828 }
 @media (min-width:768px){ .lp-band img{ aspect-ratio:auto } }
 /* the line above an early yes button */
 .lp-above{ margin:8px 0 12px; font:600 17px/24px var(--sans); color:var(--lp-navy) }

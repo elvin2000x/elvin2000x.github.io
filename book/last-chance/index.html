@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=25cf0f0f" />
+  <link rel="stylesheet" href="/css/landing.css?v=95dba62e" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp" data-store-step="last-chance">
@@ -121,16 +121,22 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <p class="lp-note">Digital downloads, for your own use. You get an instant download plus an email. A 30-day money-back guarantee covers these purchases: email elvin@elvinpeters.com within 30 days for a full refund.</p>
     <div class="lp-small"><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p></div>
   </div>
+  <div hidden data-lp-thumbs>{"claude-manual":"/img/store/last-chance/claude-manual.webp","global-ai-race":"/img/store/last-chance/global-ai-race.webp","operator-bundle":"/img/store/last-chance/operator-bundle.webp","role-packs":"/img/store/last-chance/role-packs.webp","thirty-ways":"/img/store/last-chance/thirty-ways.webp","top-15-rules":"/img/store/last-chance/top-15-rules.webp"}</div>
   <div hidden data-lp-rows><p data-product="operator-bundle">Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Rules of Engagement and Your Personal Specialists. Your Personal Specialists has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it also sells on its own for $27.</p><p data-product="claude-manual">A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work.</p><p data-product="top-15-rules">Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok.</p><p data-product="global-ai-race">One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined.</p><p data-product="thirty-ways">A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip.</p></div>
   <script>
   (function () {
-    var root = document.currentScript.parentNode, rows = {};
+    var root = document.currentScript.parentNode, rows = {}, thumbs = {};
+    try { thumbs = JSON.parse((root.querySelector('[data-lp-thumbs]') || {}).textContent || '{}') || {}; } catch (e) {}
     Array.prototype.forEach.call(root.querySelectorAll('[data-lp-rows] p'), function (r) { rows[r.getAttribute('data-product')] = r.textContent; });
     /* The store script draws the rows; this adds what each one holds, and tags it so the page can style it. */
     function dress() {
       Array.prototype.forEach.call(root.querySelectorAll('.lp-basket__list label'), function (l) {
         var cb = l.querySelector('input[type=checkbox]'); if (!cb) return;
         l.setAttribute('data-product', cb.value);
+        if (thumbs[cb.value] && !l.querySelector('.lp-basket__thumb')) {
+          var im = document.createElement('img'); im.className = 'lp-basket__thumb'; im.src = thumbs[cb.value]; im.alt = ''; im.width = 56; im.height = 90; im.loading = 'lazy'; im.decoding = 'async';
+          l.insertBefore(im, cb.nextSibling);
+        }
         if (rows[cb.value] && !l.querySelector('.lp-basket__row-text')) {
           var p = document.createElement('span'); p.className = 'lp-basket__row-text'; p.textContent = rows[cb.value]; l.appendChild(p);
         }
