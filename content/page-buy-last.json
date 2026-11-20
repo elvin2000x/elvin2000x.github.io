@@ -84,7 +84,8 @@
             "product": "thirty-ways",
             "text": "A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip."
           }
-        ]
+        ],
+        "thumbs_json": "{\"claude-manual\":\"/img/store/last-chance/claude-manual.webp\",\"global-ai-race\":\"/img/store/last-chance/global-ai-race.webp\",\"operator-bundle\":\"/img/store/last-chance/operator-bundle.webp\",\"role-packs\":\"/img/store/last-chance/role-packs.webp\",\"thirty-ways\":\"/img/store/last-chance/thirty-ways.webp\",\"top-15-rules\":\"/img/store/last-chance/top-15-rules.webp\"}"
       }
     }
   ]

@@ -603,3 +603,4 @@ body.lp .lp-stack--pay .lp-pay__go .lp-note{ margin:12px 0 0; font:14px/20px var
 @media (min-width:768px){ .lp-band img{ aspect-ratio:auto } }
 /* the line above an early yes button */
 .lp-above{ margin:8px 0 12px; font:600 17px/24px var(--sans); color:var(--lp-navy) }
+.lp-basket__thumb{ flex:none; width:56px; height:90px; object-fit:contain; border-radius:3px }

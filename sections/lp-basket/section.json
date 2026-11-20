@@ -94,6 +94,11 @@
       "key": "review_href",
       "type": "text",
       "label": "Review path link"
+    },
+    {
+      "key": "thumbs_json",
+      "type": "text",
+      "label": "Row pictures (JSON: product key to picture)"
     }
   ]
 }
