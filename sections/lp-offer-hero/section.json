@@ -142,7 +142,7 @@
         },
         {
           "key": "headline",
-          "type": "text",
+          "type": "html",
           "label": "Headline"
         },
         {

@@ -61,6 +61,13 @@
             "key": "B",
             "headline": "Ever get an AI answer so generic you shrugged and closed the tab?",
             "sub": "Learn how to tell AI what you want: a book, a toolkit and a 7-day workbook for $27.",
+            "on": false,
+            "on_since": "2026-11-20"
+          },
+          {
+            "key": "B2",
+            "headline": "Ever get an AI answer so generic you closed the tab?",
+            "sub": "Learn how to tell AI what you want: a book, a toolkit and a 7-day workbook for $27.",
             "on": true,
             "on_since": "2026-11-20"
           },

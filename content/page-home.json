@@ -49,7 +49,7 @@
           },
           {
             "key": "C",
-            "headline": "You tried AI. You weren't impressed.",
+            "headline": "You tried AI.<br/><span>You weren't impressed.</span>",
             "sub": "Learn to brief AI the way you would brief a capable new colleague, one real work task at a time.",
             "on": true,
             "on_since": "2026-11-20"

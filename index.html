@@ -350,24 +350,36 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <div>
       <h1 id="hl" data-hook-h>You can explain a job to a new hire. Explain it to AI the same way.</h1>
       <p class="hero-sub" id="sub" data-hook-s>The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.</p>
-<ul hidden data-hook-variants data-page="home"><li data-key="A" data-on="1" data-since="2026-11-20"><b>You can explain a job to a new hire. Explain it to AI the same way.</b><i>The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.</i></li><li data-key="B" data-on="1" data-since="2026-11-20"><b>Have you spent longer fixing an AI answer than writing it yourself?</b><i>The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.</i></li><li data-key="C" data-on="1" data-since="2026-11-20"><b>You tried AI. You weren't impressed.</b><i>Learn to brief AI the way you would brief a capable new colleague, one real work task at a time.</i></li></ul>
+<ul hidden data-hook-variants data-page="home"><li data-key="A" data-on="1" data-since="2026-11-20"><b>You can explain a job to a new hire. Explain it to AI the same way.</b><i>The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.</i></li><li data-key="B" data-on="1" data-since="2026-11-20"><b>Have you spent longer fixing an AI answer than writing it yourself?</b><i>The Artificial Advantage teaches you to tell AI what you want, one real work task at a time.</i></li><li data-key="C" data-on="1" data-since="2026-11-20"><b>You tried AI.<br/><span>You weren't impressed.</span></b><i>Learn to brief AI the way you would brief a capable new colleague, one real work task at a time.</i></li></ul>
 <script>
 (function () {
   /* Headline rotation. Each visitor gets one on-variant, kept in localStorage (ep_hook_<page>); a variant switched off in
      the page data is never shown and a saved one that is now off is re-rolled. Runs before the page paints, so nothing flashes.
      The view is reported once per page load to the store. */
+  /* Team flag: ?team=1 sets ep_team in localStorage and every report and the checkout request then carry test: true;
+     ?team=0 clears it. A utm_source starting taskmaster-, webmaster- or 607 counts as team too. */
+  var team = false;
+  try {
+    if (/[?&]team=1(?:&|$)/.test(location.search)) localStorage.setItem('ep_team', '1');
+    if (/[?&]team=0(?:&|$)/.test(location.search)) localStorage.removeItem('ep_team');
+    team = localStorage.getItem('ep_team') === '1';
+    var src = (/[?&]utm_source=([^&]*)/.exec(location.search) || [])[1] || ''; try { src = decodeURIComponent(src); } catch (e) {}
+    if (!src) { try { src = (JSON.parse(sessionStorage.getItem('ep-ft') || '{}') || {}).utm_source || ''; } catch (e) {} }
+    if (/^(taskmaster-|webmaster-|607)/i.test(src)) team = true;
+  } catch (e) {}
+  window.EP_TEAM = team;
   var ul = document.querySelector('[data-hook-variants]'); if (!ul) return;
   var page = ul.getAttribute('data-page'), items = [];
-  [].forEach.call(ul.children, function (li) { items.push({ k: li.getAttribute('data-key'), on: li.getAttribute('data-on') === '1', h: li.querySelector('b').textContent, s: li.querySelector('i').textContent }); });
+  [].forEach.call(ul.children, function (li) { items.push({ k: li.getAttribute('data-key'), on: li.getAttribute('data-on') === '1', h: li.querySelector('b').innerHTML, ht: li.querySelector('b').textContent.replace(/\s+/g, ' ').trim(), s: li.querySelector('i').textContent }); });
   var on = items.filter(function (x) { return x.on; }); if (!on.length) return;
   var key = 'ep_hook_' + page, saved = null; try { saved = localStorage.getItem(key); } catch (e) {}
   var pick = on.filter(function (x) { return x.k === saved; })[0] || on[Math.floor(Math.random() * on.length)];
   try { localStorage.setItem(key, pick.k); } catch (e) {}
   var h = document.querySelector('[data-hook-h]'), s = document.querySelector('[data-hook-s]');
-  if (h) h.textContent = pick.h; if (s) s.textContent = pick.s;
+  if (h) h.innerHTML = pick.h; if (s) s.textContent = pick.s;
   window.EP_HOOK = { page: page, variant: pick.k };
   window.EP_HOOK_SEND = function (event) {
-    try { fetch('https://api.elvinpeters.com/api/store/hook', { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, body: JSON.stringify({ funnel: 'the-artificial-advantage-1', page: page, variant: pick.k, event: event, text: pick.h.slice(0, 140) }) }).catch(function () {}); } catch (e) {}
+    try { fetch('https://api.elvinpeters.com/api/store/hook', { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, body: JSON.stringify({ funnel: 'the-artificial-advantage-1', page: page, variant: pick.k, event: event, text: pick.ht.slice(0, 140), test: team ? true : undefined }) }).catch(function () {}); } catch (e) {}
   };
   window.EP_HOOK_SEND('view');
   /* the homepage report counts a click on the hero's buy button (the offer page reports buy clicks itself) */
