@@ -583,3 +583,8 @@ body.lp .lp-stack--pay .lp-pay__go .lp-note{ margin:12px 0 0; font:14px/20px var
   .lp-stack--pay .lp-due--card{ display:flex !important; padding-top:16px; margin-top:0; border-top:1px solid #c7d2dd }
   .lp-stack--pay .lp-get{ margin-top:32px }
 }
+/* the three answers: beside the price from 768 up, under the video on phones */
+.lp-answers{ padding:0 16px 8px; max-width:560px; margin:0 auto }
+.lp-answers .lp-ohero__answers{ margin:12px 0 0 }
+@media (max-width:767px){ .lp-ohero__buy .lp-ohero__answers{ display:none } }
+@media (min-width:768px){ .lp-answers{ display:none } }

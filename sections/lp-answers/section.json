@@ -1,0 +1,25 @@
+{
+  "label": "Small answers under the video (phones)",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "lines",
+      "type": "list",
+      "label": "Lines",
+      "fields": [
+        {
+          "key": "line",
+          "type": "text",
+          "label": "Line"
+        }
+      ]
+    }
+  ]
+}

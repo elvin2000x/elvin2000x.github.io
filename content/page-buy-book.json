@@ -25,9 +25,15 @@
         "price": "$27",
         "answers": {
           "lines": [
-            { "line": "Works with ChatGPT, Claude, Gemini and Copilot. A free plan is enough to start." },
-            { "line": "The Toolkit is 25 prompts, 25 role setups and 16 exercises, in Word files you can edit." },
-            { "line": "The Workbook is one step a day for seven days, on one real task from your own week." }
+            {
+              "line": "Works with ChatGPT, Claude, Gemini and Copilot. A free plan is enough to start."
+            },
+            {
+              "line": "The Toolkit is 25 prompts, 25 role setups and 16 exercises, in Word files you can edit."
+            },
+            {
+              "line": "The Workbook is one step a day for seven days, on one real task from your own week."
+            }
           ]
         },
         "bar_left": "The Bundle, $27 once",
@@ -58,6 +64,23 @@
         "poster_alt": ""
       },
       "note": "Video: paste the link in Video link. Nothing shows on the page until there is one."
+    },
+    {
+      "type": "lp-answers",
+      "id": "answers",
+      "data": {
+        "lines": [
+          {
+            "line": "Works with ChatGPT, Claude, Gemini and Copilot. A free plan is enough to start."
+          },
+          {
+            "line": "The Toolkit is 25 prompts, 25 role setups and 16 exercises, in Word files you can edit."
+          },
+          {
+            "line": "The Workbook is one step a day for seven days, on one real task from your own week."
+          }
+        ]
+      }
     },
     {
       "id": "proofband",
@@ -129,7 +152,7 @@
         "align": "left",
         "heading": "Who is writing to you",
         "paras": [
-          "My name is Elvin Peters. For three years I ran paid media for two regulated lending brands, more than $50M in digital ad spend in all. Every campaign had to clear a compliance review before it went live, so I learned to be precise about what I asked for and careful about what I accepted.",
+          "My name is Elvin Peters. For three years I ran paid media for two regulated lending brands, more than $50M in digital ad spend in all. My rule with AI is measure twice, cut once: I say what I want before I ask, and I check the answer before my name goes on it.",
           "After that I advised large advertisers on how to grow their business, at a tech company building one of the leading AIs. In 2026 I became a founder, writing books and building with AI full time."
         ]
       }
