@@ -587,3 +587,14 @@ body.lp .lp-stack--pay .lp-pay__go .lp-note{ margin:12px 0 0; font:14px/20px var
 .lp-answers{ padding:0 16px 8px; max-width:560px; margin:0 auto }
 .lp-answers .lp-ohero__answers{ margin:12px 0 0 }
 .lp-ohero__buy .lp-ohero__answers{ display:none }
+/* the "You ordered" card on the step pages: the same compact shape on desktop as on a phone (cover strip beside one line) */
+@media (min-width:768px){
+  .lp-ordered{ padding-top:16px }
+  .lp-ordered .lp-in{ max-width:720px }
+  .lp-ordered__row{ flex-direction:row; align-items:center; gap:16px; padding:0 16px 0 0 }
+  .lp-ordered__row picture{ flex:0 0 320px; max-width:320px }
+  .lp-ordered__text{ padding:0; font-size:17px; line-height:1.3 }
+}
+/* step pages with the ordered card: the video is a little smaller on desktop so the headline starts inside the first screen */
+@media (min-width:768px){ body.lp:has(.lp-ordered) .ep-video__frame{ max-width:560px } }
+@media (min-width:768px){ body.lp .lp-sec.lp-ordered{ padding-top:16px; padding-bottom:0 } body.lp .lp-sec.lp-ordered + .lp-sec{ padding-top:24px } }
