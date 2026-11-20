@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=2c3b7e6b" />
+  <link rel="stylesheet" href="/css/landing.css?v=cd4cd6d0" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp" data-store-step="last-chance">
@@ -109,7 +109,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="lp-in">
     <h1>Choose any guide here for 12% off, or go straight to your downloads.</h1>
     <p class="lp-lede">Take 12% off any product below. I will not send this offer again.</p>
-    <div class="lp-body"><p>Your order is in, and your downloads are on the next page. <span data-only-with="operator-bundle" hidden>The AI Setup Bundle already includes the Manual and Rules of Engagement, so choose the AI Setup Bundle or the single guides.</span> Products you already bought are not listed. Each price shown has your 12% off.</p><p>Prices are in US dollars.</p></div>
+    <div class="lp-body"><p><span data-only-with="operator-bundle" hidden>The AI Setup Bundle already includes the Manual and Rules of Engagement, so choose the AI Setup Bundle or the single guides.</span> Products you already bought are not listed. Each price shown has your 12% off.</p><p>Prices are in US dollars, plus sales tax where it applies.</p></div>
     <div class="lp-basket__list" data-store="basket"></div>
     <p class="lp-price"><span>Total</span> <s data-store="was"></s> <strong data-store="total"></strong></p>
     <p class="lp-note">One receipt email lists everything you bought and links to your library, where each product has its own download. Anything added later in the same order gets a second email titled Added to your order.</p>
@@ -202,6 +202,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   function addonCents() { var b = addonBoxes()[0], m = b && /\$\s*(\d+(?:\.\d+)?)/.exec(b.getAttribute('data-lp-addon-price') || ''); return m ? Math.round(parseFloat(m[1]) * 100) : 0; }
   function paintAddon() {
     [].forEach.call(addonBoxes(), function (c) { c.checked = ADDON_ON; });
+    [].forEach.call(document.querySelectorAll('[data-lp-addon-off]'), function (el) { el.hidden = ADDON_ON; });
+    [].forEach.call(document.querySelectorAll('[data-lp-addon-on]'), function (el) { el.hidden = !ADDON_ON; });
     [].forEach.call(document.querySelectorAll('.lp-obar__price--text'), function (el) {
       if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
       var o = el.getAttribute('data-orig'), m = /\$\s*(\d+(?:\.\d+)?)/.exec(o);
@@ -323,7 +325,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         if (dueEls.length) {
           var bumpBox = box.querySelector('[data-store-bump]'), bm = /\$\s*(\d+(?:\.\d+)?)/.exec(box.getAttribute('data-bump-price') || ''), bumpC = bm ? Math.round(parseFloat(bm[1]) * 100) : 0;
           var showDue = function () { var c = f.front_price + (bumpBox && bumpBox.checked ? bumpC : 0); [].forEach.call(dueEls, function (el) { el.textContent = money(c); }); };
-          showDue(); if (bumpBox) { bumpBox.checked = false; bumpBox.addEventListener('change', showDue); }
+          var showBar = function () { [].forEach.call(document.querySelectorAll('[data-lp-bar-label]'), function (el) { el.textContent = el.getAttribute(bumpBox && bumpBox.checked ? 'data-addon' : 'data-base'); }); };
+          showDue(); showBar(); if (bumpBox) { bumpBox.checked = false; bumpBox.addEventListener('change', function () { showDue(); showBar(); }); }
         }
       }).catch(function () {});
     }

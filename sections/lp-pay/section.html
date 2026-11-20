@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="lp-obar lp-obar--pay" data-lp-obar>
-    <p class="lp-obar__price"><span>{{total_label}}</span><strong data-lp-due></strong></p>
+    <p class="lp-obar__price lp-obar__price--line"><span data-lp-bar-label data-base="{{bar_label}}" data-addon="{{bar_label_addon}}">{{bar_label}}</span> <strong data-lp-due></strong><span>{{bar_suffix}}</span></p>
     <button type="submit" form="lp-pay-form" class="btn btn--primary lp-obar__btn">{{bar_button}}</button>
   </div>
 </section>

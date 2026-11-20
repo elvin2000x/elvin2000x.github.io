@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=2c3b7e6b" />
+  <link rel="stylesheet" href="/css/landing.css?v=cd4cd6d0" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp" data-store-step="manual-only">
@@ -121,7 +121,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <source media="(min-width: 768px)" srcset="/img/store/manual-suite-wide.webp" width="1500" height="1000">
       <img class="lp-offer__img" src="/img/store/manual-suite.webp" alt="The Claude Operator's Manual as a printed guide, on a tablet and on a phone" width="1200" height="1200" loading="lazy" decoding="async">
     </picture>
-    <div class="lp-body"><p>This Manual shows you how to stop re-explaining who you are and what you do in every new chat. It covers Claude only: it does not cover ChatGPT or other tools. It is a separate $27 charge, and your book order stays as it is.</p><p>Inside you will find:</p><ul><li><strong>Setup in the Claude app, with no coding.</strong> Talking to Claude well, Projects and knowledge files, Skills, and connecting your tools.</li><li><strong>Claude Code, when you are ready.</strong> The Claude Code chapters are optional, and they are the only ones that ask you to open a terminal.</li><li><strong>Workflows to copy.</strong> The last part puts the setup together, with a chapter of complete workflows to copy and a chapter on keeping your setup working.</li><li><strong>Checklists.</strong> Every chapter ends with one, and the appendices include a day-one setup checklist.</li></ul><p>It is a PDF with 19 chapters. Prices are in US dollars.</p></div>
+    <div class="lp-body"><p>This Manual shows you how to stop re-explaining who you are and what you do in every new chat. It covers Claude only: it does not cover ChatGPT or other tools. It is a separate $27 charge, and your book order stays as it is.</p><p>Inside you will find:</p><ul><li><strong>Setup in the Claude app, with no coding.</strong> Talking to Claude well, Projects and knowledge files, Skills, and connecting your tools.</li><li><strong>Claude Code, when you are ready.</strong> The Claude Code chapters are optional, and they are the only ones that ask you to open a terminal.</li><li><strong>Workflows to copy.</strong> The last part puts the setup together, with a chapter of complete workflows to copy and a chapter on keeping your setup working.</li><li><strong>Checklists.</strong> Every chapter ends with one, and the appendices include a day-one setup checklist.</li></ul><p>It is a PDF with 19 chapters. Prices are in US dollars, plus sales tax where it applies.</p></div>
     <p class="lp-note">Digital download, for your own use. You get an instant download plus an email. A 30-day money-back guarantee covers this purchase: email elvin@elvinpeters.com within 30 days for a full refund.</p>
     <div class="lp-small"><p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p><p>Elvin Peters, author of The Artificial Advantage</p></div>
   </div>
@@ -190,6 +190,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   function addonCents() { var b = addonBoxes()[0], m = b && /\$\s*(\d+(?:\.\d+)?)/.exec(b.getAttribute('data-lp-addon-price') || ''); return m ? Math.round(parseFloat(m[1]) * 100) : 0; }
   function paintAddon() {
     [].forEach.call(addonBoxes(), function (c) { c.checked = ADDON_ON; });
+    [].forEach.call(document.querySelectorAll('[data-lp-addon-off]'), function (el) { el.hidden = ADDON_ON; });
+    [].forEach.call(document.querySelectorAll('[data-lp-addon-on]'), function (el) { el.hidden = !ADDON_ON; });
     [].forEach.call(document.querySelectorAll('.lp-obar__price--text'), function (el) {
       if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
       var o = el.getAttribute('data-orig'), m = /\$\s*(\d+(?:\.\d+)?)/.exec(o);
@@ -311,7 +313,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         if (dueEls.length) {
           var bumpBox = box.querySelector('[data-store-bump]'), bm = /\$\s*(\d+(?:\.\d+)?)/.exec(box.getAttribute('data-bump-price') || ''), bumpC = bm ? Math.round(parseFloat(bm[1]) * 100) : 0;
           var showDue = function () { var c = f.front_price + (bumpBox && bumpBox.checked ? bumpC : 0); [].forEach.call(dueEls, function (el) { el.textContent = money(c); }); };
-          showDue(); if (bumpBox) { bumpBox.checked = false; bumpBox.addEventListener('change', showDue); }
+          var showBar = function () { [].forEach.call(document.querySelectorAll('[data-lp-bar-label]'), function (el) { el.textContent = el.getAttribute(bumpBox && bumpBox.checked ? 'data-addon' : 'data-base'); }); };
+          showDue(); showBar(); if (bumpBox) { bumpBox.checked = false; bumpBox.addEventListener('change', function () { showDue(); showBar(); }); }
         }
       }).catch(function () {});
     }

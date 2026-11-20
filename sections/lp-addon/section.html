@@ -16,6 +16,14 @@
         </div>
       </div>
       <label class="lp-addon__tick"><input type="checkbox" data-lp-addon data-lp-addon-price="{{price}}" autocomplete="off"><span>{{label}}</span></label>
+{{#button_off}}
+      <div class="lp-addon__buy">
+        <a class="btn btn--primary btn--lg lp-addon__btn" href="{{href}}"><span data-lp-addon-off>{{button_off}}</span><span data-lp-addon-on hidden>{{button_on}}</span></a>
+{{#note}}
+        <p class="lp-addon__note">{{note}}</p>
+{{/note}}
+      </div>
+{{/button_off}}
     </div>
   </div>
 </section>

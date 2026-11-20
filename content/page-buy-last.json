@@ -53,7 +53,7 @@
         "anchor": "",
         "heading": "Choose any guide here for 12% off, or go straight to your downloads.",
         "sub": "Take 12% off any product below. I will not send this offer again.",
-        "intro": "<p>Your order is in, and your downloads are on the next page. <span data-only-with=\"operator-bundle\" hidden>The AI Setup Bundle already includes the Manual and Rules of Engagement, so choose the AI Setup Bundle or the single guides.</span> Products you already bought are not listed. Each price shown has your 12% off.</p><p>Prices are in US dollars.</p>",
+        "intro": "<p><span data-only-with=\"operator-bundle\" hidden>The AI Setup Bundle already includes the Manual and Rules of Engagement, so choose the AI Setup Bundle or the single guides.</span> Products you already bought are not listed. Each price shown has your 12% off.</p><p>Prices are in US dollars, plus sales tax where it applies.</p>",
         "total_label": "Total",
         "yes": "Add my choices at 12% off",
         "yes_note": "This charges the card you just used. You will not need to enter it again.",

@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=2c3b7e6b" />
+  <link rel="stylesheet" href="/css/landing.css?v=cd4cd6d0" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp">
@@ -91,7 +91,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         <div class="lp-ohero__buy">
           <p class="lp-ohero__price"><s data-lp-total-all>$71.99</s><strong data-lp-front-all>$27</strong></p>
           <a class="btn btn--primary btn--lg lp-ohero__btn" href="/book/checkout/">Get the bundle for $27</a>
-          <p class="lp-ohero__line"><s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars.</p>
+          <p class="lp-ohero__line"><s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars, plus sales tax where it applies.</p>
           <ul class="lp-ohero__answers">
             <li>Works with ChatGPT, Claude, Gemini and Copilot. A free plan is enough to start.</li>
             <li>The Toolkit is 25 prompts, 25 role setups and 16 exercises, in Word files you can edit.</li>
@@ -102,7 +102,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     </div>
   </div>
   <div class="lp-obar" data-lp-obar>
-    <p class="lp-obar__price lp-obar__price--text">The Bundle, $27 once</p>
+    <p class="lp-obar__price lp-obar__price--text">The Bundle, $27 before tax</p>
     <a class="btn btn--primary lp-obar__btn" href="/book/checkout/">Get the bundle</a>
   </div>
 </section>
@@ -143,6 +143,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         </div>
       </div>
       <label class="lp-addon__tick"><input type="checkbox" data-lp-addon data-lp-addon-price="$7" autocomplete="off"><span>Add AI at Home, $7</span></label>
+      <div class="lp-addon__buy">
+        <a class="btn btn--primary btn--lg lp-addon__btn" href="/book/checkout/"><span data-lp-addon-off>Get the bundle for $27</span><span data-lp-addon-on hidden>Get both for $34</span></a>
+        <p class="lp-addon__note">Prices are in US dollars, plus sales tax where it applies.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -329,7 +333,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       <ul class="lp-stack__items" data-lp-rows></ul>
       <p class="lp-stack__total"><span>Total value</span> <strong data-lp-total></strong></p>
       <p class="lp-stack__price"><span>Your price</span> <strong data-lp-front></strong></p>
-      <p class="lp-note">The ebook is Amazon's price. Every other priced item sells for the price shown in my store, and all of them are in your bundle. Prices are in US dollars.</p>
+      <p class="lp-note">The ebook is Amazon's price. Every other priced item sells for the price shown in my store, and all of them are in your bundle. Prices are in US dollars, plus sales tax where it applies.</p>
     </div>
   </div>
 </section>
@@ -391,7 +395,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <div class="ep-row ep-row--center">
     <a class="btn btn--lg btn--primary" href="/book/checkout/">Get the bundle for $27</a>
   </div>
-  <p class="lp-note ep-note"><s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars.</p>
+  <p class="lp-note ep-note"><s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars, plus sales tax where it applies.</p>
 </div>
 
 <section class="lp-sec lp-amazon">
@@ -455,6 +459,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   function addonCents() { var b = addonBoxes()[0], m = b && /\$\s*(\d+(?:\.\d+)?)/.exec(b.getAttribute('data-lp-addon-price') || ''); return m ? Math.round(parseFloat(m[1]) * 100) : 0; }
   function paintAddon() {
     [].forEach.call(addonBoxes(), function (c) { c.checked = ADDON_ON; });
+    [].forEach.call(document.querySelectorAll('[data-lp-addon-off]'), function (el) { el.hidden = ADDON_ON; });
+    [].forEach.call(document.querySelectorAll('[data-lp-addon-on]'), function (el) { el.hidden = !ADDON_ON; });
     [].forEach.call(document.querySelectorAll('.lp-obar__price--text'), function (el) {
       if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
       var o = el.getAttribute('data-orig'), m = /\$\s*(\d+(?:\.\d+)?)/.exec(o);
@@ -576,7 +582,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         if (dueEls.length) {
           var bumpBox = box.querySelector('[data-store-bump]'), bm = /\$\s*(\d+(?:\.\d+)?)/.exec(box.getAttribute('data-bump-price') || ''), bumpC = bm ? Math.round(parseFloat(bm[1]) * 100) : 0;
           var showDue = function () { var c = f.front_price + (bumpBox && bumpBox.checked ? bumpC : 0); [].forEach.call(dueEls, function (el) { el.textContent = money(c); }); };
-          showDue(); if (bumpBox) { bumpBox.checked = false; bumpBox.addEventListener('change', showDue); }
+          var showBar = function () { [].forEach.call(document.querySelectorAll('[data-lp-bar-label]'), function (el) { el.textContent = el.getAttribute(bumpBox && bumpBox.checked ? 'data-addon' : 'data-base'); }); };
+          showDue(); showBar(); if (bumpBox) { bumpBox.checked = false; bumpBox.addEventListener('change', function () { showDue(); showBar(); }); }
         }
       }).catch(function () {});
     }

@@ -640,3 +640,13 @@ body.lp .lp-sec.lp-ordered--slim{ padding-top:12px; padding-bottom:0 }
 }
 body.lp .lp-sec .lp-ordered__slim{ margin:0; font:600 16px/24px var(--sans); color:var(--lp-navy) }
 @media (max-width:599px){ body.lp .lp-sec .lp-addon__words p, body.lp .lp-sec .lp-addon__words li{ font-size:14px; line-height:20px; min-height:0 } body.lp .lp-sec .lp-addon__words ul{ padding-left:18px } }
+/* button under the first add-on card */
+.lp-addon__buy{ margin-top:12px }
+body.lp .lp-addon__btn{ display:flex; align-items:center; justify-content:center; width:100%; min-height:56px; font-size:18px; font-weight:700; border-radius:6px; text-align:center }
+.lp-addon__btn span[hidden]{ display:none }
+body.lp .lp-sec .lp-addon__note{ margin:8px 0 0; font:400 14px/20px var(--sans); color:var(--lp-navy); text-align:center }
+/* last chance rows: the name wraps normally, the price never overlaps it */
+.lp-basket__list label .store-basket-name{ flex:1 1 140px; min-width:0; overflow-wrap:break-word; word-break:normal; hyphens:none }
+.lp-basket__list label .store-basket-price{ flex:0 0 auto; margin-left:auto; text-align:right }
+/* fallback payment page bar: one line */
+@media (max-width:767px){ body.lp .lp-obar p.lp-obar__price--line{ flex-direction:row; align-items:baseline; gap:4px; font:600 15px/20px var(--sans); flex-wrap:wrap; max-width:160px } body.lp .lp-obar p.lp-obar__price--line strong{ font:700 20px/24px var(--sans) } }

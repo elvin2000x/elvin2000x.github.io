@@ -16,7 +16,7 @@
       "data": {
         "anchor": "",
         "title": "Pay $27 once and the whole bundle is yours to download today.",
-        "lede": "The Artificial Advantage Bundle, $27 in US dollars, paid once. You get an instant download plus an email.",
+        "lede": "The Artificial Advantage Bundle, $27 in US dollars, paid once, plus sales tax where it applies. You get an instant download plus an email.",
         "email_label": "Email for the receipt and the download",
         "order_heading": "Your order",
         "free_label": "Free",
@@ -44,7 +44,10 @@
             "line": "The Companion Library, which opens online from your library page."
           }
         ],
-        "bar_button": "Enter your card"
+        "bar_button": "Enter your card",
+        "bar_label": "Bundle",
+        "bar_label_addon": "Bundle and add-on",
+        "bar_suffix": ", before tax"
       }
     }
   ]

@@ -65,6 +65,26 @@
       "key": "price",
       "type": "text",
       "label": "Price (adds to the total when ticked)"
+    },
+    {
+      "key": "button_off",
+      "type": "text",
+      "label": "Button words, box unticked"
+    },
+    {
+      "key": "button_on",
+      "type": "text",
+      "label": "Button words, box ticked"
+    },
+    {
+      "key": "href",
+      "type": "text",
+      "label": "Button link"
+    },
+    {
+      "key": "note",
+      "type": "html",
+      "label": "Line under the button"
     }
   ]
 }

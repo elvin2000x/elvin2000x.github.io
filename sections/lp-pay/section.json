@@ -117,6 +117,21 @@
       "key": "bar_button",
       "type": "text",
       "label": "Phone bar button words"
+    },
+    {
+      "key": "bar_label",
+      "type": "text",
+      "label": "Phone bar label"
+    },
+    {
+      "key": "bar_label_addon",
+      "type": "text",
+      "label": "Phone bar label with the add-on ticked"
+    },
+    {
+      "key": "bar_suffix",
+      "type": "text",
+      "label": "Phone bar words after the amount"
     }
   ]
 }

@@ -36,13 +36,13 @@
             }
           ]
         },
-        "bar_left": "The Bundle, $27 once",
+        "bar_left": "The Bundle, $27 before tax",
         "bar_button": "Get the bundle",
         "button": {
           "label": "Get the bundle for $27",
           "href": "/book/checkout/"
         },
-        "note": "<s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars.",
+        "note": "<s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars, plus sales tax where it applies.",
         "shot_w": "1600",
         "shot_h": "1067",
         "shot_phone_w": "800",
@@ -104,7 +104,11 @@
         "image": "/img/store/ai-at-home-thumb.webp",
         "image_alt": "The AI at Home guide cover",
         "image_w": "192",
-        "image_h": "307"
+        "image_h": "307",
+        "button_off": "Get the bundle for $27",
+        "button_on": "Get both for $34",
+        "href": "/book/checkout/",
+        "note": "Prices are in US dollars, plus sales tax where it applies."
       }
     },
     {
@@ -387,7 +391,7 @@
         "price_label": "Your price",
         "bump": null,
         "button": null,
-        "note": "The ebook is Amazon's price. Every other priced item sells for the price shown in my store, and all of them are in your bundle. Prices are in US dollars.",
+        "note": "The ebook is Amazon's price. Every other priced item sells for the price shown in my store, and all of them are in your bundle. Prices are in US dollars, plus sales tax where it applies.",
         "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"companion-library\":\"/img/store/thumbs/companion-library-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}"
       }
     },
@@ -473,7 +477,7 @@
       "data": {
         "anchor": "",
         "align": "center",
-        "note": "<s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars.",
+        "note": "<s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars, plus sales tax where it applies.",
         "buttons": [
           {
             "label": "Get the bundle for $27",

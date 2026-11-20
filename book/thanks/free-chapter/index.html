@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=2c3b7e6b" />
+  <link rel="stylesheet" href="/css/landing.css?v=cd4cd6d0" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>body.lp .lp-hero__grid{ max-width:720px } body.lp .lp-hero{ padding-top:32px; padding-bottom:0 } body.lp .lp-hero h1{ margin-bottom:0 } body.lp .ep-block.ep-video{ max-width:720px } body.lp .ep-row{ flex-direction:column; align-items:stretch; gap:12px } body.lp .ep-row .btn{ width:100%; min-height:60px; font-size:20px; font-weight:700 } body.lp .ep-note{ text-align:left }</style>
 </head>
@@ -183,6 +183,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   function addonCents() { var b = addonBoxes()[0], m = b && /\$\s*(\d+(?:\.\d+)?)/.exec(b.getAttribute('data-lp-addon-price') || ''); return m ? Math.round(parseFloat(m[1]) * 100) : 0; }
   function paintAddon() {
     [].forEach.call(addonBoxes(), function (c) { c.checked = ADDON_ON; });
+    [].forEach.call(document.querySelectorAll('[data-lp-addon-off]'), function (el) { el.hidden = ADDON_ON; });
+    [].forEach.call(document.querySelectorAll('[data-lp-addon-on]'), function (el) { el.hidden = !ADDON_ON; });
     [].forEach.call(document.querySelectorAll('.lp-obar__price--text'), function (el) {
       if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
       var o = el.getAttribute('data-orig'), m = /\$\s*(\d+(?:\.\d+)?)/.exec(o);
@@ -304,7 +306,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         if (dueEls.length) {
           var bumpBox = box.querySelector('[data-store-bump]'), bm = /\$\s*(\d+(?:\.\d+)?)/.exec(box.getAttribute('data-bump-price') || ''), bumpC = bm ? Math.round(parseFloat(bm[1]) * 100) : 0;
           var showDue = function () { var c = f.front_price + (bumpBox && bumpBox.checked ? bumpC : 0); [].forEach.call(dueEls, function (el) { el.textContent = money(c); }); };
-          showDue(); if (bumpBox) { bumpBox.checked = false; bumpBox.addEventListener('change', showDue); }
+          var showBar = function () { [].forEach.call(document.querySelectorAll('[data-lp-bar-label]'), function (el) { el.textContent = el.getAttribute(bumpBox && bumpBox.checked ? 'data-addon' : 'data-base'); }); };
+          showDue(); showBar(); if (bumpBox) { bumpBox.checked = false; bumpBox.addEventListener('change', function () { showDue(); showBar(); }); }
         }
       }).catch(function () {});
     }
