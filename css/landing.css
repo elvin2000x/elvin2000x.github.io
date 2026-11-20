@@ -507,4 +507,5 @@ body.lp:has(.lp-progress) .ep-block.ep-video{ max-width:36rem }
   .lp-ohero__grid{ grid-template-columns:minmax(0,560px); justify-content:center; gap:20px }
   .lp-ohero__price{ justify-content:center }
   .lp-ohero__line{ text-align:center }
+  .lp-ohero__buy{ order:-1 }
 }
