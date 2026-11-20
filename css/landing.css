@@ -546,7 +546,7 @@ body.lp .lp-stack--pay .lp-due{ display:flex; justify-content:space-between; ali
 .lp-stack--pay .lp-due--card{ display:none !important }
 body.lp .lp-stack--pay .lp-bump{ display:flex; align-items:center; gap:12px; margin:0; padding:16px; border:2px dashed #c9a250; border-radius:8px; background:#f0f5fa; cursor:pointer }
 body.lp .lp-stack--pay .lp-bump input{ flex:none; width:28px; height:28px; margin:0; accent-color:var(--lp-navy) }
-body.lp .lp-stack--pay .lp-bump .lp-bump__cover{ flex:none; width:40px; height:60px; object-fit:cover; border-radius:3px; margin:0 }
+body.lp .lp-stack--pay .lp-bump .lp-bump__cover{ flex:none; width:40px; height:64px; object-fit:contain; border-radius:3px; margin:0 }
 body.lp .lp-stack--pay .lp-bump__words{ display:block; min-width:0; font:17px/24px var(--sans); color:var(--lp-navy) }
 body.lp .lp-stack--pay .lp-bump__yes{ display:block; font-weight:700 }
 body.lp .lp-stack--pay .lp-bump__line{ display:block; font:400 15px/21px var(--sans); margin-top:2px }

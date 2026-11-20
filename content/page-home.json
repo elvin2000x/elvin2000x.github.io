@@ -205,6 +205,18 @@
       }
     },
     {
+      "id": "band",
+      "type": "lp-band",
+      "data": {
+        "anchor": "",
+        "image": "/img/store/band-book-dark.webp",
+        "image_phone": "/img/store/band-book-dark-phone.webp",
+        "image_alt": "",
+        "image_w": "1344",
+        "image_h": "768"
+      }
+    },
+    {
       "id": "about",
       "type": "author",
       "note": "6. About the author (facts: 02 Books/reference/elvin-verified-profile.md; employers anonymised at Elvin's request)",
