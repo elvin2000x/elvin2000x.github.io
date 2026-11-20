@@ -33,6 +33,9 @@
     Array.prototype.forEach.call(root.querySelectorAll('[data-lp-rows] p'), function (r) { rows[r.getAttribute('data-product')] = r.textContent; });
     /* The store script draws the rows; this adds what each one holds, and tags it so the page can style it. */
     function dress() {
+      /* a sentence that only makes sense while a given product is in the basket */
+      var have = {}; Array.prototype.forEach.call(root.querySelectorAll('.lp-basket__list input[type=checkbox]'), function (c) { have[c.value] = true; });
+      Array.prototype.forEach.call(root.querySelectorAll('[data-only-with]'), function (el) { el.hidden = !have[el.getAttribute('data-only-with')]; });
       Array.prototype.forEach.call(root.querySelectorAll('.lp-basket__list label'), function (l) {
         var cb = l.querySelector('input[type=checkbox]'); if (!cb) return;
         l.setAttribute('data-product', cb.value);

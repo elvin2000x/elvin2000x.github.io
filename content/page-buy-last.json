@@ -56,7 +56,7 @@
         "anchor": "",
         "heading": "Choose any guide here for 12% off, or go straight to your downloads.",
         "sub": "Take 12% off any product below. I will not send this offer again.",
-        "intro": "<p>Your order is in, and your downloads are on the next page. The AI Setup Bundle already includes the Manual and Rules of Engagement, so choose the AI Setup Bundle or the single guides. Products you already bought are not listed. Each price shown has your 12% off.</p><p>Prices are in US dollars.</p>",
+        "intro": "<p>Your order is in, and your downloads are on the next page. <span data-only-with=\"operator-bundle\" hidden>The AI Setup Bundle already includes the Manual and Rules of Engagement, so choose the AI Setup Bundle or the single guides.</span> Products you already bought are not listed. Each price shown has your 12% off.</p><p>Prices are in US dollars.</p>",
         "total_label": "Total",
         "yes": "Add my choices at 12% off",
         "yes_note": "This charges the card you just used. You will not need to enter it again.",
@@ -86,6 +86,10 @@
           {
             "product": "thirty-ways",
             "text": "A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip."
+          },
+          {
+            "product": "role-packs",
+            "text": "A 72-page PDF of 14 ready-made Specialists for jobs like Sales or Finance, with 231 prompts and setups for ChatGPT, Claude, Gemini and Grok."
           }
         ],
         "thumbs_json": "{\"claude-manual\":\"/img/store/last-chance/claude-manual.webp\",\"global-ai-race\":\"/img/store/last-chance/global-ai-race.webp\",\"operator-bundle\":\"/img/store/last-chance/operator-bundle.webp\",\"role-packs\":\"/img/store/last-chance/role-packs.webp\",\"thirty-ways\":\"/img/store/last-chance/thirty-ways.webp\",\"top-15-rules\":\"/img/store/last-chance/top-15-rules.webp\"}"
