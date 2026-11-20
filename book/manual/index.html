@@ -105,21 +105,34 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   </div>
 </section>
 
-<section class="lp-sec lp-offer">
+<section class="lp-sec lp-offer lp-offer--early">
   <div class="lp-in">
     <h1>Open a new Claude chat and it already knows what you do for work.</h1>
     <p class="lp-lede">The Claude Operator’s Manual on its own: 217 pages for $27.</p>
-    <img class="lp-offer__img" src="/img/magnets/claude-manual.webp" alt="The Claude Operator's Manual by Elvin M. Peters" fetchpriority="high">
-    <div class="lp-body"><p>This Manual shows you how to stop re-explaining who you are and what you do in every new chat. It covers Claude only: it does not cover ChatGPT or other tools. It is a separate $27 charge, and your book order stays as it is.</p><p>Inside you will find:</p><ul><li><strong>Setup in the Claude app, with no coding.</strong> Talking to Claude well, Projects and knowledge files, Skills, and connecting your tools.</li><li><strong>Claude Code, when you are ready.</strong> The Claude Code chapters are optional, and they are the only ones that ask you to open a terminal.</li><li><strong>Workflows to copy.</strong> The last part puts the setup together, with a chapter of complete workflows to copy and a chapter on keeping your setup working.</li><li><strong>Checklists.</strong> Every chapter ends with one, and the appendices include a day-one setup checklist.</li></ul><p>It is a PDF with 19 chapters. Prices are in US dollars.</p><p><a href="/dl/Claude-Operators-Manual-Sample-14-pages.pdf">Read the contents page and Chapter 3 first (14-page PDF)</a></p><details class="lp-fold"><summary>What The AI Setup Bundle holds</summary><ul><li>The Claude Operator’s Manual</li><li>Your Personal Specialists</li><li>Rules of Engagement</li></ul></details></div>
     <p class="lp-price"><strong data-store="price">$27</strong></p>
     <p class="lp-error" data-store="error" hidden></p>
     <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>Yes, add the Manual for $27</button>
     <p class="lp-note lp-yes-note">Charges the card you just used, no re-entry. 30-day money-back guarantee.</p>
     <button type="button" class="lp-no" data-store-decline>No thanks, I’ll skip this</button>
     <div class="lp-fallback" data-store-fallback hidden><p>Pay with another card</p></div>
+    <img class="lp-offer__img" src="/img/magnets/claude-manual.webp" alt="The Claude Operator's Manual by Elvin M. Peters" fetchpriority="high">
+    <div class="lp-body"><p>This Manual shows you how to stop re-explaining who you are and what you do in every new chat. It covers Claude only: it does not cover ChatGPT or other tools. It is a separate $27 charge, and your book order stays as it is.</p><p>Inside you will find:</p><ul><li><strong>Setup in the Claude app, with no coding.</strong> Talking to Claude well, Projects and knowledge files, Skills, and connecting your tools.</li><li><strong>Claude Code, when you are ready.</strong> The Claude Code chapters are optional, and they are the only ones that ask you to open a terminal.</li><li><strong>Workflows to copy.</strong> The last part puts the setup together, with a chapter of complete workflows to copy and a chapter on keeping your setup working.</li><li><strong>Checklists.</strong> Every chapter ends with one, and the appendices include a day-one setup checklist.</li></ul><p>It is a PDF with 19 chapters. Prices are in US dollars.</p><p><a href="/dl/Claude-Operators-Manual-Sample-14-pages.pdf">Read the contents page and Chapter 3 first (14-page PDF)</a></p><details class="lp-fold"><summary>What The AI Setup Bundle holds</summary><ul><li>The Claude Operator’s Manual</li><li>Your Personal Specialists</li><li>Rules of Engagement</li></ul></details></div>
     <p class="lp-note">Digital download, for your own use. You get an instant download plus an email. A 30-day money-back guarantee covers this purchase: email elvin@elvinpeters.com within 30 days for a full refund.</p>
     <div class="lp-small"><p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p><p>Elvin Peters, author of The Artificial Advantage</p></div>
   </div>
+    <div class="lp-sticky" data-lp-sticky hidden>
+      <strong data-store="price">$27</strong>
+      <button type="button" class="btn btn--primary lp-sticky__btn" data-store-accept>Yes, add the Manual for $27</button>
+    </div>
+  <script>
+  (function () {
+    var bar = document.currentScript.parentNode.querySelector('[data-lp-sticky]');
+    var main = document.currentScript.parentNode.querySelector('.lp-cta[data-store-accept]');
+    if (!bar || !main || !('IntersectionObserver' in window)) return;
+    /* On a phone, the bar shows once the main Accept button has scrolled out of view. */
+    new IntersectionObserver(function (e) { bar.hidden = e[0].isIntersecting || e[0].boundingClientRect.top > 0; }).observe(main);
+  })();
+  </script>
 </section>
 
 </main>

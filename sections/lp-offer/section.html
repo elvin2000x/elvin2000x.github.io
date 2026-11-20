@@ -8,6 +8,14 @@
     <p class="lp-lede">{{sub}}</p>
 {{/sub}}
 {{#early}}
+    <p class="lp-price">{{#was}}<s data-store="was">{{was}}</s> {{/was}}<strong data-store="price">{{price}}</strong></p>
+    <p class="lp-error" data-store="error" hidden></p>
+    <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>{{yes}}</button>
+{{#yes_note}}
+    <p class="lp-note lp-yes-note">{{yes_note}}</p>
+{{/yes_note}}
+    <button type="button" class="lp-no" data-store-decline>{{no}}</button>
+    <div class="lp-fallback" data-store-fallback hidden><p>{{fallback}}</p></div>
 {{#image}}
     <img class="lp-offer__img" src="{{image}}" alt="{{image_alt}}" fetchpriority="high">
 {{/image}}
@@ -21,14 +29,6 @@
       </picture>
     </figure>
 {{/stack_desktop}}
-    <p class="lp-price">{{#was}}<s data-store="was">{{was}}</s> {{/was}}<strong data-store="price">{{price}}</strong></p>
-    <p class="lp-error" data-store="error" hidden></p>
-    <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>{{yes}}</button>
-{{#yes_note}}
-    <p class="lp-note lp-yes-note">{{yes_note}}</p>
-{{/yes_note}}
-    <button type="button" class="lp-no" data-store-decline>{{no}}</button>
-    <div class="lp-fallback" data-store-fallback hidden><p>{{fallback}}</p></div>
 {{#body}}
     <div class="lp-body">{{body}}</div>
 {{/body}}
