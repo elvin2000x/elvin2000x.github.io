@@ -174,8 +174,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     var ft = {}; try { ft = JSON.parse(sessionStorage.getItem('ep-ft') || '{}') || {}; } catch (x) {}
     var utm = {}; try { utm = window.EPUtm ? window.EPUtm.get() : {}; } catch (x) {}
     Object.keys(ft).forEach(function (k) { if (!(k in utm)) utm[k] = ft[k]; });
-    /* If the store gives no url, say so on this page; /book/checkout/ forwards here, so it is never a way out. */
-    var go = function () { a.removeAttribute('data-busy'); location.href = '/book/offer/?checkout=busy'; };
+    /* If the store gives no Stripe address, fails or takes longer than 1.8 s, the buyer goes to the payment page
+       (/book/checkout/, which takes the order itself). It settles once. */
+    var settled = false, ctl = window.AbortController ? new AbortController() : null;
+    var go = function () { if (settled) return; settled = true; location.href = a.href; };
     try {
       if (typeof gtag === 'function') {
         var bp = { currency: 'USD', entry: ft.entry || '', landing: ft.landing || '' };
@@ -185,10 +187,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
       }
     } catch (x) {}
     if (a.getAttribute('data-busy')) return; a.setAttribute('data-busy', '1');
-    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ funnel: funnel, utm: utm, code: '' }) })
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); go(); }, 1800);
+    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ funnel: funnel, utm: utm, code: '' }), signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) { var u = j && (j.url || j.checkout_url); if (u && /^https:\/\//.test(u)) location.assign(u); else go(); })
-      .catch(go);
+      .then(function (j) { var u = j && (j.url || j.checkout_url); clearTimeout(timer); if (!settled && u && /^https:\/\/checkout\.stripe\.com\//.test(u)) { settled = true; location.assign(u); } else go(); })
+      .catch(function () { clearTimeout(timer); go(); });
   }, false);
   /* Live prices: the shop lists every product the store sells on its own, and a value
      stack line tied to a product shows that product's shop price, so a struck-through
