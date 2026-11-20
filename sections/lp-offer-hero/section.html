@@ -43,7 +43,7 @@
 {{#button}}
   <div class="lp-obar" data-lp-obar>
 {{#bar_left}}
-    <p class="lp-obar__price lp-obar__price--text">{{bar_left}}</p>
+    <p class="lp-obar__price lp-obar__price--text"{{#bar_left_addon}} data-addon="{{bar_left_addon}}"{{/bar_left_addon}}>{{bar_left}}</p>
 {{/bar_left}}
 {{^bar_left}}
     <p class="lp-obar__price"><s data-lp-total-all>{{struck}}</s><strong data-lp-front-all>{{price}}</strong></p>

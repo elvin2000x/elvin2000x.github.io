@@ -650,3 +650,5 @@ body.lp .lp-sec .lp-addon__note{ margin:8px 0 0; font:400 14px/20px var(--sans);
 .lp-basket__list label .store-basket-price{ flex:0 0 auto; margin-left:auto; text-align:right }
 /* fallback payment page bar: one line */
 @media (max-width:767px){ body.lp .lp-obar p.lp-obar__price--line{ flex-direction:row; align-items:baseline; gap:4px; font:600 15px/20px var(--sans); flex-wrap:wrap; max-width:160px } body.lp .lp-obar p.lp-obar__price--line strong{ font:700 20px/24px var(--sans) } }
+/* offer bar: the words get the room, the button only what it needs */
+@media (max-width:767px){ body.lp .lp-obar p.lp-obar__price--text{ max-width:none; flex:1 1 0; min-width:0; font-size:15px; line-height:20px } body.lp .lp-obar p.lp-obar__price--text + .lp-obar__btn{ flex:0 0 auto; min-width:128px; width:auto } }

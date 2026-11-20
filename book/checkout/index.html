@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=cd4cd6d0" />
+  <link rel="stylesheet" href="/css/landing.css?v=60ca6da5" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp">
@@ -176,8 +176,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     });
     [].forEach.call(document.querySelectorAll('.lp-obar__price--text'), function (el) {
       if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
+      if (ADDON_ON && el.hasAttribute('data-addon')) { el.textContent = el.getAttribute('data-addon'); return; }
       var o = el.getAttribute('data-orig'), m = /\$\s*(\d+(?:\.\d+)?)/.exec(o);
       if (!m) return;
+      if (el.hasAttribute('data-addon')) { el.textContent = o; return; }
       var c = Math.round(parseFloat(m[1]) * 100) + (ADDON_ON ? addonCents() : 0);
       el.textContent = o.replace(m[0], '$' + (c / 100).toFixed(c % 100 ? 2 : 0));
     });

@@ -37,6 +37,7 @@
           ]
         },
         "bar_left": "The Bundle, $27 before tax",
+        "bar_left_addon": "Bundle + AI at Home, $34 before tax",
         "bar_button": "Get the bundle",
         "button": {
           "label": "Get the bundle for $27",
