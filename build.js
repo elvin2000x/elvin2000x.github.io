@@ -6,6 +6,20 @@ const DIR = __dirname;
 const outArg = process.argv.indexOf('--out');
 const OUT = outArg > -1 ? path.resolve(process.argv[outArg + 1]) : DIR;
 const { esc } = require('./essay-page.js');
+
+// Cache stamp: /js/*.js and /css/*.css references in built pages carry ?v=<hash of the
+// file's own bytes>, so a returning visitor's cached script or stylesheet cannot
+// outlive a deploy. A content hash (not a commit hash) keeps the build repeatable.
+const _stampCache = {};
+function stampAssets(html) {
+  return String(html).replace(/((?:src|href)=")(\/(?:js|css)\/[A-Za-z0-9._-]+\.(?:js|css))(?:\?v=[0-9a-f]+)?(")/g, (m, a, f, c) => {
+    if (!(f in _stampCache)) {
+      try { _stampCache[f] = require('crypto').createHash('sha1').update(fs.readFileSync(path.join(DIR, f))).digest('hex').slice(0, 8); }
+      catch (e) { _stampCache[f] = ''; }
+    }
+    return _stampCache[f] ? a + f + '?v=' + _stampCache[f] + c : m;
+  });
+}
 // The blog moved to epeters.ca (ticket #12, 2026-09-27). This build no longer
 // writes writing/: those paths are now redirect stubs (scripts/epca-stubs.js), and
 // the epeters-ca repo builds the posts. content/essays.json, essays/ and essay-page.js
@@ -69,7 +83,7 @@ function applyRegions(pagePath, regions) {
   const html = fillRegions(fs.readFileSync(src, 'utf8'), pagePath, regions);
   const dest = path.join(OUT, pagePath);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.writeFileSync(dest, html);
+  fs.writeFileSync(dest, stampAssets(html));
 }
 function fillRegions(html, pagePath, regions) {
   for (const [name, render] of Object.entries(regions)) {
@@ -317,7 +331,7 @@ for (const p of stackPages) {
     ? fillRegions(p.html, p.file, { 'nav': nav }) : p.html;
   const dest = path.join(OUT, p.file);
   fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.writeFileSync(dest, html);
+  fs.writeFileSync(dest, stampAssets(html));
 }
 // Popups (Studio Editor, 2026-11-08): content/popups.json becomes js/popups.js, which
 // js/site.js loads before js/capture.js. The funnel folder never gets a popup.
@@ -371,7 +385,7 @@ console.log('Regions applied: index.html (nav), nav on: ' + navOnly.join(', '));
     // Only a real change is written in place (a Windows checkout is CRLF; git sees LF).
     if (OUT === DIR && html === frame) { nFree++; continue; }
     fs.mkdirSync(path.dirname(dest), { recursive: true });
-    fs.writeFileSync(dest, html);
+    fs.writeFileSync(dest, stampAssets(html));
     nFree++;
   }
   console.log('Lead magnet pages filled from content/free/: ' + nFree);
@@ -1247,7 +1261,7 @@ for (const page of PAGES) {
     const rel = lang === 'fr' ? path.join('fr', page.slug, 'index.html') : path.join(page.slug, 'index.html');
     const dest = path.join(OUT, rel);
     fs.mkdirSync(path.dirname(dest), { recursive: true });
-    fs.writeFileSync(dest, render(page, lang));
+    fs.writeFileSync(dest, stampAssets(render(page, lang)));
     genPaths.push(rel.replace(/\\/g, '/'));
   }
 }
@@ -1288,7 +1302,7 @@ function cssFor(html) {
       /* DIR, not OUT: verify.js builds into a throwaway directory that holds
          only generated pages, so the linked stylesheets live in the source
          tree either way. */
-      const f = path.join(DIR, s.replace(/^\//, ''));
+      const f = path.join(DIR, s.replace(/^\//, '').split('?')[0]);
       cssCache.set(s, fs.existsSync(f) ? fs.readFileSync(f, 'utf8') : '');
     }
     css += '\n' + cssCache.get(s);

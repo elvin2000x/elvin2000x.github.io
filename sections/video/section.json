@@ -33,6 +33,11 @@
       "label": "Video link"
     },
     {
+      "key": "youtube",
+      "type": "text",
+      "label": "YouTube link (kept for later, not used while the page plays its own file)"
+    },
+    {
       "key": "duration",
       "type": "text",
       "label": "Length shown on the poster (for example 1:56)"

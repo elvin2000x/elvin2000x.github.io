@@ -502,3 +502,9 @@ body.lp:has(.lp-progress) .ep-block.ep-video{ max-width:36rem }
   body.lp .lp-stack__value{ flex:0 0 100%; margin-left:0; padding-left:70px; text-align:left }
 }
 @media (max-width:480px){ body.lp .lp-stack__value em, body.lp .lp-stack__value .lp-pill{ margin-left:8px } }
+/* offer hero: the two-column grid needs 1120px; between tablet and small laptop it stacks, so the price, button and promise line are never clipped */
+@media (min-width:768px) and (max-width:1139px){
+  .lp-ohero__grid{ grid-template-columns:minmax(0,560px); justify-content:center; gap:20px }
+  .lp-ohero__price{ justify-content:center }
+  .lp-ohero__line{ text-align:center }
+}

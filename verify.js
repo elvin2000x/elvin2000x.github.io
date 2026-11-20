@@ -231,7 +231,7 @@ for (const rel of PAGES) {
   // it. archive/ holds frozen snapshots and keeps the header it was saved with.
   const ownHeaderCss = (html.match(/<style[^>]*>[\s\S]*?<\/style>/g) || []).join('\n')
     .match(/(?:^|[}\s,])\.(nav|brandmark|mtop|brand)(?![\w-])[^{}]*\{/m);
-  if (/<!-- ep:nav[ >]/.test(html) && html.includes('href="/css/header.css"')) {
+  if (/<!-- ep:nav[ >]/.test(html) && /href="\/css\/header\.css(\?v=[0-9a-f]+)?"/.test(html)) {
     if (ownHeaderCss) fail(rel, 'styles the header itself (.' + ownHeaderCss[1] + '); the header look lives in css/header.css only');
   } else if (/<!-- ep:nav[ >]|class="mtop"/.test(html) && !rel.startsWith('archive/')) {
     fail(rel, 'has a site header that is not the shared one; list it in content/nav.json pages (#486)');
@@ -364,7 +364,7 @@ function* builtHtml(dir, rel) {
     // /projects/ is on apps-kit.css, not site.css, so resolve every local link
     // rather than assuming the design system is present.
     const known = new Set(defsIn(html));
-    for (const m of html.matchAll(/<link[^>]+href=["']([^"']+\.css)["']/g)) {
+    for (const m of html.matchAll(/<link[^>]+href=["']([^"'?]+\.css)(?:\?[^"']*)?["']/g)) {
       const href = m[1];
       if (/^https?:|^\/\//.test(href)) continue;             // remote sheet, not ours
       const abs = href.startsWith('/')
