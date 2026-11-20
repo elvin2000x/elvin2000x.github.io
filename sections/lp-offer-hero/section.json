@@ -95,6 +95,16 @@
       "key": "note",
       "type": "html",
       "label": "Line under the button"
+    },
+    {
+      "key": "bar_left",
+      "type": "text",
+      "label": "Phone bar, left words"
+    },
+    {
+      "key": "bar_button",
+      "type": "text",
+      "label": "Phone bar, button words"
     }
   ]
 }

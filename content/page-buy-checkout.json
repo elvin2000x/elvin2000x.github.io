@@ -11,71 +11,40 @@
   },
   "sections": [
     {
-      "id": "head",
-      "type": "text",
-      "data": {
-        "anchor": "co-head",
-        "align": "left",
-        "heading": "The method, and the files, the same day.",
-        "paras": [
-          "You're one step from The Artificial Advantage Bundle: the book, its Toolkit, the Companion Library and three bonuses, $27 in US dollars, as an instant download plus an email."
-        ]
-      }
-    },
-    {
+      "type": "lp-pay",
       "id": "pay",
-      "type": "lp-funnel-stack",
       "data": {
-        "bg": "tint",
         "anchor": "",
-        "heading": "",
+        "title": "Pay $27 once and the whole bundle is yours to download today.",
+        "lede": "The Artificial Advantage Bundle, $27 in US dollars, paid once. You get an instant download plus an email.",
+        "email_label": "Email for the receipt and the download",
+        "order_heading": "Your order",
         "free_label": "Free",
         "included_label": "Included",
-        "total_label": "Total value",
-        "price_label": "Your price",
-        "preview_stack_json": "{\"stack\":[{\"key\":\"book1-ebook\",\"name\":\"The Artificial Advantage, 2E ebook\",\"status\":\"price\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":null,\"group_name\":null},{\"key\":\"workbook-2e\",\"name\":\"7-Day AI Workbook, 2E\",\"status\":\"free\",\"standalone_price\":1200,\"standalone_price_text\":\"$12\",\"group\":null,\"group_name\":null},{\"key\":\"toolkit-exercises\",\"name\":\"Toolkit: Editable Exercises\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-practice-plans\",\"name\":\"Toolkit: 30-Day and 3-Month Practice Plans\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-prompt-library\",\"name\":\"Toolkit: Prompt Library\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-role-library\",\"name\":\"Toolkit: Role Library\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-tool-sheet\",\"name\":\"Toolkit: Tool-Selection Cheat Sheet\",\"status\":\"free\",\"standalone_price\":400,\"standalone_price_text\":\"$4\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":null,\"name\":\"The Director's Cheat Sheet\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"companion-library\",\"name\":\"The Companion Library\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":null,\"group_name\":null}]}",
-        "shots": [],
-        "review_href": "/book/operator-bundle/",
-        "email_label": "Email for the receipt and the download",
-        "email_button": "Continue to payment",
+        "total_label": "Total",
+        "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}",
+        "preview_stack_json": "{\"stack\":[{\"key\":\"book1-ebook\",\"name\":\"The Artificial Advantage, 2E ebook\",\"status\":\"price\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":null,\"group_name\":null},{\"key\":\"workbook-2e\",\"name\":\"7-Day AI Workbook, 2E\",\"status\":\"free\",\"standalone_price\":1200,\"standalone_price_text\":\"$12\",\"group\":null,\"group_name\":null},{\"key\":\"toolkit-exercises\",\"name\":\"Toolkit: Editable Exercises\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-practice-plans\",\"name\":\"Toolkit: 30-Day and 3-Month Practice Plans\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-prompt-library\",\"name\":\"Toolkit: Prompt Library\",\"status\":\"free\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-role-library\",\"name\":\"Toolkit: Role Library\",\"status\":\"free\",\"standalone_price\":700,\"standalone_price_text\":\"$7\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"toolkit-tool-sheet\",\"name\":\"Toolkit: Tool-Selection Cheat Sheet\",\"status\":\"free\",\"standalone_price\":400,\"standalone_price_text\":\"$4\",\"group\":\"toolkit\",\"group_name\":\"The Toolkit\"},{\"key\":\"companion-library\",\"name\":\"The Companion Library\",\"status\":\"included\",\"standalone_price\":null,\"standalone_price_text\":null,\"group\":null,\"group_name\":null}]}",
         "bump": {
           "image": "/img/store/ai-at-home-bump-thumb.webp",
           "image_alt": "Cover of AI at Home",
-          "name": "AI at Home",
-          "line": "",
-          "price": "$7",
-          "tab": "",
-          "headline": "Who to ask for when your internet bill jumps",
           "yes": "Yes, add AI at Home for $7",
-          "lines": [
-            "Your bill went up when the promo ended. The guide tells you which department to ask for and writes the first sentence you say.",
-            "It sets the lowest price you will accept, lets the AI play the company so you can practise the call, and ends with the price and the confirmation number to write down before you hang up.",
-            "The same four parts then cover a sick plant, a car warning light and a Windows device that stopped working."
-          ],
-          "small": "19-page PDF, instant download plus an email. Same 30-day promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars."
+          "price": "$7",
+          "line": "The words to paste for home jobs, already written: the week's dinners, your internet bill, a trip."
         },
-        "button": null,
-        "note": "Digital. Nothing is shipped. [[refund]]: if it is not for you, email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
-        "layout": "co",
-        "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}",
-        "summary_heading": "Your order"
-      }
-    },
-    {
-      "id": "why",
-      "type": "text",
-      "data": {
-        "anchor": "",
-        "align": "left",
-        "heading": "Why this order is worth it",
-        "paras": [
-          "You brief AI with a role, a task and a constraint, so the first answer is close to what you meant. This order is the book that teaches that, and the files that put it on your own work.",
-          "The card is taken on the next page. Nothing is shipped.",
-          "The Artificial Advantage ebook. Fourteen chapters of method, built around CLEAR: choose your tools, lead with clear direction, evolve your outputs, audit for accuracy, and repeat. You learn to brief AI so the first answer is close to what you meant, then check it before your name goes on it.",
-          "The 7-Day AI Workbook. One stage of that system each day, for seven days, on one real task of your own. You finish with a before and an after, and a template you keep.",
-          "The Toolkit. The exercises, the 30-day and 3-month practice plans, the Prompt Library, the Role Library and the Tool-Selection Cheat Sheet, as files you can open and edit.",
-          "The Companion Library. Eight reference pages I keep current, and the Director's Cheat Sheet. Both are free on the site. They are in this order so you are not hunting for them later."
-        ]
+        "email_button": "Next: enter your card",
+        "note": "[[refund]]: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
+        "get": [
+          {
+            "line": "The Artificial Advantage ebook and its Toolkit: the exercises, prompts and practice plans as files you can edit."
+          },
+          {
+            "line": "The 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey."
+          },
+          {
+            "line": "The Companion Library, which opens online from your library page."
+          }
+        ],
+        "bar_button": "Enter your card"
       }
     }
   ]

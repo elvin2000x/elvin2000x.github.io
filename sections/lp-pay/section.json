@@ -1,0 +1,122 @@
+{
+  "label": "Payment page (live)",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "title",
+      "type": "html",
+      "label": "Headline"
+    },
+    {
+      "key": "lede",
+      "type": "html",
+      "label": "Line under the headline"
+    },
+    {
+      "key": "email_label",
+      "type": "text",
+      "label": "Email field label"
+    },
+    {
+      "key": "order_heading",
+      "type": "text",
+      "label": "Heading above the order rows"
+    },
+    {
+      "key": "free_label",
+      "type": "text",
+      "label": "Word on free items"
+    },
+    {
+      "key": "included_label",
+      "type": "text",
+      "label": "Word on included items"
+    },
+    {
+      "key": "total_label",
+      "type": "text",
+      "label": "Total label"
+    },
+    {
+      "key": "thumbs_json",
+      "type": "text",
+      "label": "Row pictures (JSON: product key to picture)"
+    },
+    {
+      "key": "preview_stack_json",
+      "type": "text",
+      "label": "Order rows used only until the live store answers (JSON)"
+    },
+    {
+      "key": "bump",
+      "type": "object",
+      "label": "The add-on, above the pay button",
+      "fields": [
+        {
+          "key": "image",
+          "type": "image",
+          "label": "Image",
+          "alt": "image_alt",
+          "size": [
+            200,
+            300
+          ]
+        },
+        {
+          "key": "image_alt",
+          "type": "text",
+          "label": "Image description"
+        },
+        {
+          "key": "yes",
+          "type": "text",
+          "label": "Checkbox words"
+        },
+        {
+          "key": "line",
+          "type": "html",
+          "label": "The one line"
+        },
+        {
+          "key": "price",
+          "type": "text",
+          "label": "Price (adds to the total when ticked)"
+        }
+      ]
+    },
+    {
+      "key": "email_button",
+      "type": "text",
+      "label": "Pay button words"
+    },
+    {
+      "key": "note",
+      "type": "html",
+      "label": "Guarantee line under the button"
+    },
+    {
+      "key": "get",
+      "type": "list",
+      "label": "What you get (one line each)",
+      "fields": [
+        {
+          "key": "line",
+          "type": "text",
+          "label": "Line"
+        }
+      ]
+    },
+    {
+      "key": "bar_button",
+      "type": "text",
+      "label": "Phone bar button words"
+    }
+  ]
+}

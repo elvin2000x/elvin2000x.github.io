@@ -1,0 +1,45 @@
+<section class="lp-sec lp-pay-sec"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in lp-payin">
+    <h1 class="lp-pay__title">{{title}}</h1>
+{{#lede}}
+    <p class="lp-pay__lede">{{lede}}</p>
+{{/lede}}
+    <div class="lp-stack lp-stack--pay" data-lp-fstack="{{funnel}}" data-free="{{free_label}}" data-included="{{included_label}}"{{#thumbs_json}} data-thumbs='{{thumbs_json}}'{{/thumbs_json}}{{#bump}} data-bump-price="{{price}}"{{/bump}}>
+{{#preview_stack_json}}
+      <script type="application/json" data-lp-stack-preview>{{preview_stack_json}}</script>
+{{/preview_stack_json}}
+      <form class="lp-pay lp-pay--sheet" id="lp-pay-form" data-store-checkout="{{funnel}}">
+        <label class="lp-pay__email">{{email_label}}
+          <input type="email" name="email" required autocomplete="email" placeholder="you@work.com">
+        </label>
+        <div class="lp-sum">
+{{#order_heading}}
+          <p class="lp-sum__head">{{order_heading}}</p>
+{{/order_heading}}
+          <ul class="lp-stack__items" data-lp-rows></ul>
+          <p class="lp-stack__total lp-due lp-due--card"><span>{{total_label}}</span> <strong data-lp-due></strong></p>
+        </div>
+{{#bump}}
+        <label class="lp-bump lp-bump--pay"><input type="checkbox" data-store-bump>{{#image}}<img class="lp-bump__cover" src="{{image}}" alt="{{image_alt}}" width="40" height="60" loading="lazy">{{/image}}<span class="lp-bump__words"><strong class="lp-bump__yes">{{yes}}</strong>{{#line}}<span class="lp-bump__line">{{line}}</span>{{/line}}</span></label>
+{{/bump}}
+        <p class="lp-stack__total lp-due lp-due--pay"><span>{{total_label}}</span> <strong data-lp-due></strong></p>
+        <div class="lp-pay__go">
+          <button type="submit" class="btn btn--primary btn--lg lp-cta">{{email_button}}</button>
+{{#note}}
+          <p class="lp-note">{{note}}</p>
+{{/note}}
+        </div>
+        <span hidden data-lp-total></span><span hidden data-lp-front></span>
+      </form>
+      <ul class="lp-get">
+{{#get}}
+        <li>{{line}}</li>
+{{/get}}
+      </ul>
+    </div>
+  </div>
+  <div class="lp-obar lp-obar--pay" data-lp-obar>
+    <p class="lp-obar__price"><span>{{total_label}}</span><strong data-lp-due></strong></p>
+    <button type="submit" form="lp-pay-form" class="btn btn--primary lp-obar__btn">{{bar_button}}</button>
+  </div>
+</section>

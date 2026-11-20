@@ -23,6 +23,8 @@
         "shot_alt": "The Artificial Advantage as a book, a tablet and a phone, with the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey in front.",
         "struck": "$71.99",
         "price": "$27",
+        "bar_left": "The Bundle, $27 once",
+        "bar_button": "Get the bundle",
         "button": {
           "label": "Get the bundle for $27",
           "href": "/book/checkout/"
