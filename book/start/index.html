@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=68d69dd8" />
+  <link rel="stylesheet" href="/css/landing.css?v=af0ea95d" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>@media (min-width:768px){ body.lp .lp-hero{ padding-bottom:24px } body.lp .lp-hero + .ep-block{ padding-top:0 } }</style>
 </head>
@@ -275,12 +275,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     (function () {
       var bar = document.querySelector('[data-lp-obar]');
       if (!bar || !('IntersectionObserver' in window)) return;
-      var seen = {}, btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-obar__btn), .lp-pay__go .lp-cta');
+      var seen = {}, above = {}, btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-obar__btn), .lp-pay__go .lp-cta');
       /* The bar steps aside as soon as any part of a page button is above it (bar height 66, margin 72), so it never covers one; and while a field has focus. */
       var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { seen[e.target.getAttribute('data-sid')] = e.isIntersecting; });
-        var any = false; for (var k in seen) if (seen[k]) any = true;
-        if (any) bar.setAttribute('data-off', ''); else bar.removeAttribute('data-off');
+        es.forEach(function (e) { var k = e.target.getAttribute('data-sid'); seen[k] = e.isIntersecting; above[k] = !e.isIntersecting && e.boundingClientRect.bottom < 0; });
+        /* shown only after a button has scrolled up out of view and none is on screen; never before the first one */
+        var any = false, gone = false; for (var k in seen) { if (seen[k]) any = true; if (above[k]) gone = true; }
+        if (any || !gone) bar.setAttribute('data-off', ''); else bar.removeAttribute('data-off');
       }, { rootMargin: '0px 0px -72px 0px', threshold: 0 });
       document.addEventListener('focusin', function (e) { if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) && e.target.type !== 'checkbox') bar.setAttribute('data-focus', ''); });
       document.addEventListener('focusout', function () { bar.removeAttribute('data-focus'); });

@@ -586,5 +586,4 @@ body.lp .lp-stack--pay .lp-pay__go .lp-note{ margin:12px 0 0; font:14px/20px var
 /* the three answers: beside the price from 768 up, under the video on phones */
 .lp-answers{ padding:0 16px 8px; max-width:560px; margin:0 auto }
 .lp-answers .lp-ohero__answers{ margin:12px 0 0 }
-@media (max-width:767px){ .lp-ohero__buy .lp-ohero__answers{ display:none } }
-@media (min-width:768px){ .lp-answers{ display:none } }
+.lp-ohero__buy .lp-ohero__answers{ display:none }
