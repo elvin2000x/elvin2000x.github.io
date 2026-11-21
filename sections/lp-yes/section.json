@@ -1,0 +1,28 @@
+{
+  "label": "Yes and no-thanks again (same buttons as the top)",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "yes",
+      "type": "text",
+      "label": "Yes button words"
+    },
+    {
+      "key": "yes_note",
+      "type": "html",
+      "label": "Line under the yes button"
+    },
+    {
+      "key": "no",
+      "type": "text",
+      "label": "No-thanks words"
+    }
+  ]
+}

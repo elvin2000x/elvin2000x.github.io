@@ -40,9 +40,15 @@
       </picture>
     </figure>
 {{/stack_desktop}}
+{{#repeat_stack}}
+{{>yesagain}}
+{{/repeat_stack}}
 {{#body}}
     <div class="lp-body">{{body}}</div>
 {{/body}}
+{{#repeat_end}}
+{{>yesagain}}
+{{/repeat_end}}
 {{/early}}
 {{^early}}
 {{#image}}

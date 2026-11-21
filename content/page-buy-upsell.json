@@ -77,7 +77,8 @@
         "early": "1",
         "above": "$81 if you bought the three one by one.",
         "image_w": "1600",
-        "image_h": "1067"
+        "image_h": "1067",
+        "repeat_stack": "1"
       }
     },
     {
@@ -134,6 +135,16 @@
         ],
         "note": "The AI asked only what it could not know, and the draft stayed inside the facts Marcus gave.",
         "draft": "One example conversation. The names and businesses are invented, and your own answers will look different."
+      }
+    },
+    {
+      "type": "lp-yes",
+      "id": "yes-end",
+      "data": {
+        "anchor": "",
+        "yes": "Yes, add the AI Setup Bundle for $47",
+        "yes_note": "This charges the card you just used. You will not need to enter it again. [[refund]].",
+        "no": "No thanks, I’ll skip this"
       }
     }
   ]

@@ -196,6 +196,16 @@
       "key": "image_h",
       "type": "text",
       "label": "Picture height"
+    },
+    {
+      "key": "repeat_stack",
+      "type": "text",
+      "label": "Repeat the yes and no-thanks after the picture (1 = on)"
+    },
+    {
+      "key": "repeat_end",
+      "type": "text",
+      "label": "Repeat the yes and no-thanks at the end of the text (1 = on)"
     }
   ]
 }

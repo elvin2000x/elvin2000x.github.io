@@ -74,7 +74,9 @@
         "image_h": "1200",
         "image_wide": "/img/store/manual-suite-wide.webp",
         "image_wide_w": "1500",
-        "image_wide_h": "1000"
+        "image_wide_h": "1000",
+        "repeat_stack": "1",
+        "repeat_end": "1"
       }
     }
   ]
