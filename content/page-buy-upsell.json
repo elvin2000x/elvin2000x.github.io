@@ -129,7 +129,7 @@
           },
           {
             "who": "AI",
-            "text": "<p>Subject: Dispatch re-planning, one idea for Northline</p><p>Hi Priya,</p><p>Dispatchers often lose hours when a stop changes. Halcyon Routing builds scheduling software for delivery fleets, so your dispatchers spend less time re-planning routes by hand.</p><p>We are a small team, so I would rather show you than describe it. Are you free for a 15-minute call on Tuesday at 10 am?</p><p>Marcus<br>Halcyon Routing</p>"
+            "text": "<p>Subject: Dispatch re-planning, one idea for Northline</p><p>Hi Priya,</p><p>Your dispatchers lose time re-planning routes by hand. Halcyon Routing builds scheduling software for delivery fleets, so they spend less of it.</p><p>We are a small team, so I would rather show you than describe it. Would you be open to a 15-minute call?</p><p>Marcus<br>Halcyon Routing</p>"
           }
         ],
         "note": "The AI asked only what it could not know, and the draft stayed inside the facts Marcus gave.",
