@@ -107,7 +107,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     .lp-band picture{ display:block }
     .lp-band img{ display:block; width:100%; max-width:1344px; height:auto; margin:0 auto; aspect-ratio:720 / 576; background:#0a1828 }
     /* desktop: the whole picture at its own shape (no crop), centred on the colour of its own edges */
-    @media (min-width:768px){ main > section.lp-band.lp-band{ background:#161d28 } .lp-band img{ width:100%; max-width:1040px; height:auto; aspect-ratio:1344 / 768; object-fit:contain; background:#161d28 } }
+    @media (min-width:768px){ main > section.lp-band.lp-band{ background:#161d28 } .lp-band img{ width:100%; max-width:1040px; height:auto; aspect-ratio:1344 / 768; object-fit:contain; background:#161d28; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%) } }
     .hero{ background:linear-gradient(170deg,var(--panel) 0%,var(--bg-2) 100%); padding:32px 16px 48px }
     .hero .in--wide{ display:grid; gap:24px; align-items:center }
     .hero h1{ font-size:clamp(38px,9.6vw,66px); line-height:1.08; margin:0 0 16px }

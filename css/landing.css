@@ -496,7 +496,7 @@ body.lp .btn, body.lp .lp-cta{ box-sizing:border-box; max-width:100% }
 .lp-band picture{ display:block }
 .lp-band img{ display:block; width:100%; max-width:1344px; height:auto; margin:0 auto }
 /* desktop: the whole picture at its own shape (no crop), centred on the colour of the picture's own edges so no seam shows */
-@media (min-width:768px){ .lp-band{ background:#161d28 } .lp-band img{ width:100%; max-width:1040px; height:auto; object-fit:contain } }
+@media (min-width:768px){ .lp-band{ background:#161d28 } .lp-band img{ width:100%; max-width:1040px; height:auto; object-fit:contain; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%) } }
 .lp-ohero__shot img{ mix-blend-mode:multiply }
 body.lp:has(.lp-progress) .ep-block.ep-video{ max-width:36rem }
 /* "What it adds up to" rows on a phone: the name wraps first, the price sits under it, so the two never touch */
