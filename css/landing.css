@@ -495,7 +495,8 @@ body.lp .btn, body.lp .lp-cta{ box-sizing:border-box; max-width:100% }
 .lp-band{ background:#0a1828; padding:0; line-height:0 }
 .lp-band picture{ display:block }
 .lp-band img{ display:block; width:100%; max-width:1344px; height:auto; margin:0 auto }
-@media (min-width:768px){ .lp-band img{ max-width:none; height:520px; object-fit:cover } }
+/* desktop: the whole picture at its own shape (no crop), centred on the colour of the picture's own edges so no seam shows */
+@media (min-width:768px){ .lp-band{ background:#161d28 } .lp-band img{ width:100%; max-width:1040px; height:auto; object-fit:contain } }
 .lp-ohero__shot img{ mix-blend-mode:multiply }
 body.lp:has(.lp-progress) .ep-block.ep-video{ max-width:36rem }
 /* "What it adds up to" rows on a phone: the name wraps first, the price sits under it, so the two never touch */
@@ -600,7 +601,7 @@ body.lp .lp-stack--pay .lp-pay__go .lp-note{ margin:12px 0 0; font:14px/20px var
 @media (min-width:768px){ body.lp .lp-sec.lp-ordered{ padding-top:16px; padding-bottom:0 } body.lp .lp-sec.lp-ordered + .lp-sec{ padding-top:24px } }
 /* band: a fixed box so nothing flashes white or jumps while the picture loads */
 .lp-band img{ aspect-ratio:720 / 576; background:#0a1828 }
-@media (min-width:768px){ .lp-band img{ aspect-ratio:auto } }
+@media (min-width:768px){ .lp-band img{ aspect-ratio:1344 / 768; background:#161d28 } }
 /* the line above an early yes button */
 .lp-above{ margin:8px 0 12px; font:600 17px/24px var(--sans); color:var(--lp-navy) }
 .lp-basket__thumb{ flex:none; width:56px; height:90px; object-fit:contain; border-radius:3px }
