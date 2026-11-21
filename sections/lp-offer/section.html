@@ -97,12 +97,20 @@
   (function () {
     var bar = document.currentScript.parentNode.querySelector('[data-lp-sticky]');
     var main = document.currentScript.parentNode.querySelector('.lp-cta[data-store-accept]');
+    /* the list is read each time: sections further down the page are not parsed yet when this script first runs */
+    function mains() { return [].slice.call(document.querySelectorAll('.lp-cta[data-store-accept]')); }
     if (!bar || !main || !('IntersectionObserver' in window)) return;
-    /* On a phone, the bar shows once the main Accept button has scrolled up out of view. The observer alone misses an
-       instant jump to the top (a status-bar tap): the button stays "not on screen" the whole way, so it never fires. So
-       the same rule is also re-checked on scroll, on resize and when the page is shown again. */
-    function check() { var r = main.getBoundingClientRect(); bar.hidden = r.bottom > 0; }
-    new IntersectionObserver(function (e) { bar.hidden = e[0].isIntersecting || e[0].boundingClientRect.top > 0; }).observe(main);
+    /* On a phone the bar shows only once the first Accept button has scrolled up out of view AND no Accept button of the
+       page (the repeats further down too, wherever they sit) is on screen. The observer alone misses an instant jump to
+       the top (a status-bar tap), so the same rule is also worked out from the positions on scroll, resize and page show. */
+    function check() {
+      var vh = window.innerHeight || 0, any = false;
+      mains().forEach(function (b) { var r = b.getBoundingClientRect(); if (r.width === 0 && r.height === 0) return; if (r.bottom > 0 && r.top < vh) any = true; });
+      bar.hidden = any || main.getBoundingClientRect().bottom > 0;
+    }
+    var io = new IntersectionObserver(check);
+    function watch() { mains().forEach(function (b) { io.observe(b); }); check(); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch); else watch();
     var queued = false;
     function later() { if (queued) return; queued = true; (window.requestAnimationFrame || setTimeout)(function () { queued = false; check(); }); }
     window.addEventListener('scroll', later, { passive: true });
