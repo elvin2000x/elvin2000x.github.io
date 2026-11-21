@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=4d3d3f24" />
+  <link rel="stylesheet" href="/css/landing.css?v=09c3d347" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp">
@@ -412,6 +412,16 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         var any = false, gone = false; for (var k in seen) { if (seen[k]) any = true; if (above[k]) gone = true; }
         if (any || !gone) bar.setAttribute('data-off', ''); else bar.removeAttribute('data-off');
       }, { rootMargin: '0px 0px -72px 0px', threshold: 0 });
+      /* The observer alone misses an instant jump to the top (a status-bar tap), because every button stays "not on screen"
+         the whole way. So the same rule is also worked out from the buttons' positions on scroll, resize and page show. */
+      var q = false;
+      function recheck() {
+        q = false; var any = false, gone = false, vh = window.innerHeight || 0;
+        [].forEach.call(btns, function (bt) { var r = bt.getBoundingClientRect(); if (r.height === 0 && r.width === 0) return; if (r.bottom > 0 && r.top < vh - 72) any = true; if (r.bottom <= 0) gone = true; });
+        if (any || !gone) bar.setAttribute('data-off', ''); else bar.removeAttribute('data-off');
+      }
+      function later() { if (!q) { q = true; (window.requestAnimationFrame || setTimeout)(recheck); } }
+      window.addEventListener('scroll', later, { passive: true }); window.addEventListener('resize', later); window.addEventListener('pageshow', later);
       document.addEventListener('focusin', function (e) { if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) && e.target.type !== 'checkbox') bar.setAttribute('data-focus', ''); });
       document.addEventListener('focusout', function () { bar.removeAttribute('data-focus'); });
       [].forEach.call(btns, function (b, i) { b.setAttribute('data-sid', i); io.observe(b); });
