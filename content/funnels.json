@@ -5,5 +5,6 @@
   "store_base": "https://api.elvinpeters.com/api/store",
   "store_base_test": "https://test.elvinpeters.com/store-test/api/store",
   "refund_line": "30-day money-back guarantee",
-  "refund_days": "30 days"
+  "refund_days": "30 days",
+  "funnel_js_version": "31be0c85"
 }

@@ -4,9 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="robots" content="noindex, nofollow" />
-  <!-- The checkout's funnel script, before any pixel and not deferred: it takes the
-       one-time #t= token out of the address before anything can read it. -->
-  <script src="https://api.elvinpeters.com/api/store/funnel.js"></script>
+  <!-- The one-time #t= token is taken out of the address here, before any pixel can read it
+       (the same steps funnel.js takes). funnel.js itself loads deferred, stamped with its
+       version so a change to it reaches visitors at once. Buy buttons keep their own
+       /book/checkout/ address, so a click before it is ready lands on the payment page. -->
+  <script>(function(){var m=/(?:^#|&)t=([A-Za-z0-9_-]{10,100})/.exec(location.hash||"");if(m){try{sessionStorage.setItem("ep_offer",m[1])}catch(e){}try{history.replaceState(history.state,"",location.pathname+location.search)}catch(e){}}})();</script>
+  <script defer src="https://api.elvinpeters.com/api/store/funnel.js?v=31be0c85"></script>
   <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
   <script>

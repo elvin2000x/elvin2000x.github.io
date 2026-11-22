@@ -149,7 +149,7 @@ const SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?(?:\/[a-z0-9](?:[a-z0-9-]{
 const PREFIX_RE = /^[a-z0-9](?:[a-z0-9-]{0,28}[a-z0-9])?$/;
 const FUNNEL_RE = /^[a-z0-9][a-z0-9-]{0,59}$/;
 const FUNNEL_DEFAULTS = { prefix: 'buy', old_prefixes: [],
-  refund_line: '30-day money-back guarantee', refund_days: '30 days',
+  refund_line: '30-day money-back guarantee', refund_days: '30 days', funnel_js_version: '',
   store_base: 'https://api.elvinpeters.com/api/store', store_base_test: 'https://test.elvinpeters.com/store-test/api/store' };
 function funnelSettings(contentDir) {
   const f = path.join(contentDir, 'funnels.json');
@@ -429,7 +429,8 @@ function renderStack(stack, name, { site, isHome, markers, funnels, store }) {
   const page_url = ORIGIN + '/' + (L ? landingDir(fcfg.prefix, L.slug) : !isHome && stack.path ? stack.path.replace(/index\.html$/, '') : '');
   const robots_off = !isHome && stack.noindex !== false;
   const globals = { site, isHome: !!isHome, amazon: site.amazon_url, page_url, refund_line: fcfg.refund_line, refund_days: fcfg.refund_days,
-    store: L ? store || fcfg.store_base : '', funnel: L ? L.funnel || '' : '' };
+    store: L ? store || fcfg.store_base : '', funnel: L ? L.funnel || '' : '',
+    funnel_js_v: L && (store || fcfg.store_base) === fcfg.store_base ? fcfg.funnel_js_version || '' : '' };
   const parts = stack.sections.filter(s => !s.hidden).map(s => {
     const html = renderSection(s, globals);
     return stack.markers || markers ? '<!-- ep:sec:' + s.id + ' -->\n' + html + '\n<!-- /ep:sec:' + s.id + ' -->' : html;
