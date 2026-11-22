@@ -380,12 +380,12 @@
         "phone_poster": "",
         "image": "/img/store/look-inside/toolkit-prompt-titles-desktop.webp",
         "phone": "/img/store/look-inside/toolkit-prompt-titles-phone.webp",
-        "w": "880",
-        "h": "1634",
+        "w": "578",
+        "h": "1416",
         "phone_w": "578",
         "phone_h": "1416",
-        "alt": "The Toolkit's prompt library as a spreadsheet: category, prompt name and tags for all 25 prompts",
-        "caption": "All 25 prompt titles. Find the one for your week.",
+        "alt": "The Toolkit's prompt library as a spreadsheet, the first 12 of its 25 prompts: category and prompt name",
+        "caption": "12 of the 25 prompt titles.",
         "body": "<ul><li>25 prompts in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, Learning and Development. Also as a spreadsheet you can import.</li><li>25 role setups you paste once, and the formula for writing your own.</li><li>16 exercises from 10 chapters, a 30-day plan and a 3-month plan.</li></ul>",
         "buy": "Get the bundle for $27"
       }
@@ -446,9 +446,9 @@
         "buy": "",
         "tap": "1",
         "still_w": "750",
-        "still_h": "1124",
+        "still_h": "1169",
         "still_phone_w": "750",
-        "still_phone_h": "1124",
+        "still_phone_h": "1169",
         "tap_label": "Play the Companion Library tour",
         "tap_caption": "Watch it work, 10 seconds"
       }
