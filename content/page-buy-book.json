@@ -257,7 +257,7 @@
             "caption": "",
             "doc_label": "The Toolkit, Prompt Library",
             "doc_heading": "First Draft from Notes",
-            "doc_html": "<p class=\"lp-doc__tags\">Tags: writing and editing, rtc</p><p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
+            "doc_html": "<p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
           },
           {
             "thumb": "/img/store/look-inside/toolkit-tone-calibration-edge.webp",
@@ -270,7 +270,7 @@
             "caption": "",
             "doc_label": "The Toolkit, Prompt Library",
             "doc_heading": "Tone Calibration",
-            "doc_html": "<p class=\"lp-doc__tags\">Tags: writing and editing, rtc</p><p class=\"lp-doc__mono\">Act as a professional editor. Rewrite the following passage so the tone matches [target: e.g., authoritative but approachable, urgent but not alarmist, direct without being blunt]. Keep the meaning intact. Note any sentence where you changed the meaning, flag it with [CHANGED] so I can review.</p>"
+            "doc_html": "<p class=\"lp-doc__mono\">Act as a professional editor. Rewrite the following passage so the tone matches [target: e.g., authoritative but approachable, urgent but not alarmist, direct without being blunt]. Keep the meaning intact. Note any sentence where you changed the meaning, flag it with [CHANGED] so I can review.</p>"
           },
           {
             "thumb": "/img/store/look-inside/toolkit-plain-language-edge.webp",
@@ -283,7 +283,7 @@
             "caption": "",
             "doc_label": "The Toolkit, Prompt Library",
             "doc_heading": "Plain Language Rewrite",
-            "doc_html": "<p class=\"lp-doc__tags\">Tags: writing and editing, rtc</p><p class=\"lp-doc__mono\">Act as a plain language editor. Rewrite the following passage for an audience with no specialized knowledge of [field]. Replace all jargon with plain equivalents. Cut sentences longer than 20 words in half where possible. The reader should be able to understand the core point without looking anything up. Flag any term you couldn't simplify without losing precision.</p>"
+            "doc_html": "<p class=\"lp-doc__mono\">Act as a plain language editor. Rewrite the following passage for an audience with no specialized knowledge of [field]. Replace all jargon with plain equivalents. Cut sentences longer than 20 words in half where possible. The reader should be able to understand the core point without looking anything up. Flag any term you couldn't simplify without losing precision.</p>"
           }
         ],
         "strip_caption": "",
@@ -335,9 +335,9 @@
             "full": "/img/store/look-inside/ebook-chapter-1-page.webp",
             "full_w": "1200",
             "full_h": "1920",
-            "alt": "The Artificial Advantage ebook, Chapter 1: the whole page",
+            "alt": "The ebook, Chapter 1: the whole page",
             "caption": "",
-            "doc_label": "The Artificial Advantage ebook, Chapter 1",
+            "doc_label": "The ebook, Chapter 1",
             "doc_heading": "Chapter 1: From Gimmick to Daily Assistant",
             "doc_html": "<p>Marcus had a question about a tax form. He typed it into the chat the way he'd type it into a search bar, expecting the same thing a search bar gives him: the answer, retrieved from somewhere, correct. What came back was three confident paragraphs citing a specific line on a specific schedule. Clean and authoritative, the exact tone of a source that knows what it's talking about.</p><p>It was wrong. The line number didn't exist on that form.</p>"
           },
@@ -348,9 +348,9 @@
             "full": "/img/store/look-inside/ebook-chapter-6-page.webp",
             "full_w": "1200",
             "full_h": "1920",
-            "alt": "The Artificial Advantage ebook, Chapter 6: the whole page",
+            "alt": "The ebook, Chapter 6: the whole page",
             "caption": "",
-            "doc_label": "The Artificial Advantage ebook, Chapter 6",
+            "doc_label": "The ebook, Chapter 6",
             "doc_heading": "Chapter 6: The Race You're Joining",
             "doc_html": "<p>For one marketing strategist, three weeks collapsed into a single sitting. She watched a colleague answer a market-trends research question in one sitting: paste a prompt into the tool, read the response, ask a follow-up, reframe the analysis with one comment.</p>"
           }
@@ -419,6 +419,41 @@
       }
     },
     {
+      "id": "v7-s7c-tour",
+      "type": "lp-media",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "layout": "stack",
+        "heading": "",
+        "sub": "",
+        "lede": "",
+        "mp4": "/video/look-inside/library-tour-desktop.mp4",
+        "webm": "/video/look-inside/library-tour-desktop.webm",
+        "poster": "/video/look-inside/library-tour-desktop-poster.webp",
+        "phone_mp4": "/video/look-inside/library-tour-phone.mp4",
+        "phone_webm": "/video/look-inside/library-tour-phone.webm",
+        "phone_poster": "/video/look-inside/library-tour-phone-poster.webp",
+        "image": "/img/store/look-inside/library-hub-desktop.webp",
+        "phone": "/img/store/look-inside/library-hub-phone.webp",
+        "w": "900",
+        "h": "1350",
+        "phone_w": "562",
+        "phone_h": "1216",
+        "alt": "A tour through the Companion Library: the index, the prompt library, the role library, the glossary, the tools reference and the Quick Reference Card",
+        "caption": "",
+        "body": "",
+        "buy": "",
+        "tap": "1",
+        "still_w": "750",
+        "still_h": "1124",
+        "still_phone_w": "750",
+        "still_phone_h": "1124",
+        "tap_label": "Play the Companion Library tour",
+        "tap_caption": "Watch it work, 10 seconds"
+      }
+    },
+    {
       "id": "v7-s7c-builder",
       "type": "lp-media",
       "data": {
@@ -428,22 +463,29 @@
         "heading": "",
         "sub": "",
         "lede": "",
-        "mp4": "",
-        "webm": "",
-        "poster": "",
-        "phone_mp4": "",
-        "phone_webm": "",
-        "phone_poster": "",
+        "mp4": "/video/look-inside/prompt-builder-desktop.mp4",
+        "webm": "/video/look-inside/prompt-builder-desktop.webm",
+        "poster": "/video/look-inside/prompt-builder-desktop-poster.webp",
+        "phone_mp4": "/video/look-inside/prompt-builder-phone.mp4",
+        "phone_webm": "/video/look-inside/prompt-builder-phone.webm",
+        "phone_poster": "/video/look-inside/prompt-builder-phone-poster.webp",
         "image": "/img/store/look-inside/prompt-builder-brief-desktop.webp",
         "phone": "/img/store/look-inside/prompt-builder-brief-phone.webp",
-        "w": "750",
-        "h": "1050",
-        "phone_w": "750",
-        "phone_h": "1050",
-        "alt": "The Prompt Builder's finished brief: Act as a friendly kitchen manager who trains new staff, with the task and constraints filled in",
+        "w": "900",
+        "h": "1350",
+        "phone_w": "562",
+        "phone_h": "1216",
+        "alt": "The Prompt Builder: three demo answers typed in, and the finished brief it builds",
         "caption": "Three answers in, a finished brief out.",
         "body": "",
-        "buy": ""
+        "buy": "",
+        "tap": "1",
+        "still_w": "750",
+        "still_h": "1050",
+        "still_phone_w": "750",
+        "still_phone_h": "1050",
+        "tap_label": "Play the Prompt Builder",
+        "tap_caption": "Watch it work, 12 seconds"
       }
     },
     {

@@ -71,6 +71,57 @@
       "default": ""
     },
     {
+      "key": "tap",
+      "type": "choice",
+      "label": "Loop starts",
+      "options": [
+        {
+          "value": "",
+          "label": "By itself when on screen"
+        },
+        {
+          "value": "1",
+          "label": "Only when tapped (shows the picture first)"
+        }
+      ]
+    },
+    {
+      "key": "still_w",
+      "type": "text",
+      "label": "Tap-to-play picture width",
+      "default": ""
+    },
+    {
+      "key": "still_h",
+      "type": "text",
+      "label": "Tap-to-play picture height",
+      "default": ""
+    },
+    {
+      "key": "still_phone_w",
+      "type": "text",
+      "label": "Tap-to-play phone picture width",
+      "default": ""
+    },
+    {
+      "key": "still_phone_h",
+      "type": "text",
+      "label": "Tap-to-play phone picture height",
+      "default": ""
+    },
+    {
+      "key": "tap_label",
+      "type": "text",
+      "label": "Play button name, for screen readers",
+      "default": ""
+    },
+    {
+      "key": "tap_caption",
+      "type": "text",
+      "label": "Line under a tap-to-play loop",
+      "default": ""
+    },
+    {
       "key": "mp4",
       "type": "text",
       "label": "Loop: MP4 address (leave empty to show a picture instead)",

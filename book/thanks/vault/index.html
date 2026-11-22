@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=95498bfc" />
+  <link rel="stylesheet" href="/css/landing.css?v=68427b11" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>body.lp .lp-hero__grid{ max-width:720px } body.lp .lp-hero{ padding-top:32px; padding-bottom:0 } body.lp .lp-hero h1{ margin-bottom:0 } body.lp .ep-block.ep-video{ max-width:720px } body.lp .ep-row{ flex-direction:column; align-items:stretch; gap:12px } body.lp .ep-row .btn{ width:100%; min-height:60px; font-size:20px; font-weight:700 } body.lp .ep-note{ text-align:left } @media (max-width:767px){ body.lp .lp-hero{ padding-top:8px } body.lp .ep-block:not(#lifestyle ~ .ep-block){ padding-top:6px; padding-bottom:6px } body.lp .ep-block.ep-video{ padding-bottom:4px } }</style>
 </head>
@@ -437,7 +437,15 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     [].forEach.call(document.querySelectorAll('[data-lp-loop]'), function (box) {
       var btn = box.querySelector('[data-lp-loop-toggle]'), vids = box.querySelectorAll('video');
-      var paused = !!reduce, inView = false;
+      /* tap-to-play: the still is shown until the visitor taps it; then the loop takes its place and plays */
+      var tap = box.hasAttribute('data-lp-tap'), start = box.querySelector('[data-lp-start]');
+      var paused = tap ? true : !!reduce, inView = false;
+      if (tap) [].forEach.call(vids, function (v) { v.hidden = true; });
+      if (start) start.addEventListener('click', function () {
+        start.hidden = true; [].forEach.call(vids, function (v) { v.hidden = false; });
+        if (btn) btn.hidden = false; paused = false; inView = true; posters(); label(); sync();
+        var v = shown(); if (v) v.focus && v.setAttribute('tabindex', '-1');
+      });
       function shown() { return [].filter.call(vids, function (v) { return v.getClientRects().length > 0; })[0]; }
       function label() { if (!btn) return; btn.textContent = paused ? 'Play' : 'Pause'; btn.setAttribute('aria-pressed', paused ? 'true' : 'false'); }
       function sync() {

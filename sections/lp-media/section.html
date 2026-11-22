@@ -13,7 +13,18 @@
 {{/lede}}
     <figure class="lp-media__fig">
 {{#mp4}}
-      <div class="lp-media__loop" data-lp-loop>
+      <div class="lp-media__loop{{#tap}} lp-media__loop--tap{{/tap}}" data-lp-loop{{#tap}} data-lp-tap{{/tap}}>
+{{#tap}}
+        <button type="button" class="lp-media__start" data-lp-start aria-label="{{tap_label}}">
+          <picture>
+{{#phone}}
+            <source media="(max-width: 767px)" srcset="{{phone}}" width="{{still_phone_w}}" height="{{still_phone_h}}">
+{{/phone}}
+            <img src="{{image}}" alt="{{alt}}" width="{{still_w}}" height="{{still_h}}" loading="lazy" decoding="async">
+          </picture>
+          <span class="lp-media__badge" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+{{/tap}}
 {{#phone_mp4}}
         <video class="lp-media__v lp-media__v--phone" muted loop playsinline preload="none" data-poster="{{phone_poster}}" width="{{phone_w}}" height="{{phone_h}}" aria-label="{{alt}}">
 {{#phone_webm}}
@@ -28,7 +39,7 @@
 {{/webm}}
           <source src="{{mp4}}" type="video/mp4">
         </video>
-        <button type="button" class="lp-media__toggle" data-lp-loop-toggle aria-pressed="false">Pause</button>
+        <button type="button" class="lp-media__toggle" data-lp-loop-toggle aria-pressed="false"{{#tap}} hidden{{/tap}}>Pause</button>
       </div>
 {{/mp4}}
 {{^mp4}}
@@ -39,6 +50,9 @@
         <img src="{{image}}" alt="{{alt}}" width="{{w}}" height="{{h}}" loading="lazy" decoding="async">
       </picture>
 {{/mp4}}
+{{#tap_caption}}
+      <p class="lp-media__tapcap">{{tap_caption}}</p>
+{{/tap_caption}}
 {{#caption}}
       <figcaption class="lp-media__cap">{{caption}}</figcaption>
 {{/caption}}
