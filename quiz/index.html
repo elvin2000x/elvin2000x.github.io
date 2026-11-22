@@ -12,9 +12,9 @@
     gtag('config', 'AW-637214471');   /* Google Ads: remarketing + conversions */
   </script>
   <!-- X (Twitter) pixel base code -->
-  <script>!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
-  },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
-  a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('config','re26u');</script>
+  <script>(function(){var w=window;if(w.__lateInit)return;w.__lateInit=1;w.__late=w.__late||[];var ev=['scroll','touchstart','pointerdown','keydown','mousedown'],done=false;function go(){if(done)return;done=true;ev.forEach(function(e){removeEventListener(e,go,true)});var q=w.__late;w.__late={push:function(f){try{f()}catch(e){}}};q.forEach(function(f){try{f()}catch(e){}})}ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true})})})(); /* TikTok and X load after the first scroll, tap or key press; Meta and GA4 load at once */!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+  },s.version='1.1',s.queue=[],(window.__late=window.__late||[]).push(function(){u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+  a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,document,'script');twq('config','re26u');</script>
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -34,10 +34,11 @@
   <!-- End Meta Pixel Code -->
   <!-- TikTok Pixel Code Start -->
   <script>
+(function(){var w=window;if(w.__lateInit)return;w.__lateInit=1;w.__late=w.__late||[];var ev=['scroll','touchstart','pointerdown','keydown','mousedown'],done=false;function go(){if(done)return;done=true;ev.forEach(function(e){removeEventListener(e,go,true)});var q=w.__late;w.__late={push:function(f){try{f()}catch(e){}}};q.forEach(function(f){try{f()}catch(e){}})}ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true})})})(); /* TikTok and X load after the first scroll, tap or key press; Meta and GA4 load at once */
+
   !function (w, d, t) {
     w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-    ttq.load('D93C3IRC77U4775FLNR0');
-    ttq.page();
+    (window.__late=window.__late||[]).push(function(){ttq.load('D93C3IRC77U4775FLNR0');ttq.page();});
   }(window, document, 'ttq');
   </script>
   <!-- TikTok Pixel Code End -->
