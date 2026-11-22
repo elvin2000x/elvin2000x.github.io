@@ -14,6 +14,8 @@ const ROOT = __dirname;
 const EXCLUDE = /^essays([\/]|$)|^(titles|books|book1-feedback|oto|dl|studio|components|sections)([\\/]|$)|^index_v[0-9]\.html$|^system\/index\.html$|^toolkit\/index\.html$|^google-ads-audit\/index\.html$/;
 // Pages fully on the design system: strictest rules apply here.
 const TOKENIZED = new Set(['index.html', 'book.html']);
+// Pages where every <img> and <video> must carry width and height (FAIL, not warn). Ticket 701.
+const MEDIA_STRICT = new Set(['book/offer/index.html']);
 
 const SITE = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/site.json'), 'utf8'));
 const BOOK_ASIN = SITE.amazon_url.match(/dp\/([A-Z0-9]{10})/)[1];
@@ -185,16 +187,26 @@ for (const rel of PAGES) {
   if (/<img[^>]*style="[^"]*width\s*:\s*\d+px/.test(html))
     fail(rel, 'inline pixel width on an <img> (the sideways-book bug class)');
 
-  // IMG-DIMS + IMG-LAZY on tokenized pages (others warn).
+  // IMG-DIMS + IMG-LAZY on tokenized pages (others warn). On MEDIA_STRICT pages a missing
+  // width/height on an <img> or a <video> is a FAIL: those pages are long, picture-heavy sales
+  // pages where an undimensioned item shifts the buy buttons as it loads (ticket 701).
   const imgs = html.match(/<img[^>]*>/g) || [];
   let idx = 0;
   for (const tag of imgs) {
     if (tag.includes('display:none')) continue; // tracking pixels
     idx++;
     const report = TOKENIZED.has(rel) ? fail : warn;
-    if (!/width="\d+"/.test(tag) || !/height="\d+"/.test(tag)) report(rel, 'img without width/height: ' + tag.slice(0, 60));
+    const dims = MEDIA_STRICT.has(rel) ? fail : report;
+    if (!/width="\d+"/.test(tag) || !/height="\d+"/.test(tag)) dims(rel, 'img without width/height: ' + tag.slice(0, 60));
     // fetchpriority="high" marks the LCP image: it must never be lazy.
     if (idx > 2 && !tag.includes('loading=') && !tag.includes('fetchpriority="high"')) report(rel, 'below-fold img not lazy: ' + tag.slice(0, 60));
+  }
+
+  // VIDEO-DIMS: every <video> needs width and height (and a poster) on MEDIA_STRICT pages; warn elsewhere.
+  for (const tag of html.match(/<video[^>]*>/g) || []) {
+    const dims = MEDIA_STRICT.has(rel) ? fail : warn;
+    if (!/width="\d+"/.test(tag) || !/height="\d+"/.test(tag)) dims(rel, 'video without width/height: ' + tag.slice(0, 60));
+    if (!/poster="[^"]+"/.test(tag)) dims(rel, 'video without a poster: ' + tag.slice(0, 60));
   }
 
   // DEAD-CTA: href="#" is a broken promise; #anchors must resolve on-page.

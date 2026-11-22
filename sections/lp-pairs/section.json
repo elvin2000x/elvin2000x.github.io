@@ -1,0 +1,137 @@
+{
+  "label": "Two requests, two answers (labelled AI examples, as plain cards)",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading (optional)",
+      "default": ""
+    },
+    {
+      "key": "lede",
+      "type": "html",
+      "label": "Line under the heading, e.g. the AI-example label",
+      "default": ""
+    },
+    {
+      "key": "more_label",
+      "type": "text",
+      "label": "Words on the link that opens a full answer",
+      "default": "Read the full answer"
+    },
+    {
+      "key": "pairs",
+      "type": "list",
+      "label": "Pairs",
+      "fields": [
+        {
+          "key": "title",
+          "type": "html",
+          "label": "Pair title (optional)",
+          "default": ""
+        },
+        {
+          "key": "thin_kind",
+          "type": "text",
+          "label": "First card name",
+          "default": "One line"
+        },
+        {
+          "key": "thin_request",
+          "type": "html",
+          "label": "First request, as sent",
+          "default": "[Request]"
+        },
+        {
+          "key": "thin_answer_label",
+          "type": "text",
+          "label": "Label above the first answer",
+          "default": "The answer, first lines:"
+        },
+        {
+          "key": "thin_answer",
+          "type": "html",
+          "label": "First answer, as shown on the card",
+          "default": "[Answer]"
+        },
+        {
+          "key": "thin_full",
+          "type": "html",
+          "label": "First answer in full (optional; opens on tap)",
+          "default": ""
+        },
+        {
+          "key": "directed_kind",
+          "type": "text",
+          "label": "Second card name",
+          "default": "The job, explained"
+        },
+        {
+          "key": "directed_request",
+          "type": "html",
+          "label": "Second request, as sent",
+          "default": "[Request]"
+        },
+        {
+          "key": "directed_answer_label",
+          "type": "text",
+          "label": "Label above the second answer",
+          "default": "The answer:"
+        },
+        {
+          "key": "directed_answer",
+          "type": "html",
+          "label": "Second answer, as shown on the card",
+          "default": "[Answer]"
+        },
+        {
+          "key": "directed_full",
+          "type": "html",
+          "label": "Second answer in full (optional; opens on tap)",
+          "default": ""
+        },
+        {
+          "key": "note",
+          "type": "html",
+          "label": "Line under the pair (optional)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "key": "after",
+      "type": "html",
+      "label": "Words after the pairs (optional)",
+      "default": ""
+    },
+    {
+      "key": "buy",
+      "type": "text",
+      "label": "Buy button words (optional; must be exactly: Get the bundle for $27)",
+      "default": ""
+    }
+  ]
+}

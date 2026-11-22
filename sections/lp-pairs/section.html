@@ -1,0 +1,46 @@
+<section class="lp-sec lp-pairs{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+{{#heading}}
+    <h2>{{heading}}</h2>
+{{/heading}}
+{{#lede}}
+    <p class="lp-pairs__lede">{{lede}}</p>
+{{/lede}}
+{{#pairs}}
+    <div class="lp-pairs__pair">
+{{#title}}
+      <h3 class="lp-pairs__title">{{title}}</h3>
+{{/title}}
+      <div class="lp-pairs__grid">
+        <article class="lp-pairs__card lp-pairs__card--thin">
+          <p class="lp-pairs__kind">{{thin_kind}}</p>
+          <p class="lp-pairs__req">{{thin_request}}</p>
+          <p class="lp-pairs__alabel">{{thin_answer_label}}</p>
+          <div class="lp-pairs__ans lp-pairs__first">{{thin_answer}}</div>
+{{#thin_full}}
+          <details class="lp-pairs__more"><summary>{{more_label}}</summary><div class="lp-pairs__ans">{{thin_full}}</div></details>
+{{/thin_full}}
+        </article>
+        <article class="lp-pairs__card lp-pairs__card--directed">
+          <p class="lp-pairs__kind">{{directed_kind}}</p>
+          <p class="lp-pairs__req">{{directed_request}}</p>
+          <p class="lp-pairs__alabel">{{directed_answer_label}}</p>
+          <div class="lp-pairs__ans lp-pairs__first">{{directed_answer}}</div>
+{{#directed_full}}
+          <details class="lp-pairs__more"><summary>{{more_label}}</summary><div class="lp-pairs__ans">{{directed_full}}</div></details>
+{{/directed_full}}
+        </article>
+      </div>
+{{#note}}
+      <p class="lp-pairs__note">{{note}}</p>
+{{/note}}
+    </div>
+{{/pairs}}
+{{#after}}
+    <div class="lp-pairs__after">{{after}}</div>
+{{/after}}
+{{#buy}}
+    <p class="lp-pairs__buy"><a class="btn btn--primary btn--lg" href="/book/checkout/">{{buy}}</a></p>
+{{/buy}}
+  </div>
+</section>

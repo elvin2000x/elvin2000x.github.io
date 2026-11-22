@@ -1,0 +1,140 @@
+{
+  "label": "Pictures to tap and enlarge (a swipeable strip)",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading (optional)",
+      "default": ""
+    },
+    {
+      "key": "sub",
+      "type": "choice",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "",
+          "label": "Section heading (H2)"
+        },
+        {
+          "value": "1",
+          "label": "A product under a section heading (H3)"
+        }
+      ]
+    },
+    {
+      "key": "lede",
+      "type": "html",
+      "label": "One line under the heading (optional)",
+      "default": ""
+    },
+    {
+      "key": "body",
+      "type": "html",
+      "label": "Words above the pictures (optional)",
+      "default": ""
+    },
+    {
+      "key": "items",
+      "type": "list",
+      "label": "Pictures",
+      "fields": [
+        {
+          "key": "thumb",
+          "type": "text",
+          "label": "Small picture address (in the strip)",
+          "default": "[Picture: small picture address]"
+        },
+        {
+          "key": "thumb_w",
+          "type": "text",
+          "label": "Small picture width",
+          "default": ""
+        },
+        {
+          "key": "thumb_h",
+          "type": "text",
+          "label": "Small picture height",
+          "default": ""
+        },
+        {
+          "key": "full",
+          "type": "text",
+          "label": "Large picture address (opens on tap)",
+          "default": "[Picture: large picture address]"
+        },
+        {
+          "key": "full_w",
+          "type": "text",
+          "label": "Large picture width",
+          "default": ""
+        },
+        {
+          "key": "full_h",
+          "type": "text",
+          "label": "Large picture height",
+          "default": ""
+        },
+        {
+          "key": "alt",
+          "type": "text",
+          "label": "What it shows, for screen readers",
+          "default": "[Description: what the picture shows]"
+        },
+        {
+          "key": "caption",
+          "type": "html",
+          "label": "Caption (optional)",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "key": "strip_caption",
+      "type": "html",
+      "label": "Caption under the pictures (optional)",
+      "default": ""
+    },
+    {
+      "key": "dialog_label",
+      "type": "text",
+      "label": "Name of the enlarged view, for screen readers",
+      "default": "[Name: the enlarged pictures]"
+    },
+    {
+      "key": "close_label",
+      "type": "text",
+      "label": "Close button, for screen readers",
+      "default": "Close"
+    },
+    {
+      "key": "buy",
+      "type": "text",
+      "label": "Buy button words (optional; must be exactly: Get the bundle for $27)",
+      "default": ""
+    }
+  ]
+}

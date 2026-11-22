@@ -1,0 +1,170 @@
+{
+  "label": "Look inside (a short loop or a picture, with words and an optional buy button)",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "layout",
+      "type": "choice",
+      "label": "On a wide screen",
+      "options": [
+        {
+          "value": "stack",
+          "label": "Picture above the words"
+        },
+        {
+          "value": "left",
+          "label": "Picture on the left"
+        },
+        {
+          "value": "right",
+          "label": "Picture on the right"
+        }
+      ]
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading (optional)",
+      "default": ""
+    },
+    {
+      "key": "sub",
+      "type": "choice",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "",
+          "label": "Section heading (H2)"
+        },
+        {
+          "value": "1",
+          "label": "A product under a section heading (H3)"
+        }
+      ]
+    },
+    {
+      "key": "lede",
+      "type": "html",
+      "label": "One line under the heading (optional)",
+      "default": ""
+    },
+    {
+      "key": "mp4",
+      "type": "text",
+      "label": "Loop: MP4 address (leave empty to show a picture instead)",
+      "default": ""
+    },
+    {
+      "key": "webm",
+      "type": "text",
+      "label": "Loop: WebM address (smaller; tried first)",
+      "default": ""
+    },
+    {
+      "key": "poster",
+      "type": "text",
+      "label": "Loop: still shown before it plays (WebP)",
+      "default": ""
+    },
+    {
+      "key": "phone_mp4",
+      "type": "text",
+      "label": "Phone loop: MP4 address (optional, under 768px)",
+      "default": ""
+    },
+    {
+      "key": "phone_webm",
+      "type": "text",
+      "label": "Phone loop: WebM address",
+      "default": ""
+    },
+    {
+      "key": "phone_poster",
+      "type": "text",
+      "label": "Phone loop: still shown before it plays",
+      "default": ""
+    },
+    {
+      "key": "image",
+      "type": "text",
+      "label": "Picture address (when there is no loop)",
+      "default": ""
+    },
+    {
+      "key": "phone",
+      "type": "text",
+      "label": "Phone picture address (optional, under 768px)",
+      "default": ""
+    },
+    {
+      "key": "w",
+      "type": "text",
+      "label": "Width (loop or picture, in pixels)",
+      "default": ""
+    },
+    {
+      "key": "h",
+      "type": "text",
+      "label": "Height (loop or picture, in pixels)",
+      "default": ""
+    },
+    {
+      "key": "phone_w",
+      "type": "text",
+      "label": "Phone width (in pixels)",
+      "default": ""
+    },
+    {
+      "key": "phone_h",
+      "type": "text",
+      "label": "Phone height (in pixels)",
+      "default": ""
+    },
+    {
+      "key": "alt",
+      "type": "text",
+      "label": "What it shows, for screen readers",
+      "default": "[Description: what the loop or picture shows]"
+    },
+    {
+      "key": "caption",
+      "type": "html",
+      "label": "Caption under it (optional)",
+      "default": ""
+    },
+    {
+      "key": "body",
+      "type": "html",
+      "label": "Words (optional)",
+      "default": ""
+    },
+    {
+      "key": "buy",
+      "type": "text",
+      "label": "Buy button words (optional; must be exactly: Get the bundle for $27)",
+      "default": ""
+    }
+  ]
+}

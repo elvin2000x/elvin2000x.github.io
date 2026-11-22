@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=d5de1266" />
+  <link rel="stylesheet" href="/css/landing.css?v=341f52ba" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>body.lp .lp-hero__grid{ max-width:720px } body.lp .lp-hero{ padding-top:32px; padding-bottom:0 } body.lp .lp-hero h1{ margin-bottom:0 } body.lp .ep-block.ep-video{ max-width:720px } body.lp .ep-row{ flex-direction:column; align-items:stretch; gap:12px } body.lp .ep-row .btn{ width:100%; min-height:60px; font-size:20px; font-weight:700 } body.lp .ep-note{ text-align:left } @media (max-width:767px){ body.lp .lp-hero{ padding-top:8px } body.lp .ep-block:not(#lifestyle ~ .ep-block){ padding-top:6px; padding-bottom:6px } body.lp .ep-block.ep-video{ padding-bottom:4px } }</style>
 </head>
@@ -366,7 +366,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     (function () {
       var bar = document.querySelector('[data-lp-obar]');
       if (!bar || !('IntersectionObserver' in window)) return;
-      var btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-obar__btn), .lp-pay__go .lp-cta');
+      /* Every page buy button: an href that STARTS with /book/checkout/ (site.js adds UTMs to it), read again on every check so
+         buttons added later by script (a gallery dialog, a section built after this runs) are counted too. Ticket 701. */
+      var SEL = 'a.btn--primary[href^="/book/checkout/"]:not(.lp-obar__btn), .lp-pay__go .lp-cta';
       /* The bar steps aside as soon as any part of a page button is above it (bar height 66, margin 72), so it never covers one; and while a field has focus.
          The observer only reports that something changed: the decision is always worked out from the buttons' positions (recheck below). */
       var io = new IntersectionObserver(function () { later(); }, { rootMargin: '0px 0px -72px 0px', threshold: 0 });
@@ -375,14 +377,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
       var q = false;
       function recheck() {
         q = false; var any = false, gone = false, vh = window.innerHeight || 0;
-        [].forEach.call(btns, function (bt) { var r = bt.getBoundingClientRect(); if (r.height === 0 && r.width === 0) return; if (r.bottom > 0 && r.top < vh - 72) any = true; if (r.bottom <= 0) gone = true; });
+        [].forEach.call(document.querySelectorAll(SEL), function (bt) { io.observe(bt); var r = bt.getBoundingClientRect(); if (r.height === 0 && r.width === 0) return; if (r.bottom > 0 && r.top < vh - 72) any = true; if (r.bottom <= 0) gone = true; });
         if (any || !gone) bar.setAttribute('data-off', ''); else bar.removeAttribute('data-off');
       }
       function later() { if (!q) { q = true; (window.requestAnimationFrame || setTimeout)(recheck); } }
       window.addEventListener('scroll', later, { passive: true }); window.addEventListener('resize', later); window.addEventListener('pageshow', later);
       document.addEventListener('focusin', function (e) { if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) && e.target.type !== 'checkbox') bar.setAttribute('data-focus', ''); });
       document.addEventListener('focusout', function () { bar.removeAttribute('data-focus'); });
-      [].forEach.call(btns, function (b, i) { b.setAttribute('data-sid', i); io.observe(b); });
+      recheck();
     })();
     if (!shop && !tagged.length) return;
     fetch(STORE + '/products').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
@@ -415,6 +417,50 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     try { fbq('track', 'Purchase', { value: v, currency: cur }, { eventID: id }); } catch (x) {}
     try { ttq.track('CompletePayment', { value: v, currency: cur }, { event_id: id }); } catch (x) {}
   });
+</script>
+<script>
+  /* Look-inside loops (lp-media) and tap-to-enlarge pictures (lp-gallery). Ticket 701.
+     Loops: only the one on screen plays; a visible Pause/Play button (WCAG 2.2.2); with reduced motion nothing
+     autoplays and the poster stays. Gallery: the native <dialog> (it sits above the sticky bar on its own), closed
+     by the button, Esc, a tap outside the picture or the back gesture; focus goes back to the picture that opened it. */
+  (function () {
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    [].forEach.call(document.querySelectorAll('[data-lp-loop]'), function (box) {
+      var btn = box.querySelector('[data-lp-loop-toggle]'), vids = box.querySelectorAll('video');
+      var paused = !!reduce, inView = false;
+      function shown() { return [].filter.call(vids, function (v) { return v.getClientRects().length > 0; })[0]; }
+      function label() { if (!btn) return; btn.textContent = paused ? 'Play' : 'Pause'; btn.setAttribute('aria-pressed', paused ? 'true' : 'false'); }
+      function sync() {
+        var v = shown();
+        [].forEach.call(vids, function (x) { if (x !== v && !x.paused) x.pause(); });
+        if (!v) return;
+        if (inView && !paused) { var p = v.play(); if (p && p.catch) p.catch(function () { paused = true; label(); }); }
+        else if (!v.paused) v.pause();
+      }
+      if (btn) btn.addEventListener('click', function () { paused = !paused; label(); sync(); });
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { inView = es[es.length - 1].isIntersecting; sync(); }, { threshold: 0.25 }).observe(box);
+      window.addEventListener('resize', sync);
+      label();
+    });
+    [].forEach.call(document.querySelectorAll('.lp-gallery'), function (g) {
+      var dlg = g.querySelector('dialog'); if (!dlg || typeof dlg.showModal !== 'function') return;
+      var track = dlg.querySelector('.lp-gallery__track'), slides = dlg.querySelectorAll('.lp-gallery__slide'), opener = null;
+      [].forEach.call(g.querySelectorAll('[data-lp-gal-open]'), function (b, i) {
+        b.addEventListener('click', function () {
+          opener = b; dlg.showModal();
+          try { history.pushState({ lpGal: 1 }, ''); } catch (e) {}
+          var s = slides[i]; if (s && track) { var img = s.querySelector('img'); if (img) img.loading = 'eager'; track.scrollLeft = s.offsetLeft - track.offsetLeft; }
+        });
+      });
+      var close = dlg.querySelector('[data-lp-gal-close]'); if (close) close.addEventListener('click', function () { dlg.close(); });
+      dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+      dlg.addEventListener('close', function () {
+        if (history.state && history.state.lpGal) { try { history.back(); } catch (e) {} }
+        if (opener) opener.focus();
+      });
+      window.addEventListener('popstate', function () { if (dlg.open) dlg.close(); });
+    });
+  })();
 </script>
 </body>
 </html>

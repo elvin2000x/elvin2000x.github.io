@@ -1,0 +1,47 @@
+<section class="lp-sec lp-gallery{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+{{#heading}}
+{{#sub}}
+    <h3 class="lp-gallery__h">{{heading}}</h3>
+{{/sub}}
+{{^sub}}
+    <h2 class="lp-gallery__h">{{heading}}</h2>
+{{/sub}}
+{{/heading}}
+{{#lede}}
+    <p class="lp-gallery__lede">{{lede}}</p>
+{{/lede}}
+{{#body}}
+    <div class="lp-gallery__body">{{body}}</div>
+{{/body}}
+    <ul class="lp-gallery__strip">
+{{#items}}
+      <li class="lp-gallery__item">
+        <button type="button" class="lp-gallery__open" data-lp-gal-open><img src="{{thumb}}" alt="{{alt}}" width="{{thumb_w}}" height="{{thumb_h}}" loading="lazy" decoding="async"></button>
+{{#caption}}
+        <p class="lp-gallery__cap">{{caption}}</p>
+{{/caption}}
+      </li>
+{{/items}}
+    </ul>
+{{#strip_caption}}
+    <p class="lp-gallery__caption">{{strip_caption}}</p>
+{{/strip_caption}}
+    <dialog class="lp-gallery__dlg" aria-label="{{dialog_label}}">
+      <button type="button" class="lp-gallery__close" data-lp-gal-close aria-label="{{close_label}}"><span aria-hidden="true">&times;</span></button>
+      <div class="lp-gallery__track">
+{{#items}}
+        <figure class="lp-gallery__slide">
+          <img src="{{full}}" alt="{{alt}}" width="{{full_w}}" height="{{full_h}}" loading="lazy" decoding="async">
+{{#caption}}
+          <figcaption>{{caption}}</figcaption>
+{{/caption}}
+        </figure>
+{{/items}}
+      </div>
+    </dialog>
+{{#buy}}
+    <p class="lp-gallery__buy"><a class="btn btn--primary btn--lg" href="/book/checkout/">{{buy}}</a></p>
+{{/buy}}
+  </div>
+</section>

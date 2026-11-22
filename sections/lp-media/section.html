@@ -1,0 +1,53 @@
+<section class="lp-sec lp-media lp-media--{{layout}}{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in lp-media__grid">
+{{#heading}}
+{{#sub}}
+    <h3 class="lp-media__h">{{heading}}</h3>
+{{/sub}}
+{{^sub}}
+    <h2 class="lp-media__h">{{heading}}</h2>
+{{/sub}}
+{{/heading}}
+{{#lede}}
+    <p class="lp-media__lede">{{lede}}</p>
+{{/lede}}
+    <figure class="lp-media__fig">
+{{#mp4}}
+      <div class="lp-media__loop" data-lp-loop>
+{{#phone_mp4}}
+        <video class="lp-media__v lp-media__v--phone" muted loop playsinline preload="none" poster="{{phone_poster}}" width="{{phone_w}}" height="{{phone_h}}" aria-label="{{alt}}">
+{{#phone_webm}}
+          <source src="{{phone_webm}}" type="video/webm">
+{{/phone_webm}}
+          <source src="{{phone_mp4}}" type="video/mp4">
+        </video>
+{{/phone_mp4}}
+        <video class="lp-media__v{{#phone_mp4}} lp-media__v--wide{{/phone_mp4}}" muted loop playsinline preload="none" poster="{{poster}}" width="{{w}}" height="{{h}}" aria-label="{{alt}}">
+{{#webm}}
+          <source src="{{webm}}" type="video/webm">
+{{/webm}}
+          <source src="{{mp4}}" type="video/mp4">
+        </video>
+        <button type="button" class="lp-media__toggle" data-lp-loop-toggle aria-pressed="false">Pause</button>
+      </div>
+{{/mp4}}
+{{^mp4}}
+      <picture>
+{{#phone}}
+        <source media="(max-width: 767px)" srcset="{{phone}}" width="{{phone_w}}" height="{{phone_h}}">
+{{/phone}}
+        <img src="{{image}}" alt="{{alt}}" width="{{w}}" height="{{h}}" loading="lazy" decoding="async">
+      </picture>
+{{/mp4}}
+{{#caption}}
+      <figcaption class="lp-media__cap">{{caption}}</figcaption>
+{{/caption}}
+    </figure>
+{{#body}}
+    <div class="lp-media__body">{{body}}</div>
+{{/body}}
+{{#buy}}
+    <p class="lp-media__buy"><a class="btn btn--primary btn--lg" href="/book/checkout/">{{buy}}</a></p>
+{{/buy}}
+  </div>
+</section>
