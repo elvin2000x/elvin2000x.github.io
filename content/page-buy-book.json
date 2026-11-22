@@ -663,9 +663,17 @@
         "total_label": "Total value",
         "price_label": "Your price",
         "bump": null,
-        "button": null,
-        "note": "The ebook is Amazon's price. Every other priced item sells for the price shown in my store, and all of them are in your bundle. Prices are in US dollars, plus sales tax where it applies.",
-        "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"companion-library\":\"/img/store/thumbs/companion-library-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}"
+        "button": {
+          "label": "Get the bundle for $27",
+          "href": "/book/checkout/",
+          "checkout": false
+        },
+        "note": "",
+        "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"companion-library\":\"/img/store/thumbs/companion-library-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}",
+        "sources_json": "{\"book1-ebook\": {\"text\": \"$9.99, Amazon's price\", \"href\": \"https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20\"}, \"toolkit\": {\"text\": \"$17 in my store\", \"href\": \"/book/the-toolkit/\"}, \"workbook-2e\": {\"text\": \"$9 in my store\", \"href\": \"/book/workbook/\"}, \"everything-ai-2026\": {\"text\": \"$19 in my store\", \"href\": \"/book/everything-ai-2026/\"}, \"seven-rules\": {\"text\": \"$17 in my store\", \"href\": \"/book/12-commandments/\"}, \"companion-library\": {\"text\": \"free for everyone, so it carries no dollar value\"}}",
+        "bought_line": "Bought one by one: [[total]]. Your price: [[price]], paid once.",
+        "footnote": "Prices are in US dollars, plus sales tax where it applies.",
+        "guarantee": "30-day money-back guarantee. If it is not for you, email elvin@elvinpeters.com within 30 days of purchase and I will refund you in full."
       }
     },
     {
@@ -792,7 +800,22 @@
         "image": "/img/store/ai-at-home-thumb.webp",
         "image_alt": "The AI at Home guide cover",
         "image_w": "192",
-        "image_h": "307"
+        "image_h": "307",
+        "pages": [
+          {
+            "src": "/img/store/look-inside/ai-at-home-plant-phone.webp",
+            "alt": "A page from AI at Home: the plant page",
+            "w": "750",
+            "h": "1000"
+          },
+          {
+            "src": "/img/store/look-inside/ai-at-home-dinners-phone.webp",
+            "alt": "A page from AI at Home: dinners for the week",
+            "w": "750",
+            "h": "1000"
+          }
+        ],
+        "pages_caption": "Inside: two pages from the guide."
       }
     },
     {
