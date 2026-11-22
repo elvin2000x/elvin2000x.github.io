@@ -92,7 +92,7 @@
         "url": "/video/funnel-03.mp4",
         "youtube": "https://www.youtube.com/watch?v=qp0xq4YwNpg",
         "duration": "3:33",
-        "caption": "",
+        "caption": "Elvin Peters, author of The Artificial Advantage",
         "poster": "/img/store/video-poster-offer.webp",
         "poster_alt": ""
       },
@@ -202,6 +202,39 @@
       }
     },
     {
+      "id": "v7-s4-voice",
+      "type": "lp-gallery",
+      "data": {
+        "bg": "tint",
+        "anchor": "",
+        "heading": "",
+        "sub": "",
+        "lede": "To make the drafts sound like you, The 12 Commandments gives you a voice file you fill in once.",
+        "body": "",
+        "docs": "1",
+        "items": [
+          {
+            "thumb": "/img/store/look-inside/commandments-voice-file-edge.webp",
+            "thumb_w": "750",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/commandments-voice-file-page.webp",
+            "full_w": "1200",
+            "full_h": "1698",
+            "alt": "The 12 Commandments to Make AI Obey, page 19: the whole page",
+            "caption": "",
+            "doc_label": "The 12 Commandments to Make AI Obey, page 19",
+            "doc_heading": "Starter file 2: Voice",
+            "doc_html": "<p class=\"lp-doc__mono\">MY VOICE<br>HOW I SOUND<br>- My sentences are usually: [short / mixed / long]<br>- I open by: [getting straight to the point / a friendly line / a question]<br>- I close by: [a clear next step / a thank-you / a short sign-off]<br>- I use contractions: [yes / no]<br>- Words and phrases I like: [list]<br>- Words and phrases I never use: [list]</p>"
+          }
+        ],
+        "strip_caption": "",
+        "more_label": "See the whole page",
+        "dialog_label": "The voice file page",
+        "close_label": "Close",
+        "buy": ""
+      }
+    },
+    {
       "id": "v7-s4-files",
       "type": "lp-gallery",
       "data": {
@@ -211,50 +244,51 @@
         "sub": "",
         "lede": "",
         "body": "<p>From the Toolkit: First Draft from Notes, Tone Calibration and Plain Language Rewrite, with brackets for your own details.</p>",
+        "docs": "1",
         "items": [
           {
-            "thumb": "/img/store/look-inside/toolkit-first-draft-phone.webp",
-            "thumb_w": "751",
-            "thumb_h": "217",
-            "full": "/img/store/look-inside/toolkit-first-draft-desktop.webp",
-            "full_w": "1201",
-            "full_h": "346",
-            "alt": "The Toolkit prompt First Draft from Notes, with brackets for your own details",
-            "caption": ""
+            "thumb": "/img/store/look-inside/toolkit-first-draft-edge.webp",
+            "thumb_w": "750",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/toolkit-first-draft-page.webp",
+            "full_w": "1200",
+            "full_h": "1553",
+            "alt": "The Toolkit, Prompt Library: the whole page",
+            "caption": "",
+            "doc_label": "The Toolkit, Prompt Library",
+            "doc_heading": "First Draft from Notes",
+            "doc_html": "<p class=\"lp-doc__tags\">Tags: writing and editing, rtc</p><p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
           },
           {
-            "thumb": "/img/store/look-inside/toolkit-tone-calibration-phone.webp",
-            "thumb_w": "751",
-            "thumb_h": "174",
-            "full": "/img/store/look-inside/toolkit-tone-calibration-desktop.webp",
-            "full_w": "1201",
-            "full_h": "278",
-            "alt": "The Toolkit prompt Tone Calibration, with brackets for your own details",
-            "caption": ""
+            "thumb": "/img/store/look-inside/toolkit-tone-calibration-edge.webp",
+            "thumb_w": "750",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/toolkit-tone-calibration-page.webp",
+            "full_w": "1200",
+            "full_h": "1553",
+            "alt": "The Toolkit, Prompt Library: the whole page",
+            "caption": "",
+            "doc_label": "The Toolkit, Prompt Library",
+            "doc_heading": "Tone Calibration",
+            "doc_html": "<p class=\"lp-doc__tags\">Tags: writing and editing, rtc</p><p class=\"lp-doc__mono\">Act as a professional editor. Rewrite the following passage so the tone matches [target: e.g., authoritative but approachable, urgent but not alarmist, direct without being blunt]. Keep the meaning intact. Note any sentence where you changed the meaning, flag it with [CHANGED] so I can review.</p>"
           },
           {
-            "thumb": "/img/store/look-inside/toolkit-plain-language-phone.webp",
-            "thumb_w": "751",
-            "thumb_h": "200",
-            "full": "/img/store/look-inside/toolkit-plain-language-desktop.webp",
-            "full_w": "1201",
-            "full_h": "320",
-            "alt": "The Toolkit prompt Plain Language Rewrite, with brackets for your own details",
-            "caption": ""
-          },
-          {
-            "thumb": "/img/store/look-inside/commandments-voice-file-phone.webp",
-            "thumb_w": "751",
-            "thumb_h": "702",
-            "full": "/img/store/look-inside/commandments-voice-file-desktop.webp",
-            "full_w": "1201",
-            "full_h": "1122",
-            "alt": "The blank voice file from The 12 Commandments, with places for how you sound and three samples of your writing",
-            "caption": "From The 12 Commandments: the voice file you fill in once, so the drafts sound like you."
+            "thumb": "/img/store/look-inside/toolkit-plain-language-edge.webp",
+            "thumb_w": "750",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/toolkit-plain-language-page.webp",
+            "full_w": "1200",
+            "full_h": "1553",
+            "alt": "The Toolkit, Prompt Library: the whole page",
+            "caption": "",
+            "doc_label": "The Toolkit, Prompt Library",
+            "doc_heading": "Plain Language Rewrite",
+            "doc_html": "<p class=\"lp-doc__tags\">Tags: writing and editing, rtc</p><p class=\"lp-doc__mono\">Act as a plain language editor. Rewrite the following passage for an audience with no specialized knowledge of [field]. Replace all jargon with plain equivalents. Cut sentences longer than 20 words in half where possible. The reader should be able to understand the core point without looking anything up. Flag any term you couldn't simplify without losing precision.</p>"
           }
         ],
         "strip_caption": "",
-        "dialog_label": "Prompts from the Toolkit and the voice file",
+        "more_label": "See the whole page",
+        "dialog_label": "Prompts from the Toolkit",
         "close_label": "Close",
         "buy": ""
       }
@@ -271,75 +305,58 @@
     },
     {
       "id": "v7-s7a-ebook",
-      "type": "lp-media",
-      "data": {
-        "bg": "",
-        "anchor": "",
-        "layout": "right",
-        "heading": "The Artificial Advantage, 2026 edition",
-        "sub": "1",
-        "lede": "Fourteen chapters that teach you to tell AI what you want, check what comes back, and fix the request when the answer is wrong.",
-        "mp4": "",
-        "webm": "",
-        "poster": "",
-        "phone_mp4": "",
-        "phone_webm": "",
-        "phone_poster": "",
-        "image": "/img/store/look-inside/ebook-clear-figure-desktop.webp",
-        "phone": "/img/store/look-inside/ebook-clear-figure-phone.webp",
-        "w": "1136",
-        "h": "1053",
-        "phone_w": "710",
-        "phone_h": "658",
-        "alt": "The CLEAR figure from the ebook: the five steps of the method on one page",
-        "caption": "",
-        "body": "<p>The method, in five steps:</p><ul><li>C: Choose your tools</li><li>L: Lead with clear direction</li><li>E: Evolve your outputs</li><li>A: Audit for accuracy</li><li>R: Repeat to build a practice</li></ul><ul><li>The Role, Task, Constraint brief: the habit behind the second answer in each pair above.</li><li>A way to trace a wrong answer back to its cause.</li><li>A two-step check for reading an answer before your name goes on it.</li></ul>",
-        "buy": ""
-      }
-    },
-    {
-      "id": "v7-s7a-pages",
       "type": "lp-gallery",
       "data": {
         "bg": "",
         "anchor": "",
-        "heading": "",
-        "sub": "",
-        "lede": "",
-        "body": "",
+        "heading": "The Artificial Advantage, 2026 edition",
+        "sub": "1",
+        "lede": "Fourteen chapters that teach you to tell AI what you want, check what comes back, and fix the request when the answer is wrong.",
+        "body": "<p>The book's five steps:</p><ul><li>C: Choose your tools</li><li>L: Lead with clear direction</li><li>E: Evolve your outputs</li><li>A: Audit for accuracy</li><li>R: Repeat to build a practice</li></ul><ul><li>The Role, Task, Constraint brief: the habit behind the second answer in each pair above.</li><li>A way to trace a wrong answer back to its cause.</li><li>A two-step check for reading an answer before your name goes on it.</li></ul>",
+        "docs": "1",
         "items": [
           {
             "thumb": "/img/store/look-inside/ebook-contents-phone.webp",
             "thumb_w": "750",
-            "thumb_h": "1200",
+            "thumb_h": "660",
             "full": "/img/store/look-inside/ebook-contents-desktop.webp",
             "full_w": "1200",
             "full_h": "1920",
             "alt": "The ebook's contents page",
-            "caption": ""
+            "caption": "",
+            "doc_label": "",
+            "doc_heading": "",
+            "doc_html": ""
           },
           {
-            "thumb": "/img/store/look-inside/ebook-chapter-1-phone.webp",
+            "thumb": "/img/store/look-inside/ebook-chapter-1-edge.webp",
             "thumb_w": "750",
-            "thumb_h": "1200",
-            "full": "/img/store/look-inside/ebook-chapter-1-desktop.webp",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/ebook-chapter-1-page.webp",
             "full_w": "1200",
             "full_h": "1920",
-            "alt": "The opening page of Chapter 1",
-            "caption": ""
+            "alt": "The Artificial Advantage ebook, Chapter 1: the whole page",
+            "caption": "",
+            "doc_label": "The Artificial Advantage ebook, Chapter 1",
+            "doc_heading": "Chapter 1: From Gimmick to Daily Assistant",
+            "doc_html": "<p>Marcus had a question about a tax form. He typed it into the chat the way he'd type it into a search bar, expecting the same thing a search bar gives him: the answer, retrieved from somewhere, correct. What came back was three confident paragraphs citing a specific line on a specific schedule. Clean and authoritative, the exact tone of a source that knows what it's talking about.</p><p>It was wrong. The line number didn't exist on that form.</p>"
           },
           {
-            "thumb": "/img/store/look-inside/ebook-chapter-6-phone.webp",
+            "thumb": "/img/store/look-inside/ebook-chapter-6-edge.webp",
             "thumb_w": "750",
-            "thumb_h": "1200",
-            "full": "/img/store/look-inside/ebook-chapter-6-desktop.webp",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/ebook-chapter-6-page.webp",
             "full_w": "1200",
             "full_h": "1920",
-            "alt": "The opening page of Chapter 6",
-            "caption": ""
+            "alt": "The Artificial Advantage ebook, Chapter 6: the whole page",
+            "caption": "",
+            "doc_label": "The Artificial Advantage ebook, Chapter 6",
+            "doc_heading": "Chapter 6: The Race You're Joining",
+            "doc_html": "<p>For one marketing strategist, three weeks collapsed into a single sitting. She watched a colleague answer a market-trends research question in one sitting: paste a prompt into the tool, read the response, ask a follow-up, reframe the analysis with one comment.</p>"
           }
         ],
         "strip_caption": "The contents page and the openers of Chapters 1 and 6.",
+        "more_label": "See the whole page",
         "dialog_label": "Pages from the ebook",
         "close_label": "Close",
         "buy": ""
@@ -351,73 +368,25 @@
       "data": {
         "bg": "",
         "anchor": "",
-        "layout": "right",
+        "layout": "stack",
         "heading": "The Toolkit",
         "sub": "1",
         "lede": "Every exercise, prompt and role from the book, typed into Word files you can edit.",
-        "mp4": "/video/look-inside/toolkit-exercises-desktop.mp4",
-        "webm": "/video/look-inside/toolkit-exercises-desktop.webm",
-        "poster": "/video/look-inside/toolkit-exercises-desktop-poster.webp",
-        "phone_mp4": "/video/look-inside/toolkit-exercises-phone.mp4",
-        "phone_webm": "/video/look-inside/toolkit-exercises-phone.webm",
-        "phone_poster": "/video/look-inside/toolkit-exercises-phone-poster.webp",
-        "image": "",
-        "phone": "",
-        "w": "562",
-        "h": "750",
-        "phone_w": "562",
-        "phone_h": "750",
-        "alt": "Scrolling through the Toolkit's exercises in Word",
-        "caption": "",
+        "mp4": "",
+        "webm": "",
+        "poster": "",
+        "phone_mp4": "",
+        "phone_webm": "",
+        "phone_poster": "",
+        "image": "/img/store/look-inside/toolkit-prompt-titles-desktop.webp",
+        "phone": "/img/store/look-inside/toolkit-prompt-titles-phone.webp",
+        "w": "880",
+        "h": "1634",
+        "phone_w": "578",
+        "phone_h": "1416",
+        "alt": "The Toolkit's prompt library as a spreadsheet: category, prompt name and tags for all 25 prompts",
+        "caption": "All 25 prompt titles. Find the one for your week.",
         "body": "<ul><li>25 prompts in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, Learning and Development. Also as a spreadsheet you can import.</li><li>25 role setups you paste once, and the formula for writing your own.</li><li>16 exercises from 10 chapters, a 30-day plan and a 3-month plan.</li></ul>",
-        "buy": ""
-      }
-    },
-    {
-      "id": "v7-s7b-files",
-      "type": "lp-gallery",
-      "data": {
-        "bg": "",
-        "anchor": "",
-        "heading": "",
-        "sub": "",
-        "lede": "",
-        "body": "",
-        "items": [
-          {
-            "thumb": "/img/store/look-inside/toolkit-prompt-titles-phone.webp",
-            "thumb_w": "578",
-            "thumb_h": "1416",
-            "full": "/img/store/look-inside/toolkit-prompt-titles-desktop.webp",
-            "full_w": "880",
-            "full_h": "1634",
-            "alt": "The Toolkit's prompt library as a spreadsheet: category, prompt name and tags for all 25 prompts",
-            "caption": "All 25 prompt titles. Find the one for your week."
-          },
-          {
-            "thumb": "/img/store/look-inside/toolkit-prompt-library-phone.webp",
-            "thumb_w": "750",
-            "thumb_h": "1000",
-            "full": "/img/store/look-inside/toolkit-prompt-library-desktop.webp",
-            "full_w": "1200",
-            "full_h": "1553",
-            "alt": "The Toolkit's prompt library in Word, grouped by task",
-            "caption": ""
-          },
-          {
-            "thumb": "/img/store/look-inside/toolkit-role-library-phone.webp",
-            "thumb_w": "750",
-            "thumb_h": "1000",
-            "full": "/img/store/look-inside/toolkit-role-library-desktop.webp",
-            "full_w": "1200",
-            "full_h": "1553",
-            "alt": "The Toolkit's role library in Word",
-            "caption": ""
-          }
-        ],
-        "strip_caption": "",
-        "dialog_label": "Files from the Toolkit",
-        "close_label": "Close",
         "buy": "Get the bundle for $27"
       }
     },
@@ -459,19 +428,19 @@
         "heading": "",
         "sub": "",
         "lede": "",
-        "mp4": "/video/look-inside/prompt-builder-desktop.mp4",
-        "webm": "/video/look-inside/prompt-builder-desktop.webm",
-        "poster": "/video/look-inside/prompt-builder-desktop-poster.webp",
-        "phone_mp4": "/video/look-inside/prompt-builder-phone.mp4",
-        "phone_webm": "/video/look-inside/prompt-builder-phone.webm",
-        "phone_poster": "/video/look-inside/prompt-builder-phone-poster.webp",
-        "image": "",
-        "phone": "",
-        "w": "900",
-        "h": "1350",
-        "phone_w": "562",
-        "phone_h": "1216",
-        "alt": "The Prompt Builder: three demo answers typed in, and the finished brief it builds",
+        "mp4": "",
+        "webm": "",
+        "poster": "",
+        "phone_mp4": "",
+        "phone_webm": "",
+        "phone_poster": "",
+        "image": "/img/store/look-inside/prompt-builder-brief-desktop.webp",
+        "phone": "/img/store/look-inside/prompt-builder-brief-phone.webp",
+        "w": "750",
+        "h": "1050",
+        "phone_w": "750",
+        "phone_h": "1050",
+        "alt": "The Prompt Builder's finished brief: Act as a friendly kitchen manager who trains new staff, with the task and constraints filled in",
         "caption": "Three answers in, a finished brief out.",
         "body": "",
         "buy": ""
@@ -487,29 +456,37 @@
         "sub": "1",
         "lede": "One real task of your own, one step a day for seven days.",
         "body": "<ul><li>Day 2: you run the task the way you do today, and save it.</li><li>Day 7: you run it with the full method, and compare.</li><li>You keep the template.</li></ul>",
+        "docs": "1",
         "items": [
           {
-            "thumb": "/img/store/look-inside/workbook-day-1-phone.webp",
+            "thumb": "/img/store/look-inside/workbook-day-1-edge.webp",
             "thumb_w": "750",
-            "thumb_h": "1000",
-            "full": "/img/store/look-inside/workbook-day-1-desktop.webp",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/workbook-day-1-page.webp",
             "full_w": "1200",
             "full_h": "1553",
-            "alt": "Workbook page for Day 1",
-            "caption": ""
+            "alt": "The 7-Day AI Workbook, page 4: the whole page",
+            "caption": "",
+            "doc_label": "The 7-Day AI Workbook, page 4",
+            "doc_heading": "Day 1: The Director's Mindset",
+            "doc_html": "<p><strong>Today's skill:</strong> You direct, and the AI generates. Day 1 comes before the five CLEAR stages and sets the mindset that runs through all of them.</p><p>The Director's Mindset is a small pause before typing. Before you ask the AI for anything, you answer three questions: what do I need, who will use this, and what does good look like?</p>"
           },
           {
-            "thumb": "/img/store/look-inside/workbook-day-7-phone.webp",
+            "thumb": "/img/store/look-inside/workbook-day-7-edge.webp",
             "thumb_w": "750",
-            "thumb_h": "1000",
-            "full": "/img/store/look-inside/workbook-day-7-desktop.webp",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/workbook-day-7-page.webp",
             "full_w": "1200",
             "full_h": "1553",
-            "alt": "Workbook page for Day 7",
-            "caption": ""
+            "alt": "The 7-Day AI Workbook, page 16: the whole page",
+            "caption": "",
+            "doc_label": "The 7-Day AI Workbook, page 16",
+            "doc_heading": "Day 7: R, Repeat to Build a Practice",
+            "doc_html": "<p><strong>Today's skill:</strong> Template Thinking. Build it once, then reuse it.</p><p>Template Thinking fixes that. Engineer the prompt once, with full detail. Save it. Next time, paste the template, drop in the new details, give it a light edit and send.</p>"
           }
         ],
         "strip_caption": "Day 1 and Day 7.",
+        "more_label": "See the whole page",
         "dialog_label": "Pages from the 7-Day AI Workbook",
         "close_label": "Close",
         "buy": ""
@@ -551,31 +528,39 @@
         "anchor": "",
         "heading": "The 12 Commandments to Make AI Obey",
         "sub": "1",
-        "lede": "Twelve habits for getting the answer you meant, on the free and basic plans of ChatGPT, Gemini, Claude and Grok.",
+        "lede": "Twelve habits for getting the answer you meant. This guide is written for the free and basic plans of ChatGPT, Gemini, Claude and Grok.",
         "body": "<ul><li>22 pages.</li><li>Two starter files you fill in once: an About Me file, so you stop re-typing who you are, and a voice file, so the drafts sound like you.</li><li>A one-page card to keep by your screen.</li></ul>",
+        "docs": "1",
         "items": [
           {
-            "thumb": "/img/store/look-inside/commandments-habit-phone.webp",
+            "thumb": "/img/store/look-inside/commandments-before-after-edge.webp",
             "thumb_w": "750",
-            "thumb_h": "1000",
-            "full": "/img/store/look-inside/commandments-habit-desktop.webp",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/commandments-before-after-page.webp",
             "full_w": "1200",
             "full_h": "1698",
-            "alt": "A page from The 12 Commandments showing one habit, with a before and after",
-            "caption": ""
+            "alt": "The 12 Commandments to Make AI Obey, page 10: the whole page",
+            "caption": "",
+            "doc_label": "The 12 Commandments to Make AI Obey, page 10",
+            "doc_heading": "",
+            "doc_html": "<p><strong>Before and after (everyday). Ben wants to scale a recipe.</strong></p><p><strong>Before:</strong> \"How do I make my lasagne for eight people?\"</p><p><strong>After:</strong> \"Here's my lasagne recipe, which serves four. Rewrite it for eight people, keep the same layout, and tell me if the baking dish or the cooking time needs to change. START RECIPE [paste it] END RECIPE\"</p>"
           },
           {
-            "thumb": "/img/store/look-inside/commandments-card-phone.webp",
+            "thumb": "/img/store/look-inside/commandments-card-edge.webp",
             "thumb_w": "750",
-            "thumb_h": "1000",
-            "full": "/img/store/look-inside/commandments-card-desktop.webp",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/commandments-card-page.webp",
             "full_w": "1200",
             "full_h": "1698",
-            "alt": "The one-page card from The 12 Commandments",
-            "caption": ""
+            "alt": "The 12 Commandments to Make AI Obey, page 20: the whole page",
+            "caption": "",
+            "doc_label": "The 12 Commandments to Make AI Obey, page 20",
+            "doc_heading": "Part 5: The one-page card",
+            "doc_html": "<p><strong>SET UP ONCE</strong></p><ol><li>Write your About Me file once.</li><li>Keep a voice file.</li><li>Give your files a home. A project, then point back.</li></ol><p><strong>Last 10 seconds before you hit send:</strong> Is this one job? Did I say plan, make or check? Did I say who it's for and how long? Did I paste the real thing?</p>"
           }
         ],
         "strip_caption": "A habit on its page, and the card.",
+        "more_label": "See the whole page",
         "dialog_label": "Pages from The 12 Commandments",
         "close_label": "Close",
         "buy": "Get the bundle for $27"
@@ -685,52 +670,64 @@
         "heading": "Straight answers before you buy",
         "items": [
           {
-            "q": "I tried ChatGPT and it was useless. Why would this be different with the same free tool?",
-            "a": "Because the request changes, and the tool stays the same. A one-line request gets a generic answer from any AI. The book teaches you to explain the job: who it's for, why it matters, and what done looks like. Both answers at the top of this page came from the same AI."
-          },
-          {
-            "q": "Do I need a paid AI plan?",
-            "a": "No. The book's skills work across ChatGPT, Claude, Gemini and Copilot, and a free plan is enough to start."
+            "q": "Is it safe to paste client or work information into AI?",
+            "a": "The book's rule: never paste anything into a public AI chat that you wouldn't post on a public social media feed. Chapter 2 lists what to keep out: personal identifiers, confidential business information such as client lists and anything under NDA, and privileged advice from doctors, lawyers or accountants.",
+            "open": "1"
           },
           {
             "q": "I'm not technical. Is this for me?",
-            "a": "Yes, it's meant for beginners. It was written for professionals who tried AI and shrugged, and for people whose company just told them to use it."
+            "a": "Yes, it's meant for beginners. It was written for professionals who tried AI and shrugged, and for people whose company just told them to use it.",
+            "open": "1"
+          },
+          {
+            "q": "I tried ChatGPT and it was useless. Why would this be different with the same free tool?",
+            "a": "Because the request changes, and the tool stays the same. A one-line request gets a generic answer from any AI. The book teaches you to explain the job: who it's for, why it matters, and what done looks like. Both answers at the top of this page came from the same AI.",
+            "open": "1"
+          },
+          {
+            "q": "Do I need a paid AI plan?",
+            "a": "No. The book's skills work across ChatGPT, Claude, Gemini and Copilot, and a free plan is enough to start.",
+            "open": ""
           },
           {
             "q": "Will it work for my kind of work?",
-            "a": "The Toolkit's 25 prompts come in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, and Learning and Development. A few by name: Executive Update Email, Meeting Follow-Up, Risk Assessment, First Draft from Notes and Plain Language Rewrite."
+            "a": "The Toolkit's 25 prompts come in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, and Learning and Development. A few by name: Executive Update Email, Meeting Follow-Up, Risk Assessment, First Draft from Notes and Plain Language Rewrite.",
+            "open": ""
           },
           {
             "q": "How do I stop it making things up?",
-            "a": "You check before you use it. The book teaches a two-step check for reading an answer before your name goes on it, and a way to trace a wrong answer back to its cause. The tax letter above shows why: the better answer still added a claim nobody gave it."
+            "a": "You check before you use it. The book teaches a two-step check for reading an answer before your name goes on it, and a way to trace a wrong answer back to its cause. The tax letter above shows why: the better answer still added a claim nobody gave it.",
+            "open": ""
           },
           {
             "q": "What arrives, and where?",
-            "a": "An instant download plus an email. One receipt email lists everything and links to your library, where each piece has its own download. The Companion Library opens online."
+            "a": "An instant download plus an email. One receipt email lists everything and links to your library, where each piece has its own download. The Companion Library opens online.",
+            "open": ""
           },
           {
             "q": "What format are the files?",
-            "a": "The ebook is an EPUB file. The 7-Day AI Workbook and The 12 Commandments are PDFs. Everything AI 2026 comes as one zip with a PDF field guide and an Excel workbook. The Toolkit is a zip of 17 files: Word documents, a spreadsheet and a short start-here file. Every file downloads to your device."
+            "a": "The ebook is an EPUB file. The 7-Day AI Workbook and The 12 Commandments are PDFs. Everything AI 2026 comes as one zip with a PDF field guide and an Excel workbook. The Toolkit is a zip of 17 files: Word documents, a spreadsheet and a short start-here file. Every file downloads to your device.",
+            "open": ""
           },
           {
             "q": "Is $27 the whole price?",
-            "a": "Yes, $27, paid once. Prices are in US dollars, plus sales tax where it applies."
+            "a": "Yes, $27, paid once. Prices are in US dollars, plus sales tax where it applies.",
+            "open": ""
           },
           {
             "q": "Is the refund just one email?",
-            "a": "Yes. Email elvin@elvinpeters.com within 30 days of purchase and I will refund you in full."
-          },
-          {
-            "q": "Is it safe to paste client or work information into AI?",
-            "a": "The book's rule: never paste anything into a public AI chat that you wouldn't post on a public social media feed. Chapter 2 lists what to keep out: personal identifiers, confidential business information such as client lists and anything under NDA, and privileged advice from doctors, lawyers or accountants."
+            "a": "Yes. Email elvin@elvinpeters.com within 30 days of purchase and I will refund you in full.",
+            "open": ""
           },
           {
             "q": "Why not just buy the paperback?",
-            "a": "You can. The paperback and hardcover are on Amazon. The bundle adds the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments, which each sell on their own."
+            "a": "You can. The paperback and hardcover are on Amazon. The bundle adds the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments, which each sell on their own.",
+            "open": ""
           },
           {
             "q": "Can my team use it?",
-            "a": "The licence covers personal and internal work use. Please don't resell or share the files."
+            "a": "The licence covers personal and internal work use. Please don't resell or share the files.",
+            "open": ""
           }
         ]
       }
@@ -801,21 +798,54 @@
         "image_alt": "The AI at Home guide cover",
         "image_w": "192",
         "image_h": "307",
-        "pages": [
+        "pages": [],
+        "pages_caption": "Inside: two pages from the guide."
+      }
+    },
+    {
+      "id": "v7-s11-addon-pages",
+      "type": "lp-gallery",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "heading": "",
+        "sub": "",
+        "lede": "",
+        "body": "",
+        "docs": "1",
+        "items": [
           {
-            "src": "/img/store/look-inside/ai-at-home-plant-phone.webp",
-            "alt": "A page from AI at Home: the plant page",
-            "w": "750",
-            "h": "1000"
+            "thumb": "/img/store/look-inside/ai-at-home-plant-edge.webp",
+            "thumb_w": "750",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/ai-at-home-plant-page.webp",
+            "full_w": "1200",
+            "full_h": "1698",
+            "alt": "AI at Home, page 2: the whole page",
+            "caption": "",
+            "doc_label": "AI at Home, page 2",
+            "doc_heading": "1. The plant doctor",
+            "doc_html": "<p>The problem: A houseplant looks unwell and you want to know why. Do it in two messages. First give the AI its job. Then describe the plant in your own words. Send Message 1, wait for the reply, then send Message 2.</p>"
           },
           {
-            "src": "/img/store/look-inside/ai-at-home-dinners-phone.webp",
-            "alt": "A page from AI at Home: dinners for the week",
-            "w": "750",
-            "h": "1000"
+            "thumb": "/img/store/look-inside/ai-at-home-dinners-edge.webp",
+            "thumb_w": "750",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/ai-at-home-dinners-page.webp",
+            "full_w": "1200",
+            "full_h": "1698",
+            "alt": "AI at Home, page 4: the whole page",
+            "caption": "",
+            "doc_label": "AI at Home, page 4",
+            "doc_heading": "Paste this",
+            "doc_html": "<p class=\"lp-doc__mono\">Plan 5 dinners that reuse ingredients so nothing goes to waste.<br>Who is eating: [people]. Allergies and foods to skip: [list, or \"none\"].<br>Minutes on a weeknight: [number]. Equipment I will use: [pots or machines].<br>Budget: [amount].<br>I am attaching one photo of each fridge shelf, taken standing back with the door<br>open.<br>Give me one shopping list grouped by store aisle, and a prep list I can finish in 30<br>minutes on Sunday.<br>Ask me one question if something is missing.</p>"
           }
         ],
-        "pages_caption": "Inside: two pages from the guide."
+        "strip_caption": "Inside: two pages from the guide.",
+        "more_label": "See the whole page",
+        "dialog_label": "Pages from AI at Home",
+        "close_label": "Close",
+        "buy": ""
       }
     },
     {

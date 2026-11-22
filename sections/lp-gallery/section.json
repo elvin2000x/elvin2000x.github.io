@@ -58,6 +58,21 @@
       "default": ""
     },
     {
+      "key": "docs",
+      "type": "choice",
+      "label": "Pictures or page excerpts",
+      "options": [
+        {
+          "value": "",
+          "label": "Pictures in a swipe strip"
+        },
+        {
+          "value": "1",
+          "label": "Page excerpts, one under another"
+        }
+      ]
+    },
+    {
       "key": "items",
       "type": "list",
       "label": "Pictures",
@@ -109,6 +124,24 @@
           "type": "html",
           "label": "Caption (optional)",
           "default": ""
+        },
+        {
+          "key": "doc_label",
+          "type": "text",
+          "label": "Excerpt: product and page",
+          "default": ""
+        },
+        {
+          "key": "doc_heading",
+          "type": "text",
+          "label": "Excerpt: the page's own heading",
+          "default": ""
+        },
+        {
+          "key": "doc_html",
+          "type": "html",
+          "label": "Excerpt: words copied exactly from the file (leave empty for a picture)",
+          "default": ""
         }
       ]
     },
@@ -117,6 +150,12 @@
       "type": "html",
       "label": "Caption under the pictures (optional)",
       "default": ""
+    },
+    {
+      "key": "more_label",
+      "type": "text",
+      "label": "Button on each excerpt that opens the page",
+      "default": "See the whole page"
     },
     {
       "key": "dialog_label",

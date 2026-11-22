@@ -46,6 +46,21 @@
           "type": "html",
           "label": "Answer",
           "default": "[Answer: the honest answer]"
+        },
+        {
+          "key": "open",
+          "type": "choice",
+          "label": "Shown open when the page loads",
+          "options": [
+            {
+              "value": "",
+              "label": "Closed"
+            },
+            {
+              "value": "1",
+              "label": "Open"
+            }
+          ]
         }
       ]
     }

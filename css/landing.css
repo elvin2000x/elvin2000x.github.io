@@ -763,3 +763,21 @@ body.lp .lp-stack .lp-stack__guarantee{ margin:8px var(--lp-stack-pad,0) 0; font
 .lp-addon__pages img{ flex:1 1 0; min-width:0; max-width:calc(50% - 5px); width:auto; height:auto; border:1px solid #c9d3de; border-radius:3px; background:#fff }
 .lp-addon__pages:not(:has(img)){ display:none }
 .lp-addon__pages figcaption{ flex:0 0 100%; font:400 14px/20px var(--sans); color:var(--lp-navy); text-align:center }
+/* ticket 701 round 2: page excerpt cards (real text copied from the file, the real page one tap away) */
+.lp-gallery__strip--docs{ display:grid; grid-auto-flow:row; grid-template-columns:minmax(0,1fr); gap:16px; margin:16px 0 0; padding:0; overflow:visible; scroll-snap-type:none }
+@media (min-width:768px){ .lp-gallery__strip--docs{ grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start } }
+.lp-gallery__item--doc{ scroll-snap-align:none }
+.lp-doc{ border:1px solid var(--line); border-radius:var(--r-sm); background:#fff; overflow:hidden; box-shadow:0 1px 2px rgba(13,22,36,.06) }
+.lp-doc__edge{ display:block; width:100%; height:44px; object-fit:cover; object-position:top; border-bottom:1px solid var(--line); opacity:.9 }
+body.lp .lp-gallery .lp-doc__label{ margin:12px 16px 0; font:600 13px/1.4 var(--sans); letter-spacing:.03em; text-transform:uppercase; color:var(--lp-navy); opacity:.75 }
+body.lp .lp-gallery .lp-doc__h{ margin:6px 16px 0; font:700 19px/1.3 var(--serif); color:var(--lp-navy) }
+body.lp .lp-gallery .lp-doc__text{ margin:8px 16px 0; font:400 16px/1.55 var(--sans); color:var(--lp-navy) }
+.lp-doc__text p, .lp-doc__text ol{ margin:0 0 8px }
+.lp-doc__text ol{ padding-left:20px }
+.lp-doc__mono{ font:400 15px/1.55 var(--sans); background:#f4f6f9; padding:10px 12px; border-radius:6px; overflow-wrap:anywhere }
+.lp-doc__tags{ font-size:14px; opacity:.8 }
+body.lp .lp-gallery .lp-doc__more{ display:flex; align-items:center; gap:6px; min-height:44px; margin:4px 16px 12px; padding:0; border:0; background:none; font:600 16px/1.3 var(--sans); color:var(--lp-navy); text-decoration:underline; text-underline-offset:3px; cursor:zoom-in }
+.lp-doc__more:focus-visible{ outline:2px solid var(--lp-gold); outline-offset:2px }
+body.lp .lp-gallery .lp-doc__text p, body.lp .lp-gallery .lp-doc__text ol{ margin:0 0 8px }
+/* pictures in a docs (stacked) gallery: full width, so a page crop reads at phone width */
+.lp-gallery__strip--docs .lp-gallery__open{ width:100% }

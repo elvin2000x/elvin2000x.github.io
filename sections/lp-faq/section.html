@@ -3,7 +3,7 @@
     <h2>{{heading}}</h2>
     <div class="lp-faq">
 {{#items}}
-      <details><summary>{{q}}</summary><p>{{a}}</p></details>
+      <details{{#open}} open{{/open}}><summary>{{q}}</summary><p>{{a}}</p></details>
 {{/items}}
     </div>
   </div>
