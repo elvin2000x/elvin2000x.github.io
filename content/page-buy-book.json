@@ -650,11 +650,23 @@
       }
     },
     {
+      "id": "v7-s6-review-lead",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "The review at the top of this page, in full:"
+        ]
+      }
+    },
+    {
       "id": "v7-s6-review",
       "type": "lp-quotes",
       "data": {
         "bg": "",
-        "anchor": "",
+        "anchor": "review",
         "heading": "",
         "quotes": [
           {
@@ -752,8 +764,8 @@
             "open": ""
           },
           {
-            "q": "Is $27 the whole price?",
-            "a": "Yes, $27, paid once. Prices are in US dollars, plus sales tax where it applies.",
+            "q": "What does it cost in all?",
+            "a": "$27, paid once, plus sales tax where it applies. Prices are in US dollars.",
             "open": ""
           },
           {
@@ -909,5 +921,6 @@
         ]
       }
     }
-  ]
+  ],
+  "css": "body.lp #review{ padding-top:8px }"
 }
