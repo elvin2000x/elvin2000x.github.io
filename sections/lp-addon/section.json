@@ -117,6 +117,207 @@
       "key": "note",
       "type": "html",
       "label": "Line under the button"
+    },
+    {
+      "key": "mini",
+      "type": "choice",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "",
+          "label": "Card with pictures and a tick box"
+        },
+        {
+          "value": "1",
+          "label": "Teaser that opens into a mini page"
+        }
+      ]
+    },
+    {
+      "key": "mini_id",
+      "type": "text",
+      "label": "Mini page id (letters and dashes)",
+      "default": ""
+    },
+    {
+      "key": "see_label",
+      "type": "text",
+      "label": "Link that opens the mini page",
+      "default": ""
+    },
+    {
+      "key": "mini_headline",
+      "type": "text",
+      "label": "Mini page headline",
+      "default": ""
+    },
+    {
+      "key": "job_html",
+      "type": "html",
+      "label": "One job in full (page text)",
+      "default": ""
+    },
+    {
+      "key": "look",
+      "type": "choice",
+      "label": "Show a look inside",
+      "options": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "1",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "key": "look_items",
+      "type": "list",
+      "label": "Look inside (excerpt cards)",
+      "fields": [
+        {
+          "key": "thumb",
+          "type": "text",
+          "label": "Page strip picture",
+          "default": ""
+        },
+        {
+          "key": "thumb_w",
+          "type": "text",
+          "label": "Strip width",
+          "default": ""
+        },
+        {
+          "key": "thumb_h",
+          "type": "text",
+          "label": "Strip height",
+          "default": ""
+        },
+        {
+          "key": "full",
+          "type": "text",
+          "label": "Whole page picture",
+          "default": ""
+        },
+        {
+          "key": "full_w",
+          "type": "text",
+          "label": "Whole page width",
+          "default": ""
+        },
+        {
+          "key": "full_h",
+          "type": "text",
+          "label": "Whole page height",
+          "default": ""
+        },
+        {
+          "key": "alt",
+          "type": "text",
+          "label": "Whole page, for screen readers",
+          "default": ""
+        },
+        {
+          "key": "doc_label",
+          "type": "text",
+          "label": "Product and page",
+          "default": ""
+        },
+        {
+          "key": "doc_heading",
+          "type": "text",
+          "label": "The page's own heading",
+          "default": ""
+        },
+        {
+          "key": "doc_html",
+          "type": "html",
+          "label": "Words copied exactly from the file",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "key": "look_caption",
+      "type": "text",
+      "label": "Line under the look inside",
+      "default": ""
+    },
+    {
+      "key": "more_label",
+      "type": "text",
+      "label": "Button that opens the whole page",
+      "default": ""
+    },
+    {
+      "key": "dialog_label",
+      "type": "text",
+      "label": "Enlarged view name, for screen readers",
+      "default": ""
+    },
+    {
+      "key": "close_label",
+      "type": "text",
+      "label": "Close, for screen readers and the mini page",
+      "default": ""
+    },
+    {
+      "key": "all_jobs_heading",
+      "type": "text",
+      "label": "Line above the list of jobs",
+      "default": ""
+    },
+    {
+      "key": "all_jobs",
+      "type": "list",
+      "label": "Every job in the guide",
+      "fields": [
+        {
+          "key": "job",
+          "type": "text",
+          "label": "Job",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "key": "more_jobs_heading",
+      "type": "text",
+      "label": "Line above the second list",
+      "default": ""
+    },
+    {
+      "key": "more_jobs",
+      "type": "list",
+      "label": "Second list of jobs",
+      "fields": [
+        {
+          "key": "job",
+          "type": "text",
+          "label": "Job",
+          "default": ""
+        }
+      ]
+    },
+    {
+      "key": "honest_html",
+      "type": "html",
+      "label": "The honest lines, word for word from the guide",
+      "default": ""
+    },
+    {
+      "key": "what_line",
+      "type": "text",
+      "label": "What it is, in one line",
+      "default": ""
+    },
+    {
+      "key": "add_label",
+      "type": "text",
+      "label": "Add button words",
+      "default": ""
     }
   ]
 }

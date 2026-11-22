@@ -801,23 +801,6 @@
       }
     },
     {
-      "id": "buy",
-      "type": "button",
-      "data": {
-        "anchor": "",
-        "align": "center",
-        "note": "30-day money-back guarantee. Prices are in US dollars, plus sales tax where it applies.",
-        "buttons": [
-          {
-            "label": "Get the bundle for $27",
-            "href": "/book/checkout/",
-            "style": "primary",
-            "checkout": false
-          }
-        ]
-      }
-    },
-    {
       "id": "v7-s11-addon-label",
       "type": "text",
       "data": {
@@ -833,8 +816,8 @@
       "type": "lp-addon",
       "id": "addon-close",
       "data": {
-        "headline": "AI at Home: ten jobs with the words already written",
-        "line": "Open the chat app you already use, paste the words, and fill the brackets with your own details.",
+        "headline": "AI at Home",
+        "line": "Dinners for the week, the internet bill, the check engine light: the words to paste into the chat app you already use.",
         "jobs": [
           {
             "job": "Dinners for the week"
@@ -853,34 +836,111 @@
         "image_w": "192",
         "image_h": "307",
         "pages": [],
-        "pages_caption": "Inside: two pages from the guide."
-      }
-    },
-    {
-      "id": "v7-s11-addon-pages",
-      "type": "lp-gallery",
-      "data": {
-        "bg": "",
-        "anchor": "",
-        "heading": "",
-        "sub": "",
-        "lede": "",
-        "body": "",
-        "docs": "1",
-        "items": [
+        "pages_caption": "Inside: two pages from the guide.",
+        "mini": "1",
+        "mini_id": "ai-at-home-inside",
+        "see_label": "See inside",
+        "mini_headline": "Bills, dinners, car warning lights and trips, all with ready words.",
+        "job_html": "<p>One job from the guide, in full.</p><p><strong>The internet bill, start here if money is the goal</strong></p><p><strong>The problem:</strong> The bill went up after a discount ended. In this example the internet is $95 a month, you have been a customer for 6 years, the promo ended 2 months ago, you are not in a contract, and you saw a competitor ad for $60 at the same speed. Those amounts are made up. Change the numbers in the brackets to your own bill before you send.</p><p><strong>Paste this</strong></p><div class=\"lp-doc__mono\"><p>Help me call about this bill. Act as a customer retention agent at a phone or internet company.</p><p>My internet bill is [$95] a month. I have been a customer for [6 years]. A promo ended [2 months] ago. I am not in a contract. I saw a competitor ad for [$60] a month at the same speed.</p><p>Ask me one question if something is missing. Then give me the call plan: who to ask for, the first sentence I say, what I ask for, and the lowest monthly price I will accept. Then play the company for one round so I can practise.</p></div><p><strong>A good answer looks like this:</strong> It asks one short question if a contract or a bundle is unclear. Then it names who to ask for, gives you the first sentence, sets the lowest price you will accept, and tells you to get the new price in writing before you hang up. It warns you not to take a new fixed term until you know the price after that term ends.</p><p><strong>Your next click:</strong> Call the company. Ask for retention, or for loyalty. Read the first sentence from the answer. Write down the new monthly price and the confirmation number before you hang up. If they push a new contract, ask what the price becomes when it ends, and decide after you hear that number.</p><p><strong>You did it when</strong> the confirmation number is on a piece of paper or in an email from them, and you know the price on the next bill. The company can still say no, and you have still made the call.</p>",
+        "look": "1",
+        "look_caption": "Inside: Dinners for the week. Tap to see the whole page.",
+        "more_label": "See the whole page",
+        "dialog_label": "A page from AI at Home",
+        "close_label": "Close",
+        "all_jobs_heading": "Ten long jobs:",
+        "all_jobs": [
           {
-            "thumb": "/img/store/look-inside/ai-at-home-plant-edge.webp",
-            "thumb_w": "750",
-            "thumb_h": "120",
-            "full": "/img/store/look-inside/ai-at-home-plant-page.webp",
-            "full_w": "1200",
-            "full_h": "1698",
-            "alt": "AI at Home, page 2: the whole page",
-            "caption": "",
-            "doc_label": "AI at Home, page 2",
-            "doc_heading": "1. The plant doctor",
-            "doc_html": "<p>The problem: A houseplant looks unwell and you want to know why. Do it in two messages. First give the AI its job. Then describe the plant in your own words. Send Message 1, wait for the reply, then send Message 2.</p>"
+            "job": "Dinners for the week"
           },
+          {
+            "job": "The internet bill"
+          },
+          {
+            "job": "A device that stopped working on Windows"
+          },
+          {
+            "job": "The check engine light, before you call the shop"
+          },
+          {
+            "job": "A recipe, fixed for your table"
+          },
+          {
+            "job": "A trip that fits everyone"
+          },
+          {
+            "job": "The part you cannot name"
+          },
+          {
+            "job": "An old computer"
+          },
+          {
+            "job": "A slow leak in a tire"
+          },
+          {
+            "job": "The plant doctor"
+          }
+        ],
+        "more_jobs_heading": "Shorter jobs:",
+        "more_jobs": [
+          {
+            "job": "A film you half remember"
+          },
+          {
+            "job": "A year of utility bills"
+          },
+          {
+            "job": "Repair or replace an appliance"
+          },
+          {
+            "job": "A news briefing you can check"
+          },
+          {
+            "job": "A tutor that quizzes you"
+          },
+          {
+            "job": "A sheet you can build yourself"
+          },
+          {
+            "job": "School and activity emails"
+          },
+          {
+            "job": "A brain dump"
+          },
+          {
+            "job": "Read the bad reviews first"
+          },
+          {
+            "job": "Gifts, a party, or a night out"
+          },
+          {
+            "job": "Trivia or a short mystery"
+          },
+          {
+            "job": "Three colour ideas for a room"
+          },
+          {
+            "job": "The story behind something on a walk"
+          },
+          {
+            "job": "An insurance renewal"
+          },
+          {
+            "job": "A contractor quote"
+          },
+          {
+            "job": "Paperwork in plain words"
+          },
+          {
+            "job": "Questions for a pharmacist"
+          },
+          {
+            "job": "The furnace or a breaker, before you call"
+          }
+        ],
+        "honest_html": "<p>I tried the ten long jobs in Claude with made-up situations. Other apps were not tested for this guide. The shorter jobs use the same method and were not each tried.</p><p>Every job ends with something you check yourself, because the AI can be wrong.</p><p>I still call a person if I see cords in a tire, smell gas, or smell burning.</p><p>This is not medical, legal, financial, or safety advice, and nothing here is guaranteed.</p>",
+        "what_line": "A 19-page PDF, $7 in US dollars. Instant download plus an email, covered by the same 30-day money-back guarantee.",
+        "add_label": "Add AI at Home, $7",
+        "look_items": [
           {
             "thumb": "/img/store/look-inside/ai-at-home-dinners-edge.webp",
             "thumb_w": "750",
@@ -889,17 +949,28 @@
             "full_w": "1200",
             "full_h": "1698",
             "alt": "AI at Home, page 4: the whole page",
-            "caption": "",
             "doc_label": "AI at Home, page 4",
             "doc_heading": "Paste this",
             "doc_html": "<p class=\"lp-doc__mono\">Plan 5 dinners that reuse ingredients so nothing goes to waste.<br>Who is eating: [people]. Allergies and foods to skip: [list, or \"none\"].<br>Minutes on a weeknight: [number]. Equipment I will use: [pots or machines].<br>Budget: [amount].<br>I am attaching one photo of each fridge shelf, taken standing back with the door<br>open.<br>Give me one shopping list grouped by store aisle, and a prep list I can finish in 30<br>minutes on Sunday.<br>Ask me one question if something is missing.</p>"
           }
-        ],
-        "strip_caption": "Inside: two pages from the guide.",
-        "more_label": "See the whole page",
-        "dialog_label": "Pages from AI at Home",
-        "close_label": "Close",
-        "buy": ""
+        ]
+      }
+    },
+    {
+      "id": "buy",
+      "type": "button",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "note": "30-day money-back guarantee. Prices are in US dollars, plus sales tax where it applies.",
+        "buttons": [
+          {
+            "label": "Get the bundle for $27",
+            "href": "/book/checkout/",
+            "style": "primary",
+            "checkout": false
+          }
+        ]
       }
     },
     {

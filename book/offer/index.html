@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=c92d4155" />
+  <link rel="stylesheet" href="/css/landing.css?v=ec67e939" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>body.lp #review{ padding-top:8px }</style>
 </head>
@@ -644,76 +644,98 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <p>P.S. Pick one real task from this week, open the book, and try the method on it.</p>
 </div>
 
-<div class="ep-block">
-  <div class="ep-row ep-row--center">
-    <a class="btn btn--lg btn--primary" href="/book/checkout/">Get the bundle for $27</a>
-  </div>
-  <p class="lp-note ep-note">30-day money-back guarantee. Prices are in US dollars, plus sales tax where it applies.</p>
-</div>
-
 <div class="ep-block ep-text ep-text--left">
   <p>Optional add-on, sold separately:</p>
 </div>
 
 <section class="lp-sec lp-addon-sec">
   <div class="lp-in">
-    <div class="lp-addon">
-      <div class="lp-addon__top">
-        <img class="lp-addon__cover" src="/img/store/ai-at-home-thumb.webp" alt="The AI at Home guide cover" width="192" height="307" loading="lazy" decoding="async">
+    <div class="lp-addon lp-addon--mini">
+      <div class="lp-addon__teaser">
+        <img class="lp-addon__cover lp-addon__cover--sm" src="/img/store/ai-at-home-thumb.webp" alt="The AI at Home guide cover" width="192" height="307" loading="lazy" decoding="async">
         <div class="lp-addon__words">
-          <h3>AI at Home: ten jobs with the words already written</h3>
-          <p>Open the chat app you already use, paste the words, and fill the brackets with your own details.</p>
-          <ul>
-            <li>Dinners for the week</li>
-            <li>Your internet bill</li>
-            <li>A trip that fits everyone</li>
-          </ul>
+          <h3>AI at Home</h3>
+          <p>Dinners for the week, the internet bill, the check engine light: the words to paste into the chat app you already use.</p>
+          <p class="lp-addon__price">$7</p>
+          <button type="button" class="lp-addon__see" aria-expanded="false" aria-controls="ai-at-home-inside" data-lp-mini-open>See inside</button>
         </div>
       </div>
-      <figure class="lp-addon__pages">
-        <figcaption>Inside: two pages from the guide.</figcaption>
-      </figure>
       <label class="lp-addon__tick"><input type="checkbox" data-lp-addon data-lp-addon-price="$7" autocomplete="off"><span>Add AI at Home, $7</span></label>
+      <div class="lp-addon__mini" id="ai-at-home-inside" data-lp-mini hidden>
+        <h4 class="lp-addon__mini-h" tabindex="-1">Bills, dinners, car warning lights and trips, all with ready words.</h4>
+        <div class="lp-addon__job"><p>One job from the guide, in full.</p><p><strong>The internet bill, start here if money is the goal</strong></p><p><strong>The problem:</strong> The bill went up after a discount ended. In this example the internet is $95 a month, you have been a customer for 6 years, the promo ended 2 months ago, you are not in a contract, and you saw a competitor ad for $60 at the same speed. Those amounts are made up. Change the numbers in the brackets to your own bill before you send.</p><p><strong>Paste this</strong></p><div class="lp-doc__mono"><p>Help me call about this bill. Act as a customer retention agent at a phone or internet company.</p><p>My internet bill is [$95] a month. I have been a customer for [6 years]. A promo ended [2 months] ago. I am not in a contract. I saw a competitor ad for [$60] a month at the same speed.</p><p>Ask me one question if something is missing. Then give me the call plan: who to ask for, the first sentence I say, what I ask for, and the lowest monthly price I will accept. Then play the company for one round so I can practise.</p></div><p><strong>A good answer looks like this:</strong> It asks one short question if a contract or a bundle is unclear. Then it names who to ask for, gives you the first sentence, sets the lowest price you will accept, and tells you to get the new price in writing before you hang up. It warns you not to take a new fixed term until you know the price after that term ends.</p><p><strong>Your next click:</strong> Call the company. Ask for retention, or for loyalty. Read the first sentence from the answer. Write down the new monthly price and the confirmation number before you hang up. If they push a new contract, ask what the price becomes when it ends, and decide after you hear that number.</p><p><strong>You did it when</strong> the confirmation number is on a piece of paper or in an email from them, and you know the price on the next bill. The company can still say no, and you have still made the call.</p></div>
+        <div class="lp-gallery lp-addon__look">
+          <ul class="lp-gallery__strip lp-gallery__strip--docs">
+            <li class="lp-gallery__item lp-gallery__item--doc">
+              <div class="lp-doc">
+                <img class="lp-doc__edge" src="/img/store/look-inside/ai-at-home-dinners-edge.webp" alt="" width="750" height="120" loading="lazy" decoding="async">
+                <p class="lp-doc__label">AI at Home, page 4</p>
+                <p class="lp-doc__h">Paste this</p>
+                <div class="lp-doc__text"><p class="lp-doc__mono">Plan 5 dinners that reuse ingredients so nothing goes to waste.<br>Who is eating: [people]. Allergies and foods to skip: [list, or "none"].<br>Minutes on a weeknight: [number]. Equipment I will use: [pots or machines].<br>Budget: [amount].<br>I am attaching one photo of each fridge shelf, taken standing back with the door<br>open.<br>Give me one shopping list grouped by store aisle, and a prep list I can finish in 30<br>minutes on Sunday.<br>Ask me one question if something is missing.</p></div>
+                <button type="button" class="lp-doc__more" data-lp-gal-open>See the whole page</button>
+              </div>
+            </li>
+          </ul>
+          <dialog class="lp-gallery__dlg" aria-label="A page from AI at Home">
+            <button type="button" class="lp-gallery__close" data-lp-gal-close aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="lp-gallery__track">
+              <figure class="lp-gallery__slide"><img src="/img/store/look-inside/ai-at-home-dinners-page.webp" alt="AI at Home, page 4: the whole page" width="1200" height="1698" loading="lazy" decoding="async"></figure>
+            </div>
+          </dialog>
+          <p class="lp-gallery__caption">Inside: Dinners for the week. Tap to see the whole page.</p>
+        </div>
+        <p class="lp-addon__list-h">Ten long jobs:</p>
+        <ul class="lp-addon__all">
+          <li>Dinners for the week</li>
+          <li>The internet bill</li>
+          <li>A device that stopped working on Windows</li>
+          <li>The check engine light, before you call the shop</li>
+          <li>A recipe, fixed for your table</li>
+          <li>A trip that fits everyone</li>
+          <li>The part you cannot name</li>
+          <li>An old computer</li>
+          <li>A slow leak in a tire</li>
+          <li>The plant doctor</li>
+        </ul>
+        <p class="lp-addon__list-h">Shorter jobs:</p>
+        <ul class="lp-addon__all">
+          <li>A film you half remember</li>
+          <li>A year of utility bills</li>
+          <li>Repair or replace an appliance</li>
+          <li>A news briefing you can check</li>
+          <li>A tutor that quizzes you</li>
+          <li>A sheet you can build yourself</li>
+          <li>School and activity emails</li>
+          <li>A brain dump</li>
+          <li>Read the bad reviews first</li>
+          <li>Gifts, a party, or a night out</li>
+          <li>Trivia or a short mystery</li>
+          <li>Three colour ideas for a room</li>
+          <li>The story behind something on a walk</li>
+          <li>An insurance renewal</li>
+          <li>A contractor quote</li>
+          <li>Paperwork in plain words</li>
+          <li>Questions for a pharmacist</li>
+          <li>The furnace or a breaker, before you call</li>
+        </ul>
+        <div class="lp-addon__honest"><p>I tried the ten long jobs in Claude with made-up situations. Other apps were not tested for this guide. The shorter jobs use the same method and were not each tried.</p><p>Every job ends with something you check yourself, because the AI can be wrong.</p><p>I still call a person if I see cords in a tire, smell gas, or smell burning.</p><p>This is not medical, legal, financial, or safety advice, and nothing here is guaranteed.</p></div>
+        <p class="lp-addon__what">A 19-page PDF, $7 in US dollars. Instant download plus an email, covered by the same 30-day money-back guarantee.</p>
+        <div class="lp-addon__choice">
+          <button type="button" class="btn btn--ghost btn--lg lp-addon__add" data-lp-mini-add>Add AI at Home, $7</button>
+          <button type="button" class="lp-addon__close" data-lp-mini-close>Close</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="lp-sec lp-gallery">
-  <div class="lp-in">
-    <ul class="lp-gallery__strip lp-gallery__strip--docs">
-      <li class="lp-gallery__item lp-gallery__item--doc">
-        <div class="lp-doc">
-          <img class="lp-doc__edge" src="/img/store/look-inside/ai-at-home-plant-edge.webp" alt="" width="750" height="120" loading="lazy" decoding="async">
-          <p class="lp-doc__label">AI at Home, page 2</p>
-          <p class="lp-doc__h">1. The plant doctor</p>
-          <div class="lp-doc__text"><p>The problem: A houseplant looks unwell and you want to know why. Do it in two messages. First give the AI its job. Then describe the plant in your own words. Send Message 1, wait for the reply, then send Message 2.</p></div>
-          <button type="button" class="lp-doc__more" data-lp-gal-open>See the whole page</button>
-        </div>
-      </li>
-      <li class="lp-gallery__item lp-gallery__item--doc">
-        <div class="lp-doc">
-          <img class="lp-doc__edge" src="/img/store/look-inside/ai-at-home-dinners-edge.webp" alt="" width="750" height="120" loading="lazy" decoding="async">
-          <p class="lp-doc__label">AI at Home, page 4</p>
-          <p class="lp-doc__h">Paste this</p>
-          <div class="lp-doc__text"><p class="lp-doc__mono">Plan 5 dinners that reuse ingredients so nothing goes to waste.<br>Who is eating: [people]. Allergies and foods to skip: [list, or "none"].<br>Minutes on a weeknight: [number]. Equipment I will use: [pots or machines].<br>Budget: [amount].<br>I am attaching one photo of each fridge shelf, taken standing back with the door<br>open.<br>Give me one shopping list grouped by store aisle, and a prep list I can finish in 30<br>minutes on Sunday.<br>Ask me one question if something is missing.</p></div>
-          <button type="button" class="lp-doc__more" data-lp-gal-open>See the whole page</button>
-        </div>
-      </li>
-    </ul>
-    <p class="lp-gallery__caption">Inside: two pages from the guide.</p>
-    <dialog class="lp-gallery__dlg" aria-label="Pages from AI at Home">
-      <button type="button" class="lp-gallery__close" data-lp-gal-close aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <div class="lp-gallery__track">
-        <figure class="lp-gallery__slide">
-          <img src="/img/store/look-inside/ai-at-home-plant-page.webp" alt="AI at Home, page 2: the whole page" width="1200" height="1698" loading="lazy" decoding="async">
-        </figure>
-        <figure class="lp-gallery__slide">
-          <img src="/img/store/look-inside/ai-at-home-dinners-page.webp" alt="AI at Home, page 4: the whole page" width="1200" height="1698" loading="lazy" decoding="async">
-        </figure>
-      </div>
-    </dialog>
+
+<div class="ep-block">
+  <div class="ep-row ep-row--center">
+    <a class="btn btn--lg btn--primary" href="/book/checkout/">Get the bundle for $27</a>
   </div>
-</section>
+  <p class="lp-note ep-note">30-day money-back guarantee. Prices are in US dollars, plus sales tax where it applies.</p>
+</div>
 
 <section class="lp-sec lp-amazon">
   <div class="lp-in">
@@ -1037,6 +1059,22 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
       window.addEventListener('resize', posters);
       window.addEventListener('resize', sync);
       label();
+    });
+    /* Add-on mini page (ticket 702): "See inside" opens it in place and moves focus to its heading; Close or Esc closes it
+       and returns focus. "Add" ticks the same box the teaser shows (the shared add-on script then relabels every buy
+       button). The box itself works without opening anything, and nothing here ever ticks it on its own. */
+    [].forEach.call(document.querySelectorAll('[data-lp-mini]'), function (mini) {
+      var wrap = mini.closest('.lp-addon'), open = wrap && wrap.querySelector('[data-lp-mini-open]');
+      if (!open) return;
+      var close = mini.querySelector('[data-lp-mini-close]'), add = mini.querySelector('[data-lp-mini-add]'), head = mini.querySelector('.lp-addon__mini-h');
+      function set(on) { mini.hidden = !on; open.setAttribute('aria-expanded', on ? 'true' : 'false'); (on ? head : open).focus({ preventScroll: !on }); if (!on) open.scrollIntoView({ block: 'nearest' }); }
+      open.addEventListener('click', function () { set(mini.hidden); });
+      if (close) close.addEventListener('click', function () { set(false); });
+      mini.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !document.querySelector('dialog[open]')) set(false); });
+      if (add) add.addEventListener('click', function () {
+        var box = wrap.querySelector('[data-lp-addon]');
+        if (box && !box.checked) { box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true })); }
+      });
     });
     [].forEach.call(document.querySelectorAll('.lp-gallery'), function (g) {
       var dlg = g.querySelector('dialog'); if (!dlg || typeof dlg.showModal !== 'function') return;

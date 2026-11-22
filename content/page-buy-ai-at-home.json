@@ -6,7 +6,7 @@
     "old_slugs": [],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
-    "description": "AI at Home: a short guide for the chat app you already use. Don’t pay for a plant app. Describe the leaves to an AI. $7."
+    "description": "AI at Home: a short guide for the chat app you already use. Bills, dinners, car warning lights and trips, all with ready words. $7."
   },
   "sections": [
     {
@@ -16,7 +16,7 @@
         "anchor": "aah-hero",
         "eyebrow": "",
         "headline": "AI at Home",
-        "sub": "Don’t pay for a plant app. Describe the leaves to an AI.",
+        "sub": "Bills, dinners, car warning lights and trips, all with ready words.",
         "button": {
           "label": "Add AI at Home for $7",
           "checkout": false,

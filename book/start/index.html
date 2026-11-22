@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=c92d4155" />
+  <link rel="stylesheet" href="/css/landing.css?v=ec67e939" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>@media (min-width:768px){ body.lp .lp-hero{ padding-bottom:24px } body.lp .lp-hero + .ep-block{ padding-top:0 } }</style>
 </head>
@@ -477,6 +477,22 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
       window.addEventListener('resize', posters);
       window.addEventListener('resize', sync);
       label();
+    });
+    /* Add-on mini page (ticket 702): "See inside" opens it in place and moves focus to its heading; Close or Esc closes it
+       and returns focus. "Add" ticks the same box the teaser shows (the shared add-on script then relabels every buy
+       button). The box itself works without opening anything, and nothing here ever ticks it on its own. */
+    [].forEach.call(document.querySelectorAll('[data-lp-mini]'), function (mini) {
+      var wrap = mini.closest('.lp-addon'), open = wrap && wrap.querySelector('[data-lp-mini-open]');
+      if (!open) return;
+      var close = mini.querySelector('[data-lp-mini-close]'), add = mini.querySelector('[data-lp-mini-add]'), head = mini.querySelector('.lp-addon__mini-h');
+      function set(on) { mini.hidden = !on; open.setAttribute('aria-expanded', on ? 'true' : 'false'); (on ? head : open).focus({ preventScroll: !on }); if (!on) open.scrollIntoView({ block: 'nearest' }); }
+      open.addEventListener('click', function () { set(mini.hidden); });
+      if (close) close.addEventListener('click', function () { set(false); });
+      mini.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !document.querySelector('dialog[open]')) set(false); });
+      if (add) add.addEventListener('click', function () {
+        var box = wrap.querySelector('[data-lp-addon]');
+        if (box && !box.checked) { box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true })); }
+      });
     });
     [].forEach.call(document.querySelectorAll('.lp-gallery'), function (g) {
       var dlg = g.querySelector('dialog'); if (!dlg || typeof dlg.showModal !== 'function') return;
