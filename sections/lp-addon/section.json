@@ -264,6 +264,18 @@
       "default": ""
     },
     {
+      "key": "who_heading",
+      "type": "text",
+      "label": "Who it helps: heading",
+      "default": ""
+    },
+    {
+      "key": "who_html",
+      "type": "html",
+      "label": "Who it helps: the lines",
+      "default": ""
+    },
+    {
       "key": "all_jobs_heading",
       "type": "text",
       "label": "Line above the list of jobs",
