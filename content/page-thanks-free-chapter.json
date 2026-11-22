@@ -71,18 +71,6 @@
       }
     },
     {
-      "type": "text",
-      "id": "bundle-line",
-      "data": {
-        "anchor": "",
-        "align": "center",
-        "heading": "",
-        "paras": [
-          "The Artificial Advantage Bundle: the book, its Toolkit and three exclusive bonuses, for <strong class=\"lp-bigprice\">$27</strong> instead of <s>$71.99</s> bought separately."
-        ]
-      }
-    },
-    {
       "id": "go-top",
       "type": "button",
       "data": {
@@ -98,6 +86,18 @@
         ]
       },
       "note": "First button, directly under the video. Same words as the button at the bottom."
+    },
+    {
+      "type": "text",
+      "id": "bundle-line",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "heading": "",
+        "paras": [
+          "The Artificial Advantage Bundle: the book, its Toolkit and three exclusive bonuses, for <strong class=\"lp-bigprice\">$27</strong> instead of <s>$71.99</s> bought separately."
+        ]
+      }
     },
     {
       "type": "lp-image",
@@ -156,5 +156,5 @@
       }
     }
   ],
-  "css": "body.lp .lp-hero__grid{ max-width:720px } body.lp .lp-hero{ padding-top:32px; padding-bottom:0 } body.lp .lp-hero h1{ margin-bottom:0 } body.lp .ep-block.ep-video{ max-width:720px } body.lp .ep-row{ flex-direction:column; align-items:stretch; gap:12px } body.lp .ep-row .btn{ width:100%; min-height:60px; font-size:20px; font-weight:700 } body.lp .ep-note{ text-align:left }"
+  "css": "body.lp .lp-hero__grid{ max-width:720px } body.lp .lp-hero{ padding-top:32px; padding-bottom:0 } body.lp .lp-hero h1{ margin-bottom:0 } body.lp .ep-block.ep-video{ max-width:720px } body.lp .ep-row{ flex-direction:column; align-items:stretch; gap:12px } body.lp .ep-row .btn{ width:100%; min-height:60px; font-size:20px; font-weight:700 } body.lp .ep-note{ text-align:left } @media (max-width:767px){ body.lp .lp-hero{ padding-top:8px } body.lp .ep-block:not(#lifestyle ~ .ep-block){ padding-top:3px; padding-bottom:3px } body.lp .ep-block.ep-video{ padding-bottom:4px } }"
 }

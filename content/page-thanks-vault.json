@@ -75,18 +75,6 @@
       }
     },
     {
-      "type": "text",
-      "id": "bundle-line",
-      "data": {
-        "anchor": "",
-        "align": "center",
-        "heading": "",
-        "paras": [
-          "The Artificial Advantage Bundle: the book, its Toolkit and three exclusive bonuses, for <strong class=\"lp-bigprice\">$27</strong> instead of <s>$71.99</s> bought separately."
-        ]
-      }
-    },
-    {
       "id": "go-top",
       "type": "button",
       "data": {
@@ -102,6 +90,18 @@
         ]
       },
       "note": "First button, directly under the video. Same words as the button at the bottom."
+    },
+    {
+      "type": "text",
+      "id": "bundle-line",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "heading": "",
+        "paras": [
+          "The Artificial Advantage Bundle: the book, its Toolkit and three exclusive bonuses, for <strong class=\"lp-bigprice\">$27</strong> instead of <s>$71.99</s> bought separately."
+        ]
+      }
     },
     {
       "type": "lp-image",
