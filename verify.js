@@ -206,7 +206,7 @@ for (const rel of PAGES) {
   for (const tag of html.match(/<video[^>]*>/g) || []) {
     const dims = MEDIA_STRICT.has(rel) ? fail : warn;
     if (!/width="\d+"/.test(tag) || !/height="\d+"/.test(tag)) dims(rel, 'video without width/height: ' + tag.slice(0, 60));
-    if (!/poster="[^"]+"/.test(tag)) dims(rel, 'video without a poster: ' + tag.slice(0, 60));
+    if (!/(?:data-)?poster="[^"]+"/.test(tag)) dims(rel, 'video without a poster (poster or data-poster): ' + tag.slice(0, 60));
   }
 
   // DEAD-CTA: href="#" is a broken promise; #anchors must resolve on-page.

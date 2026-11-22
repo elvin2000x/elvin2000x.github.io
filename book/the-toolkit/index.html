@@ -448,7 +448,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
         else if (!v.paused) v.pause();
       }
       if (btn) btn.addEventListener('click', function () { paused = !paused; label(); sync(); });
-      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { inView = es[es.length - 1].isIntersecting; sync(); }, { threshold: 0.25 }).observe(box);
+      /* the still (poster) loads only for the copy that is shown, and only when the loop is within about two screens */
+      function posters() { var v = shown(); if (v && !v.poster && v.getAttribute('data-poster')) v.poster = v.getAttribute('data-poster'); }
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { if (es[es.length - 1].isIntersecting) posters(); }, { rootMargin: '1200px 0px' }).observe(box);
+        new IntersectionObserver(function (es) { inView = es[es.length - 1].isIntersecting; sync(); }, { threshold: 0.25 }).observe(box);
+      } else posters();
+      window.addEventListener('resize', posters);
       window.addEventListener('resize', sync);
       label();
     });

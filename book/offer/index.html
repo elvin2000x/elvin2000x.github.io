@@ -354,11 +354,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     <p class="lp-media__lede">Every exercise, prompt and role from the book, typed into Word files you can edit.</p>
     <figure class="lp-media__fig">
       <div class="lp-media__loop" data-lp-loop>
-        <video class="lp-media__v lp-media__v--phone" muted loop playsinline preload="none" poster="/video/look-inside/toolkit-exercises-phone-poster.webp" width="562" height="750" aria-label="Scrolling through the Toolkit's exercises in Word">
+        <video class="lp-media__v lp-media__v--phone" muted loop playsinline preload="none" data-poster="/video/look-inside/toolkit-exercises-phone-poster.webp" width="562" height="750" aria-label="Scrolling through the Toolkit's exercises in Word">
           <source src="/video/look-inside/toolkit-exercises-phone.webm" type="video/webm">
           <source src="/video/look-inside/toolkit-exercises-phone.mp4" type="video/mp4">
         </video>
-        <video class="lp-media__v lp-media__v--wide" muted loop playsinline preload="none" poster="/video/look-inside/toolkit-exercises-desktop-poster.webp" width="562" height="750" aria-label="Scrolling through the Toolkit's exercises in Word">
+        <video class="lp-media__v lp-media__v--wide" muted loop playsinline preload="none" data-poster="/video/look-inside/toolkit-exercises-desktop-poster.webp" width="562" height="750" aria-label="Scrolling through the Toolkit's exercises in Word">
           <source src="/video/look-inside/toolkit-exercises-desktop.webm" type="video/webm">
           <source src="/video/look-inside/toolkit-exercises-desktop.mp4" type="video/mp4">
         </video>
@@ -419,11 +419,11 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <div class="lp-in lp-media__grid">
     <figure class="lp-media__fig">
       <div class="lp-media__loop" data-lp-loop>
-        <video class="lp-media__v lp-media__v--phone" muted loop playsinline preload="none" poster="/video/look-inside/prompt-builder-phone-poster.webp" width="562" height="1216" aria-label="The Prompt Builder: three demo answers typed in, and the finished brief it builds">
+        <video class="lp-media__v lp-media__v--phone" muted loop playsinline preload="none" data-poster="/video/look-inside/prompt-builder-phone-poster.webp" width="562" height="1216" aria-label="The Prompt Builder: three demo answers typed in, and the finished brief it builds">
           <source src="/video/look-inside/prompt-builder-phone.webm" type="video/webm">
           <source src="/video/look-inside/prompt-builder-phone.mp4" type="video/mp4">
         </video>
-        <video class="lp-media__v lp-media__v--wide" muted loop playsinline preload="none" poster="/video/look-inside/prompt-builder-desktop-poster.webp" width="900" height="1350" aria-label="The Prompt Builder: three demo answers typed in, and the finished brief it builds">
+        <video class="lp-media__v lp-media__v--wide" muted loop playsinline preload="none" data-poster="/video/look-inside/prompt-builder-desktop-poster.webp" width="900" height="1350" aria-label="The Prompt Builder: three demo answers typed in, and the finished brief it builds">
           <source src="/video/look-inside/prompt-builder-desktop.webm" type="video/webm">
           <source src="/video/look-inside/prompt-builder-desktop.mp4" type="video/mp4">
         </video>
@@ -906,7 +906,13 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
         else if (!v.paused) v.pause();
       }
       if (btn) btn.addEventListener('click', function () { paused = !paused; label(); sync(); });
-      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { inView = es[es.length - 1].isIntersecting; sync(); }, { threshold: 0.25 }).observe(box);
+      /* the still (poster) loads only for the copy that is shown, and only when the loop is within about two screens */
+      function posters() { var v = shown(); if (v && !v.poster && v.getAttribute('data-poster')) v.poster = v.getAttribute('data-poster'); }
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { if (es[es.length - 1].isIntersecting) posters(); }, { rootMargin: '1200px 0px' }).observe(box);
+        new IntersectionObserver(function (es) { inView = es[es.length - 1].isIntersecting; sync(); }, { threshold: 0.25 }).observe(box);
+      } else posters();
+      window.addEventListener('resize', posters);
       window.addEventListener('resize', sync);
       label();
     });

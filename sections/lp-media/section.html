@@ -15,14 +15,14 @@
 {{#mp4}}
       <div class="lp-media__loop" data-lp-loop>
 {{#phone_mp4}}
-        <video class="lp-media__v lp-media__v--phone" muted loop playsinline preload="none" poster="{{phone_poster}}" width="{{phone_w}}" height="{{phone_h}}" aria-label="{{alt}}">
+        <video class="lp-media__v lp-media__v--phone" muted loop playsinline preload="none" data-poster="{{phone_poster}}" width="{{phone_w}}" height="{{phone_h}}" aria-label="{{alt}}">
 {{#phone_webm}}
           <source src="{{phone_webm}}" type="video/webm">
 {{/phone_webm}}
           <source src="{{phone_mp4}}" type="video/mp4">
         </video>
 {{/phone_mp4}}
-        <video class="lp-media__v{{#phone_mp4}} lp-media__v--wide{{/phone_mp4}}" muted loop playsinline preload="none" poster="{{poster}}" width="{{w}}" height="{{h}}" aria-label="{{alt}}">
+        <video class="lp-media__v{{#phone_mp4}} lp-media__v--wide{{/phone_mp4}}" muted loop playsinline preload="none" data-poster="{{poster}}" width="{{w}}" height="{{h}}" aria-label="{{alt}}">
 {{#webm}}
           <source src="{{webm}}" type="video/webm">
 {{/webm}}
