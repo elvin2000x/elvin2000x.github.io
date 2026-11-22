@@ -59,7 +59,7 @@
         "yes_note": "This charges the card you just used. You will not need to enter it again.",
         "no": "No thanks, take me to my downloads",
         "fine": "Digital downloads, for your own use. You get an instant download plus an email. A [[refund]] covers these purchases: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
-        "small": "<p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p>",
+        "small": "<p data-only-with=\"claude-manual operator-bundle\" hidden>The Claude Operator’s Manual, one of the guides in the AI Setup Bundle, is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p>",
         "fallback": "Pay with another card",
         "review_href": "/book/thank-you/",
         "after_total": "One receipt email lists everything you bought and links to your library, where each product has its own download. Anything added later in the same order gets a second email titled Added to your order.",

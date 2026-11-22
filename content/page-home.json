@@ -54,7 +54,8 @@
             "on": true,
             "on_since": "2026-11-20"
           }
-        ]
+        ],
+        "under_buy": "The bundle: the ebook, its Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey. $71.99 if bought separately."
       }
     },
     {
@@ -328,7 +329,7 @@
       "data": {
         "bg": "tint",
         "anchor": "reviews",
-        "eyebrow": "The first review the book got, unedited",
+        "eyebrow": "A verified review from Amazon.ca",
         "heading": "What readers say",
         "grid": false,
         "review_note": "verbatim from Amazon, checked 2026-09-27",
@@ -347,16 +348,7 @@
           }
         ],
         "todo": "SECOND AMAZON REVIEW: Amazon shows 2 ratings but only one written review publicly (checked .com and .ca, 2026-09-27).\n         When it appears, add it verbatim as a second .quote and drop one friend line.",
-        "friends": [
-          {
-            "quote": "&ldquo;The beginning also made me tear up.&rdquo;",
-            "who": "Early reader, a friend of the author"
-          },
-          {
-            "quote": "&ldquo;I didn't realize that my AI skills were bad, then Elvin explained I just sucked at prompting.&rdquo;",
-            "who": "Early reader, a friend of the author"
-          }
-        ],
+        "friends": [],
         "after": ""
       }
     },

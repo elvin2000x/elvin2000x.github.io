@@ -4,11 +4,11 @@
 {{#sub}}
     <p class="lp-lede">{{sub}}</p>
 {{/sub}}
-    <p class="lp-thanks__order">{{#order_label}}<span>{{order_label}}</span> {{/order_label}}<strong data-store="order-number"></strong> <span data-store="total"></span></p>
+    <p class="lp-thanks__order">{{#order_label}}<span>{{order_label}}</span> {{/order_label}}<strong data-store="order-number"></strong>{{#paid_label}}<span>{{paid_label}}</span>{{/paid_label}} <span data-store="total"></span></p>
 {{#files_label}}
     <h2>{{files_label}}</h2>
 {{/files_label}}
-    <div class="lp-thanks__files" data-store="files"></div>
+    <div class="lp-thanks__files" data-store="files"{{#file_lines_json}} data-lines='{{file_lines_json}}'{{/file_lines_json}}></div>
 {{#library}}
     <a class="btn btn--ghost btn--lg" data-store="library" href="{{page_url}}">{{library}}</a>
 {{/library}}

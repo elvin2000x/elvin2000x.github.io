@@ -64,7 +64,7 @@
         "yes_note": "This charges the card you just used. You will not need to enter it again. [[refund]].",
         "no": "No thanks, I’ll skip this",
         "fine": "Digital downloads, for your own use. You get an instant download plus an email. A [[refund]] covers this purchase too: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
-        "small": "<p>Where a detail changes from one release to the next, the Manual explains the idea and points you to the official documentation for the current specifics.</p><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p><p>Elvin Peters</p>",
+        "small": "<p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic. Claude is a product of Anthropic, and the name is used only to say what the guide covers.</p><p>Elvin Peters</p>",
         "fallback": "Pay with another card",
         "review_href": "/book/manual/",
         "stack_desktop": "/img/store/stack-ai-setup-bundle-47-desktop.webp",

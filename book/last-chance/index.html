@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=a50c1e18" />
+  <link rel="stylesheet" href="/css/landing.css?v=eaac7aec" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp" data-store-step="last-chance">
@@ -119,7 +119,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     <button type="button" class="lp-no" data-store-decline>No thanks, take me to my downloads</button>
     <div class="lp-fallback" data-store-fallback hidden><p>Pay with another card</p></div>
     <p class="lp-note">Digital downloads, for your own use. You get an instant download plus an email. A 30-day money-back guarantee covers these purchases: email elvin@elvinpeters.com within 30 days for a full refund.</p>
-    <div class="lp-small"><p>The Claude Operator’s Manual is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p></div>
+    <div class="lp-small"><p data-only-with="claude-manual operator-bundle" hidden>The Claude Operator’s Manual, one of the guides in the AI Setup Bundle, is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p></div>
   </div>
   <div hidden data-lp-thumbs>{"claude-manual":"/img/store/last-chance/claude-manual.webp","global-ai-race":"/img/store/last-chance/global-ai-race.webp","operator-bundle":"/img/store/last-chance/operator-bundle.webp","role-packs":"/img/store/last-chance/role-packs.webp","thirty-ways":"/img/store/last-chance/thirty-ways.webp","top-15-rules":"/img/store/last-chance/top-15-rules.webp"}</div>
   <div hidden data-lp-rows><p data-product="operator-bundle">Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Rules of Engagement and Your Personal Specialists. Your Personal Specialists has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it also sells on its own for $27.</p><p data-product="claude-manual">A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work.</p><p data-product="top-15-rules">Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok.</p><p data-product="global-ai-race">One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined.</p><p data-product="thirty-ways">A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip.</p><p data-product="role-packs">A 72-page PDF of 14 ready-made Specialists for jobs like Sales or Finance, with 231 prompts and setups for ChatGPT, Claude, Gemini and Grok.</p></div>
@@ -132,7 +132,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     function dress() {
       /* a sentence that only makes sense while a given product is in the basket */
       var have = {}; Array.prototype.forEach.call(root.querySelectorAll('.lp-basket__list input[type=checkbox]'), function (c) { have[c.value] = true; });
-      Array.prototype.forEach.call(root.querySelectorAll('[data-only-with]'), function (el) { el.hidden = !have[el.getAttribute('data-only-with')]; });
+      Array.prototype.forEach.call(root.querySelectorAll('[data-only-with]'), function (el) { el.hidden = !el.getAttribute('data-only-with').split(' ').some(function (k) { return have[k]; }); });
       Array.prototype.forEach.call(root.querySelectorAll('.lp-basket__list label'), function (l) {
         var cb = l.querySelector('input[type=checkbox]'); if (!cb) return;
         l.setAttribute('data-product', cb.value);
@@ -178,6 +178,21 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
      whatever page they first landed on, and bump=1 when the add-on box is ticked.
      funnel.js does the same for its POST path. Shop buttons are added later, so this
      listens on the page. */
+  /* one line under each download on the thank-you page: the store draws the rows, this adds what each one is (matched on its name) */
+  (function () {
+    var box = document.querySelector('[data-store="files"][data-lines]'); if (!box) return;
+    var lines = []; try { lines = JSON.parse(box.getAttribute('data-lines')); } catch (e) {}
+    function dress() {
+      [].forEach.call(box.querySelectorAll('.store-file'), function (row) {
+        if (row.querySelector('.store-file__line')) return;
+        var nm = row.querySelector('span'); if (!nm) return; var t = nm.textContent.toLowerCase(), line = '';
+        lines.forEach(function (l) { if (!line && t.indexOf(l.match) > -1) line = l.line; });
+        if (!line) return;
+        var p = document.createElement('small'); p.className = 'store-file__line'; p.textContent = line; nm.appendChild(p);
+      });
+    }
+    if (window.MutationObserver) new MutationObserver(dress).observe(box, { childList: true }); dress();
+  })();
   var STORE = 'https://api.elvinpeters.com/api/store';
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[data-store-checkout], a[data-lp-buy]');
@@ -320,6 +335,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           if (r.group) li.className = 'lp-stack__part';
           n.className = 'lp-stack__name'; n.textContent = r.name; v.className = 'lp-stack__value';
           if (r.group && headerGroup === r.group && !r.standalone_price) { /* a piece under a header: no figure */ }
+          else if (pay && r.status === 'price' && r.standalone_price) { var s3 = document.createElement('s'); s3.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s3); var e3 = document.createElement('em'); e3.textContent = ' ' + (box.getAttribute('data-included') || ''); v.appendChild(e3); total += r.standalone_price; }
           else if (r.status === 'included' || !r.standalone_price) { v.textContent = hasLabel ? r.label : (box.getAttribute('data-included') || ''); }
           else if (struck) { var s2 = document.createElement('s'); s2.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s2); var em = document.createElement('em'); em.textContent = ' ' + label; v.appendChild(em); total += r.standalone_price; }
           else { v.textContent = r.standalone_price_text || money(r.standalone_price); total += r.standalone_price; }

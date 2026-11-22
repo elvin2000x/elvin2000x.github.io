@@ -78,7 +78,8 @@
             "on": true,
             "on_since": "2026-11-20"
           }
-        ]
+        ],
+        "review": "<span class=\"lp-stars\" role=\"img\" aria-label=\"Rated 5 out of 5 stars\">★★★★★</span> &ldquo;Must-read if you&rsquo;re looking to enhance your output.&rdquo; <span class=\"lp-ohero__verified\">Verified purchase, Amazon.ca</span>"
       }
     },
     {
@@ -167,8 +168,8 @@
         "paras": [
           "You opened an AI chat, typed in a task from your real week, and got back a paragraph that sounded like a brochure. Maybe you tried it twice. Then you went back to doing the task by hand and decided the people raving about AI were exaggerating.",
           "I spent most of a decade running performance marketing, and I have watched smart, busy people do the same. The tool they tried was good, but the request they gave it was thin, so the answer was thin, and most of them had never been shown how to direct it.",
-          "Two professionals can sit in front of the same AI tool with the same task. One gets a generic draft to fix. The other gets a near-final email. The gap between them is a skill, and this page shows you how to build it.",
-          "That is why I wrote The Artificial Advantage, and it is why I put this page together."
+          "Two professionals can sit in front of the same AI tool with the same task. One gets a generic draft to fix. The other gets a near-final email. The gap between them is a skill, and this bundle teaches it.",
+          "That is why I wrote The Artificial Advantage."
         ]
       }
     },

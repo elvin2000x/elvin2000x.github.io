@@ -87,6 +87,16 @@
           "label": "Link"
         }
       ]
+    },
+    {
+      "key": "paid_label",
+      "type": "text",
+      "label": "Words between the order number and the amount"
+    },
+    {
+      "key": "file_lines_json",
+      "type": "text",
+      "label": "One line under each download (JSON: match, line)"
     }
   ]
 }

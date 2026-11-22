@@ -35,7 +35,7 @@
     function dress() {
       /* a sentence that only makes sense while a given product is in the basket */
       var have = {}; Array.prototype.forEach.call(root.querySelectorAll('.lp-basket__list input[type=checkbox]'), function (c) { have[c.value] = true; });
-      Array.prototype.forEach.call(root.querySelectorAll('[data-only-with]'), function (el) { el.hidden = !have[el.getAttribute('data-only-with')]; });
+      Array.prototype.forEach.call(root.querySelectorAll('[data-only-with]'), function (el) { el.hidden = !el.getAttribute('data-only-with').split(' ').some(function (k) { return have[k]; }); });
       Array.prototype.forEach.call(root.querySelectorAll('.lp-basket__list label'), function (l) {
         var cb = l.querySelector('input[type=checkbox]'); if (!cb) return;
         l.setAttribute('data-product', cb.value);

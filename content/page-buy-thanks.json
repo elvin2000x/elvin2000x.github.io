@@ -31,7 +31,7 @@
         "sub": "Start with the 7-Day AI Workbook.",
         "start_label": "Start here",
         "start_body": "<div class=\"lp-pair\"><img src=\"/img/store/mockup-workbook.webp\" alt=\"The 7-Day AI Workbook as a book and a tablet\" width=\"840\" height=\"1260\"><img src=\"/img/store/lifestyle-on-desk.webp\" alt=\"The Artificial Advantage hardcover on a wooden desk beside a laptop, a coffee cup and a small plant\" width=\"600\" height=\"600\" loading=\"lazy\" decoding=\"async\"></div>\n<p><strong>The 7-Day AI Workbook.</strong> One step a day for seven days, using one real task of your own. On Day 1 you pick a task you do every week and name who it is for and what done looks like. The Workbook then points you to the book chapter to read each day.</p>",
-        "order_label": "",
+        "order_label": "Order",
         "files_label": "",
         "help_heading": "If something is wrong",
         "help": "<p>If a download does not open, or a product is not what you expected, write to elvin@elvinpeters.com. Digital purchases made on this site are covered by a [[refund]], so email within [[refund_days]] of your purchase for a full refund. Anything else you added to your order is listed with your downloads.</p>",
@@ -47,7 +47,9 @@
             "label": "Hardcover on Amazon",
             "href": "https://www.amazon.com/dp/B0H9BX9LB4?tag=elvinpeters-20"
           }
-        ]
+        ],
+        "paid_label": ", paid",
+        "file_lines_json": "[{\"match\":\"workbook\",\"line\":\"Start here. One real task of your own, one step a day for seven days.\"},{\"match\":\"toolkit\",\"line\":\"The exercises, prompts and practice plans as files you can edit.\"},{\"match\":\"everything ai\",\"line\":\"684 AI tools organised by job, with a level and a cost label on each.\"},{\"match\":\"commandments\",\"line\":\"Twelve habits for getting the answer you meant, and a one-page card for your desk.\"},{\"match\":\"companion\",\"line\":\"Opens online. The Prompt Builder, the reference card and the prompt and role libraries, kept current.\"},{\"match\":\"artificial advantage\",\"line\":\"The method, and the chapter the Workbook sends you to each day.\"}]"
       }
     },
     {

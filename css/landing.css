@@ -670,3 +670,9 @@ body.lp .lp-sec p.lp-note.lp-yes-note{ font-size:16px; line-height:24px }
 body.lp .lp-sec.lp-yes{ padding-top:16px; padding-bottom:24px }
 /* the sticky bar never sits over the last line: the page ends with room for it */
 @media (max-width:767px){ body.lp:has(.lp-sticky){ padding-bottom:calc(64px + env(safe-area-inset-bottom) + 16px) } }
+/* words batch */
+.lp-ohero__review{ margin:12px 0 0; font:400 15px/21px var(--sans); color:var(--lp-navy); text-align:left }
+.lp-stars{ color:#8a5a14; letter-spacing:1px; font-size:17px }
+.lp-ohero__verified{ opacity:.85 }
+body.lp .lp-bigprice{ font:700 32px/1.1 var(--sans); color:var(--lp-navy); margin:0 2px }
+.store-file__line{ display:block; margin-top:4px; font:400 14px/20px var(--sans); color:var(--lp-muted,#4a5568); font-weight:400 }

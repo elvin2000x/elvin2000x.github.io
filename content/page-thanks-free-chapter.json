@@ -25,6 +25,18 @@
       }
     },
     {
+      "type": "text",
+      "id": "doesnt-cover",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "It doesn't cover how to brief AI, how to fix a weak answer, or how to check the result before your name goes on it. The rest of the book does."
+        ]
+      }
+    },
+    {
       "id": "delivery",
       "type": "button",
       "note": "Placeholder: the words are from the plan. COPYWRITER's gated lines replace them before this goes live.",
@@ -56,6 +68,18 @@
         "caption": "",
         "poster": "/img/store/video-poster-thanks-chapter.webp",
         "poster_alt": ""
+      }
+    },
+    {
+      "type": "text",
+      "id": "bundle-line",
+      "data": {
+        "anchor": "",
+        "align": "center",
+        "heading": "",
+        "paras": [
+          "The Artificial Advantage Bundle: the book, its Toolkit and three exclusive bonuses, for <strong class=\"lp-bigprice\">$27</strong> instead of <s>$71.99</s> bought separately."
+        ]
       }
     },
     {
@@ -98,7 +122,7 @@
           "After Chapter 8 you'll know which AI setting to use and when. Use fast and cheap for a quick question, so you stop burning your usage on overkill. Use the slower setting for serious work, so a missed fact doesn't cost you later. It's one piece of a bigger method.",
           "AI answers come back bland for one reason: a thin request gets a thin answer.",
           "One habit to use today. Before AI writes anything, tell it: \"Ask me the five questions that would most improve the quality of your draft.\"",
-          "The full method is in The Artificial Advantage. The bundle has the book, the Toolkit and three exclusive bonuses."
+          "The full method is in The Artificial Advantage. The bundle has the book, the Toolkit and three exclusive bonuses: the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey."
         ]
       }
     },

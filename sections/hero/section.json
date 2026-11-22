@@ -118,6 +118,11 @@
       "key": "hook_page",
       "type": "text",
       "label": "Rotation page name (lowercase, dashes)"
+    },
+    {
+      "key": "under_buy",
+      "type": "text",
+      "label": "Line under the first buy button"
     }
   ]
 }

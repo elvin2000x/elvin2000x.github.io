@@ -63,7 +63,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=a50c1e18" />
+  <link rel="stylesheet" href="/css/landing.css?v=eaac7aec" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp">
@@ -90,10 +90,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
         <div class="lp-sum">
           <p class="lp-sum__head">Your order</p>
           <ul class="lp-stack__items" data-lp-rows></ul>
-          <p class="lp-stack__total lp-due lp-due--card"><span>Total</span> <strong data-lp-due></strong></p>
+          <p class="lp-stack__total lp-due lp-due--card"><span>Before tax</span> <strong data-lp-due></strong></p>
         </div>
         <label class="lp-bump lp-bump--pay"><input type="checkbox" data-store-bump><img class="lp-bump__cover" src="/img/store/ai-at-home-bump-thumb.webp" alt="Cover of AI at Home" width="40" height="64" loading="lazy"><span class="lp-bump__words"><strong class="lp-bump__yes">Yes, add AI at Home for $7</strong><span class="lp-bump__line">The words to paste for home jobs, already written: the week's dinners, your internet bill, a trip.</span></span></label>
-        <p class="lp-stack__total lp-due lp-due--pay"><span>Total</span> <strong data-lp-due></strong></p>
+        <p class="lp-stack__total lp-due lp-due--pay"><span>Before tax</span> <strong data-lp-due></strong></p>
         <div class="lp-pay__go">
           <button type="submit" class="btn btn--primary btn--lg lp-cta">Next: enter your card</button>
           <p class="lp-note">30-day money-back guarantee: email elvin@elvinpeters.com within 30 days for a full refund.</p>
@@ -139,6 +139,21 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
      whatever page they first landed on, and bump=1 when the add-on box is ticked.
      funnel.js does the same for its POST path. Shop buttons are added later, so this
      listens on the page. */
+  /* one line under each download on the thank-you page: the store draws the rows, this adds what each one is (matched on its name) */
+  (function () {
+    var box = document.querySelector('[data-store="files"][data-lines]'); if (!box) return;
+    var lines = []; try { lines = JSON.parse(box.getAttribute('data-lines')); } catch (e) {}
+    function dress() {
+      [].forEach.call(box.querySelectorAll('.store-file'), function (row) {
+        if (row.querySelector('.store-file__line')) return;
+        var nm = row.querySelector('span'); if (!nm) return; var t = nm.textContent.toLowerCase(), line = '';
+        lines.forEach(function (l) { if (!line && t.indexOf(l.match) > -1) line = l.line; });
+        if (!line) return;
+        var p = document.createElement('small'); p.className = 'store-file__line'; p.textContent = line; nm.appendChild(p);
+      });
+    }
+    if (window.MutationObserver) new MutationObserver(dress).observe(box, { childList: true }); dress();
+  })();
   var STORE = 'https://api.elvinpeters.com/api/store';
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[data-store-checkout], a[data-lp-buy]');
@@ -281,6 +296,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
           if (r.group) li.className = 'lp-stack__part';
           n.className = 'lp-stack__name'; n.textContent = r.name; v.className = 'lp-stack__value';
           if (r.group && headerGroup === r.group && !r.standalone_price) { /* a piece under a header: no figure */ }
+          else if (pay && r.status === 'price' && r.standalone_price) { var s3 = document.createElement('s'); s3.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s3); var e3 = document.createElement('em'); e3.textContent = ' ' + (box.getAttribute('data-included') || ''); v.appendChild(e3); total += r.standalone_price; }
           else if (r.status === 'included' || !r.standalone_price) { v.textContent = hasLabel ? r.label : (box.getAttribute('data-included') || ''); }
           else if (struck) { var s2 = document.createElement('s'); s2.textContent = r.standalone_price_text || money(r.standalone_price); v.appendChild(s2); var em = document.createElement('em'); em.textContent = ' ' + label; v.appendChild(em); total += r.standalone_price; }
           else { v.textContent = r.standalone_price_text || money(r.standalone_price); total += r.standalone_price; }

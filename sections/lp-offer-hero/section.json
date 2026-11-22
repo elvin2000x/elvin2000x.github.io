@@ -166,6 +166,11 @@
       "key": "hook_page",
       "type": "text",
       "label": "Rotation page name (lowercase, dashes)"
+    },
+    {
+      "key": "review",
+      "type": "html",
+      "label": "Review line under the button"
     }
   ]
 }
