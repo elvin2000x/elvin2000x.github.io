@@ -30,6 +30,26 @@
       "label": "Row pictures (JSON: product key to picture)"
     },
     {
+      "key": "sources_json",
+      "type": "text",
+      "label": "Price sources (JSON: product key to {text, href}; href optional)"
+    },
+    {
+      "key": "bought_line",
+      "type": "text",
+      "label": "Line after the rows (use [[total]] and [[price]] for the store's numbers)"
+    },
+    {
+      "key": "footnote",
+      "type": "html",
+      "label": "Footnote under the line (16 px)"
+    },
+    {
+      "key": "guarantee",
+      "type": "text",
+      "label": "Guarantee line under the button"
+    },
+    {
       "key": "summary_heading",
       "type": "text",
       "label": "Heading above the order rows"

@@ -753,3 +753,13 @@ body.lp .lp-media h3.lp-media__h{ font:700 22px/1.25 var(--serif); color:var(--l
 .lp-gallery__body > :first-child{ margin-top:0 }
 .lp-gallery__caption{ margin:8px 0 0; font:400 15px/1.5 var(--sans); color:var(--lp-navy) }
 body.lp .lp-gallery h3.lp-gallery__h{ font:700 22px/1.25 var(--serif); color:var(--lp-navy) }
+/* offer v7 template pieces */
+.lp-stack__src{ display:block; margin-top:2px; font:400 14px/20px var(--sans); color:var(--lp-navy); opacity:.8 }
+.lp-stack__src a{ color:inherit; text-decoration:underline; text-underline-offset:2px }
+body.lp .lp-stack .lp-stack__bought{ margin:16px var(--lp-stack-pad,0) 0; font:700 19px/26px var(--sans); color:var(--lp-navy) }
+body.lp .lp-stack .lp-stack__footnote{ margin:10px var(--lp-stack-pad,0) 0; font:400 16px/24px var(--sans); color:var(--lp-navy) }
+body.lp .lp-stack .lp-stack__guarantee{ margin:8px var(--lp-stack-pad,0) 0; font:400 15px/21px var(--sans); color:var(--lp-navy); text-align:center }
+.lp-addon__pages{ display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 0; justify-content:center }
+.lp-addon__pages img{ flex:1 1 0; min-width:0; max-width:calc(50% - 5px); width:auto; height:auto; border:1px solid #c9d3de; border-radius:3px; background:#fff }
+.lp-addon__pages:not(:has(img)){ display:none }
+.lp-addon__pages figcaption{ flex:0 0 100%; font:400 14px/20px var(--sans); color:var(--lp-navy); text-align:center }

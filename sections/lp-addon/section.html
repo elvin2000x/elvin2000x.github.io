@@ -15,6 +15,14 @@
           </ul>
         </div>
       </div>
+      <figure class="lp-addon__pages">
+{{#pages}}
+        <img src="{{src}}" alt="{{alt}}" width="{{w}}" height="{{h}}" loading="lazy" decoding="async">
+{{/pages}}
+{{#pages_caption}}
+        <figcaption>{{pages_caption}}</figcaption>
+{{/pages_caption}}
+      </figure>
       <label class="lp-addon__tick"><input type="checkbox" data-lp-addon data-lp-addon-price="{{price}}" autocomplete="off"><span>{{label}}</span></label>
 {{#button_off}}
       <div class="lp-addon__buy">

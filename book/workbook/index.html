@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=341f52ba" />
+  <link rel="stylesheet" href="/css/landing.css?v=1afa94d3" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp">
@@ -312,6 +312,14 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
         });
         f = { front_price: f.front_price, front_price_text: f.front_price_text, stack: rows };
         var thumbs = {}; try { thumbs = JSON.parse(box.getAttribute('data-thumbs') || '{}'); } catch (e) {}
+        var sources = {}; try { var sEl = box.querySelector('[data-lp-sources]'); sources = sEl ? JSON.parse(sEl.textContent) : {}; } catch (e) {}
+        /* a small line under a row's name saying where its price comes from; a link opens in a new tab */
+        function srcLine(key, nameEl) {
+          var s = sources[key]; if (!s || !s.text) return;
+          var sm = document.createElement('small'); sm.className = 'lp-stack__src';
+          if (s.href) { var a = document.createElement('a'); a.href = s.href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = s.text; sm.appendChild(a); } else sm.textContent = s.text;
+          nameEl.appendChild(sm);
+        }
         var ul = box.querySelector('[data-lp-rows]'), total = 0, last = null, headerGroup = null, pay = box.classList.contains('lp-stack--pay');
         ul.innerHTML = '';
         var sumHead = box.getAttribute('data-summary');
@@ -329,7 +337,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
             if (r.standalone_price) { var hs = document.createElement('s'); hs.textContent = r.standalone_price_text || money(r.standalone_price); hv.appendChild(hs); total += r.standalone_price; }
             if (label) { var he = document.createElement('em'); he.textContent = ' ' + label; hv.appendChild(he); }
             if (thumbs[r.key]) { var ti = document.createElement('img'); ti.src = thumbs[r.key]; ti.alt = ''; ti.width = 56; ti.height = 90; ti.loading = 'eager'; hh.appendChild(ti); }
-            hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group;
+            srcLine(r.key, hn); hh.appendChild(hn); hh.appendChild(hv); ul.appendChild(hh); last = r.group; headerGroup = r.group;
             if (r._parts && r._parts.length) { var pl = document.createElement('li'); pl.className = 'lp-stack__parts'; pl.textContent = r._parts.join(', '); ul.appendChild(pl); }
             return;
           }
@@ -346,13 +354,15 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
           if (thumbs[r.key]) { var im2 = document.createElement('img'); im2.src = thumbs[r.key]; im2.alt = ''; im2.width = 56; im2.height = 90; im2.loading = 'eager'; li.appendChild(im2); }
           if (pay && !thumbs[r.key]) { var tile = document.createElement('span'); tile.className = 'lp-stack__tile'; tile.setAttribute('aria-hidden', 'true'); tile.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20V6h3v14M10 20V4h3.4v16M15.6 20l3.2-14.2 3 .7-2.9 13.5"/></svg>'; li.appendChild(tile); }
           if (pay && (r.status === 'included' || !r.standalone_price) && v.childNodes.length === 1 && v.firstChild.nodeType === 3) { var inc = document.createElement('em'); inc.textContent = v.textContent; v.textContent = ''; v.appendChild(inc); }
-          li.appendChild(n); li.appendChild(v); ul.appendChild(li);
+          srcLine(r.key, n); li.appendChild(n); li.appendChild(v); ul.appendChild(li);
         });
         [].forEach.call(document.querySelectorAll('[data-lp-total-all]'), function (el) { el.textContent = money(total); });
         [].forEach.call(document.querySelectorAll('[data-lp-front-all]'), function (el) { el.textContent = money(f.front_price); });
         var tEl = box.querySelector('[data-lp-total]'), fEl = box.querySelector('[data-lp-front]');
         if (tEl) tEl.textContent = money(total);
         if (fEl) fEl.textContent = f.front_price_text || money(f.front_price);
+        var bEl = box.querySelector('[data-lp-bought]');
+        if (bEl) bEl.textContent = (bEl.getAttribute('data-lp-bought') || '').split('[[total]]').join(money(total)).split('[[price]]').join(money(f.front_price));
         /* Payment page: the amount due follows the add-on tick, in the total row and in the phone bar. */
         var dueEls = document.querySelectorAll('[data-lp-due]');
         if (dueEls.length) {

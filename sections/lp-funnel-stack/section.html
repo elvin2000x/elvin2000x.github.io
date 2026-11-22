@@ -2,6 +2,9 @@
   <div class="lp-in">
     <h2>{{heading}}</h2>
     <div class="lp-stack{{#layout}} lp-stack--{{layout}}{{/layout}}" data-lp-fstack="{{funnel}}" data-free="{{free_label}}" data-included="{{included_label}}"{{#thumbs_json}} data-thumbs='{{thumbs_json}}'{{/thumbs_json}}{{#summary_heading}} data-summary="{{summary_heading}}"{{/summary_heading}}>
+{{#sources_json}}
+      <script type="application/json" data-lp-sources>{{sources_json}}</script>
+{{/sources_json}}
 {{#preview_stack_json}}
       <script type="application/json" data-lp-stack-preview>{{preview_stack_json}}</script>
 {{/preview_stack_json}}
@@ -11,8 +14,17 @@
 {{/shots}}
       </div>
       <ul class="lp-stack__items" data-lp-rows></ul>
+{{#bought_line}}
+      <p class="lp-stack__bought" data-lp-bought="{{bought_line}}"></p>
+      <span data-lp-total hidden></span><span data-lp-front hidden></span>
+{{/bought_line}}
+{{^bought_line}}
       <p class="lp-stack__total"><span>{{total_label}}</span> <strong data-lp-total></strong></p>
       <p class="lp-stack__price"><span>{{price_label}}</span> <strong data-lp-front></strong></p>
+{{/bought_line}}
+{{#footnote}}
+      <p class="lp-stack__footnote">{{footnote}}</p>
+{{/footnote}}
 {{#email_label}}
       <form class="lp-pay" data-store-checkout="{{funnel}}">
         <label>{{email_label}}
@@ -32,6 +44,9 @@
 {{#button}}
       {{>lp-button}}
 {{/button}}
+{{#guarantee}}
+      <p class="lp-stack__guarantee">{{guarantee}}</p>
+{{/guarantee}}
 {{#note}}
       <p class="lp-note">{{note}}</p>
 {{/note}}

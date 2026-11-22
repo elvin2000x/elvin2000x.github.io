@@ -57,6 +57,38 @@
       ]
     },
     {
+      "key": "pages",
+      "type": "list",
+      "label": "Two inside pages",
+      "fields": [
+        {
+          "key": "src",
+          "type": "text",
+          "label": "Image address"
+        },
+        {
+          "key": "alt",
+          "type": "text",
+          "label": "Description"
+        },
+        {
+          "key": "w",
+          "type": "text",
+          "label": "Width"
+        },
+        {
+          "key": "h",
+          "type": "text",
+          "label": "Height"
+        }
+      ]
+    },
+    {
+      "key": "pages_caption",
+      "type": "text",
+      "label": "Caption under the pages"
+    },
+    {
       "key": "label",
       "type": "text",
       "label": "Box label (never ticked for the buyer)"
