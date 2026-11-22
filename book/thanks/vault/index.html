@@ -362,14 +362,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
     (function () {
       var bar = document.querySelector('[data-lp-obar]');
       if (!bar || !('IntersectionObserver' in window)) return;
-      var seen = {}, above = {}, btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-obar__btn), .lp-pay__go .lp-cta');
-      /* The bar steps aside as soon as any part of a page button is above it (bar height 66, margin 72), so it never covers one; and while a field has focus. */
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { var k = e.target.getAttribute('data-sid'); seen[k] = e.isIntersecting; above[k] = !e.isIntersecting && e.boundingClientRect.bottom < 0; });
-        /* shown only after a button has scrolled up out of view and none is on screen; never before the first one */
-        var any = false, gone = false; for (var k in seen) { if (seen[k]) any = true; if (above[k]) gone = true; }
-        if (any || !gone) bar.setAttribute('data-off', ''); else bar.removeAttribute('data-off');
-      }, { rootMargin: '0px 0px -72px 0px', threshold: 0 });
+      var btns = document.querySelectorAll('a.btn--primary[href="/book/checkout/"]:not(.lp-obar__btn), .lp-pay__go .lp-cta');
+      /* The bar steps aside as soon as any part of a page button is above it (bar height 66, margin 72), so it never covers one; and while a field has focus.
+         The observer only reports that something changed: the decision is always worked out from the buttons' positions (recheck below). */
+      var io = new IntersectionObserver(function () { later(); }, { rootMargin: '0px 0px -72px 0px', threshold: 0 });
       /* The observer alone misses an instant jump to the top (a status-bar tap), because every button stays "not on screen"
          the whole way. So the same rule is also worked out from the buttons' positions on scroll, resize and page show. */
       var q = false;
