@@ -676,3 +676,13 @@ body.lp .lp-sec.lp-yes{ padding-top:16px; padding-bottom:24px }
 .lp-ohero__verified{ opacity:.85 }
 body.lp .lp-bigprice{ font:700 32px/1.1 var(--sans); color:var(--lp-navy); margin:0 2px }
 .store-file__line{ display:block; margin-top:4px; font:400 14px/20px var(--sans); color:var(--lp-muted,#4a5568); font-weight:400 }
+/* offer hero on a phone: the small picture sits beside the price, so the first buy button is on the first screen for every headline variant */
+@media (max-width:767px){
+  .lp-ohero__grid{ display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:16px; align-items:center }
+  .lp-ohero__buy{ display:contents }
+  .lp-ohero__shot{ grid-column:1; grid-row:1; margin:0 }
+  .lp-ohero__shot img{ display:block; height:120px; width:auto; max-width:46vw; object-fit:contain }
+  .lp-ohero__price{ grid-column:2; grid-row:1; margin:0; text-align:left; flex-wrap:wrap; gap:0 10px; justify-content:flex-start }
+  .lp-ohero__buy > :not(.lp-ohero__price){ grid-column:1 / -1 }
+  .lp-ohero__btn{ margin-top:12px }
+}
