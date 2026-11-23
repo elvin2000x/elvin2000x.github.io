@@ -43,6 +43,39 @@
       "default": "Read the full answer"
     },
     {
+      "key": "compact",
+      "type": "choice",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "",
+          "label": "Requests and answers in full"
+        },
+        {
+          "value": "1",
+          "label": "Answer against answer, requests behind a tap"
+        }
+      ]
+    },
+    {
+      "key": "request_label",
+      "type": "text",
+      "label": "Link that opens the requests",
+      "default": "See the request"
+    },
+    {
+      "key": "thin_request_label",
+      "type": "text",
+      "label": "Label before the first request",
+      "default": "One line:"
+    },
+    {
+      "key": "directed_request_label",
+      "type": "text",
+      "label": "Label before the second request",
+      "default": "The job, explained:"
+    },
+    {
       "key": "pairs",
       "type": "list",
       "label": "Pairs",
@@ -117,6 +150,12 @@
           "key": "note",
           "type": "html",
           "label": "Line under the pair (optional)",
+          "default": ""
+        },
+        {
+          "key": "added",
+          "type": "html",
+          "label": "What the explained request added (compact layout)",
           "default": ""
         }
       ]

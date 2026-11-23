@@ -25,7 +25,9 @@
 {{#look_items}}
             <li class="lp-gallery__item lp-gallery__item--doc">
               <div class="lp-doc">
+{{#thumb}}
                 <img class="lp-doc__edge" src="{{thumb}}" alt="" width="{{thumb_w}}" height="{{thumb_h}}" loading="lazy" decoding="async">
+{{/thumb}}
                 <p class="lp-doc__label">{{doc_label}}</p>
 {{#doc_heading}}
                 <p class="lp-doc__h">{{doc_heading}}</p>

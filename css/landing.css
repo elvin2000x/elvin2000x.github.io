@@ -818,3 +818,8 @@ body.lp .lp-addon__what{ margin:12px 0 0; font:400 16px/1.5 var(--sans); color:v
 /* ticket 704: each look-inside block ends on one line back to the bundle */
 body.lp .lp-gallery__tail{ margin:16px 0 0; font:600 17px/1.5 var(--sans); color:var(--lp-navy) }
 body.lp .lp-media__body p.lp-tail{ font-weight:600; font-size:17px }
+/* ticket 704 v9: answer against answer */
+.lp-pairs__added{ margin:12px 0 0; font:400 16px/1.5 var(--sans); color:var(--lp-navy) }
+.lp-pairs__links{ display:flex; flex-direction:column; gap:0; margin:4px 0 0 }
+.lp-media__fig:empty{ display:none }
+.lp-pairs__oneline{ margin:0 0 12px; font:400 16px/1.5 var(--sans); color:var(--lp-navy) }

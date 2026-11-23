@@ -11,6 +11,27 @@
 {{#title}}
       <h3 class="lp-pairs__title">{{title}}</h3>
 {{/title}}
+{{#compact}}
+      <p class="lp-pairs__oneline"><strong>{{oneline_label}}</strong> {{thin_request}}</p>
+      <div class="lp-pairs__grid">
+        <article class="lp-pairs__card lp-pairs__card--thin">
+          <p class="lp-pairs__kind">{{thin_kind}}</p>
+          <div class="lp-pairs__ans">{{thin_answer}}</div>
+        </article>
+        <article class="lp-pairs__card lp-pairs__card--directed">
+          <p class="lp-pairs__kind">{{directed_kind}}</p>
+          <div class="lp-pairs__ans">{{directed_answer}}</div>
+        </article>
+      </div>
+{{#added}}
+      <p class="lp-pairs__added">{{added}}</p>
+{{/added}}
+      <div class="lp-pairs__links">
+        <details class="lp-pairs__more"><summary>{{request_label}}</summary><div class="lp-pairs__ans"><p>{{directed_request}}</p></div></details>
+        <details class="lp-pairs__more"><summary>{{more_label}}</summary><div class="lp-pairs__ans"><p><strong>{{thin_kind}}</strong></p>{{thin_full}}<p><strong>{{directed_kind}}</strong></p>{{directed_full}}</div></details>
+      </div>
+{{/compact}}
+{{^compact}}
       <div class="lp-pairs__grid">
         <article class="lp-pairs__card lp-pairs__card--thin">
           <p class="lp-pairs__kind">{{thin_kind}}</p>
@@ -31,6 +52,7 @@
 {{/directed_full}}
         </article>
       </div>
+{{/compact}}
 {{#note}}
       <p class="lp-pairs__note">{{note}}</p>
 {{/note}}

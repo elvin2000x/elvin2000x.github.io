@@ -36,14 +36,14 @@
             }
           ]
         },
-        "bar_left": "The Bundle, $27 before tax",
-        "bar_left_addon": "Bundle + AI at Home, $34 before tax",
+        "bar_left": "The Bundle, $27, plus sales tax where it applies",
+        "bar_left_addon": "Bundle + AI at Home, $34, plus sales tax where it applies",
         "bar_button": "Get the bundle",
         "button": {
           "label": "Get the bundle for $27",
           "href": "/book/checkout/"
         },
-        "note": "<s>$71.99</s> $27, paid once. 30-day money-back promise: email elvin@elvinpeters.com for a full refund. Prices are in US dollars, plus sales tax where it applies.",
+        "note": "Paid once. 30-day money-back guarantee: email elvin@elvinpeters.com for a full refund. Prices are in US dollars, plus sales tax where it applies.",
         "shot_w": "1600",
         "shot_h": "1067",
         "shot_phone_w": "800",
@@ -104,7 +104,7 @@
       "data": {
         "lines": [
           {
-            "line": "Works with ChatGPT, Claude, Gemini and Copilot. A free plan is enough to start."
+            "line": "The book works with ChatGPT, Claude, Gemini and Copilot. A free plan is enough to start."
           },
           {
             "line": "The Toolkit is 25 prompts, 25 role setups and 16 exercises, in Word files you can edit."
@@ -112,18 +112,6 @@
           {
             "line": "The Workbook is one step a day for seven days, on one real task from your own week."
           }
-        ]
-      }
-    },
-    {
-      "id": "v8-video-last",
-      "type": "text",
-      "data": {
-        "anchor": "",
-        "align": "left",
-        "heading": "",
-        "paras": [
-          "The idea behind this bundle starts with a mistake I made early in my career."
         ]
       }
     },
@@ -138,8 +126,6 @@
           "Early in my career, I sent generic job applications to every role I could find, and thought I was being efficient. I was wasting everyone's time, including mine.",
           "A friend told me he'd applied to hundreds of jobs in a few weeks and hadn't had a single call back. I knew why. The jobs I got came from a few applications I aimed at the role.",
           "AI works the same way. Send it a generic request, and you get a generic answer, over and over. Aim it instead. Tell it who it's for, why it matters, and what a good result looks like.",
-          "That's what my book, The Artificial Advantage, teaches: a way to think through your work before you hand it to AI.",
-          "As someone who follows AI, it sounds like it's magic until you realize it's not.",
           "Which of these two would you rather send a client? Below is the same request, sent to the same AI twice. The bundle teaches you how to write the better one."
         ]
       }
@@ -185,49 +171,57 @@
         "pairs": [
           {
             "title": "An email to a supplier about late deliveries",
-            "thin_kind": "One line",
+            "thin_kind": "From one line:",
             "thin_request": "Write an email to a supplier about late deliveries.",
             "thin_answer_label": "The answer, first lines:",
             "thin_answer": "<p>Hi [Supplier Contact Name], I'm writing about the late deliveries we've had on our recent orders. Over the past [timeframe], several shipments have arrived after the agreed dates...</p>",
             "thin_full": "<p>Subject: Late Deliveries on Recent Orders</p><p>Hi [Supplier Contact Name],</p><p>I'm writing about the late deliveries we've had on our recent orders. Over the past [timeframe], several shipments have arrived after the agreed dates, including:</p><ul><li>Order #[number], due [date], received [date]</li><li>Order #[number], due [date], received [date]</li><li>Order #[number], due [date], received [date]</li></ul><p>These delays have caused problems on our side, including [missed customer commitments / production holdups / extra costs]. We value our relationship with [Supplier Company] and want to find a way to fix this.</p><p>Could you please:</p><ol><li>Explain what caused the delays.</li><li>Confirm the delivery dates for any open orders.</li><li>Share the steps you will take to keep future shipments on schedule.</li></ol><p>Please reply by [date] so we can plan around your answer. If there are capacity or logistics issues on your end, let us know early and we can work together on a solution, such as adjusting order timing or sizes.</p><p>If on-time delivery does not improve, we may need to review our arrangement. I would much rather resolve this together.</p><p>Thank you for your attention to this. I look forward to your reply.</p><p>Best regards,<br>[Your Name]<br>[Your Title]<br>[Company Name]<br>[Phone] | [Email]</p>",
-            "directed_kind": "The job, explained",
+            "directed_kind": "From the job explained:",
             "directed_request": "Act as an operations manager at a mid-sized distribution company. Write an email to our supplier's account rep. Three of their last five shipments arrived two to four days late, and last week's delay made us miss a customer's restock date. We want to keep working with them. Ask for a call this week and a written plan to get deliveries back on schedule by the end of the month. Firm and specific, not angry. Under 150 words.",
             "directed_answer_label": "The answer, first lines:",
             "directed_answer": "<p>We value our partnership, and I want to raise a problem before it grows. Three of your last five shipments arrived two to four days late. Last week's delay caused us to miss a customer's restock date, which has a real cost for us and for them.</p>",
             "directed_full": "<p>Subject: Late deliveries and a plan to fix them</p><p>Hi [Name],</p><p>We value our partnership, and I want to raise a problem before it grows. Three of your last five shipments arrived two to four days late. Last week's delay caused us to miss a customer's restock date, which has a real cost for us and for them.</p><p>I'd like to get this resolved and keep working together. Could we schedule a call this week to go over what's driving the delays?</p><p>After the call, please send a written plan by [date] that covers:</p><ul><li>The root cause of the recent delays</li></ul><ul><li>The specific steps you'll take to fix them</li></ul><ul><li>A schedule showing on-time delivery restored by the end of the month</li></ul><p>If there are constraints on our side that contribute, tell me and we'll address them.</p><p>I'm available [days/times]. Thanks for your help with this.</p><p>Best regards, [Your Name], Operations Manager, [Company]</p>",
-            "note": ""
+            "note": "",
+            "added": "What the explained request added: three of five shipments late, a missed restock date, a call this week, and a plan by the end of the month."
           },
           {
             "title": "A letter to a tax client about a late filing",
-            "thin_kind": "One line",
+            "thin_kind": "From one line:",
             "thin_request": "Write a letter to a client explaining why their tax return will be filed late.",
             "thin_answer_label": "The answer, first lines:",
             "thin_answer": "<p>Dear [Client Name], I am writing to let you know that your [Tax Year] tax return will not be filed by the [filing deadline, e.g., April 30] deadline...</p>",
             "thin_full": "<p>[Your Name]<br>[Your Firm or Practice Name]<br>[Address]<br>[Phone] | [Email]</p><p>[Date]</p><p>[Client Name]<br>[Client Address]</p><p>Re: Your [Tax Year] Tax Return</p><p>Dear [Client Name],</p><p>I am writing to let you know that your [Tax Year] tax return will not be filed by the [filing deadline, e.g., April 30] deadline. I want to explain why, what it means for you, and what we are doing to resolve it.</p><p><strong>Why the return is delayed</strong></p><p>We are still waiting on [a T-slip / K-1 / corrected statement / signed document] from [source, e.g., your brokerage, employer, or partnership]. Without it, we cannot report your income accurately. Filing with estimated figures would risk errors that could trigger a reassessment, penalties, or a request for amended returns later. Filing it correctly the first time is the safer choice.</p><p>[Alternative or additional reasons, as applicable:]</p><ul><li>Some of the documents we received were incomplete, and we have asked you for the missing items.</li><li>Your return involves [rental income, business income, foreign assets, or a sale of property] that needs extra review.</li><li>A change in [tax rules or filing software] on [date] pushed back our work schedule.</li></ul><p><strong>What this means for you</strong></p><ul><li><strong>If you owe tax:</strong> Interest and late-filing penalties generally start to accrue from the original deadline. To limit this, I recommend sending an estimated payment of $[amount] by [date]. Any overpayment will be refunded when the return is assessed.</li><li><strong>If you are due a refund:</strong> There is usually no penalty for filing late. Your refund will simply arrive later than it otherwise would.</li><li><strong>If you are expecting benefits or credits tied to your return,</strong> they may be delayed until the return is processed.</li></ul><p><strong>What happens next</strong></p><ol><li>We will file the return as soon as we receive [missing item]. We expect to do so by [target date].</li><li>Please send [missing item or action required] by [date].</li><li>I will confirm with you as soon as the return has been filed and send you a copy for your records.</li></ol><p>I apologize for the inconvenience and understand that this is not the news you were hoping for. If you have questions or would like to talk through any of this, please call me at [phone] or reply to this letter. I am happy to help.</p><p>Sincerely,</p><p>[Your Name]<br>[Title]<br>[Firm or Practice Name]</p>",
-            "directed_kind": "The job, explained",
+            "directed_kind": "From the job explained:",
             "directed_request": "Act as the owner of a small bookkeeping and tax practice writing to a long-time client. Write a short letter explaining that their personal tax return will be filed two days later than we planned, because one investment slip from their bank arrived late and we won't file without it. Filing with every slip avoids a correction later. The client is a retired teacher who worries about penalties. Tell them we will not charge any extra fee for the delay and that we'll call them the day it's filed. Warm, plain language, no jargon. Under 150 words.",
             "directed_answer_label": "The answer, first lines:",
             "directed_answer": "<p>I'm writing with a small update on your tax return. One of your investment slips from your bank arrived late, and we won't file without it. Filing with every slip in hand means we avoid having to correct the return afterward, which is the safer path for you. Because of this, your return will be filed two days later than we planned. Please don't worry about penalties. This short delay is well within the time you have, and nothing about it puts you at risk.</p>",
             "directed_full": "<p>Dear [Name],</p><p>I'm writing with a small update on your tax return. One of your investment slips from your bank arrived late, and we won't file without it. Filing with every slip in hand means we avoid having to correct the return afterward, which is the safer path for you.</p><p>Because of this, your return will be filed two days later than we planned. <strong>Please don't worry about penalties. This short delay is well within the time you have, and nothing about it puts you at risk.</strong></p><p>We will not charge any extra fee for the delay. We'll also call you the day your return is filed, so you'll hear it from us right away.</p><p>If you have any questions in the meantime, just pick up the phone. I'm always glad to hear from you.</p><p>Warmly, [Your name], [Practice name]</p>",
-            "note": "Read it before you send it. The better letter tells the client not to worry about penalties, and nobody gave the AI that fact. That is why the book teaches a two-step check before your name goes on anything."
+            "note": "Read it before you send it. The better letter tells the client not to worry about penalties, and nobody gave the AI that fact. That is why the book teaches a two-step check before your name goes on anything.",
+            "added": "What the explained request added: one late bank slip, two days late, a retired teacher who worries about penalties, no extra fee, and a call the day it's filed."
           },
           {
             "title": "A grant paragraph for a community association",
-            "thin_kind": "One line",
+            "thin_kind": "From one line:",
             "thin_request": "Write a grant application paragraph for our community association.",
             "thin_answer_label": "The answer, first lines:",
             "thin_answer": "<p>Our community association has served as a hub for neighbourhood connection, safety, and shared growth for over a decade...</p>",
             "thin_full": "<p>Our community association has served as a hub for neighbourhood connection, safety, and shared growth for over a decade. We are requesting funding to expand our programming through a revitalized community space, offering free workshops, youth mentorship, seniors' social programs, and seasonal events open to all residents. These funds will directly support facility upgrades, program supplies, and volunteer training, allowing us to reach more households, particularly those facing barriers such as limited income, language, or mobility. With a volunteer-driven model and strong local partnerships, every dollar goes further: we anticipate engaging at least 500 residents over the next year, strengthening social ties, reducing isolation, and building a more resilient, inclusive community. Your investment will leave a lasting, measurable impact on the people who call this neighbourhood home.</p><p><em>Tip: Swap in your association's name, location, founding year, and specific numbers or program details to match the funder's priorities.</em></p>",
-            "directed_kind": "The job, explained",
+            "directed_kind": "From the job explained:",
             "directed_request": "Act as the volunteer treasurer of a small community association applying for a $5,000 city grant to replace the park benches. Write the one-paragraph project summary. The reviewers score on community need and on how the money will be spent. We have 140 member households, the benches are 22 years old, and two were removed for safety last summer. Write in warm, plain first person plural, the way a retired school principal would speak at a board meeting. No buzzwords. Under 120 words.",
             "directed_answer_label": "The answer, first lines:",
             "directed_answer": "<p>We have 140 member households, and every one of them knows our park benches. They are 22 years old, and last summer we had to remove two for safety because the wood and bolts could no longer be trusted.</p>",
             "directed_full": "<p>We have 140 member households, and every one of them knows our park benches. They are 22 years old, and last summer we had to remove two for safety because the wood and bolts could no longer be trusted. Neighbors now stand or sit on the grass, and older residents and parents with small children feel it most. We are asking for $5,000 to replace the worn benches. Every dollar goes to the benches themselves: materials, delivery, and installation. Our volunteers will handle the removal of the old ones and the site cleanup, so nothing goes to overhead. These benches will serve us for decades.</p>",
-            "note": "The one-line version invented details nobody gave it, such as \"over a decade\". The explained version used the real numbers."
+            "note": "The one-line version invented details nobody gave it, such as \"over a decade\". The explained version used the real numbers.",
+            "added": "What the explained request added: a $5,000 city grant for park benches, 140 member households, benches 22 years old, and two removed last summer."
           }
         ],
         "after": "",
-        "buy": ""
+        "buy": "",
+        "compact": "1",
+        "request_label": "See the request",
+        "thin_request_label": "One line:",
+        "directed_request_label": "The job, explained:",
+        "oneline_label": "The one-line request:"
       }
     },
     {
@@ -243,7 +237,7 @@
         "docs": "1",
         "items": [
           {
-            "thumb": "/img/store/look-inside/commandments-voice-file-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/commandments-voice-file-page.webp",
@@ -276,7 +270,7 @@
         "docs": "1",
         "items": [
           {
-            "thumb": "/img/store/look-inside/toolkit-first-draft-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/toolkit-first-draft-page.webp",
@@ -289,7 +283,7 @@
             "doc_html": "<p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
           },
           {
-            "thumb": "/img/store/look-inside/toolkit-tone-calibration-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/toolkit-tone-calibration-page.webp",
@@ -302,7 +296,7 @@
             "doc_html": "<p class=\"lp-doc__mono\">Act as a professional editor. Rewrite the following passage so the tone matches [target: e.g., authoritative but approachable, urgent but not alarmist, direct without being blunt]. Keep the meaning intact. Note any sentence where you changed the meaning, flag it with [CHANGED] so I can review.</p>"
           },
           {
-            "thumb": "/img/store/look-inside/toolkit-plain-language-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/toolkit-plain-language-page.webp",
@@ -328,13 +322,12 @@
       "data": {
         "anchor": "",
         "align": "left",
-        "heading": "Who made this, and how to check him",
+        "heading": "Who wrote the book",
         "paras": [
           "I dropped my Python coding class a few weeks into my first year of university. Nothing about it made sense to me, no matter how much time I put in. And I was the kid who loved gadgets and wanted to be an inventor.",
           "I ended up in digital marketing. Then I went out on my own, and I needed websites. I still couldn't code.",
           "I'd used AI for years, but only for the basics. Research, ideas, email. So I spent a year testing AI tools and ways of working, and writing down what worked and what didn't. That year became my foundation. Now I build my own websites with AI, including this page. My notes from that year became my book, The Artificial Advantage.",
-          "I'm not a master of AI. Mastery is a journey without a destination. The book is a shortcut, built on a year of hard-won lessons, so you can start where I ended up.",
-          "I've been using AI since it came out, and I'm still guilty of the most common errors.",
+          "The book is a shortcut, built on a year of hard-won lessons, so you can start where I ended up.",
           "I'm Elvin Peters, and I'm not a tech wizard. If you've ever typed one line and got a brochure back, me too. My answers were poor until I learned to treat AI like a person who can't read my mind and will do the job however it sees fit until I say exactly how. I still slip when I'm lazy, and I pay for it by doing the work again, so I measure twice and cut once.",
           "AI turned research that used to take me days into hours. I ran paid media for easyfinancial, more than $50M in digital ad spend, then advised advertisers on Google's global clients team. In 2026 I became a founder, writing books and building with AI full time.",
           "My notes include what failed as well as what worked. They are the book, and the book is in this bundle."
@@ -417,7 +410,7 @@
             "doc_html": ""
           },
           {
-            "thumb": "/img/store/look-inside/ebook-chapter-1-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/ebook-chapter-1-page.webp",
@@ -430,7 +423,7 @@
             "doc_html": "<p>Marcus had a question about a tax form. He typed it into the chat the way he'd type it into a search bar, expecting the same thing a search bar gives him: the answer, retrieved from somewhere, correct. What came back was three confident paragraphs citing a specific line on a specific schedule. Clean and authoritative, the exact tone of a source that knows what it's talking about.</p><p>It was wrong. The line number didn't exist on that form.</p>"
           },
           {
-            "thumb": "/img/store/look-inside/ebook-chapter-6-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/ebook-chapter-6-page.webp",
@@ -586,7 +579,7 @@
         "heading": "",
         "paras": [
           "In 1921, at the University of Toronto, Frederick Banting kept failing. Months of study and failed attempts, with Charles Best. In January 1922, their first patient was treated with insulin. The breakthrough came after the failures, here in Toronto.",
-          "Most of us try AI twice, get a generic answer, and stop. The people who get good at it learn why an answer went wrong. That's what my book, The Artificial Advantage, teaches. Brief AI the way you'd brief a new hire. Check what comes back. And when it's wrong, trace it to the cause, so you fix the request instead of starting over.",
+          "Most of us try AI twice, get a generic answer, and stop. The people who get good at it learn why an answer went wrong. Brief AI the way you'd brief a new hire. Check what comes back. And when it's wrong, trace it to the cause, so you fix the request instead of starting over.",
           "Pick one real task. The 7-Day AI Workbook, included in the bundle, runs it for seven days, starting with the old way on Day 2. Why would a workbook start you there?"
         ]
       }
@@ -600,11 +593,11 @@
         "heading": "The 7-Day AI Workbook",
         "sub": "1",
         "lede": "One real task of your own, one step a day for seven days.",
-        "body": "<ul><li>Day 2: you run the task the way you do today, and save it.</li><li>Day 7: you run it with the full method, and compare.</li><li>You keep the template.</li></ul>",
+        "body": "<ul><li>Day 2: you run the task the way you do today, and save it.</li><li>Day 7: you run it with the full method, and compare.<br>That's why Day 2 comes first: on Day 7 you see the difference in your own work.</li><li>You keep the template.</li></ul>",
         "docs": "1",
         "items": [
           {
-            "thumb": "/img/store/look-inside/workbook-day-1-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/workbook-day-1-page.webp",
@@ -617,7 +610,7 @@
             "doc_html": "<p><strong>Today's skill:</strong> You direct, and the AI generates. Day 1 comes before the five CLEAR stages and sets the mindset that runs through all of them.</p><p>The Director's Mindset is a small pause before typing. Before you ask the AI for anything, you answer three questions: what do I need, who will use this, and what does good look like?</p>"
           },
           {
-            "thumb": "/img/store/look-inside/workbook-day-7-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/workbook-day-7-page.webp",
@@ -647,22 +640,22 @@
         "layout": "stack",
         "heading": "Everything AI 2026",
         "sub": "1",
-        "lede": "Look up the job in front of you and see the tools that fit, with what each costs.",
+        "lede": "",
         "mp4": "",
         "webm": "",
         "poster": "",
         "phone_mp4": "",
         "phone_webm": "",
         "phone_poster": "",
-        "image": "/img/store/look-inside/everything-ai-meetings-desktop.webp",
-        "phone": "/img/store/look-inside/everything-ai-meetings-phone.webp",
-        "w": "1200",
-        "h": "771",
-        "phone_w": "750",
-        "phone_h": "805",
-        "alt": "The Everything AI 2026 spreadsheet filtered to one job, Meetings, Notes and Productivity",
-        "caption": "One job, Meetings, Notes and Productivity: 23 tools.",
-        "body": "<ul><li>684 resources organised by job, each with a level and a cost label.</li><li>12 job stacks, a spreadsheet and a 23-page field guide.</li></ul><p class=\"lp-tail\">In the bundle, Everything AI 2026 shows which tool fits the job in front of you.</p>",
+        "image": "",
+        "phone": "",
+        "w": "",
+        "h": "",
+        "phone_w": "",
+        "phone_h": "",
+        "alt": "",
+        "caption": "",
+        "body": "<p>Look up the job in front of you and see the resources that fit, with what each costs. One job, Meetings, Notes and Productivity:</p><ul><li>Fathom: free meeting recorder with summaries and highlights. Beginner, freemium.</li><li>Fireflies: joins calls to record, transcribe and summarise. Beginner, freemium.</li><li>Clockwise: team calendar optimiser. Beginner, freemium.</li></ul><p>That job lists 23 resources. The guide has 12 job stacks, a spreadsheet and a 23-page field guide, and it's a dated snapshot.</p><p class=\"lp-tail\">In the bundle, Everything AI 2026 shows which resources fit the job in front of you.</p>",
         "buy": ""
       }
     },
@@ -676,7 +669,7 @@
         "paras": [
           "At sixty-five, Harland Sanders was living on a government cheque of a hundred and five dollars a month. What he had was a chicken recipe, built from years of cooking.",
           "You have a recipe too. Years of knowing your clients, your numbers, and how your work gets done. Then you type one line into an AI chat, and none of that goes in. So the answer comes back generic, and you decide AI isn't for you.",
-          "The fix is telling AI what you already know. Who it's for, why it matters, and what a good result looks like. That's what my book, The Artificial Advantage, teaches, and it's meant for beginners.",
+          "The fix is telling AI what you already know. Who it's for, why it matters, and what a good result looks like.",
           "Your recipe goes in once: the About Me file and the voice file from The 12 Commandments, in the bundle."
         ]
       }
@@ -689,12 +682,12 @@
         "anchor": "",
         "heading": "The 12 Commandments to Make AI Obey",
         "sub": "1",
-        "lede": "Twelve habits for getting the answer you meant. This guide is written for the free and basic plans of ChatGPT, Gemini, Claude and Grok.",
+        "lede": "Twelve habits for getting the answer you meant. This guide is written for the free and basic plans of ChatGPT, Claude, Gemini and Grok.",
         "body": "<ul><li>22 pages.</li><li>Two starter files you fill in once: an About Me file, so you stop re-typing who you are, and a voice file, so the drafts sound like you.</li><li>A one-page card to keep by your screen.</li></ul>",
         "docs": "1",
         "items": [
           {
-            "thumb": "/img/store/look-inside/commandments-before-after-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/commandments-before-after-page.webp",
@@ -707,7 +700,7 @@
             "doc_html": "<p><strong>Before and after (everyday). Ben wants to scale a recipe.</strong></p><p><strong>Before:</strong> \"How do I make my lasagne for eight people?\"</p><p><strong>After:</strong> \"Here's my lasagne recipe, which serves four. Rewrite it for eight people, keep the same layout, and tell me if the baking dish or the cooking time needs to change. START RECIPE [paste it] END RECIPE\"</p>"
           },
           {
-            "thumb": "/img/store/look-inside/commandments-card-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/commandments-card-page.webp",
@@ -819,7 +812,7 @@
           {
             "q": "How do I stop it making things up?",
             "a": "You check before you use it. The book teaches a two-step check for reading an answer before your name goes on it, and a way to trace a wrong answer back to its cause. The tax letter above shows why: the better answer still added a claim nobody gave it.",
-            "open": ""
+            "open": "1"
           },
           {
             "q": "What arrives, and where?",
@@ -834,12 +827,12 @@
           {
             "q": "What does it cost in all?",
             "a": "$27, paid once, plus sales tax where it applies. Prices are in US dollars.",
-            "open": ""
+            "open": "1"
           },
           {
             "q": "Is the refund just one email?",
             "a": "Yes. Email elvin@elvinpeters.com within 30 days of purchase and I will refund you in full.",
-            "open": ""
+            "open": "1"
           },
           {
             "q": "Why not just buy the paperback?",
@@ -1012,7 +1005,7 @@
         "who_html": "<p><strong>Parents and kids:</strong> a tutor that quizzes your child one question at a time and explains the step so you can teach it, without writing their answers. One dated list from the pile of school and activity emails. A trivia night or a short mystery to host.</p><p><strong>Helping an older parent, or yourself:</strong> better questions to take to the pharmacist, paperwork in plain words, and what changed in this year’s insurance renewal.</p><p><strong>Around the house:</strong> what to say when you call about the furnace or a breaker, what to ask about a contractor quote, and whether to repair or replace an appliance.</p><p><strong>Money:</strong> a call plan for the internet bill, and the month that spiked in a year of utility bills.</p>",
         "look_items": [
           {
-            "thumb": "/img/store/look-inside/ai-at-home-dinners-edge.webp",
+            "thumb": "",
             "thumb_w": "750",
             "thumb_h": "120",
             "full": "/img/store/look-inside/ai-at-home-dinners-page.webp",
