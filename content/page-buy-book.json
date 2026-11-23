@@ -524,7 +524,7 @@
         "phone_h": "1216",
         "alt": "A tour through the Companion Library: the index, the prompt library, the role library, the glossary, the tools reference and the Quick Reference Card",
         "caption": "",
-        "body": "",
+        "body": "<p class=\"lp-tail\">In the bundle, the Library keeps the book's reference pages one tap away.</p>",
         "buy": "",
         "tap": "1",
         "still_w": "750",
@@ -533,41 +533,6 @@
         "still_phone_h": "1169",
         "tap_label": "Play the Companion Library tour",
         "tap_caption": "Watch it work, 10 seconds"
-      }
-    },
-    {
-      "id": "v7-s7c-builder",
-      "type": "lp-media",
-      "data": {
-        "bg": "",
-        "anchor": "",
-        "layout": "stack",
-        "heading": "",
-        "sub": "",
-        "lede": "",
-        "mp4": "/video/look-inside/prompt-builder-desktop.mp4",
-        "webm": "/video/look-inside/prompt-builder-desktop.webm",
-        "poster": "/video/look-inside/prompt-builder-desktop-poster.webp",
-        "phone_mp4": "/video/look-inside/prompt-builder-phone.mp4",
-        "phone_webm": "/video/look-inside/prompt-builder-phone.webm",
-        "phone_poster": "/video/look-inside/prompt-builder-phone-poster.webp",
-        "image": "/img/store/look-inside/prompt-builder-brief-desktop.webp",
-        "phone": "/img/store/look-inside/prompt-builder-brief-phone.webp",
-        "w": "900",
-        "h": "1350",
-        "phone_w": "562",
-        "phone_h": "1216",
-        "alt": "The Prompt Builder: three demo answers typed in, and the finished brief it builds",
-        "caption": "Three answers in, a finished brief out.",
-        "body": "<p class=\"lp-tail\">In the bundle, the Library keeps the book's reference pages one tap away.</p>",
-        "buy": "",
-        "tap": "1",
-        "still_w": "750",
-        "still_h": "1050",
-        "still_phone_w": "750",
-        "still_phone_h": "1050",
-        "tap_label": "Play the Prompt Builder",
-        "tap_caption": "Watch it work, 12 seconds"
       }
     },
     {
@@ -802,12 +767,12 @@
           {
             "q": "Do I need a paid AI plan?",
             "a": "No. The book's skills work across ChatGPT, Claude, Gemini and Copilot, and a free plan is enough to start.",
-            "open": ""
+            "open": "1"
           },
           {
             "q": "Will it work for my kind of work?",
             "a": "The Toolkit's 25 prompts come in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, and Learning and Development. A few by name: Executive Update Email, Meeting Follow-Up, Risk Assessment, First Draft from Notes and Plain Language Rewrite.",
-            "open": ""
+            "open": "1"
           },
           {
             "q": "How do I stop it making things up?",
@@ -817,12 +782,12 @@
           {
             "q": "What arrives, and where?",
             "a": "An instant download plus an email. One receipt email lists everything and links to your library, where each piece has its own download. The Companion Library opens online.",
-            "open": ""
+            "open": "1"
           },
           {
             "q": "What format are the files?",
             "a": "The ebook is an EPUB file. The 7-Day AI Workbook and The 12 Commandments are PDFs. Everything AI 2026 comes as one zip with a PDF field guide and an Excel workbook. The Toolkit is a zip of 17 files: Word documents, a spreadsheet and a short start-here file. Every file downloads to your device.",
-            "open": ""
+            "open": "1"
           },
           {
             "q": "What does it cost in all?",
@@ -837,12 +802,12 @@
           {
             "q": "Why not just buy the paperback?",
             "a": "You can. The paperback and hardcover are on Amazon. The bundle adds the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments, which each sell on their own.",
-            "open": ""
+            "open": "1"
           },
           {
             "q": "Can my team use it?",
             "a": "The licence covers personal and internal work use. Please don't resell or share the files.",
-            "open": ""
+            "open": "1"
           }
         ]
       }
@@ -1037,24 +1002,17 @@
       }
     },
     {
-      "id": "print",
-      "type": "lp-amazon",
+      "id": "v9-amazon-disclosure",
+      "type": "text",
       "data": {
-        "bg": "",
-        "anchor": "",
-        "heading": "The Artificial Advantage is also sold as a paperback and a hardcover on Amazon.",
-        "buttons": [
-          {
-            "label": "Paperback on Amazon",
-            "href": "https://www.amazon.com/dp/B0H7TB366R?tag=elvinpeters-20"
-          },
-          {
-            "label": "Hardcover on Amazon",
-            "href": "https://www.amazon.com/dp/B0H9BX9LB4?tag=elvinpeters-20"
-          }
+        "anchor": "v9-disc-end",
+        "align": "center",
+        "heading": "",
+        "paras": [
+          "<span class=\"amz-disclosure\">As an Amazon Associate I earn from qualifying purchases.</span>"
         ]
       }
     }
   ],
-  "css": "body.lp #review{ padding-top:8px }"
+  "css": "body.lp #review{ padding-top:8px } body.lp .lp-sec{ padding-top:40px; padding-bottom:40px } body.lp .lp-sec:not(.lp-sec--tint) + .lp-sec:not(.lp-sec--tint), body.lp .lp-sec--tint + .lp-sec--tint{ padding-top:4px } body.lp .lp-media__buy .btn, body.lp .lp-gallery__buy .btn, body.lp .lp-pairs__buy .btn, body.lp .lp-addon__add{ border-radius:6px; min-height:60px; font-size:20px } body.lp .lp-sec:not(.lp-sec--tint) + .ep-block{ padding-top:0 } body.lp .ep-block + .lp-sec:not(.lp-sec--tint){ padding-top:8px } body.lp #v9-disc-end p{ font-size:14px }"
 }
