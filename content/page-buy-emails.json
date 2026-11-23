@@ -1,0 +1,70 @@
+{
+  "title": "Your Emails, Your Voice, Your Facts",
+  "frame": "landing",
+  "landing": {
+    "slug": "emails",
+    "old_slugs": [
+      "letters"
+    ],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "step": "letters",
+    "description": "Your Emails, Your Voice, Your Facts: get ChatGPT to write your emails, messages and replies in your own voice, from your facts only. $9."
+  },
+  "noindex": true,
+  "sections": [
+    {
+      "id": "steps",
+      "type": "lp-progress",
+      "data": {
+        "aria": "Your order progress",
+        "paid": "Paid",
+        "extras": "Optional extras",
+        "downloads": "Your downloads",
+        "extras_now": true
+      }
+    },
+    {
+      "id": "ordered",
+      "type": "lp-ordered",
+      "data": {
+        "anchor": "",
+        "text": "You ordered The Artificial Advantage Bundle"
+      }
+    },
+    {
+      "id": "offer",
+      "type": "lp-offer",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "top": "",
+        "heading": "Have you rewritten an AI email because it sounded nothing like you?",
+        "sub": "Your Emails, Your Voice, Your Facts: get ChatGPT to write your emails, messages and replies in your own voice, from your facts only.",
+        "image": "/img/store/your-emails-cover.webp",
+        "image_alt": "The cover of Your Emails, Your Voice, Your Facts, by Elvin Peters",
+        "body": "<h2>What you get</h2><ul><li>Two short files you set up once: how you write, and who you are. Both shown filled in for an example person.</li><li>Ten ready requests for what you send most.</li><li>A quick check before you hit send.</li></ul><h2>The ten</h2><ul><li>An email to a client</li><li>An email to a supplier</li><li>An update to your team or board</li><li>A complaint to a company</li><li>A request to a landlord or service provider</li><li>Saying no politely</li><li>A thank-you message</li><li>A reference for someone</li><li>A follow-up when nobody replied</li><li>A reply to a tricky message</li></ul><p>Each one ends with the same two lines: \"Use only the facts I've given you. If something you need is missing, ask me before you write.\"</p><h2>Three of the ten, first lines</h2><div class=\"lp-sample\"><p><strong>An email to a client.</strong> Something changed: a delay, a price, a date.</p><div class=\"lp-doc__mono lp-copybox\"><p>What happened: [the change].</p><p>Why: [the reason, in a sentence].</p><p>What happens next: [the new date, price or step].</p></div><details class=\"lp-sample__full\"><summary><span class=\"lp-sample__closed\">See it in full</span><span class=\"lp-sample__open\">Close</span></summary><p><strong>When:</strong> something changed for a client, such as a delay, a price or a date.</p><div class=\"lp-doc__mono lp-copybox\"><p>Using my voice file and my About Me file, write a short email to [name], a client who [one line about them].</p><p>What happened: [the change].</p><p>Why: [the reason, in a sentence].</p><p>What happens next: [the new date, price or step].</p><p>What I need from them: [nothing / a reply by a date / a decision].</p><p>Under [150] words. Lead with the news. Don't apologize more than once.</p><p>Use only the facts I've given you. If something you need is missing, ask me before you write.</p></div><p><strong>Good answer:</strong> the news in the first two sentences, the reason in one, the next step last.</p><p><strong>Check:</strong> is every date and amount yours? Did it promise something you didn't, like \"no extra cost\"?</p></details></div><div class=\"lp-sample\"><p><strong>An email to a supplier.</strong> Orders are late or wrong, and you want it fixed without burning the relationship.</p><div class=\"lp-doc__mono lp-copybox\"><p>The problem: [what went wrong, with numbers].</p><p>The orders: [order or PO numbers, due dates and arrival dates].</p><p>What it cost us: [one line].</p></div><details class=\"lp-sample__full\"><summary><span class=\"lp-sample__closed\">See it in full</span><span class=\"lp-sample__open\">Close</span></summary><p><strong>When:</strong> orders are late or wrong, and you want it fixed without burning the relationship.</p><div class=\"lp-doc__mono lp-copybox\"><p>Using my voice file and my About Me file, write an email to [name] at [supplier].</p><p>The problem: [what went wrong, with numbers].</p><p>The orders: [order or PO numbers, due dates and arrival dates].</p><p>What it cost us: [one line].</p><p>What I want: [a call this week / a written plan by a date / a credit].</p><p>We want to keep working with them. Firm, not angry. Under [150] words.</p><p>Use only the facts I've given you. If something you need is missing, ask me before you write.</p></div><p><strong>Good answer:</strong> your numbers, what it cost, one clear ask with a date.</p><p><strong>Check:</strong> are the numbers unchanged? Did it threaten anything you won't do?</p></details></div><div class=\"lp-sample\"><p><strong>A reply to a tricky message.</strong> Someone sent something awkward or pushy, and you want to answer well.</p><div class=\"lp-doc__mono lp-copybox\"><p>Their message: [paste it, with account numbers and other people's details covered].</p><p>What I want to say: [your answer in one or two plain lines].</p><p>What I won't do: [anything you won't agree to].</p></div><details class=\"lp-sample__full\"><summary><span class=\"lp-sample__closed\">See it in full</span><span class=\"lp-sample__open\">Close</span></summary><p><strong>When:</strong> someone sent you something awkward, upset or pushy, and you want to answer well without getting pulled in.</p><div class=\"lp-doc__mono lp-copybox\"><p>Using my voice file and my About Me file, write a reply to the message below from [name], who is my [client / colleague / neighbour / family member].</p><p>Their message: [paste it, with account numbers and other people's details covered].</p><p>What I want to say: [your answer in one or two plain lines].</p><p>What I won't do: [anything you won't agree to].</p><p>Calm and short. Answer what they asked, and don't argue every point. Under [150] words.</p><p>Use only the facts I've given you. If something you need is missing, ask me before you write.</p></div><p><strong>Good answer:</strong> calm, answers the real question, says your position once, no new promises.</p><p><strong>Check:</strong> read it as them. Would it calm things down or start round two? Did it agree to anything you listed under \"won't do\"?</p></details></div><h2>What it is</h2><p>A 20-page PDF guide written for ChatGPT, for your own use. Instant download plus an email. A 30-day money-back guarantee covers this purchase: email elvin@elvinpeters.com within 30 days for a full refund.</p>",
+        "was": "",
+        "price": "$9",
+        "yes": "Yes, add it for $9",
+        "yes_note": "This charges the card you just used. You will not need to enter it again. 30-day money-back guarantee.",
+        "no": "No thanks, I'll skip this",
+        "fine": "",
+        "small": "<p>Elvin Peters, author of The Artificial Advantage</p><p>Your Emails, Your Voice, Your Facts is an independent guide. It is not affiliated with, endorsed by or sponsored by OpenAI. ChatGPT is a product of OpenAI, and the name is used only to say what the guide is written for.</p>",
+        "fallback": "Pay with another card",
+        "early": "1",
+        "review_href": "/book/last-chance/",
+        "after_yes": "",
+        "above": "$9 in US dollars, on the card you just used. It's $17 in the store; this price is for this order only.<br>Nothing to type again. Your order so far stays as it is.",
+        "image_w": "800",
+        "image_h": "1280",
+        "image_wide": "",
+        "image_wide_w": "",
+        "image_wide_h": "",
+        "repeat_stack": "",
+        "repeat_end": "1"
+      }
+    }
+  ],
+  "css": "body.lp .lp-body .lp-copybox, body.lp .lp-body .lp-copybox p{ font-size:16px } body.lp .lp-body .lp-copybox p{ margin:0 0 8px } body.lp .lp-sample{ margin:0 0 20px } body.lp .lp-sample__full > summary{ display:flex; align-items:center; min-height:44px; cursor:pointer; font:600 17px/1.3 var(--sans); color:var(--lp-navy); text-decoration:underline; text-underline-offset:3px } body.lp .lp-sample__full[open] .lp-sample__closed, body.lp .lp-sample__full:not([open]) .lp-sample__open{ display:none }"
+}
