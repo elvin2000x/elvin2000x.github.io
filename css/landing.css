@@ -815,3 +815,6 @@ body.lp .lp-addon__what{ margin:12px 0 0; font:400 16px/1.5 var(--sans); color:v
 .lp-addon__close{ min-height:44px; padding:0; border:0; background:none; font:600 16px/1.3 var(--sans); color:var(--lp-navy); text-decoration:underline; text-underline-offset:3px; cursor:pointer }
 .lp-addon__who{ font:400 16px/1.55 var(--sans); color:var(--lp-navy) }
 .lp-addon__who p{ margin:0 0 10px }
+/* ticket 704: each look-inside block ends on one line back to the bundle */
+body.lp .lp-gallery__tail{ margin:16px 0 0; font:600 17px/1.5 var(--sans); color:var(--lp-navy) }
+body.lp .lp-media__body p.lp-tail{ font-weight:600; font-size:17px }

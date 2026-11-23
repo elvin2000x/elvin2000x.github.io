@@ -170,6 +170,12 @@
       "default": "Close"
     },
     {
+      "key": "tail",
+      "type": "html",
+      "label": "Closing line, after the pictures (optional)",
+      "default": ""
+    },
+    {
       "key": "buy",
       "type": "text",
       "label": "Buy button words (optional; must be exactly: Get the bundle for $27)",

@@ -116,6 +116,34 @@
       }
     },
     {
+      "id": "v8-video-last",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "The idea behind this bundle starts with a mistake I made early in my career."
+        ]
+      }
+    },
+    {
+      "id": "story-spray",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "Early in my career, I sent generic job applications to every role I could find, and thought I was being efficient. I was wasting everyone's time, including mine.",
+          "A friend told me he'd applied to hundreds of jobs in a few weeks and hadn't had a single call back. I knew why. The jobs I got came from a few applications I aimed at the role.",
+          "AI works the same way. Send it a generic request, and you get a generic answer, over and over. Aim it instead. Tell it who it's for, why it matters, and what a good result looks like.",
+          "That's what my book, The Artificial Advantage, teaches: a way to think through your work before you hand it to AI.",
+          "Which of these two would you rather send a client? Below is the same request, sent to the same AI twice. The bundle teaches you how to write the better one."
+        ]
+      }
+    },
+    {
       "id": "v7-s3-two-answers",
       "type": "lp-pairs",
       "data": {
@@ -140,7 +168,7 @@
             "note": ""
           }
         ],
-        "after": "<p>What changed: the second request says who is writing, who is reading, why it's late and how that reader takes bad news. The first answer is a template that apologizes. The second leads with the new date, gives the reason in two sentences, and needs only the names and dates filled in. The book calls this the Role, Task, Constraint brief, and it is the habit the whole method is built on.</p>",
+        "after": "<p>What changed: the second request says who is writing, who is reading, why it's late and how that reader takes bad news. The first answer is a template that apologizes. The second leads with the new date, gives the reason in two sentences, and needs only the names and dates filled in. The book calls this the Role, Task, Constraint brief, and it is the habit the whole method is built on.</p><p>Read each answer below as if your name goes at the bottom. Which line would you have to check before sending it?</p>",
         "buy": "Get the bundle for $27"
       }
     },
@@ -286,11 +314,69 @@
             "doc_html": "<p class=\"lp-doc__mono\">Act as a plain language editor. Rewrite the following passage for an audience with no specialized knowledge of [field]. Replace all jargon with plain equivalents. Cut sentences longer than 20 words in half where possible. The reader should be able to understand the core point without looking anything up. Flag any term you couldn't simplify without losing precision.</p>"
           }
         ],
-        "strip_caption": "",
+        "strip_caption": "The Toolkit gives you 25 prompts built the same way, with brackets for your own details, and it's in the bundle.",
         "more_label": "See the whole page",
         "dialog_label": "Prompts from the Toolkit",
         "close_label": "Close",
         "buy": ""
+      }
+    },
+    {
+      "id": "v7-s5-who",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "Who made this, and how to check him",
+        "paras": [
+          "I dropped my Python coding class a few weeks into my first year of university. Nothing about it made sense to me, no matter how much time I put in. And I was the kid who loved gadgets and wanted to be an inventor.",
+          "I ended up in digital marketing. Then I went out on my own, and I needed websites. I still couldn't code.",
+          "I'd used AI for years, but only for the basics. Research, ideas, email. So I spent a year testing AI tools and ways of working, and writing down what worked and what didn't. That year became my foundation. Now I build my own websites with AI, including this page. My notes from that year became my book, The Artificial Advantage.",
+          "I'm not a master of AI. Mastery is a journey without a destination. The book is a shortcut, built on a year of hard-won lessons, so you can start where I ended up.",
+          "I'm Elvin Peters, and I'm not a tech wizard. If you've ever typed one line and got a brochure back, me too. My answers were poor until I learned to treat AI like a person who can't read my mind and will do the job however it sees fit until I say exactly how. I still slip when I'm lazy, and I pay for it by doing the work again, so I measure twice and cut once.",
+          "AI turned research that used to take me days into hours. I ran paid media for easyfinancial, more than $50M in digital ad spend, then advised advertisers on Google's global clients team. In 2026 I became a founder, writing books and building with AI full time.",
+          "My notes include what failed as well as what worked. They are the book, and the book is in this bundle."
+        ]
+      }
+    },
+    {
+      "id": "v7-s6-review-lead",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "The review at the top of this page, in full:"
+        ]
+      }
+    },
+    {
+      "id": "v7-s6-review",
+      "type": "lp-quotes",
+      "data": {
+        "bg": "",
+        "anchor": "review",
+        "heading": "",
+        "quotes": [
+          {
+            "quote": "<span class=\"lp-stars\" role=\"img\" aria-label=\"Rated 5 out of 5 stars\">★★★★★</span> <strong>\"Must-read if you're looking to enhance your output.\"</strong><br>What an amazing read! I would highly recommend The Artificial Advantage if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life. Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.",
+            "source": "Verified purchase, Amazon.ca, paperback, reviewed in Canada, July 15, 2026"
+          }
+        ]
+      }
+    },
+    {
+      "id": "v7-s6-chapter8",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "Check the teaching yourself. <a href=\"/free/free-chapter/\" target=\"_blank\" rel=\"noopener\">Chapter 8 is free to read</a>, and it shows which AI setting fits which job.",
+          "Or get all fourteen chapters, with the rest of the bundle, for $27."
+        ]
       }
     },
     {
@@ -359,7 +445,8 @@
         "more_label": "See the whole page",
         "dialog_label": "Pages from the ebook",
         "close_label": "Close",
-        "buy": ""
+        "buy": "",
+        "tail": "In the bundle, the book is where you learn the method."
       }
     },
     {
@@ -386,7 +473,7 @@
         "phone_h": "1416",
         "alt": "The Toolkit's prompt library as a spreadsheet, the first 12 of its 25 prompts: category and prompt name",
         "caption": "12 of the 25 prompt titles.",
-        "body": "<ul><li>25 prompts in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, Learning and Development. Also as a spreadsheet you can import.</li><li>25 role setups you paste once, and the formula for writing your own.</li><li>16 exercises from 10 chapters, a 30-day plan and a 3-month plan.</li></ul>",
+        "body": "<ul><li>25 prompts in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, Learning and Development. Also as a spreadsheet you can import.</li><li>25 role setups you paste once, and the formula for writing your own.</li><li>16 exercises from 10 chapters, a 30-day plan and a 3-month plan.</li></ul><p class=\"lp-tail\">In the bundle, the Toolkit saves you typing the book's prompts and exercises out yourself.</p>",
         "buy": "Get the bundle for $27"
       }
     },
@@ -477,7 +564,7 @@
         "phone_h": "1216",
         "alt": "The Prompt Builder: three demo answers typed in, and the finished brief it builds",
         "caption": "Three answers in, a finished brief out.",
-        "body": "",
+        "body": "<p class=\"lp-tail\">In the bundle, the Library keeps the book's reference pages one tap away.</p>",
         "buy": "",
         "tap": "1",
         "still_w": "750",
@@ -486,6 +573,20 @@
         "still_phone_h": "1050",
         "tap_label": "Play the Prompt Builder",
         "tap_caption": "Watch it work, 12 seconds"
+      }
+    },
+    {
+      "id": "story-banting",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "In 1921, at the University of Toronto, Frederick Banting kept failing. Months of study and failed attempts, with Charles Best. In January 1922, their first patient was treated with insulin. The breakthrough came after the failures, here in Toronto.",
+          "Most of us try AI twice, get a generic answer, and stop. The people who get good at it learn why an answer went wrong. That's what my book, The Artificial Advantage, teaches. Brief AI the way you'd brief a new hire. Check what comes back. And when it's wrong, trace it to the cause, so you fix the request instead of starting over.",
+          "Pick one real task. The 7-Day AI Workbook, included in the bundle, runs it for seven days, starting with the old way on Day 2. Why would a workbook start you there?"
+        ]
       }
     },
     {
@@ -531,7 +632,8 @@
         "more_label": "See the whole page",
         "dialog_label": "Pages from the 7-Day AI Workbook",
         "close_label": "Close",
-        "buy": ""
+        "buy": "",
+        "tail": "In the bundle, the Workbook is where you try the method on your own work."
       }
     },
     {
@@ -558,8 +660,23 @@
         "phone_h": "805",
         "alt": "The Everything AI 2026 spreadsheet filtered to one job, Meetings, Notes and Productivity",
         "caption": "One job, Meetings, Notes and Productivity: 23 tools.",
-        "body": "<ul><li>684 resources organised by job, each with a level and a cost label.</li><li>12 job stacks, a spreadsheet and a 23-page field guide.</li></ul>",
+        "body": "<ul><li>684 resources organised by job, each with a level and a cost label.</li><li>12 job stacks, a spreadsheet and a 23-page field guide.</li></ul><p class=\"lp-tail\">In the bundle, Everything AI 2026 shows which tool fits the job in front of you.</p>",
         "buy": ""
+      }
+    },
+    {
+      "id": "story-sanders",
+      "type": "text",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "At sixty-five, Harland Sanders was living on a government cheque of a hundred and five dollars a month. What he had was a chicken recipe, built from years of cooking.",
+          "You have a recipe too. Years of knowing your clients, your numbers, and how your work gets done. Then you type one line into an AI chat, and none of that goes in. So the answer comes back generic, and you decide AI isn't for you.",
+          "The fix is telling AI what you already know. Who it's for, why it matters, and what a good result looks like. That's what my book, The Artificial Advantage, teaches, and it's meant for beginners.",
+          "Your recipe goes in once: the About Me file and the voice file from The 12 Commandments, in the bundle."
+        ]
       }
     },
     {
@@ -605,7 +722,8 @@
         "more_label": "See the whole page",
         "dialog_label": "Pages from The 12 Commandments",
         "close_label": "Close",
-        "buy": "Get the bundle for $27"
+        "buy": "Get the bundle for $27",
+        "tail": "In the bundle, The 12 Commandments helps the drafts sound like you."
       }
     },
     {
@@ -632,60 +750,8 @@
         "phone_h": "2380",
         "alt": "The download page after paying: the Workbook first, then the ebook, the Toolkit, the Companion Library, Everything AI 2026 and The 12 Commandments, each with a one-line note",
         "caption": "The download page, from a sample order.",
-        "body": "",
+        "body": "<p class=\"lp-tail\">Everything you've read about above arrives in that one download.</p>",
         "buy": ""
-      }
-    },
-    {
-      "id": "v7-s5-who",
-      "type": "text",
-      "data": {
-        "anchor": "",
-        "align": "left",
-        "heading": "Who made this, and how to check him",
-        "paras": [
-          "I'm Elvin Peters, and I'm not a tech wizard. If you've ever typed one line and got a brochure back, me too. My answers were poor until I learned to treat AI like a person who can't read my mind and will do the job however it sees fit until I say exactly how. I still slip when I'm lazy, and I pay for it by doing the work again, so I measure twice and cut once.",
-          "AI turned research that used to take me days into hours. I ran paid media for easyfinancial, more than $50M in digital ad spend, then advised advertisers on Google's global clients team. In 2026 I became a founder, writing books and building with AI full time."
-        ]
-      }
-    },
-    {
-      "id": "v7-s6-review-lead",
-      "type": "text",
-      "data": {
-        "anchor": "",
-        "align": "left",
-        "heading": "",
-        "paras": [
-          "The review at the top of this page, in full:"
-        ]
-      }
-    },
-    {
-      "id": "v7-s6-review",
-      "type": "lp-quotes",
-      "data": {
-        "bg": "",
-        "anchor": "review",
-        "heading": "",
-        "quotes": [
-          {
-            "quote": "<span class=\"lp-stars\" role=\"img\" aria-label=\"Rated 5 out of 5 stars\">★★★★★</span> <strong>\"Must-read if you're looking to enhance your output.\"</strong><br>What an amazing read! I would highly recommend The Artificial Advantage if you're looking to master AI. It gives you a very clear framework that will assist you in your professional and personal life. Elvin Peters does an amazing job ensuring that these concepts are easily digestible! I'll be recommending this to all of my coworkers who have been struggling with AI and prompting.",
-            "source": "Verified purchase, Amazon.ca, paperback, reviewed in Canada, July 15, 2026"
-          }
-        ]
-      }
-    },
-    {
-      "id": "v7-s6-chapter8",
-      "type": "text",
-      "data": {
-        "anchor": "",
-        "align": "left",
-        "heading": "",
-        "paras": [
-          "Check the teaching yourself. <a href=\"/free/free-chapter/\" target=\"_blank\" rel=\"noopener\">Chapter 8 is free to read</a>, and it shows which AI setting fits which job."
-        ]
       }
     },
     {
