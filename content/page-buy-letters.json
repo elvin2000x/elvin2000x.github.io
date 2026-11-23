@@ -1,0 +1,68 @@
+{
+  "title": "Letters You Can Put Your Name To",
+  "frame": "landing",
+  "landing": {
+    "slug": "letters",
+    "old_slugs": [],
+    "funnel": "the-artificial-advantage-1",
+    "hide_menu": true,
+    "step": "letters",
+    "description": "Letters You Can Put Your Name To: a short guide that gets ChatGPT to write your letters in your voice, from your facts. $17."
+  },
+  "noindex": true,
+  "sections": [
+    {
+      "id": "steps",
+      "type": "lp-progress",
+      "data": {
+        "aria": "Your order progress",
+        "paid": "Paid",
+        "extras": "Optional extras",
+        "downloads": "Your downloads",
+        "extras_now": true
+      }
+    },
+    {
+      "id": "ordered",
+      "type": "lp-ordered",
+      "data": {
+        "anchor": "",
+        "text": "You ordered The Artificial Advantage Bundle"
+      }
+    },
+    {
+      "id": "offer",
+      "type": "lp-offer",
+      "data": {
+        "bg": "",
+        "anchor": "",
+        "top": "",
+        "heading": "Have you rewritten an AI letter because it didn't sound like you?",
+        "sub": "Letters You Can Put Your Name To: a short guide that gets ChatGPT to write your letters in your voice, from your facts.",
+        "image": "/img/store/letters-cover.webp",
+        "image_alt": "The cover of Letters You Can Put Your Name To, by Elvin Peters",
+        "body": "<h2>What's new in this guide</h2><p>Your voice file and your About Me file, filled in for an example person, so you can see what finished ones look like. Ten letter requests written out in full. And the check before you send. Teach ChatGPT how you sound once, and every letter starts closer to your own.</p><h2>Three of the ten, first lines</h2><div class=\"lp-letter\"><p><strong>A client letter.</strong> Something has changed for a client: a delay, a price, a date.</p><div class=\"lp-doc__mono lp-copybox\"><p>What happened: [the change, in one or two sentences].</p><p>Why: [the reason, in a sentence].</p><p>What happens next: [the new date, price or step].</p></div><details class=\"lp-letter__full\"><summary><span class=\"lp-letter__closed\">See it in full</span><span class=\"lp-letter__open\">Close</span></summary><p><strong>When you'd send it.</strong> Something has changed for a client: a delay, a price, a date. You want them to hear it from you, plainly.</p><p><strong>Paste this</strong></p><div class=\"lp-doc__mono lp-copybox\"><p>Using my voice file and my About Me file, write a short letter to [name], a client who [one line about them and how long we have worked together].</p><p>What happened: [the change, in one or two sentences].</p><p>Why: [the reason, in a sentence].</p><p>What happens next: [the new date, price or step].</p><p>What I need from them: [nothing / a reply by a date / a decision].</p><p>Under [150] words. Lead with the news, then the reason, then the next step. Don't apologize more than once.</p><p>Use only the facts I've given you. If something you need is missing, ask me before you write.</p></div><p><strong>A good answer looks like this.</strong> The news comes in the first two sentences. The reason is one sentence. It ends with the next step and your usual sign-off. It doesn't promise anything you didn't.</p><p><strong>Check before you send.</strong> Is every date and amount the one you gave it? Did it add a reassurance you can't stand behind, such as \"there will be no extra cost\"?</p></details></div><div class=\"lp-letter\"><p><strong>An email to a supplier.</strong> Orders are late or wrong, and you want it fixed without burning the relationship.</p><div class=\"lp-doc__mono lp-copybox\"><p>The problem: [what went wrong, with numbers, such as \"three of the last five orders arrived late\"].</p><p>The orders: [order or PO numbers, the dates they were due and the dates they arrived].</p><p>What it cost us: [one line, such as \"we missed a customer's date\"].</p></div><details class=\"lp-letter__full\"><summary><span class=\"lp-letter__closed\">See it in full</span><span class=\"lp-letter__open\">Close</span></summary><p><strong>When you'd send it.</strong> Orders are late or wrong, and you want it fixed without burning the relationship.</p><p><strong>Paste this</strong></p><div class=\"lp-doc__mono lp-copybox\"><p>Using my voice file and my About Me file, write an email to [name], our contact at [supplier].</p><p>The problem: [what went wrong, with numbers, such as \"three of the last five orders arrived late\"].</p><p>The orders: [order or PO numbers, the dates they were due and the dates they arrived].</p><p>What it cost us: [one line, such as \"we missed a customer's date\"].</p><p>What I want: [a call this week / a written plan by a date / a credit].</p><p>We want to keep working with them. Firm and specific, not angry. Under [150] words.</p><p>Use only the facts I've given you. If something you need is missing, ask me before you write.</p></div><p><strong>A good answer looks like this.</strong> It states the problem with your numbers, says what it cost, asks for one clear thing by a date, and stays polite.</p><p><strong>Check before you send.</strong> Are the numbers yours, unchanged? Did it threaten anything you won't do?</p></details></div><div class=\"lp-letter\"><p><strong>A short report to a board or committee.</strong> You need to update a board, a committee or a group of members, and they'll skim it.</p><div class=\"lp-doc__mono lp-copybox\"><p>Here are my notes: [paste your rough notes, figures and dates, or a small table of income and expenses].</p><p>Keep every fact and number from my notes exactly as written. Don't add any figure that isn't in my notes. Flag any part of my notes that was unclear with [CHECK].</p></div><details class=\"lp-letter__full\"><summary><span class=\"lp-letter__closed\">See it in full</span><span class=\"lp-letter__open\">Close</span></summary><p><strong>When you'd send it.</strong> You need to update a board, a committee or a group of members, and they'll skim it.</p><p><strong>Paste this</strong></p><div class=\"lp-doc__mono lp-copybox\"><p>Using my voice file and my About Me file, write a short report to [the board / committee] of [organization].</p><p>Here are my notes: [paste your rough notes, figures and dates, or a small table of income and expenses].</p><p>Turn my notes into a report they can read in two minutes. Start with what they need to decide, if anything. Then what happened, then what's next.</p><p>Keep every fact and number from my notes exactly as written. Don't add any figure that isn't in my notes. Flag any part of my notes that was unclear with [CHECK].</p><p>Under [250] words.</p><p>Use only the facts I've given you. If something you need is missing, ask me before you write.</p></div><p><strong>A good answer looks like this.</strong> The decision, if there is one, comes first. Every number matches your notes. Anything it wasn't sure of is marked [CHECK] for you to fix.</p><p><strong>Check before you send.</strong> Put your notes beside the draft and tick off every number. Search the draft for [CHECK].</p></details></div><h2>The ten letters</h2><ul><li>A client letter</li><li>An email to a supplier</li><li>A short report to a board or committee</li><li>A grant paragraph</li><li>A reference letter</li><li>A complaint to a company</li><li>A request to a landlord or service provider</li><li>A polite no</li><li>A thank-you to a colleague</li><li>A follow-up after no reply</li></ul><p>Each one ends with the same two lines: \"Use only the facts I've given you. If something you need is missing, ask me before you write.\"</p><h2>The check before you send</h2><p>Before your name goes on it, you check that every fact is one you gave it, take out anything it added that you can't stand behind, ask it what it guessed, and read it aloud.</p><h2>What it is</h2><p>A PDF guide, written for ChatGPT's free plan, for your own use. Instant download plus an email. A 30-day money-back guarantee covers this purchase: email elvin@elvinpeters.com within 30 days for a full refund. Prices are in US dollars.</p>",
+        "was": "",
+        "price": "$17",
+        "yes": "Yes, add the letters guide for $17",
+        "yes_note": "Charges the card you just used, no re-entry. 30-day money-back guarantee.",
+        "no": "No thanks, I'll skip this",
+        "fine": "",
+        "small": "<p>Elvin Peters, author of The Artificial Advantage</p>",
+        "fallback": "Pay with another card",
+        "early": "1",
+        "review_href": "/book/last-chance/",
+        "after_yes": "",
+        "above": "$17 in US dollars, on the card you just used.<br>Nothing to type again. Your order so far stays as it is.",
+        "image_w": "800",
+        "image_h": "1280",
+        "image_wide": "",
+        "image_wide_w": "",
+        "image_wide_h": "",
+        "repeat_stack": "",
+        "repeat_end": "1"
+      }
+    }
+  ],
+  "css": "body.lp .lp-body .lp-copybox, body.lp .lp-body .lp-copybox p{ font-size:16px } body.lp .lp-body .lp-copybox p{ margin:0 0 8px } body.lp .lp-letter{ margin:0 0 20px } body.lp .lp-letter__full > summary{ display:flex; align-items:center; min-height:44px; cursor:pointer; font:600 17px/1.3 var(--sans); color:var(--lp-navy); text-decoration:underline; text-underline-offset:3px } body.lp .lp-letter__full[open] .lp-letter__closed, body.lp .lp-letter__full:not([open]) .lp-letter__open{ display:none }"
+}
