@@ -165,7 +165,7 @@
       "data": {
         "bg": "tint",
         "anchor": "",
-        "heading": "A supplier email, a client letter and a grant paragraph",
+        "heading": "A supplier email, a client email and a grant paragraph",
         "lede": "The same test on three everyday jobs. Example answers, written by AI for this page to show the difference.",
         "more_label": "Read the full answer",
         "pairs": [
@@ -185,7 +185,7 @@
             "added": "What the explained request added: three of five shipments late, a missed restock date, a call this week, and a plan by the end of the month."
           },
           {
-            "title": "A letter to a tax client about a late filing",
+            "title": "An email to a tax client about a late filing",
             "thin_kind": "From one line:",
             "thin_request": "Write a letter to a client explaining why their tax return will be filed late.",
             "thin_answer_label": "The answer, first lines:",
@@ -196,7 +196,7 @@
             "directed_answer_label": "The answer, first lines:",
             "directed_answer": "<p>I'm writing with a small update on your tax return. One of your investment slips from your bank arrived late, and we won't file without it. Filing with every slip in hand means we avoid having to correct the return afterward, which is the safer path for you. Because of this, your return will be filed two days later than we planned. Please don't worry about penalties. This short delay is well within the time you have, and nothing about it puts you at risk.</p>",
             "directed_full": "<p>Dear [Name],</p><p>I'm writing with a small update on your tax return. One of your investment slips from your bank arrived late, and we won't file without it. Filing with every slip in hand means we avoid having to correct the return afterward, which is the safer path for you.</p><p>Because of this, your return will be filed two days later than we planned. <strong>Please don't worry about penalties. This short delay is well within the time you have, and nothing about it puts you at risk.</strong></p><p>We will not charge any extra fee for the delay. We'll also call you the day your return is filed, so you'll hear it from us right away.</p><p>If you have any questions in the meantime, just pick up the phone. I'm always glad to hear from you.</p><p>Warmly, [Your name], [Practice name]</p>",
-            "note": "Read it before you send it. The better letter tells the client not to worry about penalties, and nobody gave the AI that fact. That is why the book teaches a two-step check before your name goes on anything.",
+            "note": "Read it before you send it. The better email tells the client not to worry about penalties, and nobody gave the AI that fact. That is why the book teaches a two-step check before your name goes on anything.",
             "added": "What the explained request added: one late bank slip, two days late, a retired teacher who worries about penalties, no extra fee, and a call the day it's filed."
           },
           {
@@ -776,7 +776,7 @@
           },
           {
             "q": "How do I stop it making things up?",
-            "a": "You check before you use it. The book teaches a two-step check for reading an answer before your name goes on it, and a way to trace a wrong answer back to its cause. The tax letter above shows why: the better answer still added a claim nobody gave it.",
+            "a": "You check before you use it. The book teaches a two-step check for reading an answer before your name goes on it, and a way to trace a wrong answer back to its cause. The tax email above shows why: the better answer still added a claim nobody gave it.",
             "open": "1"
           },
           {
