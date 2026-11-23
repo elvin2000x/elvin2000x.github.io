@@ -9,9 +9,9 @@ The question is never "what is the best AI tool." It is "what category of tool d
 | The job to be done | The category you want | Current instances (early 2026) |
 |---|---|---|
 | Think, draft, analyze, and converse across almost anything | Frontier chat assistant | Claude, ChatGPT, Gemini |
-| Get answers grounded only in your own documents, with citations | Document-grounded notebook | NotebookLM |
-| Keep standing context and files for a recurring body of work | Project workspace | Claude Projects, ChatGPT Projects, Gemini Gems |
-| Have AI build a working artifact (a spreadsheet, a script, a site) | Agentic workspace | Claude Code, ChatGPT agent mode, Cursor |
+| Get answers grounded only in your own documents, with citations | Document-grounded notebook | Gemini Notebook (formerly NotebookLM) |
+| Keep standing context and files for a recurring body of work | Project workspace | Claude Projects, ChatGPT Projects, Gemini notebooks |
+| Have AI build a working artifact (a spreadsheet, a script, a site) | Agentic workspace | Claude Code, ChatGPT Work, Cursor |
 | Produce a long, sourced research brief from many pages | Deep-research mode | Deep Research in ChatGPT, Gemini, and Claude |
 | Generate or edit images, including compositing onto a reference | Image model | Gemini image generation, Midjourney, Ideogram |
 | Generate short video from a prompt or a reference frame | Video model | Veo, Sora, Runway |

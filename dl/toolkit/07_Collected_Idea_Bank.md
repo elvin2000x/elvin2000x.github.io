@@ -81,7 +81,7 @@ An SOP is what turns doing the work well once into doing it well every time, who
 The operating system is not a metaphor. Here is what it does once you have built it.
 
 - **The renewal file.** Every contract, policy, warranty, and lease in one project folder, so "when does my internet contract renew and what is the cancellation window" is a question you ask rather than a hunt. Load once, query forever. (project workspace, Claude Projects or ChatGPT Projects)
-- **The grounded expert.** A workspace loaded with your industry's regulations answers only from those documents, with citations. The input set defines the truth, so the guessing stops. (document-grounded notebook, NotebookLM)
+- **The grounded expert.** A workspace loaded with your industry's regulations answers only from those documents, with citations. The input set defines the truth, so the guessing stops. (document-grounded notebook, Gemini Notebook, formerly NotebookLM)
 - **The portable you.** A one-page file of role, company, audience, and preferences pasted into every new tool you trial. The system instruction is yours; the tool is just where you point it. (any chat tool)
 - **The five-minute dossier.** Attendee bios and the last email thread become "five things to know before this call." Assembling scattered context is the cheapest win the system gives you. (any chat tool)
 - **The effort dial in daily use.** The cheapest model formats the spreadsheet; the strongest writes the strategy memo. Match the tier to the stakes rather than defaulting to maximum. (the model picker in any major tool)
@@ -233,7 +233,7 @@ Six of these run the chapter's discipline of directed interrogation. The two vis
 
 The four workflows prepare conversations. A leader's AI leverage also compounds at team scale, where the principle shifts from preparing yourself to equipping others.
 
-- **The self-serve trainer.** Load every SOP, policy, and best-practice document into a document-grounded notebook that answers only from those files (NotebookLM is the current standard). New hires ask it the questions they would have interrupted you with, and customer-service training runs from the same source. Your documented practice becomes infrastructure.
+- **The self-serve trainer.** Load every SOP, policy, and best-practice document into a document-grounded notebook that answers only from those files (Gemini Notebook, once called NotebookLM, is the current standard). New hires ask it the questions they would have interrupted you with, and customer-service training runs from the same source. Your documented practice becomes infrastructure.
 - **The best performer's Tuesday.** Sit with your strongest performer for an hour, capture how they actually prompt through their hardest recurring task, and publish it as the team's floor. Chapter 3's SOP discipline aimed at prompting itself.
 - **The meeting that ends itself.** No meeting closes without the model extracting decisions, owners, and deadlines into the team channel before people reach the door. The follow-up email dies as a genre.
 - **The onboarding wiki you already wrote.** Six months of your chat answers to the same recurring questions, exported and synthesized into the documentation nobody had time to write.
