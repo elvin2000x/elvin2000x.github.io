@@ -414,7 +414,7 @@
             "doc_html": "<p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
           }
         ],
-        "strip_caption": "The Toolkit gives you 25 prompts built the same way, with brackets for your own details, and it's in the bundle.",
+        "strip_caption": "The Toolkit gives you 25 prompts built the same way, with brackets for your own details.",
         "more_label": "See the whole page",
         "dialog_label": "Prompts from the Toolkit",
         "close_label": "Close",
@@ -842,7 +842,7 @@
             "doc_html": "<p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
           }
         ],
-        "doc_caption": "The Toolkit gives you 25 prompts built the same way, with brackets for your own details, and it's in the bundle.",
+        "doc_caption": "The Toolkit gives you 25 prompts built the same way, with brackets for your own details.",
         "more_label": "See the whole page",
         "dialog_label": "Prompts from the Toolkit",
         "close_label": "Close"
@@ -1119,7 +1119,7 @@
             "doc_html": "<p class=\"lp-doc__mono\">MY VOICE<br>HOW I SOUND<br>- My sentences are usually: [short / mixed / long]<br>- I open by: [getting straight to the point / a friendly line / a question]<br>- I close by: [a clear next step / a thank-you / a short sign-off]<br>- I use contractions: [yes / no]<br>- Words and phrases I like: [list]<br>- Words and phrases I never use: [list]</p>"
           }
         ],
-        "strip_caption": "A habit on its page, and the card.",
+        "strip_caption": "A habit on its page, the card, and the voice file.",
         "more_label": "See the whole page",
         "dialog_label": "Pages from The 12 Commandments",
         "close_label": "Close",
