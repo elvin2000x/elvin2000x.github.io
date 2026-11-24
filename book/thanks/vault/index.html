@@ -9,6 +9,44 @@
        version so a change to it reaches visitors at once. Buy buttons keep their own
        /book/checkout/ address, so a click before it is ready lands on the payment page. -->
   <script>(function(){var m=/(?:^#|&)t=([A-Za-z0-9_-]{10,100})/.exec(location.hash||"");if(m){try{sessionStorage.setItem("ep_offer",m[1])}catch(e){}try{history.replaceState(history.state,"",location.pathname+location.search)}catch(e){}}})();</script>
+  <!-- 735: the visit's own details for the store (no cookie; sessionStorage only). Nothing here can throw or wait. -->
+  <script>(function () {
+    var V = window.EPVisit = { id: '', ad: {}, screen: {}, hints: {}, ready: null };
+    function rid() {
+      try { var a = new Uint8Array(16); crypto.getRandomValues(a); return Array.prototype.map.call(a, function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+      catch (e) { return (Date.now().toString(36) + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)).replace(/[^A-Za-z0-9]/g, '').slice(0, 32); }
+    }
+    try {
+      var id = ''; try { id = sessionStorage.getItem('ep-visit') || ''; } catch (e) {}
+      if (!/^[A-Za-z0-9_-]{8,64}$/.test(id)) { id = rid(); try { sessionStorage.setItem('ep-visit', id); } catch (e) {} }
+      V.id = id;
+    } catch (e) {}
+    try {
+      var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'placement', 'site_source', 'campaign_id', 'adset_id', 'ad_id', 'fbclid'];
+      var clean = function (src) {
+        var o = {}, any = false;
+        KEYS.forEach(function (k) {
+          var v = src && src[k] != null ? String(src[k]).replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 100) : '';
+          if (v && /^(campaign_id|adset_id|ad_id)$/.test(k) && !/^\d+$/.test(v)) v = '';
+          if (v) { o[k] = v; any = true; }
+        });
+        return any ? o : null;
+      };
+      var here = null; try { var q = new URLSearchParams(location.search), raw = {}; KEYS.forEach(function (k) { raw[k] = q.get(k); }); here = clean(raw); } catch (e) {}
+      var kept = null; try { kept = clean(JSON.parse(sessionStorage.getItem('ep-ad') || 'null')); } catch (e) {}
+      if (!kept && here) { try { sessionStorage.setItem('ep-ad', JSON.stringify(here)); } catch (e) {} }
+      V.ad = kept || here || {};
+    } catch (e) {}
+    try { V.screen = { w: screen.width, h: screen.height, dpr: window.devicePixelRatio || 1 }; } catch (e) {}
+    try {
+      var uad = navigator.userAgentData;
+      if (uad && typeof uad.getHighEntropyValues === 'function') {
+        V.ready = Promise.resolve(uad.getHighEntropyValues(['model', 'platformVersion'])).then(function (h) {
+          V.hints = { model: String((h && h.model) || '').slice(0, 100), platformVersion: String((h && h.platformVersion) || '').slice(0, 40) };
+        }, function () {});
+      }
+    } catch (e) {}
+  })();</script>
   <script defer src="https://api.elvinpeters.com/api/store/funnel.js?v=31be0c85"></script>
   <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLZ7N26J1Q"></script>
@@ -274,7 +312,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     /* 733: the Meta browser ids for the store's server-side Purchase; mirrors funnel.js cookie() (#607). Never throws. */
     var ck = function (n) { try { var m = new RegExp('(?:^|; )' + n + '=([^;]{1,600})').exec(document.cookie); return m ? decodeURIComponent(m[1]) : ''; } catch (x) { return ''; } };
     var timer = setTimeout(function () { if (ctl) ctl.abort(); go(); }, 1800);
-    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify((function () { var b = { funnel: funnel, utm: utm, code: '' }; if (window.EP_HOOK && window.EP_HOOK.page === 'offer') b.hook = { page: 'offer', variant: window.EP_HOOK.variant }; if (window.EP_TEAM) b.test = true; if (ADDON_ON) b.bump = true; else if (SEND_BUMP_FALSE) b.bump = false; b.fbp = ck('_fbp'); b.fbc = ck('_fbc'); return b; })()), signal: ctl ? ctl.signal : undefined })
+    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify((function () { var b = { funnel: funnel, utm: utm, code: '' }; if (window.EP_HOOK && window.EP_HOOK.page === 'offer') b.hook = { page: 'offer', variant: window.EP_HOOK.variant }; if (window.EP_TEAM) b.test = true; if (ADDON_ON) b.bump = true; else if (SEND_BUMP_FALSE) b.bump = false; b.fbp = ck('_fbp'); b.fbc = ck('_fbc'); b.visit_id = ''; b.screen = {}; b.hints = {}; try { var V = window.EPVisit; if (V) { var ad = V.ad || {}; if (b.utm && typeof b.utm === 'object') Object.keys(ad).forEach(function (k) { if (!(k in b.utm)) b.utm[k] = ad[k]; }); b.visit_id = V.id || ''; b.screen = V.screen || {}; b.hints = V.hints || {}; } } catch (x) {} return b; })()), signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { var u = j && (j.url || j.checkout_url); clearTimeout(timer); if (!settled && u && /^https:\/\/checkout\.stripe\.com\//.test(u)) { settled = true; location.assign(u); } else go(); })
       .catch(function () { clearTimeout(timer); go(); });
