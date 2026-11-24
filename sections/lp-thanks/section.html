@@ -4,7 +4,8 @@
 {{#sub}}
     <p class="lp-lede">{{sub}}</p>
 {{/sub}}
-    <p class="lp-thanks__order">{{#order_label}}<span>{{order_label}}</span> {{/order_label}}<strong data-store="order-number"></strong>{{#paid_label}}<span>{{paid_label}}</span>{{/paid_label}} <span data-store="total"></span></p>
+    <p class="lp-thanks__order" data-lp-order hidden>{{#order_label}}<span>{{order_label}}</span> {{/order_label}}<strong data-store="order-number"></strong>{{#paid_label}}<span>{{paid_label}}</span>{{/paid_label}} <span data-store="total"></span></p>
+    <p class="lp-error" data-store="error" hidden></p>
 {{#files_label}}
     <h2>{{files_label}}</h2>
 {{/files_label}}
@@ -33,4 +34,15 @@
       <p class="amz-disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
     </div>
   </div>
+  <script>
+  (function () {
+    /* 727: the order line shows once the store has filled the number, never as "Order , paid" */
+    var root = document.currentScript.parentNode, line = root.querySelector('[data-lp-order]'),
+        num = root.querySelector('[data-store="order-number"]');
+    if (!line || !num) return;
+    function f() { line.hidden = !num.textContent.trim(); }
+    if (window.MutationObserver) new MutationObserver(f).observe(num, { childList: true, characterData: true, subtree: true });
+    f();
+  })();
+  </script>
 </section>

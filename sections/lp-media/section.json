@@ -314,6 +314,62 @@
           ]
         }
       ]
+    },
+    {
+      "key": "sample",
+      "type": "text",
+      "label": "Sample label on the picture (leave empty for none)"
+    },
+    {
+      "key": "ptable",
+      "type": "object",
+      "label": "Table in place of the picture",
+      "fields": [
+        {
+          "key": "col1",
+          "type": "text",
+          "label": "First column heading"
+        },
+        {
+          "key": "col2",
+          "type": "text",
+          "label": "Second column heading"
+        },
+        {
+          "key": "groups",
+          "type": "list",
+          "label": "Groups",
+          "fields": [
+            {
+              "key": "cat",
+              "type": "text",
+              "label": "Group name"
+            },
+            {
+              "key": "span",
+              "type": "text",
+              "label": "Rows in the group"
+            },
+            {
+              "key": "items",
+              "type": "list",
+              "label": "Rows",
+              "fields": [
+                {
+                  "key": "name",
+                  "type": "text",
+                  "label": "Name"
+                },
+                {
+                  "key": "first",
+                  "type": "bool",
+                  "label": "First row of the group"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -24,7 +24,10 @@
 {{/jobs_total}}
     </ul>
 {{/jobs.0}}
-    <figure class="lp-media__fig">
+    <figure class="lp-media__fig{{#sample}} lp-media__fig--sample{{/sample}}">
+{{#sample}}
+      <p class="lp-media__sample">{{sample}}</p>
+{{/sample}}
 {{#mp4}}
       <div class="lp-media__loop{{#tap}} lp-media__loop--tap{{/tap}}" data-lp-loop{{#tap}} data-lp-tap{{/tap}}>
 {{#tap}}
@@ -56,6 +59,7 @@
       </div>
 {{/mp4}}
 {{^mp4}}
+{{^ptable}}
 {{#image}}
       <picture>
 {{#phone}}
@@ -64,6 +68,19 @@
         <img src="{{image}}" alt="{{alt}}" width="{{w}}" height="{{h}}" loading="lazy" decoding="async">
       </picture>
 {{/image}}
+{{/ptable}}
+{{#ptable}}
+      <table class="lp-ptable">
+        <thead><tr><th scope="col">{{col1}}</th><th scope="col">{{col2}}</th></tr></thead>
+{{#groups}}
+        <tbody>
+{{#items}}
+          <tr>{{#first}}<th scope="rowgroup" rowspan="{{span}}">{{cat}}</th>{{/first}}<td>{{name}}</td></tr>
+{{/items}}
+        </tbody>
+{{/groups}}
+      </table>
+{{/ptable}}
 {{/mp4}}
 {{#tap_caption}}
       <p class="lp-media__tapcap">{{tap_caption}}</p>

@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=0b149e78" />
-  <link rel="stylesheet" href="/css/landing.css?v=af0a8add" />
+  <link rel="stylesheet" href="/css/landing.css?v=e6105dc9" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp" data-store-step="last-chance">
@@ -118,6 +118,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     <p class="lp-price"><span>Total</span> <s data-store="was"></s> <strong data-store="total"></strong></p>
     <p class="lp-note">One receipt email lists everything you bought and links to your library, where each product has its own download. Anything added later in the same order gets a second email titled Added to your order.</p>
     <p class="lp-error" data-store="error" hidden></p>
+    <p class="lp-expired-link"><a href="/book/offer/">The Artificial Advantage Bundle</a></p>
     <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>Add my choices at 12% off</button>
     <p class="lp-note lp-yes-note">This charges the card you just used. You will not need to enter it again.</p>
     <button type="button" class="lp-no" data-store-decline>No thanks, take me to my downloads</button>
@@ -156,6 +157,18 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     var box = root.querySelector('.lp-basket__list');
     if (box && window.MutationObserver) new MutationObserver(dress).observe(box, { childList: true });
     dress();
+    /* 727: no offer token (or the store says it has expired): show only that message and the link */
+    if (root.querySelector('.lp-expired-link')) {
+      var ready = false, tok = null, err = root.querySelector('[data-store="error"]');
+      try { tok = sessionStorage.getItem('ep_offer'); } catch (e) {}
+      if (!tok && /(?:^#|&)t=[A-Za-z0-9_-]{10,100}/.test(location.hash || '')) tok = 'hash';
+      var expire = function () { if (!ready) document.body.classList.add('lp-expired'); };
+      document.addEventListener('store:ready', function () { ready = true; document.body.classList.remove('lp-expired'); });
+      if (!tok) expire();
+      if (err && window.MutationObserver) new MutationObserver(function () {
+        if (!ready && !err.hidden && err.textContent && !/couldn.t load|offline/i.test(err.textContent)) expire();
+      }).observe(err, { attributes: true, childList: true, characterData: true, subtree: true });
+    }
   })();
   </script>
 </section>

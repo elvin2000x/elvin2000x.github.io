@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=0b149e78" />
-  <link rel="stylesheet" href="/css/landing.css?v=af0a8add" />
+  <link rel="stylesheet" href="/css/landing.css?v=e6105dc9" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>body.lp #review{ padding-top:8px } body.lp .lp-sec{ padding-top:40px; padding-bottom:40px } body.lp .lp-sec:not(.lp-sec--tint) + .lp-sec:not(.lp-sec--tint), body.lp .lp-sec--tint + .lp-sec--tint{ padding-top:4px } body.lp .lp-media__buy .btn, body.lp .lp-gallery__buy .btn, body.lp .lp-pairs__buy .btn, body.lp .lp-addon__add{ border-radius:6px; min-height:60px; font-size:20px } body.lp .lp-sec:not(.lp-sec--tint) + .ep-block{ padding-top:0 } body.lp .ep-block + .lp-sec:not(.lp-sec--tint){ padding-top:8px } body.lp #v9-disc-end p{ font-size:14px }</style>
 </head>
@@ -552,10 +552,27 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     <h3 class="lp-media__h">The Toolkit</h3>
     <p class="lp-media__lede">Every exercise, prompt and role from the book, typed into Word files you can edit.</p>
     <figure class="lp-media__fig">
-      <picture>
-        <source media="(max-width: 767px)" srcset="/img/store/look-inside/toolkit-prompt-titles-phone.webp" width="578" height="1416">
-        <img src="/img/store/look-inside/toolkit-prompt-titles-desktop.webp" alt="The Toolkit's prompt library as a spreadsheet, the first 12 of its 25 prompts: category and prompt name" width="578" height="1416" loading="lazy" decoding="async">
-      </picture>
+      <table class="lp-ptable">
+        <thead><tr><th scope="col">Category</th><th scope="col">Prompt name</th></tr></thead>
+        <tbody>
+          <tr><th scope="rowgroup" rowspan="5">Communication</th><td>Executive Update Email</td></tr>
+          <tr><td>Stakeholder Briefing</td></tr>
+          <tr><td>Conflict De-escalation Email</td></tr>
+          <tr><td>Meeting Follow-Up</td></tr>
+          <tr><td>Decline or Pushback Message</td></tr>
+        </tbody>
+        <tbody>
+          <tr><th scope="rowgroup" rowspan="5">Analysis and Research</th><td>Competitive Landscape Brief</td></tr>
+          <tr><td>Risk Assessment</td></tr>
+          <tr><td>Data Interpretation</td></tr>
+          <tr><td>Options Comparison</td></tr>
+          <tr><td>Literature / Research Digest</td></tr>
+        </tbody>
+        <tbody>
+          <tr><th scope="rowgroup" rowspan="2">Writing and Editing</th><td>First Draft from Notes</td></tr>
+          <tr><td>Structural Edit</td></tr>
+        </tbody>
+      </table>
       <figcaption class="lp-media__cap">12 of the 25 prompt titles.</figcaption>
     </figure>
     <div class="lp-media__body"><p class="lp-tail">In the bundle, the Toolkit saves you typing the book's prompts and exercises out yourself.</p></div>
@@ -820,7 +837,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <div class="lp-in lp-media__grid">
     <h2 class="lp-media__h">Your download list, and the one place to start</h2>
     <p class="lp-media__lede">Right after you pay, every piece is on one download page, and one receipt email lists everything with a link back to your library. Start with the 7-Day AI Workbook. On Day 1 you pick a task you do every week.</p>
-    <figure class="lp-media__fig">
+    <figure class="lp-media__fig lp-media__fig--sample">
+      <p class="lp-media__sample">Sample order</p>
       <picture>
         <source media="(max-width: 767px)" srcset="/img/store/look-inside/download-list-phone.webp" width="734" height="2380">
         <img src="/img/store/look-inside/download-list-desktop.webp" alt="The download page after paying: the Workbook first, then the ebook, the Toolkit, the Companion Library, Everything AI 2026 and The 12 Commandments, each with a one-line note" width="1488" height="1316" loading="lazy" decoding="async">

@@ -288,6 +288,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     .hero-sub{ order:2; font-size:19px; line-height:1.42; margin:0 0 20px; max-width:none }
     .hero .buy{ order:3; margin:0 0 12px }
     .hero .price-line{ order:4 }
+    /* 727: the bundle line belongs under its price line (with no order it jumped above the headline) */
+    .hero .under-buy{ order:4; font-size:16px; line-height:1.5; color:var(--ink); margin:8px 0 0; max-width:560px }
     .hero .hero-art{ order:5; margin:24px 0 8px }
     .hero .hero-art img{ width:100%; max-width:340px; height:auto; mix-blend-mode:multiply }
     .hero .trust{ order:6; font-size:16px; line-height:1.5; color:var(--ink); border-top:1px solid var(--hp-line); padding-top:16px; margin:16px 0 0; max-width:560px }
@@ -299,6 +301,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
       .hero-sub{ font-size:20px; line-height:1.5; grid-column:1; max-width:560px }
       .hero .buy{ grid-column:1; justify-self:start }
       .hero .price-line{ grid-column:1 }
+      .hero .under-buy{ grid-column:1 }
       .hero .sample{ order:5; grid-column:1; justify-self:start; margin:16px 0 0 }
       .hero .trust{ order:6; grid-column:1; margin:20px 0 0 }
       .hero .hero-art{ grid-column:2; grid-row:1 / span 7; margin:0; align-self:center }

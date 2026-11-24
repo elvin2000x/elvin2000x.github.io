@@ -11,6 +11,9 @@
     <p class="lp-note">{{after_total}}</p>
 {{/after_total}}
     <p class="lp-error" data-store="error" hidden></p>
+{{#expired_href}}
+    <p class="lp-expired-link"><a href="{{expired_href}}">{{expired_link}}</a></p>
+{{/expired_href}}
     <button type="button" class="btn btn--primary btn--lg lp-cta" data-store-accept>{{yes}}</button>
 {{#yes_note}}
     <p class="lp-note lp-yes-note">{{yes_note}}</p>
@@ -55,6 +58,18 @@
     var box = root.querySelector('.lp-basket__list');
     if (box && window.MutationObserver) new MutationObserver(dress).observe(box, { childList: true });
     dress();
+    /* 727: no offer token (or the store says it has expired): show only that message and the link */
+    if (root.querySelector('.lp-expired-link')) {
+      var ready = false, tok = null, err = root.querySelector('[data-store="error"]');
+      try { tok = sessionStorage.getItem('ep_offer'); } catch (e) {}
+      if (!tok && /(?:^#|&)t=[A-Za-z0-9_-]{10,100}/.test(location.hash || '')) tok = 'hash';
+      var expire = function () { if (!ready) document.body.classList.add('lp-expired'); };
+      document.addEventListener('store:ready', function () { ready = true; document.body.classList.remove('lp-expired'); });
+      if (!tok) expire();
+      if (err && window.MutationObserver) new MutationObserver(function () {
+        if (!ready && !err.hidden && err.textContent && !/couldn.t load|offline/i.test(err.textContent)) expire();
+      }).observe(err, { attributes: true, childList: true, characterData: true, subtree: true });
+    }
   })();
   </script>
 </section>

@@ -739,6 +739,78 @@
               "where": "It's in the Toolkit. Print it and keep it by your screen."
             }
           ]
+        },
+        "ptable": {
+          "col1": "Category",
+          "col2": "Prompt name",
+          "groups": [
+            {
+              "cat": "Communication",
+              "span": "5",
+              "items": [
+                {
+                  "name": "Executive Update Email",
+                  "first": true
+                },
+                {
+                  "name": "Stakeholder Briefing",
+                  "first": false
+                },
+                {
+                  "name": "Conflict De-escalation Email",
+                  "first": false
+                },
+                {
+                  "name": "Meeting Follow-Up",
+                  "first": false
+                },
+                {
+                  "name": "Decline or Pushback Message",
+                  "first": false
+                }
+              ]
+            },
+            {
+              "cat": "Analysis and Research",
+              "span": "5",
+              "items": [
+                {
+                  "name": "Competitive Landscape Brief",
+                  "first": true
+                },
+                {
+                  "name": "Risk Assessment",
+                  "first": false
+                },
+                {
+                  "name": "Data Interpretation",
+                  "first": false
+                },
+                {
+                  "name": "Options Comparison",
+                  "first": false
+                },
+                {
+                  "name": "Literature / Research Digest",
+                  "first": false
+                }
+              ]
+            },
+            {
+              "cat": "Writing and Editing",
+              "span": "2",
+              "items": [
+                {
+                  "name": "First Draft from Notes",
+                  "first": true
+                },
+                {
+                  "name": "Structural Edit",
+                  "first": false
+                }
+              ]
+            }
+          ]
         }
       }
     },
@@ -1082,7 +1154,8 @@
         "alt": "The download page after paying: the Workbook first, then the ebook, the Toolkit, the Companion Library, Everything AI 2026 and The 12 Commandments, each with a one-line note",
         "caption": "The download page, from a sample order.",
         "body": "<p class=\"lp-tail\">Everything you've read about above arrives in that one download.</p>",
-        "buy": ""
+        "buy": "",
+        "sample": "Sample order"
       }
     },
     {

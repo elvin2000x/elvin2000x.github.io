@@ -1002,3 +1002,20 @@ body.lp #fine-print p{ font-size:14px; line-height:1.55; color:var(--ink-2, #334
 /* 725: the emails pair in the slider's chat frames */
 body.lp .lp-pairs__frames{ margin:20px 0 0 }
 body.lp .lp-pairs__frames + .lp-pairs__after{ margin-top:20px }
+/* 727: night-review fixes: sample label, Toolkit table, order line, expired last-chance page */
+body.lp .lp-media__fig--sample .lp-media__sample{ display:block; margin:0; padding:8px 14px; border-radius:var(--r-sm) var(--r-sm) 0 0; background:var(--lp-navy); color:#fff; font:700 15px/1.3 var(--sans); letter-spacing:.04em; text-transform:uppercase }
+.lp-media__fig--sample picture{ display:block; border:2px solid var(--lp-navy); border-top:0; border-radius:0 0 var(--r-sm) var(--r-sm); overflow:hidden }
+.lp-media__fig--sample img{ border-radius:0 !important; pointer-events:none; -webkit-user-select:none; user-select:none; -webkit-touch-callout:none }
+.lp-ptable{ width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--lp-line, #d9dee7); border-radius:var(--r-sm); overflow:hidden; font:400 17px/1.4 var(--sans); color:var(--lp-navy) }
+.lp-ptable thead th{ background:var(--lp-navy); color:#fff; font-weight:700; text-align:left; padding:12px 14px }
+.lp-ptable td, .lp-ptable tbody th{ padding:10px 14px; text-align:left; vertical-align:top; border-top:1px solid var(--lp-line, #d9dee7) }
+.lp-ptable tbody th{ font-weight:700; width:42%; background:#f5f7fb }
+.lp-ptable tbody + tbody{ border-top:2px solid var(--lp-navy) }
+@media (max-width:767px){ .lp-ptable{ font-size:16px } .lp-ptable td, .lp-ptable tbody th, .lp-ptable thead th{ padding:10px 12px } }
+.lp-thanks__order[hidden]{ display:none }
+.lp-expired-link{ display:none }
+body.lp-expired main > section:not(.lp-basket), body.lp-expired main > .lp-progress{ display:none }
+body.lp-expired .lp-basket .lp-in > :not(.lp-error):not(.lp-expired-link){ display:none !important }
+body.lp-expired .lp-basket .lp-error{ font-size:20px; line-height:1.45; margin:24px 0 12px }
+body.lp-expired .lp-expired-link{ display:block; margin:0 0 40px; font:600 18px/1.4 var(--sans) }
+body.lp-expired .lp-expired-link a{ display:inline-flex; align-items:center; min-height:44px }

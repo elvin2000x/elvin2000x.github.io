@@ -117,6 +117,16 @@
       "key": "thumbs_json",
       "type": "text",
       "label": "Row pictures (JSON: product key to picture)"
+    },
+    {
+      "key": "expired_link",
+      "type": "text",
+      "label": "Link shown with the expired message"
+    },
+    {
+      "key": "expired_href",
+      "type": "text",
+      "label": "Where that link goes (empty = keep the page as it is)"
     }
   ]
 }
