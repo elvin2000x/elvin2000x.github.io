@@ -234,7 +234,7 @@
           {
             "title": "&ldquo;The tools change too fast.&rdquo;",
             "line": "A good brief carries over from one model to the next (Ch 6).",
-            "body": "<p>ChatGPT, Claude and Gemini share the same engine underneath, and each one mirrors the quality of what you type. In the book's words, &ldquo;The skill you're building here transfers to every tool, because the underlying engine is the same one.&rdquo; Product names will keep changing, and your briefs keep working.</p>"
+            "body": "<p>ChatGPT, Claude and Gemini work the same way underneath, and each one mirrors the quality of what you type. In the book's words, &ldquo;The skill you're building here transfers to every tool, because the underlying engine is the same one.&rdquo; Product names will keep changing, and your briefs keep working.</p>"
           }
         ],
         "buy": null
