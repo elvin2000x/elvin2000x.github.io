@@ -29,7 +29,7 @@
               "line": "Works with ChatGPT, Claude, Gemini and Copilot. A free plan is enough to start."
             },
             {
-              "line": "The Toolkit is 25 prompts, 25 role setups and 16 exercises, in Word files you can edit."
+              "line": "The Toolkit is 26 prompts, 25 role setups and 18 exercises, in Word files you can edit."
             },
             {
               "line": "The Workbook is one step a day for seven days, on one real task from your own week."
@@ -108,7 +108,7 @@
             "line": "The book works with ChatGPT, Claude, Gemini and Copilot. A free plan is enough to start."
           },
           {
-            "line": "The Toolkit is 25 prompts, 25 role setups and 16 exercises, in Word files you can edit."
+            "line": "The Toolkit is 26 prompts, 25 role setups and 18 exercises, in Word files you can edit."
           },
           {
             "line": "The Workbook is one step a day for seven days, on one real task from your own week."
@@ -413,7 +413,7 @@
             "doc_html": "<p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
           }
         ],
-        "strip_caption": "The Toolkit gives you 25 prompts built the same way, with brackets for your own details.",
+        "strip_caption": "The Toolkit gives you 26 prompts built the same way, with brackets for your own details.",
         "more_label": "See the whole page",
         "dialog_label": "Prompts from the Toolkit",
         "close_label": "Close",
@@ -675,8 +675,8 @@
         "h": "1416",
         "phone_w": "578",
         "phone_h": "1416",
-        "alt": "The Toolkit's prompt library as a spreadsheet, the first 12 of its 25 prompts: category and prompt name",
-        "caption": "12 of the 25 prompt titles.",
+        "alt": "The Toolkit's prompt library as a spreadsheet, the first 12 of its 26 prompts: category and prompt name",
+        "caption": "12 of the 26 prompt titles.",
         "body": "<p class=\"lp-tail\">In the bundle, the Toolkit saves you typing the book's prompts and exercises out yourself.</p>",
         "buy": "Get the bundle for $27",
         "kit_cards": {
@@ -841,7 +841,7 @@
             "doc_html": "<p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
           }
         ],
-        "doc_caption": "The Toolkit gives you 25 prompts built the same way, with brackets for your own details.",
+        "doc_caption": "The Toolkit gives you 26 prompts built the same way, with brackets for your own details.",
         "more_label": "See the whole page",
         "dialog_label": "Prompts from the Toolkit",
         "close_label": "Close"
@@ -1266,7 +1266,7 @@
           },
           {
             "q": "Will it work for my kind of work?",
-            "a": "The Toolkit's 25 prompts come in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, and Learning and Development. A few by name: Executive Update Email, Meeting Follow-Up, Risk Assessment, First Draft from Notes and Plain Language Rewrite."
+            "a": "The Toolkit's 26 prompts come in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, and Learning and Development. A few by name: Executive Update Email, Meeting Follow-Up, Risk Assessment, First Draft from Notes and Plain Language Rewrite."
           },
           {
             "q": "How do I stop it making things up?",

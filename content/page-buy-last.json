@@ -76,7 +76,7 @@
             "text": "A 217-page PDF, for Claude only, on setting it up so every chat starts out knowing your work. The first half needs no terminal.",
             "was": "A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work.",
             "problem": "Does Claude start every chat knowing nothing about your work?",
-            "off": true
+            "off": false
           },
           {
             "product": "top-15-rules",
