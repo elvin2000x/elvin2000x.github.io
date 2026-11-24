@@ -242,6 +242,22 @@
       }
     },
     {
+      "id": "why-wrote",
+      "type": "text",
+      "note": "721 section 2 (COPYWRITER, approved 2026-11-23): sits straight above About the author.",
+      "data": {
+        "anchor": "why-i-wrote",
+        "align": "left",
+        "heading": "Why I wrote this book",
+        "paras": [
+          "When I went looking for a way to learn AI, I found two shelves.",
+          "On one were short videos and gurus selling this week's trick. On the other were research papers, developer manuals and courses that cost hundreds or thousands of dollars.",
+          "For a person with a job and a free AI app, the middle was empty. You could get a list of prompts, a history of the microchip or a debate about ethics.",
+          "So I did the slow part. I read the manuals, followed the research and tested things on my own work until I knew what held up. Then I wrote it down in plain English, for the person I was at the start."
+        ]
+      }
+    },
+    {
       "id": "about",
       "type": "author",
       "note": "6. About the author (facts: 02 Books/reference/elvin-verified-profile.md; employers anonymised at Elvin's request)",

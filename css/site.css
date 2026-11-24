@@ -619,3 +619,8 @@ html .nav .links a.cta, html .nav .lk a.cta{ white-space:nowrap }
 .ep-s-imgalign-left.ep-s-imgalign-left img:not(li img):not(.ep-video__play img){ display:block; margin-left:0; margin-right:auto; justify-self:start }
 .ep-s-imgalign-center.ep-s-imgalign-center img:not(li img):not(.ep-video__play img){ display:block; margin-left:auto; margin-right:auto; justify-self:center }
 .ep-s-imgalign-right.ep-s-imgalign-right img:not(li img):not(.ep-video__play img){ display:block; margin-left:auto; margin-right:0; justify-self:end }
+
+/* 721: Why I wrote this book on the homepage, spaced like the sections around it */
+#why-i-wrote{ padding:64px 16px 56px }
+#why-i-wrote p{ font-size:18px; line-height:1.6 }
+@media (min-width:768px){ #why-i-wrote{ padding:88px 16px 80px } #why-i-wrote p{ font-size:19px } }

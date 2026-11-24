@@ -156,7 +156,7 @@
             "note": ""
           }
         ],
-        "after": "<p>What changed: the second request says who is writing, who is reading, why it's late and how that reader takes bad news. The first answer is a template that apologizes. The second leads with the new date, gives the reason in two sentences, and needs only the names and dates filled in. The book calls this the Role, Task, Constraint brief, and it is the habit the whole method is built on.</p><p>Read each answer below as if your name goes at the bottom. Which line would you have to check before sending it?</p>",
+        "after": "<p>What the explained request added: who is writing, who is reading, why it is late and how the reader takes bad news. The book calls it the Role, Task, Constraint brief.</p>",
         "buy": "Get the bundle for $27",
         "frames": "1",
         "scroll_label": "Scroll for the rest"
