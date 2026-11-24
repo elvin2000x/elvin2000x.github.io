@@ -998,3 +998,7 @@ body.lp #fine-print p{ font-size:14px; line-height:1.55; color:var(--ink-2, #334
 .lp-hero__problem{ margin:12px 0 0; font:600 26px/1.35 var(--serif, Georgia, serif); color:var(--ink) }
 .lp-hero__problem + .lp-lede{ margin-top:10px }
 @media (max-width:639px){ .lp-hero__problem{ font-size:22px } .lp-basket__row-problem{ font-size:18px } }
+
+/* 725: the emails pair in the slider's chat frames */
+body.lp .lp-pairs__frames{ margin:20px 0 0 }
+body.lp .lp-pairs__frames + .lp-pairs__after{ margin-top:20px }

@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=3481e178" />
+  <link rel="stylesheet" href="/css/landing.css?v=af0a8add" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>body.lp #review{ padding-top:8px } body.lp .lp-sec{ padding-top:40px; padding-bottom:40px } body.lp .lp-sec:not(.lp-sec--tint) + .lp-sec:not(.lp-sec--tint), body.lp .lp-sec--tint + .lp-sec--tint{ padding-top:4px } body.lp .lp-media__buy .btn, body.lp .lp-gallery__buy .btn, body.lp .lp-pairs__buy .btn, body.lp .lp-addon__add{ border-radius:6px; min-height:60px; font-size:20px } body.lp .lp-sec:not(.lp-sec--tint) + .ep-block{ padding-top:0 } body.lp .ep-block + .lp-sec:not(.lp-sec--tint){ padding-top:8px } body.lp #v9-disc-end p{ font-size:14px }</style>
 </head>
@@ -182,21 +182,25 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <div class="lp-in">
     <h2>Same AI, same task, two very different emails</h2>
     <p class="lp-pairs__lede">Example answers, written by AI for this page to show the difference.</p>
-    <div class="lp-pairs__pair">
-      <div class="lp-pairs__grid">
-        <article class="lp-pairs__card lp-pairs__card--thin">
-          <p class="lp-pairs__kind">One line</p>
-          <p class="lp-pairs__req">Write an email to the client about the project delay.</p>
-          <p class="lp-pairs__alabel">The answer, first lines:</p>
-          <div class="lp-pairs__ans lp-pairs__first"><p>Hi [Client Name], I'm writing to let you know that [Project Name] will be delayed. We had planned to deliver on [original date], and we now expect to deliver by [new date]. The delay is due to [brief, honest reason, e.g., an unexpected technical issue / a late dependency / a change in scope]. I know this is not the news you were hoping for, and I apologize for the inconvenience it causes on your end.</p></div>
-          <details class="lp-pairs__more"><summary>Read the full answer</summary><div class="lp-pairs__ans"><p>Subject: Update on Your Project Timeline</p><p>Hi [Client Name],</p><p>I'm writing to let you know that [Project Name] will be delayed. We had planned to deliver on [original date], and we now expect to deliver by [new date].</p><p>The delay is due to [brief, honest reason, e.g., an unexpected technical issue / a late dependency / a change in scope]. I know this is not the news you were hoping for, and I apologize for the inconvenience it causes on your end.</p><p>Here is what we are doing to get things back on track:</p><ul><li>[Action 1, e.g., reallocating resources to the affected work]</li><li>[Action 2, e.g., prioritizing the items that matter most to you]</li><li>[Action 3, e.g., adding a mid-point check-in to confirm progress]</li></ul><p>Here is the updated schedule:</p><ul><li>[Milestone 1]: [date]</li><li>[Milestone 2]: [date]</li><li>Final delivery: [new date]</li></ul><p>If the new date creates a problem for you, please tell me. I'm happy to talk through options, such as delivering part of the work earlier or adjusting the scope.</p><p>I'll send you a progress update on [date] so you always know where things stand. Thank you for your patience and your trust. I'm committed to delivering something you'll be happy with.</p><p>Best regards,<br>[Your Name]<br>[Your Title / Company]<br>[Phone / Email]</p></div></details>
-        </article>
-        <article class="lp-pairs__card lp-pairs__card--directed">
-          <p class="lp-pairs__kind">The job, explained</p>
-          <p class="lp-pairs__req">Act as a senior account manager at a consulting firm. Write an email to a long-term client explaining that a deliverable they expected Friday will now arrive Tuesday. The delay is due to a data quality issue we caught during QA, something that will improve the final output. The client is detail-oriented and tends to interpret silence as incompetence. The tone should be direct and professional, not apologetic. Open with the updated timeline, explain the reason briefly, and close with what they can expect next. Under 150 words.</p>
-          <p class="lp-pairs__alabel">The answer:</p>
-          <div class="lp-pairs__ans lp-pairs__first"><p>Subject: Updated delivery: [Deliverable] now arriving Tuesday</p><p>Hi [Name],</p><p>The [deliverable] will reach you Tuesday, [date], rather than this Friday.</p><p>During final QA, we found a data quality issue in [source/dataset]. Delivering on schedule would have meant shipping output we couldn't fully stand behind. We're correcting the affected records and re-validating the results, which will make the final analysis more reliable.</p><p>Here's what to expect:</p><ul><li>Monday: Corrections and validation complete. I'll send you a brief status note.</li></ul><ul><li>Tuesday, by [time]: Full deliverable in your inbox, along with a short summary of the issue and how we resolved it.</li></ul><p>If it would help to review the data findings before Tuesday, I'm glad to set up a call.</p><p>Best regards, [Your name]</p></div>
-        </article>
+    <div class="lp-pairs__frames">
+      <div class="lp-slide__frames">
+        <div class="lp-chat" data-lp-scroll>
+          <p class="lp-chat__bar"><span class="lp-chat__dots" aria-hidden="true"></span><span class="lp-chip lp-chip--before">One line</span></p>
+          <div class="lp-chat__msgs" tabindex="0" aria-label="One line: Same AI, same task, two very different emails">
+            <div class="lp-bub lp-bub--you"><p>Write an email to the client about the project delay.</p></div>
+            <div class="lp-bub lp-bub--ai"><p>Subject: Update on Your Project Timeline</p><p>Hi [Client Name],</p><p>I'm writing to let you know that [Project Name] will be delayed. We had planned to deliver on [original date], and we now expect to deliver by [new date].</p><p>The delay is due to [brief, honest reason, e.g., an unexpected technical issue / a late dependency / a change in scope]. I know this is not the news you were hoping for, and I apologize for the inconvenience it causes on your end.</p><p>Here is what we are doing to get things back on track:</p><ul><li>[Action 1, e.g., reallocating resources to the affected work]</li><li>[Action 2, e.g., prioritizing the items that matter most to you]</li><li>[Action 3, e.g., adding a mid-point check-in to confirm progress]</li></ul><p>Here is the updated schedule:</p><ul><li>[Milestone 1]: [date]</li><li>[Milestone 2]: [date]</li><li>Final delivery: [new date]</li></ul><p>If the new date creates a problem for you, please tell me. I'm happy to talk through options, such as delivering part of the work earlier or adjusting the scope.</p><p>I'll send you a progress update on [date] so you always know where things stand. Thank you for your patience and your trust. I'm committed to delivering something you'll be happy with.</p><p>Best regards,<br>[Your Name]<br>[Your Title / Company]<br>[Phone / Email]</p></div>
+          </div>
+          <span class="lp-chat__hint" aria-hidden="true">Scroll for the rest</span>
+        </div>
+        <span class="lp-slide__arrow" aria-hidden="true"></span>
+        <div class="lp-chat lp-chat--after" data-lp-scroll>
+          <p class="lp-chat__bar"><span class="lp-chat__dots" aria-hidden="true"></span><span class="lp-chip lp-chip--after">The job, explained</span></p>
+          <div class="lp-chat__msgs" tabindex="0" aria-label="The job, explained: Same AI, same task, two very different emails">
+            <div class="lp-bub lp-bub--you"><p>Act as a senior account manager at a consulting firm. Write an email to a long-term client explaining that a deliverable they expected Friday will now arrive Tuesday. The delay is due to a data quality issue we caught during QA, something that will improve the final output. The client is detail-oriented and tends to interpret silence as incompetence. The tone should be direct and professional, not apologetic. Open with the updated timeline, explain the reason briefly, and close with what they can expect next. Under 150 words.</p></div>
+            <div class="lp-bub lp-bub--ai"><p>Subject: Updated delivery: [Deliverable] now arriving Tuesday</p><p>Hi [Name],</p><p>The [deliverable] will reach you Tuesday, [date], rather than this Friday.</p><p>During final QA, we found a data quality issue in [source/dataset]. Delivering on schedule would have meant shipping output we couldn't fully stand behind. We're correcting the affected records and re-validating the results, which will make the final analysis more reliable.</p><p>Here's what to expect:</p><ul><li>Monday: Corrections and validation complete. I'll send you a brief status note.</li></ul><ul><li>Tuesday, by [time]: Full deliverable in your inbox, along with a short summary of the issue and how we resolved it.</li></ul><p>If it would help to review the data findings before Tuesday, I'm glad to set up a call.</p><p>Best regards, [Your name]</p></div>
+          </div>
+          <span class="lp-chat__hint" aria-hidden="true">Scroll for the rest</span>
+        </div>
       </div>
     </div>
     <div class="lp-pairs__after"><p>What changed: the second request says who is writing, who is reading, why it's late and how that reader takes bad news. The first answer is a template that apologizes. The second leads with the new date, gives the reason in two sentences, and needs only the names and dates filled in. The book calls this the Role, Task, Constraint brief, and it is the habit the whole method is built on.</p><p>Read each answer below as if your name goes at the bottom. Which line would you have to check before sending it?</p></div>

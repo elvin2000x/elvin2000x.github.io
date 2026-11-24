@@ -188,6 +188,12 @@
       ]
     },
     {
+      "key": "frames",
+      "type": "text",
+      "label": "Chat frames without the slider (1 = on)",
+      "default": ""
+    },
+    {
       "key": "before_label",
       "type": "text",
       "label": "Slider: Before label"

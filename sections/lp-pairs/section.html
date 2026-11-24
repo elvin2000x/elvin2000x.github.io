@@ -51,6 +51,35 @@
     </div>
 {{/slider}}
 {{^slider}}
+{{#frames}}
+{{#pairs}}
+    <div class="lp-pairs__frames">
+      <div class="lp-slide__frames">
+        <div class="lp-chat" data-lp-scroll>
+          <p class="lp-chat__bar"><span class="lp-chat__dots" aria-hidden="true"></span><span class="lp-chip lp-chip--before">{{thin_kind}}</span></p>
+          <div class="lp-chat__msgs" tabindex="0" aria-label="{{thin_kind}}: {{heading}}">
+            <div class="lp-bub lp-bub--you"><p>{{thin_request}}</p></div>
+            <div class="lp-bub lp-bub--ai">{{#thin_full}}{{thin_full}}{{/thin_full}}{{^thin_full}}{{thin_answer}}{{/thin_full}}</div>
+          </div>
+          <span class="lp-chat__hint" aria-hidden="true">{{scroll_label}}</span>
+        </div>
+        <span class="lp-slide__arrow" aria-hidden="true"></span>
+        <div class="lp-chat lp-chat--after" data-lp-scroll>
+          <p class="lp-chat__bar"><span class="lp-chat__dots" aria-hidden="true"></span><span class="lp-chip lp-chip--after">{{directed_kind}}</span></p>
+          <div class="lp-chat__msgs" tabindex="0" aria-label="{{directed_kind}}: {{heading}}">
+            <div class="lp-bub lp-bub--you"><p>{{directed_request}}</p></div>
+            <div class="lp-bub lp-bub--ai">{{#directed_full}}{{directed_full}}{{/directed_full}}{{^directed_full}}{{directed_answer}}{{/directed_full}}</div>
+          </div>
+          <span class="lp-chat__hint" aria-hidden="true">{{scroll_label}}</span>
+        </div>
+      </div>
+{{#note}}
+      <p class="lp-pairs__note">{{note}}</p>
+{{/note}}
+    </div>
+{{/pairs}}
+{{/frames}}
+{{^frames}}
 {{#pairs}}
     <div class="lp-pairs__pair">
 {{#title}}
@@ -103,6 +132,7 @@
 {{/note}}
     </div>
 {{/pairs}}
+{{/frames}}
 {{/slider}}
 {{#after}}
     <div class="lp-pairs__after">{{after}}</div>
