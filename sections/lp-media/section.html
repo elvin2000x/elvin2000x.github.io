@@ -62,6 +62,24 @@
 {{#body}}
     <div class="lp-media__body">{{body}}</div>
 {{/body}}
+{{#kit_cards}}
+    <ul class="lp-tcards">
+{{#items}}
+      <li class="lp-tcard">
+        <img class="lp-tcard__shot" src="{{src}}" srcset="{{src}} 600w, {{src2}} 1200w" sizes="(max-width: 639px) 38vw, 440px" alt="{{alt}}" width="600" height="450" loading="lazy" decoding="async">
+        <div class="lp-tcard__head">
+          <p class="lp-tcard__chip"><span class="lp-tcard__tab" aria-hidden="true"></span>{{kind}}</p>
+          <h4 class="lp-tcard__name">{{name}}</h4>
+        </div>
+        <div class="lp-tcard__body">
+          <p class="lp-tcard__problem">{{problem}}</p>
+          <p class="lp-tcard__outcome">{{outcome}}</p>
+          <p class="lp-tcard__where">{{where}}</p>
+        </div>
+      </li>
+{{/items}}
+    </ul>
+{{/kit_cards}}
 {{#buy}}
     <p class="lp-media__buy"><a class="btn btn--primary btn--lg" href="/book/checkout/">{{buy}}</a></p>
 {{/buy}}

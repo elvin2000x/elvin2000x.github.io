@@ -94,7 +94,8 @@
         "duration": "3:33",
         "caption": "Elvin Peters, author of The Artificial Advantage",
         "poster": "/img/store/video-poster-offer.webp",
-        "poster_alt": ""
+        "poster_alt": "",
+        "lede": "The book, the Toolkit that comes with it, and three bonuses: a 7-day workbook, a guide to 684 AI resources sorted by job, and twelve habits for getting the answer you meant."
       },
       "note": "Video: paste the link in Video link. Nothing shows on the page until there is one."
     },
@@ -469,7 +470,31 @@
         "alt": "The Toolkit's prompt library as a spreadsheet, the first 12 of its 25 prompts: category and prompt name",
         "caption": "12 of the 25 prompt titles.",
         "body": "<ul><li>25 prompts in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, Learning and Development. Also as a spreadsheet you can import.</li><li>25 role setups you paste once, and the formula for writing your own.</li><li>16 exercises from 10 chapters, a 30-day plan and a 3-month plan.</li></ul><p class=\"lp-tail\">In the bundle, the Toolkit saves you typing the book's prompts and exercises out yourself.</p>",
-        "buy": "Get the bundle for $27"
+        "buy": "Get the bundle for $27",
+        "kit_cards": {
+          "items": [
+            {
+              "name": "The Tool-Selection Cheat Sheet",
+              "kind": "Word file",
+              "src": "/img/store/look-inside/toolkit-tool-selection-crop.webp",
+              "src2": "/img/store/look-inside/toolkit-tool-selection-crop@2x.webp",
+              "alt": "The first page of the Tool-Selection Cheat Sheet: its title, the date it carries, and the top rows of the job and tool table",
+              "problem": "Not sure which AI app to open for the job in front of you?",
+              "outcome": "Find your job in a list of twelve and see the kind of tool that fits.",
+              "where": "It's in the Toolkit. The page carries a date, so check it before you rely on a product name."
+            },
+            {
+              "name": "The Director's Cheat Sheet",
+              "kind": "Word file",
+              "src": "/img/store/look-inside/toolkit-directors-cheat-sheet-crop.webp",
+              "src2": "/img/store/look-inside/toolkit-directors-cheat-sheet-crop@2x.webp",
+              "alt": "The first page of the Director's Cheat Sheet: its title, its opening lines and the start of the CLEAR System",
+              "problem": "Halfway through a task and can't remember the next step?",
+              "outcome": "The whole method on a few pages: the five steps, the three-part brief, how to trace a wrong answer to its cause, and the two-step check before your name goes on it.",
+              "where": "It's in the Toolkit. Print it and keep it by your screen."
+            }
+          ]
+        }
       }
     },
     {
@@ -751,65 +776,54 @@
         "items": [
           {
             "q": "Is it safe to paste client or work information into AI?",
-            "a": "The book's rule: never paste anything into a public AI chat that you wouldn't post on a public social media feed. Chapter 2 lists what to keep out: personal identifiers, confidential business information such as client lists and anything under NDA, and privileged advice from doctors, lawyers or accountants.",
-            "open": "1"
+            "a": "The book's rule: never paste anything into a public AI chat that you wouldn't post on a public social media feed. Chapter 2 lists what to keep out: personal identifiers, confidential business information such as client lists and anything under NDA, and privileged advice from doctors, lawyers or accountants."
           },
           {
             "q": "I'm not technical. Is this for me?",
-            "a": "Yes, it's meant for beginners. It was written for professionals who tried AI and shrugged, and for people whose company just told them to use it.",
-            "open": "1"
+            "a": "Yes, it's meant for beginners. It was written for professionals who tried AI and shrugged, and for people whose company just told them to use it."
           },
           {
             "q": "I tried ChatGPT and it was useless. Why would this be different with the same free tool?",
-            "a": "Because the request changes, and the tool stays the same. A one-line request gets a generic answer from any AI. The book teaches you to explain the job: who it's for, why it matters, and what done looks like. Both answers at the top of this page came from the same AI.",
-            "open": "1"
+            "a": "Because the request changes, and the tool stays the same. A one-line request gets a generic answer from any AI. The book teaches you to explain the job: who it's for, why it matters, and what done looks like. Both answers at the top of this page came from the same AI."
           },
           {
             "q": "Do I need a paid AI plan?",
-            "a": "No. The book's skills work across ChatGPT, Claude, Gemini and Copilot, and a free plan is enough to start.",
-            "open": "1"
+            "a": "No. The book's skills work across ChatGPT, Claude, Gemini and Copilot, and a free plan is enough to start."
           },
           {
             "q": "Will it work for my kind of work?",
-            "a": "The Toolkit's 25 prompts come in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, and Learning and Development. A few by name: Executive Update Email, Meeting Follow-Up, Risk Assessment, First Draft from Notes and Plain Language Rewrite.",
-            "open": "1"
+            "a": "The Toolkit's 25 prompts come in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, and Learning and Development. A few by name: Executive Update Email, Meeting Follow-Up, Risk Assessment, First Draft from Notes and Plain Language Rewrite."
           },
           {
             "q": "How do I stop it making things up?",
-            "a": "You check before you use it. The book teaches a two-step check for reading an answer before your name goes on it, and a way to trace a wrong answer back to its cause. The tax email above shows why: the better answer still added a claim nobody gave it.",
-            "open": "1"
+            "a": "You check before you use it. The book teaches a two-step check for reading an answer before your name goes on it, and a way to trace a wrong answer back to its cause. The tax email above shows why: the better answer still added a claim nobody gave it."
           },
           {
             "q": "What arrives, and where?",
-            "a": "An instant download plus an email. One receipt email lists everything and links to your library, where each piece has its own download. The Companion Library opens online.",
-            "open": "1"
+            "a": "An instant download plus an email. One receipt email lists everything and links to your library, where each piece has its own download. The Companion Library opens online."
           },
           {
             "q": "What format are the files?",
-            "a": "The ebook is an EPUB file. The 7-Day AI Workbook and The 12 Commandments are PDFs. Everything AI 2026 comes as one zip with a PDF field guide and an Excel workbook. The Toolkit is a zip of 17 files: Word documents, a spreadsheet and a short start-here file. Every file downloads to your device.",
-            "open": "1"
+            "a": "The ebook is an EPUB file. The 7-Day AI Workbook and The 12 Commandments are PDFs. Everything AI 2026 comes as one zip with a PDF field guide and an Excel workbook. The Toolkit is a zip of 17 files: Word documents, a spreadsheet and a short start-here file. Every file downloads to your device."
           },
           {
             "q": "What does it cost in all?",
-            "a": "$27, paid once, plus sales tax where it applies. Prices are in US dollars.",
-            "open": "1"
+            "a": "$27, paid once, plus sales tax where it applies. Prices are in US dollars."
           },
           {
             "q": "Is the refund just one email?",
-            "a": "Yes. Email elvin@elvinpeters.com within 30 days of purchase and I will refund you in full. You keep the files.",
-            "open": "1"
+            "a": "Yes. Email elvin@elvinpeters.com within 30 days of purchase and I will refund you in full. You keep the files."
           },
           {
             "q": "Why not just buy the paperback?",
-            "a": "You can. The paperback and hardcover are on Amazon. The bundle adds the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments, which each sell on their own.",
-            "open": "1"
+            "a": "You can. The paperback and hardcover are on Amazon. The bundle adds the Toolkit, the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments, which each sell on their own."
           },
           {
             "q": "Can my team use it?",
-            "a": "The licence covers personal and internal work use. Please don't resell or share the files.",
-            "open": "1"
+            "a": "The licence covers personal and internal work use. Please don't resell or share the files."
           }
-        ]
+        ],
+        "group": "offer-faq"
       }
     },
     {

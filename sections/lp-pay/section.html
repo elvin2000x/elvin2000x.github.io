@@ -20,7 +20,24 @@
           <p class="lp-stack__total lp-due lp-due--card"><span>{{total_label}}</span> <strong data-lp-due></strong></p>
         </div>
 {{#bump}}
+{{#head}}
+        <div class="lp-bump lp-bump--pay lp-bump--rich">
+          <img class="lp-bump__cover" src="{{image}}" alt="{{image_alt}}" width="{{image_w}}" height="{{image_h}}" loading="lazy" decoding="async">
+          <p class="lp-bump__head">{{head}}</p>
+          <div class="lp-bump__words">
+{{#paras}}
+            <p class="lp-bump__p">{{p}}</p>
+{{/paras}}
+{{#small}}
+            <p class="lp-bump__small">{{small}}</p>
+{{/small}}
+            <label class="lp-bump__yes"><input type="checkbox" data-store-bump><span>{{yes}}</span></label>
+          </div>
+        </div>
+{{/head}}
+{{^head}}
         <label class="lp-bump lp-bump--pay"><input type="checkbox" data-store-bump>{{#image}}<img class="lp-bump__cover" src="{{image}}" alt="{{image_alt}}" width="40" height="64" loading="lazy">{{/image}}<span class="lp-bump__words"><strong class="lp-bump__yes">{{yes}}</strong>{{#line}}<span class="lp-bump__line">{{line}}</span>{{/line}}</span></label>
+{{/head}}
 {{/bump}}
         <p class="lp-stack__total lp-due lp-due--pay"><span>{{total_label}}</span> <strong data-lp-due></strong></p>
         <div class="lp-pay__go">

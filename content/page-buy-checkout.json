@@ -25,11 +25,22 @@
         "thumbs_json": "{\"book1-ebook\":\"/img/store/thumbs/artificial-advantage-ebook-thumb.webp\",\"toolkit\":\"/img/store/thumbs/toolkit-thumb.webp\",\"companion-library\":\"/img/store/thumbs/companion-library-thumb.webp\",\"workbook-2e\":\"/img/store/thumbs/workbook-2e-thumb.webp\",\"everything-ai-2026\":\"/img/store/thumbs/everything-ai-2026-thumb.webp\",\"seven-rules\":\"/img/store/thumbs/twelve-commandments-thumb.webp\"}",
         "preview_stack_json": "{\"stack\":[{\"group\":null,\"group_name\":null,\"key\":\"book1-ebook\",\"label\":null,\"name\":\"The Artificial Advantage, 2E ebook\",\"standalone_price\":999,\"standalone_price_text\":\"$9.99\",\"status\":\"price\"},{\"group\":null,\"group_header\":true,\"group_name\":null,\"key\":\"toolkit\",\"label\":\"Included\",\"name\":\"The Toolkit\",\"standalone_price\":1700,\"standalone_price_text\":\"$17\",\"status\":\"free\"},{\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"key\":\"toolkit-exercises\",\"label\":null,\"name\":\"Toolkit: Editable Exercises\",\"standalone_price\":null,\"standalone_price_text\":null,\"status\":\"included\"},{\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"key\":\"toolkit-practice-plans\",\"label\":null,\"name\":\"Toolkit: 30-Day and 3-Month Practice Plans\",\"standalone_price\":null,\"standalone_price_text\":null,\"status\":\"included\"},{\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"key\":\"toolkit-prompt-library\",\"label\":null,\"name\":\"Toolkit: Prompt Library\",\"standalone_price\":null,\"standalone_price_text\":null,\"status\":\"included\"},{\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"key\":\"toolkit-role-library\",\"label\":null,\"name\":\"Toolkit: Role Library\",\"standalone_price\":null,\"standalone_price_text\":null,\"status\":\"included\"},{\"group\":\"toolkit\",\"group_name\":\"The Toolkit\",\"key\":\"toolkit-tool-sheet\",\"label\":null,\"name\":\"Toolkit: Tool-Selection Cheat Sheet\",\"standalone_price\":null,\"standalone_price_text\":null,\"status\":\"included\"},{\"group\":null,\"group_name\":null,\"key\":\"companion-library\",\"label\":null,\"name\":\"The Companion Library\",\"standalone_price\":null,\"standalone_price_text\":null,\"status\":\"included\"},{\"group\":null,\"group_name\":null,\"key\":\"workbook-2e\",\"label\":\"Included\",\"name\":\"7-Day AI Workbook, 2E\",\"standalone_price\":900,\"standalone_price_text\":\"$9\",\"status\":\"free\"},{\"group\":null,\"group_name\":null,\"key\":\"everything-ai-2026\",\"label\":\"Included\",\"name\":\"Everything AI 2026\",\"standalone_price\":1900,\"standalone_price_text\":\"$19\",\"status\":\"free\"},{\"group\":null,\"group_name\":null,\"key\":\"seven-rules\",\"label\":\"Included\",\"name\":\"The 12 Commandments to Make AI Obey\",\"standalone_price\":1700,\"standalone_price_text\":\"$17\",\"status\":\"free\"}]}",
         "bump": {
-          "image": "/img/store/ai-at-home-bump-thumb.webp",
-          "image_alt": "Cover of AI at Home",
+          "image": "/img/store/ai-at-home-thumb.webp",
+          "image_alt": "The AI at Home guide cover",
           "yes": "Yes, add AI at Home for $7",
           "price": "$7",
-          "line": "The words to paste for home jobs, already written: the week's dinners, your internet bill, a trip."
+          "head": "Did your internet bill go up when the discount ended?",
+          "paras": [
+            {
+              "p": "AI at Home gives you the words to paste into the chat app you already use. Back comes a call plan: who to ask for, your first sentence, and the lowest price you'll accept. The company can still say no, and you'll have made the call."
+            },
+            {
+              "p": "The guide does the same for the week's dinners, a check engine light and a trip."
+            }
+          ],
+          "small": "19 pages. The same 30-day money-back guarantee.",
+          "image_w": "192",
+          "image_h": "307"
         },
         "email_button": "Next: enter your card",
         "note": "[[refund]]: email elvin@elvinpeters.com within [[refund_days]] for a full refund.",
