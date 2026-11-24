@@ -205,6 +205,11 @@
       "key": "note",
       "type": "html",
       "label": "Small print"
+    },
+    {
+      "key": "fold_label",
+      "type": "text",
+      "label": "Button that opens the price rows (empty = rows showing)"
     }
   ]
 }

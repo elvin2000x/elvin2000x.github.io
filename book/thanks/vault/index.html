@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=0b149e78" />
-  <link rel="stylesheet" href="/css/landing.css?v=e6105dc9" />
+  <link rel="stylesheet" href="/css/landing.css?v=9b8a1e9e" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>body.lp .lp-hero__grid{ max-width:720px } body.lp .lp-hero{ padding-top:32px; padding-bottom:0 } body.lp .lp-hero h1{ margin-bottom:0 } body.lp .ep-block.ep-video{ max-width:720px } body.lp .ep-row{ flex-direction:column; align-items:stretch; gap:12px } body.lp .ep-row .btn{ width:100%; min-height:60px; font-size:20px; font-weight:700 } body.lp .ep-note{ text-align:left } @media (max-width:767px){ body.lp .lp-hero{ padding-top:8px } body.lp .ep-block:not(#lifestyle ~ .ep-block){ padding-top:6px; padding-bottom:6px } body.lp .ep-block.ep-video{ padding-bottom:4px } }</style>
 </head>
@@ -526,7 +526,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
         if (box && !box.checked) { box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true })); }
       });
     });
-    [].forEach.call(document.querySelectorAll('.lp-gallery'), function (g) {
+    [].forEach.call(document.querySelectorAll('.lp-gallery, [data-lp-gal]'), function (g) {
       var dlg = g.querySelector('dialog'); if (!dlg || typeof dlg.showModal !== 'function') return;
       var track = dlg.querySelector('.lp-gallery__track'), slides = dlg.querySelectorAll('.lp-gallery__slide'), opener = null;
       [].forEach.call(g.querySelectorAll('[data-lp-gal-open]'), function (b, i) {

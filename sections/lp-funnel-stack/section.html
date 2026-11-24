@@ -13,7 +13,14 @@
         <figure class="lp-shot"><img src="{{src}}" alt="{{alt}}" width="280" height="420"><figcaption>{{caption}}</figcaption></figure>
 {{/shots}}
       </div>
+{{#fold_label}}
+      <details class="lp-fold lp-stack__fold">
+        <summary>{{fold_label}}</summary>
+{{/fold_label}}
       <ul class="lp-stack__items" data-lp-rows></ul>
+{{#fold_label}}
+      </details>
+{{/fold_label}}
 {{#bought_line}}
       <p class="lp-stack__bought" data-lp-bought="{{bought_line}}"></p>
       <span data-lp-total hidden></span><span data-lp-front hidden></span>

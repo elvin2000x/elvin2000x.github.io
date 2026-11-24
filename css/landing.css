@@ -1019,3 +1019,43 @@ body.lp-expired .lp-basket .lp-in > :not(.lp-error):not(.lp-expired-link){ displ
 body.lp-expired .lp-basket .lp-error{ font-size:20px; line-height:1.45; margin:24px 0 12px }
 body.lp-expired .lp-expired-link{ display:block; margin:0 0 40px; font:600 18px/1.4 var(--sans) }
 body.lp-expired .lp-expired-link a{ display:inline-flex; align-items:center; min-height:44px }
+/* 728: Step 1 dedupe: folds that open on a tap, swipe strips for page cards */
+body.lp details.lp-fold{ margin:12px 0 0; border:1px solid #d6e0ea; border-radius:10px; background:#fff }
+body.lp details.lp-fold > summary{ list-style:none; position:relative; min-height:52px; display:flex; align-items:center; padding:12px 52px 12px 16px; cursor:pointer; font:600 18px/1.35 var(--sans); color:var(--lp-navy) }
+body.lp details.lp-fold > summary::-webkit-details-marker{ display:none }
+body.lp details.lp-fold > summary::after{ content:"+"; position:absolute; right:14px; top:50%; transform:translateY(-50%); width:28px; height:28px; border:2px solid var(--lp-navy); border-radius:50%; display:flex; align-items:center; justify-content:center; font:600 20px/1 var(--sans); color:var(--lp-navy) }
+body.lp details.lp-fold[open] > summary::after{ content:"\2212" }
+body.lp details.lp-fold > summary:focus-visible{ outline:3px solid #8a5a14; outline-offset:2px }
+body.lp details.lp-fold[open] > :not(summary){ margin-left:12px; margin-right:12px }
+body.lp details.lp-fold[open]{ padding-bottom:12px }
+body.lp .lp-chapters__more ol.lp-chapters{ margin-top:4px }
+body.lp .lp-stack__fold .lp-stack__items{ margin-top:4px }
+/* page cards side by side in one swipe strip (phones); in a row on wider screens */
+.lp-gallery__strip--docs.lp-gallery__strip--swipe{ grid-auto-flow:column; grid-template-columns:none; grid-auto-columns:84%; align-items:start; margin:16px -16px 0; padding:0 16px 10px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding:0 16px; overscroll-behavior-x:contain }
+.lp-gallery__strip--swipe > li{ scroll-snap-align:start }
+@media (min-width:768px){ .lp-gallery__strip--docs.lp-gallery__strip--swipe{ grid-auto-flow:row; grid-auto-columns:auto; grid-template-columns:repeat(auto-fit,minmax(0,1fr)); margin:16px 0 0; padding:0; overflow:visible } }
+/* Toolkit cards: the names showing, each card opens on a tap */
+body.lp .lp-tcards--fold{ gap:8px }
+body.lp .lp-tcard.lp-tcard--fold{ display:block; min-height:0; padding:0; box-shadow:0 4px 14px rgba(10,24,40,.08) }
+body.lp .lp-tcard--fold details{ border:0 }
+body.lp .lp-tcard__sum .lp-tcard__chip{ font-size:13px; line-height:1.3; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:#8a5a14 }
+body.lp .lp-tcard__sum{ list-style:none; position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:2px; min-height:56px; padding:12px 52px 12px 16px; cursor:pointer }
+body.lp .lp-tcard__sum::-webkit-details-marker{ display:none }
+body.lp .lp-tcard__sum::after{ content:"+"; position:absolute; right:14px; top:50%; transform:translateY(-50%); width:28px; height:28px; border:2px solid var(--lp-navy); border-radius:50%; display:flex; align-items:center; justify-content:center; font:600 20px/1 var(--sans); color:var(--lp-navy) }
+body.lp .lp-tcard--fold details[open] > .lp-tcard__sum::after{ content:"\2212" }
+body.lp .lp-tcard__sum:focus-visible{ outline:3px solid #8a5a14; outline-offset:2px }
+body.lp .lp-tcard__sum .lp-tcard__chip{ display:flex; align-items:center; gap:6px; margin:0 }
+body.lp .lp-tcard__sum .lp-tcard__name{ display:block; font-weight:700; font-size:19px; line-height:1.3; color:var(--lp-navy) }
+body.lp .lp-tcard__open{ padding:0 16px 16px }
+body.lp .lp-tcard__open .lp-tcard__shot{ display:block; width:100%; max-width:440px; height:auto; margin:0 0 12px }
+/* 728b: page cards in an lp-media section look like the gallery's; swipe-strip excerpts stop at a fade (See the whole page opens all of it) */
+body.lp [data-lp-gal] .lp-doc__label{ margin:12px 16px 0; font:600 13px/1.4 var(--sans); letter-spacing:.03em; text-transform:uppercase; color:var(--lp-navy); opacity:.75 }
+body.lp [data-lp-gal] .lp-doc__h{ margin:6px 16px 0; font:700 19px/1.3 var(--serif); color:var(--lp-navy) }
+body.lp [data-lp-gal] .lp-doc__text{ margin:8px 16px 0; font:400 16px/1.55 var(--sans); color:var(--lp-navy) }
+body.lp [data-lp-gal] .lp-doc__more{ display:flex; align-items:center; gap:6px; min-height:44px; margin:4px 16px 12px; padding:0; border:0; background:none; font:600 16px/1.3 var(--sans); color:var(--lp-navy); text-decoration:underline; text-underline-offset:3px; cursor:zoom-in }
+body.lp [data-lp-gal] .lp-doc__text p, body.lp [data-lp-gal] .lp-doc__text ol{ margin:0 0 8px }
+body.lp [data-lp-gal] .lp-gallery__strip--docs{ margin-top:0 }
+body.lp .lp-stack .lp-shots:not(:has(*)){ display:none }
+body.lp .lp-stack details.lp-stack__fold{ margin:4px var(--lp-stack-pad) 12px; border-width:0 0 1px; border-radius:0 }
+body.lp .lp-stack details.lp-stack__fold > summary{ padding-left:0 }
+body.lp .lp-gallery__strip--swipe .lp-doc__text{ max-height:300px; overflow:hidden; -webkit-mask-image:linear-gradient(#000 70%, transparent); mask-image:linear-gradient(#000 70%, transparent) }

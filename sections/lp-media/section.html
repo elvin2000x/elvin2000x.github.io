@@ -1,4 +1,4 @@
-<section class="lp-sec lp-media lp-media--{{layout}}{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+<section class="lp-sec lp-media lp-media--{{layout}}{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}{{#doc_items.0}} data-lp-gal{{/doc_items.0}}>
   <div class="lp-in lp-media__grid">
 {{#heading}}
 {{#sub}}
@@ -24,6 +24,11 @@
 {{/jobs_total}}
     </ul>
 {{/jobs.0}}
+{{#fold_label}}
+    <details class="lp-fold lp-media__fold">
+      <summary>{{fold_label}}</summary>
+{{/fold_label}}
+{{^doc_items.0}}
     <figure class="lp-media__fig{{#sample}} lp-media__fig--sample{{/sample}}">
 {{#sample}}
       <p class="lp-media__sample">{{sample}}</p>
@@ -89,12 +94,61 @@
       <figcaption class="lp-media__cap">{{caption}}</figcaption>
 {{/caption}}
     </figure>
+{{/doc_items.0}}
+{{#doc_items.0}}
+    <ul class="lp-gallery__strip lp-gallery__strip--docs">
+{{#doc_items}}
+      <li class="lp-gallery__item lp-gallery__item--doc">
+        <div class="lp-doc">
+          <p class="lp-doc__label">{{doc_label}}</p>
+{{#doc_heading}}
+          <p class="lp-doc__h">{{doc_heading}}</p>
+{{/doc_heading}}
+          <div class="lp-doc__text">{{doc_html}}</div>
+          <button type="button" class="lp-doc__more" data-lp-gal-open>{{more_label}}</button>
+        </div>
+      </li>
+{{/doc_items}}
+    </ul>
+{{#doc_caption}}
+    <p class="lp-gallery__caption">{{doc_caption}}</p>
+{{/doc_caption}}
+    <dialog class="lp-gallery__dlg" aria-label="{{dialog_label}}">
+      <button type="button" class="lp-gallery__close" data-lp-gal-close aria-label="{{close_label}}"><span aria-hidden="true">&times;</span></button>
+      <div class="lp-gallery__track">
+{{#doc_items}}
+        <figure class="lp-gallery__slide">
+          <img src="{{full}}" alt="{{alt}}" width="{{full_w}}" height="{{full_h}}" loading="lazy" decoding="async">
+        </figure>
+{{/doc_items}}
+      </div>
+    </dialog>
+{{/doc_items.0}}
+{{#fold_label}}
+    </details>
+{{/fold_label}}
 {{#body}}
     <div class="lp-media__body">{{body}}</div>
 {{/body}}
 {{#kit_cards}}
-    <ul class="lp-tcards">
+    <ul class="lp-tcards{{#fold}} lp-tcards--fold{{/fold}}">
 {{#items}}
+{{#fold}}
+      <li class="lp-tcard lp-tcard--fold">
+        <details>
+          <summary class="lp-tcard__sum"><span class="lp-tcard__chip"><span class="lp-tcard__tab" aria-hidden="true"></span>{{kind}}</span><span class="lp-tcard__name">{{name}}</span></summary>
+          <div class="lp-tcard__open">
+            <img class="lp-tcard__shot" src="{{src}}" srcset="{{src}} 600w, {{src2}} 1200w" sizes="(max-width: 639px) 38vw, 440px" alt="{{alt}}" width="600" height="450" loading="lazy" decoding="async">
+            <p class="lp-tcard__problem">{{problem}}</p>
+            <p class="lp-tcard__outcome">{{outcome}}</p>
+{{#where}}
+            <p class="lp-tcard__where">{{where}}</p>
+{{/where}}
+          </div>
+        </details>
+      </li>
+{{/fold}}
+{{^fold}}
       <li class="lp-tcard">
         <img class="lp-tcard__shot" src="{{src}}" srcset="{{src}} 600w, {{src2}} 1200w" sizes="(max-width: 639px) 38vw, 440px" alt="{{alt}}" width="600" height="450" loading="lazy" decoding="async">
         <div class="lp-tcard__head">
@@ -109,6 +163,7 @@
 {{/where}}
         </div>
       </li>
+{{/fold}}
 {{/items}}
     </ul>
 {{/kit_cards}}

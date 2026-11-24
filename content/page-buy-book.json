@@ -114,7 +114,8 @@
             "line": "The Workbook is one step a day for seven days, on one real task from your own week."
           }
         ]
-      }
+      },
+      "hidden": true
     },
     {
       "id": "story-spray",
@@ -384,7 +385,8 @@
         "dialog_label": "The voice file page",
         "close_label": "Close",
         "buy": ""
-      }
+      },
+      "hidden": true
     },
     {
       "id": "v7-s4-files",
@@ -417,7 +419,8 @@
         "dialog_label": "Prompts from the Toolkit",
         "close_label": "Close",
         "buy": ""
-      }
+      },
+      "hidden": true
     },
     {
       "id": "v7-s5-who",
@@ -603,41 +606,52 @@
           },
           {
             "n": "6",
-            "line": "Why the skill travels from one AI app to the next, so you only learn it once. Chapter 6."
+            "line": "Why the skill travels from one AI app to the next, so you only learn it once. Chapter 6.",
+            "later": true
           },
           {
             "n": "7",
-            "line": "Three questions and one sitting to choose your AI tool and stop second-guessing it. Chapter 7."
+            "line": "Three questions and one sitting to choose your AI tool and stop second-guessing it. Chapter 7.",
+            "later": true
           },
           {
             "n": "8",
-            "line": "The dropdown you may never have touched, and how it changes the answer you get. Chapter 8."
+            "line": "The dropdown you may never have touched, and how it changes the answer you get. Chapter 8.",
+            "later": true
           },
           {
             "n": "9",
-            "line": "The email you've been avoiding, the meeting that went everywhere and a long document: jobs you run yourself, with four traps to skip. Chapter 9."
+            "line": "The email you've been avoiding, the meeting that went everywhere and a long document: jobs you run yourself, with four traps to skip. Chapter 9.",
+            "later": true
           },
           {
             "n": "10",
-            "line": "Three rules to check before you hit send. Chapter 10."
+            "line": "Three rules to check before you hit send. Chapter 10.",
+            "later": true
           },
           {
             "n": "11",
-            "line": "When an answer is wrong, where to look first: a three-rung ladder that traces it to the cause. Chapter 11."
+            "line": "When an answer is wrong, where to look first: a three-rung ladder that traces it to the cause. Chapter 11.",
+            "later": true
           },
           {
             "n": "12",
-            "line": "Which details in your request matter and which are noise, and how to get AI to ask you the questions you didn't think of. Chapter 12."
+            "line": "Which details in your request matter and which are noise, and how to get AI to ask you the questions you didn't think of. Chapter 12.",
+            "later": true
           },
           {
             "n": "13",
-            "line": "Why AI sounds sure when it's wrong, and the two-step check to run before your name goes on it. Chapter 13."
+            "line": "Why AI sounds sure when it's wrong, and the two-step check to run before your name goes on it. Chapter 13.",
+            "later": true
           },
           {
             "n": "14",
-            "line": "A three-month plan that takes you from your first week to a system, and what to do when you stop improving. Chapter 14."
+            "line": "A three-month plan that takes you from your first week to a system, and what to do when you stop improving. Chapter 14.",
+            "later": true
           }
-        ]
+        ],
+        "chapters_more": "See all fourteen chapters",
+        "swipe": "1"
       }
     },
     {
@@ -738,7 +752,8 @@
               "outcome": "The whole method on a few pages: the five steps, the three-part brief, how to trace a wrong answer to its cause, and the two-step check before your name goes on it.",
               "where": "It's in the Toolkit. Print it and keep it by your screen."
             }
-          ]
+          ],
+          "fold": true
         },
         "ptable": {
           "col1": "Category",
@@ -811,7 +826,26 @@
               ]
             }
           ]
-        }
+        },
+        "doc_items": [
+          {
+            "thumb": "",
+            "thumb_w": "750",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/toolkit-first-draft-page.webp",
+            "full_w": "1200",
+            "full_h": "1553",
+            "alt": "The Toolkit, Prompt Library: the whole page",
+            "caption": "",
+            "doc_label": "The Toolkit, Prompt Library",
+            "doc_heading": "First Draft from Notes",
+            "doc_html": "<p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
+          }
+        ],
+        "doc_caption": "The Toolkit gives you 25 prompts built the same way, with brackets for your own details, and it's in the bundle.",
+        "more_label": "See the whole page",
+        "dialog_label": "Prompts from the Toolkit",
+        "close_label": "Close"
       }
     },
     {
@@ -840,7 +874,8 @@
         "caption": "",
         "body": "<ul><li>Nine pages: Prompt Builder, Quick Reference Card, The Professional Prompt Library, The Role Library, Framework Reference, The Director's Diagnostic, AI Tools Reference, Glossary and Sources.</li><li>The Prompt Builder assembles a brief from three answers.</li><li>It opens on any screen, with no email and no login.</li></ul>",
         "buy": ""
-      }
+      },
+      "hidden": true
     },
     {
       "id": "v7-s7c-tour",
@@ -849,9 +884,9 @@
         "bg": "",
         "anchor": "",
         "layout": "stack",
-        "heading": "",
-        "sub": "",
-        "lede": "",
+        "heading": "The Companion Library",
+        "sub": "1",
+        "lede": "The book's reference pages, online and kept current. It's free for everyone, and it's in your bundle so everything lives in one place.",
         "mp4": "/video/look-inside/library-tour-desktop.mp4",
         "webm": "/video/look-inside/library-tour-desktop.webm",
         "poster": "/video/look-inside/library-tour-desktop-poster.webp",
@@ -866,7 +901,7 @@
         "phone_h": "1216",
         "alt": "A tour through the Companion Library: the index, the prompt library, the role library, the glossary, the tools reference and the Quick Reference Card",
         "caption": "",
-        "body": "<p class=\"lp-tail\">In the bundle, the Library keeps the book's reference pages one tap away.</p>",
+        "body": "<ul><li>Nine pages: Prompt Builder, Quick Reference Card, The Professional Prompt Library, The Role Library, Framework Reference, The Director's Diagnostic, AI Tools Reference, Glossary and Sources.</li><li>The Prompt Builder assembles a brief from three answers.</li><li>It opens on any screen, with no email and no login.</li></ul><p class=\"lp-tail\">In the bundle, the Library keeps the book's reference pages one tap away.</p>",
         "buy": "",
         "tap": "1",
         "still_w": "750",
@@ -966,7 +1001,8 @@
             "d": "Day 7",
             "line": "run it again, and put the two results side by side."
           }
-        ]
+        ],
+        "swipe": "1"
       }
     },
     {
@@ -1068,6 +1104,19 @@
             "doc_label": "The 12 Commandments to Make AI Obey, page 20",
             "doc_heading": "Part 5: The one-page card",
             "doc_html": "<p><strong>SET UP ONCE</strong></p><ol><li>Write your About Me file once.</li><li>Keep a voice file.</li><li>Give your files a home. A project, then point back.</li></ol><p><strong>Last 10 seconds before you hit send:</strong> Is this one job? Did I say plan, make or check? Did I say who it's for and how long? Did I paste the real thing?</p>"
+          },
+          {
+            "thumb": "",
+            "thumb_w": "750",
+            "thumb_h": "120",
+            "full": "/img/store/look-inside/commandments-voice-file-page.webp",
+            "full_w": "1200",
+            "full_h": "1698",
+            "alt": "The 12 Commandments to Make AI Obey, page 19: the whole page",
+            "caption": "",
+            "doc_label": "The 12 Commandments to Make AI Obey, page 19",
+            "doc_heading": "Starter file 2: Voice",
+            "doc_html": "<p class=\"lp-doc__mono\">MY VOICE<br>HOW I SOUND<br>- My sentences are usually: [short / mixed / long]<br>- I open by: [getting straight to the point / a friendly line / a question]<br>- I close by: [a clear next step / a thank-you / a short sign-off]<br>- I use contractions: [yes / no]<br>- Words and phrases I like: [list]<br>- Words and phrases I never use: [list]</p>"
           }
         ],
         "strip_caption": "A habit on its page, and the card.",
@@ -1126,7 +1175,8 @@
             "n": "12",
             "t": "A wrong fact going out under your name."
           }
-        ]
+        ],
+        "swipe": "1"
       }
     },
     {
@@ -1155,7 +1205,8 @@
         "caption": "The download page, from a sample order.",
         "body": "<p class=\"lp-tail\">Everything you've read about above arrives in that one download.</p>",
         "buy": "",
-        "sample": "Sample order"
+        "sample": "Sample order",
+        "fold_label": "See the download page"
       }
     },
     {
@@ -1182,7 +1233,8 @@
         "sources_json": "{\"book1-ebook\": {\"text\": \"$9.99, Amazon's price\", \"href\": \"https://www.amazon.com/dp/B0H4X2S2JD?tag=elvinpeters-20\"}, \"toolkit\": {\"text\": \"$17 in my store\", \"href\": \"/book/the-toolkit/\"}, \"workbook-2e\": {\"text\": \"$9 in my store\", \"href\": \"/book/workbook/\"}, \"everything-ai-2026\": {\"text\": \"$19 in my store\", \"href\": \"/book/everything-ai-2026/\"}, \"seven-rules\": {\"text\": \"$17 in my store\", \"href\": \"/book/12-commandments/\"}, \"companion-library\": {\"text\": \"free for everyone, so it carries no dollar value\"}}",
         "bought_line": "Bought one by one: [[total]]. Your price: [[price]], paid once.",
         "footnote": "Prices are in US dollars, plus sales tax where it applies.",
-        "guarantee": "30-day money-back guarantee. If it is not for you, email elvin@elvinpeters.com within 30 days of purchase and I will refund you in full."
+        "guarantee": "30-day money-back guarantee. If it is not for you, email elvin@elvinpeters.com within 30 days of purchase and I will refund you in full.",
+        "fold_label": "See each price"
       }
     },
     {

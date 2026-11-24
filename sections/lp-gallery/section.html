@@ -20,9 +20,23 @@
 {{#chapters.0}}
     <ol class="lp-chapters">
 {{#chapters}}
+{{^later}}
       <li><span class="lp-chapters__n" aria-hidden="true">{{n}}</span><span>{{line}}</span></li>
+{{/later}}
 {{/chapters}}
     </ol>
+{{#chapters_more}}
+    <details class="lp-fold lp-chapters__more">
+      <summary>{{chapters_more}}</summary>
+      <ol class="lp-chapters">
+{{#chapters}}
+{{#later}}
+        <li><span class="lp-chapters__n" aria-hidden="true">{{n}}</span><span>{{line}}</span></li>
+{{/later}}
+{{/chapters}}
+      </ol>
+    </details>
+{{/chapters_more}}
 {{/chapters.0}}
 {{#days.0}}
     <ol class="lp-days" tabindex="0" aria-label="{{heading}}">
@@ -41,7 +55,7 @@
 {{#body}}
     <div class="lp-gallery__body">{{body}}</div>
 {{/body}}
-    <ul class="lp-gallery__strip{{#docs}} lp-gallery__strip--docs{{/docs}}">
+    <ul class="lp-gallery__strip{{#docs}} lp-gallery__strip--docs{{/docs}}{{#swipe}} lp-gallery__strip--swipe{{/swipe}}">
 {{#items}}
 {{#doc_html}}
       <li class="lp-gallery__item lp-gallery__item--doc">

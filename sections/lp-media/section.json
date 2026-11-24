@@ -312,6 +312,11 @@
               "label": "Where it lives"
             }
           ]
+        },
+        {
+          "key": "fold",
+          "type": "bool",
+          "label": "Names showing, each card opens on a tap"
         }
       ]
     },
@@ -370,6 +375,74 @@
           ]
         }
       ]
+    },
+    {
+      "key": "fold_label",
+      "type": "text",
+      "label": "Button that opens the picture (empty = picture showing)"
+    },
+    {
+      "key": "doc_items",
+      "type": "list",
+      "label": "Page cards in place of the picture",
+      "fields": [
+        {
+          "key": "doc_label",
+          "type": "text",
+          "label": "Label"
+        },
+        {
+          "key": "doc_heading",
+          "type": "text",
+          "label": "Heading"
+        },
+        {
+          "key": "doc_html",
+          "type": "html",
+          "label": "Excerpt"
+        },
+        {
+          "key": "full",
+          "type": "image",
+          "label": "Whole page",
+          "alt": "alt"
+        },
+        {
+          "key": "full_w",
+          "type": "text",
+          "label": "Width"
+        },
+        {
+          "key": "full_h",
+          "type": "text",
+          "label": "Height"
+        },
+        {
+          "key": "alt",
+          "type": "text",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "key": "doc_caption",
+      "type": "text",
+      "label": "Line under the page cards"
+    },
+    {
+      "key": "more_label",
+      "type": "text",
+      "label": "Whole-page button"
+    },
+    {
+      "key": "dialog_label",
+      "type": "text",
+      "label": "Whole-page viewer name"
+    },
+    {
+      "key": "close_label",
+      "type": "text",
+      "label": "Close button"
     }
   ]
 }

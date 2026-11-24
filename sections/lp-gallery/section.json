@@ -205,6 +205,11 @@
           "key": "line",
           "type": "html",
           "label": "Line"
+        },
+        {
+          "key": "later",
+          "type": "bool",
+          "label": "Behind the 'see all' button"
         }
       ]
     },
@@ -241,6 +246,16 @@
           "label": "Tile"
         }
       ]
+    },
+    {
+      "key": "swipe",
+      "type": "bool",
+      "label": "Page cards side by side in one swipe strip"
+    },
+    {
+      "key": "chapters_more",
+      "type": "text",
+      "label": "Button that opens chapters 6 onward (empty = all open)"
     }
   ]
 }

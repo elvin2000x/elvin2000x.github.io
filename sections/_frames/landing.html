@@ -508,7 +508,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
         if (box && !box.checked) { box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true })); }
       });
     });
-    [].forEach.call(document.querySelectorAll('.lp-gallery'), function (g) {
+    [].forEach.call(document.querySelectorAll('.lp-gallery, [data-lp-gal]'), function (g) {
       var dlg = g.querySelector('dialog'); if (!dlg || typeof dlg.showModal !== 'function') return;
       var track = dlg.querySelector('.lp-gallery__track'), slides = dlg.querySelectorAll('.lp-gallery__slide'), opener = null;
       [].forEach.call(g.querySelectorAll('[data-lp-gal-open]'), function (b, i) {
