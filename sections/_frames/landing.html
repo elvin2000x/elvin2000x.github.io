@@ -208,8 +208,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     } catch (x) {}
     if (window.EP_HOOK_SEND) window.EP_HOOK_SEND('click');
     if (a.getAttribute('data-busy')) return; a.setAttribute('data-busy', '1');
+    /* 733: the Meta browser ids for the store's server-side Purchase; mirrors funnel.js cookie() (#607). Never throws. */
+    var ck = function (n) { try { var m = new RegExp('(?:^|; )' + n + '=([^;]{1,600})').exec(document.cookie); return m ? decodeURIComponent(m[1]) : ''; } catch (x) { return ''; } };
     var timer = setTimeout(function () { if (ctl) ctl.abort(); go(); }, 1800);
-    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify((function () { var b = { funnel: funnel, utm: utm, code: '' }; if (window.EP_HOOK && window.EP_HOOK.page === 'offer') b.hook = { page: 'offer', variant: window.EP_HOOK.variant }; if (window.EP_TEAM) b.test = true; if (ADDON_ON) b.bump = true; else if (SEND_BUMP_FALSE) b.bump = false; return b; })()), signal: ctl ? ctl.signal : undefined })
+    fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify((function () { var b = { funnel: funnel, utm: utm, code: '' }; if (window.EP_HOOK && window.EP_HOOK.page === 'offer') b.hook = { page: 'offer', variant: window.EP_HOOK.variant }; if (window.EP_TEAM) b.test = true; if (ADDON_ON) b.bump = true; else if (SEND_BUMP_FALSE) b.bump = false; b.fbp = ck('_fbp'); b.fbc = ck('_fbc'); return b; })()), signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { var u = j && (j.url || j.checkout_url); clearTimeout(timer); if (!settled && u && /^https:\/\/checkout\.stripe\.com\//.test(u)) { settled = true; location.assign(u); } else go(); })
       .catch(function () { clearTimeout(timer); go(); });
