@@ -88,6 +88,38 @@
           "key": "price",
           "type": "text",
           "label": "Price (adds to the total when ticked)"
+        },
+        {
+          "key": "head",
+          "type": "html",
+          "label": "Add-on question"
+        },
+        {
+          "key": "paras",
+          "type": "list",
+          "label": "Add-on paragraphs",
+          "fields": [
+            {
+              "key": "p",
+              "type": "html",
+              "label": "Paragraph"
+            }
+          ]
+        },
+        {
+          "key": "small",
+          "type": "html",
+          "label": "Add-on small line"
+        },
+        {
+          "key": "image_w",
+          "type": "text",
+          "label": "Cover width"
+        },
+        {
+          "key": "image_h",
+          "type": "text",
+          "label": "Cover height"
         }
       ]
     },

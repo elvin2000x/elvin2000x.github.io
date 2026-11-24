@@ -222,7 +222,133 @@
         "request_label": "See the request",
         "thin_request_label": "One line:",
         "directed_request_label": "The job, explained:",
-        "oneline_label": "The one-line request:"
+        "oneline_label": "The one-line request:",
+        "slider": "1",
+        "before_label": "Before",
+        "after_label": "After",
+        "next_label": "Next example",
+        "prev_label": "Previous",
+        "scroll_label": "Scroll for the rest"
+      }
+    },
+    {
+      "id": "v10-bundle",
+      "type": "lp-bundle",
+      "data": {
+        "bg": "",
+        "anchor": "everything",
+        "desktop": "/img/store/v10/bundle-picture-desktop.webp",
+        "desktop_w": "1200",
+        "desktop_h": "608",
+        "phone": "/img/store/v10/bundle-picture-phone.webp",
+        "phone_w": "600",
+        "phone_h": "608",
+        "alt": "The Artificial Advantage book, with its Companion Library and Toolkit on either side, and the 7-Day AI Workbook, Everything AI 2026 and The 12 Commandments to Make AI Obey below.",
+        "items": [
+          {
+            "name": "The Artificial Advantage, 2E ebook",
+            "price": "$9.99"
+          },
+          {
+            "name": "The Companion Library",
+            "price": ""
+          },
+          {
+            "name": "The Toolkit",
+            "price": "$17"
+          },
+          {
+            "name": "7-Day AI Workbook, 2E",
+            "price": "$9"
+          },
+          {
+            "name": "Everything AI 2026",
+            "price": "$19"
+          },
+          {
+            "name": "The 12 Commandments to Make AI Obey",
+            "price": "$17"
+          }
+        ],
+        "total_label": "Total value",
+        "total": "$71.99",
+        "price_label": "Your price",
+        "price": "$27",
+        "buy": "Get the bundle for $27"
+      }
+    },
+    {
+      "id": "v10-open-when",
+      "type": "lp-openwhen",
+      "data": {
+        "bg": "tint",
+        "anchor": "open-this-when",
+        "heading": "Open this when...",
+        "frame": "/img/store/v10/phone-frame.svg",
+        "scroll_label": "Scroll for the rest",
+        "rows": [
+          {
+            "bubble": "I'm staring at an empty chat box.",
+            "file": "The Prompt Library, in the Toolkit",
+            "kind": "word"
+          },
+          {
+            "bubble": "The answer reads like a brochure.",
+            "file": "The book, Chapter 3",
+            "kind": "book"
+          },
+          {
+            "bubble": "I typed \"act as an expert\" and nothing changed.",
+            "file": "The Role Library, in the Toolkit",
+            "kind": "word"
+          },
+          {
+            "bubble": "I don't know which AI app to open.",
+            "file": "The Tool-Selection Cheat Sheet, in the Toolkit",
+            "kind": "word"
+          },
+          {
+            "bubble": "I forgot the next step halfway through.",
+            "file": "The Director's Cheat Sheet, in the Toolkit",
+            "kind": "word"
+          },
+          {
+            "bubble": "I read about a skill and never tried it.",
+            "file": "The Exercises, in the Toolkit",
+            "kind": "word"
+          },
+          {
+            "bubble": "I used AI once and drifted away.",
+            "file": "The 30-Day Practice Plan, in the Toolkit",
+            "kind": "word"
+          },
+          {
+            "bubble": "I use AI most days and I'm no faster.",
+            "file": "The 3-Month AI Practice Plan, in the Toolkit",
+            "kind": "word"
+          },
+          {
+            "bubble": "Does this work on my own job?",
+            "file": "The 7-Day AI Workbook",
+            "kind": "pdf"
+          },
+          {
+            "bubble": "There are too many AI tools to choose from.",
+            "file": "Everything AI 2026",
+            "kind": "sheet"
+          },
+          {
+            "bubble": "The draft sounds nothing like me.",
+            "file": "The 12 Commandments to Make AI Obey",
+            "kind": "pdf"
+          },
+          {
+            "bubble": "I need that prompt from the book right now.",
+            "file": "The Companion Library",
+            "kind": "web"
+          }
+        ],
+        "closing": "Every one of these is in the bundle."
       }
     },
     {
@@ -267,7 +393,7 @@
         "heading": "",
         "sub": "",
         "lede": "",
-        "body": "<p>From the Toolkit: First Draft from Notes, Tone Calibration and Plain Language Rewrite, with brackets for your own details.</p>",
+        "body": "<p>From the Toolkit: First Draft from Notes, with brackets for your own details.</p>",
         "docs": "1",
         "items": [
           {
@@ -282,32 +408,6 @@
             "doc_label": "The Toolkit, Prompt Library",
             "doc_heading": "First Draft from Notes",
             "doc_html": "<p class=\"lp-doc__mono\">Act as a professional business writer. I'm going to paste rough notes on [topic]. Transform these notes into a polished first draft suitable for [audience, e.g., an internal report, a client-facing document]. Maintain all the factual content from my notes. Improve structure, transitions, and sentence clarity. Flag any section where my notes were unclear and you made an interpretive decision.</p>"
-          },
-          {
-            "thumb": "",
-            "thumb_w": "750",
-            "thumb_h": "120",
-            "full": "/img/store/look-inside/toolkit-tone-calibration-page.webp",
-            "full_w": "1200",
-            "full_h": "1553",
-            "alt": "The Toolkit, Prompt Library: the whole page",
-            "caption": "",
-            "doc_label": "The Toolkit, Prompt Library",
-            "doc_heading": "Tone Calibration",
-            "doc_html": "<p class=\"lp-doc__mono\">Act as a professional editor. Rewrite the following passage so the tone matches [target: e.g., authoritative but approachable, urgent but not alarmist, direct without being blunt]. Keep the meaning intact. Note any sentence where you changed the meaning, flag it with [CHANGED] so I can review.</p>"
-          },
-          {
-            "thumb": "",
-            "thumb_w": "750",
-            "thumb_h": "120",
-            "full": "/img/store/look-inside/toolkit-plain-language-page.webp",
-            "full_w": "1200",
-            "full_h": "1553",
-            "alt": "The Toolkit, Prompt Library: the whole page",
-            "caption": "",
-            "doc_label": "The Toolkit, Prompt Library",
-            "doc_heading": "Plain Language Rewrite",
-            "doc_html": "<p class=\"lp-doc__mono\">Act as a plain language editor. Rewrite the following passage for an audience with no specialized knowledge of [field]. Replace all jargon with plain equivalents. Cut sentences longer than 20 words in half where possible. The reader should be able to understand the core point without looking anything up. Flag any term you couldn't simplify without losing precision.</p>"
           }
         ],
         "strip_caption": "The Toolkit gives you 25 prompts built the same way, with brackets for your own details, and it's in the bundle.",
@@ -332,6 +432,41 @@
           "I'm Elvin Peters, and I'm not a tech wizard. If you've ever typed one line and got a brochure back, me too. My answers were poor until I learned to treat AI like a person who can't read my mind and will do the job however it sees fit until I say exactly how. I still slip when I'm lazy, and I pay for it by doing the work again, so I measure twice and cut once.",
           "AI turned research that used to take me days into hours. I ran paid media for easyfinancial, more than $50M in digital ad spend, then advised advertisers on Google's global clients team. In 2026 I became a founder, writing books and building with AI full time.",
           "My notes include what failed as well as what worked. They are the book, and the book is in this bundle."
+        ]
+      }
+    },
+    {
+      "id": "v10-who-short",
+      "type": "text",
+      "hidden": true,
+      "note": "Version 10: Who wrote the book without its first three paragraphs. Switch on with v10-why-listen, and hide v7-s5-who.",
+      "data": {
+        "anchor": "",
+        "align": "left",
+        "heading": "Who wrote the book",
+        "paras": [
+          "The book is a shortcut, built on a year of hard-won lessons, so you can start where I ended up.",
+          "I'm Elvin Peters, and I'm not a tech wizard. If you've ever typed one line and got a brochure back, me too. My answers were poor until I learned to treat AI like a person who can't read my mind and will do the job however it sees fit until I say exactly how. I still slip when I'm lazy, and I pay for it by doing the work again, so I measure twice and cut once.",
+          "AI turned research that used to take me days into hours. I ran paid media for easyfinancial, more than $50M in digital ad spend, then advised advertisers on Google's global clients team. In 2026 I became a founder, writing books and building with AI full time.",
+          "My notes include what failed as well as what worked. They are the book, and the book is in this bundle."
+        ]
+      }
+    },
+    {
+      "id": "v10-why-listen",
+      "type": "text",
+      "hidden": true,
+      "note": "Version 10: Why listen to me (COPY-716 section 4). Waits for Elvin's read.",
+      "data": {
+        "anchor": "why-listen",
+        "align": "left",
+        "heading": "Why listen to me?",
+        "paras": [
+          "Maybe someone at work told you to start using AI, and nobody showed you how. You tried it, got a brochure back, and wondered what everyone else was seeing.",
+          "I was there, and I'm not a tech wizard. I dropped my Python class in first year, and for a long time I couldn't get a website off the ground.",
+          "I've used ChatGPT since the winter it came out. I thought about selling prompts. Then I saw I'd be adding to a pile of slop, and that any trick would be out of date by the next release. I wanted to make something that lasts. So I spent a year turning what works into a method: how AI works, and how to talk to any model so you get what you meant. That's how the book was born.",
+          "Learning this changed my life. Today I run my own websites, my own apps, a server and a team of AI agents, and I'm building a business on it. I'm still learning, and I plan to be one of the best at this.",
+          "I'm a keener. I've always been happiest sharing what I know and making it easy to pick up. This is the guide I wish someone had handed me at the start."
         ]
       }
     },
@@ -394,7 +529,7 @@
         "heading": "The Artificial Advantage, 2026 edition",
         "sub": "1",
         "lede": "Fourteen chapters that teach you to tell AI what you want, check what comes back, and fix the request when the answer is wrong.",
-        "body": "<p>How the book is built:</p><ul><li>Part 1: Building Your Foundation. AI is just tech, a tool, so you know what it can and can't do before you start.</li><li>Part 2: Choose Your Tools. What exists out there and how to get started, so you're not guessing which app to open.</li><li>Part 3: The Core Skills of Conversation. The prompt skills, so what comes back is something you can use.</li></ul><p>AI doesn't care what you want. It only understands what you prompt.</p><p>The book's five steps:</p><ul><li>C: Choose your tools</li><li>L: Lead with clear direction</li><li>E: Evolve your outputs</li><li>A: Audit for accuracy</li><li>R: Repeat to build a practice</li></ul><ul><li>The Role, Task, Constraint brief: the habit behind the second answer in each pair above.</li><li>A way to trace a wrong answer back to its cause.</li><li>A two-step check for reading an answer before your name goes on it.</li></ul>",
+        "body": "<p>AI doesn't care what you want. It only understands what you prompt.</p><p>The book's five steps:</p><ul><li>C: Choose your tools</li><li>L: Lead with clear direction</li><li>E: Evolve your outputs</li><li>A: Audit for accuracy</li><li>R: Repeat to build a practice</li></ul><ul><li>The Role, Task, Constraint brief: the habit behind the second answer in each pair above.</li><li>A way to trace a wrong answer back to its cause.</li><li>A two-step check for reading an answer before your name goes on it.</li></ul>",
         "docs": "1",
         "items": [
           {
@@ -442,7 +577,66 @@
         "dialog_label": "Pages from the ebook",
         "close_label": "Close",
         "buy": "",
-        "tail": "In the bundle, the book is where you learn the method."
+        "tail": "In the bundle, the book is where you learn the method.",
+        "chapters_heading": "Fourteen chapters. Here's what each one fixes.",
+        "chapters": [
+          {
+            "n": "1",
+            "line": "Why AI hands you a confident answer that's wrong, and the one idea about how it works that changes what you type. Chapter 1."
+          },
+          {
+            "n": "2",
+            "line": "The four fears that keep capable people away from AI at work, and the one privacy rule that tells you in a second what never to paste. Chapter 2."
+          },
+          {
+            "n": "3",
+            "line": "Why treating AI like a search bar gets you a brochure, and the three-part brief that gets you a near-final draft. Chapter 3."
+          },
+          {
+            "n": "4",
+            "line": "What AI is good at, what it's bad at, and how to tell a gap you can fix from a limit you can't. Chapter 4."
+          },
+          {
+            "n": "5",
+            "line": "What waiting costs you, and how to save your first template so a task you set up once is ready next time. Chapter 5."
+          },
+          {
+            "n": "6",
+            "line": "Why the skill travels from one AI app to the next, so you only learn it once. Chapter 6."
+          },
+          {
+            "n": "7",
+            "line": "Three questions and one sitting to choose your AI tool and stop second-guessing it. Chapter 7."
+          },
+          {
+            "n": "8",
+            "line": "The dropdown you may never have touched, and how it changes the answer you get. Chapter 8."
+          },
+          {
+            "n": "9",
+            "line": "The email you've been avoiding, the meeting that went everywhere and a long document: jobs you run yourself, with four traps to skip. Chapter 9."
+          },
+          {
+            "n": "10",
+            "line": "Three rules to check before you hit send. Chapter 10."
+          },
+          {
+            "n": "11",
+            "line": "When an answer is wrong, where to look first: a three-rung ladder that traces it to the cause. Chapter 11."
+          },
+          {
+            "n": "12",
+            "line": "Which details in your request matter and which are noise, and how to get AI to ask you the questions you didn't think of. Chapter 12."
+          },
+          {
+            "n": "13",
+            "line": "Why AI sounds sure when it's wrong, and the two-step check to run before your name goes on it. Chapter 13."
+          },
+          {
+            "n": "14",
+            "line": "A three-month plan that takes you from your first week to a system, and what to do when you stop improving. Chapter 14."
+          }
+        ]
       }
     },
     {
@@ -469,10 +663,60 @@
         "phone_h": "1416",
         "alt": "The Toolkit's prompt library as a spreadsheet, the first 12 of its 25 prompts: category and prompt name",
         "caption": "12 of the 25 prompt titles.",
-        "body": "<ul><li>25 prompts in five groups: Communication, Analysis and Research, Writing and Editing, Planning and Strategy, Learning and Development. Also as a spreadsheet you can import.</li><li>25 role setups you paste once, and the formula for writing your own.</li><li>16 exercises from 10 chapters, a 30-day plan and a 3-month plan.</li></ul><p class=\"lp-tail\">In the bundle, the Toolkit saves you typing the book's prompts and exercises out yourself.</p>",
+        "body": "<p class=\"lp-tail\">In the bundle, the Toolkit saves you typing the book's prompts and exercises out yourself.</p>",
         "buy": "Get the bundle for $27",
         "kit_cards": {
           "items": [
+            {
+              "name": "The Exercises",
+              "kind": "Word file",
+              "src": "/img/store/look-inside/toolkit-card-exercises.webp",
+              "src2": "/img/store/look-inside/toolkit-card-exercises@2x.webp",
+              "alt": "The first page of The Exercises, Editable: its title and opening lines",
+              "problem": "Read a skill on Monday and forgotten it by Friday?",
+              "outcome": "Every exercise from the book, with space for your notes. You run each one on your own work and keep a record of what happened.",
+              "where": ""
+            },
+            {
+              "name": "The 30-Day Practice Plan",
+              "kind": "Word file",
+              "src": "/img/store/look-inside/toolkit-card-30-day-plan.webp",
+              "src2": "/img/store/look-inside/toolkit-card-30-day-plan@2x.webp",
+              "alt": "The first page of The 30-Day Practice Plan: its title and the start of week one",
+              "problem": "Tried AI once and drifted away?",
+              "outcome": "A first month that starts with one real task and ends with AI in every working day, with a checklist to tick off.",
+              "where": ""
+            },
+            {
+              "name": "The 3-Month AI Practice Plan",
+              "kind": "Word file",
+              "src": "/img/store/look-inside/toolkit-card-3-month-plan.webp",
+              "src2": "/img/store/look-inside/toolkit-card-3-month-plan@2x.webp",
+              "alt": "The first page of The 3-Month AI Practice Plan: its title and the start of month one",
+              "problem": "Using AI most days and not getting any faster?",
+              "outcome": "Three months, each with its own job, and a check-in at the end of each one.",
+              "where": ""
+            },
+            {
+              "name": "The Professional Prompt Library",
+              "kind": "Word file and spreadsheet",
+              "src": "/img/store/look-inside/toolkit-card-prompt-library.webp",
+              "src2": "/img/store/look-inside/toolkit-card-prompt-library@2x.webp",
+              "alt": "The first page of The Professional Prompt Library: its title and its first group of prompts",
+              "problem": "Staring at an empty chat box?",
+              "outcome": "Start from a prompt that's already written, with blanks for your details. Five groups, from a meeting follow-up to a first draft from your notes. It also comes as a spreadsheet you can import.",
+              "where": ""
+            },
+            {
+              "name": "The Role Library",
+              "kind": "Word file",
+              "src": "/img/store/look-inside/toolkit-card-role-library.webp",
+              "src2": "/img/store/look-inside/toolkit-card-role-library@2x.webp",
+              "alt": "The first page of The Role Library: its title and the start of its roles",
+              "problem": "Typed \"act as an expert\" and got nothing better?",
+              "outcome": "25 openers that give the AI a job title and a point of view, in eight work areas, plus the formula for writing your own.",
+              "where": ""
+            },
             {
               "name": "The Tool-Selection Cheat Sheet",
               "kind": "Word file",
@@ -618,7 +862,38 @@
         "dialog_label": "Pages from the 7-Day AI Workbook",
         "close_label": "Close",
         "buy": "",
-        "tail": "In the bundle, the Workbook is where you try the method on your own work."
+        "tail": "In the bundle, the Workbook is where you try the method on your own work.",
+        "opener": "You understand the method. Have you tried it on your own work?",
+        "days": [
+          {
+            "d": "Day 1",
+            "line": "pick one task you do every week."
+          },
+          {
+            "d": "Day 2",
+            "line": "do it the way you do it today, and save the result."
+          },
+          {
+            "d": "Day 3",
+            "line": "write the three-part brief."
+          },
+          {
+            "d": "Day 4",
+            "line": "ask for one thing at a time, and improve in rounds."
+          },
+          {
+            "d": "Day 5",
+            "line": "trace what went wrong."
+          },
+          {
+            "d": "Day 6",
+            "line": "check the answer before you trust it."
+          },
+          {
+            "d": "Day 7",
+            "line": "run it again, and put the two results side by side."
+          }
+        ]
       }
     },
     {
@@ -646,7 +921,26 @@
         "alt": "",
         "caption": "",
         "body": "<p>Look up the job in front of you and see the resources that fit, with what each costs. One job, Meetings, Notes and Productivity:</p><ul><li>Fathom: free meeting recorder with summaries and highlights. Beginner, freemium.</li><li>Fireflies: joins calls to record, transcribe and summarise. Beginner, freemium.</li><li>Clockwise: team calendar optimiser. Beginner, freemium.</li></ul><p>That job lists 23 resources. The guide has 12 job stacks, a spreadsheet and a 23-page field guide, and it's a dated snapshot.</p><p class=\"lp-tail\">In the bundle, Everything AI 2026 shows which resources fit the job in front of you.</p>",
-        "buy": ""
+        "buy": "",
+        "opener": "Hundreds of AI tools, and no idea which one fits your job?",
+        "jobs": [
+          {
+            "name": "Meetings, Notes and Productivity",
+            "count": "23 resources",
+            "open": "1"
+          },
+          {
+            "name": "Writing and Editing",
+            "count": "17 resources",
+            "open": ""
+          },
+          {
+            "name": "Presentations, Design and Documents",
+            "count": "22 resources",
+            "open": ""
+          }
+        ],
+        "jobs_total": "684 resources"
       }
     },
     {
@@ -708,7 +1002,58 @@
         "dialog_label": "Pages from The 12 Commandments",
         "close_label": "Close",
         "buy": "Get the bundle for $27",
-        "tail": "In the bundle, The 12 Commandments helps the drafts sound like you."
+        "tail": "In the bundle, The 12 Commandments helps the drafts sound like you.",
+        "opener": "Does AI forget who you are every time you open a new chat?",
+        "tiles": [
+          {
+            "n": "1",
+            "t": "One chat that's doing three jobs."
+          },
+          {
+            "n": "2",
+            "t": "Asking for a finished piece when you needed a plan."
+          },
+          {
+            "n": "3",
+            "t": "An answer built on a guess about what you wanted."
+          },
+          {
+            "n": "4",
+            "t": "A draft that's finished and still isn't right."
+          },
+          {
+            "n": "5",
+            "t": "Advice about a document the AI never saw."
+          },
+          {
+            "n": "6",
+            "t": "Ten messages to get what one could have asked for."
+          },
+          {
+            "n": "7",
+            "t": "Retyping who you are in every chat."
+          },
+          {
+            "n": "8",
+            "t": "Drafts that sound like a stranger wrote them."
+          },
+          {
+            "n": "9",
+            "t": "Uploading the same files to every new chat."
+          },
+          {
+            "n": "10",
+            "t": "Slow answers on easy jobs and thin answers on hard ones."
+          },
+          {
+            "n": "11",
+            "t": "A chat that keeps making the same mistake."
+          },
+          {
+            "n": "12",
+            "t": "A wrong fact going out under your name."
+          }
+        ]
       }
     },
     {
@@ -787,6 +1132,10 @@
             "a": "Because the request changes, and the tool stays the same. A one-line request gets a generic answer from any AI. The book teaches you to explain the job: who it's for, why it matters, and what done looks like. Both answers at the top of this page came from the same AI."
           },
           {
+            "q": "How long before I see a better answer?",
+            "a": "The three-part brief is in Chapter 3, and you can try it on your next request. The Workbook gives you a before and an after on your own task by Day 7."
+          },
+          {
             "q": "Do I need a paid AI plan?",
             "a": "No. The book's skills work across ChatGPT, Claude, Gemini and Copilot, and a free plan is enough to start."
           },
@@ -801,6 +1150,10 @@
           {
             "q": "What arrives, and where?",
             "a": "An instant download plus an email. One receipt email lists everything and links to your library, where each piece has its own download. The Companion Library opens online."
+          },
+          {
+            "q": "Is this just a pile of files?",
+            "a": "There's one place to start: the 7-Day AI Workbook. It points you to the chapter to read each day, and the other files come in when you need them."
           },
           {
             "q": "What format are the files?",
@@ -1024,6 +1377,18 @@
         "heading": "",
         "paras": [
           "<span class=\"amz-disclosure\">As an Amazon Associate I earn from qualifying purchases.</span>"
+        ]
+      }
+    },
+    {
+      "id": "v10-fine-print",
+      "type": "text",
+      "data": {
+        "anchor": "fine-print",
+        "align": "left",
+        "heading": "",
+        "paras": [
+          "The Artificial Advantage and the files that come with it are based on the author's own experience. Your results depend on your work and on how you use what you learn, and they will differ from his. Nothing on this page or in these products is legal, financial, medical or other professional advice. The example answers on this page were written by AI to show the difference. The 30-day money-back guarantee applies to every purchase."
         ]
       }
     }

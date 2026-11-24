@@ -58,6 +58,11 @@
       "type": "text",
       "label": "Poster description",
       "hidden": true
+    },
+    {
+      "key": "lede",
+      "type": "html",
+      "label": "Line above the video"
     }
   ]
 }

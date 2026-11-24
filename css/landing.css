@@ -868,3 +868,127 @@ body.lp .lp-faq summary::after{ content:"+"; position:absolute; right:4px; top:5
 body.lp .lp-faq details[open] > summary::after{ content:"\2212" }
 body.lp .lp-faq summary:focus-visible{ outline:3px solid #8a5a14; outline-offset:2px }
 body.lp .lp-faq details > p{ margin:0 0 16px; padding-right:44px }
+
+/* 719: Step 1 version 10 (DESIGN-BRIEF-v10.md) */
+/* opening question above each bonus section's first line */
+body.lp .lp-sec p.lp-opener{ margin:4px 0 12px; font-family:"EB Garamond", Georgia, serif; font-size:24px; line-height:1.3; color:var(--lp-navy) }
+@media (min-width:920px){ body.lp .lp-sec p.lp-opener{ font-size:26px } }
+
+/* chat frames and bubbles (slider and phone) */
+body.lp .lp-chat{ position:relative; display:flex; flex-direction:column; height:300px; margin:0; background:#fff; border:1px solid #d6e0ea; border-radius:16px; overflow:hidden; box-shadow:0 12px 32px rgba(10,24,40,.12) }
+body.lp .lp-sec p.lp-chat__bar{ flex:none; display:flex; align-items:center; justify-content:space-between; height:40px; margin:0; padding:0 12px; border-bottom:1px solid #e3e9f0; background:#fff }
+body.lp .lp-chat__dots{ display:inline-block; width:8px; height:8px; border-radius:50%; background:#c4ced9; box-shadow:12px 0 0 #c4ced9, 24px 0 0 #c4ced9 }
+body.lp .lp-chip{ display:inline-block; padding:3px 12px; border-radius:999px; font:700 13px/1.4 var(--sans, Inter, sans-serif); letter-spacing:.02em; color:var(--lp-navy) }
+body.lp .lp-chip--before{ background:#e6ebf0 }
+body.lp .lp-chip--after{ background:var(--lp-gold) }
+body.lp .lp-chat__msgs{ box-sizing:border-box; flex:1; min-height:0; overflow-y:auto; padding:14px 12px 40px; background:var(--lp-band); scrollbar-width:thin; scrollbar-color:#9fb0c2 transparent }
+body.lp .lp-chat__msgs:focus-visible{ outline:3px solid #8a5a14; outline-offset:-3px }
+body.lp .lp-bub{ max-width:90%; margin:0 0 10px; padding:12px 14px; border-radius:18px; font-size:16px; line-height:1.45; color:var(--lp-navy) }
+body.lp .lp-bub--you{ margin-left:auto; background:var(--lp-gold); border-bottom-right-radius:4px }
+body.lp .lp-bub--ai{ margin-right:auto; background:#fff; border:1px solid #d6e0ea; border-bottom-left-radius:4px }
+body.lp .lp-sec .lp-bub p, body.lp .lp-sec p.lp-bub, body.lp .lp-sec .lp-bub li{ font-size:16px; line-height:1.45; color:var(--lp-navy) }
+body.lp .lp-sec .lp-bub p{ margin:0 0 8px }
+body.lp .lp-sec .lp-bub p:last-child{ margin-bottom:0 }
+body.lp .lp-chat::after, body.lp .lp-phone__fade{ content:""; position:absolute; left:0; right:0; bottom:0; height:40px; background:linear-gradient(rgba(240,245,250,0), var(--lp-band)); pointer-events:none }
+body.lp .lp-chat__hint{ position:absolute; right:10px; bottom:8px; z-index:1; padding:3px 10px; border-radius:999px; background:#fff; border:1px solid #d6e0ea; font:600 13px/1.4 var(--sans, Inter, sans-serif); color:var(--lp-navy); pointer-events:none }
+body.lp .is-end::after, body.lp .is-end .lp-phone__fade, body.lp .is-end > .lp-chat__hint{ display:none }
+
+/* the slider */
+body.lp .lp-slider{ margin-top:8px }
+body.lp .lp-slider__track{ display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; align-items:flex-start }
+body.lp .lp-slider__track::-webkit-scrollbar{ display:none }
+body.lp .lp-slide{ box-sizing:border-box; flex:0 0 100%; min-width:0; scroll-snap-align:start; padding:4px 2px 18px }
+body.lp .lp-slide__title{ margin:0 0 12px; font-size:22px }
+body.lp .lp-slide__frames{ display:grid; gap:10px; justify-items:stretch }
+body.lp .lp-slide__arrow{ justify-self:center; display:flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:var(--lp-navy) }
+body.lp .lp-slide__arrow::before{ content:""; width:9px; height:9px; margin-top:-4px; border-right:2.5px solid #fff; border-bottom:2.5px solid #fff; transform:rotate(45deg) }
+body.lp .lp-slider__nav{ display:flex; align-items:center; justify-content:center; gap:6px; margin-top:6px }
+body.lp .lp-slider__btn{ min-height:44px; padding:0 18px; border:2px solid var(--lp-navy); border-radius:999px; background:#fff; color:var(--lp-navy); font:600 16px/1 var(--sans, Inter, sans-serif); cursor:pointer }
+body.lp .lp-slider__btn:disabled{ opacity:.4; cursor:default }
+body.lp .lp-slider__btn:focus-visible, body.lp .lp-slider__dot:focus-visible{ outline:3px solid #8a5a14; outline-offset:2px }
+body.lp .lp-slider__dots{ display:flex }
+body.lp .lp-slider__dot{ width:44px; height:44px; padding:0; border:0; background:none; cursor:pointer; display:flex; align-items:center; justify-content:center }
+body.lp .lp-slider__dot::before{ content:""; width:10px; height:10px; border-radius:50%; border:2px solid var(--lp-navy); background:#fff }
+body.lp .lp-slider__dot[aria-current]::before{ background:var(--lp-navy) }
+body.lp .lp-sec p.lp-slider__count{ margin:2px 0 0; text-align:center; font-size:14px; color:var(--lp-navy) }
+@media (min-width:920px){
+  body.lp .lp-slide__frames{ grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr); align-items:center; gap:12px }
+  body.lp .lp-slide__arrow::before{ margin:0 0 0 -4px; transform:rotate(-45deg) }
+  body.lp .lp-chat{ height:380px }
+}
+
+/* the bundle picture and its prices */
+body.lp .lp-bundle__pic img{ display:block; width:100%; height:auto }
+body.lp .lp-sec ul.lp-bundle__items{ list-style:none; margin:16px 0 0; padding:0; border-top:1px solid #d6e0ea }
+body.lp .lp-sec .lp-bundle__items li{ display:flex; justify-content:space-between; gap:16px; margin:0; padding:10px 0; border-bottom:1px solid #d6e0ea; font-size:17px; line-height:1.4 }
+body.lp .lp-bundle__was{ color:#4a5d70; white-space:nowrap }
+body.lp .lp-sec p.lp-bundle__total{ margin:18px 0 0; text-align:center; font-size:19px }
+body.lp .lp-bundle__total s{ color:#4a5d70 }
+body.lp .lp-sec p.lp-bundle__price{ margin:4px 0 0; text-align:center; font-size:22px; font-weight:600 }
+body.lp .lp-bundle__price strong{ display:inline-block; font-family:"EB Garamond", Georgia, serif; font-size:40px; line-height:1.1; padding-bottom:4px; border-bottom:4px solid var(--lp-gold) }
+body.lp .lp-bundle__buy{ margin:18px 0 0; text-align:center }
+@media (min-width:640px){
+  body.lp .lp-sec ul.lp-bundle__items{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); column-gap:20px }
+  body.lp .lp-sec .lp-bundle__items li{ flex-direction:column; justify-content:flex-start; gap:2px }
+}
+
+/* Open this when: the phone */
+body.lp .lp-ow__grid{ display:grid; gap:24px; justify-items:center }
+body.lp .lp-phone{ position:relative; width:300px; max-width:100%; aspect-ratio:320/660 }
+body.lp .lp-phone__screen{ box-sizing:border-box; position:absolute; left:5%; top:2.42%; width:90%; height:95.15%; border-radius:28px; padding:44px 10px 44px }
+body.lp .lp-phone__fade{ left:5%; right:5%; bottom:2.42%; border-radius:0 0 28px 28px }
+body.lp .lp-phone__frame{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none }
+body.lp .lp-phone > .lp-chat__hint{ right:auto; left:50%; bottom:5%; transform:translateX(-50%); white-space:nowrap }
+body.lp .lp-sec ul.lp-ow__chat{ list-style:none; margin:0; padding:0 }
+body.lp .lp-sec .lp-ow__chat li{ margin:0 0 14px; padding:0 }
+body.lp .lp-sec p.lp-ow__file{ display:flex; align-items:center; gap:10px; font-weight:600 }
+body.lp .lp-file{ position:relative; flex:none; width:28px; height:36px; border:1.5px solid #9fb0c2; border-radius:3px; background:#fff; overflow:hidden }
+body.lp .lp-file::before{ content:""; position:absolute; left:0; right:0; top:0; height:9px; background:var(--tab, #2b5797) }
+body.lp .lp-file--word{ --tab:#2b5797 } body.lp .lp-file--pdf{ --tab:#c9a250 } body.lp .lp-file--sheet{ --tab:#2e7d4f }
+body.lp .lp-file--book{ --tab:#8a5a14 } body.lp .lp-file--web{ --tab:#0a1828 }
+body.lp .lp-ow__legend{ display:none }
+body.lp .lp-sec p.lp-ow__close{ margin:20px 0 0; text-align:center; font-weight:600 }
+@media (min-width:920px){
+  body.lp .lp-ow__grid{ grid-template-columns:300px minmax(0,1fr); align-items:center; justify-items:start; column-gap:40px }
+  body.lp .lp-sec ol.lp-ow__legend{ display:block; margin:0; padding:0; list-style:none }
+  body.lp .lp-sec .lp-ow__legend li{ margin:0; padding:0; font-size:16px }
+  body.lp .lp-ow__legend button{ display:block; width:100%; padding:7px 0; border:0; border-bottom:1px solid #d6e0ea; background:none; text-align:left; font:16px/1.4 var(--sans, Inter, sans-serif); color:var(--lp-navy); cursor:pointer }
+  body.lp .lp-ow__to{ display:block; font-weight:600; color:#8a5a14 }
+  body.lp .lp-ow__to::before{ content:"\2192\00a0" }
+}
+
+/* the book: fourteen chapter lines */
+body.lp .lp-chapters__h{ margin:20px 0 10px; font-family:"EB Garamond", Georgia, serif; font-size:26px; line-height:1.25; color:var(--lp-navy) }
+body.lp .lp-sec ol.lp-chapters{ list-style:none; margin:0 0 20px; padding:0; display:grid; gap:10px }
+body.lp .lp-sec .lp-chapters li{ display:grid; grid-template-columns:34px minmax(0,1fr); gap:12px; align-items:start; min-height:44px; margin:0; padding:0; font-size:17px; line-height:1.5 }
+body.lp .lp-chapters__n, body.lp .lp-tiles__n{ display:flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; background:var(--lp-gold); color:var(--lp-navy); font:700 15px/1 var(--sans, Inter, sans-serif) }
+@media (min-width:640px){ body.lp .lp-sec ol.lp-chapters{ grid-template-columns:1fr 1fr; column-gap:28px } }
+
+/* the Workbook's seven-day strip */
+body.lp .lp-sec ol.lp-days{ list-style:none; display:flex; gap:10px; margin:4px 0 18px; padding:2px 2px 12px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:thin; scrollbar-color:#9fb0c2 transparent }
+body.lp .lp-sec .lp-days li{ flex:0 0 156px; scroll-snap-align:start; display:flex; flex-direction:column; gap:6px; margin:0; padding:12px; border:1px solid #d6e0ea; border-top:4px solid var(--lp-gold); border-radius:10px; background:#fff; font-size:15px; line-height:1.4 }
+body.lp .lp-days__d{ font:700 13px/1.2 var(--sans, Inter, sans-serif); letter-spacing:.04em; text-transform:uppercase; color:#8a5a14 }
+body.lp .lp-days:focus-visible{ outline:3px solid #8a5a14; outline-offset:2px }
+
+/* Everything AI: three jobs and the count */
+body.lp .lp-sec ul.lp-jobs{ list-style:none; display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 14px; padding:0 }
+body.lp .lp-sec .lp-jobs li{ margin:0; padding:7px 14px; border:1.5px solid #9fb0c2; border-radius:999px; background:#fff; font-size:15px; line-height:1.35 }
+body.lp .lp-sec .lp-jobs li.lp-jobs__j--open{ border-color:var(--lp-navy); background:var(--lp-band) }
+body.lp .lp-sec .lp-jobs li.lp-jobs__all{ border-color:var(--lp-navy); background:var(--lp-navy); color:#fff; font-weight:700 }
+body.lp .lp-jobs b{ font-weight:700; white-space:nowrap }
+
+/* The 12 Commandments: the twelve as tiles */
+body.lp .lp-sec ol.lp-tiles{ list-style:none; display:grid; grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:8px; margin:4px 0 18px; padding:0 }
+body.lp .lp-sec .lp-tiles li{ display:flex; align-items:flex-start; gap:8px; min-height:56px; margin:0; padding:10px; border:1px solid #d6e0ea; border-radius:10px; background:#fff; font-size:15px; line-height:1.35 }
+body.lp .lp-tiles__n{ flex:none; width:26px; height:26px; font-size:13px }
+@media (min-width:640px){ body.lp .lp-sec ol.lp-tiles{ grid-template-columns:repeat(3, 1fr) } }
+@media (min-width:920px){ body.lp .lp-sec ol.lp-tiles{ grid-template-columns:repeat(4, 1fr) } }
+
+/* Toolkit: seven cards; an odd last card runs the full width */
+@media (min-width:640px){
+  body.lp .lp-tcard:last-child:nth-child(odd){ grid-column:1 / -1; grid-template-columns:minmax(0,42%) minmax(0,1fr); grid-template-areas:"shot head" "shot body"; column-gap:20px }
+}
+
+/* footer fine print */
+body.lp #fine-print{ max-width:720px; margin:0 auto; padding:8px 16px 28px }
+body.lp #fine-print p{ font-size:14px; line-height:1.55; color:var(--ink-2, #33475b) }

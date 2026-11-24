@@ -1,0 +1,21 @@
+<section class="lp-sec lp-bundle{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+{{#heading}}
+    <h2>{{heading}}</h2>
+{{/heading}}
+    <picture class="lp-bundle__pic">
+      <source media="(max-width: 639px)" srcset="{{phone}}" width="{{phone_w}}" height="{{phone_h}}">
+      <img src="{{desktop}}" alt="{{alt}}" width="{{desktop_w}}" height="{{desktop_h}}" loading="lazy" decoding="async">
+    </picture>
+    <ul class="lp-bundle__items">
+{{#items}}
+      <li><span class="lp-bundle__name">{{name}}</span>{{#price}} <s class="lp-bundle__was">{{price}}</s>{{/price}}</li>
+{{/items}}
+    </ul>
+    <p class="lp-bundle__total">{{total_label}} <s data-lp-total-all>{{total}}</s></p>
+    <p class="lp-bundle__price">{{price_label}} <strong data-lp-front-all>{{price}}</strong></p>
+{{#buy}}
+    <p class="lp-bundle__buy"><a class="btn btn--primary btn--lg" href="/book/checkout/">{{buy}}</a></p>
+{{/buy}}
+  </div>
+</section>

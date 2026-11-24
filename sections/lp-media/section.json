@@ -216,6 +216,104 @@
       "type": "text",
       "label": "Buy button words (optional; must be exactly: Get the bundle for $27)",
       "default": ""
+    },
+    {
+      "key": "opener",
+      "type": "html",
+      "label": "Opening question"
+    },
+    {
+      "key": "jobs",
+      "type": "list",
+      "label": "Job chips",
+      "fields": [
+        {
+          "key": "name",
+          "type": "text",
+          "label": "Job"
+        },
+        {
+          "key": "count",
+          "type": "text",
+          "label": "Count"
+        },
+        {
+          "key": "open",
+          "type": "choice",
+          "label": "The open example",
+          "options": [
+            {
+              "value": "",
+              "label": "No"
+            },
+            {
+              "value": "1",
+              "label": "Yes"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "jobs_total",
+      "type": "text",
+      "label": "Total chip"
+    },
+    {
+      "key": "kit_cards",
+      "type": "object",
+      "label": "Toolkit cards",
+      "fields": [
+        {
+          "key": "items",
+          "type": "list",
+          "label": "Cards",
+          "fields": [
+            {
+              "key": "name",
+              "type": "text",
+              "label": "Name"
+            },
+            {
+              "key": "kind",
+              "type": "text",
+              "label": "File type"
+            },
+            {
+              "key": "src",
+              "type": "image",
+              "label": "Crop",
+              "alt": "alt"
+            },
+            {
+              "key": "src2",
+              "type": "text",
+              "label": "Crop, sharp version"
+            },
+            {
+              "key": "alt",
+              "type": "text",
+              "label": "Crop description",
+              "hidden": true
+            },
+            {
+              "key": "problem",
+              "type": "html",
+              "label": "Problem line"
+            },
+            {
+              "key": "outcome",
+              "type": "html",
+              "label": "Outcome line"
+            },
+            {
+              "key": "where",
+              "type": "html",
+              "label": "Where it lives"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

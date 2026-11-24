@@ -8,9 +8,36 @@
     <h2 class="lp-gallery__h">{{heading}}</h2>
 {{/sub}}
 {{/heading}}
+{{#opener}}
+    <p class="lp-opener">{{opener}}</p>
+{{/opener}}
 {{#lede}}
     <p class="lp-gallery__lede">{{lede}}</p>
 {{/lede}}
+{{#chapters_heading}}
+    <h4 class="lp-chapters__h">{{chapters_heading}}</h4>
+{{/chapters_heading}}
+{{#chapters.0}}
+    <ol class="lp-chapters">
+{{#chapters}}
+      <li><span class="lp-chapters__n" aria-hidden="true">{{n}}</span><span>{{line}}</span></li>
+{{/chapters}}
+    </ol>
+{{/chapters.0}}
+{{#days.0}}
+    <ol class="lp-days" tabindex="0" aria-label="{{heading}}">
+{{#days}}
+      <li><span class="lp-days__d">{{d}}</span><span class="lp-days__t">{{line}}</span></li>
+{{/days}}
+    </ol>
+{{/days.0}}
+{{#tiles.0}}
+    <ol class="lp-tiles">
+{{#tiles}}
+      <li><span class="lp-tiles__n" aria-hidden="true">{{n}}</span><span>{{t}}</span></li>
+{{/tiles}}
+    </ol>
+{{/tiles.0}}
 {{#body}}
     <div class="lp-gallery__body">{{body}}</div>
 {{/body}}

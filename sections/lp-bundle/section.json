@@ -1,0 +1,113 @@
+{
+  "label": "Bundle picture and prices",
+  "about": "One picture of everything in the bundle, the list of what each piece sells for, the total and the price.",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "desktop",
+      "type": "image",
+      "label": "Picture, wide",
+      "alt": "alt"
+    },
+    {
+      "key": "desktop_w",
+      "type": "text",
+      "label": "Wide width"
+    },
+    {
+      "key": "desktop_h",
+      "type": "text",
+      "label": "Wide height"
+    },
+    {
+      "key": "phone",
+      "type": "image",
+      "label": "Picture, phone"
+    },
+    {
+      "key": "phone_w",
+      "type": "text",
+      "label": "Phone width"
+    },
+    {
+      "key": "phone_h",
+      "type": "text",
+      "label": "Phone height"
+    },
+    {
+      "key": "alt",
+      "type": "text",
+      "label": "Picture description",
+      "hidden": true
+    },
+    {
+      "key": "items",
+      "type": "list",
+      "label": "Pieces",
+      "fields": [
+        {
+          "key": "name",
+          "type": "text",
+          "label": "Name"
+        },
+        {
+          "key": "price",
+          "type": "text",
+          "label": "Price on its own (leave empty for none)"
+        }
+      ]
+    },
+    {
+      "key": "total_label",
+      "type": "text",
+      "label": "Total label"
+    },
+    {
+      "key": "total",
+      "type": "text",
+      "label": "Total"
+    },
+    {
+      "key": "price_label",
+      "type": "text",
+      "label": "Price label"
+    },
+    {
+      "key": "price",
+      "type": "text",
+      "label": "Price"
+    },
+    {
+      "key": "buy",
+      "type": "text",
+      "label": "Button"
+    }
+  ]
+}

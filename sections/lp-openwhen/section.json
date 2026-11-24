@@ -1,0 +1,93 @@
+{
+  "label": "Open this when (phone)",
+  "about": "A phone with a chat: each row is a problem, then the file that answers it.",
+  "frames": [
+    "landing"
+  ],
+  "fields": [
+    {
+      "key": "bg",
+      "type": "choice",
+      "label": "Background",
+      "options": [
+        {
+          "value": "",
+          "label": "Plain"
+        },
+        {
+          "value": "tint",
+          "label": "Tint"
+        }
+      ]
+    },
+    {
+      "key": "anchor",
+      "type": "text",
+      "label": "Anchor id"
+    },
+    {
+      "key": "heading",
+      "type": "html",
+      "label": "Heading"
+    },
+    {
+      "key": "frame",
+      "type": "image",
+      "label": "Phone frame"
+    },
+    {
+      "key": "scroll_label",
+      "type": "text",
+      "label": "Scroll hint"
+    },
+    {
+      "key": "rows",
+      "type": "list",
+      "label": "Rows",
+      "fields": [
+        {
+          "key": "bubble",
+          "type": "html",
+          "label": "The problem"
+        },
+        {
+          "key": "file",
+          "type": "html",
+          "label": "The file"
+        },
+        {
+          "key": "kind",
+          "type": "choice",
+          "label": "File type",
+          "options": [
+            {
+              "value": "word",
+              "label": "Word"
+            },
+            {
+              "value": "pdf",
+              "label": "PDF"
+            },
+            {
+              "value": "sheet",
+              "label": "Spreadsheet"
+            },
+            {
+              "value": "book",
+              "label": "Book"
+            },
+            {
+              "value": "web",
+              "label": "Web page"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "closing",
+      "type": "html",
+      "label": "Closing line"
+    }
+  ]
+}

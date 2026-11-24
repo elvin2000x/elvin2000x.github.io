@@ -180,6 +180,67 @@
       "type": "text",
       "label": "Buy button words (optional; must be exactly: Get the bundle for $27)",
       "default": ""
+    },
+    {
+      "key": "opener",
+      "type": "html",
+      "label": "Opening question"
+    },
+    {
+      "key": "chapters_heading",
+      "type": "html",
+      "label": "Chapter list heading"
+    },
+    {
+      "key": "chapters",
+      "type": "list",
+      "label": "Chapter lines",
+      "fields": [
+        {
+          "key": "n",
+          "type": "text",
+          "label": "Number"
+        },
+        {
+          "key": "line",
+          "type": "html",
+          "label": "Line"
+        }
+      ]
+    },
+    {
+      "key": "days",
+      "type": "list",
+      "label": "Day strip",
+      "fields": [
+        {
+          "key": "d",
+          "type": "text",
+          "label": "Day"
+        },
+        {
+          "key": "line",
+          "type": "html",
+          "label": "Line"
+        }
+      ]
+    },
+    {
+      "key": "tiles",
+      "type": "list",
+      "label": "Numbered tiles",
+      "fields": [
+        {
+          "key": "n",
+          "type": "text",
+          "label": "Number"
+        },
+        {
+          "key": "t",
+          "type": "html",
+          "label": "Tile"
+        }
+      ]
     }
   ]
 }

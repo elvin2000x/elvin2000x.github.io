@@ -8,9 +8,22 @@
     <h2 class="lp-media__h">{{heading}}</h2>
 {{/sub}}
 {{/heading}}
+{{#opener}}
+    <p class="lp-opener">{{opener}}</p>
+{{/opener}}
 {{#lede}}
     <p class="lp-media__lede">{{lede}}</p>
 {{/lede}}
+{{#jobs.0}}
+    <ul class="lp-jobs">
+{{#jobs}}
+      <li class="lp-jobs__j{{#open}} lp-jobs__j--open{{/open}}"><span>{{name}}</span> <b>{{count}}</b></li>
+{{/jobs}}
+{{#jobs_total}}
+      <li class="lp-jobs__all">{{jobs_total}}</li>
+{{/jobs_total}}
+    </ul>
+{{/jobs.0}}
     <figure class="lp-media__fig">
 {{#mp4}}
       <div class="lp-media__loop{{#tap}} lp-media__loop--tap{{/tap}}" data-lp-loop{{#tap}} data-lp-tap{{/tap}}>
@@ -74,7 +87,9 @@
         <div class="lp-tcard__body">
           <p class="lp-tcard__problem">{{problem}}</p>
           <p class="lp-tcard__outcome">{{outcome}}</p>
+{{#where}}
           <p class="lp-tcard__where">{{where}}</p>
+{{/where}}
         </div>
       </li>
 {{/items}}

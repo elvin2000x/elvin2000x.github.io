@@ -6,6 +6,51 @@
 {{#lede}}
     <p class="lp-pairs__lede">{{lede}}</p>
 {{/lede}}
+{{#slider}}
+    <div class="lp-slider" role="region" aria-roledescription="carousel" aria-label="{{heading}}" data-lp-slider>
+      <div class="lp-slider__track">
+{{#pairs}}
+        <div class="lp-slide" role="group" aria-roledescription="slide">
+{{#title}}
+          <h3 class="lp-slide__title">{{title}}</h3>
+{{/title}}
+          <div class="lp-slide__frames">
+            <div class="lp-chat" data-lp-scroll>
+              <p class="lp-chat__bar"><span class="lp-chat__dots" aria-hidden="true"></span><span class="lp-chip lp-chip--before">{{before_label}}</span></p>
+              <div class="lp-chat__msgs" tabindex="0" aria-label="{{before_label}}: {{title}}">
+                <div class="lp-bub lp-bub--you"><p>{{thin_request}}</p></div>
+                <div class="lp-bub lp-bub--ai">{{thin_full}}</div>
+              </div>
+              <span class="lp-chat__hint" aria-hidden="true">{{scroll_label}}</span>
+            </div>
+            <span class="lp-slide__arrow" aria-hidden="true"></span>
+            <div class="lp-chat lp-chat--after" data-lp-scroll>
+              <p class="lp-chat__bar"><span class="lp-chat__dots" aria-hidden="true"></span><span class="lp-chip lp-chip--after">{{after_label}}</span></p>
+              <div class="lp-chat__msgs" tabindex="0" aria-label="{{after_label}}: {{title}}">
+                <div class="lp-bub lp-bub--you"><p>{{directed_request}}</p></div>
+                <div class="lp-bub lp-bub--ai">{{directed_full}}</div>
+              </div>
+              <span class="lp-chat__hint" aria-hidden="true">{{scroll_label}}</span>
+            </div>
+          </div>
+{{#added}}
+          <p class="lp-pairs__added">{{added}}</p>
+{{/added}}
+{{#note}}
+          <p class="lp-pairs__note">{{note}}</p>
+{{/note}}
+        </div>
+{{/pairs}}
+      </div>
+      <div class="lp-slider__nav">
+        <button type="button" class="lp-slider__btn" data-lp-prev>{{prev_label}}</button>
+        <span class="lp-slider__dots" data-lp-dots></span>
+        <button type="button" class="lp-slider__btn" data-lp-next>{{next_label}}</button>
+      </div>
+      <p class="lp-slider__count" data-lp-count aria-live="polite"></p>
+    </div>
+{{/slider}}
+{{^slider}}
 {{#pairs}}
     <div class="lp-pairs__pair">
 {{#title}}
@@ -58,6 +103,7 @@
 {{/note}}
     </div>
 {{/pairs}}
+{{/slider}}
 {{#after}}
     <div class="lp-pairs__after">{{after}}</div>
 {{/after}}

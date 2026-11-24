@@ -1,0 +1,30 @@
+<section class="lp-sec lp-ow{{#bg}} lp-sec--{{bg}}{{/bg}}"{{#anchor}} id="{{anchor}}"{{/anchor}}>
+  <div class="lp-in">
+    <h2>{{heading}}</h2>
+    <div class="lp-ow__grid">
+      <div class="lp-phone" data-lp-scroll>
+        <div class="lp-phone__screen lp-chat__msgs" tabindex="0" aria-label="{{heading}}" data-lp-ow-screen>
+          <ul class="lp-ow__chat">
+{{#rows}}
+            <li class="lp-ow__row">
+              <p class="lp-bub lp-bub--you">{{bubble}}</p>
+              <p class="lp-bub lp-bub--ai lp-ow__file"><span class="lp-file lp-file--{{kind}}" aria-hidden="true"></span><span>{{file}}</span></p>
+            </li>
+{{/rows}}
+          </ul>
+        </div>
+        <span class="lp-phone__fade" aria-hidden="true"></span>
+        <img class="lp-phone__frame" src="{{frame}}" alt="" width="320" height="660" loading="lazy" decoding="async" aria-hidden="true">
+        <span class="lp-chat__hint" aria-hidden="true">{{scroll_label}}</span>
+      </div>
+      <ol class="lp-ow__legend" aria-hidden="true">
+{{#rows}}
+        <li><button type="button" tabindex="-1" data-lp-ow-go>{{bubble}} <span class="lp-ow__to">{{file}}</span></button></li>
+{{/rows}}
+      </ol>
+    </div>
+{{#closing}}
+    <p class="lp-ow__close">{{closing}}</p>
+{{/closing}}
+  </div>
+</section>

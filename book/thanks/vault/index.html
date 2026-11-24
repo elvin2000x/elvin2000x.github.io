@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=2a18521e" />
+  <link rel="stylesheet" href="/css/landing.css?v=909e8e6b" />
   <script src="/js/site.js?v=ee628fa7"></script>
   <style>body.lp .lp-hero__grid{ max-width:720px } body.lp .lp-hero{ padding-top:32px; padding-bottom:0 } body.lp .lp-hero h1{ margin-bottom:0 } body.lp .ep-block.ep-video{ max-width:720px } body.lp .ep-row{ flex-direction:column; align-items:stretch; gap:12px } body.lp .ep-row .btn{ width:100%; min-height:60px; font-size:20px; font-weight:700 } body.lp .ep-note{ text-align:left } @media (max-width:767px){ body.lp .lp-hero{ padding-top:8px } body.lp .ep-block:not(#lifestyle ~ .ep-block){ padding-top:6px; padding-bottom:6px } body.lp .ep-block.ep-video{ padding-bottom:4px } }</style>
 </head>
@@ -427,6 +427,50 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     try { fbq('track', 'Purchase', { value: v, currency: cur }, { eventID: id }); } catch (x) {}
     try { ttq.track('CompletePayment', { value: v, currency: cur }, { event_id: id }); } catch (x) {}
   });
+</script>
+<script>
+  /* Version 10 (ticket 719). Slider: swipe (scroll-snap), Previous / Next and the dots move one example; only the shown
+     example can take focus; reduced motion jumps instead of sliding. Scroll hints: a chat or phone screen that has more
+     below shows a fade and "Scroll for the rest" until the reader reaches the end. "Open this when" legend (desktop):
+     a row scrolls the phone to the same row. */
+  (function () {
+    var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    [].forEach.call(document.querySelectorAll('[data-lp-slider]'), function (sl) {
+      var track = sl.querySelector('.lp-slider__track'), slides = [].slice.call(sl.querySelectorAll('.lp-slide')), n = slides.length, cur = -1;
+      var prev = sl.querySelector('[data-lp-prev]'), next = sl.querySelector('[data-lp-next]'), dotsBox = sl.querySelector('[data-lp-dots]'), count = sl.querySelector('[data-lp-count]');
+      var dots = slides.map(function (s, i) {
+        s.setAttribute('aria-label', (i + 1) + ' of ' + n);
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'lp-slider__dot'; b.setAttribute('aria-label', (i + 1) + ' of ' + n);
+        b.addEventListener('click', function () { show(i, true); }); dotsBox.appendChild(b); return b;
+      });
+      function show(i, move) {
+        i = Math.max(0, Math.min(n - 1, i));
+        if (move) track.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: still ? 'auto' : 'smooth' });
+        if (i === cur) return; cur = i;
+        slides.forEach(function (s, j) { if (j === i) { s.removeAttribute('inert'); s.removeAttribute('aria-hidden'); } else { s.setAttribute('inert', ''); s.setAttribute('aria-hidden', 'true'); } });
+        dots.forEach(function (d, j) { if (j === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+        prev.disabled = i === 0; next.disabled = i === n - 1; count.textContent = (i + 1) + ' of ' + n; fit();
+      }
+      /* the track is as tall as the example on show, so a short example has no gap under it */
+      function fit() { if (cur >= 0) track.style.height = slides[cur].offsetHeight + 'px'; }
+      window.addEventListener('resize', fit); window.addEventListener('load', fit);
+      prev.addEventListener('click', function () { show(cur - 1, true); });
+      next.addEventListener('click', function () { show(cur + 1, true); });
+      var t; track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(function () { var x = track.scrollLeft, best = 0; slides.forEach(function (s, j) { if (Math.abs(s.offsetLeft - slides[0].offsetLeft - x) < Math.abs(slides[best].offsetLeft - slides[0].offsetLeft - x)) best = j; }); show(best, false); }, 90); }, { passive: true });
+      show(0, false);
+    });
+    [].forEach.call(document.querySelectorAll('[data-lp-scroll]'), function (box) {
+      var m = box.querySelector('.lp-chat__msgs');
+      function upd() { box.classList.toggle('is-end', m.scrollTop + m.clientHeight >= m.scrollHeight - 4); }
+      m.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); upd();
+    });
+    [].forEach.call(document.querySelectorAll('.lp-ow'), function (ow) {
+      var screen = ow.querySelector('[data-lp-ow-screen]'), rows = ow.querySelectorAll('.lp-ow__row');
+      [].forEach.call(ow.querySelectorAll('[data-lp-ow-go]'), function (b, i) {
+        b.addEventListener('click', function () { if (rows[i]) screen.scrollTo({ top: rows[i].offsetTop - 44, behavior: still ? 'auto' : 'smooth' }); });
+      });
+    });
+  })();
 </script>
 <script>
   /* Look-inside loops (lp-media) and tap-to-enlarge pictures (lp-gallery). Ticket 701.

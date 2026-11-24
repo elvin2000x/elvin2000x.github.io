@@ -63,6 +63,11 @@
           ]
         }
       ]
+    },
+    {
+      "key": "group",
+      "type": "text",
+      "label": "Group name (one answer open at a time)"
     }
   ]
 }

@@ -171,6 +171,46 @@
       "type": "text",
       "label": "Buy button words (optional; must be exactly: Get the bundle for $27)",
       "default": ""
+    },
+    {
+      "key": "slider",
+      "type": "choice",
+      "label": "Show as a slider",
+      "options": [
+        {
+          "value": "",
+          "label": "No"
+        },
+        {
+          "value": "1",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "key": "before_label",
+      "type": "text",
+      "label": "Slider: Before label"
+    },
+    {
+      "key": "after_label",
+      "type": "text",
+      "label": "Slider: After label"
+    },
+    {
+      "key": "next_label",
+      "type": "text",
+      "label": "Slider: Next button"
+    },
+    {
+      "key": "prev_label",
+      "type": "text",
+      "label": "Slider: Back button"
+    },
+    {
+      "key": "scroll_label",
+      "type": "text",
+      "label": "Slider: scroll hint"
     }
   ]
 }
