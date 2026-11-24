@@ -1059,3 +1059,33 @@ body.lp .lp-stack .lp-shots:not(:has(*)){ display:none }
 body.lp .lp-stack details.lp-stack__fold{ margin:4px var(--lp-stack-pad) 12px; border-width:0 0 1px; border-radius:0 }
 body.lp .lp-stack details.lp-stack__fold > summary{ padding-left:0 }
 body.lp .lp-gallery__strip--swipe .lp-doc__text{ max-height:300px; overflow:hidden; -webkit-mask-image:linear-gradient(#000 70%, transparent); mask-image:linear-gradient(#000 70%, transparent) }
+/* 730: Step 1 on one type scale: 13 / 16 / 19 / 20 / 22 / 26 / 28 / 36 / 56 (Step 1 only) */
+/* 13: labels, numerals, fine print */
+html body.lp:has(.lp-ohero) .lp-ohero__pre p{ font-size:13px; line-height:1.3 }
+html body.lp:has(.lp-ohero) .lp-sec .lp-slider__count, html body.lp:has(.lp-ohero) .lp-quotes figcaption, html body.lp:has(.lp-ohero) .lp-stack__src, html body.lp:has(.lp-ohero) .lp-stack__src a,
+html body.lp:has(.lp-ohero) .amz-disclosure, html body.lp:has(.lp-ohero) .lp-foot, html body.lp:has(.lp-ohero) .lp-foot a, html body.lp:has(.lp-ohero) .lp-foot span, html body.lp:has(.lp-ohero) #fine-print p, html body.lp:has(.lp-ohero) #fine-print li,
+html body.lp:has(.lp-ohero) .lp-sec .lp-chapters__n, html body.lp:has(.lp-ohero) .lp-media__fig--sample .lp-media__sample{ font-size:13px; line-height:1.45 }
+/* 16: small body */
+html body.lp:has(.lp-ohero) .lp-sec .lp-stack__parts, html body.lp:has(.lp-ohero) .lp-sec li.lp-stack__parts, html body.lp:has(.lp-ohero) .lp-ohero__line, html body.lp:has(.lp-ohero) .lp-note, html body.lp:has(.lp-ohero) .lp-sec p.lp-note, html body.lp:has(.lp-ohero) .ep-note,
+html body.lp:has(.lp-ohero) .lp-stack .lp-stack__guarantee, html body.lp:has(.lp-ohero) .lp-media__cap, html body.lp:has(.lp-ohero) .lp-sec .lp-jobs li, html body.lp:has(.lp-ohero) .lp-sec .lp-jobs li span, html body.lp:has(.lp-ohero) .lp-sec .lp-jobs li b,
+html body.lp:has(.lp-ohero) .lp-ohero__review, html body.lp:has(.lp-ohero) .lp-sec .lp-days__t, html body.lp:has(.lp-ohero) .lp-sec .lp-tiles li, html body.lp:has(.lp-ohero) .lp-sec .lp-tiles li span:not(.lp-tiles__n),
+html body.lp:has(.lp-ohero) .lp-sec .lp-chapters li, html body.lp:has(.lp-ohero) .lp-sec .lp-chapters li > span:not(.lp-chapters__n), html body.lp:has(.lp-ohero) .lp-sec .lp-bundle__name, html body.lp:has(.lp-ohero) .lp-sec .lp-bundle__was,
+html body.lp:has(.lp-ohero) .lp-sec p.lp-tcard__outcome, html body.lp:has(.lp-ohero) .lp-sec .lp-tcard__where, html body.lp:has(.lp-ohero) .lp-sec p.lp-tail, html body.lp:has(.lp-ohero) .lp-media__body p.lp-tail, html body.lp:has(.lp-ohero) .lp-stars,
+html body.lp:has(.lp-ohero) .lp-sec .lp-addon__words p, html body.lp:has(.lp-ohero) .lp-sec .lp-addon__words li, html body.lp:has(.lp-ohero) .lp-sec .lp-addon__words ul, html body.lp:has(.lp-ohero) .lp-sec .lp-addon__price,
+html body.lp:has(.lp-ohero) .lp-sec .lp-addon__see, html body.lp:has(.lp-ohero) .lp-sec .lp-addon__tick span, html body.lp:has(.lp-ohero) .lp-sec .lp-addon__note{ font-size:16px; line-height:1.5 }
+html body.lp:has(.lp-ohero) .lp-ohero__review .lp-stars, html body.lp:has(.lp-ohero) .lp-quotes .lp-stars{ font-size:16px }
+html body.lp:has(.lp-ohero) .lp-answers .lp-ohero__answers li, html body.lp:has(.lp-ohero) .lp-obar .lp-obar__price--text{ font-size:16px; line-height:1.45 }
+html body.lp:has(.lp-ohero) .lp-obar p.lp-obar__price--line{ font-size:16px }
+html body.lp:has(.lp-ohero) .lp-media__toggle{ font-size:16px }
+/* hidden at these widths, kept on the scale so a count of every element agrees */
+html body.lp:has(.lp-ohero) .lp-ohero__buy .lp-ohero__answers li{ font-size:16px }
+@media (max-width:919px){ html body.lp:has(.lp-ohero) .lp-ow__legend button, html body.lp:has(.lp-ohero) .lp-ow__legend .lp-ow__to{ font-size:16px } }
+/* 19: body and controls */
+html body.lp:has(.lp-ohero) .ep-video__lede, html body.lp:has(.lp-ohero) .lp-sec .lp-addon__words h3, html body.lp:has(.lp-ohero) details.lp-fold > summary,
+html body.lp:has(.lp-ohero) .lp-stack__name, html body.lp:has(.lp-ohero) .lp-stack__value, html body.lp:has(.lp-ohero) .lp-stack__value s, html body.lp:has(.lp-ohero) .lp-stack__value em, html body.lp:has(.lp-ohero) .lp-stack__total, html body.lp:has(.lp-ohero) .lp-stack__price > span{ font-size:19px; line-height:1.4 }
+/* 20: buy buttons and the lead */
+html body.lp:has(.lp-ohero) main .btn--primary, html body.lp:has(.lp-ohero) main .btn--lg, html body.lp:has(.lp-ohero) .lp-sec .lp-bundle__buy .btn{ font-size:20px }
+/* 22: h3, card problems, pull quote, openers on phones */
+html body.lp:has(.lp-ohero) .lp-quotes blockquote{ font-size:22px; line-height:1.4 }
+html body.lp:has(.lp-ohero) .lp-sec p.lp-opener{ font-size:22px; line-height:1.3 }
+@media (min-width:768px){ html body.lp:has(.lp-ohero) .lp-sec p.lp-opener{ font-size:26px } }
