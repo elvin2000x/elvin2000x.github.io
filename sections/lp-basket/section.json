@@ -50,10 +50,28 @@
           "default": ""
         },
         {
+          "key": "problem",
+          "type": "text",
+          "label": "Buyer's problem (opens the card)",
+          "default": ""
+        },
+        {
           "key": "text",
           "type": "text",
           "label": "Words",
           "default": "[Words: what this product holds]"
+        },
+        {
+          "key": "off",
+          "type": "bool",
+          "label": "Switched off: show the old words instead (the store does not sell it yet)",
+          "default": false
+        },
+        {
+          "key": "was",
+          "type": "text",
+          "label": "Old words, shown while switched off",
+          "default": ""
         }
       ]
     },

@@ -66,27 +66,42 @@
         "rows": [
           {
             "product": "operator-bundle",
-            "text": "Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Rules of Engagement and Your Personal Specialists. Your Personal Specialists has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it also sells on its own for $27."
+            "text": "Set it up once. Three guides for $47 together instead of $81 separately: the Claude Operator's Manual, Rules of Engagement and Your Personal Specialists. Your Personal Specialists has 14 Specialists and 231 prompts, and it also sells on its own for $27.",
+            "was": "Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Rules of Engagement and Your Personal Specialists. Your Personal Specialists has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it also sells on its own for $27.",
+            "problem": "Explaining your work to AI at the start of every chat?",
+            "off": true
           },
           {
             "product": "claude-manual",
-            "text": "A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work."
+            "text": "A 217-page PDF, for Claude only, on setting it up so every chat starts out knowing your work. The first half needs no terminal.",
+            "was": "A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work.",
+            "problem": "Does Claude start every chat knowing nothing about your work?",
+            "off": true
           },
           {
             "product": "top-15-rules",
-            "text": "Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok."
+            "text": "Rule one is \"Never make things up.\" Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok.",
+            "problem": "Has AI ever made something up and said it like a fact?",
+            "off": false
           },
           {
             "product": "global-ai-race",
-            "text": "One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined."
+            "text": "One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined.",
+            "was": "One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined.",
+            "problem": "Lost track of which AI company released what, and when?",
+            "off": true
           },
           {
             "product": "thirty-ways",
-            "text": "A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip."
+            "text": "A short guide to home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week's dinners and a trip.",
+            "problem": "Using AI at work and never at home?",
+            "off": false
           },
           {
             "product": "role-packs",
-            "text": "A 72-page PDF of 14 ready-made Specialists for jobs like Sales or Finance, with 231 prompts and setups for ChatGPT, Claude, Gemini and Grok."
+            "text": "A 72-page PDF of 14 ready-made Specialists for jobs like Marketing, Sales and Finance, with 231 prompts and setups for ChatGPT, Claude, Gemini and Grok.",
+            "problem": "Need a marketing answer one hour and a finance answer the next?",
+            "off": false
           }
         ],
         "thumbs_json": "{\"claude-manual\":\"/img/store/last-chance/claude-manual.webp\",\"global-ai-race\":\"/img/store/last-chance/global-ai-race.webp\",\"operator-bundle\":\"/img/store/last-chance/operator-bundle.webp\",\"role-packs\":\"/img/store/last-chance/role-packs.webp\",\"thirty-ways\":\"/img/store/last-chance/thirty-ways.webp\",\"top-15-rules\":\"/img/store/last-chance/top-15-rules.webp\"}"

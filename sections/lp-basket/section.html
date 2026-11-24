@@ -25,12 +25,12 @@
 {{/small}}
   </div>
   <div hidden data-lp-thumbs>{{thumbs_json}}</div>
-  <div hidden data-lp-rows>{{#rows}}<p data-product="{{product}}">{{text}}</p>{{/rows}}</div>
+  <div hidden data-lp-rows>{{#rows}}{{#off}}<p data-product="{{product}}">{{was}}</p>{{/off}}{{^off}}<p data-product="{{product}}"{{#problem}} data-problem="{{problem}}"{{/problem}}>{{text}}</p>{{/off}}{{/rows}}</div>
   <script>
   (function () {
-    var root = document.currentScript.parentNode, rows = {}, thumbs = {};
+    var root = document.currentScript.parentNode, rows = {}, probs = {}, thumbs = {};
     try { thumbs = JSON.parse((root.querySelector('[data-lp-thumbs]') || {}).textContent || '{}') || {}; } catch (e) {}
-    Array.prototype.forEach.call(root.querySelectorAll('[data-lp-rows] p'), function (r) { rows[r.getAttribute('data-product')] = r.textContent; });
+    Array.prototype.forEach.call(root.querySelectorAll('[data-lp-rows] p'), function (r) { rows[r.getAttribute('data-product')] = r.textContent; probs[r.getAttribute('data-product')] = r.getAttribute('data-problem'); });
     /* The store script draws the rows; this adds what each one holds, and tags it so the page can style it. */
     function dress() {
       /* a sentence that only makes sense while a given product is in the basket */
@@ -42,6 +42,10 @@
         if (thumbs[cb.value] && !l.querySelector('.lp-basket__thumb')) {
           var im = document.createElement('img'); im.className = 'lp-basket__thumb'; im.src = thumbs[cb.value]; im.alt = ''; im.width = 56; im.height = 90; im.loading = 'lazy'; im.decoding = 'async';
           l.insertBefore(im, cb.nextSibling);
+        }
+        /* the buyer's problem opens the card, above the box and the name */
+        if (probs[cb.value] && !l.querySelector('.lp-basket__row-problem')) {
+          var q = document.createElement('span'); q.className = 'lp-basket__row-problem'; q.textContent = probs[cb.value]; l.insertBefore(q, l.firstChild);
         }
         if (rows[cb.value] && !l.querySelector('.lp-basket__row-text')) {
           var p = document.createElement('span'); p.className = 'lp-basket__row-text'; p.textContent = rows[cb.value]; l.appendChild(p);

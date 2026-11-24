@@ -67,7 +67,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="/css/site.css?v=6671ca86" />
-  <link rel="stylesheet" href="/css/landing.css?v=909e8e6b" />
+  <link rel="stylesheet" href="/css/landing.css?v=3481e178" />
   <script src="/js/site.js?v=ee628fa7"></script>
 </head>
 <body class="lp" data-store-step="last-chance">
@@ -126,12 +126,12 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     <div class="lp-small"><p data-only-with="claude-manual operator-bundle" hidden>The Claude Operator’s Manual, one of the guides in the AI Setup Bundle, is an independent guide. It is not affiliated with, endorsed by or sponsored by Anthropic.</p><p>Elvin Peters, author of The Artificial Advantage</p></div>
   </div>
   <div hidden data-lp-thumbs>{"claude-manual":"/img/store/last-chance/claude-manual.webp","global-ai-race":"/img/store/last-chance/global-ai-race.webp","operator-bundle":"/img/store/last-chance/operator-bundle.webp","role-packs":"/img/store/last-chance/role-packs.webp","thirty-ways":"/img/store/last-chance/thirty-ways.webp","top-15-rules":"/img/store/last-chance/top-15-rules.webp"}</div>
-  <div hidden data-lp-rows><p data-product="operator-bundle">Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Rules of Engagement and Your Personal Specialists. Your Personal Specialists has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it also sells on its own for $27.</p><p data-product="claude-manual">A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work.</p><p data-product="top-15-rules">Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok.</p><p data-product="global-ai-race">One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined.</p><p data-product="thirty-ways">A short guide to doing home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week’s dinners and a trip.</p><p data-product="role-packs">A 72-page PDF of 14 ready-made Specialists for jobs like Sales or Finance, with 231 prompts and setups for ChatGPT, Claude, Gemini and Grok.</p></div>
+  <div hidden data-lp-rows><p data-product="operator-bundle">Set up your AI once. Three guides for $47 together instead of $81 separately: the Claude Operator’s Manual, Rules of Engagement and Your Personal Specialists. Your Personal Specialists has ready-made setups for jobs like Sales or Finance. It has 14 Specialists and 231 prompts, and it also sells on its own for $27.</p><p data-product="claude-manual">A 217-page PDF, for Claude only, on setting Claude up so every chat starts out knowing your work.</p><p data-product="top-15-rules" data-problem="Has AI ever made something up and said it like a fact?">Rule one is "Never make things up." Twenty rules you load once. Each rule switches on or off, and the guides cover ChatGPT, Claude, Gemini and Grok.</p><p data-product="global-ai-race">One infographic, a dated snapshot, of model releases, when each capability arrived, and when companies from each country joined.</p><p data-product="thirty-ways" data-problem="Using AI at work and never at home?">A short guide to home jobs with the chat app you already use, with the words to paste for each one, such as your internet bill, the week's dinners and a trip.</p><p data-product="role-packs" data-problem="Need a marketing answer one hour and a finance answer the next?">A 72-page PDF of 14 ready-made Specialists for jobs like Marketing, Sales and Finance, with 231 prompts and setups for ChatGPT, Claude, Gemini and Grok.</p></div>
   <script>
   (function () {
-    var root = document.currentScript.parentNode, rows = {}, thumbs = {};
+    var root = document.currentScript.parentNode, rows = {}, probs = {}, thumbs = {};
     try { thumbs = JSON.parse((root.querySelector('[data-lp-thumbs]') || {}).textContent || '{}') || {}; } catch (e) {}
-    Array.prototype.forEach.call(root.querySelectorAll('[data-lp-rows] p'), function (r) { rows[r.getAttribute('data-product')] = r.textContent; });
+    Array.prototype.forEach.call(root.querySelectorAll('[data-lp-rows] p'), function (r) { rows[r.getAttribute('data-product')] = r.textContent; probs[r.getAttribute('data-product')] = r.getAttribute('data-problem'); });
     /* The store script draws the rows; this adds what each one holds, and tags it so the page can style it. */
     function dress() {
       /* a sentence that only makes sense while a given product is in the basket */
@@ -143,6 +143,10 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
         if (thumbs[cb.value] && !l.querySelector('.lp-basket__thumb')) {
           var im = document.createElement('img'); im.className = 'lp-basket__thumb'; im.src = thumbs[cb.value]; im.alt = ''; im.width = 56; im.height = 90; im.loading = 'lazy'; im.decoding = 'async';
           l.insertBefore(im, cb.nextSibling);
+        }
+        /* the buyer's problem opens the card, above the box and the name */
+        if (probs[cb.value] && !l.querySelector('.lp-basket__row-problem')) {
+          var q = document.createElement('span'); q.className = 'lp-basket__row-problem'; q.textContent = probs[cb.value]; l.insertBefore(q, l.firstChild);
         }
         if (rows[cb.value] && !l.querySelector('.lp-basket__row-text')) {
           var p = document.createElement('span'); p.className = 'lp-basket__row-text'; p.textContent = rows[cb.value]; l.appendChild(p);

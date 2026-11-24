@@ -21,6 +21,11 @@
       "default": "[Headline: the one promise]"
     },
     {
+      "key": "problem",
+      "type": "text",
+      "label": "Buyer's problem, above the line under"
+    },
+    {
       "key": "sub",
       "type": "html",
       "label": "Line under",

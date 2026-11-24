@@ -992,3 +992,9 @@ body.lp .lp-tiles__n{ flex:none; width:26px; height:26px; font-size:13px }
 /* footer fine print */
 body.lp #fine-print{ max-width:720px; margin:0 auto; padding:8px 16px 28px }
 body.lp #fine-print p{ font-size:14px; line-height:1.55; color:var(--ink-2, #33475b) }
+
+/* 720: the buyer's problem opens each last-chance card and each listing hero */
+.lp-basket__row-problem{ flex:0 0 100%; box-sizing:border-box; margin:0 0 8px; font:600 19px/1.35 var(--serif, Georgia, serif); color:var(--ink) }
+.lp-hero__problem{ margin:12px 0 0; font:600 26px/1.35 var(--serif, Georgia, serif); color:var(--ink) }
+.lp-hero__problem + .lp-lede{ margin-top:10px }
+@media (max-width:639px){ .lp-hero__problem{ font-size:22px } .lp-basket__row-problem{ font-size:18px } }
