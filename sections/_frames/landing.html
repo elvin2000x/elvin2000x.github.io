@@ -530,5 +530,9 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     });
   })();
 </script>
-</body>
+{{#page.seen}}<!-- 732: funnel.js counts a landing view (POST /api/store/seen) when the page has a
+     [data-store-checkout]; direct checkout means the payment page that carried one rarely loads now. Hidden, empty,
+     last in <body>, so nothing can click it and every real button comes before it. -->
+<span hidden data-store-checkout="{{funnel}}"></span>
+{{/page.seen}}</body>
 </html>
