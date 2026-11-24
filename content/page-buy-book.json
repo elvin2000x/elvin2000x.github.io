@@ -433,12 +433,12 @@
           "AI turned research that used to take me days into hours. I ran paid media for easyfinancial, more than $50M in digital ad spend, then advised advertisers on Google's global clients team. In 2026 I became a founder, writing books and building with AI full time.",
           "My notes include what failed as well as what worked. They are the book, and the book is in this bundle."
         ]
-      }
+      },
+      "hidden": true
     },
     {
       "id": "v10-who-short",
       "type": "text",
-      "hidden": true,
       "note": "Version 10: Who wrote the book without its first three paragraphs. Switch on with v10-why-listen, and hide v7-s5-who.",
       "data": {
         "anchor": "",
@@ -455,7 +455,6 @@
     {
       "id": "v10-why-listen",
       "type": "text",
-      "hidden": true,
       "note": "Version 10: Why listen to me (COPY-716 section 4). Waits for Elvin's read.",
       "data": {
         "anchor": "why-listen",
