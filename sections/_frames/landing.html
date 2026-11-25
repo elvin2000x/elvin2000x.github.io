@@ -585,5 +585,80 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
   }
   try { setTimeout(send, 300); addEventListener('pagehide', send); var V = window.EPVisit; if (V && V.ready) V.ready.then(send, send); } catch (e) { send(); }
 })();</script>
+<!-- 739: journey steps (POST /api/store/step), fire and forget: never waits, never blocks a click, swallows every error.
+     Warm-up page: warmup-click. Offer page: scroll-25/50/75, video-play/50/100, addon-tick/untick, buy-click. -->
+<script>(function () {
+  var KIND = '{{page.seen_kind}}', ID_RE = /^[A-Za-z0-9_-]{8,64}$/, once = {};
+  function team() {
+    if (typeof window.EP_TEAM === 'boolean') return window.EP_TEAM;
+    try {
+      if (localStorage.getItem('ep_team') === '1') return true;
+      var src = (/[?&]utm_source=([^&]*)/.exec(location.search) || [])[1] || ''; try { src = decodeURIComponent(src); } catch (e) {}
+      if (!src) { try { src = (JSON.parse(sessionStorage.getItem('ep-ft') || '{}') || {}).utm_source || ''; } catch (e) {} }
+      if (!src) { try { src = (JSON.parse(sessionStorage.getItem('ep-ad') || '{}') || {}).utm_source || ''; } catch (e) {} }
+      return /^(taskmaster-|webmaster-|607)/i.test(src);
+    } catch (e) { return false; }
+  }
+  function post(step) {
+    try {
+      var V = window.EPVisit || {};
+      if (!ID_RE.test(V.id || '')) return false;
+      var b = { funnel: '{{funnel}}', visit_id: V.id, step: step, utm: V.ad || {} };
+      if (team()) b.test = true;
+      fetch('{{store}}/step', { method: 'POST', keepalive: true, credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) }).catch(function () {});
+    } catch (e) {}
+    return true;
+  }
+  function step(name, one) {
+    try {
+      if (one) { if (once[name]) return; once[name] = 1; }
+      if (!post(name)) { var V = window.EPVisit; if (V && V.ready && V.ready.then) V.ready.then(function () { post(name); }, function () {}); }
+    } catch (e) {}
+  }
+  try {
+    if (KIND === 'warmup') {
+      document.addEventListener('click', function (e) {
+        try { var a = e.target.closest && e.target.closest('a[href]'); if (a && new URL(a.href, location.href).pathname === '/book/offer/') step('warmup-click', true); } catch (x) {}
+      }, true);
+      return;
+    }
+    /* scroll depth: each mark once, checked at most once per frame */
+    var marks = [[0.25, 'scroll-25'], [0.5, 'scroll-50'], [0.75, 'scroll-75']], ticking = false;
+    function depth() {
+      ticking = false;
+      try {
+        var h = document.documentElement.scrollHeight || document.body.scrollHeight; if (!h) return;
+        var f = ((window.scrollY || window.pageYOffset || 0) + window.innerHeight) / h;
+        marks.forEach(function (m) { if (f >= m[0]) step(m[1], true); });
+        if (once['scroll-75']) removeEventListener('scroll', onScroll);
+      } catch (x) {}
+    }
+    function onScroll() { if (!ticking) { ticking = true; (window.requestAnimationFrame || setTimeout)(depth); } }
+    addEventListener('scroll', onScroll, { passive: true });
+    /* presenter video: the first tap, then 50% and the end of the video element that tap puts in place */
+    document.addEventListener('click', function (e) {
+      try {
+        var btn = e.target.closest && e.target.closest('.ep-video__play'); if (!btn) return;
+        var frame = btn.closest('[data-video]') || btn.parentNode;
+        step('video-play', true);
+        setTimeout(function () {
+          try {
+            var v = frame && frame.querySelector('video'); if (!v) return;
+            v.addEventListener('timeupdate', function () { try { var d = v.duration; if (!d || !isFinite(d)) return; var r = v.currentTime / d; if (r >= 0.5) step('video-50', true); if (r >= 0.98) step('video-100', true); } catch (x) {} });
+            v.addEventListener('ended', function () { step('video-50', true); step('video-100', true); });
+          } catch (x) {}
+        }, 0);
+      } catch (x) {}
+    }, true);
+    /* add-on box: every tick and untick */
+    document.addEventListener('change', function (e) {
+      try { var t = e.target; if (t && t.hasAttribute && (t.hasAttribute('data-lp-addon') || t.hasAttribute('data-store-bump'))) step(t.checked ? 'addon-tick' : 'addon-untick', false); } catch (x) {}
+    }, true);
+    /* buy button: sent alongside the checkout request, never delays it */
+    document.addEventListener('click', function (e) {
+      try { var a = e.target.closest && e.target.closest('a.btn--primary[href^="/book/checkout/"], a[data-store-checkout], a[data-lp-buy]'); if (a) step('buy-click', false); } catch (x) {}
+    }, true);
+  } catch (e) {}
+})();</script>
 {{/page.seen}}</body>
 </html>
