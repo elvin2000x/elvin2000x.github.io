@@ -7,6 +7,8 @@
     "old_slugs": [],
     "funnel": "the-artificial-advantage-1",
     "hide_menu": true,
+    "seen": true,
+    "seen_kind": "warmup",
     "aud": true,
     "description": "Before you continue, here is why AI answers come back bland."
   },

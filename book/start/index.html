@@ -600,5 +600,20 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     });
   })();
 </script>
+<!-- 732 and 735: this page counts its own landing view (POST /api/store/seen), once per load, at the
+     first of: device hints ready, 300 ms, leaving the page. (The 732 marker that made funnel.js send a thinner one is gone.) -->
+<script>(function () {
+  var sent = false;
+  function send() {
+    if (sent) return; sent = true;
+    try {
+      var V = window.EPVisit || {};
+      fetch('https://api.elvinpeters.com/api/store/seen', { method: 'POST', keepalive: true, credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ funnel: 'the-artificial-advantage-1', kind: 'warmup', _keep: true, page: location.pathname, visit_id: V.id || '', utm: V.ad || {}, screen: V.screen || {}, hints: V.hints || {} }) })
+        .catch(function () {});
+    } catch (e) {}
+  }
+  try { setTimeout(send, 300); addEventListener('pagehide', send); var V = window.EPVisit; if (V && V.ready) V.ready.then(send, send); } catch (e) { send(); }
+})();</script>
 </body>
 </html>

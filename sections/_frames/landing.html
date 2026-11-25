@@ -579,7 +579,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     try {
       var V = window.EPVisit || {};
       fetch('{{store}}/seen', { method: 'POST', keepalive: true, credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ funnel: '{{funnel}}', _keep: true, page: location.pathname, visit_id: V.id || '', utm: V.ad || {}, screen: V.screen || {}, hints: V.hints || {} }) })
+        body: JSON.stringify({ funnel: '{{funnel}}', {{#page.seen_kind}}kind: '{{page.seen_kind}}', {{/page.seen_kind}}_keep: true, page: location.pathname, visit_id: V.id || '', utm: V.ad || {}, screen: V.screen || {}, hints: V.hints || {} }) })
         .catch(function () {});
     } catch (e) {}
   }

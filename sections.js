@@ -282,6 +282,7 @@ function checkStack(stack, name) {
       if (L.funnel != null && L.funnel !== '' && !FUNNEL_RE.test(L.funnel)) errs.push('the funnel key can use a-z, 0-9 and dashes');
       if (L.hide_menu != null && typeof L.hide_menu !== 'boolean') errs.push('hide_menu must be true or false');
       if (L.seen != null && typeof L.seen !== 'boolean') errs.push('seen must be true or false');
+      if (L.seen_kind != null && L.seen_kind !== '' && !FUNNEL_RE.test(L.seen_kind)) errs.push('seen_kind can use a-z, 0-9 and dashes');
       if (L.aud != null && typeof L.aud !== 'boolean') errs.push('aud must be true or false');
       if (L.step != null && L.step !== '' && !FUNNEL_RE.test(L.step)) errs.push('the step can use a-z, 0-9 and dashes');
       for (const k of ['description'])
@@ -438,7 +439,7 @@ function renderStack(stack, name, { site, isHome, markers, funnels, store }) {
   });
   const frame = path.join(SEC_DIR, '_frames', stack.frame + '.html');
   // css: the page's own stylesheet (Studio's Custom CSS box), checked by checkStack above.
-  const page = { title: stack.title || '', description: (L && L.description) || '', hide_menu: !!(L && L.hide_menu), seen: !!(L && L.seen && L.funnel), step: (L && L.step) || '', aud: !!(L && L.aud),
+  const page = { title: stack.title || '', description: (L && L.description) || '', hide_menu: !!(L && L.hide_menu), seen: !!(L && L.seen && L.funnel), seen_kind: (L && L.seen && L.funnel && L.seen_kind) || '', step: (L && L.step) || '', aud: !!(L && L.aud),
     css: typeof stack.css === 'string' ? stack.css.trim() : '' };
   return renderTpl(frame, '_frames/' + stack.frame, [{ ...globals, robots_off, page, redirect_to: (L && typeof L.redirect_to === 'string') ? L.redirect_to : '', sections: parts.join('\n\n') }]) + '\n';
 }
