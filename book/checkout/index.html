@@ -286,7 +286,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     var timer = setTimeout(function () { if (ctl) ctl.abort(); go(); }, 1800);
     fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify((function () { var b = { funnel: funnel, utm: utm, code: '' }; if (window.EP_HOOK && window.EP_HOOK.page === 'offer') b.hook = { page: 'offer', variant: window.EP_HOOK.variant }; if (window.EP_TEAM) b.test = true; if (ADDON_ON) b.bump = true; else if (SEND_BUMP_FALSE) b.bump = false; b.fbp = ck('_fbp'); b.fbc = ck('_fbc'); b.visit_id = ''; b.screen = {}; b.hints = {}; try { var V = window.EPVisit; if (V) { var ad = V.ad || {}; if (b.utm && typeof b.utm === 'object') Object.keys(ad).forEach(function (k) { if (!(k in b.utm)) b.utm[k] = ad[k]; }); b.visit_id = V.id || ''; b.screen = V.screen || {}; b.hints = V.hints || {}; } } catch (x) {} return b; })()), signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) { var u = j && (j.url || j.checkout_url); clearTimeout(timer); if (!settled && u && /^https:\/\/checkout\.stripe\.com\//.test(u)) { settled = true; location.assign(u); } else go(); })
+      .then(function (j) { var u = j && (j.url || j.checkout_url); clearTimeout(timer); try { if (!settled && j && window.EPMeta) window.EPMeta.checkout(j.meta); } catch (x) {} if (!settled && u && /^https:\/\/checkout\.stripe\.com\//.test(u)) { settled = true; location.assign(u); } else go(); })
       .catch(function () { clearTimeout(timer); go(); });
   }, false);
   /* Live prices: the shop lists every product the store sells on its own, and a value

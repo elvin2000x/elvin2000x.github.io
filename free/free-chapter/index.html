@@ -113,7 +113,9 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
   var THANKS="/book/thanks/free-chapter/";
   var moved=false;
   function go(){if(moved)return;moved=true;location.replace(THANKS+location.search);}
-  function convert(email,after){
+  // 739: one Lead event id per sign-up, sent to /api/lead as lead_event_id too, so a server Lead can share it
+  var LEAD_ID='lead-'+(function(){try{if(window.crypto&&crypto.randomUUID)return crypto.randomUUID().replace(/-/g,'');var a=new Uint8Array(16);crypto.getRandomValues(a);return Array.prototype.map.call(a,function(x){return('0'+x.toString(16)).slice(-2);}).join('');}catch(e){return(Date.now().toString(16)+Math.random().toString(16).slice(2)).slice(0,32);}})();
+  function convert(email,after,ok){
     var left=2;function one(){left--;if(left<=0&&after)after();}
     if(after)setTimeout(after,900);
     // Enhanced conversions: hand Google the email (it hashes client-side) so it
@@ -121,7 +123,7 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
     try{if(email&&typeof gtag==='function')gtag('set','user_data',{email:email});}catch(e){}
     try{if(XEVT&&typeof twq==='function')twq('event',XEVT,{});}catch(e){}
     try{if(GADS&&typeof gtag==='function')gtag('event','conversion',{'send_to':GADS,'event_callback':one});else one();}catch(e){}
-    try{if(typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG});}catch(e){}
+    try{if(ok&&typeof fbq==='function')fbq('track','Lead',{content_name:'magnet-'+SLUG},{eventID:LEAD_ID});}catch(e){}  // 739: only after /api/lead says success
     try{if(typeof gtag==='function')gtag('event','generate_lead',{event_label:'magnet-'+SLUG,'event_callback':one});else one();}catch(e){}
     try{if(typeof gtag==='function')gtag('event','free_optin',{magnet:SLUG,page_path:location.pathname});}catch(e){}
   }
@@ -136,10 +138,11 @@ h1{font-family:var(--serif);font-weight:600;font-size:var(--fs-h1);line-height:v
     var email=val('email'),name=val('name');
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){return fail('Please enter a valid email.');}
     btn.disabled=true;btn.textContent='Sending...';
-    var body=new URLSearchParams({name:name||'Magnet lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:val('website')}).toString();
+    var body=new URLSearchParams({name:name||'Magnet lead',email:email,message:'Lead magnet: '+TITLE,source:source(),website:val('website'),lead_event_id:LEAD_ID}).toString();
     fetch("https://ultimateaidirectory.com/api/lead",{method:'POST',mode:'cors',keepalive:true,headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
-      .then(function(){convert(email,go);})
-      .catch(function(){convert(email,go);});  // always take the visitor on to the thank-you page
+      .then(function(r){return r.json().then(function(j){return !!(r.ok&&j&&j.success);},function(){return false;});})
+      .then(function(ok){convert(email,go,ok);},function(){convert(email,go,false);})
+      .catch(function(){convert(email,go,false);});  // always take the visitor on to the thank-you page
   });
 })();
 </script>

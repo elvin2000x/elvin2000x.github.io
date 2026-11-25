@@ -1108,7 +1108,7 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     var timer = setTimeout(function () { if (ctl) ctl.abort(); go(); }, 1800);
     fetch(STORE + '/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify((function () { var b = { funnel: funnel, utm: utm, code: '' }; if (window.EP_HOOK && window.EP_HOOK.page === 'offer') b.hook = { page: 'offer', variant: window.EP_HOOK.variant }; if (window.EP_TEAM) b.test = true; if (ADDON_ON) b.bump = true; else if (SEND_BUMP_FALSE) b.bump = false; b.fbp = ck('_fbp'); b.fbc = ck('_fbc'); b.visit_id = ''; b.screen = {}; b.hints = {}; try { var V = window.EPVisit; if (V) { var ad = V.ad || {}; if (b.utm && typeof b.utm === 'object') Object.keys(ad).forEach(function (k) { if (!(k in b.utm)) b.utm[k] = ad[k]; }); b.visit_id = V.id || ''; b.screen = V.screen || {}; b.hints = V.hints || {}; } } catch (x) {} return b; })()), signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) { var u = j && (j.url || j.checkout_url); clearTimeout(timer); if (!settled && u && /^https:\/\/checkout\.stripe\.com\//.test(u)) { settled = true; location.assign(u); } else go(); })
+      .then(function (j) { var u = j && (j.url || j.checkout_url); clearTimeout(timer); try { if (!settled && j && window.EPMeta) window.EPMeta.checkout(j.meta); } catch (x) {} if (!settled && u && /^https:\/\/checkout\.stripe\.com\//.test(u)) { settled = true; location.assign(u); } else go(); })
       .catch(function () { clearTimeout(timer); go(); });
   }, false);
   /* Live prices: the shop lists every product the store sells on its own, and a value
@@ -1382,6 +1382,43 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     });
   })();
 </script>
+<!-- 739 phase 2: Meta browser events the store decides on. Each fires only when the store's reply says
+     meta.send is true (Elvin's switch, off until the privacy wording is live), on the one pixel, with the store's event id
+     so Meta pairs it with the server's copy. Never waits, never throws. -->
+<script>(function () {
+  var PX = '1699232654449762', M = { on: false, atc: null };
+  function fire(name, ev, fields) {
+    try { if (ev && ev.id && typeof fbq === 'function') fbq('trackSingle', PX, name, fields, { eventID: String(ev.id) }); } catch (x) {}
+  }
+  function pick(ev, keys) { var o = {}; keys.forEach(function (k) { if (ev[k] != null) o[k] = ev[k]; }); return o; }
+  window.EPMeta = {
+    /* the /seen reply: ViewContent on the offer page (never on the warm-up page); remembers whether the switch is on */
+    seen: function (m, kind) {
+      try {
+        M.on = !!(m && m.send === true); M.atc = (M.on && m.add_to_cart) || null;
+        if (M.on && !kind && m.view_content) fire('ViewContent', m.view_content, pick(m.view_content, ['content_ids', 'content_type', 'value', 'currency']));
+      } catch (x) {}
+    },
+    /* the add-on tick: AddToCart, only when the last /seen reply had the switch on; same id the checkout uses */
+    tick: function (price) {
+      try {
+        var V = window.EPVisit || {}; if (!M.on || !V.id) return;
+        var f = M.atc ? pick(M.atc, ['content_ids', 'content_type', 'value', 'currency']) : {};
+        if (f.value == null && price) f.value = price;
+        if (!f.currency) f.currency = 'USD'; if (!f.content_type) f.content_type = 'product';
+        fire('AddToCart', { id: 'atc-' + V.id }, f);
+      } catch (x) {}
+    },
+    /* the /checkout reply: AddToCart (only when the add-on is in the basket) and InitiateCheckout, before going to Stripe */
+    checkout: function (m) {
+      try {
+        if (!m || m.send !== true) return;
+        if (m.add_to_cart) fire('AddToCart', m.add_to_cart, pick(m.add_to_cart, ['content_ids', 'content_type', 'value', 'currency']));
+        if (m.initiate_checkout) fire('InitiateCheckout', m.initiate_checkout, pick(m.initiate_checkout, ['content_ids', 'contents', 'num_items', 'content_type', 'value', 'currency']));
+      } catch (x) {}
+    }
+  };
+})();</script>
 <!-- 732 and 735: this page counts its own landing view (POST /api/store/seen), once per load, at the
      first of: device hints ready, 300 ms, leaving the page. (The 732 marker that made funnel.js send a thinner one is gone.) -->
 <script>(function () {
@@ -1392,6 +1429,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
       var V = window.EPVisit || {};
       fetch('https://api.elvinpeters.com/api/store/seen', { method: 'POST', keepalive: true, credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ funnel: 'the-artificial-advantage-1', _keep: true, page: location.pathname, visit_id: V.id || '', utm: V.ad || {}, screen: V.screen || {}, hints: V.hints || {} }) })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { if (window.EPMeta) window.EPMeta.seen(j && j.meta, ''); })
         .catch(function () {});
     } catch (e) {}
   }
@@ -1464,7 +1503,8 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a)}))}(window,documen
     }, true);
     /* add-on box: every tick and untick */
     document.addEventListener('change', function (e) {
-      try { var t = e.target; if (t && t.hasAttribute && (t.hasAttribute('data-lp-addon') || t.hasAttribute('data-store-bump'))) step(t.checked ? 'addon-tick' : 'addon-untick', false); } catch (x) {}
+      try { var t = e.target; if (t && t.hasAttribute && (t.hasAttribute('data-lp-addon') || t.hasAttribute('data-store-bump'))) { step(t.checked ? 'addon-tick' : 'addon-untick', false);
+        if (t.checked && window.EPMeta) { var pm = /\$\s*(\d+(?:\.\d+)?)/.exec(t.getAttribute('data-lp-addon-price') || t.getAttribute('data-bump-price') || ''); window.EPMeta.tick(pm ? parseFloat(pm[1]) : 0); } } } catch (x) {}
     }, true);
     /* buy button: sent alongside the checkout request, never delays it */
     document.addEventListener('click', function (e) {
