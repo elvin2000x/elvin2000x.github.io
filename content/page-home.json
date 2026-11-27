@@ -467,7 +467,7 @@
           },
           {
             "q": "Which format should I get?",
-            "a": "Kindle, paperback and hardcover are all on Amazon, with Amazon's standard returns. The paperback is handy to keep open beside your desk for the appendices."
+            "a": "For the full book, get the ebook in the bundle on this site. It prints all 25 roles, 12 prompt makeovers and 26 prompts. Kindle, paperback and hardcover are on Amazon, with Amazon's standard returns. The Amazon edition is shorter: it prints 8 roles and 8 makeovers, and the book tells you where to get all 25 roles online, free. The paperback is handy to keep open beside your desk."
           },
           {
             "q": "Can I read some of it first?",
@@ -483,7 +483,7 @@
       "note": "Also sold on Amazon: one strip at the bottom (the words are the ones that sat under the buttons)",
       "data": {
         "anchor": "",
-        "text": "Kindle, paperback and hardcover · 198 pages in print"
+        "text": "Kindle, paperback and hardcover on Amazon · 198 pages in print · the shorter edition, with 8 roles and 8 makeovers"
       }
     }
   ]
